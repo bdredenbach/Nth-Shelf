@@ -1,8 +1,10 @@
 // sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
 // Comic pages themselves live in IndexedDB (js/db.js), not here.
 
-const CACHE_NAME = "nth-shelf-shell-v2-42";
+const CACHE_NAME = "nth-shelf-shell-v2-47";
 const SHELL_FILES = [
+  "./js/turn.js",
+  "./js/page-mode.js",
   "./",
   "./index.html",
   "./manifest.webmanifest",
