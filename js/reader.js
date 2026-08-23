@@ -124,11 +124,12 @@ const Reader = {
    screen.orientation?.addEventListener?.("change", settleContinuous);
  },
 
- async open(comicId) {
+ async open(comicId, startPage = null) {
    this.comic = await LongboxDB.getComic(comicId);
    if (!this.comic) return;
    LongboxDB.updateComic(comicId, { lastOpenedAt: Date.now() });
-   this.index = this.comic.lastPage || 0;
+   const requestedPage = Number.isInteger(startPage) ? startPage : (this.comic.lastPage || 0);
+   this.index = Math.max(0, Math.min((this.comic.pageCount || 1) - 1, requestedPage));
    this.mode = this.comic.readMode || "single";
    this.theme = this.comic.theme || "dark";
    this.pageUrls = new Array(this.comic.pageCount).fill(null);

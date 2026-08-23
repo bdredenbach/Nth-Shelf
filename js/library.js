@@ -106,6 +106,11 @@ const Library = {
   searchQuery: "",
   searchItems: [],
   searchIndex: 0,
+  searchView: "comics",
+  bookmarkItems: [],
+  bookmarkIndex: 0,
+  bookmarkImageCache: new Map(),
+  bookmarkRenderToken: 0,
 
   init() {
     Modal.init();
@@ -131,23 +136,26 @@ const Library = {
 
     document.getElementById("search-mode-btn").addEventListener("click", () => this.toggleSearchMode());
     document.getElementById("search-mode-close").addEventListener("click", () => this.closeSearchMode());
+    document.getElementById("search-bookmarks-btn").addEventListener("click", () => this.toggleBookmarkSearch());
     this.els.searchInput.addEventListener("input", () => {
       this.searchQuery = this.els.searchInput.value.trim().toLowerCase();
-      this.rebuildSearchItems();
+      if (this.searchView === "bookmarks") this.rebuildBookmarkItems();
+      else this.rebuildSearchItems();
     });
     this.els.searchClear.addEventListener("click", () => {
       this.els.searchInput.value = "";
       this.searchQuery = "";
-      this.rebuildSearchItems();
+      if (this.searchView === "bookmarks") this.rebuildBookmarkItems();
+      else this.rebuildSearchItems();
       this.els.searchInput.focus();
     });
-    document.getElementById("shelf-carousel-prev").addEventListener("click", () => this.moveSearch(-1));
-    document.getElementById("shelf-carousel-next").addEventListener("click", () => this.moveSearch(1));
+    document.getElementById("shelf-carousel-prev").addEventListener("click", () => this.searchView === "bookmarks" ? this.moveBookmarks(-1) : this.moveSearch(-1));
+    document.getElementById("shelf-carousel-next").addEventListener("click", () => this.searchView === "bookmarks" ? this.moveBookmarks(1) : this.moveSearch(1));
     this.bindSearchSwipe();
     this.els.searchCarousel.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") { e.preventDefault(); this.moveSearch(-1); }
-      if (e.key === "ArrowRight") { e.preventDefault(); this.moveSearch(1); }
-      if (e.key === "Enter") { e.preventDefault(); this.openSearchSelection(); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); this.searchView === "bookmarks" ? this.moveBookmarks(-1) : this.moveSearch(-1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); this.searchView === "bookmarks" ? this.moveBookmarks(1) : this.moveSearch(1); }
+      if (e.key === "Enter") { e.preventDefault(); this.searchView === "bookmarks" ? this.openBookmarkSelection() : this.openSearchSelection(); }
     });
 
     document.getElementById("import-input").addEventListener("change", (e) => {
@@ -173,6 +181,9 @@ const Library = {
     document.getElementById("collection-back").addEventListener("click", () => this.showRoot());
     document.getElementById("collection-menu").addEventListener("click", () => this.openCollectionMenu(this.activeCollectionId));
 
+    // Library launches in ascending order; users can still toggle to descending during the session.
+    this.sortDirection = "asc";
+    localStorage.setItem(SORT_DIR_KEY, this.sortDirection);
     this.updateSortPills();
     this.refresh();
   },
@@ -322,8 +333,12 @@ const Library = {
   toggleSearchMode() {
     if (this.searchMode) return;
     this.searchMode = true;
+    this.searchView = "comics";
     this.searchQuery = "";
     this.els.searchInput.value = "";
+    this.els.searchInput.placeholder = "Search your Nth Shelf…";
+    document.getElementById("search-bookmarks-btn").classList.remove("active");
+    document.getElementById("search-bookmarks-btn").setAttribute("aria-pressed", "false");
     this.els.searchMode.hidden = false;
     this.els.gridEl.style.display = "none";
     this.els.toolbar.style.display = "none";
@@ -339,6 +354,114 @@ const Library = {
     this.els.gridEl.style.display = this.searchItems.length ? "grid" : "none";
     this.els.toolbar.style.display = this.searchItems.length ? "flex" : "none";
     this.els.searchInput.value = "";
+    this.els.searchInput.placeholder = "Search your Nth Shelf…";
+    document.getElementById("search-bookmarks-btn")?.classList.remove("active");
+    document.getElementById("search-bookmarks-btn")?.setAttribute("aria-pressed", "false");
+    this.searchView = "comics";
+    this.bookmarkItems = [];
+    this.bookmarkIndex = 0;
+    this.bookmarkImageCache.clear();
+    this.bookmarkRenderToken++;
+  },
+
+  async toggleBookmarkSearch() {
+    this.searchView = this.searchView === "bookmarks" ? "comics" : "bookmarks";
+    const btn = document.getElementById("search-bookmarks-btn");
+    btn.classList.toggle("active", this.searchView === "bookmarks");
+    btn.setAttribute("aria-pressed", this.searchView === "bookmarks" ? "true" : "false");
+    if (this.searchView === "bookmarks") {
+      this.els.searchInput.placeholder = "Search your bookmarks…";
+      await this.rebuildBookmarkItems();
+    } else {
+      this.els.searchInput.placeholder = "Search your Nth Shelf…";
+      this.rebuildSearchItems();
+    }
+  },
+
+  async rebuildBookmarkItems() {
+    const comics = await LongboxDB.getAllComics();
+    const q = this.searchQuery;
+    const items = [];
+    comics.forEach((comic) => {
+      (comic.bookmarks || []).slice().sort((a,b) => a-b).forEach((pageIndex) => {
+        if (q && !(comic.title || "").toLowerCase().includes(q)) return;
+        items.push({
+          id: `${comic.id}:${pageIndex}`,
+          comicId: comic.id,
+          pageIndex,
+          title: comic.title || "Comic",
+          pageCount: comic.pageCount || 0,
+        });
+      });
+    });
+    items.sort((a,b) => {
+      const title = a.title.localeCompare(b.title, undefined, { sensitivity: "base", numeric: true });
+      return title || a.pageIndex - b.pageIndex;
+    });
+    this.bookmarkItems = items;
+    this.bookmarkIndex = Math.min(this.bookmarkIndex, Math.max(0, items.length - 1));
+    this.renderBookmarkCarousel();
+  },
+
+  async getBookmarkImage(item) {
+    if (this.bookmarkImageCache.has(item.id)) return this.bookmarkImageCache.get(item.id);
+    const blob = await LongboxDB.getPage(item.comicId, item.pageIndex);
+    if (!blob) return null;
+    const thumb = await makeThumbnail(blob, 520);
+    const url = await blobToDataUrl(thumb);
+    this.bookmarkImageCache.set(item.id, url);
+    return url;
+  },
+
+  async renderBookmarkCarousel() {
+    const items = this.bookmarkItems;
+    const token = ++this.bookmarkRenderToken;
+    if (!items.length) {
+      this.els.searchTrack.innerHTML = `<div class="shelf-search-empty">No bookmarked pages yet.</div>`;
+      this.els.searchTitle.textContent = "";
+      this.els.searchCount.textContent = "0 bookmarks";
+      return;
+    }
+    const n = items.length;
+    this.bookmarkIndex = ((this.bookmarkIndex % n) + n) % n;
+    this.els.searchTrack.innerHTML = "";
+    const radius = Math.min(3, Math.floor(n / 2));
+    for (let offset = -radius; offset <= radius; offset++) {
+      const index = (this.bookmarkIndex + offset + n) % n;
+      const item = items[index];
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "shelf-carousel-card bookmark-carousel-card";
+      card.dataset.offset = String(offset);
+      card.dataset.index = String(index);
+      const image = document.createElement("div");
+      image.className = "shelf-carousel-cover bookmark-page-cover";
+      image.innerHTML = `<div class="shelf-carousel-placeholder">Loading page…</div>`;
+      const label = document.createElement("span");
+      label.className = "shelf-carousel-label";
+      label.textContent = `${item.title} · Page ${item.pageIndex + 1}`;
+      card.append(image, label);
+      if (offset === 0) card.classList.add("is-selected");
+      card.addEventListener("click", () => {
+        if (offset === 0) window.LongboxApp.openReader(item.comicId, item.pageIndex);
+        else { this.bookmarkIndex = index; this.renderBookmarkCarousel(); }
+      });
+      this.els.searchTrack.appendChild(card);
+      this.getBookmarkImage(item).then((url) => {
+        if (!url || token !== this.bookmarkRenderToken || !card.isConnected) return;
+        image.innerHTML = `<img src="${url}" alt="${escapeHtml(item.title)} page ${item.pageIndex + 1}" loading="eager">`;
+      }).catch(() => {
+        if (token === this.bookmarkRenderToken && card.isConnected) image.innerHTML = `<div class="shelf-carousel-placeholder">Page unavailable</div>`;
+      });
+    }
+    this.els.searchTitle.textContent = items[this.bookmarkIndex].title;
+    this.els.searchCount.textContent = `Bookmark ${this.bookmarkIndex + 1} / ${n}`;
+  },
+
+  moveBookmarks(delta) {
+    if (!this.bookmarkItems.length) return;
+    this.bookmarkIndex = (this.bookmarkIndex + delta + this.bookmarkItems.length) % this.bookmarkItems.length;
+    this.renderBookmarkCarousel();
   },
 
   rebuildSearchItems() {
@@ -404,6 +527,11 @@ const Library = {
     else window.LongboxApp.openReader(item.id);
   },
 
+  openBookmarkSelection() {
+    const item = this.bookmarkItems[this.bookmarkIndex];
+    if (item) window.LongboxApp.openReader(item.comicId, item.pageIndex);
+  },
+
   bindSearchSwipe() {
     let startX = 0;
     let startY = 0;
@@ -418,7 +546,10 @@ const Library = {
       tracking = false;
       const dx = e.clientX - startX;
       const dy = e.clientY - startY;
-      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) this.moveSearch(dx < 0 ? 1 : -1);
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        if (this.searchView === "bookmarks") this.moveBookmarks(dx < 0 ? 1 : -1);
+        else this.moveSearch(dx < 0 ? 1 : -1);
+      }
     });
     this.els.searchCarousel.addEventListener("pointercancel", () => { tracking = false; });
   },

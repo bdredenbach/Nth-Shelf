@@ -57,10 +57,10 @@ const LongboxApp = {
     this.updateInstallButton();
   },
 
-  async openReader(comicId) {
+  async openReader(comicId, startPage = null) {
     document.getElementById("library-view").classList.remove("active");
     document.getElementById("reader-view").classList.add("active");
-    await Reader.open(comicId);
+    await Reader.open(comicId, startPage);
   },
 
   closeReader() {
