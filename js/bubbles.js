@@ -194,7 +194,7 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
   // without making every light part of the artwork a bubble.
   const thresholds = [218, 205, 192, 180];
   const maxArea = Math.floor(w * h * 0.22);
-  const minArea = Math.max(28, Math.floor(w * h * 0.0008));
+  const minArea = Math.max(18, Math.floor(w * h * 0.00035));
 
   let result = null;
   for (const threshold of thresholds) {
@@ -317,12 +317,15 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
       continue;
     }
 
-    // Small bubbles are common, especially in dense comic pages. For these,
+    // Small bubbles are common, especially in dense comic pages.
+    // v2.35: allow the compact speech balloons seen in the test comic while
+    // retaining outline/shape guards to avoid turning tiny highlights into
+    // Bubble Zoom targets. For these,
     // require a little more shape evidence so lowering the area threshold does
     // not turn tiny highlights or white lettering gaps into false bubbles.
     const aspect = bw / Math.max(1, bh);
-    const smallCandidate = count < w * h * 0.0015;
-    if (smallCandidate && (bw < w * 0.018 || bh < h * 0.012 || aspect > 9 || aspect < 0.11 || fill < 0.16)) {
+    const smallCandidate = count < w * h * 0.003;
+    if (smallCandidate && (bw < w * 0.012 || bh < h * 0.008 || aspect > 12 || aspect < 0.08 || fill < 0.12)) {
       if (log) log(`try threshold=${threshold}: rejected tiny implausible region ${bw}x${bh} fill=${fill.toFixed(2)}`);
       continue;
     }
