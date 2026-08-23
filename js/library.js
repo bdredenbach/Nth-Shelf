@@ -545,11 +545,11 @@ const Library = {
     try {
       payload = JSON.parse(await file.text());
     } catch (err) {
-      Modal.actions("Couldn't read backup", "That file doesn't look like a valid Longbox backup.", [{ label: "OK", cls: "neutral" }]);
+      Modal.actions("Couldn't read backup", "That file doesn't look like a valid Nth Shelf backup.", [{ label: "OK", cls: "neutral" }]);
       return;
     }
     if (!payload || payload.app !== "longbox" || !Array.isArray(payload.comics)) {
-      Modal.actions("Couldn't read backup", "That file doesn't look like a valid Longbox backup.", [{ label: "OK", cls: "neutral" }]);
+      Modal.actions("Couldn't read backup", "That file doesn't look like a valid Nth Shelf backup.", [{ label: "OK", cls: "neutral" }]);
       return;
     }
 
@@ -603,7 +603,7 @@ const Library = {
   async handleFiles(fileList) {
     const files = Array.from(fileList).filter((f) => ARCHIVE_EXT.test(f.name));
     if (!files.length) {
-      alert("No supported comic archives found. Longbox supports CBZ, ZIP, CBT, TAR, CB7, 7Z, CBR, and RAR.");
+      alert("No supported comic archives found. Nth Shelf supports CBZ, ZIP, CBT, TAR, CB7, 7Z, CBR, and RAR.");
       return;
     }
     this.els.progressEl.classList.add("active");
