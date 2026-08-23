@@ -1,3 +1,38 @@
+
+window.NthShelfPwaDiagnostics = async function() {
+  try {
+    const mod = await import("./library.js");
+    const d = await mod.getPwaStorageDiagnostics();
+    const report = [
+      "NTH SHELF — PWA STORAGE DIAGNOSTIC",
+      `Time: ${d.timestamp}`,
+      `Origin: ${d.origin}`,
+      `URL: ${d.href}`,
+      `Display mode: ${d.displayMode}`,
+      `Standalone: ${d.standalone}`,
+      `Service worker controller: ${d.serviceWorkerController}`,
+      `Service worker state: ${d.serviceWorkerState}`,
+      `Service worker: ${d.serviceWorkerScriptURL}`,
+      `IndexedDB supported: ${d.indexedDBSupported}`,
+      `Database: ${d.databaseName}`,
+      `Database version: ${d.databaseVersion ?? "unknown"}`,
+      `Stores: ${d.stores.join(", ") || "none"}`,
+      `Comics records: ${d.comicsCount ?? "unknown"}`,
+      `Collections records: ${d.collectionsCount ?? "unknown"}`,
+      `Bookmarks records: ${d.bookmarksCount ?? "unknown"}`,
+      `Persistent storage: ${d.storagePersisted ?? "unknown"}`,
+      `Storage usage: ${d.storageEstimate?.usage ?? "unknown"}`,
+      `Storage quota: ${d.storageEstimate?.quota ?? "unknown"}`
+    ].join("\n");
+    console.info(report);
+    return report;
+  } catch (e) {
+    const report="NTH SHELF — PWA STORAGE DIAGNOSTIC\nDiagnostic failed: "+(e?.message||e);
+    console.error(report,e);
+    return report;
+  }
+};
+
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
 const PANEL_ZOOM_KEY = "longbox_panel_zoom_enabled";
