@@ -16,6 +16,8 @@ const Reader = {
  ty: 0,
  chromeVisible: true,
  chromeTimer: null,
+ _twoPageEnteredFullscreen: false,
+ _twoPageOrientationLocked: false,
 
  currentPanels: [],       // detected panel rects for the visible page, fractional coords
  panelZoomEnabled: localStorage.getItem(PANEL_ZOOM_KEY) !== "0",
@@ -70,6 +72,12 @@ const Reader = {
    document.getElementById("reader-back").addEventListener("click", () => this.close());
    document.getElementById("reader-bookmark").addEventListener("click", () => this.toggleBookmark());
    document.getElementById("reader-help").addEventListener("click", () => this.openHelpDrawer());
+   this.els.twoPageExitFullscreen = document.getElementById("two-page-exit-fullscreen");
+   this.els.twoPageExitFullscreen?.addEventListener("click", () => this.exitTwoPageFullscreen());
+   document.addEventListener("fullscreenchange", () => this.handleTwoPageFullscreenChange());
+   window.addEventListener("orientationchange", () => this.updateTwoPageFullscreenButton());
+   window.addEventListener("resize", () => this.updateTwoPageFullscreenButton(), { passive: true });
+   screen.orientation?.addEventListener?.("change", () => this.updateTwoPageFullscreenButton());
    document.getElementById("help-drawer-close").addEventListener("click", () => this.closeHelpDrawer());
    this.els.helpDrawer.addEventListener("click", (e) => {
      if (e.target === this.els.helpDrawer) this.closeHelpDrawer();
@@ -926,17 +934,117 @@ const Reader = {
    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
  },
 
+
+ isLandscapeViewport() {
+   return window.matchMedia?.("(orientation: landscape)")?.matches ??
+     (window.innerWidth > window.innerHeight);
+ },
+
+ updateTwoPageFullscreenButton() {
+   const btn = this.els.twoPageExitFullscreen;
+   if (!btn) return;
+   const visible = this.mode === "two-page" &&
+     !!document.fullscreenElement &&
+     this.isLandscapeViewport();
+   btn.hidden = !visible;
+   btn.classList.toggle("is-visible", visible);
+ },
+
+ handleTwoPageFullscreenChange() {
+   // If the browser/system exits fullscreen while Two Page remains active,
+   // release our orientation lock too and simply continue in Two Page portrait.
+   if (this.mode === "two-page" && !document.fullscreenElement &&
+       this._twoPageEnteredFullscreen) {
+     if (this._twoPageOrientationLocked && screen.orientation?.unlock) {
+       try { screen.orientation.unlock(); } catch (_) {}
+     }
+     this._twoPageOrientationLocked = false;
+     this._twoPageEnteredFullscreen = false;
+   }
+   this.updateTwoPageFullscreenButton();
+ },
+
+ async enterTwoPageFullscreenLandscape() {
+   // Request fullscreen immediately from the mode-button gesture. This is
+   // more reliable on mobile browsers than waiting for orientation locking.
+   if (!document.fullscreenElement && this.els.view?.requestFullscreen) {
+     try {
+       await this.els.view.requestFullscreen({ navigationUI: "hide" });
+       this._twoPageEnteredFullscreen = true;
+       this.debugLog("two-page: entered fullscreen");
+     } catch (err) {
+       this.debugLog(`two-page: fullscreen unavailable: ${err?.message || err}`);
+     }
+   }
+
+   let locked = false;
+   if (screen.orientation?.lock) {
+     try {
+       await screen.orientation.lock("landscape-primary");
+       locked = true;
+       this.debugLog("two-page: landscape-primary orientation locked");
+     } catch (err) {
+       try {
+         await screen.orientation.lock("landscape");
+         locked = true;
+         this.debugLog("two-page: landscape orientation locked");
+       } catch (err2) {
+         this.debugLog("two-page: orientation lock unavailable");
+       }
+     }
+   }
+   this._twoPageOrientationLocked = locked;
+
+   if (locked || document.fullscreenElement) {
+     await new Promise(resolve => requestAnimationFrame(() =>
+       requestAnimationFrame(resolve)));
+   }
+   this.updateTwoPageFullscreenButton();
+ },
+
+ async exitTwoPageFullscreen() {
+   if (this._twoPageOrientationLocked && screen.orientation?.unlock) {
+     try { screen.orientation.unlock(); } catch (_) {}
+   }
+   this._twoPageOrientationLocked = false;
+
+   if (document.fullscreenElement && document.exitFullscreen) {
+     try { await document.exitFullscreen(); } catch (_) {}
+   }
+   this._twoPageEnteredFullscreen = false;
+   this.updateTwoPageFullscreenButton();
+
+   // Re-measure the existing Two Page layout after the viewport returns.
+   await new Promise(resolve => requestAnimationFrame(() =>
+     requestAnimationFrame(resolve)));
+   if (this.mode === "two-page") {
+     await this.renderTwoPage();
+     this.updateSliderLabel();
+   }
+ },
+
  async setMode(mode) {
    if (mode === this.mode) return;
    this.debugLog(`setMode: ${this.mode} -> ${mode}`);
 
    const wasContinuous = this.mode === "scroll" || this.mode === "manga" || this.mode === "webcomic";
+   const enteringTwoPage = mode === "two-page" && this.mode !== "two-page";
    const leavingTwoPage = this.mode === "two-page" && mode !== "two-page";
 
    // Two Page owns the shared viewport with inline layout styles. Clear those
    // styles before a continuous mode gets a chance to measure/rebuild it.
    // The mode-specific CSS will then provide the correct display/size/overflow.
    if (leavingTwoPage) {
+     if (this._twoPageOrientationLocked && screen.orientation?.unlock) {
+       try { screen.orientation.unlock(); } catch (_) {}
+     }
+     this._twoPageOrientationLocked = false;
+     if (this._twoPageEnteredFullscreen && document.fullscreenElement && document.exitFullscreen) {
+       try { await document.exitFullscreen(); } catch (_) {}
+     }
+     this._twoPageEnteredFullscreen = false;
+     this.updateTwoPageFullscreenButton();
+
      this._continuousHandoffIndex = this.index;
      this._continuousHandoffPending = true;
 
@@ -972,6 +1080,10 @@ const Reader = {
    LongboxDB.updateComic(this.comic.id, { readMode: mode });
    this.applyModeClass();
    this.updateModePills();
+
+   if (enteringTwoPage) {
+     await this.enterTwoPageFullscreenLandscape();
+   }
 
    await this.render();
    this.showChrome();
