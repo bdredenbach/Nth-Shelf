@@ -1,14 +1,8 @@
-// db.js — IndexedDB persistence layer for Nth Shelf
-// Stores: comics (metadata + progress), pages (blob per page, keyed by comicId+index),
-// panels (bubble/panel detection cache), collections, and a tiny meta store used to
-// harden persistence across app-shell updates.
-//
-// IMPORTANT: DB_NAME intentionally remains "longbox" for backwards compatibility.
-// Renaming an IndexedDB database would make an existing library look brand new.
+// db.js — IndexedDB persistence layer for Longbox
+// Stores: comics (metadata + progress), pages (blob per page, keyed by comicId+index)
 
 const DB_NAME = "longbox";
-const DB_VERSION = 4;
-const STORAGE_MARKER_KEY = "nth-shelf-library-marker-v1";
+const DB_VERSION = 3;
 let dbPromise = null;
 
 function openDB() {
@@ -31,28 +25,9 @@ function openDB() {
         const store = db.createObjectStore("panels", { keyPath: "key" });
         store.createIndex("comicId", "comicId", { unique: false });
       }
-      if (!db.objectStoreNames.contains("meta")) {
-        db.createObjectStore("meta", { keyPath: "key" });
-      }
     };
-    req.onsuccess = () => {
-      const db = req.result;
-      // If another tab/PWA instance upgrades the database, close this connection
-      // so the next operation can reopen it cleanly instead of failing against a
-      // stale connection.
-      db.onversionchange = () => {
-        try { db.close(); } catch (e) {}
-        dbPromise = null;
-      };
-      resolve(db);
-    };
-    req.onerror = () => {
-      dbPromise = null;
-      reject(req.error);
-    };
-    req.onblocked = () => {
-      console.warn("Nth Shelf database upgrade is blocked by another open tab.");
-    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
   });
   return dbPromise;
 }
@@ -62,63 +37,10 @@ function tx(storeNames, mode) {
 }
 
 const LongboxDB = {
-  // Run once at startup. Requesting persistent storage lets supporting browsers
-  // keep the comic library from being evicted as ordinary site data. Browsers
-  // may decline the request; the app still works normally in that case.
-  async bootstrap() {
-    const db = await openDB();
-    let persisted = false;
-    try {
-      if (navigator.storage?.persist) {
-        persisted = await navigator.storage.persist();
-      }
-    } catch (e) {
-      console.warn("Nth Shelf persistent-storage request failed:", e);
-    }
-
-    try {
-      const t = db.transaction(["meta"], "readwrite");
-      t.objectStore("meta").put({
-        key: "schema",
-        dbName: DB_NAME,
-        dbVersion: DB_VERSION,
-        app: "nth-shelf",
-        updatedAt: Date.now(),
-      });
-      t.objectStore("meta").put({
-        key: "storage",
-        persistentRequested: true,
-        persistentGranted: persisted,
-        updatedAt: Date.now(),
-      });
-      await txDone(t);
-    } catch (e) {
-      console.warn("Nth Shelf metadata write failed:", e);
-    }
-
-    return { persisted };
-  },
-
-  async getMeta(key) {
-    const t = await tx(["meta"], "readonly");
-    return reqResult(t.objectStore("meta").get(key));
-  },
-
-  async setMeta(key, value) {
-    const t = await tx(["meta"], "readwrite");
-    t.objectStore("meta").put({ key, ...value });
-    return txDone(t);
-  },
-
   async addComic(comic) {
     const t = await tx(["comics"], "readwrite");
     t.objectStore("comics").put(comic);
-    const done = txDone(t);
-    await done;
-    try {
-      localStorage.setItem(STORAGE_MARKER_KEY, JSON.stringify({ hasLibrary: true, updatedAt: Date.now() }));
-    } catch (e) {}
-    return done;
+    return txDone(t);
   },
 
   async getComic(id) {
@@ -164,13 +86,7 @@ const LongboxDB = {
         cursor.continue();
       }
     };
-    const done = txDone(t);
-    await done;
-    try {
-      const remaining = await this.getAllComics();
-      if (!remaining.length) localStorage.setItem(STORAGE_MARKER_KEY, JSON.stringify({ hasLibrary: false, updatedAt: Date.now() }));
-    } catch (e) {}
-    return done;
+    return txDone(t);
   },
 
   async putPage(comicId, index, blob) {
@@ -206,12 +122,7 @@ const LongboxDB = {
   async addCollection(collection) {
     const t = await tx(["collections"], "readwrite");
     t.objectStore("collections").put(collection);
-    const done = txDone(t);
-    await done;
-    try {
-      localStorage.setItem(STORAGE_MARKER_KEY, JSON.stringify({ hasLibrary: true, updatedAt: Date.now() }));
-    } catch (e) {}
-    return done;
+    return txDone(t);
   },
 
   async getCollection(id) {
@@ -256,15 +167,7 @@ const LongboxDB = {
     }
     const t = await tx(["collections"], "readwrite");
     t.objectStore("collections").delete(id);
-    const done = txDone(t);
-    await done;
-    try {
-      const [remainingComics, remainingCollections] = await Promise.all([this.getAllComics(), this.getAllCollections()]);
-      if (!remainingComics.length && !remainingCollections.length) {
-        localStorage.setItem(STORAGE_MARKER_KEY, JSON.stringify({ hasLibrary: false, updatedAt: Date.now() }));
-      }
-    } catch (e) {}
-    return done;
+    return txDone(t);
   },
 };
 
