@@ -18,6 +18,7 @@ const Reader = {
  chromeTimer: null,
  _twoPageEnteredFullscreen: false,
  _twoPageOrientationLocked: false,
+ _initialReaderGuideShown: false,
 
  currentPanels: [],       // detected panel rects for the visible page, fractional coords
  panelZoomEnabled: localStorage.getItem(PANEL_ZOOM_KEY) !== "0",
@@ -143,7 +144,11 @@ const Reader = {
    this.showChrome(true);
 
    await this.render();
- },
+ if (!this._initialReaderGuideShown) {
+    this._initialReaderGuideShown = true;
+    requestAnimationFrame(() => this.openHelpDrawer());
+  }
+},
 
  close() {
    this.saveProgress();
