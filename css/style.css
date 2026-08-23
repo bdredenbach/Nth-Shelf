@@ -1749,3 +1749,14 @@ button.reader-btn.mini-btn {
     min-height: 58px;
   }
 }
+
+
+.empty-state > * {
+  visibility: hidden;
+}
+.empty-state .empty-import,
+.empty-state button,
+.empty-state input,
+.empty-state a {
+  visibility: hidden;
+}
