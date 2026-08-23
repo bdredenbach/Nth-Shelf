@@ -80,7 +80,12 @@
           <button class="library-search-clear" id="library-search-clear" type="button"
             aria-label="Clear library search" title="Clear search">×</button>
         </div>
-        <button class="ghost-btn shelf-search-close" id="search-mode-close" type="button">Done</button>
+        <div class="shelf-search-actions">
+          <button class="ghost-btn shelf-search-bookmarks" id="search-bookmarks-btn" type="button" aria-pressed="false" title="Browse bookmarked pages">
+            <span class="bookmark-search-icon" aria-hidden="true"><span class="reg-mark"><span class="reg-mark-ring"></span></span></span> Bookmarks
+          </button>
+          <button class="ghost-btn shelf-search-close" id="search-mode-close" type="button">Done</button>
+        </div>
       </div>
       <div class="shelf-carousel" id="shelf-carousel" tabindex="0" aria-label="Comic cover browser">
         <button class="shelf-carousel-arrow shelf-carousel-prev" id="shelf-carousel-prev" type="button" aria-label="Previous comic">‹</button>
