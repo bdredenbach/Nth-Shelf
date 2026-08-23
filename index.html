@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-<title>Longbox — Comic Reader</title>
+<title>Nth Shelf — Comic Reader</title>
 <meta name="theme-color" content="#0d0d0f" />
 <link rel="manifest" href="manifest.webmanifest" />
 <script>
@@ -36,8 +36,8 @@
 <main id="library-view" class="view active">
 
   <div id="library-root">
-    <div class="lib-header">
-      <h1 class="lib-title">Longbox<span class="dot">.</span></h1>
+    <div class="lib-header" id="library-header">
+      <h1 class="lib-title">Nth Shelf</h1>
       <span class="lib-count" id="lib-count"></span>
     </div>
 
@@ -49,7 +49,7 @@
     <div class="library-search-wrap" id="library-search-wrap" style="display:none;">
       <label class="sr-only" for="library-search">Search library</label>
       <input class="library-search" id="library-search" type="search"
-        placeholder="Search your Longbox…" autocomplete="off" enterkeyhint="search" />
+        placeholder="Search your Nth Shelf…" autocomplete="off" enterkeyhint="search" />
       <button class="library-search-clear" id="library-search-clear" type="button"
         aria-label="Clear library search" title="Clear search">×</button>
     </div>
@@ -74,9 +74,8 @@
 
     <input type="file" id="restore-input" accept=".json,application/json" style="display:none" />
 
-    <div class="empty-state" id="empty-state" style="display:none;">
-      <img class="empty-state-art" src="./assets/nth-shelf-empty.png" alt="Nth Shelf empty library" />
-      <button class="empty-state-import" id="empty-state-import" type="button" aria-label="Import a comic">Import</button>
+    <div class="empty-state" id="empty-state" style="display:none;" aria-label="Nth Shelf empty library">
+      <button class="empty-import-hit" id="empty-import-hit" type="button" aria-label="Import a comic"></button>
     </div>
 
     <div class="comic-grid" id="comic-grid" style="display:none;"></div>
@@ -260,9 +259,10 @@
 <script src="js/reader.js"></script>
 <script src="js/app.js"></script>
 <script>
-  document.getElementById("fab-import").addEventListener("click", () => {
-    document.getElementById("import-input").click();
-  });
+  const importInput = document.getElementById("import-input");
+  const openImport = () => importInput.click();
+  document.getElementById("fab-import").addEventListener("click", openImport);
+  document.getElementById("empty-import-hit").addEventListener("click", openImport);
 </script>
 </body>
 </html>
