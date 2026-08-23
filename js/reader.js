@@ -17,6 +17,10 @@ const Reader = {
  chromeVisible: true,
  chromeTimer: null,
  _twoPageEnteredFullscreen: false,
+ _autoScrollEnabled: false,
+ _autoScrollAnimation: null,
+ _autoScrollLastTime: 0,
+ _autoScrollSpeed: 38,
  _twoPageOrientationLocked: false,
  _initialReaderGuideShown: false,
 
@@ -73,6 +77,12 @@ const Reader = {
    document.getElementById("reader-back").addEventListener("click", () => this.close());
    document.getElementById("reader-bookmark").addEventListener("click", () => this.toggleBookmark());
    document.getElementById("reader-help").addEventListener("click", () => this.openHelpDrawer());
+    this.els.autoScrollToggle = document.getElementById("auto-scroll-toggle");
+    this.els.autoScrollToggle?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      this.toggleAutoScroll();
+    });
+
    this.els.twoPageExitFullscreen = document.getElementById("two-page-exit-fullscreen");
    this.els.twoPageExitFullscreen?.addEventListener("click", () => this.exitTwoPageFullscreen());
    document.addEventListener("fullscreenchange", () => this.handleTwoPageFullscreenChange());
@@ -1028,6 +1038,64 @@ const Reader = {
      this.updateSliderLabel();
    }
  },
+
+  updateAutoScrollControl() {
+    const btn = this.els.autoScrollToggle;
+    if (!btn) return;
+    const allowed = this.mode === "scroll" || this.mode === "manga" || this.mode === "webcomic";
+    btn.hidden = !allowed;
+    btn.classList.toggle("is-active", allowed && this._autoScrollEnabled);
+    btn.setAttribute("aria-pressed", String(allowed && this._autoScrollEnabled));
+  },
+
+  stopAutoScroll() {
+    if (this._autoScrollAnimation) cancelAnimationFrame(this._autoScrollAnimation);
+    this._autoScrollAnimation = null;
+    this._autoScrollLastTime = 0;
+    this._autoScrollEnabled = false;
+    this.updateAutoScrollControl();
+  },
+
+  startAutoScroll() {
+    const allowed = this.mode === "scroll" || this.mode === "manga" || this.mode === "webcomic";
+    if (!allowed || this._autoScrollAnimation) return;
+    this._autoScrollEnabled = true;
+    this.updateAutoScrollControl();
+
+    const tick = (now) => {
+      if (!this._autoScrollEnabled ||
+          !(this.mode === "scroll" || this.mode === "manga" || this.mode === "webcomic")) {
+        this._autoScrollAnimation = null;
+        this._autoScrollLastTime = 0;
+        return;
+      }
+      if (!this._autoScrollLastTime) this._autoScrollLastTime = now;
+      const dt = Math.min(now - this._autoScrollLastTime, 50);
+      this._autoScrollLastTime = now;
+      const distance = this._autoScrollSpeed * dt / 1000;
+
+      if (this.mode === "manga") this.els.view.scrollLeft -= distance;
+      else this.els.view.scrollLeft += distance;
+
+      const max = Math.max(0, this.els.view.scrollWidth - this.els.view.clientWidth);
+      const atEnd = this.mode === "manga"
+        ? this.els.view.scrollLeft <= 0
+        : this.els.view.scrollLeft >= max - 1;
+
+      if (atEnd) {
+        this.stopAutoScroll();
+        return;
+      }
+      this._autoScrollAnimation = requestAnimationFrame(tick);
+    };
+    this._autoScrollAnimation = requestAnimationFrame(tick);
+  },
+
+  toggleAutoScroll() {
+    if (this._autoScrollEnabled) this.stopAutoScroll();
+    else this.startAutoScroll();
+  },
+
 
  async setMode(mode) {
    if (mode === this.mode) return;
