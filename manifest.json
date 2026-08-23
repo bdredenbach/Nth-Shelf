@@ -1,6 +1,6 @@
 {
-  "name": "Nth Shelf \u2014 Comic Reader",
-  "short_name": "Nth Shelf",
+  "name": "Longbox \u2014 Comic Reader",
+  "short_name": "Longbox",
   "description": "A personal offline CBZ comic reader.",
   "start_url": "./index.html",
   "scope": "./",

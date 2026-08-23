@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-<title>Nth Shelf — Comic Reader</title>
+<title>Longbox — Comic Reader</title>
 <meta name="theme-color" content="#0d0d0f" />
 <link rel="manifest" href="manifest.webmanifest" />
 <script>
@@ -37,7 +37,7 @@
 
   <div id="library-root">
     <div class="lib-header">
-      <h1 class="lib-title">Nth Shelf</h1>
+      <h1 class="lib-title">Longbox<span class="dot">.</span></h1>
       <span class="lib-count" id="lib-count"></span>
     </div>
 
@@ -49,7 +49,7 @@
     <div class="library-search-wrap" id="library-search-wrap" style="display:none;">
       <label class="sr-only" for="library-search">Search library</label>
       <input class="library-search" id="library-search" type="search"
-        placeholder="Search your Nth Shelf…" autocomplete="off" enterkeyhint="search" />
+        placeholder="Search your Longbox…" autocomplete="off" enterkeyhint="search" />
       <button class="library-search-clear" id="library-search-clear" type="button"
         aria-label="Clear library search" title="Clear search">×</button>
     </div>
@@ -74,12 +74,9 @@
 
     <input type="file" id="restore-input" accept=".json,application/json" style="display:none" />
 
-    <div class="empty-state halftone" id="empty-state" style="display:none;">
-      <h2>Your Nth Shelf is empty</h2>
-      <p>Everything stays on this device.</p>
-      <div class="format-row" aria-label="Supported comic formats">
-        <span>CBZ</span><span>ZIP</span><span>CBT</span><span>CB7</span><span>7Z</span><span>CBR</span><span>RAR</span>
-      </div>
+    <div class="empty-state" id="empty-state" style="display:none;">
+      <img class="empty-state-art" src="./assets/nth-shelf-empty.png" alt="Nth Shelf empty library" />
+      <button class="empty-state-import" id="empty-state-import" type="button" aria-label="Import a comic">Import</button>
     </div>
 
     <div class="comic-grid" id="comic-grid" style="display:none;"></div>

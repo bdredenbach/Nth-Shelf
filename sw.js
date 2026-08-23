@@ -1,12 +1,13 @@
-// sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
+// sw.js — caches the app shell so Longbox launches and runs fully offline.
 // Comic pages themselves live in IndexedDB (js/db.js), not here.
 
-const CACHE_NAME = "nth-shelf-shell-v2-38";
+const CACHE_NAME = "longbox-shell-v2-38";
 const SHELL_FILES = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./css/style.css",
+  "./assets/nth-shelf-empty.png",
   "./js/db.js",
   "./js/library.js",
   "./js/panels.js",
