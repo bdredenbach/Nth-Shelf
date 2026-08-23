@@ -1141,7 +1141,7 @@ const Reader = {
    let dim = this.els.focusDim;
    if (!dim) {
      dim = document.createElement("div");
-     dim.className = "reader-focus-dim";
+     dim.className = "reader-focus-dim"; dim.dataset.readerFocusLayer = "top";
      dim.setAttribute("aria-hidden", "true");
      this.els.stage.appendChild(dim);
      this.els.focusDim = dim;
