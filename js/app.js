@@ -25,8 +25,8 @@ const LongboxApp = {
     btn.style.display = standalone ? "none" : "";
     btn.textContent = this.deferredInstallPrompt ? "Install" : "Install";
     btn.title = this.deferredInstallPrompt
-      ? "Install Nth Shelf on this device"
-      : "Install Nth Shelf from your browser menu";
+      ? "Install Longbox on this device"
+      : "Install Longbox from your browser menu";
   },
 
   async installPWA() {
@@ -36,7 +36,7 @@ const LongboxApp = {
 
     if (!this.deferredInstallPrompt) {
       Modal.actions(
-        "Install Nth Shelf",
+        "Install Longbox",
         "If your browser does not show the install prompt automatically, open the browser menu and choose “Install app” or “Add to Home screen.”",
         [{ label: "Close", cls: "subtle" }]
       );
@@ -48,10 +48,10 @@ const LongboxApp = {
 
     try {
       const result = await promptEvent.prompt();
-      console.info("Nth Shelf install prompt:", result?.outcome || "shown");
+      console.info("Longbox install prompt:", result?.outcome || "shown");
       await promptEvent.userChoice.catch(() => null);
     } catch (err) {
-      console.warn("Nth Shelf install prompt failed:", err);
+      console.warn("Longbox install prompt failed:", err);
     }
 
     this.updateInstallButton();
