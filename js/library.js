@@ -114,8 +114,6 @@ const Library = {
     this.els.toolbar = document.getElementById("lib-toolbar");
     this.els.progressEl = document.getElementById("import-progress");
     this.els.progressText = document.getElementById("import-progress-text");
-    this.els.emptyImport = document.getElementById("empty-state-import");
-    this.els.fabImport = document.getElementById("fab-import");
     this.els.collectionGrid = document.getElementById("collection-grid");
     this.els.collectionTitle = document.getElementById("collection-title");
     this.els.collectionCount = document.getElementById("collection-count");
@@ -123,9 +121,6 @@ const Library = {
     document.getElementById("import-input").addEventListener("change", (e) => {
       this.handleFiles(e.target.files);
       e.target.value = "";
-    });
-    this.els.emptyImport?.addEventListener("click", () => {
-      document.getElementById("import-input").click();
     });
 
     document.querySelectorAll("#sort-row .pill[data-sort], #collection-sort-row .pill[data-sort]").forEach((btn) => {
@@ -243,9 +238,8 @@ const Library = {
     this.els.toolbar.style.display = totalCount ? "flex" : "none";
     this.els.emptyEl.style.display = totalCount ? "none" : "block";
     this.els.gridEl.style.display = totalCount ? "grid" : "none";
-    if (this.els.fabImport) {
-      this.els.fabImport.style.display = totalCount ? "flex" : "none";
-    }
+    document.getElementById("library-view")?.classList.toggle("empty-library", !totalCount);
+    document.getElementById("fab-import")?.classList.toggle("empty-library-fab", !totalCount);
     this.els.gridEl.innerHTML = "";
 
     // enrich collections with aggregate stats for sorting/progress display
@@ -553,11 +547,11 @@ const Library = {
     try {
       payload = JSON.parse(await file.text());
     } catch (err) {
-      Modal.actions("Couldn't read backup", "That file doesn't look like a valid Longbox backup.", [{ label: "OK", cls: "neutral" }]);
+      Modal.actions("Couldn't read backup", "That file doesn't look like a valid Nth Shelf backup.", [{ label: "OK", cls: "neutral" }]);
       return;
     }
     if (!payload || payload.app !== "longbox" || !Array.isArray(payload.comics)) {
-      Modal.actions("Couldn't read backup", "That file doesn't look like a valid Longbox backup.", [{ label: "OK", cls: "neutral" }]);
+      Modal.actions("Couldn't read backup", "That file doesn't look like a valid Nth Shelf backup.", [{ label: "OK", cls: "neutral" }]);
       return;
     }
 
@@ -611,7 +605,7 @@ const Library = {
   async handleFiles(fileList) {
     const files = Array.from(fileList).filter((f) => ARCHIVE_EXT.test(f.name));
     if (!files.length) {
-      alert("No supported comic archives found. Longbox supports CBZ, ZIP, CBT, TAR, CB7, 7Z, CBR, and RAR.");
+      alert("No supported comic archives found. Nth Shelf supports CBZ, ZIP, CBT, TAR, CB7, 7Z, CBR, and RAR.");
       return;
     }
     this.els.progressEl.classList.add("active");
