@@ -1,5 +1,5 @@
 {
-  "name": "Nth Shelf \u2014 Comic Reader",
+  "name": "Nth Shelf — Comic Reader",
   "short_name": "Nth Shelf",
   "description": "A personal offline CBZ comic reader.",
   "start_url": "./",
@@ -27,5 +27,6 @@
     }
   ],
   "id": "./",
-  "prefer_related_applications": false
+  "prefer_related_applications": false,
+  "version": "2.45"
 }
