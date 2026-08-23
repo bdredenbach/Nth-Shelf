@@ -1042,14 +1042,19 @@ const Reader = {
   updateAutoScrollControl() {
     const btn = this.els.autoScrollToggle;
     if (!btn) return;
-    const allowed = this.mode === "scroll" || this.mode === "manga" || this.mode === "webcomic";
+    const allowed =
+      this.mode === "scroll" ||
+      this.mode === "manga" ||
+      this.mode === "webcomic";
     btn.hidden = !allowed;
     btn.classList.toggle("is-active", allowed && this._autoScrollEnabled);
     btn.setAttribute("aria-pressed", String(allowed && this._autoScrollEnabled));
   },
 
   stopAutoScroll() {
-    if (this._autoScrollAnimation) cancelAnimationFrame(this._autoScrollAnimation);
+    if (this._autoScrollAnimation) {
+      cancelAnimationFrame(this._autoScrollAnimation);
+    }
     this._autoScrollAnimation = null;
     this._autoScrollLastTime = 0;
     this._autoScrollEnabled = false;
@@ -1057,37 +1062,60 @@ const Reader = {
   },
 
   startAutoScroll() {
-    const allowed = this.mode === "scroll" || this.mode === "manga" || this.mode === "webcomic";
-    if (!allowed || this._autoScrollAnimation) return;
+    const allowed =
+      this.mode === "scroll" ||
+      this.mode === "manga" ||
+      this.mode === "webcomic";
+    const viewport = this.els.view;
+    if (!allowed || !viewport || this._autoScrollAnimation) return;
+
     this._autoScrollEnabled = true;
+    this._autoScrollLastTime = 0;
     this.updateAutoScrollControl();
 
     const tick = (now) => {
-      if (!this._autoScrollEnabled ||
-          !(this.mode === "scroll" || this.mode === "manga" || this.mode === "webcomic")) {
+      if (!this._autoScrollEnabled) {
         this._autoScrollAnimation = null;
         this._autoScrollLastTime = 0;
         return;
       }
-      if (!this._autoScrollLastTime) this._autoScrollLastTime = now;
-      const dt = Math.min(now - this._autoScrollLastTime, 50);
-      this._autoScrollLastTime = now;
-      const distance = this._autoScrollSpeed * dt / 1000;
 
-      if (this.mode === "manga") this.els.view.scrollLeft -= distance;
-      else this.els.view.scrollLeft += distance;
-
-      const max = Math.max(0, this.els.view.scrollWidth - this.els.view.clientWidth);
-      const atEnd = this.mode === "manga"
-        ? this.els.view.scrollLeft <= 0
-        : this.els.view.scrollLeft >= max - 1;
-
-      if (atEnd) {
+      const mode = this.mode;
+      if (mode !== "scroll" && mode !== "manga" && mode !== "webcomic") {
         this.stopAutoScroll();
         return;
       }
+
+      if (!this._autoScrollLastTime) this._autoScrollLastTime = now;
+      const dt = Math.min(now - this._autoScrollLastTime, 50);
+      this._autoScrollLastTime = now;
+      const distance = 45 * dt / 1000;
+
+      if (mode === "webcomic") {
+        const maxY = Math.max(0, viewport.scrollHeight - viewport.clientHeight);
+        viewport.scrollTop = Math.min(maxY, viewport.scrollTop + distance);
+        if (viewport.scrollTop >= maxY - 1) {
+          this.stopAutoScroll();
+          return;
+        }
+      } else if (mode === "manga") {
+        viewport.scrollLeft = Math.max(0, viewport.scrollLeft - distance);
+        if (viewport.scrollLeft <= 1) {
+          this.stopAutoScroll();
+          return;
+        }
+      } else {
+        const maxX = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+        viewport.scrollLeft = Math.min(maxX, viewport.scrollLeft + distance);
+        if (viewport.scrollLeft >= maxX - 1) {
+          this.stopAutoScroll();
+          return;
+        }
+      }
+
       this._autoScrollAnimation = requestAnimationFrame(tick);
     };
+
     this._autoScrollAnimation = requestAnimationFrame(tick);
   },
 
@@ -1096,8 +1124,9 @@ const Reader = {
     else this.startAutoScroll();
   },
 
+async setMode(mode) {
 
- async setMode(mode) {
+  this.stopAutoScroll();
    if (mode === this.mode) return;
    this.debugLog(`setMode: ${this.mode} -> ${mode}`);
 
