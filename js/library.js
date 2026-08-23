@@ -102,6 +102,10 @@ const Library = {
   sort: localStorage.getItem(SORT_KEY) || "recent",
   sortDirection: localStorage.getItem(SORT_DIR_KEY) || "",
   activeCollectionId: null,
+  searchMode: false,
+  searchQuery: "",
+  searchItems: [],
+  searchIndex: 0,
 
   init() {
     Modal.init();
@@ -117,6 +121,34 @@ const Library = {
     this.els.collectionGrid = document.getElementById("collection-grid");
     this.els.collectionTitle = document.getElementById("collection-title");
     this.els.collectionCount = document.getElementById("collection-count");
+    this.els.searchMode = document.getElementById("shelf-search-mode");
+    this.els.searchInput = document.getElementById("library-search");
+    this.els.searchClear = document.getElementById("library-search-clear");
+    this.els.searchTrack = document.getElementById("shelf-track");
+    this.els.searchTitle = document.getElementById("shelf-search-title");
+    this.els.searchCount = document.getElementById("shelf-search-count");
+    this.els.searchCarousel = document.getElementById("shelf-carousel");
+
+    document.getElementById("search-mode-btn").addEventListener("click", () => this.toggleSearchMode());
+    document.getElementById("search-mode-close").addEventListener("click", () => this.closeSearchMode());
+    this.els.searchInput.addEventListener("input", () => {
+      this.searchQuery = this.els.searchInput.value.trim().toLowerCase();
+      this.rebuildSearchItems();
+    });
+    this.els.searchClear.addEventListener("click", () => {
+      this.els.searchInput.value = "";
+      this.searchQuery = "";
+      this.rebuildSearchItems();
+      this.els.searchInput.focus();
+    });
+    document.getElementById("shelf-carousel-prev").addEventListener("click", () => this.moveSearch(-1));
+    document.getElementById("shelf-carousel-next").addEventListener("click", () => this.moveSearch(1));
+    this.bindSearchSwipe();
+    this.els.searchCarousel.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") { e.preventDefault(); this.moveSearch(-1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); this.moveSearch(1); }
+      if (e.key === "Enter") { e.preventDefault(); this.openSearchSelection(); }
+    });
 
     document.getElementById("import-input").addEventListener("change", (e) => {
       this.handleFiles(e.target.files);
@@ -146,6 +178,7 @@ const Library = {
   },
 
   showRoot() {
+    if (this.searchMode) this.closeSearchMode();
     this.activeCollectionId = null;
     this.els.collectionView.style.display = "none";
     this.els.root.style.display = "block";
@@ -153,6 +186,7 @@ const Library = {
   },
 
   showCollection(id) {
+    if (this.searchMode) this.closeSearchMode();
     this.activeCollectionId = id;
     this.els.root.style.display = "none";
     this.els.collectionView.style.display = "block";
@@ -262,6 +296,8 @@ const Library = {
     items.forEach((item) => {
       this.els.gridEl.appendChild(item._isCollection ? this.renderCollectionCard(item) : this.renderComicCard(item));
     });
+    this.searchItems = items;
+    if (this.searchMode) this.rebuildSearchItems();
   },
 
   async refreshCollectionView() {
@@ -281,6 +317,110 @@ const Library = {
     this.els.collectionCount.textContent = `${members.length} issue${members.length === 1 ? "" : "s"}`;
     this.els.collectionGrid.innerHTML = "";
     members.forEach((m) => this.els.collectionGrid.appendChild(this.renderComicCard(m, { inCollection: true })));
+  },
+
+  toggleSearchMode() {
+    if (this.searchMode) return;
+    this.searchMode = true;
+    this.searchQuery = "";
+    this.els.searchInput.value = "";
+    this.els.searchMode.hidden = false;
+    this.els.gridEl.style.display = "none";
+    this.els.toolbar.style.display = "none";
+    this.els.countEl.textContent = "";
+    this.rebuildSearchItems();
+    requestAnimationFrame(() => this.els.searchInput.focus());
+  },
+
+  closeSearchMode() {
+    this.searchMode = false;
+    this.searchQuery = "";
+    this.els.searchMode.hidden = true;
+    this.els.gridEl.style.display = this.searchItems.length ? "grid" : "none";
+    this.els.toolbar.style.display = this.searchItems.length ? "flex" : "none";
+    this.els.searchInput.value = "";
+  },
+
+  rebuildSearchItems() {
+    const q = this.searchQuery;
+    const filtered = q
+      ? this.searchItems.filter((item) => (item.title || "").toLowerCase().includes(q))
+      : this.searchItems.slice();
+    if (!filtered.length) {
+      this.els.searchTrack.innerHTML = `<div class="shelf-search-empty">No comics found.</div>`;
+      this.els.searchTitle.textContent = "";
+      this.els.searchCount.textContent = "0 results";
+      this.searchIndex = 0;
+      return;
+    }
+    const currentId = this.searchItems[this.searchIndex]?.id;
+    const sameIndex = currentId ? filtered.findIndex((item) => item.id === currentId) : -1;
+    this.searchItems = this.searchItems.slice();
+    this._searchFiltered = filtered;
+    this.searchIndex = sameIndex >= 0 ? sameIndex : Math.min(this.searchIndex, filtered.length - 1);
+    this.renderSearchCarousel();
+  },
+
+  renderSearchCarousel() {
+    const items = this._searchFiltered || this.searchItems;
+    const n = items.length;
+    if (!n) return;
+    this.searchIndex = ((this.searchIndex % n) + n) % n;
+    this.els.searchTrack.innerHTML = "";
+    const radius = Math.min(3, Math.floor(n / 2));
+    for (let offset = -radius; offset <= radius; offset++) {
+      const index = (this.searchIndex + offset + n) % n;
+      const item = items[index];
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "shelf-carousel-card";
+      card.dataset.offset = String(offset);
+      card.dataset.index = String(index);
+      const cover = item._cover || item;
+      const image = cover?.coverUrl ? `<img src="${cover.coverUrl}" alt="${escapeHtml(item.title || "Comic cover")}" loading="eager">` : `<div class="shelf-carousel-placeholder">${escapeHtml(item.title || "Comic")}</div>`;
+      card.innerHTML = `<div class="shelf-carousel-cover">${image}</div><span class="shelf-carousel-label">${escapeHtml(item.title || "")}</span>`;
+      if (offset === 0) card.classList.add("is-selected");
+      card.addEventListener("click", () => {
+        if (offset === 0) this.openSearchSelection();
+        else this.searchIndex = index, this.renderSearchCarousel();
+      });
+      this.els.searchTrack.appendChild(card);
+    }
+    this.els.searchTitle.textContent = items[this.searchIndex]?.title || "";
+    this.els.searchCount.textContent = `${this.searchIndex + 1} / ${n}`;
+  },
+
+  moveSearch(delta) {
+    const items = this._searchFiltered || this.searchItems;
+    if (!items.length) return;
+    this.searchIndex = (this.searchIndex + delta + items.length) % items.length;
+    this.renderSearchCarousel();
+  },
+
+  openSearchSelection() {
+    const item = (this._searchFiltered || this.searchItems)[this.searchIndex];
+    if (!item) return;
+    if (item._isCollection) this.showCollection(item.id);
+    else window.LongboxApp.openReader(item.id);
+  },
+
+  bindSearchSwipe() {
+    let startX = 0;
+    let startY = 0;
+    let tracking = false;
+    this.els.searchCarousel.addEventListener("pointerdown", (e) => {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      startX = e.clientX; startY = e.clientY; tracking = true;
+      this.els.searchCarousel.setPointerCapture?.(e.pointerId);
+    });
+    this.els.searchCarousel.addEventListener("pointerup", (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) this.moveSearch(dx < 0 ? 1 : -1);
+    });
+    this.els.searchCarousel.addEventListener("pointercancel", () => { tracking = false; });
   },
 
   renderComicCard(comic, opts = {}) {
