@@ -1141,11 +1141,40 @@ const Reader = {
    let dim = this.els.focusDim;
    if (!dim) {
      dim = document.createElement("div");
-     dim.className = "reader-focus-dim"; dim.dataset.readerFocusLayer = "top";
+     dim.className = "reader-focus-dim";
      dim.setAttribute("aria-hidden", "true");
      this.els.stage.appendChild(dim);
      this.els.focusDim = dim;
    }
+
+   // Continuous readers scroll the .reader-stage itself. An absolute dim
+   // would stay at scrollTop 0 and disappear when the reader is down the
+   // issue. Keep the dim fixed to the visible reader-stage rectangle in
+   // Scroll/Manga/Webcomic. Page/Two Page retain their proven behavior.
+   const continuous =
+     this.mode === "scroll" ||
+     this.mode === "manga" ||
+     this.mode === "webcomic";
+
+   if (active && continuous) {
+     const rect = this.els.stage.getBoundingClientRect();
+     dim.style.position = "fixed";
+     dim.style.left = `${rect.left}px`;
+     dim.style.top = `${rect.top}px`;
+     dim.style.width = `${rect.width}px`;
+     dim.style.height = `${rect.height}px`;
+     // Reader chrome lives above the stage at z-index 5. The bubble uses
+     // z-index 120, so the dim sits between content and chrome.
+     dim.style.zIndex = "4";
+   } else {
+     dim.style.position = "";
+     dim.style.left = "";
+     dim.style.top = "";
+     dim.style.width = "";
+     dim.style.height = "";
+     dim.style.zIndex = "";
+   }
+
    if (!animate) dim.classList.add("no-transition");
    else dim.classList.remove("no-transition");
    dim.classList.toggle("active", active);
@@ -1969,7 +1998,13 @@ const Reader = {
    // positioned through portrait/landscape transitions. Continuous readers
    // keep their existing page-anchored behavior.
    const twoPageFixedOverlay = this.mode === "two-page";
-   if (twoPageFixedOverlay) {
+   const continuousFixedOverlay =
+     this.mode === "scroll" ||
+     this.mode === "manga" ||
+     this.mode === "webcomic";
+   const topLevelFixedOverlay = twoPageFixedOverlay || continuousFixedOverlay;
+
+   if (topLevelFixedOverlay) {
      overlay.style.position = "fixed";
      overlay.style.left = `${left}px`;
      overlay.style.top = `${top}px`;
@@ -1997,7 +2032,7 @@ const Reader = {
    // the focus dim. Appending it to a .two-page-page would trap the overlay
    // inside the page/viewport stacking context, allowing the dim layer to
    // cover it even with a higher z-index.
-   if (twoPageFixedOverlay) {
+   if (topLevelFixedOverlay) {
      this.els.stage.appendChild(overlay);
    } else if (anchorPage) {
      anchorPage.appendChild(overlay);
