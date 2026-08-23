@@ -218,7 +218,7 @@ const Library = {
   },
 
   defaultSortDirection(sort) {
-    return (sort === "recent" || sort === "progress") ? "desc" : "asc";
+    return (sort === "recent" || sort === "progress" || sort === "added") ? "desc" : "asc";
   },
 
   toggleSortDirection() {
@@ -262,6 +262,11 @@ const Library = {
           break;
         case "progress":
           result = progressPct(a) - progressPct(b);
+          break;
+        case "added":
+          // Sort by when the item was added to the shelf. Collections use
+          // createdAt as their equivalent timestamp.
+          result = (a.addedAt || a.createdAt || 0) - (b.addedAt || b.createdAt || 0);
           break;
         case "recent":
         default:
