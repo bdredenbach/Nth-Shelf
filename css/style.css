@@ -1754,26 +1754,30 @@ button.reader-btn.mini-btn {
 .auto-scroll-toggle { font-size: 19px !important; }
 .auto-scroll-toggle.is-active { outline: 2px solid currentColor; outline-offset: -2px; }
 
-/* v2.50 Auto Scroll pill */
-.auto-scroll-pill {
-  min-width: 118px;
-  min-height: 40px;
-  padding: 0 16px !important;
-  border-radius: 999px !important;
-  background: #d71920 !important;
-  color: #fff !important;
-  border: 2px solid #000 !important;
-  font-size: 12px !important;
-  font-weight: 800 !important;
-  letter-spacing: .06em !important;
-  line-height: 1 !important;
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
+
+/* v2.51 Auto Scroll: same pill language as Bubble Zoom. */
+.reader-options-row .auto-scroll-pill {
+  min-height: 30px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: var(--red);
+  border: 1px solid transparent;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: normal;
+  cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
-.auto-scroll-pill.is-active {
-  box-shadow: 0 0 0 3px rgba(215,25,32,.28);
-  transform: translateY(-1px);
+.reader-options-row .auto-scroll-pill.active {
+  background: var(--red);
+}
+.reader-options-row .auto-scroll-pill.is-active {
+  box-shadow: 0 0 0 2px rgba(215,25,32,.25);
+}
+.reader-options-row .auto-scroll-pill[hidden] {
+  display: none !important;
 }
