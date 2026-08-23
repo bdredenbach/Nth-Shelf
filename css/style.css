@@ -1472,3 +1472,20 @@ button.reader-btn.mini-btn {
 
 /* v2.34 alternate: continuous Bubble Zoom uses fixed reader-stage overlays. */
 /* Geometry and stacking are set by reader.js so the overlay follows the visible reader stage. */
+
+
+/* v2.35: Two Page fullscreen exit control.
+   Visible only while Two Page is fullscreen and the viewport is landscape. */
+.two-page-exit-fullscreen {
+  display: none !important;
+  order: 99;
+  font-size: 21px !important;
+  line-height: 1;
+}
+.two-page-exit-fullscreen.is-visible {
+  display: flex !important;
+}
+.fullscreen-icon {
+  display: block;
+  transform: translateY(-1px);
+}
