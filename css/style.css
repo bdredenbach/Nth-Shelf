@@ -258,7 +258,13 @@ button {
   width: 34px; height: 34px; border: 0; border-radius: 50%;
   background: transparent; color: var(--paper-dim); font-size: 22px;
 }
-.shelf-search-close { flex: 0 0 auto; }
+.shelf-search-actions { display:flex; align-items:center; gap:8px; flex:0 0 auto; }
+.shelf-search-close, .shelf-search-bookmarks { flex: 0 0 auto; }
+.shelf-search-bookmarks.active { background: var(--red); border-color: var(--red); color: #fff; }
+.bookmark-search-icon { display:inline-flex; vertical-align:middle; margin-right:5px; transform:scale(.78); transform-origin:center; }
+.bookmark-carousel-card .shelf-carousel-label { white-space:nowrap; }
+.bookmark-page-cover { background:#050506; }
+.bookmark-page-cover img { object-fit:contain; background:#050506; }
 .shelf-carousel {
   position: relative;
   height: min(66vh, 520px);
@@ -338,6 +344,8 @@ button {
   .shelf-carousel-card[data-offset="1"] { --offset:1; --scale:.55; --rot:-6; --opacity:.4; }
   .shelf-carousel-card[data-offset="-2"], .shelf-carousel-card[data-offset="2"], .shelf-carousel-card[data-offset="-3"], .shelf-carousel-card[data-offset="3"] { display:none; }
   .shelf-carousel-arrow { width:40px; height:40px; }
+  .shelf-search-actions { gap:6px; }
+  .shelf-search-bookmarks { padding-left:11px; padding-right:11px; }
 }
 
 /* ---- Collection card: layered "stack of books" look ---- */
