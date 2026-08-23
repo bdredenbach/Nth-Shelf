@@ -99,6 +99,7 @@ function normalizeKey(s) {
 
 const Library = {
   els: {},
+  persistenceWarningShown: false,
   sort: localStorage.getItem(SORT_KEY) || "recent",
   sortDirection: localStorage.getItem(SORT_DIR_KEY) || "",
   activeCollectionId: null,
@@ -185,7 +186,28 @@ const Library = {
     this.sortDirection = "asc";
     localStorage.setItem(SORT_DIR_KEY, this.sortDirection);
     this.updateSortPills();
-    this.refresh();
+
+    // Harden storage before the first library render. This upgrades the existing
+    // IndexedDB in place (DB v3 → v4), asks the browser for persistent storage,
+    // and gives us a chance to detect a suspicious "empty shelf" after an update.
+    LongboxDB.bootstrap()
+      .then(() => this.refresh())
+      .catch((err) => {
+        console.warn("Nth Shelf persistence bootstrap failed; continuing normally:", err);
+        this.refresh();
+      });
+  },
+
+  showPersistenceWarning() {
+    if (this.persistenceWarningShown) return;
+    this.persistenceWarningShown = true;
+    Modal.actions(
+      "Your library wasn't found",
+      "Nth Shelf remembers that this device previously had a library, but the current database is empty. Do not re-import everything yet if you need to recover the previous library. Check your browser/site storage first, or use your Nth Shelf backup after re-importing your comics.",
+      [
+        { label: "OK", cls: "neutral" },
+      ]
+    );
   },
 
   showRoot() {
@@ -284,6 +306,19 @@ const Library = {
     const standalone = comics.filter((c) => !c.collectionId);
 
     const totalCount = standalone.length + collections.length;
+
+    // If this origin previously contained a library but IndexedDB now appears
+    // completely empty, don't silently pretend this is a fresh installation.
+    // We still show the normal empty shelf so the app remains usable, but surface
+    // a recovery warning instead of encouraging an import that could complicate
+    // recovery. A normal first launch has no marker, so it stays completely clean.
+    if (!totalCount) {
+      try {
+        const marker = JSON.parse(localStorage.getItem("nth-shelf-library-marker-v1") || "null");
+        if (marker?.hasLibrary === true) this.showPersistenceWarning();
+      } catch (e) {}
+    }
+
     this.els.countEl.textContent = comics.length ? `${comics.length} book${comics.length === 1 ? "" : "s"}` : "";
     this.els.toolbar.style.display = totalCount ? "flex" : "none";
     this.els.emptyEl.style.display = totalCount ? "none" : "block";
