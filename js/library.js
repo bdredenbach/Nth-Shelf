@@ -1,3 +1,74 @@
+
+export async function getPwaStorageDiagnostics() {
+  const result = {
+    timestamp: new Date().toISOString(),
+    origin: location.origin,
+    href: location.href,
+    displayMode: "browser",
+    standalone: false,
+    serviceWorkerController: !!navigator.serviceWorker?.controller,
+    serviceWorkerState: navigator.serviceWorker?.controller?.state || "none",
+    serviceWorkerScriptURL: navigator.serviceWorker?.controller?.scriptURL || "none",
+    indexedDBSupported: !!window.indexedDB,
+    databaseName: "longbox",
+    databaseVersion: null,
+    stores: [],
+    comicsCount: null,
+    collectionsCount: null,
+    bookmarksCount: null,
+    storagePersisted: null,
+    storageEstimate: null
+  };
+
+  try {
+    result.standalone =
+      !!window.matchMedia?.("(display-mode: standalone)")?.matches ||
+      navigator.standalone === true ||
+      !!window.matchMedia?.("(display-mode: fullscreen)")?.matches;
+    if (window.matchMedia?.("(display-mode: standalone)")?.matches) result.displayMode = "standalone";
+    else if (navigator.standalone === true) result.displayMode = "ios-standalone";
+    else if (window.matchMedia?.("(display-mode: fullscreen)")?.matches) result.displayMode = "fullscreen";
+  } catch (_) {}
+
+  try {
+    if (navigator.storage?.persisted) result.storagePersisted = await navigator.storage.persisted();
+    if (navigator.storage?.estimate) {
+      const e = await navigator.storage.estimate();
+      result.storageEstimate = { usage: e.usage ?? null, quota: e.quota ?? null };
+    }
+  } catch (_) {}
+
+  try {
+    if (indexedDB.databases) {
+      const dbs = await indexedDB.databases();
+      const db = dbs.find(d => d.name === "longbox");
+      result.databaseVersion = db?.version ?? null;
+    }
+  } catch (_) {}
+
+  try {
+    const db = await new Promise((resolve,reject)=>{
+      const req=indexedDB.open("longbox");
+      req.onsuccess=()=>resolve(req.result);
+      req.onerror=()=>reject(req.error);
+    });
+    result.stores=Array.from(db.objectStoreNames);
+    const count=(name)=>new Promise(resolve=>{
+      if(!db.objectStoreNames.contains(name)) return resolve(null);
+      try {
+        const req=db.transaction(name,"readonly").objectStore(name).count();
+        req.onsuccess=()=>resolve(req.result);
+        req.onerror=()=>resolve(null);
+      } catch(_) { resolve(null); }
+    });
+    result.comicsCount=await count("comics");
+    result.collectionsCount=await count("collections");
+    result.bookmarksCount=await count("bookmarks");
+    db.close();
+  } catch (_) {}
+  return result;
+}
+
 // library.js — import, sort, series bundling, and collection management
 
 const IMAGE_EXT = /\.(jpe?g|png|gif|webp|avif)$/i;
@@ -99,6 +170,7 @@ function normalizeKey(s) {
 
 const Library = {
   els: {},
+  persistenceWarningShown: false,
   sort: localStorage.getItem(SORT_KEY) || "recent",
   sortDirection: localStorage.getItem(SORT_DIR_KEY) || "",
   activeCollectionId: null,
@@ -185,7 +257,28 @@ const Library = {
     this.sortDirection = "asc";
     localStorage.setItem(SORT_DIR_KEY, this.sortDirection);
     this.updateSortPills();
-    this.refresh();
+
+    // Harden storage before the first library render. This upgrades the existing
+    // IndexedDB in place (DB v3 → v4), asks the browser for persistent storage,
+    // and gives us a chance to detect a suspicious "empty shelf" after an update.
+    LongboxDB.bootstrap()
+      .then(() => this.refresh())
+      .catch((err) => {
+        console.warn("Nth Shelf persistence bootstrap failed; continuing normally:", err);
+        this.refresh();
+      });
+  },
+
+  showPersistenceWarning() {
+    if (this.persistenceWarningShown) return;
+    this.persistenceWarningShown = true;
+    Modal.actions(
+      "Your library wasn't found",
+      "Nth Shelf remembers that this device previously had a library, but the current database is empty. Do not re-import everything yet if you need to recover the previous library. Check your browser/site storage first, or use your Nth Shelf backup after re-importing your comics.",
+      [
+        { label: "OK", cls: "neutral" },
+      ]
+    );
   },
 
   showRoot() {
@@ -284,6 +377,19 @@ const Library = {
     const standalone = comics.filter((c) => !c.collectionId);
 
     const totalCount = standalone.length + collections.length;
+
+    // If this origin previously contained a library but IndexedDB now appears
+    // completely empty, don't silently pretend this is a fresh installation.
+    // We still show the normal empty shelf so the app remains usable, but surface
+    // a recovery warning instead of encouraging an import that could complicate
+    // recovery. A normal first launch has no marker, so it stays completely clean.
+    if (!totalCount) {
+      try {
+        const marker = JSON.parse(localStorage.getItem("nth-shelf-library-marker-v1") || "null");
+        if (marker?.hasLibrary === true) this.showPersistenceWarning();
+      } catch (e) {}
+    }
+
     this.els.countEl.textContent = comics.length ? `${comics.length} book${comics.length === 1 ? "" : "s"}` : "";
     this.els.toolbar.style.display = totalCount ? "flex" : "none";
     this.els.emptyEl.style.display = totalCount ? "none" : "block";
