@@ -1489,3 +1489,36 @@ button.reader-btn.mini-btn {
   display: block;
   transform: translateY(-1px);
 }
+
+
+/* v2.37: Center the Reader Guide title without the old red plus mark. */
+.help-drawer-header {
+  position: relative;
+  justify-content: center;
+}
+.help-drawer-header h2 {
+  flex: 0 0 auto;
+  text-align: center;
+}
+.help-drawer-header #help-drawer-close {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.help-guide-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--red);
+  margin: 2px 0 8px;
+}
+.bookmark-guide-icon .reg-mark {
+  font-size: 24px;
+}
+.fullscreen-guide-icon {
+  font-size: 27px;
+  line-height: 1;
+}
