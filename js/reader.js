@@ -1042,11 +1042,14 @@ const Reader = {
   updateAutoScrollControl() {
     const btn = this.els.autoScrollToggle;
     if (!btn) return;
+
     const allowed =
       this.mode === "scroll" ||
       this.mode === "manga" ||
       this.mode === "webcomic";
+
     btn.hidden = !allowed;
+    btn.classList.toggle("active", allowed && this._autoScrollEnabled);
     btn.classList.toggle("is-active", allowed && this._autoScrollEnabled);
     btn.setAttribute("aria-pressed", String(allowed && this._autoScrollEnabled));
   },
@@ -1066,8 +1069,11 @@ const Reader = {
       this.mode === "scroll" ||
       this.mode === "manga" ||
       this.mode === "webcomic";
-    const viewport = this.els.view;
-    if (!allowed || !viewport || this._autoScrollAnimation) return;
+
+    // .reader-stage is the element that actually owns overflow in all
+    // three continuous reading modes.
+    const stage = this.els.stage;
+    if (!allowed || !stage || this._autoScrollAnimation) return;
 
     this._autoScrollEnabled = true;
     this._autoScrollLastTime = 0;
@@ -1089,25 +1095,38 @@ const Reader = {
       if (!this._autoScrollLastTime) this._autoScrollLastTime = now;
       const dt = Math.min(now - this._autoScrollLastTime, 50);
       this._autoScrollLastTime = now;
+
+      // Comfortable reading speed: 45 CSS pixels per second.
       const distance = 45 * dt / 1000;
 
       if (mode === "webcomic") {
-        const maxY = Math.max(0, viewport.scrollHeight - viewport.clientHeight);
-        viewport.scrollTop = Math.min(maxY, viewport.scrollTop + distance);
-        if (viewport.scrollTop >= maxY - 1) {
+        const maxY = Math.max(0, stage.scrollHeight - stage.clientHeight);
+        stage.scrollTop = Math.min(maxY, stage.scrollTop + distance);
+
+        if (stage.scrollTop >= maxY - 1) {
           this.stopAutoScroll();
           return;
         }
       } else if (mode === "manga") {
-        viewport.scrollLeft = Math.max(0, viewport.scrollLeft - distance);
-        if (viewport.scrollLeft <= 1) {
+        // Manga uses RTL direction; Chrome's scrollLeft moves negative
+        // as the reader advances from right to left.
+        stage.scrollLeft = Math.max(
+          -Math.max(0, stage.scrollWidth - stage.clientWidth),
+          stage.scrollLeft - distance
+        );
+
+        const atEnd = stage.scrollLeft <=
+          -Math.max(0, stage.scrollWidth - stage.clientWidth) + 1;
+
+        if (atEnd) {
           this.stopAutoScroll();
           return;
         }
       } else {
-        const maxX = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
-        viewport.scrollLeft = Math.min(maxX, viewport.scrollLeft + distance);
-        if (viewport.scrollLeft >= maxX - 1) {
+        const maxX = Math.max(0, stage.scrollWidth - stage.clientWidth);
+        stage.scrollLeft = Math.min(maxX, stage.scrollLeft + distance);
+
+        if (stage.scrollLeft >= maxX - 1) {
           this.stopAutoScroll();
           return;
         }
@@ -1120,8 +1139,11 @@ const Reader = {
   },
 
   toggleAutoScroll() {
-    if (this._autoScrollEnabled) this.stopAutoScroll();
-    else this.startAutoScroll();
+    if (this._autoScrollEnabled) {
+      this.stopAutoScroll();
+    } else {
+      this.startAutoScroll();
+    }
   },
 
 async setMode(mode) {
