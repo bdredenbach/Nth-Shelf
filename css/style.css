@@ -1749,3 +1749,7 @@ button.reader-btn.mini-btn {
     min-height: 58px;
   }
 }
+
+/* v2.48 Auto Scroll */
+.auto-scroll-toggle { font-size: 19px !important; }
+.auto-scroll-toggle.is-active { outline: 2px solid currentColor; outline-offset: -2px; }
