@@ -3,8 +3,6 @@
 
 const CACHE_NAME = "nth-shelf-shell-v2-47";
 const SHELL_FILES = [
-  "./js/turn.js",
-  "./js/page-mode.js",
   "./",
   "./index.html",
   "./manifest.webmanifest",
