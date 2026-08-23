@@ -1,74 +1,3 @@
-
-export async function getPwaStorageDiagnostics() {
-  const result = {
-    timestamp: new Date().toISOString(),
-    origin: location.origin,
-    href: location.href,
-    displayMode: "browser",
-    standalone: false,
-    serviceWorkerController: !!navigator.serviceWorker?.controller,
-    serviceWorkerState: navigator.serviceWorker?.controller?.state || "none",
-    serviceWorkerScriptURL: navigator.serviceWorker?.controller?.scriptURL || "none",
-    indexedDBSupported: !!window.indexedDB,
-    databaseName: "longbox",
-    databaseVersion: null,
-    stores: [],
-    comicsCount: null,
-    collectionsCount: null,
-    bookmarksCount: null,
-    storagePersisted: null,
-    storageEstimate: null
-  };
-
-  try {
-    result.standalone =
-      !!window.matchMedia?.("(display-mode: standalone)")?.matches ||
-      navigator.standalone === true ||
-      !!window.matchMedia?.("(display-mode: fullscreen)")?.matches;
-    if (window.matchMedia?.("(display-mode: standalone)")?.matches) result.displayMode = "standalone";
-    else if (navigator.standalone === true) result.displayMode = "ios-standalone";
-    else if (window.matchMedia?.("(display-mode: fullscreen)")?.matches) result.displayMode = "fullscreen";
-  } catch (_) {}
-
-  try {
-    if (navigator.storage?.persisted) result.storagePersisted = await navigator.storage.persisted();
-    if (navigator.storage?.estimate) {
-      const e = await navigator.storage.estimate();
-      result.storageEstimate = { usage: e.usage ?? null, quota: e.quota ?? null };
-    }
-  } catch (_) {}
-
-  try {
-    if (indexedDB.databases) {
-      const dbs = await indexedDB.databases();
-      const db = dbs.find(d => d.name === "longbox");
-      result.databaseVersion = db?.version ?? null;
-    }
-  } catch (_) {}
-
-  try {
-    const db = await new Promise((resolve,reject)=>{
-      const req=indexedDB.open("longbox");
-      req.onsuccess=()=>resolve(req.result);
-      req.onerror=()=>reject(req.error);
-    });
-    result.stores=Array.from(db.objectStoreNames);
-    const count=(name)=>new Promise(resolve=>{
-      if(!db.objectStoreNames.contains(name)) return resolve(null);
-      try {
-        const req=db.transaction(name,"readonly").objectStore(name).count();
-        req.onsuccess=()=>resolve(req.result);
-        req.onerror=()=>resolve(null);
-      } catch(_) { resolve(null); }
-    });
-    result.comicsCount=await count("comics");
-    result.collectionsCount=await count("collections");
-    result.bookmarksCount=await count("bookmarks");
-    db.close();
-  } catch (_) {}
-  return result;
-}
-
 // library.js — import, sort, series bundling, and collection management
 
 const IMAGE_EXT = /\.(jpe?g|png|gif|webp|avif)$/i;
@@ -1278,3 +1207,76 @@ function makeThumbnail(blob, maxW = 300) {
 }
 
 window.Library = Library;
+
+
+// v2.45 PWA storage diagnostic helper.
+// Kept as a classic-script function so library.js remains non-module code.
+async function getPwaStorageDiagnostics() {
+  const result = {
+    timestamp: new Date().toISOString(),
+    origin: location.origin,
+    href: location.href,
+    displayMode: "browser",
+    standalone: false,
+    serviceWorkerController: !!navigator.serviceWorker?.controller,
+    serviceWorkerState: navigator.serviceWorker?.controller?.state || "none",
+    serviceWorkerScriptURL: navigator.serviceWorker?.controller?.scriptURL || "none",
+    indexedDBSupported: !!window.indexedDB,
+    databaseName: "longbox",
+    databaseVersion: null,
+    stores: [],
+    comicsCount: null,
+    collectionsCount: null,
+    bookmarksCount: null,
+    storagePersisted: null,
+    storageEstimate: null
+  };
+
+  try {
+    result.standalone =
+      !!window.matchMedia?.("(display-mode: standalone)")?.matches ||
+      navigator.standalone === true ||
+      !!window.matchMedia?.("(display-mode: fullscreen)")?.matches;
+    if (window.matchMedia?.("(display-mode: standalone)")?.matches) result.displayMode = "standalone";
+    else if (navigator.standalone === true) result.displayMode = "ios-standalone";
+    else if (window.matchMedia?.("(display-mode: fullscreen)")?.matches) result.displayMode = "fullscreen";
+  } catch (_) {}
+
+  try {
+    if (navigator.storage?.persisted) result.storagePersisted = await navigator.storage.persisted();
+    if (navigator.storage?.estimate) {
+      const e = await navigator.storage.estimate();
+      result.storageEstimate = { usage: e.usage ?? null, quota: e.quota ?? null };
+    }
+  } catch (_) {}
+
+  try {
+    if (indexedDB.databases) {
+      const dbs = await indexedDB.databases();
+      const db = dbs.find(d => d.name === "longbox");
+      result.databaseVersion = db?.version ?? null;
+    }
+  } catch (_) {}
+
+  try {
+    const db = await new Promise((resolve,reject)=>{
+      const req=indexedDB.open("longbox");
+      req.onsuccess=()=>resolve(req.result);
+      req.onerror=()=>reject(req.error);
+    });
+    result.stores=Array.from(db.objectStoreNames);
+    const count=(name)=>new Promise(resolve=>{
+      if(!db.objectStoreNames.contains(name)) return resolve(null);
+      try {
+        const req=db.transaction(name,"readonly").objectStore(name).count();
+        req.onsuccess=()=>resolve(req.result);
+        req.onerror=()=>resolve(null);
+      } catch(_) { resolve(null); }
+    });
+    result.comicsCount=await count("comics");
+    result.collectionsCount=await count("collections");
+    result.bookmarksCount=await count("bookmarks");
+    db.close();
+  } catch (_) {}
+  return result;
+}
