@@ -1468,14 +1468,7 @@ button.reader-btn.mini-btn {
   }
 }
 
-/* v2.34: keep Bubble Zoom's focus dim above reader content in every
-   continuous reading mode, while the bubble itself remains above the dim. */
-.reader-stage > .reader-focus-dim,
-.reader-focus-dim[data-reader-focus-layer="top"] {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 9998 !important;
-  pointer-events: auto;
-}
+
+
+/* v2.34 alternate: continuous Bubble Zoom uses fixed reader-stage overlays. */
+/* Geometry and stacking are set by reader.js so the overlay follows the visible reader stage. */
