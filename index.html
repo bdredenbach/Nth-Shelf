@@ -46,14 +46,6 @@
       <div class="continue-card" id="continue-card"></div>
     </section>
 
-    <div class="library-search-wrap" id="library-search-wrap" style="display:none;">
-      <label class="sr-only" for="library-search">Search library</label>
-      <input class="library-search" id="library-search" type="search"
-        placeholder="Search your Nth Shelf…" autocomplete="off" enterkeyhint="search" />
-      <button class="library-search-clear" id="library-search-clear" type="button"
-        aria-label="Clear library search" title="Clear search">×</button>
-    </div>
-
     <div class="toolbar" id="lib-toolbar" style="display:none;">
       <div class="pill-row library-sort-row" id="sort-row">
         <button class="pill" data-sort="recent">Recent</button>
@@ -64,6 +56,7 @@
       </div>
       <div class="pill-row library-action-row">
         <div class="library-action-group">
+          <button class="ghost-btn" id="search-mode-btn" type="button">Search Mode</button>
           <button class="ghost-btn" id="detect-series-btn">Detect Series</button>
           <button class="ghost-btn" id="new-collection-btn">+ Collection</button>
           <button class="ghost-btn" id="backup-btn">Backup</button>
@@ -77,6 +70,29 @@
     <div class="empty-state" id="empty-state" style="display:none;" aria-label="Nth Shelf empty library">
       <button class="empty-import-hit" id="empty-import-hit" type="button" aria-label="Import a comic"></button>
     </div>
+
+    <section class="shelf-search-mode" id="shelf-search-mode" hidden aria-label="Animated Nth Shelf search">
+      <div class="shelf-search-top">
+        <div class="shelf-search-input-wrap">
+          <span class="shelf-search-icon" aria-hidden="true">⌕</span>
+          <input class="library-search shelf-search-input" id="library-search" type="search"
+            placeholder="Search your Nth Shelf…" autocomplete="off" enterkeyhint="search" />
+          <button class="library-search-clear" id="library-search-clear" type="button"
+            aria-label="Clear library search" title="Clear search">×</button>
+        </div>
+        <button class="ghost-btn shelf-search-close" id="search-mode-close" type="button">Done</button>
+      </div>
+      <div class="shelf-carousel" id="shelf-carousel" tabindex="0" aria-label="Comic cover browser">
+        <button class="shelf-carousel-arrow shelf-carousel-prev" id="shelf-carousel-prev" type="button" aria-label="Previous comic">‹</button>
+        <div class="shelf-track" id="shelf-track"></div>
+        <button class="shelf-carousel-arrow shelf-carousel-next" id="shelf-carousel-next" type="button" aria-label="Next comic">›</button>
+      </div>
+      <div class="shelf-search-meta">
+        <div class="shelf-search-title" id="shelf-search-title"></div>
+        <div class="shelf-search-count" id="shelf-search-count"></div>
+      </div>
+      <p class="shelf-search-hint">Swipe left or right to browse. Tap the center cover to read.</p>
+    </section>
 
     <div class="comic-grid" id="comic-grid" style="display:none;"></div>
   </div>
