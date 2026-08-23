@@ -1,6 +1,6 @@
 # Nth Shelf
 
-![Nth Shelf](<assets/nth-shelf-empty.png>)
+![Nth Shelf](<assets/nth-shelf-empty.jpg>)
 
 **Nth Shelf** is a local-first comic reader and personal comic library built as an installable Progressive Web App.
 
