@@ -1750,34 +1750,188 @@ button.reader-btn.mini-btn {
   }
 }
 
-/* v2.48 Auto Scroll */
-.auto-scroll-toggle { font-size: 19px !important; }
-.auto-scroll-toggle.is-active { outline: 2px solid currentColor; outline-offset: -2px; }
 
 
-/* v2.51 Auto Scroll: same pill language as Bubble Zoom. */
+/* v2.52 Auto Scroll controls */
 .reader-options-row .auto-scroll-pill {
-  min-height: 30px;
-  padding: 6px 10px;
-  border-radius: 20px;
-  background: var(--red);
-  border: 1px solid transparent;
-  color: #fff;
   font-size: 11px;
   font-weight: 400;
-  letter-spacing: 0.04em;
+  padding: 6px 10px;
+  min-height: 0;
+  border-radius: 20px;
+  background: var(--red);
+  color: #fff;
+  border: 1px solid transparent;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
   line-height: normal;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.reader-options-row .auto-scroll-pill.is-active {
+  box-shadow: 0 0 0 2px rgba(215,25,32,.22);
+}
+.reader-options-row .auto-scroll-pill[hidden] {
+  display: none !important;
+}
+
+.auto-scroll-control-panel {
+  position: absolute;
+  top: calc(60px + var(--safe-top));
+  left: 10px;
+  right: 10px;
+  z-index: 8;
+  pointer-events: auto;
+}
+.auto-scroll-control-panel[hidden] {
+  display: none !important;
+}
+.auto-scroll-control-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(560px, 100%);
+  margin: 0 auto;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: rgba(10,10,12,.88);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.auto-scroll-speed-wrap {
+  flex: 1;
+  min-width: 0;
+}
+.auto-scroll-speed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+  color: rgba(255,255,255,.82);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+.auto-scroll-speed-title {
+  color: #fff;
+  font-weight: 700;
+}
+.auto-scroll-speed-direction {
+  color: rgba(255,255,255,.55);
+  white-space: nowrap;
+}
+.auto-scroll-slider-wrap {
+  position: relative;
+  height: 22px;
+  display: flex;
+  align-items: center;
+}
+.auto-scroll-slider-wrap input[type="range"] {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin: 0;
+  accent-color: var(--red);
+}
+.auto-scroll-ticks {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 1;
+}
+.auto-scroll-ticks span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0 2px rgba(10,10,12,.9);
+}
+.auto-scroll-speed-labels {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255,255,255,.72);
+  font-size: 9px;
+  line-height: 1;
+  margin-top: -1px;
+}
+.auto-scroll-play {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
-.reader-options-row .auto-scroll-pill.active {
+.auto-scroll-play.is-paused {
+  font-size: 14px;
+}
+.auto-scroll-guide {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 10px;
+}
+.auto-scroll-guide-slider {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,.75);
+  font-size: 9px;
+}
+.auto-scroll-guide-slider i {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
   background: var(--red);
 }
-.reader-options-row .auto-scroll-pill.is-active {
-  box-shadow: 0 0 0 2px rgba(215,25,32,.25);
+.auto-scroll-guide-play {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
 }
-.reader-options-row .auto-scroll-pill[hidden] {
-  display: none !important;
+@media (max-width: 520px) {
+  .auto-scroll-control-panel {
+    left: 7px;
+    right: 7px;
+  }
+  .auto-scroll-control-inner {
+    gap: 7px;
+    padding: 7px 8px;
+  }
+  .auto-scroll-speed-direction {
+    display: none;
+  }
+  .auto-scroll-speed-labels {
+    font-size: 8px;
+  }
+  .auto-scroll-ticks span {
+    width: 6px;
+    height: 6px;
+  }
 }
