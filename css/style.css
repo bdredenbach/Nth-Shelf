@@ -1752,19 +1752,10 @@ button.reader-btn.mini-btn {
 
 
 
-/* v2.52 Auto Scroll controls */
+/* v2.57 Auto Scroll button: match Bubble Zoom and live in the reader options row. */
 .reader-options-row .auto-scroll-pill {
-  font-size: 11px;
-  font-weight: 400;
-  padding: 6px 10px;
-  min-height: 0;
-  border-radius: 20px;
   background: var(--red);
   color: #fff;
-  border: 1px solid transparent;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  line-height: normal;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
@@ -1787,17 +1778,6 @@ button.reader-btn.mini-btn {
   transform: translateX(-50%);
   transition: opacity 180ms ease;
   touch-action: manipulation;
-}
-.auto-scroll-persistent-toggle {
-  position: absolute;
-  left: 145px;
-  bottom: calc(12px + var(--safe-bottom) + 42px);
-  z-index: 9;
-  pointer-events: auto;
-  white-space: nowrap;
-}
-.auto-scroll-persistent-toggle[hidden] {
-  display: none !important;
 }
 .auto-scroll-control-panel {
   cursor: grab;
@@ -1962,10 +1942,6 @@ button.reader-btn.mini-btn {
 @media (max-width: 520px) {
   .auto-scroll-control-panel {
     width: calc(100% - 14px);
-  }
-  .auto-scroll-persistent-toggle {
-    left: 143px;
-    bottom: calc(12px + var(--safe-bottom) + 42px);
   }
   .auto-scroll-control-inner {
     gap: 7px;
