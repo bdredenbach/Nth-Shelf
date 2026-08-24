@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.64**
+**Version 2.65**
 
 This release updates the Auto Scroll control styling so it follows the same visual state convention as Bubble Zoom: dark when off and red when active. The README documents the current Nth Shelf feature set, including animated Search and Bookmarks, ASC/ADDED sorting, nested archive imports, Two Page fullscreen, Bubble Zoom, Auto Scroll controls, and persistence protection.
 
@@ -134,3 +134,9 @@ This project is licensed under the **MIT License**. The license applies to the s
 - Bubble Zoom now uses additional shape and interior-ink checks.
 - White/off-white color alone is no longer sufficient to qualify as a bubble.
 - Bright artwork regions are filtered more aggressively while preserving normal speech balloons.
+
+
+### v2.65
+- Tightened Bubble Zoom false-positive filtering for irregular bright artwork.
+- Requires stronger bubble-outline evidence and more interior ink/text evidence.
+- Rejects larger low-fill, weak-shape candidates while preserving normal speech balloons.
