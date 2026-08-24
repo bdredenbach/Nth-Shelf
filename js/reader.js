@@ -1367,7 +1367,7 @@ const Reader = {
   setAutoScrollSpeed(value) {
     const speed = Number(value);
     if (!Number.isFinite(speed)) return;
-    this._autoScrollSpeed = speed * 38;
+    this._autoScrollSpeed = Math.max(0, Math.min(1, speed)) * 38;
   },
 
   toggleAutoScroll() {
