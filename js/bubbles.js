@@ -183,22 +183,33 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
     return 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
   };
 
+  // Bubble Zoom should target white and only slightly off-white interiors.
+  // Requiring low RGB chroma prevents bright yellow, green, blue, and other
+  // artwork highlights from being mistaken for speech balloons.
+  const isWhiteish = (x, y, threshold) => {
+    const i = (y * w + x) * 4;
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+    const chroma = Math.max(r, g, b) - Math.min(r, g, b);
+    const chromaLimit = lum > 235 ? 45 : lum > 225 ? 38 : 30;
+    return lum > threshold && chroma <= chromaLimit;
+  };
+
   const tapX = clampInt(Math.round(relX * (w - 1)), 0, w - 1);
   const tapY = clampInt(Math.round(relY * (h - 1)), 0, h - 1);
   const tapLum = lumAt(tapX, tapY);
   if (log) log(`hit-test: tap=(${tapX},${tapY}) lum=${tapLum.toFixed(0)} image=${w}x${h}`);
 
-  // Comic bubbles are often not pure white. Try the normal threshold first,
-  // then progressively relax it only if the first pass cannot produce a
-  // plausible enclosed region. This improves off-white/aged-paper balloons
-  // without making every light part of the artwork a bubble.
-  const thresholds = [218, 205, 192, 180];
+  // Keep Bubble Zoom intentionally conservative: white first, then only a
+  // small amount of off-white. The neutral-color test above keeps bright
+  // colored artwork from qualifying as a bubble interior.
+  const thresholds = [235, 225, 215];
   const maxArea = Math.floor(w * h * 0.22);
   const minArea = Math.max(28, Math.floor(w * h * 0.0008));
 
   let result = null;
   for (const threshold of thresholds) {
-    const isBright = (x, y) => lumAt(x, y) > threshold;
+    const isBright = (x, y) => isWhiteish(x, y, threshold);
     let seedX = tapX, seedY = tapY;
 
     if (!isBright(seedX, seedY)) {
