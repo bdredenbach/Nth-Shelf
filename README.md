@@ -106,9 +106,11 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.66**
+**Version 2.67**
 
-This release updates the Auto Scroll control styling so it follows the same visual state convention as Bubble Zoom: dark when off and red when active. The README documents the current Nth Shelf feature set, including animated Search and Bookmarks, ASC/ADDED sorting, nested archive imports, Two Page fullscreen, Bubble Zoom, Auto Scroll controls, and persistence protection.
+This release adds **Shelf Mode**, an interactive 3D-style cover shelf inspired by console library cover browsing. The shelf presents a continuous line of comic covers with the selected comic centered as the hero. Swipe left/right or use the arrow keys to move through the shelf, and tap the center comic to open it. Shelf Mode is launched from the red button beside Import and can be closed at any time.
+
+The current Nth Shelf feature set includes animated Search and Bookmarks, ASC/ADDED sorting, nested archive imports, Two Page fullscreen, Bubble Zoom, Auto Scroll controls, persistence protection, and the new Shelf Mode library view.
 
 ## 🔒 Privacy
 Nth Shelf is designed around local-first storage. Your comics are stored on your device rather than uploaded to an Nth Shelf server simply to read them.
@@ -145,3 +147,9 @@ This project is licensed under the **MIT License**. The license applies to the s
 ### v2.66
 - Bubble Zoom adds a dark enclosed-boundary test to reject irregular bright artwork regions.
 - Legitimate speech balloons remain supported through the existing white/off-white, outline, fill, and interior-ink checks.
+
+### v2.67
+- Adds Shelf Mode with a continuous 3D-style comic cover line and centered hero cover.
+- Shelf Mode supports swipe/drag browsing, keyboard arrows, center-cover selection, and a close control.
+- Adds a Shelf Mode button beside the Import button using the existing Nth Shelf red pill styling.
+- Shelf Mode works with the current library sorting, collections, and cover data without changing the reading experience.

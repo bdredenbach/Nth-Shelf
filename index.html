@@ -124,7 +124,24 @@
   <input type="file" id="import-input" accept=".cbz,.zip,.cbt,.tar,.cb7,.7z,.cbr,.rar,application/zip,application/x-cbz,application/vnd.comicbook+zip,application/x-tar,application/x-7z-compressed,application/vnd.rar,application/octet-stream" multiple style="display:none" />
 </main>
 
+<button class="import-btn shelf-mode-btn" id="shelf-mode-btn" type="button" style="position:fixed; left:20px; bottom:calc(20px + env(safe-area-inset-bottom,0px)); border-radius:50px; z-index:40;">Shelf Mode</button>
 <button class="import-btn" id="fab-import" style="position:fixed; right:20px; bottom:calc(20px + env(safe-area-inset-bottom,0px)); border-radius:50px; z-index:40;">+ Import</button>
+
+<section class="shelf-mode-view" id="shelf-mode-view" hidden aria-label="Nth Shelf Shelf Mode">
+  <div class="shelf-mode-header">
+    <div class="shelf-mode-brand">NTH SHELF</div>
+    <button class="reader-btn dark-btn shelf-mode-close" id="shelf-mode-close" type="button" aria-label="Close Shelf Mode">×</button>
+  </div>
+  <div class="shelf-mode-stage" id="shelf-mode-stage" tabindex="0" aria-label="Interactive comic shelf">
+    <div class="shelf-mode-floor" aria-hidden="true"></div>
+    <div class="shelf-mode-track" id="shelf-mode-track"></div>
+  </div>
+  <div class="shelf-mode-info">
+    <div class="shelf-mode-title" id="shelf-mode-title"></div>
+    <div class="shelf-mode-count" id="shelf-mode-count"></div>
+    <div class="shelf-mode-hint">Swipe left or right to browse · Tap the center comic to read</div>
+  </div>
+</section>
 
 <div class="import-progress" id="import-progress">
   <div class="spinner"></div>
