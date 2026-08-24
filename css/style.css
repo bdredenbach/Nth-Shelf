@@ -1782,12 +1782,26 @@ button.reader-btn.mini-btn {
   right: 10px;
   z-index: 8;
   pointer-events: auto;
-  opacity: .01;
+  opacity: .015;
   transition: opacity 180ms ease;
   touch-action: manipulation;
 }
 .auto-scroll-control-panel {
   cursor: grab;
+}
+.auto-scroll-control-panel::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10px;
+  height: 28px;
+  cursor: grab;
+  touch-action: none;
+  z-index: 2;
+}
+.auto-scroll-control-panel.is-dragging::before {
+  cursor: grabbing;
 }
 .auto-scroll-control-panel.is-dragging {
   cursor: grabbing;
