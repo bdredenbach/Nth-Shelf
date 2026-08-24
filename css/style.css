@@ -2170,7 +2170,7 @@ button.reader-btn.mini-btn {
   .comic-card.cinematic-reveal, .shelf-mode-card.center { animation: none !important; }
 }
 
-/* v2.70 continuous shelf tuning */
+/* v2.71 continuous shelf tuning */
 @media (max-width: 600px) {
   .shelf-mode-track { height:min(62vh, 560px); }
   .shelf-mode-card { width:min(31vw, 250px); }
