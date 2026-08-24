@@ -73,7 +73,7 @@ const BubbleDetect = {
       seedX = found.x; seedY = found.y;
     }
 
-    const maxArea = Math.floor(w * h * 0.22);
+    const maxArea = Math.floor(w * h * 0.12);
     const minArea = Math.floor(w * h * 0.004);
     const visited = new Uint8Array(w * h);
     const component = wantMask ? new Uint8Array(w * h) : null;
@@ -288,7 +288,7 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
     // False-positive guard: an ordinary light area of the artwork can be a
     // huge connected component. Speech bubbles are usually bounded and have
     // a dark outline. Reject very large components before accepting them.
-    if (bw > w * 0.62 || bh > h * 0.42) {
+    if (bw > w * 0.48 || bh > h * 0.32) {
       if (log) log(`try threshold=${threshold}: rejected oversized candidate ${bw}x${bh}`);
       continue;
     }
@@ -323,7 +323,7 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
       }
     }
     const outlineScore = ringSamples ? darkRing / ringSamples : 0;
-    if (outlineScore < 0.10) {
+    if (outlineScore < 0.16) {
       if (log) log(`try threshold=${threshold}: rejected weak bubble outline score=${outlineScore.toFixed(2)}`);
       continue;
     }
@@ -359,7 +359,7 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
     const hasDistributedInk = inkRows.size >= 1 && inkCols.size >= 1;
     // Reject completely empty light regions. Allow both sparse lettering and
     // denser comic lettering, but reject very dark artwork blocks.
-    if (!hasDistributedInk || inkRatio < 0.003 || inkRatio > 0.34) {
+    if (!hasDistributedInk || inkRatio < 0.006 || inkRatio > 0.34) {
       if (log) log(`try threshold=${threshold}: rejected weak/non-text interior ink ratio=${inkRatio.toFixed(3)}`);
       continue;
     }
@@ -367,8 +367,18 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
     // A genuine bubble tends to be mostly light inside its outline. This
     // secondary fill guard rejects irregular bright artwork regions while
     // preserving speech balloons with lettering cut out of the white area.
-    if (fill < 0.22) {
+    if (fill < 0.28) {
       if (log) log(`try threshold=${threshold}: rejected low-fill candidate fill=${fill.toFixed(2)}`);
+      continue;
+    }
+
+    // Tighten the shape test for large irregular light patches. A speech
+    // balloon can be oval, rounded, or caption-like, but it should not look
+    // like a random torn/painted region of the artwork. Compare the connected
+    // area with the bounding box and require a reasonable amount of interior
+    // ink before accepting larger candidates.
+    if (count > w * h * 0.018 && (fill < 0.42 || inkRatio < 0.012)) {
+      if (log) log(`try threshold=${threshold}: rejected large weak-shape candidate fill=${fill.toFixed(2)} ink=${inkRatio.toFixed(3)}`);
       continue;
     }
 
