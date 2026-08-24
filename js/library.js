@@ -457,15 +457,15 @@ const Library = {
       card.dataset.distance = String(distance);
       card.dataset.offset = String(offset);
 
-      // Wide, physical shelf spacing. Neighboring covers remain clearly
-      // visible instead of collapsing behind the centered cover.
-      const x = offset * 20.5;
-      const arcY = Math.min(10, distance * 1.8);
-      const rot = offset * -15;
-      const scale = Math.max(.54, 1 - distance * .075);
-      const opacity = Math.max(.28, 1 - distance * .10);
-      const z = -distance * 10;
-      const zindex = 100 - distance;
+      // Restore the proven 2.69 shelf geometry: a denser, deeper line of
+      // covers with several neighbors visibly surrounding the hero.
+      const x = offset * (distance === 0 ? 0 : 15);
+      const arcY = 0;
+      const rot = offset * -18;
+      const scale = offset === 0 ? 1 : Math.max(.42, 1 - distance * .10);
+      const opacity = offset === 0 ? 1 : Math.max(.16, 1 - distance * .14);
+      const z = -distance * 52;
+      const zindex = 20 - distance;
 
       card.style.setProperty("--x", `${x}vw`);
       card.style.setProperty("--arc-y", `${arcY}px`);
