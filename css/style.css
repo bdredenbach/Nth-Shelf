@@ -1774,7 +1774,7 @@ button.reader-btn.mini-btn {
   width: min(560px, calc(100% - 20px));
   z-index: 8;
   pointer-events: auto;
-  opacity: .035;
+  opacity: .075;
   transform: translateX(-50%);
   transition: opacity 180ms ease;
   touch-action: manipulation;
