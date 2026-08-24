@@ -116,6 +116,7 @@ const Library = {
   shelfIndex: 0,
   shelfItems: [],
   shelfRenderToken: 0,
+  shelfHeroSelected: false,
 
   init() {
     Modal.init();
@@ -404,6 +405,7 @@ const Library = {
     this.shelfItems = this.searchItems.slice();
     if (!this.shelfItems.length) return;
     this.shelfMode = true;
+    this.shelfHeroSelected = false;
     this.shelfIndex = Math.min(this.shelfIndex, this.shelfItems.length - 1);
     this.els.shelfView.hidden = false;
     document.getElementById("shelf-mode-btn").textContent = "Close Shelf";
@@ -414,6 +416,7 @@ const Library = {
 
   closeShelfMode() {
     this.shelfMode = false;
+    this.shelfHeroSelected = false;
     this.els.shelfView.hidden = true;
     document.getElementById("shelf-mode-btn").textContent = "Shelf Mode";
     document.getElementById("fab-import").style.display = "flex";
@@ -452,9 +455,25 @@ const Library = {
       card.innerHTML = cover?.coverUrl
         ? `<img src="${cover.coverUrl}" alt="${escapeHtml(item.title || "Comic cover")}" loading="eager">`
         : `<div class="shelf-mode-placeholder">${escapeHtml(item.title || "Comic")}</div>`;
-      card.addEventListener("click", () => {
-        if (offset === 0) this.openShelfSelection();
-        else { this.shelfIndex = index; this.renderShelfMode(); }
+      card.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (offset === 0) {
+          // First tap selects/animates the hero cover. A second tap opens it.
+          if (this.shelfHeroSelected) {
+            this.openShelfSelection();
+          } else {
+            this.shelfHeroSelected = true;
+            card.classList.add("hero-selected");
+            this.els.shelfTitle.dataset.hint = "Tap again to open";
+            setTimeout(() => {
+              if (card.isConnected) card.classList.remove("hero-selected");
+            }, 700);
+          }
+        } else {
+          this.shelfIndex = index;
+          this.shelfHeroSelected = false;
+          this.renderShelfMode();
+        }
       });
       this.els.shelfTrack.appendChild(card);
     }
@@ -736,7 +755,18 @@ const Library = {
       e.stopPropagation();
       this.openComicMenu(comic, opts.inCollection);
     });
-    card.addEventListener("click", () => window.LongboxApp.openReader(comic.id));
+    card.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (card.classList.contains("cinematic-selected")) {
+        window.LongboxApp.openReader(comic.id);
+        return;
+      }
+      document.querySelectorAll(".comic-card.cinematic-selected").forEach((el) => el.classList.remove("cinematic-selected"));
+      card.classList.add("cinematic-selected");
+      card.setAttribute("aria-label", `${comic.title}. Tap again to open.`);
+      window.clearTimeout(card._cinematicTimer);
+      card._cinematicTimer = window.setTimeout(() => card.classList.remove("cinematic-selected"), 1800);
+    });
     return card;
   },
 
@@ -760,7 +790,18 @@ const Library = {
       e.stopPropagation();
       this.openCollectionMenu(col.id);
     });
-    card.addEventListener("click", () => this.showCollection(col.id));
+    card.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (card.classList.contains("cinematic-selected")) {
+        this.showCollection(col.id);
+        return;
+      }
+      document.querySelectorAll(".comic-card.cinematic-selected").forEach((el) => el.classList.remove("cinematic-selected"));
+      card.classList.add("cinematic-selected");
+      card.setAttribute("aria-label", `${col.title}. Tap again to open.`);
+      window.clearTimeout(card._cinematicTimer);
+      card._cinematicTimer = window.setTimeout(() => card.classList.remove("cinematic-selected"), 1800);
+    });
     return card;
   },
 
