@@ -919,21 +919,65 @@ const Library = {
       alert("No supported comic archives found. Nth Shelf supports CBZ, ZIP, CBT, TAR, CB7, 7Z, CBR, and RAR.");
       return;
     }
+
     this.els.progressEl.classList.add("active");
     const importedIds = [];
+
     for (const file of files) {
       try {
-        this.els.progressText.textContent = `Importing ${file.name}…`;
-        const id = await this.importCbz(file);
-        importedIds.push(id);
+        // A normal ZIP/CBZ contains page images and remains a single comic.
+        // A ZIP that contains comic archives is treated as a collection and
+        // imports each contained archive as its own comic.
+        const nestedArchives = await this.findNestedComicArchives(file);
+
+        if (nestedArchives.length) {
+          for (let i = 0; i < nestedArchives.length; i++) {
+            const nested = nestedArchives[i];
+            this.els.progressText.textContent =
+              `Importing ${nested.name} (${i + 1}/${nestedArchives.length})…`;
+            const id = await this.importCbz(nested);
+            importedIds.push(id);
+          }
+        } else {
+          this.els.progressText.textContent = `Importing ${file.name}…`;
+          const id = await this.importCbz(file);
+          importedIds.push(id);
+        }
       } catch (err) {
         console.error(err);
         alert(`Couldn't import ${file.name}: ${err.message}`);
       }
     }
+
     this.els.progressEl.classList.remove("active");
     this.showRoot();
     await this.suggestBundles(importedIds);
+  },
+
+  async findNestedComicArchives(file) {
+    if (!/\.zip$/i.test(file.name)) return [];
+
+    const zip = await JSZip.loadAsync(file);
+    const nested = Object.values(zip.files)
+      .filter((entry) => !entry.dir && /\.(cbz|cbr|cbt|cb7|7z|rar|tar)$/i.test(entry.name))
+      .sort((a, b) =>
+        a.name.localeCompare(b.name, undefined, {
+          numeric: true,
+          sensitivity: "base"
+        })
+      );
+
+    if (!nested.length) return [];
+
+    const result = [];
+    for (const entry of nested) {
+      const blob = await entry.async("blob");
+      result.push(new File([blob], entry.name, {
+        type: "application/octet-stream",
+        lastModified: Date.now()
+      }));
+    }
+    return result;
   },
 
   async importCbz(file) {
