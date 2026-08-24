@@ -236,6 +236,11 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
 
     let minX = seedX, maxX = seedX, minY = seedY, maxY = seedY;
     let count = 0, leaked = false;
+    // A real speech balloon is normally enclosed by a dark contour. Track
+    // how much of the connected region's boundary is backed by dark ink.
+    // This is much stronger than sampling the bounding-box ring because an
+    // irregular bright patch can happen to have dark artwork nearby.
+    let boundaryEdges = 0, darkBoundaryEdges = 0;
 
     while (sp > 0) {
       const x = stackX[--sp], y = stackY[sp];
@@ -249,6 +254,22 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
         component[y*w+x] = 1;
         if (x < rowMin[y]) rowMin[y] = x;
         if (x > rowMax[y]) rowMax[y] = x;
+      }
+
+      // Inspect the four sides of each component pixel. A boundary side is
+      // counted only when the neighboring pixel is outside the bright region.
+      // Allow a one-pixel anti-aliased edge by also checking the immediate
+      // neighbor's luminance rather than requiring exact black.
+      const bx = [x+1, x-1, x, x];
+      const by = [y, y, y+1, y-1];
+      for (let bi = 0; bi < 4; bi++) {
+        const xx = bx[bi], yy = by[bi];
+        if (xx < 0 || xx >= w || yy < 0 || yy >= h || !isBright(xx, yy)) {
+          boundaryEdges++;
+          if (xx >= 0 && xx < w && yy >= 0 && yy < h && lumAt(xx, yy) < threshold - 35) {
+            darkBoundaryEdges++;
+          }
+        }
       }
 
       const nx = [x+1, x-1, x, x];
@@ -278,6 +299,16 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
     const bw = maxX - minX + 1;
     const bh = maxY - minY + 1;
     const fill = count / Math.max(1, bw * bh);
+    const boundaryScore = boundaryEdges ? darkBoundaryEdges / boundaryEdges : 0;
+
+    // Speech balloons are normally enclosed by a recognizable dark contour.
+    // Reject bright artwork regions whose boundary is mostly open/light.
+    // This is intentionally checked before the softer bounding-box outline
+    // score below.
+    if (boundaryScore < 0.30) {
+      if (log) log(`try threshold=${threshold}: rejected weak enclosed outline boundary=${boundaryScore.toFixed(2)}`);
+      continue;
+    }
 
     // Avoid accepting an enormous, thin light strip as a speech bubble.
     if ((bw > w * 0.92 && bh < h * 0.08) || (bh > h * 0.92 && bw < w * 0.08)) {
@@ -392,8 +423,8 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
       continue;
     }
 
-    result = { threshold, seedX, seedY, count, minX, maxX, minY, maxY, fill, rowMin, rowMax, component };
-    if (log) log(`bubble: accepted threshold=${threshold} area=${count}px bbox=(${minX},${minY})-(${maxX},${maxY}) fill=${fill.toFixed(2)}`);
+    result = { threshold, seedX, seedY, count, minX, maxX, minY, maxY, fill, boundaryScore, rowMin, rowMax, component };
+    if (log) log(`bubble: accepted threshold=${threshold} area=${count}px bbox=(${minX},${minY})-(${maxX},${maxY}) fill=${fill.toFixed(2)} boundary=${boundaryScore.toFixed(2)}`);
     break;
   }
 
