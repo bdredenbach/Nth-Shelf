@@ -1778,13 +1778,26 @@ button.reader-btn.mini-btn {
 .auto-scroll-control-panel {
   position: absolute;
   top: calc(60px + var(--safe-top));
-  left: 10px;
-  right: 10px;
+  left: 50%;
+  right: auto;
+  width: min(560px, calc(100% - 20px));
   z-index: 8;
   pointer-events: auto;
   opacity: .015;
+  transform: translateX(-50%);
   transition: opacity 180ms ease;
   touch-action: manipulation;
+}
+.auto-scroll-persistent-toggle {
+  position: absolute;
+  left: 145px;
+  bottom: calc(12px + var(--safe-bottom) + 42px);
+  z-index: 9;
+  pointer-events: auto;
+  white-space: nowrap;
+}
+.auto-scroll-persistent-toggle[hidden] {
+  display: none !important;
 }
 .auto-scroll-control-panel {
   cursor: grab;
@@ -1948,8 +1961,11 @@ button.reader-btn.mini-btn {
 }
 @media (max-width: 520px) {
   .auto-scroll-control-panel {
-    left: 7px;
-    right: 7px;
+    width: calc(100% - 14px);
+  }
+  .auto-scroll-persistent-toggle {
+    left: 143px;
+    bottom: calc(12px + var(--safe-bottom) + 42px);
   }
   .auto-scroll-control-inner {
     gap: 7px;
