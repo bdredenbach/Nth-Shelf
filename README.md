@@ -1,6 +1,6 @@
 # Nth Shelf
 
-![Nth Shelf](assets/nth-shelf-empty.jpg)
+![Nth Shelf](assets/nth-shelf-empty.png)
 
 **Nth Shelf** is a local-first comic reader and personal comic library built as an installable Progressive Web App.
 
@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.61**
+**Version 2.64**
 
 This release updates the Auto Scroll control styling so it follows the same visual state convention as Bubble Zoom: dark when off and red when active. The README documents the current Nth Shelf feature set, including animated Search and Bookmarks, ASC/ADDED sorting, nested archive imports, Two Page fullscreen, Bubble Zoom, Auto Scroll controls, and persistence protection.
 
@@ -120,3 +120,17 @@ This project is licensed under the **MIT License**. The license applies to the s
 
 **Nth Shelf**  
 *Your comics. Your shelf. Your device.*
+
+
+### v2.62 Test Note
+- Adds a temporary **2.0x Auto Scroll** speed endpoint for iPhone testing. Existing speed settings are unchanged.
+
+
+### v2.63
+- Bubble Zoom detection is now intentionally conservative: it recognizes white and slightly off-white bubble interiors while rejecting most brightly colored artwork highlights.
+
+
+### v2.64
+- Bubble Zoom now uses additional shape and interior-ink checks.
+- White/off-white color alone is no longer sufficient to qualify as a bubble.
+- Bright artwork regions are filtered more aggressively while preserving normal speech balloons.
