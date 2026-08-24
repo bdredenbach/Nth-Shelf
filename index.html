@@ -172,6 +172,29 @@
         <span aria-hidden="true" class="fullscreen-icon">⛶</span>
       </button>
     </div>
+
+    <div class="auto-scroll-control-panel" id="auto-scroll-control-panel" hidden aria-label="Auto Scroll controls">
+      <div class="auto-scroll-control-inner">
+        <div class="auto-scroll-speed-wrap">
+          <div class="auto-scroll-speed-header">
+            <span class="auto-scroll-speed-title">Speed</span>
+            <span class="auto-scroll-speed-direction">− Reverse&nbsp;&nbsp; · &nbsp;&nbsp;+ Forward</span>
+          </div>
+          <div class="auto-scroll-slider-wrap">
+            <input id="auto-scroll-speed" type="range" min="-1" max="1" step="0.5" value="1" aria-label="Auto Scroll speed" />
+            <div class="auto-scroll-ticks" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="auto-scroll-speed-labels" aria-hidden="true">
+            <span>−1x</span><span>−0.5x</span><span>0.0x</span><span>+0.5x</span><span>+1x</span>
+          </div>
+        </div>
+        <button class="auto-scroll-play" id="auto-scroll-play" type="button" aria-label="Pause Auto Scroll" title="Pause Auto Scroll" aria-pressed="false">
+          <span aria-hidden="true">Ⅱ</span>
+        </button>
+      </div>
+    </div>
     <div class="reader-bottombar">
       <div class="page-slider-row">
         <input type="range" id="page-slider" min="0" max="0" value="0" step="1" />
@@ -188,7 +211,7 @@
       </div>
       <div class="page-slider-row reader-options-row">
         <button class="mode-pill" id="bubble-zoom-toggle" title="Double-tap inside a speech bubble to magnify only the bubble">Bubble Zoom</button>
-        <button class="mode-pill auto-scroll-toggle auto-scroll-pill" id="auto-scroll-toggle" type="button" aria-label="Auto Scroll" title="Auto Scroll" aria-pressed="false" hidden>AUTO SCROLL</button>
+        <button class="mode-pill auto-scroll-toggle auto-scroll-pill" id="auto-scroll-toggle" type="button" aria-label="Auto Scroll" title="Auto Scroll" aria-pressed="false" hidden>Auto Scroll</button>
         <div class="theme-row" aria-label="Reading theme">
           <button class="theme-swatch dark" data-theme="dark" title="Dark"></button>
           <button class="theme-swatch sepia" data-theme="sepia" title="Sepia"></button>
@@ -220,6 +243,23 @@
           <li><b>Scroll</b> → Continuous horizontal reading.</li>
           <li><b>Manga</b> → Continuous horizontal right-to-left reading.</li>
           <li><b>Webcomic</b> → Continuous vertical reading.</li>
+        </ul>
+      </div>
+
+      <div class="help-section">
+        <h3>Auto Scroll</h3>
+        <div class="auto-scroll-guide" aria-hidden="true">
+          <div class="auto-scroll-guide-slider">
+            <span>−1x</span><i></i><span>−0.5x</span><i></i><span>0.0x</span><i></i><span>+0.5x</span><i></i><span>+1x</span>
+          </div>
+          <span class="auto-scroll-guide-play">Ⅱ</span>
+        </div>
+        <ul class="help-list">
+          <li><b>Auto Scroll</b> → Automatically moves through continuous reading modes.</li>
+          <li><b>Speed</b> → Drag the slider toward − to reverse direction or toward + to move forward.</li>
+          <li><b>0.0x</b> → Keeps Auto Scroll active without moving.</li>
+          <li><b>Pause / Play</b> → Pause or resume Auto Scroll without closing the controls.</li>
+          <li><b>Scroll / Manga / Webcomic</b> → Auto Scroll works in these modes only.</li>
         </ul>
       </div>
 
