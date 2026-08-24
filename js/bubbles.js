@@ -328,6 +328,50 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
       continue;
     }
 
+    // Speech bubbles normally contain dark lettering/ink inside a light,
+    // enclosed region. Require some interior ink evidence so a bright patch
+    // of artwork is not enough to trigger Bubble Zoom. Keep the test tolerant
+    // because lettering can be sparse or partially obscured.
+    const insetX = Math.max(2, Math.round(bw * 0.10));
+    const insetY = Math.max(2, Math.round(bh * 0.10));
+    const ix0 = Math.min(maxX, minX + insetX);
+    const ix1 = Math.max(minX, maxX - insetX);
+    const iy0 = Math.min(maxY, minY + insetY);
+    const iy1 = Math.max(minY, maxY - insetY);
+    const darkInkThreshold = Math.max(75, threshold - 85);
+    const inkStep = Math.max(1, Math.round(Math.min(bw, bh) / 90));
+    let interiorSamples = 0, darkInk = 0;
+    const inkRows = new Set();
+    const inkCols = new Set();
+
+    for (let yy = iy0; yy <= iy1; yy += inkStep) {
+      for (let xx = ix0; xx <= ix1; xx += inkStep) {
+        interiorSamples++;
+        if (lumAt(xx, yy) < darkInkThreshold) {
+          darkInk++;
+          inkRows.add(Math.floor((yy - iy0) / Math.max(1, (iy1 - iy0 + 1) / 5)));
+          inkCols.add(Math.floor((xx - ix0) / Math.max(1, (ix1 - ix0 + 1) / 5)));
+        }
+      }
+    }
+
+    const inkRatio = interiorSamples ? darkInk / interiorSamples : 0;
+    const hasDistributedInk = inkRows.size >= 1 && inkCols.size >= 1;
+    // Reject completely empty light regions. Allow both sparse lettering and
+    // denser comic lettering, but reject very dark artwork blocks.
+    if (!hasDistributedInk || inkRatio < 0.003 || inkRatio > 0.34) {
+      if (log) log(`try threshold=${threshold}: rejected weak/non-text interior ink ratio=${inkRatio.toFixed(3)}`);
+      continue;
+    }
+
+    // A genuine bubble tends to be mostly light inside its outline. This
+    // secondary fill guard rejects irregular bright artwork regions while
+    // preserving speech balloons with lettering cut out of the white area.
+    if (fill < 0.22) {
+      if (log) log(`try threshold=${threshold}: rejected low-fill candidate fill=${fill.toFixed(2)}`);
+      continue;
+    }
+
     // Small bubbles are common, especially in dense comic pages. For these,
     // require a little more shape evidence so lowering the area threshold does
     // not turn tiny highlights or white lettering gaps into false bubbles.
