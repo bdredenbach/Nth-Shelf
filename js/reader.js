@@ -199,6 +199,7 @@ const Reader = {
    this.applyTheme();
    this.applyModeClass();
    this.updateModePills();
+   this.updateAutoScrollControl();
    this.updateThemeSwatches();
    this.showChrome(true);
 
@@ -1108,6 +1109,7 @@ const Reader = {
     };
 
     panel.setPointerCapture?.(event.pointerId);
+    panel.style.transform = "none";
     panel.classList.add("is-dragging");
     this.keepAutoScrollControlsVisible();
     event.preventDefault();
@@ -1135,6 +1137,7 @@ const Reader = {
     panel.style.left = `${left}px`;
     panel.style.right = "auto";
     panel.style.top = `${top}px`;
+    panel.style.transform = "none";
     panel.style.bottom = "auto";
     event.preventDefault();
   },
@@ -1181,6 +1184,7 @@ const Reader = {
       panel.style.right = "auto";
       panel.style.top = `${top}px`;
       panel.style.bottom = "auto";
+      panel.style.transform = "none";
     } catch (_) {}
   },
 
@@ -1430,6 +1434,7 @@ async setMode(mode) {
    LongboxDB.updateComic(this.comic.id, { readMode: mode });
    this.applyModeClass();
    this.updateModePills();
+   this.updateAutoScrollControl();
 
    if (enteringTwoPage) {
      await this.enterTwoPageFullscreenLandscape();
