@@ -1855,7 +1855,7 @@ button.reader-btn.mini-btn {
 .shelf-mode-card {
   position:absolute;
   left:50%; top:50%;
-  width:min(24vw, 225px);
+  width:min(27vw, 280px);
   aspect-ratio:2/3;
   padding:0; border:1px solid rgba(255,255,255,.12);
   border-radius:8px; overflow:hidden;
@@ -1866,7 +1866,7 @@ button.reader-btn.mini-btn {
   transform:translate3d(calc(-50% + var(--x)), calc(-50% + var(--arc-y)), var(--z)) rotateY(var(--rot)) rotateX(var(--tilt-x)) scale(var(--scale));
   opacity:var(--opacity);
   z-index:var(--zindex);
-  transition:transform 360ms cubic-bezier(.2,.8,.2,1), opacity 260ms ease, filter 260ms ease, box-shadow 260ms ease;
+  transition:transform 420ms cubic-bezier(.2,.8,.2,1), opacity 300ms ease, filter 300ms ease, box-shadow 300ms ease;
   filter:saturate(.82) brightness(.78);
   will-change:transform;
 }
@@ -1898,15 +1898,15 @@ button.reader-btn.mini-btn {
   filter: saturate(1.08) contrast(1.02);
 }
 .shelf-mode-card[data-distance="1"] {
-  filter:saturate(.72) brightness(.68) blur(.15px);
+  filter:saturate(.82) brightness(.78) blur(.05px);
 }
 .shelf-mode-card[data-distance="2"],
 .shelf-mode-card[data-distance="3"] {
-  filter:saturate(.52) brightness(.52) blur(.5px);
+  filter:saturate(.68) brightness(.64) blur(.18px);
 }
 @keyframes cinematic-shelf-float {
-  0%,100% { transform:translate3d(calc(-50% + var(--x)), calc(-50% + var(--arc-y)), var(--z)) rotateY(var(--rot)) rotateX(var(--tilt-x)) scale(var(--scale)) translateY(0); }
-  50% { transform:translate3d(calc(-50% + var(--x)), calc(-50% + var(--arc-y) - 5px), var(--z)) rotateY(var(--rot)) rotateX(var(--tilt-x)) scale(var(--scale)) translateY(0); }
+  0%,100% { transform:translate3d(calc(-50% + var(--x)), calc(-50% + var(--arc-y)), var(--z)) rotateY(var(--rot)) rotateX(var(--tilt-x)) scale(var(--scale)); }
+  50% { transform:translate3d(calc(-50% + var(--x)), calc(-50% + var(--arc-y) - 4px), var(--z)) rotateY(var(--rot)) rotateX(var(--tilt-x)) scale(var(--scale)); }
 }
 .shelf-mode-card.hero-selected {
   animation: cinematic-hero-select 620ms cubic-bezier(.16,.9,.2,1) both !important;
@@ -2168,4 +2168,10 @@ button.reader-btn.mini-btn {
 
 @media (prefers-reduced-motion: reduce) {
   .comic-card.cinematic-reveal, .shelf-mode-card.center { animation: none !important; }
+}
+
+/* v2.70 continuous shelf tuning */
+@media (max-width: 600px) {
+  .shelf-mode-track { height:min(62vh, 560px); }
+  .shelf-mode-card { width:min(31vw, 250px); }
 }
