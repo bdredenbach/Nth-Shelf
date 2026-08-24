@@ -1,0 +1,7 @@
+Nth Shelf
+Version: v2.70
+
+Changes:
+- Shelf Mode continuous visible cover line.
+- Wider shelf spacing and improved neighbor visibility.
+- Center selection state resets whenever the centered comic changes.

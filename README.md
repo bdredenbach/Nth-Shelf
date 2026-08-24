@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.69**
+**Version 2.70**
 
 This release adds **Shelf Mode**, an interactive 3D-style cover shelf inspired by console library cover browsing. The shelf presents a continuous line of comic covers with the selected comic centered as the hero. Swipe left/right or use the arrow keys to move through the shelf, and tap the center comic to open it. Shelf Mode is launched from the red button beside Import and can be closed at any time.
 
@@ -166,3 +166,10 @@ This project is licensed under the **MIT License**. The license applies to the s
 - Tapping a side cover moves it into the hero position without opening it.
 - Normal library cards now use the same two-step cinematic interaction: first tap lifts/selects a cover, second tap opens it.
 - Added a short “Tap again to open” cue after selection.
+
+
+### v2.70
+- Shelf Mode now presents a continuous visible line of comic covers around the centered hero.
+- Wider spacing and lighter side covers make neighboring comics clearly visible.
+- Changing the centered comic always clears the previous comic's cinematic/second-tap state.
+- The newly centered comic requires a fresh first tap before opening.
