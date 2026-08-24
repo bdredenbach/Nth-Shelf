@@ -22,6 +22,7 @@ const Reader = {
  _autoScrollLastTime: 0,
  _autoScrollSpeed: 38,
  _autoScrollPaused: false,
+  _autoScrollControlHideTimer: null,
  _twoPageOrientationLocked: false,
  _initialReaderGuideShown: false,
 
@@ -87,11 +88,24 @@ const Reader = {
     this.els.autoScrollSpeed = document.getElementById("auto-scroll-speed");
     this.els.autoScrollPlay = document.getElementById("auto-scroll-play");
 
+    const wakeAutoScrollControls = () => this.revealAutoScrollControls();
+    const holdAutoScrollControls = () => this.keepAutoScrollControlsVisible();
+
+    this.els.autoScrollPanel?.addEventListener("pointerdown", holdAutoScrollControls);
+    this.els.autoScrollPanel?.addEventListener("pointerup", wakeAutoScrollControls);
+    this.els.autoScrollPanel?.addEventListener("pointercancel", wakeAutoScrollControls);
+    this.els.autoScrollPanel?.addEventListener("touchstart", holdAutoScrollControls, { passive: true });
+    this.els.autoScrollPanel?.addEventListener("focusin", holdAutoScrollControls);
+
     this.els.autoScrollSpeed?.addEventListener("input", (event) => {
+      this.revealAutoScrollControls();
       this.setAutoScrollSpeed(event.target.value);
     });
+    this.els.autoScrollSpeed?.addEventListener("change", wakeAutoScrollControls);
+
     this.els.autoScrollPlay?.addEventListener("click", (event) => {
       event.stopPropagation();
+      this.keepAutoScrollControlsVisible();
       this.toggleAutoScrollPause();
     });
 
@@ -1051,6 +1065,35 @@ const Reader = {
    }
  },
 
+  revealAutoScrollControls() {
+    const panel = this.els.autoScrollPanel;
+    if (!panel) return;
+
+    panel.classList.add("is-visible");
+
+    if (this._autoScrollControlHideTimer) {
+      clearTimeout(this._autoScrollControlHideTimer);
+    }
+
+    if (this._autoScrollEnabled && !this._autoScrollPaused) {
+      this._autoScrollControlHideTimer = setTimeout(() => {
+        panel.classList.remove("is-visible");
+        this._autoScrollControlHideTimer = null;
+      }, 900);
+    }
+  },
+
+  keepAutoScrollControlsVisible() {
+    const panel = this.els.autoScrollPanel;
+    if (!panel) return;
+
+    if (this._autoScrollControlHideTimer) {
+      clearTimeout(this._autoScrollControlHideTimer);
+      this._autoScrollControlHideTimer = null;
+    }
+    panel.classList.add("is-visible");
+  },
+
   updateAutoScrollControl() {
     const btn = this.els.autoScrollToggle;
     const panel = this.els.autoScrollPanel;
@@ -1069,7 +1112,20 @@ const Reader = {
     btn.classList.toggle("is-active", active);
     btn.setAttribute("aria-pressed", String(active));
 
-    if (panel) panel.hidden = !active;
+    if (panel) {
+      panel.hidden = !active;
+      if (!active) {
+        panel.classList.remove("is-visible");
+        if (this._autoScrollControlHideTimer) {
+          clearTimeout(this._autoScrollControlHideTimer);
+          this._autoScrollControlHideTimer = null;
+        }
+      } else if (this._autoScrollPaused) {
+        this.keepAutoScrollControlsVisible();
+      } else {
+        this.revealAutoScrollControls();
+      }
+    }
 
     if (play) {
       const paused = active && this._autoScrollPaused;
@@ -1169,6 +1225,7 @@ const Reader = {
     this._autoScrollAnimation = null;
     this._autoScrollLastTime = 0;
     this._autoScrollPaused = true;
+    this.keepAutoScrollControlsVisible();
     this.updateAutoScrollControl();
   },
 
