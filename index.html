@@ -178,16 +178,16 @@
         <div class="auto-scroll-speed-wrap">
           <div class="auto-scroll-speed-header">
             <span class="auto-scroll-speed-title">Speed</span>
-            <span class="auto-scroll-speed-direction">− Reverse&nbsp;&nbsp; · &nbsp;&nbsp;+ Forward</span>
+            <span class="auto-scroll-speed-direction">Slow&nbsp;→&nbsp; Fast</span>
           </div>
           <div class="auto-scroll-slider-wrap">
-            <input id="auto-scroll-speed" type="range" min="-1" max="1" step="0.5" value="1" aria-label="Auto Scroll speed" />
+            <input id="auto-scroll-speed" type="range" min="0" max="1" step="0.01" value="1" aria-label="Auto Scroll speed" />
             <div class="auto-scroll-ticks" aria-hidden="true">
               <span></span><span></span><span></span><span></span><span></span>
             </div>
           </div>
           <div class="auto-scroll-speed-labels" aria-hidden="true">
-            <span>−1x</span><span>−0.5x</span><span>0.0x</span><span>+0.5x</span><span>+1x</span>
+            <span>0.0x</span><span>0.33x</span><span>0.50x</span><span>0.66x</span><span>1.0x</span>
           </div>
         </div>
         <button class="auto-scroll-play" id="auto-scroll-play" type="button" aria-label="Pause Auto Scroll" title="Pause Auto Scroll" aria-pressed="false">
@@ -250,13 +250,13 @@
         <h3>Auto Scroll</h3>
         <div class="auto-scroll-guide" aria-hidden="true">
           <div class="auto-scroll-guide-slider">
-            <span>−1x</span><i></i><span>−0.5x</span><i></i><span>0.0x</span><i></i><span>+0.5x</span><i></i><span>+1x</span>
+            <span>0.0x</span><i></i><span>0.33x</span><i></i><span>0.50x</span><i></i><span>0.66x</span><i></i><span>1.0x</span>
           </div>
           <span class="auto-scroll-guide-play">Ⅱ</span>
         </div>
         <ul class="help-list">
           <li><b>Auto Scroll</b> → Automatically moves through continuous reading modes.</li>
-          <li><b>Speed</b> → Drag the slider toward − to reverse direction or toward + to move forward.</li>
+          <li><b>Speed</b> → Drag the slider from 0.0x to 1.0x to choose how quickly the comic moves.</li>
           <li><b>0.0x</b> → Keeps Auto Scroll active without moving.</li>
           <li><b>Pause / Play</b> → Pause or resume Auto Scroll without closing the controls.</li>
           <li><b>Scroll / Manga / Webcomic</b> → Auto Scroll works in these modes only.</li>
