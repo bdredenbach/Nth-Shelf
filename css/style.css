@@ -1754,12 +1754,17 @@ button.reader-btn.mini-btn {
 
 /* v2.57 Auto Scroll button: match Bubble Zoom and live in the reader options row. */
 .reader-options-row .auto-scroll-pill {
-  background: var(--red);
+  /* Off state matches the standard reader pills (same visual language as Bubble Zoom). */
+  background: rgba(255,255,255,0.08);
   color: #fff;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
+.reader-options-row .auto-scroll-pill.active,
 .reader-options-row .auto-scroll-pill.is-active {
+  /* On state uses the same red active treatment as the other reader controls. */
+  background: var(--red);
+  color: #fff;
   box-shadow: 0 0 0 2px rgba(215,25,32,.22);
 }
 .reader-options-row .auto-scroll-pill[hidden] {
