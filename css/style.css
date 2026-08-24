@@ -1855,7 +1855,7 @@ button.reader-btn.mini-btn {
 .shelf-mode-card {
   position:absolute;
   left:50%; top:50%;
-  width:min(25vw, 235px);
+  width:min(24vw, 225px);
   aspect-ratio:2/3;
   padding:0; border:1px solid rgba(255,255,255,.12);
   border-radius:8px; overflow:hidden;
@@ -1863,7 +1863,7 @@ button.reader-btn.mini-btn {
   box-shadow:0 22px 35px rgba(0,0,0,.62), 0 0 0 1px rgba(0,0,0,.55);
   cursor:pointer;
   transform-origin:center bottom;
-  transform:translate3d(calc(-50% + var(--x)), -50%, var(--z)) rotateY(var(--rot)) scale(var(--scale));
+  transform:translate3d(calc(-50% + var(--x)), calc(-50% + var(--arc-y)), var(--z)) rotateY(var(--rot)) rotateX(var(--tilt-x)) scale(var(--scale));
   opacity:var(--opacity);
   z-index:var(--zindex);
   transition:transform 360ms cubic-bezier(.2,.8,.2,1), opacity 260ms ease, filter 260ms ease, box-shadow 260ms ease;
@@ -1905,9 +1905,36 @@ button.reader-btn.mini-btn {
   filter:saturate(.52) brightness(.52) blur(.5px);
 }
 @keyframes cinematic-shelf-float {
-  0%,100% { transform:translate3d(calc(-50% + var(--x)), -50%, var(--z)) rotateY(var(--rot)) scale(var(--scale)) translateY(0); }
-  50% { transform:translate3d(calc(-50% + var(--x)), -50%, var(--z)) rotateY(var(--rot)) scale(var(--scale)) translateY(-5px); }
+  0%,100% { transform:translate3d(calc(-50% + var(--x)), calc(-50% + var(--arc-y)), var(--z)) rotateY(var(--rot)) rotateX(var(--tilt-x)) scale(var(--scale)) translateY(0); }
+  50% { transform:translate3d(calc(-50% + var(--x)), calc(-50% + var(--arc-y) - 5px), var(--z)) rotateY(var(--rot)) rotateX(var(--tilt-x)) scale(var(--scale)) translateY(0); }
 }
+.shelf-mode-card.hero-selected {
+  animation: cinematic-hero-select 620ms cubic-bezier(.16,.9,.2,1) both !important;
+  border-color:rgba(232,53,43,1);
+  box-shadow:0 36px 70px rgba(0,0,0,.82), 0 0 42px rgba(232,53,43,.28);
+}
+@keyframes cinematic-hero-select {
+  0% { filter:saturate(1.05) brightness(1); }
+  45% { transform:translate3d(-50%, calc(-50% - 8px), 58px) rotateY(0deg) rotateX(0deg) scale(1.075); filter:saturate(1.16) brightness(1.08); }
+  100% { filter:saturate(1.08) brightness(1.03); }
+}
+.shelf-mode-title::after {
+  content:attr(data-hint); display:block; min-height:1em; margin-top:7px;
+  color:rgba(232,53,43,.86); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+}
+.comic-card.cinematic-selected {
+  transform:translateY(-14px) rotateY(-5deg) scale(1.035);
+  z-index:8;
+}
+.comic-card.cinematic-selected .comic-cover {
+  border-color:rgba(232,53,43,.92);
+  box-shadow:0 24px 46px rgba(0,0,0,.60), 0 0 30px rgba(232,53,43,.18);
+}
+.comic-card.cinematic-selected .comic-cover img {
+  transform:scale(1.035);
+  filter:saturate(1.08) brightness(1.04);
+}
+.comic-card.cinematic-selected::after { opacity:.72; transform:translateZ(-1px) scale(1.08); }
 
 .shelf-mode-placeholder { height:100%; display:grid; place-items:center; padding:20px; text-align:center; color:var(--text-dim); }
 .shelf-mode-info {
@@ -1921,7 +1948,7 @@ button.reader-btn.mini-btn {
 @media (max-width:600px) {
   .shelf-mode-btn { min-width:104px; padding-left:14px; padding-right:14px; }
   .shelf-mode-track { height:48vh; }
-  .shelf-mode-card { width:min(43vw,210px); }
+  .shelf-mode-card { width:min(38vw,205px); }
   .shelf-mode-card[data-distance="2"], .shelf-mode-card[data-distance="3"] { opacity:.13; }
   .shelf-mode-title { font-size:17px; }
 }
