@@ -1782,6 +1782,12 @@ button.reader-btn.mini-btn {
   right: 10px;
   z-index: 8;
   pointer-events: auto;
+  opacity: .01;
+  transition: opacity 180ms ease;
+  touch-action: manipulation;
+}
+.auto-scroll-control-panel.is-visible {
+  opacity: 1;
 }
 .auto-scroll-control-panel[hidden] {
   display: none !important;
