@@ -1,17 +1,16 @@
 # Nth Shelf
 
-![Nth Shelf](<assets/nth-shelf-empty.jpg>)
+![Nth Shelf](assets/nth-shelf-empty.png)
 
 **Nth Shelf** is a local-first comic reader and personal comic library built as an installable Progressive Web App.
 
 **Everything stays on this device.**
 
-
-
 ## ✨ Features
 
 ### 📚 Personal Comic Library
 - Import **CBZ, ZIP, CBT, CB7, 7Z, CBR, and RAR** comics.
+- Import a ZIP containing multiple supported comic archives as a batch.
 - Search your collection.
 - Organize comics into collections.
 - Track reading progress and unread status.
@@ -54,6 +53,17 @@ The **Exit Fullscreen** button appears only in Two Page fullscreen landscape.
 - Bubble positioning adapts to the reading layout.
 - Two Page supports bubbles on either displayed page.
 
+## 🖱️ Auto Scroll
+Auto Scroll is available in **Scroll, Manga,** and **Webcomic** modes.
+
+- The **Auto Scroll** button appears only in modes that support continuous scrolling.
+- The button is dark when off and red when active, matching the Bubble Zoom control style.
+- Use the speed control to select **0.0x, 0.33x, 0.50x, 0.66x,** or **1.0x**.
+- Use the play/pause control to stop and resume scrolling without leaving the mode.
+- The control panel fades almost completely into the artwork while idle and becomes visible when interacted with.
+- The control panel can be moved to a more convenient position.
+- Auto Scroll automatically stops when switching to a reading mode that does not support it, preventing unexpected movement when changing modes.
+
 ## 🔖 Bookmarks & Progress
 - Bookmark the current page.
 - Return directly to bookmarked pages.
@@ -88,17 +98,17 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 
 ## 🚀 Getting Started
 1. Open Nth Shelf.
-2. The Reader Guide appears when a comic is first opened.
-3. Import a comic.
-4. Choose a reading layout.
-5. Search or organize your shelf.
-6. Bookmark pages you want to revisit.
+2. Import a comic or a ZIP containing supported comic archives.
+3. Choose a reading layout.
+4. Search or organize your shelf.
+5. Bookmark pages you want to revisit.
+6. Use Bubble Zoom or Auto Scroll when appropriate.
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.54**
+**Version 2.61**
 
-This release adds the project README and documents the current Nth Shelf feature set.
+This release updates the Auto Scroll control styling so it follows the same visual state convention as Bubble Zoom: dark when off and red when active. The README documents the current Nth Shelf feature set, including animated Search and Bookmarks, ASC/ADDED sorting, nested archive imports, Two Page fullscreen, Bubble Zoom, Auto Scroll controls, and persistence protection.
 
 ## 🔒 Privacy
 Nth Shelf is designed around local-first storage. Your comics are stored on your device rather than uploaded to an Nth Shelf server simply to read them.
