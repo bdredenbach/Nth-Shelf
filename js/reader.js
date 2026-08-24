@@ -21,6 +21,7 @@ const Reader = {
  _autoScrollAnimation: null,
  _autoScrollLastTime: 0,
  _autoScrollSpeed: 38,
+ _autoScrollPaused: false,
  _twoPageOrientationLocked: false,
  _initialReaderGuideShown: false,
 
@@ -81,6 +82,17 @@ const Reader = {
     this.els.autoScrollToggle?.addEventListener("click", (event) => {
       event.stopPropagation();
       this.toggleAutoScroll();
+    });
+    this.els.autoScrollPanel = document.getElementById("auto-scroll-control-panel");
+    this.els.autoScrollSpeed = document.getElementById("auto-scroll-speed");
+    this.els.autoScrollPlay = document.getElementById("auto-scroll-play");
+
+    this.els.autoScrollSpeed?.addEventListener("input", (event) => {
+      this.setAutoScrollSpeed(event.target.value);
+    });
+    this.els.autoScrollPlay?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      this.toggleAutoScrollPause();
     });
 
    this.els.twoPageExitFullscreen = document.getElementById("two-page-exit-fullscreen");
@@ -1041,6 +1053,8 @@ const Reader = {
 
   updateAutoScrollControl() {
     const btn = this.els.autoScrollToggle;
+    const panel = this.els.autoScrollPanel;
+    const play = this.els.autoScrollPlay;
     if (!btn) return;
 
     const allowed =
@@ -1048,10 +1062,23 @@ const Reader = {
       this.mode === "manga" ||
       this.mode === "webcomic";
 
+    const active = allowed && this._autoScrollEnabled;
+
     btn.hidden = !allowed;
-    btn.classList.toggle("active", allowed && this._autoScrollEnabled);
-    btn.classList.toggle("is-active", allowed && this._autoScrollEnabled);
-    btn.setAttribute("aria-pressed", String(allowed && this._autoScrollEnabled));
+    btn.classList.toggle("active", active);
+    btn.classList.toggle("is-active", active);
+    btn.setAttribute("aria-pressed", String(active));
+
+    if (panel) panel.hidden = !active;
+
+    if (play) {
+      const paused = active && this._autoScrollPaused;
+      play.classList.toggle("is-paused", paused);
+      play.setAttribute("aria-pressed", String(paused));
+      play.setAttribute("aria-label", paused ? "Play Auto Scroll" : "Pause Auto Scroll");
+      play.title = paused ? "Play Auto Scroll" : "Pause Auto Scroll";
+      play.innerHTML = `<span aria-hidden="true">${paused ? "▶" : "Ⅱ"}</span>`;
+    }
   },
 
   stopAutoScroll() {
@@ -1061,6 +1088,7 @@ const Reader = {
     this._autoScrollAnimation = null;
     this._autoScrollLastTime = 0;
     this._autoScrollEnabled = false;
+    this._autoScrollPaused = false;
     this.updateAutoScrollControl();
   },
 
@@ -1070,19 +1098,19 @@ const Reader = {
       this.mode === "manga" ||
       this.mode === "webcomic";
 
-    // .reader-stage is the element that actually owns overflow in all
-    // three continuous reading modes.
     const stage = this.els.stage;
     if (!allowed || !stage || this._autoScrollAnimation) return;
 
     this._autoScrollEnabled = true;
+    this._autoScrollPaused = false;
     this._autoScrollLastTime = 0;
     this.updateAutoScrollControl();
 
     const tick = (now) => {
-      if (!this._autoScrollEnabled) {
+      if (!this._autoScrollEnabled || this._autoScrollPaused) {
         this._autoScrollAnimation = null;
         this._autoScrollLastTime = 0;
+        this.updateAutoScrollControl();
         return;
       }
 
@@ -1096,37 +1124,34 @@ const Reader = {
       const dt = Math.min(now - this._autoScrollLastTime, 50);
       this._autoScrollLastTime = now;
 
-      // Comfortable reading speed: 45 CSS pixels per second.
-      const distance = 45 * dt / 1000;
+      const speed = Number(this._autoScrollSpeed || 0);
+      const distance = speed * dt / 1000;
 
       if (mode === "webcomic") {
         const maxY = Math.max(0, stage.scrollHeight - stage.clientHeight);
-        stage.scrollTop = Math.min(maxY, stage.scrollTop + distance);
+        const nextY = Math.max(0, Math.min(maxY, stage.scrollTop + distance));
+        stage.scrollTop = nextY;
 
-        if (stage.scrollTop >= maxY - 1) {
+        if ((speed > 0 && nextY >= maxY - 1) || (speed < 0 && nextY <= 1)) {
           this.stopAutoScroll();
           return;
         }
       } else if (mode === "manga") {
-        // Manga uses RTL direction; Chrome's scrollLeft moves negative
-        // as the reader advances from right to left.
-        stage.scrollLeft = Math.max(
-          -Math.max(0, stage.scrollWidth - stage.clientWidth),
-          stage.scrollLeft - distance
-        );
+        const maxX = Math.max(0, stage.scrollWidth - stage.clientWidth);
+        const minX = -maxX;
+        const nextX = Math.max(minX, Math.min(0, stage.scrollLeft - distance));
+        stage.scrollLeft = nextX;
 
-        const atEnd = stage.scrollLeft <=
-          -Math.max(0, stage.scrollWidth - stage.clientWidth) + 1;
-
-        if (atEnd) {
+        if ((speed > 0 && nextX <= minX + 1) || (speed < 0 && nextX >= -1)) {
           this.stopAutoScroll();
           return;
         }
       } else {
         const maxX = Math.max(0, stage.scrollWidth - stage.clientWidth);
-        stage.scrollLeft = Math.min(maxX, stage.scrollLeft + distance);
+        const nextX = Math.max(0, Math.min(maxX, stage.scrollLeft + distance));
+        stage.scrollLeft = nextX;
 
-        if (stage.scrollLeft >= maxX - 1) {
+        if ((speed > 0 && nextX >= maxX - 1) || (speed < 0 && nextX <= 1)) {
           this.stopAutoScroll();
           return;
         }
@@ -1138,12 +1163,38 @@ const Reader = {
     this._autoScrollAnimation = requestAnimationFrame(tick);
   },
 
+  pauseAutoScroll() {
+    if (!this._autoScrollEnabled || this._autoScrollPaused) return;
+    if (this._autoScrollAnimation) cancelAnimationFrame(this._autoScrollAnimation);
+    this._autoScrollAnimation = null;
+    this._autoScrollLastTime = 0;
+    this._autoScrollPaused = true;
+    this.updateAutoScrollControl();
+  },
+
+  resumeAutoScroll() {
+    if (!this._autoScrollEnabled || !this._autoScrollPaused) return;
+    this._autoScrollPaused = false;
+    this._autoScrollLastTime = 0;
+    this.updateAutoScrollControl();
+    this.startAutoScroll();
+  },
+
+  toggleAutoScrollPause() {
+    if (!this._autoScrollEnabled) return;
+    if (this._autoScrollPaused) this.resumeAutoScroll();
+    else this.pauseAutoScroll();
+  },
+
+  setAutoScrollSpeed(value) {
+    const speed = Number(value);
+    if (!Number.isFinite(speed)) return;
+    this._autoScrollSpeed = speed * 38;
+  },
+
   toggleAutoScroll() {
-    if (this._autoScrollEnabled) {
-      this.stopAutoScroll();
-    } else {
-      this.startAutoScroll();
-    }
+    if (this._autoScrollEnabled) this.stopAutoScroll();
+    else this.startAutoScroll();
   },
 
 async setMode(mode) {
