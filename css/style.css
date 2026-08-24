@@ -1786,6 +1786,17 @@ button.reader-btn.mini-btn {
   transition: opacity 180ms ease;
   touch-action: manipulation;
 }
+.auto-scroll-control-panel {
+  cursor: grab;
+}
+.auto-scroll-control-panel.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+.auto-scroll-control-panel.is-dragging * {
+  user-select: none;
+}
+
 .auto-scroll-control-panel.is-visible {
   opacity: 1;
 }
