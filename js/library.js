@@ -112,6 +112,10 @@ const Library = {
   bookmarkIndex: 0,
   bookmarkImageCache: new Map(),
   bookmarkRenderToken: 0,
+  shelfMode: false,
+  shelfIndex: 0,
+  shelfItems: [],
+  shelfRenderToken: 0,
 
   init() {
     Modal.init();
@@ -134,6 +138,21 @@ const Library = {
     this.els.searchTitle = document.getElementById("shelf-search-title");
     this.els.searchCount = document.getElementById("shelf-search-count");
     this.els.searchCarousel = document.getElementById("shelf-carousel");
+    this.els.shelfView = document.getElementById("shelf-mode-view");
+    this.els.shelfStage = document.getElementById("shelf-mode-stage");
+    this.els.shelfTrack = document.getElementById("shelf-mode-track");
+    this.els.shelfTitle = document.getElementById("shelf-mode-title");
+    this.els.shelfCount = document.getElementById("shelf-mode-count");
+
+    document.getElementById("shelf-mode-btn").addEventListener("click", () => this.toggleShelfMode());
+    document.getElementById("shelf-mode-close").addEventListener("click", () => this.closeShelfMode());
+    document.getElementById("shelf-mode-stage").addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") { e.preventDefault(); this.moveShelf(-1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); this.moveShelf(1); }
+      if (e.key === "Enter") { e.preventDefault(); this.openShelfSelection(); }
+      if (e.key === "Escape") { e.preventDefault(); this.closeShelfMode(); }
+    });
+    this.bindShelfSwipe();
 
     document.getElementById("search-mode-btn").addEventListener("click", () => this.toggleSearchMode());
     document.getElementById("search-mode-close").addEventListener("click", () => this.closeSearchMode());
@@ -212,6 +231,7 @@ const Library = {
 
   showRoot() {
     if (this.searchMode) this.closeSearchMode();
+    if (this.shelfMode) this.closeShelfMode();
     this.activeCollectionId = null;
     this.els.collectionView.style.display = "none";
     this.els.root.style.display = "block";
@@ -348,6 +368,11 @@ const Library = {
       this.els.gridEl.appendChild(item._isCollection ? this.renderCollectionCard(item) : this.renderComicCard(item));
     });
     this.searchItems = items;
+    if (this.shelfMode) {
+      this.shelfItems = items.slice();
+      this.shelfIndex = Math.min(this.shelfIndex, Math.max(0, this.shelfItems.length - 1));
+      this.renderShelfMode();
+    }
     if (this.searchMode) this.rebuildSearchItems();
   },
 
@@ -368,6 +393,101 @@ const Library = {
     this.els.collectionCount.textContent = `${members.length} issue${members.length === 1 ? "" : "s"}`;
     this.els.collectionGrid.innerHTML = "";
     members.forEach((m) => this.els.collectionGrid.appendChild(this.renderComicCard(m, { inCollection: true })));
+  },
+
+  toggleShelfMode() {
+    if (this.shelfMode) { this.closeShelfMode(); return; }
+    this.closeSearchMode();
+    this.shelfItems = this.searchItems.slice();
+    if (!this.shelfItems.length) return;
+    this.shelfMode = true;
+    this.shelfIndex = Math.min(this.shelfIndex, this.shelfItems.length - 1);
+    this.els.shelfView.hidden = false;
+    document.getElementById("shelf-mode-btn").textContent = "Close Shelf";
+    document.getElementById("fab-import").style.display = "none";
+    this.renderShelfMode();
+    requestAnimationFrame(() => this.els.shelfStage.focus());
+  },
+
+  closeShelfMode() {
+    this.shelfMode = false;
+    this.els.shelfView.hidden = true;
+    document.getElementById("shelf-mode-btn").textContent = "Shelf Mode";
+    document.getElementById("fab-import").style.display = "flex";
+    this.shelfRenderToken++;
+  },
+
+  renderShelfMode() {
+    const items = this.shelfItems;
+    const n = items.length;
+    if (!n) return;
+    this.shelfIndex = ((this.shelfIndex % n) + n) % n;
+    this.els.shelfTrack.innerHTML = "";
+    const radius = Math.min(6, Math.max(2, Math.floor(n / 2)));
+    for (let offset = -radius; offset <= radius; offset++) {
+      const index = (this.shelfIndex + offset + n) % n;
+      const item = items[index];
+      const distance = Math.abs(offset);
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = `shelf-mode-card${offset === 0 ? " center" : ""}`;
+      card.dataset.distance = String(distance);
+      card.dataset.offset = String(offset);
+      const x = offset * (distance === 0 ? 0 : 15);
+      const rot = offset * -18;
+      const scale = offset === 0 ? 1 : Math.max(.42, 1 - distance * .10);
+      const opacity = offset === 0 ? 1 : Math.max(.16, 1 - distance * .14);
+      const z = -distance * 52;
+      const zindex = 20 - distance;
+      card.style.setProperty("--x", `${x}vw`);
+      card.style.setProperty("--rot", `${rot}deg`);
+      card.style.setProperty("--scale", scale);
+      card.style.setProperty("--opacity", opacity);
+      card.style.setProperty("--z", `${z}px`);
+      card.style.setProperty("--zindex", zindex);
+      const cover = item._cover || item;
+      card.innerHTML = cover?.coverUrl
+        ? `<img src="${cover.coverUrl}" alt="${escapeHtml(item.title || "Comic cover")}" loading="eager">`
+        : `<div class="shelf-mode-placeholder">${escapeHtml(item.title || "Comic")}</div>`;
+      card.addEventListener("click", () => {
+        if (offset === 0) this.openShelfSelection();
+        else { this.shelfIndex = index; this.renderShelfMode(); }
+      });
+      this.els.shelfTrack.appendChild(card);
+    }
+    const selected = items[this.shelfIndex];
+    this.els.shelfTitle.textContent = selected?.title || "";
+    this.els.shelfCount.textContent = `${this.shelfIndex + 1} / ${n}`;
+  },
+
+  moveShelf(delta) {
+    if (!this.shelfItems.length) return;
+    this.shelfIndex = (this.shelfIndex + delta + this.shelfItems.length) % this.shelfItems.length;
+    this.renderShelfMode();
+  },
+
+  openShelfSelection() {
+    const item = this.shelfItems[this.shelfIndex];
+    if (!item) return;
+    if (item._isCollection) this.showCollection(item.id);
+    else window.LongboxApp.openReader(item.id);
+    this.closeShelfMode();
+  },
+
+  bindShelfSwipe() {
+    let startX = 0, startY = 0, tracking = false;
+    this.els.shelfStage.addEventListener("pointerdown", (e) => {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      startX = e.clientX; startY = e.clientY; tracking = true;
+      this.els.shelfStage.setPointerCapture?.(e.pointerId);
+    });
+    this.els.shelfStage.addEventListener("pointerup", (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.clientX - startX, dy = e.clientY - startY;
+      if (Math.abs(dx) > 35 && Math.abs(dx) > Math.abs(dy)) this.moveShelf(dx < 0 ? 1 : -1);
+    });
+    this.els.shelfStage.addEventListener("pointercancel", () => { tracking = false; });
   },
 
   toggleSearchMode() {
