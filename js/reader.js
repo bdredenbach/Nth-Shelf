@@ -23,6 +23,7 @@ const Reader = {
  _autoScrollSpeed: 38,
  _autoScrollPaused: false,
   _autoScrollControlHideTimer: null,
+  _autoScrollDrag: null,
  _twoPageOrientationLocked: false,
  _initialReaderGuideShown: false,
 
@@ -91,11 +92,26 @@ const Reader = {
     const wakeAutoScrollControls = () => this.revealAutoScrollControls();
     const holdAutoScrollControls = () => this.keepAutoScrollControlsVisible();
 
-    this.els.autoScrollPanel?.addEventListener("pointerdown", holdAutoScrollControls);
-    this.els.autoScrollPanel?.addEventListener("pointerup", wakeAutoScrollControls);
-    this.els.autoScrollPanel?.addEventListener("pointercancel", wakeAutoScrollControls);
-    this.els.autoScrollPanel?.addEventListener("touchstart", holdAutoScrollControls, { passive: true });
+    this.els.autoScrollPanel?.addEventListener("pointerdown", (event) => {
+      if (!this._isAutoScrollInteractiveTarget(event.target)) {
+        this.startAutoScrollPanelDrag(event);
+      } else {
+        holdAutoScrollControls();
+      }
+    });
+    this.els.autoScrollPanel?.addEventListener("pointermove", (event) => {
+      this.moveAutoScrollPanelDrag(event);
+    });
+    this.els.autoScrollPanel?.addEventListener("pointerup", (event) => {
+      this.endAutoScrollPanelDrag(event);
+      wakeAutoScrollControls();
+    });
+    this.els.autoScrollPanel?.addEventListener("pointercancel", (event) => {
+      this.endAutoScrollPanelDrag(event);
+      wakeAutoScrollControls();
+    });
     this.els.autoScrollPanel?.addEventListener("focusin", holdAutoScrollControls);
+    this.restoreAutoScrollPanelPosition();
 
     this.els.autoScrollSpeed?.addEventListener("input", (event) => {
       this.revealAutoScrollControls();
@@ -1065,6 +1081,103 @@ const Reader = {
    }
  },
 
+  _isAutoScrollInteractiveTarget(target) {
+    if (!target) return false;
+    return !!target.closest("input, button, select, option, a, label");
+  },
+
+  startAutoScrollPanelDrag(event) {
+    const panel = this.els.autoScrollPanel;
+    if (!panel || event.pointerType === "mouse" && event.button !== 0) return;
+    if (this._isAutoScrollInteractiveTarget(event.target)) return;
+
+    const rect = panel.getBoundingClientRect();
+    this._autoScrollDrag = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      startLeft: rect.left,
+      startTop: rect.top,
+      moved: false
+    };
+
+    panel.setPointerCapture?.(event.pointerId);
+    panel.classList.add("is-dragging");
+    this.keepAutoScrollControlsVisible();
+    event.preventDefault();
+  },
+
+  moveAutoScrollPanelDrag(event) {
+    const drag = this._autoScrollDrag;
+    const panel = this.els.autoScrollPanel;
+    if (!drag || !panel || event.pointerId !== drag.pointerId) return;
+
+    const dx = event.clientX - drag.startX;
+    const dy = event.clientY - drag.startY;
+    if (Math.abs(dx) + Math.abs(dy) > 4) drag.moved = true;
+
+    const vw = document.documentElement.clientWidth;
+    const vh = document.documentElement.clientHeight;
+    const rect = panel.getBoundingClientRect();
+
+    const maxLeft = Math.max(0, vw - rect.width);
+    const maxTop = Math.max(0, vh - rect.height);
+
+    const left = Math.max(0, Math.min(maxLeft, drag.startLeft + dx));
+    const top = Math.max(0, Math.min(maxTop, drag.startTop + dy));
+
+    panel.style.left = `${left}px`;
+    panel.style.right = "auto";
+    panel.style.top = `${top}px`;
+    panel.style.bottom = "auto";
+    event.preventDefault();
+  },
+
+  endAutoScrollPanelDrag(event) {
+    const drag = this._autoScrollDrag;
+    const panel = this.els.autoScrollPanel;
+    if (!drag || !panel || event.pointerId !== drag.pointerId) return;
+
+    panel.releasePointerCapture?.(event.pointerId);
+    panel.classList.remove("is-dragging");
+
+    const wasMoved = drag.moved;
+    this._autoScrollDrag = null;
+
+    if (wasMoved) {
+      const rect = panel.getBoundingClientRect();
+      try {
+        localStorage.setItem("nthShelfAutoScrollPanelPosition",
+          JSON.stringify({ left: rect.left, top: rect.top }));
+      } catch (_) {}
+    }
+
+    this.revealAutoScrollControls();
+  },
+
+  restoreAutoScrollPanelPosition() {
+    const panel = this.els.autoScrollPanel;
+    if (!panel) return;
+
+    try {
+      const raw = localStorage.getItem("nthShelfAutoScrollPanelPosition");
+      if (!raw) return;
+      const pos = JSON.parse(raw);
+      if (!Number.isFinite(pos.left) || !Number.isFinite(pos.top)) return;
+
+      const rect = panel.getBoundingClientRect();
+      const vw = document.documentElement.clientWidth;
+      const vh = document.documentElement.clientHeight;
+      const left = Math.max(0, Math.min(Math.max(0, vw - rect.width), pos.left));
+      const top = Math.max(0, Math.min(Math.max(0, vh - rect.height), pos.top));
+
+      panel.style.left = `${left}px`;
+      panel.style.right = "auto";
+      panel.style.top = `${top}px`;
+      panel.style.bottom = "auto";
+    } catch (_) {}
+  },
+
   revealAutoScrollControls() {
     const panel = this.els.autoScrollPanel;
     if (!panel) return;
@@ -1120,8 +1233,6 @@ const Reader = {
           clearTimeout(this._autoScrollControlHideTimer);
           this._autoScrollControlHideTimer = null;
         }
-      } else if (this._autoScrollPaused) {
-        this.keepAutoScrollControlsVisible();
       } else {
         this.revealAutoScrollControls();
       }
@@ -1225,7 +1336,7 @@ const Reader = {
     this._autoScrollAnimation = null;
     this._autoScrollLastTime = 0;
     this._autoScrollPaused = true;
-    this.keepAutoScrollControlsVisible();
+    this.revealAutoScrollControls();
     this.updateAutoScrollControl();
   },
 
