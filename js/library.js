@@ -423,13 +423,30 @@ const Library = {
     this.shelfRenderToken++;
   },
 
+  resetShelfSelection() {
+    this.shelfHeroSelected = false;
+    this.els.shelfTitle?.removeAttribute("data-hint");
+    this.els.shelfTrack?.querySelectorAll(".hero-selected").forEach((el) => {
+      el.classList.remove("hero-selected");
+    });
+  },
+
   renderShelfMode() {
     const items = this.shelfItems;
     const n = items.length;
     if (!n) return;
     this.shelfIndex = ((this.shelfIndex % n) + n) % n;
+
+    // Changing the centered comic always releases the previous comic from
+    // its clicked/hero state. The newly centered comic must be tapped before
+    // a second tap can open it.
+    this.resetShelfSelection();
     this.els.shelfTrack.innerHTML = "";
-    const radius = Math.min(6, Math.max(2, Math.floor(n / 2)));
+
+    // Render a continuous circular line of covers around the hero. We keep
+    // several neighbors visible on each side so the shelf reads as a
+    // collection rather than a single-card carousel.
+    const radius = Math.min(6, Math.max(3, Math.floor(n / 2)));
     for (let offset = -radius; offset <= radius; offset++) {
       const index = (this.shelfIndex + offset + n) % n;
       const item = items[index];
@@ -439,22 +456,30 @@ const Library = {
       card.className = `shelf-mode-card${offset === 0 ? " center" : ""}`;
       card.dataset.distance = String(distance);
       card.dataset.offset = String(offset);
-      const x = offset * (distance === 0 ? 0 : 15);
-      const rot = offset * -18;
-      const scale = offset === 0 ? 1 : Math.max(.42, 1 - distance * .10);
-      const opacity = offset === 0 ? 1 : Math.max(.16, 1 - distance * .14);
-      const z = -distance * 52;
-      const zindex = 20 - distance;
+
+      // Wide, physical shelf spacing. Neighboring covers remain clearly
+      // visible instead of collapsing behind the centered cover.
+      const x = offset * 20.5;
+      const arcY = Math.min(10, distance * 1.8);
+      const rot = offset * -15;
+      const scale = Math.max(.54, 1 - distance * .075);
+      const opacity = Math.max(.28, 1 - distance * .10);
+      const z = -distance * 10;
+      const zindex = 100 - distance;
+
       card.style.setProperty("--x", `${x}vw`);
+      card.style.setProperty("--arc-y", `${arcY}px`);
       card.style.setProperty("--rot", `${rot}deg`);
       card.style.setProperty("--scale", scale);
       card.style.setProperty("--opacity", opacity);
       card.style.setProperty("--z", `${z}px`);
       card.style.setProperty("--zindex", zindex);
+
       const cover = item._cover || item;
       card.innerHTML = cover?.coverUrl
         ? `<img src="${cover.coverUrl}" alt="${escapeHtml(item.title || "Comic cover")}" loading="eager">`
         : `<div class="shelf-mode-placeholder">${escapeHtml(item.title || "Comic")}</div>`;
+
       card.addEventListener("click", (e) => {
         e.stopPropagation();
         if (offset === 0) {
@@ -465,18 +490,26 @@ const Library = {
             this.shelfHeroSelected = true;
             card.classList.add("hero-selected");
             this.els.shelfTitle.dataset.hint = "Tap again to open";
-            setTimeout(() => {
-              if (card.isConnected) card.classList.remove("hero-selected");
-            }, 700);
+            clearTimeout(this._shelfHeroTimer);
+            this._shelfHeroTimer = setTimeout(() => {
+              if (card.isConnected) {
+                card.classList.remove("hero-selected");
+                this.shelfHeroSelected = false;
+                this.els.shelfTitle.removeAttribute("data-hint");
+              }
+            }, 1800);
           }
         } else {
+          // Selecting another title immediately clears the previous hero
+          // state, giving the newly centered comic a clean first tap.
           this.shelfIndex = index;
-          this.shelfHeroSelected = false;
+          this.resetShelfSelection();
           this.renderShelfMode();
         }
       });
       this.els.shelfTrack.appendChild(card);
     }
+
     const selected = items[this.shelfIndex];
     this.els.shelfTitle.textContent = selected?.title || "";
     this.els.shelfCount.textContent = `${this.shelfIndex + 1} / ${n}`;
@@ -484,6 +517,7 @@ const Library = {
 
   moveShelf(delta) {
     if (!this.shelfItems.length) return;
+    this.resetShelfSelection();
     this.shelfIndex = (this.shelfIndex + delta + this.shelfItems.length) % this.shelfItems.length;
     this.renderShelfMode();
   },
