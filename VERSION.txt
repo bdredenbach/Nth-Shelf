@@ -1,5 +1,5 @@
 Nth Shelf
-Version: v2.70
+Version: v2.71
 
 Changes:
 - Shelf Mode continuous visible cover line.
