@@ -93,7 +93,13 @@ const Reader = {
     const holdAutoScrollControls = () => this.keepAutoScrollControlsVisible();
 
     this.els.autoScrollPanel?.addEventListener("pointerdown", (event) => {
-      if (!this._isAutoScrollInteractiveTarget(event.target)) {
+      const panel = this.els.autoScrollPanel;
+      const rect = panel?.getBoundingClientRect();
+      const inDragStrip = rect &&
+        event.clientY >= rect.top - 10 &&
+        event.clientY <= rect.top + 18;
+
+      if (inDragStrip || !this._isAutoScrollInteractiveTarget(event.target)) {
         this.startAutoScrollPanelDrag(event);
       } else {
         holdAutoScrollControls();
@@ -1114,7 +1120,7 @@ const Reader = {
 
     const dx = event.clientX - drag.startX;
     const dy = event.clientY - drag.startY;
-    if (Math.abs(dx) + Math.abs(dy) > 4) drag.moved = true;
+    if (Math.hypot(dx, dy) > 3) drag.moved = true;
 
     const vw = document.documentElement.clientWidth;
     const vh = document.documentElement.clientHeight;
