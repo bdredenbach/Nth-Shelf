@@ -1948,7 +1948,7 @@ button.reader-btn.mini-btn {
 @media (max-width:600px) {
   .shelf-mode-btn { min-width:104px; padding-left:14px; padding-right:14px; }
   .shelf-mode-track { height:48vh; }
-  .shelf-mode-card { width:min(38vw,205px); }
+  .shelf-mode-card { width:min(43vw,210px); }
   .shelf-mode-card[data-distance="2"], .shelf-mode-card[data-distance="3"] { opacity:.13; }
   .shelf-mode-title { font-size:17px; }
 }
@@ -2174,4 +2174,12 @@ button.reader-btn.mini-btn {
 @media (max-width: 600px) {
   .shelf-mode-track { height:min(62vh, 560px); }
   .shelf-mode-card { width:min(31vw, 250px); }
+}
+
+/* v2.72 — preserve the proven v2.67 Shelf Mode mobile presentation */
+@media (max-width: 600px) {
+  .shelf-mode-track { height:48vh; }
+  .shelf-mode-card { width:min(43vw,210px); }
+  .shelf-mode-card[data-distance="2"],
+  .shelf-mode-card[data-distance="3"] { opacity:.13; }
 }
