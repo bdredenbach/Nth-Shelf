@@ -364,8 +364,11 @@ const Library = {
     });
 
     const items = this.sortItems([...standalone, ...enrichedCollections]);
-    items.forEach((item) => {
-      this.els.gridEl.appendChild(item._isCollection ? this.renderCollectionCard(item) : this.renderComicCard(item));
+    items.forEach((item, index) => {
+      const card = item._isCollection ? this.renderCollectionCard(item) : this.renderComicCard(item);
+      card.classList.add("cinematic-reveal");
+      card.style.animationDelay = `${Math.min(index, 12) * 32}ms`;
+      this.els.gridEl.appendChild(card);
     });
     this.searchItems = items;
     if (this.shelfMode) {
