@@ -80,6 +80,17 @@ const Reader = {
    document.getElementById("reader-back").addEventListener("click", () => this.close());
    document.getElementById("reader-bookmark").addEventListener("click", () => this.toggleBookmark());
    document.getElementById("reader-help").addEventListener("click", () => this.openHelpDrawer());
+
+   this.els.readerPrev = document.getElementById("reader-prev");
+   this.els.readerNext = document.getElementById("reader-next");
+   this.els.readerPrev?.addEventListener("click", (event) => {
+     event.stopPropagation();
+     this.openAdjacentIssue(-1);
+   });
+   this.els.readerNext?.addEventListener("click", (event) => {
+     event.stopPropagation();
+     this.openAdjacentIssue(1);
+   });
     this.els.autoScrollToggle = document.getElementById("auto-scroll-toggle");
     this.els.autoScrollToggle?.addEventListener("click", (event) => {
       event.stopPropagation();
@@ -196,6 +207,7 @@ const Reader = {
 
    this.els.title.textContent = this.comic.title;
    this.els.slider.max = this.comic.pageCount - 1;
+   this.updateAdjacentIssueControls();
    this.applyTheme();
    this.applyModeClass();
    this.updateModePills();
@@ -209,6 +221,115 @@ const Reader = {
     requestAnimationFrame(() => this.openHelpDrawer());
   }
 },
+
+ async getAdjacentIssues() {
+   if (!this.comic) return { previous: null, next: null };
+
+   try {
+     const comics = await LongboxDB.getAllComics();
+
+     // Prefer explicit Detect Series metadata. Collection membership is the
+     // fallback for libraries where series metadata has not been assigned.
+     let siblings = [];
+     if (this.comic.seriesKey) {
+       siblings = comics.filter((comic) =>
+         comic.id !== this.comic.id &&
+         comic.seriesKey &&
+         comic.seriesKey === this.comic.seriesKey
+       );
+     }
+
+     if (siblings.length < 1 && this.comic.collectionId) {
+       siblings = comics.filter((comic) =>
+         comic.id !== this.comic.id &&
+         comic.collectionId === this.comic.collectionId
+       );
+     }
+
+     if (!siblings.length) return { previous: null, next: null };
+
+     const issueNumber = (comic) => {
+       const n = Number(comic.issueNumber);
+       return Number.isFinite(n) ? n : null;
+     };
+
+     const currentNumber = issueNumber(this.comic);
+
+     siblings.sort((a, b) => {
+       const an = issueNumber(a), bn = issueNumber(b);
+       if (an != null && bn != null && an !== bn) return an - bn;
+       if (an != null && bn == null) return -1;
+       if (an == null && bn != null) return 1;
+       return String(a.title || "").localeCompare(
+         String(b.title || ""), undefined, { numeric: true }
+       );
+     });
+
+     if (currentNumber != null) {
+       let previous = null;
+       let next = null;
+
+       for (const comic of siblings) {
+         const n = issueNumber(comic);
+         if (n == null) continue;
+         if (n < currentNumber && (!previous || n > issueNumber(previous))) previous = comic;
+         if (n > currentNumber && (!next || n < issueNumber(next))) next = comic;
+       }
+       return { previous, next };
+     }
+
+     const all = [this.comic, ...siblings].sort((a, b) =>
+       String(a.title || "").localeCompare(
+         String(b.title || ""), undefined, { numeric: true }
+       )
+     );
+     const index = all.findIndex((comic) => comic.id === this.comic.id);
+     return {
+       previous: index > 0 ? all[index - 1] : null,
+       next: index >= 0 && index < all.length - 1 ? all[index + 1] : null
+     };
+   } catch (err) {
+     console.warn("Nth Shelf adjacent issue lookup failed:", err);
+     return { previous: null, next: null };
+   }
+ },
+
+ async updateAdjacentIssueControls() {
+   if (!this.els.readerPrev || !this.els.readerNext) return;
+
+   const { previous, next } = await this.getAdjacentIssues();
+   this._adjacentIssues = { previous, next };
+
+   this.els.readerPrev.disabled = !previous;
+   this.els.readerNext.disabled = !next;
+
+   this.els.readerPrev.title = previous
+     ? `Previous issue: ${previous.title}`
+     : "No previous issue";
+   this.els.readerNext.title = next
+     ? `Next issue: ${next.title}`
+     : "No next issue";
+
+   this.els.readerPrev.setAttribute(
+     "aria-label",
+     previous ? `Previous issue: ${previous.title}` : "No previous issue"
+   );
+   this.els.readerNext.setAttribute(
+     "aria-label",
+     next ? `Next issue: ${next.title}` : "No next issue"
+   );
+ },
+
+ async openAdjacentIssue(direction) {
+   const target = direction < 0
+     ? this._adjacentIssues?.previous
+     : this._adjacentIssues?.next;
+
+   if (!target) return;
+
+   this.saveProgress();
+   await this.open(target.id);
+ },
 
  close() {
    this.saveProgress();
