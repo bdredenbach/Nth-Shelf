@@ -651,6 +651,14 @@ button {
   cursor: pointer;
   flex-shrink: 0;
 }
+.reader-series-nav-btn {
+  font-size: 24px;
+  line-height: 1;
+}
+.reader-series-nav-btn:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
 .reader-title {
   flex: 1;
   color: #fff;
