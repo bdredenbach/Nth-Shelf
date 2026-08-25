@@ -106,11 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.74**
-
-This release refines **Shelf Mode** using the proven v2.67 visual presentation, while keeping the newer two-tap selection behavior. The shelf presents a continuous line of comic covers with the selected comic centered as the hero. Swipe left/right or use the arrow keys to move through the shelf, Tap the centered comic once to select it, then tap again to open it; changing comics always clears the previous selection. Shelf Mode is launched from the red button beside Import and can be closed at any time.
-
-The current Nth Shelf feature set includes animated Search and Bookmarks, ASC/ADDED sorting, nested archive imports, Two Page fullscreen, Bubble Zoom, Auto Scroll controls, persistence protection, and the new Shelf Mode library view.
+**Version 2.75**
 
 ## 🔒 Privacy
 Nth Shelf is designed around local-first storage. Your comics are stored on your device rather than uploaded to an Nth Shelf server simply to read them.
@@ -181,3 +177,10 @@ This project is licensed under the **MIT License**. The license applies to the s
 - The live comic carousel remains the foreground element while the backdrop supplies the dark library, shelves, reflective floor, crates, and distant city atmosphere.
 - Moved the Shelf Mode title, issue count, and browsing instructions into the open space above the backdrop.
 - Added the backdrop to `assets/` and included it in the service-worker shell cache for installed/offline use.
+
+
+### v2.75
+- Added **Surprise Me**, a library jump feature for choosing something to read without manually searching.
+- Options include preferring unread comics, preferring bookmarked comics, random in-progress reading, random from a collection, or random from the entire shelf.
+- Finished issues are excluded when possible, and Surprise Me avoids immediately repeating the previous selection when another choice exists.
+- Added the new control beside **Backup** using the existing library action-button styling.
