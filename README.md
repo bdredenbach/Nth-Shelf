@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.71**
+**Version 2.74**
 
 This release refines **Shelf Mode** using the proven v2.67 visual presentation, while keeping the newer two-tap selection behavior. The shelf presents a continuous line of comic covers with the selected comic centered as the hero. Swipe left/right or use the arrow keys to move through the shelf, Tap the centered comic once to select it, then tap again to open it; changing comics always clears the previous selection. Shelf Mode is launched from the red button beside Import and can be closed at any time.
 
@@ -123,6 +123,13 @@ This project is licensed under the **MIT License**. The license applies to the s
 **Nth Shelf**  
 *Your comics. Your shelf. Your device.*
 
+
+
+### v2.74
+- Added a dedicated dystopian bookshelf environment beneath the animated Shelf Mode covers.
+- The live comic carousel remains the foreground element while the backdrop supplies the dark library, shelves, reflective floor, crates, and distant city atmosphere.
+- Moved the Shelf Mode title, issue count, and browsing instructions into the open space above the backdrop.
+- Added the backdrop to `assets/` and included it in the service-worker shell cache for installed/offline use.
 
 ### v2.62 Test Note
 - Adds a temporary **2.0x Auto Scroll** speed endpoint for iPhone testing. Existing speed settings are unchanged.

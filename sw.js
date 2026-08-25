@@ -1,7 +1,7 @@
 // sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
 // Comic pages themselves live in IndexedDB (js/db.js), not here.
 
-const CACHE_NAME = "nth-shelf-shell-v2-73";
+const CACHE_NAME = "nth-shelf-shell-v2-74";
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -18,6 +18,7 @@ const SHELL_FILES = [
   "./icons/icon-512.png",
   "./icons/icon-maskable-512.png",
   "./assets/nth-shelf-empty.png",
+  "./assets/nth-shelf-dystopian-shelf.jpg",
   "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js",
 ];
 
