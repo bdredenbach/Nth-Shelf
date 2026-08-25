@@ -1839,16 +1839,31 @@ button.reader-btn.mini-btn {
   touch-action:pan-y;
   outline:none;
 }
+.shelf-mode-stage::before {
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:46%;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(7,7,8,.92) 0%, rgba(7,7,8,.18) 24%, rgba(7,7,8,0) 48%),
+    url("../assets/nth-shelf-dystopian-shelf.jpg") center 58% / cover no-repeat;
+  opacity:.96;
+}
+
 .shelf-mode-floor {
   position:absolute;
   left:4%; right:4%;
   top:57%; height:1px;
+  z-index:2;
   background:linear-gradient(90deg, transparent, rgba(232,53,43,.72), rgba(255,255,255,.18), rgba(232,53,43,.72), transparent);
   box-shadow:0 34px 70px rgba(0,0,0,.95);
   opacity:.7;
 }
 .shelf-mode-track {
   position:relative;
+  z-index:5;
   width:100%; height:min(58vh, 540px);
   transform-style:preserve-3d;
 }
@@ -1938,14 +1953,21 @@ button.reader-btn.mini-btn {
 
 .shelf-mode-placeholder { height:100%; display:grid; place-items:center; padding:20px; text-align:center; color:var(--text-dim); }
 .shelf-mode-info {
-  position:absolute; left:20px; right:20px; bottom:calc(22px + env(safe-area-inset-bottom,0px));
-  text-align:center; z-index:20;
+  position:absolute;
+  left:20px; right:20px;
+  top:calc(92px + env(safe-area-inset-top,0px));
+  bottom:auto;
+  text-align:center;
+  z-index:25;
+  pointer-events:none;
 }
 .shelf-mode-title { font-size:20px; font-weight:900; color:var(--paper); text-transform:uppercase; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .shelf-mode-count { margin-top:4px; color:var(--text-dim); font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
 .shelf-mode-hint { margin-top:12px; color:rgba(255,255,255,.48); font-size:11px; }
 
 @media (max-width:600px) {
+  .shelf-mode-info { top:calc(84px + env(safe-area-inset-top,0px)); }
+  .shelf-mode-hint { max-width:92vw; margin-left:auto; margin-right:auto; }
   .shelf-mode-btn { min-width:104px; padding-left:14px; padding-right:14px; }
   .shelf-mode-track { height:48vh; }
   .shelf-mode-card { width:min(43vw,210px); }
