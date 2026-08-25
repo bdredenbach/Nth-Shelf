@@ -123,45 +123,21 @@ This project is licensed under the **MIT License**. The license applies to the s
 **Nth Shelf**  
 *Your comics. Your shelf. Your device.*
 
-
-
-### v2.76
-- Added persistent **Previous Issue** and **Next Issue** controls beside the Reader Guide button.
-- Controls use the same circular reader-button styling as the existing Reader Guide/navigation controls.
-- Previous/Next follow detected series metadata and issue numbers, with collection-based fallback when appropriate.
-- Buttons disable themselves at the beginning/end of an available series.
-
-### v2.74
-- Added a dedicated dystopian bookshelf environment beneath the animated Shelf Mode covers.
-- The live comic carousel remains the foreground element while the backdrop supplies the dark library, shelves, reflective floor, crates, and distant city atmosphere.
-- Moved the Shelf Mode title, issue count, and browsing instructions into the open space above the backdrop.
-- Added the backdrop to `assets/` and included it in the service-worker shell cache for installed/offline use.
-
-### v2.75
-- Added **Surprise Me**, a library jump feature for choosing something to read without manually searching.
-- Options include preferring unread comics, preferring bookmarked comics, random in-progress reading, random from a collection, or random from the entire shelf.
-- Finished issues are excluded when possible, and Surprise Me avoids immediately repeating the previous selection when another choice exists.
-- Added the new control beside **Backup** using the existing library action-button styling.
-
 ### v2.62 Test Note
 - Adds a temporary **2.0x Auto Scroll** speed endpoint for iPhone testing. Existing speed settings are unchanged.
 
-
 ### v2.63
 - Bubble Zoom detection is now intentionally conservative: it recognizes white and slightly off-white bubble interiors while rejecting most brightly colored artwork highlights.
-
 
 ### v2.64
 - Bubble Zoom now uses additional shape and interior-ink checks.
 - White/off-white color alone is no longer sufficient to qualify as a bubble.
 - Bright artwork regions are filtered more aggressively while preserving normal speech balloons.
 
-
 ### v2.65
 - Tightened Bubble Zoom false-positive filtering for irregular bright artwork.
 - Requires stronger bubble-outline evidence and more interior ink/text evidence.
 - Rejects larger low-fill, weak-shape candidates while preserving normal speech balloons.
-
 
 ### v2.66
 - Bubble Zoom adds a dark enclosed-boundary test to reject irregular bright artwork regions.
@@ -178,7 +154,6 @@ This project is licensed under the **MIT License**. The license applies to the s
 - Added cinematic motion to the normal library: staggered cover entrance, lift/tilt on hover or pointer interaction, cover zoom, and grounded shadows.
 - Honors reduced-motion preferences.
 
-
 ### v2.69
 - Reworked Cinematic Shelf into a more pronounced 3D presentation with curved depth, perspective, overlap, and a centered hero cover.
 - Shelf Mode now uses a two-tap interaction: first tap selects and animates the centered comic; second tap opens it.
@@ -186,9 +161,26 @@ This project is licensed under the **MIT License**. The license applies to the s
 - Normal library cards now use the same two-step cinematic interaction: first tap lifts/selects a cover, second tap opens it.
 - Added a short “Tap again to open” cue after selection.
 
-
 ### v2.71
 - Shelf Mode now presents a continuous visible line of comic covers around the centered hero.
 - Wider spacing and lighter side covers make neighboring comics clearly visible.
 - Changing the centered comic always clears the previous comic's cinematic/second-tap state.
 - The newly centered comic requires a fresh first tap before opening.
+
+### v2.74
+- Added a dedicated dystopian bookshelf environment beneath the animated Shelf Mode covers.
+- The live comic carousel remains the foreground element while the backdrop supplies the dark library, shelves, reflective floor, crates, and distant city atmosphere.
+- Moved the Shelf Mode title, issue count, and browsing instructions into the open space above the backdrop.
+- Added the backdrop to `assets/` and included it in the service-worker shell cache for installed/offline use.
+
+### v2.75
+- Added **Surprise Me**, a library jump feature for choosing something to read without manually searching.
+- Options include preferring unread comics, preferring bookmarked comics, random in-progress reading, random from a collection, or random from the entire shelf.
+- Finished issues are excluded when possible, and Surprise Me avoids immediately repeating the previous selection when another choice exists.
+- Added the new control beside **Backup** using the existing library action-button styling.
+
+### v2.76
+- Added persistent **Previous Issue** and **Next Issue** controls beside the Reader Guide button.
+- Controls use the same circular reader-button styling as the existing Reader Guide/navigation controls.
+- Previous/Next follow detected series metadata and issue numbers, with collection-based fallback when appropriate.
+- Buttons disable themselves at the beginning/end of an available series.
