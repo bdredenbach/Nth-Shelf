@@ -125,12 +125,6 @@ This project is licensed under the **MIT License**. The license applies to the s
 
 
 
-### v2.74
-- Added a dedicated dystopian bookshelf environment beneath the animated Shelf Mode covers.
-- The live comic carousel remains the foreground element while the backdrop supplies the dark library, shelves, reflective floor, crates, and distant city atmosphere.
-- Moved the Shelf Mode title, issue count, and browsing instructions into the open space above the backdrop.
-- Added the backdrop to `assets/` and included it in the service-worker shell cache for installed/offline use.
-
 ### v2.62 Test Note
 - Adds a temporary **2.0x Auto Scroll** speed endpoint for iPhone testing. Existing speed settings are unchanged.
 
@@ -180,3 +174,10 @@ This project is licensed under the **MIT License**. The license applies to the s
 - Wider spacing and lighter side covers make neighboring comics clearly visible.
 - Changing the centered comic always clears the previous comic's cinematic/second-tap state.
 - The newly centered comic requires a fresh first tap before opening.
+
+
+### v2.74
+- Added a dedicated dystopian bookshelf environment beneath the animated Shelf Mode covers.
+- The live comic carousel remains the foreground element while the backdrop supplies the dark library, shelves, reflective floor, crates, and distant city atmosphere.
+- Moved the Shelf Mode title, issue count, and browsing instructions into the open space above the backdrop.
+- Added the backdrop to `assets/` and included it in the service-worker shell cache for installed/offline use.
