@@ -58,7 +58,7 @@ Auto Scroll is available in **Scroll, Manga,** and **Webcomic** modes.
 
 - The **Auto Scroll** button appears only in modes that support continuous scrolling.
 - The button is dark when off and red when active, matching the Bubble Zoom control style.
-- Use the speed control to select **0.0x, 0.33x, 0.50x, 0.66x,** or **1.0x**.
+- Use the speed control to select **0.0x, 0.33x, 0.50x, 0.66x, 1.0x** or **2.0x**.
 - Use the play/pause control to stop and resume scrolling without leaving the mode.
 - The control panel fades almost completely into the artwork while idle and becomes visible when interacted with.
 - The control panel can be moved to a more convenient position.
@@ -104,24 +104,14 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 5. Bookmark pages you want to revisit.
 6. Use Bubble Zoom or Auto Scroll when appropriate.
 7. Use Backup/Restore to keep a safety copy.
-
-## 🧪 Current Release
-**Version 2.76**
-
-This release refines **Shelf Mode** using the proven v2.67 visual presentation, while keeping the newer two-tap selection behavior. The shelf presents a continuous line of comic covers with the selected comic centered as the hero. Swipe left/right or use the arrow keys to move through the shelf, Tap the centered comic once to select it, then tap again to open it; changing comics always clears the previous selection. Shelf Mode is launched from the red button beside Import and can be closed at any time.
-
-The current Nth Shelf feature set includes animated Search and Bookmarks, ASC/ADDED sorting, nested archive imports, Two Page fullscreen, Bubble Zoom, Auto Scroll controls, persistence protection, and the new Shelf Mode library view.
-
-## 🔒 Privacy
-Nth Shelf is designed around local-first storage. Your comics are stored on your device rather than uploaded to an Nth Shelf server simply to read them.
+   
 
 ## 📜 License
 This project is licensed under the **MIT License**. The license applies to the software and does not grant rights to comic artwork or other copyrighted material imported by users.
 
 ---
 
-**Nth Shelf**  
-*Your comics. Your shelf. Your device.*
+**Nth Shelf latest addon/changes**  
 
 ### v2.62 Test Note
 - Adds a temporary **2.0x Auto Scroll** speed endpoint for iPhone testing. Existing speed settings are unchanged.
