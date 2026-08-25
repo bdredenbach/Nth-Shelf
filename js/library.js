@@ -194,6 +194,7 @@ const Library = {
     document.getElementById("detect-series-btn").addEventListener("click", () => this.detectSeriesNow());
     document.getElementById("new-collection-btn").addEventListener("click", () => this.promptNewCollection());
     document.getElementById("backup-btn").addEventListener("click", () => this.openBackupMenu());
+    document.getElementById("surprise-me-btn").addEventListener("click", () => this.openSurpriseMeMenu());
     document.getElementById("restore-input").addEventListener("change", (e) => {
       const file = e.target.files[0];
       e.target.value = "";
@@ -978,6 +979,64 @@ const Library = {
     const id = `col_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
     await LongboxDB.addCollection({ id, title, createdAt: Date.now() });
     return id;
+  },
+
+  // ---------------- Surprise Me ----------------
+  // Picks a comic from the existing library without changing library order.
+  // Finished issues are excluded by default; unread/marked items are favored
+  // by the corresponding choices below.
+  openSurpriseMeMenu() {
+    Modal.actions("Surprise Me", "Pick something from your library and jump straight into it.", [
+      { label: "Surprise Me — Prefer Unread", cls: "primary", onClick: () => this.surpriseMe("unread") },
+      { label: "Surprise Me — Prefer Bookmarked", cls: "neutral", onClick: () => this.surpriseMe("bookmarked") },
+      { label: "Random In Progress", cls: "neutral", onClick: () => this.surpriseMe("progress") },
+      { label: "Random from a Collection", cls: "neutral", onClick: () => this.surpriseMe("collection") },
+      { label: "Random from Entire Shelf", cls: "neutral", onClick: () => this.surpriseMe("all") },
+      { label: "Cancel", cls: "subtle" },
+    ]);
+  },
+
+  async surpriseMe(mode = "unread") {
+    const [comics, collections] = await Promise.all([
+      LongboxDB.getAllComics(),
+      LongboxDB.getAllCollections(),
+    ]);
+    if (!comics.length) {
+      Modal.actions("Your Shelf is Empty", "Import a comic first, then Surprise Me will have something to choose from.", [
+        { label: "OK", cls: "neutral" },
+      ]);
+      return;
+    }
+
+    const eligible = comics.filter((c) => progressPct(c) < 100);
+    const pool = eligible.length ? eligible : comics;
+    let candidates = pool;
+
+    if (mode === "progress") {
+      const inProgress = pool.filter((c) => progressPct(c) > 0 && progressPct(c) < 100);
+      if (inProgress.length) candidates = inProgress;
+    } else if (mode === "bookmarked") {
+      const bookmarked = pool.filter((c) => Array.isArray(c.bookmarks) && c.bookmarks.length);
+      if (bookmarked.length) candidates = bookmarked;
+    } else if (mode === "collection") {
+      const collectionIds = new Set(collections.map((c) => c.id));
+      const grouped = pool.filter((c) => c.collectionId && collectionIds.has(c.collectionId));
+      if (grouped.length) candidates = grouped;
+    } else if (mode === "unread") {
+      const unread = pool.filter((c) => progressPct(c) === 0);
+      if (unread.length) candidates = unread;
+    }
+
+    // Avoid immediately repeating the same comic when there is another choice.
+    const lastId = sessionStorage.getItem("nthShelf_lastSurpriseId");
+    if (candidates.length > 1 && lastId) {
+      const withoutLast = candidates.filter((c) => c.id !== lastId);
+      if (withoutLast.length) candidates = withoutLast;
+    }
+
+    const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+    sessionStorage.setItem("nthShelf_lastSurpriseId", chosen.id);
+    window.LongboxApp.openReader(chosen.id, chosen.lastPage || 0);
   },
 
   // ---------------- Backup / restore ----------------
