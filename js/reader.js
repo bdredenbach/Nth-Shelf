@@ -1,3 +1,10 @@
+// V63 PERFORMANCE-SAFE GRADIENT LAB — progressive tap-centered frame-boundary experiment.
+// V60 TAP-OWNS-SELECTION — retained for comparison only.
+// V57 DOMINANT-OUTER-CANDIDATE TAP SELECTION EXPERIMENT — retained as fallback.
+// V48 PANEL SELECTION MAP TEST — retained for comparison.
+// V47 PANEL GEOMETRY VISUALIZATION TEST — retained for comparison.
+// V46 PANEL SELECTION TEST — retained for comparison.
+// V45 PANEL HANDOFF TEST — retained for comparison.
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
 const PANEL_ZOOM_KEY = "longbox_panel_zoom_enabled";
@@ -10,6 +17,7 @@ const Reader = {
  pageUrls: [],       // object URLs, lazily filled
  index: 0,
  mode: "single",      // single | two-page | scroll | manga | webcomic
+ androidPageTopReserve: 48,
  theme: "dark",        // dark | sepia | light
  scale: 1,
  tx: 0,
@@ -457,6 +465,7 @@ const Reader = {
     if (this.mode === "single" && this.useTurnJSPageMode && this.turnPageMode) {
       const ok = await this.turnPageMode.render(this.els.viewport);
       if (ok) {
+		this.applyAndroidPageViewportReserve();
         this.prefetch();
         this.loadPanelsForCurrentPage();
         this.updateSliderLabel();
@@ -471,6 +480,7 @@ const Reader = {
     this.els.viewport.style.height = "100%";
     this.els.viewport.style.transform = "none";
     this.els.viewport.style.overflow = "hidden";
+	this.applyAndroidPageViewportReserve();
     this.els.viewport.scrollLeft = 0;
     this.els.viewport.scrollTop = 0;
     this.els.stage.scrollLeft = 0;
@@ -765,6 +775,7 @@ const Reader = {
  },
 
  async loadPanelsForCurrentPage() {
+   this.removePanelDiagnosticOverlay();
    this.currentPanels = [];
    if (this.mode !== "single") return;
 
@@ -786,6 +797,189 @@ const Reader = {
    if (token !== this._panelLoadToken || this.comic.id !== comicId || this.index !== pageIndex) return;
    this.currentPanels = panels;
    if (logger) logger(`currentPanels set: ${panels.length}`);
+   if (this.debugMode) this.renderPanelDiagnosticOverlay();
+ },
+
+ removePanelDiagnosticOverlay() {
+   const existing = this.els.panelDiagnosticOverlay;
+   if (existing && existing.parentNode) existing.remove();
+   this.els.panelDiagnosticOverlay = null;
+ },
+
+ renderPanelDiagnosticOverlay() {
+   this.removePanelDiagnosticOverlay();
+   if (!this.debugMode || this.mode !== "single" || !this.currentPanels.length) return;
+
+   const ctx = this.getPanelImageContext();
+   const imgRect = ctx?.rect;
+   const stage = this.els.stage;
+   if (!stage || !imgRect || imgRect.width <= 1 || imgRect.height <= 1) return;
+
+   const stageRect = stage.getBoundingClientRect();
+   const overlay = document.createElement("div");
+   overlay.className = "v47-panel-diagnostic-overlay";
+   overlay.setAttribute("aria-hidden", "true");
+   Object.assign(overlay.style, {
+     position: "absolute",
+     left: `${imgRect.left - stageRect.left}px`,
+     top: `${imgRect.top - stageRect.top}px`,
+     width: `${imgRect.width}px`,
+     height: `${imgRect.height}px`,
+     pointerEvents: "none",
+     zIndex: "20",
+     overflow: "visible",
+     boxSizing: "border-box"
+   });
+
+   this.currentPanels.forEach((panel, index) => {
+     const box = document.createElement("div");
+     box.dataset.panelIndex = String(index);
+     Object.assign(box.style, {
+       position: "absolute",
+       left: `${panel.x * 100}%`,
+       top: `${panel.y * 100}%`,
+       width: `${panel.w * 100}%`,
+       height: `${panel.h * 100}%`,
+       boxSizing: "border-box",
+       border: "2px solid rgba(255, 230, 0, 0.95)",
+       background: "rgba(255, 230, 0, 0.035)",
+       pointerEvents: "none"
+     });
+
+     const label = document.createElement("div");
+     label.textContent = `#${index}`;
+     Object.assign(label.style, {
+       position: "absolute",
+       left: "2px",
+       top: "2px",
+       minWidth: "22px",
+       padding: "2px 5px",
+       borderRadius: "3px",
+       background: "rgba(0,0,0,0.82)",
+       color: "#fff",
+       border: "1px solid rgba(255,230,0,0.95)",
+       font: "bold 13px/1.1 sans-serif",
+       textAlign: "center",
+       boxSizing: "border-box"
+     });
+
+     box.appendChild(label);
+     overlay.appendChild(box);
+   });
+
+   stage.appendChild(overlay);
+   this.els.panelDiagnosticOverlay = overlay;
+
+   this.debugLog(`[V47] PANEL OVERLAY rendered ${this.currentPanels.length} panel(s)`);
+ },
+
+ // V48: visually and diagnostically map the panel selected by the tap.
+ // Keep V47's complete candidate overlay intact, then mark the exact winner
+ // and report which detected panels contain or are contained by it.
+ renderPanelSelectionDiagnostic(winnerIndex, hits) {
+   if (!this.debugMode || this.mode !== "single") return;
+
+   const overlay = this.els.panelDiagnosticOverlay;
+   if (!overlay) return;
+
+   overlay.querySelectorAll('[data-v48-selection="winner"], [data-v48-selection="candidate"], [data-v48-selection="parent"]').forEach(el => {
+     el.remove();
+   });
+
+   overlay.querySelectorAll('[data-v48-panel-role="winner"]').forEach(el => {
+     el.style.border = "2px solid rgba(255, 230, 0, 0.95)";
+     el.style.background = "rgba(255, 230, 0, 0.035)";
+     el.style.zIndex = "1";
+   });
+
+   if (winnerIndex == null || winnerIndex < 0 || !this.currentPanels[winnerIndex]) return;
+
+   const winner = this.currentPanels[winnerIndex];
+   const intersectionArea = (a, b) => {
+     const left = Math.max(a.x, b.x);
+     const top = Math.max(a.y, b.y);
+     const right = Math.min(a.x + a.w, b.x + b.w);
+     const bottom = Math.min(a.y + a.h, b.y + b.h);
+     return Math.max(0, right - left) * Math.max(0, bottom - top);
+   };
+   const contains = (outer, inner, tolerance = 0.003) =>
+     outer.x <= inner.x + tolerance &&
+     outer.y <= inner.y + tolerance &&
+     outer.x + outer.w >= inner.x + inner.w - tolerance &&
+     outer.y + outer.h >= inner.y + inner.h - tolerance;
+
+   const parents = [];
+   const children = [];
+   this.currentPanels.forEach((candidate, index) => {
+     if (index === winnerIndex) return;
+     if (contains(candidate, winner)) parents.push(index);
+     if (contains(winner, candidate)) children.push(index);
+   });
+
+   // Mark the original candidate box.
+   const winnerBox = overlay.querySelector(`[data-panel-index="${winnerIndex}"]`);
+   if (winnerBox) {
+     winnerBox.dataset.v48PanelRole = "winner";
+     winnerBox.style.border = "4px solid rgba(255, 255, 255, 0.98)";
+     winnerBox.style.background = "rgba(255, 255, 255, 0.08)";
+     winnerBox.style.zIndex = "50";
+
+     const badge = document.createElement("div");
+     badge.dataset.v48Selection = "winner";
+     badge.textContent = `SELECTED #${winnerIndex}`;
+     Object.assign(badge.style, {
+       position: "absolute",
+       left: "0",
+       top: "0",
+       transform: "translateY(-100%)",
+       padding: "4px 7px",
+       borderRadius: "4px 4px 0 0",
+       background: "rgba(255,255,255,0.96)",
+       color: "#000",
+       font: "bold 14px/1.1 sans-serif",
+       whiteSpace: "nowrap",
+       boxSizing: "border-box",
+       pointerEvents: "none",
+       zIndex: "60"
+     });
+     winnerBox.appendChild(badge);
+   }
+
+   // Highlight other candidates that participated in the tap.
+   for (const entry of (hits || [])) {
+     if (entry.index === winnerIndex) continue;
+     const box = overlay.querySelector(`[data-panel-index="${entry.index}"]`);
+     if (!box) continue;
+     box.dataset.v48PanelRole = "candidate";
+     box.style.border = "3px dashed rgba(255,255,255,0.82)";
+     box.style.background = "rgba(255,255,255,0.025)";
+     box.style.zIndex = "40";
+   }
+
+   // Highlight containing/contained rectangles so the hierarchy is obvious.
+   for (const index of parents) {
+     const box = overlay.querySelector(`[data-panel-index="${index}"]`);
+     if (!box) continue;
+     box.dataset.v48PanelRole = "parent";
+     box.style.border = "3px dashed rgba(255,120,0,0.95)";
+     box.style.background = "rgba(255,120,0,0.025)";
+     box.style.zIndex = "30";
+   }
+
+   const fmt = (p) =>
+     `x=${Number(p.x.toFixed(4))} y=${Number(p.y.toFixed(4))} ` +
+     `w=${Number(p.w.toFixed(4))} h=${Number(p.h.toFixed(4))} ` +
+     `area=${Number((p.w * p.h).toFixed(5))}`;
+
+   this.debugLog(`[V48] TAP WINNER #${winnerIndex} ${fmt(winner)}`);
+   this.debugLog(`[V48] TAP HITS ${hits?.map?.(h => `#${h.index}`).join(",") || "none"}`);
+   this.debugLog(`[V48] PARENTS of #${winnerIndex}: ${parents.length ? parents.map(i => `#${i}`).join(",") : "none"}`);
+   this.debugLog(`[V48] CHILDREN of #${winnerIndex}: ${children.length ? children.map(i => `#${i}`).join(",") : "none"}`);
+
+   const parentDetails = parents.map(i => `#${i}(${fmt(this.currentPanels[i])})`).join(" | ");
+   const childDetails = children.map(i => `#${i}(${fmt(this.currentPanels[i])})`).join(" | ");
+   if (parentDetails) this.debugLog(`[V48] PARENT DETAILS ${parentDetails}`);
+   if (childDetails) this.debugLog(`[V48] CHILD DETAILS ${childDetails}`);
  },
 
  getPanelImageContext() {
@@ -817,14 +1011,127 @@ const Reader = {
    return null;
  },
 
+ // V57: DOMINANT-OUTER-CANDIDATE TAP SELECTION EXPERIMENT.
+ //
+ // V56 showed that strict parent/child containment is not reliable enough:
+ // some detector rectangles overlap or differ by a few pixels, even when the
+ // visually useful target is the larger outer region. For this experiment we
+ // therefore leave detection completely unchanged and rank ONLY the candidates
+ // that actually contain the tap.
+ //
+ // When two or more candidates contain the tap, the largest-area candidate
+ // wins. This deliberately favors the dominant outer region over small child
+ // detections. Children are NOT removed from currentPanels and can still be
+ // inspected by later experiments.
+
+ // V59 RETAINED FOR FUTURE REVISIT:
+ // Tap-centered boundary reconstruction remains available here, but V60
+ // deliberately does not call it. If V60 cannot select the correct panel
+ // from existing candidates, we will return to the boundary experiment.
+ async reconstructPanelAtTap(relX, relY, img, log) {
+   if (!img || !img.naturalWidth || !img.naturalHeight) return null;
+   try {
+     return await PanelDetect.reconstructAt(
+       img,
+       relX,
+       relY,
+       log,
+       this.currentPanels
+     );
+   } catch (err) {
+     if (typeof log === "function") {
+       log(`[V59] reconstruction ERROR ${err?.message || err}`);
+     }
+     return null;
+   }
+ },
+
  findPanelAt(relX, relY) {
    if (!this.panelZoomEnabled) return null;
-   for (const p of this.currentPanels) {
-     if (relX >= p.x && relX <= p.x + p.w && relY >= p.y && relY <= p.y + p.h) {
-       return p;
+
+   const panels = Array.isArray(this.currentPanels) ? this.currentPanels : [];
+
+   // V60 RULE: the exact tap owns the selection.
+   // Find every detector rectangle containing the tap, then choose the
+   // smallest containing candidate. This is deliberately the opposite of
+   // V57's dominant-outer rule: a parent may contain children, but a tap
+   // inside a child should select that child rather than its parent.
+   const hits = panels
+     .map((candidate, index) => ({ candidate, index }))
+     .filter(({ candidate }) =>
+       Number.isFinite(candidate?.x) &&
+       Number.isFinite(candidate?.y) &&
+       Number.isFinite(candidate?.w) &&
+       Number.isFinite(candidate?.h) &&
+       candidate.w > 0 &&
+       candidate.h > 0 &&
+       relX >= candidate.x &&
+       relX <= candidate.x + candidate.w &&
+       relY >= candidate.y &&
+       relY <= candidate.y + candidate.h
+     );
+
+   if (!hits.length) {
+     if (typeof this.debugLog === "function") {
+       this.debugLog(
+         `[V60] PANEL SELECT tap=` +
+         `${Number(relX.toFixed(4))},${Number(relY.toFixed(4))} ` +
+         `total=${panels.length} hits=0 winner=-1`
+       );
      }
+     return null;
    }
-   return null;
+
+   const areaOf = (p) =>
+     Math.max(0.00000001, Number(p.w) * Number(p.h));
+
+   const ranking = hits.slice().sort((a, b) => {
+     const areaDiff = areaOf(a.candidate) - areaOf(b.candidate);
+     if (Math.abs(areaDiff) > 0.00000001) return areaDiff;
+
+     const aCX = a.candidate.x + a.candidate.w / 2;
+     const aCY = a.candidate.y + a.candidate.h / 2;
+     const bCX = b.candidate.x + b.candidate.w / 2;
+     const bCY = b.candidate.y + b.candidate.h / 2;
+     return Math.hypot(relX - aCX, relY - aCY) -
+       Math.hypot(relX - bCX, relY - bCY);
+   });
+
+   const winner = ranking[0];
+
+   if (typeof this.debugLog === "function") {
+     try {
+       const hitText = ranking.map(entry => {
+         const p = entry.candidate;
+         return `#${entry.index}` +
+           `(${Number(p.x.toFixed(4))},${Number(p.y.toFixed(4))},` +
+           `${Number(p.w.toFixed(4))},${Number(p.h.toFixed(4))})` +
+           ` area=${Number(areaOf(p).toFixed(5))}`;
+       }).join(" | ");
+
+       const smallestArea = areaOf(winner.candidate);
+       const largestArea = areaOf(ranking[ranking.length - 1].candidate);
+       const ratio = smallestArea > 0 ? largestArea / smallestArea : 0;
+
+       this.debugLog(
+         `[V60] PANEL SELECT tap=` +
+         `${Number(relX.toFixed(4))},${Number(relY.toFixed(4))} ` +
+         `total=${panels.length} hits=${hits.length} winner=#${winner.index}`
+       );
+       this.debugLog(`[V60] CONTAINING CANDIDATES ${hitText}`);
+       this.debugLog(
+         `[V60] SMALLEST WINNER #${winner.index} ` +
+         `area=${Number(smallestArea.toFixed(5))} ` +
+         `largestToSmallest=${Number(ratio.toFixed(3))}`
+       );
+     } catch (_) {}
+   }
+
+   if (typeof this.renderPanelSelectionDiagnostic === "function") {
+     this.renderPanelSelectionDiagnostic(winner.index, hits);
+   }
+
+   return winner.candidate;
  },
 
  togglePanelZoom() {
@@ -969,6 +1276,7 @@ const Reader = {
        this.debugMode = !this.debugMode;
        this.els.debugPanel.style.display = this.debugMode ? "block" : "none";
        this.debugLines = [];
+       if (!this.debugMode) this.removePanelDiagnosticOverlay();
        this.debugLog(this.debugMode ? "— debug on —" : "— debug off —");
        if (this.debugMode) {
          this.debugLog(`panelZoomEnabled=${this.panelZoomEnabled} bubbleZoomEnabled=${this.bubbleZoomEnabled} bubbleAltZoomEnabled=${this.bubbleAltZoomEnabled}`);
@@ -1496,6 +1804,29 @@ const Reader = {
     else this.startAutoScroll();
   },
 
+  applyAndroidPageViewportReserve() {
+    if (!this.els.viewport) return;
+
+    // Only Page mode gets the reserved top area. Other modes retain their
+    // existing geometry.
+    const isPageMode = this.mode === "single";
+    if (!isPageMode) {
+      this.els.viewport.style.marginTop = "";
+      this.els.viewport.style.height = "";
+      this.els.viewport.style.boxSizing = "";
+      return;
+    }
+
+    const reserve = this.androidPageTopReserve || 48;
+    const stageHeight = this.els.stage?.clientHeight || 0;
+
+    if (stageHeight > reserve) {
+      this.els.viewport.style.height = `${stageHeight - reserve}px`;
+      this.els.viewport.style.marginTop = `${reserve}px`;
+      this.els.viewport.style.boxSizing = "border-box";
+    }
+  },
+
 async setMode(mode) {
 
   this.stopAutoScroll();
@@ -1562,6 +1893,7 @@ async setMode(mode) {
    }
 
    await this.render();
+   this.applyAndroidPageViewportReserve();
    this.showChrome();
  },
 
@@ -2234,12 +2566,16 @@ async setMode(mode) {
            this.handleDoubleTap(pos);
          } else {
            let panelHit = false;
+           let tappedPanel = null;
            if (this.mode === "single" && this.panelZoomEnabled) {
              const ctx = this.getPanelImageContext();
-             if (ctx) {
-               const relX = clamp((pos.x - ctx.rect.left) / ctx.rect.width, 0, 1);
-               const relY = clamp((pos.y - ctx.rect.top) / ctx.rect.height, 0, 1);
-               panelHit = !!this.findPanelAt(relX, relY);
+             if (ctx && ctx.rect.width > 1 && ctx.rect.height > 1) {
+               // V63: every tap in the displayed page is eligible for the
+               // gradient laboratory. Do NOT call findPanelAt() here: that
+               // would reintroduce child/grandchild candidates before the
+               // gradient experiment even gets a chance to run.
+               panelHit = true;
+               tappedPanel = null;
              }
            }
 
@@ -2250,6 +2586,26 @@ async setMode(mode) {
              lastTapPos = pos;
 
              // Once a frame is already focused, do NOT create another
+
+             // V43: diagnostics only. Existing hit-test code is unchanged.
+             try {
+               if (typeof this.debugLog === "function") {
+                 this.debugLog("V43 TAP SELECTION DIAGNOSTICS");
+                 this.debugLog("V43 HIT-TEST PATH REACHED");
+                 // V44: deeper diagnostics only; no selection/control-flow changes.
+                 try {
+                   const p = tappedPanel;
+                   const px = p && Number.isFinite(Number(p.x)) ? Number(p.x) : (p && Number.isFinite(Number(p.left)) ? Number(p.left) : "?");
+                   const py = p && Number.isFinite(Number(p.y)) ? Number(p.y) : (p && Number.isFinite(Number(p.top)) ? Number(p.top) : "?");
+                   const pw = p && Number.isFinite(Number(p.w)) ? Number(p.w) : (p && Number.isFinite(Number(p.width)) ? Number(p.width) : "?");
+                   const ph = p && Number.isFinite(Number(p.h)) ? Number(p.h) : (p && Number.isFinite(Number(p.height)) ? Number(p.height) : "?");
+                   const tapX = pos && Number.isFinite(Number(pos.x)) ? Number(pos.x) : "?";
+                   const tapY = pos && Number.isFinite(Number(pos.y)) ? Number(pos.y) : "?";
+                   this.debugLog(`V44 PRE-HITTEST SNAPSHOT tap=(${tapX},${tapY}) panelHit=${!!p} panelBounds=(${px},${py},${pw},${ph})`);
+                 } catch (_) {}
+
+               }
+             } catch (_) {}
              // deferred panel candidate. The next tap belongs to the
              // focused-frame interaction: bubble detection gets a chance,
              // and if no bubble is found the frame is dismissed.
@@ -2277,6 +2633,7 @@ async setMode(mode) {
                  pos,
                  comicId,
                  pageIndex,
+                 panel: tappedPanel,
                  promise: (async () => {
                    try {
                      const url = await this.getPageUrl(pageIndex);
@@ -2307,8 +2664,21 @@ async setMode(mode) {
                pendingTapTimer = null;
                lastTapTime = 0;
                lastTapPos = null;
+
+               const pendingPanel = this._deferredPanelTap?.panel || null;
                this._deferredPanelTap = null;
-               this.handleSingleTap(pos);
+
+               if (typeof this.debugLog === "function") {
+                 try {
+                   this.debugLog(
+                     pendingPanel
+                       ? `[V45] COMMIT stored panel`
+                       : `[V45] COMMIT no stored panel`
+                   );
+                 } catch (_) {}
+               }
+
+               this.handleSingleTap(pos, pendingPanel);
              }, 450);
            } else {
              clearTimeout(pendingTapTimer);
@@ -2375,7 +2745,7 @@ async setMode(mode) {
    });
  },
 
- async handleSingleTap(pos) {
+ async handleSingleTap(pos, forcedPanel = null) {
    if (this.mode !== "single" || this.scale > 1.02) return;
 
    const stageRect = this.els.stage.getBoundingClientRect();
@@ -2389,13 +2759,53 @@ async setMode(mode) {
 
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
-   const panel = this.findPanelAt(relXImg, relYImg);
+
+   // V63: ignore the detected parent/child hierarchy for frame selection.
+   // The exact displayed image and exact tap are the only inputs to the
+   // gradient laboratory. Existing currentPanels are deliberately NOT passed
+   // as seeds because child/grandchild rectangles must not influence this
+   // experiment.
+   const logger = typeof this.debugLog === "function"
+     ? (msg) => this.debugLog(msg)
+     : null;
+
+   if (logger) {
+     logger(
+       `[V63] TAP x=${Number(relXImg.toFixed(4))} ` +
+       `y=${Number(relYImg.toFixed(4))} ` +
+       `forced=${forcedPanel ? "yes" : "no"}`
+     );
+     logger(`[V63] CHILD/PARENT DETECTION DISABLED FOR THIS EXPERIMENT`);
+   }
+
+   let panel = null;
+   try {
+     panel = await PanelDetect.exhaustiveTapGradient(
+       img,
+       relXImg,
+       relYImg,
+       logger
+     );
+   } catch (err) {
+     if (logger) logger(`[V63] LAB ERROR ${err?.message || err}`);
+   }
 
    if (panel) {
+     if (logger) {
+       logger(
+         `[V63] FINAL GRADIENT PANEL ` +
+         `x=${Number(Number(panel.x).toFixed(4))} ` +
+         `y=${Number(Number(panel.y).toFixed(4))} ` +
+         `w=${Number(Number(panel.w).toFixed(4))} ` +
+         `h=${Number(Number(panel.h).toFixed(4))} ` +
+         `method=${panel.__v61Method || "unknown"}`
+       );
+     }
      this.zoomToPanel(panel, stageRect, imgRect);
      return;
    }
 
+   if (logger) logger(`[V63] NO GRADIENT PANEL FOUND -> no frame opened`);
    this.toggleChrome();
  },
 
@@ -2631,6 +3041,7 @@ async setMode(mode) {
    this.els.bubbleOverlay = overlay;
    this.bubbleOverlayActive = true;
    this.focusMode = "bubble";
+   overlay.classList.add("active");
 
    const zoomInDuration = 560;
    const animation = overlay.animate(
@@ -2712,6 +3123,27 @@ async setMode(mode) {
 
  async zoomToPanel(panel, stageRect, imgRect) {
    if (this.focusMode) return;
+
+   if (typeof this.debugLog === "function") {
+     try {
+       this.debugLog(
+         `[V45] zoomToPanel ENTER ` +
+         `panel=${JSON.stringify({
+           x: Number(Number(panel?.x).toFixed(4)),
+           y: Number(Number(panel?.y).toFixed(4)),
+           w: Number(Number(panel?.w).toFixed(4)),
+           h: Number(Number(panel?.h).toFixed(4))
+         })} ` +
+         `imgRect=${JSON.stringify({
+           left: Number(Number(imgRect?.left).toFixed(1)),
+           top: Number(Number(imgRect?.top).toFixed(1)),
+           width: Number(Number(imgRect?.width).toFixed(1)),
+           height: Number(Number(imgRect?.height).toFixed(1))
+         })}`
+       );
+     } catch (_) {}
+   }
+
    const token = ++this.panelOverlayToken;
    const ctx = this.getPanelImageContext();
    const img = ctx?.img;
@@ -2735,6 +3167,17 @@ async setMode(mode) {
    const sy = panel.y * img.naturalHeight;
    const sw = panel.w * img.naturalWidth;
    const sh = panel.h * img.naturalHeight;
+
+   if (typeof this.debugLog === "function") {
+     try {
+       this.debugLog(
+         `[V45] CROP PIXELS ` +
+         `sx=${Math.round(sx)} sy=${Math.round(sy)} ` +
+         `sw=${Math.round(sw)} sh=${Math.round(sh)} ` +
+         `natural=${img.naturalWidth}x${img.naturalHeight}`
+       );
+     } catch (_) {}
+   }
 
    this.panelFocusMeta = {
      panel: { x: panel.x, y: panel.y, w: panel.w, h: panel.h },

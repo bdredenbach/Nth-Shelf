@@ -63,6 +63,45 @@ const LongboxApp = {
     await Reader.open(comicId, startPage);
   },
 
+  handleAndroidBack() {
+    const readerView = document.getElementById("reader-view");
+    const collectionView = document.getElementById("collection-view");
+
+    // 1. Reader is the deepest NthShelf level.
+    if (readerView?.classList.contains("active")) {
+      this.closeReader();
+      return true;
+    }
+
+    // Search and Shelf Mode are library overlays, not separate Android
+    // screens. Close them before considering Android Back an app exit.
+    if (window.Library?.searchMode) {
+      if (typeof window.Library.closeSearchMode === "function") {
+        window.Library.closeSearchMode();
+        return true;
+      }
+    }
+
+    if (window.Library?.shelfMode) {
+      if (typeof window.Library.closeShelfMode === "function") {
+        window.Library.closeShelfMode();
+        return true;
+      }
+    }
+
+    // Collection view uses display:block/none rather than the "active"
+    // class used by the top-level views.
+    if (collectionView && collectionView.style.display !== "none") {
+      if (typeof window.Library?.showRoot === "function") {
+        window.Library.showRoot();
+        return true;
+      }
+    }
+
+    // At the Main Lobby there is no deeper NthShelf view to navigate back to.
+    return false;
+  },
+
   closeReader() {
     document.getElementById("reader-view").classList.remove("active");
     document.getElementById("library-view").classList.add("active");
@@ -84,4 +123,19 @@ window.addEventListener("appinstalled", () => {
 });
 
 window.LongboxApp = LongboxApp;
-document.addEventListener("DOMContentLoaded", () => LongboxApp.init());
+document.addEventListener("DOMContentLoaded", () => {
+  LongboxApp.init();
+
+  // Android Back is routed through NthShelf's existing view hierarchy.
+  const capacitorApp = window.Capacitor?.Plugins?.App;
+  if (capacitorApp?.addListener) {
+    capacitorApp.addListener("backButton", () => {
+      const handled = LongboxApp.handleAndroidBack();
+
+      // Only the Main Lobby reaches this point. Let Android exit normally.
+      if (!handled && capacitorApp.exitApp) {
+        capacitorApp.exitApp();
+      }
+    });
+  }
+});
