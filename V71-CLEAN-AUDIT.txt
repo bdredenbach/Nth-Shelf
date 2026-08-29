@@ -1,0 +1,7 @@
+NTH SHELF — V71 CLEAN GUTTER / REGION MEMBERSHIP
+
+Base: V70 True Clean Gutter Boundary.
+
+V71 keeps the V70 isolated tap path and replaces only the gutter interpretation. The detector now searches cardinal directions nearest-to-farthest for sustained transitions that persist laterally and are supported by a short gutter-like separator zone. It then combines the four nearest sustained crossings into the tap-containing bounding rectangle. No legacy panel hierarchy, smallest-child logic, recursive region splitting, page-level panel cache, or fallback detector participates in selection.
+
+Testing focus: repeat V65-V70 troublesome taps first; then stacked, side-by-side, wide/tall, and irregular panels. Record accepted and rejected cases.
