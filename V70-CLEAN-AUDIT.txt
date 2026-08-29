@@ -1,0 +1,70 @@
+NTH SHELF V70 — TRUE CLEAN GUTTER BOUNDARY
+CODEBASE AUDIT
+
+Source of truth: Nth-Shelf-Test_Branch.zip supplied for the V70 cleanup.
+
+AUDIT RESULT
+============
+The previous test branch contained legacy panel-detection code in js/panels.js and
+legacy tap-selection/reconstruction methods in js/reader.js. Those paths have been
+removed from this V70 experiment.
+
+Removed from active panel detection:
+- Border-grid detector
+- Region-first detector
+- Region-border voting
+- Shape-aware detector
+- Legacy gutter-grid detector
+- Recursive rectangular partitioning
+- Panelness tribunal
+- Sibling protection / hierarchy selection
+- Black-border recovery
+- Gutter negative-space recovery
+- Candidate merging/sorting used by the old detector
+- V59 reconstruction path
+- V60 findPanelAt smallest-containing selection
+
+V70 ACTIVE PANEL PATH
+=====================
+Exact screen tap
+  -> verified visible page image / source coordinate
+  -> PanelDetect.findPanelByGutter()
+  -> gutter-enclosed region bounding box
+  -> existing zoomToPanel() rendering
+
+The reader no longer runs page-level panel detection or reads cached panel rectangles
+to decide which panel to pop out. currentPanels remains only as an empty compatibility
+state and is never used for tap selection.
+
+IMPORTANT NON-PANEL CODE
+=========================
+Bubble detection remains active because it is a separate user feature. The existing
+panel zoom rendering/animation remains active because V70 changes detection, not the
+presentation mechanism.
+
+SERVICE WORKER
+==============
+Cache name: nth-shelf-shell-v2-81-v70
+
+SYNTAX CHECKS
+=============
+js/panels.js : PASS
+js/reader.js : PASS
+js/app.js    : PASS
+sw.js        : PASS
+
+TEST PROCEDURE
+==============
+1. Install this V70 archive.
+2. If the PWA appears to be serving an older build, use Nth Shelf's cache-reset/update
+   path before judging the test. Confirm debug output identifies V70.
+3. Use Single Page mode and enable panel zoom.
+4. Enable diagnostics using the existing five-tap debug toggle.
+5. Repeat the same troublesome taps from V65-V69 first.
+6. Wait for each pop-out to finish before the next tap.
+7. Judge success by whether the pop-out corresponds to the visual comic panel enclosed
+   by the gutter, regardless of shape or size.
+8. Also test normal rectangular, stacked/adjacent, wide/tall, and irregular/angled
+   panels when available.
+9. Save video/logs for both wrong selections and clean rejections.
+10. Useful V70 diagnostics: TAP, RAYS, CONTOUR, GUTTER CONTOUR ACCEPTED/REJECTED, FINAL.

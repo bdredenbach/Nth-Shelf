@@ -1,16 +1,6 @@
-## Current experimental build: V69 — CLEAN GUTTER BOUNDARY
+## Current experimental build: V68 — GUTTER BOUNDARY
 
 # Nth Shelf
-
-## Current experiment: V69 — CLEAN GUTTER BOUNDARY
-
-This test intentionally disables the legacy panel-candidate detector and hierarchy paths. Tap selection is handled directly by the isolated gutter-boundary detector in `js/panels.js`.
-
-
-## Current experiment: V69 — CLEAN GUTTER BOUNDARY
-
-This build isolates the gutter-boundary tap detector. The legacy V1–V68 panel candidate, hierarchy, reconstruction, partition, and cached-panel selection paths are disabled for this test. A tap is evaluated directly against the visible page image by the V69 gutter-boundary contour detector.
-
 
 ![Nth Shelf](assets/nth-shelf-empty.jpg)
 
@@ -201,3 +191,25 @@ The active panel experiment is V67: Closed Boundary / Region Lock + Interior Pan
 ## V68 experiment notes
 
 **V68 — GUTTER BOUNDARY** is the current panel-pop-out experiment. It starts from the verified tap coordinate, searches outward in many radial directions for the nearest sustained visual transition into a gutter/boundary zone, and connects the evidence into a closed contour around the tapped region. Detector parent/child/grandchild rectangles are not used for this selection. The existing zoom system receives the contour's bounding rectangle.
+
+
+## V70 — TRUE CLEAN GUTTER BOUNDARY
+
+This build is a deliberate codebase-isolation experiment. Page-level panel detection is disabled, cached/precomputed panel rectangles are not used for tap selection, and legacy panel-selection functions from earlier experiments are removed from the active reader path. `js/panels.js` contains only the V70 gutter-boundary detector.
+
+### Testing steps
+1. Install the V70 archive as a fresh test build.
+2. Because Nth Shelf is a PWA, use the app's cache-reset/update path if the device appears to be serving an older build. Confirm the debug output says **V70**.
+3. Open a comic in **Single Page** mode with panel zoom enabled.
+4. Enable diagnostics using the existing five-tap debug toggle.
+5. First repeat the same troublesome taps used in V65/V66/V67/V69 so the results are directly comparable.
+6. Wait for each pop-out to finish before making the next tap.
+7. Judge the result by the **visual panel enclosed by the gutter**, not by whether the resulting bounding box is a perfect rectangle.
+8. Then test, if available: a normal rectangular panel; a panel beside/above another panel; an unusually wide or tall panel; and an irregular/angled panel.
+9. For every wrong result, save the video and diagnostic log. The useful V70 lines are `TAP`, `RAYS`, `CONTOUR`, `GUTTER CONTOUR ACCEPTED/REJECTED`, and `FINAL`.
+10. If V70 refuses to pop a panel out, record that too. A clean rejection is useful evidence because it tells us the gutter detector did not fall back to an older detector.
+
+### Isolation guarantee
+- `js/panels.js`: V70 gutter detector only.
+- `js/reader.js`: no legacy `findPanelAt`/`reconstructPanelAtTap` path and no page-level detector/cache feeding tap selection.
+- `sw.js`: V70 cache name.
