@@ -19,15 +19,6 @@ window.LongboxPageMode = (() => {
       this.pageCount = 0;
       this._boundResize = () => this.resize();
       this._gesture = null;
-      this._cornerGesture = null;
-      this._cornerTapCount = 0;
-      this._cornerTapTime = 0;
-      this._cornerTapX = 0;
-      this._cornerTapY = 0;
-      this._cornerTapSide = null;
-      this._boundCornerTouchStart = (e) => this._cornerTouchStart(e);
-      this._boundCornerTouchMove = (e) => this._cornerTouchMove(e);
-      this._boundCornerTouchEnd = (e) => this._cornerTouchEnd(e);
       this._boundGestureStart = (e) => this._gestureStart(e);
       this._boundGestureMove = (e) => this._gestureMove(e);
       this._boundGestureEnd = (e) => this._gestureEnd(e);
@@ -107,12 +98,9 @@ window.LongboxPageMode = (() => {
 
       host.style.display = "block";
       host.style.position = "absolute";
-      host.style.top = "99px";
-	  host.style.left = "0";
-	  host.style.right = "0";
-	  host.style.bottom = "0";
-	  host.style.width = "100%";
-	  host.style.height = "calc(100% - 99px)";
+      host.style.inset = "0";
+      host.style.width = "100%";
+      host.style.height = "100%";
       host.style.overflow = "hidden";
       host.style.zIndex = "4";
       host.style.pointerEvents = "auto";
@@ -158,7 +146,6 @@ window.LongboxPageMode = (() => {
           elevation: 0.05,
           duration: 600,
           direction: "ltr",
-          cornerSize: 0,
           pages: 1,
           page: 1
         });
@@ -211,14 +198,6 @@ window.LongboxPageMode = (() => {
 
     _installGestureGrab(book) {
       this._removeGestureGrab();
-      // Capture corner touches before Turn.js sees them. Corner taps are
-      // handled here so Turn.js cannot begin a native page turn on tap #1.
-      book.addEventListener("touchstart", this._boundCornerTouchStart, { capture: true, passive: false });
-      book.addEventListener("touchmove", this._boundCornerTouchMove, { capture: true, passive: false });
-      book.addEventListener("touchend", this._boundCornerTouchEnd, { capture: true, passive: false });
-      book.addEventListener("touchcancel", this._boundCornerTouchEnd, { capture: true, passive: false });
-      this._cornerTouchBook = book;
-
       // We only listen on the page book. Corner touches remain Turn.js's own
       // gesture path; this layer only activates after a deliberate middle drag.
       book.addEventListener("touchstart", this._boundGestureStart, { passive: true });
@@ -233,15 +212,6 @@ window.LongboxPageMode = (() => {
     }
 
     _removeGestureGrab() {
-      const cornerBook = this._cornerTouchBook;
-      if (cornerBook) {
-        cornerBook.removeEventListener("touchstart", this._boundCornerTouchStart, true);
-        cornerBook.removeEventListener("touchmove", this._boundCornerTouchMove, true);
-        cornerBook.removeEventListener("touchend", this._boundCornerTouchEnd, true);
-        cornerBook.removeEventListener("touchcancel", this._boundCornerTouchEnd, true);
-        this._cornerTouchBook = null;
-      }
-
       const book = this._gestureBook;
       if (!book) return;
       book.removeEventListener("touchstart", this._boundGestureStart);
@@ -256,126 +226,6 @@ window.LongboxPageMode = (() => {
       this._gesture = null;
     }
 
-    _cornerInfo(e) {
-      if (!this._cornerTouchBook) return null;
-      const p = e.touches?.[0];
-      if (!p) return null;
-      const rect = this._cornerTouchBook.getBoundingClientRect();
-      const x = p.clientX - rect.left;
-      const y = p.clientY - rect.top;
-      const corner = 100;
-      const nearLeft = x <= corner;
-      const nearRight = x >= rect.width - corner;
-      const nearTop = y <= corner;
-      const nearBottom = y >= rect.height - corner;
-      if (!(nearLeft || nearRight) || !(nearTop || nearBottom)) return null;
-      const side = nearLeft ? "left" : "right";
-      return { p, rect, x, y, side };
-    }
-
-    _cornerTouchStart(e) {
-      const info = this._cornerInfo(e);
-      if (!info) return;
-
-      // This touch belongs to our corner interaction. Stop Turn.js and
-      // Reader from seeing it. We will either turn on the third tap or
-      // hand a deliberate drag to the existing grab API.
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-
-      this._cornerGesture = {
-        x0: info.p.clientX,
-        y0: info.p.clientY,
-        lastX: info.p.clientX,
-        lastY: info.p.clientY,
-        rect: info.rect,
-        side: info.side,
-        moved: false,
-        triggered: false
-      };
-    }
-
-    _cornerTouchMove(e) {
-      const g = this._cornerGesture;
-      if (!g) return;
-
-      const p = e.touches?.[0];
-      if (!p) return;
-
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-
-      const dx = p.clientX - g.x0;
-      const dy = p.clientY - g.y0;
-      g.lastX = p.clientX;
-      g.lastY = p.clientY;
-
-      if (!g.triggered && Math.abs(dx) >= 40 && Math.abs(dx) >= Math.abs(dy) * 1.5) {
-        g.moved = true;
-        g.triggered = true;
-        g.direction = dx < 0 ? "next" : "prev";
-
-        const x = Math.max(1, Math.min(g.rect.width - 1, p.clientX - g.rect.left));
-        const y = Math.max(1, Math.min(g.rect.height - 1, p.clientY - g.rect.top));
-        try {
-          if (!this.book.turn("grabStart", x, y, g.direction)) {
-            g.triggered = false;
-          }
-        } catch (_) {
-          g.triggered = false;
-        }
-      } else if (g.triggered) {
-        const x = Math.max(1, Math.min(g.rect.width - 1, p.clientX - g.rect.left));
-        const y = Math.max(1, Math.min(g.rect.height - 1, p.clientY - g.rect.top));
-        try { this.book.turn("grabMove", x, y); } catch (_) {}
-      }
-    }
-
-    _cornerTouchEnd(e) {
-      const g = this._cornerGesture;
-      if (!g) return;
-
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-
-      if (g.triggered) {
-        const dx = g.lastX - g.x0;
-        const commit = Math.abs(dx) > Math.max(90, g.rect.width * 0.30);
-        try { this.book.turn("grabEnd", commit); } catch (_) {}
-        this._cornerTapCount = 0;
-        this._cornerGesture = null;
-        return;
-      }
-
-      const now = performance.now();
-      const sameCorner =
-        this._cornerTapSide === g.side &&
-        Math.hypot(g.x0 - this._cornerTapX, g.y0 - this._cornerTapY) < 70 &&
-        (now - this._cornerTapTime) < 500;
-
-      this._cornerTapCount = sameCorner ? this._cornerTapCount + 1 : 1;
-      this._cornerTapTime = now;
-      this._cornerTapX = g.x0;
-      this._cornerTapY = g.y0;
-      this._cornerTapSide = g.side;
-
-      if (this._cornerTapCount >= 3) {
-        const direction = g.side === "right" ? "next" : "prev";
-        try {
-          if (direction === "next") this.next();
-          else this.prev();
-        } catch (_) {}
-        this._cornerTapCount = 0;
-        this._cornerTapTime = 0;
-        this._cornerTapSide = null;
-      }
-
-      this._cornerGesture = null;
-    }
-
     _gestureStart(e) {
       if (!this.book || !this._gestureBook) return;
       const p = e.touches?.[0] || e;
@@ -384,9 +234,17 @@ window.LongboxPageMode = (() => {
       const rect = this._gestureBook.getBoundingClientRect();
       const x = p.clientX - rect.left;
       const y = p.clientY - rect.top;
-      // Turn.js native corner turns are disabled above so tap sequences in
-      // the corners can be handled by Reader. Our custom horizontal drag
-      // gesture now owns the entire page, including the corners.
+      const corner = 110;
+      const nearCorner =
+        (x < corner || x > rect.width - corner) &&
+        (y < corner || y > rect.height - corner);
+
+      // Don't compete with Turn.js's native corner-grab gesture.
+      if (nearCorner) {
+        this._gesture = null;
+        return;
+      }
+
       this._gesture = {
         x0: p.clientX,
         y0: p.clientY,

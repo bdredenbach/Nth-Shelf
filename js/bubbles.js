@@ -390,7 +390,7 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
     const hasDistributedInk = inkRows.size >= 1 && inkCols.size >= 1;
     // Reject completely empty light regions. Allow both sparse lettering and
     // denser comic lettering, but reject very dark artwork blocks.
-    if (!hasDistributedInk || inkRatio < 0.006 || inkRatio > 0.60) {
+    if (!hasDistributedInk || inkRatio < 0.006 || inkRatio > 0.34) {
       if (log) log(`try threshold=${threshold}: rejected weak/non-text interior ink ratio=${inkRatio.toFixed(3)}`);
       continue;
     }
@@ -398,7 +398,7 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
     // A genuine bubble tends to be mostly light inside its outline. This
     // secondary fill guard rejects irregular bright artwork regions while
     // preserving speech balloons with lettering cut out of the white area.
-    if (fill < 0.22) {
+    if (fill < 0.28) {
       if (log) log(`try threshold=${threshold}: rejected low-fill candidate fill=${fill.toFixed(2)}`);
       continue;
     }
@@ -412,8 +412,6 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
       if (log) log(`try threshold=${threshold}: rejected large weak-shape candidate fill=${fill.toFixed(2)} ink=${inkRatio.toFixed(3)}`);
       continue;
     }
-
-
 
     // Small bubbles are common, especially in dense comic pages. For these,
     // require a little more shape evidence so lowering the area threshold does
@@ -474,40 +472,13 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
   }
   mask.getContext('2d').putImageData(md, 0, 0);
 
-// Smooth the extracted bubble silhouette.
-// Start from a clean canvas so the original hard edge does not
-// remain underneath the blurred version.
-const smooth = document.createElement('canvas');
-smooth.width = cw;
-smooth.height = ch;
-
-const sctx = smooth.getContext('2d');
-sctx.imageSmoothingEnabled = true;
-sctx.imageSmoothingQuality = 'high';
-
-sctx.clearRect(0, 0, cw, ch);
-
-// A controlled blur softens pixel-stepped edges and tiny notches
-// while preserving the overall shape of the speech balloon.
-sctx.filter = 'blur(2px)';
-sctx.drawImage(mask, 0, 0);
-sctx.filter = 'none';
-
-const smoothData = sctx.getImageData(0, 0, cw, ch);
-
-for (let i = 3; i < smoothData.data.length; i += 4) {
-  smoothData.data[i] = smoothData.data[i] >= 128 ? 255 : 0;
-}
-
-sctx.putImageData(smoothData, 0, 0);
-
   const out = document.createElement('canvas'); out.width = cw; out.height = ch;
   const octx = out.getContext('2d');
   octx.imageSmoothingEnabled = true;
   octx.imageSmoothingQuality = 'high';
   octx.drawImage(crop, 0, 0);
   octx.globalCompositeOperation = 'destination-in';
-  octx.drawImage(smooth, 0, 0);
+  octx.drawImage(mask, 0, 0);
   octx.globalCompositeOperation = 'source-over';
 
   if (log) log(`bubble: extracted masked overlay ${cw}x${ch} threshold=${threshold}`);

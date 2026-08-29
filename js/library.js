@@ -347,8 +347,6 @@ const Library = {
     this.els.gridEl.style.display = totalCount ? "grid" : "none";
     document.getElementById("library-view")?.classList.toggle("empty-library", !totalCount);
     document.getElementById("fab-import")?.classList.toggle("empty-library-fab", !totalCount);
-    const shelfModeBtn = document.getElementById("shelf-mode-btn");
-    if (shelfModeBtn) shelfModeBtn.hidden = !totalCount;
     this.els.gridEl.innerHTML = "";
 
     // enrich collections with aggregate stats for sorting/progress display
