@@ -1,7 +1,7 @@
 // ================================================================
-// NTH SHELF — V67
-// EXPERIMENT: CLOSED BOUNDARY / REGION LOCK + INTERIOR PANEL SPLIT
-// BUILD: V67 — tap-containing region refinement
+// NTH SHELF — V68
+// EXPERIMENT: GUTTER BOUNDARY
+// BUILD: V68 — gutter-boundary radial contour
 // ================================================================
 // panels.js — Border-Grid Panel Detection
 // V64 COORDINATE TRUTH COMPATIBLE + V63 PERFORMANCE-SAFE GRADIENT LAB: tap-centered boundary experiment.
@@ -53,36 +53,38 @@ const PanelDetect = {
   // a geometric frame. It is intentionally allowed to be more expensive than
   // the normal detector.
   exhaustiveTapGradient(img, relX, relY, log) {
-    // V67 — CLOSED BOUNDARY / REGION LOCK + INTERIOR PANEL SPLIT
-    //
-    // V65 proved that nearest-first sustained boundary searches can find useful
-    // local evidence, but its four independent answers could belong to four
-    // different visual structures. V66 keeps the nearest-first search, but
-    // collects a small number of plausible boundaries and then asks a harder
-    // question: which combination forms one coherent closed region around the
-    // exact tap?
+    // ================================================================
+    // V68 — GUTTER BOUNDARY TEST
+    // ================================================================
+    // The target is the visual panel containing the exact tap. We do NOT
+    // select a detector child/parent and we do NOT subdivide a previously
+    // selected rectangle. Instead, we shoot many rays from the tap and look
+    // for the nearest sustained transition into a gutter/boundary zone.
+    // Candidate points are then connected into a closed contour. Isolated
+    // artwork edges should lose because they generally do not persist across
+    // neighboring ray angles or form a coherent closed enclosure.
+    // ================================================================
     const started = performance.now();
     if (!img || !(img.naturalWidth || img.width) || !(img.naturalHeight || img.height)) return null;
 
     const srcW = img.naturalWidth || img.width;
     const srcH = img.naturalHeight || img.height;
-    const scale = Math.min(1, 1200 / Math.max(srcW, srcH));
-    const w = Math.max(2, Math.round(srcW * scale));
-    const h = Math.max(2, Math.round(srcH * scale));
+    const scale = Math.min(1, 1400 / Math.max(srcW, srcH));
+    const w = Math.max(32, Math.round(srcW * scale));
+    const h = Math.max(32, Math.round(srcH * scale));
 
     const canvas = document.createElement("canvas");
     canvas.width = w;
     canvas.height = h;
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return null;
-
     ctx.drawImage(img, 0, 0, w, h);
 
     let data;
     try {
       data = ctx.getImageData(0, 0, w, h).data;
     } catch (e) {
-      if (log) log(`[V67] IMAGE READ ERROR ${e?.message || e}`);
+      if (log) log(`[V68] IMAGE READ ERROR ${e?.message || e}`);
       return null;
     }
 
@@ -95,938 +97,269 @@ const PanelDetect = {
 
     for (let i = 0, p = 0; i < n; i++, p += 4) {
       const r = data[p], g = data[p + 1], b = data[p + 2];
-      rr[i] = r;
-      gg[i] = g;
-      bb[i] = b;
+      rr[i] = r; gg[i] = g; bb[i] = b;
       lum[i] = 0.299 * r + 0.587 * g + 0.114 * b;
       chr[i] = Math.max(r, g, b) - Math.min(r, g, b);
     }
 
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     const at = (x, y) => y * w + x;
-    const px = clamp(Math.round(relX * (w - 1)), 2, w - 3);
-    const py = clamp(Math.round(relY * (h - 1)), 2, h - 3);
+    const px = clamp(Math.round(relX * (w - 1)), 3, w - 4);
+    const py = clamp(Math.round(relY * (h - 1)), 3, h - 4);
 
     if (log) {
-      log(`[V67] TAP x=${relX.toFixed(4)} y=${relY.toFixed(4)} px=${px} py=${py}`);
-      log(`[V67] CHILD/PARENT/GRANDCHILD DETECTION DISABLED`);
-      log(`[V67] IMAGE ${w}x${h}`);
+      log(`[V68] TAP x=${relX.toFixed(4)} y=${relY.toFixed(4)} px=${px} py=${py}`);
+      log(`[V68] GUTTER SEARCH — detector hierarchy disabled`);
+      log(`[V68] IMAGE ${w}x${h}`);
     }
 
-    function transition(axis, coord, span, relax) {
-      const half = Math.max(8, Math.round(span / 2));
-      const samples = 23;
-
-      let rgb = 0;
-      let ld = 0;
-      let cd = 0;
-      let edge = 0;
-      let stable = 0;
-
-      for (let i = 0; i < samples; i++) {
-        const t = (i + 0.5) / samples;
-
-        if (axis === "h") {
-          const x = clamp(
-            Math.round(px - half + t * 2 * half),
-            3, w - 4
-          );
-          const y = clamp(coord, 10, h - 11);
-
-          const c = at(x, y);
-          const a = at(x, y - 4);
-          const b = at(x, y + 4);
-          const aa = at(x, y - 9);
-          const bbx = at(x, y + 9);
-
-          const dr = rr[a] - rr[b];
-          const dg = gg[a] - gg[b];
-          const db = bb[a] - bb[b];
-
-          rgb += Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
-          ld += Math.abs(lum[a] - lum[b]) / 255;
-          cd += Math.abs(chr[a] - chr[b]) / 255;
-          edge += Math.min(
-            1,
-            Math.abs(lum[c] - (lum[aa] + lum[bbx]) / 2) / 70
-          );
-          stable += Math.min(
-            1,
-            Math.abs(lum[aa] - lum[bbx]) / 255
-          );
-        } else {
-          const y = clamp(
-            Math.round(py - half + t * 2 * half),
-            3, h - 4
-          );
-          const x = clamp(coord, 10, w - 11);
-
-          const c = at(x, y);
-          const a = at(x - 4, y);
-          const b = at(x + 4, y);
-          const aa = at(x - 9, y);
-          const bbx = at(x + 9, y);
-
-          const dr = rr[a] - rr[b];
-          const dg = gg[a] - gg[b];
-          const db = bb[a] - bb[b];
-
-          rgb += Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
-          ld += Math.abs(lum[a] - lum[b]) / 255;
-          cd += Math.abs(chr[a] - chr[b]) / 255;
-          edge += Math.min(
-            1,
-            Math.abs(lum[c] - (lum[aa] + lum[bbx]) / 2) / 70
-          );
-          stable += Math.min(
-            1,
-            Math.abs(lum[aa] - lum[bbx]) / 255
-          );
-        }
-      }
-
-      rgb /= samples;
-      ld /= samples;
-      cd /= samples;
-      edge /= samples;
-      stable /= samples;
-
-      const score =
-        0.34 * rgb +
-        0.25 * ld +
-        0.11 * cd +
-        0.16 * edge +
-        0.14 * stable;
-
-      const support =
-        (rgb >= 0.065 ? 0.30 : 0) +
-        (ld >= 0.045 ? 0.22 : 0) +
-        (cd >= 0.028 ? 0.10 : 0) +
-        (edge >= 0.040 ? 0.16 : 0) +
-        (stable >= 0.065 ? 0.22 : 0);
-
-      const threshold = 0.108 - relax * 0.015;
-      const requiredSupport = 0.59 - relax * 0.07;
-
-      return {
-        score,
-        support,
-        rgb,
-        lum: ld,
-        chroma: cd,
-        edge,
-        stable,
-        convincing: score >= threshold && support >= requiredSupport
-      };
+    function pixelTransition(x1, y1, x2, y2) {
+      x1 = clamp(Math.round(x1), 0, w - 1); y1 = clamp(Math.round(y1), 0, h - 1);
+      x2 = clamp(Math.round(x2), 0, w - 1); y2 = clamp(Math.round(y2), 0, h - 1);
+      const a = at(x1, y1), b = at(x2, y2);
+      const dr = rr[a] - rr[b], dg = gg[a] - gg[b], db = bb[a] - bb[b];
+      const rgb = Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
+      const ld = Math.abs(lum[a] - lum[b]) / 255;
+      const cd = Math.abs(chr[a] - chr[b]) / 255;
+      return 0.47 * rgb + 0.35 * ld + 0.18 * cd;
     }
 
-    const dirs = [
-      {
-        name: "TOP",
-        axis: "h",
-        sign: -1,
-        limit: Math.round(h * 0.48)
-      },
-      {
-        name: "BOTTOM",
-        axis: "h",
-        sign: 1,
-        limit: Math.round(h * 0.48)
-      },
-      {
-        name: "LEFT",
-        axis: "v",
-        sign: -1,
-        limit: Math.round(w * 0.48)
-      },
-      {
-        name: "RIGHT",
-        axis: "v",
-        sign: 1,
-        limit: Math.round(w * 0.48)
-      }
-    ];
-
-    function addCandidate(list, candidate) {
-      if (!candidate) return;
-
-      const duplicate = list.find(
-        existing => Math.abs(existing.coord - candidate.coord) <= Math.max(7, Math.round(Math.min(w, h) * 0.012))
-      );
-
-      if (duplicate) {
-        const oldValue = duplicate.score + duplicate.support * 0.12;
-        const newValue = candidate.score + candidate.support * 0.12;
-        if (newValue > oldValue) Object.assign(duplicate, candidate);
-        return;
-      }
-
-      list.push(candidate);
-    }
-
-    function findCandidates(d) {
-      const candidates = [];
-      const step = Math.max(3, Math.round(Math.min(w, h) / 210));
-      const spans = d.axis === "h"
-        ? [
-            Math.max(30, Math.round(w * 0.12)),
-            Math.max(48, Math.round(w * 0.28)),
-            Math.max(72, Math.round(w * 0.48)),
-            Math.max(96, Math.round(w * 0.68))
-          ]
-        : [
-            Math.max(30, Math.round(h * 0.12)),
-            Math.max(48, Math.round(h * 0.28)),
-            Math.max(72, Math.round(h * 0.48)),
-            Math.max(96, Math.round(h * 0.68))
-          ];
-
-      for (let relax = 0; relax < 3; relax++) {
-        let streak = 0;
-        let zoneStart = null;
-        let zoneBest = null;
-
-        for (let dist = step; dist <= d.limit; dist += step) {
-          const coord = d.axis === "h"
-            ? py + d.sign * dist
-            : px + d.sign * dist;
-
-          if (
-            d.axis === "h"
-              ? (coord < 10 || coord > h - 11)
-              : (coord < 10 || coord > w - 11)
-          ) {
-            break;
-          }
-
-          let best = null;
-
-          for (const span of spans) {
-            const ev = transition(d.axis, coord, span, relax);
-            if (
-              !best ||
-              ev.score + ev.support * 0.12 >
-                best.score + best.support * 0.12
-            ) {
-              best = ev;
-            }
-          }
-
-          if (best && best.convincing) {
-            if (!streak) zoneStart = dist;
-            streak++;
-
-            if (
-              !zoneBest ||
-              best.score + best.support * 0.12 >
-                zoneBest.score + zoneBest.support * 0.12
-            ) {
-              zoneBest = {
-                ...best,
-                coord,
-                distance: dist
-              };
-            }
-          } else {
-            // Require a sustained zone, not a single lucky sample.
-            if (streak >= 2 && zoneBest) {
-              addCandidate(candidates, {
-                ...zoneBest,
-                zoneStart,
-                zoneEnd: dist - step,
-                relax
-              });
-            }
-            streak = 0;
-            zoneStart = null;
-            zoneBest = null;
-          }
-        }
-
-        if (streak >= 2 && zoneBest) {
-          addCandidate(candidates, {
-            ...zoneBest,
-            zoneStart,
-            zoneEnd: d.limit,
-            relax
-          });
-        }
-      }
-
-      candidates.sort((a, b) => a.distance - b.distance);
-
-      // Keep the search local and bounded. We want alternatives, not a
-      // V62-style explosion.
-      return candidates.slice(0, 7);
-    }
-
-    const candidateMap = {};
-    for (const d of dirs) {
-      candidateMap[d.name] = findCandidates(d);
-
-      if (log) {
-        log(
-          `[V67] ${d.name} candidates=${candidateMap[d.name].length} ` +
-          candidateMap[d.name]
-            .map(c =>
-              `${Math.round(c.coord)}@${c.score.toFixed(2)}/p${c.support.toFixed(2)}/r${c.relax}`
-            )
-            .join(" | ")
-        );
-      }
-    }
-
-    if (
-      !candidateMap.TOP.length ||
-      !candidateMap.BOTTOM.length ||
-      !candidateMap.LEFT.length ||
-      !candidateMap.RIGHT.length
-    ) {
-      if (log) log(`[V67] INSUFFICIENT CANDIDATE SIDES`);
-      return null;
-    }
-
-    function boundaryQuality(axis, coord, start, end, relax) {
-      const samples = 17;
+    // Evidence that a radial transition is really a boundary/gutter rather
+    // than one isolated artwork edge. The test samples a short tangent strip
+    // on both sides of the ray and requires persistence across that strip.
+    function radialBoundaryQuality(x, y, nx, ny, tx, ty, radius) {
+      const tangentOffsets = [-18, -12, -7, 0, 7, 12, 18];
       const values = [];
+      const innerGap = Math.max(3, Math.round(radius * 0.012));
+      const outerGap = Math.max(5, Math.round(radius * 0.010));
 
-      for (let i = 0; i < samples; i++) {
-        const t = (i + 0.5) / samples;
-        if (axis === "h") {
-          const x = clamp(
-            Math.round(start + (end - start) * t),
-            8, w - 9
-          );
-          const y = clamp(coord, 10, h - 11);
-
-          const outside = at(x, y - 8);
-          const inside = at(x, y + 8);
-          const center = at(x, y);
-
-          const dr = rr[outside] - rr[inside];
-          const dg = gg[outside] - gg[inside];
-          const db = bb[outside] - bb[inside];
-
-          const rgb = Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
-          const ld = Math.abs(lum[outside] - lum[inside]) / 255;
-          const cd = Math.abs(chr[outside] - chr[inside]) / 255;
-          const line = Math.min(
-            1,
-            Math.abs(
-              lum[center] -
-              (lum[at(x, y - 15)] + lum[at(x, y + 15)]) / 2
-            ) / 70
-          );
-
-          values.push(
-            0.42 * rgb +
-            0.30 * ld +
-            0.12 * cd +
-            0.16 * line
-          );
-        } else {
-          const y = clamp(
-            Math.round(start + (end - start) * t),
-            8, h - 9
-          );
-          const x = clamp(coord, 10, w - 11);
-
-          const outside = at(x - 8, y);
-          const inside = at(x + 8, y);
-          const center = at(x, y);
-
-          const dr = rr[outside] - rr[inside];
-          const dg = gg[outside] - gg[inside];
-          const db = bb[outside] - bb[inside];
-
-          const rgb = Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
-          const ld = Math.abs(lum[outside] - lum[inside]) / 255;
-          const cd = Math.abs(chr[outside] - chr[inside]) / 255;
-          const line = Math.min(
-            1,
-            Math.abs(
-              lum[center] -
-              (lum[at(x - 15, y)] + lum[at(x + 15, y)]) / 2
-            ) / 70
-          );
-
-          values.push(
-            0.42 * rgb +
-            0.30 * ld +
-            0.12 * cd +
-            0.16 * line
-          );
-        }
-      }
-
-      const ordered = values.slice().sort((a, b) => a - b);
-      const mean = values.reduce((a, b) => a + b, 0) / values.length;
-      const median = ordered[Math.floor(ordered.length / 2)];
-      const threshold = 0.095 - relax * 0.012;
-      const coverage =
-        values.filter(v => v >= threshold).length / values.length;
-
-      // The best frame boundary should be persistent over a meaningful
-      // portion of its length. Median protects us from one spectacular
-      // artwork edge dominating an otherwise weak side.
-      const quality =
-        0.42 * mean +
-        0.34 * median +
-        0.24 * coverage;
-
-      return {
-        quality,
-        mean,
-        median,
-        coverage
-      };
-    }
-
-    function cornerContinuity(x, y) {
-      let total = 0;
-      let strong = 0;
-      let count = 0;
-
-      for (let dy = -8; dy <= 8; dy += 2) {
-        for (let dx = -8; dx <= 8; dx += 2) {
-          const xx = clamp(x + dx, 1, w - 2);
-          const yy = clamp(y + dy, 1, h - 2);
-
-          const gx =
-            Math.abs(lum[at(xx + 1, yy)] - lum[at(xx - 1, yy)]) / 255;
-          const gy =
-            Math.abs(lum[at(xx, yy + 1)] - lum[at(xx, yy - 1)]) / 255;
-
-          const g = Math.min(1, gx + gy);
-          total += g;
-          if (g >= 0.075) strong++;
-          count++;
-        }
-      }
-
-      return count
-        ? 0.60 * (total / count) + 0.40 * (strong / count)
-        : 0;
-    }
-
-    function interiorRegionCheck(x0, y0, x1, y1) {
-      // Sample a cross inside the proposed region and just outside it.
-      // This is intentionally weak evidence: artwork can vary wildly inside
-      // a real panel, so interior uniformity must never be required.
-      const insetX = Math.max(6, Math.round((x1 - x0) * 0.10));
-      const insetY = Math.max(6, Math.round((y1 - y0) * 0.10));
-
-      const cx = Math.round((x0 + x1) / 2);
-      const cy = Math.round((y0 + y1) / 2);
-
-      const inside = [
-        [cx, y0 + insetY],
-        [cx, y1 - insetY],
-        [x0 + insetX, cy],
-        [x1 - insetX, cy]
-      ];
-
-      let interiorVariance = 0;
-      let outsideContrast = 0;
-      let count = 0;
-
-      for (const [x, y] of inside) {
-        const xx = clamp(x, 2, w - 3);
-        const yy = clamp(y, 2, h - 3);
-        const c = lum[at(xx, yy)];
-
-        const local =
-          Math.abs(c - lum[at(xx - 3, yy)]) +
-          Math.abs(c - lum[at(xx + 3, yy)]) +
-          Math.abs(c - lum[at(xx, yy - 3)]) +
-          Math.abs(c - lum[at(xx, yy + 3)]);
-
-        interiorVariance += Math.min(1, local / 510);
-
-        const edgeOutside =
-          Math.min(1, Math.abs(
-            lum[at(xx, yy)] -
-            lum[at(
-              clamp(
-                xx + (xx < cx ? -Math.max(4, Math.round((x1 - x0) * 0.10)) : Math.max(4, Math.round((x1 - x0) * 0.10))),
-                1, w - 2
-              ),
-              yy
-            )]
-          ) / 255);
-
-        outsideContrast += edgeOutside;
-        count++;
-      }
-
-      return {
-        interior: count ? interiorVariance / count : 0,
-        contrast: count ? outsideContrast / count : 0
-      };
-    }
-
-    function scoreRectangle(t, b, l, r, relax) {
-      const x0 = l.coord;
-      const x1 = r.coord;
-      const y0 = t.coord;
-      const y1 = b.coord;
-
-      if (!(x0 < px && x1 > px && y0 < py && y1 > py)) return null;
-
-      const width = x1 - x0;
-      const height = y1 - y0;
-
-      const minWidth = Math.max(30, Math.round(w * 0.045));
-      const minHeight = Math.max(30, Math.round(h * 0.045));
-
-      if (
-        width < minWidth ||
-        height < minHeight ||
-        width > w * 0.94 ||
-        height > h * 0.94
-      ) {
-        return null;
-      }
-
-      const topQ = boundaryQuality("h", y0, x0, x1, relax);
-      const bottomQ = boundaryQuality("h", y1, x0, x1, relax);
-      const leftQ = boundaryQuality("v", x0, y0, y1, relax);
-      const rightQ = boundaryQuality("v", x1, y0, y1, relax);
-
-      const sides = [topQ, bottomQ, leftQ, rightQ];
-
-      const sideMean =
-        sides.reduce((sum, q) => sum + q.quality, 0) / sides.length;
-
-      const sideMedian =
-        sides.map(q => q.quality).sort((a, b) => a - b)[1.5 | 0];
-
-      const coverage =
-        sides.reduce((sum, q) => sum + q.coverage, 0) / sides.length;
-
-      const corners =
-        (
-          cornerContinuity(x0, y0) +
-          cornerContinuity(x1, y0) +
-          cornerContinuity(x0, y1) +
-          cornerContinuity(x1, y1)
-        ) / 4;
-
-      const interior = interiorRegionCheck(x0, y0, x1, y1);
-
-      // "Near" strongly rewards a small closed region around the tap, but
-      // does not allow proximity to overpower poor boundary evidence.
-      const verticalNear =
-        1 - clamp(
-          ((py - y0) + (y1 - py)) / Math.max(1, h * 0.72),
-          0, 1
-        );
-
-      const horizontalNear =
-        1 - clamp(
-          ((px - x0) + (x1 - px)) / Math.max(1, w * 0.72),
-          0, 1
-        );
-
-      const near = 0.5 * verticalNear + 0.5 * horizontalNear;
-
-      const balance =
-        1 -
-        clamp(
-          Math.abs(
-            ((px - x0) / Math.max(1, width)) -
-            ((x1 - px) / Math.max(1, width))
-          ) +
-          Math.abs(
-            ((py - y0) / Math.max(1, height)) -
-            ((y1 - py) / Math.max(1, height))
-          ),
-          0, 1
-        );
-
-      const areaPenalty = Math.sqrt((width * height) / (w * h));
-
-      const score =
-        0.31 * near +
-        0.28 * sideMean +
-        0.15 * coverage +
-        0.11 * corners +
-        0.07 * balance +
-        0.04 * interior.contrast -
-        0.13 * areaPenalty;
-
-      // A closed region must have four credible sides. Do not let three
-      // excellent sides drag a completely unsupported fourth side through.
-      const weakSides = sides.filter(q => q.coverage < (0.28 - relax * 0.04)).length;
-      const sideFloor = 0.105 - relax * 0.012;
-
-      if (
-        weakSides >= 2 ||
-        sideMedian < sideFloor ||
-        coverage < (0.31 - relax * 0.04)
-      ) {
-        return null;
-      }
-
-      return {
-        score,
-        x0, x1, y0, y1,
-        width,
-        height,
-        near,
-        balance,
-        sideMean,
-        sideMedian,
-        coverage,
-        corners,
-        interior,
-        sides
-      };
-    }
-
-    const candidates = [];
-
-    // Candidate counts are capped above, so this remains a small progressive
-    // search rather than V62's page-wide combinatorial explorer.
-    for (const t of candidateMap.TOP) {
-      for (const b of candidateMap.BOTTOM) {
-        for (const l of candidateMap.LEFT) {
-          for (const r of candidateMap.RIGHT) {
-            for (let relax = 0; relax < 3; relax++) {
-              const scored = scoreRectangle(t, b, l, r, relax);
-              if (scored) {
-                candidates.push({
-                  ...scored,
-                  top: t,
-                  bottom: b,
-                  left: l,
-                  right: r,
-                  relax
-                });
-                break;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    if (!candidates.length) {
-      if (log) log(`[V67] NO CLOSED REGION SURVIVED VALIDATION`);
-      return null;
-    }
-
-    candidates.sort((a, b) => b.score - a.score);
-
-    // The score already favors proximity, but this final gate prevents a
-    // substantially farther candidate with slightly prettier evidence from
-    // defeating a nearby closed region.
-    let best = candidates[0];
-
-    const nearestComparable = candidates
-      .slice()
-      .sort((a, b) => {
-        const da =
-          ((py - a.y0) + (a.y1 - py)) / h +
-          ((px - a.x0) + (a.x1 - px)) / w;
-        const db =
-          ((py - b.y0) + (b.y1 - py)) / h +
-          ((px - b.x0) + (b.x1 - px)) / w;
-        return da - db;
-      });
-
-    if (nearestComparable.length) {
-      const nearest = nearestComparable[0];
-      if (
-        nearest.score >= best.score - 0.075 &&
-        nearest.sideMedian >= best.sideMedian * 0.82
-      ) {
-        best = nearest;
-      }
-    }
-
-    // ================================================================
-    // V67 INTERIOR PANEL SPLIT
-    // ================================================================
-    // V66 could prove that four boundaries form a closed region, but that
-    // region could still be a parent containing multiple real panels. V67
-    // therefore inspects the INSIDE of the winning region for another
-    // sustained boundary. If a credible divider separates the tap from one
-    // edge, that divider becomes the new edge of the tap-containing region.
-    // This is image evidence only; detector parent/child rectangles remain
-    // completely out of the decision.
-    function internalBoundaryQuality(axis, coord, start, end) {
-      const samples = 31;
-      const values = [];
-
-      for (let i = 0; i < samples; i++) {
-        const t = (i + 0.5) / samples;
-        if (axis === "h") {
-          const x = clamp(Math.round(start + (end - start) * t), 3, w - 4);
-          const y = clamp(Math.round(coord), 12, h - 13);
-          const outside = at(x, y - 7);
-          const inside = at(x, y + 7);
-          const center = at(x, y);
-          const farA = at(x, y - 14);
-          const farB = at(x, y + 14);
-
-          const dr = rr[outside] - rr[inside];
-          const dg = gg[outside] - gg[inside];
-          const db = bb[outside] - bb[inside];
-          const rgb = Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
-          const ld = Math.abs(lum[outside] - lum[inside]) / 255;
-          const cd = Math.abs(chr[outside] - chr[inside]) / 255;
-          const line = Math.min(1, Math.abs(lum[center] - (lum[farA] + lum[farB]) / 2) / 70);
-          values.push(0.40 * rgb + 0.31 * ld + 0.12 * cd + 0.17 * line);
-        } else {
-          const y = clamp(Math.round(start + (end - start) * t), 3, h - 4);
-          const x = clamp(Math.round(coord), 12, w - 13);
-          const outside = at(x - 7, y);
-          const inside = at(x + 7, y);
-          const center = at(x, y);
-          const farA = at(x - 14, y);
-          const farB = at(x + 14, y);
-
-          const dr = rr[outside] - rr[inside];
-          const dg = gg[outside] - gg[inside];
-          const db = bb[outside] - bb[inside];
-          const rgb = Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
-          const ld = Math.abs(lum[outside] - lum[inside]) / 255;
-          const cd = Math.abs(chr[outside] - chr[inside]) / 255;
-          const line = Math.min(1, Math.abs(lum[center] - (lum[farA] + lum[farB]) / 2) / 70);
-          values.push(0.40 * rgb + 0.31 * ld + 0.12 * cd + 0.17 * line);
-        }
+      for (const off of tangentOffsets) {
+        const cx = x + tx * off;
+        const cy = y + ty * off;
+        const insideX = cx - nx * innerGap;
+        const insideY = cy - ny * innerGap;
+        const outsideX = cx + nx * outerGap;
+        const outsideY = cy + ny * outerGap;
+        values.push(pixelTransition(insideX, insideY, outsideX, outsideY));
       }
 
       const sorted = values.slice().sort((a, b) => a - b);
-      const mean = values.reduce((a, b) => a + b, 0) / values.length;
       const median = sorted[Math.floor(sorted.length / 2)];
-      const threshold = 0.105;
-      const coverage = values.filter(v => v >= threshold).length / values.length;
-      const quality = 0.40 * mean + 0.36 * median + 0.24 * coverage;
+      const mean = values.reduce((a, b) => a + b, 0) / values.length;
+      const coverage = values.filter(v => v >= 0.095).length / values.length;
+      const strong = values.filter(v => v >= 0.17).length / values.length;
 
-      return { quality, mean, median, coverage };
+      // A gutter can be a zone, not a literal line. Check for evidence just
+      // beyond the proposed transition as well, looking for a sustained
+      // outside regime instead of a single-pixel spike.
+      const zoneA = pixelTransition(x - nx * 2, y - ny * 2, x + nx * 10, y + ny * 10);
+      const zoneB = pixelTransition(x - nx * 5, y - ny * 5, x + nx * 15, y + ny * 15);
+      const zone = Math.max(zoneA, zoneB);
+      const quality = 0.38 * median + 0.28 * mean + 0.22 * coverage + 0.12 * strong;
+
+      return { quality, median, mean, coverage, strong, zone };
     }
 
-    function findInternalDivider(axis, region, side) {
-      const start = axis === "h"
-        ? region.x0 + Math.max(10, Math.round((region.x1 - region.x0) * 0.07))
-        : region.y0 + Math.max(10, Math.round((region.y1 - region.y0) * 0.07));
-      const end = axis === "h"
-        ? region.x1 - Math.max(10, Math.round((region.x1 - region.x0) * 0.07))
-        : region.y1 - Math.max(10, Math.round((region.y1 - region.y0) * 0.07));
+    const maxRadius = Math.hypot(Math.max(px, w - 1 - px), Math.max(py, h - 1 - py));
+    const step = Math.max(3, Math.round(Math.min(w, h) / 280));
+    const rayCount = 72;
+    const rayResults = [];
 
-      const edge = axis === "h"
-        ? (side === "TOP" ? region.y0 : region.y1)
-        : (side === "LEFT" ? region.x0 : region.x1);
-      const tap = axis === "h" ? py : px;
-      const maxDistance = side === "TOP" || side === "LEFT"
-        ? tap - edge
-        : edge - tap;
-      const minGap = Math.max(12, Math.round(Math.min(w, h) * 0.025));
-      const step = Math.max(3, Math.round(Math.min(w, h) / 220));
-
-      if (maxDistance <= minGap + step || end <= start) return null;
+    // Nearest-to-farthest on every ray. We keep only the first convincing
+    // sustained candidate, exactly to avoid the old "strongest farther edge"
+    // behavior.
+    for (let r = 0; r < rayCount; r++) {
+      const angle = (Math.PI * 2 * r) / rayCount;
+      const nx = Math.cos(angle), ny = Math.sin(angle);
+      const tx = -ny, ty = nx;
+      const maxD = Math.min(maxRadius, Math.hypot(
+        nx < 0 ? px : (w - 1 - px),
+        ny < 0 ? py : (h - 1 - py)
+      ));
 
       let streak = 0;
-      let zoneBest = null;
-      let zoneStart = null;
-
-      for (let distance = minGap; distance <= maxDistance - minGap; distance += step) {
-        const coord = side === "TOP" || side === "LEFT"
-          ? edge + distance
-          : edge - distance;
-        const q = internalBoundaryQuality(axis, coord, start, end);
-        const convincing =
-          q.quality >= 0.125 &&
-          q.median >= 0.085 &&
-          q.coverage >= 0.56;
+      let best = null;
+      for (let d = Math.max(10, step * 2); d <= maxD - 8; d += step) {
+        const x = px + nx * d;
+        const y = py + ny * d;
+        const q = radialBoundaryQuality(x, y, nx, ny, tx, ty, d);
+        const convincing = q.quality >= 0.155 && q.median >= 0.090 && q.coverage >= 0.57;
 
         if (convincing) {
-          if (!streak) zoneStart = distance;
           streak++;
-          if (!zoneBest || q.quality > zoneBest.quality) {
-            zoneBest = { ...q, coord, distance };
+          if (!best || q.quality > best.quality) {
+            best = { d, x, y, angle, nx, ny, tx, ty, ...q };
           }
+          if (streak >= 2) break;
         } else {
-          if (streak >= 2 && zoneBest) {
-            return { ...zoneBest, zoneStart, zoneEnd: distance - step, side, axis };
-          }
           streak = 0;
-          zoneStart = null;
-          zoneBest = null;
+          best = null;
         }
       }
+      rayResults.push(best);
+    }
 
-      if (streak >= 2 && zoneBest) {
-        return { ...zoneBest, zoneStart, zoneEnd: maxDistance - minGap, side, axis };
-      }
+    const foundCount = rayResults.filter(Boolean).length;
+    if (log) log(`[V68] RAYS ${rayCount} found=${foundCount}/${rayCount}`);
+
+    if (foundCount < Math.round(rayCount * 0.52)) {
+      if (log) log(`[V68] NO CLOSED GUTTER CONTOUR — insufficient boundary coverage`);
       return null;
     }
 
-    function regionSideCandidate(coord, score, support, axis) {
-      return {
-        coord,
-        score,
-        support,
-        axis,
-        relax: 0
-      };
-    }
-
-    function refineTapContainingRegion(region) {
-      let current = { ...region };
-      let splits = 0;
-      const history = [];
-      const maxSplits = 4;
-
-      while (splits < maxSplits) {
-        const candidates = [];
-        const checks = [
-          ["h", "TOP"], ["h", "BOTTOM"],
-          ["v", "LEFT"], ["v", "RIGHT"]
-        ];
-
-        for (const [axis, side] of checks) {
-          const found = findInternalDivider(axis, current, side);
-          if (found) candidates.push(found);
-        }
-
-        if (!candidates.length) break;
-
-        candidates.sort((a, b) => a.distance - b.distance);
-        let accepted = null;
-
-        for (const found of candidates) {
-          const proposed = { ...current };
-          if (found.side === "TOP") proposed.y0 = found.coord;
-          else if (found.side === "BOTTOM") proposed.y1 = found.coord;
-          else if (found.side === "LEFT") proposed.x0 = found.coord;
-          else proposed.x1 = found.coord;
-
-          const width = proposed.x1 - proposed.x0;
-          const height = proposed.y1 - proposed.y0;
-          const minWidth = Math.max(30, Math.round(w * 0.045));
-          const minHeight = Math.max(30, Math.round(h * 0.045));
-          if (width < minWidth || height < minHeight) continue;
-          if (!(proposed.x0 < px && proposed.x1 > px && proposed.y0 < py && proposed.y1 > py)) continue;
-
-          const t = regionSideCandidate(proposed.y0, found.quality, found.coverage, "h");
-          const b = regionSideCandidate(proposed.y1, found.quality, found.coverage, "h");
-          const l = regionSideCandidate(proposed.x0, found.quality, found.coverage, "v");
-          const r = regionSideCandidate(proposed.x1, found.quality, found.coverage, "v");
-          const t0 = { coord: current.y0, score: 0.15, support: 0.65, axis: "h", relax: 0 };
-          const b0 = { coord: current.y1, score: 0.15, support: 0.65, axis: "h", relax: 0 };
-          const l0 = { coord: current.x0, score: 0.15, support: 0.65, axis: "v", relax: 0 };
-          const r0 = { coord: current.x1, score: 0.15, support: 0.65, axis: "v", relax: 0 };
-          const validated = scoreRectangle(
-            found.side === "TOP" ? t : t0,
-            found.side === "BOTTOM" ? b : b0,
-            found.side === "LEFT" ? l : l0,
-            found.side === "RIGHT" ? r : r0,
-            0
-          );
-
-          if (validated || found.quality >= 0.17) {
-            accepted = { proposed, found };
-            break;
+    // Fill small gaps only when neighboring angular rays agree. We never
+    // invent a long missing section, which keeps the contour conservative.
+    const filled = rayResults.slice();
+    for (let i = 0; i < rayCount; i++) {
+      if (filled[i]) continue;
+      const prev = filled[(i - 1 + rayCount) % rayCount];
+      const next = filled[(i + 1) % rayCount];
+      if (prev && next) {
+        const gap = Math.abs(prev.d - next.d) / Math.max(1, Math.min(prev.d, next.d));
+        if (gap <= 0.28) {
+          const d = (prev.d + next.d) / 2;
+          const angle = (Math.PI * 2 * i) / rayCount;
+          const nx = Math.cos(angle), ny = Math.sin(angle);
+          const tx = -ny, ty = nx;
+          const x = px + nx * d, y = py + ny * d;
+          const q = radialBoundaryQuality(x, y, nx, ny, tx, ty, d);
+          if (q.coverage >= 0.52 && q.quality >= 0.135) {
+            filled[i] = { d, x, y, angle, nx, ny, tx, ty, ...q, filled: true };
           }
         }
+      }
+    }
 
-        if (!accepted) break;
-        current = accepted.proposed;
-        history.push(accepted.found);
-        splits++;
-
-        if (log) {
-          log(
-            `[V67] INTERIOR SPLIT #${splits} ${accepted.found.side} ` +
-            `at=${Math.round(accepted.found.coord)} ` +
-            `q=${accepted.found.quality.toFixed(3)} ` +
-            `median=${accepted.found.median.toFixed(3)} ` +
-            `coverage=${accepted.found.coverage.toFixed(2)}`
-          );
+    // Angular median smoothing removes isolated artwork edges. A real gutter
+    // should occupy a coherent angular neighborhood, while a speech balloon
+    // or character contour tends to be a short-lived angular spike.
+    const smoothed = filled.slice();
+    for (let i = 0; i < rayCount; i++) {
+      if (!filled[i]) continue;
+      const ds = [];
+      for (let k = -2; k <= 2; k++) {
+        const q = filled[(i + k + rayCount) % rayCount];
+        if (q) ds.push(q.d);
+      }
+      if (ds.length >= 3) {
+        ds.sort((a, b) => a - b);
+        const med = ds[Math.floor(ds.length / 2)];
+        if (Math.abs(filled[i].d - med) / Math.max(1, med) > 0.42) {
+          smoothed[i] = null;
+        } else {
+          smoothed[i] = { ...filled[i], d: 0.72 * filled[i].d + 0.28 * med };
+          smoothed[i].x = px + smoothed[i].nx * smoothed[i].d;
+          smoothed[i].y = py + smoothed[i].ny * smoothed[i].d;
         }
       }
-
-      return { region: current, splits, history };
     }
 
-    const refined = refineTapContainingRegion(best);
-    best = {
-      ...best,
-      x0: refined.region.x0,
-      x1: refined.region.x1,
-      y0: refined.region.y0,
-      y1: refined.region.y1,
-      width: refined.region.x1 - refined.region.x0,
-      height: refined.region.y1 - refined.region.y0,
-      __v67Splits: refined.splits,
-      __v67SplitHistory: refined.history
-    };
+    const points = smoothed.filter(Boolean);
+    const coverage = points.length / rayCount;
+    if (coverage < 0.58) {
+      if (log) log(`[V68] CONTOUR REJECTED coverage=${coverage.toFixed(3)}`);
+      return null;
+    }
+
+    const distances = points.map(p => p.d).sort((a, b) => a - b);
+    const medianD = distances[Math.floor(distances.length / 2)];
+    const mad = distances.map(d => Math.abs(d - medianD)).sort((a, b) => a - b);
+    const medianAbsDev = mad[Math.floor(mad.length / 2)];
+    const radialConsistency = 1 - Math.min(1, medianAbsDev / Math.max(12, medianD));
+
+    // Validate that the contour really surrounds the tap. Every ray with a
+    // point represents an outward crossing from the tap into the candidate
+    // gutter. We additionally compare the candidate distance to the image
+    // limits so an accidental giant enclosure is penalized.
+    const minD = distances[0];
+    const maxD = distances[distances.length - 1];
+    const spread = maxD / Math.max(1, minD);
+    const closure = Math.max(0, 1 - Math.min(1, Math.abs(spread - 1.8) / 2.8));
+    const evidence = points.reduce((sum, p) => sum + p.quality, 0) / points.length;
+    const tangentCoverage = points.reduce((sum, p) => sum + p.coverage, 0) / points.length;
+
+    // A second, deliberately independent test: sample a narrow ring just
+    // inside and just outside the contour and verify that the transition is
+    // coherent. This is the closest thing here to "is this actually a
+    // gutter?" rather than merely "did I find lots of edges?".
+    let ringInside = 0, ringOutside = 0, ringCount = 0;
+    for (let i = 0; i < rayCount; i++) {
+      const p = smoothed[i];
+      if (!p) continue;
+      const d = p.d;
+      const x = px + p.nx * d, y = py + p.ny * d;
+      ringInside += pixelTransition(x - p.nx * 8, y - p.ny * 8, x - p.nx * 2, y - p.ny * 2);
+      ringOutside += pixelTransition(x + p.nx * 2, y + p.ny * 2, x + p.nx * 10, y + p.ny * 10);
+      ringCount++;
+    }
+    ringInside /= Math.max(1, ringCount);
+    ringOutside /= Math.max(1, ringCount);
+    const ringEvidence = Math.min(1, (ringInside + ringOutside) * 2.2);
+
+    const contourScore =
+      0.28 * evidence +
+      0.18 * tangentCoverage +
+      0.22 * coverage +
+      0.18 * radialConsistency +
+      0.14 * ringEvidence;
 
     if (log) {
-      log(
-        `[V67] REFINED REGION ` +
-        `T=${Math.round(best.y0)} B=${Math.round(best.y1)} ` +
-        `L=${Math.round(best.x0)} R=${Math.round(best.x1)} ` +
-        `splits=${refined.splits}`
-      );
+      log(`[V68] CONTOUR coverage=${coverage.toFixed(3)} evidence=${evidence.toFixed(3)} tangent=${tangentCoverage.toFixed(3)}`);
+      log(`[V68] CONTOUR consistency=${radialConsistency.toFixed(3)} ring=${ringEvidence.toFixed(3)} score=${contourScore.toFixed(3)}`);
+      log(`[V68] RADIAL min=${minD.toFixed(1)} median=${medianD.toFixed(1)} max=${maxD.toFixed(1)}`);
     }
+
+    if (contourScore < 0.49 || coverage < 0.60 || radialConsistency < 0.32) {
+      if (log) log(`[V68] GUTTER CONTOUR REJECTED — not a convincing enclosure`);
+      return null;
+    }
+
+    // Convert the discovered contour to the bounding rectangle expected by
+    // the existing zoom system. The contour itself remains available in the
+    // diagnostic metadata, so future experiments can move to a true polygon
+    // mask without changing the detection concept.
+    const xs = points.map(p => p.x);
+    const ys = points.map(p => p.y);
+    const x0 = clamp(Math.floor(Math.min(...xs) - 3), 0, w - 1);
+    const x1 = clamp(Math.ceil(Math.max(...xs) + 3), 1, w);
+    const y0 = clamp(Math.floor(Math.min(...ys) - 3), 0, h - 1);
+    const y1 = clamp(Math.ceil(Math.max(...ys) + 3), 1, h);
+
+    if (x1 <= x0 || y1 <= y0 || (x1 - x0) < 20 || (y1 - y0) < 20) {
+      if (log) log(`[V68] INVALID CONTOUR BOUNDS`);
+      return null;
+    }
+
+    const contour = points.map(p => ({
+      x: Number((p.x / w).toFixed(5)),
+      y: Number((p.y / h).toFixed(5))
+    }));
 
     const panel = {
-      x: clamp(best.x0 / w, 0, 1),
-      y: clamp(best.y0 / h, 0, 1),
-      w: clamp(best.width / w, 0, 1),
-      h: clamp(best.height / h, 0, 1),
-      __v67Method: "closed-boundary-region-lock-interior-split",
-      __v67Score: best.score,
-      __v67Evidence: {
-        top: best.top,
-        bottom: best.bottom,
-        left: best.left,
-        right: best.right,
-        near: best.near,
-        balance: best.balance,
-        sideMean: best.sideMean,
-        sideMedian: best.sideMedian,
-        coverage: best.coverage,
-        corners: best.corners,
-        interior: best.interior,
-        relax: best.relax,
-        candidatesTested: candidates.length,
-        interiorSplits: refined.splits,
-        interiorSplitHistory: refined.history
+      x: clamp(x0 / w, 0, 1),
+      y: clamp(y0 / h, 0, 1),
+      w: clamp((x1 - x0) / w, 0, 1),
+      h: clamp((y1 - y0) / h, 0, 1),
+      __v68Method: "gutter-boundary-radial-contour",
+      __v68Score: contourScore,
+      __v68Evidence: {
+        rayCount,
+        raysFound: foundCount,
+        contourCoverage: coverage,
+        radialConsistency,
+        tangentCoverage,
+        ringEvidence,
+        medianRadius: medianD,
+        minRadius: minD,
+        maxRadius: maxD,
+        contour
       }
     };
+
     if (log) {
-      log(
-        `[V67] BEST CLOSED REGION ` +
-        `T=${Math.round(best.y0)} B=${Math.round(best.y1)} ` +
-        `L=${Math.round(best.x0)} R=${Math.round(best.x1)}`
-      );
-      log(
-        `[V67] SCORE=${best.score.toFixed(3)} ` +
-        `near=${best.near.toFixed(3)} ` +
-        `side=${best.sideMean.toFixed(3)} ` +
-        `median=${best.sideMedian.toFixed(3)} ` +
-        `coverage=${best.coverage.toFixed(3)} ` +
-        `corner=${best.corners.toFixed(3)} ` +
-        `relax=${best.relax}`
-      );
-      log(
-        `[V67] SIDES ` +
-        `T=${best.sides[0].quality.toFixed(3)}/c${best.sides[0].coverage.toFixed(2)} ` +
-        `B=${best.sides[1].quality.toFixed(3)}/c${best.sides[1].coverage.toFixed(2)} ` +
-        `L=${best.sides[2].quality.toFixed(3)}/c${best.sides[2].coverage.toFixed(2)} ` +
-        `R=${best.sides[3].quality.toFixed(3)}/c${best.sides[3].coverage.toFixed(2)}`
-      );
-      log(
-        `[V67] FINAL x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} ` +
-        `w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} ` +
-        `method=${panel.__v66Method}`
-      );
-      log(`[V67] ELAPSED ${Math.round(performance.now() - started)}ms candidates=${candidates.length}`);
+      log(`[V68] GUTTER CONTOUR ACCEPTED`);
+      log(`[V68] FINAL x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)}`);
+      log(`[V68] METHOD=${panel.__v68Method} elapsed=${Math.round(performance.now() - started)}ms`);
     }
 
     return panel;
