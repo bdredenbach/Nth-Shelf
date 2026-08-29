@@ -1,6 +1,16 @@
-## Current experimental build: V68 — GUTTER BOUNDARY
+## Current experimental build: V69 — CLEAN GUTTER BOUNDARY
 
 # Nth Shelf
+
+## Current experiment: V69 — CLEAN GUTTER BOUNDARY
+
+This test intentionally disables the legacy panel-candidate detector and hierarchy paths. Tap selection is handled directly by the isolated gutter-boundary detector in `js/panels.js`.
+
+
+## Current experiment: V69 — CLEAN GUTTER BOUNDARY
+
+This build isolates the gutter-boundary tap detector. The legacy V1–V68 panel candidate, hierarchy, reconstruction, partition, and cached-panel selection paths are disabled for this test. A tap is evaluated directly against the visible page image by the V69 gutter-boundary contour detector.
+
 
 ![Nth Shelf](assets/nth-shelf-empty.jpg)
 
