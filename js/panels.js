@@ -1,31 +1,20 @@
 // ================================================================
-// NTH SHELF — V69
-// EXPERIMENT: CLEAN GUTTER BOUNDARY
-// BUILD: V69 — isolated gutter-boundary detector
+// NTH SHELF — V70
+// EXPERIMENT: TRUE CLEAN GUTTER BOUNDARY
+// BUILD: V70 — isolated gutter-boundary detector
 // ================================================================
+// IMPORTANT: This file intentionally contains NO legacy panel detector.
+// There is no border-grid detector, region detector, hierarchy logic,
+// recursive partitioner, black-border recovery, old gutter-grid recovery,
+// candidate tribunal, or tap rectangle selector.
 //
-// This file intentionally contains ONLY the active gutter experiment.
-//
-// Selection authority:
-//   exact tap coordinate -> image evidence -> gutter boundary contour
-//
-// Removed from this experiment:
-//   - V1–V68 panel candidate detectors
-//   - parent/child/grandchild hierarchy
-//   - smallest-containing selection
-//   - legacy rectangle reconstruction
-//   - global gutter-grid recovery
-//   - black-border recovery
-//   - recursive partitioning
-//
-// The existing reader asks PanelDetect.exhaustiveTapGradient() directly.
-// No cached panel candidates are involved in the tap-selection decision.
-// ================================================================
+// V70 receives only the verified visible page image and exact tap coordinate.
+// Its sole job is to identify the visual panel region enclosed by the gutter.
 
 const PanelDetect = {
-  exhaustiveTapGradient(img, relX, relY, log) {
+  findPanelByGutter(img, relX, relY, log) {
     // ================================================================
-    // V69 — CLEAN GUTTER BOUNDARY TEST
+    // V70 — GUTTER BOUNDARY TEST
     // ================================================================
     // The target is the visual panel containing the exact tap. We do NOT
     // select a detector child/parent and we do NOT subdivide a previously
@@ -55,7 +44,7 @@ const PanelDetect = {
     try {
       data = ctx.getImageData(0, 0, w, h).data;
     } catch (e) {
-      if (log) log(`[V69] IMAGE READ ERROR ${e?.message || e}`);
+      if (log) log(`[V70] IMAGE READ ERROR ${e?.message || e}`);
       return null;
     }
 
@@ -79,9 +68,9 @@ const PanelDetect = {
     const py = clamp(Math.round(relY * (h - 1)), 3, h - 4);
 
     if (log) {
-      log(`[V69] TAP x=${relX.toFixed(4)} y=${relY.toFixed(4)} px=${px} py=${py}`);
-      log(`[V69] GUTTER SEARCH — detector hierarchy disabled`);
-      log(`[V69] IMAGE ${w}x${h}`);
+      log(`[V70] TAP x=${relX.toFixed(4)} y=${relY.toFixed(4)} px=${px} py=${py}`);
+      log(`[V70] GUTTER SEARCH — detector hierarchy disabled`);
+      log(`[V70] IMAGE ${w}x${h}`);
     }
 
     function pixelTransition(x1, y1, x2, y2) {
@@ -171,10 +160,10 @@ const PanelDetect = {
     }
 
     const foundCount = rayResults.filter(Boolean).length;
-    if (log) log(`[V69] RAYS ${rayCount} found=${foundCount}/${rayCount}`);
+    if (log) log(`[V70] RAYS ${rayCount} found=${foundCount}/${rayCount}`);
 
     if (foundCount < Math.round(rayCount * 0.52)) {
-      if (log) log(`[V69] NO CLOSED GUTTER CONTOUR — insufficient boundary coverage`);
+      if (log) log(`[V70] NO CLOSED GUTTER CONTOUR — insufficient boundary coverage`);
       return null;
     }
 
@@ -228,7 +217,7 @@ const PanelDetect = {
     const points = smoothed.filter(Boolean);
     const coverage = points.length / rayCount;
     if (coverage < 0.58) {
-      if (log) log(`[V69] CONTOUR REJECTED coverage=${coverage.toFixed(3)}`);
+      if (log) log(`[V70] CONTOUR REJECTED coverage=${coverage.toFixed(3)}`);
       return null;
     }
 
@@ -275,13 +264,13 @@ const PanelDetect = {
       0.14 * ringEvidence;
 
     if (log) {
-      log(`[V69] CONTOUR coverage=${coverage.toFixed(3)} evidence=${evidence.toFixed(3)} tangent=${tangentCoverage.toFixed(3)}`);
-      log(`[V69] CONTOUR consistency=${radialConsistency.toFixed(3)} ring=${ringEvidence.toFixed(3)} score=${contourScore.toFixed(3)}`);
-      log(`[V69] RADIAL min=${minD.toFixed(1)} median=${medianD.toFixed(1)} max=${maxD.toFixed(1)}`);
+      log(`[V70] CONTOUR coverage=${coverage.toFixed(3)} evidence=${evidence.toFixed(3)} tangent=${tangentCoverage.toFixed(3)}`);
+      log(`[V70] CONTOUR consistency=${radialConsistency.toFixed(3)} ring=${ringEvidence.toFixed(3)} score=${contourScore.toFixed(3)}`);
+      log(`[V70] RADIAL min=${minD.toFixed(1)} median=${medianD.toFixed(1)} max=${maxD.toFixed(1)}`);
     }
 
     if (contourScore < 0.49 || coverage < 0.60 || radialConsistency < 0.32) {
-      if (log) log(`[V69] GUTTER CONTOUR REJECTED — not a convincing enclosure`);
+      if (log) log(`[V70] GUTTER CONTOUR REJECTED — not a convincing enclosure`);
       return null;
     }
 
@@ -297,7 +286,7 @@ const PanelDetect = {
     const y1 = clamp(Math.ceil(Math.max(...ys) + 3), 1, h);
 
     if (x1 <= x0 || y1 <= y0 || (x1 - x0) < 20 || (y1 - y0) < 20) {
-      if (log) log(`[V69] INVALID CONTOUR BOUNDS`);
+      if (log) log(`[V70] INVALID CONTOUR BOUNDS`);
       return null;
     }
 
@@ -311,9 +300,9 @@ const PanelDetect = {
       y: clamp(y0 / h, 0, 1),
       w: clamp((x1 - x0) / w, 0, 1),
       h: clamp((y1 - y0) / h, 0, 1),
-      __v69Method: "gutter-boundary-radial-contour",
-      __v69Score: contourScore,
-      __v69Evidence: {
+      __v68Method: "clean-gutter-boundary-radial-contour",
+      __v68Score: contourScore,
+      __v68Evidence: {
         rayCount,
         raysFound: foundCount,
         contourCoverage: coverage,
@@ -328,9 +317,9 @@ const PanelDetect = {
     };
 
     if (log) {
-      log(`[V69] GUTTER CONTOUR ACCEPTED`);
-      log(`[V69] FINAL x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)}`);
-      log(`[V69] METHOD=${panel.__v69Method} elapsed=${Math.round(performance.now() - started)}ms`);
+      log(`[V70] GUTTER CONTOUR ACCEPTED`);
+      log(`[V70] FINAL x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)}`);
+      log(`[V70] METHOD=${panel.__v70Method} elapsed=${Math.round(performance.now() - started)}ms`);
     }
 
     return panel;

@@ -1,9 +1,12 @@
 // ================================================================
-// NTH SHELF — V69
-// EXPERIMENT: CLEAN GUTTER BOUNDARY
-// BUILD: V69 — isolated gutter-boundary detector
+// NTH SHELF — V70
+// EXPERIMENT: TRUE CLEAN GUTTER BOUNDARY
+// BUILD: V70 — isolated gutter-boundary detector
 // ================================================================
-// V69 CLEAN GUTTER BOUNDARY — exact tap image mapping + isolated gutter contour.
+// The panel tap path uses only the verified visible image, exact tap
+// coordinate, and PanelDetect.findPanelByGutter(). No legacy panel detector,
+// hierarchy selector, cached rectangle, or fallback selector participates.
+
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
 const PANEL_ZOOM_KEY = "longbox_panel_zoom_enabled";
@@ -34,7 +37,7 @@ const Reader = {
  _twoPageOrientationLocked: false,
  _initialReaderGuideShown: false,
 
- currentPanels: [],       // detected panel rects for the visible page, fractional coords
+ currentPanels: [],       // intentionally empty in V70 clean gutter experiment
  panelZoomEnabled: localStorage.getItem(PANEL_ZOOM_KEY) !== "0",
  bubbleZoomEnabled: localStorage.getItem(BUBBLE_ZOOM_KEY) !== "0",
  bubbleAltZoomEnabled: localStorage.getItem(BUBBLE_ALT_ZOOM_KEY) !== "0",
@@ -772,23 +775,23 @@ const Reader = {
    const step = this.mode === "two-page" ? 2 : 1;
    [this.index + step, this.index - 1].forEach((i) => this.getPageUrl(i));
  },
-  loadPanelsForCurrentPage() {
-    // V69: legacy page-level panel candidate detection is disabled.
-    // Tap selection runs directly against the visible image.
-    this.currentPanels = [];
-    if (this.debugMode) this.debugLog("[V69] clean gutter mode — legacy panel detector disabled");
-  },
-  removePanelDiagnosticOverlay() {
-    // V69: legacy candidate overlay intentionally disabled.
-    this.els.panelDiagnosticOverlay = null;
-  },
 
- // V48: visually and diagnostically map the panel selected by the tap.
- // Keep V47's complete candidate overlay intact, then mark the exact winner
- // and report which detected panels contain or are contained by it.
+ async loadPanelsForCurrentPage() {
+   // V70 CLEAN EXPERIMENT: no page-level panel detection runs.
+   // No cached panel rectangles, detector candidates, hierarchy data, or
+   // legacy selection logic may influence the tap-to-pop-out decision.
+   this.currentPanels = [];
+   this.removePanelDiagnosticOverlay();
+ },
+
+ removePanelDiagnosticOverlay() {
+   const existing = this.els.panelDiagnosticOverlay;
+   if (existing && existing.parentNode) existing.remove();
+   this.els.panelDiagnosticOverlay = null;
+ },
 
  getPanelImageContext(screenX = null, screenY = null) {
-   // V69 EXACT TAP IMAGE MAPPING:
+   // V64 COORDINATE TRUTH:
    // When a tap position is supplied, resolve the ACTUAL visible image under
    // that screen point instead of assuming Turn.js view()[0] is the image
    // the user touched. This is intentionally a DOM/image-location experiment;
@@ -878,17 +881,17 @@ const Reader = {
 
        if (this.debugMode) {
          this.debugLog(
-           `[V69] COORDINATE TRUTH candidates=${images.length} containing=${containing.length} ` +
+           `[V70] COORDINATE TRUTH candidates=${images.length} containing=${containing.length} ` +
            `hitFromPoint=${hitFromPoint ? "yes" : "no"}`
          );
          this.debugLog(
-           `[V69] SELECTED IMG page=${pageNumber} ` +
+           `[V70] SELECTED IMG page=${pageNumber} ` +
            `rect=(${Number(rect.left.toFixed(1))},${Number(rect.top.toFixed(1))},` +
            `${Number(rect.width.toFixed(1))},${Number(rect.height.toFixed(1))}) ` +
            `natural=${chosen.naturalWidth}x${chosen.naturalHeight}`
          );
          this.debugLog(
-           `[V69] SCREEN TAP=(${Number(sx.toFixed(1))},${Number(sy.toFixed(1))}) ` +
+           `[V70] SCREEN TAP=(${Number(sx.toFixed(1))},${Number(sy.toFixed(1))}) ` +
            `IMAGE TAP=(${Number(normalizedX.toFixed(5))},${Number(normalizedY.toFixed(5))}) ` +
            `PIXEL=(${Math.round(normalizedX * (chosen.naturalWidth - 1))},` +
            `${Math.round(normalizedY * (chosen.naturalHeight - 1))})`
@@ -897,7 +900,7 @@ const Reader = {
            const r = img.getBoundingClientRect();
            const pn = img.closest?.(".turn-page, .turn-page-wrapper")?.getAttribute?.("page") || "?";
            this.debugLog(
-             `[V69] CANDIDATE page=${pn} rect=(${Number(r.left.toFixed(1))},${Number(r.top.toFixed(1))},` +
+             `[V70] CANDIDATE page=${pn} rect=(${Number(r.left.toFixed(1))},${Number(r.top.toFixed(1))},` +
              `${Number(r.width.toFixed(1))},${Number(r.height.toFixed(1))})`
            );
          }
@@ -908,7 +911,7 @@ const Reader = {
    }
 
    // Preserve the existing non-tap behavior for diagnostics, rendering, and
-   // other reader paths; the tap path uses the isolated gutter detector.
+   // other reader paths. V64 only changes how a tap resolves its image.
    if (this.mode === "single" &&
        this.useTurnJSPageMode &&
        this.turnPageMode?.book) {
@@ -935,10 +938,10 @@ const Reader = {
    return null;
  },
 
- showV69TapMarker(pos, img, imgRect, relX, relY, pageNumber) {
+ showV70TapMarker(pos, img, imgRect, relX, relY, pageNumber) {
    if (!this.els.stage || !img || !imgRect) return;
    const stageRect = this.els.stage.getBoundingClientRect();
-   const old = this.els.v69TapMarker;
+   const old = this.els.v70TapMarker;
    if (old?.parentNode) old.remove();
 
    const marker = document.createElement("div");
@@ -961,7 +964,7 @@ const Reader = {
    });
 
    const label = document.createElement("div");
-   label.textContent = `V69 page ${pageNumber}  ${Math.round(relX * (img.naturalWidth - 1))},${Math.round(relY * (img.naturalHeight - 1))}`;
+   label.textContent = `V70 page ${pageNumber}  ${Math.round(relX * (img.naturalWidth - 1))},${Math.round(relY * (img.naturalHeight - 1))}`;
    Object.assign(label.style, {
      position: "absolute",
      left: "18px",
@@ -976,15 +979,19 @@ const Reader = {
    });
    marker.appendChild(label);
    this.els.stage.appendChild(marker);
-   this.els.v69TapMarker = marker;
-   clearTimeout(this._v69MarkerTimer);
-   this._v69MarkerTimer = setTimeout(() => {
-     if (this.els.v69TapMarker === marker) {
+   this.els.v70TapMarker = marker;
+   clearTimeout(this._v64MarkerTimer);
+   this._v64MarkerTimer = setTimeout(() => {
+     if (this.els.v70TapMarker === marker) {
        marker.remove();
-       this.els.v69TapMarker = null;
+       this.els.v70TapMarker = null;
      }
    }, 3500);
  },
+
+ // V70 CLEAN GUTTER: no legacy panel selector remains here.
+ // `currentPanels` is intentionally kept empty for compatibility with other
+ // reader state, but it is never used to choose the tapped panel.
 
  togglePanelZoom() {
    this.panelZoomEnabled = !this.panelZoomEnabled;
@@ -2418,17 +2425,9 @@ async setMode(mode) {
            this.handleDoubleTap(pos);
          } else {
            let panelHit = false;
-           let tappedPanel = null;
            if (this.mode === "single" && this.panelZoomEnabled) {
              const ctx = this.getPanelImageContext();
-             if (ctx && ctx.rect.width > 1 && ctx.rect.height > 1) {
-               // V63: every tap in the displayed page is eligible for the
-               // V69: every tap is eligible for the isolated gutter detector.
-               // would reintroduce child/grandchild candidates before the
-               // gradient experiment even gets a chance to run.
-               panelHit = true;
-               tappedPanel = null;
-             }
+             panelHit = !!(ctx && ctx.rect.width > 1 && ctx.rect.height > 1);
            }
 
            if (panelHit) {
@@ -2439,25 +2438,6 @@ async setMode(mode) {
 
              // Once a frame is already focused, do NOT create another
 
-             // V43: diagnostics only. Existing hit-test code is unchanged.
-             try {
-               if (typeof this.debugLog === "function") {
-                 this.debugLog("V43 TAP SELECTION DIAGNOSTICS");
-                 this.debugLog("V43 HIT-TEST PATH REACHED");
-                 // V44: deeper diagnostics only; no selection/control-flow changes.
-                 try {
-                   const p = tappedPanel;
-                   const px = p && Number.isFinite(Number(p.x)) ? Number(p.x) : (p && Number.isFinite(Number(p.left)) ? Number(p.left) : "?");
-                   const py = p && Number.isFinite(Number(p.y)) ? Number(p.y) : (p && Number.isFinite(Number(p.top)) ? Number(p.top) : "?");
-                   const pw = p && Number.isFinite(Number(p.w)) ? Number(p.w) : (p && Number.isFinite(Number(p.width)) ? Number(p.width) : "?");
-                   const ph = p && Number.isFinite(Number(p.h)) ? Number(p.h) : (p && Number.isFinite(Number(p.height)) ? Number(p.height) : "?");
-                   const tapX = pos && Number.isFinite(Number(pos.x)) ? Number(pos.x) : "?";
-                   const tapY = pos && Number.isFinite(Number(pos.y)) ? Number(pos.y) : "?";
-                   this.debugLog(`V44 PRE-HITTEST SNAPSHOT tap=(${tapX},${tapY}) panelHit=${!!p} panelBounds=(${px},${py},${pw},${ph})`);
-                 } catch (_) {}
-
-               }
-             } catch (_) {}
              // deferred panel candidate. The next tap belongs to the
              // focused-frame interaction: bubble detection gets a chance,
              // and if no bubble is found the frame is dismissed.
@@ -2485,7 +2465,6 @@ async setMode(mode) {
                  pos,
                  comicId,
                  pageIndex,
-                 panel: tappedPanel,
                  promise: (async () => {
                    try {
                      const url = await this.getPageUrl(pageIndex);
@@ -2517,20 +2496,8 @@ async setMode(mode) {
                lastTapTime = 0;
                lastTapPos = null;
 
-               const pendingPanel = this._deferredPanelTap?.panel || null;
                this._deferredPanelTap = null;
-
-               if (typeof this.debugLog === "function") {
-                 try {
-                   this.debugLog(
-                     pendingPanel
-                       ? `[V45] COMMIT stored panel`
-                       : `[V45] COMMIT no stored panel`
-                   );
-                 } catch (_) {}
-               }
-
-               this.handleSingleTap(pos, pendingPanel);
+               this.handleSingleTap(pos);
              }, 450);
            } else {
              clearTimeout(pendingTapTimer);
@@ -2597,7 +2564,7 @@ async setMode(mode) {
    });
  },
 
- async handleSingleTap(pos, forcedPanel = null) {
+ async handleSingleTap(pos) {
    if (this.mode !== "single" || this.scale > 1.02) return;
 
    const stageRect = this.els.stage.getBoundingClientRect();
@@ -2612,63 +2579,58 @@ async setMode(mode) {
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
 
-   // V69: the image context above is resolved from the exact screen tap.
-   // Show a temporary marker and log the natural source pixel so this test
-   // can prove the coordinate mapping before we judge V63's boundary logic.
-   this.showV69TapMarker(pos, img, imgRect, relXImg, relYImg, ctx?.pageNumber || (this.index + 1));
+   // V70: the image context above is resolved from the exact screen tap.
+   // This coordinate path is retained from the verified coordinate experiment.
+   this.showV70TapMarker(pos, img, imgRect, relXImg, relYImg, ctx?.pageNumber || (this.index + 1));
    if (this.debugMode) {
      this.debugLog(
-       `[V69] VERIFIED CONTEXT page=${ctx?.pageNumber || (this.index + 1)} ` +
+       `[V70] VERIFIED CONTEXT page=${ctx?.pageNumber || (this.index + 1)} ` +
        `img=${img.naturalWidth}x${img.naturalHeight}`
      );
    }
 
-   // V63: ignore the detected parent/child hierarchy for frame selection.
-   // The exact displayed image and exact tap are the only inputs to the
-   // gradient laboratory. Existing currentPanels are deliberately NOT passed
-   // as seeds because child/grandchild rectangles must not influence this
-   // experiment.
+   // V70 CLEAN GUTTER: the exact visible image and exact tap are the only
+   // panel-detection inputs. currentPanels is intentionally never consulted.
    const logger = typeof this.debugLog === "function"
      ? (msg) => this.debugLog(msg)
      : null;
 
    if (logger) {
      logger(
-       `[V69] TAP x=${Number(relXImg.toFixed(4))} ` +
-       `y=${Number(relYImg.toFixed(4))} ` +
-       `forced=${forcedPanel ? "yes" : "no"}`
+       `[V70] TAP x=${Number(relXImg.toFixed(4))} ` +
+       `y=${Number(relYImg.toFixed(4))}`
      );
-     logger(`[V69] CHILD/PARENT/GRANDCHILD DETECTION DISABLED FOR THIS EXPERIMENT`);
+     logger(`[V70] CLEAN GUTTER PATH — NO LEGACY PANEL DETECTOR`);
    }
 
    let panel = null;
    try {
-     panel = await PanelDetect.exhaustiveTapGradient(
+     panel = await PanelDetect.findPanelByGutter(
        img,
        relXImg,
        relYImg,
        logger
      );
    } catch (err) {
-     if (logger) logger(`[V69] LAB ERROR ${err?.message || err}`);
+     if (logger) logger(`[V70] LAB ERROR ${err?.message || err}`);
    }
 
    if (panel) {
      if (logger) {
        logger(
-         `[V69] FINAL TAP-CONTAINING PANEL ` +
+         `[V70] FINAL TAP-CONTAINING PANEL ` +
          `x=${Number(Number(panel.x).toFixed(4))} ` +
          `y=${Number(Number(panel.y).toFixed(4))} ` +
          `w=${Number(Number(panel.w).toFixed(4))} ` +
          `h=${Number(Number(panel.h).toFixed(4))} ` +
-         `method=${panel.__v68Method || "unknown"}`
+         `method=${panel.__v70Method || "unknown"}`
        );
      }
      this.zoomToPanel(panel, stageRect, imgRect, img);
      return;
    }
 
-   if (logger) logger(`[V69] NO TAP-CONTAINING PANEL FOUND -> no frame opened`);
+   if (logger) logger(`[V70] NO GUTTER-ENCLOSED PANEL FOUND -> no frame opened`);
    this.toggleChrome();
  },
 
