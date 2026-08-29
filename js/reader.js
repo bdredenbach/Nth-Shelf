@@ -765,22 +765,22 @@ const Reader = {
  },
 
  async loadPanelsForCurrentPage() {
+   // V76: deliberately bypass the IndexedDB panel cache for this experiment.
+   // Older panel rectangles must not influence the test.
    this.currentPanels = [];
    if (this.mode !== "single") return;
 
    const comicId = this.comic.id;
    const pageIndex = this.index;
    const token = ++this._panelLoadToken;
-   const logger = this.debugMode ? (msg) => this.debugLog(`[panels p${pageIndex}] ${msg}`) : null;
+   const logger = this.debugMode ? (msg) => this.debugLog(`[V76 panels p${pageIndex}] ${msg}`) : null;
 
-   // V75 test isolation: always detect fresh so no panel rectangles produced
-   // by earlier experiments can influence this run.
    const url = await this.getPageUrl(pageIndex);
    const panels = url ? await PanelDetect.detect(url, logger) : [];
 
    if (token !== this._panelLoadToken || this.comic.id !== comicId || this.index !== pageIndex) return;
    this.currentPanels = panels;
-   if (logger) logger(`V75 currentPanels set: ${panels.length} fresh adaptive-gutter panel(s)`);
+   if (logger) logger(`V76 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
  },
 
  getPanelImageContext() {
