@@ -1,8 +1,8 @@
-// NTH SHELF V73 — stable gutter baseline test cache
+// NTH SHELF V73 — V80 test cache
 // sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
 // Comic pages themselves live in IndexedDB (js/db.js), not here.
 
-const CACHE_NAME = "nth-shelf-shell-v2-79-v78-tight-fallback";
+const CACHE_NAME = "nth-shelf-shell-v2-80-v80-looser-fallback";
 const SHELL_FILES = [
   "./",
   "./index.html",
