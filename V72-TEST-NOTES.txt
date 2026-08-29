@@ -1,0 +1,5 @@
+NTH SHELF V72 — SUSTAINED GUTTER / REGION MEMBERSHIP
+
+This is a clean gutter-only panel detection experiment. V72 changes the V70/V71 acceptance rule: four-sided closure is not required. Opposing sustained gutter zones can establish a panel band; additional sides are used only when credible. No legacy panel detector, parent/child hierarchy, recursive subdivision, or fallback is active in the tap-selection path.
+
+TEST: install archive, confirm V72 diagnostics, Single Page + Panel Zoom, diagnostics on, repeat the same troublesome taps from V65-V71, then try stacked/side-by-side/wide/tall/irregular panels. Record both correct pop-outs and failures.
