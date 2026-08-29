@@ -1,6 +1,6 @@
-// NTH SHELF V79 — V78 BASELINE / SLIGHTLY TIGHTER TAP-LOCAL FALLBACK
+// NTH SHELF V80 — V78 BASELINE / SLIGHTLY LOOSER TAP-LOCAL FALLBACK
 // Freshly based on V78. V73 remains authoritative whenever it contains the tap.
-// V79 changes only the tap-local fallback acceptance; no V74-V77 detector code is included.
+// V80 changes only the tap-local fallback acceptance; no V74-V77 detector code is included.
 
 // NTH SHELF V73 — STABLE GUTTER BASELINE / TAP SELECTION
 // V73 intentionally restores the simple v2.76 gutter-scanning detector as the sole panel detector.
@@ -48,7 +48,7 @@ const PanelDetect = {
     });
   },
 
-  // V79 fallback: inspect only the neighborhood of the exact tap. This is
+  // V80 fallback: inspect only the neighborhood of the exact tap. This is
   // not a page-wide panel detector. It looks for a gutter zone bracketed by
   // edge energy and uses the nearest credible zone on each side of the tap.
   detectTapLocalFallback(imgUrl, relX, relY, log) {
@@ -57,8 +57,8 @@ const PanelDetect = {
       img.onload = () => {
         try { resolve(this._analyzeTapLocalFallback(img, relX, relY, log)); }
         catch (err) {
-          console.warn("V79 tap-local fallback failed:", err);
-          if (log) log(`V79 fallback ERROR: ${err.message}`);
+          console.warn("V80 tap-local fallback failed:", err);
+          if (log) log(`V80 fallback ERROR: ${err.message}`);
           resolve(null);
         }
       };
@@ -74,7 +74,7 @@ const PanelDetect = {
     const h = Math.max(1, Math.round(img.height * scale));
     const tx = clamp01(relX) * (w - 1);
     const ty = clamp01(relY) * (h - 1);
-    if (log) log(`V79 fallback source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
+    if (log) log(`V80 fallback source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
 
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;
@@ -121,8 +121,8 @@ const PanelDetect = {
     for(let i=1;i<w-1;i++) samples.push(gradV[i]);
     samples.sort((a,b)=>a-b);
     const med=samples.length?samples[Math.floor(samples.length*0.5)]:0;
-    const edgeCut=Math.max(9,med*2.5);
-    const quietCut=Math.max(2.5,edgeCut*0.44);
+    const edgeCut=Math.max(9,med*2.3);
+    const quietCut=Math.max(2.5,edgeCut*0.46);
 
     function findSide(profile,start,step,limit,size){
       let x=start+step, travelled=0;
@@ -157,7 +157,7 @@ const PanelDetect = {
     const left=findSide(gradV,x0,-1,Math.max(12,Math.round(w*0.48)),w);
     const right=findSide(gradV,x0,1,Math.max(12,Math.round(w*0.48)),w);
 
-    if(log) log(`V79 fallback gutters T=${top?top.pos:"-"} B=${bottom?bottom.pos:"-"} L=${left?left.pos:"-"} R=${right?right.pos:"-"} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
+    if(log) log(`V80 fallback gutters T=${top?top.pos:"-"} B=${bottom?bottom.pos:"-"} L=${left?left.pos:"-"} R=${right?right.pos:"-"} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
 
     const sx=left?left.pos:0, ex=right?right.pos:w-1;
     const sy=top?top.pos:0, ey=bottom?bottom.pos:h-1;
@@ -168,12 +168,12 @@ const PanelDetect = {
       (found>=2 || (found>=1 && (pw>=w*0.84 || ph>=h*0.84)));
 
     if(!credible){
-      if(log) log(`V79 fallback REJECTED region=${Math.round(pw)}x${Math.round(ph)} sides=${found} containsTap=${contains}`);
+      if(log) log(`V80 fallback REJECTED region=${Math.round(pw)}x${Math.round(ph)} sides=${found} containsTap=${contains}`);
       return null;
     }
 
     const panel={x:Math.min(sx,ex)/w,y:Math.min(sy,ey)/h,w:pw/w,h:ph/h,_v79Fallback:true,_gutterSides:found};
-    if(log) log(`V79 fallback ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${found}`);
+    if(log) log(`V80 fallback ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${found}`);
     return panel;
   },
 
