@@ -1,3 +1,8 @@
+// ================================================================
+// NTH SHELF — V66
+// EXPERIMENT: CLOSED BOUNDARY / REGION LOCK
+// BUILD: V66 — First Sustained Boundary successor
+// ================================================================
 // V65 FIRST SUSTAINED BOUNDARY + V64 COORDINATE TRUTH — nearest-first boundary selection.
 // V60 TAP-OWNS-SELECTION — retained for comparison only.
 // V57 DOMINANT-OUTER-CANDIDATE TAP SELECTION EXPERIMENT — retained as fallback.
@@ -2952,11 +2957,11 @@ async setMode(mode) {
 
    if (logger) {
      logger(
-       `[V65] TAP x=${Number(relXImg.toFixed(4))} ` +
+       `[V66] TAP x=${Number(relXImg.toFixed(4))} ` +
        `y=${Number(relYImg.toFixed(4))} ` +
        `forced=${forcedPanel ? "yes" : "no"}`
      );
-     logger(`[V65] CHILD/PARENT/GRANDCHILD DETECTION DISABLED FOR THIS EXPERIMENT`);
+     logger(`[V66] CHILD/PARENT/GRANDCHILD DETECTION DISABLED FOR THIS EXPERIMENT`);
    }
 
    let panel = null;
@@ -2968,25 +2973,25 @@ async setMode(mode) {
        logger
      );
    } catch (err) {
-     if (logger) logger(`[V65] LAB ERROR ${err?.message || err}`);
+     if (logger) logger(`[V66] LAB ERROR ${err?.message || err}`);
    }
 
    if (panel) {
      if (logger) {
        logger(
-         `[V65] FINAL NEAREST-BOUNDARY PANEL ` +
+         `[V66] FINAL CLOSED-REGION PANEL ` +
          `x=${Number(Number(panel.x).toFixed(4))} ` +
          `y=${Number(Number(panel.y).toFixed(4))} ` +
          `w=${Number(Number(panel.w).toFixed(4))} ` +
          `h=${Number(Number(panel.h).toFixed(4))} ` +
-         `method=${panel.__v61Method || "unknown"}`
+         `method=${panel.__v66Method || "unknown"}`
        );
      }
      this.zoomToPanel(panel, stageRect, imgRect, img);
      return;
    }
 
-   if (logger) logger(`[V65] NO NEAREST-BOUNDARY PANEL FOUND -> no frame opened`);
+   if (logger) logger(`[V66] NO NEAREST-BOUNDARY PANEL FOUND -> no frame opened`);
    this.toggleChrome();
  },
 

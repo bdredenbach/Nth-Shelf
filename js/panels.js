@@ -1,3 +1,8 @@
+// ================================================================
+// NTH SHELF — V66
+// EXPERIMENT: CLOSED BOUNDARY / REGION LOCK
+// BUILD: V66 — nearest sustained boundaries + closed-region validation
+// ================================================================
 // panels.js — Border-Grid Panel Detection
 // V64 COORDINATE TRUTH COMPATIBLE + V63 PERFORMANCE-SAFE GRADIENT LAB: tap-centered boundary experiment.
 //
@@ -48,81 +53,752 @@ const PanelDetect = {
   // a geometric frame. It is intentionally allowed to be more expensive than
   // the normal detector.
   exhaustiveTapGradient(img, relX, relY, log) {
+    // V66 — CLOSED BOUNDARY / REGION LOCK
+    //
+    // V65 proved that nearest-first sustained boundary searches can find useful
+    // local evidence, but its four independent answers could belong to four
+    // different visual structures. V66 keeps the nearest-first search, but
+    // collects a small number of plausible boundaries and then asks a harder
+    // question: which combination forms one coherent closed region around the
+    // exact tap?
     const started = performance.now();
-    // V65: nearest-first sustained-boundary experiment. This intentionally
-    // ignores all detected panel/parent/child/grandchild rectangles.
     if (!img || !(img.naturalWidth || img.width) || !(img.naturalHeight || img.height)) return null;
-    const srcW = img.naturalWidth || img.width, srcH = img.naturalHeight || img.height;
-    const scale = Math.min(1, 1100 / Math.max(srcW, srcH));
-    const w = Math.max(2, Math.round(srcW * scale)), h = Math.max(2, Math.round(srcH * scale));
-    const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
-    const ctx = canvas.getContext('2d', {willReadFrequently:true}); if (!ctx) return null;
+
+    const srcW = img.naturalWidth || img.width;
+    const srcH = img.naturalHeight || img.height;
+    const scale = Math.min(1, 1200 / Math.max(srcW, srcH));
+    const w = Math.max(2, Math.round(srcW * scale));
+    const h = Math.max(2, Math.round(srcH * scale));
+
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    if (!ctx) return null;
+
     ctx.drawImage(img, 0, 0, w, h);
-    let data; try { data = ctx.getImageData(0,0,w,h).data; } catch(e) { if(log) log(`[V65] IMAGE READ ERROR ${e?.message||e}`); return null; }
-    const n=w*h, lum=new Float32Array(n), chr=new Float32Array(n), rr=new Uint8Array(n), gg=new Uint8Array(n), bb=new Uint8Array(n);
-    for(let i=0,p=0;i<n;i++,p+=4){const r=data[p],g=data[p+1],b=data[p+2];rr[i]=r;gg[i]=g;bb[i]=b;lum[i]=.299*r+.587*g+.114*b;chr[i]=Math.max(r,g,b)-Math.min(r,g,b);}
-    const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)), at=(x,y)=>y*w+x;
-    const px=clamp(Math.round(relX*(w-1)),1,w-2), py=clamp(Math.round(relY*(h-1)),1,h-2);
-    if(log){log(`[V65] TAP x=${relX.toFixed(4)} y=${relY.toFixed(4)} px=${px} py=${py}`);log('[V65] CHILD/PARENT/GRANDCHILD DETECTION DISABLED');log(`[V65] IMAGE ${w}x${h}`);}
 
-    function evidence(axis, coord, span, relax){
-      const half=Math.max(6,Math.round(span/2)), samples=19; let rgb=0,ld=0,cd=0,edge=0,stable=0;
-      for(let i=0;i<samples;i++){
-        const t=(i+.5)/samples;
-        if(axis==='h'){
-          const x=clamp(Math.round(px-half+t*2*half),2,w-3), y=clamp(coord,10,h-11);
-          const c=at(x,y), a=at(x,y-4), b=at(x,y+4), aa=at(x,y-9), bbx=at(x,y+9);
-          const dr=rr[a]-rr[b],dg=gg[a]-gg[b],db=bb[a]-bb[b]; rgb+=Math.sqrt(dr*dr+dg*dg+db*db)/441.673; ld+=Math.abs(lum[a]-lum[b])/255; cd+=Math.abs(chr[a]-chr[b])/255; edge+=Math.min(1,Math.abs(lum[c]-(lum[aa]+lum[bbx])/2)/80); stable+=Math.min(1,Math.abs(lum[aa]-lum[bbx])/255);
-        } else {
-          const y=clamp(Math.round(py-half+t*2*half),2,h-3), x=clamp(coord,10,w-11);
-          const c=at(x,y), a=at(x-4,y), b=at(x+4,y), aa=at(x-9,y), bbx=at(x+9,y);
-          const dr=rr[a]-rr[b],dg=gg[a]-gg[b],db=bb[a]-bb[b]; rgb+=Math.sqrt(dr*dr+dg*dg+db*db)/441.673; ld+=Math.abs(lum[a]-lum[b])/255; cd+=Math.abs(chr[a]-chr[b])/255; edge+=Math.min(1,Math.abs(lum[c]-(lum[aa]+lum[bbx])/2)/80); stable+=Math.min(1,Math.abs(lum[aa]-lum[bbx])/255);
-        }
-      }
-      rgb/=samples;ld/=samples;cd/=samples;edge/=samples;stable/=samples;
-      const score=.34*rgb+.25*ld+.11*cd+.16*edge+.14*stable;
-      const support=(rgb>=.07? .30:0)+(ld>=.05?.22:0)+(cd>=.03?.10:0)+(edge>=.045?.16:0)+(stable>=.07?.22:0);
-      const threshold=.115-relax*.018;
-      return {score,support,rgb,lum:ld,chroma:cd,edge,stable,convincing:score>=threshold&&support>=(.62-relax*.08)};
-    }
-
-    const dirs=[
-      {name:'TOP',axis:'h',sign:-1,limit:Math.round(h*.46)}, {name:'BOTTOM',axis:'h',sign:1,limit:Math.round(h*.46)},
-      {name:'LEFT',axis:'v',sign:-1,limit:Math.round(w*.46)}, {name:'RIGHT',axis:'v',sign:1,limit:Math.round(w*.46)}
-    ];
-    function findNearest(d){
-      const step=Math.max(3,Math.round(Math.min(w,h)/190));
-      const spans=d.axis==='h'?[Math.max(28,Math.round(w*.14)),Math.max(42,Math.round(w*.30)),Math.max(56,Math.round(w*.54))]:[Math.max(28,Math.round(h*.14)),Math.max(42,Math.round(h*.30)),Math.max(56,Math.round(h*.54))];
-      for(let relax=0;relax<3;relax++){
-        let streak=0, first=null, best=null;
-        for(let dist=step;dist<=d.limit;dist+=step){
-          const coord=d.axis==='h'?py+d.sign*dist:px+d.sign*dist;
-          if(d.axis==='h'?(coord<10||coord>h-11):(coord<10||coord>w-11)) break;
-          let evBest=null;
-          for(const span of spans){const ev=evidence(d.axis,coord,span,relax);if(!evBest||ev.score+ev.support*.12>evBest.score+evBest.support*.12)evBest=ev;}
-          if(evBest&&evBest.convincing){if(!streak)first=dist;streak++;if(!best||evBest.score>best.score)best={...evBest,coord,distance:dist};}
-          else {if(streak>=2&&best)return {...best,zoneStart:first,zoneEnd:dist-step,relax};streak=0;first=null;best=null;}
-        }
-        if(streak>=2&&best)return {...best,zoneStart:first,zoneEnd:d.limit,relax};
-      }
+    let data;
+    try {
+      data = ctx.getImageData(0, 0, w, h).data;
+    } catch (e) {
+      if (log) log(`[V66] IMAGE READ ERROR ${e?.message || e}`);
       return null;
     }
-    const found={};
-    for(const d of dirs){found[d.name]=findNearest(d);if(log)log(`[V65] ${d.name} nearest=${found[d.name]?`${Math.round(found[d.name].coord)}:${found[d.name].score.toFixed(2)}:p${found[d.name].support.toFixed(2)}:r${found[d.name].relax}`:'NONE'}`);}
-    if(!found.TOP||!found.BOTTOM||!found.LEFT||!found.RIGHT){if(log)log('[V65] INSUFFICIENT NEAREST BOUNDARIES -> no frame');return null;}
 
-    function corner(x,y){let s=0,c=0;for(let dy=-6;dy<=6;dy+=2)for(let dx=-6;dx<=6;dx+=2){const xx=clamp(x+dx,1,w-2),yy=clamp(y+dy,1,h-2);const gx=Math.abs(lum[at(xx+1,yy)]-lum[at(xx-1,yy)])/255,gy=Math.abs(lum[at(xx,yy+1)]-lum[at(xx,yy-1)])/255;s+=Math.min(1,gx+gy);c++;}return c?s/c:0;}
-    const t=found.TOP,b=found.BOTTOM,l=found.LEFT,r=found.RIGHT;
-    if(!(l.coord<px&&r.coord>px&&t.coord<py&&b.coord>py)) {if(log)log('[V65] BOUNDARIES DO NOT ENCLOSE TAP');return null;}
-    const width=r.coord-l.coord,height=b.coord-t.coord;
-    if(width<Math.max(28,w*.045)||height<Math.max(28,h*.045)||width>w*.96||height>h*.96)return null;
-    const side=(t.score+b.score+l.score+r.score)/4, support=(t.support+b.support+l.support+r.support)/4;
-    const near=1-clamp(((t.distance+b.distance)/2/h+(l.distance+r.distance)/2/w)/.46,0,1);
-    const corners=(corner(l.coord,t.coord)+corner(r.coord,t.coord)+corner(l.coord,b.coord)+corner(r.coord,b.coord))/4;
-    const area=(width*height)/(w*h);
-    const score=.48*near+.25*support+.17*side+.10*corners-.05*Math.sqrt(area);
-    const panel={x:l.coord/w,y:t.coord/h,w:width/w,h:height/h,__v65Method:'first-sustained-boundary',__v65Score:score,__v65Evidence:{top:t,bottom:b,left:l,right:r,near,support,side,corners,area}};
-    if(log){log(`[V65] CLOSED REGION T=${Math.round(t.coord)} B=${Math.round(b.coord)} L=${Math.round(l.coord)} R=${Math.round(r.coord)}`);log(`[V65] SCORE=${score.toFixed(3)} proximity=${near.toFixed(3)} persistence=${support.toFixed(3)} side=${side.toFixed(3)} corner=${corners.toFixed(3)}`);log(`[V65] FINAL x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} method=${panel.__v65Method}`);log(`[V65] ELAPSED ${Math.round(performance.now()-started)}ms`);}
+    const n = w * h;
+    const lum = new Float32Array(n);
+    const chr = new Float32Array(n);
+    const rr = new Uint8Array(n);
+    const gg = new Uint8Array(n);
+    const bb = new Uint8Array(n);
+
+    for (let i = 0, p = 0; i < n; i++, p += 4) {
+      const r = data[p], g = data[p + 1], b = data[p + 2];
+      rr[i] = r;
+      gg[i] = g;
+      bb[i] = b;
+      lum[i] = 0.299 * r + 0.587 * g + 0.114 * b;
+      chr[i] = Math.max(r, g, b) - Math.min(r, g, b);
+    }
+
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const at = (x, y) => y * w + x;
+    const px = clamp(Math.round(relX * (w - 1)), 2, w - 3);
+    const py = clamp(Math.round(relY * (h - 1)), 2, h - 3);
+
+    if (log) {
+      log(`[V66] TAP x=${relX.toFixed(4)} y=${relY.toFixed(4)} px=${px} py=${py}`);
+      log(`[V66] CHILD/PARENT/GRANDCHILD DETECTION DISABLED`);
+      log(`[V66] IMAGE ${w}x${h}`);
+    }
+
+    function transition(axis, coord, span, relax) {
+      const half = Math.max(8, Math.round(span / 2));
+      const samples = 23;
+
+      let rgb = 0;
+      let ld = 0;
+      let cd = 0;
+      let edge = 0;
+      let stable = 0;
+
+      for (let i = 0; i < samples; i++) {
+        const t = (i + 0.5) / samples;
+
+        if (axis === "h") {
+          const x = clamp(
+            Math.round(px - half + t * 2 * half),
+            3, w - 4
+          );
+          const y = clamp(coord, 10, h - 11);
+
+          const c = at(x, y);
+          const a = at(x, y - 4);
+          const b = at(x, y + 4);
+          const aa = at(x, y - 9);
+          const bbx = at(x, y + 9);
+
+          const dr = rr[a] - rr[b];
+          const dg = gg[a] - gg[b];
+          const db = bb[a] - bb[b];
+
+          rgb += Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
+          ld += Math.abs(lum[a] - lum[b]) / 255;
+          cd += Math.abs(chr[a] - chr[b]) / 255;
+          edge += Math.min(
+            1,
+            Math.abs(lum[c] - (lum[aa] + lum[bbx]) / 2) / 70
+          );
+          stable += Math.min(
+            1,
+            Math.abs(lum[aa] - lum[bbx]) / 255
+          );
+        } else {
+          const y = clamp(
+            Math.round(py - half + t * 2 * half),
+            3, h - 4
+          );
+          const x = clamp(coord, 10, w - 11);
+
+          const c = at(x, y);
+          const a = at(x - 4, y);
+          const b = at(x + 4, y);
+          const aa = at(x - 9, y);
+          const bbx = at(x + 9, y);
+
+          const dr = rr[a] - rr[b];
+          const dg = gg[a] - gg[b];
+          const db = bb[a] - bb[b];
+
+          rgb += Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
+          ld += Math.abs(lum[a] - lum[b]) / 255;
+          cd += Math.abs(chr[a] - chr[b]) / 255;
+          edge += Math.min(
+            1,
+            Math.abs(lum[c] - (lum[aa] + lum[bbx]) / 2) / 70
+          );
+          stable += Math.min(
+            1,
+            Math.abs(lum[aa] - lum[bbx]) / 255
+          );
+        }
+      }
+
+      rgb /= samples;
+      ld /= samples;
+      cd /= samples;
+      edge /= samples;
+      stable /= samples;
+
+      const score =
+        0.34 * rgb +
+        0.25 * ld +
+        0.11 * cd +
+        0.16 * edge +
+        0.14 * stable;
+
+      const support =
+        (rgb >= 0.065 ? 0.30 : 0) +
+        (ld >= 0.045 ? 0.22 : 0) +
+        (cd >= 0.028 ? 0.10 : 0) +
+        (edge >= 0.040 ? 0.16 : 0) +
+        (stable >= 0.065 ? 0.22 : 0);
+
+      const threshold = 0.108 - relax * 0.015;
+      const requiredSupport = 0.59 - relax * 0.07;
+
+      return {
+        score,
+        support,
+        rgb,
+        lum: ld,
+        chroma: cd,
+        edge,
+        stable,
+        convincing: score >= threshold && support >= requiredSupport
+      };
+    }
+
+    const dirs = [
+      {
+        name: "TOP",
+        axis: "h",
+        sign: -1,
+        limit: Math.round(h * 0.48)
+      },
+      {
+        name: "BOTTOM",
+        axis: "h",
+        sign: 1,
+        limit: Math.round(h * 0.48)
+      },
+      {
+        name: "LEFT",
+        axis: "v",
+        sign: -1,
+        limit: Math.round(w * 0.48)
+      },
+      {
+        name: "RIGHT",
+        axis: "v",
+        sign: 1,
+        limit: Math.round(w * 0.48)
+      }
+    ];
+
+    function addCandidate(list, candidate) {
+      if (!candidate) return;
+
+      const duplicate = list.find(
+        existing => Math.abs(existing.coord - candidate.coord) <= Math.max(7, Math.round(Math.min(w, h) * 0.012))
+      );
+
+      if (duplicate) {
+        const oldValue = duplicate.score + duplicate.support * 0.12;
+        const newValue = candidate.score + candidate.support * 0.12;
+        if (newValue > oldValue) Object.assign(duplicate, candidate);
+        return;
+      }
+
+      list.push(candidate);
+    }
+
+    function findCandidates(d) {
+      const candidates = [];
+      const step = Math.max(3, Math.round(Math.min(w, h) / 210));
+      const spans = d.axis === "h"
+        ? [
+            Math.max(30, Math.round(w * 0.12)),
+            Math.max(48, Math.round(w * 0.28)),
+            Math.max(72, Math.round(w * 0.48)),
+            Math.max(96, Math.round(w * 0.68))
+          ]
+        : [
+            Math.max(30, Math.round(h * 0.12)),
+            Math.max(48, Math.round(h * 0.28)),
+            Math.max(72, Math.round(h * 0.48)),
+            Math.max(96, Math.round(h * 0.68))
+          ];
+
+      for (let relax = 0; relax < 3; relax++) {
+        let streak = 0;
+        let zoneStart = null;
+        let zoneBest = null;
+
+        for (let dist = step; dist <= d.limit; dist += step) {
+          const coord = d.axis === "h"
+            ? py + d.sign * dist
+            : px + d.sign * dist;
+
+          if (
+            d.axis === "h"
+              ? (coord < 10 || coord > h - 11)
+              : (coord < 10 || coord > w - 11)
+          ) {
+            break;
+          }
+
+          let best = null;
+
+          for (const span of spans) {
+            const ev = transition(d.axis, coord, span, relax);
+            if (
+              !best ||
+              ev.score + ev.support * 0.12 >
+                best.score + best.support * 0.12
+            ) {
+              best = ev;
+            }
+          }
+
+          if (best && best.convincing) {
+            if (!streak) zoneStart = dist;
+            streak++;
+
+            if (
+              !zoneBest ||
+              best.score + best.support * 0.12 >
+                zoneBest.score + zoneBest.support * 0.12
+            ) {
+              zoneBest = {
+                ...best,
+                coord,
+                distance: dist
+              };
+            }
+          } else {
+            // Require a sustained zone, not a single lucky sample.
+            if (streak >= 2 && zoneBest) {
+              addCandidate(candidates, {
+                ...zoneBest,
+                zoneStart,
+                zoneEnd: dist - step,
+                relax
+              });
+            }
+            streak = 0;
+            zoneStart = null;
+            zoneBest = null;
+          }
+        }
+
+        if (streak >= 2 && zoneBest) {
+          addCandidate(candidates, {
+            ...zoneBest,
+            zoneStart,
+            zoneEnd: d.limit,
+            relax
+          });
+        }
+      }
+
+      candidates.sort((a, b) => a.distance - b.distance);
+
+      // Keep the search local and bounded. We want alternatives, not a
+      // V62-style explosion.
+      return candidates.slice(0, 7);
+    }
+
+    const candidateMap = {};
+    for (const d of dirs) {
+      candidateMap[d.name] = findCandidates(d);
+
+      if (log) {
+        log(
+          `[V66] ${d.name} candidates=${candidateMap[d.name].length} ` +
+          candidateMap[d.name]
+            .map(c =>
+              `${Math.round(c.coord)}@${c.score.toFixed(2)}/p${c.support.toFixed(2)}/r${c.relax}`
+            )
+            .join(" | ")
+        );
+      }
+    }
+
+    if (
+      !candidateMap.TOP.length ||
+      !candidateMap.BOTTOM.length ||
+      !candidateMap.LEFT.length ||
+      !candidateMap.RIGHT.length
+    ) {
+      if (log) log(`[V66] INSUFFICIENT CANDIDATE SIDES`);
+      return null;
+    }
+
+    function boundaryQuality(axis, coord, start, end, relax) {
+      const samples = 17;
+      const values = [];
+
+      for (let i = 0; i < samples; i++) {
+        const t = (i + 0.5) / samples;
+        if (axis === "h") {
+          const x = clamp(
+            Math.round(start + (end - start) * t),
+            8, w - 9
+          );
+          const y = clamp(coord, 10, h - 11);
+
+          const outside = at(x, y - 8);
+          const inside = at(x, y + 8);
+          const center = at(x, y);
+
+          const dr = rr[outside] - rr[inside];
+          const dg = gg[outside] - gg[inside];
+          const db = bb[outside] - bb[inside];
+
+          const rgb = Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
+          const ld = Math.abs(lum[outside] - lum[inside]) / 255;
+          const cd = Math.abs(chr[outside] - chr[inside]) / 255;
+          const line = Math.min(
+            1,
+            Math.abs(
+              lum[center] -
+              (lum[at(x, y - 15)] + lum[at(x, y + 15)]) / 2
+            ) / 70
+          );
+
+          values.push(
+            0.42 * rgb +
+            0.30 * ld +
+            0.12 * cd +
+            0.16 * line
+          );
+        } else {
+          const y = clamp(
+            Math.round(start + (end - start) * t),
+            8, h - 9
+          );
+          const x = clamp(coord, 10, w - 11);
+
+          const outside = at(x - 8, y);
+          const inside = at(x + 8, y);
+          const center = at(x, y);
+
+          const dr = rr[outside] - rr[inside];
+          const dg = gg[outside] - gg[inside];
+          const db = bb[outside] - bb[inside];
+
+          const rgb = Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
+          const ld = Math.abs(lum[outside] - lum[inside]) / 255;
+          const cd = Math.abs(chr[outside] - chr[inside]) / 255;
+          const line = Math.min(
+            1,
+            Math.abs(
+              lum[center] -
+              (lum[at(x - 15, y)] + lum[at(x + 15, y)]) / 2
+            ) / 70
+          );
+
+          values.push(
+            0.42 * rgb +
+            0.30 * ld +
+            0.12 * cd +
+            0.16 * line
+          );
+        }
+      }
+
+      const ordered = values.slice().sort((a, b) => a - b);
+      const mean = values.reduce((a, b) => a + b, 0) / values.length;
+      const median = ordered[Math.floor(ordered.length / 2)];
+      const threshold = 0.095 - relax * 0.012;
+      const coverage =
+        values.filter(v => v >= threshold).length / values.length;
+
+      // The best frame boundary should be persistent over a meaningful
+      // portion of its length. Median protects us from one spectacular
+      // artwork edge dominating an otherwise weak side.
+      const quality =
+        0.42 * mean +
+        0.34 * median +
+        0.24 * coverage;
+
+      return {
+        quality,
+        mean,
+        median,
+        coverage
+      };
+    }
+
+    function cornerContinuity(x, y) {
+      let total = 0;
+      let strong = 0;
+      let count = 0;
+
+      for (let dy = -8; dy <= 8; dy += 2) {
+        for (let dx = -8; dx <= 8; dx += 2) {
+          const xx = clamp(x + dx, 1, w - 2);
+          const yy = clamp(y + dy, 1, h - 2);
+
+          const gx =
+            Math.abs(lum[at(xx + 1, yy)] - lum[at(xx - 1, yy)]) / 255;
+          const gy =
+            Math.abs(lum[at(xx, yy + 1)] - lum[at(xx, yy - 1)]) / 255;
+
+          const g = Math.min(1, gx + gy);
+          total += g;
+          if (g >= 0.075) strong++;
+          count++;
+        }
+      }
+
+      return count
+        ? 0.60 * (total / count) + 0.40 * (strong / count)
+        : 0;
+    }
+
+    function interiorRegionCheck(x0, y0, x1, y1) {
+      // Sample a cross inside the proposed region and just outside it.
+      // This is intentionally weak evidence: artwork can vary wildly inside
+      // a real panel, so interior uniformity must never be required.
+      const insetX = Math.max(6, Math.round((x1 - x0) * 0.10));
+      const insetY = Math.max(6, Math.round((y1 - y0) * 0.10));
+
+      const cx = Math.round((x0 + x1) / 2);
+      const cy = Math.round((y0 + y1) / 2);
+
+      const inside = [
+        [cx, y0 + insetY],
+        [cx, y1 - insetY],
+        [x0 + insetX, cy],
+        [x1 - insetX, cy]
+      ];
+
+      let interiorVariance = 0;
+      let outsideContrast = 0;
+      let count = 0;
+
+      for (const [x, y] of inside) {
+        const xx = clamp(x, 2, w - 3);
+        const yy = clamp(y, 2, h - 3);
+        const c = lum[at(xx, yy)];
+
+        const local =
+          Math.abs(c - lum[at(xx - 3, yy)]) +
+          Math.abs(c - lum[at(xx + 3, yy)]) +
+          Math.abs(c - lum[at(xx, yy - 3)]) +
+          Math.abs(c - lum[at(xx, yy + 3)]);
+
+        interiorVariance += Math.min(1, local / 510);
+
+        const edgeOutside =
+          Math.min(1, Math.abs(
+            lum[at(xx, yy)] -
+            lum[at(
+              clamp(
+                xx + (xx < cx ? -Math.max(4, Math.round((x1 - x0) * 0.10)) : Math.max(4, Math.round((x1 - x0) * 0.10))),
+                1, w - 2
+              ),
+              yy
+            )]
+          ) / 255);
+
+        outsideContrast += edgeOutside;
+        count++;
+      }
+
+      return {
+        interior: count ? interiorVariance / count : 0,
+        contrast: count ? outsideContrast / count : 0
+      };
+    }
+
+    function scoreRectangle(t, b, l, r, relax) {
+      const x0 = l.coord;
+      const x1 = r.coord;
+      const y0 = t.coord;
+      const y1 = b.coord;
+
+      if (!(x0 < px && x1 > px && y0 < py && y1 > py)) return null;
+
+      const width = x1 - x0;
+      const height = y1 - y0;
+
+      const minWidth = Math.max(30, Math.round(w * 0.045));
+      const minHeight = Math.max(30, Math.round(h * 0.045));
+
+      if (
+        width < minWidth ||
+        height < minHeight ||
+        width > w * 0.94 ||
+        height > h * 0.94
+      ) {
+        return null;
+      }
+
+      const topQ = boundaryQuality("h", y0, x0, x1, relax);
+      const bottomQ = boundaryQuality("h", y1, x0, x1, relax);
+      const leftQ = boundaryQuality("v", x0, y0, y1, relax);
+      const rightQ = boundaryQuality("v", x1, y0, y1, relax);
+
+      const sides = [topQ, bottomQ, leftQ, rightQ];
+
+      const sideMean =
+        sides.reduce((sum, q) => sum + q.quality, 0) / sides.length;
+
+      const sideMedian =
+        sides.map(q => q.quality).sort((a, b) => a - b)[1.5 | 0];
+
+      const coverage =
+        sides.reduce((sum, q) => sum + q.coverage, 0) / sides.length;
+
+      const corners =
+        (
+          cornerContinuity(x0, y0) +
+          cornerContinuity(x1, y0) +
+          cornerContinuity(x0, y1) +
+          cornerContinuity(x1, y1)
+        ) / 4;
+
+      const interior = interiorRegionCheck(x0, y0, x1, y1);
+
+      // "Near" strongly rewards a small closed region around the tap, but
+      // does not allow proximity to overpower poor boundary evidence.
+      const verticalNear =
+        1 - clamp(
+          ((py - y0) + (y1 - py)) / Math.max(1, h * 0.72),
+          0, 1
+        );
+
+      const horizontalNear =
+        1 - clamp(
+          ((px - x0) + (x1 - px)) / Math.max(1, w * 0.72),
+          0, 1
+        );
+
+      const near = 0.5 * verticalNear + 0.5 * horizontalNear;
+
+      const balance =
+        1 -
+        clamp(
+          Math.abs(
+            ((px - x0) / Math.max(1, width)) -
+            ((x1 - px) / Math.max(1, width))
+          ) +
+          Math.abs(
+            ((py - y0) / Math.max(1, height)) -
+            ((y1 - py) / Math.max(1, height))
+          ),
+          0, 1
+        );
+
+      const areaPenalty = Math.sqrt((width * height) / (w * h));
+
+      const score =
+        0.31 * near +
+        0.28 * sideMean +
+        0.15 * coverage +
+        0.11 * corners +
+        0.07 * balance +
+        0.04 * interior.contrast -
+        0.13 * areaPenalty;
+
+      // A closed region must have four credible sides. Do not let three
+      // excellent sides drag a completely unsupported fourth side through.
+      const weakSides = sides.filter(q => q.coverage < (0.28 - relax * 0.04)).length;
+      const sideFloor = 0.105 - relax * 0.012;
+
+      if (
+        weakSides >= 2 ||
+        sideMedian < sideFloor ||
+        coverage < (0.31 - relax * 0.04)
+      ) {
+        return null;
+      }
+
+      return {
+        score,
+        x0, x1, y0, y1,
+        width,
+        height,
+        near,
+        balance,
+        sideMean,
+        sideMedian,
+        coverage,
+        corners,
+        interior,
+        sides
+      };
+    }
+
+    const candidates = [];
+
+    // Candidate counts are capped above, so this remains a small progressive
+    // search rather than V62's page-wide combinatorial explorer.
+    for (const t of candidateMap.TOP) {
+      for (const b of candidateMap.BOTTOM) {
+        for (const l of candidateMap.LEFT) {
+          for (const r of candidateMap.RIGHT) {
+            for (let relax = 0; relax < 3; relax++) {
+              const scored = scoreRectangle(t, b, l, r, relax);
+              if (scored) {
+                candidates.push({
+                  ...scored,
+                  top: t,
+                  bottom: b,
+                  left: l,
+                  right: r,
+                  relax
+                });
+                break;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if (!candidates.length) {
+      if (log) log(`[V66] NO CLOSED REGION SURVIVED VALIDATION`);
+      return null;
+    }
+
+    candidates.sort((a, b) => b.score - a.score);
+
+    // The score already favors proximity, but this final gate prevents a
+    // substantially farther candidate with slightly prettier evidence from
+    // defeating a nearby closed region.
+    let best = candidates[0];
+
+    const nearestComparable = candidates
+      .slice()
+      .sort((a, b) => {
+        const da =
+          ((py - a.y0) + (a.y1 - py)) / h +
+          ((px - a.x0) + (a.x1 - px)) / w;
+        const db =
+          ((py - b.y0) + (b.y1 - py)) / h +
+          ((px - b.x0) + (b.x1 - px)) / w;
+        return da - db;
+      });
+
+    if (nearestComparable.length) {
+      const nearest = nearestComparable[0];
+      if (
+        nearest.score >= best.score - 0.075 &&
+        nearest.sideMedian >= best.sideMedian * 0.82
+      ) {
+        best = nearest;
+      }
+    }
+
+    const panel = {
+      x: clamp(best.x0 / w, 0, 1),
+      y: clamp(best.y0 / h, 0, 1),
+      w: clamp(best.width / w, 0, 1),
+      h: clamp(best.height / h, 0, 1),
+      __v66Method: "closed-boundary-region-lock",
+      __v66Score: best.score,
+      __v66Evidence: {
+        top: best.top,
+        bottom: best.bottom,
+        left: best.left,
+        right: best.right,
+        near: best.near,
+        balance: best.balance,
+        sideMean: best.sideMean,
+        sideMedian: best.sideMedian,
+        coverage: best.coverage,
+        corners: best.corners,
+        interior: best.interior,
+        relax: best.relax,
+        candidatesTested: candidates.length
+      }
+    };
+
+    if (log) {
+      log(
+        `[V66] BEST CLOSED REGION ` +
+        `T=${Math.round(best.y0)} B=${Math.round(best.y1)} ` +
+        `L=${Math.round(best.x0)} R=${Math.round(best.x1)}`
+      );
+      log(
+        `[V66] SCORE=${best.score.toFixed(3)} ` +
+        `near=${best.near.toFixed(3)} ` +
+        `side=${best.sideMean.toFixed(3)} ` +
+        `median=${best.sideMedian.toFixed(3)} ` +
+        `coverage=${best.coverage.toFixed(3)} ` +
+        `corner=${best.corners.toFixed(3)} ` +
+        `relax=${best.relax}`
+      );
+      log(
+        `[V66] SIDES ` +
+        `T=${best.sides[0].quality.toFixed(3)}/c${best.sides[0].coverage.toFixed(2)} ` +
+        `B=${best.sides[1].quality.toFixed(3)}/c${best.sides[1].coverage.toFixed(2)} ` +
+        `L=${best.sides[2].quality.toFixed(3)}/c${best.sides[2].coverage.toFixed(2)} ` +
+        `R=${best.sides[3].quality.toFixed(3)}/c${best.sides[3].coverage.toFixed(2)}`
+      );
+      log(
+        `[V66] FINAL x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} ` +
+        `w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} ` +
+        `method=${panel.__v66Method}`
+      );
+      log(`[V66] ELAPSED ${Math.round(performance.now() - started)}ms candidates=${candidates.length}`);
+    }
+
     return panel;
   },
 
