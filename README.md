@@ -194,14 +194,9 @@ This project is licensed under the **MIT License**. The license applies to the s
 - The newly centered comic requires a fresh first tap before opening.
 
 
-## V73 Test Build — Stable Gutter Baseline / Tap Selection
+## V77 Test Build — Two-Pass Gutter / V73 Baseline + Geometry Fallback
 
-This experimental build deliberately returns panel detection to the compact gutter-scanning implementation used by the v2.76 Stable source supplied for the V73 experiment.
+V77 starts from the V73 stable gutter baseline, which was the last known-good panel detector. Pass 1 uses that baseline exactly. If the exact tap is not inside a Pass 1 panel, and only then, V77 runs a separate geometry-based gutter fallback for that tap. A successful Pass 1 result can never be replaced by the fallback.
 
-V73 does not run the V1–V72 experimental panel detectors. The panel cache is deliberately bypassed so previously stored panel rectangles cannot affect this test. Each page is freshly analyzed by `PanelDetect`, and the existing reader tap-selection path chooses the detected region containing the exact tap coordinate.
+This build intentionally does not carry forward the failed V74, V75, or V76 detector paths.
 
-This is a diagnostic baseline: if V73 succeeds where V65–V72 failed, the next work should focus on the later experimental detection algorithms rather than adding more complexity.
-
-
-## V76 Test
-V76 starts from the known-good V73 stable-gutter baseline and changes only the gutter signal. It looks for geometric gap corridors bracketed by sustained boundary edges rather than requiring a particular gutter color or low pixel variance. V74 and V75 detector code is not included. The panel cache is bypassed for this experiment.
