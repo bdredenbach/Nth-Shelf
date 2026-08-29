@@ -1,5 +1,5 @@
 // panels.js — Border-Grid Panel Detection
-// V63 PERFORMANCE-SAFE GRADIENT LAB: progressive tap-centered frame-boundary experiment.
+// V64 COORDINATE TRUTH COMPATIBLE + V63 PERFORMANCE-SAFE GRADIENT LAB: tap-centered boundary experiment.
 //
 // Detects comic panel frames by finding black border lines and their
 // intersections, then building a rectangle grid from corner points.
@@ -24,6 +24,9 @@ const PanelDetect = {
   },
 
   // ================================================================
+  // V64 uses this V63 boundary engine only after reader.js verifies the
+  // exact visible image and tap-to-source coordinate. Parent/child/grandchild
+  // panel selection remains intentionally excluded from the experiment.
   // V63 PERFORMANCE-SAFE GRADIENT LAB
   // ================================================================
   // A one-off, tap-centered frame finder. This deliberately ignores every

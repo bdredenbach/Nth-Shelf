@@ -1,4 +1,4 @@
-// V63 PERFORMANCE-SAFE GRADIENT LAB — progressive tap-centered frame-boundary experiment.
+// V64 COORDINATE TRUTH + V63 PERFORMANCE-SAFE GRADIENT LAB — tap-to-image verification before boundary analysis.
 // V60 TAP-OWNS-SELECTION — retained for comparison only.
 // V57 DOMINANT-OUTER-CANDIDATE TAP SELECTION EXPERIMENT — retained as fallback.
 // V48 PANEL SELECTION MAP TEST — retained for comparison.
@@ -982,9 +982,128 @@ const Reader = {
    if (childDetails) this.debugLog(`[V48] CHILD DETAILS ${childDetails}`);
  },
 
- getPanelImageContext() {
-   // Turn.js keeps multiple page images in the viewport. Resolve the image
-   // belonging to the page Turn.js says is currently visible.
+ getPanelImageContext(screenX = null, screenY = null) {
+   // V64 COORDINATE TRUTH:
+   // When a tap position is supplied, resolve the ACTUAL visible image under
+   // that screen point instead of assuming Turn.js view()[0] is the image
+   // the user touched. This is intentionally a DOM/image-location experiment;
+   // it does not use currentPanels, parents, children, or grandchildren.
+   const hasPoint = Number.isFinite(Number(screenX)) && Number.isFinite(Number(screenY));
+   const sx = Number(screenX);
+   const sy = Number(screenY);
+
+   const isVisibleImage = (img) => {
+     if (!img || !img.naturalWidth || !img.naturalHeight) return false;
+     const rect = img.getBoundingClientRect();
+     if (rect.width <= 1 || rect.height <= 1) return false;
+     const cs = getComputedStyle(img);
+     if (cs.display === "none" || cs.visibility === "hidden" || Number(cs.opacity) <= 0) return false;
+     let el = img.parentElement;
+     for (let i = 0; i < 6 && el; i++, el = el.parentElement) {
+       const ecs = getComputedStyle(el);
+       if (ecs.display === "none" || ecs.visibility === "hidden" || Number(ecs.opacity) <= 0) return false;
+     }
+     return true;
+   };
+
+   const containsPoint = (rect, x, y, pad = 1) =>
+     x >= rect.left - pad && x <= rect.right + pad &&
+     y >= rect.top - pad && y <= rect.bottom + pad;
+
+   if (hasPoint) {
+     const images = Array.from(this.els.viewport?.querySelectorAll?.("img") || [])
+       .filter(isVisibleImage);
+
+     const containing = images.filter(img => containsPoint(img.getBoundingClientRect(), sx, sy, 2));
+
+     // First prefer the image Turn.js exposes at the exact screen point.
+     // pointer-events:none on comic images means elementsFromPoint often
+     // returns the Turn.js page wrapper instead, so walk upward and then
+     // inspect its descendant image.
+     let hitFromPoint = null;
+     try {
+       const stack = document.elementsFromPoint?.(sx, sy) || [];
+       for (const el of stack) {
+         if (el?.tagName === "IMG" && images.includes(el)) {
+           hitFromPoint = el;
+           break;
+         }
+         const candidate = el?.closest?.(".turn-page, .turn-page-wrapper, .longbox-turn-page");
+         const childImg = candidate?.querySelector?.("img");
+         if (childImg && images.includes(childImg) && containsPoint(childImg.getBoundingClientRect(), sx, sy, 2)) {
+           hitFromPoint = childImg;
+           break;
+         }
+       }
+     } catch (_) {}
+
+     let chosen = hitFromPoint;
+     if (!chosen && containing.length === 1) chosen = containing[0];
+
+     // If multiple visible images overlap, use the page wrapper's stacking
+     // order where possible, then prefer the image with the smallest rendered
+     // area. This is NOT panel hierarchy: it only chooses which DOM page image
+     // is physically under the finger.
+     if (!chosen && containing.length > 1) {
+       const scored = containing.map((img, index) => {
+         const rect = img.getBoundingClientRect();
+         let score = 0;
+         const page = img.closest?.(".turn-page, .turn-page-wrapper, .longbox-turn-page");
+         if (page) {
+           const pcs = getComputedStyle(page);
+           if (pcs.display !== "none" && pcs.visibility !== "hidden") score += 100;
+           const z = Number.parseInt(pcs.zIndex, 10);
+           if (Number.isFinite(z)) score += Math.max(-20, Math.min(20, z));
+           if (page.classList.contains("turn-page")) score += 5;
+         }
+         score -= (rect.width * rect.height) / 1000000;
+         return { img, rect, score, index };
+       }).sort((a, b) => b.score - a.score);
+       chosen = scored[0]?.img || null;
+     }
+
+     if (chosen) {
+       const rect = chosen.getBoundingClientRect();
+       const page = chosen.closest?.(".turn-page, .turn-page-wrapper, .longbox-turn-page");
+       let pageNumber = this.index + 1;
+       const pAttr = page?.getAttribute?.("page");
+       if (pAttr != null && Number.isFinite(Number(pAttr))) pageNumber = Number(pAttr);
+       const normalizedX = clamp((sx - rect.left) / rect.width, 0, 1);
+       const normalizedY = clamp((sy - rect.top) / rect.height, 0, 1);
+
+       if (this.debugMode) {
+         this.debugLog(
+           `[V64] COORDINATE TRUTH candidates=${images.length} containing=${containing.length} ` +
+           `hitFromPoint=${hitFromPoint ? "yes" : "no"}`
+         );
+         this.debugLog(
+           `[V64] SELECTED IMG page=${pageNumber} ` +
+           `rect=(${Number(rect.left.toFixed(1))},${Number(rect.top.toFixed(1))},` +
+           `${Number(rect.width.toFixed(1))},${Number(rect.height.toFixed(1))}) ` +
+           `natural=${chosen.naturalWidth}x${chosen.naturalHeight}`
+         );
+         this.debugLog(
+           `[V64] SCREEN TAP=(${Number(sx.toFixed(1))},${Number(sy.toFixed(1))}) ` +
+           `IMAGE TAP=(${Number(normalizedX.toFixed(5))},${Number(normalizedY.toFixed(5))}) ` +
+           `PIXEL=(${Math.round(normalizedX * (chosen.naturalWidth - 1))},` +
+           `${Math.round(normalizedY * (chosen.naturalHeight - 1))})`
+         );
+         for (const img of containing.slice(0, 6)) {
+           const r = img.getBoundingClientRect();
+           const pn = img.closest?.(".turn-page, .turn-page-wrapper")?.getAttribute?.("page") || "?";
+           this.debugLog(
+             `[V64] CANDIDATE page=${pn} rect=(${Number(r.left.toFixed(1))},${Number(r.top.toFixed(1))},` +
+             `${Number(r.width.toFixed(1))},${Number(r.height.toFixed(1))})`
+           );
+         }
+       }
+
+       return { img: chosen, rect, pageNumber };
+     }
+   }
+
+   // Preserve the existing non-tap behavior for diagnostics, rendering, and
+   // other reader paths. V64 only changes how a tap resolves its image.
    if (this.mode === "single" &&
        this.useTurnJSPageMode &&
        this.turnPageMode?.book) {
@@ -1009,6 +1128,57 @@ const Reader = {
      return { img, rect, pageNumber: this.index + 1 };
    }
    return null;
+ },
+
+ showV64TapMarker(pos, img, imgRect, relX, relY, pageNumber) {
+   if (!this.els.stage || !img || !imgRect) return;
+   const stageRect = this.els.stage.getBoundingClientRect();
+   const old = this.els.v64TapMarker;
+   if (old?.parentNode) old.remove();
+
+   const marker = document.createElement("div");
+   marker.setAttribute("aria-hidden", "true");
+   Object.assign(marker.style, {
+     position: "absolute",
+     left: `${pos.x - stageRect.left}px`,
+     top: `${pos.y - stageRect.top}px`,
+     width: "22px",
+     height: "22px",
+     marginLeft: "-11px",
+     marginTop: "-11px",
+     border: "3px solid red",
+     borderRadius: "50%",
+     boxSizing: "border-box",
+     pointerEvents: "none",
+     zIndex: "9999",
+     background: "rgba(255,0,0,0.08)",
+     boxShadow: "0 0 0 2px rgba(255,255,255,0.85)"
+   });
+
+   const label = document.createElement("div");
+   label.textContent = `V64 page ${pageNumber}  ${Math.round(relX * (img.naturalWidth - 1))},${Math.round(relY * (img.naturalHeight - 1))}`;
+   Object.assign(label.style, {
+     position: "absolute",
+     left: "18px",
+     top: "-8px",
+     padding: "3px 5px",
+     borderRadius: "4px",
+     background: "rgba(0,0,0,0.82)",
+     color: "white",
+     font: "11px/1.2 monospace",
+     whiteSpace: "nowrap",
+     pointerEvents: "none"
+   });
+   marker.appendChild(label);
+   this.els.stage.appendChild(marker);
+   this.els.v64TapMarker = marker;
+   clearTimeout(this._v64MarkerTimer);
+   this._v64MarkerTimer = setTimeout(() => {
+     if (this.els.v64TapMarker === marker) {
+       marker.remove();
+       this.els.v64TapMarker = null;
+     }
+   }, 3500);
  },
 
  // V57: DOMINANT-OUTER-CANDIDATE TAP SELECTION EXPERIMENT.
@@ -2749,7 +2919,7 @@ async setMode(mode) {
    if (this.mode !== "single" || this.scale > 1.02) return;
 
    const stageRect = this.els.stage.getBoundingClientRect();
-   const ctx = this.getPanelImageContext();
+   const ctx = this.getPanelImageContext(pos.x, pos.y);
    const img = ctx?.img;
    const imgRect = ctx?.rect || stageRect;
    if (!img || !imgRect.width || !imgRect.height) {
@@ -2759,6 +2929,17 @@ async setMode(mode) {
 
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
+
+   // V64: the image context above was resolved from the exact screen tap.
+   // Show a temporary marker and log the natural source pixel so this test
+   // can prove the coordinate mapping before we judge V63's boundary logic.
+   this.showV64TapMarker(pos, img, imgRect, relXImg, relYImg, ctx?.pageNumber || (this.index + 1));
+   if (this.debugMode) {
+     this.debugLog(
+       `[V64] VERIFIED CONTEXT page=${ctx?.pageNumber || (this.index + 1)} ` +
+       `img=${img.naturalWidth}x${img.naturalHeight}`
+     );
+   }
 
    // V63: ignore the detected parent/child hierarchy for frame selection.
    // The exact displayed image and exact tap are the only inputs to the
@@ -2801,7 +2982,7 @@ async setMode(mode) {
          `method=${panel.__v61Method || "unknown"}`
        );
      }
-     this.zoomToPanel(panel, stageRect, imgRect);
+     this.zoomToPanel(panel, stageRect, imgRect, img);
      return;
    }
 
@@ -3121,7 +3302,7 @@ async setMode(mode) {
    this.applyTransform();
  },
 
- async zoomToPanel(panel, stageRect, imgRect) {
+ async zoomToPanel(panel, stageRect, imgRect, verifiedImg = null) {
    if (this.focusMode) return;
 
    if (typeof this.debugLog === "function") {
@@ -3145,8 +3326,8 @@ async setMode(mode) {
    }
 
    const token = ++this.panelOverlayToken;
-   const ctx = this.getPanelImageContext();
-   const img = ctx?.img;
+   const ctx = verifiedImg ? null : this.getPanelImageContext();
+   const img = verifiedImg || ctx?.img;
    if (!img || !img.naturalWidth || !img.naturalHeight) return;
 
    this.focusMode = "panel";
