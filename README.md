@@ -1,8 +1,6 @@
-## Current experimental build: V68 — GUTTER BOUNDARY
-
 # Nth Shelf
 
-![Nth Shelf](assets/nth-shelf-empty.jpg)
+![Nth Shelf](assets/nth-shelf-empty.png)
 
 **Nth Shelf** is a local-first comic reader and personal comic library built as an installable Progressive Web App.
 
@@ -60,7 +58,7 @@ Auto Scroll is available in **Scroll, Manga,** and **Webcomic** modes.
 
 - The **Auto Scroll** button appears only in modes that support continuous scrolling.
 - The button is dark when off and red when active, matching the Bubble Zoom control style.
-- Use the speed control to select **0.0x, 0.33x, 0.50x, 0.66x, 1.0x** or **2.0x**.
+- Use the speed control to select **0.0x, 0.33x, 0.50x, 0.66x,** or **1.0x**.
 - Use the play/pause control to stop and resume scrolling without leaving the mode.
 - The control panel fades almost completely into the artwork while idle and becomes visible when interacted with.
 - The control panel can be moved to a more convenient position.
@@ -106,30 +104,64 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 5. Bookmark pages you want to revisit.
 6. Use Bubble Zoom or Auto Scroll when appropriate.
 7. Use Backup/Restore to keep a safety copy.
-   
+
+## 🧪 Current Release
+**Version 2.76**
+
+This release refines **Shelf Mode** using the proven v2.67 visual presentation, while keeping the newer two-tap selection behavior. The shelf presents a continuous line of comic covers with the selected comic centered as the hero. Swipe left/right or use the arrow keys to move through the shelf, Tap the centered comic once to select it, then tap again to open it; changing comics always clears the previous selection. Shelf Mode is launched from the red button beside Import and can be closed at any time.
+
+The current Nth Shelf feature set includes animated Search and Bookmarks, ASC/ADDED sorting, nested archive imports, Two Page fullscreen, Bubble Zoom, Auto Scroll controls, persistence protection, and the new Shelf Mode library view.
+
+## 🔒 Privacy
+Nth Shelf is designed around local-first storage. Your comics are stored on your device rather than uploaded to an Nth Shelf server simply to read them.
 
 ## 📜 License
 This project is licensed under the **MIT License**. The license applies to the software and does not grant rights to comic artwork or other copyrighted material imported by users.
 
 ---
 
-**Nth Shelf latest addon/changes**  
+**Nth Shelf**  
+*Your comics. Your shelf. Your device.*
+
+
+
+### v2.76
+- Added persistent **Previous Issue** and **Next Issue** controls beside the Reader Guide button.
+- Controls use the same circular reader-button styling as the existing Reader Guide/navigation controls.
+- Previous/Next follow detected series metadata and issue numbers, with collection-based fallback when appropriate.
+- Buttons disable themselves at the beginning/end of an available series.
+
+### v2.74
+- Added a dedicated dystopian bookshelf environment beneath the animated Shelf Mode covers.
+- The live comic carousel remains the foreground element while the backdrop supplies the dark library, shelves, reflective floor, crates, and distant city atmosphere.
+- Moved the Shelf Mode title, issue count, and browsing instructions into the open space above the backdrop.
+- Added the backdrop to `assets/` and included it in the service-worker shell cache for installed/offline use.
+
+### v2.75
+- Added **Surprise Me**, a library jump feature for choosing something to read without manually searching.
+- Options include preferring unread comics, preferring bookmarked comics, random in-progress reading, random from a collection, or random from the entire shelf.
+- Finished issues are excluded when possible, and Surprise Me avoids immediately repeating the previous selection when another choice exists.
+- Added the new control beside **Backup** using the existing library action-button styling.
 
 ### v2.62 Test Note
 - Adds a temporary **2.0x Auto Scroll** speed endpoint for iPhone testing. Existing speed settings are unchanged.
 
+
 ### v2.63
 - Bubble Zoom detection is now intentionally conservative: it recognizes white and slightly off-white bubble interiors while rejecting most brightly colored artwork highlights.
+
 
 ### v2.64
 - Bubble Zoom now uses additional shape and interior-ink checks.
 - White/off-white color alone is no longer sufficient to qualify as a bubble.
 - Bright artwork regions are filtered more aggressively while preserving normal speech balloons.
 
+
 ### v2.65
 - Tightened Bubble Zoom false-positive filtering for irregular bright artwork.
 - Requires stronger bubble-outline evidence and more interior ink/text evidence.
 - Rejects larger low-fill, weak-shape candidates while preserving normal speech balloons.
+
 
 ### v2.66
 - Bubble Zoom adds a dark enclosed-boundary test to reject irregular bright artwork regions.
@@ -146,6 +178,7 @@ This project is licensed under the **MIT License**. The license applies to the s
 - Added cinematic motion to the normal library: staggered cover entrance, lift/tilt on hover or pointer interaction, cover zoom, and grounded shadows.
 - Honors reduced-motion preferences.
 
+
 ### v2.69
 - Reworked Cinematic Shelf into a more pronounced 3D presentation with curved depth, perspective, overlap, and a centered hero cover.
 - Shelf Mode now uses a two-tap interaction: first tap selects and animates the centered comic; second tap opens it.
@@ -153,63 +186,18 @@ This project is licensed under the **MIT License**. The license applies to the s
 - Normal library cards now use the same two-step cinematic interaction: first tap lifts/selects a cover, second tap opens it.
 - Added a short “Tap again to open” cue after selection.
 
+
 ### v2.71
 - Shelf Mode now presents a continuous visible line of comic covers around the centered hero.
 - Wider spacing and lighter side covers make neighboring comics clearly visible.
 - Changing the centered comic always clears the previous comic's cinematic/second-tap state.
 - The newly centered comic requires a fresh first tap before opening.
 
-### v2.74
-- Added a dedicated dystopian bookshelf environment beneath the animated Shelf Mode covers.
-- The live comic carousel remains the foreground element while the backdrop supplies the dark library, shelves, reflective floor, crates, and distant city atmosphere.
-- Moved the Shelf Mode title, issue count, and browsing instructions into the open space above the backdrop.
-- Added the backdrop to `assets/` and included it in the service-worker shell cache for installed/offline use.
 
-### v2.75
-- Added **Surprise Me**, a library jump feature for choosing something to read without manually searching.
-- Options include preferring unread comics, preferring bookmarked comics, random in-progress reading, random from a collection, or random from the entire shelf.
-- Finished issues are excluded when possible, and Surprise Me avoids immediately repeating the previous selection when another choice exists.
-- Added the new control beside **Backup** using the existing library action-button styling.
+## V73 Test Build — Stable Gutter Baseline / Tap Selection
 
-### v2.76
-- Added persistent **Previous Issue** and **Next Issue** controls beside the Reader Guide button.
-- Controls use the same circular reader-button styling as the existing Reader Guide/navigation controls.
-- Previous/Next follow detected series metadata and issue numbers, with collection-based fallback when appropriate.
-- Buttons disable themselves at the beginning/end of an available series.
-### V67 — Closed Boundary / Region Lock + Interior Panel Split Test
-- Tap-to-panel reconstruction now collects a small set of nearest sustained boundary candidates in each direction.
-- Candidate boundaries are combined into closed regions and validated using perimeter persistence, inside/outside transition evidence, and corner continuity.
-- The experiment continues to ignore detector parent/child/grandchild hierarchy for the final tap selection.
-- This is a test build; V65 remains the prior baseline.
+This experimental build deliberately returns panel detection to the compact gutter-scanning implementation used by the v2.76 Stable source supplied for the V73 experiment.
 
+V73 does not run the V1–V72 experimental panel detectors. The panel cache is deliberately bypassed so previously stored panel rectangles cannot affect this test. Each page is freshly analyzed by `PanelDetect`, and the existing reader tap-selection path chooses the detected region containing the exact tap coordinate.
 
-
-### V67 identification
-The active panel experiment is V67: Closed Boundary / Region Lock + Interior Panel Split. The tap-containing region may be recursively split when the image itself shows a sustained internal divider between the tap and a proposed outer boundary. Detector parent/child hierarchy is not used for selection.
-
-
-## V68 experiment notes
-
-**V68 — GUTTER BOUNDARY** is the current panel-pop-out experiment. It starts from the verified tap coordinate, searches outward in many radial directions for the nearest sustained visual transition into a gutter/boundary zone, and connects the evidence into a closed contour around the tapped region. Detector parent/child/grandchild rectangles are not used for this selection. The existing zoom system receives the contour's bounding rectangle.
-
-
-## V70 — TRUE CLEAN GUTTER BOUNDARY
-
-This build is a deliberate codebase-isolation experiment. Page-level panel detection is disabled, cached/precomputed panel rectangles are not used for tap selection, and legacy panel-selection functions from earlier experiments are removed from the active reader path. `js/panels.js` contains only the V70 gutter-boundary detector.
-
-### Testing steps
-1. Install the V70 archive as a fresh test build.
-2. Because Nth Shelf is a PWA, use the app's cache-reset/update path if the device appears to be serving an older build. Confirm the debug output says **V70**.
-3. Open a comic in **Single Page** mode with panel zoom enabled.
-4. Enable diagnostics using the existing five-tap debug toggle.
-5. First repeat the same troublesome taps used in V65/V66/V67/V69 so the results are directly comparable.
-6. Wait for each pop-out to finish before making the next tap.
-7. Judge the result by the **visual panel enclosed by the gutter**, not by whether the resulting bounding box is a perfect rectangle.
-8. Then test, if available: a normal rectangular panel; a panel beside/above another panel; an unusually wide or tall panel; and an irregular/angled panel.
-9. For every wrong result, save the video and diagnostic log. The useful V70 lines are `TAP`, `RAYS`, `CONTOUR`, `GUTTER CONTOUR ACCEPTED/REJECTED`, and `FINAL`.
-10. If V70 refuses to pop a panel out, record that too. A clean rejection is useful evidence because it tells us the gutter detector did not fall back to an older detector.
-
-### Isolation guarantee
-- `js/panels.js`: V70 gutter detector only.
-- `js/reader.js`: no legacy `findPanelAt`/`reconstructPanelAtTap` path and no page-level detector/cache feeding tap selection.
-- `sw.js`: V70 cache name.
+This is a diagnostic baseline: if V73 succeeds where V65–V72 failed, the next work should focus on the later experimental detection algorithms rather than adding more complexity.
