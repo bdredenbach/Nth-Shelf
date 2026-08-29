@@ -765,7 +765,8 @@ const Reader = {
  },
 
  async loadPanelsForCurrentPage() {
-   // V76: deliberately bypass the IndexedDB panel cache for this experiment.
+   // V77: deliberately bypass the IndexedDB panel cache. Pass 1 is the V73 stable gutter baseline;
+   // the geometry pass is invoked only at tap time if the baseline misses the tap.
    // Older panel rectangles must not influence the test.
    this.currentPanels = [];
    if (this.mode !== "single") return;
@@ -773,14 +774,14 @@ const Reader = {
    const comicId = this.comic.id;
    const pageIndex = this.index;
    const token = ++this._panelLoadToken;
-   const logger = this.debugMode ? (msg) => this.debugLog(`[V76 panels p${pageIndex}] ${msg}`) : null;
+   const logger = this.debugMode ? (msg) => this.debugLog(`[V77 pass1 p${pageIndex}] ${msg}`) : null;
 
    const url = await this.getPageUrl(pageIndex);
    const panels = url ? await PanelDetect.detect(url, logger) : [];
 
    if (token !== this._panelLoadToken || this.comic.id !== comicId || this.index !== pageIndex) return;
    this.currentPanels = panels;
-   if (logger) logger(`V76 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
+   if (logger) logger(`V77 pass1 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
  },
 
  getPanelImageContext() {
@@ -2370,6 +2371,33 @@ async setMode(mode) {
    });
  },
 
+ async findPanelWithV77Fallback(relXImg, relYImg, pageIndex) {
+   // Pass 1: V73 baseline, already loaded into currentPanels. Never replace a
+   // successful baseline hit with fallback output.
+   const baseline = this.findPanelAt(relXImg, relYImg);
+   if (baseline) return baseline;
+
+   if (this.mode !== "single") return null;
+   const comicId = this.comic?.id;
+   const token = this._panelLoadToken;
+   const url = await this.getPageUrl(pageIndex);
+   if (!url) return null;
+
+   const logger = this.debugMode ? (msg) => this.debugLog(`[V77 fallback p${pageIndex}] ${msg}`) : null;
+   if (logger) logger("V73 pass 1 missed tap; running geometry fallback only now");
+   const fallbackPanels = await PanelDetect.detectGeometryFallback(url, logger);
+
+   if (this.comic?.id !== comicId || this.index !== pageIndex || token !== this._panelLoadToken) return null;
+   for (const p of fallbackPanels) {
+     if (relXImg >= p.x && relXImg <= p.x + p.w && relYImg >= p.y && relYImg <= p.y + p.h) {
+       if (logger) logger(`V77 fallback TAP HIT x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)}`);
+       return p;
+     }
+   }
+   if (logger) logger("V77 fallback missed tap");
+   return null;
+ },
+
  async handleSingleTap(pos) {
    if (this.mode !== "single" || this.scale > 1.02) return;
 
@@ -2384,7 +2412,7 @@ async setMode(mode) {
 
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
-   const panel = this.findPanelAt(relXImg, relYImg);
+   const panel = await this.findPanelWithV77Fallback(relXImg, relYImg, this.index);
 
    if (panel) {
      this.zoomToPanel(panel, stageRect, imgRect);
