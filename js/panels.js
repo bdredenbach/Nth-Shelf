@@ -1,7 +1,11 @@
-// NTH SHELF V77 — TWO-PASS GUTTER / V73 BASELINE + GEOMETRY FALLBACK
-// V77 starts from the V73 known-good stable gutter detector. The geometry pass is
-// strictly a fallback: it runs only after the V73 panel list does not contain the tap.
-// No other experimental panel detector is active in this build.
+// NTH SHELF V78 — V73 FIRST / TAP-LOCAL GEOMETRY FALLBACK
+// Freshly based on V73. V73 remains authoritative whenever it contains the tap.
+// The fallback is new and runs only after a V73 tap miss. No V74-V77 detector code is included.
+
+// NTH SHELF V73 — STABLE GUTTER BASELINE / TAP SELECTION
+// V73 intentionally restores the simple v2.76 gutter-scanning detector as the sole panel detector.
+// The experiment is tap-aware only at selection time: detect the stable gutter-separated regions,
+// then select the one containing the exact tap. No V1-V72 panel detector logic is used.
 
 // panels.js — detects panel boundaries on a comic page so double-tap zoom
 // can snap to the actual panel instead of a geometric quadrant.
@@ -44,30 +48,33 @@ const PanelDetect = {
     });
   },
 
-  // V77 fallback: a separate geometry-based gutter analysis. It is never
-  // used to replace a successful V73 tap hit.
-  detectGeometryFallback(imgUrl, log) {
+  // V78 fallback: inspect only the neighborhood of the exact tap. This is
+  // not a page-wide panel detector. It looks for a gutter zone bracketed by
+  // edge energy and uses the nearest credible zone on each side of the tap.
+  detectTapLocalFallback(imgUrl, relX, relY, log) {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
-        try { resolve(this._analyzeGeometryFallback(img, log)); }
+        try { resolve(this._analyzeTapLocalFallback(img, relX, relY, log)); }
         catch (err) {
-          console.warn("Geometry fallback failed:", err);
-          if (log) log(`FALLBACK ERROR: ${err.message}`);
-          resolve([]);
+          console.warn("V78 tap-local fallback failed:", err);
+          if (log) log(`V78 fallback ERROR: ${err.message}`);
+          resolve(null);
         }
       };
-      img.onerror = () => resolve([]);
+      img.onerror = () => resolve(null);
       img.src = imgUrl;
     });
   },
 
-  _analyzeGeometryFallback(img, log) {
+  _analyzeTapLocalFallback(img, relX, relY, log) {
     const maxDim = 900;
     const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
     const w = Math.max(1, Math.round(img.width * scale));
     const h = Math.max(1, Math.round(img.height * scale));
-    if (log) log(`fallback source=${img.width}x${img.height} downscaled=${w}x${h}`);
+    const tx = clamp01(relX) * (w - 1);
+    const ty = clamp01(relY) * (h - 1);
+    if (log) log(`V78 fallback source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
 
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;
@@ -75,70 +82,102 @@ const PanelDetect = {
     ctx.drawImage(img, 0, 0, w, h);
     const data = ctx.getImageData(0, 0, w, h).data;
     const lum = new Float32Array(w * h);
-    for (let y = 0; y < h; y++) {
-      for (let x = 0; x < w; x++) {
-        const i = (y * w + x) * 4;
-        lum[y * w + x] = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+
+    for (let y=0; y<h; y++) for (let x=0; x<w; x++) {
+      const i=(y*w+x)*4;
+      lum[y*w+x]=0.299*data[i]+0.587*data[i+1]+0.114*data[i+2];
+    }
+
+    const x0=Math.round(tx), y0=Math.round(ty);
+    const xHalf=Math.max(10, Math.round(w*0.045));
+    const yHalf=Math.max(10, Math.round(h*0.045));
+    const gradH=new Float32Array(h);
+    const gradV=new Float32Array(w);
+
+    for(let y=1;y<h-1;y++){
+      const xa=Math.max(1,x0-xHalf), xb=Math.min(w-2,x0+xHalf);
+      let sum=0,n=0;
+      for(let x=xa;x<=xb;x++){
+        sum += Math.abs(lum[y*w+x]-lum[(y-1)*w+x]) +
+               Math.abs(lum[(y+1)*w+x]-lum[y*w+x]);
+        n++;
       }
+      gradH[y]=sum/(2*Math.max(1,n));
     }
 
-    const grad = new Float32Array(w * h);
-    let sum = 0, count = 0;
-    for (let y = 1; y < h - 1; y++) {
-      for (let x = 1; x < w - 1; x++) {
-        const gx = Math.abs(lum[y * w + x + 1] - lum[y * w + x - 1]);
-        const gy = Math.abs(lum[(y + 1) * w + x] - lum[(y - 1) * w + x]);
-        const g = Math.sqrt(gx * gx + gy * gy);
-        grad[y * w + x] = g;
-        sum += g; count++;
+    for(let x=1;x<w-1;x++){
+      const ya=Math.max(1,y0-yHalf), yb=Math.min(h-2,y0+yHalf);
+      let sum=0,n=0;
+      for(let y=ya;y<=yb;y++){
+        sum += Math.abs(lum[y*w+x]-lum[y*w+(x-1)]) +
+               Math.abs(lum[y*w+(x+1)]-lum[y*w+x]);
+        n++;
       }
-    }
-    const meanGrad = sum / Math.max(1, count);
-    const edgeThreshold = Math.max(12, meanGrad * 2.6);
-    if (log) log(`V77 fallback mean-gradient=${meanGrad.toFixed(1)} edge-threshold=${edgeThreshold.toFixed(1)}`);
-
-    const rowDensity = new Float32Array(h);
-    const colDensity = new Float32Array(w);
-    for (let y = 1; y < h - 1; y++) {
-      let n = 0;
-      for (let x = 1; x < w - 1; x++) if (grad[y * w + x] >= edgeThreshold) n++;
-      rowDensity[y] = n / Math.max(1, w - 2);
-    }
-    for (let x = 1; x < w - 1; x++) {
-      let n = 0;
-      for (let y = 1; y < h - 1; y++) if (grad[y * w + x] >= edgeThreshold) n++;
-      colDensity[x] = n / Math.max(1, h - 2);
+      gradV[x]=sum/(2*Math.max(1,n));
     }
 
-    const hGutters = findGeometryGutters(rowDensity, h);
-    const vGutters = findGeometryGutters(colDensity, w);
-    if (log) {
-      log(`V77 fallback horizontal gutters=${hGutters.length}: ${JSON.stringify(hGutters.map(g => [g.a,g.b,Number(g.score.toFixed(2))]))}`);
-      log(`V77 fallback vertical gutters=${vGutters.length}: ${JSON.stringify(vGutters.map(g => [g.a,g.b,Number(g.score.toFixed(2))]))}`);
-    }
+    const samples=[];
+    for(let i=1;i<h-1;i++) samples.push(gradH[i]);
+    for(let i=1;i<w-1;i++) samples.push(gradV[i]);
+    samples.sort((a,b)=>a-b);
+    const med=samples.length?samples[Math.floor(samples.length*0.5)]:0;
+    const edgeCut=Math.max(8,med*2.2);
+    const quietCut=Math.max(2.5,edgeCut*0.48);
 
-    const rowCuts = [0, ...hGutters.map(g => Math.round((g.a + g.b) / 2)), h];
-    const rows = uniqueSorted(rowCuts).filter((v, i, a) => i === 0 || v - a[i - 1] >= Math.max(2, Math.round(h * 0.01)));
-    const panels = [];
-    for (let r = 0; r < rows.length - 1; r++) {
-      const sy = rows[r], ey = rows[r + 1];
-      if (ey - sy < h * 0.05) continue;
-      const cols = detectGeometryVerticalCuts(grad, w, sy, ey, edgeThreshold);
-      const cuts = [0, ...cols, w];
-      const xs = uniqueSorted(cuts);
-      for (let c = 0; c < xs.length - 1; c++) {
-        const sx = xs[c], ex = xs[c + 1];
-        if (ex - sx < w * 0.05) continue;
-        panels.push({ x: sx / w, y: sy / h, w: (ex - sx) / w, h: (ey - sy) / h });
+    function findSide(profile,start,step,limit,size){
+      let x=start+step, travelled=0;
+      const maxRun=Math.max(3,Math.round(size*0.012));
+      while(x>=1 && x<size-1 && travelled<limit){
+        if(profile[x] <= quietCut){
+          const rs=x;
+          let re=x;
+          while(re>=1 && re<size-1 && profile[re] <= quietCut &&
+                Math.abs(re-rs)<maxRun) re+=step;
+          re-=step;
+          const before=rs-step, after=re+step;
+          const bg=(before>=1&&before<size-1)?profile[before]:0;
+          const ag=(after>=1&&after<size-1)?profile[after]:0;
+          const support=(Math.max(0,bg)+Math.max(0,ag))/2;
+          const len=Math.abs(re-rs)+1;
+          if(len>=2 && support>=edgeCut) {
+            return {pos:Math.round((rs+re)/2), width:len, score:support/Math.max(1,edgeCut)};
+          }
+          x=re+step;
+          travelled+=len;
+        } else {
+          x+=step;
+          travelled++;
+        }
       }
+      return null;
     }
-    const cleaned = panels.filter(p => p.w >= 0.05 && p.h >= 0.05);
-    if (log) log(`V77 fallback reconstructed ${cleaned.length} panel(s)`);
-    return cleaned;
+
+    const top=findSide(gradH,y0,-1,Math.max(12,Math.round(h*0.48)),h);
+    const bottom=findSide(gradH,y0,1,Math.max(12,Math.round(h*0.48)),h);
+    const left=findSide(gradV,x0,-1,Math.max(12,Math.round(w*0.48)),w);
+    const right=findSide(gradV,x0,1,Math.max(12,Math.round(w*0.48)),w);
+
+    if(log) log(`V78 fallback gutters T=${top?top.pos:"-"} B=${bottom?bottom.pos:"-"} L=${left?left.pos:"-"} R=${right?right.pos:"-"} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
+
+    const sx=left?left.pos:0, ex=right?right.pos:w-1;
+    const sy=top?top.pos:0, ey=bottom?bottom.pos:h-1;
+    const pw=Math.max(0,ex-sx), ph=Math.max(0,ey-sy);
+    const contains=tx>=Math.min(sx,ex)&&tx<=Math.max(sx,ex)&&ty>=Math.min(sy,ey)&&ty<=Math.max(sy,ey);
+    const found=[top,bottom,left,right].filter(Boolean).length;
+    const credible=contains && pw>=Math.max(12,w*0.05) && ph>=Math.max(12,h*0.05) &&
+      (found>=2 || (found>=1 && (pw>=w*0.84 || ph>=h*0.84)));
+
+    if(!credible){
+      if(log) log(`V78 fallback REJECTED region=${Math.round(pw)}x${Math.round(ph)} sides=${found} containsTap=${contains}`);
+      return null;
+    }
+
+    const panel={x:Math.min(sx,ex)/w,y:Math.min(sy,ey)/h,w:pw/w,h:ph/h,_v78Fallback:true,_gutterSides:found};
+    if(log) log(`V78 fallback ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${found}`);
+    return panel;
   },
 
   _analyze(img, log) {
-    if (log) log("V77 pass 1 = V73 stable gutter baseline");
     const maxDim = 900;
     const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
     const w = Math.max(1, Math.round(img.width * scale));
@@ -252,5 +291,7 @@ function splitByGutter(arr, total, thresh, minGutterRun) {
   if (total - contentStart > 0) spans.push([contentStart, total]);
   return spans;
 }
+
+function clamp01(v) { return Math.min(1, Math.max(0, Number(v) || 0)); }
 
 window.PanelDetect = PanelDetect;
