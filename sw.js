@@ -1,7 +1,9 @@
+// NTH SHELF — V68
+// EXPERIMENT: GUTTER BOUNDARY
 // sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
 // Comic pages themselves live in IndexedDB (js/db.js), not here.
 
-const CACHE_NAME = "nth-shelf-shell-v2-78-v65";
+const CACHE_NAME = "nth-shelf-shell-v2-79-v68";
 const SHELL_FILES = [
   "./",
   "./index.html",

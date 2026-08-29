@@ -1,3 +1,5 @@
+## Current experimental build: V68 — GUTTER BOUNDARY
+
 # Nth Shelf
 
 ![Nth Shelf](assets/nth-shelf-empty.jpg)
@@ -174,3 +176,18 @@ This project is licensed under the **MIT License**. The license applies to the s
 - Controls use the same circular reader-button styling as the existing Reader Guide/navigation controls.
 - Previous/Next follow detected series metadata and issue numbers, with collection-based fallback when appropriate.
 - Buttons disable themselves at the beginning/end of an available series.
+### V67 — Closed Boundary / Region Lock + Interior Panel Split Test
+- Tap-to-panel reconstruction now collects a small set of nearest sustained boundary candidates in each direction.
+- Candidate boundaries are combined into closed regions and validated using perimeter persistence, inside/outside transition evidence, and corner continuity.
+- The experiment continues to ignore detector parent/child/grandchild hierarchy for the final tap selection.
+- This is a test build; V65 remains the prior baseline.
+
+
+
+### V67 identification
+The active panel experiment is V67: Closed Boundary / Region Lock + Interior Panel Split. The tap-containing region may be recursively split when the image itself shows a sustained internal divider between the tap and a proposed outer boundary. Detector parent/child hierarchy is not used for selection.
+
+
+## V68 experiment notes
+
+**V68 — GUTTER BOUNDARY** is the current panel-pop-out experiment. It starts from the verified tap coordinate, searches outward in many radial directions for the nearest sustained visual transition into a gutter/boundary zone, and connects the evidence into a closed contour around the tapped region. Detector parent/child/grandchild rectangles are not used for this selection. The existing zoom system receives the contour's bounding rectangle.
