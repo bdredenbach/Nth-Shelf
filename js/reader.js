@@ -1,4 +1,4 @@
-// V64 COORDINATE TRUTH + V63 PERFORMANCE-SAFE GRADIENT LAB — tap-to-image verification before boundary analysis.
+// V65 FIRST SUSTAINED BOUNDARY + V64 COORDINATE TRUTH — nearest-first boundary selection.
 // V60 TAP-OWNS-SELECTION — retained for comparison only.
 // V57 DOMINANT-OUTER-CANDIDATE TAP SELECTION EXPERIMENT — retained as fallback.
 // V48 PANEL SELECTION MAP TEST — retained for comparison.
@@ -2952,11 +2952,11 @@ async setMode(mode) {
 
    if (logger) {
      logger(
-       `[V63] TAP x=${Number(relXImg.toFixed(4))} ` +
+       `[V65] TAP x=${Number(relXImg.toFixed(4))} ` +
        `y=${Number(relYImg.toFixed(4))} ` +
        `forced=${forcedPanel ? "yes" : "no"}`
      );
-     logger(`[V63] CHILD/PARENT DETECTION DISABLED FOR THIS EXPERIMENT`);
+     logger(`[V65] CHILD/PARENT/GRANDCHILD DETECTION DISABLED FOR THIS EXPERIMENT`);
    }
 
    let panel = null;
@@ -2968,13 +2968,13 @@ async setMode(mode) {
        logger
      );
    } catch (err) {
-     if (logger) logger(`[V63] LAB ERROR ${err?.message || err}`);
+     if (logger) logger(`[V65] LAB ERROR ${err?.message || err}`);
    }
 
    if (panel) {
      if (logger) {
        logger(
-         `[V63] FINAL GRADIENT PANEL ` +
+         `[V65] FINAL NEAREST-BOUNDARY PANEL ` +
          `x=${Number(Number(panel.x).toFixed(4))} ` +
          `y=${Number(Number(panel.y).toFixed(4))} ` +
          `w=${Number(Number(panel.w).toFixed(4))} ` +
@@ -2986,7 +2986,7 @@ async setMode(mode) {
      return;
    }
 
-   if (logger) logger(`[V63] NO GRADIENT PANEL FOUND -> no frame opened`);
+   if (logger) logger(`[V65] NO NEAREST-BOUNDARY PANEL FOUND -> no frame opened`);
    this.toggleChrome();
  },
 

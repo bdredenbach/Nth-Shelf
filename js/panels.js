@@ -49,547 +49,81 @@ const PanelDetect = {
   // the normal detector.
   exhaustiveTapGradient(img, relX, relY, log) {
     const started = performance.now();
-
-    // ================================================================
-    // V63 PERFORMANCE-SAFE BOUNDARY EXPLORER
-    // ================================================================
-    // One-off tap-centered experiment.
-    //
-    // IMPORTANT: this routine deliberately ignores currentPanels entirely.
-    // Parent/child/grandchild relationships cannot influence the answer.
-    // The only authoritative inputs are the exact tap and the currently
-    // displayed page image.
-    //
-    // V62 tried to brute-force an enormous number of combinations. V63 keeps
-    // the same philosophy (many ways to interpret a boundary), but changes
-    // the architecture to progressive refinement:
-    //
-    //   1. Cheap coarse radial scan.
-    //   2. Keep only promising boundary zones.
-    //   3. Deeply inspect those zones using several visual measurements.
-    //   4. Build only a small number of four-side candidates.
-    //   5. Verify corners + interior before accepting a frame.
-    //
-    // This should be orders of magnitude cheaper than V62 while still
-    // allowing us to search for color, luminance, line, gutter, and texture
-    // changes rather than assuming a frame must be black.
-    // ================================================================
-
-    if (!img || !(img.naturalWidth || img.width) || !(img.naturalHeight || img.height)) {
-      if (log) log('[V63] INVALID IMAGE');
-      return null;
-    }
-
-    const MAX_DIM = 1100;
-    const srcW = img.naturalWidth || img.width;
-    const srcH = img.naturalHeight || img.height;
-    const scale = Math.min(1, MAX_DIM / Math.max(srcW, srcH));
-    const w = Math.max(2, Math.round(srcW * scale));
-    const h = Math.max(2, Math.round(srcH * scale));
-
-    const canvas = document.createElement('canvas');
-    canvas.width = w;
-    canvas.height = h;
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    if (!ctx) {
-      if (log) log('[V63] NO CANVAS CONTEXT');
-      return null;
-    }
-
+    // V65: nearest-first sustained-boundary experiment. This intentionally
+    // ignores all detected panel/parent/child/grandchild rectangles.
+    if (!img || !(img.naturalWidth || img.width) || !(img.naturalHeight || img.height)) return null;
+    const srcW = img.naturalWidth || img.width, srcH = img.naturalHeight || img.height;
+    const scale = Math.min(1, 1100 / Math.max(srcW, srcH));
+    const w = Math.max(2, Math.round(srcW * scale)), h = Math.max(2, Math.round(srcH * scale));
+    const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext('2d', {willReadFrequently:true}); if (!ctx) return null;
     ctx.drawImage(img, 0, 0, w, h);
+    let data; try { data = ctx.getImageData(0,0,w,h).data; } catch(e) { if(log) log(`[V65] IMAGE READ ERROR ${e?.message||e}`); return null; }
+    const n=w*h, lum=new Float32Array(n), chr=new Float32Array(n), rr=new Uint8Array(n), gg=new Uint8Array(n), bb=new Uint8Array(n);
+    for(let i=0,p=0;i<n;i++,p+=4){const r=data[p],g=data[p+1],b=data[p+2];rr[i]=r;gg[i]=g;bb[i]=b;lum[i]=.299*r+.587*g+.114*b;chr[i]=Math.max(r,g,b)-Math.min(r,g,b);}
+    const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)), at=(x,y)=>y*w+x;
+    const px=clamp(Math.round(relX*(w-1)),1,w-2), py=clamp(Math.round(relY*(h-1)),1,h-2);
+    if(log){log(`[V65] TAP x=${relX.toFixed(4)} y=${relY.toFixed(4)} px=${px} py=${py}`);log('[V65] CHILD/PARENT/GRANDCHILD DETECTION DISABLED');log(`[V65] IMAGE ${w}x${h}`);}
 
-    let imageData;
-    try {
-      imageData = ctx.getImageData(0, 0, w, h);
-    } catch (err) {
-      if (log) log(`[V63] IMAGE READ ERROR ${err?.message || err}`);
-      return null;
-    }
-
-    const data = imageData.data;
-    const count = w * h;
-    const lum = new Float32Array(count);
-    const chroma = new Float32Array(count);
-    const rr = new Uint8Array(count);
-    const gg = new Uint8Array(count);
-    const bb = new Uint8Array(count);
-
-    for (let i = 0, p = 0; i < count; i++, p += 4) {
-      const r = data[p];
-      const g = data[p + 1];
-      const b = data[p + 2];
-      rr[i] = r;
-      gg[i] = g;
-      bb[i] = b;
-      lum[i] = 0.299 * r + 0.587 * g + 0.114 * b;
-      chroma[i] = Math.max(r, g, b) - Math.min(r, g, b);
-    }
-
-    const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-    const idx = (x, y) => y * w + x;
-
-    const px = clamp(Math.round(relX * (w - 1)), 1, w - 2);
-    const py = clamp(Math.round(relY * (h - 1)), 1, h - 2);
-
-    if (log) {
-      log(`[V63] TAP x=${Number(relX.toFixed(4))} y=${Number(relY.toFixed(4))} px=${px} py=${py}`);
-      log('[V63] CHILD/PARENT/GRANDCHILD DETECTION DISABLED');
-      log(`[V63] IMAGE ${w}x${h}`);
-    }
-
-    // ------------------------------------------------------------
-    // Small, cheap helpers.
-    // ------------------------------------------------------------
-    function colorDistance(a, b) {
-      const dr = rr[a] - rr[b];
-      const dg = gg[a] - gg[b];
-      const db = bb[a] - bb[b];
-      return Math.sqrt(dr * dr + dg * dg + db * db);
-    }
-
-    function localFeature(a, b) {
-      const rgb = colorDistance(a, b) / 441.673;
-      const ld = Math.abs(lum[a] - lum[b]) / 255;
-      const cd = Math.abs(chroma[a] - chroma[b]) / 255;
-      return { rgb, lum: ld, chroma: cd };
-    }
-
-    function oneDimStats(axis, coord, span, depth = 1) {
-      const half = Math.max(3, Math.round(span / 2));
-      const sampleCount = depth === 1 ? 9 : 15;
-      let total = 0;
-      let lumDiff = 0;
-      let rgbDiff = 0;
-      let chromaDiff = 0;
-      let lineScore = 0;
-      let textureChange = 0;
-      let valid = 0;
-
-      for (let i = 0; i < sampleCount; i++) {
-        const t = (i + 0.5) / sampleCount;
-        if (axis === 'h') {
-          const x = clamp(Math.round(px - half + t * (2 * half)), 2, w - 3);
-          const y = clamp(coord, 2, h - 3);
-          const c = idx(x, y);
-          const a = idx(x, y - 2);
-          const b = idx(x, y + 2);
-          const aa = idx(x, y - 5);
-          const bbx = idx(x, y + 5);
-          const f = localFeature(a, b);
-          lumDiff += f.lum;
-          rgbDiff += f.rgb;
-          chromaDiff += f.chroma;
-          const center = lum[c];
-          const outer = (lum[aa] + lum[bbx]) / 2;
-          lineScore += Math.abs(center - outer) / 255;
-          textureChange += Math.abs(Math.abs(lum[a] - lum[c]) - Math.abs(lum[c] - lum[b])) / 255;
-          valid++;
+    function evidence(axis, coord, span, relax){
+      const half=Math.max(6,Math.round(span/2)), samples=19; let rgb=0,ld=0,cd=0,edge=0,stable=0;
+      for(let i=0;i<samples;i++){
+        const t=(i+.5)/samples;
+        if(axis==='h'){
+          const x=clamp(Math.round(px-half+t*2*half),2,w-3), y=clamp(coord,10,h-11);
+          const c=at(x,y), a=at(x,y-4), b=at(x,y+4), aa=at(x,y-9), bbx=at(x,y+9);
+          const dr=rr[a]-rr[b],dg=gg[a]-gg[b],db=bb[a]-bb[b]; rgb+=Math.sqrt(dr*dr+dg*dg+db*db)/441.673; ld+=Math.abs(lum[a]-lum[b])/255; cd+=Math.abs(chr[a]-chr[b])/255; edge+=Math.min(1,Math.abs(lum[c]-(lum[aa]+lum[bbx])/2)/80); stable+=Math.min(1,Math.abs(lum[aa]-lum[bbx])/255);
         } else {
-          const y = clamp(Math.round(py - half + t * (2 * half)), 2, h - 3);
-          const x = clamp(coord, 2, w - 3);
-          const c = idx(x, y);
-          const a = idx(x - 2, y);
-          const b = idx(x + 2, y);
-          const aa = idx(x - 5, y);
-          const bbx = idx(x + 5, y);
-          const f = localFeature(a, b);
-          lumDiff += f.lum;
-          rgbDiff += f.rgb;
-          chromaDiff += f.chroma;
-          const center = lum[c];
-          const outer = (lum[aa] + lum[bbx]) / 2;
-          lineScore += Math.abs(center - outer) / 255;
-          textureChange += Math.abs(Math.abs(lum[a] - lum[c]) - Math.abs(lum[c] - lum[b])) / 255;
-          valid++;
+          const y=clamp(Math.round(py-half+t*2*half),2,h-3), x=clamp(coord,10,w-11);
+          const c=at(x,y), a=at(x-4,y), b=at(x+4,y), aa=at(x-9,y), bbx=at(x+9,y);
+          const dr=rr[a]-rr[b],dg=gg[a]-gg[b],db=bb[a]-bb[b]; rgb+=Math.sqrt(dr*dr+dg*dg+db*db)/441.673; ld+=Math.abs(lum[a]-lum[b])/255; cd+=Math.abs(chr[a]-chr[b])/255; edge+=Math.min(1,Math.abs(lum[c]-(lum[aa]+lum[bbx])/2)/80); stable+=Math.min(1,Math.abs(lum[aa]-lum[bbx])/255);
         }
       }
-
-      if (!valid) return null;
-      const n = 1 / valid;
-      return {
-        lum: lumDiff * n,
-        rgb: rgbDiff * n,
-        chroma: chromaDiff * n,
-        line: lineScore * n,
-        texture: textureChange * n
-      };
+      rgb/=samples;ld/=samples;cd/=samples;edge/=samples;stable/=samples;
+      const score=.34*rgb+.25*ld+.11*cd+.16*edge+.14*stable;
+      const support=(rgb>=.07? .30:0)+(ld>=.05?.22:0)+(cd>=.03?.10:0)+(edge>=.045?.16:0)+(stable>=.07?.22:0);
+      const threshold=.115-relax*.018;
+      return {score,support,rgb,lum:ld,chroma:cd,edge,stable,convincing:score>=threshold&&support>=(.62-relax*.08)};
     }
 
-    // ------------------------------------------------------------
-    // Candidate score for one potential boundary coordinate.
-    // This deliberately rewards a CHANGE, not a particular color.
-    // ------------------------------------------------------------
-    function boundaryScore(axis, coord, mode, span, depth = 1) {
-      const stats = oneDimStats(axis, coord, span, depth);
-      if (!stats) return 0;
-
-      let score;
-      switch (mode) {
-        case 'color':
-          score = stats.rgb * 0.60 + stats.chroma * 0.20 + stats.lum * 0.20;
-          break;
-        case 'luminance':
-          score = stats.lum * 0.72 + stats.rgb * 0.18 + stats.line * 0.10;
-          break;
-        case 'line':
-          score = stats.line * 0.58 + stats.lum * 0.22 + stats.rgb * 0.20;
-          break;
-        case 'texture':
-          score = stats.texture * 0.55 + stats.rgb * 0.25 + stats.lum * 0.20;
-          break;
-        default:
-          score = stats.rgb * 0.35 + stats.lum * 0.30 + stats.chroma * 0.10 +
-            stats.line * 0.15 + stats.texture * 0.10;
-      }
-      return clamp(score, 0, 1);
-    }
-
-    // ------------------------------------------------------------
-    // Cheap coarse scan. We intentionally scan only a few hundred
-    // positions, not thousands of combinations per position.
-    // ------------------------------------------------------------
-    const directions = [
-      { name: 'TOP', axis: 'h', sign: -1, limit: Math.max(16, Math.round(h * 0.46)) },
-      { name: 'BOTTOM', axis: 'h', sign: 1, limit: Math.max(16, Math.round(h * 0.46)) },
-      { name: 'LEFT', axis: 'v', sign: -1, limit: Math.max(16, Math.round(w * 0.46)) },
-      { name: 'RIGHT', axis: 'v', sign: 1, limit: Math.max(16, Math.round(w * 0.46)) }
+    const dirs=[
+      {name:'TOP',axis:'h',sign:-1,limit:Math.round(h*.46)}, {name:'BOTTOM',axis:'h',sign:1,limit:Math.round(h*.46)},
+      {name:'LEFT',axis:'v',sign:-1,limit:Math.round(w*.46)}, {name:'RIGHT',axis:'v',sign:1,limit:Math.round(w*.46)}
     ];
-
-    const modes = [
-      { name: 'hybrid', threshold: 0.085 },
-      { name: 'color', threshold: 0.095 },
-      { name: 'luminance', threshold: 0.095 },
-      { name: 'line', threshold: 0.070 },
-      { name: 'texture', threshold: 0.075 }
-    ];
-
-    function coarseCandidates(direction, mode) {
-      const out = [];
-      const step = Math.max(4, Math.round(Math.min(w, h) / 130));
-      const scanLimit = direction.limit;
-      let previous = 0;
-      let previous2 = 0;
-
-      for (let d = step; d <= scanLimit; d += step) {
-        const coord = direction.axis === 'h'
-          ? py + direction.sign * d
-          : px + direction.sign * d;
-        if (coord < 4 || (direction.axis === 'h' ? coord > h - 5 : coord > w - 5)) break;
-
-        // Three span sizes catch small, medium and broad panel boundaries.
-        const shortSpan = direction.axis === 'h'
-          ? Math.max(18, Math.round(w * 0.12))
-          : Math.max(18, Math.round(h * 0.12));
-        const mediumSpan = direction.axis === 'h'
-          ? Math.max(24, Math.round(w * 0.28))
-          : Math.max(24, Math.round(h * 0.28));
-        const longSpan = direction.axis === 'h'
-          ? Math.max(30, Math.round(w * 0.50))
-          : Math.max(30, Math.round(h * 0.50));
-
-        const s1 = boundaryScore(direction.axis, coord, mode.name, shortSpan, 1);
-        const s2 = boundaryScore(direction.axis, coord, mode.name, mediumSpan, 1);
-        const s3 = boundaryScore(direction.axis, coord, mode.name, longSpan, 1);
-        const score = s1 * 0.40 + s2 * 0.35 + s3 * 0.25;
-
-        // Require local persistence: a real boundary should influence more
-        // than one coarse sample. This rejects isolated artwork details.
-        if (score >= mode.threshold && score >= previous && previous >= previous2 * 0.72) {
-          out.push({ coord, score, distance: d, mode: mode.name });
+    function findNearest(d){
+      const step=Math.max(3,Math.round(Math.min(w,h)/190));
+      const spans=d.axis==='h'?[Math.max(28,Math.round(w*.14)),Math.max(42,Math.round(w*.30)),Math.max(56,Math.round(w*.54))]:[Math.max(28,Math.round(h*.14)),Math.max(42,Math.round(h*.30)),Math.max(56,Math.round(h*.54))];
+      for(let relax=0;relax<3;relax++){
+        let streak=0, first=null, best=null;
+        for(let dist=step;dist<=d.limit;dist+=step){
+          const coord=d.axis==='h'?py+d.sign*dist:px+d.sign*dist;
+          if(d.axis==='h'?(coord<10||coord>h-11):(coord<10||coord>w-11)) break;
+          let evBest=null;
+          for(const span of spans){const ev=evidence(d.axis,coord,span,relax);if(!evBest||ev.score+ev.support*.12>evBest.score+evBest.support*.12)evBest=ev;}
+          if(evBest&&evBest.convincing){if(!streak)first=dist;streak++;if(!best||evBest.score>best.score)best={...evBest,coord,distance:dist};}
+          else {if(streak>=2&&best)return {...best,zoneStart:first,zoneEnd:dist-step,relax};streak=0;first=null;best=null;}
         }
-        previous2 = previous;
-        previous = score;
-      }
-
-      out.sort((a, b) => b.score - a.score);
-      return out.slice(0, 6);
-    }
-
-    const directionCandidates = {};
-
-    for (const direction of directions) {
-      const all = [];
-      for (const mode of modes) {
-        all.push(...coarseCandidates(direction, mode));
-      }
-
-      // Cluster nearby candidates so five methods agreeing around the same
-      // location become one boundary zone instead of five candidates.
-      all.sort((a, b) => a.coord - b.coord);
-      const clusters = [];
-      const mergeDistance = Math.max(6, Math.round(Math.min(w, h) * 0.018));
-
-      for (const candidate of all) {
-        let cluster = clusters.find(c => Math.abs(c.center - candidate.coord) <= mergeDistance);
-        if (!cluster) {
-          cluster = { center: candidate.coord, items: [] };
-          clusters.push(cluster);
-        }
-        cluster.items.push(candidate);
-        cluster.center = cluster.items.reduce((sum, item) => sum + item.coord, 0) / cluster.items.length;
-      }
-
-      clusters.sort((a, b) => {
-        const scoreA = Math.max(...a.items.map(x => x.score));
-        const scoreB = Math.max(...b.items.map(x => x.score));
-        return scoreB - scoreA;
-      });
-
-      directionCandidates[direction.name] = clusters.slice(0, 5).map(cluster => ({
-        coord: Math.round(cluster.center),
-        score: Math.max(...cluster.items.map(x => x.score)),
-        agreement: cluster.items.length,
-        modes: [...new Set(cluster.items.map(x => x.mode))]
-      }));
-
-      if (log) {
-        log(
-          `[V63] ${direction.name} coarse=` +
-          `${directionCandidates[direction.name].length} ` +
-          directionCandidates[direction.name].map(c =>
-            `${c.coord}:${c.score.toFixed(2)}:${c.agreement}`
-          ).join(',')
-        );
-      }
-    }
-
-    // ------------------------------------------------------------
-    // Deep refinement: only inspect the handful of promising zones.
-    // ------------------------------------------------------------
-    function refineBoundary(direction, coarse) {
-      if (!coarse) return [];
-
-      const out = [];
-      const radius = Math.max(8, Math.round(Math.min(w, h) * 0.025));
-      const fineStep = 2;
-      const spans = direction.axis === 'h'
-        ? [Math.max(20, Math.round(w * 0.10)), Math.max(24, Math.round(w * 0.22)), Math.max(28, Math.round(w * 0.40)), Math.max(34, Math.round(w * 0.62))]
-        : [Math.max(20, Math.round(h * 0.10)), Math.max(24, Math.round(h * 0.22)), Math.max(28, Math.round(h * 0.40)), Math.max(34, Math.round(h * 0.62))];
-
-      const fineModes = ['hybrid', 'color', 'luminance', 'line', 'texture'];
-
-      for (let delta = -radius; delta <= radius; delta += fineStep) {
-        const coord = coarse.coord + delta;
-        if (direction.axis === 'h') {
-          if (coord < 4 || coord > h - 5) continue;
-        } else {
-          if (coord < 4 || coord > w - 5) continue;
-        }
-
-        let bestMode = 0;
-        for (const mode of fineModes) {
-          for (const span of spans) {
-            bestMode = Math.max(bestMode, boundaryScore(direction.axis, coord, mode, span, 2));
-          }
-        }
-
-        // Measure persistence across nearby positions. A true boundary tends
-        // to create a small plateau, while a one-pixel comic detail does not.
-        let persistence = 0;
-        for (const off of [-4, -2, 0, 2, 4]) {
-          const c = coord + off;
-          if (direction.axis === 'h' && (c < 4 || c > h - 5)) continue;
-          if (direction.axis === 'v' && (c < 4 || c > w - 5)) continue;
-          persistence += boundaryScore(
-            direction.axis,
-            c,
-            'hybrid',
-            direction.axis === 'h' ? Math.max(24, Math.round(w * 0.30)) : Math.max(24, Math.round(h * 0.30)),
-            2
-          );
-        }
-        persistence /= 5;
-
-        out.push({
-          coord,
-          score: bestMode * 0.72 + persistence * 0.28,
-          persistence
-        });
-      }
-
-      out.sort((a, b) => b.score - a.score);
-      return out.slice(0, 4);
-    }
-
-    const refined = {};
-    for (const direction of directions) {
-      refined[direction.name] = [];
-      for (const coarse of directionCandidates[direction.name]) {
-        refined[direction.name].push(...refineBoundary(direction, coarse));
-      }
-      refined[direction.name].sort((a, b) => b.score - a.score);
-      refined[direction.name] = refined[direction.name].slice(0, 8);
-      if (log) {
-        log(
-          `[V63] ${direction.name} refined=` +
-          refined[direction.name].map(c => `${c.coord}:${c.score.toFixed(2)}`).join(',')
-        );
-      }
-    }
-
-    if (!refined.TOP.length || !refined.BOTTOM.length || !refined.LEFT.length || !refined.RIGHT.length) {
-      if (log) log(`[V63] INSUFFICIENT FOUR-SIDE CANDIDATES -> no frame`);
-      return null;
-    }
-
-    // ------------------------------------------------------------
-    // Candidate geometry. Only a small cartesian product is considered,
-    // after coarse/refined pruning. No V62-style 12^4 explosion.
-    // ------------------------------------------------------------
-    function cornerEvidence(x, y) {
-      const radius = 5;
-      let edge = 0;
-      let total = 0;
-      for (let dy = -radius; dy <= radius; dy += 2) {
-        for (let dx = -radius; dx <= radius; dx += 2) {
-          const xx = clamp(x + dx, 1, w - 2);
-          const yy = clamp(y + dy, 1, h - 2);
-          const c = idx(xx, yy);
-          const gx = Math.abs(lum[idx(Math.min(w - 1, xx + 1), yy)] - lum[idx(Math.max(0, xx - 1), yy)]) / 255;
-          const gy = Math.abs(lum[idx(xx, Math.min(h - 1, yy + 1))] - lum[idx(xx, Math.max(0, yy - 1))]) / 255;
-          edge += Math.min(1, gx + gy);
-          total++;
-        }
-      }
-      return total ? edge / total : 0;
-    }
-
-    function interiorConsistency(x0, y0, x1, y1) {
-      const insetX = Math.max(4, Math.round((x1 - x0) * 0.08));
-      const insetY = Math.max(4, Math.round((y1 - y0) * 0.08));
-      const ax0 = clamp(x0 + insetX, 2, w - 3);
-      const ax1 = clamp(x1 - insetX, 2, w - 3);
-      const ay0 = clamp(y0 + insetY, 2, h - 3);
-      const ay1 = clamp(y1 - insetY, 2, h - 3);
-      if (ax1 <= ax0 || ay1 <= ay0) return 0;
-
-      let sum = 0;
-      let n = 0;
-      const sx = Math.max(1, Math.round((ax1 - ax0) / 12));
-      const sy = Math.max(1, Math.round((ay1 - ay0) / 12));
-      for (let y = ay0; y <= ay1; y += sy) {
-        for (let x = ax0; x <= ax1; x += sx) {
-          const c = idx(x, y);
-          const gx = Math.abs(lum[idx(Math.min(w - 1, x + 1), y)] - lum[idx(Math.max(0, x - 1), y)]) / 255;
-          const gy = Math.abs(lum[idx(x, Math.min(h - 1, y + 1))] - lum[idx(x, Math.max(0, y - 1))]) / 255;
-          sum += 1 - Math.min(1, gx + gy);
-          n++;
-        }
-      }
-      return n ? sum / n : 0;
-    }
-
-    function regionScore(top, bottom, left, right) {
-      const x0 = left.coord;
-      const x1 = right.coord;
-      const y0 = top.coord;
-      const y1 = bottom.coord;
-      const width = x1 - x0;
-      const height = y1 - y0;
-
-      if (x0 >= px || x1 <= px || y0 >= py || y1 <= py) return null;
-      if (width < Math.max(28, w * 0.055) || height < Math.max(28, h * 0.055)) return null;
-      if (width > w * 0.92 || height > h * 0.92) return null;
-
-      const areaFrac = (width * height) / (w * h);
-      if (areaFrac > 0.78) return null;
-
-      const corner = (
-        cornerEvidence(x0, y0) +
-        cornerEvidence(x1, y0) +
-        cornerEvidence(x0, y1) +
-        cornerEvidence(x1, y1)
-      ) / 4;
-
-      const side = (top.score + bottom.score + left.score + right.score) / 4;
-      const persistence = (top.persistence + bottom.persistence + left.persistence + right.persistence) / 4;
-      const agreement = (Math.min(4, top.agreement || 1) + Math.min(4, bottom.agreement || 1) + Math.min(4, left.agreement || 1) + Math.min(4, right.agreement || 1)) / 16;
-      const interior = interiorConsistency(x0, y0, x1, y1);
-
-      // Prefer a compact region surrounding the tap, but don't simply choose
-      // the smallest possible box. Boundary agreement is more important.
-      const tapMarginX = Math.min(px - x0, x1 - px) / Math.max(1, width);
-      const tapMarginY = Math.min(py - y0, y1 - py) / Math.max(1, height);
-      const centered = Math.min(1, (tapMarginX + tapMarginY) * 1.6);
-      const sizePenalty = Math.sqrt(areaFrac) * 0.10;
-
-      const score =
-        side * 0.42 +
-        corner * 0.18 +
-        persistence * 0.16 +
-        agreement * 0.09 +
-        centered * 0.10 +
-        interior * 0.05 -
-        sizePenalty;
-
-      return {
-        x: clamp(x0 / w, 0, 1),
-        y: clamp(y0 / h, 0, 1),
-        w: clamp(width / w, 0, 1),
-        h: clamp(height / h, 0, 1),
-        __v63Method: 'progressive-boundary-explorer',
-        __v63Score: score,
-        __v63Evidence: {
-          top, bottom, left, right,
-          corner, side, persistence,
-          agreement, centered, interior, areaFrac
-        }
-      };
-    }
-
-    let best = null;
-
-    // Top/bottom and left/right are already pruned to <= 8 each. We also
-    // reject impossible geometry before doing the expensive region tests.
-    for (const top of refined.TOP) {
-      for (const bottom of refined.BOTTOM) {
-        if (bottom.coord <= top.coord + 12) continue;
-        if (!(top.coord < py && bottom.coord > py)) continue;
-
-        for (const left of refined.LEFT) {
-          for (const right of refined.RIGHT) {
-            if (right.coord <= left.coord + 12) continue;
-            if (!(left.coord < px && right.coord > px)) continue;
-
-            const candidate = regionScore(top, bottom, left, right);
-            if (!candidate) continue;
-            if (!best || candidate.__v63Score > best.__v63Score) best = candidate;
-          }
-        }
-      }
-    }
-
-    if (!best) {
-      if (log) {
-        log(`[V63] NO CLOSED REGION elapsed=${Math.round(performance.now() - started)}ms`);
+        if(streak>=2&&best)return {...best,zoneStart:first,zoneEnd:d.limit,relax};
       }
       return null;
     }
+    const found={};
+    for(const d of dirs){found[d.name]=findNearest(d);if(log)log(`[V65] ${d.name} nearest=${found[d.name]?`${Math.round(found[d.name].coord)}:${found[d.name].score.toFixed(2)}:p${found[d.name].support.toFixed(2)}:r${found[d.name].relax}`:'NONE'}`);}
+    if(!found.TOP||!found.BOTTOM||!found.LEFT||!found.RIGHT){if(log)log('[V65] INSUFFICIENT NEAREST BOUNDARIES -> no frame');return null;}
 
-    const e = best.__v63Evidence;
-    if (log) {
-      log(
-        `[V63] CLOSED REGION ` +
-        `T=${Math.round(e.top.coord)} B=${Math.round(e.bottom.coord)} ` +
-        `L=${Math.round(e.left.coord)} R=${Math.round(e.right.coord)}`
-      );
-      log(
-        `[V63] SCORE=${best.__v63Score.toFixed(3)} ` +
-        `corner=${e.corner.toFixed(3)} ` +
-        `persistence=${e.persistence.toFixed(3)} ` +
-        `agreement=${e.agreement.toFixed(3)} ` +
-        `interior=${e.interior.toFixed(3)}`
-      );
-      log(
-        `[V63] FINAL ` +
-        `x=${best.x.toFixed(4)} y=${best.y.toFixed(4)} ` +
-        `w=${best.w.toFixed(4)} h=${best.h.toFixed(4)} ` +
-        `method=${best.__v63Method}`
-      );
-      log(`[V63] ELAPSED ${Math.round(performance.now() - started)}ms`);
-    }
-
-    return best;
+    function corner(x,y){let s=0,c=0;for(let dy=-6;dy<=6;dy+=2)for(let dx=-6;dx<=6;dx+=2){const xx=clamp(x+dx,1,w-2),yy=clamp(y+dy,1,h-2);const gx=Math.abs(lum[at(xx+1,yy)]-lum[at(xx-1,yy)])/255,gy=Math.abs(lum[at(xx,yy+1)]-lum[at(xx,yy-1)])/255;s+=Math.min(1,gx+gy);c++;}return c?s/c:0;}
+    const t=found.TOP,b=found.BOTTOM,l=found.LEFT,r=found.RIGHT;
+    if(!(l.coord<px&&r.coord>px&&t.coord<py&&b.coord>py)) {if(log)log('[V65] BOUNDARIES DO NOT ENCLOSE TAP');return null;}
+    const width=r.coord-l.coord,height=b.coord-t.coord;
+    if(width<Math.max(28,w*.045)||height<Math.max(28,h*.045)||width>w*.96||height>h*.96)return null;
+    const side=(t.score+b.score+l.score+r.score)/4, support=(t.support+b.support+l.support+r.support)/4;
+    const near=1-clamp(((t.distance+b.distance)/2/h+(l.distance+r.distance)/2/w)/.46,0,1);
+    const corners=(corner(l.coord,t.coord)+corner(r.coord,t.coord)+corner(l.coord,b.coord)+corner(r.coord,b.coord))/4;
+    const area=(width*height)/(w*h);
+    const score=.48*near+.25*support+.17*side+.10*corners-.05*Math.sqrt(area);
+    const panel={x:l.coord/w,y:t.coord/h,w:width/w,h:height/h,__v65Method:'first-sustained-boundary',__v65Score:score,__v65Evidence:{top:t,bottom:b,left:l,right:r,near,support,side,corners,area}};
+    if(log){log(`[V65] CLOSED REGION T=${Math.round(t.coord)} B=${Math.round(b.coord)} L=${Math.round(l.coord)} R=${Math.round(r.coord)}`);log(`[V65] SCORE=${score.toFixed(3)} proximity=${near.toFixed(3)} persistence=${support.toFixed(3)} side=${side.toFixed(3)} corner=${corners.toFixed(3)}`);log(`[V65] FINAL x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} method=${panel.__v65Method}`);log(`[V65] ELAPSED ${Math.round(performance.now()-started)}ms`);}
+    return panel;
   },
 
   reconstructAt(img, relX, relY, log, seedPanels = null) {
