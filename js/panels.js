@@ -1,6 +1,6 @@
-// NTH SHELF V80 — V78 BASELINE / SLIGHTLY LOOSER TAP-LOCAL FALLBACK
-// Freshly based on V78. V73 remains authoritative whenever it contains the tap.
-// V80 changes only the tap-local fallback acceptance; no V74-V77 detector code is included.
+// NTH SHELF V81 — V79 BASELINE / CANDIDATE SELECTION FALLBACK
+// Freshly based on V79. V73 remains authoritative whenever it contains the tap.
+// V81 changes only fallback candidate selection; no V74-V78 detector code is included.
 
 // NTH SHELF V73 — STABLE GUTTER BASELINE / TAP SELECTION
 // V73 intentionally restores the simple v2.76 gutter-scanning detector as the sole panel detector.
@@ -48,7 +48,7 @@ const PanelDetect = {
     });
   },
 
-  // V80 fallback: inspect only the neighborhood of the exact tap. This is
+  // V81 fallback: inspect only the neighborhood of the exact tap. This is
   // not a page-wide panel detector. It looks for a gutter zone bracketed by
   // edge energy and uses the nearest credible zone on each side of the tap.
   detectTapLocalFallback(imgUrl, relX, relY, log) {
@@ -57,8 +57,8 @@ const PanelDetect = {
       img.onload = () => {
         try { resolve(this._analyzeTapLocalFallback(img, relX, relY, log)); }
         catch (err) {
-          console.warn("V80 tap-local fallback failed:", err);
-          if (log) log(`V80 fallback ERROR: ${err.message}`);
+          console.warn("V81 tap-local fallback failed:", err);
+          if (log) log(`V81 fallback ERROR: ${err.message}`);
           resolve(null);
         }
       };
@@ -74,7 +74,7 @@ const PanelDetect = {
     const h = Math.max(1, Math.round(img.height * scale));
     const tx = clamp01(relX) * (w - 1);
     const ty = clamp01(relY) * (h - 1);
-    if (log) log(`V80 fallback source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
+    if (log) log(`V81 fallback source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
 
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;
@@ -121,13 +121,17 @@ const PanelDetect = {
     for(let i=1;i<w-1;i++) samples.push(gradV[i]);
     samples.sort((a,b)=>a-b);
     const med=samples.length?samples[Math.floor(samples.length*0.5)]:0;
-    const edgeCut=Math.max(9,med*2.3);
-    const quietCut=Math.max(2.5,edgeCut*0.46);
+    const edgeCut=Math.max(9,med*2.5);
+    const quietCut=Math.max(2.5,edgeCut*0.44);
 
-    function findSide(profile,start,step,limit,size){
+    // V81 keeps V79's exact detection thresholds, but gathers several
+    // credible gutter candidates on each side of the tap and scores the
+    // possible enclosed regions. The goal is selection, not looser detection.
+    function findSideCandidates(profile,start,step,limit,size){
+      const candidates=[];
       let x=start+step, travelled=0;
       const maxRun=Math.max(3,Math.round(size*0.012));
-      while(x>=1 && x<size-1 && travelled<limit){
+      while(x>=1 && x<size-1 && travelled<limit && candidates.length<5){
         if(profile[x] <= quietCut){
           const rs=x;
           let re=x;
@@ -139,8 +143,12 @@ const PanelDetect = {
           const ag=(after>=1&&after<size-1)?profile[after]:0;
           const support=(Math.max(0,bg)+Math.max(0,ag))/2;
           const len=Math.abs(re-rs)+1;
-          if(len>=2 && support>=edgeCut) {
-            return {pos:Math.round((rs+re)/2), width:len, score:support/Math.max(1,edgeCut)};
+          if(len>=2 && support>=edgeCut){
+            candidates.push({
+              pos:Math.round((rs+re)/2), width:len,
+              score:support/Math.max(1,edgeCut),
+              distance:Math.abs(Math.round((rs+re)/2)-start)
+            });
           }
           x=re+step;
           travelled+=len;
@@ -149,31 +157,60 @@ const PanelDetect = {
           travelled++;
         }
       }
+      return candidates;
+    }
+
+    const topC=findSideCandidates(gradH,y0,-1,Math.max(12,Math.round(h*0.48)),h);
+    const bottomC=findSideCandidates(gradH,y0,1,Math.max(12,Math.round(h*0.48)),h);
+    const leftC=findSideCandidates(gradV,x0,-1,Math.max(12,Math.round(w*0.48)),w);
+    const rightC=findSideCandidates(gradV,x0,1,Math.max(12,Math.round(w*0.48)),w);
+
+    if(log) log(`V81 fallback candidates T=${topC.length} B=${bottomC.length} L=${leftC.length} R=${rightC.length} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
+
+    const tops=[null,...topC], bottoms=[null,...bottomC], lefts=[null,...leftC], rights=[null,...rightC];
+    const combos=[];
+    for(const top of tops) for(const bottom of bottoms) for(const left of lefts) for(const right of rights){
+      const sx=left?left.pos:0, ex=right?right.pos:w-1;
+      const sy=top?top.pos:0, ey=bottom?bottom.pos:h-1;
+      const loX=Math.min(sx,ex), hiX=Math.max(sx,ex), loY=Math.min(sy,ey), hiY=Math.max(sy,ey);
+      const pw=hiX-loX, ph=hiY-loY;
+      const contains=tx>=loX&&tx<=hiX&&ty>=loY&&ty<=hiY;
+      if(!contains || pw<Math.max(12,w*0.05) || ph<Math.max(12,h*0.05)) continue;
+      const sides=[top,bottom,left,right].filter(Boolean).length;
+      if(!(sides>=2 || (sides>=1 && (pw>=w*0.84 || ph>=h*0.84)))) continue;
+
+      const strengths=[top,bottom,left,right].filter(Boolean).map(c=>c.score);
+      const meanStrength=strengths.length?strengths.reduce((a,b)=>a+b,0)/strengths.length:0;
+      const minStrength=strengths.length?Math.min(...strengths):0;
+      const areaFrac=(pw/w)*(ph/h);
+      const widthFrac=pw/w, heightFrac=ph/h;
+      // Prefer candidates with strong, balanced evidence. Penalize tiny
+      // regions so an interior artwork edge does not beat a real panel just
+      // because it is closer to the tap. Do not reward the largest box alone.
+      const balance=1-Math.abs(widthFrac-heightFrac)*0.35;
+      const areaScore=Math.min(1, Math.sqrt(Math.max(0,areaFrac)/0.18));
+      const sideBonus=sides*0.32;
+      const proximityPenalty=Math.min(1.4,
+        ((top?top.distance:0)+(bottom?bottom.distance:0)+(left?left.distance:0)+(right?right.distance:0)) /
+        Math.max(1, w+h) * 0.9);
+      const score = meanStrength*1.55 + minStrength*0.55 + sideBonus + areaScore*0.85 + balance*0.35 - proximityPenalty;
+      combos.push({top,bottom,left,right,sx,ex,sy,ey,pw,ph,sides,score,meanStrength,minStrength});
+    }
+
+    combos.sort((a,b)=>b.score-a.score);
+    const best=combos[0] || null;
+    if(log){
+      if(best) log(`V81 fallback selected candidates=${combos.length} sides=${best.sides} score=${best.score.toFixed(2)} meanEdge=${best.meanStrength.toFixed(2)} minEdge=${best.minStrength.toFixed(2)}`);
+      else log('V81 fallback no credible candidate region');
+    }
+
+    if(!best){
+      if(log) log('V81 fallback REJECTED');
       return null;
     }
 
-    const top=findSide(gradH,y0,-1,Math.max(12,Math.round(h*0.48)),h);
-    const bottom=findSide(gradH,y0,1,Math.max(12,Math.round(h*0.48)),h);
-    const left=findSide(gradV,x0,-1,Math.max(12,Math.round(w*0.48)),w);
-    const right=findSide(gradV,x0,1,Math.max(12,Math.round(w*0.48)),w);
-
-    if(log) log(`V80 fallback gutters T=${top?top.pos:"-"} B=${bottom?bottom.pos:"-"} L=${left?left.pos:"-"} R=${right?right.pos:"-"} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
-
-    const sx=left?left.pos:0, ex=right?right.pos:w-1;
-    const sy=top?top.pos:0, ey=bottom?bottom.pos:h-1;
-    const pw=Math.max(0,ex-sx), ph=Math.max(0,ey-sy);
-    const contains=tx>=Math.min(sx,ex)&&tx<=Math.max(sx,ex)&&ty>=Math.min(sy,ey)&&ty<=Math.max(sy,ey);
-    const found=[top,bottom,left,right].filter(Boolean).length;
-    const credible=contains && pw>=Math.max(12,w*0.05) && ph>=Math.max(12,h*0.05) &&
-      (found>=2 || (found>=1 && (pw>=w*0.84 || ph>=h*0.84)));
-
-    if(!credible){
-      if(log) log(`V80 fallback REJECTED region=${Math.round(pw)}x${Math.round(ph)} sides=${found} containsTap=${contains}`);
-      return null;
-    }
-
-    const panel={x:Math.min(sx,ex)/w,y:Math.min(sy,ey)/h,w:pw/w,h:ph/h,_v79Fallback:true,_gutterSides:found};
-    if(log) log(`V80 fallback ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${found}`);
+    const panel={x:Math.min(best.sx,best.ex)/w,y:Math.min(best.sy,best.ey)/h,w:best.pw/w,h:best.ph/h,_v81Fallback:true,_gutterSides:best.sides};
+    if(log) log(`V81 fallback ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${best.sides}`);
     return panel;
   },
 
