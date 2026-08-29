@@ -1,15 +1,9 @@
 // ================================================================
-// NTH SHELF — V68
-// EXPERIMENT: GUTTER BOUNDARY
-// BUILD: V68 — gutter-boundary radial contour
+// NTH SHELF — V69
+// EXPERIMENT: CLEAN GUTTER BOUNDARY
+// BUILD: V69 — isolated gutter-boundary detector
 // ================================================================
-// V68 GUTTER BOUNDARY + V64 COORDINATE TRUTH — radial contour around the exact tap.
-// V60 TAP-OWNS-SELECTION — retained for comparison only.
-// V57 DOMINANT-OUTER-CANDIDATE TAP SELECTION EXPERIMENT — retained as fallback.
-// V48 PANEL SELECTION MAP TEST — retained for comparison.
-// V47 PANEL GEOMETRY VISUALIZATION TEST — retained for comparison.
-// V46 PANEL SELECTION TEST — retained for comparison.
-// V45 PANEL HANDOFF TEST — retained for comparison.
+// V69 CLEAN GUTTER BOUNDARY — exact tap image mapping + isolated gutter contour.
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
 const PANEL_ZOOM_KEY = "longbox_panel_zoom_enabled";
@@ -778,217 +772,23 @@ const Reader = {
    const step = this.mode === "two-page" ? 2 : 1;
    [this.index + step, this.index - 1].forEach((i) => this.getPageUrl(i));
  },
-
- async loadPanelsForCurrentPage() {
-   this.removePanelDiagnosticOverlay();
-   this.currentPanels = [];
-   if (this.mode !== "single") return;
-
-   const comicId = this.comic.id;
-   const pageIndex = this.index;
-   const token = ++this._panelLoadToken;
-   const logger = this.debugMode ? (msg) => this.debugLog(`[panels p${pageIndex}] ${msg}`) : null;
-
-   let panels = this.debugMode ? undefined : await LongboxDB.getPanels(comicId, pageIndex);
-   if (panels === undefined) {
-     if (logger) logger("running detection" + (this.debugMode ? " (debug mode bypasses cache)" : " (not cached yet)"));
-     const url = await this.getPageUrl(pageIndex);
-     panels = url ? await PanelDetect.detect(url, logger) : [];
-     LongboxDB.putPanels(comicId, pageIndex, panels);
-   } else if (logger) {
-     logger(`cache hit: ${panels.length} panel(s)`);
-   }
-
-   if (token !== this._panelLoadToken || this.comic.id !== comicId || this.index !== pageIndex) return;
-   this.currentPanels = panels;
-   if (logger) logger(`currentPanels set: ${panels.length}`);
-   if (this.debugMode) this.renderPanelDiagnosticOverlay();
- },
-
- removePanelDiagnosticOverlay() {
-   const existing = this.els.panelDiagnosticOverlay;
-   if (existing && existing.parentNode) existing.remove();
-   this.els.panelDiagnosticOverlay = null;
- },
-
- renderPanelDiagnosticOverlay() {
-   this.removePanelDiagnosticOverlay();
-   if (!this.debugMode || this.mode !== "single" || !this.currentPanels.length) return;
-
-   const ctx = this.getPanelImageContext();
-   const imgRect = ctx?.rect;
-   const stage = this.els.stage;
-   if (!stage || !imgRect || imgRect.width <= 1 || imgRect.height <= 1) return;
-
-   const stageRect = stage.getBoundingClientRect();
-   const overlay = document.createElement("div");
-   overlay.className = "v47-panel-diagnostic-overlay";
-   overlay.setAttribute("aria-hidden", "true");
-   Object.assign(overlay.style, {
-     position: "absolute",
-     left: `${imgRect.left - stageRect.left}px`,
-     top: `${imgRect.top - stageRect.top}px`,
-     width: `${imgRect.width}px`,
-     height: `${imgRect.height}px`,
-     pointerEvents: "none",
-     zIndex: "20",
-     overflow: "visible",
-     boxSizing: "border-box"
-   });
-
-   this.currentPanels.forEach((panel, index) => {
-     const box = document.createElement("div");
-     box.dataset.panelIndex = String(index);
-     Object.assign(box.style, {
-       position: "absolute",
-       left: `${panel.x * 100}%`,
-       top: `${panel.y * 100}%`,
-       width: `${panel.w * 100}%`,
-       height: `${panel.h * 100}%`,
-       boxSizing: "border-box",
-       border: "2px solid rgba(255, 230, 0, 0.95)",
-       background: "rgba(255, 230, 0, 0.035)",
-       pointerEvents: "none"
-     });
-
-     const label = document.createElement("div");
-     label.textContent = `#${index}`;
-     Object.assign(label.style, {
-       position: "absolute",
-       left: "2px",
-       top: "2px",
-       minWidth: "22px",
-       padding: "2px 5px",
-       borderRadius: "3px",
-       background: "rgba(0,0,0,0.82)",
-       color: "#fff",
-       border: "1px solid rgba(255,230,0,0.95)",
-       font: "bold 13px/1.1 sans-serif",
-       textAlign: "center",
-       boxSizing: "border-box"
-     });
-
-     box.appendChild(label);
-     overlay.appendChild(box);
-   });
-
-   stage.appendChild(overlay);
-   this.els.panelDiagnosticOverlay = overlay;
-
-   this.debugLog(`[V47] PANEL OVERLAY rendered ${this.currentPanels.length} panel(s)`);
- },
+  loadPanelsForCurrentPage() {
+    // V69: legacy page-level panel candidate detection is disabled.
+    // Tap selection runs directly against the visible image.
+    this.currentPanels = [];
+    if (this.debugMode) this.debugLog("[V69] clean gutter mode — legacy panel detector disabled");
+  },
+  removePanelDiagnosticOverlay() {
+    // V69: legacy candidate overlay intentionally disabled.
+    this.els.panelDiagnosticOverlay = null;
+  },
 
  // V48: visually and diagnostically map the panel selected by the tap.
  // Keep V47's complete candidate overlay intact, then mark the exact winner
  // and report which detected panels contain or are contained by it.
- renderPanelSelectionDiagnostic(winnerIndex, hits) {
-   if (!this.debugMode || this.mode !== "single") return;
-
-   const overlay = this.els.panelDiagnosticOverlay;
-   if (!overlay) return;
-
-   overlay.querySelectorAll('[data-v48-selection="winner"], [data-v48-selection="candidate"], [data-v48-selection="parent"]').forEach(el => {
-     el.remove();
-   });
-
-   overlay.querySelectorAll('[data-v48-panel-role="winner"]').forEach(el => {
-     el.style.border = "2px solid rgba(255, 230, 0, 0.95)";
-     el.style.background = "rgba(255, 230, 0, 0.035)";
-     el.style.zIndex = "1";
-   });
-
-   if (winnerIndex == null || winnerIndex < 0 || !this.currentPanels[winnerIndex]) return;
-
-   const winner = this.currentPanels[winnerIndex];
-   const intersectionArea = (a, b) => {
-     const left = Math.max(a.x, b.x);
-     const top = Math.max(a.y, b.y);
-     const right = Math.min(a.x + a.w, b.x + b.w);
-     const bottom = Math.min(a.y + a.h, b.y + b.h);
-     return Math.max(0, right - left) * Math.max(0, bottom - top);
-   };
-   const contains = (outer, inner, tolerance = 0.003) =>
-     outer.x <= inner.x + tolerance &&
-     outer.y <= inner.y + tolerance &&
-     outer.x + outer.w >= inner.x + inner.w - tolerance &&
-     outer.y + outer.h >= inner.y + inner.h - tolerance;
-
-   const parents = [];
-   const children = [];
-   this.currentPanels.forEach((candidate, index) => {
-     if (index === winnerIndex) return;
-     if (contains(candidate, winner)) parents.push(index);
-     if (contains(winner, candidate)) children.push(index);
-   });
-
-   // Mark the original candidate box.
-   const winnerBox = overlay.querySelector(`[data-panel-index="${winnerIndex}"]`);
-   if (winnerBox) {
-     winnerBox.dataset.v48PanelRole = "winner";
-     winnerBox.style.border = "4px solid rgba(255, 255, 255, 0.98)";
-     winnerBox.style.background = "rgba(255, 255, 255, 0.08)";
-     winnerBox.style.zIndex = "50";
-
-     const badge = document.createElement("div");
-     badge.dataset.v48Selection = "winner";
-     badge.textContent = `SELECTED #${winnerIndex}`;
-     Object.assign(badge.style, {
-       position: "absolute",
-       left: "0",
-       top: "0",
-       transform: "translateY(-100%)",
-       padding: "4px 7px",
-       borderRadius: "4px 4px 0 0",
-       background: "rgba(255,255,255,0.96)",
-       color: "#000",
-       font: "bold 14px/1.1 sans-serif",
-       whiteSpace: "nowrap",
-       boxSizing: "border-box",
-       pointerEvents: "none",
-       zIndex: "60"
-     });
-     winnerBox.appendChild(badge);
-   }
-
-   // Highlight other candidates that participated in the tap.
-   for (const entry of (hits || [])) {
-     if (entry.index === winnerIndex) continue;
-     const box = overlay.querySelector(`[data-panel-index="${entry.index}"]`);
-     if (!box) continue;
-     box.dataset.v48PanelRole = "candidate";
-     box.style.border = "3px dashed rgba(255,255,255,0.82)";
-     box.style.background = "rgba(255,255,255,0.025)";
-     box.style.zIndex = "40";
-   }
-
-   // Highlight containing/contained rectangles so the hierarchy is obvious.
-   for (const index of parents) {
-     const box = overlay.querySelector(`[data-panel-index="${index}"]`);
-     if (!box) continue;
-     box.dataset.v48PanelRole = "parent";
-     box.style.border = "3px dashed rgba(255,120,0,0.95)";
-     box.style.background = "rgba(255,120,0,0.025)";
-     box.style.zIndex = "30";
-   }
-
-   const fmt = (p) =>
-     `x=${Number(p.x.toFixed(4))} y=${Number(p.y.toFixed(4))} ` +
-     `w=${Number(p.w.toFixed(4))} h=${Number(p.h.toFixed(4))} ` +
-     `area=${Number((p.w * p.h).toFixed(5))}`;
-
-   this.debugLog(`[V48] TAP WINNER #${winnerIndex} ${fmt(winner)}`);
-   this.debugLog(`[V48] TAP HITS ${hits?.map?.(h => `#${h.index}`).join(",") || "none"}`);
-   this.debugLog(`[V48] PARENTS of #${winnerIndex}: ${parents.length ? parents.map(i => `#${i}`).join(",") : "none"}`);
-   this.debugLog(`[V48] CHILDREN of #${winnerIndex}: ${children.length ? children.map(i => `#${i}`).join(",") : "none"}`);
-
-   const parentDetails = parents.map(i => `#${i}(${fmt(this.currentPanels[i])})`).join(" | ");
-   const childDetails = children.map(i => `#${i}(${fmt(this.currentPanels[i])})`).join(" | ");
-   if (parentDetails) this.debugLog(`[V48] PARENT DETAILS ${parentDetails}`);
-   if (childDetails) this.debugLog(`[V48] CHILD DETAILS ${childDetails}`);
- },
 
  getPanelImageContext(screenX = null, screenY = null) {
-   // V64 COORDINATE TRUTH:
+   // V69 EXACT TAP IMAGE MAPPING:
    // When a tap position is supplied, resolve the ACTUAL visible image under
    // that screen point instead of assuming Turn.js view()[0] is the image
    // the user touched. This is intentionally a DOM/image-location experiment;
@@ -1078,17 +878,17 @@ const Reader = {
 
        if (this.debugMode) {
          this.debugLog(
-           `[V64] COORDINATE TRUTH candidates=${images.length} containing=${containing.length} ` +
+           `[V69] COORDINATE TRUTH candidates=${images.length} containing=${containing.length} ` +
            `hitFromPoint=${hitFromPoint ? "yes" : "no"}`
          );
          this.debugLog(
-           `[V64] SELECTED IMG page=${pageNumber} ` +
+           `[V69] SELECTED IMG page=${pageNumber} ` +
            `rect=(${Number(rect.left.toFixed(1))},${Number(rect.top.toFixed(1))},` +
            `${Number(rect.width.toFixed(1))},${Number(rect.height.toFixed(1))}) ` +
            `natural=${chosen.naturalWidth}x${chosen.naturalHeight}`
          );
          this.debugLog(
-           `[V64] SCREEN TAP=(${Number(sx.toFixed(1))},${Number(sy.toFixed(1))}) ` +
+           `[V69] SCREEN TAP=(${Number(sx.toFixed(1))},${Number(sy.toFixed(1))}) ` +
            `IMAGE TAP=(${Number(normalizedX.toFixed(5))},${Number(normalizedY.toFixed(5))}) ` +
            `PIXEL=(${Math.round(normalizedX * (chosen.naturalWidth - 1))},` +
            `${Math.round(normalizedY * (chosen.naturalHeight - 1))})`
@@ -1097,7 +897,7 @@ const Reader = {
            const r = img.getBoundingClientRect();
            const pn = img.closest?.(".turn-page, .turn-page-wrapper")?.getAttribute?.("page") || "?";
            this.debugLog(
-             `[V64] CANDIDATE page=${pn} rect=(${Number(r.left.toFixed(1))},${Number(r.top.toFixed(1))},` +
+             `[V69] CANDIDATE page=${pn} rect=(${Number(r.left.toFixed(1))},${Number(r.top.toFixed(1))},` +
              `${Number(r.width.toFixed(1))},${Number(r.height.toFixed(1))})`
            );
          }
@@ -1108,7 +908,7 @@ const Reader = {
    }
 
    // Preserve the existing non-tap behavior for diagnostics, rendering, and
-   // other reader paths. V64 only changes how a tap resolves its image.
+   // other reader paths; the tap path uses the isolated gutter detector.
    if (this.mode === "single" &&
        this.useTurnJSPageMode &&
        this.turnPageMode?.book) {
@@ -1135,10 +935,10 @@ const Reader = {
    return null;
  },
 
- showV64TapMarker(pos, img, imgRect, relX, relY, pageNumber) {
+ showV69TapMarker(pos, img, imgRect, relX, relY, pageNumber) {
    if (!this.els.stage || !img || !imgRect) return;
    const stageRect = this.els.stage.getBoundingClientRect();
-   const old = this.els.v64TapMarker;
+   const old = this.els.v69TapMarker;
    if (old?.parentNode) old.remove();
 
    const marker = document.createElement("div");
@@ -1161,7 +961,7 @@ const Reader = {
    });
 
    const label = document.createElement("div");
-   label.textContent = `V64 page ${pageNumber}  ${Math.round(relX * (img.naturalWidth - 1))},${Math.round(relY * (img.naturalHeight - 1))}`;
+   label.textContent = `V69 page ${pageNumber}  ${Math.round(relX * (img.naturalWidth - 1))},${Math.round(relY * (img.naturalHeight - 1))}`;
    Object.assign(label.style, {
      position: "absolute",
      left: "18px",
@@ -1176,137 +976,14 @@ const Reader = {
    });
    marker.appendChild(label);
    this.els.stage.appendChild(marker);
-   this.els.v64TapMarker = marker;
-   clearTimeout(this._v64MarkerTimer);
-   this._v64MarkerTimer = setTimeout(() => {
-     if (this.els.v64TapMarker === marker) {
+   this.els.v69TapMarker = marker;
+   clearTimeout(this._v69MarkerTimer);
+   this._v69MarkerTimer = setTimeout(() => {
+     if (this.els.v69TapMarker === marker) {
        marker.remove();
-       this.els.v64TapMarker = null;
+       this.els.v69TapMarker = null;
      }
    }, 3500);
- },
-
- // V57: DOMINANT-OUTER-CANDIDATE TAP SELECTION EXPERIMENT.
- //
- // V56 showed that strict parent/child containment is not reliable enough:
- // some detector rectangles overlap or differ by a few pixels, even when the
- // visually useful target is the larger outer region. For this experiment we
- // therefore leave detection completely unchanged and rank ONLY the candidates
- // that actually contain the tap.
- //
- // When two or more candidates contain the tap, the largest-area candidate
- // wins. This deliberately favors the dominant outer region over small child
- // detections. Children are NOT removed from currentPanels and can still be
- // inspected by later experiments.
-
- // V59 RETAINED FOR FUTURE REVISIT:
- // Tap-centered boundary reconstruction remains available here, but V60
- // deliberately does not call it. If V60 cannot select the correct panel
- // from existing candidates, we will return to the boundary experiment.
- async reconstructPanelAtTap(relX, relY, img, log) {
-   if (!img || !img.naturalWidth || !img.naturalHeight) return null;
-   try {
-     return await PanelDetect.reconstructAt(
-       img,
-       relX,
-       relY,
-       log,
-       this.currentPanels
-     );
-   } catch (err) {
-     if (typeof log === "function") {
-       log(`[V59] reconstruction ERROR ${err?.message || err}`);
-     }
-     return null;
-   }
- },
-
- findPanelAt(relX, relY) {
-   if (!this.panelZoomEnabled) return null;
-
-   const panels = Array.isArray(this.currentPanels) ? this.currentPanels : [];
-
-   // V60 RULE: the exact tap owns the selection.
-   // Find every detector rectangle containing the tap, then choose the
-   // smallest containing candidate. This is deliberately the opposite of
-   // V57's dominant-outer rule: a parent may contain children, but a tap
-   // inside a child should select that child rather than its parent.
-   const hits = panels
-     .map((candidate, index) => ({ candidate, index }))
-     .filter(({ candidate }) =>
-       Number.isFinite(candidate?.x) &&
-       Number.isFinite(candidate?.y) &&
-       Number.isFinite(candidate?.w) &&
-       Number.isFinite(candidate?.h) &&
-       candidate.w > 0 &&
-       candidate.h > 0 &&
-       relX >= candidate.x &&
-       relX <= candidate.x + candidate.w &&
-       relY >= candidate.y &&
-       relY <= candidate.y + candidate.h
-     );
-
-   if (!hits.length) {
-     if (typeof this.debugLog === "function") {
-       this.debugLog(
-         `[V60] PANEL SELECT tap=` +
-         `${Number(relX.toFixed(4))},${Number(relY.toFixed(4))} ` +
-         `total=${panels.length} hits=0 winner=-1`
-       );
-     }
-     return null;
-   }
-
-   const areaOf = (p) =>
-     Math.max(0.00000001, Number(p.w) * Number(p.h));
-
-   const ranking = hits.slice().sort((a, b) => {
-     const areaDiff = areaOf(a.candidate) - areaOf(b.candidate);
-     if (Math.abs(areaDiff) > 0.00000001) return areaDiff;
-
-     const aCX = a.candidate.x + a.candidate.w / 2;
-     const aCY = a.candidate.y + a.candidate.h / 2;
-     const bCX = b.candidate.x + b.candidate.w / 2;
-     const bCY = b.candidate.y + b.candidate.h / 2;
-     return Math.hypot(relX - aCX, relY - aCY) -
-       Math.hypot(relX - bCX, relY - bCY);
-   });
-
-   const winner = ranking[0];
-
-   if (typeof this.debugLog === "function") {
-     try {
-       const hitText = ranking.map(entry => {
-         const p = entry.candidate;
-         return `#${entry.index}` +
-           `(${Number(p.x.toFixed(4))},${Number(p.y.toFixed(4))},` +
-           `${Number(p.w.toFixed(4))},${Number(p.h.toFixed(4))})` +
-           ` area=${Number(areaOf(p).toFixed(5))}`;
-       }).join(" | ");
-
-       const smallestArea = areaOf(winner.candidate);
-       const largestArea = areaOf(ranking[ranking.length - 1].candidate);
-       const ratio = smallestArea > 0 ? largestArea / smallestArea : 0;
-
-       this.debugLog(
-         `[V60] PANEL SELECT tap=` +
-         `${Number(relX.toFixed(4))},${Number(relY.toFixed(4))} ` +
-         `total=${panels.length} hits=${hits.length} winner=#${winner.index}`
-       );
-       this.debugLog(`[V60] CONTAINING CANDIDATES ${hitText}`);
-       this.debugLog(
-         `[V60] SMALLEST WINNER #${winner.index} ` +
-         `area=${Number(smallestArea.toFixed(5))} ` +
-         `largestToSmallest=${Number(ratio.toFixed(3))}`
-       );
-     } catch (_) {}
-   }
-
-   if (typeof this.renderPanelSelectionDiagnostic === "function") {
-     this.renderPanelSelectionDiagnostic(winner.index, hits);
-   }
-
-   return winner.candidate;
  },
 
  togglePanelZoom() {
@@ -2746,7 +2423,7 @@ async setMode(mode) {
              const ctx = this.getPanelImageContext();
              if (ctx && ctx.rect.width > 1 && ctx.rect.height > 1) {
                // V63: every tap in the displayed page is eligible for the
-               // gradient laboratory. Do NOT call findPanelAt() here: that
+               // V69: every tap is eligible for the isolated gutter detector.
                // would reintroduce child/grandchild candidates before the
                // gradient experiment even gets a chance to run.
                panelHit = true;
@@ -2935,13 +2612,13 @@ async setMode(mode) {
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
 
-   // V64: the image context above was resolved from the exact screen tap.
+   // V69: the image context above is resolved from the exact screen tap.
    // Show a temporary marker and log the natural source pixel so this test
    // can prove the coordinate mapping before we judge V63's boundary logic.
-   this.showV64TapMarker(pos, img, imgRect, relXImg, relYImg, ctx?.pageNumber || (this.index + 1));
+   this.showV69TapMarker(pos, img, imgRect, relXImg, relYImg, ctx?.pageNumber || (this.index + 1));
    if (this.debugMode) {
      this.debugLog(
-       `[V64] VERIFIED CONTEXT page=${ctx?.pageNumber || (this.index + 1)} ` +
+       `[V69] VERIFIED CONTEXT page=${ctx?.pageNumber || (this.index + 1)} ` +
        `img=${img.naturalWidth}x${img.naturalHeight}`
      );
    }
@@ -2957,11 +2634,11 @@ async setMode(mode) {
 
    if (logger) {
      logger(
-       `[V68] TAP x=${Number(relXImg.toFixed(4))} ` +
+       `[V69] TAP x=${Number(relXImg.toFixed(4))} ` +
        `y=${Number(relYImg.toFixed(4))} ` +
        `forced=${forcedPanel ? "yes" : "no"}`
      );
-     logger(`[V68] CHILD/PARENT/GRANDCHILD DETECTION DISABLED FOR THIS EXPERIMENT`);
+     logger(`[V69] CHILD/PARENT/GRANDCHILD DETECTION DISABLED FOR THIS EXPERIMENT`);
    }
 
    let panel = null;
@@ -2973,13 +2650,13 @@ async setMode(mode) {
        logger
      );
    } catch (err) {
-     if (logger) logger(`[V68] LAB ERROR ${err?.message || err}`);
+     if (logger) logger(`[V69] LAB ERROR ${err?.message || err}`);
    }
 
    if (panel) {
      if (logger) {
        logger(
-         `[V68] FINAL TAP-CONTAINING PANEL ` +
+         `[V69] FINAL TAP-CONTAINING PANEL ` +
          `x=${Number(Number(panel.x).toFixed(4))} ` +
          `y=${Number(Number(panel.y).toFixed(4))} ` +
          `w=${Number(Number(panel.w).toFixed(4))} ` +
@@ -2991,7 +2668,7 @@ async setMode(mode) {
      return;
    }
 
-   if (logger) logger(`[V68] NO TAP-CONTAINING PANEL FOUND -> no frame opened`);
+   if (logger) logger(`[V69] NO TAP-CONTAINING PANEL FOUND -> no frame opened`);
    this.toggleChrome();
  },
 
