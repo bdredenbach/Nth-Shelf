@@ -1,7 +1,7 @@
 // ================================================================
-// NTH SHELF — V66
-// EXPERIMENT: CLOSED BOUNDARY / REGION LOCK
-// BUILD: V66 — nearest sustained boundaries + closed-region validation
+// NTH SHELF — V67
+// EXPERIMENT: CLOSED BOUNDARY / REGION LOCK + INTERIOR PANEL SPLIT
+// BUILD: V67 — tap-containing region refinement
 // ================================================================
 // panels.js — Border-Grid Panel Detection
 // V64 COORDINATE TRUTH COMPATIBLE + V63 PERFORMANCE-SAFE GRADIENT LAB: tap-centered boundary experiment.
@@ -53,7 +53,7 @@ const PanelDetect = {
   // a geometric frame. It is intentionally allowed to be more expensive than
   // the normal detector.
   exhaustiveTapGradient(img, relX, relY, log) {
-    // V66 — CLOSED BOUNDARY / REGION LOCK
+    // V67 — CLOSED BOUNDARY / REGION LOCK + INTERIOR PANEL SPLIT
     //
     // V65 proved that nearest-first sustained boundary searches can find useful
     // local evidence, but its four independent answers could belong to four
@@ -82,7 +82,7 @@ const PanelDetect = {
     try {
       data = ctx.getImageData(0, 0, w, h).data;
     } catch (e) {
-      if (log) log(`[V66] IMAGE READ ERROR ${e?.message || e}`);
+      if (log) log(`[V67] IMAGE READ ERROR ${e?.message || e}`);
       return null;
     }
 
@@ -108,9 +108,9 @@ const PanelDetect = {
     const py = clamp(Math.round(relY * (h - 1)), 2, h - 3);
 
     if (log) {
-      log(`[V66] TAP x=${relX.toFixed(4)} y=${relY.toFixed(4)} px=${px} py=${py}`);
-      log(`[V66] CHILD/PARENT/GRANDCHILD DETECTION DISABLED`);
-      log(`[V66] IMAGE ${w}x${h}`);
+      log(`[V67] TAP x=${relX.toFixed(4)} y=${relY.toFixed(4)} px=${px} py=${py}`);
+      log(`[V67] CHILD/PARENT/GRANDCHILD DETECTION DISABLED`);
+      log(`[V67] IMAGE ${w}x${h}`);
     }
 
     function transition(axis, coord, span, relax) {
@@ -366,7 +366,7 @@ const PanelDetect = {
 
       if (log) {
         log(
-          `[V66] ${d.name} candidates=${candidateMap[d.name].length} ` +
+          `[V67] ${d.name} candidates=${candidateMap[d.name].length} ` +
           candidateMap[d.name]
             .map(c =>
               `${Math.round(c.coord)}@${c.score.toFixed(2)}/p${c.support.toFixed(2)}/r${c.relax}`
@@ -382,7 +382,7 @@ const PanelDetect = {
       !candidateMap.LEFT.length ||
       !candidateMap.RIGHT.length
     ) {
-      if (log) log(`[V66] INSUFFICIENT CANDIDATE SIDES`);
+      if (log) log(`[V67] INSUFFICIENT CANDIDATE SIDES`);
       return null;
     }
 
@@ -712,7 +712,7 @@ const PanelDetect = {
     }
 
     if (!candidates.length) {
-      if (log) log(`[V66] NO CLOSED REGION SURVIVED VALIDATION`);
+      if (log) log(`[V67] NO CLOSED REGION SURVIVED VALIDATION`);
       return null;
     }
 
@@ -745,14 +745,243 @@ const PanelDetect = {
       }
     }
 
+    // ================================================================
+    // V67 INTERIOR PANEL SPLIT
+    // ================================================================
+    // V66 could prove that four boundaries form a closed region, but that
+    // region could still be a parent containing multiple real panels. V67
+    // therefore inspects the INSIDE of the winning region for another
+    // sustained boundary. If a credible divider separates the tap from one
+    // edge, that divider becomes the new edge of the tap-containing region.
+    // This is image evidence only; detector parent/child rectangles remain
+    // completely out of the decision.
+    function internalBoundaryQuality(axis, coord, start, end) {
+      const samples = 31;
+      const values = [];
+
+      for (let i = 0; i < samples; i++) {
+        const t = (i + 0.5) / samples;
+        if (axis === "h") {
+          const x = clamp(Math.round(start + (end - start) * t), 3, w - 4);
+          const y = clamp(Math.round(coord), 12, h - 13);
+          const outside = at(x, y - 7);
+          const inside = at(x, y + 7);
+          const center = at(x, y);
+          const farA = at(x, y - 14);
+          const farB = at(x, y + 14);
+
+          const dr = rr[outside] - rr[inside];
+          const dg = gg[outside] - gg[inside];
+          const db = bb[outside] - bb[inside];
+          const rgb = Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
+          const ld = Math.abs(lum[outside] - lum[inside]) / 255;
+          const cd = Math.abs(chr[outside] - chr[inside]) / 255;
+          const line = Math.min(1, Math.abs(lum[center] - (lum[farA] + lum[farB]) / 2) / 70);
+          values.push(0.40 * rgb + 0.31 * ld + 0.12 * cd + 0.17 * line);
+        } else {
+          const y = clamp(Math.round(start + (end - start) * t), 3, h - 4);
+          const x = clamp(Math.round(coord), 12, w - 13);
+          const outside = at(x - 7, y);
+          const inside = at(x + 7, y);
+          const center = at(x, y);
+          const farA = at(x - 14, y);
+          const farB = at(x + 14, y);
+
+          const dr = rr[outside] - rr[inside];
+          const dg = gg[outside] - gg[inside];
+          const db = bb[outside] - bb[inside];
+          const rgb = Math.sqrt(dr * dr + dg * dg + db * db) / 441.673;
+          const ld = Math.abs(lum[outside] - lum[inside]) / 255;
+          const cd = Math.abs(chr[outside] - chr[inside]) / 255;
+          const line = Math.min(1, Math.abs(lum[center] - (lum[farA] + lum[farB]) / 2) / 70);
+          values.push(0.40 * rgb + 0.31 * ld + 0.12 * cd + 0.17 * line);
+        }
+      }
+
+      const sorted = values.slice().sort((a, b) => a - b);
+      const mean = values.reduce((a, b) => a + b, 0) / values.length;
+      const median = sorted[Math.floor(sorted.length / 2)];
+      const threshold = 0.105;
+      const coverage = values.filter(v => v >= threshold).length / values.length;
+      const quality = 0.40 * mean + 0.36 * median + 0.24 * coverage;
+
+      return { quality, mean, median, coverage };
+    }
+
+    function findInternalDivider(axis, region, side) {
+      const start = axis === "h"
+        ? region.x0 + Math.max(10, Math.round((region.x1 - region.x0) * 0.07))
+        : region.y0 + Math.max(10, Math.round((region.y1 - region.y0) * 0.07));
+      const end = axis === "h"
+        ? region.x1 - Math.max(10, Math.round((region.x1 - region.x0) * 0.07))
+        : region.y1 - Math.max(10, Math.round((region.y1 - region.y0) * 0.07));
+
+      const edge = axis === "h"
+        ? (side === "TOP" ? region.y0 : region.y1)
+        : (side === "LEFT" ? region.x0 : region.x1);
+      const tap = axis === "h" ? py : px;
+      const maxDistance = side === "TOP" || side === "LEFT"
+        ? tap - edge
+        : edge - tap;
+      const minGap = Math.max(12, Math.round(Math.min(w, h) * 0.025));
+      const step = Math.max(3, Math.round(Math.min(w, h) / 220));
+
+      if (maxDistance <= minGap + step || end <= start) return null;
+
+      let streak = 0;
+      let zoneBest = null;
+      let zoneStart = null;
+
+      for (let distance = minGap; distance <= maxDistance - minGap; distance += step) {
+        const coord = side === "TOP" || side === "LEFT"
+          ? edge + distance
+          : edge - distance;
+        const q = internalBoundaryQuality(axis, coord, start, end);
+        const convincing =
+          q.quality >= 0.125 &&
+          q.median >= 0.085 &&
+          q.coverage >= 0.56;
+
+        if (convincing) {
+          if (!streak) zoneStart = distance;
+          streak++;
+          if (!zoneBest || q.quality > zoneBest.quality) {
+            zoneBest = { ...q, coord, distance };
+          }
+        } else {
+          if (streak >= 2 && zoneBest) {
+            return { ...zoneBest, zoneStart, zoneEnd: distance - step, side, axis };
+          }
+          streak = 0;
+          zoneStart = null;
+          zoneBest = null;
+        }
+      }
+
+      if (streak >= 2 && zoneBest) {
+        return { ...zoneBest, zoneStart, zoneEnd: maxDistance - minGap, side, axis };
+      }
+      return null;
+    }
+
+    function regionSideCandidate(coord, score, support, axis) {
+      return {
+        coord,
+        score,
+        support,
+        axis,
+        relax: 0
+      };
+    }
+
+    function refineTapContainingRegion(region) {
+      let current = { ...region };
+      let splits = 0;
+      const history = [];
+      const maxSplits = 4;
+
+      while (splits < maxSplits) {
+        const candidates = [];
+        const checks = [
+          ["h", "TOP"], ["h", "BOTTOM"],
+          ["v", "LEFT"], ["v", "RIGHT"]
+        ];
+
+        for (const [axis, side] of checks) {
+          const found = findInternalDivider(axis, current, side);
+          if (found) candidates.push(found);
+        }
+
+        if (!candidates.length) break;
+
+        candidates.sort((a, b) => a.distance - b.distance);
+        let accepted = null;
+
+        for (const found of candidates) {
+          const proposed = { ...current };
+          if (found.side === "TOP") proposed.y0 = found.coord;
+          else if (found.side === "BOTTOM") proposed.y1 = found.coord;
+          else if (found.side === "LEFT") proposed.x0 = found.coord;
+          else proposed.x1 = found.coord;
+
+          const width = proposed.x1 - proposed.x0;
+          const height = proposed.y1 - proposed.y0;
+          const minWidth = Math.max(30, Math.round(w * 0.045));
+          const minHeight = Math.max(30, Math.round(h * 0.045));
+          if (width < minWidth || height < minHeight) continue;
+          if (!(proposed.x0 < px && proposed.x1 > px && proposed.y0 < py && proposed.y1 > py)) continue;
+
+          const t = regionSideCandidate(proposed.y0, found.quality, found.coverage, "h");
+          const b = regionSideCandidate(proposed.y1, found.quality, found.coverage, "h");
+          const l = regionSideCandidate(proposed.x0, found.quality, found.coverage, "v");
+          const r = regionSideCandidate(proposed.x1, found.quality, found.coverage, "v");
+          const t0 = { coord: current.y0, score: 0.15, support: 0.65, axis: "h", relax: 0 };
+          const b0 = { coord: current.y1, score: 0.15, support: 0.65, axis: "h", relax: 0 };
+          const l0 = { coord: current.x0, score: 0.15, support: 0.65, axis: "v", relax: 0 };
+          const r0 = { coord: current.x1, score: 0.15, support: 0.65, axis: "v", relax: 0 };
+          const validated = scoreRectangle(
+            found.side === "TOP" ? t : t0,
+            found.side === "BOTTOM" ? b : b0,
+            found.side === "LEFT" ? l : l0,
+            found.side === "RIGHT" ? r : r0,
+            0
+          );
+
+          if (validated || found.quality >= 0.17) {
+            accepted = { proposed, found };
+            break;
+          }
+        }
+
+        if (!accepted) break;
+        current = accepted.proposed;
+        history.push(accepted.found);
+        splits++;
+
+        if (log) {
+          log(
+            `[V67] INTERIOR SPLIT #${splits} ${accepted.found.side} ` +
+            `at=${Math.round(accepted.found.coord)} ` +
+            `q=${accepted.found.quality.toFixed(3)} ` +
+            `median=${accepted.found.median.toFixed(3)} ` +
+            `coverage=${accepted.found.coverage.toFixed(2)}`
+          );
+        }
+      }
+
+      return { region: current, splits, history };
+    }
+
+    const refined = refineTapContainingRegion(best);
+    best = {
+      ...best,
+      x0: refined.region.x0,
+      x1: refined.region.x1,
+      y0: refined.region.y0,
+      y1: refined.region.y1,
+      width: refined.region.x1 - refined.region.x0,
+      height: refined.region.y1 - refined.region.y0,
+      __v67Splits: refined.splits,
+      __v67SplitHistory: refined.history
+    };
+
+    if (log) {
+      log(
+        `[V67] REFINED REGION ` +
+        `T=${Math.round(best.y0)} B=${Math.round(best.y1)} ` +
+        `L=${Math.round(best.x0)} R=${Math.round(best.x1)} ` +
+        `splits=${refined.splits}`
+      );
+    }
+
     const panel = {
       x: clamp(best.x0 / w, 0, 1),
       y: clamp(best.y0 / h, 0, 1),
       w: clamp(best.width / w, 0, 1),
       h: clamp(best.height / h, 0, 1),
-      __v66Method: "closed-boundary-region-lock",
-      __v66Score: best.score,
-      __v66Evidence: {
+      __v67Method: "closed-boundary-region-lock-interior-split",
+      __v67Score: best.score,
+      __v67Evidence: {
         top: best.top,
         bottom: best.bottom,
         left: best.left,
@@ -765,18 +994,19 @@ const PanelDetect = {
         corners: best.corners,
         interior: best.interior,
         relax: best.relax,
-        candidatesTested: candidates.length
+        candidatesTested: candidates.length,
+        interiorSplits: refined.splits,
+        interiorSplitHistory: refined.history
       }
     };
-
     if (log) {
       log(
-        `[V66] BEST CLOSED REGION ` +
+        `[V67] BEST CLOSED REGION ` +
         `T=${Math.round(best.y0)} B=${Math.round(best.y1)} ` +
         `L=${Math.round(best.x0)} R=${Math.round(best.x1)}`
       );
       log(
-        `[V66] SCORE=${best.score.toFixed(3)} ` +
+        `[V67] SCORE=${best.score.toFixed(3)} ` +
         `near=${best.near.toFixed(3)} ` +
         `side=${best.sideMean.toFixed(3)} ` +
         `median=${best.sideMedian.toFixed(3)} ` +
@@ -785,18 +1015,18 @@ const PanelDetect = {
         `relax=${best.relax}`
       );
       log(
-        `[V66] SIDES ` +
+        `[V67] SIDES ` +
         `T=${best.sides[0].quality.toFixed(3)}/c${best.sides[0].coverage.toFixed(2)} ` +
         `B=${best.sides[1].quality.toFixed(3)}/c${best.sides[1].coverage.toFixed(2)} ` +
         `L=${best.sides[2].quality.toFixed(3)}/c${best.sides[2].coverage.toFixed(2)} ` +
         `R=${best.sides[3].quality.toFixed(3)}/c${best.sides[3].coverage.toFixed(2)}`
       );
       log(
-        `[V66] FINAL x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} ` +
+        `[V67] FINAL x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} ` +
         `w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} ` +
         `method=${panel.__v66Method}`
       );
-      log(`[V66] ELAPSED ${Math.round(performance.now() - started)}ms candidates=${candidates.length}`);
+      log(`[V67] ELAPSED ${Math.round(performance.now() - started)}ms candidates=${candidates.length}`);
     }
 
     return panel;

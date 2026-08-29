@@ -1,7 +1,7 @@
 // ================================================================
-// NTH SHELF — V66
-// EXPERIMENT: CLOSED BOUNDARY / REGION LOCK
-// BUILD: V66 — First Sustained Boundary successor
+// NTH SHELF — V67
+// EXPERIMENT: CLOSED BOUNDARY / REGION LOCK + INTERIOR PANEL SPLIT
+// BUILD: V67 — tap-containing region refinement
 // ================================================================
 // V65 FIRST SUSTAINED BOUNDARY + V64 COORDINATE TRUTH — nearest-first boundary selection.
 // V60 TAP-OWNS-SELECTION — retained for comparison only.
@@ -2957,11 +2957,11 @@ async setMode(mode) {
 
    if (logger) {
      logger(
-       `[V66] TAP x=${Number(relXImg.toFixed(4))} ` +
+       `[V67] TAP x=${Number(relXImg.toFixed(4))} ` +
        `y=${Number(relYImg.toFixed(4))} ` +
        `forced=${forcedPanel ? "yes" : "no"}`
      );
-     logger(`[V66] CHILD/PARENT/GRANDCHILD DETECTION DISABLED FOR THIS EXPERIMENT`);
+     logger(`[V67] CHILD/PARENT/GRANDCHILD DETECTION DISABLED FOR THIS EXPERIMENT`);
    }
 
    let panel = null;
@@ -2973,25 +2973,25 @@ async setMode(mode) {
        logger
      );
    } catch (err) {
-     if (logger) logger(`[V66] LAB ERROR ${err?.message || err}`);
+     if (logger) logger(`[V67] LAB ERROR ${err?.message || err}`);
    }
 
    if (panel) {
      if (logger) {
        logger(
-         `[V66] FINAL CLOSED-REGION PANEL ` +
+         `[V67] FINAL TAP-CONTAINING PANEL ` +
          `x=${Number(Number(panel.x).toFixed(4))} ` +
          `y=${Number(Number(panel.y).toFixed(4))} ` +
          `w=${Number(Number(panel.w).toFixed(4))} ` +
          `h=${Number(Number(panel.h).toFixed(4))} ` +
-         `method=${panel.__v66Method || "unknown"}`
+         `method=${panel.__v67Method || "unknown"}`
        );
      }
      this.zoomToPanel(panel, stageRect, imgRect, img);
      return;
    }
 
-   if (logger) logger(`[V66] NO NEAREST-BOUNDARY PANEL FOUND -> no frame opened`);
+   if (logger) logger(`[V67] NO TAP-CONTAINING PANEL FOUND -> no frame opened`);
    this.toggleChrome();
  },
 
