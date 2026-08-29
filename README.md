@@ -192,3 +192,16 @@ This project is licensed under the **MIT License**. The license applies to the s
 - Wider spacing and lighter side covers make neighboring comics clearly visible.
 - Changing the centered comic always clears the previous comic's cinematic/second-tap state.
 - The newly centered comic requires a fresh first tap before opening.
+
+
+## V73 Test Build — Stable Gutter Baseline / Tap Selection
+
+This experimental build deliberately returns panel detection to the compact gutter-scanning implementation used by the v2.76 Stable source supplied for the V73 experiment.
+
+V73 does not run the V1–V72 experimental panel detectors. The panel cache is deliberately bypassed so previously stored panel rectangles cannot affect this test. Each page is freshly analyzed by `PanelDetect`, and the existing reader tap-selection path chooses the detected region containing the exact tap coordinate.
+
+This is a diagnostic baseline: if V73 succeeds where V65–V72 failed, the next work should focus on the later experimental detection algorithms rather than adding more complexity.
+
+
+## V76 Test
+V76 starts from the known-good V73 stable-gutter baseline and changes only the gutter signal. It looks for geometric gap corridors bracketed by sustained boundary edges rather than requiring a particular gutter color or low pixel variance. V74 and V75 detector code is not included. The panel cache is bypassed for this experiment.
