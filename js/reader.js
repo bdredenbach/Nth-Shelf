@@ -1,7 +1,7 @@
 // ================================================================
-// NTH SHELF — V70
+// NTH SHELF — V71
 // EXPERIMENT: TRUE CLEAN GUTTER BOUNDARY
-// BUILD: V70 — isolated gutter-boundary detector
+// BUILD: V71 — isolated gutter-boundary detector
 // ================================================================
 // The panel tap path uses only the verified visible image, exact tap
 // coordinate, and PanelDetect.findPanelByGutter(). No legacy panel detector,
@@ -37,7 +37,7 @@ const Reader = {
  _twoPageOrientationLocked: false,
  _initialReaderGuideShown: false,
 
- currentPanels: [],       // intentionally empty in V70 clean gutter experiment
+ currentPanels: [],       // intentionally empty in V71 clean gutter experiment
  panelZoomEnabled: localStorage.getItem(PANEL_ZOOM_KEY) !== "0",
  bubbleZoomEnabled: localStorage.getItem(BUBBLE_ZOOM_KEY) !== "0",
  bubbleAltZoomEnabled: localStorage.getItem(BUBBLE_ALT_ZOOM_KEY) !== "0",
@@ -777,7 +777,7 @@ const Reader = {
  },
 
  async loadPanelsForCurrentPage() {
-   // V70 CLEAN EXPERIMENT: no page-level panel detection runs.
+   // V71 CLEAN EXPERIMENT: no page-level panel detection runs.
    // No cached panel rectangles, detector candidates, hierarchy data, or
    // legacy selection logic may influence the tap-to-pop-out decision.
    this.currentPanels = [];
@@ -881,17 +881,17 @@ const Reader = {
 
        if (this.debugMode) {
          this.debugLog(
-           `[V70] COORDINATE TRUTH candidates=${images.length} containing=${containing.length} ` +
+           `[V71] COORDINATE TRUTH candidates=${images.length} containing=${containing.length} ` +
            `hitFromPoint=${hitFromPoint ? "yes" : "no"}`
          );
          this.debugLog(
-           `[V70] SELECTED IMG page=${pageNumber} ` +
+           `[V71] SELECTED IMG page=${pageNumber} ` +
            `rect=(${Number(rect.left.toFixed(1))},${Number(rect.top.toFixed(1))},` +
            `${Number(rect.width.toFixed(1))},${Number(rect.height.toFixed(1))}) ` +
            `natural=${chosen.naturalWidth}x${chosen.naturalHeight}`
          );
          this.debugLog(
-           `[V70] SCREEN TAP=(${Number(sx.toFixed(1))},${Number(sy.toFixed(1))}) ` +
+           `[V71] SCREEN TAP=(${Number(sx.toFixed(1))},${Number(sy.toFixed(1))}) ` +
            `IMAGE TAP=(${Number(normalizedX.toFixed(5))},${Number(normalizedY.toFixed(5))}) ` +
            `PIXEL=(${Math.round(normalizedX * (chosen.naturalWidth - 1))},` +
            `${Math.round(normalizedY * (chosen.naturalHeight - 1))})`
@@ -900,7 +900,7 @@ const Reader = {
            const r = img.getBoundingClientRect();
            const pn = img.closest?.(".turn-page, .turn-page-wrapper")?.getAttribute?.("page") || "?";
            this.debugLog(
-             `[V70] CANDIDATE page=${pn} rect=(${Number(r.left.toFixed(1))},${Number(r.top.toFixed(1))},` +
+             `[V71] CANDIDATE page=${pn} rect=(${Number(r.left.toFixed(1))},${Number(r.top.toFixed(1))},` +
              `${Number(r.width.toFixed(1))},${Number(r.height.toFixed(1))})`
            );
          }
@@ -938,10 +938,10 @@ const Reader = {
    return null;
  },
 
- showV70TapMarker(pos, img, imgRect, relX, relY, pageNumber) {
+ showV71TapMarker(pos, img, imgRect, relX, relY, pageNumber) {
    if (!this.els.stage || !img || !imgRect) return;
    const stageRect = this.els.stage.getBoundingClientRect();
-   const old = this.els.v70TapMarker;
+   const old = this.els.v71TapMarker;
    if (old?.parentNode) old.remove();
 
    const marker = document.createElement("div");
@@ -964,7 +964,7 @@ const Reader = {
    });
 
    const label = document.createElement("div");
-   label.textContent = `V70 page ${pageNumber}  ${Math.round(relX * (img.naturalWidth - 1))},${Math.round(relY * (img.naturalHeight - 1))}`;
+   label.textContent = `V71 page ${pageNumber}  ${Math.round(relX * (img.naturalWidth - 1))},${Math.round(relY * (img.naturalHeight - 1))}`;
    Object.assign(label.style, {
      position: "absolute",
      left: "18px",
@@ -979,17 +979,17 @@ const Reader = {
    });
    marker.appendChild(label);
    this.els.stage.appendChild(marker);
-   this.els.v70TapMarker = marker;
+   this.els.v71TapMarker = marker;
    clearTimeout(this._v64MarkerTimer);
    this._v64MarkerTimer = setTimeout(() => {
-     if (this.els.v70TapMarker === marker) {
+     if (this.els.v71TapMarker === marker) {
        marker.remove();
-       this.els.v70TapMarker = null;
+       this.els.v71TapMarker = null;
      }
    }, 3500);
  },
 
- // V70 CLEAN GUTTER: no legacy panel selector remains here.
+ // V71 CLEAN GUTTER: no legacy panel selector remains here.
  // `currentPanels` is intentionally kept empty for compatibility with other
  // reader state, but it is never used to choose the tapped panel.
 
@@ -2579,17 +2579,17 @@ async setMode(mode) {
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
 
-   // V70: the image context above is resolved from the exact screen tap.
+   // V71: the image context above is resolved from the exact screen tap.
    // This coordinate path is retained from the verified coordinate experiment.
-   this.showV70TapMarker(pos, img, imgRect, relXImg, relYImg, ctx?.pageNumber || (this.index + 1));
+   this.showV71TapMarker(pos, img, imgRect, relXImg, relYImg, ctx?.pageNumber || (this.index + 1));
    if (this.debugMode) {
      this.debugLog(
-       `[V70] VERIFIED CONTEXT page=${ctx?.pageNumber || (this.index + 1)} ` +
+       `[V71] VERIFIED CONTEXT page=${ctx?.pageNumber || (this.index + 1)} ` +
        `img=${img.naturalWidth}x${img.naturalHeight}`
      );
    }
 
-   // V70 CLEAN GUTTER: the exact visible image and exact tap are the only
+   // V71 CLEAN GUTTER: the exact visible image and exact tap are the only
    // panel-detection inputs. currentPanels is intentionally never consulted.
    const logger = typeof this.debugLog === "function"
      ? (msg) => this.debugLog(msg)
@@ -2597,10 +2597,10 @@ async setMode(mode) {
 
    if (logger) {
      logger(
-       `[V70] TAP x=${Number(relXImg.toFixed(4))} ` +
+       `[V71] TAP x=${Number(relXImg.toFixed(4))} ` +
        `y=${Number(relYImg.toFixed(4))}`
      );
-     logger(`[V70] CLEAN GUTTER PATH — NO LEGACY PANEL DETECTOR`);
+     logger(`[V71] CLEAN GUTTER PATH — NO LEGACY PANEL DETECTOR`);
    }
 
    let panel = null;
@@ -2612,25 +2612,25 @@ async setMode(mode) {
        logger
      );
    } catch (err) {
-     if (logger) logger(`[V70] LAB ERROR ${err?.message || err}`);
+     if (logger) logger(`[V71] LAB ERROR ${err?.message || err}`);
    }
 
    if (panel) {
      if (logger) {
        logger(
-         `[V70] FINAL TAP-CONTAINING PANEL ` +
+         `[V71] FINAL TAP-CONTAINING PANEL ` +
          `x=${Number(Number(panel.x).toFixed(4))} ` +
          `y=${Number(Number(panel.y).toFixed(4))} ` +
          `w=${Number(Number(panel.w).toFixed(4))} ` +
          `h=${Number(Number(panel.h).toFixed(4))} ` +
-         `method=${panel.__v70Method || "unknown"}`
+         `method=${panel.__v71Method || "unknown"}`
        );
      }
      this.zoomToPanel(panel, stageRect, imgRect, img);
      return;
    }
 
-   if (logger) logger(`[V70] NO GUTTER-ENCLOSED PANEL FOUND -> no frame opened`);
+   if (logger) logger(`[V71] NO GUTTER-ENCLOSED PANEL FOUND -> no frame opened`);
    this.toggleChrome();
  },
 
