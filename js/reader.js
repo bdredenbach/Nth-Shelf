@@ -765,7 +765,7 @@ const Reader = {
  },
 
  async loadPanelsForCurrentPage() {
-   // V73: deliberately bypass the IndexedDB panel cache for this experiment.
+   // V74: deliberately bypass the IndexedDB panel cache for this experiment.
    // Older panel rectangles must not influence the test.
    this.currentPanels = [];
    if (this.mode !== "single") return;
@@ -773,14 +773,14 @@ const Reader = {
    const comicId = this.comic.id;
    const pageIndex = this.index;
    const token = ++this._panelLoadToken;
-   const logger = this.debugMode ? (msg) => this.debugLog(`[V73 panels p${pageIndex}] ${msg}`) : null;
+   const logger = this.debugMode ? (msg) => this.debugLog(`[V74 panels p${pageIndex}] ${msg}`) : null;
 
    const url = await this.getPageUrl(pageIndex);
    const panels = url ? await PanelDetect.detect(url, logger) : [];
 
    if (token !== this._panelLoadToken || this.comic.id !== comicId || this.index !== pageIndex) return;
    this.currentPanels = panels;
-   if (logger) logger(`V73 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
+   if (logger) logger(`V74 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
  },
 
  getPanelImageContext() {
