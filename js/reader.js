@@ -1,12 +1,3 @@
-// ================================================================
-// NTH SHELF — V70
-// EXPERIMENT: TRUE CLEAN GUTTER BOUNDARY
-// BUILD: V70 — isolated gutter-boundary detector
-// ================================================================
-// The panel tap path uses only the verified visible image, exact tap
-// coordinate, and PanelDetect.findPanelByGutter(). No legacy panel detector,
-// hierarchy selector, cached rectangle, or fallback selector participates.
-
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
 const PANEL_ZOOM_KEY = "longbox_panel_zoom_enabled";
@@ -19,7 +10,6 @@ const Reader = {
  pageUrls: [],       // object URLs, lazily filled
  index: 0,
  mode: "single",      // single | two-page | scroll | manga | webcomic
- androidPageTopReserve: 48,
  theme: "dark",        // dark | sepia | light
  scale: 1,
  tx: 0,
@@ -37,7 +27,7 @@ const Reader = {
  _twoPageOrientationLocked: false,
  _initialReaderGuideShown: false,
 
- currentPanels: [],       // intentionally empty in V70 clean gutter experiment
+ currentPanels: [],       // detected panel rects for the visible page, fractional coords
  panelZoomEnabled: localStorage.getItem(PANEL_ZOOM_KEY) !== "0",
  bubbleZoomEnabled: localStorage.getItem(BUBBLE_ZOOM_KEY) !== "0",
  bubbleAltZoomEnabled: localStorage.getItem(BUBBLE_ALT_ZOOM_KEY) !== "0",
@@ -467,7 +457,6 @@ const Reader = {
     if (this.mode === "single" && this.useTurnJSPageMode && this.turnPageMode) {
       const ok = await this.turnPageMode.render(this.els.viewport);
       if (ok) {
-		this.applyAndroidPageViewportReserve();
         this.prefetch();
         this.loadPanelsForCurrentPage();
         this.updateSliderLabel();
@@ -482,7 +471,6 @@ const Reader = {
     this.els.viewport.style.height = "100%";
     this.els.viewport.style.transform = "none";
     this.els.viewport.style.overflow = "hidden";
-	this.applyAndroidPageViewportReserve();
     this.els.viewport.scrollLeft = 0;
     this.els.viewport.scrollTop = 0;
     this.els.stage.scrollLeft = 0;
@@ -777,141 +765,27 @@ const Reader = {
  },
 
  async loadPanelsForCurrentPage() {
-   // V70 CLEAN EXPERIMENT: no page-level panel detection runs.
-   // No cached panel rectangles, detector candidates, hierarchy data, or
-   // legacy selection logic may influence the tap-to-pop-out decision.
+   // V73: deliberately bypass the IndexedDB panel cache for this experiment.
+   // Older panel rectangles must not influence the test.
    this.currentPanels = [];
-   this.removePanelDiagnosticOverlay();
+   if (this.mode !== "single") return;
+
+   const comicId = this.comic.id;
+   const pageIndex = this.index;
+   const token = ++this._panelLoadToken;
+   const logger = this.debugMode ? (msg) => this.debugLog(`[V73 panels p${pageIndex}] ${msg}`) : null;
+
+   const url = await this.getPageUrl(pageIndex);
+   const panels = url ? await PanelDetect.detect(url, logger) : [];
+
+   if (token !== this._panelLoadToken || this.comic.id !== comicId || this.index !== pageIndex) return;
+   this.currentPanels = panels;
+   if (logger) logger(`V73 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
  },
 
- removePanelDiagnosticOverlay() {
-   const existing = this.els.panelDiagnosticOverlay;
-   if (existing && existing.parentNode) existing.remove();
-   this.els.panelDiagnosticOverlay = null;
- },
-
- getPanelImageContext(screenX = null, screenY = null) {
-   // V64 COORDINATE TRUTH:
-   // When a tap position is supplied, resolve the ACTUAL visible image under
-   // that screen point instead of assuming Turn.js view()[0] is the image
-   // the user touched. This is intentionally a DOM/image-location experiment;
-   // it does not use currentPanels, parents, children, or grandchildren.
-   const hasPoint = Number.isFinite(Number(screenX)) && Number.isFinite(Number(screenY));
-   const sx = Number(screenX);
-   const sy = Number(screenY);
-
-   const isVisibleImage = (img) => {
-     if (!img || !img.naturalWidth || !img.naturalHeight) return false;
-     const rect = img.getBoundingClientRect();
-     if (rect.width <= 1 || rect.height <= 1) return false;
-     const cs = getComputedStyle(img);
-     if (cs.display === "none" || cs.visibility === "hidden" || Number(cs.opacity) <= 0) return false;
-     let el = img.parentElement;
-     for (let i = 0; i < 6 && el; i++, el = el.parentElement) {
-       const ecs = getComputedStyle(el);
-       if (ecs.display === "none" || ecs.visibility === "hidden" || Number(ecs.opacity) <= 0) return false;
-     }
-     return true;
-   };
-
-   const containsPoint = (rect, x, y, pad = 1) =>
-     x >= rect.left - pad && x <= rect.right + pad &&
-     y >= rect.top - pad && y <= rect.bottom + pad;
-
-   if (hasPoint) {
-     const images = Array.from(this.els.viewport?.querySelectorAll?.("img") || [])
-       .filter(isVisibleImage);
-
-     const containing = images.filter(img => containsPoint(img.getBoundingClientRect(), sx, sy, 2));
-
-     // First prefer the image Turn.js exposes at the exact screen point.
-     // pointer-events:none on comic images means elementsFromPoint often
-     // returns the Turn.js page wrapper instead, so walk upward and then
-     // inspect its descendant image.
-     let hitFromPoint = null;
-     try {
-       const stack = document.elementsFromPoint?.(sx, sy) || [];
-       for (const el of stack) {
-         if (el?.tagName === "IMG" && images.includes(el)) {
-           hitFromPoint = el;
-           break;
-         }
-         const candidate = el?.closest?.(".turn-page, .turn-page-wrapper, .longbox-turn-page");
-         const childImg = candidate?.querySelector?.("img");
-         if (childImg && images.includes(childImg) && containsPoint(childImg.getBoundingClientRect(), sx, sy, 2)) {
-           hitFromPoint = childImg;
-           break;
-         }
-       }
-     } catch (_) {}
-
-     let chosen = hitFromPoint;
-     if (!chosen && containing.length === 1) chosen = containing[0];
-
-     // If multiple visible images overlap, use the page wrapper's stacking
-     // order where possible, then prefer the image with the smallest rendered
-     // area. This is NOT panel hierarchy: it only chooses which DOM page image
-     // is physically under the finger.
-     if (!chosen && containing.length > 1) {
-       const scored = containing.map((img, index) => {
-         const rect = img.getBoundingClientRect();
-         let score = 0;
-         const page = img.closest?.(".turn-page, .turn-page-wrapper, .longbox-turn-page");
-         if (page) {
-           const pcs = getComputedStyle(page);
-           if (pcs.display !== "none" && pcs.visibility !== "hidden") score += 100;
-           const z = Number.parseInt(pcs.zIndex, 10);
-           if (Number.isFinite(z)) score += Math.max(-20, Math.min(20, z));
-           if (page.classList.contains("turn-page")) score += 5;
-         }
-         score -= (rect.width * rect.height) / 1000000;
-         return { img, rect, score, index };
-       }).sort((a, b) => b.score - a.score);
-       chosen = scored[0]?.img || null;
-     }
-
-     if (chosen) {
-       const rect = chosen.getBoundingClientRect();
-       const page = chosen.closest?.(".turn-page, .turn-page-wrapper, .longbox-turn-page");
-       let pageNumber = this.index + 1;
-       const pAttr = page?.getAttribute?.("page");
-       if (pAttr != null && Number.isFinite(Number(pAttr))) pageNumber = Number(pAttr);
-       const normalizedX = clamp((sx - rect.left) / rect.width, 0, 1);
-       const normalizedY = clamp((sy - rect.top) / rect.height, 0, 1);
-
-       if (this.debugMode) {
-         this.debugLog(
-           `[V70] COORDINATE TRUTH candidates=${images.length} containing=${containing.length} ` +
-           `hitFromPoint=${hitFromPoint ? "yes" : "no"}`
-         );
-         this.debugLog(
-           `[V70] SELECTED IMG page=${pageNumber} ` +
-           `rect=(${Number(rect.left.toFixed(1))},${Number(rect.top.toFixed(1))},` +
-           `${Number(rect.width.toFixed(1))},${Number(rect.height.toFixed(1))}) ` +
-           `natural=${chosen.naturalWidth}x${chosen.naturalHeight}`
-         );
-         this.debugLog(
-           `[V70] SCREEN TAP=(${Number(sx.toFixed(1))},${Number(sy.toFixed(1))}) ` +
-           `IMAGE TAP=(${Number(normalizedX.toFixed(5))},${Number(normalizedY.toFixed(5))}) ` +
-           `PIXEL=(${Math.round(normalizedX * (chosen.naturalWidth - 1))},` +
-           `${Math.round(normalizedY * (chosen.naturalHeight - 1))})`
-         );
-         for (const img of containing.slice(0, 6)) {
-           const r = img.getBoundingClientRect();
-           const pn = img.closest?.(".turn-page, .turn-page-wrapper")?.getAttribute?.("page") || "?";
-           this.debugLog(
-             `[V70] CANDIDATE page=${pn} rect=(${Number(r.left.toFixed(1))},${Number(r.top.toFixed(1))},` +
-             `${Number(r.width.toFixed(1))},${Number(r.height.toFixed(1))})`
-           );
-         }
-       }
-
-       return { img: chosen, rect, pageNumber };
-     }
-   }
-
-   // Preserve the existing non-tap behavior for diagnostics, rendering, and
-   // other reader paths. V64 only changes how a tap resolves its image.
+ getPanelImageContext() {
+   // Turn.js keeps multiple page images in the viewport. Resolve the image
+   // belonging to the page Turn.js says is currently visible.
    if (this.mode === "single" &&
        this.useTurnJSPageMode &&
        this.turnPageMode?.book) {
@@ -938,60 +812,15 @@ const Reader = {
    return null;
  },
 
- showV70TapMarker(pos, img, imgRect, relX, relY, pageNumber) {
-   if (!this.els.stage || !img || !imgRect) return;
-   const stageRect = this.els.stage.getBoundingClientRect();
-   const old = this.els.v70TapMarker;
-   if (old?.parentNode) old.remove();
-
-   const marker = document.createElement("div");
-   marker.setAttribute("aria-hidden", "true");
-   Object.assign(marker.style, {
-     position: "absolute",
-     left: `${pos.x - stageRect.left}px`,
-     top: `${pos.y - stageRect.top}px`,
-     width: "22px",
-     height: "22px",
-     marginLeft: "-11px",
-     marginTop: "-11px",
-     border: "3px solid red",
-     borderRadius: "50%",
-     boxSizing: "border-box",
-     pointerEvents: "none",
-     zIndex: "9999",
-     background: "rgba(255,0,0,0.08)",
-     boxShadow: "0 0 0 2px rgba(255,255,255,0.85)"
-   });
-
-   const label = document.createElement("div");
-   label.textContent = `V70 page ${pageNumber}  ${Math.round(relX * (img.naturalWidth - 1))},${Math.round(relY * (img.naturalHeight - 1))}`;
-   Object.assign(label.style, {
-     position: "absolute",
-     left: "18px",
-     top: "-8px",
-     padding: "3px 5px",
-     borderRadius: "4px",
-     background: "rgba(0,0,0,0.82)",
-     color: "white",
-     font: "11px/1.2 monospace",
-     whiteSpace: "nowrap",
-     pointerEvents: "none"
-   });
-   marker.appendChild(label);
-   this.els.stage.appendChild(marker);
-   this.els.v70TapMarker = marker;
-   clearTimeout(this._v64MarkerTimer);
-   this._v64MarkerTimer = setTimeout(() => {
-     if (this.els.v70TapMarker === marker) {
-       marker.remove();
-       this.els.v70TapMarker = null;
+ findPanelAt(relX, relY) {
+   if (!this.panelZoomEnabled) return null;
+   for (const p of this.currentPanels) {
+     if (relX >= p.x && relX <= p.x + p.w && relY >= p.y && relY <= p.y + p.h) {
+       return p;
      }
-   }, 3500);
+   }
+   return null;
  },
-
- // V70 CLEAN GUTTER: no legacy panel selector remains here.
- // `currentPanels` is intentionally kept empty for compatibility with other
- // reader state, but it is never used to choose the tapped panel.
 
  togglePanelZoom() {
    this.panelZoomEnabled = !this.panelZoomEnabled;
@@ -1135,7 +964,6 @@ const Reader = {
        this.debugMode = !this.debugMode;
        this.els.debugPanel.style.display = this.debugMode ? "block" : "none";
        this.debugLines = [];
-       if (!this.debugMode) this.removePanelDiagnosticOverlay();
        this.debugLog(this.debugMode ? "— debug on —" : "— debug off —");
        if (this.debugMode) {
          this.debugLog(`panelZoomEnabled=${this.panelZoomEnabled} bubbleZoomEnabled=${this.bubbleZoomEnabled} bubbleAltZoomEnabled=${this.bubbleAltZoomEnabled}`);
@@ -1663,29 +1491,6 @@ const Reader = {
     else this.startAutoScroll();
   },
 
-  applyAndroidPageViewportReserve() {
-    if (!this.els.viewport) return;
-
-    // Only Page mode gets the reserved top area. Other modes retain their
-    // existing geometry.
-    const isPageMode = this.mode === "single";
-    if (!isPageMode) {
-      this.els.viewport.style.marginTop = "";
-      this.els.viewport.style.height = "";
-      this.els.viewport.style.boxSizing = "";
-      return;
-    }
-
-    const reserve = this.androidPageTopReserve || 48;
-    const stageHeight = this.els.stage?.clientHeight || 0;
-
-    if (stageHeight > reserve) {
-      this.els.viewport.style.height = `${stageHeight - reserve}px`;
-      this.els.viewport.style.marginTop = `${reserve}px`;
-      this.els.viewport.style.boxSizing = "border-box";
-    }
-  },
-
 async setMode(mode) {
 
   this.stopAutoScroll();
@@ -1752,7 +1557,6 @@ async setMode(mode) {
    }
 
    await this.render();
-   this.applyAndroidPageViewportReserve();
    this.showChrome();
  },
 
@@ -2427,7 +2231,11 @@ async setMode(mode) {
            let panelHit = false;
            if (this.mode === "single" && this.panelZoomEnabled) {
              const ctx = this.getPanelImageContext();
-             panelHit = !!(ctx && ctx.rect.width > 1 && ctx.rect.height > 1);
+             if (ctx) {
+               const relX = clamp((pos.x - ctx.rect.left) / ctx.rect.width, 0, 1);
+               const relY = clamp((pos.y - ctx.rect.top) / ctx.rect.height, 0, 1);
+               panelHit = !!this.findPanelAt(relX, relY);
+             }
            }
 
            if (panelHit) {
@@ -2437,7 +2245,6 @@ async setMode(mode) {
              lastTapPos = pos;
 
              // Once a frame is already focused, do NOT create another
-
              // deferred panel candidate. The next tap belongs to the
              // focused-frame interaction: bubble detection gets a chance,
              // and if no bubble is found the frame is dismissed.
@@ -2495,7 +2302,6 @@ async setMode(mode) {
                pendingTapTimer = null;
                lastTapTime = 0;
                lastTapPos = null;
-
                this._deferredPanelTap = null;
                this.handleSingleTap(pos);
              }, 450);
@@ -2568,7 +2374,7 @@ async setMode(mode) {
    if (this.mode !== "single" || this.scale > 1.02) return;
 
    const stageRect = this.els.stage.getBoundingClientRect();
-   const ctx = this.getPanelImageContext(pos.x, pos.y);
+   const ctx = this.getPanelImageContext();
    const img = ctx?.img;
    const imgRect = ctx?.rect || stageRect;
    if (!img || !imgRect.width || !imgRect.height) {
@@ -2578,59 +2384,13 @@ async setMode(mode) {
 
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
-
-   // V70: the image context above is resolved from the exact screen tap.
-   // This coordinate path is retained from the verified coordinate experiment.
-   this.showV70TapMarker(pos, img, imgRect, relXImg, relYImg, ctx?.pageNumber || (this.index + 1));
-   if (this.debugMode) {
-     this.debugLog(
-       `[V70] VERIFIED CONTEXT page=${ctx?.pageNumber || (this.index + 1)} ` +
-       `img=${img.naturalWidth}x${img.naturalHeight}`
-     );
-   }
-
-   // V70 CLEAN GUTTER: the exact visible image and exact tap are the only
-   // panel-detection inputs. currentPanels is intentionally never consulted.
-   const logger = typeof this.debugLog === "function"
-     ? (msg) => this.debugLog(msg)
-     : null;
-
-   if (logger) {
-     logger(
-       `[V70] TAP x=${Number(relXImg.toFixed(4))} ` +
-       `y=${Number(relYImg.toFixed(4))}`
-     );
-     logger(`[V70] CLEAN GUTTER PATH — NO LEGACY PANEL DETECTOR`);
-   }
-
-   let panel = null;
-   try {
-     panel = await PanelDetect.findPanelByGutter(
-       img,
-       relXImg,
-       relYImg,
-       logger
-     );
-   } catch (err) {
-     if (logger) logger(`[V70] LAB ERROR ${err?.message || err}`);
-   }
+   const panel = this.findPanelAt(relXImg, relYImg);
 
    if (panel) {
-     if (logger) {
-       logger(
-         `[V70] FINAL TAP-CONTAINING PANEL ` +
-         `x=${Number(Number(panel.x).toFixed(4))} ` +
-         `y=${Number(Number(panel.y).toFixed(4))} ` +
-         `w=${Number(Number(panel.w).toFixed(4))} ` +
-         `h=${Number(Number(panel.h).toFixed(4))} ` +
-         `method=${panel.__v70Method || "unknown"}`
-       );
-     }
-     this.zoomToPanel(panel, stageRect, imgRect, img);
+     this.zoomToPanel(panel, stageRect, imgRect);
      return;
    }
 
-   if (logger) logger(`[V70] NO GUTTER-ENCLOSED PANEL FOUND -> no frame opened`);
    this.toggleChrome();
  },
 
@@ -2866,7 +2626,6 @@ async setMode(mode) {
    this.els.bubbleOverlay = overlay;
    this.bubbleOverlayActive = true;
    this.focusMode = "bubble";
-   overlay.classList.add("active");
 
    const zoomInDuration = 560;
    const animation = overlay.animate(
@@ -2946,32 +2705,11 @@ async setMode(mode) {
    this.applyTransform();
  },
 
- async zoomToPanel(panel, stageRect, imgRect, verifiedImg = null) {
+ async zoomToPanel(panel, stageRect, imgRect) {
    if (this.focusMode) return;
-
-   if (typeof this.debugLog === "function") {
-     try {
-       this.debugLog(
-         `[V45] zoomToPanel ENTER ` +
-         `panel=${JSON.stringify({
-           x: Number(Number(panel?.x).toFixed(4)),
-           y: Number(Number(panel?.y).toFixed(4)),
-           w: Number(Number(panel?.w).toFixed(4)),
-           h: Number(Number(panel?.h).toFixed(4))
-         })} ` +
-         `imgRect=${JSON.stringify({
-           left: Number(Number(imgRect?.left).toFixed(1)),
-           top: Number(Number(imgRect?.top).toFixed(1)),
-           width: Number(Number(imgRect?.width).toFixed(1)),
-           height: Number(Number(imgRect?.height).toFixed(1))
-         })}`
-       );
-     } catch (_) {}
-   }
-
    const token = ++this.panelOverlayToken;
-   const ctx = verifiedImg ? null : this.getPanelImageContext();
-   const img = verifiedImg || ctx?.img;
+   const ctx = this.getPanelImageContext();
+   const img = ctx?.img;
    if (!img || !img.naturalWidth || !img.naturalHeight) return;
 
    this.focusMode = "panel";
@@ -2992,17 +2730,6 @@ async setMode(mode) {
    const sy = panel.y * img.naturalHeight;
    const sw = panel.w * img.naturalWidth;
    const sh = panel.h * img.naturalHeight;
-
-   if (typeof this.debugLog === "function") {
-     try {
-       this.debugLog(
-         `[V45] CROP PIXELS ` +
-         `sx=${Math.round(sx)} sy=${Math.round(sy)} ` +
-         `sw=${Math.round(sw)} sh=${Math.round(sh)} ` +
-         `natural=${img.naturalWidth}x${img.naturalHeight}`
-       );
-     } catch (_) {}
-   }
 
    this.panelFocusMeta = {
      panel: { x: panel.x, y: panel.y, w: panel.w, h: panel.h },
