@@ -1,6 +1,6 @@
-// NTH SHELF V83 — V83 OVERSIZED ONE-SIDED CANDIDATE GATE
-// V73 is authoritative when it contains the tap. V83 fallback runs only after a miss.
-// V83 is based on V83; only oversized one-sided fallback acceptance changes.
+// NTH SHELF V84 — V79 BASELINE / FOUR-DIRECTION BOUNDARY WALK
+// V84 keeps the V73 first-pass authoritative and replaces only PASS 2 with a tap-local four-direction walk.
+// V80-V83 detector experiments are not carried forward.
 
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
@@ -777,14 +777,14 @@ const Reader = {
    const comicId = this.comic.id;
    const pageIndex = this.index;
    const token = ++this._panelLoadToken;
-   const logger = this.debugMode ? (msg) => this.debugLog(`[V83 panels p${pageIndex}] ${msg}`) : null;
+   const logger = this.debugMode ? (msg) => this.debugLog(`[V84 panels p${pageIndex}] ${msg}`) : null;
 
    const url = await this.getPageUrl(pageIndex);
    const panels = url ? await PanelDetect.detect(url, logger) : [];
 
    if (token !== this._panelLoadToken || this.comic.id !== comicId || this.index !== pageIndex) return;
    this.currentPanels = panels;
-   if (logger) logger(`V83 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
+   if (logger) logger(`V84 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
  },
 
  getPanelImageContext() {
@@ -2389,31 +2389,31 @@ async setMode(mode) {
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
 
-   // PASS 1: V73 baseline. A successful V73 hit is final and cannot be
+   // V84 PASS 1: V73 baseline. A successful V73 hit is final and cannot be
    // replaced by the fallback.
    const panel = this.findPanelAt(relXImg, relYImg);
    if (panel) {
-     if (this.debugMode) this.debugLog("[V83] PASS 1 HIT (V73 baseline)");
+     if (this.debugMode) this.debugLog("[V84] PASS 1 HIT (V73 baseline)");
      this.zoomToPanel(panel, stageRect, imgRect);
      return;
    }
 
    // PASS 2: only the exact V73-missed tap gets the new local geometry test.
-   if (this.debugMode) this.debugLog("[V83] PASS 1 MISS -> tap-local geometry fallback");
+   if (this.debugMode) this.debugLog("[V84] PASS 1 MISS -> four-direction boundary walk");
    const pageIndex = this.index;
    const comicId = this.comic?.id;
    const url = await this.getPageUrl(pageIndex);
    if (url && PanelDetect.detectTapLocalFallback) {
      const logger = this.debugMode
-       ? (msg) => this.debugLog(`[V83 fallback p${pageIndex}] ${msg}`)
+       ? (msg) => this.debugLog(`[V84 fallback p${pageIndex}] ${msg}`)
        : null;
      const fallback = await PanelDetect.detectTapLocalFallback(url, relXImg, relYImg, logger);
      if (this.comic?.id === comicId && this.index === pageIndex && fallback) {
-       if (this.debugMode) this.debugLog("[V83] PASS 2 HIT -> zoom fallback panel");
+       if (this.debugMode) this.debugLog("[V84] PASS 2 HIT -> boundary-walk panel");
        this.zoomToPanel(fallback, stageRect, imgRect);
        return;
      }
-     if (this.debugMode) this.debugLog("[V83] PASS 2 MISS");
+     if (this.debugMode) this.debugLog("[V84] PASS 2 MISS");
    }
 
    this.toggleChrome();
