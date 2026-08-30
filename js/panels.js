@@ -1,6 +1,6 @@
-// NTH SHELF V82 — V79 BASELINE / V81 ENCLOSURE-FIRST CANDIDATE SELECTION
+// NTH SHELF V83 — V82 OVERSIZED ONE-SIDED CANDIDATE GATE
 // Freshly based on V79. V73 remains authoritative whenever it contains the tap.
-// V82 changes only fallback candidate ranking; no V74-V80 detector code is included.
+// V83 changes only the fallback acceptance gate; no V74-V81 detector code is included.
 
 // NTH SHELF V73 — STABLE GUTTER BASELINE / TAP SELECTION
 // V73 intentionally restores the simple v2.76 gutter-scanning detector as the sole panel detector.
@@ -58,7 +58,7 @@ const PanelDetect = {
         try { resolve(this._analyzeTapLocalFallback(img, relX, relY, log)); }
         catch (err) {
           console.warn("V81 tap-local fallback failed:", err);
-          if (log) log(`V82 fallback ERROR: ${err.message}`);
+          if (log) log(`V83 fallback ERROR: ${err.message}`);
           resolve(null);
         }
       };
@@ -74,7 +74,7 @@ const PanelDetect = {
     const h = Math.max(1, Math.round(img.height * scale));
     const tx = clamp01(relX) * (w - 1);
     const ty = clamp01(relY) * (h - 1);
-    if (log) log(`V82 fallback source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
+    if (log) log(`V83 fallback source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
 
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;
@@ -177,7 +177,13 @@ const PanelDetect = {
       const contains=tx>=loX&&tx<=hiX&&ty>=loY&&ty<=hiY;
       if(!contains || pw<Math.max(12,w*0.05) || ph<Math.max(12,h*0.05)) continue;
       const sides=[top,bottom,left,right].filter(Boolean).length;
-      if(!(sides>=2 || (sides>=1 && (pw>=w*0.84 || ph>=h*0.84)))) continue;
+      // V83: a one-sided candidate is allowed only when it is genuinely
+      // local. A one-sided region covering roughly half or more of the page
+      // is too weakly bounded to call a panel: it usually means the fallback
+      // failed to find one or more real gutters. Keep the allowance for
+      // smaller one-sided/irregular panels, but reject oversized guesses.
+      const oversizedOneSided = sides === 1 && (pw / w) * (ph / h) >= 0.48;
+      if (sides < 1 || oversizedOneSided) continue;
 
       const strengths=[top,bottom,left,right].filter(Boolean).map(c=>c.score);
       const meanStrength=strengths.length?strengths.reduce((a,b)=>a+b,0)/strengths.length:0;
@@ -200,26 +206,26 @@ const PanelDetect = {
     // V82: enclosure-first ranking. A candidate with more independent
     // gutter sides is always preferred over one with fewer sides, even if
     // the latter has a larger area or slightly stronger local edge score.
-    // This prevents a one-sided, near-page-sized region from beating a
-    // genuinely enclosed panel. Only candidates with the same side count
-    // are compared by the existing V81 score.
+    // V83 keeps that ranking but adds a hard gate below for oversized
+    // one-sided candidates, which are evidence of missing boundaries rather
+    // than a legitimately enclosed panel.
     combos.sort((a,b)=>{
       if (b.sides !== a.sides) return b.sides - a.sides;
       return b.score - a.score;
     });
     const best=combos[0] || null;
     if(log){
-      if(best) log(`V82 fallback selected candidates=${combos.length} sides=${best.sides} score=${best.score.toFixed(2)} meanEdge=${best.meanStrength.toFixed(2)} minEdge=${best.minStrength.toFixed(2)}`);
-      else log('V82 fallback no credible candidate region');
+      if(best) log(`V83 fallback selected candidates=${combos.length} sides=${best.sides} score=${best.score.toFixed(2)} meanEdge=${best.meanStrength.toFixed(2)} minEdge=${best.minStrength.toFixed(2)}`);
+      else log('V83 fallback no credible candidate region');
     }
 
     if(!best){
-      if(log) log('V82 fallback REJECTED');
+      if(log) log('V83 fallback REJECTED');
       return null;
     }
 
-    const panel={x:Math.min(best.sx,best.ex)/w,y:Math.min(best.sy,best.ey)/h,w:best.pw/w,h:best.ph/h,_v82Fallback:true,_gutterSides:best.sides};
-    if(log) log(`V82 fallback ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${best.sides}`);
+    const panel={x:Math.min(best.sx,best.ex)/w,y:Math.min(best.sy,best.ey)/h,w:best.pw/w,h:best.ph/h,_v83Fallback:true,_gutterSides:best.sides};
+    if(log) log(`V83 fallback ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${best.sides}`);
     return panel;
   },
 

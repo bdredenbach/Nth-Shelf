@@ -1,6 +1,6 @@
-// NTH SHELF V82 — V79 BASELINE / CANDIDATE SELECTION FALLBACK
-// V73 is authoritative when it contains the tap. V82 fallback runs only after a miss.
-// V82 is based on V79; only fallback candidate selection changes.
+// NTH SHELF V83 — V83 OVERSIZED ONE-SIDED CANDIDATE GATE
+// V73 is authoritative when it contains the tap. V83 fallback runs only after a miss.
+// V83 is based on V83; only oversized one-sided fallback acceptance changes.
 
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
@@ -777,14 +777,14 @@ const Reader = {
    const comicId = this.comic.id;
    const pageIndex = this.index;
    const token = ++this._panelLoadToken;
-   const logger = this.debugMode ? (msg) => this.debugLog(`[V82 panels p${pageIndex}] ${msg}`) : null;
+   const logger = this.debugMode ? (msg) => this.debugLog(`[V83 panels p${pageIndex}] ${msg}`) : null;
 
    const url = await this.getPageUrl(pageIndex);
    const panels = url ? await PanelDetect.detect(url, logger) : [];
 
    if (token !== this._panelLoadToken || this.comic.id !== comicId || this.index !== pageIndex) return;
    this.currentPanels = panels;
-   if (logger) logger(`V82 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
+   if (logger) logger(`V83 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
  },
 
  getPanelImageContext() {
@@ -2393,27 +2393,27 @@ async setMode(mode) {
    // replaced by the fallback.
    const panel = this.findPanelAt(relXImg, relYImg);
    if (panel) {
-     if (this.debugMode) this.debugLog("[V82] PASS 1 HIT (V73 baseline)");
+     if (this.debugMode) this.debugLog("[V83] PASS 1 HIT (V73 baseline)");
      this.zoomToPanel(panel, stageRect, imgRect);
      return;
    }
 
    // PASS 2: only the exact V73-missed tap gets the new local geometry test.
-   if (this.debugMode) this.debugLog("[V82] PASS 1 MISS -> tap-local geometry fallback");
+   if (this.debugMode) this.debugLog("[V83] PASS 1 MISS -> tap-local geometry fallback");
    const pageIndex = this.index;
    const comicId = this.comic?.id;
    const url = await this.getPageUrl(pageIndex);
    if (url && PanelDetect.detectTapLocalFallback) {
      const logger = this.debugMode
-       ? (msg) => this.debugLog(`[V82 fallback p${pageIndex}] ${msg}`)
+       ? (msg) => this.debugLog(`[V83 fallback p${pageIndex}] ${msg}`)
        : null;
      const fallback = await PanelDetect.detectTapLocalFallback(url, relXImg, relYImg, logger);
      if (this.comic?.id === comicId && this.index === pageIndex && fallback) {
-       if (this.debugMode) this.debugLog("[V82] PASS 2 HIT -> zoom fallback panel");
+       if (this.debugMode) this.debugLog("[V83] PASS 2 HIT -> zoom fallback panel");
        this.zoomToPanel(fallback, stageRect, imgRect);
        return;
      }
-     if (this.debugMode) this.debugLog("[V82] PASS 2 MISS");
+     if (this.debugMode) this.debugLog("[V83] PASS 2 MISS");
    }
 
    this.toggleChrome();
