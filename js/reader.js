@@ -2393,27 +2393,27 @@ async setMode(mode) {
    // replaced by the fallback.
    const panel = this.findPanelAt(relXImg, relYImg);
    if (panel) {
-     if (this.debugMode) this.debugLog("[V91] PASS 1 HIT (V73 baseline)");
+     if (this.debugMode) this.debugLog("[V92] PASS 1 HIT (V73 baseline)");
      this.zoomToPanel(panel, stageRect, imgRect);
      return;
    }
 
    // PASS 2: only the exact V73-missed tap gets the new local geometry test.
-   if (this.debugMode) this.debugLog("[V91] PASS 1 MISS -> V89 boundary-set + opposing-boundary agreement");
+   if (this.debugMode) this.debugLog("[V92] PASS 1 MISS -> V91 boundary-set + V92 interior validation");
    const pageIndex = this.index;
    const comicId = this.comic?.id;
    const url = await this.getPageUrl(pageIndex);
    if (url && PanelDetect.detectTapLocalFallback) {
      const logger = this.debugMode
-       ? (msg) => this.debugLog(`[V91 fallback p${pageIndex}] ${msg}`)
+       ? (msg) => this.debugLog(`[V92 fallback p${pageIndex}] ${msg}`)
        : null;
      const fallback = await PanelDetect.detectTapLocalFallback(url, relXImg, relYImg, logger);
      if (this.comic?.id === comicId && this.index === pageIndex && fallback) {
-       if (this.debugMode) this.debugLog("[V91] PASS 2 HIT -> zoom V91 refined panel");
+       if (this.debugMode) this.debugLog("[V92] PASS 2 HIT -> zoom V92 validated panel");
        this.zoomToPanel(fallback, stageRect, imgRect);
        return;
      }
-     if (this.debugMode) this.debugLog("[V91] PASS 2 MISS");
+     if (this.debugMode) this.debugLog("[V92] PASS 2 MISS");
    }
 
    this.toggleChrome();

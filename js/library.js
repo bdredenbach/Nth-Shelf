@@ -343,6 +343,8 @@ const Library = {
 
     this.els.countEl.textContent = comics.length ? `${comics.length} book${comics.length === 1 ? "" : "s"}` : "";
     this.els.toolbar.style.display = totalCount ? "flex" : "none";
+    const shelfModeButton = document.getElementById("shelf-mode-btn");
+    if (shelfModeButton) shelfModeButton.hidden = !totalCount;
     this.els.emptyEl.style.display = totalCount ? "none" : "block";
     this.els.gridEl.style.display = totalCount ? "grid" : "none";
     document.getElementById("library-view")?.classList.toggle("empty-library", !totalCount);

@@ -1,7 +1,8 @@
-// NTH SHELF V91 — V89 BASELINE / OPPOSING-BOUNDARY AGREEMENT
+// NTH SHELF V92 — V91 BASELINE / PANEL INTERIOR VALIDATION
 // V73 remains authoritative whenever it contains the tap.
-// V91 keeps the V89 iterative internal-gutter path, but adds one acceptance
-// check: opposing boundaries must agree about the same candidate span.
+// V92 keeps the V91 boundary-set + iterative internal-gutter path, then adds
+// a conservative interior validation gate. A fallback result is rejected if
+// a strong, sustained internal gutter still cuts through its interior.
 // No smallest/largest rule and no recovery pass.
 
 const PanelDetect = {
@@ -21,7 +22,7 @@ const PanelDetect = {
     });
   },
 
-  // V91 fallback: V89 coherent boundary SET plus internal-gutter refinement. A boundary is
+  // V92 fallback: V91 coherent boundary SET plus internal-gutter refinement. A boundary is
   // not selected because it is merely nearest, smallest, or largest. Each
   // side is scored for continuity and edge support, then opposite/adjacent
   // boundaries are paired only when their support spans are mutually
@@ -32,8 +33,8 @@ const PanelDetect = {
       img.onload = () => {
         try { resolve(this._analyzeBoundarySet(img, relX, relY, log)); }
         catch (err) {
-          console.warn("V91 fallback failed:", err);
-          if (log) log(`V91 fallback ERROR: ${err.message}`);
+          console.warn("V92 fallback failed:", err);
+          if (log) log(`V92 fallback ERROR: ${err.message}`);
           resolve(null);
         }
       };
@@ -50,7 +51,7 @@ const PanelDetect = {
     const tx = clamp01(relX) * (w - 1);
     const ty = clamp01(relY) * (h - 1);
 
-    if (log) log(`V91 boundary-set source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
+    if (log) log(`V92 boundary-set source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
 
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;
@@ -84,9 +85,9 @@ const PanelDetect = {
     const vCandidates = this._findVerticalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut);
 
     if (log) {
-      log(`V91 boundary candidates H=${hCandidates.length} V=${vCandidates.length} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
-      log(`V91 H candidates=${JSON.stringify(hCandidates.slice(0,8))}`);
-      log(`V91 V candidates=${JSON.stringify(vCandidates.slice(0,8))}`);
+      log(`V92 boundary candidates H=${hCandidates.length} V=${vCandidates.length} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
+      log(`V92 H candidates=${JSON.stringify(hCandidates.slice(0,8))}`);
+      log(`V92 V candidates=${JSON.stringify(vCandidates.slice(0,8))}`);
     }
 
     const top = hCandidates.filter(c => c.pos < ty).sort((a,b)=>Math.abs(ty-a.pos)-Math.abs(ty-b.pos)).slice(0,5);
@@ -156,7 +157,7 @@ const PanelDetect = {
     }
 
     if (!best) {
-      if (log) log("V91 boundary-set REJECTED: no coherent boundary set around tap");
+      if (log) log("V92 boundary-set REJECTED: no coherent boundary set around tap");
       return null;
     }
 
@@ -176,7 +177,19 @@ const PanelDetect = {
     const refined = this._splitAtInternalGuttersIterative(lum, w, h, tx, ty, p, edgeCut, quietCut, log);
     if (refined) p = refined;
 
-    if (log) log(`V91 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)}`);
+    // V92: panel interior validation. Even a coherent outer boundary set can
+    // still contain multiple visual panels if an internal gutter survived the
+    // V89 iterative refinement. Reject that result rather than accepting a
+    // multi-panel pop-out. This is deliberately not a size rule: small and
+    // large panels are both allowed when their interior is not divided by a
+    // strong sustained gutter.
+    const interior = this._validatePanelInterior(lum, w, h, tx, ty, p, edgeCut, quietCut, log);
+    if (!interior.ok) {
+      if (log) log(`V92 interior validation REJECTED: ${interior.reason}`);
+      return null;
+    }
+
+    if (log) log(`V92 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)} interior=clean`);
     return p;
   },
 
@@ -189,7 +202,7 @@ const PanelDetect = {
       if (!next) break;
       current = next;
       changed = true;
-      if (log) log(`V91 internal refinement pass ${i + 1}/${maxSplits}`);
+      if (log) log(`V92 internal refinement pass ${i + 1}/${maxSplits}`);
     }
     return changed ? current : null;
   },
@@ -264,19 +277,98 @@ const PanelDetect = {
       if (ty < hg.pos) refined.h = (hg.pos / h) - refined.y;
       else refined.y = hg.pos / h, refined.h = (p.y + p.h) - refined.y;
       did = true;
-      if (log) log(`V91 internal H gutter split at ${hg.pos} quality=${hg.quality.toFixed(2)} quiet=${hg.quietFrac.toFixed(2)}`);
+      if (log) log(`V92 internal H gutter split at ${hg.pos} quality=${hg.quality.toFixed(2)} quiet=${hg.quietFrac.toFixed(2)}`);
     }
     if (vg) {
       if (tx < vg.pos) refined.w = (vg.pos / w) - refined.x;
       else refined.x = vg.pos / w, refined.w = (p.x + p.w) - refined.x;
       did = true;
-      if (log) log(`V91 internal V gutter split at ${vg.pos} quality=${vg.quality.toFixed(2)} quiet=${vg.quietFrac.toFixed(2)}`);
+      if (log) log(`V92 internal V gutter split at ${vg.pos} quality=${vg.quality.toFixed(2)} quiet=${vg.quietFrac.toFixed(2)}`);
     }
     if (!did) return null;
     refined.w = clamp01(refined.w);
     refined.h = clamp01(refined.h);
     refined._v88InternalSplit = true;
     return refined;
+  },
+
+  _validatePanelInterior(lum, w, h, tx, ty, p, edgeCut, quietCut, log) {
+    const x0 = Math.max(1, Math.round(p.x * w));
+    const y0 = Math.max(1, Math.round(p.y * h));
+    const x1 = Math.min(w - 2, Math.round((p.x + p.w) * w));
+    const y1 = Math.min(h - 2, Math.round((p.y + p.h) * h));
+    const pw = Math.max(1, x1 - x0);
+    const ph = Math.max(1, y1 - y0);
+
+    // Validation is intentionally conservative. We only call something an
+    // internal gutter when it forms a long, quiet corridor with strong edge
+    // support on both sides. Short artwork strokes and speech-balloon edges
+    // should not be enough to invalidate a panel.
+    const marginX = Math.max(3, Math.round(pw * 0.08));
+    const marginY = Math.max(3, Math.round(ph * 0.08));
+    const xa = Math.min(x1 - 2, x0 + marginX);
+    const xb = Math.max(x0 + 2, x1 - marginX);
+    const ya = Math.min(y1 - 2, y0 + marginY);
+    const yb = Math.max(y0 + 2, y1 - marginY);
+    const spanNeed = 0.72;
+    const quietNeed = 0.70;
+    const supportNeed = edgeCut * 1.05;
+
+    let strongestH = null;
+    for (let y = ya + 2; y <= yb - 2; y++) {
+      // Do not let a tap sitting immediately on a gutter invalidate the panel;
+      // V89's split logic has already had the opportunity to use that gutter.
+      if (Math.abs(y - ty) <= Math.max(3, Math.round(ph * 0.025))) continue;
+      let quiet = 0;
+      for (let x = xa; x <= xb; x++) {
+        const g = Math.abs(lum[y*w+x] - lum[(y-1)*w+x]) +
+                  Math.abs(lum[(y+1)*w+x] - lum[y*w+x]);
+        if (g <= quietCut) quiet++;
+      }
+      const span = Math.max(1, xb - xa + 1);
+      const quietFrac = quiet / span;
+      if (quietFrac < quietNeed) continue;
+      const support = this._axisEdgeSupportH(lum, w, h, y - 1, xa, xb) * 0.5 +
+                      this._axisEdgeSupportH(lum, w, h, y + 1, xa, xb) * 0.5;
+      const spanFrac = span / Math.max(1, pw);
+      if (spanFrac < spanNeed || support < supportNeed) continue;
+      const quality = (support / Math.max(1, edgeCut)) * (0.60 + quietFrac * 0.40) * spanFrac;
+      if (!strongestH || quality > strongestH.quality) {
+        strongestH = { pos: y, quality, quietFrac, support, spanFrac };
+      }
+    }
+
+    let strongestV = null;
+    for (let x = xa + 2; x <= xb - 2; x++) {
+      if (Math.abs(x - tx) <= Math.max(3, Math.round(pw * 0.025))) continue;
+      let quiet = 0;
+      for (let y = ya; y <= yb; y++) {
+        const g = Math.abs(lum[y*w+x] - lum[y*w+x-1]) +
+                  Math.abs(lum[y*w+x+1] - lum[y*w+x]);
+        if (g <= quietCut) quiet++;
+      }
+      const span = Math.max(1, yb - ya + 1);
+      const quietFrac = quiet / span;
+      if (quietFrac < quietNeed) continue;
+      const support = this._axisEdgeSupportV(lum, w, h, x - 1, ya, yb) * 0.5 +
+                      this._axisEdgeSupportV(lum, w, h, x + 1, ya, yb) * 0.5;
+      const spanFrac = span / Math.max(1, ph);
+      if (spanFrac < spanNeed || support < supportNeed) continue;
+      const quality = (support / Math.max(1, edgeCut)) * (0.60 + quietFrac * 0.40) * spanFrac;
+      if (!strongestV || quality > strongestV.quality) {
+        strongestV = { pos: x, quality, quietFrac, support, spanFrac };
+      }
+    }
+
+    if (log) {
+      if (strongestH) log(`V92 interior H gutter candidate y=${strongestH.pos} quality=${strongestH.quality.toFixed(2)} span=${strongestH.spanFrac.toFixed(2)} quiet=${strongestH.quietFrac.toFixed(2)}`);
+      if (strongestV) log(`V92 interior V gutter candidate x=${strongestV.pos} quality=${strongestV.quality.toFixed(2)} span=${strongestV.spanFrac.toFixed(2)} quiet=${strongestV.quietFrac.toFixed(2)}`);
+    }
+
+    if (strongestH && strongestV) return { ok: false, reason: "strong internal H+V gutters remain" };
+    if (strongestH) return { ok: false, reason: `strong internal H gutter at ${strongestH.pos}` };
+    if (strongestV) return { ok: false, reason: `strong internal V gutter at ${strongestV.pos}` };
+    return { ok: true };
   },
 
   _axisEdgeSupportH(lum, w, h, y, xa, xb) {
