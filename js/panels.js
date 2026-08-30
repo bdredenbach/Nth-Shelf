@@ -401,6 +401,29 @@ const PanelDetect = {
     return sum / Math.max(1, yb-ya+1);
   },
 
+
+  _v98RankBoundaryCandidates(candidates, tapPos, total) {
+    const valid = (candidates || []).filter(c =>
+      Number.isFinite(c.pos) && Number.isFinite(c.quality)
+    );
+
+    // Quality remains primary. Only candidates within a narrow evidence tier
+    // can be reordered by distance to the tap.
+    valid.sort((a,b) => {
+      const qa = a.quality || 0;
+      const qb = b.quality || 0;
+      const gap = Math.abs(qa-qb);
+      if (gap <= 0.55) {
+        const da = Math.abs(a.pos-tapPos);
+        const db = Math.abs(b.pos-tapPos);
+        const distanceGap = Math.abs(da-db);
+        if (distanceGap > Math.max(3,total*0.012)) return da-db;
+      }
+      return qb-qa;
+    });
+    return valid;
+  },
+
   _findBlackFirstBoundaries(lum, w, h, tx, ty, axis) {
     const out = [];
     const darkCut = 55;
@@ -512,7 +535,12 @@ const PanelDetect = {
     }
 
     // Collapse repeated detections from overlapping scan spans.
-    out.sort((a,b)=>a.pos-b.pos || b.quality-a.quality);
+    const ranked = this._v98RankBoundaryCandidates(
+      out,
+      axis === "H" ? tx : ty,
+      total
+    );
+    ranked.sort((a,b)=>a.pos-b.pos || b.quality-a.quality);
     const merged=[];
     const mergeDist=Math.max(3,Math.round(total*0.012));
     for(const c of out){
