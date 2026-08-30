@@ -1,8 +1,8 @@
-// NTH SHELF V91 — opposing-boundary agreement test cache
+// NTH SHELF V92 — panel interior validation test cache
 // sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
 // Comic pages themselves live in IndexedDB (js/db.js), not here.
 
-const CACHE_NAME = "nth-shelf-shell-v2-91-opposing-boundary-agreement";
+const CACHE_NAME = "nth-shelf-shell-v2-92-panel-interior-validation";
 const SHELL_FILES = [
   "./",
   "./index.html",
