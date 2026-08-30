@@ -1,8 +1,8 @@
-// NTH SHELF V90 — V89 BASELINE / CONSENSUS RECOVERY
+// NTH SHELF V91 — V89 BASELINE / OPPOSING-BOUNDARY AGREEMENT
 // V73 remains authoritative whenever it contains the tap.
-// V90 keeps V89 successful detection intact, then adds recovery only after a
-// fallback candidate for a strong internal gutter that would indicate that
-// multiple comic panels were bundled together. No smallest/largest rule.
+// V91 keeps the V89 iterative internal-gutter path, but adds one acceptance
+// check: opposing boundaries must agree about the same candidate span.
+// No smallest/largest rule and no recovery pass.
 
 const PanelDetect = {
   detect(imgUrl, log) {
@@ -21,7 +21,7 @@ const PanelDetect = {
     });
   },
 
-  // V89 fallback: V87 coherent boundary SET plus internal-gutter check. A boundary is
+  // V91 fallback: V89 coherent boundary SET plus internal-gutter refinement. A boundary is
   // not selected because it is merely nearest, smallest, or largest. Each
   // side is scored for continuity and edge support, then opposite/adjacent
   // boundaries are paired only when their support spans are mutually
@@ -32,8 +32,8 @@ const PanelDetect = {
       img.onload = () => {
         try { resolve(this._analyzeBoundarySet(img, relX, relY, log)); }
         catch (err) {
-          console.warn("V89 fallback failed:", err);
-          if (log) log(`V89 fallback ERROR: ${err.message}`);
+          console.warn("V91 fallback failed:", err);
+          if (log) log(`V91 fallback ERROR: ${err.message}`);
           resolve(null);
         }
       };
@@ -50,7 +50,7 @@ const PanelDetect = {
     const tx = clamp01(relX) * (w - 1);
     const ty = clamp01(relY) * (h - 1);
 
-    if (log) log(`V89 boundary-set source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
+    if (log) log(`V91 boundary-set source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
 
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;
@@ -84,9 +84,9 @@ const PanelDetect = {
     const vCandidates = this._findVerticalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut);
 
     if (log) {
-      log(`V89 boundary candidates H=${hCandidates.length} V=${vCandidates.length} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
-      log(`V89 H candidates=${JSON.stringify(hCandidates.slice(0,8))}`);
-      log(`V89 V candidates=${JSON.stringify(vCandidates.slice(0,8))}`);
+      log(`V91 boundary candidates H=${hCandidates.length} V=${vCandidates.length} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
+      log(`V91 H candidates=${JSON.stringify(hCandidates.slice(0,8))}`);
+      log(`V91 V candidates=${JSON.stringify(vCandidates.slice(0,8))}`);
     }
 
     const top = hCandidates.filter(c => c.pos < ty).sort((a,b)=>Math.abs(ty-a.pos)-Math.abs(ty-b.pos)).slice(0,5);
@@ -119,6 +119,23 @@ const PanelDetect = {
       const vCoherent = (L.edge || R.edge || vOverlap >= vNeed);
       if (!hCoherent || !vCoherent) continue;
 
+      // V91: opposing-boundary agreement. A candidate is only trustworthy when
+      // the boundaries on the same axis actually support the same proposed
+      // panel span. This is a consistency test, not a smallest/largest rule.
+      // Each non-edge boundary must cover a meaningful portion of the candidate
+      // span, and opposing supports must overlap strongly enough to describe
+      // the same enclosure. Edge boundaries are valid but contribute no gutter
+      // evidence. This specifically rejects large regions whose detected
+      // boundaries only cover a small local slice of the proposed rectangle.
+      const hTopCov = T.edge ? 1 : intervalCoverage(T.span, L.pos, R.pos) / Math.max(1, pw);
+      const hBotCov = B.edge ? 1 : intervalCoverage(B.span, L.pos, R.pos) / Math.max(1, pw);
+      const vLeftCov = L.edge ? 1 : intervalCoverage(L.span, T.pos, B.pos) / Math.max(1, ph);
+      const vRightCov = R.edge ? 1 : intervalCoverage(R.span, T.pos, B.pos) / Math.max(1, ph);
+      const hPair = (T.edge || B.edge) ? Math.min(hTopCov, hBotCov) : Math.min(hTopCov, hBotCov, hOverlap / Math.max(1, pw));
+      const vPair = (L.edge || R.edge) ? Math.min(vLeftCov, vRightCov) : Math.min(vLeftCov, vRightCov, vOverlap / Math.max(1, ph));
+      const pairNeed = 0.42;
+      if (hPair < pairNeed || vPair < pairNeed) continue;
+
       // Score only evidence quality and mutual coherence. Region area is not
       // rewarded or penalized, so V87 does not reintroduce smallest/largest.
       let score = 0;
@@ -135,11 +152,11 @@ const PanelDetect = {
       const axisBonus = (hs.length >= 2 ? 0.5 : 0) + (vs.length >= 2 ? 0.5 : 0);
       score += axisBonus;
 
-      if (!best || score > best.score) best = {T,B,L,R,score,sides,hOverlap,vOverlap,pw,ph};
+      if (!best || score > best.score) best = {T,B,L,R,score,sides,hOverlap,vOverlap,hPair,vPair,pw,ph};
     }
 
     if (!best) {
-      if (log) log("V89 boundary-set REJECTED: no coherent boundary set around tap");
+      if (log) log("V91 boundary-set REJECTED: no coherent boundary set around tap");
       return null;
     }
 
@@ -159,7 +176,7 @@ const PanelDetect = {
     const refined = this._splitAtInternalGuttersIterative(lum, w, h, tx, ty, p, edgeCut, quietCut, log);
     if (refined) p = refined;
 
-    if (log) log(`V89 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)}`);
+    if (log) log(`V91 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)}`);
     return p;
   },
 
@@ -172,7 +189,7 @@ const PanelDetect = {
       if (!next) break;
       current = next;
       changed = true;
-      if (log) log(`V89 internal refinement pass ${i + 1}/${maxSplits}`);
+      if (log) log(`V91 internal refinement pass ${i + 1}/${maxSplits}`);
     }
     return changed ? current : null;
   },
@@ -247,13 +264,13 @@ const PanelDetect = {
       if (ty < hg.pos) refined.h = (hg.pos / h) - refined.y;
       else refined.y = hg.pos / h, refined.h = (p.y + p.h) - refined.y;
       did = true;
-      if (log) log(`V89 internal H gutter split at ${hg.pos} quality=${hg.quality.toFixed(2)} quiet=${hg.quietFrac.toFixed(2)}`);
+      if (log) log(`V91 internal H gutter split at ${hg.pos} quality=${hg.quality.toFixed(2)} quiet=${hg.quietFrac.toFixed(2)}`);
     }
     if (vg) {
       if (tx < vg.pos) refined.w = (vg.pos / w) - refined.x;
       else refined.x = vg.pos / w, refined.w = (p.x + p.w) - refined.x;
       did = true;
-      if (log) log(`V89 internal V gutter split at ${vg.pos} quality=${vg.quality.toFixed(2)} quiet=${vg.quietFrac.toFixed(2)}`);
+      if (log) log(`V91 internal V gutter split at ${vg.pos} quality=${vg.quality.toFixed(2)} quiet=${vg.quietFrac.toFixed(2)}`);
     }
     if (!did) return null;
     refined.w = clamp01(refined.w);
@@ -347,217 +364,6 @@ const PanelDetect = {
     }
   },
 
-  // V90 recovery pass: only runs after the V89 boundary-set fallback fails.
-  // It does not replace V73/V89 successes. Instead of selecting one profile,
-  // it votes across several parallel local scan windows. A real gutter should
-  // recur at approximately the same coordinate across nearby scan windows,
-  // even when one particular window is contaminated by lettering/art.
-  detectTapRecoveryFallback(imgUrl, relX, relY, log) {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => {
-        try { resolve(this._analyzeRecovery(img, relX, relY, log)); }
-        catch (err) {
-          console.warn("V90 recovery failed:", err);
-          if (log) log(`V90 recovery ERROR: ${err.message}`);
-          resolve(null);
-        }
-      };
-      img.onerror = () => resolve(null);
-      img.src = imgUrl;
-    });
-  },
-
-  _analyzeRecovery(img, relX, relY, log) {
-    const maxDim = 900;
-    const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
-    const w = Math.max(1, Math.round(img.width * scale));
-    const h = Math.max(1, Math.round(img.height * scale));
-    const tx = clamp01(relX) * (w - 1);
-    const ty = clamp01(relY) * (h - 1);
-    if (log) log(`V90 recovery source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
-
-    const canvas = document.createElement("canvas");
-    canvas.width = w; canvas.height = h;
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
-    ctx.drawImage(img, 0, 0, w, h);
-    const data = ctx.getImageData(0, 0, w, h).data;
-    const lum = new Float32Array(w * h);
-    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
-      const i = (y * w + x) * 4;
-      lum[y*w+x] = 0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2];
-    }
-
-    const samples = [];
-    const step = Math.max(1, Math.floor(Math.max(w, h) / 180));
-    for (let y = 1; y < h - 1; y += step) for (let x = 1; x < w - 1; x += step) {
-      samples.push(
-        Math.abs(lum[y*w+x]-lum[(y-1)*w+x]) +
-        Math.abs(lum[(y+1)*w+x]-lum[y*w+x]) +
-        Math.abs(lum[y*w+x]-lum[y*w+x-1]) +
-        Math.abs(lum[y*w+x+1]-lum[y*w+x])
-      );
-    }
-    samples.sort((a,b)=>a-b);
-    const med = samples.length ? samples[Math.floor(samples.length*0.5)] : 0;
-    const edgeCut = Math.max(9, med*2.5);
-    const quietCut = Math.max(2.5, edgeCut*0.44);
-
-    // Several overlapping windows are deliberately used. This is the only
-    // new recovery mechanism in V90: boundary positions that recur across
-    // multiple nearby windows get consensus; isolated lines do not.
-    const hWindows = [
-      [-0.14, 0.30], [0, 0.30], [0.14, 0.30],
-      [-0.10, 0.48], [0, 0.48], [0.10, 0.48],
-      [0, 0.68]
-    ];
-    const vWindows = [
-      [-0.14, 0.30], [0, 0.30], [0.14, 0.30],
-      [-0.10, 0.48], [0, 0.48], [0.10, 0.48],
-      [0, 0.68]
-    ];
-
-    const horizontalHits = [];
-    for (const [offset, frac] of hWindows) {
-      const half = Math.max(8, Math.round(w*frac/2));
-      const center = Math.round(tx + w*offset);
-      const xa = Math.max(1, center-half), xb = Math.min(w-2, center+half);
-      const width = Math.max(1, xb-xa+1);
-      const profile = new Float32Array(h);
-      for (let y=1; y<h-1; y++) {
-        let sum=0, quiet=0;
-        for (let x=xa; x<=xb; x++) {
-          const g=Math.abs(lum[y*w+x]-lum[(y-1)*w+x]) + Math.abs(lum[(y+1)*w+x]-lum[y*w+x]);
-          sum += g;
-          if (g <= quietCut) quiet++;
-        }
-        const q = quiet/width;
-        profile[y] = sum/width + (1-q)*edgeCut*0.35;
-      }
-      horizontalHits.push(...this._collectRecoverySideHits(profile, ty, h, edgeCut, quietCut, "H", w, offset, frac));
-    }
-
-    const verticalHits = [];
-    for (const [offset, frac] of vWindows) {
-      const half = Math.max(8, Math.round(h*frac/2));
-      const center = Math.round(ty + h*offset);
-      const ya = Math.max(1, center-half), yb = Math.min(h-2, center+half);
-      const height = Math.max(1, yb-ya+1);
-      const profile = new Float32Array(w);
-      for (let x=1; x<w-1; x++) {
-        let sum=0, quiet=0;
-        for (let y=ya; y<=yb; y++) {
-          const g=Math.abs(lum[y*w+x]-lum[y*w+x-1]) + Math.abs(lum[y*w+x+1]-lum[y*w+x]);
-          sum += g;
-          if (g <= quietCut) quiet++;
-        }
-        const q = quiet/height;
-        profile[x] = sum/height + (1-q)*edgeCut*0.35;
-      }
-      verticalHits.push(...this._collectRecoverySideHits(profile, tx, w, edgeCut, quietCut, "V", h, offset, frac));
-    }
-
-    const top = this._consensusRecoveryBoundary(horizontalHits.filter(c=>c.pos<ty), ty, h, "TOP", log);
-    const bottom = this._consensusRecoveryBoundary(horizontalHits.filter(c=>c.pos>ty), ty, h, "BOTTOM", log);
-    const left = this._consensusRecoveryBoundary(verticalHits.filter(c=>c.pos<tx), tx, w, "LEFT", log);
-    const right = this._consensusRecoveryBoundary(verticalHits.filter(c=>c.pos>tx), tx, w, "RIGHT", log);
-
-    if (log) log(`V90 recovery consensus T=${top?top.pos:"-"} B=${bottom?bottom.pos:"-"} L=${left?left.pos:"-"} R=${right?right.pos:"-"} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
-
-    const sx = left ? left.pos : 0;
-    const ex = right ? right.pos : w-1;
-    const sy = top ? top.pos : 0;
-    const ey = bottom ? bottom.pos : h-1;
-    const pw = Math.max(0, ex-sx), ph = Math.max(0, ey-sy);
-    const contains = tx>=sx && tx<=ex && ty>=sy && ty<=ey;
-    const sides = [top,bottom,left,right].filter(Boolean).length;
-    const axisMix = (top||bottom) && (left||right);
-    const opposingH = top && bottom;
-    const opposingV = left && right;
-
-    // Conservative recovery gate. Unlike V79's broader fallback, V90 only
-    // accepts a region when consensus exists on both axes, or on both opposing
-    // boundaries of one axis. This prevents a weak single edge from becoming
-    // a giant page-sized guess.
-    const credible = contains && pw>=Math.max(14,w*0.05) && ph>=Math.max(14,h*0.05) &&
-      (axisMix || opposingH || opposingV) && sides>=2;
-
-    if (!credible) {
-      if (log) log(`V90 recovery REJECTED region=${Math.round(pw)}x${Math.round(ph)} sides=${sides} axisMix=${!!axisMix} opposingH=${!!opposingH} opposingV=${!!opposingV}`);
-      return null;
-    }
-
-    const panel = {
-      x:sx/w, y:sy/h, w:pw/w, h:ph/h,
-      _v90Recovery:true, _gutterSides:sides,
-      _recoveryConsensus:true
-    };
-    if (log) log(`V90 recovery ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${sides}`);
-    return panel;
-  },
-
-  _collectRecoverySideHits(profile, tapPos, total, edgeCut, quietCut, axis, spanSize, offset, frac) {
-    const hits = [];
-    const minDistance = Math.max(4, Math.round(total*0.018));
-    const maxDistance = Math.max(16, Math.round(total*0.52));
-    const maxRun = Math.max(3, Math.round(total*0.012));
-    for (let dir of [-1, 1]) {
-      let pos = Math.round(tapPos) + dir;
-      let travelled = 0;
-      while (pos>=1 && pos<total-1 && travelled<maxDistance) {
-        if (Math.abs(pos-tapPos)<minDistance) { pos += dir; travelled++; continue; }
-        if (profile[pos] <= quietCut) {
-          const rs=pos;
-          let re=pos;
-          while (re>=1 && re<total-1 && profile[re] <= quietCut && Math.abs(re-rs)<maxRun) re += dir;
-          re -= dir;
-          const before=rs-dir, after=re+dir;
-          const support=((before>=1&&before<total-1)?Math.max(0,profile[before]):0) +
-                        ((after>=1&&after<total-1)?Math.max(0,profile[after]):0);
-          const avgSupport=support/2;
-          const len=Math.abs(re-rs)+1;
-          const quietFrac=Math.max(0,Math.min(1,1-profile[Math.round((rs+re)/2)]/Math.max(1,quietCut)));
-          if (len>=2 && avgSupport>=edgeCut*0.90) {
-            hits.push({pos:(rs+re)/2, quality:(avgSupport/Math.max(1,edgeCut))*(0.65+quietFrac*0.35), axis, offset, frac, spanSize});
-          }
-          pos=re+dir;
-          travelled += len;
-        } else {
-          pos += dir;
-          travelled++;
-        }
-      }
-    }
-    return hits;
-  },
-
-  _consensusRecoveryBoundary(hits, tapPos, total, label, log) {
-    if (!hits.length) return null;
-    const tol=Math.max(5, Math.round(total*0.025));
-    const clusters=[];
-    for (const hit of hits.sort((a,b)=>a.pos-b.pos)) {
-      let cluster=clusters.find(c=>Math.abs(c.center-hit.pos)<=tol);
-      if (!cluster) { cluster={center:hit.pos,hits:[]}; clusters.push(cluster); }
-      cluster.hits.push(hit);
-      cluster.center=cluster.hits.reduce((s,h)=>s+h.pos,0)/cluster.hits.length;
-    }
-    for (const c of clusters) {
-      c.count=new Set(c.hits.map(h=>`${h.offset}:${h.frac}`)).size;
-      c.quality=c.hits.reduce((s,h)=>s+h.quality,0)/c.hits.length;
-      c.distance=Math.abs(tapPos-c.center);
-      c.score=c.count*1.35+c.quality*0.55;
-    }
-    clusters.sort((a,b)=>b.score-a.score || a.distance-b.distance);
-    const best=clusters[0];
-    // Require independent window agreement. One scan cannot create a recovery.
-    if (!best || best.count<3) {
-      if (log) log(`V90 ${label} consensus rejected: best=${best?best.count:0} independent windows`);
-      return null;
-    }
-    if (log) log(`V90 ${label} consensus pos=${best.center.toFixed(1)} windows=${best.count} score=${best.score.toFixed(2)}`);
-    return {pos:best.center, quality:best.quality, consensus:best.count};
-  },
-
   _analyze(img, log) {
     const maxDim = 900;
     const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
@@ -580,6 +386,13 @@ const PanelDetect = {
   }
 };
 
+function intervalCoverage(span, lo, hi){
+  if (!span || span.length < 2) return 0;
+  const a = Math.min(span[0], span[1]);
+  const b = Math.max(span[0], span[1]);
+  const overlap = Math.max(0, Math.min(b, hi) - Math.max(a, lo) + 1);
+  return overlap;
+}
 function boundarySpanOverlap(a,b,total){
   if(a.edge || b.edge) return Math.max(0,total-1);
   const lo=Math.max(a.span[0],b.span[0]), hi=Math.min(a.span[1],b.span[1]);
