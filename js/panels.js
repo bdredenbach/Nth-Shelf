@@ -1,6 +1,6 @@
-// NTH SHELF V95 — GUTTER + THICK BOUNDARY EVIDENCE
+// NTH SHELF V96 — V91 BASELINE / PANEL INTERIOR VALIDATION
 // V73 remains authoritative whenever it contains the tap.
-// V95 keeps the V95 boundary-set + iterative internal-gutter path, then adds
+// V92 keeps the V91 boundary-set + iterative internal-gutter path, then adds
 // a conservative interior validation gate. A fallback result is rejected if
 // a strong, sustained internal gutter still cuts through its interior.
 // No smallest/largest rule and no recovery pass.
@@ -22,7 +22,7 @@ const PanelDetect = {
     });
   },
 
-  // V95 fallback: V91/V95 coherent boundary SET plus gutter + thick-boundary refinement. A boundary is
+  // V92 fallback: V91 coherent boundary SET plus internal-gutter refinement. A boundary is
   // not selected because it is merely nearest, smallest, or largest. Each
   // side is scored for continuity and edge support, then opposite/adjacent
   // boundaries are paired only when their support spans are mutually
@@ -33,8 +33,8 @@ const PanelDetect = {
       img.onload = () => {
         try { resolve(this._analyzeBoundarySet(img, relX, relY, log)); }
         catch (err) {
-          console.warn("V95 fallback failed:", err);
-          if (log) log(`V95 fallback ERROR: ${err.message}`);
+          console.warn("V92 fallback failed:", err);
+          if (log) log(`V92 fallback ERROR: ${err.message}`);
           resolve(null);
         }
       };
@@ -51,7 +51,7 @@ const PanelDetect = {
     const tx = clamp01(relX) * (w - 1);
     const ty = clamp01(relY) * (h - 1);
 
-    if (log) log(`V95 boundary-set source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
+    if (log) log(`V92 boundary-set source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
 
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;
@@ -81,32 +81,27 @@ const PanelDetect = {
     const edgeCut = Math.max(9, med * 2.5);
     const quietCut = Math.max(2.5, edgeCut * 0.44);
 
-    // V95: independently detect true dark/black frame bands.
-    // The earlier "thickness" experiment only measured gradient strength;
-    // it did NOT actually ask whether the boundary itself was black.
-    // Here we look for an isolated dark band: many dark pixels on the line,
-    // bounded by noticeably lighter pixels immediately outside it, plus a
-    // long continuous run. This is supporting evidence, not "black = panel".
-    const blackH = this._findBlackFrameBoundaries(
-      lum, w, h, tx, ty, "H"
-    );
-    const blackV = this._findBlackFrameBoundaries(
-      lum, w, h, tx, ty, "V"
-    );
+    const hCandidates = this._findHorizontalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut);
+    const vCandidates = this._findVerticalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut);
 
-    const hCandidates = this._findHorizontalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut)
-      .concat(blackH);
-    const vCandidates = this._findVerticalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut)
-      .concat(blackV);
-
+    // V96: do not promote arbitrary black lines to boundaries. Instead,
+    // inspect only the strongest existing grey-gutter candidates and ask
+    // whether a dark frame line continues along the SAME boundary.
+    // This is confirmation of gutter evidence, not a replacement detector.
+    this._addBlackFrameContinuationEvidence(
+      hCandidates, lum, w, h, tx, ty, "H"
+    );
+    this._addBlackFrameContinuationEvidence(
+      vCandidates, lum, w, h, tx, ty, "V"
+    );
     if (log) {
-      log(`V95 black-frame candidates H=${blackH.length} V=${blackV.length}`);
+      log(`V96 black continuation H=${hCandidates.filter(c=>c.blackContinuation).length} V=${vCandidates.filter(c=>c.blackContinuation).length}`);
     }
 
     if (log) {
-      log(`V95 boundary candidates H=${hCandidates.length} V=${vCandidates.length} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
-      log(`V95 H candidates=${JSON.stringify(hCandidates.slice(0,8))}`);
-      log(`V95 V candidates=${JSON.stringify(vCandidates.slice(0,8))}`);
+      log(`V92 boundary candidates H=${hCandidates.length} V=${vCandidates.length} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
+      log(`V92 H candidates=${JSON.stringify(hCandidates.slice(0,8))}`);
+      log(`V92 V candidates=${JSON.stringify(vCandidates.slice(0,8))}`);
     }
 
     const top = hCandidates.filter(c => c.pos < ty).sort((a,b)=>Math.abs(ty-a.pos)-Math.abs(ty-b.pos)).slice(0,5);
@@ -176,7 +171,7 @@ const PanelDetect = {
     }
 
     if (!best) {
-      if (log) log("V95 boundary-set REJECTED: no coherent boundary set around tap");
+      if (log) log("V92 boundary-set REJECTED: no coherent boundary set around tap");
       return null;
     }
 
@@ -196,7 +191,7 @@ const PanelDetect = {
     const refined = this._splitAtInternalGuttersIterative(lum, w, h, tx, ty, p, edgeCut, quietCut, log);
     if (refined) p = refined;
 
-    // V95: panel interior validation. Even a coherent outer boundary set can
+    // V92: panel interior validation. Even a coherent outer boundary set can
     // still contain multiple visual panels if an internal gutter survived the
     // V89 iterative refinement. Reject that result rather than accepting a
     // multi-panel pop-out. This is deliberately not a size rule: small and
@@ -204,11 +199,11 @@ const PanelDetect = {
     // strong sustained gutter.
     const interior = this._validatePanelInterior(lum, w, h, tx, ty, p, edgeCut, quietCut, log);
     if (!interior.ok) {
-      if (log) log(`V95 interior validation REJECTED: ${interior.reason}`);
+      if (log) log(`V92 interior validation REJECTED: ${interior.reason}`);
       return null;
     }
 
-    if (log) log(`V95 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)} interior=clean`);
+    if (log) log(`V92 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)} interior=clean`);
     return p;
   },
 
@@ -221,7 +216,7 @@ const PanelDetect = {
       if (!next) break;
       current = next;
       changed = true;
-      if (log) log(`V95 internal refinement pass ${i + 1}/${maxSplits}`);
+      if (log) log(`V92 internal refinement pass ${i + 1}/${maxSplits}`);
     }
     return changed ? current : null;
   },
@@ -296,13 +291,13 @@ const PanelDetect = {
       if (ty < hg.pos) refined.h = (hg.pos / h) - refined.y;
       else refined.y = hg.pos / h, refined.h = (p.y + p.h) - refined.y;
       did = true;
-      if (log) log(`V95 internal H gutter split at ${hg.pos} quality=${hg.quality.toFixed(2)} quiet=${hg.quietFrac.toFixed(2)}`);
+      if (log) log(`V92 internal H gutter split at ${hg.pos} quality=${hg.quality.toFixed(2)} quiet=${hg.quietFrac.toFixed(2)}`);
     }
     if (vg) {
       if (tx < vg.pos) refined.w = (vg.pos / w) - refined.x;
       else refined.x = vg.pos / w, refined.w = (p.x + p.w) - refined.x;
       did = true;
-      if (log) log(`V95 internal V gutter split at ${vg.pos} quality=${vg.quality.toFixed(2)} quiet=${vg.quietFrac.toFixed(2)}`);
+      if (log) log(`V92 internal V gutter split at ${vg.pos} quality=${vg.quality.toFixed(2)} quiet=${vg.quietFrac.toFixed(2)}`);
     }
     if (!did) return null;
     refined.w = clamp01(refined.w);
@@ -380,8 +375,8 @@ const PanelDetect = {
     }
 
     if (log) {
-      if (strongestH) log(`V95 interior H gutter candidate y=${strongestH.pos} quality=${strongestH.quality.toFixed(2)} span=${strongestH.spanFrac.toFixed(2)} quiet=${strongestH.quietFrac.toFixed(2)}`);
-      if (strongestV) log(`V95 interior V gutter candidate x=${strongestV.pos} quality=${strongestV.quality.toFixed(2)} span=${strongestV.spanFrac.toFixed(2)} quiet=${strongestV.quietFrac.toFixed(2)}`);
+      if (strongestH) log(`V92 interior H gutter candidate y=${strongestH.pos} quality=${strongestH.quality.toFixed(2)} span=${strongestH.spanFrac.toFixed(2)} quiet=${strongestH.quietFrac.toFixed(2)}`);
+      if (strongestV) log(`V92 interior V gutter candidate x=${strongestV.pos} quality=${strongestV.quality.toFixed(2)} span=${strongestV.spanFrac.toFixed(2)} quiet=${strongestV.quietFrac.toFixed(2)}`);
     }
 
     if (strongestH && strongestV) return { ok: false, reason: "strong internal H+V gutters remain" };
@@ -404,179 +399,135 @@ const PanelDetect = {
     return sum / Math.max(1, yb-ya+1);
   },
 
-  _findBlackFrameBoundaries(lum, w, h, tx, ty, axis) {
-    const out = [];
-    const darkCut = 48;       // genuinely dark ink/frame territory
-    const lightCut = 105;     // neighboring panel/gutter is meaningfully lighter
-    const minDarkFrac = 0.62;
-    const minRunFrac = 0.46;
-    const minSpanFrac = 0.36;
-    const maxBand = 5;
+  _addBlackFrameContinuationEvidence(candidates, lum, w, h, tx, ty, axis) {
+    if (!candidates || !candidates.length) return;
 
-    const total = axis === "H" ? h : w;
-    const spanLimit = axis === "H" ? w : h;
+    const darkCut = 55;
+    const lightCut = 105;
+    const sampleCount = 17;
+    const minDarkFrac = 0.55;
+    const minLightFrac = 0.45;
 
-    // Search multiple spans around the tap so partial frame lines can still
-    // be recognized without allowing a tiny piece of artwork to dominate.
-    const spans = [0.34, 0.50, 0.68, 0.84];
+    for (const c of candidates) {
+      // Only inspect a neighborhood around an already-detected gutter.
+      // This preserves the working gutter detector and prevents black artwork
+      // elsewhere on the page from creating new boundaries.
+      const pos = Math.round(c.pos);
+      const span = c.span || (axis === "H" ? [0, w-1] : [0, h-1]);
 
-    for (const frac of spans) {
       if (axis === "H") {
-        const half = Math.max(10, Math.round(w * frac / 2));
-        const xa = Math.max(2, Math.round(tx) - half);
-        const xb = Math.min(w - 3, Math.round(tx) + half);
+        const xa = Math.max(2, Math.round(span[0]));
+        const xb = Math.min(w-3, Math.round(span[1]));
         if (xb <= xa) continue;
-        for (let y = 2; y < h - 2; y++) {
-          if (Math.abs(y - ty) < Math.max(3, Math.round(h * 0.018))) continue;
 
-          let dark = 0, bestRun = 0, run = 0;
-          let lineSum = 0;
-          for (let x = xa; x <= xb; x++) {
+        let darkSamples = 0;
+        let isolatedSamples = 0;
+        let longestRun = 0;
+        let run = 0;
+
+        for (let s = 0; s < sampleCount; s++) {
+          const x = Math.round(xa + (xb-xa) * (s/(sampleCount-1)));
+          let best = null;
+
+          // Look immediately above/below the gutter, where a frame edge
+          // continuing the gutter should actually live.
+          for (let d = -6; d <= 6; d++) {
+            const y = pos + d;
+            if (y < 2 || y >= h-2) continue;
             const v = lum[y*w+x];
-            lineSum += v;
-            if (v <= darkCut) {
-              dark++;
-              run++;
-              if (run > bestRun) bestRun = run;
-            } else {
-              run = 0;
+            if (v <= darkCut && (best === null || v < best.v)) {
+              best = {y, v};
             }
           }
-          const span = xb - xa + 1;
-          const darkFrac = dark / span;
-          const runFrac = bestRun / span;
-          if (darkFrac < minDarkFrac || runFrac < minRunFrac) continue;
 
-          // Require the dark band to be isolated from its neighbors. A solid
-          // black artwork area should not look like a frame just because it
-          // contains lots of black pixels.
-          let above = 0, below = 0;
-          for (let x = xa; x <= xb; x++) {
-            above += lum[(y-1)*w+x];
-            below += lum[(y+1)*w+x];
+          if (!best) {
+            run = 0;
+            continue;
           }
-          above /= span;
-          below /= span;
-          const neighborLight = Math.min(above, below);
-          if (neighborLight < lightCut) continue;
 
-          // Allow a frame to be a few pixels thick. Collapse nearby rows into
-          // one candidate centered on the dark band.
-          let a = y, b = y;
-          while (a > 1 && b-a < maxBand && this._darkRowScore(lum,w,h,a-1,xa,xb,darkCut) >= minDarkFrac) a--;
-          while (b < h-2 && b-a < maxBand && this._darkRowScore(lum,w,h,b+1,xa,xb,darkCut) >= minDarkFrac) b++;
-          const pos = (a+b)/2;
+          darkSamples++;
+          const y = best.y;
+          const above = lum[(y-1)*w+x];
+          const below = lum[(y+1)*w+x];
+          const isolated = Math.min(above, below) >= lightCut;
+          if (isolated) isolatedSamples++;
 
-          const contrast = Math.max(0, Math.min(1, (neighborLight - lineSum/span) / 180));
-          const continuity = Math.max(0, Math.min(1, runFrac));
-          const quality = 1.35 + contrast*1.15 + continuity*0.90 + darkFrac*0.60;
+          if (isolated) run++;
+          else run = 0;
+          if (run > longestRun) longestRun = run;
+        }
 
-          out.push({
-            pos,
-            width: b-a+1,
-            quality,
-            gutterQuality: 0,
-            thickness: b-a+1,
-            thickScore: Math.min(1, (b-a+1)/3),
-            span: [xa, xb],
-            axis,
-            blackFrame: true,
-            darkFrac,
-            runFrac,
-            neighborLight
-          });
+        const darkFrac = darkSamples / sampleCount;
+        const isolatedFrac = isolatedSamples / sampleCount;
+        const continuity = longestRun / sampleCount;
+
+        if (darkFrac >= minDarkFrac && isolatedFrac >= minLightFrac &&
+            continuity >= 0.30) {
+          c.blackContinuation = true;
+          c.blackContinuationScore =
+            Math.min(1, darkFrac) * 0.40 +
+            Math.min(1, isolatedFrac) * 0.35 +
+            Math.min(1, continuity * 1.7) * 0.25;
+
+          // Small bonus only. Grey-gutter quality remains dominant.
+          c.quality += 0.45 * c.blackContinuationScore;
         }
       } else {
-        const half = Math.max(10, Math.round(h * frac / 2));
-        const ya = Math.max(2, Math.round(ty) - half);
-        const yb = Math.min(h - 3, Math.round(ty) + half);
+        const ya = Math.max(2, Math.round(span[0]));
+        const yb = Math.min(h-3, Math.round(span[1]));
         if (yb <= ya) continue;
-        for (let x = 2; x < w - 2; x++) {
-          if (Math.abs(x - tx) < Math.max(3, Math.round(w * 0.018))) continue;
 
-          let dark = 0, bestRun = 0, run = 0;
-          let lineSum = 0;
-          for (let y = ya; y <= yb; y++) {
+        let darkSamples = 0;
+        let isolatedSamples = 0;
+        let longestRun = 0;
+        let run = 0;
+
+        for (let s = 0; s < sampleCount; s++) {
+          const y = Math.round(ya + (yb-ya) * (s/(sampleCount-1)));
+          let best = null;
+
+          for (let d = -6; d <= 6; d++) {
+            const x = pos + d;
+            if (x < 2 || x >= w-2) continue;
             const v = lum[y*w+x];
-            lineSum += v;
-            if (v <= darkCut) {
-              dark++;
-              run++;
-              if (run > bestRun) bestRun = run;
-            } else {
-              run = 0;
+            if (v <= darkCut && (best === null || v < best.v)) {
+              best = {x, v};
             }
           }
-          const span = yb - ya + 1;
-          const darkFrac = dark / span;
-          const runFrac = bestRun / span;
-          if (darkFrac < minDarkFrac || runFrac < minRunFrac) continue;
 
-          let left = 0, right = 0;
-          for (let y = ya; y <= yb; y++) {
-            left += lum[y*w + x-1];
-            right += lum[y*w + x+1];
+          if (!best) {
+            run = 0;
+            continue;
           }
-          left /= span;
-          right /= span;
-          const neighborLight = Math.min(left, right);
-          if (neighborLight < lightCut) continue;
 
-          let a = x, b = x;
-          while (a > 1 && b-a < maxBand && this._darkColScore(lum,w,h,a-1,ya,yb,darkCut) >= minDarkFrac) a--;
-          while (b < w-2 && b-a < maxBand && this._darkColScore(lum,w,h,b+1,ya,yb,darkCut) >= minDarkFrac) b++;
-          const pos = (a+b)/2;
+          darkSamples++;
+          const x = best.x;
+          const left = lum[y*w+x-1];
+          const right = lum[y*w+x+1];
+          const isolated = Math.min(left, right) >= lightCut;
+          if (isolated) isolatedSamples++;
 
-          const contrast = Math.max(0, Math.min(1, (neighborLight - lineSum/span) / 180));
-          const continuity = Math.max(0, Math.min(1, runFrac));
-          const quality = 1.35 + contrast*1.15 + continuity*0.90 + darkFrac*0.60;
+          if (isolated) run++;
+          else run = 0;
+          if (run > longestRun) longestRun = run;
+        }
 
-          out.push({
-            pos,
-            width: b-a+1,
-            quality,
-            gutterQuality: 0,
-            thickness: b-a+1,
-            thickScore: Math.min(1, (b-a+1)/3),
-            span: [ya, yb],
-            axis,
-            blackFrame: true,
-            darkFrac,
-            runFrac,
-            neighborLight
-          });
+        const darkFrac = darkSamples / sampleCount;
+        const isolatedFrac = isolatedSamples / sampleCount;
+        const continuity = longestRun / sampleCount;
+
+        if (darkFrac >= minDarkFrac && isolatedFrac >= minLightFrac &&
+            continuity >= 0.30) {
+          c.blackContinuation = true;
+          c.blackContinuationScore =
+            Math.min(1, darkFrac) * 0.40 +
+            Math.min(1, isolatedFrac) * 0.35 +
+            Math.min(1, continuity * 1.7) * 0.25;
+
+          c.quality += 0.45 * c.blackContinuationScore;
         }
       }
     }
-
-    // Nearby candidates from overlapping spans are redundant. Keep the best
-    // representative so black artwork doesn't multiply the same boundary.
-    out.sort((a,b)=>a.pos-b.pos || b.quality-a.quality);
-    const deduped = [];
-    const mergeDist = Math.max(3, Math.round(total*0.012));
-    for (const c of out) {
-      const last = deduped[deduped.length-1];
-      if (last && Math.abs(last.pos-c.pos) <= mergeDist) {
-        if (c.quality > last.quality) deduped[deduped.length-1] = c;
-      } else {
-        deduped.push(c);
-      }
-    }
-    return deduped.slice(0, 24);
-  },
-
-  _darkRowScore(lum, w, h, y, xa, xb, cut) {
-    let n = 0;
-    const span = Math.max(1, xb-xa+1);
-    for (let x=xa; x<=xb; x++) if (lum[y*w+x] <= cut) n++;
-    return n/span;
-  },
-
-  _darkColScore(lum, w, h, x, ya, yb, cut) {
-    let n = 0;
-    const span = Math.max(1, yb-ya+1);
-    for (let y=ya; y<=yb; y++) if (lum[y*w+x] <= cut) n++;
-    return n/span;
   },
 
   _findHorizontalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut) {
@@ -629,27 +580,6 @@ const PanelDetect = {
     return dedupeBoundaryCandidates(candidates, Math.max(2, Math.round(w*0.012)), 12);
   },
 
-  _boundaryThickness(profile, a, b, edgeCut) {
-    // Look immediately outside the quiet gutter corridor. A thick panel line
-    // produces elevated edge response across multiple adjacent samples.
-    const strong = edgeCut * 0.62;
-    const maxBand = 6;
-
-    let left = 0;
-    for (let k = 1; k <= maxBand && a-k >= 1; k++) {
-      if (profile[a-k] >= strong) left++;
-      else if (k > 2) break;
-    }
-
-    let right = 0;
-    for (let k = 1; k <= maxBand && b+k < profile.length-1; k++) {
-      if (profile[b+k] >= strong) right++;
-      else if (k > 2) break;
-    }
-
-    return Math.min(maxBand * 2, left + right);
-  },
-
   _collectBoundaryCandidates(profile, total, edgeCut, quietCut, spanA, spanB, out, axis) {
     for (let i=2;i<total-2;i++) {
       if (profile[i] > quietCut) continue;
@@ -663,25 +593,10 @@ const PanelDetect = {
       const support=(Math.max(0,before)+Math.max(0,after))/2;
       const quietFrac=Math.max(0, Math.min(1, 1 - profile[i]/Math.max(1,quietCut)));
       if (support < edgeCut*0.78) continue;
-
-      // V95: gutter + thick-boundary evidence.
-      // A real panel gutter is often accompanied by a visible border on one
-      // or both sides. Measure how strongly the edge persists across several
-      // adjacent samples instead of trusting a single-pixel spike.
-      const thickness = this._boundaryThickness(profile, a, b, edgeCut);
-      const thickScore = Math.min(1, thickness / 6);
-      const gutterQuality =
-        Math.min(3, support/Math.max(1,edgeCut)) *
-        (0.65 + quietFrac*0.35);
-      // Thickness is supporting evidence, not a hard requirement. Borderless
-      // panels can still pass; when gutter candidates compete, a thicker,
-      // more sustained boundary gets a meaningful advantage.
-      const quality = gutterQuality + thickScore * 0.55;
+      const pos=(a+b)/2;
+      const quality=Math.min(3, support/Math.max(1,edgeCut)) * (0.65 + quietFrac*0.35);
       const span=[spanA,spanB];
-      out.push({
-        pos, width:b-a+1, quality, gutterQuality, thickness,
-        thickScore, span, axis
-      });
+      out.push({pos, width:b-a+1, quality, span, axis});
       i=b;
     }
   },
