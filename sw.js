@@ -1,8 +1,7 @@
-// NTH SHELF V92 — panel interior validation test cache
-// sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
-// Comic pages themselves live in IndexedDB (js/db.js), not here.
+// NTH SHELF V94 — panel interior validation test cache
 
-const CACHE_NAME = "nth-shelf-shell-2.77-v93-attempt-frame-gutter";
+
+const CACHE_NAME = "nth-shelf-shell-v2.77.94-frame-and-gutter";
 const SHELL_FILES = [
   "./",
   "./index.html",
