@@ -1,8 +1,8 @@
-// NTH SHELF V86 — gutter continuity test cache
+// NTH SHELF V87 — boundary-set test cache
 // sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
 // Comic pages themselves live in IndexedDB (js/db.js), not here.
 
-const CACHE_NAME = "nth-shelf-shell-v2-86-gutter-continuity";
+const CACHE_NAME = "nth-shelf-shell-v2-87-boundary-set";
 const SHELL_FILES = [
   "./",
   "./index.html",
