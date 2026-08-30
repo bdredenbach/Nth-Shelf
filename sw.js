@@ -1,4 +1,4 @@
-// NTH SHELF V82 — enclosure-first candidate selection test cache
+// NTH SHELF V83 — enclosure-first candidate selection test cache
 // sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
 // Comic pages themselves live in IndexedDB (js/db.js), not here.
 
