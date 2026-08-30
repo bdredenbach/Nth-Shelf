@@ -1,6 +1,6 @@
-// NTH SHELF V85 — V79 BASELINE / GUTTER-INTERSECTION FALLBACK
-// V73 is authoritative when it contains the tap. V85 intersection runs only after a miss.
-// V85 keeps the V73 first pass authoritative and replaces only the fallback.
+// NTH SHELF V86 — V79 BASELINE / GUTTER CONTINUITY
+// V73 is authoritative when it contains the tap. V86 fallback runs only after a miss.
+// V86 is based on V79; only gutter continuity is added to the fallback.
 
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
@@ -777,14 +777,14 @@ const Reader = {
    const comicId = this.comic.id;
    const pageIndex = this.index;
    const token = ++this._panelLoadToken;
-   const logger = this.debugMode ? (msg) => this.debugLog(`[V85 panels p${pageIndex}] ${msg}`) : null;
+   const logger = this.debugMode ? (msg) => this.debugLog(`[V86 panels p${pageIndex}] ${msg}`) : null;
 
    const url = await this.getPageUrl(pageIndex);
    const panels = url ? await PanelDetect.detect(url, logger) : [];
 
    if (token !== this._panelLoadToken || this.comic.id !== comicId || this.index !== pageIndex) return;
    this.currentPanels = panels;
-   if (logger) logger(`V85 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
+   if (logger) logger(`V86 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
  },
 
  getPanelImageContext() {
@@ -2393,27 +2393,27 @@ async setMode(mode) {
    // replaced by the fallback.
    const panel = this.findPanelAt(relXImg, relYImg);
    if (panel) {
-     if (this.debugMode) this.debugLog("[V85] PASS 1 HIT (V73 baseline)");
+     if (this.debugMode) this.debugLog("[V86] PASS 1 HIT (V73 baseline)");
      this.zoomToPanel(panel, stageRect, imgRect);
      return;
    }
 
-   // PASS 2: only the exact V73-missed tap gets the V85 gutter-intersection test.
-   if (this.debugMode) this.debugLog("[V85] PASS 1 MISS -> tap-local geometry fallback");
+   // PASS 2: only the exact V73-missed tap gets the new local geometry test.
+   if (this.debugMode) this.debugLog("[V86] PASS 1 MISS -> tap-local geometry fallback");
    const pageIndex = this.index;
    const comicId = this.comic?.id;
    const url = await this.getPageUrl(pageIndex);
    if (url && PanelDetect.detectTapLocalFallback) {
      const logger = this.debugMode
-       ? (msg) => this.debugLog(`[V85 intersection p${pageIndex}] ${msg}`)
+       ? (msg) => this.debugLog(`[V86 fallback p${pageIndex}] ${msg}`)
        : null;
      const fallback = await PanelDetect.detectTapLocalFallback(url, relXImg, relYImg, logger);
      if (this.comic?.id === comicId && this.index === pageIndex && fallback) {
-       if (this.debugMode) this.debugLog("[V85] PASS 2 HIT -> zoom fallback panel");
+       if (this.debugMode) this.debugLog("[V86] PASS 2 HIT -> zoom fallback panel");
        this.zoomToPanel(fallback, stageRect, imgRect);
        return;
      }
-     if (this.debugMode) this.debugLog("[V85] PASS 2 MISS");
+     if (this.debugMode) this.debugLog("[V86] PASS 2 MISS");
    }
 
    this.toggleChrome();

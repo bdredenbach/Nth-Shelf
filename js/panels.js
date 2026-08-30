@@ -1,6 +1,6 @@
-// NTH SHELF V85 — V79 BASELINE / GUTTER-INTERSECTION FALLBACK
-// Freshly based on V78. V73 remains authoritative whenever it contains the tap.
-// V85 replaces only the fallback with gutter-intersection analysis; no V80-V84 detector code is included.
+// NTH SHELF V86 — V79 BASELINE / GUTTER CONTINUITY
+// Freshly based on V79. V73 remains authoritative whenever it contains the tap.
+// V86 changes only the tap-local fallback by requiring gutter continuity; no V80-V85 detector code is included.
 
 // NTH SHELF V73 — STABLE GUTTER BASELINE / TAP SELECTION
 // V73 intentionally restores the simple v2.76 gutter-scanning detector as the sole panel detector.
@@ -48,18 +48,17 @@ const PanelDetect = {
     });
   },
 
-  // V85 fallback: gutter-intersection test. Instead of walking outward
-  // from one pixel, build horizontal and vertical gutter candidates from
-  // short rectangular strips centered on the exact tap. The four selected
-  // gutter bands then form the panel cell containing that tap.
+  // V86 fallback: inspect only the neighborhood of the exact tap. This is
+  // not a page-wide panel detector. It looks for a gutter zone bracketed by
+  // edge energy and uses the nearest credible zone on each side of the tap.
   detectTapLocalFallback(imgUrl, relX, relY, log) {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
-        try { resolve(this._analyzeGutterIntersection(img, relX, relY, log)); }
+        try { resolve(this._analyzeTapLocalFallback(img, relX, relY, log)); }
         catch (err) {
-          console.warn("V85 gutter-intersection fallback failed:", err);
-          if (log) log(`V85 intersection ERROR: ${err.message}`);
+          console.warn("V86 tap-local fallback failed:", err);
+          if (log) log(`V86 fallback ERROR: ${err.message}`);
           resolve(null);
         }
       };
@@ -68,14 +67,14 @@ const PanelDetect = {
     });
   },
 
-  _analyzeGutterIntersection(img, relX, relY, log) {
+  _analyzeTapLocalFallback(img, relX, relY, log) {
     const maxDim = 900;
     const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
     const w = Math.max(1, Math.round(img.width * scale));
     const h = Math.max(1, Math.round(img.height * scale));
     const tx = clamp01(relX) * (w - 1);
     const ty = clamp01(relY) * (h - 1);
-    if (log) log(`V85 intersection source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
+    if (log) log(`V86 fallback source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
 
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;
@@ -83,172 +82,150 @@ const PanelDetect = {
     ctx.drawImage(img, 0, 0, w, h);
     const data = ctx.getImageData(0, 0, w, h).data;
     const lum = new Float32Array(w * h);
+
     for (let y=0; y<h; y++) for (let x=0; x<w; x++) {
       const i=(y*w+x)*4;
       lum[y*w+x]=0.299*data[i]+0.587*data[i+1]+0.114*data[i+2];
     }
 
-    const median = (arr) => {
-      if (!arr.length) return 0;
-      const a = arr.slice().sort((x,y)=>x-y);
-      return a[Math.floor(a.length*0.5)];
-    };
+    const x0=Math.round(tx), y0=Math.round(ty);
+    const xHalf=Math.max(10, Math.round(w*0.045));
+    const yHalf=Math.max(10, Math.round(h*0.045));
+    const gradH=new Float32Array(h);
+    const gradV=new Float32Array(w);
 
-    // Evaluate several local window sizes. A real gutter can be short in
-    // one dimension, so requiring the whole page row/column would miss it.
-    const hFractions=[0.14,0.22,0.34,0.50,0.70];
-    const vFractions=[0.14,0.22,0.34,0.50,0.70];
-    const statsH=[], statsV=[];
-
-    function rowStats(y, half) {
-      const xa=Math.max(0,Math.floor(tx-half)), xb=Math.min(w-1,Math.ceil(tx+half));
-      const n=xb-xa+1;
-      let sum=0,sumSq=0;
-      for(let x=xa;x<=xb;x++){const v=lum[y*w+x];sum+=v;sumSq+=v*v;}
-      const mean=sum/n;
-      const sd=Math.sqrt(Math.max(0,sumSq/n-mean*mean));
-      let above=0,below=0,na=0,nb=0;
-      const depth=Math.max(1,Math.round(Math.min(half*0.35, h*0.018)));
-      for(let d=1;d<=depth;d++){
-        const ya=y-d,yb=y+d;
-        if(ya>=0){for(let x=xa;x<=xb;x++) above+=lum[ya*w+x];na+=n;}
-        if(yb<h){for(let x=xa;x<=xb;x++) below+=lum[yb*w+x];nb+=n;}
+    for(let y=1;y<h-1;y++){
+      const xa=Math.max(1,x0-xHalf), xb=Math.min(w-2,x0+xHalf);
+      let sum=0,n=0;
+      for(let x=xa;x<=xb;x++){
+        sum += Math.abs(lum[y*w+x]-lum[(y-1)*w+x]) +
+               Math.abs(lum[(y+1)*w+x]-lum[y*w+x]);
+        n++;
       }
-      const am=na?above/na:mean, bm=nb?below/nb:mean;
-      const sideContrast=(Math.abs(mean-am)+Math.abs(mean-bm))/2;
-      return {sd,contrast:sideContrast};
+      gradH[y]=sum/(2*Math.max(1,n));
     }
 
-    function colStats(x, half) {
-      const ya=Math.max(0,Math.floor(ty-half)), yb=Math.min(h-1,Math.ceil(ty+half));
-      const n=yb-ya+1;
-      let sum=0,sumSq=0;
-      for(let y=ya;y<=yb;y++){const v=lum[y*w+x];sum+=v;sumSq+=v*v;}
-      const mean=sum/n;
-      const sd=Math.sqrt(Math.max(0,sumSq/n-mean*mean));
-      let left=0,right=0,nl=0,nr=0;
-      const depth=Math.max(1,Math.round(Math.min(half*0.35, w*0.018)));
-      for(let d=1;d<=depth;d++){
-        const xl=x-d,xr=x+d;
-        if(xl>=0){for(let y=ya;y<=yb;y++) left+=lum[y*w+xl];nl+=n;}
-        if(xr<w){for(let y=ya;y<=yb;y++) right+=lum[y*w+xr];nr+=n;}
+    for(let x=1;x<w-1;x++){
+      const ya=Math.max(1,y0-yHalf), yb=Math.min(h-2,y0+yHalf);
+      let sum=0,n=0;
+      for(let y=ya;y<=yb;y++){
+        sum += Math.abs(lum[y*w+x]-lum[y*w+(x-1)]) +
+               Math.abs(lum[y*w+(x+1)]-lum[y*w+x]);
+        n++;
       }
-      const lm=nl?left/nl:mean, rm=nr?right/nr:mean;
-      const sideContrast=(Math.abs(mean-lm)+Math.abs(mean-rm))/2;
-      return {sd,contrast:sideContrast};
+      gradV[x]=sum/(2*Math.max(1,n));
     }
 
-    function buildHorizontalProfile(fraction){
-      const half=Math.max(5, Math.round(w*fraction/2));
-      const p=new Float32Array(h);
-      for(let y=0;y<h;y++){
-        const st=rowStats(y,half);
-        // Lower is more gutter-like. Contrast around the strip is positive
-        // evidence that the quiet row is actually separating content.
-        p[y]=st.sd/(st.contrast+6);
+    const samples=[];
+    for(let i=1;i<h-1;i++) samples.push(gradH[i]);
+    for(let i=1;i<w-1;i++) samples.push(gradV[i]);
+    samples.sort((a,b)=>a-b);
+    const med=samples.length?samples[Math.floor(samples.length*0.5)]:0;
+    const edgeCut=Math.max(9,med*2.5);
+    const quietCut=Math.max(2.5,edgeCut*0.44);
+
+    // V86 continuity check: a real gutter should persist across multiple
+    // neighboring samples perpendicular to its direction. A single quiet
+    // pixel/short stroke can fool the 1D profile, but a true separator tends
+    // to remain quiet across a meaningful span of the panel. We keep V79's
+    // thresholds and edge tests unchanged; continuity is an additional gate.
+    function horizontalContinuity(y, runStart, runEnd) {
+      const span = Math.max(18, Math.round(w * 0.12));
+      const xa = Math.max(1, x0 - span), xb = Math.min(w - 2, x0 + span);
+      const segments = 5;
+      let good = 0, total = 0;
+      for (let s=0; s<segments; s++) {
+        const a = Math.round(xa + (xb-xa) * s / segments);
+        const b = Math.max(a, Math.round(xa + (xb-xa) * (s+1) / segments));
+        let sum=0,n=0;
+        for (let x=a; x<=b; x++) {
+          const ya=Math.max(1, runStart), yb=Math.min(h-2, runEnd);
+          for (let y=ya; y<=yb; y++) {
+            sum += Math.abs(lum[y*w+x]-lum[(y-1)*w+x]);
+            n++;
+          }
+        }
+        const mean=n ? sum/n : Infinity;
+        total++;
+        if (mean <= quietCut) good++;
       }
-      return {p,half};
+      return total ? good/total : 0;
     }
-    function buildVerticalProfile(fraction){
-      const half=Math.max(5, Math.round(h*fraction/2));
-      const p=new Float32Array(w);
-      for(let x=0;x<w;x++){
-        const st=colStats(x,half);
-        p[x]=st.sd/(st.contrast+6);
+
+    function verticalContinuity(x, runStart, runEnd) {
+      const span = Math.max(18, Math.round(h * 0.12));
+      const ya = Math.max(1, y0 - span), yb = Math.min(h - 2, y0 + span);
+      const segments = 5;
+      let good = 0, total = 0;
+      for (let s=0; s<segments; s++) {
+        const a = Math.round(ya + (yb-ya) * s / segments);
+        const b = Math.max(a, Math.round(ya + (yb-ya) * (s+1) / segments));
+        let sum=0,n=0;
+        for (let y=a; y<=b; y++) {
+          const xa=Math.max(1, runStart), xb=Math.min(w-2, runEnd);
+          for (let x=xa; x<=xb; x++) {
+            sum += Math.abs(lum[y*w+x]-lum[y*w+(x-1)]);
+            n++;
+          }
+        }
+        const mean=n ? sum/n : Infinity;
+        total++;
+        if (mean <= quietCut) good++;
       }
-      return {p,half};
+      return total ? good/total : 0;
     }
 
-    function robustCut(profile){
-      const vals=Array.from(profile).filter(Number.isFinite);
-      const med=median(vals);
-      const dev=median(vals.map(v=>Math.abs(v-med)));
-      return Math.max(1.5, med-dev*0.9);
-    }
-
-    function findCandidates(profile, axisSize, tap, cut){
-      const minRun=Math.max(2,Math.round(axisSize*0.004));
-      const candidates=[];
-      let i=0;
-      while(i<axisSize){
-        if(profile[i]>cut){i++;continue;}
-        const a=i;
-        while(i<axisSize && profile[i]<=cut)i++;
-        const b=i-1;
-        if(b-a+1<minRun)continue;
-        const pos=(a+b)/2;
-        const dist=Math.abs(pos-tap);
-        const run=b-a+1;
-        const nearBonus=1/(1+dist/Math.max(1,axisSize*0.20));
-        const runBonus=Math.min(1,run/Math.max(2,axisSize*0.012));
-        candidates.push({pos,width:run,dist,score:nearBonus*0.65+runBonus*0.35});
+    function findSide(profile,start,step,limit,size,continuity){
+      let x=start+step, travelled=0;
+      const maxRun=Math.max(3,Math.round(size*0.012));
+      while(x>=1 && x<size-1 && travelled<limit){
+        if(profile[x] <= quietCut){
+          const rs=x;
+          let re=x;
+          while(re>=1 && re<size-1 && profile[re] <= quietCut &&
+                Math.abs(re-rs)<maxRun) re+=step;
+          re-=step;
+          const before=rs-step, after=re+step;
+          const bg=(before>=1&&before<size-1)?profile[before]:0;
+          const ag=(after>=1&&after<size-1)?profile[after]:0;
+          const support=(Math.max(0,bg)+Math.max(0,ag))/2;
+          const len=Math.abs(re-rs)+1;
+          const continuityScore=continuity(Math.round((rs+re)/2), Math.min(rs,re), Math.max(rs,re));
+          if(len>=2 && support>=edgeCut && continuityScore>=0.60) {
+            return {pos:Math.round((rs+re)/2), width:len, score:support/Math.max(1,edgeCut), continuity:continuityScore};
+          }
+          x=re+step;
+          travelled+=len;
+        } else {
+          x+=step;
+          travelled++;
+        }
       }
-      return candidates;
+      return null;
     }
 
-    // Choose the nearest credible gutter on each side of the tap. A gutter
-    // must be sustained and score better than the page's own profile noise.
-    function chooseSide(cands,tap,axisSize,dir){
-      const side=cands.filter(c=>dir<0?c.pos<tap:c.pos>tap);
-      if(!side.length)return null;
-      side.sort((a,b)=>{
-        const ad=Math.abs(a.pos-tap),bd=Math.abs(b.pos-tap);
-        return (ad/axisSize)-(bd/axisSize) || b.score-a.score;
-      });
-      // Don't accept a distant accidental quiet line when a page edge is a
-      // more plausible boundary. The fallback is deliberately conservative.
-      const c=side[0];
-      if(c.dist>axisSize*0.48)return null;
-      return c;
-    }
+    const top=findSide(gradH,y0,-1,Math.max(12,Math.round(h*0.48)),h,horizontalContinuity);
+    const bottom=findSide(gradH,y0,1,Math.max(12,Math.round(h*0.48)),h,horizontalContinuity);
+    const left=findSide(gradV,x0,-1,Math.max(12,Math.round(w*0.48)),w,verticalContinuity);
+    const right=findSide(gradV,x0,1,Math.max(12,Math.round(w*0.48)),w,verticalContinuity);
 
-    function solveAxis(axis, fractions, axisSize, tap){
-      const all=[];
-      for(const f of fractions){
-        const built=axis==='h'?buildHorizontalProfile(f):buildVerticalProfile(f);
-        const cut=robustCut(built.p);
-        const cands=findCandidates(built.p,axisSize,tap,cut);
-        for(const c of cands) all.push({...c,fraction:f,cut});
-      }
-      // Deduplicate candidates that describe the same gutter band across
-      // window scales, then select independently on each side.
-      all.sort((a,b)=>a.pos-b.pos);
-      const merged=[];
-      for(const c of all){
-        const last=merged[merged.length-1];
-        if(last && Math.abs(last.pos-c.pos)<=Math.max(2,axisSize*0.008)){
-          if(c.score>last.score)Object.assign(last,c);
-          last.samples=(last.samples||1)+1;
-        } else merged.push({...c,samples:1});
-      }
-      for(const c of merged)c.score += Math.min(0.25,(c.samples-1)*0.06);
-      const left=chooseSide(merged,tap,axisSize,-1);
-      const right=chooseSide(merged,tap,axisSize,1);
-      return {left,right,candidates:merged};
-    }
-
-    const H=solveAxis('h',hFractions,h,ty);
-    const V=solveAxis('v',vFractions,w,tx);
-    const top=H.left,bottom=H.right,left=V.left,right=V.right;
-    if(log) log(`V85 intersection gutters T=${top?Math.round(top.pos):"EDGE"} B=${bottom?Math.round(bottom.pos):"EDGE"} L=${left?Math.round(left.pos):"EDGE"} R=${right?Math.round(right.pos):"EDGE"} candidatesH=${H.candidates.length} candidatesV=${V.candidates.length}`);
+    if(log) log(`V86 fallback gutters T=${top?top.pos:"-"} B=${bottom?bottom.pos:"-"} L=${left?left.pos:"-"} R=${right?right.pos:"-"} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)} continuity>=0.60`);
 
     const sx=left?left.pos:0, ex=right?right.pos:w-1;
     const sy=top?top.pos:0, ey=bottom?bottom.pos:h-1;
     const pw=Math.max(0,ex-sx), ph=Math.max(0,ey-sy);
-    const found=[top,bottom,left,right].filter(Boolean).length;
     const contains=tx>=Math.min(sx,ex)&&tx<=Math.max(sx,ex)&&ty>=Math.min(sy,ey)&&ty<=Math.max(sy,ey);
-    // Require at least two detected sides. One-sided guesses were the source
-    // of the oversized regions in V81-V83, so V85 never invents a large panel
-    // merely because a page edge is available.
-    const bounded=found>=2 && pw>=Math.max(14,w*0.05) && ph>=Math.max(14,h*0.05);
-    const notOversized=pw<=w*0.94 && ph<=h*0.94;
-    if(!contains || !bounded || !notOversized){
-      if(log) log(`V85 intersection REJECTED region=${Math.round(pw)}x${Math.round(ph)} sides=${found} containsTap=${contains} oversized=${!notOversized}`);
+    const found=[top,bottom,left,right].filter(Boolean).length;
+    const credible=contains && pw>=Math.max(12,w*0.05) && ph>=Math.max(12,h*0.05) &&
+      (found>=2 || (found>=1 && (pw>=w*0.84 || ph>=h*0.84)));
+
+    if(!credible){
+      if(log) log(`V86 fallback REJECTED region=${Math.round(pw)}x${Math.round(ph)} sides=${found} containsTap=${contains}`);
       return null;
     }
 
-    const panel={x:Math.min(sx,ex)/w,y:Math.min(sy,ey)/h,w:pw/w,h:ph/h,_v85Intersection:true,_gutterSides:found};
-    if(log) log(`V85 intersection ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${found}`);
+    const panel={x:Math.min(sx,ex)/w,y:Math.min(sy,ey)/h,w:pw/w,h:ph/h,_v86Fallback:true,_gutterSides:found};
+    if(log) log(`V86 fallback ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${found}`);
     return panel;
   },
 
