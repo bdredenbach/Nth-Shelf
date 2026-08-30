@@ -1,7 +1,7 @@
-// NTH SHELF V94 — panel interior validation test cache
+// NTH SHELF V95 — panel interior validation test cache
 
 
-const CACHE_NAME = "nth-shelf-shell-v2.77.94-frame-and-gutter";
+const CACHE_NAME = "nth-shelf-shell-v2.77.95";
 const SHELL_FILES = [
   "./",
   "./index.html",
