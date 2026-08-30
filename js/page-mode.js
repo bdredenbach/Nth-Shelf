@@ -1,4 +1,4 @@
-/* Longbox Page Mode — isolated Turn.js experiment
+/* Longbox Page Mode — isolated Turn.js experiment / recovered triple-tap test
  * v57: initialize with exactly one page, then add remaining pages after the
  * Turn.js instance is interactive. This isolates initialization from the
  * multi-page/image-loading path that froze on mobile.
@@ -19,6 +19,15 @@ window.LongboxPageMode = (() => {
       this.pageCount = 0;
       this._boundResize = () => this.resize();
       this._gesture = null;
+      this._cornerGesture = null;
+      this._cornerTapCount = 0;
+      this._cornerTapTime = 0;
+      this._cornerTapX = 0;
+      this._cornerTapY = 0;
+      this._cornerTapSide = null;
+      this._boundCornerTouchStart = (e) => this._cornerTouchStart(e);
+      this._boundCornerTouchMove = (e) => this._cornerTouchMove(e);
+      this._boundCornerTouchEnd = (e) => this._cornerTouchEnd(e);
       this._boundGestureStart = (e) => this._gestureStart(e);
       this._boundGestureMove = (e) => this._gestureMove(e);
       this._boundGestureEnd = (e) => this._gestureEnd(e);
@@ -146,6 +155,7 @@ window.LongboxPageMode = (() => {
           elevation: 0.05,
           duration: 600,
           direction: "ltr",
+          cornerSize: 0,
           pages: 1,
           page: 1
         });
@@ -156,12 +166,10 @@ window.LongboxPageMode = (() => {
 
       this.book = $book;
       this.issueKey = issueKey;
-      this._disableNativeCornerTaps();
       this._installGestureGrab(book);
       this.onState("ready=1");
 
       $book.bind("turned", (_event, page) => {
-        this._disableNativeCornerTaps();
         const index = Math.max(0, Number(page) - 1);
         this.setIndex(index);
         this.onPageChanged(index);
@@ -182,7 +190,6 @@ window.LongboxPageMode = (() => {
         if (this._destroyed || !this.book) return false;
         try {
           this.book.turn("addPage", page, i + 1);
-          this._disableNativeCornerTaps();
           this.pageCount = i + 1;
           this.onState(`added=${this.pageCount}`);
         } catch (err) {
@@ -199,24 +206,27 @@ window.LongboxPageMode = (() => {
       return true;
     }
 
-    _disableNativeCornerTaps() {
-      if (!this.book) return;
-      const pages = this.book.data()?.pages || {};
-      for (const key of Object.keys(pages)) {
-        try {
-          // Turn.js creates each flip with its own corners option. An empty
-          // corner list prevents a single touch in a page corner from being
-          // interpreted as a native page turn. Programmatic turn("next")
-          // remains available to Reader.next().
-          pages[key].flip("options", { corners: [] });
-        } catch (_) {}
-      }
-    }
-
     _installGestureGrab(book) {
       this._removeGestureGrab();
-      // We only listen on the page book. Native corner taps are disabled so
-      // Reader's tap state machine owns taps; this layer handles deliberate drags.
+
+      // Capture corner touches before Turn.js sees them. This is the
+      // recovered triple-tap test: corner taps are owned here so Turn.js
+      // cannot begin a native page turn on tap #1.
+      book.addEventListener("touchstart", this._boundCornerTouchStart, {
+        capture: true, passive: false
+      });
+      book.addEventListener("touchmove", this._boundCornerTouchMove, {
+        capture: true, passive: false
+      });
+      book.addEventListener("touchend", this._boundCornerTouchEnd, {
+        capture: true, passive: false
+      });
+      book.addEventListener("touchcancel", this._boundCornerTouchEnd, {
+        capture: true, passive: false
+      });
+      this._cornerTouchBook = book;
+
+      // Preserve the existing custom horizontal drag for non-corner gestures.
       book.addEventListener("touchstart", this._boundGestureStart, { passive: true });
       book.addEventListener("touchmove", this._boundGestureMove, { passive: false });
       book.addEventListener("touchend", this._boundGestureEnd, { passive: true });
@@ -229,6 +239,15 @@ window.LongboxPageMode = (() => {
     }
 
     _removeGestureGrab() {
+      const cornerBook = this._cornerTouchBook;
+      if (cornerBook) {
+        cornerBook.removeEventListener("touchstart", this._boundCornerTouchStart, true);
+        cornerBook.removeEventListener("touchmove", this._boundCornerTouchMove, true);
+        cornerBook.removeEventListener("touchend", this._boundCornerTouchEnd, true);
+        cornerBook.removeEventListener("touchcancel", this._boundCornerTouchEnd, true);
+        this._cornerTouchBook = null;
+      }
+
       const book = this._gestureBook;
       if (!book) return;
       book.removeEventListener("touchstart", this._boundGestureStart);
@@ -241,6 +260,145 @@ window.LongboxPageMode = (() => {
       book.removeEventListener("pointercancel", this._boundGestureEnd);
       this._gestureBook = null;
       this._gesture = null;
+    }
+
+    _cornerInfo(e) {
+      if (!this._cornerTouchBook) return null;
+      const p = e.touches?.[0];
+      if (!p) return null;
+
+      const rect = this._cornerTouchBook.getBoundingClientRect();
+      const x = p.clientX - rect.left;
+      const y = p.clientY - rect.top;
+
+      const corner = 100;
+      const nearLeft = x <= corner;
+      const nearRight = x >= rect.width - corner;
+      const nearTop = y <= corner;
+      const nearBottom = y >= rect.height - corner;
+
+      if (!(nearLeft || nearRight) || !(nearTop || nearBottom)) return null;
+
+      const side = nearLeft ? "left" : "right";
+      return { p, rect, x, y, side };
+    }
+
+    _cornerTouchStart(e) {
+      const info = this._cornerInfo(e);
+      if (!info) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+
+      this._cornerGesture = {
+        x0: info.p.clientX,
+        y0: info.p.clientY,
+        lastX: info.p.clientX,
+        lastY: info.p.clientY,
+        rect: info.rect,
+        side: info.side,
+        moved: false,
+        triggered: false
+      };
+    }
+
+    _cornerTouchMove(e) {
+      const g = this._cornerGesture;
+      if (!g) return;
+
+      const p = e.touches?.[0];
+      if (!p) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+
+      const dx = p.clientX - g.x0;
+      const dy = p.clientY - g.y0;
+      g.lastX = p.clientX;
+      g.lastY = p.clientY;
+
+      if (!g.triggered &&
+          Math.abs(dx) >= 40 &&
+          Math.abs(dx) >= Math.abs(dy) * 1.5) {
+        g.moved = true;
+        g.triggered = true;
+        g.direction = dx < 0 ? "next" : "prev";
+
+        const x = Math.max(
+          1, Math.min(g.rect.width - 1, p.clientX - g.rect.left)
+        );
+        const y = Math.max(
+          1, Math.min(g.rect.height - 1, p.clientY - g.rect.top)
+        );
+
+        try {
+          if (!this.book.turn("grabStart", x, y, g.direction)) {
+            g.triggered = false;
+          }
+        } catch (_) {
+          g.triggered = false;
+        }
+      } else if (g.triggered) {
+        const x = Math.max(
+          1, Math.min(g.rect.width - 1, p.clientX - g.rect.left)
+        );
+        const y = Math.max(
+          1, Math.min(g.rect.height - 1, p.clientY - g.rect.top)
+        );
+        try { this.book.turn("grabMove", x, y); } catch (_) {}
+      }
+    }
+
+    _cornerTouchEnd(e) {
+      const g = this._cornerGesture;
+      if (!g) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+
+      if (g.triggered) {
+        const dx = g.lastX - g.x0;
+        const commit = Math.abs(dx) > Math.max(90, g.rect.width * 0.30);
+        try { this.book.turn("grabEnd", commit); } catch (_) {}
+        this._cornerTapCount = 0;
+        this._cornerGesture = null;
+        return;
+      }
+
+      const now = performance.now();
+      const sameCorner =
+        this._cornerTapSide === g.side &&
+        Math.hypot(
+          g.x0 - this._cornerTapX,
+          g.y0 - this._cornerTapY
+        ) < 70 &&
+        (now - this._cornerTapTime) < 500;
+
+      this._cornerTapCount = sameCorner
+        ? this._cornerTapCount + 1
+        : 1;
+
+      this._cornerTapTime = now;
+      this._cornerTapX = g.x0;
+      this._cornerTapY = g.y0;
+      this._cornerTapSide = g.side;
+
+      if (this._cornerTapCount >= 3) {
+        const direction = g.side === "right" ? "next" : "prev";
+        try {
+          if (direction === "next") this.next();
+          else this.prev();
+        } catch (_) {}
+
+        this._cornerTapCount = 0;
+        this._cornerTapTime = 0;
+        this._cornerTapSide = null;
+      }
+
+      this._cornerGesture = null;
     }
 
     _gestureStart(e) {
