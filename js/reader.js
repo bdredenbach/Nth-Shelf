@@ -1,6 +1,6 @@
-// NTH SHELF V87 — V79 BASELINE / BOUNDARY-SET FALLBACK
+// NTH SHELF V90 — V89 BASELINE / CONSENSUS RECOVERY
 // V73 is authoritative when it contains the tap. V87 boundary-set fallback runs only after a miss.
-// V87 is based on the last known-good V79 baseline; only the fallback selection method is changed.
+// V90 preserves the V89 path and adds a recovery pass only after V89 misses.
 
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
@@ -2393,27 +2393,43 @@ async setMode(mode) {
    // replaced by the fallback.
    const panel = this.findPanelAt(relXImg, relYImg);
    if (panel) {
-     if (this.debugMode) this.debugLog("[V89] PASS 1 HIT (V73 baseline)");
+     if (this.debugMode) this.debugLog("[V90] PASS 1 HIT (V73 baseline)");
      this.zoomToPanel(panel, stageRect, imgRect);
      return;
    }
 
    // PASS 2: only the exact V73-missed tap gets the new local geometry test.
-   if (this.debugMode) this.debugLog("[V89] PASS 1 MISS -> V87 boundary-set + internal-gutter fallback");
+   if (this.debugMode) this.debugLog("[V90] PASS 1 MISS -> V89 boundary-set + internal-gutter fallback");
    const pageIndex = this.index;
    const comicId = this.comic?.id;
    const url = await this.getPageUrl(pageIndex);
    if (url && PanelDetect.detectTapLocalFallback) {
      const logger = this.debugMode
-       ? (msg) => this.debugLog(`[V87 fallback p${pageIndex}] ${msg}`)
+       ? (msg) => this.debugLog(`[V89 fallback p${pageIndex}] ${msg}`)
        : null;
      const fallback = await PanelDetect.detectTapLocalFallback(url, relXImg, relYImg, logger);
      if (this.comic?.id === comicId && this.index === pageIndex && fallback) {
-       if (this.debugMode) this.debugLog("[V89] PASS 2 HIT -> zoom V89 refined panel");
+       if (this.debugMode) this.debugLog("[V90] PASS 2 HIT -> zoom V89 refined panel");
        this.zoomToPanel(fallback, stageRect, imgRect);
        return;
      }
-     if (this.debugMode) this.debugLog("[V89] PASS 2 MISS");
+     if (this.debugMode) this.debugLog("[V90] PASS 2 MISS");
+
+     // PASS 3: V90 recovery runs only after BOTH V73 and V89 fail.
+     // A recovery result can never override a successful earlier pass.
+     if (PanelDetect.detectTapRecoveryFallback) {
+       if (this.debugMode) this.debugLog("[V90] PASS 2 MISS -> consensus recovery");
+       const recoveryLogger = this.debugMode
+         ? (msg) => this.debugLog(`[V90 recovery p${pageIndex}] ${msg}`)
+         : null;
+       const recovery = await PanelDetect.detectTapRecoveryFallback(url, relXImg, relYImg, recoveryLogger);
+       if (this.comic?.id === comicId && this.index === pageIndex && recovery) {
+         if (this.debugMode) this.debugLog("[V90] PASS 3 HIT -> zoom recovery panel");
+         this.zoomToPanel(recovery, stageRect, imgRect);
+         return;
+       }
+       if (this.debugMode) this.debugLog("[V90] PASS 3 MISS");
+     }
    }
 
    this.toggleChrome();
