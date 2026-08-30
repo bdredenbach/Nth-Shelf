@@ -1,8 +1,8 @@
-// NTH SHELF V90 — consensus recovery test cache
+// NTH SHELF V91 — opposing-boundary agreement test cache
 // sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
 // Comic pages themselves live in IndexedDB (js/db.js), not here.
 
-const CACHE_NAME = "nth-shelf-shell-v2-90-consensus-recovery";
+const CACHE_NAME = "nth-shelf-shell-v2-91-opposing-boundary-agreement";
 const SHELL_FILES = [
   "./",
   "./index.html",
