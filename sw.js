@@ -1,4 +1,4 @@
-// NTH SHELF V88 — boundary-set test cache
+// NTH SHELF V89 — boundary-set test cache
 // sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
 // Comic pages themselves live in IndexedDB (js/db.js), not here.
 
