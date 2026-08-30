@@ -1,8 +1,8 @@
-// NTH SHELF V83 — enclosure-first candidate selection test cache
+// NTH SHELF V84 — four-direction boundary walk test cache
 // sw.js — caches the app shell so Nth Shelf launches and runs fully offline.
 // Comic pages themselves live in IndexedDB (js/db.js), not here.
 
-const CACHE_NAME = "nth-shelf-shell-v2-82-v81-enclosure-first";
+const CACHE_NAME = "nth-shelf-shell-v2-84-four-direction-boundary-walk";
 const SHELL_FILES = [
   "./",
   "./index.html",
