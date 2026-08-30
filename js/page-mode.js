@@ -156,10 +156,12 @@ window.LongboxPageMode = (() => {
 
       this.book = $book;
       this.issueKey = issueKey;
+      this._disableNativeCornerTaps();
       this._installGestureGrab(book);
       this.onState("ready=1");
 
       $book.bind("turned", (_event, page) => {
+        this._disableNativeCornerTaps();
         const index = Math.max(0, Number(page) - 1);
         this.setIndex(index);
         this.onPageChanged(index);
@@ -180,6 +182,7 @@ window.LongboxPageMode = (() => {
         if (this._destroyed || !this.book) return false;
         try {
           this.book.turn("addPage", page, i + 1);
+          this._disableNativeCornerTaps();
           this.pageCount = i + 1;
           this.onState(`added=${this.pageCount}`);
         } catch (err) {
@@ -196,10 +199,24 @@ window.LongboxPageMode = (() => {
       return true;
     }
 
+    _disableNativeCornerTaps() {
+      if (!this.book) return;
+      const pages = this.book.data()?.pages || {};
+      for (const key of Object.keys(pages)) {
+        try {
+          // Turn.js creates each flip with its own corners option. An empty
+          // corner list prevents a single touch in a page corner from being
+          // interpreted as a native page turn. Programmatic turn("next")
+          // remains available to Reader.next().
+          pages[key].flip("options", { corners: [] });
+        } catch (_) {}
+      }
+    }
+
     _installGestureGrab(book) {
       this._removeGestureGrab();
-      // We only listen on the page book. Corner touches remain Turn.js's own
-      // gesture path; this layer only activates after a deliberate middle drag.
+      // We only listen on the page book. Native corner taps are disabled so
+      // Reader's tap state machine owns taps; this layer handles deliberate drags.
       book.addEventListener("touchstart", this._boundGestureStart, { passive: true });
       book.addEventListener("touchmove", this._boundGestureMove, { passive: false });
       book.addEventListener("touchend", this._boundGestureEnd, { passive: true });

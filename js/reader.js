@@ -1,6 +1,6 @@
 // NTH SHELF V92 — UI FIX 4 / THREE-TAP INTERACTION
 // V92 panel detection is frozen for this UI/interaction repair.
-// UI fixes: Shelf visibility, reader offset, and deterministic three-tap Turn.js page advance.
+// UI fixes: Shelf visibility, reader offset, and deterministic three-tap page advance.
 
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
@@ -1802,7 +1802,7 @@ async setMode(mode) {
    let lastTapTime = 0;
    let lastTapPos = null;
    let pendingTapTimer = null;
-   // V92 UI FIX 4: deterministic three-tap reader interaction.
+   // V92 UI FIX 5: deterministic three-tap reader interaction.
    // Desired behavior:
    //   1 tap  -> normal panel/frame action
    //   2 taps -> existing double-tap action (release frame / bubble)
@@ -1862,7 +1862,7 @@ async setMode(mode) {
        pendingTapTimer = null;
        lastTapTime = 0;
        lastTapPos = null;
-       this.debugLog("V92 UI FIX 4: triple-tap -> Turn.js next()");
+       this.debugLog("V92 UI FIX 5: triple-tap -> page-mode next()");
        this.next();
        return true;
      }
@@ -2237,13 +2237,8 @@ async setMode(mode) {
      }
      mouseDown = false;
    });
-   stage.addEventListener("dblclick", (e) => {
-     if (this.mode !== "single") return;
-     if (this.focusMode === "panel") {
-       e.preventDefault();
-       this.resetZoom({ animate: true });
-     }
-   });
+   // V92 UI FIX 5: explicit 1/2/3-tap handling owns double-tap; no
+   // separate browser dblclick handler should race BubbleDetect/panel release.
  },
 
  async handleSingleTap(pos) {
