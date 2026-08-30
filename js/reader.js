@@ -1,6 +1,6 @@
-// NTH SHELF V92 — UI FIX 3 / THREE-TAP TURN RESTORE
+// NTH SHELF V92 — UI FIX 4 / THREE-TAP INTERACTION
 // V92 panel detection is frozen for this UI/interaction repair.
-// UI fixes: Shelf visibility, reader offset, and three-tap Turn.js page advance.
+// UI fixes: Shelf visibility, reader offset, and deterministic three-tap Turn.js page advance.
 
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
@@ -1802,110 +1802,19 @@ async setMode(mode) {
    let lastTapTime = 0;
    let lastTapPos = null;
    let pendingTapTimer = null;
-   // V92 UI FIX 3: preserve single/double-tap behavior while allowing a
-   // deliberate third tap to advance the page through the existing Turn.js
-   // page-mode controller.
+   // V92 UI FIX 4: deterministic three-tap reader interaction.
+   // Desired behavior:
+   //   1 tap  -> normal panel/frame action
+   //   2 taps -> existing double-tap action (release frame / bubble)
+   //   3 taps -> next page through the existing Turn.js controller
+   //
+   // The first tap is intentionally immediate. The prior implementation
+   // deferred it while waiting for a possible third tap, which could swallow
+   // edge/corner taps and delay the normal panel action.
    let tapSequenceCount = 0;
    let tapSequenceTime = 0;
    let tapSequencePos = null;
    let tapSequenceTimer = null;
-   let tapSequenceDoubleTimer = null;
-   let holdTimer = null;
-   let holdFired = false;
-   let twoPageGestureStart = null;
-   let twoPageGestureMoved = false;
-
-   const dist = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
-   const mid = (a, b) => ({ x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 });
-
-   const getContinuousTargetAtPoint = (screenX, screenY) => {
-     if (!(this.mode === "scroll" || this.mode === "webcomic" || this.mode === "manga" || this.mode === "two-page")) return null;
-     const pages = Array.from(this.els.stage.querySelectorAll(".scroll-page, .two-page-page"));
-     for (const page of pages) {
-       const img = page.querySelector("img");
-       if (!img) continue;
-       const rect = img.getBoundingClientRect();
-       if (rect.width < 2 || rect.height < 2) continue;
-       if (screenX >= rect.left && screenX <= rect.right &&
-           screenY >= rect.top && screenY <= rect.bottom) {
-         const pageIndex = Number(page.dataset.index);
-         if (!Number.isInteger(pageIndex)) continue;
-         return { page, img, imgRect: rect, pageIndex };
-       }
-     }
-     return null;
-   };
-
-   const triggerContinuousHold = async (screenX, screenY) => {
-     continuousHoldFired = true;
-     continuousTapStart = null;
-
-     if (!this.bubbleZoomEnabled) return;
-     if (this.bubbleOverlayActive) {
-       this.removeBubbleOverlay(true);
-       return;
-     }
-
-     const target = getContinuousTargetAtPoint(screenX, screenY);
-     if (!target) return;
-
-     const stageRect = this.els.stage.getBoundingClientRect();
-     const relXImg = clamp((screenX - target.imgRect.left) / target.imgRect.width, 0, 1);
-     const relYImg = clamp((screenY - target.imgRect.top) / target.imgRect.height, 0, 1);
-     const comicId = this.comic?.id;
-     const pageIndex = target.pageIndex;
-
-     const url = await this.getPageUrl(pageIndex);
-     if (!url) return;
-
-     const logger = this.debugMode
-       ? (msg) => this.debugLog(`[bubble-continuous] ${msg}`)
-       : null;
-     const bubble = await BubbleDetect.detect(url, relXImg, relYImg, logger);
-
-     if (!this.comic || this.comic.id !== comicId) return;
-
-     const fresh = getContinuousTargetAtPoint(screenX, screenY);
-     const displayTarget = fresh && fresh.pageIndex === pageIndex ? fresh : target;
-
-     if (bubble) {
-       this.showBubbleOverlay(bubble, stageRect, displayTarget.imgRect, displayTarget.page);
-     }
-   };
-
-   const handleContinuousDoubleTap = async (screenX, screenY) => {
-     if (!this.bubbleAltZoomEnabled) return;
-     if (this.bubbleOverlayActive) {
-       this.removeBubbleOverlay(true);
-       return;
-     }
-
-     const target = getContinuousTargetAtPoint(screenX, screenY);
-     if (!target) return;
-
-     const stageRect = this.els.stage.getBoundingClientRect();
-     const relXImg = clamp((screenX - target.imgRect.left) / target.imgRect.width, 0, 1);
-     const relYImg = clamp((screenY - target.imgRect.top) / target.imgRect.height, 0, 1);
-     const comicId = this.comic?.id;
-     const pageIndex = target.pageIndex;
-
-     const url = await this.getPageUrl(pageIndex);
-     if (!url) return;
-
-     const logger = this.debugMode
-       ? (msg) => this.debugLog(`[bubble-alt-continuous] ${msg}`)
-       : null;
-     const bubble = await BubbleDetect.extract(url, relXImg, relYImg, logger);
-
-     if (!this.comic || this.comic.id !== comicId) return;
-
-     const fresh = getContinuousTargetAtPoint(screenX, screenY);
-     const displayTarget = fresh && fresh.pageIndex === pageIndex ? fresh : target;
-
-     if (bubble) {
-       this.showBubbleOverlay(bubble, stageRect, displayTarget.imgRect, displayTarget.page);
-     }
-   };
 
    const resetTapSequence = () => {
      tapSequenceCount = 0;
@@ -1913,61 +1822,52 @@ async setMode(mode) {
      tapSequencePos = null;
      clearTimeout(tapSequenceTimer);
      tapSequenceTimer = null;
-     clearTimeout(tapSequenceDoubleTimer);
-     tapSequenceDoubleTimer = null;
    };
 
-   const noteTapSequence = (pos, doubleHandler) => {
-     const now = Date.now();
-     const sameSpot = tapSequencePos &&
-       Math.hypot(pos.x - tapSequencePos.x, pos.y - tapSequencePos.y) < 70;
-     const within = tapSequenceTime > 0 && (now - tapSequenceTime) < 520;
+   const isTapInSequence = (pos, now) => {
+     if (!tapSequencePos || !tapSequenceTime) return false;
+     return (now - tapSequenceTime) <= 700 &&
+       Math.hypot(pos.x - tapSequencePos.x, pos.y - tapSequencePos.y) < 90;
+   };
 
-     if (!sameSpot || !within) {
-       clearTimeout(tapSequenceDoubleTimer);
-       tapSequenceDoubleTimer = null;
+   const registerReaderTap = async (pos) => {
+     const now = Date.now();
+
+     if (!isTapInSequence(pos, now)) {
        tapSequenceCount = 1;
-       tapSequenceTime = now;
-       tapSequencePos = pos;
-       clearTimeout(tapSequenceTimer);
-       tapSequenceTimer = setTimeout(resetTapSequence, 620);
-       return false;
+     } else {
+       tapSequenceCount += 1;
      }
 
-     if (tapSequenceCount === 1) {
-       tapSequenceCount = 2;
-       tapSequenceTime = now;
-       tapSequencePos = pos;
-       clearTimeout(tapSequenceTimer);
-       tapSequenceTimer = setTimeout(resetTapSequence, 620);
+     tapSequenceTime = now;
+     tapSequencePos = pos;
 
-       // Delay the double-tap action just long enough to see whether a third
-       // tap arrives. If it does, the page turn wins and the double-tap action
-       // is never dispatched.
-       clearTimeout(tapSequenceDoubleTimer);
-       tapSequenceDoubleTimer = setTimeout(async () => {
-         tapSequenceDoubleTimer = null;
-         if (tapSequenceCount !== 2) return;
-         resetTapSequence();
-         await doubleHandler();
-       }, 300);
+     clearTimeout(tapSequenceTimer);
+     tapSequenceTimer = setTimeout(resetTapSequence, 760);
+
+     if (tapSequenceCount === 1) {
+       await this.handleSingleTap(pos);
        return true;
      }
 
      if (tapSequenceCount === 2) {
+       await this.handleDoubleTap(pos);
+       return true;
+     }
+
+     if (tapSequenceCount >= 3) {
        resetTapSequence();
+       this._deferredPanelTap = null;
        clearTimeout(pendingTapTimer);
        pendingTapTimer = null;
-       this._deferredPanelTap = null;
        lastTapTime = 0;
        lastTapPos = null;
-       this.debugLog('V92 UI: triple-tap -> Turn.js next()');
+       this.debugLog("V92 UI FIX 4: triple-tap -> Turn.js next()");
        this.next();
        return true;
      }
 
-     resetTapSequence();
-     return false;
+     return true;
    };
 
    const triggerHold = async (screenX, screenY) => {
@@ -2290,107 +2190,8 @@ async setMode(mode) {
        }
 
        if (!dragMoved) {
-         const now = Date.now();
          const pos = { x: endTouch.clientX, y: endTouch.clientY };
-         const isDouble = lastTapPos &&
-           (now - lastTapTime) < 280 &&
-           Math.hypot(pos.x - lastTapPos.x, pos.y - lastTapPos.y) < 70;
-
-         if (isDouble) {
-           // V92 UI FIX 3: let a third tap claim the sequence before the
-           // existing double-tap Bubble Zoom action fires.
-           noteTapSequence(pos, () => this.handleDoubleTap(pos));
-         } else {
-           noteTapSequence(pos, () => Promise.resolve());
-           let panelHit = false;
-           if (this.mode === "single" && this.panelZoomEnabled) {
-             const ctx = this.getPanelImageContext();
-             if (ctx) {
-               const relX = clamp((pos.x - ctx.rect.left) / ctx.rect.width, 0, 1);
-               const relY = clamp((pos.y - ctx.rect.top) / ctx.rect.height, 0, 1);
-               panelHit = !!this.findPanelAt(relX, relY);
-             }
-           }
-
-           if (panelHit) {
-             clearTimeout(pendingTapTimer);
-             pendingTapTimer = null;
-             lastTapTime = now;
-             lastTapPos = pos;
-
-             // Once a frame is already focused, do NOT create another
-             // deferred panel candidate. The next tap belongs to the
-             // focused-frame interaction: bubble detection gets a chance,
-             // and if no bubble is found the frame is dismissed.
-             if (this.focusMode === "panel") {
-               this._deferredPanelTap = null;
-               return;
-             }
-
-             // Unfocused panel: defer commitment so a direct bubble
-             // double-tap can win before the frame opens.
-             const panelCtx = this.getPanelImageContext();
-             const panelImgRect = panelCtx?.rect;
-             const comicId = this.comic?.id;
-             const pageIndex = this.index;
-
-             if (this.bubbleAltZoomEnabled && panelCtx && panelImgRect) {
-               const relX = clamp(
-                 (pos.x - panelImgRect.left) / panelImgRect.width, 0, 1
-               );
-               const relY = clamp(
-                 (pos.y - panelImgRect.top) / panelImgRect.height, 0, 1
-               );
-
-               this._deferredPanelTap = {
-                 pos,
-                 comicId,
-                 pageIndex,
-                 promise: (async () => {
-                   try {
-                     const url = await this.getPageUrl(pageIndex);
-                     if (!url) return { bubble: null };
-
-                     const logger = this.debugMode
-                       ? (msg) => this.debugLog(`[bubble-deferred] ${msg}`)
-                       : null;
-
-                     const bubble = await BubbleDetect.extract(
-                       url, relX, relY, logger
-                     );
-
-                     return {
-                       bubble,
-                       imgRect: panelImgRect
-                     };
-                   } catch (_) {
-                     return { bubble: null };
-                   }
-                 })()
-               };
-             } else {
-               this._deferredPanelTap = null;
-             }
-
-             pendingTapTimer = setTimeout(() => {
-               pendingTapTimer = null;
-               lastTapTime = 0;
-               lastTapPos = null;
-               this._deferredPanelTap = null;
-               this.handleSingleTap(pos);
-             }, 450);
-           } else {
-             clearTimeout(pendingTapTimer);
-             lastTapTime = now;
-             lastTapPos = pos;
-             pendingTapTimer = setTimeout(() => {
-               pendingTapTimer = null;
-               lastTapTime = 0;
-               lastTapPos = null;
-               this.handleSingleTap(pos);
-             }, 280);
-           }
-         }
+         registerReaderTap(pos);
        }
        panStart = null;
        wasPinching = false;
@@ -2427,8 +2228,7 @@ async setMode(mode) {
      if (this.mode === "scroll") return;
      if (mouseDown && !mouseMoved) {
        const pos = { x: e.clientX, y: e.clientY };
-       if (noteTapSequence(pos, () => Promise.resolve())) return;
-       this.handleSingleTap(pos);
+       registerReaderTap(pos);
      } else if (mouseDown && mouseMoved && this.scale <= 1.02) {
        const dx = e.clientX - mStart.x, dy = e.clientY - mStart.y;
        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.15) {
