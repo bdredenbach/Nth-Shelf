@@ -1,6 +1,6 @@
-// NTH SHELF V87 — V79 BASELINE / BOUNDARY-SET FALLBACK
-// V73 is authoritative when it contains the tap. V87 boundary-set fallback runs only after a miss.
-// V87 is based on the last known-good V79 baseline; only the fallback selection method is changed.
+// NTH SHELF V92 — UI FIX 3 / THREE-TAP TURN RESTORE
+// V92 panel detection is frozen for this UI/interaction repair.
+// UI fixes: Shelf visibility, reader offset, and three-tap Turn.js page advance.
 
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
@@ -1802,6 +1802,14 @@ async setMode(mode) {
    let lastTapTime = 0;
    let lastTapPos = null;
    let pendingTapTimer = null;
+   // V92 UI FIX 3: preserve single/double-tap behavior while allowing a
+   // deliberate third tap to advance the page through the existing Turn.js
+   // page-mode controller.
+   let tapSequenceCount = 0;
+   let tapSequenceTime = 0;
+   let tapSequencePos = null;
+   let tapSequenceTimer = null;
+   let tapSequenceDoubleTimer = null;
    let holdTimer = null;
    let holdFired = false;
    let twoPageGestureStart = null;
@@ -1897,6 +1905,69 @@ async setMode(mode) {
      if (bubble) {
        this.showBubbleOverlay(bubble, stageRect, displayTarget.imgRect, displayTarget.page);
      }
+   };
+
+   const resetTapSequence = () => {
+     tapSequenceCount = 0;
+     tapSequenceTime = 0;
+     tapSequencePos = null;
+     clearTimeout(tapSequenceTimer);
+     tapSequenceTimer = null;
+     clearTimeout(tapSequenceDoubleTimer);
+     tapSequenceDoubleTimer = null;
+   };
+
+   const noteTapSequence = (pos, doubleHandler) => {
+     const now = Date.now();
+     const sameSpot = tapSequencePos &&
+       Math.hypot(pos.x - tapSequencePos.x, pos.y - tapSequencePos.y) < 70;
+     const within = tapSequenceTime > 0 && (now - tapSequenceTime) < 520;
+
+     if (!sameSpot || !within) {
+       clearTimeout(tapSequenceDoubleTimer);
+       tapSequenceDoubleTimer = null;
+       tapSequenceCount = 1;
+       tapSequenceTime = now;
+       tapSequencePos = pos;
+       clearTimeout(tapSequenceTimer);
+       tapSequenceTimer = setTimeout(resetTapSequence, 620);
+       return false;
+     }
+
+     if (tapSequenceCount === 1) {
+       tapSequenceCount = 2;
+       tapSequenceTime = now;
+       tapSequencePos = pos;
+       clearTimeout(tapSequenceTimer);
+       tapSequenceTimer = setTimeout(resetTapSequence, 620);
+
+       // Delay the double-tap action just long enough to see whether a third
+       // tap arrives. If it does, the page turn wins and the double-tap action
+       // is never dispatched.
+       clearTimeout(tapSequenceDoubleTimer);
+       tapSequenceDoubleTimer = setTimeout(async () => {
+         tapSequenceDoubleTimer = null;
+         if (tapSequenceCount !== 2) return;
+         resetTapSequence();
+         await doubleHandler();
+       }, 300);
+       return true;
+     }
+
+     if (tapSequenceCount === 2) {
+       resetTapSequence();
+       clearTimeout(pendingTapTimer);
+       pendingTapTimer = null;
+       this._deferredPanelTap = null;
+       lastTapTime = 0;
+       lastTapPos = null;
+       this.debugLog('V92 UI: triple-tap -> Turn.js next()');
+       this.next();
+       return true;
+     }
+
+     resetTapSequence();
+     return false;
    };
 
    const triggerHold = async (screenX, screenY) => {
@@ -2226,12 +2297,11 @@ async setMode(mode) {
            Math.hypot(pos.x - lastTapPos.x, pos.y - lastTapPos.y) < 70;
 
          if (isDouble) {
-           clearTimeout(pendingTapTimer);
-           pendingTapTimer = null;
-           lastTapTime = 0;
-           lastTapPos = null;
-           this.handleDoubleTap(pos);
+           // V92 UI FIX 3: let a third tap claim the sequence before the
+           // existing double-tap Bubble Zoom action fires.
+           noteTapSequence(pos, () => this.handleDoubleTap(pos));
          } else {
+           noteTapSequence(pos, () => Promise.resolve());
            let panelHit = false;
            if (this.mode === "single" && this.panelZoomEnabled) {
              const ctx = this.getPanelImageContext();
@@ -2356,7 +2426,9 @@ async setMode(mode) {
    stage.addEventListener("mouseup", (e) => {
      if (this.mode === "scroll") return;
      if (mouseDown && !mouseMoved) {
-       this.handleSingleTap({ x: e.clientX, y: e.clientY });
+       const pos = { x: e.clientX, y: e.clientY };
+       if (noteTapSequence(pos, () => Promise.resolve())) return;
+       this.handleSingleTap(pos);
      } else if (mouseDown && mouseMoved && this.scale <= 1.02) {
        const dx = e.clientX - mStart.x, dy = e.clientY - mStart.y;
        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.15) {
