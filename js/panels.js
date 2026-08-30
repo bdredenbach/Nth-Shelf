@@ -1,4 +1,4 @@
-// NTH SHELF V96 — V91 BASELINE / PANEL INTERIOR VALIDATION
+// NTH SHELF V92 — V91 BASELINE / PANEL INTERIOR VALIDATION
 // V73 remains authoritative whenever it contains the tap.
 // V92 keeps the V91 boundary-set + iterative internal-gutter path, then adds
 // a conservative interior validation gate. A fallback result is rejected if
@@ -81,21 +81,23 @@ const PanelDetect = {
     const edgeCut = Math.max(9, med * 2.5);
     const quietCut = Math.max(2.5, edgeCut * 0.44);
 
-    const hCandidates = this._findHorizontalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut);
-    const vCandidates = this._findVerticalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut);
+    // V97: reverse the evidence order for panel boundaries.
+    // Black frame lines are primary candidates; grey gutter evidence confirms
+    // them when present. This is deliberately separate from the V96
+    // gutter-first approach.
+    const blackH = this._findBlackFirstBoundaries(lum, w, h, tx, ty, "H");
+    const blackV = this._findBlackFirstBoundaries(lum, w, h, tx, ty, "V");
+    const greyH = this._findHorizontalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut);
+    const greyV = this._findVerticalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut);
 
-    // V96: do not promote arbitrary black lines to boundaries. Instead,
-    // inspect only the strongest existing grey-gutter candidates and ask
-    // whether a dark frame line continues along the SAME boundary.
-    // This is confirmation of gutter evidence, not a replacement detector.
-    this._addBlackFrameContinuationEvidence(
-      hCandidates, lum, w, h, tx, ty, "H"
-    );
-    this._addBlackFrameContinuationEvidence(
-      vCandidates, lum, w, h, tx, ty, "V"
-    );
+    this._confirmBlackWithGrey(blackH, greyH, "H", w, h);
+    this._confirmBlackWithGrey(blackV, greyV, "V", w, h);
+
+    const hCandidates = blackH.concat(greyH);
+    const vCandidates = blackV.concat(greyV);
+
     if (log) {
-      log(`V96 black continuation H=${hCandidates.filter(c=>c.blackContinuation).length} V=${vCandidates.filter(c=>c.blackContinuation).length}`);
+      log(`V97 black-first H=${blackH.length} V=${blackV.length}`);
     }
 
     if (log) {
@@ -399,133 +401,166 @@ const PanelDetect = {
     return sum / Math.max(1, yb-ya+1);
   },
 
-  _addBlackFrameContinuationEvidence(candidates, lum, w, h, tx, ty, axis) {
-    if (!candidates || !candidates.length) return;
-
+  _findBlackFirstBoundaries(lum, w, h, tx, ty, axis) {
+    const out = [];
     const darkCut = 55;
     const lightCut = 105;
-    const sampleCount = 17;
-    const minDarkFrac = 0.55;
-    const minLightFrac = 0.45;
+    const minDarkFrac = 0.62;
+    const minRunFrac = 0.45;
+    const minSpanFrac = 0.34;
+    const total = axis === "H" ? h : w;
+    const spanLimit = axis === "H" ? w : h;
 
-    for (const c of candidates) {
-      // Only inspect a neighborhood around an already-detected gutter.
-      // This preserves the working gutter detector and prevents black artwork
-      // elsewhere on the page from creating new boundaries.
-      const pos = Math.round(c.pos);
-      const span = c.span || (axis === "H" ? [0, w-1] : [0, h-1]);
+    const spans = [0.38, 0.52, 0.68, 0.84];
 
+    for (const frac of spans) {
       if (axis === "H") {
-        const xa = Math.max(2, Math.round(span[0]));
-        const xb = Math.min(w-3, Math.round(span[1]));
+        const half = Math.max(12, Math.round(w * frac / 2));
+        const xa = Math.max(2, Math.round(tx) - half);
+        const xb = Math.min(w - 3, Math.round(tx) + half);
         if (xb <= xa) continue;
 
-        let darkSamples = 0;
-        let isolatedSamples = 0;
-        let longestRun = 0;
-        let run = 0;
+        for (let y = 2; y < h - 2; y++) {
+          if (Math.abs(y - ty) < Math.max(4, Math.round(h * 0.02))) continue;
 
-        for (let s = 0; s < sampleCount; s++) {
-          const x = Math.round(xa + (xb-xa) * (s/(sampleCount-1)));
-          let best = null;
-
-          // Look immediately above/below the gutter, where a frame edge
-          // continuing the gutter should actually live.
-          for (let d = -6; d <= 6; d++) {
-            const y = pos + d;
-            if (y < 2 || y >= h-2) continue;
+          let dark = 0, bestRun = 0, run = 0;
+          let sum = 0;
+          for (let x = xa; x <= xb; x++) {
             const v = lum[y*w+x];
-            if (v <= darkCut && (best === null || v < best.v)) {
-              best = {y, v};
-            }
+            sum += v;
+            if (v <= darkCut) {
+              dark++; run++;
+              if (run > bestRun) bestRun = run;
+            } else run = 0;
           }
+          const span = xb-xa+1;
+          const darkFrac = dark/span;
+          const runFrac = bestRun/span;
+          if (darkFrac < minDarkFrac || runFrac < minRunFrac) continue;
 
-          if (!best) {
-            run = 0;
-            continue;
+          let above=0, below=0;
+          for (let x=xa; x<=xb; x++) {
+            above += lum[(y-1)*w+x];
+            below += lum[(y+1)*w+x];
           }
+          above/=span; below/=span;
+          const isolated = Math.min(above, below);
+          if (isolated < lightCut) continue;
 
-          darkSamples++;
-          const y = best.y;
-          const above = lum[(y-1)*w+x];
-          const below = lum[(y+1)*w+x];
-          const isolated = Math.min(above, below) >= lightCut;
-          if (isolated) isolatedSamples++;
+          let a=y, b=y;
+          while (a>1 && b-a<5 && this._blackRowScore(lum,w,a-1,xa,xb,darkCut)>=minDarkFrac) a--;
+          while (b<h-2 && b-a<5 && this._blackRowScore(lum,w,b+1,xa,xb,darkCut)>=minDarkFrac) b++;
 
-          if (isolated) run++;
-          else run = 0;
-          if (run > longestRun) longestRun = run;
-        }
+          const quality =
+            1.55 +
+            Math.min(1, darkFrac)*0.85 +
+            Math.min(1, runFrac)*0.90 +
+            Math.min(1, (isolated-55)/150)*0.80;
 
-        const darkFrac = darkSamples / sampleCount;
-        const isolatedFrac = isolatedSamples / sampleCount;
-        const continuity = longestRun / sampleCount;
-
-        if (darkFrac >= minDarkFrac && isolatedFrac >= minLightFrac &&
-            continuity >= 0.30) {
-          c.blackContinuation = true;
-          c.blackContinuationScore =
-            Math.min(1, darkFrac) * 0.40 +
-            Math.min(1, isolatedFrac) * 0.35 +
-            Math.min(1, continuity * 1.7) * 0.25;
-
-          // Small bonus only. Grey-gutter quality remains dominant.
-          c.quality += 0.45 * c.blackContinuationScore;
+          out.push({
+            pos:(a+b)/2, width:b-a+1, quality,
+            gutterQuality:0, thickness:b-a+1,
+            span:[xa,xb], axis, blackFrame:true,
+            darkFrac, runFrac, neighborLight:isolated
+          });
         }
       } else {
-        const ya = Math.max(2, Math.round(span[0]));
-        const yb = Math.min(h-3, Math.round(span[1]));
+        const half = Math.max(12, Math.round(h * frac / 2));
+        const ya = Math.max(2, Math.round(ty) - half);
+        const yb = Math.min(h - 3, Math.round(ty) + half);
         if (yb <= ya) continue;
 
-        let darkSamples = 0;
-        let isolatedSamples = 0;
-        let longestRun = 0;
-        let run = 0;
+        for (let x = 2; x < w - 2; x++) {
+          if (Math.abs(x - tx) < Math.max(4, Math.round(w * 0.02))) continue;
 
-        for (let s = 0; s < sampleCount; s++) {
-          const y = Math.round(ya + (yb-ya) * (s/(sampleCount-1)));
-          let best = null;
-
-          for (let d = -6; d <= 6; d++) {
-            const x = pos + d;
-            if (x < 2 || x >= w-2) continue;
-            const v = lum[y*w+x];
-            if (v <= darkCut && (best === null || v < best.v)) {
-              best = {x, v};
-            }
+          let dark=0, bestRun=0, run=0, sum=0;
+          for (let y=ya; y<=yb; y++) {
+            const v=lum[y*w+x]; sum+=v;
+            if (v<=darkCut) { dark++; run++; if(run>bestRun) bestRun=run; }
+            else run=0;
           }
+          const span=yb-ya+1;
+          const darkFrac=dark/span, runFrac=bestRun/span;
+          if(darkFrac<minDarkFrac || runFrac<minRunFrac) continue;
 
-          if (!best) {
-            run = 0;
-            continue;
+          let left=0,right=0;
+          for(let y=ya;y<=yb;y++){
+            left+=lum[y*w+x-1]; right+=lum[y*w+x+1];
           }
+          left/=span; right/=span;
+          const isolated=Math.min(left,right);
+          if(isolated<lightCut) continue;
 
-          darkSamples++;
-          const x = best.x;
-          const left = lum[y*w+x-1];
-          const right = lum[y*w+x+1];
-          const isolated = Math.min(left, right) >= lightCut;
-          if (isolated) isolatedSamples++;
+          let a=x,b=x;
+          while(a>1 && b-a<5 && this._blackColScore(lum,w,a-1,ya,yb,darkCut)>=minDarkFrac) a--;
+          while(b<w-2 && b-a<5 && this._blackColScore(lum,w,b+1,ya,yb,darkCut)>=minDarkFrac) b++;
 
-          if (isolated) run++;
-          else run = 0;
-          if (run > longestRun) longestRun = run;
+          const quality =
+            1.55 +
+            Math.min(1,darkFrac)*0.85 +
+            Math.min(1,runFrac)*0.90 +
+            Math.min(1,(isolated-55)/150)*0.80;
+
+          out.push({
+            pos:(a+b)/2, width:b-a+1, quality,
+            gutterQuality:0, thickness:b-a+1,
+            span:[ya,yb], axis, blackFrame:true,
+            darkFrac, runFrac, neighborLight:isolated
+          });
         }
+      }
+    }
 
-        const darkFrac = darkSamples / sampleCount;
-        const isolatedFrac = isolatedSamples / sampleCount;
-        const continuity = longestRun / sampleCount;
+    // Collapse repeated detections from overlapping scan spans.
+    out.sort((a,b)=>a.pos-b.pos || b.quality-a.quality);
+    const merged=[];
+    const mergeDist=Math.max(3,Math.round(total*0.012));
+    for(const c of out){
+      const last=merged[merged.length-1];
+      if(last && Math.abs(last.pos-c.pos)<=mergeDist){
+        if(c.quality>last.quality) merged[merged.length-1]=c;
+      } else merged.push(c);
+    }
+    return merged.slice(0,24);
+  },
 
-        if (darkFrac >= minDarkFrac && isolatedFrac >= minLightFrac &&
-            continuity >= 0.30) {
-          c.blackContinuation = true;
-          c.blackContinuationScore =
-            Math.min(1, darkFrac) * 0.40 +
-            Math.min(1, isolatedFrac) * 0.35 +
-            Math.min(1, continuity * 1.7) * 0.25;
+  _blackRowScore(lum,w,y,xa,xb,cut){
+    let n=0, span=Math.max(1,xb-xa+1);
+    for(let x=xa;x<=xb;x++) if(lum[y*w+x]<=cut) n++;
+    return n/span;
+  },
 
-          c.quality += 0.45 * c.blackContinuationScore;
-        }
+  _blackColScore(lum,w,x,ya,yb,cut){
+    let n=0, span=Math.max(1,yb-ya+1);
+    for(let y=ya;y<=yb;y++) if(lum[y*w+x]<=cut) n++;
+    return n/span;
+  },
+
+  _confirmBlackWithGrey(black, grey, axis, w, h) {
+    if(!black.length || !grey.length) return;
+    const tolerance=Math.max(5, Math.round((axis==="H"?h:w)*0.025));
+
+    for(const b of black){
+      let best=null;
+      for(const g of grey){
+        if(Math.abs(g.pos-b.pos)>tolerance) continue;
+
+        // Prefer grey evidence whose span overlaps most of the black frame.
+        const bs=b.span||[0,axis==="H"?w-1:h-1];
+        const gs=g.span||[0,axis==="H"?w-1:h-1];
+        const overlap=Math.max(0,Math.min(bs[1],gs[1])-Math.max(bs[0],gs[0])+1);
+        const union=Math.max(bs[1],gs[1])-Math.min(bs[0],gs[0])+1;
+        const overlapFrac=overlap/Math.max(1,union);
+
+        const score=(g.quality||0)+overlapFrac;
+        if(!best || score>best.score) best={g,score,overlapFrac};
+      }
+
+      if(best){
+        b.greyConfirmed=true;
+        b.greyConfirmationScore=Math.min(1,best.overlapFrac);
+        // Confirmation is a meaningful bonus, but black remains primary.
+        b.quality += 0.70 + 0.55*b.greyConfirmationScore;
       }
     }
   },
