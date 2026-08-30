@@ -1,8 +1,8 @@
-// NTH SHELF V87 — V79 BASELINE / BOUNDARY-SET FALLBACK
+// NTH SHELF V88 — V87 BASELINE / INTERNAL GUTTER CHECK
 // V73 remains authoritative whenever it contains the tap.
-// V87 changes only the fallback: instead of choosing the smallest/largest
-// candidate, it searches for a coherent SET of gutter boundaries around the
-// exact tap. No V80-V86 detector code is used.
+// V88 keeps V87 boundary-set detection intact, then checks an accepted
+// fallback candidate for a strong internal gutter that would indicate that
+// multiple comic panels were bundled together. No smallest/largest rule.
 
 const PanelDetect = {
   detect(imgUrl, log) {
@@ -21,7 +21,7 @@ const PanelDetect = {
     });
   },
 
-  // V87 fallback: find a coherent boundary SET around the tap. A boundary is
+  // V88 fallback: V87 coherent boundary SET plus internal-gutter check. A boundary is
   // not selected because it is merely nearest, smallest, or largest. Each
   // side is scored for continuity and edge support, then opposite/adjacent
   // boundaries are paired only when their support spans are mutually
@@ -32,8 +32,8 @@ const PanelDetect = {
       img.onload = () => {
         try { resolve(this._analyzeBoundarySet(img, relX, relY, log)); }
         catch (err) {
-          console.warn("V87 boundary-set fallback failed:", err);
-          if (log) log(`V87 boundary-set ERROR: ${err.message}`);
+          console.warn("V88 fallback failed:", err);
+          if (log) log(`V88 fallback ERROR: ${err.message}`);
           resolve(null);
         }
       };
@@ -50,7 +50,7 @@ const PanelDetect = {
     const tx = clamp01(relX) * (w - 1);
     const ty = clamp01(relY) * (h - 1);
 
-    if (log) log(`V87 boundary-set source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
+    if (log) log(`V88 boundary-set source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
 
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;
@@ -84,9 +84,9 @@ const PanelDetect = {
     const vCandidates = this._findVerticalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut);
 
     if (log) {
-      log(`V87 boundary candidates H=${hCandidates.length} V=${vCandidates.length} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
-      log(`V87 H candidates=${JSON.stringify(hCandidates.slice(0,8))}`);
-      log(`V87 V candidates=${JSON.stringify(vCandidates.slice(0,8))}`);
+      log(`V88 boundary candidates H=${hCandidates.length} V=${vCandidates.length} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
+      log(`V88 H candidates=${JSON.stringify(hCandidates.slice(0,8))}`);
+      log(`V88 V candidates=${JSON.stringify(vCandidates.slice(0,8))}`);
     }
 
     const top = hCandidates.filter(c => c.pos < ty).sort((a,b)=>Math.abs(ty-a.pos)-Math.abs(ty-b.pos)).slice(0,5);
@@ -139,11 +139,11 @@ const PanelDetect = {
     }
 
     if (!best) {
-      if (log) log("V87 boundary-set REJECTED: no coherent boundary set around tap");
+      if (log) log("V88 boundary-set REJECTED: no coherent boundary set around tap");
       return null;
     }
 
-    const p = {
+    let p = {
       x: best.L.pos / w,
       y: best.T.pos / h,
       w: best.pw / w,
@@ -151,8 +151,115 @@ const PanelDetect = {
       _v87BoundarySet: true,
       _gutterSides: best.sides
     };
-    if (log) log(`V87 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${best.sides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)}`);
+
+    // V88: A good outer boundary set can still contain multiple panels.
+    // Before accepting it, look INSIDE the proposed region for a strong,
+    // sustained gutter. If one exists, split the candidate at that gutter
+    // and keep the side containing the user's tap. This is not a smallest-
+    // child rule: the tap selects the side, while gutter evidence selects
+    // the split. We allow at most one strong split per axis.
+    const refined = this._splitAtInternalGutters(lum, w, h, tx, ty, p, edgeCut, quietCut, log);
+    if (refined) p = refined;
+
+    if (log) log(`V88 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)}`);
     return p;
+  },
+
+  _splitAtInternalGutters(lum, w, h, tx, ty, p, edgeCut, quietCut, log) {
+    const x0 = Math.max(1, Math.round(p.x * w));
+    const y0 = Math.max(1, Math.round(p.y * h));
+    const x1 = Math.min(w - 2, Math.round((p.x + p.w) * w));
+    const y1 = Math.min(h - 2, Math.round((p.y + p.h) * h));
+    const pw = Math.max(1, x1 - x0);
+    const ph = Math.max(1, y1 - y0);
+    const minSpanH = Math.max(0.60, Math.min(0.78, 0.66));
+    const minSpanV = minSpanH;
+
+    const findH = () => {
+      let best = null;
+      const xa = Math.max(x0 + 2, Math.round(x0 + pw * 0.08));
+      const xb = Math.min(x1 - 2, Math.round(x1 - pw * 0.08));
+      const span = Math.max(1, xb - xa + 1);
+      for (let y = y0 + Math.max(3, Math.round(ph * 0.05)); y <= y1 - Math.max(3, Math.round(ph * 0.05)); y++) {
+        if (Math.abs(y - ty) < Math.max(3, Math.round(ph * 0.025))) continue;
+        let sum = 0, quiet = 0;
+        for (let x = xa; x <= xb; x++) {
+          const g = Math.abs(lum[y*w+x]-lum[(y-1)*w+x]) + Math.abs(lum[(y+1)*w+x]-lum[y*w+x]);
+          sum += g;
+          if (g <= quietCut) quiet++;
+        }
+        const avg = sum / span;
+        const quietFrac = quiet / span;
+        const before = this._axisEdgeSupportH(lum, w, h, y - 1, xa, xb);
+        const after = this._axisEdgeSupportH(lum, w, h, y + 1, xa, xb);
+        const support = (before + after) / 2;
+        if (quietFrac < 0.62 || support < edgeCut * 0.90) continue;
+        const quality = (support / Math.max(1, edgeCut)) * (0.55 + quietFrac * 0.45);
+        if (!best || quality > best.quality) best = {pos:y, quality, quietFrac, spanFrac:span/pw};
+      }
+      return best && best.spanFrac >= minSpanH ? best : null;
+    };
+
+    const findV = () => {
+      let best = null;
+      const ya = Math.max(y0 + 2, Math.round(y0 + ph * 0.08));
+      const yb = Math.min(y1 - 2, Math.round(y1 - ph * 0.08));
+      const span = Math.max(1, yb - ya + 1);
+      for (let x = x0 + Math.max(3, Math.round(pw * 0.05)); x <= x1 - Math.max(3, Math.round(pw * 0.05)); x++) {
+        if (Math.abs(x - tx) < Math.max(3, Math.round(pw * 0.025))) continue;
+        let sum = 0, quiet = 0;
+        for (let y = ya; y <= yb; y++) {
+          const g = Math.abs(lum[y*w+x]-lum[y*w+x-1]) + Math.abs(lum[y*w+x+1]-lum[y*w+x]);
+          sum += g;
+          if (g <= quietCut) quiet++;
+        }
+        const avg = sum / span;
+        const quietFrac = quiet / span;
+        const before = this._axisEdgeSupportV(lum, w, h, x - 1, ya, yb);
+        const after = this._axisEdgeSupportV(lum, w, h, x + 1, ya, yb);
+        const support = (before + after) / 2;
+        if (quietFrac < 0.62 || support < edgeCut * 0.90) continue;
+        const quality = (support / Math.max(1, edgeCut)) * (0.55 + quietFrac * 0.45);
+        if (!best || quality > best.quality) best = {pos:x, quality, quietFrac, spanFrac:span/ph};
+      }
+      return best && best.spanFrac >= minSpanV ? best : null;
+    };
+
+    let refined = {...p};
+    const hg = findH();
+    const vg = findV();
+    let did = false;
+    if (hg) {
+      if (ty < hg.pos) refined.h = (hg.pos / h) - refined.y;
+      else refined.y = hg.pos / h, refined.h = (p.y + p.h) - refined.y;
+      did = true;
+      if (log) log(`V88 internal H gutter split at ${hg.pos} quality=${hg.quality.toFixed(2)} quiet=${hg.quietFrac.toFixed(2)}`);
+    }
+    if (vg) {
+      if (tx < vg.pos) refined.w = (vg.pos / w) - refined.x;
+      else refined.x = vg.pos / w, refined.w = (p.x + p.w) - refined.x;
+      did = true;
+      if (log) log(`V88 internal V gutter split at ${vg.pos} quality=${vg.quality.toFixed(2)} quiet=${vg.quietFrac.toFixed(2)}`);
+    }
+    if (!did) return null;
+    refined.w = clamp01(refined.w);
+    refined.h = clamp01(refined.h);
+    refined._v88InternalSplit = true;
+    return refined;
+  },
+
+  _axisEdgeSupportH(lum, w, h, y, xa, xb) {
+    y = Math.max(1, Math.min(h-2, y));
+    let sum = 0;
+    for (let x = xa; x <= xb; x++) sum += Math.abs(lum[y*w+x]-lum[(y-1)*w+x]) + Math.abs(lum[(y+1)*w+x]-lum[y*w+x]);
+    return sum / Math.max(1, xb-xa+1);
+  },
+
+  _axisEdgeSupportV(lum, w, h, x, ya, yb) {
+    x = Math.max(1, Math.min(w-2, x));
+    let sum = 0;
+    for (let y = ya; y <= yb; y++) sum += Math.abs(lum[y*w+x]-lum[y*w+x-1]) + Math.abs(lum[y*w+x+1]-lum[y*w+x]);
+    return sum / Math.max(1, yb-ya+1);
   },
 
   _findHorizontalBoundaries(lum, w, h, tx, ty, edgeCut, quietCut) {
