@@ -1,6 +1,6 @@
-// NTH SHELF V84 — V79 BASELINE / FOUR-DIRECTION BOUNDARY WALK
+// NTH SHELF V85 — V79 BASELINE / GUTTER-INTERSECTION FALLBACK
 // Freshly based on V78. V73 remains authoritative whenever it contains the tap.
-// V84 is rebuilt from V79. V80-V83 detector experiments are not carried forward.
+// V85 replaces only the fallback with gutter-intersection analysis; no V80-V84 detector code is included.
 
 // NTH SHELF V73 — STABLE GUTTER BASELINE / TAP SELECTION
 // V73 intentionally restores the simple v2.76 gutter-scanning detector as the sole panel detector.
@@ -48,19 +48,18 @@ const PanelDetect = {
     });
   },
 
-  // V84: four-direction boundary walk. This fallback starts at the exact tap
-  // and walks outward independently in the four cardinal directions. It does
-  // not rank a page-wide set of rectangles. Each direction seeks the nearest
-  // sustained separator zone, using local edge support on both sides of the
-  // zone. Page edges are valid boundaries when no interior gutter is found.
+  // V85 fallback: gutter-intersection test. Instead of walking outward
+  // from one pixel, build horizontal and vertical gutter candidates from
+  // short rectangular strips centered on the exact tap. The four selected
+  // gutter bands then form the panel cell containing that tap.
   detectTapLocalFallback(imgUrl, relX, relY, log) {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
-        try { resolve(this._analyzeTapBoundaryWalk(img, relX, relY, log)); }
+        try { resolve(this._analyzeGutterIntersection(img, relX, relY, log)); }
         catch (err) {
-          console.warn("V84 boundary walk failed:", err);
-          if (log) log(`V84 fallback ERROR: ${err.message}`);
+          console.warn("V85 gutter-intersection fallback failed:", err);
+          if (log) log(`V85 intersection ERROR: ${err.message}`);
           resolve(null);
         }
       };
@@ -69,15 +68,14 @@ const PanelDetect = {
     });
   },
 
-  _analyzeTapBoundaryWalk(img, relX, relY, log) {
+  _analyzeGutterIntersection(img, relX, relY, log) {
     const maxDim = 900;
     const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
     const w = Math.max(1, Math.round(img.width * scale));
     const h = Math.max(1, Math.round(img.height * scale));
     const tx = clamp01(relX) * (w - 1);
     const ty = clamp01(relY) * (h - 1);
-    const x0 = Math.round(tx), y0 = Math.round(ty);
-    if (log) log(`V84 walk source=${img.width}x${img.height} downscaled=${w}x${h} tap=${x0},${y0}`);
+    if (log) log(`V85 intersection source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
 
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;
@@ -90,98 +88,167 @@ const PanelDetect = {
       lum[y*w+x]=0.299*data[i]+0.587*data[i+1]+0.114*data[i+2];
     }
 
-    // Estimate local boundary strength from a short perpendicular corridor.
-    // A real gutter should produce a transition into a sustained zone and a
-    // transition back out, not merely one strong artwork edge.
-    const sampleHalfX = Math.max(8, Math.round(w*0.035));
-    const sampleHalfY = Math.max(8, Math.round(h*0.035));
-    const profiles = { top:new Float32Array(h), bottom:null, left:new Float32Array(w), right:null };
-    profiles.bottom = profiles.top;
-    profiles.right = profiles.left;
+    const median = (arr) => {
+      if (!arr.length) return 0;
+      const a = arr.slice().sort((x,y)=>x-y);
+      return a[Math.floor(a.length*0.5)];
+    };
 
-    for (let y=1; y<h-1; y++) {
-      const xa=Math.max(1,x0-sampleHalfX), xb=Math.min(w-2,x0+sampleHalfX);
-      let sum=0,n=0;
-      for(let x=xa;x<=xb;x++) {
-        const a=lum[y*w+x], b=lum[(y-1)*w+x], c=lum[(y+1)*w+x];
-        sum += Math.abs(a-b)+Math.abs(c-a); n++;
-      }
-      profiles.top[y]=sum/(2*Math.max(1,n));
-    }
-    for (let x=1; x<w-1; x++) {
-      const ya=Math.max(1,y0-sampleHalfY), yb=Math.min(h-2,y0+sampleHalfY);
-      let sum=0,n=0;
-      for(let y=ya;y<=yb;y++) {
-        const a=lum[y*w+x], b=lum[y*w+x-1], c=lum[y*w+x+1];
-        sum += Math.abs(a-b)+Math.abs(c-a); n++;
-      }
-      profiles.left[x]=sum/(2*Math.max(1,n));
-    }
+    // Evaluate several local window sizes. A real gutter can be short in
+    // one dimension, so requiring the whole page row/column would miss it.
+    const hFractions=[0.14,0.22,0.34,0.50,0.70];
+    const vFractions=[0.14,0.22,0.34,0.50,0.70];
+    const statsH=[], statsV=[];
 
-    const all=[];
-    for(let i=1;i<h-1;i++) all.push(profiles.top[i]);
-    for(let i=1;i<w-1;i++) all.push(profiles.left[i]);
-    all.sort((a,b)=>a-b);
-    const med=all.length?all[Math.floor(all.length*0.5)]:0;
-    const edgeCut=Math.max(9, med*2.5);
-    const zoneQuiet=Math.max(3, edgeCut*0.52);
-    const minZone=Math.max(2, Math.round(Math.min(w,h)*0.006));
-    const maxWalkY=Math.max(20, Math.round(h*0.49));
-    const maxWalkX=Math.max(20, Math.round(w*0.49));
-
-    function walk(profile, start, step, limit, size, axisName) {
-      let x=start+step, travelled=0;
-      while(x>=1 && x<size-1 && travelled<limit) {
-        // Find a candidate quiet corridor, then require a strong transition
-        // immediately before and after it.
-        if(profile[x] <= zoneQuiet) {
-          let rs=x, re=x;
-          while(re>=1 && re<size-1 && profile[re] <= zoneQuiet &&
-                Math.abs(re-rs) < Math.max(4,minZone*3)) re+=step;
-          re-=step;
-          const before=rs-step, after=re+step;
-          const bg=(before>=1&&before<size-1)?profile[before]:0;
-          const ag=(after>=1&&after<size-1)?profile[after]:0;
-          const support=Math.min(bg,ag);
-          const len=Math.abs(re-rs)+1;
-          if(len>=minZone && support>=edgeCut) {
-            return { pos:Math.round((rs+re)/2), width:len, support, score:support/Math.max(1,edgeCut), axis:axisName };
-          }
-          x=re+step; travelled+=len;
-        } else { x+=step; travelled++; }
+    function rowStats(y, half) {
+      const xa=Math.max(0,Math.floor(tx-half)), xb=Math.min(w-1,Math.ceil(tx+half));
+      const n=xb-xa+1;
+      let sum=0,sumSq=0;
+      for(let x=xa;x<=xb;x++){const v=lum[y*w+x];sum+=v;sumSq+=v*v;}
+      const mean=sum/n;
+      const sd=Math.sqrt(Math.max(0,sumSq/n-mean*mean));
+      let above=0,below=0,na=0,nb=0;
+      const depth=Math.max(1,Math.round(Math.min(half*0.35, h*0.018)));
+      for(let d=1;d<=depth;d++){
+        const ya=y-d,yb=y+d;
+        if(ya>=0){for(let x=xa;x<=xb;x++) above+=lum[ya*w+x];na+=n;}
+        if(yb<h){for(let x=xa;x<=xb;x++) below+=lum[yb*w+x];nb+=n;}
       }
-      return null;
+      const am=na?above/na:mean, bm=nb?below/nb:mean;
+      const sideContrast=(Math.abs(mean-am)+Math.abs(mean-bm))/2;
+      return {sd,contrast:sideContrast};
     }
 
-    const top=walk(profiles.top,y0,-1,maxWalkY,h,'top');
-    const bottom=walk(profiles.top,y0,1,maxWalkY,h,'bottom');
-    const left=walk(profiles.left,x0,-1,maxWalkX,w,'left');
-    const right=walk(profiles.left,x0,1,maxWalkX,w,'right');
+    function colStats(x, half) {
+      const ya=Math.max(0,Math.floor(ty-half)), yb=Math.min(h-1,Math.ceil(ty+half));
+      const n=yb-ya+1;
+      let sum=0,sumSq=0;
+      for(let y=ya;y<=yb;y++){const v=lum[y*w+x];sum+=v;sumSq+=v*v;}
+      const mean=sum/n;
+      const sd=Math.sqrt(Math.max(0,sumSq/n-mean*mean));
+      let left=0,right=0,nl=0,nr=0;
+      const depth=Math.max(1,Math.round(Math.min(half*0.35, w*0.018)));
+      for(let d=1;d<=depth;d++){
+        const xl=x-d,xr=x+d;
+        if(xl>=0){for(let y=ya;y<=yb;y++) left+=lum[y*w+xl];nl+=n;}
+        if(xr<w){for(let y=ya;y<=yb;y++) right+=lum[y*w+xr];nr+=n;}
+      }
+      const lm=nl?left/nl:mean, rm=nr?right/nr:mean;
+      const sideContrast=(Math.abs(mean-lm)+Math.abs(mean-rm))/2;
+      return {sd,contrast:sideContrast};
+    }
 
-    if(log) log(`V84 walk boundaries T=${top?top.pos:"EDGE"} B=${bottom?bottom.pos:"EDGE"} L=${left?left.pos:"EDGE"} R=${right?right.pos:"EDGE"} edgeCut=${edgeCut.toFixed(1)} zoneQuiet=${zoneQuiet.toFixed(1)}`);
+    function buildHorizontalProfile(fraction){
+      const half=Math.max(5, Math.round(w*fraction/2));
+      const p=new Float32Array(h);
+      for(let y=0;y<h;y++){
+        const st=rowStats(y,half);
+        // Lower is more gutter-like. Contrast around the strip is positive
+        // evidence that the quiet row is actually separating content.
+        p[y]=st.sd/(st.contrast+6);
+      }
+      return {p,half};
+    }
+    function buildVerticalProfile(fraction){
+      const half=Math.max(5, Math.round(h*fraction/2));
+      const p=new Float32Array(w);
+      for(let x=0;x<w;x++){
+        const st=colStats(x,half);
+        p[x]=st.sd/(st.contrast+6);
+      }
+      return {p,half};
+    }
+
+    function robustCut(profile){
+      const vals=Array.from(profile).filter(Number.isFinite);
+      const med=median(vals);
+      const dev=median(vals.map(v=>Math.abs(v-med)));
+      return Math.max(1.5, med-dev*0.9);
+    }
+
+    function findCandidates(profile, axisSize, tap, cut){
+      const minRun=Math.max(2,Math.round(axisSize*0.004));
+      const candidates=[];
+      let i=0;
+      while(i<axisSize){
+        if(profile[i]>cut){i++;continue;}
+        const a=i;
+        while(i<axisSize && profile[i]<=cut)i++;
+        const b=i-1;
+        if(b-a+1<minRun)continue;
+        const pos=(a+b)/2;
+        const dist=Math.abs(pos-tap);
+        const run=b-a+1;
+        const nearBonus=1/(1+dist/Math.max(1,axisSize*0.20));
+        const runBonus=Math.min(1,run/Math.max(2,axisSize*0.012));
+        candidates.push({pos,width:run,dist,score:nearBonus*0.65+runBonus*0.35});
+      }
+      return candidates;
+    }
+
+    // Choose the nearest credible gutter on each side of the tap. A gutter
+    // must be sustained and score better than the page's own profile noise.
+    function chooseSide(cands,tap,axisSize,dir){
+      const side=cands.filter(c=>dir<0?c.pos<tap:c.pos>tap);
+      if(!side.length)return null;
+      side.sort((a,b)=>{
+        const ad=Math.abs(a.pos-tap),bd=Math.abs(b.pos-tap);
+        return (ad/axisSize)-(bd/axisSize) || b.score-a.score;
+      });
+      // Don't accept a distant accidental quiet line when a page edge is a
+      // more plausible boundary. The fallback is deliberately conservative.
+      const c=side[0];
+      if(c.dist>axisSize*0.48)return null;
+      return c;
+    }
+
+    function solveAxis(axis, fractions, axisSize, tap){
+      const all=[];
+      for(const f of fractions){
+        const built=axis==='h'?buildHorizontalProfile(f):buildVerticalProfile(f);
+        const cut=robustCut(built.p);
+        const cands=findCandidates(built.p,axisSize,tap,cut);
+        for(const c of cands) all.push({...c,fraction:f,cut});
+      }
+      // Deduplicate candidates that describe the same gutter band across
+      // window scales, then select independently on each side.
+      all.sort((a,b)=>a.pos-b.pos);
+      const merged=[];
+      for(const c of all){
+        const last=merged[merged.length-1];
+        if(last && Math.abs(last.pos-c.pos)<=Math.max(2,axisSize*0.008)){
+          if(c.score>last.score)Object.assign(last,c);
+          last.samples=(last.samples||1)+1;
+        } else merged.push({...c,samples:1});
+      }
+      for(const c of merged)c.score += Math.min(0.25,(c.samples-1)*0.06);
+      const left=chooseSide(merged,tap,axisSize,-1);
+      const right=chooseSide(merged,tap,axisSize,1);
+      return {left,right,candidates:merged};
+    }
+
+    const H=solveAxis('h',hFractions,h,ty);
+    const V=solveAxis('v',vFractions,w,tx);
+    const top=H.left,bottom=H.right,left=V.left,right=V.right;
+    if(log) log(`V85 intersection gutters T=${top?Math.round(top.pos):"EDGE"} B=${bottom?Math.round(bottom.pos):"EDGE"} L=${left?Math.round(left.pos):"EDGE"} R=${right?Math.round(right.pos):"EDGE"} candidatesH=${H.candidates.length} candidatesV=${V.candidates.length}`);
 
     const sx=left?left.pos:0, ex=right?right.pos:w-1;
     const sy=top?top.pos:0, ey=bottom?bottom.pos:h-1;
     const pw=Math.max(0,ex-sx), ph=Math.max(0,ey-sy);
-    const contains=tx>=Math.min(sx,ex)&&tx<=Math.max(sx,ex)&&ty>=Math.min(sy,ey)&&ty<=Math.max(sy,ey);
     const found=[top,bottom,left,right].filter(Boolean).length;
-
-    // Require two independent directions for a normal panel. A single
-    // detected side is accepted only when the other axis is effectively a
-    // page edge; this prevents a lone interior artwork edge from becoming a
-    // huge guessed rectangle while still permitting edge-touching panels.
-    const edgeTouchX=!left || !right;
-    const edgeTouchY=!top || !bottom;
-    const credible = contains && pw>=Math.max(12,w*0.05) && ph>=Math.max(12,h*0.05) &&
-      (found>=2 || (found===1 && ((edgeTouchX && pw>=w*0.45) || (edgeTouchY && ph>=h*0.45))));
-
-    if(!credible){
-      if(log) log(`V84 walk REJECTED region=${Math.round(pw)}x${Math.round(ph)} sides=${found} containsTap=${contains}`);
+    const contains=tx>=Math.min(sx,ex)&&tx<=Math.max(sx,ex)&&ty>=Math.min(sy,ey)&&ty<=Math.max(sy,ey);
+    // Require at least two detected sides. One-sided guesses were the source
+    // of the oversized regions in V81-V83, so V85 never invents a large panel
+    // merely because a page edge is available.
+    const bounded=found>=2 && pw>=Math.max(14,w*0.05) && ph>=Math.max(14,h*0.05);
+    const notOversized=pw<=w*0.94 && ph<=h*0.94;
+    if(!contains || !bounded || !notOversized){
+      if(log) log(`V85 intersection REJECTED region=${Math.round(pw)}x${Math.round(ph)} sides=${found} containsTap=${contains} oversized=${!notOversized}`);
       return null;
     }
 
-    const panel={x:Math.min(sx,ex)/w,y:Math.min(sy,ey)/h,w:pw/w,h:ph/h,_v84Fallback:true,_boundarySides:found};
-    if(log) log(`V84 walk ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${found}`);
+    const panel={x:Math.min(sx,ex)/w,y:Math.min(sy,ey)/h,w:pw/w,h:ph/h,_v85Intersection:true,_gutterSides:found};
+    if(log) log(`V85 intersection ACCEPTED x=${panel.x.toFixed(4)} y=${panel.y.toFixed(4)} w=${panel.w.toFixed(4)} h=${panel.h.toFixed(4)} sides=${found}`);
     return panel;
   },
 
