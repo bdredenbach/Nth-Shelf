@@ -282,13 +282,13 @@ const PanelDetect = {
       _gutterSides: best.sides
     };
 
-    // V105 / V102C: recursive enclosure refinement over the V99 result.
-    const recursiveRefinement = this._v102CRecursiveRefine(lum,w,h,p,edgeCut,log);
-    if (recursiveRefinement && recursiveRefinement.edges >= 3 && recursiveRefinement.score >= 0.42) {
-      const ratio=(recursiveRefinement.w*recursiveRefinement.h)/Math.max(0.0001,p.w*p.h);
-      if (ratio >= 0.55 && ratio <= 1.25) {
-        p={...p,x:recursiveRefinement.x,y:recursiveRefinement.y,w:refined.w,h:refined.h,_v102C:true,_v102CScore:recursiveRefinement.score};
-        if(log) log(`V105 V99+V102C accepted edges=${recursiveRefinement.edges}/4 score=${recursiveRefinement.score.toFixed(2)} areaRatio=${ratio.toFixed(3)}`);
+    // V106 / V102D: contour/boundary-run reconstruction over the V99 result.
+    const contourRefinement = this._v102DContourRefine(lum,w,h,p,edgeCut,log);
+    if (contourRefinement && contourRefinement.edges === 4 && contourRefinement.score >= 0.48) {
+      const ratio=(contourRefinement.w*contourRefinement.h)/Math.max(0.0001,p.w*p.h);
+      if (ratio >= 0.55 && ratio <= 1.45) {
+        p={...p,x:contourRefinement.x,y:contourRefinement.y,w:contourRefinement.w,h:contourRefinement.h,_v102D:true,_v102DScore:contourRefinement.score};
+        if(log) log(`V106 V99+V102D accepted edges=4/4 score=${contourRefinement.score.toFixed(2)} areaRatio=${ratio.toFixed(3)}`);
       }
     }
 
@@ -770,21 +770,61 @@ const PanelDetect = {
     }
   },
 
-  _v102CRecursiveRefine(lum,w,h,p,edgeCut,log) {
+  _v102DContourRefine(lum,w,h,p,edgeCut,log) {
     const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-    let r={x:clamp(p.x*w,2,w-3),y:clamp(p.y*h,2,h-3),x2:clamp((p.x+p.w)*w,3,w-2),y2:clamp((p.y+p.h)*h,3,h-2)};
-    const g=(x,y)=>{x=clamp(Math.round(x),1,w-2);y=clamp(Math.round(y),1,h-2);return Math.abs(lum[y*w+x]-lum[y*w+x-1])+Math.abs(lum[y*w+x+1]-lum[y*w+x])+Math.abs(lum[y*w+x]-lum[(y-1)*w+x])+Math.abs(lum[(y+1)*w+x]-lum[y*w+x]);};
-    const cont=(hor,pos,a,b)=>{let good=0,bins=32;for(let k=0;k<bins;k++){const aa=Math.round(a+(b-a)*k/bins),bb=Math.round(a+(b-a)*(k+1)/bins);let hit=0,n=0;for(let q=aa;q<=bb;q+=Math.max(1,Math.round((bb-aa)/4))){if((hor?g(q,pos):g(pos,q))>edgeCut*.72)hit++;n++;}if(hit/Math.max(1,n)>=.30)good++;}return good/bins;};
-    const step=Math.max(2,Math.round(Math.min(w,h)/500));
-    for(let pass=0;pass<3;pass++){
-      const cur=[cont(true,r.y,r.x,r.x2),cont(true,r.y2,r.x,r.x2),cont(false,r.x,r.y,r.y2),cont(false,r.x2,r.y,r.y2)];
-      const defs=[['y',-1,true],['y2',1,true],['x',-1,false],['x2',1,false]];
-      for(let i=0;i<4;i++){if(cur[i]>=.48)continue;const key=defs[i][0],dir=defs[i][1],hor=defs[i][2],base=r[key];let best=cur[i],bp=base;for(let n=1;n<=28;n++){const pos=base+dir*n*step;if(hor){if(pos<2||pos>h-3)break;const v=cont(true,pos,r.x,r.x2);if(v>best+.025){best=v;bp=pos;}}else{if(pos<2||pos>w-3)break;const v=cont(false,pos,r.y,r.y2);if(v>best+.025){best=v;bp=pos;}}}if(best>.38)r[key]=bp;}
+    const g=(x,y)=>{
+      x=clamp(Math.round(x),1,w-2); y=clamp(Math.round(y),1,h-2);
+      return Math.abs(lum[y*w+x]-lum[y*w+x-1])+
+             Math.abs(lum[y*w+x+1]-lum[y*w+x])+
+             Math.abs(lum[y*w+x]-lum[(y-1)*w+x])+
+             Math.abs(lum[(y+1)*w+x]-lum[y*w+x]);
+    };
+    const r={x:clamp(p.x*w,2,w-3),y:clamp(p.y*h,2,h-3),
+             x2:clamp((p.x+p.w)*w,3,w-2),y2:clamp((p.y+p.h)*h,3,h-2)};
+    if(r.x2-r.x<16 || r.y2-r.y<16) return null;
+
+    // Search a narrow band around each V99 side. Score continuity, not peak
+    // strength: a real frame should persist across much of the candidate.
+    const continuity=(hor,pos,a,b)=>{
+      const bins=40; let good=0,run=0,bestRun=0;
+      for(let k=0;k<bins;k++){
+        const aa=Math.round(a+(b-a)*k/bins), bb=Math.round(a+(b-a)*(k+1)/bins);
+        let hit=0,n=0;
+        for(let q=aa;q<=bb;q+=Math.max(1,Math.round((bb-aa)/4))){
+          if((hor?g(q,pos):g(pos,q))>edgeCut*.72) hit++;
+          n++;
+        }
+        const ok=hit/Math.max(1,n)>=.32;
+        if(ok){good++;run++;bestRun=Math.max(bestRun,run);}else run=0;
+      }
+      return {occ:good/bins,long:bestRun/bins,score:good/bins*.6+bestRun/bins*.4};
+    };
+    const seek=(hor,base,a,b)=>{
+      const maxOff=Math.max(10,Math.round(Math.min(w,h)*.025));
+      let best={pos:base,score:0,occ:0,long:0};
+      for(let off=-maxOff;off<=maxOff;off+=2){
+        const pos=base+off;
+        if(hor ? (pos<2||pos>h-3):(pos<2||pos>w-3)) continue;
+        const c=continuity(hor,pos,a,b);
+        if(c.score>best.score) best={pos,...c};
+      }
+      return best;
+    };
+    const top=seek(true,r.y,r.x,r.x2),bottom=seek(true,r.y2,r.x,r.x2);
+    const left=seek(false,r.x,r.y,r.y2),right=seek(false,r.x2,r.y,r.y2);
+    const edges=[top,bottom,left,right];
+    const strong=edges.filter(e=>e.score>=.40).length;
+    if(strong<4) {
+      if(log) log(`V102D contour rejected edges=${strong}/4`);
+      return null;
     }
-    const e=[cont(true,r.y,r.x,r.x2),cont(true,r.y2,r.x,r.x2),cont(false,r.x,r.y,r.y2),cont(false,r.x2,r.y,r.y2)];
-    const edges=e.filter(v=>v>=.48).length,score=e.reduce((a,b)=>a+b,0)/4;
-    if(log)log(`V102C recursive enclosure edges=${edges}/4 score=${score.toFixed(2)}`);
-    return {x:r.x/w,y:r.y/h,w:(r.x2-r.x)/w,h:(r.y2-r.y)/h,edges,score};
+    const x=Math.min(left.pos,right.pos), y=Math.min(top.pos,bottom.pos);
+    const x2=Math.max(left.pos,right.pos), y2=Math.max(top.pos,bottom.pos);
+    const rw=x2-x,rh=y2-y;
+    if(rw<20||rh<20) return null;
+    const score=edges.reduce((a,e)=>a+e.score,0)/4;
+    if(log) log(`V102D contour edges=4/4 score=${score.toFixed(2)}`);
+    return {x:x/w,y:y/h,w:rw/w,h:rh/h,edges:4,score};
   },
 
   _analyze(img, log) {
