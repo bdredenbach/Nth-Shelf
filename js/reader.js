@@ -2756,23 +2756,42 @@ async setMode(mode) {
    this.panelOverlayActive = false;
    this.setFocusDim(true, true);
 
-   const sourceLeft = imgRect.left + panel.x * imgRect.width;
-   const sourceTop = imgRect.top + panel.y * imgRect.height;
-   const sourceW = Math.max(8, panel.w * imgRect.width);
-   const sourceH = Math.max(8, panel.h * imgRect.height);
+   // V101 geometry: hybrid panels may carry a true four-corner polygon.
+   // Build the overlay from its bounding box, then clip the canvas to the
+   // fitted frame. Legacy/V73/V92 rectangles continue unchanged.
+   const quad = Array.isArray(panel._quad) && panel._quad.length === 4 ? panel._quad : null;
+   let geom = { x: panel.x, y: panel.y, w: panel.w, h: panel.h };
+   let clipPolygon = null;
+   if (quad) {
+     const xs = quad.map(p => p.x), ys = quad.map(p => p.y);
+     const qx0 = Math.max(0, Math.min(...xs)), qx1 = Math.min(1, Math.max(...xs));
+     const qy0 = Math.max(0, Math.min(...ys)), qy1 = Math.min(1, Math.max(...ys));
+     if (qx1-qx0 > .01 && qy1-qy0 > .01) {
+       geom = { x: qx0, y: qy0, w: qx1-qx0, h: qy1-qy0 };
+       clipPolygon = quad.map(p => ({
+         x: ((p.x-qx0)/(qx1-qx0))*100,
+         y: ((p.y-qy0)/(qy1-qy0))*100
+       }));
+     }
+   }
 
-   const naturalW = Math.max(1, Math.round(panel.w * img.naturalWidth));
-   const naturalH = Math.max(1, Math.round(panel.h * img.naturalHeight));
+   const sourceLeft = imgRect.left + geom.x * imgRect.width;
+   const sourceTop = imgRect.top + geom.y * imgRect.height;
+   const sourceW = Math.max(8, geom.w * imgRect.width);
+   const sourceH = Math.max(8, geom.h * imgRect.height);
+
+   const naturalW = Math.max(1, Math.round(geom.w * img.naturalWidth));
+   const naturalH = Math.max(1, Math.round(geom.h * img.naturalHeight));
    const renderScale = Math.min(1, 3000 / Math.max(naturalW, naturalH));
    const canvasW = Math.max(1, Math.round(naturalW * renderScale));
    const canvasH = Math.max(1, Math.round(naturalH * renderScale));
-   const sx = panel.x * img.naturalWidth;
-   const sy = panel.y * img.naturalHeight;
-   const sw = panel.w * img.naturalWidth;
-   const sh = panel.h * img.naturalHeight;
+   const sx = geom.x * img.naturalWidth;
+   const sy = geom.y * img.naturalHeight;
+   const sw = geom.w * img.naturalWidth;
+   const sh = geom.h * img.naturalHeight;
 
    this.panelFocusMeta = {
-     panel: { x: panel.x, y: panel.y, w: panel.w, h: panel.h },
+     panel: { x: panel.x, y: panel.y, w: panel.w, h: panel.h, _quad: quad || undefined },
      pageIndex: this.index
    };
 
@@ -2783,6 +2802,13 @@ async setMode(mode) {
    overlay.style.top = `${sourceTop - stageRect.top}px`;
    overlay.style.width = `${sourceW}px`;
    overlay.style.height = `${sourceH}px`;
+   if (clipPolygon) {
+     const clip = `polygon(${clipPolygon.map(p=>`${p.x.toFixed(3)}% ${p.y.toFixed(3)}%`).join(',')})`;
+     overlay.style.clipPath = clip;
+     overlay.style.webkitClipPath = clip;
+     overlay.dataset.geometry = 'quad';
+     if (this.debugMode) this.debugLog(`[V101 geometry] polygon clip ${clip}`);
+   }
 
    const canvas = document.createElement("canvas");
    canvas.width = canvasW;
@@ -2798,8 +2824,8 @@ async setMode(mode) {
    const availableW = Math.max(1, imgRect.width - pagePad * 2);
    const availableH = Math.max(1, imgRect.height - pagePad * 2);
    const fitScale = Math.min(availableW / sourceW, availableH / sourceH);
-   const areaRatio = panel.w * panel.h;
-   const pageSpanning = panel.w >= 0.86 || panel.h >= 0.86 || areaRatio >= 0.68;
+   const areaRatio = geom.w * geom.h;
+   const pageSpanning = geom.w >= 0.86 || geom.h >= 0.86 || areaRatio >= 0.68;
 
    let targetScale;
    if (pageSpanning) {

@@ -124,8 +124,122 @@ const PanelDetect = {
     // If the result is nearly the whole page, hybrid learned nothing; defer.
     if(pw*ph > (x1-x0+1)*(y1-y0+1)*.86){if(log)log('V100 hybrid MISS: unpartitioned page');return null}
     const out={x:hit[0]/w,y:hit[1]/h,w:pw/w,h:ph/h,_v100Hybrid:true};
-    if(log)log(`V100 hybrid HIT x=${out.x.toFixed(4)} y=${out.y.toFixed(4)} w=${out.w.toFixed(4)} h=${out.h.toFixed(4)}`);
+
+    // V101 GEOMETRY REFINEMENT: once V100 has already proven which region
+    // contains the tap, fit the four nearby ink rails instead of forcing the
+    // pop-out to remain axis-aligned. This stage is intentionally NOT allowed
+    // to choose a different panel; it only refines V100's four sides.
+    const quad=this._refineHybridQuad(lum,w,h,hit,log);
+    if(quad) out._quad=quad;
+
+    if(log)log(`V100 hybrid HIT x=${out.x.toFixed(4)} y=${out.y.toFixed(4)} w=${out.w.toFixed(4)} h=${out.h.toFixed(4)}${quad?' + V101 quad':''}`);
     return out;
+  },
+
+
+  // Refine an already-proven hybrid rectangle into a four-corner polygon.
+  // Coordinates returned here are normalized to the source analysis image.
+  _refineHybridQuad(lum,w,h,hit,log) {
+    const [x0,y0,x1,y1]=hit;
+    const rw=x1-x0+1, rh=y1-y0+1;
+    if(rw<20 || rh<20) return null;
+
+    const darkCut=92;
+    const fitLine=(axis,guess,a0,a1)=>{
+      const span=a1-a0;
+      const radius=Math.max(4,Math.round((axis==='H'?h:w)*.018));
+      const step=Math.max(1,Math.round(span/150));
+      const pts=[];
+      for(let a=Math.round(a0+span*.035);a<=Math.round(a1-span*.035);a+=step){
+        let bestPos=null,bestScore=1e9,bestLum=255;
+        const g=Math.round(guess);
+        for(let off=-radius;off<=radius;off++){
+          const p=g+off;
+          if(axis==='H'){
+            if(p<1||p>=h-1||a<1||a>=w-1) continue;
+            // Three-pixel cross-section rewards a real thick rail and suppresses
+            // isolated specks. A small distance penalty keeps us local to V100.
+            const v=(lum[(p-1)*w+a]+lum[p*w+a]+lum[(p+1)*w+a])/3;
+            const score=v+Math.abs(off)*2.2;
+            if(score<bestScore){bestScore=score;bestPos=p;bestLum=v;}
+          }else{
+            if(p<1||p>=w-1||a<1||a>=h-1) continue;
+            const v=(lum[a*w+p-1]+lum[a*w+p]+lum[a*w+p+1])/3;
+            const score=v+Math.abs(off)*2.2;
+            if(score<bestScore){bestScore=score;bestPos=p;bestLum=v;}
+          }
+        }
+        if(bestPos!==null && bestLum<=darkCut) pts.push(axis==='H'?{x:a,y:bestPos}:{x:bestPos,y:a});
+      }
+      if(pts.length<12) return null;
+
+      // Iteratively trimmed least-squares fit. Panel rails contribute a dense,
+      // coherent cloud; artwork outliers fall away after the first fit.
+      let keep=pts;
+      let model=null;
+      for(let iter=0;iter<4;iter++){
+        if(keep.length<10) return null;
+        if(axis==='H'){
+          let sx=0,sy=0,sxx=0,sxy=0,n=keep.length;
+          for(const p of keep){sx+=p.x;sy+=p.y;sxx+=p.x*p.x;sxy+=p.x*p.y;}
+          const den=n*sxx-sx*sx;
+          const m=Math.abs(den)>1e-6?(n*sxy-sx*sy)/den:0;
+          const b=(sy-m*sx)/n;
+          model={m,b};
+          const residuals=keep.map(p=>Math.abs(p.y-(m*p.x+b))).sort((a,b)=>a-b);
+          const med=residuals[Math.floor(residuals.length/2)]||0;
+          const tol=Math.max(2.2,Math.min(5.5,med*2.8+1.0));
+          keep=keep.filter(p=>Math.abs(p.y-(m*p.x+b))<=tol);
+        }else{
+          let sy=0,sx=0,syy=0,syx=0,n=keep.length;
+          for(const p of keep){sy+=p.y;sx+=p.x;syy+=p.y*p.y;syx+=p.y*p.x;}
+          const den=n*syy-sy*sy;
+          const m=Math.abs(den)>1e-6?(n*syx-sy*sx)/den:0;
+          const b=(sx-m*sy)/n;
+          model={m,b};
+          const residuals=keep.map(p=>Math.abs(p.x-(m*p.y+b))).sort((a,b)=>a-b);
+          const med=residuals[Math.floor(residuals.length/2)]||0;
+          const tol=Math.max(2.2,Math.min(5.5,med*2.8+1.0));
+          keep=keep.filter(p=>Math.abs(p.x-(m*p.y+b))<=tol);
+        }
+      }
+      if(!model || keep.length<Math.max(10,pts.length*.34)) return null;
+      return {...model,n:keep.length,total:pts.length,axis};
+    };
+
+    const top=fitLine('H',y0,x0,x1), bottom=fitLine('H',y1,x0,x1);
+    const left=fitLine('V',x0,y0,y1), right=fitLine('V',x1,y0,y1);
+    if(!top||!bottom||!left||!right){
+      if(log)log(`V101 geometry MISS sides=${[top,bottom,left,right].filter(Boolean).length}/4`);
+      return null;
+    }
+
+    const intersect=(hl,vl)=>{
+      // y=hm*x+hb ; x=vm*y+vb
+      const den=1-hl.m*vl.m;
+      if(Math.abs(den)<.1) return null;
+      const x=(vl.m*hl.b+vl.b)/den;
+      const y=hl.m*x+hl.b;
+      return {x,y};
+    };
+    const tl=intersect(top,left), tr=intersect(top,right), br=intersect(bottom,right), bl=intersect(bottom,left);
+    if(!tl||!tr||!br||!bl) return null;
+    const q=[tl,tr,br,bl];
+
+    // Geometry is a refinement only. Refuse any fit that wanders too far away
+    // from the V100 rectangle or becomes degenerate/self-crossing.
+    const maxDx=Math.max(10,rw*.11), maxDy=Math.max(10,rh*.11);
+    const refs=[{x:x0,y:y0},{x:x1,y:y0},{x:x1,y:y1},{x:x0,y:y1}];
+    for(let i=0;i<4;i++){
+      if(!Number.isFinite(q[i].x)||!Number.isFinite(q[i].y)) return null;
+      if(Math.abs(q[i].x-refs[i].x)>maxDx || Math.abs(q[i].y-refs[i].y)>maxDy) return null;
+    }
+    const area=Math.abs(q.reduce((s,p,i)=>{const n=q[(i+1)%4];return s+p.x*n.y-n.x*p.y},0)/2);
+    if(area<rw*rh*.72 || area>rw*rh*1.22) return null;
+
+    const nq=q.map(p=>({x:clamp01(p.x/(w-1)),y:clamp01(p.y/(h-1))}));
+    if(log)log(`V101 geometry HIT tl=${nq[0].x.toFixed(4)},${nq[0].y.toFixed(4)} tr=${nq[1].x.toFixed(4)},${nq[1].y.toFixed(4)} br=${nq[2].x.toFixed(4)},${nq[2].y.toFixed(4)} bl=${nq[3].x.toFixed(4)},${nq[3].y.toFixed(4)}`);
+    return nq;
   },
 
   // V99 fallback: V91 coherent boundary SET plus internal-gutter refinement. A boundary is
