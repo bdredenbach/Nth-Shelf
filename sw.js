@@ -1,6 +1,6 @@
-// NTH SHELF V2.77.109 — FIRST-PASS PERSISTENT-ENCLOSURE WITNESS
+// NTH SHELF V2.77.110 — GLOBAL FRAME-LATTICE WITNESS
 
-const CACHE_NAME = "nth-shelf-shell-2.77.109";
+const CACHE_NAME = "nth-shelf-shell-2.77.110";
 const SHELL_FILES = [
   "./",
   "./index.html",
