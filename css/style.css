@@ -570,7 +570,9 @@ button {
 #reader-view.theme-light { background: #ffffff; }
 
 .reader-stage {
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
+  transform: translateY(66px);
   display: flex;
   align-items: center;
   justify-content: center;
