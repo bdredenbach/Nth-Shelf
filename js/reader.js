@@ -2414,7 +2414,7 @@ async setMode(mode) {
        this.zoomToPanel(hybrid, stageRect, imgRect);
        return;
      }
-     if (this.debugMode) this.debugLog("[V100] PASS 2A MISS -> legacy fallback");
+     if (this.debugMode) this.debugLog("[V103] HYBRID MISS -> LEGACY SEED / TRACE AUTHORITY");
    }
 
    // PASS 2B: unchanged V99/V92 fallback.
@@ -2424,7 +2424,11 @@ async setMode(mode) {
        : null;
      const fallback = await PanelDetect.detectTapLocalFallback(url, relXImg, relYImg, logger);
      if (this.comic?.id === comicId && this.index === pageIndex && fallback) {
-       if (this.debugMode) this.debugLog("[V92] PASS 2 HIT -> zoom V92 validated panel");
+       if (fallback._v103TraceBridge && fallback._quad) {
+         if (this.debugMode) this.debugLog("[V103] RENDER POLYGON from legacy seed trace");
+       } else {
+         if (this.debugMode) this.debugLog("[V103] RENDER RECTANGLE from proven four-side legacy seed");
+       }
        this.zoomToPanel(fallback, stageRect, imgRect);
        return;
      }

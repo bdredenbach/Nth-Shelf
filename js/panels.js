@@ -480,7 +480,29 @@ const PanelDetect = {
       return null;
     }
 
-    if (log) log(`V99 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)} interior=clean`);
+    // V103 TRACE-AUTHORITY BRIDGE: if V100 could not prove this panel, the
+    // legacy boundary set may supply a SEED rectangle, but a weak two-side
+    // seed is no longer allowed to declare victory by itself. Give V102 the
+    // geometry authority first. A four-side legacy seed may still preserve
+    // the stable rectangular fallback when tracing is inconclusive.
+    const hx0 = Math.max(0, Math.round(p.x * w));
+    const hy0 = Math.max(0, Math.round(p.y * h));
+    const hx1 = Math.min(w - 1, Math.round((p.x + p.w) * w) - 1);
+    const hy1 = Math.min(h - 1, Math.round((p.y + p.h) * h) - 1);
+    if (log) log(`V103 TRACE ATTEMPT from legacy seed sides=${p._gutterSides} seed=${hx0},${hy0}-${hx1},${hy1}`);
+    const bridgeQuad = this._refineHybridQuad(lum, w, h, [hx0,hy0,hx1,hy1], log);
+    if (bridgeQuad) {
+      p._quad = bridgeQuad;
+      p._v103TraceBridge = true;
+      if (log) log('V103 TRACE HIT -> polygon authority');
+    } else if ((p._gutterSides || 0) < 4) {
+      if (log) log(`V103 REJECT legacy sides=${p._gutterSides}: trace did not prove missing geometry`);
+      return null;
+    } else {
+      if (log) log('V103 TRACE MISS -> preserve four-side legacy rectangle');
+    }
+
+    if (log) log(`V99 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)} interior=clean${bridgeQuad?' + V103 polygon':''}`);
     return p;
   },
 
