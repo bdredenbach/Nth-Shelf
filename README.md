@@ -58,7 +58,7 @@ Auto Scroll is available in **Scroll, Manga,** and **Webcomic** modes.
 
 - The **Auto Scroll** button appears only in modes that support continuous scrolling.
 - The button is dark when off and red when active, matching the Bubble Zoom control style.
-- Use the speed control to select **0.0x, 0.33x, 0.50x, 0.66x, 1.0x** or **2.0x**.
+- Use the speed control to select **0.0x, 0.33x, 0.50x, 0.66x,** or **1.0x**.
 - Use the play/pause control to stop and resume scrolling without leaving the mode.
 - The control panel fades almost completely into the artwork while idle and becomes visible when interacted with.
 - The control panel can be moved to a more convenient position.
@@ -74,7 +74,7 @@ Auto Scroll is available in **Scroll, Manga,** and **Webcomic** modes.
 Use the built-in theme swatches to change the reading appearance.
 
 ## 💾 Backup & Restore
-Back up and restore comics, collections, bookmarks, reading progress, and library metadata.
+Back up and restore the metadata for your comics, collections, bookmarks, reading progress, and library. You'll need to re sync your collection, however if db gets destroyed.
 
 **Recommendation:** keep a current backup before major browser or device changes.
 
@@ -104,73 +104,20 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 5. Bookmark pages you want to revisit.
 6. Use Bubble Zoom or Auto Scroll when appropriate.
 7. Use Backup/Restore to keep a safety copy.
-   
+
+## 🧪 Current Release
+**Version 2.78.00**
+
+
+## 🔒 Privacy
+Nth Shelf is designed around local-first storage. Your comics are stored on your device rather than uploaded to an Nth Shelf server simply to read them.
 
 ## 📜 License
 This project is licensed under the **MIT License**. The license applies to the software and does not grant rights to comic artwork or other copyrighted material imported by users.
 
----
 
-**Nth Shelf latest addon/changes**  
+## V2.78.00 Stable — Structural Panel Pop-Out
 
-### v2.62 Test Note
-- Adds a temporary **2.0x Auto Scroll** speed endpoint for iPhone testing. Existing speed settings are unchanged.
+V2.78.00 promotes the V100 hybrid panel detector to the stable baseline. V73 remains the first panel-detection pass. When V73 misses, the structural detector analyzes sustained black frame bands and quiet gutter bands to identify a proven panel region. If it cannot prove a region, Nth Shelf falls back to the existing V99 boundary-set + V92 interior-validation path rather than forcing a result.
 
-### v2.63
-- Bubble Zoom detection is now intentionally conservative: it recognizes white and slightly off-white bubble interiors while rejecting most brightly colored artwork highlights.
-
-### v2.64
-- Bubble Zoom now uses additional shape and interior-ink checks.
-- White/off-white color alone is no longer sufficient to qualify as a bubble.
-- Bright artwork regions are filtered more aggressively while preserving normal speech balloons.
-
-### v2.65
-- Tightened Bubble Zoom false-positive filtering for irregular bright artwork.
-- Requires stronger bubble-outline evidence and more interior ink/text evidence.
-- Rejects larger low-fill, weak-shape candidates while preserving normal speech balloons.
-
-### v2.66
-- Bubble Zoom adds a dark enclosed-boundary test to reject irregular bright artwork regions.
-- Legitimate speech balloons remain supported through the existing white/off-white, outline, fill, and interior-ink checks.
-
-### v2.67
-- Adds Shelf Mode with a continuous 3D-style comic cover line and centered hero cover.
-- Shelf Mode supports swipe/drag browsing, keyboard arrows, center-cover selection, and a close control.
-- Adds a Shelf Mode button beside the Import button using the existing Nth Shelf red pill styling.
-- Shelf Mode works with the current library sorting, collections, and cover data without changing the reading experience.
-
-### v2.68
-- Added Cinematic Shelf styling to Shelf Mode: stronger depth, spotlight treatment, reflections, atmospheric dimming, and a subtle idle float on the selected cover.
-- Added cinematic motion to the normal library: staggered cover entrance, lift/tilt on hover or pointer interaction, cover zoom, and grounded shadows.
-- Honors reduced-motion preferences.
-
-### v2.69
-- Reworked Cinematic Shelf into a more pronounced 3D presentation with curved depth, perspective, overlap, and a centered hero cover.
-- Shelf Mode now uses a two-tap interaction: first tap selects and animates the centered comic; second tap opens it.
-- Tapping a side cover moves it into the hero position without opening it.
-- Normal library cards now use the same two-step cinematic interaction: first tap lifts/selects a cover, second tap opens it.
-- Added a short “Tap again to open” cue after selection.
-
-### v2.71
-- Shelf Mode now presents a continuous visible line of comic covers around the centered hero.
-- Wider spacing and lighter side covers make neighboring comics clearly visible.
-- Changing the centered comic always clears the previous comic's cinematic/second-tap state.
-- The newly centered comic requires a fresh first tap before opening.
-
-### v2.74
-- Added a dedicated dystopian bookshelf environment beneath the animated Shelf Mode covers.
-- The live comic carousel remains the foreground element while the backdrop supplies the dark library, shelves, reflective floor, crates, and distant city atmosphere.
-- Moved the Shelf Mode title, issue count, and browsing instructions into the open space above the backdrop.
-- Added the backdrop to `assets/` and included it in the service-worker shell cache for installed/offline use.
-
-### v2.75
-- Added **Surprise Me**, a library jump feature for choosing something to read without manually searching.
-- Options include preferring unread comics, preferring bookmarked comics, random in-progress reading, random from a collection, or random from the entire shelf.
-- Finished issues are excluded when possible, and Surprise Me avoids immediately repeating the previous selection when another choice exists.
-- Added the new control beside **Backup** using the existing library action-button styling.
-
-### v2.76
-- Added persistent **Previous Issue** and **Next Issue** controls beside the Reader Guide button.
-- Controls use the same circular reader-button styling as the existing Reader Guide/navigation controls.
-- Previous/Next follow detected series metadata and issue numbers, with collection-based fallback when appropriate.
-- Buttons disable themselves at the beginning/end of an available series.
+This release establishes the structural hybrid detector as the baseline for future panel-geometry improvements. Internal debug messages continue to use the `V100 hybrid` prefix so test logs remain comparable with the successful prototype run.
