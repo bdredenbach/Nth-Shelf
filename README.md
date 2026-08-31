@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.03 Trace Authority Test**
+**Version 2.78.04 Trace Stabilizer Test**
 
 
 ## 🔒 Privacy
@@ -116,6 +116,11 @@ Nth Shelf is designed around local-first storage. Your comics are stored on your
 This project is licensed under the **MIT License**. The license applies to the software and does not grant rights to comic artwork or other copyrighted material imported by users.
 
 
+
+
+## V2.78.04 Trace Stabilizer Test — Geometry Branch
+
+V2.78.04 keeps the V2.78.00 stable detector and the V2.78.03 authority routing, but makes polygon geometry deliberately harder to earn. Each of the four rails is now fit as one robust mostly-straight structure with distributed support across the side. Dark artwork can no longer pull a trace through a chain of locally attractive pixels. Opposite rails must agree, corners must remain near the proven seed, the quadrilateral must stay convex, and area/support/coverage checks reject malformed cutouts. If the stabilizer cannot prove all four sides, the existing safe fallback behavior remains in force. Debug logs use `V104 trace-stabilizer HIT/MISS`. V2.78.00 remains the stable baseline.
 
 ## V2.78.03 Trace Authority Test — Routing Branch
 
