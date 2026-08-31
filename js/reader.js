@@ -1,3 +1,7 @@
+// NTH SHELF V87 — V79 BASELINE / BOUNDARY-SET FALLBACK
+// V73 is authoritative when it contains the tap. V87 boundary-set fallback runs only after a miss.
+// V87 is based on the last known-good V79 baseline; only the fallback selection method is changed.
+
 // reader.js — the reading experience: paging, zoom/pan, modes, themes
 
 const PANEL_ZOOM_KEY = "longbox_panel_zoom_enabled";
@@ -765,27 +769,22 @@ const Reader = {
  },
 
  async loadPanelsForCurrentPage() {
+   // V73: deliberately bypass the IndexedDB panel cache for this experiment.
+   // Older panel rectangles must not influence the test.
    this.currentPanels = [];
    if (this.mode !== "single") return;
 
    const comicId = this.comic.id;
    const pageIndex = this.index;
    const token = ++this._panelLoadToken;
-   const logger = this.debugMode ? (msg) => this.debugLog(`[panels p${pageIndex}] ${msg}`) : null;
+   const logger = this.debugMode ? (msg) => this.debugLog(`[V87 panels p${pageIndex}] ${msg}`) : null;
 
-   let panels = this.debugMode ? undefined : await LongboxDB.getPanels(comicId, pageIndex);
-   if (panels === undefined) {
-     if (logger) logger("running detection" + (this.debugMode ? " (debug mode bypasses cache)" : " (not cached yet)"));
-     const url = await this.getPageUrl(pageIndex);
-     panels = url ? await PanelDetect.detect(url, logger) : [];
-     LongboxDB.putPanels(comicId, pageIndex, panels);
-   } else if (logger) {
-     logger(`cache hit: ${panels.length} panel(s)`);
-   }
+   const url = await this.getPageUrl(pageIndex);
+   const panels = url ? await PanelDetect.detect(url, logger) : [];
 
    if (token !== this._panelLoadToken || this.comic.id !== comicId || this.index !== pageIndex) return;
    this.currentPanels = panels;
-   if (logger) logger(`currentPanels set: ${panels.length}`);
+   if (logger) logger(`V87 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
  },
 
  getPanelImageContext() {
@@ -2389,11 +2388,47 @@ async setMode(mode) {
 
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
-   const panel = this.findPanelAt(relXImg, relYImg);
 
+   // PASS 1: V73 baseline. A successful V73 hit is final and cannot be
+   // replaced by the fallback.
+   const panel = this.findPanelAt(relXImg, relYImg);
    if (panel) {
+     if (this.debugMode) this.debugLog("[V92] PASS 1 HIT (V73 baseline)");
      this.zoomToPanel(panel, stageRect, imgRect);
      return;
+   }
+
+   // PASS 2A: V100 hybrid structural partitioner. It must prove a page region
+   // from sustained frame/gutter structure; otherwise it defers to V99/V92.
+   if (this.debugMode) this.debugLog("[V100] PASS 1 MISS -> hybrid structural partition");
+   const pageIndex = this.index;
+   const comicId = this.comic?.id;
+   const url = await this.getPageUrl(pageIndex);
+   if (url && PanelDetect.detectTapHybrid) {
+     const hybridLogger = this.debugMode
+       ? (msg) => this.debugLog(`[V100 hybrid p${pageIndex}] ${msg}`)
+       : null;
+     const hybrid = await PanelDetect.detectTapHybrid(url, relXImg, relYImg, hybridLogger);
+     if (this.comic?.id === comicId && this.index === pageIndex && hybrid) {
+       if (this.debugMode) this.debugLog("[V100] PASS 2A HIT -> zoom hybrid panel");
+       this.zoomToPanel(hybrid, stageRect, imgRect);
+       return;
+     }
+     if (this.debugMode) this.debugLog("[V100] PASS 2A MISS -> legacy fallback");
+   }
+
+   // PASS 2B: unchanged V99/V92 fallback.
+   if (url && PanelDetect.detectTapLocalFallback) {
+     const logger = this.debugMode
+       ? (msg) => this.debugLog(`[V92 fallback p${pageIndex}] ${msg}`)
+       : null;
+     const fallback = await PanelDetect.detectTapLocalFallback(url, relXImg, relYImg, logger);
+     if (this.comic?.id === comicId && this.index === pageIndex && fallback) {
+       if (this.debugMode) this.debugLog("[V92] PASS 2 HIT -> zoom V92 validated panel");
+       this.zoomToPanel(fallback, stageRect, imgRect);
+       return;
+     }
+     if (this.debugMode) this.debugLog("[V92] PASS 2 MISS");
    }
 
    this.toggleChrome();
