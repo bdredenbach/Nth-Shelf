@@ -2389,12 +2389,12 @@ async setMode(mode) {
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
 
-   // PASS 1: V73 baseline. V109 gives the already-selected V73 rectangle to
-   // V108's conservative persistent-enclosure witness before zooming. This is
-   // not a new detector: uncertain evidence returns the exact V73 rectangle.
+   // PASS 1: V73 baseline. V110 asks a tap-independent global frame lattice
+   // whether the selected V73 rectangle is an artwork fragment or a multi-
+   // panel grouping. Uncertain evidence returns the exact V73 rectangle.
    const panel = this.findPanelAt(relXImg, relYImg);
    if (panel) {
-     if (this.debugMode) this.debugLog("[V109] PASS 1 HIT (V73 baseline) -> persistent witness");
+     if (this.debugMode) this.debugLog("[V110] PASS 1 HIT (V73 baseline) -> global frame lattice");
      const pageIndex = this.index;
      const comicId = this.comic?.id;
      const url = await this.getPageUrl(pageIndex);
@@ -2402,7 +2402,7 @@ async setMode(mode) {
 
      if (url && PanelDetect.repairDetectedPanel) {
        const logger = this.debugMode
-         ? (msg) => this.debugLog(`[V109 first-pass p${pageIndex}] ${msg}`)
+         ? (msg) => this.debugLog(`[V110 first-pass p${pageIndex}] ${msg}`)
          : null;
        selected = await PanelDetect.repairDetectedPanel(url, relXImg, relYImg, panel, logger) || panel;
      }
@@ -2411,9 +2411,9 @@ async setMode(mode) {
      // while its source image was loading.
      if (this.comic?.id !== comicId || this.index !== pageIndex) return;
      if (this.debugMode) {
-       this.debugLog(selected._v109FirstPassRepair
-         ? "[V109] PASS 1 V73 fragment repaired"
-         : "[V109] PASS 1 exact V73 control preserved");
+       this.debugLog(selected._v110FrameLatticeRepair
+         ? "[V110] PASS 1 V73 result repaired by frame lattice"
+         : "[V110] PASS 1 exact V73 control preserved");
      }
      this.zoomToPanel(selected, stageRect, imgRect);
      return;

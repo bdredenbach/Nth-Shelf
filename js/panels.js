@@ -1,10 +1,14 @@
-// NTH SHELF V109 — FIRST-PASS PERSISTENT-ENCLOSURE WITNESS
-// V99 and the V108 persistent-enclosure algorithm remain unchanged. V109
-// exposes that same conservative enclosure witness to a V73 first-pass hit,
-// because a successful V73 lookup previously returned before V108 could run.
-// The V73 rectangle remains exact unless a persistent enclosure contains it
-// and passes V108's existing containment/expansion gates. V99 misses and all
-// other fallback results remain unchanged.
+// NTH SHELF V110 — GLOBAL FRAME-LATTICE WITNESS
+// V73 and V99 remain the scientific control. V110 adds one tap-independent
+// experiment in front of a V73 first-pass result: find page-wide structural
+// frame bands, connect them into a closed lattice cell, and ask which cell
+// contains the tap. Unlike the V108/V109 pixel flood, artwork edges do not
+// become barriers merely because they are strong near the tap.
+//
+// The exact V73 rectangle is preserved unless the lattice forms a high-
+// confidence cell and that cell cleanly contains the V73 fragment (repairing
+// over-segmentation) or is cleanly contained by a V73 multi-panel grouping
+// (repairing under-segmentation). V99 and V108's PASS-2 fallback are unchanged.
 
 const PanelDetect = {
   detect(imgUrl, log) {
@@ -23,11 +27,10 @@ const PanelDetect = {
     });
   },
 
-  // V109: validate an already-selected V73 rectangle with the exact V108
-  // witness. This is intentionally not another detector or another threshold
-  // set. It only fixes the call-path gap demonstrated by the device recording:
-  // V73 can split one real panel into artwork-shaped bands, then prevent the
-  // tap-local enclosure logic from ever seeing the tap.
+  // V110: validate an already-selected V73 rectangle with a global structural
+  // witness. The candidate is derived from the page layout, not from a flood
+  // seeded at the tap; different taps in the same lattice cell therefore ask
+  // about the same enclosure.
   repairDetectedPanel(imgUrl, relX, relY, baseline, log) {
     return new Promise((resolve) => {
       if (!baseline) {
@@ -38,24 +41,331 @@ const PanelDetect = {
       const img = new Image();
       img.onload = () => {
         try {
-          if (log) log("V109 first-pass witness armed for V73 hit");
-          const enclosure = this._analyzePersistentEnclosure(img, relX, relY, log);
-          const selected = this._v108SelectResult(baseline, enclosure, log, "V73");
-          if (selected === enclosure) {
-            resolve({ ...enclosure, _v109FirstPassRepair: true });
+          if (log) log("V110 global frame-lattice witness armed for V73 hit");
+          const cell = this._analyzeGlobalFrameLattice(img, relX, relY, log);
+          const selected = this._v110SelectResult(baseline, cell, log);
+          if (selected === cell) {
+            resolve({ ...cell, _v110FrameLatticeRepair: true });
             return;
           }
           resolve(baseline);
         }
         catch (err) {
-          console.warn("V109 first-pass witness failed:", err);
-          if (log) log(`V109 first-pass ERROR: ${err.message}`);
+          console.warn("V110 first-pass witness failed:", err);
+          if (log) log(`V110 first-pass ERROR: ${err.message}`);
           resolve(baseline);
         }
       };
       img.onerror = () => resolve(baseline);
       img.src = imgUrl;
     });
+  },
+
+  _v110SelectResult(baseline, cell, log) {
+    if (!cell) {
+      if (log) log("V110 lattice MISS -> preserve exact V73 control");
+      return baseline || null;
+    }
+    if (!baseline) return null;
+
+    const bx0 = baseline.x, by0 = baseline.y;
+    const bx1 = baseline.x + baseline.w, by1 = baseline.y + baseline.h;
+    const cx0 = cell.x, cy0 = cell.y;
+    const cx1 = cell.x + cell.w, cy1 = cell.y + cell.h;
+    const iw = Math.max(0, Math.min(bx1, cx1) - Math.max(bx0, cx0));
+    const ih = Math.max(0, Math.min(by1, cy1) - Math.max(by0, cy0));
+    const intersection = iw * ih;
+    const baselineArea = Math.max(0.000001, baseline.w * baseline.h);
+    const cellArea = Math.max(0.000001, cell.w * cell.h);
+    const baselineInside = intersection / baselineArea;
+    const cellInside = intersection / cellArea;
+    const areaRatio = cellArea / baselineArea;
+    const iou = intersection /
+      Math.max(0.000001, baselineArea + cellArea - intersection);
+    const widthRatio = cell.w / Math.max(0.000001, baseline.w);
+    const heightRatio = cell.h / Math.max(0.000001, baseline.h);
+
+    if (log) {
+      log(`V110 lattice comparison: baselineInside=${baselineInside.toFixed(2)} cellInside=${cellInside.toFixed(2)} areaRatio=${areaRatio.toFixed(2)} iou=${iou.toFixed(2)} widthRatio=${widthRatio.toFixed(2)} heightRatio=${heightRatio.toFixed(2)}`);
+    }
+
+    // The global witness agrees with the control. Keep the exact control so a
+    // successful V73 crop does not move by a few downscaled pixels.
+    if (iou >= 0.72 || (areaRatio >= 0.82 && areaRatio <= 1.22 &&
+        baselineInside >= 0.88 && cellInside >= 0.88)) {
+      if (log) log("V110 lattice agrees -> preserve exact V73 control");
+      return baseline;
+    }
+
+    // Expansion is deliberately stricter than simple containment. Both axes
+    // must grow, preventing a missed vertical divider from turning one good
+    // side-by-side panel into a whole-row crop (and vice versa).
+    const expandsFragment = baselineInside >= 0.82 &&
+      areaRatio >= 1.45 && areaRatio <= 36 &&
+      widthRatio >= 1.10 && heightRatio >= 1.10;
+    if (expandsFragment) {
+      if (log) log("V110 lattice REPLACES contained V73 artwork fragment");
+      return cell;
+    }
+
+    // A closed structural cell may also sit inside a V73 rectangle that
+    // grouped adjacent rows/columns. This is the failure V109 could not fix
+    // because its selection rule only permitted expansion.
+    const shrinksGrouping = cellInside >= 0.90 &&
+      areaRatio >= 0.10 && areaRatio <= 0.72 &&
+      (widthRatio <= 0.77 || heightRatio <= 0.77);
+    if (shrinksGrouping) {
+      if (log) log("V110 lattice REPLACES V73 multi-panel grouping");
+      return cell;
+    }
+
+    if (log) log("V110 lattice evidence not decisive -> preserve exact V73 control");
+    return baseline;
+  },
+
+  _analyzeGlobalFrameLattice(img, relX, relY, log) {
+    const maxDim = 700;
+    const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+    const w = Math.max(1, Math.round(img.width * scale));
+    const h = Math.max(1, Math.round(img.height * scale));
+    if (w < 40 || h < 40) return null;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0, w, h);
+    const data = ctx.getImageData(0, 0, w, h).data;
+    const lum = new Float32Array(w * h);
+    for (let i = 0, p = 0; i < lum.length; i++, p += 4) {
+      lum[i] = 0.299 * data[p] + 0.587 * data[p + 1] + 0.114 * data[p + 2];
+    }
+
+    const darkCut = Math.max(52, Math.min(85,
+      this._v108Percentile(lum, 20) + 10));
+    const tx = clamp01(relX) * (w - 1);
+    const ty = clamp01(relY) * (h - 1);
+    const horizontal = this._v110FindFrameBands(
+      lum, w, h, "H", 0, h, darkCut, false
+    );
+    const yCell = this._v110CellAt(horizontal, ty, h);
+    if (!yCell) {
+      if (log) log("V110 lattice REJECTED: tap lies on a horizontal frame band");
+      return null;
+    }
+
+    const vertical = this._v110FindFrameBands(
+      lum, w, h, "V", yCell.start, yCell.end, darkCut, true
+    );
+    const xCell = this._v110CellAt(vertical, tx, w);
+    if (!xCell) {
+      if (log) log("V110 lattice REJECTED: tap lies on a vertical frame band");
+      return null;
+    }
+
+    const internalSides =
+      (yCell.before ? 1 : 0) + (yCell.after ? 1 : 0) +
+      (xCell.before ? 1 : 0) + (xCell.after ? 1 : 0);
+    const pw = xCell.end - xCell.start;
+    const ph = yCell.end - yCell.start;
+    const boxArea = (pw * ph) / Math.max(1, w * h);
+    if (internalSides < 1 || pw < w * 0.055 || ph < h * 0.055 ||
+        boxArea > 0.86) {
+      if (log) log(`V110 lattice REJECTED: sides=${internalSides} area=${boxArea.toFixed(3)}`);
+      return null;
+    }
+
+    const usedBands = [
+      yCell.before, yCell.after, xCell.before, xCell.after
+    ].filter(Boolean);
+    const confidence = usedBands.length
+      ? Math.min(...usedBands.map(band => band.confidence))
+      : 0;
+    if (confidence < 0.90) {
+      if (log) log(`V110 lattice REJECTED: confidence=${confidence.toFixed(2)}`);
+      return null;
+    }
+
+    const result = {
+      x: xCell.start / w,
+      y: yCell.start / h,
+      w: pw / w,
+      h: ph / h,
+      _v110GlobalFrameLattice: true,
+      _v110InternalSides: internalSides,
+      _v110Confidence: confidence,
+      _v110HorizontalBands: horizontal.length,
+      _v110VerticalBands: vertical.length
+    };
+    if (log) {
+      const hs = horizontal.map(b =>
+        `${(b.start / h).toFixed(3)}-${(b.end / h).toFixed(3)}`).join(",") || "none";
+      const vs = vertical.map(b =>
+        `${(b.start / w).toFixed(3)}-${(b.end / w).toFixed(3)}`).join(",") || "none";
+      log(`V110 lattice source=${img.width}x${img.height} downscaled=${w}x${h} darkCut=${darkCut.toFixed(1)} H=[${hs}] V=[${vs}]`);
+      log(`V110 lattice ACCEPTED x=${result.x.toFixed(3)} y=${result.y.toFixed(3)} w=${result.w.toFixed(3)} h=${result.h.toFixed(3)} sides=${internalSides} confidence=${confidence.toFixed(2)}`);
+    }
+    return result;
+  },
+
+  // H bands must contain a gap-tolerant dark run anchored near both page
+  // edges. V bands are measured only inside the selected horizontal cell and
+  // must additionally be isolated from dark artwork on both sides. These are
+  // line-membership tests; a strong but local artwork edge receives no vote.
+  _v110FindFrameBands(lum, w, h, axis, spanStart, spanEnd, darkCut, isolated) {
+    const axisTotal = axis === "H" ? h : w;
+    const longStart = axis === "H"
+      ? Math.max(0, Math.round(w * 0.015))
+      : Math.max(0, Math.round(spanStart));
+    const longEnd = axis === "H"
+      ? Math.min(w, Math.round(w * 0.985))
+      : Math.min(h, Math.round(spanEnd));
+    const longLength = Math.max(1, longEnd - longStart);
+    const maxGap = Math.max(2, Math.round(longLength * 0.014));
+    const samples = [];
+
+    for (let fixed = 1; fixed < axisTotal - 1; fixed++) {
+      const run = this._v110LongestDarkRun(
+        lum, w, h, axis, fixed, longStart, longEnd, darkCut, maxGap
+      );
+      const fraction = run.length / longLength;
+      const anchored = run.start <= longStart + longLength * 0.08 &&
+        run.end >= longEnd - 1 - longLength * 0.08;
+      if (fraction >= 0.68 && anchored) {
+        samples.push({ fixed, fraction });
+      }
+    }
+
+    const groups = [];
+    const joinGap = Math.max(2, Math.round(axisTotal * 0.014));
+    for (const sample of samples) {
+      const last = groups[groups.length - 1];
+      if (last && sample.fixed - last.last <= joinGap) {
+        last.items.push(sample);
+        last.last = sample.fixed;
+      } else {
+        groups.push({ first: sample.fixed, last: sample.fixed, items: [sample] });
+      }
+    }
+
+    const margin = axisTotal * 0.025;
+    const maxWidth = axisTotal * 0.025;
+    const bands = [];
+    for (const group of groups) {
+      const width = group.last - group.first + 1;
+      const confidence = Math.max(...group.items.map(item => item.fraction));
+      if (group.last <= margin || group.first >= axisTotal - margin) continue;
+      if (width > maxWidth) continue;
+      if (group.items.length < 2 && confidence < 0.90) continue;
+
+      const band = {
+        start: group.first,
+        end: group.last,
+        confidence
+      };
+      if (isolated && !this._v110BandIsIsolated(
+          lum, w, h, axis, band, longStart, longEnd, darkCut)) continue;
+      bands.push(band);
+    }
+    return bands;
+  },
+
+  _v110LongestDarkRun(lum, w, h, axis, fixed, start, end, darkCut, maxGap) {
+    let bestStart = start, bestEnd = start - 1;
+    let runStart = -1, lastDark = -1, gap = 0;
+    const finish = () => {
+      if (runStart >= 0 && lastDark - runStart > bestEnd - bestStart) {
+        bestStart = runStart;
+        bestEnd = lastDark;
+      }
+      runStart = -1;
+      lastDark = -1;
+      gap = 0;
+    };
+
+    for (let variable = start; variable < end; variable++) {
+      const index = axis === "H"
+        ? fixed * w + variable
+        : variable * w + fixed;
+      if (lum[index] < darkCut) {
+        if (runStart < 0) runStart = variable;
+        lastDark = variable;
+        gap = 0;
+      } else if (runStart >= 0) {
+        gap++;
+        if (gap > maxGap) finish();
+      }
+    }
+    finish();
+    return {
+      start: bestStart,
+      end: bestEnd,
+      length: Math.max(0, bestEnd - bestStart + 1)
+    };
+  },
+
+  _v110BandIsIsolated(lum, w, h, axis, band, start, end, darkCut) {
+    // Currently used for vertical dividers. A broad dark object can span the
+    // full cell height; a frame divider is a narrow dark band with distinctly
+    // lighter material immediately on both sides.
+    const total = axis === "H" ? h : w;
+    const offset = Math.max(3, Math.round(total * 0.008));
+    const sampleWidth = 3;
+    const bandStats = this._v110BandStats(
+      lum, w, h, axis, band.start, band.end + 1, start, end, darkCut
+    );
+    const leftStats = this._v110BandStats(
+      lum, w, h, axis,
+      Math.max(0, band.start - offset - sampleWidth),
+      Math.max(1, band.start - offset), start, end, darkCut
+    );
+    const rightStats = this._v110BandStats(
+      lum, w, h, axis,
+      Math.min(total - 1, band.end + offset),
+      Math.min(total, band.end + offset + sampleWidth),
+      start, end, darkCut
+    );
+    return leftStats.mean >= bandStats.mean + 24 &&
+      rightStats.mean >= bandStats.mean + 24 &&
+      leftStats.darkFraction <= bandStats.darkFraction - 0.20 &&
+      rightStats.darkFraction <= bandStats.darkFraction - 0.20;
+  },
+
+  _v110BandStats(lum, w, h, axis, fixedStart, fixedEnd,
+      variableStart, variableEnd, darkCut) {
+    let sum = 0, dark = 0, count = 0;
+    for (let fixed = fixedStart; fixed < fixedEnd; fixed++) {
+      for (let variable = variableStart; variable < variableEnd; variable++) {
+        const index = axis === "H"
+          ? fixed * w + variable
+          : variable * w + fixed;
+        const value = lum[index];
+        sum += value;
+        if (value < darkCut) dark++;
+        count++;
+      }
+    }
+    return {
+      mean: count ? sum / count : 255,
+      darkFraction: count ? dark / count : 0
+    };
+  },
+
+  _v110CellAt(bands, position, total) {
+    let before = null;
+    let after = null;
+    for (const band of bands) {
+      if (position >= band.start && position <= band.end) return null;
+      if (band.end < position) before = band;
+      else if (band.start > position) {
+        after = band;
+        break;
+      }
+    }
+    const start = before ? before.end + 1 : 0;
+    const end = after ? after.start : total;
+    if (end <= start) return null;
+    return { start, end, before, after };
   },
 
   // V108 wrapper around the unmodified V99 control. The new persistent-
