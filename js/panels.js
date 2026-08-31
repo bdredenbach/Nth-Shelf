@@ -169,23 +169,6 @@ const PanelDetect = {
       const axisBonus = (hs.length >= 2 ? 0.5 : 0) + (vs.length >= 2 ? 0.5 : 0);
       score += axisBonus;
 
-      // V100: modestly penalize an unnecessarily large enclosing rectangle.
-      // This is intentionally applied only after V99's valid boundary set has
-      // been assembled. Evidence remains primary; size only nudges close
-      // candidates toward the tighter frame around the tap.
-      const tapX = tx;
-      const tapY = ty;
-      const rectW = Math.max(1, R.pos - L.pos);
-      const rectH = Math.max(1, B.pos - T.pos);
-      const tapDistX = Math.min(Math.abs(tapX - L.pos), Math.abs(R.pos - tapX));
-      const tapDistY = Math.min(Math.abs(tapY - T.pos), Math.abs(B.pos - tapY));
-      const excessX = Math.max(0, rectW - Math.max(24, tapDistX * 2));
-      const excessY = Math.max(0, rectH - Math.max(24, tapDistY * 2));
-      const excessRatio =
-        Math.min(1.5, excessX / Math.max(24, rectW)) +
-        Math.min(1.5, excessY / Math.max(24, rectH));
-      score -= 0.28 * excessRatio;
-
       // V99: the V98 nearest-valid idea must act at the actual boundary-set
       // selection point. Keep evidence quality primary, but when two coherent
       // sets are close in score, prefer the set whose valid boundaries are
@@ -442,6 +425,98 @@ const PanelDetect = {
     return sum / Math.max(1, yb-ya+1);
   },
 
+
+
+  _v101CompletePanelEnclosure(boundary, hCandidates, vCandidates, tx, ty, w, h) {
+    if (!boundary) return boundary;
+
+    const T0=boundary.T, B0=boundary.B, L0=boundary.L, R0=boundary.R;
+    const out = {...boundary};
+
+    // A side is considered weak only when its boundary evidence is materially
+    // below the strongest available boundary on that axis. We then look just
+    // outside it for a continuous matching candidate. This is deliberately
+    // conservative: it can expand a frame, but never shrinks one.
+    const expand = (side, candidates, axis, targetPos, span) => {
+      const tol = Math.max(5, Math.min(18, Math.round((axis==="H"?h:w)*0.035)));
+      let best = null;
+
+      for (const c of candidates || []) {
+        if (!Number.isFinite(c.pos)) continue;
+        const delta = axis==="H" ? c.pos-targetPos : c.pos-targetPos;
+
+        // Only search outward from the current side.
+        if (side==="T" && c.pos <= targetPos) continue;
+        if (side==="B" && c.pos >= targetPos) continue;
+        if (side==="L" && c.pos <= targetPos) continue;
+        if (side==="R" && c.pos >= targetPos) continue;
+
+        const distance = Math.abs(c.pos-targetPos);
+        if (distance > Math.max(24, Math.min(axis==="H"?h:w, 220))) continue;
+
+        const cs = c.span || [0, axis==="H"?w-1:h-1];
+        const overlap = Math.max(0, Math.min(span[1],cs[1])-Math.max(span[0],cs[0])+1);
+        const overlapFrac = overlap / Math.max(1, Math.max(span[1],cs[1])-Math.min(span[0],cs[0])+1);
+        if (overlapFrac < 0.50) continue;
+
+        const isMatching = c.blackFrame || c.greyConfirmed || (c.gutterQuality||0) > 0;
+        if (!isMatching) continue;
+
+        const score = (c.quality||0) + overlapFrac*0.8 - distance*0.002;
+        if (!best || score > best.score) best={c,score,overlapFrac};
+      }
+    if (best) {
+      best = this._v101CompletePanelEnclosure(
+        best, hCandidates, vCandidates, tx, ty, w, h
+      );
+    }
+
+      return best;
+    };
+
+    // Determine whether each existing side has usable evidence.
+    const hs = [boundary.T, boundary.B].filter(Boolean);
+    const vs = [boundary.L, boundary.R].filter(Boolean);
+    const hq = Math.min(...hs.map(x=>x.quality||0));
+    const vq = Math.min(...vs.map(x=>x.quality||0));
+
+    // Only attempt completion when a side is weak relative to the candidate
+    // set. Strong complete rectangles are left untouched.
+    const weakH = hq < 2.15;
+    const weakV = vq < 2.15;
+
+    if (weakH && hCandidates && hCandidates.length) {
+      const top = expand("T", hCandidates, "H", T0.pos, [L0.pos,R0.pos]);
+      const bottom = expand("B", hCandidates, "H", B0.pos, [L0.pos,R0.pos]);
+      if (top && top.c.quality > (T0.quality||0) + 0.15) {
+        out.T=top.c;
+      }
+      if (bottom && bottom.c.quality > (B0.quality||0) + 0.15) {
+        out.B=bottom.c;
+      }
+    }
+
+    if (weakV && vCandidates && vCandidates.length) {
+      const left = expand("L", vCandidates, "V", L0.pos, [T0.pos,B0.pos]);
+      const right = expand("R", vCandidates, "V", R0.pos, [T0.pos,B0.pos]);
+      if (left && left.c.quality > (L0.quality||0) + 0.15) {
+        out.L=left.c;
+      }
+      if (right && right.c.quality > (R0.quality||0) + 0.15) {
+        out.R=right.c;
+      }
+    }
+
+    out.T = out.T || T0; out.B = out.B || B0;
+    out.L = out.L || L0; out.R = out.R || R0;
+
+    // Require a genuine outward expansion; otherwise return the original.
+    if (out.T===T0 && out.B===B0 && out.L===L0 && out.R===R0) return boundary;
+
+    out.completePanelEnclosure = true;
+    out.completionNote = "V101 outward matching boundary completion";
+    return out;
+  },
 
   _v98RankBoundaryCandidates(candidates, tapPos, total) {
     const valid = (candidates || []).filter(c =>
