@@ -1,9 +1,9 @@
-// NTH SHELF V92 — V91 BASELINE / PANEL INTERIOR VALIDATION
-// V73 remains authoritative whenever it contains the tap.
-// V92 keeps the V91 boundary-set + iterative internal-gutter path, then adds
-// a conservative interior validation gate. A fallback result is rejected if
-// a strong, sustained internal gutter still cuts through its interior.
-// No smallest/largest rule and no recovery pass.
+// NTH SHELF V108 — V99 CONTROL / TAP-SEEDED PERSISTENT ENCLOSURE
+// V73 remains authoritative whenever it contains the tap. V99 remains the
+// exact fallback control. V108 is allowed to replace V99 only when V99 looks
+// fragment-like and a tap-seeded enclosure persists across six or more
+// boundary-evidence levels, contains the V99 fragment, and expands it.
+// V99 misses and all other V99 results remain unchanged.
 
 const PanelDetect = {
   detect(imgUrl, log) {
@@ -22,25 +22,418 @@ const PanelDetect = {
     });
   },
 
-  // V99 + V107 frame-tracing fallback: V91 coherent boundary SET plus internal-gutter refinement. A boundary is
-  // not selected because it is merely nearest, smallest, or largest. Each
-  // side is scored for continuity and edge support, then opposite/adjacent
-  // boundaries are paired only when their support spans are mutually
-  // compatible and the resulting region contains the tap.
+  // V108 wrapper around the unmodified V99 control. The new persistent-
+  // enclosure path is deliberately gated so normal V99 hits do not pay its
+  // cost and cannot be changed by it.
   detectTapLocalFallback(imgUrl, relX, relY, log) {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
-        try { resolve(this._analyzeBoundarySet(img, relX, relY, log)); }
+        let baseline = null;
+        try {
+          baseline = this._analyzeBoundarySet(img, relX, relY, log);
+          const fragmentLike = baseline && this._v108LooksFragmentLike(baseline);
+
+          if (!baseline) {
+            if (log) log("V108 repair-only control preserved: V99 miss remains a miss");
+            resolve(null);
+            return;
+          }
+
+          if (baseline && !fragmentLike) {
+            if (log) log("V108 control preserved: V99 result is not fragment-like");
+            resolve(baseline);
+            return;
+          }
+
+          if (log) log("V108 experiment armed: V99 result is fragment-like");
+
+          const enclosure = this._analyzePersistentEnclosure(img, relX, relY, log);
+          resolve(this._v108SelectResult(baseline, enclosure, log));
+        }
         catch (err) {
-          console.warn("V99 fallback failed:", err);
-          if (log) log(`V99 fallback ERROR: ${err.message}`);
-          resolve(null);
+          console.warn("V108 fallback failed:", err);
+          if (log) log(`V108 fallback ERROR: ${err.message}`);
+          resolve(baseline || null);
         }
       };
       img.onerror = () => resolve(null);
       img.src = imgUrl;
     });
+  },
+
+  _v108LooksFragmentLike(p) {
+    if (!p) return false;
+    const pw = Math.max(0, Number(p.w) || 0);
+    const ph = Math.max(0, Number(p.h) || 0);
+    const area = pw * ph;
+    const shortSide = Math.min(pw, ph);
+    const longSide = Math.max(pw, ph);
+    const aspect = longSide / Math.max(0.0001, shortSide);
+
+    // This is only an experiment gate, never panel evidence. The observed
+    // failure is commonly produced by V99's one-way internal-gutter split, so
+    // those results are eligible for an enclosure witness even when the bad
+    // fragment is not numerically tiny. Small/very thin results are eligible
+    // for the same reason. Nothing is replaced without the later containment,
+    // expansion, and six-level persistence proof.
+    return p._v88InternalSplit === true ||
+      area <= 0.060 ||
+      (shortSide <= 0.145 && aspect >= 4.0);
+  },
+
+  _v108SelectResult(baseline, enclosure, log) {
+    if (!enclosure) {
+      if (log) log("V108 persistent enclosure MISS -> preserve V99 control");
+      return baseline || null;
+    }
+
+    if (!baseline) {
+      if (log) log("V108 repair-only control preserved: no V99 fragment to repair");
+      return null;
+    }
+
+    const bx0 = baseline.x, by0 = baseline.y;
+    const bx1 = baseline.x + baseline.w, by1 = baseline.y + baseline.h;
+    const ex0 = enclosure.x, ey0 = enclosure.y;
+    const ex1 = enclosure.x + enclosure.w, ey1 = enclosure.y + enclosure.h;
+    const iw = Math.max(0, Math.min(bx1, ex1) - Math.max(bx0, ex0));
+    const ih = Math.max(0, Math.min(by1, ey1) - Math.max(by0, ey0));
+    const baselineArea = Math.max(0.000001, baseline.w * baseline.h);
+    const enclosureArea = Math.max(0.000001, enclosure.w * enclosure.h);
+    const baselineInside = (iw * ih) / baselineArea;
+    const expansion = enclosureArea / baselineArea;
+
+    if (log) {
+      log(`V108 control comparison: baselineInside=${baselineInside.toFixed(2)} expansion=${expansion.toFixed(2)} stability=${enclosure._v108Stability}`);
+    }
+
+    // Repair only the failure under test: a V99 fragment sitting inside a
+    // substantially larger, repeatedly observed enclosing region.
+    if (baselineInside >= 0.82 && expansion >= 1.45 && expansion <= 12) {
+      if (log) log("V108 persistent enclosure REPLACES contained V99 fragment");
+      return enclosure;
+    }
+
+    if (log) log("V108 evidence not decisive -> preserve exact V99 control");
+    return baseline;
+  },
+
+  _analyzePersistentEnclosure(img, relX, relY, log) {
+    const maxDim = 500;
+    const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+    const w = Math.max(1, Math.round(img.width * scale));
+    const h = Math.max(1, Math.round(img.height * scale));
+    const tx = clamp01(relX) * (w - 1);
+    const ty = clamp01(relY) * (h - 1);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0, w, h);
+    const data = ctx.getImageData(0, 0, w, h).data;
+    const lum = new Float32Array(w * h);
+    for (let i = 0, p = 0; i < lum.length; i++, p += 4) {
+      lum[i] = 0.299 * data[p] + 0.587 * data[p + 1] + 0.114 * data[p + 2];
+    }
+
+    if (log) {
+      log(`V108 persistent source=${img.width}x${img.height} downscaled=${w}x${h} tap=${Math.round(tx)},${Math.round(ty)}`);
+    }
+    return this._v108PersistentFromLuminance(lum, w, h, tx, ty, log);
+  },
+
+  // Topological persistence experiment. Strong, coherent edges and dark
+  // ridges become traversal barriers. Starting at the tap, observe the free
+  // component as the barrier threshold is lowered. A frame is accepted only
+  // when essentially the same enclosure survives at least six consecutive
+  // evidence levels. A one-threshold flood-fill result is never accepted.
+  _v108PersistentFromLuminance(lum, w, h, tx, ty, log) {
+    if (!lum || w < 24 || h < 24 || lum.length !== w * h) return null;
+
+    const fine = this._v108GaussianBlur(lum, w, h, 1.0);
+    const coarse = this._v108GaussianBlur(lum, w, h, 3.0);
+    const gFine = new Float32Array(w * h);
+    const gCoarse = new Float32Array(w * h);
+    const darkRidge = new Float32Array(w * h);
+
+    for (let y = 1; y < h - 1; y++) {
+      for (let x = 1; x < w - 1; x++) {
+        const i = y * w + x;
+        const fdx = (
+          fine[i - w + 1] + 2 * fine[i + 1] + fine[i + w + 1] -
+          fine[i - w - 1] - 2 * fine[i - 1] - fine[i + w - 1]
+        ) / 8;
+        const fdy = (
+          fine[i + w - 1] + 2 * fine[i + w] + fine[i + w + 1] -
+          fine[i - w - 1] - 2 * fine[i - w] - fine[i - w + 1]
+        ) / 8;
+        const cdx = (
+          coarse[i - w + 1] + 2 * coarse[i + 1] + coarse[i + w + 1] -
+          coarse[i - w - 1] - 2 * coarse[i - 1] - coarse[i + w - 1]
+        ) / 8;
+        const cdy = (
+          coarse[i + w - 1] + 2 * coarse[i + w] + coarse[i + w + 1] -
+          coarse[i - w - 1] - 2 * coarse[i - w] - coarse[i - w + 1]
+        ) / 8;
+        gFine[i] = Math.hypot(fdx, fdy);
+        gCoarse[i] = Math.hypot(cdx, cdy);
+        darkRidge[i] = Math.max(0, coarse[i] - fine[i]);
+      }
+    }
+
+    const fine99 = Math.max(0.001, this._v108Percentile(gFine, 99));
+    const coarse99 = Math.max(0.001, this._v108Percentile(gCoarse, 99));
+    const ridge99 = Math.max(0.001, this._v108Percentile(darkRidge, 99));
+    const strength = new Float32Array(w * h);
+
+    for (let i = 0; i < strength.length; i++) {
+      const a = Math.min(1.5, gFine[i] / fine99);
+      const b = Math.min(1.5, gCoarse[i] / coarse99);
+      const c = Math.min(1.5, darkRidge[i] / ridge99);
+      strength[i] = 0.52 * a + 0.32 * b + 0.16 * c;
+    }
+
+    // A 3x3 maximum is a scale operation, not another threshold choice. It
+    // lets the two sides of a thin frame line meet and bridges only one-pixel
+    // interruptions caused by downscaling or ink damage.
+    const closedStrength = new Float32Array(w * h);
+    for (let y = 1; y < h - 1; y++) {
+      for (let x = 1; x < w - 1; x++) {
+        let best = 0;
+        for (let yy = y - 1; yy <= y + 1; yy++) {
+          const row = yy * w;
+          for (let xx = x - 1; xx <= x + 1; xx++) {
+            if (strength[row + xx] > best) best = strength[row + xx];
+          }
+        }
+        closedStrength[y * w + x] = best;
+      }
+    }
+
+    const levels = [88, 86, 84, 82, 80, 78, 76, 74, 72, 70, 68];
+    const thresholds = this._v108Percentiles(closedStrength, levels);
+    const observations = [];
+    for (let levelIndex = 0; levelIndex < levels.length; levelIndex++) {
+      const level = levels[levelIndex];
+      const threshold = thresholds[levelIndex];
+      const component = this._v108FloodComponent(
+        closedStrength, w, h, threshold, tx, ty
+      );
+      if (!component) {
+        observations.push(null);
+        continue;
+      }
+
+      const boxArea = component.w * component.h;
+      const pageLike = component.area >= 0.75 || boxArea >= 0.82 ||
+        (component.w >= 0.92 && component.h >= 0.92);
+      const plausible = !pageLike && component.area >= 0.025 &&
+        component.w >= 0.08 && component.h >= 0.08 &&
+        component.fill >= 0.30 && boxArea <= 0.78;
+      observations.push(plausible ? { ...component, level, threshold } : null);
+
+      if (log && plausible) {
+        log(`V108 level=${level} component x=${component.x.toFixed(3)} y=${component.y.toFixed(3)} w=${component.w.toFixed(3)} h=${component.h.toFixed(3)} area=${component.area.toFixed(3)} fill=${component.fill.toFixed(2)}`);
+      }
+    }
+
+    const groups = [];
+    let active = null;
+    for (const candidate of observations) {
+      if (!candidate) {
+        if (active) groups.push(active);
+        active = null;
+        continue;
+      }
+
+      if (active) {
+        const iou = this._v108BoxIoU(active.last, candidate);
+        const areaRetention = Math.min(active.last.area, candidate.area) /
+          Math.max(0.000001, Math.max(active.last.area, candidate.area));
+        if (iou >= 0.93 && areaRetention >= 0.78) {
+          active.items.push(candidate);
+          active.last = candidate;
+          continue;
+        }
+        groups.push(active);
+      }
+
+      active = { items: [candidate], first: candidate, last: candidate };
+    }
+    if (active) groups.push(active);
+
+    const stable = groups.filter(group => {
+      if (group.items.length < 6) return false;
+      const endpointIoU = this._v108BoxIoU(group.first, group.last);
+      const areaRetention = group.last.area / Math.max(0.000001, group.first.area);
+      return endpointIoU >= 0.93 && areaRetention >= 0.72;
+    });
+
+    stable.sort((a, b) =>
+      b.items.length - a.items.length ||
+      b.first.level - a.first.level ||
+      (b.first.w * b.first.h) - (a.first.w * a.first.h)
+    );
+
+    if (!stable.length) {
+      if (log) log("V108 persistent REJECTED: no enclosure survived six evidence levels");
+      return null;
+    }
+
+    const winner = stable[0];
+    const p = winner.first;
+    if (log) {
+      log(`V108 persistent ACCEPTED levels=${winner.items.length} range=${winner.first.level}->${winner.last.level} endpointIoU=${this._v108BoxIoU(winner.first, winner.last).toFixed(2)}`);
+    }
+    return {
+      x: p.x, y: p.y, w: p.w, h: p.h,
+      _v108PersistentEnclosure: true,
+      _v108Stability: winner.items.length,
+      _v108LevelStart: winner.first.level,
+      _v108LevelEnd: winner.last.level
+    };
+  },
+
+  _v108GaussianBlur(src, w, h, sigma) {
+    const radius = Math.max(1, Math.ceil(sigma * 3));
+    const kernel = new Float32Array(radius * 2 + 1);
+    let kernelSum = 0;
+    for (let k = -radius; k <= radius; k++) {
+      const value = Math.exp(-(k * k) / (2 * sigma * sigma));
+      kernel[k + radius] = value;
+      kernelSum += value;
+    }
+    for (let i = 0; i < kernel.length; i++) kernel[i] /= kernelSum;
+
+    const tmp = new Float32Array(w * h);
+    const out = new Float32Array(w * h);
+    for (let y = 0; y < h; y++) {
+      const row = y * w;
+      for (let x = 0; x < w; x++) {
+        let sum = 0;
+        for (let k = -radius; k <= radius; k++) {
+          const xx = Math.max(0, Math.min(w - 1, x + k));
+          sum += src[row + xx] * kernel[k + radius];
+        }
+        tmp[row + x] = sum;
+      }
+    }
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        let sum = 0;
+        for (let k = -radius; k <= radius; k++) {
+          const yy = Math.max(0, Math.min(h - 1, y + k));
+          sum += tmp[yy * w + x] * kernel[k + radius];
+        }
+        out[y * w + x] = sum;
+      }
+    }
+    return out;
+  },
+
+  _v108Percentile(values, percentile) {
+    return this._v108Percentiles(values, [percentile])[0];
+  },
+
+  _v108Percentiles(values, percentiles) {
+    const sample = [];
+    const stride = Math.max(1, Math.floor(values.length / 45000));
+    for (let i = 0; i < values.length; i += stride) {
+      const value = values[i];
+      if (Number.isFinite(value)) sample.push(value);
+    }
+    if (!sample.length) return percentiles.map(() => 0);
+    sample.sort((a, b) => a - b);
+    return percentiles.map(percentile => {
+      const q = Math.max(0, Math.min(100, percentile)) / 100;
+      return sample[Math.min(sample.length - 1, Math.floor(q * (sample.length - 1)))];
+    });
+  },
+
+  _v108FloodComponent(strength, w, h, threshold, tx, ty) {
+    const inset = 2;
+    const isFree = (x, y) =>
+      x >= inset && x < w - inset && y >= inset && y < h - inset &&
+      strength[y * w + x] < threshold;
+
+    let sx = Math.max(inset, Math.min(w - inset - 1, Math.round(tx)));
+    let sy = Math.max(inset, Math.min(h - inset - 1, Math.round(ty)));
+    if (!isFree(sx, sy)) {
+      let found = null;
+      for (let radius = 1; radius <= 8 && !found; radius++) {
+        let bestDistance = Infinity;
+        for (let y = Math.max(inset, sy - radius); y <= Math.min(h - inset - 1, sy + radius); y++) {
+          for (let x = Math.max(inset, sx - radius); x <= Math.min(w - inset - 1, sx + radius); x++) {
+            const distance = (x - sx) * (x - sx) + (y - sy) * (y - sy);
+            if (distance > radius * radius || distance >= bestDistance || !isFree(x, y)) continue;
+            bestDistance = distance;
+            found = { x, y };
+          }
+        }
+      }
+      if (!found) return null;
+      sx = found.x;
+      sy = found.y;
+    }
+
+    const seen = new Uint8Array(w * h);
+    const queue = new Int32Array(w * h);
+    let head = 0, tail = 0;
+    const seed = sy * w + sx;
+    queue[tail++] = seed;
+    seen[seed] = 1;
+    let minX = sx, maxX = sx, minY = sy, maxY = sy, count = 0;
+
+    const add = (index) => {
+      if (seen[index] || strength[index] >= threshold) return;
+      seen[index] = 1;
+      queue[tail++] = index;
+    };
+
+    while (head < tail) {
+      const index = queue[head++];
+      const y = Math.floor(index / w);
+      const x = index - y * w;
+      count++;
+      if (x < minX) minX = x;
+      if (x > maxX) maxX = x;
+      if (y < minY) minY = y;
+      if (y > maxY) maxY = y;
+
+      if (x > inset) add(index - 1);
+      if (x < w - inset - 1) add(index + 1);
+      if (y > inset) add(index - w);
+      if (y < h - inset - 1) add(index + w);
+    }
+
+    if (!count) return null;
+    const pad = 2;
+    const x0 = Math.max(0, minX - pad);
+    const y0 = Math.max(0, minY - pad);
+    const x1 = Math.min(w, maxX + pad + 1);
+    const y1 = Math.min(h, maxY + pad + 1);
+    const boxPixels = Math.max(1, (x1 - x0) * (y1 - y0));
+    return {
+      x: x0 / w,
+      y: y0 / h,
+      w: (x1 - x0) / w,
+      h: (y1 - y0) / h,
+      area: count / (w * h),
+      fill: count / boxPixels
+    };
+  },
+
+  _v108BoxIoU(a, b) {
+    if (!a || !b) return 0;
+    const x0 = Math.max(a.x, b.x);
+    const y0 = Math.max(a.y, b.y);
+    const x1 = Math.min(a.x + a.w, b.x + b.w);
+    const y1 = Math.min(a.y + a.h, b.y + b.h);
+    const intersection = Math.max(0, x1 - x0) * Math.max(0, y1 - y0);
+    const union = a.w * a.h + b.w * b.h - intersection;
+    return intersection / Math.max(0.000001, union);
   },
 
   _analyzeBoundarySet(img, relX, relY, log) {
@@ -217,11 +610,6 @@ const PanelDetect = {
     const refined = this._splitAtInternalGuttersIterative(lum, w, h, tx, ty, p, edgeCut, quietCut, log);
     if (refined) p = refined;
 
-    // V107: one surgical tracing pass over the V99 enclosure. V99 remains
-    // authoritative when tracing is inconclusive.
-    const traced = this._v107RefineFrame(lum, w, h, p, edgeCut, log);
-    if (traced) p = traced;
-
     // V92: panel interior validation. Even a coherent outer boundary set can
     // still contain multiple visual panels if an internal gutter survived the
     // V89 iterative refinement. Reject that result rather than accepting a
@@ -236,69 +624,6 @@ const PanelDetect = {
 
     if (log) log(`V99 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)} interior=clean`);
     return p;
-  },
-
-
-  // V107: trace the selected boundary candidates outward from their
-  // evidence, rather than accepting a short local fragment. This is a
-  // conservative refinement of V99: if tracing cannot produce a coherent
-  // enclosure, the original V99 result is retained.
-  _v107TraceBoundary(lum,w,h,start,dir,axis,cut){
-    const pts=[]; let pos=start;
-    const max=Math.round(Math.min(w,h)*.18);
-    for(let i=0;i<max;i++){
-      let best=-1,bestScore=0;
-      for(let off=-3;off<=3;off++){
-        const q=pos+dir*(i+off);
-        if(q<2||q>(axis==='x'?w-3:h-3)) continue;
-        const score=axis==='x'
-          ? Math.abs(lum[start*w+q]-lum[start*w+q-1]) + Math.abs(lum[start*w+q+1]-lum[start*w+q])
-          : Math.abs(lum[q*w+start]-lum[(q-1)*w+start]) + Math.abs(lum[(q+1)*w+start]-lum[q*w+start]);
-        if(score>bestScore){bestScore=score;best=q;}
-      }
-      if(best<0||bestScore<cut*.55) break;
-      pts.push(best); pos=best;
-    }
-    return pts;
-  },
-
-  _v107RefineFrame(lum,w,h,p,edgeCut,log){
-    const x=Math.round(p.x*w),y=Math.round(p.y*h);
-    const x2=Math.round((p.x+p.w)*w),y2=Math.round((p.y+p.h)*h);
-    if(x2-x<24||y2-y<24)return null;
-    // Trace from each existing V99 side. We use the side's long-axis evidence
-    // and only accept movement when it extends a boundary substantially.
-    const spanX=x2-x,spanY=y2-y;
-    const traceH=(yy)=>{
-      let best={score:0,pos:yy};
-      for(let off=-Math.round(spanY*.15);off<=Math.round(spanY*.15);off+=2){
-        const q=yy+off;if(q<2||q>h-3)continue;
-        let hit=0,n=0;for(let xx=x;xx<=x2;xx+=Math.max(2,Math.round(spanX/60))){
-          const g=Math.abs(lum[q*w+xx]-lum[q*w+Math.max(0,xx-1)])+Math.abs(lum[q*w+Math.min(w-1,xx+1)]-lum[q*w+xx]);
-          if(g>edgeCut)hit++;n++;
-        }
-        const score=hit/Math.max(1,n);if(score>best.score)best={score,pos:q};
-      }return best;
-    };
-    const traceV=(xx)=>{
-      let best={score:0,pos:xx};
-      for(let off=-Math.round(spanX*.15);off<=Math.round(spanX*.15);off+=2){
-        const q=xx+off;if(q<2||q>w-3)continue;
-        let hit=0,n=0;for(let yy=y;yy<=y2;yy+=Math.max(2,Math.round(spanY/60))){
-          const g=Math.abs(lum[yy*w+q]-lum[yy*w+Math.max(0,q-1)])+Math.abs(lum[yy*w+Math.min(w-1,q+1)]-lum[yy*w+q]);
-          if(g>edgeCut)hit++;n++;
-        }
-        const score=hit/Math.max(1,n);if(score>best.score)best={score,pos:q};
-      }return best;
-    };
-    const t=traceH(y),b=traceH(y2),l=traceV(x),r=traceV(x2);
-    const strong=[t,b,l,r].filter(e=>e.score>=.30).length;
-    if(strong<3)return null;
-    const nx=Math.min(l.pos,r.pos),ny=Math.min(t.pos,b.pos),nw=Math.abs(r.pos-l.pos),nh=Math.abs(b.pos-t.pos);
-    if(nw<24||nh<24)return null;
-    const area=(nw*nh)/(w*h);if(area<.003)return null;
-    if(log)log(`V107 frame-trace sides=${strong}/4 scores=${[t,b,l,r].map(e=>e.score.toFixed(2)).join(',')}`);
-    return {x:nx/w,y:ny/h,w:nw/w,h:nh/h,_v107Trace:true};
   },
 
   _splitAtInternalGuttersIterative(lum, w, h, tx, ty, p, edgeCut, quietCut, log) {
