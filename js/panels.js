@@ -22,7 +22,7 @@ const PanelDetect = {
     });
   },
 
-  // V92 fallback: V91 coherent boundary SET plus internal-gutter refinement. A boundary is
+  // V99 fallback: V91 coherent boundary SET plus internal-gutter refinement. A boundary is
   // not selected because it is merely nearest, smallest, or largest. Each
   // side is scored for continuity and edge support, then opposite/adjacent
   // boundaries are paired only when their support spans are mutually
@@ -33,8 +33,8 @@ const PanelDetect = {
       img.onload = () => {
         try { resolve(this._analyzeBoundarySet(img, relX, relY, log)); }
         catch (err) {
-          console.warn("V92 fallback failed:", err);
-          if (log) log(`V92 fallback ERROR: ${err.message}`);
+          console.warn("V99 fallback failed:", err);
+          if (log) log(`V99 fallback ERROR: ${err.message}`);
           resolve(null);
         }
       };
@@ -101,9 +101,9 @@ const PanelDetect = {
     }
 
     if (log) {
-      log(`V92 boundary candidates H=${hCandidates.length} V=${vCandidates.length} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
-      log(`V92 H candidates=${JSON.stringify(hCandidates.slice(0,8))}`);
-      log(`V92 V candidates=${JSON.stringify(vCandidates.slice(0,8))}`);
+      log(`V99 boundary candidates H=${hCandidates.length} V=${vCandidates.length} edgeCut=${edgeCut.toFixed(1)} quietCut=${quietCut.toFixed(1)}`);
+      log(`V99 H candidates=${JSON.stringify(hCandidates.slice(0,8))}`);
+      log(`V99 V candidates=${JSON.stringify(vCandidates.slice(0,8))}`);
     }
 
     const top = hCandidates.filter(c => c.pos < ty).sort((a,b)=>Math.abs(ty-a.pos)-Math.abs(ty-b.pos)).slice(0,5);
@@ -169,11 +169,35 @@ const PanelDetect = {
       const axisBonus = (hs.length >= 2 ? 0.5 : 0) + (vs.length >= 2 ? 0.5 : 0);
       score += axisBonus;
 
-      if (!best || score > best.score) best = {T,B,L,R,score,sides,hOverlap,vOverlap,hPair,vPair,pw,ph};
+      // V99: the V98 nearest-valid idea must act at the actual boundary-set
+      // selection point. Keep evidence quality primary, but when two coherent
+      // sets are close in score, prefer the set whose valid boundaries are
+      // closer to the tap. This is a tie-breaker only.
+      const tapBoundaryDistance =
+        Math.max(0, ty - T.pos) +
+        Math.max(0, B.pos - ty) +
+        Math.max(0, tx - L.pos) +
+        Math.max(0, R.pos - tx);
+
+      if (!best) {
+        best = {T,B,L,R,score,sides,hOverlap,vOverlap,hPair,vPair,pw,ph,tapBoundaryDistance};
+      } else {
+        const scoreGap = score - best.score;
+        const tieBand = 0.45;
+        const distanceImprovement = best.tapBoundaryDistance - tapBoundaryDistance;
+        const meaningfulDistance = Math.max(6, Math.min(w,h) * 0.035);
+
+        if (
+          scoreGap > 0 ||
+          (Math.abs(scoreGap) <= tieBand && distanceImprovement > meaningfulDistance)
+        ) {
+          best = {T,B,L,R,score,sides,hOverlap,vOverlap,hPair,vPair,pw,ph,tapBoundaryDistance};
+        }
+      }
     }
 
     if (!best) {
-      if (log) log("V92 boundary-set REJECTED: no coherent boundary set around tap");
+      if (log) log("V99 boundary-set REJECTED: no coherent boundary set around tap");
       return null;
     }
 
@@ -201,11 +225,11 @@ const PanelDetect = {
     // strong sustained gutter.
     const interior = this._validatePanelInterior(lum, w, h, tx, ty, p, edgeCut, quietCut, log);
     if (!interior.ok) {
-      if (log) log(`V92 interior validation REJECTED: ${interior.reason}`);
+      if (log) log(`V99 interior validation REJECTED: ${interior.reason}`);
       return null;
     }
 
-    if (log) log(`V92 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)} interior=clean`);
+    if (log) log(`V99 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)} interior=clean`);
     return p;
   },
 
@@ -218,7 +242,7 @@ const PanelDetect = {
       if (!next) break;
       current = next;
       changed = true;
-      if (log) log(`V92 internal refinement pass ${i + 1}/${maxSplits}`);
+      if (log) log(`V99 internal refinement pass ${i + 1}/${maxSplits}`);
     }
     return changed ? current : null;
   },
@@ -293,13 +317,13 @@ const PanelDetect = {
       if (ty < hg.pos) refined.h = (hg.pos / h) - refined.y;
       else refined.y = hg.pos / h, refined.h = (p.y + p.h) - refined.y;
       did = true;
-      if (log) log(`V92 internal H gutter split at ${hg.pos} quality=${hg.quality.toFixed(2)} quiet=${hg.quietFrac.toFixed(2)}`);
+      if (log) log(`V99 internal H gutter split at ${hg.pos} quality=${hg.quality.toFixed(2)} quiet=${hg.quietFrac.toFixed(2)}`);
     }
     if (vg) {
       if (tx < vg.pos) refined.w = (vg.pos / w) - refined.x;
       else refined.x = vg.pos / w, refined.w = (p.x + p.w) - refined.x;
       did = true;
-      if (log) log(`V92 internal V gutter split at ${vg.pos} quality=${vg.quality.toFixed(2)} quiet=${vg.quietFrac.toFixed(2)}`);
+      if (log) log(`V99 internal V gutter split at ${vg.pos} quality=${vg.quality.toFixed(2)} quiet=${vg.quietFrac.toFixed(2)}`);
     }
     if (!did) return null;
     refined.w = clamp01(refined.w);
