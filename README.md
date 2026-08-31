@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.01**
+**Version 2.78.02 Boundary Trace Test**
 
 
 ## 🔒 Privacy
@@ -116,8 +116,8 @@ Nth Shelf is designed around local-first storage. Your comics are stored on your
 This project is licensed under the **MIT License**. The license applies to the software and does not grant rights to comic artwork or other copyrighted material imported by users.
 
 
-## V2.78.01 Stable — Structural Panel Pop-Out
+## V2.78.02 Boundary Trace Test — Geometry Branch
 
-V2.78.01 promotes the V100 hybrid panel detector to the stable baseline. V73 remains the first panel-detection pass. When V73 misses, the structural detector analyzes sustained black frame bands and quiet gutter bands to identify a proven panel region. If it cannot prove a region, Nth Shelf falls back to the existing V99 boundary-set + V92 interior-validation path rather than forcing a result.
+V2.78.02 is an experimental geometry branch built on the V2.78.00 stable hybrid baseline. V100 still identifies the panel; V102 traces coherent frame rails around that proven region and may supply a four-corner polygon. If tracing is weak, the stable rectangle is preserved. V2.78.00 remains the stable baseline. V73 remains the first panel-detection pass. When V73 misses, the structural detector analyzes sustained black frame bands and quiet gutter bands to identify a proven panel region. If it cannot prove a region, Nth Shelf falls back to the existing V99 boundary-set + V92 interior-validation path rather than forcing a result.
 
 This release establishes the structural hybrid detector as the baseline for future panel-geometry improvements. Internal debug messages continue to use the `V100 hybrid` prefix so test logs remain comparable with the successful prototype run.

@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.01
+// NTH SHELF V2.78.02
 
-const CACHE_NAME = "nth-shelf-shell-2.78.01";
+const CACHE_NAME = "nth-shelf-shell-2.78.02";
 const SHELL_FILES = [
   "./",
   "./index.html",
