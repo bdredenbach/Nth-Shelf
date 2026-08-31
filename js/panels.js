@@ -1,7 +1,9 @@
-// NTH SHELF V103 — V99 + V102B REGION/BARRIER HYBRID
-// V99 remains the candidate-generation baseline. V102B is added as a second-stage
-// region/barrier interpretation layer inside the V99 candidate. If V102B cannot
-// produce a substantial enclosed region, V99 is left untouched.
+// NTH SHELF V92 — V91 BASELINE / PANEL INTERIOR VALIDATION
+// V73 remains authoritative whenever it contains the tap.
+// V92 keeps the V91 boundary-set + iterative internal-gutter path, then adds
+// a conservative interior validation gate. A fallback result is rejected if
+// a strong, sustained internal gutter still cuts through its interior.
+// No smallest/largest rule and no recovery pass.
 
 const PanelDetect = {
   detect(imgUrl, log) {
@@ -20,7 +22,7 @@ const PanelDetect = {
     });
   },
 
-  // V99 fallback: V91 coherent boundary SET plus internal-gutter refinement. A boundary is
+  // V99 + V107 frame-tracing fallback: V91 coherent boundary SET plus internal-gutter refinement. A boundary is
   // not selected because it is merely nearest, smallest, or largest. Each
   // side is scored for continuity and edge support, then opposite/adjacent
   // boundaries are paired only when their support spans are mutually
@@ -41,81 +43,7 @@ const PanelDetect = {
     });
   },
 
-
-  // V103 / V102B integration: use V99's boundary candidate as the structural
-  // hypothesis, then test that hypothesis as a region enclosed by black/grey
-  // barriers. V99 remains the source of candidate boundaries; region reasoning
-  // is a second-stage interpretation layer, not a replacement detector.
-  _researchRegionFromV99(lum, w, h, tx, ty, p, edgeCut, quietCut, log) {
-    const barriers = this._buildResearchBarriers(lum, w, h, edgeCut, quietCut);
-    const bounds = {
-      x0: Math.max(1, Math.round(p.x * w)),
-      y0: Math.max(1, Math.round(p.y * h)),
-      x1: Math.min(w - 2, Math.round((p.x + p.w) * w)),
-      y1: Math.min(h - 2, Math.round((p.y + p.h) * h))
-    };
-    const sx = Math.max(bounds.x0, Math.min(bounds.x1, Math.round(tx)));
-    const sy = Math.max(bounds.y0, Math.min(bounds.y1, Math.round(ty)));
-    const total = Math.max(1, (bounds.x1 - bounds.x0 + 1) * (bounds.y1 - bounds.y0 + 1));
-    const seen = new Uint8Array(total);
-    const rw = bounds.x1 - bounds.x0 + 1;
-    const rh = bounds.y1 - bounds.y0 + 1;
-    const qx = new Int32Array(total);
-    const qy = new Int32Array(total);
-    let head = 0, tail = 0, count = 0;
-    let minX = sx, maxX = sx, minY = sy, maxY = sy;
-    const idx = (x, y) => (y - bounds.y0) * rw + (x - bounds.x0);
-    const inside = (x, y) => x >= bounds.x0 && x <= bounds.x1 && y >= bounds.y0 && y <= bounds.y1;
-    const crosses = (x, y, nx, ny) => {
-      if (nx !== x) return !!barriers.vBarrier[y * w + Math.min(x, nx)];
-      return !!barriers.hBarrier[Math.min(y, ny) * w + x];
-    };
-
-    qx[tail] = sx; qy[tail] = sy; tail++;
-    seen[idx(sx, sy)] = 1;
-    while (head < tail && count < total) {
-      const x = qx[head], y = qy[head]; head++; count++;
-      minX = Math.min(minX, x); maxX = Math.max(maxX, x);
-      minY = Math.min(minY, y); maxY = Math.max(maxY, y);
-      const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
-      for (const [dx,dy] of dirs) {
-        const nx=x+dx, ny=y+dy;
-        if (!inside(nx,ny) || crosses(x,y,nx,ny)) continue;
-        const ni=idx(nx,ny);
-        if (seen[ni]) continue;
-        seen[ni]=1; qx[tail]=nx; qy[tail]=ny; tail++;
-      }
-    }
-
-    const bw=maxX-minX+1, bh=maxY-minY+1;
-    const regionArea=count/total;
-    const fill=count/Math.max(1,bw*bh);
-    const candArea=Math.max(.0001,p.w*p.h);
-    const regionRelArea=(bw/w)*(bh/h);
-    const containment =
-      minX >= bounds.x0 && maxX <= bounds.x1 && minY >= bounds.y0 && maxY <= bounds.y1;
-
-    // A region that is almost the whole V99 candidate is not useful evidence;
-    // a tiny fragment is not useful either. The useful case is a substantial,
-    // enclosed subregion that remains plausibly the tapped panel.
-    const substantial = regionArea >= .18 && fill >= .28 && regionRelArea >= candArea * .28;
-    if (!containment || !substantial) {
-      if (log) log(`V103 V102B region rejected area=${regionArea.toFixed(3)} fill=${fill.toFixed(3)} relArea=${regionRelArea.toFixed(4)}`);
-      return null;
-    }
-
-    const r={
-      x:minX/w, y:minY/h, w:bw/w, h:bh/h,
-      _v102ARegion:true,
-      _regionArea:regionArea,
-      _regionFill:fill,
-      _regionRelArea:regionRelArea
-    };
-    if (log) log(`V103 V102B region accepted area=${regionArea.toFixed(3)} fill=${fill.toFixed(3)} box=${r.x.toFixed(4)},${r.y.toFixed(4)},${r.w.toFixed(4)},${r.h.toFixed(4)}`);
-    return r;
-  },
-
-    _analyzeBoundarySet(img, relX, relY, log) {
+  _analyzeBoundarySet(img, relX, relY, log) {
     const maxDim = 900;
     const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
     const w = Math.max(1, Math.round(img.width * scale));
@@ -282,22 +210,17 @@ const PanelDetect = {
       _gutterSides: best.sides
     };
 
-    // V106 / V102D: contour/boundary-run reconstruction over the V99 result.
-    const contourRefinement = this._v102DContourRefine(lum,w,h,p,edgeCut,log);
-    if (contourRefinement && contourRefinement.edges === 4 && contourRefinement.score >= 0.48) {
-      const ratio=(contourRefinement.w*contourRefinement.h)/Math.max(0.0001,p.w*p.h);
-      if (ratio >= 0.55 && ratio <= 1.45) {
-        p={...p,x:contourRefinement.x,y:contourRefinement.y,w:contourRefinement.w,h:contourRefinement.h,_v102D:true,_v102DScore:contourRefinement.score};
-        if(log) log(`V106 V99+V102D accepted edges=4/4 score=${contourRefinement.score.toFixed(2)} areaRatio=${ratio.toFixed(3)}`);
-      }
-    }
-
     // V89: A good outer boundary set can still contain multiple panels.
     // Iteratively inspect the selected region for strong internal gutters.
     // Each split is chosen by gutter continuity/evidence, while the tap
     // determines which side survives. We do NOT choose the smallest child.
     const refined = this._splitAtInternalGuttersIterative(lum, w, h, tx, ty, p, edgeCut, quietCut, log);
     if (refined) p = refined;
+
+    // V107: one surgical tracing pass over the V99 enclosure. V99 remains
+    // authoritative when tracing is inconclusive.
+    const traced = this._v107RefineFrame(lum, w, h, p, edgeCut, log);
+    if (traced) p = traced;
 
     // V92: panel interior validation. Even a coherent outer boundary set can
     // still contain multiple visual panels if an internal gutter survived the
@@ -313,6 +236,69 @@ const PanelDetect = {
 
     if (log) log(`V99 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)} interior=clean`);
     return p;
+  },
+
+
+  // V107: trace the selected boundary candidates outward from their
+  // evidence, rather than accepting a short local fragment. This is a
+  // conservative refinement of V99: if tracing cannot produce a coherent
+  // enclosure, the original V99 result is retained.
+  _v107TraceBoundary(lum,w,h,start,dir,axis,cut){
+    const pts=[]; let pos=start;
+    const max=Math.round(Math.min(w,h)*.18);
+    for(let i=0;i<max;i++){
+      let best=-1,bestScore=0;
+      for(let off=-3;off<=3;off++){
+        const q=pos+dir*(i+off);
+        if(q<2||q>(axis==='x'?w-3:h-3)) continue;
+        const score=axis==='x'
+          ? Math.abs(lum[start*w+q]-lum[start*w+q-1]) + Math.abs(lum[start*w+q+1]-lum[start*w+q])
+          : Math.abs(lum[q*w+start]-lum[(q-1)*w+start]) + Math.abs(lum[(q+1)*w+start]-lum[q*w+start]);
+        if(score>bestScore){bestScore=score;best=q;}
+      }
+      if(best<0||bestScore<cut*.55) break;
+      pts.push(best); pos=best;
+    }
+    return pts;
+  },
+
+  _v107RefineFrame(lum,w,h,p,edgeCut,log){
+    const x=Math.round(p.x*w),y=Math.round(p.y*h);
+    const x2=Math.round((p.x+p.w)*w),y2=Math.round((p.y+p.h)*h);
+    if(x2-x<24||y2-y<24)return null;
+    // Trace from each existing V99 side. We use the side's long-axis evidence
+    // and only accept movement when it extends a boundary substantially.
+    const spanX=x2-x,spanY=y2-y;
+    const traceH=(yy)=>{
+      let best={score:0,pos:yy};
+      for(let off=-Math.round(spanY*.15);off<=Math.round(spanY*.15);off+=2){
+        const q=yy+off;if(q<2||q>h-3)continue;
+        let hit=0,n=0;for(let xx=x;xx<=x2;xx+=Math.max(2,Math.round(spanX/60))){
+          const g=Math.abs(lum[q*w+xx]-lum[q*w+Math.max(0,xx-1)])+Math.abs(lum[q*w+Math.min(w-1,xx+1)]-lum[q*w+xx]);
+          if(g>edgeCut)hit++;n++;
+        }
+        const score=hit/Math.max(1,n);if(score>best.score)best={score,pos:q};
+      }return best;
+    };
+    const traceV=(xx)=>{
+      let best={score:0,pos:xx};
+      for(let off=-Math.round(spanX*.15);off<=Math.round(spanX*.15);off+=2){
+        const q=xx+off;if(q<2||q>w-3)continue;
+        let hit=0,n=0;for(let yy=y;yy<=y2;yy+=Math.max(2,Math.round(spanY/60))){
+          const g=Math.abs(lum[yy*w+q]-lum[yy*w+Math.max(0,q-1)])+Math.abs(lum[yy*w+Math.min(w-1,q+1)]-lum[yy*w+q]);
+          if(g>edgeCut)hit++;n++;
+        }
+        const score=hit/Math.max(1,n);if(score>best.score)best={score,pos:q};
+      }return best;
+    };
+    const t=traceH(y),b=traceH(y2),l=traceV(x),r=traceV(x2);
+    const strong=[t,b,l,r].filter(e=>e.score>=.30).length;
+    if(strong<3)return null;
+    const nx=Math.min(l.pos,r.pos),ny=Math.min(t.pos,b.pos),nw=Math.abs(r.pos-l.pos),nh=Math.abs(b.pos-t.pos);
+    if(nw<24||nh<24)return null;
+    const area=(nw*nh)/(w*h);if(area<.003)return null;
+    if(log)log(`V107 frame-trace sides=${strong}/4 scores=${[t,b,l,r].map(e=>e.score.toFixed(2)).join(',')}`);
+    return {x:nx/w,y:ny/h,w:nw/w,h:nh/h,_v107Trace:true};
   },
 
   _splitAtInternalGuttersIterative(lum, w, h, tx, ty, p, edgeCut, quietCut, log) {
@@ -768,63 +754,6 @@ const PanelDetect = {
       out.push({pos, width:b-a+1, quality, span, axis});
       i=b;
     }
-  },
-
-  _v102DContourRefine(lum,w,h,p,edgeCut,log) {
-    const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-    const g=(x,y)=>{
-      x=clamp(Math.round(x),1,w-2); y=clamp(Math.round(y),1,h-2);
-      return Math.abs(lum[y*w+x]-lum[y*w+x-1])+
-             Math.abs(lum[y*w+x+1]-lum[y*w+x])+
-             Math.abs(lum[y*w+x]-lum[(y-1)*w+x])+
-             Math.abs(lum[(y+1)*w+x]-lum[y*w+x]);
-    };
-    const r={x:clamp(p.x*w,2,w-3),y:clamp(p.y*h,2,h-3),
-             x2:clamp((p.x+p.w)*w,3,w-2),y2:clamp((p.y+p.h)*h,3,h-2)};
-    if(r.x2-r.x<16 || r.y2-r.y<16) return null;
-
-    // Search a narrow band around each V99 side. Score continuity, not peak
-    // strength: a real frame should persist across much of the candidate.
-    const continuity=(hor,pos,a,b)=>{
-      const bins=40; let good=0,run=0,bestRun=0;
-      for(let k=0;k<bins;k++){
-        const aa=Math.round(a+(b-a)*k/bins), bb=Math.round(a+(b-a)*(k+1)/bins);
-        let hit=0,n=0;
-        for(let q=aa;q<=bb;q+=Math.max(1,Math.round((bb-aa)/4))){
-          if((hor?g(q,pos):g(pos,q))>edgeCut*.72) hit++;
-          n++;
-        }
-        const ok=hit/Math.max(1,n)>=.32;
-        if(ok){good++;run++;bestRun=Math.max(bestRun,run);}else run=0;
-      }
-      return {occ:good/bins,long:bestRun/bins,score:good/bins*.6+bestRun/bins*.4};
-    };
-    const seek=(hor,base,a,b)=>{
-      const maxOff=Math.max(10,Math.round(Math.min(w,h)*.025));
-      let best={pos:base,score:0,occ:0,long:0};
-      for(let off=-maxOff;off<=maxOff;off+=2){
-        const pos=base+off;
-        if(hor ? (pos<2||pos>h-3):(pos<2||pos>w-3)) continue;
-        const c=continuity(hor,pos,a,b);
-        if(c.score>best.score) best={pos,...c};
-      }
-      return best;
-    };
-    const top=seek(true,r.y,r.x,r.x2),bottom=seek(true,r.y2,r.x,r.x2);
-    const left=seek(false,r.x,r.y,r.y2),right=seek(false,r.x2,r.y,r.y2);
-    const edges=[top,bottom,left,right];
-    const strong=edges.filter(e=>e.score>=.40).length;
-    if(strong<4) {
-      if(log) log(`V102D contour rejected edges=${strong}/4`);
-      return null;
-    }
-    const x=Math.min(left.pos,right.pos), y=Math.min(top.pos,bottom.pos);
-    const x2=Math.max(left.pos,right.pos), y2=Math.max(top.pos,bottom.pos);
-    const rw=x2-x,rh=y2-y;
-    if(rw<20||rh<20) return null;
-    const score=edges.reduce((a,e)=>a+e.score,0)/4;
-    if(log) log(`V102D contour edges=4/4 score=${score.toFixed(2)}`);
-    return {x:x/w,y:y/h,w:rw/w,h:rh/h,edges:4,score};
   },
 
   _analyze(img, log) {
