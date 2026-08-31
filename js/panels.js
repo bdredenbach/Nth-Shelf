@@ -125,124 +125,116 @@ const PanelDetect = {
     if(pw*ph > (x1-x0+1)*(y1-y0+1)*.86){if(log)log('V100 hybrid MISS: unpartitioned page');return null}
     const out={x:hit[0]/w,y:hit[1]/h,w:pw/w,h:ph/h,_v100Hybrid:true};
 
-    // V102 BOUNDARY TRACE: once V100 has already proven which region
+    // V104 TRACE STABILIZER: once V100 has already proven which region
     // contains the tap, fit the four nearby ink rails instead of forcing the
     // pop-out to remain axis-aligned. This stage is intentionally NOT allowed
     // to choose a different panel; it only refines V100's four sides.
     const quad=this._refineHybridQuad(lum,w,h,hit,log);
     if(quad) out._quad=quad;
 
-    if(log)log(`V100 hybrid HIT x=${out.x.toFixed(4)} y=${out.y.toFixed(4)} w=${out.w.toFixed(4)} h=${out.h.toFixed(4)}${quad?' + V102 trace':''}`);
+    if(log)log(`V100 hybrid HIT x=${out.x.toFixed(4)} y=${out.y.toFixed(4)} w=${out.w.toFixed(4)} h=${out.h.toFixed(4)}${quad?' + V104 stabilized trace':''}`);
     return out;
   },
 
 
-  // V102 BOUNDARY TRACE: V100 still chooses the panel. Geometry now follows
-  // a coherent dark rail from end to end instead of independently rediscovering
-  // a darkest pixel at every sample. Short gaps may be bridged, but sudden jumps
-  // into nearby artwork are expensive. This stage may refine shape only; it may
-  // never select a different panel.
+  // V104 TRACE STABILIZER: V100/V99 still choose the panel seed. Geometry
+  // refinement is deliberately conservative: each side is fit as one robust,
+  // mostly-straight frame rail. Artwork may be dark, but it is not allowed to
+  // pull the trace through a sequence of locally attractive pixels. We require
+  // distributed support along the side, low residual error, sensible opposite-
+  // side agreement, and corners that stay near the proven seed rectangle.
   _refineHybridQuad(lum,w,h,hit,log) {
     const [x0,y0,x1,y1]=hit;
     const rw=x1-x0+1, rh=y1-y0+1;
     if(rw<20 || rh<20) return null;
 
-    const traceSide=(axis,guess,a0,a1)=>{
+    const fitSide=(axis,guess,a0,a1)=>{
       const span=Math.max(1,a1-a0);
       const cross=axis==='H'?h:w;
-      const radius=Math.min(46,Math.max(8,Math.round(cross*.048)));
-      const step=Math.max(1,Math.round(span/190));
-      const along=[];
-      for(let a=Math.round(a0+span*.025);a<=Math.round(a1-span*.025);a+=step) along.push(a);
-      if(along.length<14) return null;
-      const lo=Math.max(1,Math.round(guess-radius));
-      const hi=Math.min(cross-2,Math.round(guess+radius));
-      const count=hi-lo+1;
-      if(count<5) return null;
+      const radius=Math.min(42,Math.max(8,Math.round(cross*.042)));
+      const step=Math.max(1,Math.round(span/170));
+      const samples=[];
+      const aStart=Math.round(a0+span*.025), aEnd=Math.round(a1-span*.025);
 
-      // Cost of a candidate rail position. Three-pixel cross-sections reward
-      // thick frame ink. Staying reasonably near V100 is preferred but not
-      // mandatory, allowing a genuinely slanted side to walk across the panel.
-      const pixCost=(a,p)=>{
-        let v;
-        if(axis==='H') v=(lum[(p-1)*w+a]+lum[p*w+a]+lum[(p+1)*w+a])/3;
-        else v=(lum[(a-1)*w+p]+lum[a*w+p]+lum[(a+1)*w+p])/3;
-        const near=Math.abs(p-guess)*0.95;
-        // Dark rails are strongly rewarded; pale pixels can bridge a short gap.
-        const ink=v<=105 ? v*.62 : v<=155 ? 92+(v-105)*1.15 : 150+(v-155)*1.55;
-        return ink+near;
-      };
-
-      let prev=new Float64Array(count), back=[];
-      for(let j=0;j<count;j++) prev[j]=pixCost(along[0],lo+j);
-      for(let i=1;i<along.length;i++){
-        const cur=new Float64Array(count); cur.fill(1e15);
-        const bp=new Int16Array(count); bp.fill(-1);
-        for(let j=0;j<count;j++){
-          const p=lo+j;
-          const j0=Math.max(0,j-5), j1=Math.min(count-1,j+5);
-          let best=1e15,bestk=-1;
-          for(let k=j0;k<=j1;k++){
-            const delta=Math.abs(j-k);
-            const c=prev[k] + delta*7.5 + (delta>2?(delta-2)*6:0);
-            if(c<best){best=c;bestk=k;}
-          }
-          cur[j]=best+pixCost(along[i],p);
-          bp[j]=bestk;
+      for(let a=aStart;a<=aEnd;a+=step){
+        const lo=Math.max(1,Math.round(guess-radius));
+        const hi=Math.min(cross-2,Math.round(guess+radius));
+        let best=null;
+        for(let pos=lo;pos<=hi;pos++){
+          let v;
+          if(axis==='H') v=(lum[(pos-1)*w+a]+lum[pos*w+a]+lum[(pos+1)*w+a])/3;
+          else v=(lum[(a-1)*w+pos]+lum[a*w+pos]+lum[(a+1)*w+pos])/3;
+          // Strongly prefer dark, thick ink but keep a mild seed-distance prior.
+          const d=Math.abs(pos-guess);
+          const score=v + d*1.10;
+          if(!best || score<best.score) best={a,pos,v,score};
         }
-        back.push(bp); prev=cur;
+        if(best && best.v<=150) samples.push(best);
       }
-      let endj=0; for(let j=1;j<count;j++) if(prev[j]<prev[endj]) endj=j;
-      const js=new Int16Array(along.length); js[along.length-1]=endj;
-      for(let i=along.length-1;i>0;i--) js[i-1]=back[i-1][js[i]];
+      if(samples.length<14) return null;
 
-      const pts=[]; let darkN=0, maxJump=0;
-      for(let i=0;i<along.length;i++){
-        const a=along[i], p=lo+js[i];
-        let v;
-        if(axis==='H') v=(lum[(p-1)*w+a]+lum[p*w+a]+lum[(p+1)*w+a])/3;
-        else v=(lum[(a-1)*w+p]+lum[a*w+p]+lum[(a+1)*w+p])/3;
-        if(v<=125) darkN++;
-        if(i) maxJump=Math.max(maxJump,Math.abs(js[i]-js[i-1]));
-        pts.push(axis==='H'?{x:a,y:p,v}:{x:p,y:a,v});
-      }
-      const darkFrac=darkN/pts.length;
-      if(darkFrac<.43 || maxJump>5) return null;
+      const totalSlots=Math.max(1,Math.floor((aEnd-aStart)/step)+1);
+      const rawSupport=samples.length/totalSlots;
+      if(rawSupport<.46) return null;
 
-      // Fit only the darker traced samples, then trim residual outliers twice.
-      let keep=pts.filter(p=>p.v<=145);
-      let model=null;
-      for(let iter=0;iter<3;iter++){
-        if(keep.length<10) return null;
+      // Robust straight-line fit, repeatedly trimming pixels that disagree with
+      // the common rail. This is the key V104 change: the side is global first,
+      // local second, so an airplane edge cannot make the trace "turn a corner".
+      let keep=samples.slice(), model=null, residualMed=99;
+      for(let iter=0;iter<4;iter++){
+        if(keep.length<12) return null;
         if(axis==='H'){
           let sx=0,sy=0,sxx=0,sxy=0,n=keep.length;
-          for(const p of keep){sx+=p.x;sy+=p.y;sxx+=p.x*p.x;sxy+=p.x*p.y;}
+          for(const q of keep){sx+=q.a;sy+=q.pos;sxx+=q.a*q.a;sxy+=q.a*q.pos;}
           const den=n*sxx-sx*sx;
           const m=Math.abs(den)>1e-7?(n*sxy-sx*sy)/den:0, b=(sy-m*sx)/n;
-          model={m,b,axis};
-          const rs=keep.map(p=>Math.abs(p.y-(m*p.x+b))).sort((a,b)=>a-b);
-          const med=rs[Math.floor(rs.length/2)]||0, tol=Math.max(2.0,Math.min(5.0,med*2.6+1));
-          keep=keep.filter(p=>Math.abs(p.y-(m*p.x+b))<=tol);
+          model={axis,m,b};
+          const rs=keep.map(q=>Math.abs(q.pos-(m*q.a+b))).sort((a,b)=>a-b);
+          residualMed=rs[Math.floor(rs.length/2)]||0;
+          const tol=Math.max(1.8,Math.min(4.2,residualMed*2.3+1.0));
+          keep=keep.filter(q=>Math.abs(q.pos-(m*q.a+b))<=tol);
         }else{
           let sy=0,sx=0,syy=0,syx=0,n=keep.length;
-          for(const p of keep){sy+=p.y;sx+=p.x;syy+=p.y*p.y;syx+=p.y*p.x;}
+          for(const q of keep){sy+=q.a;sx+=q.pos;syy+=q.a*q.a;syx+=q.a*q.pos;}
           const den=n*syy-sy*sy;
           const m=Math.abs(den)>1e-7?(n*syx-sy*sx)/den:0, b=(sx-m*sy)/n;
-          model={m,b,axis};
-          const rs=keep.map(p=>Math.abs(p.x-(m*p.y+b))).sort((a,b)=>a-b);
-          const med=rs[Math.floor(rs.length/2)]||0, tol=Math.max(2.0,Math.min(5.0,med*2.6+1));
-          keep=keep.filter(p=>Math.abs(p.x-(m*p.y+b))<=tol);
+          model={axis,m,b};
+          const rs=keep.map(q=>Math.abs(q.pos-(m*q.a+b))).sort((a,b)=>a-b);
+          residualMed=rs[Math.floor(rs.length/2)]||0;
+          const tol=Math.max(1.8,Math.min(4.2,residualMed*2.3+1.0));
+          keep=keep.filter(q=>Math.abs(q.pos-(m*q.a+b))<=tol);
         }
       }
-      if(!model || keep.length<Math.max(10,pts.length*.34)) return null;
-      model.support=keep.length/pts.length;
+      if(!model || keep.length<12) return null;
+
+      // Require support to be spread across the rail rather than clustered in
+      // one dark object. Eight occupancy bins is cheap and very effective here.
+      const bins=new Set();
+      for(const q of keep){
+        const t=(q.a-aStart)/Math.max(1,aEnd-aStart);
+        bins.add(Math.max(0,Math.min(7,Math.floor(t*8))));
+      }
+      const coverage=bins.size/8;
+      const support=keep.length/totalSlots;
+      if(coverage<.625 || support<.38 || residualMed>3.6) return null;
+
+      // A frame side can slant, but not at implausible comic-art angles.
+      if(Math.abs(model.m)>.32) return null;
+      model.support=support; model.coverage=coverage; model.residual=residualMed;
       return model;
     };
 
-    const top=traceSide('H',y0,x0,x1), bottom=traceSide('H',y1,x0,x1);
-    const left=traceSide('V',x0,y0,y1), right=traceSide('V',x1,y0,y1);
+    const top=fitSide('H',y0,x0,x1), bottom=fitSide('H',y1,x0,x1);
+    const left=fitSide('V',x0,y0,y1), right=fitSide('V',x1,y0,y1);
     const sides=[top,bottom,left,right].filter(Boolean).length;
-    if(sides<4){if(log)log(`V102 boundary-trace MISS sides=${sides}/4`);return null;}
+    if(sides<4){if(log)log(`V104 trace-stabilizer MISS sides=${sides}/4`);return null;}
+
+    // Opposite sides should describe the same panel, not two unrelated artwork
+    // edges. Permit perspective/hand-drawn variance without allowing a wild X.
+    if(Math.abs(top.m-bottom.m)>.20 || Math.abs(left.m-right.m)>.20){
+      if(log)log('V104 trace-stabilizer MISS: opposite rails disagree');
+      return null;
+    }
 
     const intersect=(hl,vl)=>{
       const den=1-hl.m*vl.m;
@@ -254,22 +246,26 @@ const PanelDetect = {
     if(!tl||!tr||!br||!bl) return null;
     const q=[tl,tr,br,bl];
 
-    // Guard rail: traced geometry must remain recognizably the V100 panel.
-    // It may move farther than V101 because an angled rail can accumulate drift.
     const refs=[{x:x0,y:y0},{x:x1,y:y0},{x:x1,y:y1},{x:x0,y:y1}];
-    const maxDx=Math.max(16,rw*.18), maxDy=Math.max(16,rh*.18);
+    const maxDx=Math.max(14,rw*.145), maxDy=Math.max(14,rh*.145);
     for(let i=0;i<4;i++){
       if(!Number.isFinite(q[i].x)||!Number.isFinite(q[i].y)) return null;
-      if(Math.abs(q[i].x-refs[i].x)>maxDx || Math.abs(q[i].y-refs[i].y)>maxDy) {
-        if(log)log('V102 boundary-trace MISS: wandered outside V100 guard rail');
+      if(Math.abs(q[i].x-refs[i].x)>maxDx || Math.abs(q[i].y-refs[i].y)>maxDy){
+        if(log)log('V104 trace-stabilizer MISS: corner escaped seed guard rail');
         return null;
       }
     }
+
+    // Convexity/order check and area sanity stop crossed/bow-tie cutouts.
+    const cross=(a,b,c)=>(b.x-a.x)*(c.y-b.y)-(b.y-a.y)*(c.x-b.x);
+    const cs=[cross(q[0],q[1],q[2]),cross(q[1],q[2],q[3]),cross(q[2],q[3],q[0]),cross(q[3],q[0],q[1])];
+    const sameTurn=cs.every(v=>v>0)||cs.every(v=>v<0);
+    if(!sameTurn){if(log)log('V104 trace-stabilizer MISS: non-convex/crossed quad');return null;}
     const area=Math.abs(q.reduce((s,p,i)=>{const n=q[(i+1)%4];return s+p.x*n.y-n.x*p.y},0)/2);
-    if(area<rw*rh*.62 || area>rw*rh*1.34) return null;
+    if(area<rw*rh*.68 || area>rw*rh*1.25){if(log)log('V104 trace-stabilizer MISS: area guard');return null;}
 
     const nq=q.map(p=>({x:clamp01(p.x/(w-1)),y:clamp01(p.y/(h-1))}));
-    if(log)log(`V102 boundary-trace HIT support=${[top,bottom,left,right].map(s=>s.support.toFixed(2)).join('/')} tl=${nq[0].x.toFixed(4)},${nq[0].y.toFixed(4)} tr=${nq[1].x.toFixed(4)},${nq[1].y.toFixed(4)} br=${nq[2].x.toFixed(4)},${nq[2].y.toFixed(4)} bl=${nq[3].x.toFixed(4)},${nq[3].y.toFixed(4)}`);
+    if(log)log(`V104 trace-stabilizer HIT support=${[top,bottom,left,right].map(s=>s.support.toFixed(2)).join('/')} coverage=${[top,bottom,left,right].map(s=>s.coverage.toFixed(2)).join('/')} residual=${[top,bottom,left,right].map(s=>s.residual.toFixed(1)).join('/')} tl=${nq[0].x.toFixed(4)},${nq[0].y.toFixed(4)} tr=${nq[1].x.toFixed(4)},${nq[1].y.toFixed(4)} br=${nq[2].x.toFixed(4)},${nq[2].y.toFixed(4)} bl=${nq[3].x.toFixed(4)},${nq[3].y.toFixed(4)}`);
     return nq;
   },
 
@@ -480,29 +476,29 @@ const PanelDetect = {
       return null;
     }
 
-    // V103 TRACE-AUTHORITY BRIDGE: if V100 could not prove this panel, the
+    // V104 TRACE-STABILIZED AUTHORITY BRIDGE: if V100 could not prove this panel, the
     // legacy boundary set may supply a SEED rectangle, but a weak two-side
-    // seed is no longer allowed to declare victory by itself. Give V102 the
+    // seed is no longer allowed to declare victory by itself. Give V104 the
     // geometry authority first. A four-side legacy seed may still preserve
     // the stable rectangular fallback when tracing is inconclusive.
     const hx0 = Math.max(0, Math.round(p.x * w));
     const hy0 = Math.max(0, Math.round(p.y * h));
     const hx1 = Math.min(w - 1, Math.round((p.x + p.w) * w) - 1);
     const hy1 = Math.min(h - 1, Math.round((p.y + p.h) * h) - 1);
-    if (log) log(`V103 TRACE ATTEMPT from legacy seed sides=${p._gutterSides} seed=${hx0},${hy0}-${hx1},${hy1}`);
+    if (log) log(`V104 TRACE ATTEMPT from legacy seed sides=${p._gutterSides} seed=${hx0},${hy0}-${hx1},${hy1}`);
     const bridgeQuad = this._refineHybridQuad(lum, w, h, [hx0,hy0,hx1,hy1], log);
     if (bridgeQuad) {
       p._quad = bridgeQuad;
-      p._v103TraceBridge = true;
-      if (log) log('V103 TRACE HIT -> polygon authority');
+      p._v104TraceBridge = true;
+      if (log) log('V104 TRACE HIT -> stabilized polygon authority');
     } else if ((p._gutterSides || 0) < 4) {
-      if (log) log(`V103 REJECT legacy sides=${p._gutterSides}: trace did not prove missing geometry`);
+      if (log) log(`V104 REJECT legacy sides=${p._gutterSides}: trace did not prove missing geometry`);
       return null;
     } else {
-      if (log) log('V103 TRACE MISS -> preserve four-side legacy rectangle');
+      if (log) log('V104 TRACE MISS -> preserve four-side legacy rectangle');
     }
 
-    if (log) log(`V99 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)} interior=clean${bridgeQuad?' + V103 polygon':''}`);
+    if (log) log(`V99 boundary-set ACCEPTED x=${p.x.toFixed(4)} y=${p.y.toFixed(4)} w=${p.w.toFixed(4)} h=${p.h.toFixed(4)} sides=${p._gutterSides} score=${best.score.toFixed(2)} hOverlap=${Math.round(best.hOverlap)} vOverlap=${Math.round(best.vOverlap)} hPair=${best.hPair.toFixed(2)} vPair=${best.vPair.toFixed(2)} interior=clean${bridgeQuad?' + V104 polygon':''}`);
     return p;
   },
 

@@ -2760,7 +2760,7 @@ async setMode(mode) {
    this.panelOverlayActive = false;
    this.setFocusDim(true, true);
 
-   // V102 boundary trace: hybrid panels may carry a true four-corner polygon.
+   // V104 trace stabilizer: qualified panels may carry a conservative four-corner polygon.
    // Build the overlay from its bounding box, then clip the canvas to the
    // fitted frame. Legacy/V73/V92 rectangles continue unchanged.
    const quad = Array.isArray(panel._quad) && panel._quad.length === 4 ? panel._quad : null;
@@ -2811,7 +2811,7 @@ async setMode(mode) {
      overlay.style.clipPath = clip;
      overlay.style.webkitClipPath = clip;
      overlay.dataset.geometry = 'quad';
-     if (this.debugMode) this.debugLog(`[V102 boundary trace] polygon clip ${clip}`);
+     if (this.debugMode) this.debugLog(`[V104 trace stabilizer] polygon clip ${clip}`);
    }
 
    const canvas = document.createElement("canvas");
