@@ -1,9 +1,10 @@
-// NTH SHELF V108 — V99 CONTROL / TAP-SEEDED PERSISTENT ENCLOSURE
-// V73 remains authoritative whenever it contains the tap. V99 remains the
-// exact fallback control. V108 is allowed to replace V99 only when V99 looks
-// fragment-like and a tap-seeded enclosure persists across six or more
-// boundary-evidence levels, contains the V99 fragment, and expands it.
-// V99 misses and all other V99 results remain unchanged.
+// NTH SHELF V109 — FIRST-PASS PERSISTENT-ENCLOSURE WITNESS
+// V99 and the V108 persistent-enclosure algorithm remain unchanged. V109
+// exposes that same conservative enclosure witness to a V73 first-pass hit,
+// because a successful V73 lookup previously returned before V108 could run.
+// The V73 rectangle remains exact unless a persistent enclosure contains it
+// and passes V108's existing containment/expansion gates. V99 misses and all
+// other fallback results remain unchanged.
 
 const PanelDetect = {
   detect(imgUrl, log) {
@@ -18,6 +19,41 @@ const PanelDetect = {
         }
       };
       img.onerror = () => resolve([]);
+      img.src = imgUrl;
+    });
+  },
+
+  // V109: validate an already-selected V73 rectangle with the exact V108
+  // witness. This is intentionally not another detector or another threshold
+  // set. It only fixes the call-path gap demonstrated by the device recording:
+  // V73 can split one real panel into artwork-shaped bands, then prevent the
+  // tap-local enclosure logic from ever seeing the tap.
+  repairDetectedPanel(imgUrl, relX, relY, baseline, log) {
+    return new Promise((resolve) => {
+      if (!baseline) {
+        resolve(null);
+        return;
+      }
+
+      const img = new Image();
+      img.onload = () => {
+        try {
+          if (log) log("V109 first-pass witness armed for V73 hit");
+          const enclosure = this._analyzePersistentEnclosure(img, relX, relY, log);
+          const selected = this._v108SelectResult(baseline, enclosure, log, "V73");
+          if (selected === enclosure) {
+            resolve({ ...enclosure, _v109FirstPassRepair: true });
+            return;
+          }
+          resolve(baseline);
+        }
+        catch (err) {
+          console.warn("V109 first-pass witness failed:", err);
+          if (log) log(`V109 first-pass ERROR: ${err.message}`);
+          resolve(baseline);
+        }
+      };
+      img.onerror = () => resolve(baseline);
       img.src = imgUrl;
     });
   },
@@ -82,14 +118,14 @@ const PanelDetect = {
       (shortSide <= 0.145 && aspect >= 4.0);
   },
 
-  _v108SelectResult(baseline, enclosure, log) {
+  _v108SelectResult(baseline, enclosure, log, controlName = "V99") {
     if (!enclosure) {
-      if (log) log("V108 persistent enclosure MISS -> preserve V99 control");
+      if (log) log(`V108 persistent enclosure MISS -> preserve ${controlName} control`);
       return baseline || null;
     }
 
     if (!baseline) {
-      if (log) log("V108 repair-only control preserved: no V99 fragment to repair");
+      if (log) log(`V108 repair-only control preserved: no ${controlName} fragment to repair`);
       return null;
     }
 
@@ -108,14 +144,14 @@ const PanelDetect = {
       log(`V108 control comparison: baselineInside=${baselineInside.toFixed(2)} expansion=${expansion.toFixed(2)} stability=${enclosure._v108Stability}`);
     }
 
-    // Repair only the failure under test: a V99 fragment sitting inside a
-    // substantially larger, repeatedly observed enclosing region.
+    // Repair only the failure under test: a baseline fragment sitting inside
+    // a substantially larger, repeatedly observed enclosing region.
     if (baselineInside >= 0.82 && expansion >= 1.45 && expansion <= 12) {
-      if (log) log("V108 persistent enclosure REPLACES contained V99 fragment");
+      if (log) log(`V108 persistent enclosure REPLACES contained ${controlName} fragment`);
       return enclosure;
     }
 
-    if (log) log("V108 evidence not decisive -> preserve exact V99 control");
+    if (log) log(`V108 evidence not decisive -> preserve exact ${controlName} control`);
     return baseline;
   },
 

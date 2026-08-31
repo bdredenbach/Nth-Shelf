@@ -2389,12 +2389,33 @@ async setMode(mode) {
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
 
-   // PASS 1: V73 baseline. A successful V73 hit is final and cannot be
-   // replaced by the fallback.
+   // PASS 1: V73 baseline. V109 gives the already-selected V73 rectangle to
+   // V108's conservative persistent-enclosure witness before zooming. This is
+   // not a new detector: uncertain evidence returns the exact V73 rectangle.
    const panel = this.findPanelAt(relXImg, relYImg);
    if (panel) {
-     if (this.debugMode) this.debugLog("[V92] PASS 1 HIT (V73 baseline)");
-     this.zoomToPanel(panel, stageRect, imgRect);
+     if (this.debugMode) this.debugLog("[V109] PASS 1 HIT (V73 baseline) -> persistent witness");
+     const pageIndex = this.index;
+     const comicId = this.comic?.id;
+     const url = await this.getPageUrl(pageIndex);
+     let selected = panel;
+
+     if (url && PanelDetect.repairDetectedPanel) {
+       const logger = this.debugMode
+         ? (msg) => this.debugLog(`[V109 first-pass p${pageIndex}] ${msg}`)
+         : null;
+       selected = await PanelDetect.repairDetectedPanel(url, relXImg, relYImg, panel, logger) || panel;
+     }
+
+     // The witness is asynchronous. Never apply a result to a page that moved
+     // while its source image was loading.
+     if (this.comic?.id !== comicId || this.index !== pageIndex) return;
+     if (this.debugMode) {
+       this.debugLog(selected._v109FirstPassRepair
+         ? "[V109] PASS 1 V73 fragment repaired"
+         : "[V109] PASS 1 exact V73 control preserved");
+     }
+     this.zoomToPanel(selected, stageRect, imgRect);
      return;
    }
 
