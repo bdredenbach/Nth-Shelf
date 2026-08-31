@@ -1,6 +1,6 @@
-// NTH SHELF V103 — V99 + V102A REGION/BARRIER HYBRID
-// V99 remains the candidate-generation baseline. V102A is added as a second-stage
-// region/barrier interpretation layer inside the V99 candidate. If V102A cannot
+// NTH SHELF V103 — V99 + V102B REGION/BARRIER HYBRID
+// V99 remains the candidate-generation baseline. V102B is added as a second-stage
+// region/barrier interpretation layer inside the V99 candidate. If V102B cannot
 // produce a substantial enclosed region, V99 is left untouched.
 
 const PanelDetect = {
@@ -42,7 +42,7 @@ const PanelDetect = {
   },
 
 
-  // V103 / V102A integration: use V99's boundary candidate as the structural
+  // V103 / V102B integration: use V99's boundary candidate as the structural
   // hypothesis, then test that hypothesis as a region enclosed by black/grey
   // barriers. V99 remains the source of candidate boundaries; region reasoning
   // is a second-stage interpretation layer, not a replacement detector.
@@ -100,7 +100,7 @@ const PanelDetect = {
     // enclosed subregion that remains plausibly the tapped panel.
     const substantial = regionArea >= .18 && fill >= .28 && regionRelArea >= candArea * .28;
     if (!containment || !substantial) {
-      if (log) log(`V103 V102A region rejected area=${regionArea.toFixed(3)} fill=${fill.toFixed(3)} relArea=${regionRelArea.toFixed(4)}`);
+      if (log) log(`V103 V102B region rejected area=${regionArea.toFixed(3)} fill=${fill.toFixed(3)} relArea=${regionRelArea.toFixed(4)}`);
       return null;
     }
 
@@ -111,12 +111,126 @@ const PanelDetect = {
       _regionFill:fill,
       _regionRelArea:regionRelArea
     };
-    if (log) log(`V103 V102A region accepted area=${regionArea.toFixed(3)} fill=${fill.toFixed(3)} box=${r.x.toFixed(4)},${r.y.toFixed(4)},${r.w.toFixed(4)},${r.h.toFixed(4)}`);
+    if (log) log(`V103 V102B region accepted area=${regionArea.toFixed(3)} fill=${fill.toFixed(3)} box=${r.x.toFixed(4)},${r.y.toFixed(4)},${r.w.toFixed(4)},${r.h.toFixed(4)}`);
     return r;
   },
 
-  // V102A: black/grey separator barriers. This is deliberately independent of
-  // V99's boundary ranking; V99 supplies the candidate region to constrain the
+  /* V102B_RESEARCH_LAYER */
+  // Research idea B: panel-outline + corner/T-junction evidence.
+  // This is a second-stage evaluator over V99 candidates. It does not replace
+  // V99's detector or alter candidate geometry.
+  _v102BOutlineEvidence(img, p, log) {
+    const canvas = document.createElement("canvas");
+    const scale = Math.min(1, 900 / Math.max(img.width, img.height));
+    const w = Math.max(1, Math.round(img.width * scale));
+    const h = Math.max(1, Math.round(img.height * scale));
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext("2d", {willReadFrequently:true});
+    ctx.drawImage(img,0,0,w,h);
+    const d = ctx.getImageData(0,0,w,h).data;
+    const lum = new Float32Array(w*h);
+    for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+      const i=(y*w+x)*4;
+      lum[y*w+x]=.299*d[i]+.587*d[i+1]+.114*d[i+2];
+    }
+
+    const x0=Math.max(1,Math.round(p.x*w));
+    const y0=Math.max(1,Math.round(p.y*h));
+    const x1=Math.min(w-2,Math.round((p.x+p.w)*w));
+    const y1=Math.min(h-2,Math.round((p.y+p.h)*h));
+    if(x1<=x0 || y1<=y0) return {score:0,sides:0,corners:0,junction:0};
+
+    const cut=this._v102BEdgeCut(lum,w,h);
+    const grad=(x,y)=>{
+      const xm=Math.max(0,x-1),xp=Math.min(w-1,x+1);
+      const ym=Math.max(0,y-1),yp=Math.min(h-1,y+1);
+      return Math.abs(lum[y*w+x]-lum[y*w+xm])+
+             Math.abs(lum[y*w+xp]-lum[y*w+x])+
+             Math.abs(lum[y*w+x]-lum[ym*w+x])+
+             Math.abs(lum[yp*w+x]-lum[y*w+x]);
+    };
+    const side=(horizontal,pos,a,b)=>{
+      let hit=0,n=0;
+      const step=Math.max(1,Math.round((b-a)/120));
+      for(let q=a;q<=b;q+=step){
+        if(horizontal ? grad(q,pos)>cut : grad(pos,q)>cut) hit++;
+        n++;
+      }
+      return hit/Math.max(1,n);
+    };
+
+    const top=side(true,y0,x0,x1), bottom=side(true,y1,x0,x1);
+    const left=side(false,x0,y0,y1), right=side(false,x1,y0,y1);
+    const sides=[top,bottom,left,right];
+    const sideCount=sides.filter(v=>v>=.20).length;
+
+    // Corner/T-junction proxy: both directional responses should be present
+    // near a real panel corner rather than only one isolated line.
+    const r=Math.max(4,Math.round(Math.min(w,h)*.018));
+    const corner=(cx,cy)=>{
+      let hh=0,vv=0,n=0;
+      for(let d=-r;d<=r;d+=2){
+        const xx=Math.max(1,Math.min(w-2,cx+d));
+        const yy=Math.max(1,Math.min(h-2,cy+d));
+        if(grad(xx,cy)>cut) hh++;
+        if(grad(cx,yy)>cut) vv++;
+        n++;
+      }
+      return Math.min(1,(hh+vv)/(2*n));
+    };
+    const corners=[
+      corner(x0,y0),corner(x1,y0),corner(x0,y1),corner(x1,y1)
+    ];
+    const cornerAvg=corners.reduce((a,b)=>a+b,0)/4;
+    const junctionAvg=[
+      Math.min(top,left),Math.min(top,right),
+      Math.min(bottom,left),Math.min(bottom,right)
+    ].reduce((a,b)=>a+b,0)/4;
+
+    const score=(sideCount/4)*.50+cornerAvg*.25+junctionAvg*.25;
+    if(log) log(`V102B outline sides=${sideCount}/4 corner=${cornerAvg.toFixed(2)} junction=${junctionAvg.toFixed(2)} score=${score.toFixed(2)}`);
+    return {score,sides:sideCount,corners:cornerAvg,junction:junctionAvg};
+  },
+
+  _v102BEdgeCut(lum,w,h){
+    let sum=0,n=0;
+    const sx=Math.max(1,Math.floor(w/45)), sy=Math.max(1,Math.floor(h/45));
+    for(let y=1;y<h-1;y+=sy) for(let x=1;x<w-1;x+=sx){
+      const xm=Math.max(0,x-1),xp=Math.min(w-1,x+1);
+      const ym=Math.max(0,y-1),yp=Math.min(h-1,y+1);
+      sum += Math.abs(lum[y*w+x]-lum[y*w+xm])+
+             Math.abs(lum[y*w+xp]-lum[y*w+x])+
+             Math.abs(lum[y*w+x]-lum[ym*w+x])+
+             Math.abs(lum[yp*w+x]-lum[y*w+x]);
+      n++;
+    }
+    return Math.max(12,(sum/Math.max(1,n))*2);
+  },
+
+  _applyV102B(img,candidates,log){
+    if(!Array.isArray(candidates)||!candidates.length) return candidates;
+
+    const scored=candidates.map((p,i)=>({
+      p,i,e:this._v102BOutlineEvidence(img,p,log)
+    }));
+    const strong=scored.filter(s=>s.e.sides>=2 && s.e.score>=.42);
+    if(!strong.length) return candidates;
+
+    // Preserve V99 geometry. V102B only identifies the structurally strongest
+    // V99 candidate so downstream V99 selection can use the annotation.
+    strong.sort((a,b)=>b.e.score-a.e.score);
+    const best=strong[0];
+    const result=candidates.slice();
+    result[best.i]=Object.assign({},best.p,{
+      _v102B:true,
+      _v102BOutlineScore:best.e.score,
+      _v102BCornerScore:best.e.corners,
+      _v102BJunctionScore:best.e.junction
+    });
+    if(log) log(`V102B selected V99 candidate #${best.i}; geometry preserved`);
+    return result;
+  },
+// V99's boundary ranking; V99 supplies the candidate region to constrain the
   // flood, while this method decides which pixels are separated within it.
   _buildResearchBarriers(lum, w, h, edgeCut, quietCut) {
     const hBarrier = new Uint8Array(w*h);
@@ -321,7 +435,7 @@ const PanelDetect = {
       _gutterSides: best.sides
     };
 
-    // V103: V99 has found a coherent boundary set. Now give V102A a chance
+    // V103: V99 has found a coherent boundary set. Now give V102B a chance
     // to interpret that candidate as a real enclosed region. We only accept
     // the region result when it remains substantial and fully inside V99's
     // candidate. Otherwise V99 continues unchanged.
@@ -330,9 +444,9 @@ const PanelDetect = {
       const shrinkX = (regionRefinement.w * regionRefinement.h) / Math.max(.0001, p.w*p.h);
       if (shrinkX >= .28 && shrinkX <= 1.02) {
         p = { ...p, ...regionRefinement, _v99RegionHybrid:true };
-        if (log) log(`V103 V99+V102A HYBRID accepted areaRatio=${shrinkX.toFixed(3)}`);
+        if (log) log(`V103 V99+V102B HYBRID accepted areaRatio=${shrinkX.toFixed(3)}`);
       } else if (log) {
-        log(`V103 V99+V102A region not adopted areaRatio=${shrinkX.toFixed(3)}`);
+        log(`V103 V99+V102B region not adopted areaRatio=${shrinkX.toFixed(3)}`);
       }
     }
 
