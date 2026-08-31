@@ -169,6 +169,23 @@ const PanelDetect = {
       const axisBonus = (hs.length >= 2 ? 0.5 : 0) + (vs.length >= 2 ? 0.5 : 0);
       score += axisBonus;
 
+      // V100: modestly penalize an unnecessarily large enclosing rectangle.
+      // This is intentionally applied only after V99's valid boundary set has
+      // been assembled. Evidence remains primary; size only nudges close
+      // candidates toward the tighter frame around the tap.
+      const tapX = tx;
+      const tapY = ty;
+      const rectW = Math.max(1, R.pos - L.pos);
+      const rectH = Math.max(1, B.pos - T.pos);
+      const tapDistX = Math.min(Math.abs(tapX - L.pos), Math.abs(R.pos - tapX));
+      const tapDistY = Math.min(Math.abs(tapY - T.pos), Math.abs(B.pos - tapY));
+      const excessX = Math.max(0, rectW - Math.max(24, tapDistX * 2));
+      const excessY = Math.max(0, rectH - Math.max(24, tapDistY * 2));
+      const excessRatio =
+        Math.min(1.5, excessX / Math.max(24, rectW)) +
+        Math.min(1.5, excessY / Math.max(24, rectH));
+      score -= 0.28 * excessRatio;
+
       // V99: the V98 nearest-valid idea must act at the actual boundary-set
       // selection point. Keep evidence quality primary, but when two coherent
       // sets are close in score, prefer the set whose valid boundaries are
