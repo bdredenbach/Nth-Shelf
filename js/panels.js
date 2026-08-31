@@ -22,6 +22,112 @@ const PanelDetect = {
     });
   },
 
+  // V100 HYBRID TEST: page-structure partitioner.
+  // Builds a conservative guillotine partition from sustained black frame bands
+  // and quiet gutter bands. It never invents missing sides from only two local
+  // candidates. If it cannot prove a region, the existing V99/V92 fallback runs.
+  detectTapHybrid(imgUrl, relX, relY, log) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        try { resolve(this._analyzeHybrid(img, relX, relY, log)); }
+        catch (err) {
+          console.warn("V100 hybrid failed:", err);
+          if (log) log(`V100 hybrid ERROR: ${err.message}`);
+          resolve(null);
+        }
+      };
+      img.onerror = () => resolve(null);
+      img.src = imgUrl;
+    });
+  },
+
+  _analyzeHybrid(img, relX, relY, log) {
+    const maxDim = 900;
+    const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+    const w = Math.max(1, Math.round(img.width * scale));
+    const h = Math.max(1, Math.round(img.height * scale));
+    const tx = clamp01(relX) * (w - 1), ty = clamp01(relY) * (h - 1);
+    const c = document.createElement("canvas"); c.width=w; c.height=h;
+    const cx = c.getContext("2d", {willReadFrequently:true}); cx.drawImage(img,0,0,w,h);
+    const d = cx.getImageData(0,0,w,h).data;
+    const lum = new Uint8Array(w*h);
+    for(let i=0,j=0;i<d.length;i+=4,j++) lum[j]=Math.round(.299*d[i]+.587*d[i+1]+.114*d[i+2]);
+
+    // Find the comic's outer content rails from sustained dark runs near edges.
+    const darkCut = 62;
+    const rowRun = (y,x0,x1)=>{let best=0,run=0;for(let x=x0;x<=x1;x++){if(lum[y*w+x]<=darkCut){run++;best=Math.max(best,run)}else run=0}return best};
+    const colRun = (x,y0,y1)=>{let best=0,run=0;for(let y=y0;y<=y1;y++){if(lum[y*w+x]<=darkCut){run++;best=Math.max(best,run)}else run=0}return best};
+    let x0=0,x1=w-1,y0=0,y1=h-1;
+    const minHR=Math.round(w*.55), minVR=Math.round(h*.55);
+    for(let y=0;y<Math.round(h*.12);y++) if(rowRun(y,0,w-1)>=minHR){y0=y;break}
+    for(let y=h-1;y>Math.round(h*.88);y--) if(rowRun(y,0,w-1)>=minHR){y1=y;break}
+    for(let x=0;x<Math.round(w*.12);x++) if(colRun(x,0,h-1)>=minVR){x0=x;break}
+    for(let x=w-1;x>Math.round(w*.88);x--) if(colRun(x,0,h-1)>=minVR){x1=x;break}
+
+    const regions=[];
+    const split=(a,b,c0,d0,depth)=>{
+      const rw=b-a+1, rh=d0-c0+1;
+      if(depth>7 || rw<w*.075 || rh<h*.055){regions.push([a,c0,b,d0]);return}
+      let best=null;
+      // Candidate horizontal separator: sustained dark run OR narrow quiet gutter,
+      // measured across the CURRENT region (so partial dividers become full after
+      // their parent split).
+      const my=Math.max(4,Math.round(rh*.05));
+      for(let y=c0+my;y<=d0-my;y++){
+        let dark=0, quiet=0, run=0, bestRun=0, sum=0, sq=0;
+        for(let x=a;x<=b;x++){
+          const v=lum[y*w+x]; if(v<=darkCut){dark++;run++;bestRun=Math.max(bestRun,run)}else run=0;
+          sum+=v; sq+=v*v;
+        }
+        const n=rw, mean=sum/n, sd=Math.sqrt(Math.max(0,sq/n-mean*mean));
+        const darkFrac=dark/n, runFrac=bestRun/n;
+        const blackScore=(runFrac>=.64 && darkFrac>=.48)?(runFrac+darkFrac):0;
+        const gutterScore=(sd<=10 && (mean>=165 || mean<=150))?(.95 + (10-sd)/20):0;
+        const score=Math.max(blackScore,gutterScore);
+        if(score>0 && (!best || score>best.score)) best={axis:'H',pos:y,score};
+      }
+      const mx=Math.max(4,Math.round(rw*.05));
+      for(let x=a+mx;x<=b-mx;x++){
+        let dark=0,run=0,bestRun=0,sum=0,sq=0;
+        for(let y=c0;y<=d0;y++){
+          const v=lum[y*w+x]; if(v<=darkCut){dark++;run++;bestRun=Math.max(bestRun,run)}else run=0;
+          sum+=v; sq+=v*v;
+        }
+        const n=rh, mean=sum/n, sd=Math.sqrt(Math.max(0,sq/n-mean*mean));
+        const darkFrac=dark/n, runFrac=bestRun/n;
+        const blackScore=(runFrac>=.64 && darkFrac>=.48)?(runFrac+darkFrac):0;
+        const gutterScore=(sd<=10 && (mean>=165 || mean<=150))?(.95 + (10-sd)/20):0;
+        const score=Math.max(blackScore,gutterScore);
+        if(score>0 && (!best || score>best.score+.03)) best={axis:'V',pos:x,score};
+      }
+      if(!best){regions.push([a,c0,b,d0]);return}
+      const pad=Math.max(2,Math.round((best.axis==='H'?rh:rw)*.006));
+      if(best.axis==='H'){
+        if(best.pos-c0 < rh*.09 || d0-best.pos < rh*.09){regions.push([a,c0,b,d0]);return}
+        split(a,b,c0,Math.max(c0,best.pos-pad),depth+1);
+        split(a,b,Math.min(d0,best.pos+pad),d0,depth+1);
+      }else{
+        if(best.pos-a < rw*.09 || b-best.pos < rw*.09){regions.push([a,c0,b,d0]);return}
+        split(a,Math.max(a,best.pos-pad),c0,d0,depth+1);
+        split(Math.min(b,best.pos+pad),b,c0,d0,depth+1);
+      }
+    };
+    split(x0,x1,y0,y1,0);
+
+    // Conservative cleanup and tap selection. Reject implausibly tiny fragments.
+    const clean=regions.filter(r=>((r[2]-r[0]+1)*(r[3]-r[1]+1)) >= w*h*.018);
+    if(log) log(`V100 hybrid partition rails=${x0},${y0}-${x1},${y1} regions=${clean.length}`);
+    const hit=clean.find(r=>tx>=r[0]&&tx<=r[2]&&ty>=r[1]&&ty<=r[3]);
+    if(!hit){if(log)log('V100 hybrid MISS: tap not in proven region');return null}
+    const pw=hit[2]-hit[0]+1, ph=hit[3]-hit[1]+1;
+    // If the result is nearly the whole page, hybrid learned nothing; defer.
+    if(pw*ph > (x1-x0+1)*(y1-y0+1)*.86){if(log)log('V100 hybrid MISS: unpartitioned page');return null}
+    const out={x:hit[0]/w,y:hit[1]/h,w:pw/w,h:ph/h,_v100Hybrid:true};
+    if(log)log(`V100 hybrid HIT x=${out.x.toFixed(4)} y=${out.y.toFixed(4)} w=${out.w.toFixed(4)} h=${out.h.toFixed(4)}`);
+    return out;
+  },
+
   // V99 fallback: V91 coherent boundary SET plus internal-gutter refinement. A boundary is
   // not selected because it is merely nearest, smallest, or largest. Each
   // side is scored for continuity and edge support, then opposite/adjacent

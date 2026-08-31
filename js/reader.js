@@ -2398,11 +2398,26 @@ async setMode(mode) {
      return;
    }
 
-   // PASS 2: only the exact V73-missed tap gets the new local geometry test.
-   if (this.debugMode) this.debugLog("[V92] PASS 1 MISS -> V91 boundary-set + V92 interior validation");
+   // PASS 2A: V100 hybrid structural partitioner. It must prove a page region
+   // from sustained frame/gutter structure; otherwise it defers to V99/V92.
+   if (this.debugMode) this.debugLog("[V100] PASS 1 MISS -> hybrid structural partition");
    const pageIndex = this.index;
    const comicId = this.comic?.id;
    const url = await this.getPageUrl(pageIndex);
+   if (url && PanelDetect.detectTapHybrid) {
+     const hybridLogger = this.debugMode
+       ? (msg) => this.debugLog(`[V100 hybrid p${pageIndex}] ${msg}`)
+       : null;
+     const hybrid = await PanelDetect.detectTapHybrid(url, relXImg, relYImg, hybridLogger);
+     if (this.comic?.id === comicId && this.index === pageIndex && hybrid) {
+       if (this.debugMode) this.debugLog("[V100] PASS 2A HIT -> zoom hybrid panel");
+       this.zoomToPanel(hybrid, stageRect, imgRect);
+       return;
+     }
+     if (this.debugMode) this.debugLog("[V100] PASS 2A MISS -> legacy fallback");
+   }
+
+   // PASS 2B: unchanged V99/V92 fallback.
    if (url && PanelDetect.detectTapLocalFallback) {
      const logger = this.debugMode
        ? (msg) => this.debugLog(`[V92 fallback p${pageIndex}] ${msg}`)
