@@ -1,6 +1,6 @@
-// NTH SHELF V2.77.108 — TAP-SEEDED PERSISTENT ENCLOSURE EXPERIMENT
+// NTH SHELF V2.77.109 — FIRST-PASS PERSISTENT-ENCLOSURE WITNESS
 
-const CACHE_NAME = "nth-shelf-shell-2.77.108";
+const CACHE_NAME = "nth-shelf-shell-2.77.109";
 const SHELL_FILES = [
   "./",
   "./index.html",
