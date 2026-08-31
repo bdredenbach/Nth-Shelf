@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.02 Boundary Trace Test**
+**Version 2.78.03 Trace Authority Test**
 
 
 ## 🔒 Privacy
@@ -115,6 +115,11 @@ Nth Shelf is designed around local-first storage. Your comics are stored on your
 ## 📜 License
 This project is licensed under the **MIT License**. The license applies to the software and does not grant rights to comic artwork or other copyrighted material imported by users.
 
+
+
+## V2.78.03 Trace Authority Test — Routing Branch
+
+V2.78.03 keeps the V2.78.00 stable hybrid detector and the V102 boundary tracer, but changes who is allowed to declare a difficult fallback panel complete. If V100 misses, V99/V92 may provide a legacy seed rectangle. V102 then gets the first chance to prove the four true rails and supply a polygon. A legacy candidate supported by only two sides is rejected when tracing cannot prove the missing geometry; it can no longer silently become the final pop-out. Four-side legacy candidates remain available as a safe rectangular fallback. Debug logs explicitly report `HYBRID MISS`, `TRACE ATTEMPT`, `TRACE HIT/MISS`, and whether the renderer receives a polygon or rectangle. V2.78.00 remains the stable baseline.
 
 ## V2.78.02 Boundary Trace Test — Geometry Branch
 
