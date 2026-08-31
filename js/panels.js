@@ -115,160 +115,7 @@ const PanelDetect = {
     return r;
   },
 
-  /* V102B_RESEARCH_LAYER */
-  // Research idea B: panel-outline + corner/T-junction evidence.
-  // This is a second-stage evaluator over V99 candidates. It does not replace
-  // V99's detector or alter candidate geometry.
-  _v102BOutlineEvidence(img, p, log) {
-    const canvas = document.createElement("canvas");
-    const scale = Math.min(1, 900 / Math.max(img.width, img.height));
-    const w = Math.max(1, Math.round(img.width * scale));
-    const h = Math.max(1, Math.round(img.height * scale));
-    canvas.width = w; canvas.height = h;
-    const ctx = canvas.getContext("2d", {willReadFrequently:true});
-    ctx.drawImage(img,0,0,w,h);
-    const d = ctx.getImageData(0,0,w,h).data;
-    const lum = new Float32Array(w*h);
-    for(let y=0;y<h;y++) for(let x=0;x<w;x++){
-      const i=(y*w+x)*4;
-      lum[y*w+x]=.299*d[i]+.587*d[i+1]+.114*d[i+2];
-    }
-
-    const x0=Math.max(1,Math.round(p.x*w));
-    const y0=Math.max(1,Math.round(p.y*h));
-    const x1=Math.min(w-2,Math.round((p.x+p.w)*w));
-    const y1=Math.min(h-2,Math.round((p.y+p.h)*h));
-    if(x1<=x0 || y1<=y0) return {score:0,sides:0,corners:0,junction:0};
-
-    const cut=this._v102BEdgeCut(lum,w,h);
-    const grad=(x,y)=>{
-      const xm=Math.max(0,x-1),xp=Math.min(w-1,x+1);
-      const ym=Math.max(0,y-1),yp=Math.min(h-1,y+1);
-      return Math.abs(lum[y*w+x]-lum[y*w+xm])+
-             Math.abs(lum[y*w+xp]-lum[y*w+x])+
-             Math.abs(lum[y*w+x]-lum[ym*w+x])+
-             Math.abs(lum[yp*w+x]-lum[y*w+x]);
-    };
-    const side=(horizontal,pos,a,b)=>{
-      let hit=0,n=0;
-      const step=Math.max(1,Math.round((b-a)/120));
-      for(let q=a;q<=b;q+=step){
-        if(horizontal ? grad(q,pos)>cut : grad(pos,q)>cut) hit++;
-        n++;
-      }
-      return hit/Math.max(1,n);
-    };
-
-    const top=side(true,y0,x0,x1), bottom=side(true,y1,x0,x1);
-    const left=side(false,x0,y0,y1), right=side(false,x1,y0,y1);
-    const sides=[top,bottom,left,right];
-    const sideCount=sides.filter(v=>v>=.20).length;
-
-    // Corner/T-junction proxy: both directional responses should be present
-    // near a real panel corner rather than only one isolated line.
-    const r=Math.max(4,Math.round(Math.min(w,h)*.018));
-    const corner=(cx,cy)=>{
-      let hh=0,vv=0,n=0;
-      for(let d=-r;d<=r;d+=2){
-        const xx=Math.max(1,Math.min(w-2,cx+d));
-        const yy=Math.max(1,Math.min(h-2,cy+d));
-        if(grad(xx,cy)>cut) hh++;
-        if(grad(cx,yy)>cut) vv++;
-        n++;
-      }
-      return Math.min(1,(hh+vv)/(2*n));
-    };
-    const corners=[
-      corner(x0,y0),corner(x1,y0),corner(x0,y1),corner(x1,y1)
-    ];
-    const cornerAvg=corners.reduce((a,b)=>a+b,0)/4;
-    const junctionAvg=[
-      Math.min(top,left),Math.min(top,right),
-      Math.min(bottom,left),Math.min(bottom,right)
-    ].reduce((a,b)=>a+b,0)/4;
-
-    const score=(sideCount/4)*.50+cornerAvg*.25+junctionAvg*.25;
-    if(log) log(`V102B outline sides=${sideCount}/4 corner=${cornerAvg.toFixed(2)} junction=${junctionAvg.toFixed(2)} score=${score.toFixed(2)}`);
-    return {score,sides:sideCount,corners:cornerAvg,junction:junctionAvg};
-  },
-
-  _v102BEdgeCut(lum,w,h){
-    let sum=0,n=0;
-    const sx=Math.max(1,Math.floor(w/45)), sy=Math.max(1,Math.floor(h/45));
-    for(let y=1;y<h-1;y+=sy) for(let x=1;x<w-1;x+=sx){
-      const xm=Math.max(0,x-1),xp=Math.min(w-1,x+1);
-      const ym=Math.max(0,y-1),yp=Math.min(h-1,y+1);
-      sum += Math.abs(lum[y*w+x]-lum[y*w+xm])+
-             Math.abs(lum[y*w+xp]-lum[y*w+x])+
-             Math.abs(lum[y*w+x]-lum[ym*w+x])+
-             Math.abs(lum[yp*w+x]-lum[y*w+x]);
-      n++;
-    }
-    return Math.max(12,(sum/Math.max(1,n))*2);
-  },
-
-  _applyV102B(img,candidates,log){
-    if(!Array.isArray(candidates)||!candidates.length) return candidates;
-
-    const scored=candidates.map((p,i)=>({
-      p,i,e:this._v102BOutlineEvidence(img,p,log)
-    }));
-    const strong=scored.filter(s=>s.e.sides>=2 && s.e.score>=.42);
-    if(!strong.length) return candidates;
-
-    // Preserve V99 geometry. V102B only identifies the structurally strongest
-    // V99 candidate so downstream V99 selection can use the annotation.
-    strong.sort((a,b)=>b.e.score-a.e.score);
-    const best=strong[0];
-    const result=candidates.slice();
-    result[best.i]=Object.assign({},best.p,{
-      _v102B:true,
-      _v102BOutlineScore:best.e.score,
-      _v102BCornerScore:best.e.corners,
-      _v102BJunctionScore:best.e.junction
-    });
-    if(log) log(`V102B selected V99 candidate #${best.i}; geometry preserved`);
-    return result;
-  },
-// V99's boundary ranking; V99 supplies the candidate region to constrain the
-  // flood, while this method decides which pixels are separated within it.
-  _buildResearchBarriers(lum, w, h, edgeCut, quietCut) {
-    const hBarrier = new Uint8Array(w*h);
-    const vBarrier = new Uint8Array(w*h);
-    const dark = 72;
-    const run = Math.max(2, Math.round(Math.min(w,h)*.012));
-
-    for (let y=1;y<h-1;y++) {
-      let start=-1;
-      for (let x=1;x<w-1;x++) {
-        const g=Math.abs(lum[y*w+x]-lum[(y-1)*w+x]) + Math.abs(lum[(y+1)*w+x]-lum[y*w+x]);
-        const candidate=(lum[y*w+x] <= dark) || (g <= quietCut && g <= edgeCut*.62);
-        if(candidate){ if(start<0) start=x; }
-        else if(start>=0){
-          if(x-start>=run) for(let xx=start;xx<x;xx++) hBarrier[y*w+xx]=1;
-          start=-1;
-        }
-      }
-      if(start>=0 && w-1-start>=run) for(let xx=start;xx<w-1;xx++) hBarrier[y*w+xx]=1;
-    }
-
-    for (let x=1;x<w-1;x++) {
-      let start=-1;
-      for (let y=1;y<h-1;y++) {
-        const g=Math.abs(lum[y*w+x]-lum[y*w+x-1]) + Math.abs(lum[y*w+x+1]-lum[y*w+x]);
-        const candidate=(lum[y*w+x] <= dark) || (g <= quietCut && g <= edgeCut*.62);
-        if(candidate){ if(start<0) start=y; }
-        else if(start>=0){
-          if(y-start>=run) for(let yy=start;yy<y;yy++) vBarrier[yy*w+x]=1;
-          start=-1;
-        }
-      }
-      if(start>=0 && h-1-start>=run) for(let yy=start;yy<h-1;yy++) vBarrier[yy*w+x]=1;
-    }
-    return {hBarrier,vBarrier};
-  },
-
-  _analyzeBoundarySet(img, relX, relY, log) {
+    _analyzeBoundarySet(img, relX, relY, log) {
     const maxDim = 900;
     const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
     const w = Math.max(1, Math.round(img.width * scale));
@@ -435,18 +282,13 @@ const PanelDetect = {
       _gutterSides: best.sides
     };
 
-    // V103: V99 has found a coherent boundary set. Now give V102B a chance
-    // to interpret that candidate as a real enclosed region. We only accept
-    // the region result when it remains substantial and fully inside V99's
-    // candidate. Otherwise V99 continues unchanged.
-    const regionRefinement = this._researchRegionFromV99(lum, w, h, tx, ty, p, edgeCut, quietCut, log);
-    if (regionRefinement) {
-      const shrinkX = (regionRefinement.w * regionRefinement.h) / Math.max(.0001, p.w*p.h);
-      if (shrinkX >= .28 && shrinkX <= 1.02) {
-        p = { ...p, ...regionRefinement, _v99RegionHybrid:true };
-        if (log) log(`V103 V99+V102B HYBRID accepted areaRatio=${shrinkX.toFixed(3)}`);
-      } else if (log) {
-        log(`V103 V99+V102B region not adopted areaRatio=${shrinkX.toFixed(3)}`);
+    // V105 / V102C: recursive enclosure refinement over the V99 result.
+    const recursiveRefinement = this._v102CRecursiveRefine(lum,w,h,p,edgeCut,log);
+    if (recursiveRefinement && recursiveRefinement.edges >= 3 && recursiveRefinement.score >= 0.42) {
+      const ratio=(recursiveRefinement.w*recursiveRefinement.h)/Math.max(0.0001,p.w*p.h);
+      if (ratio >= 0.55 && ratio <= 1.25) {
+        p={...p,x:recursiveRefinement.x,y:recursiveRefinement.y,w:refined.w,h:refined.h,_v102C:true,_v102CScore:recursiveRefinement.score};
+        if(log) log(`V105 V99+V102C accepted edges=${recursiveRefinement.edges}/4 score=${recursiveRefinement.score.toFixed(2)} areaRatio=${ratio.toFixed(3)}`);
       }
     }
 
@@ -926,6 +768,23 @@ const PanelDetect = {
       out.push({pos, width:b-a+1, quality, span, axis});
       i=b;
     }
+  },
+
+  _v102CRecursiveRefine(lum,w,h,p,edgeCut,log) {
+    const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+    let r={x:clamp(p.x*w,2,w-3),y:clamp(p.y*h,2,h-3),x2:clamp((p.x+p.w)*w,3,w-2),y2:clamp((p.y+p.h)*h,3,h-2)};
+    const g=(x,y)=>{x=clamp(Math.round(x),1,w-2);y=clamp(Math.round(y),1,h-2);return Math.abs(lum[y*w+x]-lum[y*w+x-1])+Math.abs(lum[y*w+x+1]-lum[y*w+x])+Math.abs(lum[y*w+x]-lum[(y-1)*w+x])+Math.abs(lum[(y+1)*w+x]-lum[y*w+x]);};
+    const cont=(hor,pos,a,b)=>{let good=0,bins=32;for(let k=0;k<bins;k++){const aa=Math.round(a+(b-a)*k/bins),bb=Math.round(a+(b-a)*(k+1)/bins);let hit=0,n=0;for(let q=aa;q<=bb;q+=Math.max(1,Math.round((bb-aa)/4))){if((hor?g(q,pos):g(pos,q))>edgeCut*.72)hit++;n++;}if(hit/Math.max(1,n)>=.30)good++;}return good/bins;};
+    const step=Math.max(2,Math.round(Math.min(w,h)/500));
+    for(let pass=0;pass<3;pass++){
+      const cur=[cont(true,r.y,r.x,r.x2),cont(true,r.y2,r.x,r.x2),cont(false,r.x,r.y,r.y2),cont(false,r.x2,r.y,r.y2)];
+      const defs=[['y',-1,true],['y2',1,true],['x',-1,false],['x2',1,false]];
+      for(let i=0;i<4;i++){if(cur[i]>=.48)continue;const key=defs[i][0],dir=defs[i][1],hor=defs[i][2],base=r[key];let best=cur[i],bp=base;for(let n=1;n<=28;n++){const pos=base+dir*n*step;if(hor){if(pos<2||pos>h-3)break;const v=cont(true,pos,r.x,r.x2);if(v>best+.025){best=v;bp=pos;}}else{if(pos<2||pos>w-3)break;const v=cont(false,pos,r.y,r.y2);if(v>best+.025){best=v;bp=pos;}}}if(best>.38)r[key]=bp;}
+    }
+    const e=[cont(true,r.y,r.x,r.x2),cont(true,r.y2,r.x,r.x2),cont(false,r.x,r.y,r.y2),cont(false,r.x2,r.y,r.y2)];
+    const edges=e.filter(v=>v>=.48).length,score=e.reduce((a,b)=>a+b,0)/4;
+    if(log)log(`V102C recursive enclosure edges=${edges}/4 score=${score.toFixed(2)}`);
+    return {x:r.x/w,y:r.y/h,w:(r.x2-r.x)/w,h:(r.y2-r.y)/h,edges,score};
   },
 
   _analyze(img, log) {
