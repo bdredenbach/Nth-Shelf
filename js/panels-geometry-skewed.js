@@ -1,8 +1,7 @@
-// NTH SHELF V2.78.05 — SKEWED PANEL GEOMETRY
+// NTH SHELF V2.78.06 — SKEWED RAIL ACQUISITION
 // Geometry-only engine for trapezoids/slanted quadrilaterals. Panel identity
-// comes from panels.js. This module may refine the four rails, but may not pick
-// a different panel. It returns null unless the fitted shape is convincingly
-// non-orthogonal and remains close to the seed.
+// comes from panels.js. Unlike V2.78.05, each side may migrate progressively
+// away from the orthogonal seed while remaining a coherent dark rail.
 
 const PanelGeometrySkewed = {
   refine(imgUrl, panel, log) {
@@ -41,31 +40,97 @@ const PanelGeometrySkewed = {
     const rw=x1-x0+1, rh=y1-y0+1;
     if (rw < 24 || rh < 24) return null;
 
-    const fitSide = (axis, guess, a0, a1) => {
+    const sampleInk = (axis, a, pos) => {
+      let best=255;
+      for(let t=-2;t<=2;t++){
+        const p=Math.round(pos+t);
+        if(axis==='H'){
+          if(p<1||p>=h-1||a<1||a>=w-1) continue;
+          const v=(lum[(p-1)*w+a]+lum[p*w+a]+lum[(p+1)*w+a])/3;
+          if(v<best) best=v;
+        } else {
+          if(p<1||p>=w-1||a<1||a>=h-1) continue;
+          const v=(lum[(a-1)*w+p]+lum[a*w+p]+lum[(a+1)*w+p])/3;
+          if(v<best) best=v;
+        }
+      }
+      return best;
+    };
+
+    // Search for a complete straight-ish rail as a line hypothesis first.
+    // This is the key V106 change: distance from the seed is judged mainly at
+    // the rail midpoint, so a legitimate diagonal can drift substantially at
+    // its ends without being punished on every sample.
+    const acquireRail = (axis, guess, a0, a1, label) => {
       const span=Math.max(1,a1-a0);
       const cross=axis==='H'?h:w;
-      const radius=Math.min(55,Math.max(10,Math.round(cross*.055)));
-      const step=Math.max(1,Math.round(span/190));
-      const samples=[];
-      const aStart=Math.round(a0+span*.02), aEnd=Math.round(a1-span*.02);
-      for(let a=aStart;a<=aEnd;a+=step){
-        let best=null;
-        const lo=Math.max(1,Math.round(guess-radius)), hi=Math.min(cross-2,Math.round(guess+radius));
-        for(let pos=lo;pos<=hi;pos++){
-          let v;
-          if(axis==='H') v=(lum[(pos-1)*w+a]+lum[pos*w+a]+lum[(pos+1)*w+a])/3;
-          else v=(lum[(a-1)*w+pos]+lum[a*w+pos]+lum[(a+1)*w+pos])/3;
-          // dark-thick ink wins, but remaining near the seed still matters
-          const score=v + Math.abs(pos-guess)*0.82;
-          if(!best || score<best.score) best={a,pos,v,score};
-        }
-        if(best && best.v<=158) samples.push(best);
-      }
-      if(samples.length<12) return null;
-      const totalSlots=Math.max(1,Math.floor((aEnd-aStart)/step)+1);
-      if(samples.length/totalSlots<.38) return null;
+      const mid=(a0+a1)/2;
+      const offsetRadius=Math.min(64,Math.max(14,Math.round(cross*.070)));
+      const slopeMax=Math.min(.48, Math.max(.20, (offsetRadius*1.75)/Math.max(40,span*.5)));
+      const evalStep=Math.max(2,Math.round(span/110));
+      const aStart=Math.round(a0+span*.025), aEnd=Math.round(a1-span*.025);
+      let best=null;
 
-      let keep=samples.slice(), model=null, residualMed=99;
+      // Coarse-to-fine slope scan. A true comic rail generally has sustained
+      // dark support and a long contiguous run; speed-lines usually do not.
+      for(let pass=0;pass<2;pass++){
+        const slopeStep=pass===0?.025:.006;
+        const offStep=pass===0?4:1;
+        const mLo=best?Math.max(-slopeMax,best.m-.035):-slopeMax;
+        const mHi=best?Math.min(slopeMax,best.m+.035):slopeMax;
+        const oLo=best?Math.max(-offsetRadius,best.off-7):-offsetRadius;
+        const oHi=best?Math.min(offsetRadius,best.off+7):offsetRadius;
+        let passBest=best;
+        for(let m=mLo;m<=mHi+1e-9;m+=slopeStep){
+          for(let off=oLo;off<=oHi;off+=offStep){
+            let dark=0, veryDark=0, total=0, longest=0, run=0, lumSum=0;
+            for(let a=aStart;a<=aEnd;a+=evalStep){
+              const pos=guess+off+m*(a-mid);
+              if(pos<2||pos>=cross-2){ run=0; continue; }
+              const v=sampleInk(axis,a,pos);
+              total++; lumSum+=v;
+              if(v<=166){ dark++; run++; if(run>longest) longest=run; } else run=0;
+              if(v<=105) veryDark++;
+            }
+            if(total<10) continue;
+            const support=dark/total, strong=veryDark/total, continuity=longest/total;
+            // Favor sustained rails. Offset at midpoint costs a little; slope
+            // itself is not punished because skew is the thing we're seeking.
+            const score=support*2.15 + continuity*1.35 + strong*.55 - (lumSum/total)/420 - Math.abs(off)/(offsetRadius*4.0);
+            const cand={axis,m,off,b:guess+off-m*mid,support,continuity,strong,meanLum:lumSum/total,score};
+            if(!passBest || cand.score>passBest.score) passBest=cand;
+          }
+        }
+        best=passBest;
+      }
+      if(!best) return null;
+
+      // Reject short accidental artwork lines before refinement.
+      if(best.support<.34 || best.continuity<.20 || (best.support<.44 && best.continuity<.32)){
+        if(log) log(`SKEWED rail ${label} weak support=${best.support.toFixed(2)} run=${best.continuity.toFixed(2)}`);
+        return null;
+      }
+
+      // Pull actual dark samples in a narrow corridor around the winning line,
+      // then robustly refit. This keeps the final rail attached to ink rather
+      // than to the coarse hypothesis grid.
+      const slots=[];
+      const refineStep=Math.max(1,Math.round(span/175));
+      for(let a=aStart;a<=aEnd;a+=refineStep){
+        const predicted=best.m*a+best.b;
+        let pick=null;
+        for(let dd=-6;dd<=6;dd++){
+          const pos=Math.round(predicted+dd);
+          if(pos<2||pos>=cross-2) continue;
+          const v=sampleInk(axis,a,pos);
+          const score=v+Math.abs(dd)*3.0;
+          if(!pick||score<pick.score) pick={a,pos,v,score};
+        }
+        if(pick&&pick.v<=174) slots.push(pick);
+      }
+      if(slots.length<12) return null;
+
+      let keep=slots.slice(), model=null, residualMed=99;
       for(let iter=0;iter<4;iter++){
         if(keep.length<10) return null;
         let sa=0,sp=0,saa=0,sap=0,n=keep.length;
@@ -75,23 +140,31 @@ const PanelGeometrySkewed = {
         model={axis,m,b};
         const rs=keep.map(q=>Math.abs(q.pos-(m*q.a+b))).sort((a,b)=>a-b);
         residualMed=rs[Math.floor(rs.length/2)]||0;
-        const tol=Math.max(2.0,Math.min(5.2,residualMed*2.5+1.2));
+        const tol=Math.max(2.2,Math.min(6.0,residualMed*2.8+1.4));
         keep=keep.filter(q=>Math.abs(q.pos-(m*q.a+b))<=tol);
       }
-      if(!model || keep.length<10) return null;
+      if(!model||keep.length<10) return null;
       const bins=new Set();
       for(const q of keep){
         const t=(q.a-aStart)/Math.max(1,aEnd-aStart);
-        bins.add(Math.max(0,Math.min(7,Math.floor(t*8))));
+        bins.add(Math.max(0,Math.min(9,Math.floor(t*10))));
       }
-      const coverage=bins.size/8, support=keep.length/totalSlots;
-      if(coverage<.50 || support<.30 || residualMed>4.6 || Math.abs(model.m)>.42) return null;
-      model.support=support; model.coverage=coverage; model.residual=residualMed;
+      const totalSlots=Math.max(1,Math.floor((aEnd-aStart)/refineStep)+1);
+      model.support=keep.length/totalSlots;
+      model.coverage=bins.size/10;
+      model.residual=residualMed;
+      model.continuity=best.continuity;
+      model.offsetMid=(model.m*mid+model.b)-guess;
+      if(model.coverage<.50 || model.support<.26 || residualMed>5.4 || Math.abs(model.m)>.52) return null;
+      if(Math.abs(model.offsetMid)>offsetRadius*.92) return null;
+      if(log) log(`SKEWED rail ${label} HIT m=${model.m.toFixed(3)} support=${model.support.toFixed(2)} cover=${model.coverage.toFixed(2)} run=${best.continuity.toFixed(2)}`);
       return model;
     };
 
-    const top=fitSide('H',y0,x0,x1), bottom=fitSide('H',y1,x0,x1);
-    const left=fitSide('V',x0,y0,y1), right=fitSide('V',x1,y0,y1);
+    const top=acquireRail('H',y0,x0,x1,'top');
+    const bottom=acquireRail('H',y1,x0,x1,'bottom');
+    const left=acquireRail('V',x0,y0,y1,'left');
+    const right=acquireRail('V',x1,y0,y1,'right');
     const sides=[top,bottom,left,right].filter(Boolean).length;
     if(sides<4){ if(log) log(`SKEWED MISS rails=${sides}/4`); return null; }
 
@@ -104,10 +177,11 @@ const PanelGeometrySkewed = {
     const q=[intersect(top,left),intersect(top,right),intersect(bottom,right),intersect(bottom,left)];
     if(q.some(p=>!p||!Number.isFinite(p.x)||!Number.isFinite(p.y))) return null;
 
-    // Keep corners close enough to the stable detector's seed to prevent the
-    // skewed engine from changing panel identity.
     const refs=[{x:x0,y:y0},{x:x1,y:y0},{x:x1,y:y1},{x:x0,y:y1}];
-    const maxDx=Math.max(18,rw*.20), maxDy=Math.max(18,rh*.20);
+    // A skewed rail is allowed more endpoint drift than V105, while the final
+    // polygon still has to overlap the stable seed strongly enough to preserve
+    // panel identity.
+    const maxDx=Math.max(24,rw*.32), maxDy=Math.max(24,rh*.28);
     for(let i=0;i<4;i++) if(Math.abs(q[i].x-refs[i].x)>maxDx || Math.abs(q[i].y-refs[i].y)>maxDy){
       if(log) log('SKEWED MISS corner escaped seed'); return null;
     }
@@ -116,15 +190,15 @@ const PanelGeometrySkewed = {
     const cs=[cross(q[0],q[1],q[2]),cross(q[1],q[2],q[3]),cross(q[2],q[3],q[0]),cross(q[3],q[0],q[1])];
     if(!(cs.every(v=>v>0)||cs.every(v=>v<0))){ if(log) log('SKEWED MISS non-convex'); return null; }
     const area=Math.abs(q.reduce((s,p,i)=>{const n=q[(i+1)%4];return s+p.x*n.y-n.x*p.y},0)/2);
-    if(area<rw*rh*.60 || area>rw*rh*1.35){ if(log) log('SKEWED MISS area'); return null; }
+    if(area<rw*rh*.52 || area>rw*rh*1.48){ if(log) log('SKEWED MISS area'); return null; }
 
-    // Router only uses this engine if the result is materially non-orthogonal.
     const cornerShift=Math.max(...q.map((p,i)=>Math.hypot(p.x-refs[i].x,p.y-refs[i].y)));
     const slopeSignal=Math.max(Math.abs(top.m),Math.abs(bottom.m),Math.abs(left.m),Math.abs(right.m));
-    const skewed = slopeSignal >= .028 || cornerShift >= Math.max(6,Math.min(rw,rh)*.035);
+    const skewed = slopeSignal >= .024 || cornerShift >= Math.max(5,Math.min(rw,rh)*.030);
     if(!skewed){ if(log) log(`SKEWED DECLINE slope=${slopeSignal.toFixed(3)} shift=${cornerShift.toFixed(1)}`); return null; }
 
-    const nq=q.map(p=>({x:clamp01(p.x/(w-1)),y:clamp01(p.y/(h-1))}));
+    const clamp = (v)=>Math.max(0,Math.min(1,v));
+    const nq=q.map(p=>({x:clamp(p.x/(w-1)),y:clamp(p.y/(h-1))}));
     const out={...panel,_quad:nq,_geometryType:'skewed'};
     if(log) log(`SKEWED HIT slope=${slopeSignal.toFixed(3)} shift=${cornerShift.toFixed(1)} support=${[top,bottom,left,right].map(s=>s.support.toFixed(2)).join('/')}`);
     return out;
