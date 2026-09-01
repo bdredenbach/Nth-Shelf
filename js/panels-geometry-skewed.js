@@ -1,4 +1,4 @@
-// NTH SHELF V2.78.06 — SKEWED RAIL ACQUISITION
+// NTH SHELF V2.78.07 — SKEWED CLASSIFIER + CORNER FREEDOM
 // Geometry-only engine for trapezoids/slanted quadrilaterals. Panel identity
 // comes from panels.js. Unlike V2.78.05, each side may migrate progressively
 // away from the orthogonal seed while remaining a coherent dark rail.
@@ -178,12 +178,26 @@ const PanelGeometrySkewed = {
     if(q.some(p=>!p||!Number.isFinite(p.x)||!Number.isFinite(p.y))) return null;
 
     const refs=[{x:x0,y:y0},{x:x1,y:y0},{x:x1,y:y1},{x:x0,y:y1}];
-    // A skewed rail is allowed more endpoint drift than V105, while the final
-    // polygon still has to overlap the stable seed strongly enough to preserve
-    // panel identity.
-    const maxDx=Math.max(24,rw*.32), maxDy=Math.max(24,rh*.28);
-    for(let i=0;i<4;i++) if(Math.abs(q[i].x-refs[i].x)>maxDx || Math.abs(q[i].y-refs[i].y)>maxDy){
-      if(log) log('SKEWED MISS corner escaped seed'); return null;
+
+    // V2.78.07: corner freedom is directional instead of using one fixed box.
+    // A corner may legitimately escape the orthogonal seed when one of its
+    // adjacent rails is strongly oblique and well-supported. We still keep a
+    // hard ceiling so a rail cannot run off into unrelated artwork.
+    const railOblique = (r)=>Math.abs(r.m);
+    const railTrust = (r)=>Math.max(0,Math.min(1,(r.support*.65)+(r.coverage*.35)));
+    const cornerRails=[[top,left],[top,right],[bottom,right],[bottom,left]];
+    for(let i=0;i<4;i++){
+      const [ra,rb]=cornerRails[i];
+      const ob=Math.max(railOblique(ra),railOblique(rb));
+      const trust=Math.min(railTrust(ra),railTrust(rb));
+      const bonus=Math.min(.34, ob*.62) * Math.max(.45, trust);
+      const maxDx=Math.max(26, rw*(.30+bonus));
+      const maxDy=Math.max(26, rh*(.26+bonus));
+      const dx=Math.abs(q[i].x-refs[i].x), dy=Math.abs(q[i].y-refs[i].y);
+      if(dx>maxDx || dy>maxDy){
+        if(log) log(`SKEWED MISS corner ${i} escaped dx=${dx.toFixed(1)}/${maxDx.toFixed(1)} dy=${dy.toFixed(1)}/${maxDy.toFixed(1)} ob=${ob.toFixed(3)}`);
+        return null;
+      }
     }
 
     const cross=(a,b,c)=>(b.x-a.x)*(c.y-b.y)-(b.y-a.y)*(c.x-b.x);
@@ -193,14 +207,40 @@ const PanelGeometrySkewed = {
     if(area<rw*rh*.52 || area>rw*rh*1.48){ if(log) log('SKEWED MISS area'); return null; }
 
     const cornerShift=Math.max(...q.map((p,i)=>Math.hypot(p.x-refs[i].x,p.y-refs[i].y)));
-    const slopeSignal=Math.max(Math.abs(top.m),Math.abs(bottom.m),Math.abs(left.m),Math.abs(right.m));
-    const skewed = slopeSignal >= .024 || cornerShift >= Math.max(5,Math.min(rw,rh)*.030);
-    if(!skewed){ if(log) log(`SKEWED DECLINE slope=${slopeSignal.toFixed(3)} shift=${cornerShift.toFixed(1)}`); return null; }
+    const slopes={top:Math.abs(top.m),bottom:Math.abs(bottom.m),left:Math.abs(left.m),right:Math.abs(right.m)};
+    const slopeSignal=Math.max(slopes.top,slopes.bottom,slopes.left,slopes.right);
+
+    // V2.78.07 classifier: one genuinely oblique rail is enough evidence when
+    // it is trustworthy. This avoids averaging a trapezoid back into an
+    // "orthogonal" decision just because the other three rails are nearly flat.
+    const trustedOblique = [top,bottom,left,right].some(r => Math.abs(r.m)>=.055 && r.support>=.42 && r.coverage>=.60);
+    const opposingDivergence = Math.max(Math.abs(top.m-bottom.m), Math.abs(left.m-right.m));
+    const skewed = trustedOblique || opposingDivergence>=.045 || slopeSignal>=.030 || cornerShift>=Math.max(6,Math.min(rw,rh)*.035);
+    if(!skewed){
+      if(log) log(`SKEWED DECLINE slope=${slopeSignal.toFixed(3)} div=${opposingDivergence.toFixed(3)} shift=${cornerShift.toFixed(1)}`);
+      return null;
+    }
+
+    // Preserve panel identity: the stable seed center must remain inside the
+    // final quadrilateral, and the polygon must meaningfully overlap the seed.
+    const seedCenter={x:(x0+x1)/2,y:(y0+y1)/2};
+    const pointInQuad=(p,poly)=>{
+      let sign=0;
+      for(let i=0;i<4;i++){
+        const a=poly[i], b=poly[(i+1)%4];
+        const z=(b.x-a.x)*(p.y-a.y)-(b.y-a.y)*(p.x-a.x);
+        if(Math.abs(z)<1e-6) continue;
+        const sgn=z>0?1:-1;
+        if(!sign) sign=sgn; else if(sign!==sgn) return false;
+      }
+      return true;
+    };
+    if(!pointInQuad(seedCenter,q)){ if(log) log('SKEWED MISS seed center outside polygon'); return null; }
 
     const clamp = (v)=>Math.max(0,Math.min(1,v));
     const nq=q.map(p=>({x:clamp(p.x/(w-1)),y:clamp(p.y/(h-1))}));
     const out={...panel,_quad:nq,_geometryType:'skewed'};
-    if(log) log(`SKEWED HIT slope=${slopeSignal.toFixed(3)} shift=${cornerShift.toFixed(1)} support=${[top,bottom,left,right].map(s=>s.support.toFixed(2)).join('/')}`);
+    if(log) log(`SKEWED HIT slope=${slopeSignal.toFixed(3)} div=${opposingDivergence.toFixed(3)} shift=${cornerShift.toFixed(1)} support=${[top,bottom,left,right].map(s=>s.support.toFixed(2)).join('/')}`);
     return out;
   }
 };
