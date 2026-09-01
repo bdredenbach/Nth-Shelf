@@ -2397,8 +2397,9 @@ async setMode(mode) {
      : null;
    const refineGeometry = async (seed) => {
      if (!seed) return null;
-     if (!url || typeof PanelGeometry === 'undefined' || !PanelGeometry.refine) return seed;
-     return (await PanelGeometry.refine(url, seed, geometryLogger)) || seed;
+     const seeded = { ...seed, _tap: { x: relXImg, y: relYImg } };
+     if (!url || typeof PanelGeometry === 'undefined' || !PanelGeometry.refine) return seeded;
+     return (await PanelGeometry.refine(url, seeded, geometryLogger)) || seeded;
    };
 
    // PASS 1: V73 baseline identifies the panel. Geometry is now a separate
