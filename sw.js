@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.08 — TAP-ANCHORED ENCLOSURE
+// NTH SHELF V2.78.09 — SKEWED OWNERSHIP
 
-const CACHE_NAME = "nth-shelf-shell-2.78.08";
+const CACHE_NAME = "nth-shelf-shell-2.78.09";
 const SHELL_FILES = [
   "./",
   "./index.html",

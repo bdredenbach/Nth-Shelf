@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.08 Tap-Anchored Enclosure Test**
+**Version 2.78.09 Skewed Ownership Test**
 
 
 ## 🔒 Privacy
@@ -143,6 +143,10 @@ V2.78.02 is an experimental geometry branch built on the V2.78.00 stable hybrid 
 
 This release establishes the structural hybrid detector as the baseline for future panel-geometry improvements. Internal debug messages continue to use the `V100 hybrid` prefix so test logs remain comparable with the successful prototype run.
 
+
+## V2.78.09 Skewed Ownership Test
+
+V2.78.09 changes the geometry contract rather than the stable detector. When the skewed engine proves at least three strong rails and has trusted non-orthogonal evidence, it now claims temporary ownership of that tap instead of immediately surrendering to orthogonal geometry. A missing fourth rail is reacquired at the scale of the stable panel seed. If the first four-rail polygon is too small, the owned skewed path performs one controlled outward expansion pass, favoring rails near the expected frame distance while preserving the detected slopes. Orthogonal geometry remains the fallback only when skewed ownership or completion fails. Large/page-sized polygons are still rejected, and the final polygon must remain convex and contain the tap. V2.78.00 remains the stable production baseline.
 
 ## V2.78.08 Tap-Anchored Enclosure Test
 
