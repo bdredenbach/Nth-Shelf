@@ -1,313 +1,228 @@
-// NTH SHELF V2.78.10 — SKEW PROOF GATE
-// Geometry-only engine for trapezoids/slanted quadrilaterals.
-// V2.78.10 keeps the V2.78.09 ownership/completion path, but ownership now
-// requires PAIRWISE geometric proof of skew. A lone oblique rail is not enough.
-// This protects ordinary orthogonal panels from being claimed by artwork lines.
+// NTH SHELF V2.78.11 — VERTEX / ANGLE OWNERSHIP CLASSIFIER
+//
+// This module intentionally DOES NOT try to pop the whole skewed panel yet.
+// Its only job in V2.78.11 is to answer one question reliably:
+//   "Does the local four-corner geometry around this tapped panel prove that
+//    skewed geometry, rather than orthogonal geometry, should own the tap?"
+//
+// The full-frame expansion problem is deliberately deferred.  If ownership is
+// proven, the router records SKEWED ownership but still renders the stable seed
+// rectangle.  That lets us tune classification without damaging panel pop-outs.
 
 const PanelGeometrySkewed = {
-  refine(imgUrl, panel, log) {
-    if (!imgUrl || !panel) return Promise.resolve(null);
+  classify(imgUrl, panel, log) {
+    if (!imgUrl || !panel) return Promise.resolve({ owns:false, reason:'missing-input' });
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
-        try { resolve(this._analyze(img, panel, log)); }
+        try { resolve(this._classify(img, panel, log)); }
         catch (err) {
-          console.warn('Skewed geometry failed:', err);
-          if (log) log(`SKEWED ERROR: ${err.message}`);
-          resolve(null);
+          console.warn('Skewed ownership classifier failed:', err);
+          if (log) log(`VERTEX CLASSIFIER ERROR: ${err.message}`);
+          resolve({ owns:false, reason:'error' });
         }
       };
-      img.onerror = () => resolve(null);
+      img.onerror = () => resolve({ owns:false, reason:'image-error' });
       img.src = imgUrl;
     });
   },
 
-  _analyze(img, panel, log) {
+  // Compatibility: the router now calls classify(), but keeping refine() makes
+  // the module safe if an older caller is still present somewhere in the shell.
+  async refine(imgUrl, panel, log) {
+    const result = await this.classify(imgUrl, panel, log);
+    return result && result.owns ? { ...panel, _geometryOwner:'skewed', _skewEvidence:result } : null;
+  },
+
+  _classify(img, panel, log) {
     const maxDim = 900;
     const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
     const w = Math.max(1, Math.round(img.width * scale));
     const h = Math.max(1, Math.round(img.height * scale));
-    const c = document.createElement('canvas'); c.width = w; c.height = h;
-    const cx = c.getContext('2d', { willReadFrequently: true });
-    cx.drawImage(img, 0, 0, w, h);
-    const d = cx.getImageData(0, 0, w, h).data;
-    const lum = new Uint8Array(w * h);
-    for (let i=0,j=0;i<d.length;i+=4,j++) lum[j]=Math.round(.299*d[i]+.587*d[i+1]+.114*d[i+2]);
+    const canvas = document.createElement('canvas');
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext('2d', { willReadFrequently:true });
+    ctx.drawImage(img, 0, 0, w, h);
+    const rgba = ctx.getImageData(0, 0, w, h).data;
+    const lum = new Uint8Array(w*h);
+    for (let i=0,j=0;i<rgba.length;i+=4,j++) {
+      lum[j] = Math.round(.299*rgba[i] + .587*rgba[i+1] + .114*rgba[i+2]);
+    }
 
-    const x0 = Math.max(1, Math.round(panel.x * w));
-    const y0 = Math.max(1, Math.round(panel.y * h));
-    const x1 = Math.min(w-2, Math.round((panel.x + panel.w) * w)-1);
-    const y1 = Math.min(h-2, Math.round((panel.y + panel.h) * h)-1);
-    const rw=x1-x0+1, rh=y1-y0+1;
-    if (rw < 24 || rh < 24) return null;
+    const x0 = Math.max(2, Math.round(panel.x*w));
+    const y0 = Math.max(2, Math.round(panel.y*h));
+    const x1 = Math.min(w-3, Math.round((panel.x+panel.w)*w)-1);
+    const y1 = Math.min(h-3, Math.round((panel.y+panel.h)*h)-1);
+    const rw = x1-x0+1, rh = y1-y0+1;
+    if (rw < 26 || rh < 26) return { owns:false, reason:'seed-too-small' };
 
-    const tapNorm = panel._tap || {x:panel.x+panel.w/2,y:panel.y+panel.h/2};
-    const tx = Math.max(2,Math.min(w-3,tapNorm.x*(w-1)));
-    const ty = Math.max(2,Math.min(h-3,tapNorm.y*(h-1)));
-    if(log) log(`SKEWED tap-anchor px=${tx.toFixed(1)},${ty.toFixed(1)} seed=${x0},${y0}-${x1},${y1}`);
+    const tap = panel._tap || {x:panel.x+panel.w/2, y:panel.y+panel.h/2};
+    const tx = Math.max(2, Math.min(w-3, tap.x*(w-1)));
+    const ty = Math.max(2, Math.min(h-3, tap.y*(h-1)));
+    if (log) log(`VERTEX CLASSIFIER start tap=${tx.toFixed(1)},${ty.toFixed(1)} seed=${x0},${y0}-${x1},${y1}`);
 
-    const sampleInk = (axis, a, pos) => {
-      let best=255;
-      for(let t=-2;t<=2;t++){
-        const p=Math.round(pos+t);
-        if(axis==='H'){
-          if(p<1||p>=h-1||a<1||a>=w-1) continue;
-          const v=(lum[(p-1)*w+a]+lum[p*w+a]+lum[(p+1)*w+a])/3;
-          if(v<best) best=v;
-        } else {
-          if(p<1||p>=w-1||a<1||a>=h-1) continue;
-          const v=(lum[(a-1)*w+p]+lum[a*w+p]+lum[(a+1)*w+p])/3;
-          if(v<best) best=v;
-        }
-      }
-      return best;
+    const pixelLum = (x,y) => {
+      x=Math.max(1,Math.min(w-2,Math.round(x)));
+      y=Math.max(1,Math.min(h-2,Math.round(y)));
+      return (lum[(y-1)*w+x]+lum[y*w+x]+lum[(y+1)*w+x]+lum[y*w+x-1]+lum[y*w+x+1])/5;
     };
 
-    // Find a sustained line that ENCLOSES the tap. Instead of beginning at the
-    // old rectangle edge, candidate anchors are scanned outward from the tap.
-    // Among lines with adequate structural proof, the nearest one wins.
-    const acquireTapRail = (axis, side, a0, a1, label, mode='nearest') => {
-      const span=Math.max(1,a1-a0);
-      const cross=axis==='H'?h:w;
-      const tapA=axis==='H'?tx:ty;
-      const tapCross=axis==='H'?ty:tx;
-      const seedGuess = label==='top'?y0:label==='bottom'?y1:label==='left'?x0:x1;
-      const outwardSign=(side==='neg')?-1:1;
-      const seedDist=Math.abs(seedGuess-tapCross);
-      const maxDist=Math.min(cross*.72, Math.max(seedDist*1.55, (axis==='H'?rh:rw)*.82, 42));
-      const baseMinDist=Math.max(5, Math.min(18, (axis==='H'?rh:rw)*.035));
-      // Ownership completion deliberately excludes tiny interior rails and searches
-      // around the scale already established by the stable panel seed.
-      const minDist = mode==='expand' ? Math.max(baseMinDist, seedDist*.48) : baseMinDist;
-      const aStart=Math.max(2,Math.round(a0+span*.02));
-      const aEnd=Math.min((axis==='H'?w:h)-3,Math.round(a1-span*.02));
-      const evalStep=Math.max(2,Math.round(span/105));
-      const slopeMax=.52;
+    // Fit one local side around a seed edge.  The candidate may lean, but its
+    // intersection corners must still live near the seed corners.  This is an
+    // ownership classifier, not a page-wide rail hunt.
+    const fitSide = (kind) => {
+      const horizontal = kind==='top' || kind==='bottom';
+      const neg = kind==='top' || kind==='left';
+      const along0 = horizontal ? x0 : y0;
+      const along1 = horizontal ? x1 : y1;
+      const tapAlong = horizontal ? tx : ty;
+      const tapCross = horizontal ? ty : tx;
+      const seedCross = kind==='top'?y0:kind==='bottom'?y1:kind==='left'?x0:x1;
+      const span = along1-along0;
+      const crossSize = horizontal ? rh : rw;
+      const alongSize = horizontal ? rw : rh;
+      const corridor = Math.max(14, Math.min((horizontal?h:w)*.08, crossSize*.34));
+      const a0 = Math.max(2, Math.round(along0 - alongSize*.10));
+      const a1 = Math.min((horizontal?w:h)-3, Math.round(along1 + alongSize*.10));
+      const sampleStep = Math.max(2, Math.round((a1-a0)/95));
+      const slopeMax = .48;
       let best=null;
 
-      // Coarse then fine. Anchor position is defined at the tap coordinate.
-      for(let pass=0;pass<2;pass++){
-        const slopeStep=pass===0?.028:.006;
-        const distStep=pass===0?5:1;
-        const mLo=best?Math.max(-slopeMax,best.m-.04):-slopeMax;
-        const mHi=best?Math.min(slopeMax,best.m+.04):slopeMax;
-        const dLo=best?Math.max(minDist,best.dist-9):minDist;
-        const expandMax = mode==='expand' ? Math.min(maxDist, Math.max(seedDist*1.38, minDist+10)) : maxDist;
-        const dHi=best?Math.min(expandMax,best.dist+9):expandMax;
+      // Represent H as y=m*x+b and V as x=m*y+b. Anchor is position at tapAlong.
+      for (let pass=0; pass<2; pass++) {
+        const mStep = pass===0 ? .03 : .006;
+        const pStep = pass===0 ? 3 : 1;
+        const mLo = best ? Math.max(-slopeMax,best.m-.05) : -slopeMax;
+        const mHi = best ? Math.min(slopeMax,best.m+.05) : slopeMax;
+        const pLo = best ? Math.max(seedCross-corridor,best.anchor-8) : seedCross-corridor;
+        const pHi = best ? Math.min(seedCross+corridor,best.anchor+8) : seedCross+corridor;
         let passBest=best;
-        for(let m=mLo;m<=mHi+1e-9;m+=slopeStep){
-          for(let dist=dLo;dist<=dHi;dist+=distStep){
-            const pAtTap=tapCross+outwardSign*dist;
-            const b=pAtTap-m*tapA;
-            let dark=0, veryDark=0, total=0, longest=0, run=0, lumSum=0;
-            for(let a=aStart;a<=aEnd;a+=evalStep){
-              const pos=m*a+b;
-              if(pos<2||pos>=cross-2){run=0;continue;}
-              const v=sampleInk(axis,a,pos);
-              total++; lumSum+=v;
-              if(v<=166){dark++;run++;if(run>longest)longest=run;}else run=0;
-              if(v<=105) veryDark++;
+        for (let m=mLo; m<=mHi+1e-9; m+=mStep) {
+          for (let anchor=pLo; anchor<=pHi; anchor+=pStep) {
+            const b = anchor - m*tapAlong;
+            const atTap = m*tapAlong+b;
+            if (neg && atTap >= tapCross-3) continue;
+            if (!neg && atTap <= tapCross+3) continue;
+            let n=0,dark=0,veryDark=0,longest=0,run=0,sum=0;
+            for (let a=a0; a<=a1; a+=sampleStep) {
+              const p=m*a+b;
+              if (p<2 || p>=(horizontal?h:w)-2) { run=0; continue; }
+              const v=horizontal ? pixelLum(a,p) : pixelLum(p,a);
+              n++; sum+=v;
+              if (v<=166) { dark++; run++; if(run>longest)longest=run; } else run=0;
+              if (v<=108) veryDark++;
             }
-            if(total<10) continue;
-            const support=dark/total, strong=veryDark/total, continuity=longest/total;
-            // Structural proof first. Distance is a strong tie-breaker so a
-            // farther page border cannot beat the first enclosing divider.
-            const structural=support*2.20+continuity*1.45+strong*.55-(lumSum/total)/430;
-            const proximityPenalty = mode==='expand'
-              ? (Math.abs(dist-seedDist)/Math.max(12,seedDist))*.42
-              : (dist/Math.max(1,maxDist))*.68;
-            const score=structural-proximityPenalty;
-            const qualifies=support>=.34 && continuity>=.18 && !(support<.44&&continuity<.30);
-            if(!qualifies) continue;
-            const cand={axis,m,b,dist,pAtTap,support,continuity,strong,meanLum:lumSum/total,score};
-            if(!passBest || cand.score>passBest.score+.06 || (Math.abs(cand.score-passBest.score)<=.06 && cand.dist<passBest.dist)) passBest=cand;
+            if(n<12) continue;
+            const support=dark/n, continuity=longest/n, strong=veryDark/n;
+            if(support<.30 || continuity<.14) continue;
+            const seedPenalty=Math.abs(anchor-seedCross)/Math.max(8,corridor);
+            const slopePenalty=Math.max(0,Math.abs(m)-.32)*.3;
+            const score=support*2.15+continuity*1.35+strong*.45-(sum/n)/470-seedPenalty*.35-slopePenalty;
+            const cand={kind,horizontal,m,b,anchor,support,continuity,strong,mean:sum/n,score};
+            if(!passBest || score>passBest.score) passBest=cand;
           }
         }
         best=passBest;
       }
-      if(!best){if(log)log(`SKEWED rail ${label} MISS no enclosing candidate`);return null;}
-
-      // Refine around the winning line with actual dark samples.
-      const slots=[];
-      const refineStep=Math.max(1,Math.round(span/175));
-      for(let a=aStart;a<=aEnd;a+=refineStep){
-        const predicted=best.m*a+best.b;
-        let pick=null;
-        for(let dd=-6;dd<=6;dd++){
-          const pos=Math.round(predicted+dd);
-          if(pos<2||pos>=cross-2) continue;
-          const v=sampleInk(axis,a,pos);
-          const s=v+Math.abs(dd)*3;
-          if(!pick||s<pick.s) pick={a,pos,v,s};
-        }
-        if(pick&&pick.v<=174) slots.push(pick);
-      }
-      if(slots.length<12){if(log)log(`SKEWED rail ${label} MISS refine samples=${slots.length}`);return null;}
-
-      let keep=slots.slice(), model=null, residualMed=99;
-      for(let iter=0;iter<4;iter++){
-        if(keep.length<10) return null;
-        let sa=0,sp=0,saa=0,sap=0,n=keep.length;
-        for(const q of keep){sa+=q.a;sp+=q.pos;saa+=q.a*q.a;sap+=q.a*q.pos;}
-        const den=n*saa-sa*sa;
-        const m=Math.abs(den)>1e-7?(n*sap-sa*sp)/den:0,b=(sp-m*sa)/n;
-        model={axis,m,b};
-        const rs=keep.map(q=>Math.abs(q.pos-(m*q.a+b))).sort((a,b)=>a-b);
-        residualMed=rs[Math.floor(rs.length/2)]||0;
-        const tol=Math.max(2.2,Math.min(6,residualMed*2.8+1.4));
-        keep=keep.filter(q=>Math.abs(q.pos-(m*q.a+b))<=tol);
-      }
-      if(!model||keep.length<10) return null;
-      const bins=new Set();
-      for(const q of keep){
-        const t=(q.a-aStart)/Math.max(1,aEnd-aStart);
-        bins.add(Math.max(0,Math.min(9,Math.floor(t*10))));
-      }
-      const totalSlots=Math.max(1,Math.floor((aEnd-aStart)/refineStep)+1);
-      model.support=keep.length/totalSlots;
-      model.coverage=bins.size/10;
-      model.residual=residualMed;
-      model.continuity=best.continuity;
-      model.atTap=model.m*tapA+model.b;
-      model.tapDistance=Math.abs(model.atTap-tapCross);
-      if(model.coverage<.50||model.support<.26||residualMed>5.4||Math.abs(model.m)>.52) return null;
-      // The refined rail must remain on the correct side of the tap.
-      if((side==='neg'&&model.atTap>=tapCross-3)||(side==='pos'&&model.atTap<=tapCross+3)) return null;
-      if(log) log(`SKEWED rail ${label} HIT mode=${mode} m=${model.m.toFixed(3)} d=${model.tapDistance.toFixed(1)} support=${model.support.toFixed(2)} cover=${model.coverage.toFixed(2)}`);
-      return model;
+      if(!best) { if(log)log(`VERTEX side ${kind} MISS`); return null; }
+      if(log)log(`VERTEX side ${kind} HIT m=${best.m.toFixed(3)} support=${best.support.toFixed(2)} cont=${best.continuity.toFixed(2)}`);
+      return best;
     };
 
-    // Search spans are deliberately broader than the seed, but selection is
-    // tap-local. This lets a slanted side reach its true corners without letting
-    // a distant page rail win simply because it is longer.
-    const padX=Math.min(w*.12,Math.max(18,rw*.20));
-    const padY=Math.min(h*.12,Math.max(18,rh*.20));
-    const sx0=Math.max(2,x0-padX), sx1=Math.min(w-3,x1+padX);
-    const sy0=Math.max(2,y0-padY), sy1=Math.min(h-3,y1+padY);
-    let top=acquireTapRail('H','neg',sx0,sx1,'top');
-    let bottom=acquireTapRail('H','pos',sx0,sx1,'bottom');
-    let left=acquireTapRail('V','neg',sy0,sy1,'left');
-    let right=acquireTapRail('V','pos',sy0,sy1,'right');
-    let rails=[top,bottom,left,right];
-    let sides=rails.filter(Boolean).length;
-
-    const isStrong=(r)=>!!r && r.support>=.36 && r.coverage>=.58 && r.residual<=5.0;
-    const strongRails=()=>rails.filter(isStrong);
-
-    // V2.78.10 SKEW PROOF GATE
-    // A single diagonal-looking rail can easily be artwork inside an otherwise
-    // rectangular panel. Skewed geometry may only claim the tap when an opposing
-    // pair proves a non-orthogonal relationship. This recognizes both trapezoids
-    // (opposing rails diverge) and parallelogram-like panels (both opposing rails
-    // lean materially in the same direction), while protecting orthogonal panels.
-    const pairProof=(a,b)=>{
-      if(!isStrong(a)||!isStrong(b)) return {proved:false,div:0,maxAbs:0,minAbs:0,parallelLean:false};
-      const aa=Math.abs(a.m), bb=Math.abs(b.m);
-      const div=Math.abs(a.m-b.m);
-      const maxAbs=Math.max(aa,bb), minAbs=Math.min(aa,bb);
-      const divergent = div>=.075 && maxAbs>=.085;
-      const parallelLean = minAbs>=.095 && Math.sign(a.m)===Math.sign(b.m) && div<=.065;
-      return {proved:divergent||parallelLean,div,maxAbs,minAbs,parallelLean};
-    };
-    const ownershipSignal=()=>{
-      const strong=strongRails();
-      const hp=pairProof(top,bottom);
-      const vp=pairProof(left,right);
-      const proof=hp.proved||vp.proved;
-      return {strong:strong.length,hp,vp,proof,owns:strong.length>=3&&proof};
-    };
-    let ownership=ownershipSignal();
-    if(log)log(`SKEW PROOF rails=${sides}/4 strong=${ownership.strong} H=${ownership.hp.proved?'yes':'no'}(div=${ownership.hp.div.toFixed(3)},lean=${ownership.hp.minAbs.toFixed(3)}) V=${ownership.vp.proved?'yes':'no'}(div=${ownership.vp.div.toFixed(3)},lean=${ownership.vp.minAbs.toFixed(3)}) owns=${ownership.owns?'yes':'no'}`);
-    if(sides<3 || !ownership.owns){
-      if(log)log(`SKEW GATE -> ORTHOGONAL rails=${sides}/4 proof=${ownership.proof?'yes':'no'}`);
-      return null;
+    const top=fitSide('top'), bottom=fitSide('bottom'), left=fitSide('left'), right=fitSide('right');
+    const sides=[top,bottom,left,right].filter(Boolean).length;
+    if(sides<4) {
+      if(log)log(`VERTEX OWNERSHIP -> ORTHOGONAL reason=rails ${sides}/4`);
+      return {owns:false,reason:'rails',sides};
     }
-    if(log)log('SKEW GATE -> OWNERSHIP');
-
-    // If one rail is missing after ownership is established, reacquire that side
-    // at seed scale rather than surrendering the tap to orthogonal geometry.
-    if(!top) top=acquireTapRail('H','neg',sx0,sx1,'top','expand');
-    if(!bottom) bottom=acquireTapRail('H','pos',sx0,sx1,'bottom','expand');
-    if(!left) left=acquireTapRail('V','neg',sy0,sy1,'left','expand');
-    if(!right) right=acquireTapRail('V','pos',sy0,sy1,'right','expand');
-    rails=[top,bottom,left,right];
-    sides=rails.filter(Boolean).length;
-    if(sides<4){if(log)log(`SKEWED OWNED MISS completion rails=${sides}/4`);return null;}
 
     const intersect=(hl,vl)=>{
       const den=1-hl.m*vl.m;
-      if(Math.abs(den)<.08) return null;
-      const x=(vl.m*hl.b+vl.b)/den,y=hl.m*x+hl.b;
-      return{x,y};
+      if(Math.abs(den)<.10) return null;
+      const x=(vl.m*hl.b+vl.b)/den;
+      const y=hl.m*x+hl.b;
+      return {x,y};
     };
     const q=[intersect(top,left),intersect(top,right),intersect(bottom,right),intersect(bottom,left)];
-    if(q.some(p=>!p||!Number.isFinite(p.x)||!Number.isFinite(p.y))) return null;
+    if(q.some(p=>!p||!Number.isFinite(p.x)||!Number.isFinite(p.y))) {
+      if(log)log('VERTEX OWNERSHIP -> ORTHOGONAL reason=intersection');
+      return {owns:false,reason:'intersection'};
+    }
+
+    // Ownership corners must correspond to the local seed's four corners.  This
+    // rejects tiny interior boxes and page-wide quadrilaterals before angle math.
+    const seedCorners=[{x:x0,y:y0},{x:x1,y:y0},{x:x1,y:y1},{x:x0,y:y1}];
+    const cornerTolX=Math.max(22,rw*.38), cornerTolY=Math.max(22,rh*.38);
+    let worstCorner=0;
+    for(let i=0;i<4;i++){
+      const dx=Math.abs(q[i].x-seedCorners[i].x), dy=Math.abs(q[i].y-seedCorners[i].y);
+      worstCorner=Math.max(worstCorner,Math.hypot(dx/rw,dy/rh));
+      if(dx>cornerTolX || dy>cornerTolY){
+        if(log)log(`VERTEX OWNERSHIP -> ORTHOGONAL reason=corner-${i} dx=${dx.toFixed(1)} dy=${dy.toFixed(1)}`);
+        return {owns:false,reason:'corner-locality',corner:i,dx,dy};
+      }
+    }
 
     const cross=(a,b,c)=>(b.x-a.x)*(c.y-b.y)-(b.y-a.y)*(c.x-b.x);
     const cs=[cross(q[0],q[1],q[2]),cross(q[1],q[2],q[3]),cross(q[2],q[3],q[0]),cross(q[3],q[0],q[1])];
-    if(!(cs.every(v=>v>0)||cs.every(v=>v<0))){if(log)log('SKEWED MISS non-convex');return null;}
-
-    let area=Math.abs(q.reduce((s,p,i)=>{const n=q[(i+1)%4];return s+p.x*n.y-n.x*p.y;},0)/2);
-    const seedArea=rw*rh;
-
-    // V2.78.08 often found a legitimate oblique structure at the wrong scale.
-    // Once skewed owns the tap, a too-small polygon triggers one seed-scale
-    // expansion pass. This preserves the rail slopes but searches farther out for
-    // the surrounding frame instead of accepting an interior mini-polygon.
-    if(area<seedArea*.32 && ownership.owns){
-      if(log)log(`SKEWED OWNED EXPAND provisional area=${(area/seedArea).toFixed(2)}`);
-      const et=acquireTapRail('H','neg',sx0,sx1,'top','expand');
-      const eb=acquireTapRail('H','pos',sx0,sx1,'bottom','expand');
-      const el=acquireTapRail('V','neg',sy0,sy1,'left','expand');
-      const er=acquireTapRail('V','pos',sy0,sy1,'right','expand');
-      if(et&&eb&&el&&er){
-        const eq=[intersect(et,el),intersect(et,er),intersect(eb,er),intersect(eb,el)];
-        if(!eq.some(p=>!p||!Number.isFinite(p.x)||!Number.isFinite(p.y))){
-          const ecs=[cross(eq[0],eq[1],eq[2]),cross(eq[1],eq[2],eq[3]),cross(eq[2],eq[3],eq[0]),cross(eq[3],eq[0],eq[1])];
-          const earea=Math.abs(eq.reduce((s,p,i)=>{const n=eq[(i+1)%4];return s+p.x*n.y-n.x*p.y;},0)/2);
-          if((ecs.every(v=>v>0)||ecs.every(v=>v<0)) && earea>area){
-            top=et; bottom=eb; left=el; right=er;
-            q.splice(0,4,...eq); area=earea;
-            if(log)log(`SKEWED OWNED EXPAND result area=${(area/seedArea).toFixed(2)}`);
-          }
-        }
-      }
+    if(!(cs.every(v=>v>0)||cs.every(v=>v<0))){
+      if(log)log('VERTEX OWNERSHIP -> ORTHOGONAL reason=non-convex');
+      return {owns:false,reason:'non-convex'};
     }
-    if(area<seedArea*.18||area>seedArea*1.65){if(log)log(`SKEWED OWNED MISS final area ratio=${(area/seedArea).toFixed(2)}`);return null;}
 
-    const pointInQuad=(p,poly)=>{
-      let sign=0;
-      for(let i=0;i<4;i++){
-        const a=poly[i],b=poly[(i+1)%4];
-        const z=(b.x-a.x)*(p.y-a.y)-(b.y-a.y)*(p.x-a.x);
-        if(Math.abs(z)<1e-6) continue;
-        const s=z>0?1:-1;
-        if(!sign)sign=s;else if(sign!==s)return false;
-      }
-      return true;
+    const angleAt=(prev,p,next)=>{
+      const ax=prev.x-p.x, ay=prev.y-p.y, bx=next.x-p.x, by=next.y-p.y;
+      const na=Math.hypot(ax,ay), nb=Math.hypot(bx,by);
+      if(na<1||nb<1) return NaN;
+      const c=Math.max(-1,Math.min(1,(ax*bx+ay*by)/(na*nb)));
+      return Math.acos(c)*180/Math.PI;
     };
-    if(!pointInQuad({x:tx,y:ty},q)){if(log)log('SKEWED MISS tap outside polygon');return null;}
+    const angles=q.map((p,i)=>angleAt(q[(i+3)%4],p,q[(i+1)%4]));
+    if(angles.some(a=>!Number.isFinite(a))) return {owns:false,reason:'angles'};
+    const dev=angles.map(a=>Math.abs(a-90));
+    const maxDev=Math.max(...dev);
+    const sorted=dev.slice().sort((a,b)=>b-a);
+    const secondDev=sorted[1];
 
-    // Guard against the V2.78.07 page-sized failure: every chosen rail must be
-    // reasonably local to the tap compared with the seed's own extent.
-    const maxLocalX=Math.max(rw*.90,48), maxLocalY=Math.max(rh*.90,48);
-    if(left.tapDistance>maxLocalX||right.tapDistance>maxLocalX||top.tapDistance>maxLocalY||bottom.tapDistance>maxLocalY){
-      if(log)log(`SKEWED MISS nonlocal enclosure d=${top.tapDistance.toFixed(0)}/${right.tapDistance.toFixed(0)}/${bottom.tapDistance.toFixed(0)}/${left.tapDistance.toFixed(0)}`);
-      return null;
+    const lineAngleH=(r)=>Math.atan(r.m)*180/Math.PI;
+    const lineAngleV=(r)=>90-Math.atan(r.m)*180/Math.PI;
+    const sideAngles=[lineAngleH(top),lineAngleV(right),lineAngleH(bottom),lineAngleV(left)];
+    const oppositeDivergence=Math.max(
+      Math.abs(lineAngleH(top)-lineAngleH(bottom)),
+      Math.abs(lineAngleV(left)-lineAngleV(right))
+    );
+
+    // Area is used only to ensure the candidate corner set is local enough for
+    // classification; V2.78.11 does NOT use this polygon for rendering.
+    const area=Math.abs(q.reduce((s,p,i)=>{const n=q[(i+1)%4];return s+p.x*n.y-n.x*p.y;},0)/2);
+    const areaRatio=area/(rw*rh);
+    if(areaRatio<.28 || areaRatio>1.75){
+      if(log)log(`VERTEX OWNERSHIP -> ORTHOGONAL reason=area ratio=${areaRatio.toFixed(2)}`);
+      return {owns:false,reason:'area',areaRatio};
     }
 
-    const slopeSignal=Math.max(Math.abs(top.m),Math.abs(bottom.m),Math.abs(left.m),Math.abs(right.m));
-    const opposingDivergence=Math.max(Math.abs(top.m-bottom.m),Math.abs(left.m-right.m));
-    const finalHP=pairProof(top,bottom), finalVP=pairProof(left,right);
-    if(!finalHP.proved&&!finalVP.proved){
-      if(log)log(`SKEWED DECLINE final skew proof lost slope=${slopeSignal.toFixed(3)} div=${opposingDivergence.toFixed(3)}`);
-      return null;
-    }
+    // Vertex proof: do not let one noisy corner decide ownership.  A true skewed
+    // quadrilateral must show one substantial angle departure AND corroboration
+    // from another corner or opposing-side divergence.
+    const substantial=maxDev>=8.0;
+    const corroborated=secondDev>=4.5 || oppositeDivergence>=6.0;
+    const owns=substantial && corroborated;
+    const confidence=Math.max(0,Math.min(1,(maxDev-5)/18 + (secondDev-3)/28 + oppositeDivergence/45));
 
-    const clamp=v=>Math.max(0,Math.min(1,v));
-    const nq=q.map(p=>({x:clamp(p.x/(w-1)),y:clamp(p.y/(h-1))}));
-    const out={...panel,_quad:nq,_geometryType:'skewed-owned-enclosure'};
-    if(log) log(`SKEWED OWNED HIT slope=${slopeSignal.toFixed(3)} div=${opposingDivergence.toFixed(3)} area=${(area/seedArea).toFixed(2)} d=${[top,right,bottom,left].map(r=>r.tapDistance.toFixed(0)).join('/')}`);
-    return out;
+    if(log) log(`VERTEX angles=${angles.map(a=>a.toFixed(1)).join('/')} dev=${dev.map(a=>a.toFixed(1)).join('/')} oppDiv=${oppositeDivergence.toFixed(1)} area=${areaRatio.toFixed(2)}`);
+    if(log) log(`VERTEX OWNERSHIP -> ${owns?'SKEWED':'ORTHOGONAL'} confidence=${confidence.toFixed(2)}`);
+
+    return {
+      owns,
+      reason:owns?'vertex-angle-proof':'orthogonal-angle-profile',
+      confidence,
+      angles,
+      deviations:dev,
+      oppositeDivergence,
+      areaRatio,
+      sideAngles,
+      // Diagnostic only. Router deliberately does not render this quad yet.
+      diagnosticQuad:q.map(p=>({x:p.x/(w-1),y:p.y/(h-1)}))
+    };
   }
 };
