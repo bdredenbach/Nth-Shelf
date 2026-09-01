@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.09 Skewed Ownership Test**
+**Version 2.78.10 Skew Proof Gate Test**
 
 
 ## 🔒 Privacy
@@ -143,6 +143,10 @@ V2.78.02 is an experimental geometry branch built on the V2.78.00 stable hybrid 
 
 This release establishes the structural hybrid detector as the baseline for future panel-geometry improvements. Internal debug messages continue to use the `V100 hybrid` prefix so test logs remain comparable with the successful prototype run.
 
+
+## V2.78.10 Skew Proof Gate Test
+
+V2.78.10 keeps the V2.78.09 tap-ownership and enclosure-completion work, but adds a strict pairwise skew gate before the skewed engine is allowed to own a tap. Three strong rails alone are no longer sufficient, and one isolated diagonal rail can no longer claim an otherwise orthogonal panel. The engine now requires an opposing rail pair to prove either meaningful angular divergence (trapezoid) or a strong shared lean (parallelogram-like geometry). If that proof is absent, routing returns immediately to the orthogonal engine. The same proof is checked again before rendering. `panels.js`, the orthogonal engine, and the stable V2.78.00 detector behavior remain unchanged.
 
 ## V2.78.09 Skewed Ownership Test
 

@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.09 — SKEWED OWNERSHIP
+// NTH SHELF V2.78.10 — SKEW PROOF GATE
 
-const CACHE_NAME = "nth-shelf-shell-2.78.09";
+const CACHE_NAME = "nth-shelf-shell-2.78.10";
 const SHELL_FILES = [
   "./",
   "./index.html",
