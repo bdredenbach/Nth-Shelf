@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.11 — VERTEX OWNERSHIP CLASSIFIER
+// NTH SHELF V2.78.12 — FRAME ENVELOPE TEST
 
-const CACHE_NAME = "nth-shelf-shell-2.78.11";
+const CACHE_NAME = "nth-shelf-shell-2.78.12";
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -9,6 +9,7 @@ const SHELL_FILES = [
   "./js/db.js",
   "./js/library.js",
   "./js/panels.js",
+  "./js/panels-frame-envelope.js",
   "./js/panels-geometry-orthogonal.js",
   "./js/panels-geometry-skewed.js",
   "./js/panels-geometry.js",

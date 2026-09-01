@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.11 Vertex / Angle Ownership Test**
+**Version 2.78.12 Frame Envelope Test**
 
 
 ## 🔒 Privacy
@@ -162,3 +162,10 @@ V2.78.09 changes the geometry contract rather than the stable detector. When the
 ## V2.78.08 Tap-Anchored Enclosure Test
 
 V2.78.08 keeps the V2.78 dual-geometry architecture intact and changes only how the skewed engine chooses its four rails. The user's tap is now passed into the geometry layer and becomes the origin of the search. Each side is selected as the nearest sustained enclosing rail on its respective side of the tap; a stronger but more distant page border is no longer allowed to jump across a nearer proven divider. Rail tracing may still extend beyond the orthogonal seed to reach true trapezoid corners, but the final polygon must remain convex, contain the actual tap, stay within a sane area ratio, and remain local to the seed. This directly targets the page-sized skewed polygons seen in V2.78.07 while preserving the working router and stable panel identity system. V2.78.00 remains the stable production baseline.
+
+
+## V2.78.12 Frame Envelope Test
+
+V2.78.12 deliberately moves **full-frame recovery ahead of geometry ownership**. The stable V2.78 panel detector still identifies the tapped panel. A new `js/panels-frame-envelope.js` stage then searches for the complete four-sided enclosure around that seed and tap. It rejects tiny interior slivers by requiring a whole-frame area comparable to the stable seed, keeps the tap inside the recovered quadrilateral, requires four connected/convex corners, and allows real trapezoid corners to escape outward from the orthogonal seed.
+
+For this test build, angle ownership is intentionally deferred. When a complete envelope is proven, the reader renders that four-corner envelope directly so testing can answer one question cleanly: **did we find the whole comic-panel frame?** If the envelope cannot prove itself, the router falls back to the stable orthogonal rectangle. Once full-frame recovery is reliable, the existing vertex/angle classifier can be applied to those actual frame vertices to route between orthogonal and skewed geometry.
