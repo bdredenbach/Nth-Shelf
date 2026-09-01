@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.07 Skewed Classifier + Corner Freedom Test**
+**Version 2.78.08 Tap-Anchored Enclosure Test**
 
 
 ## 🔒 Privacy
@@ -142,3 +142,8 @@ V2.78.03 keeps the V2.78.00 stable hybrid detector and the V102 boundary tracer,
 V2.78.02 is an experimental geometry branch built on the V2.78.00 stable hybrid baseline. V100 still identifies the panel; V102 traces coherent frame rails around that proven region and may supply a four-corner polygon. If tracing is weak, the stable rectangle is preserved. V2.78.00 remains the stable baseline. V73 remains the first panel-detection pass. When V73 misses, the structural detector analyzes sustained black frame bands and quiet gutter bands to identify a proven panel region. If it cannot prove a region, Nth Shelf falls back to the existing V99 boundary-set + V92 interior-validation path rather than forcing a result.
 
 This release establishes the structural hybrid detector as the baseline for future panel-geometry improvements. Internal debug messages continue to use the `V100 hybrid` prefix so test logs remain comparable with the successful prototype run.
+
+
+## V2.78.08 Tap-Anchored Enclosure Test
+
+V2.78.08 keeps the V2.78 dual-geometry architecture intact and changes only how the skewed engine chooses its four rails. The user's tap is now passed into the geometry layer and becomes the origin of the search. Each side is selected as the nearest sustained enclosing rail on its respective side of the tap; a stronger but more distant page border is no longer allowed to jump across a nearer proven divider. Rail tracing may still extend beyond the orthogonal seed to reach true trapezoid corners, but the final polygon must remain convex, contain the actual tap, stay within a sane area ratio, and remain local to the seed. This directly targets the page-sized skewed polygons seen in V2.78.07 while preserving the working router and stable panel identity system. V2.78.00 remains the stable production baseline.

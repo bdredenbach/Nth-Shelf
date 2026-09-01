@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.07 — SKEWED CLASSIFIER + CORNER FREEDOM
+// NTH SHELF V2.78.08 — TAP-ANCHORED ENCLOSURE
 
-const CACHE_NAME = "nth-shelf-shell-2.78.07";
+const CACHE_NAME = "nth-shelf-shell-2.78.08";
 const SHELL_FILES = [
   "./",
   "./index.html",
