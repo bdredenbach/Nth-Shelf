@@ -2389,32 +2389,44 @@ async setMode(mode) {
    const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
    const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
 
-   // PASS 1: V73 baseline. A successful V73 hit is final and cannot be
-   // replaced by the fallback.
+   const pageIndex = this.index;
+   const comicId = this.comic?.id;
+   const url = await this.getPageUrl(pageIndex);
+   const geometryLogger = this.debugMode
+     ? (msg) => this.debugLog(`[V105 geometry p${pageIndex}] ${msg}`)
+     : null;
+   const refineGeometry = async (seed) => {
+     if (!seed) return null;
+     if (!url || typeof PanelGeometry === 'undefined' || !PanelGeometry.refine) return seed;
+     return (await PanelGeometry.refine(url, seed, geometryLogger)) || seed;
+   };
+
+   // PASS 1: V73 baseline identifies the panel. Geometry is now a separate
+   // concern: the router may preserve the orthogonal rectangle or prove a
+   // skewed quadrilateral without changing panel identity.
    const panel = this.findPanelAt(relXImg, relYImg);
    if (panel) {
-     if (this.debugMode) this.debugLog("[V92] PASS 1 HIT (V73 baseline)");
-     this.zoomToPanel(panel, stageRect, imgRect);
+     if (this.debugMode) this.debugLog("[V105] PASS 1 HIT (V73 identity) -> GEOMETRY ROUTER");
+     const shaped = await refineGeometry(panel);
+     if (this.comic?.id === comicId && this.index === pageIndex && shaped) this.zoomToPanel(shaped, stageRect, imgRect);
      return;
    }
 
    // PASS 2A: V100 hybrid structural partitioner. It must prove a page region
    // from sustained frame/gutter structure; otherwise it defers to V99/V92.
    if (this.debugMode) this.debugLog("[V100] PASS 1 MISS -> hybrid structural partition");
-   const pageIndex = this.index;
-   const comicId = this.comic?.id;
-   const url = await this.getPageUrl(pageIndex);
    if (url && PanelDetect.detectTapHybrid) {
      const hybridLogger = this.debugMode
        ? (msg) => this.debugLog(`[V100 hybrid p${pageIndex}] ${msg}`)
        : null;
      const hybrid = await PanelDetect.detectTapHybrid(url, relXImg, relYImg, hybridLogger);
      if (this.comic?.id === comicId && this.index === pageIndex && hybrid) {
-       if (this.debugMode) this.debugLog("[V100] PASS 2A HIT -> zoom hybrid panel");
-       this.zoomToPanel(hybrid, stageRect, imgRect);
+       if (this.debugMode) this.debugLog("[V105] PASS 2A HIT (V100 identity) -> GEOMETRY ROUTER");
+       const shaped = await refineGeometry(hybrid);
+       if (this.comic?.id === comicId && this.index === pageIndex && shaped) this.zoomToPanel(shaped, stageRect, imgRect);
        return;
      }
-     if (this.debugMode) this.debugLog("[V103] HYBRID MISS -> LEGACY SEED / TRACE AUTHORITY");
+     if (this.debugMode) this.debugLog("[V105] HYBRID MISS -> LEGACY IDENTITY FALLBACK");
    }
 
    // PASS 2B: unchanged V99/V92 fallback.
@@ -2424,12 +2436,9 @@ async setMode(mode) {
        : null;
      const fallback = await PanelDetect.detectTapLocalFallback(url, relXImg, relYImg, logger);
      if (this.comic?.id === comicId && this.index === pageIndex && fallback) {
-       if (fallback._v103TraceBridge && fallback._quad) {
-         if (this.debugMode) this.debugLog("[V103] RENDER POLYGON from legacy seed trace");
-       } else {
-         if (this.debugMode) this.debugLog("[V103] RENDER RECTANGLE from proven four-side legacy seed");
-       }
-       this.zoomToPanel(fallback, stageRect, imgRect);
+       if (this.debugMode) this.debugLog(`[V105] LEGACY IDENTITY sides=${fallback._gutterSides || 0} -> GEOMETRY ROUTER`);
+       const shaped = await refineGeometry(fallback);
+       if (this.comic?.id === comicId && this.index === pageIndex && shaped) this.zoomToPanel(shaped, stageRect, imgRect);
        return;
      }
      if (this.debugMode) this.debugLog("[V92] PASS 2 MISS");
@@ -2760,7 +2769,7 @@ async setMode(mode) {
    this.panelOverlayActive = false;
    this.setFocusDim(true, true);
 
-   // V104 trace stabilizer: qualified panels may carry a conservative four-corner polygon.
+   // V2.78.05 geometry router: skewed panels may carry a proven four-corner polygon.
    // Build the overlay from its bounding box, then clip the canvas to the
    // fitted frame. Legacy/V73/V92 rectangles continue unchanged.
    const quad = Array.isArray(panel._quad) && panel._quad.length === 4 ? panel._quad : null;
@@ -2811,7 +2820,7 @@ async setMode(mode) {
      overlay.style.clipPath = clip;
      overlay.style.webkitClipPath = clip;
      overlay.dataset.geometry = 'quad';
-     if (this.debugMode) this.debugLog(`[V104 trace stabilizer] polygon clip ${clip}`);
+     if (this.debugMode) this.debugLog(`[V105 geometry ${panel._geometryType || 'quad'}] polygon clip ${clip}`);
    }
 
    const canvas = document.createElement("canvas");
