@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.10 Skew Proof Gate Test**
+**Version 2.78.11 Vertex / Angle Ownership Test**
 
 
 ## 🔒 Privacy
@@ -143,6 +143,13 @@ V2.78.02 is an experimental geometry branch built on the V2.78.00 stable hybrid 
 
 This release establishes the structural hybrid detector as the baseline for future panel-geometry improvements. Internal debug messages continue to use the `V100 hybrid` prefix so test logs remain comparable with the successful prototype run.
 
+
+
+## V2.78.11 Vertex / Angle Ownership Test
+
+V2.78.11 intentionally separates **geometry ownership** from **full skewed-frame extraction**. `panels.js` remains the stable V2.78 panel-identification core. `panels-geometry-skewed.js` now classifies only from a local four-vertex candidate: it fits local sides near the stable seed, intersects them into four corners, measures the four interior angles and opposing-side divergence, and grants skewed ownership only when the vertex geometry proves a genuinely non-orthogonal quadrilateral. `panels-geometry.js` records that ownership but deliberately renders the stable rectangular seed in this test build. This prevents slivers/malformed polygons while ownership is tuned. Once ownership is reliable, the next phase can add full-frame expansion entirely inside the skewed geometry module.
+
+Expected diagnostic paths are `VERTEX OWNERSHIP -> SKEWED` / `ROUTER OWNERSHIP -> SKEWED ... (render seed only)` for true skewed panels and `VERTEX OWNERSHIP -> ORTHOGONAL` / `ROUTER OWNERSHIP -> ORTHOGONAL` for normal panels.
 
 ## V2.78.10 Skew Proof Gate Test
 

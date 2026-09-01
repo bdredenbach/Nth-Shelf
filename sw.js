@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.10 — SKEW PROOF GATE
+// NTH SHELF V2.78.11 — VERTEX OWNERSHIP CLASSIFIER
 
-const CACHE_NAME = "nth-shelf-shell-2.78.10";
+const CACHE_NAME = "nth-shelf-shell-2.78.11";
 const SHELL_FILES = [
   "./",
   "./index.html",
