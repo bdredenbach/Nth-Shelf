@@ -1,9 +1,8 @@
-// NTH SHELF V2.78.09 — SKEWED OWNERSHIP
+// NTH SHELF V2.78.10 — SKEW PROOF GATE
 // Geometry-only engine for trapezoids/slanted quadrilaterals.
-// V2.78.09 adds an ownership phase: three strong rails plus trusted non-orthogonal
-// evidence let the skewed engine keep control long enough to expand a too-small
-// provisional enclosure toward the stable seed instead of immediately falling
-// back to orthogonal geometry.
+// V2.78.10 keeps the V2.78.09 ownership/completion path, but ownership now
+// requires PAIRWISE geometric proof of skew. A lone oblique rail is not enough.
+// This protects ordinary orthogonal panels from being claimed by artwork lines.
 
 const PanelGeometrySkewed = {
   refine(imgUrl, panel, log) {
@@ -192,18 +191,38 @@ const PanelGeometrySkewed = {
     let rails=[top,bottom,left,right];
     let sides=rails.filter(Boolean).length;
 
-    const strongRails=()=>rails.filter(r=>r&&r.support>=.34&&r.coverage>=.55);
+    const isStrong=(r)=>!!r && r.support>=.36 && r.coverage>=.58 && r.residual<=5.0;
+    const strongRails=()=>rails.filter(isStrong);
+
+    // V2.78.10 SKEW PROOF GATE
+    // A single diagonal-looking rail can easily be artwork inside an otherwise
+    // rectangular panel. Skewed geometry may only claim the tap when an opposing
+    // pair proves a non-orthogonal relationship. This recognizes both trapezoids
+    // (opposing rails diverge) and parallelogram-like panels (both opposing rails
+    // lean materially in the same direction), while protecting orthogonal panels.
+    const pairProof=(a,b)=>{
+      if(!isStrong(a)||!isStrong(b)) return {proved:false,div:0,maxAbs:0,minAbs:0,parallelLean:false};
+      const aa=Math.abs(a.m), bb=Math.abs(b.m);
+      const div=Math.abs(a.m-b.m);
+      const maxAbs=Math.max(aa,bb), minAbs=Math.min(aa,bb);
+      const divergent = div>=.075 && maxAbs>=.085;
+      const parallelLean = minAbs>=.095 && Math.sign(a.m)===Math.sign(b.m) && div<=.065;
+      return {proved:divergent||parallelLean,div,maxAbs,minAbs,parallelLean};
+    };
     const ownershipSignal=()=>{
       const strong=strongRails();
-      const oblique=strong.filter(r=>Math.abs(r.m)>=.045);
-      let divergence=0;
-      if(top&&bottom) divergence=Math.max(divergence,Math.abs(top.m-bottom.m));
-      if(left&&right) divergence=Math.max(divergence,Math.abs(left.m-right.m));
-      return {strong:strong.length,oblique:oblique.length,divergence,owns:strong.length>=3&&(oblique.length>=1||divergence>=.045)};
+      const hp=pairProof(top,bottom);
+      const vp=pairProof(left,right);
+      const proof=hp.proved||vp.proved;
+      return {strong:strong.length,hp,vp,proof,owns:strong.length>=3&&proof};
     };
     let ownership=ownershipSignal();
-    if(log)log(`SKEWED OWNERSHIP rails=${sides}/4 strong=${ownership.strong} oblique=${ownership.oblique} div=${ownership.divergence.toFixed(3)} owns=${ownership.owns?'yes':'no'}`);
-    if(sides<3 || !ownership.owns){if(log)log(`SKEWED MISS ownership rails=${sides}/4`);return null;}
+    if(log)log(`SKEW PROOF rails=${sides}/4 strong=${ownership.strong} H=${ownership.hp.proved?'yes':'no'}(div=${ownership.hp.div.toFixed(3)},lean=${ownership.hp.minAbs.toFixed(3)}) V=${ownership.vp.proved?'yes':'no'}(div=${ownership.vp.div.toFixed(3)},lean=${ownership.vp.minAbs.toFixed(3)}) owns=${ownership.owns?'yes':'no'}`);
+    if(sides<3 || !ownership.owns){
+      if(log)log(`SKEW GATE -> ORTHOGONAL rails=${sides}/4 proof=${ownership.proof?'yes':'no'}`);
+      return null;
+    }
+    if(log)log('SKEW GATE -> OWNERSHIP');
 
     // If one rail is missing after ownership is established, reacquire that side
     // at seed scale rather than surrendering the tap to orthogonal geometry.
@@ -279,9 +298,9 @@ const PanelGeometrySkewed = {
 
     const slopeSignal=Math.max(Math.abs(top.m),Math.abs(bottom.m),Math.abs(left.m),Math.abs(right.m));
     const opposingDivergence=Math.max(Math.abs(top.m-bottom.m),Math.abs(left.m-right.m));
-    const trustedOblique=[top,bottom,left,right].some(r=>Math.abs(r.m)>=.045&&r.support>=.38&&r.coverage>=.60);
-    if(!trustedOblique&&opposingDivergence<.038&&slopeSignal<.028){
-      if(log)log(`SKEWED DECLINE slope=${slopeSignal.toFixed(3)} div=${opposingDivergence.toFixed(3)}`);
+    const finalHP=pairProof(top,bottom), finalVP=pairProof(left,right);
+    if(!finalHP.proved&&!finalVP.proved){
+      if(log)log(`SKEWED DECLINE final skew proof lost slope=${slopeSignal.toFixed(3)} div=${opposingDivergence.toFixed(3)}`);
       return null;
     }
 

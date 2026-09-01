@@ -1,4 +1,4 @@
-// NTH SHELF V2.78.09 — ORTHOGONAL PANEL GEOMETRY
+// NTH SHELF V2.78.10 — ORTHOGONAL PANEL GEOMETRY
 // Conservative rectangle/near-rectangle geometry. This module never changes
 // panel identity; it only normalizes the seed supplied by panels.js.
 
