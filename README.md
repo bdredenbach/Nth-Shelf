@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.04 Trace Stabilizer Test**
+**Version 2.78.05 Dual Geometry Router Test**
 
 
 ## 🔒 Privacy
@@ -116,6 +116,13 @@ Nth Shelf is designed around local-first storage. Your comics are stored on your
 This project is licensed under the **MIT License**. The license applies to the software and does not grant rights to comic artwork or other copyrighted material imported by users.
 
 
+
+
+## V2.78.05 Dual Geometry Router Test — Clean Geometry Architecture
+
+V2.78.05 separates panel identity from panel shape. `js/panels.js` is returned to the stable V2.78.00-style role: V73/V100/V99/V92 identify the tapped panel and return a rectangle seed, but no longer perform V101–V104 polygon refinement. Geometry is routed afterward through three dedicated modules: `panels-geometry.js` (router), `panels-geometry-orthogonal.js` (rectangle/near-rectangle path), and `panels-geometry-skewed.js` (trapezoid/slanted quadrilateral path). The skewed engine inherits the useful rail-fitting, continuity, corner, convexity, and area-validation lessons from V2.78.01–V2.78.04, but cannot choose a different panel. If skewed geometry cannot prove itself, the router falls back to the orthogonal seed. Debug logs use the `V105 geometry` prefix and explicitly report `ROUTER -> SKEWED` or `ROUTER -> ORTHOGONAL`. V2.78.00 remains the stable production baseline.
+
+The V2.78.01–V2.78.04 geometry experiments are retained below as R&D history only; their geometry implementations have been removed from `panels.js` in this build.
 
 
 ## V2.78.04 Trace Stabilizer Test — Geometry Branch

@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.04
+// NTH SHELF V2.78.05 — DUAL GEOMETRY ROUTER
 
-const CACHE_NAME = "nth-shelf-shell-2.78.04";
+const CACHE_NAME = "nth-shelf-shell-2.78.05";
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -9,6 +9,9 @@ const SHELL_FILES = [
   "./js/db.js",
   "./js/library.js",
   "./js/panels.js",
+  "./js/panels-geometry-orthogonal.js",
+  "./js/panels-geometry-skewed.js",
+  "./js/panels-geometry.js",
   "./js/bubbles.js",
   "./js/page-turn.js",
   "./js/reader.js",
