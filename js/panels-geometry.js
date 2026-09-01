@@ -1,4 +1,4 @@
-// NTH SHELF V2.78.08 — PANEL GEOMETRY ROUTER
+// NTH SHELF V2.78.09 — PANEL GEOMETRY ROUTER
 // panels.js identifies the tapped panel. This router decides only how that
 // already-identified panel should be represented: orthogonal rectangle or a
 // proven skewed quadrilateral.

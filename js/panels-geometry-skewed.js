@@ -1,8 +1,9 @@
-// NTH SHELF V2.78.08 — TAP-ANCHORED ENCLOSURE
+// NTH SHELF V2.78.09 — SKEWED OWNERSHIP
 // Geometry-only engine for trapezoids/slanted quadrilaterals.
-// V2.78.08 changes the search origin: the tap is the anchor, and each side is
-// chosen as the nearest sustained enclosing rail. Stronger rails farther away
-// are not allowed to jump across a nearer proven boundary.
+// V2.78.09 adds an ownership phase: three strong rails plus trusted non-orthogonal
+// evidence let the skewed engine keep control long enough to expand a too-small
+// provisional enclosure toward the stable seed instead of immediately falling
+// back to orthogonal geometry.
 
 const PanelGeometrySkewed = {
   refine(imgUrl, panel, log) {
@@ -66,7 +67,7 @@ const PanelGeometrySkewed = {
     // Find a sustained line that ENCLOSES the tap. Instead of beginning at the
     // old rectangle edge, candidate anchors are scanned outward from the tap.
     // Among lines with adequate structural proof, the nearest one wins.
-    const acquireTapRail = (axis, side, a0, a1, label) => {
+    const acquireTapRail = (axis, side, a0, a1, label, mode='nearest') => {
       const span=Math.max(1,a1-a0);
       const cross=axis==='H'?h:w;
       const tapA=axis==='H'?tx:ty;
@@ -75,7 +76,10 @@ const PanelGeometrySkewed = {
       const outwardSign=(side==='neg')?-1:1;
       const seedDist=Math.abs(seedGuess-tapCross);
       const maxDist=Math.min(cross*.72, Math.max(seedDist*1.55, (axis==='H'?rh:rw)*.82, 42));
-      const minDist=Math.max(5, Math.min(18, (axis==='H'?rh:rw)*.035));
+      const baseMinDist=Math.max(5, Math.min(18, (axis==='H'?rh:rw)*.035));
+      // Ownership completion deliberately excludes tiny interior rails and searches
+      // around the scale already established by the stable panel seed.
+      const minDist = mode==='expand' ? Math.max(baseMinDist, seedDist*.48) : baseMinDist;
       const aStart=Math.max(2,Math.round(a0+span*.02));
       const aEnd=Math.min((axis==='H'?w:h)-3,Math.round(a1-span*.02));
       const evalStep=Math.max(2,Math.round(span/105));
@@ -89,7 +93,8 @@ const PanelGeometrySkewed = {
         const mLo=best?Math.max(-slopeMax,best.m-.04):-slopeMax;
         const mHi=best?Math.min(slopeMax,best.m+.04):slopeMax;
         const dLo=best?Math.max(minDist,best.dist-9):minDist;
-        const dHi=best?Math.min(maxDist,best.dist+9):maxDist;
+        const expandMax = mode==='expand' ? Math.min(maxDist, Math.max(seedDist*1.38, minDist+10)) : maxDist;
+        const dHi=best?Math.min(expandMax,best.dist+9):expandMax;
         let passBest=best;
         for(let m=mLo;m<=mHi+1e-9;m+=slopeStep){
           for(let dist=dLo;dist<=dHi;dist+=distStep){
@@ -109,7 +114,9 @@ const PanelGeometrySkewed = {
             // Structural proof first. Distance is a strong tie-breaker so a
             // farther page border cannot beat the first enclosing divider.
             const structural=support*2.20+continuity*1.45+strong*.55-(lumSum/total)/430;
-            const proximityPenalty=(dist/Math.max(1,maxDist))*.68;
+            const proximityPenalty = mode==='expand'
+              ? (Math.abs(dist-seedDist)/Math.max(12,seedDist))*.42
+              : (dist/Math.max(1,maxDist))*.68;
             const score=structural-proximityPenalty;
             const qualifies=support>=.34 && continuity>=.18 && !(support<.44&&continuity<.30);
             if(!qualifies) continue;
@@ -167,7 +174,7 @@ const PanelGeometrySkewed = {
       if(model.coverage<.50||model.support<.26||residualMed>5.4||Math.abs(model.m)>.52) return null;
       // The refined rail must remain on the correct side of the tap.
       if((side==='neg'&&model.atTap>=tapCross-3)||(side==='pos'&&model.atTap<=tapCross+3)) return null;
-      if(log) log(`SKEWED rail ${label} HIT m=${model.m.toFixed(3)} d=${model.tapDistance.toFixed(1)} support=${model.support.toFixed(2)} cover=${model.coverage.toFixed(2)}`);
+      if(log) log(`SKEWED rail ${label} HIT mode=${mode} m=${model.m.toFixed(3)} d=${model.tapDistance.toFixed(1)} support=${model.support.toFixed(2)} cover=${model.coverage.toFixed(2)}`);
       return model;
     };
 
@@ -178,12 +185,35 @@ const PanelGeometrySkewed = {
     const padY=Math.min(h*.12,Math.max(18,rh*.20));
     const sx0=Math.max(2,x0-padX), sx1=Math.min(w-3,x1+padX);
     const sy0=Math.max(2,y0-padY), sy1=Math.min(h-3,y1+padY);
-    const top=acquireTapRail('H','neg',sx0,sx1,'top');
-    const bottom=acquireTapRail('H','pos',sx0,sx1,'bottom');
-    const left=acquireTapRail('V','neg',sy0,sy1,'left');
-    const right=acquireTapRail('V','pos',sy0,sy1,'right');
-    const sides=[top,bottom,left,right].filter(Boolean).length;
-    if(sides<4){if(log)log(`SKEWED MISS rails=${sides}/4`);return null;}
+    let top=acquireTapRail('H','neg',sx0,sx1,'top');
+    let bottom=acquireTapRail('H','pos',sx0,sx1,'bottom');
+    let left=acquireTapRail('V','neg',sy0,sy1,'left');
+    let right=acquireTapRail('V','pos',sy0,sy1,'right');
+    let rails=[top,bottom,left,right];
+    let sides=rails.filter(Boolean).length;
+
+    const strongRails=()=>rails.filter(r=>r&&r.support>=.34&&r.coverage>=.55);
+    const ownershipSignal=()=>{
+      const strong=strongRails();
+      const oblique=strong.filter(r=>Math.abs(r.m)>=.045);
+      let divergence=0;
+      if(top&&bottom) divergence=Math.max(divergence,Math.abs(top.m-bottom.m));
+      if(left&&right) divergence=Math.max(divergence,Math.abs(left.m-right.m));
+      return {strong:strong.length,oblique:oblique.length,divergence,owns:strong.length>=3&&(oblique.length>=1||divergence>=.045)};
+    };
+    let ownership=ownershipSignal();
+    if(log)log(`SKEWED OWNERSHIP rails=${sides}/4 strong=${ownership.strong} oblique=${ownership.oblique} div=${ownership.divergence.toFixed(3)} owns=${ownership.owns?'yes':'no'}`);
+    if(sides<3 || !ownership.owns){if(log)log(`SKEWED MISS ownership rails=${sides}/4`);return null;}
+
+    // If one rail is missing after ownership is established, reacquire that side
+    // at seed scale rather than surrendering the tap to orthogonal geometry.
+    if(!top) top=acquireTapRail('H','neg',sx0,sx1,'top','expand');
+    if(!bottom) bottom=acquireTapRail('H','pos',sx0,sx1,'bottom','expand');
+    if(!left) left=acquireTapRail('V','neg',sy0,sy1,'left','expand');
+    if(!right) right=acquireTapRail('V','pos',sy0,sy1,'right','expand');
+    rails=[top,bottom,left,right];
+    sides=rails.filter(Boolean).length;
+    if(sides<4){if(log)log(`SKEWED OWNED MISS completion rails=${sides}/4`);return null;}
 
     const intersect=(hl,vl)=>{
       const den=1-hl.m*vl.m;
@@ -198,9 +228,33 @@ const PanelGeometrySkewed = {
     const cs=[cross(q[0],q[1],q[2]),cross(q[1],q[2],q[3]),cross(q[2],q[3],q[0]),cross(q[3],q[0],q[1])];
     if(!(cs.every(v=>v>0)||cs.every(v=>v<0))){if(log)log('SKEWED MISS non-convex');return null;}
 
-    const area=Math.abs(q.reduce((s,p,i)=>{const n=q[(i+1)%4];return s+p.x*n.y-n.x*p.y;},0)/2);
+    let area=Math.abs(q.reduce((s,p,i)=>{const n=q[(i+1)%4];return s+p.x*n.y-n.x*p.y;},0)/2);
     const seedArea=rw*rh;
-    if(area<seedArea*.32||area>seedArea*1.65){if(log)log(`SKEWED MISS area ratio=${(area/seedArea).toFixed(2)}`);return null;}
+
+    // V2.78.08 often found a legitimate oblique structure at the wrong scale.
+    // Once skewed owns the tap, a too-small polygon triggers one seed-scale
+    // expansion pass. This preserves the rail slopes but searches farther out for
+    // the surrounding frame instead of accepting an interior mini-polygon.
+    if(area<seedArea*.32 && ownership.owns){
+      if(log)log(`SKEWED OWNED EXPAND provisional area=${(area/seedArea).toFixed(2)}`);
+      const et=acquireTapRail('H','neg',sx0,sx1,'top','expand');
+      const eb=acquireTapRail('H','pos',sx0,sx1,'bottom','expand');
+      const el=acquireTapRail('V','neg',sy0,sy1,'left','expand');
+      const er=acquireTapRail('V','pos',sy0,sy1,'right','expand');
+      if(et&&eb&&el&&er){
+        const eq=[intersect(et,el),intersect(et,er),intersect(eb,er),intersect(eb,el)];
+        if(!eq.some(p=>!p||!Number.isFinite(p.x)||!Number.isFinite(p.y))){
+          const ecs=[cross(eq[0],eq[1],eq[2]),cross(eq[1],eq[2],eq[3]),cross(eq[2],eq[3],eq[0]),cross(eq[3],eq[0],eq[1])];
+          const earea=Math.abs(eq.reduce((s,p,i)=>{const n=eq[(i+1)%4];return s+p.x*n.y-n.x*p.y;},0)/2);
+          if((ecs.every(v=>v>0)||ecs.every(v=>v<0)) && earea>area){
+            top=et; bottom=eb; left=el; right=er;
+            q.splice(0,4,...eq); area=earea;
+            if(log)log(`SKEWED OWNED EXPAND result area=${(area/seedArea).toFixed(2)}`);
+          }
+        }
+      }
+    }
+    if(area<seedArea*.18||area>seedArea*1.65){if(log)log(`SKEWED OWNED MISS final area ratio=${(area/seedArea).toFixed(2)}`);return null;}
 
     const pointInQuad=(p,poly)=>{
       let sign=0;
@@ -233,8 +287,8 @@ const PanelGeometrySkewed = {
 
     const clamp=v=>Math.max(0,Math.min(1,v));
     const nq=q.map(p=>({x:clamp(p.x/(w-1)),y:clamp(p.y/(h-1))}));
-    const out={...panel,_quad:nq,_geometryType:'skewed-tap-enclosure'};
-    if(log) log(`SKEWED HIT tap-enclosure slope=${slopeSignal.toFixed(3)} div=${opposingDivergence.toFixed(3)} area=${(area/seedArea).toFixed(2)} d=${[top,right,bottom,left].map(r=>r.tapDistance.toFixed(0)).join('/')}`);
+    const out={...panel,_quad:nq,_geometryType:'skewed-owned-enclosure'};
+    if(log) log(`SKEWED OWNED HIT slope=${slopeSignal.toFixed(3)} div=${opposingDivergence.toFixed(3)} area=${(area/seedArea).toFixed(2)} d=${[top,right,bottom,left].map(r=>r.tapDistance.toFixed(0)).join('/')}`);
     return out;
   }
 };
