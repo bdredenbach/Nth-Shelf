@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.05 — DUAL GEOMETRY ROUTER
+// NTH SHELF V2.78.06 — SKEWED RAIL ACQUISITION
 
-const CACHE_NAME = "nth-shelf-shell-2.78.05";
+const CACHE_NAME = "nth-shelf-shell-2.78.06";
 const SHELL_FILES = [
   "./",
   "./index.html",
