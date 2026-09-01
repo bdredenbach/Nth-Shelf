@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.06 Skewed Rail Acquisition Test**
+**Version 2.78.07 Skewed Classifier + Corner Freedom Test**
 
 
 ## 🔒 Privacy
@@ -117,6 +117,10 @@ This project is licensed under the **MIT License**. The license applies to the s
 
 
 
+
+## V2.78.07 Skewed Classifier + Corner Freedom Test
+
+V2.78.07 keeps the dual-geometry router and V2.78.06 rail acquisition unchanged, but adjusts the final skewed decision and polygon validation. A single high-confidence oblique rail can now classify a panel as skewed, and opposing-rail divergence is considered directly instead of relying only on an averaged slope/shift signal. Corner escape is now directional: corners adjacent to a strongly oblique, well-supported rail may move farther outside the orthogonal seed while convexity, area, seed-center containment, and four-rail proof remain mandatory. This specifically targets the two V2.78.06 outcomes observed in testing: `SKEWED DECLINE` after four rails were found and `SKEWED MISS corner escaped seed` after a strong diagonal rail was acquired. V2.78.00 remains the stable production baseline.
 
 ## V2.78.06 Skewed Rail Acquisition Test — Directional Rail Search
 

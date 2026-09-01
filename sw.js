@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.06 — SKEWED RAIL ACQUISITION
+// NTH SHELF V2.78.07 — SKEWED CLASSIFIER + CORNER FREEDOM
 
-const CACHE_NAME = "nth-shelf-shell-2.78.06";
+const CACHE_NAME = "nth-shelf-shell-2.78.07";
 const SHELL_FILES = [
   "./",
   "./index.html",
