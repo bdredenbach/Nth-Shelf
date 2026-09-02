@@ -1,4 +1,4 @@
-// NTH SHELF V2.78.15 — FINITE RAIL ENDPOINTS
+// NTH SHELF V2.78.16 — ENDPOINT CONVERGENCE / SHORT-BRIDGE CORNERS
 //
 // Recover one connected four-sided frame around the tapped panel, but treat
 // every fitted rail as a FINITE supported segment rather than an infinite line.
@@ -97,7 +97,7 @@ const PanelFrameEnvelope = {
         const fragmentationPenalty=Math.max(0,segments-4)*.035;
         const score=support*2.35+continuity*1.8+strongRate*.45-nearestPenalty-fragmentationPenalty;
 
-        // V2.78.15: record the finite span where this rail is actually supported.
+        // V2.78.16 inherits V2.78.15 finite spans: record where this rail is actually supported.
         // Small gaps are bridged, but we do not allow the fitted line to become
         // an infinite geometric object later.
         const samples=[];
@@ -152,25 +152,56 @@ const PanelFrameEnvelope = {
     const q=[intersect(top,left),intersect(top,right),intersect(bottom,right),intersect(bottom,left)];
     if(q.some(p=>!p||!Number.isFinite(p.x)||!Number.isFinite(p.y))){if(log)log('FINITE RAIL MISS intersections');return null;}
 
-    // V2.78.15: an intersection is legal only when it lies close to the ACTUAL
-    // supported span of both rails.  A small extension is allowed for thick or
-    // interrupted ink, but not unlimited extrapolation.
-    const spanContains=(rail,p)=>{
-      const a=rail.horizontal?p.x:p.y;
-      const pad=Math.max(12,Math.min(34,rail.spanLen*.10));
-      return a>=rail.span0-pad && a<=rail.span1+pad;
+    // V2.78.16: finite rails remain mandatory, but a short unsupported gap at a
+    // true comic-frame corner is legal when BOTH rail trajectories converge on
+    // the same nearby intersection.  This is deliberately a SHORT bridge only;
+    // it does not restore V2.78.14-style infinite-line extrapolation.
+    const alongAt=(rail,p)=>rail.horizontal?p.x:p.y;
+    const basePad=(rail)=>Math.max(8,Math.min(22,rail.spanLen*.07));
+    const overrun=(rail,p)=>{
+      const a=alongAt(rail,p),pad=basePad(rail);
+      if(a<rail.span0-pad)return rail.span0-a-pad;
+      if(a>rail.span1+pad)return a-rail.span1-pad;
+      return 0;
+    };
+    const endpointFor=(rail,p)=>{
+      const a=alongAt(rail,p);
+      const ea=Math.abs(a-rail.span0)<=Math.abs(a-rail.span1)?rail.span0:rail.span1;
+      return rail.horizontal?{x:ea,y:rail.m*ea+rail.b}:{x:rail.m*ea+rail.b,y:ea};
+    };
+    const endpointInk=(rail,ep)=>{
+      let hit=0,n=0;
+      const radius=8;
+      for(let d=-radius;d<=radius;d+=2){
+        const a=(rail.horizontal?ep.x:ep.y)+d;
+        const c=rail.m*a+rail.b;
+        const x=rail.horizontal?a:c,y=rail.horizontal?c:a;
+        if(x>=2&&x<w-2&&y>=2&&y<h-2){hit+=pixelLum(x,y)<=180?1:0;n++;}
+      }
+      return n?hit/n:0;
     };
     const finitePairs=[[top,left],[top,right],[bottom,right],[bottom,left]];
+    const bridgeMeta=[];
     for(let i=0;i<4;i++){
       const [ra,rb]=finitePairs[i], p=q[i];
-      const okA=spanContains(ra,p),okB=spanContains(rb,p);
-      if(log)log(`FINITE RAIL corner ${i} raw=${p.x.toFixed(1)},${p.y.toFixed(1)} spans=${okA?'Y':'N'}/${okB?'Y':'N'}`);
-      if(!okA||!okB){if(log)log(`FINITE RAIL MISS corner-${i} beyond-supported-span`);return null;}
+      const oa=overrun(ra,p),ob=overrun(rb,p);
+      const ea=endpointFor(ra,p),eb=endpointFor(rb,p);
+      const da=Math.hypot(p.x-ea.x,p.y-ea.y),db=Math.hypot(p.x-eb.x,p.y-eb.y);
+      const endpointGap=Math.hypot(ea.x-eb.x,ea.y-eb.y);
+      const bridgeMax=Math.max(10,Math.min(34,Math.min(rw,rh)*.11));
+      const totalMax=Math.max(18,Math.min(54,Math.min(rw,rh)*.18));
+      const ia=endpointInk(ra,ea),ib=endpointInk(rb,eb);
+      const direct=oa<=0&&ob<=0;
+      const bridged=!direct && da<=bridgeMax && db<=bridgeMax && endpointGap<=totalMax && ia>=.32 && ib>=.32;
+      bridgeMeta[i]={direct,bridged,da,db,endpointGap,ia,ib,bridgeMax,totalMax};
+      if(log)log(`SHORT BRIDGE corner ${i} raw=${p.x.toFixed(1)},${p.y.toFixed(1)} direct=${direct?'Y':'N'} proj=${da.toFixed(1)}/${db.toFixed(1)} gap=${endpointGap.toFixed(1)} ink=${ia.toFixed(2)}/${ib.toFixed(2)} max=${bridgeMax.toFixed(1)}`);
+      if(!direct&&!bridged){if(log)log(`SHORT BRIDGE MISS corner-${i} endpoints do not converge`);return null;}
     }
 
-    // A legal corner must be the intersection of the SAME two proven rails, and
-    // both rails must carry dark support right up to that intersection.  The
-    // vertex itself is never moved. This remains the connected-frame rule from V2.78.14; V2.78.15 additionally requires finite supported spans.
+    // Direct corners still require ink right up to the intersection. For a
+    // V2.78.16 short-bridged corner, endpoint convergence replaces that literal
+    // intersection-ink requirement; the vertex remains the SAME two-rail
+    // intersection and is never independently snapped to unrelated artwork.
     const armSupport=(corner,hRail,vRail)=>{
       const radius=Math.max(6,Math.min(18,Math.round(Math.min(rw,rh)*.06)));
       let hs=0,hn=0,vs=0,vn=0;
@@ -187,8 +218,9 @@ const PanelFrameEnvelope = {
       const p=q[i];
       if(p.x<-8||p.x>w+8||p.y<-8||p.y>h+8){if(log)log(`FINITE RAIL MISS corner-${i} outside`);return null;}
       const a=armSupport(p,pairs[i][0],pairs[i][1]);
-      if(log)log(`FINITE RAIL corner ${i} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} arms=${a.h.toFixed(2)}/${a.v.toFixed(2)}`);
-      if(a.h<.28||a.v<.28){if(log)log(`FINITE RAIL MISS corner-${i} disconnected`);return null;}
+      const bm=bridgeMeta[i];
+      if(log)log(`SHORT BRIDGE corner ${i} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} arms=${a.h.toFixed(2)}/${a.v.toFixed(2)} mode=${bm.bridged?'BRIDGED':'DIRECT'}`);
+      if(!bm.bridged && (a.h<.28||a.v<.28)){if(log)log(`SHORT BRIDGE MISS corner-${i} disconnected`);return null;}
     }
 
     const cross=(a,b,c)=>(b.x-a.x)*(c.y-b.y)-(b.y-a.y)*(c.x-b.x);
@@ -216,7 +248,7 @@ const PanelFrameEnvelope = {
     const bx=Math.max(0,Math.min(...xs)),by=Math.max(0,Math.min(...ys));
     const br=Math.min(1,Math.max(...xs)),bb=Math.min(1,Math.max(...ys));
     const confidence=Math.min(1,rails.reduce((s,r)=>s+r.support+r.continuity,0)/8);
-    if(log)log(`FINITE RAIL HIT area=${areaRatio.toFixed(2)} confidence=${confidence.toFixed(2)} quad=${quad.map(p=>`${p.x.toFixed(3)},${p.y.toFixed(3)}`).join(' | ')}`);
-    return {...panel,x:bx,y:by,w:Math.max(.001,br-bx),h:Math.max(.001,bb-by),_quad:quad,_geometryType:'connected-frame',_frameEnvelope:{confidence,areaRatio,sides:4,connected:true}};
+    if(log)log(`SHORT BRIDGE HIT area=${areaRatio.toFixed(2)} confidence=${confidence.toFixed(2)} bridged=${bridgeMeta.filter(b=>b.bridged).length}/4 quad=${quad.map(p=>`${p.x.toFixed(3)},${p.y.toFixed(3)}`).join(' | ')}`);
+    return {...panel,x:bx,y:by,w:Math.max(.001,br-bx),h:Math.max(.001,bb-by),_quad:quad,_geometryType:'short-bridge-frame',_frameEnvelope:{confidence,areaRatio,sides:4,connected:true,shortBridge:true,bridgedCorners:bridgeMeta.filter(b=>b.bridged).length}};
   }
 };
