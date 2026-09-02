@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.16 — ENDPOINT CONVERGENCE / SHORT-BRIDGE TEST
+// NTH SHELF V2.78.17 — CHAIN-CONNECTED RAIL FAMILY TEST
 
-const CACHE_NAME = "nth-shelf-shell-2.78.16";
+const CACHE_NAME = "nth-shelf-shell-2.78.17";
 const SHELL_FILES = [
   "./",
   "./index.html",

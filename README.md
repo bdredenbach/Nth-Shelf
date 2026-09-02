@@ -106,9 +106,13 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.16 Endpoint Convergence / Short-Bridge Corners Test**
+**Version 2.78.17 Chain-Connected Rail Family Test**
 
 
+
+## V2.78.17 Chain-Connected Rail Family Test
+
+V2.78.17 keeps the finite-rail and short-bridge safety work from V2.78.15–V2.78.16 but changes rail acquisition fundamentally. The frame envelope now generates several plausible rails per side and searches for one **closed rail family** around the tap: top → right → bottom → left → top. A rail is no longer allowed to win simply because it is individually strong; every selected side must participate in the same finite, connected enclosure. This directly targets the V2.78.16 failure where excellent rails at very different structural scales produced a 500+ px endpoint mismatch. Ownership remains deferred: this build tests only whether one coherent whole frame can be recovered around the tap before orthogonal/skewed classification. V2.78.00 remains the stable production baseline.
 
 ## V2.78.16 Endpoint Convergence / Short-Bridge Corners Test
 
