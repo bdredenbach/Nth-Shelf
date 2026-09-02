@@ -1,4 +1,4 @@
-// NTH SHELF V2.78.22 — RAIL-BAND CELL INTEGRITY
+// NTH SHELF V2.78.23 — RAIL-BAND CELL INTEGRITY / OWNERSHIP SUPPORT
 //
 // Generate multiple plausible finite rails per side, then choose one four-rail
 // FAMILY that closes around the tap.  Rails are no longer selected independently.
@@ -145,7 +145,7 @@ const PanelFrameEnvelope = {
     // ordinary evidence ranking remains the fallback.
     const completeCells=suspiciousSeed?trials.filter(t=>{
       const e=t.result._frameEnvelope||{};
-      return t.absoluteArea>=.040&&(e.weakestAdj||0)>=.28&&
+      return t.absoluteArea>=.040&&(e.weakestAdj||0)>=.20&&
         (e.relativeAdjScore||0)>=.72&&(e.minThickness||0)>=.66;
     }):[];
     completeCells.sort((a,b)=>a.absoluteArea-b.absoluteArea||b.rank-a.rank);

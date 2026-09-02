@@ -2458,9 +2458,11 @@ async setMode(mode) {
        { x: 0.011, y: 0.013, w: 0.954, h: 0.957, _geometryOnlyRescue: true },
        'geometry-rescue'
      );
-     const proven = rescue && rescue._geometryType === 'tap-neighborhood-frame' &&
-       Array.isArray(rescue._quad) && rescue._quad.length === 4 &&
-       rescue._frameEnvelope?.chainConnected === true;
+     const provenQuad = rescue?._geometryType === 'tap-neighborhood-frame' &&
+       Array.isArray(rescue?._quad) && rescue._quad.length === 4;
+     const provenOrthogonalFrame = rescue?._geometryOwner === 'orthogonal-frame';
+     const proven = rescue && rescue._frameEnvelope?.chainConnected === true &&
+       (provenQuad || provenOrthogonalFrame);
      if (this.comic?.id === comicId && this.index === pageIndex && proven) {
        if (this.debugMode) this.debugLog("[V106] CLOSED-FRAME RESCUE HIT -> ZOOM");
        this.zoomToPanel(rescue, stageRect, imgRect);

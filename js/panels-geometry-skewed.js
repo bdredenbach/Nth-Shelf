@@ -1,13 +1,8 @@
-// NTH SHELF V2.78.11 — VERTEX / ANGLE OWNERSHIP CLASSIFIER
+// NTH SHELF V2.78.23 — PROVEN-FRAME OWNERSHIP CLASSIFIER
 //
-// This module intentionally DOES NOT try to pop the whole skewed panel yet.
-// Its only job in V2.78.11 is to answer one question reliably:
-//   "Does the local four-corner geometry around this tapped panel prove that
-//    skewed geometry, rather than orthogonal geometry, should own the tap?"
-//
-// The full-frame expansion problem is deliberately deferred.  If ownership is
-// proven, the router records SKEWED ownership but still renders the stable seed
-// rectangle.  That lets us tune classification without damaging panel pop-outs.
+// Ownership is decided only after the rail-band envelope proves a complete
+// four-corner frame. Trusted tilted rails keep their quadrilateral; an
+// orthogonal classification renders the box around that same proven frame.
 
 const PanelGeometrySkewed = {
   classify(imgUrl, panel, log) {
@@ -32,6 +27,65 @@ const PanelGeometrySkewed = {
   async refine(imgUrl, panel, log) {
     const result = await this.classify(imgUrl, panel, log);
     return result && result.owns ? { ...panel, _geometryOwner:'skewed', _skewEvidence:result } : null;
+  },
+
+  // Classify the already-proven whole-frame quadrilateral. Ownership never
+  // moves a corner; it only decides whether the envelope keeps its four
+  // vertices or is rendered as the orthogonal box around those same rails.
+  classifyQuad(panel, log) {
+    const q=panel?._quad;
+    if(!Array.isArray(q)||q.length!==4||q.some(p=>!Number.isFinite(p?.x)||!Number.isFinite(p?.y))){
+      return {owns:false,owner:'orthogonal',reason:'missing-proven-quad',confidence:0};
+    }
+    const angleAt=(prev,p,next)=>{
+      const ax=prev.x-p.x,ay=prev.y-p.y,bx=next.x-p.x,by=next.y-p.y;
+      const den=Math.hypot(ax,ay)*Math.hypot(bx,by);
+      if(den<1e-8)return NaN;
+      return Math.acos(Math.max(-1,Math.min(1,(ax*bx+ay*by)/den)))*180/Math.PI;
+    };
+    const orientation=(a,b)=>{
+      let deg=Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI;
+      deg=((deg%180)+180)%180;
+      return deg;
+    };
+    const diff180=(a,b)=>{const d=Math.abs(a-b);return Math.min(d,180-d);};
+    const angles=q.map((p,i)=>angleAt(q[(i+3)%4],p,q[(i+1)%4]));
+    if(angles.some(a=>!Number.isFinite(a)))return {owns:false,owner:'orthogonal',reason:'invalid-angles',confidence:0};
+    const deviations=angles.map(a=>Math.abs(a-90));
+    const sortedDev=deviations.slice().sort((a,b)=>b-a);
+    const edgeAngles=q.map((p,i)=>orientation(p,q[(i+1)%4]));
+    const axisDepartures=edgeAngles.map(a=>Math.min(a,Math.abs(a-90),180-a));
+    const maxAxisDeparture=Math.max(...axisDepartures);
+    const oppositeDivergence=Math.max(diff180(edgeAngles[0],edgeAngles[2]),diff180(edgeAngles[1],edgeAngles[3]));
+    const maxDev=sortedDev[0],secondDev=sortedDev[1];
+
+    // A visibly tilted edge may still be an artwork rail mistakenly fitted
+    // inside an otherwise orthogonal panel. Only an edge with both strong
+    // neighbor separation and printed-band integrity may prove skew ownership.
+    const adjSides=panel?._frameEnvelope?.adjSides||[];
+    const thicknessSides=panel?._frameEnvelope?.thicknessSides||[];
+    const trustedAxisDepartures=axisDepartures.filter((departure,i)=>
+      departure>=5.0&&(adjSides[i]===undefined||adjSides[i]>=.50)&&
+      (thicknessSides[i]===undefined||thicknessSides[i]>=.66)
+    );
+    const trustedAxisDeparture=Math.max(0,...trustedAxisDepartures);
+    // One trusted non-axial rail is still not enough by itself. It needs
+    // corroboration from a second corner or opposing-rail divergence.
+    const substantial=trustedAxisDeparture>=5.0;
+    const corroborated=secondDev>=4.5||oppositeDivergence>=5.0;
+    const owns=substantial&&corroborated;
+    const confidence=Math.max(0,Math.min(1,
+      (maxDev-4)/14+(secondDev-2)/22+(oppositeDivergence-2)/26
+    ));
+    const result={
+      owns,owner:owns?'skewed':'orthogonal',
+      reason:owns?'whole-frame-angle-proof':'orthogonal-angle-profile',confidence,
+      angles,deviations,edgeAngles,axisDepartures,maxDev,secondDev,
+      maxAxisDeparture,trustedAxisDeparture,oppositeDivergence,adjSides,thicknessSides
+    };
+    if(log)log(`FRAME OWNERSHIP angles=${angles.map(a=>a.toFixed(1)).join('/')} dev=${deviations.map(a=>a.toFixed(1)).join('/')} axis=${axisDepartures.map(a=>a.toFixed(1)).join('/')} trusted=${trustedAxisDeparture.toFixed(1)} adj=${adjSides.map(a=>a.toFixed(2)).join('/')} opp=${oppositeDivergence.toFixed(1)}`);
+    if(log)log(`FRAME OWNERSHIP -> ${owns?'SKEWED':'ORTHOGONAL'} confidence=${confidence.toFixed(2)} reason=${result.reason}`);
+    return result;
   },
 
   _classify(img, panel, log) {
