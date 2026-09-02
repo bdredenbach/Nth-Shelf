@@ -106,9 +106,13 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.21 Orthogonal Authority Gate Test**
+**Version 2.78.22 Rail-Band Cell Integrity Test**
 
 ## 🧪 Release History (Newest First)
+
+## V2.78.22 Rail-Band Cell Integrity Test
+
+V2.78.22 makes the smallest-complete-cell rescue distinguish a printed panel gutter from a thin line inside the artwork. Every retained rail now receives a cross-rail band-thickness score, and a page/row rescue may select a small cell only when all four rails have sufficient band integrity in addition to the existing closed-loop, adjacency, convexity, and tap-containment proofs. If V73, V100, and V99/V92 all miss panel identity, the reader now makes one final page-seed geometry attempt and accepts it only when the envelope proves a connected four-rail frame; it never displays the orthogonal whole-page fallback. Debug logs add `thick=min/average` and four side-ordered thickness values. On `140153.jpg`, all six visible skewed frames passed both the 30-position page-seed sweep and the 30-position aligned-seed sweep without slivers, while the V2.78.21 orthogonal-authority gate remains in place.
 
 ## V2.78.21 Orthogonal Authority Gate Test
 
