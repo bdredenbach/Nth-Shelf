@@ -106,13 +106,13 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.15 Finite Rail Endpoints Test**
+**Version 2.78.16 Endpoint Convergence / Short-Bridge Corners Test**
 
 
 
-## V2.78.15 Finite Rail Endpoints Test
+## V2.78.16 Endpoint Convergence / Short-Bridge Corners Test
 
-V2.78.15 keeps the connected-frame/boundary-walk model from V2.78.14 but stops treating fitted frame rails as infinite mathematical lines. Every recovered top, bottom, left, and right rail now carries a finite supported span based on the actual dark frame evidence. A corner is legal only when the same two neighboring rails both have supported spans that reach the intersection, with only a small tolerance for thick or briefly interrupted ink. This directly targets the V2.78.14 failures where a real slanted rail was extrapolated hundreds of pixels into a distant or off-page corner. Ownership remains deferred; this test is still only about recovering one coherent whole frame around the tap. V2.78.00 remains the stable production baseline.
+V2.78.16 keeps V2.78.15 finite rail spans, but allows a tightly bounded short bridge when two proven neighboring rail endpoints stop just before a real comic-frame corner. The engine projects each rail only a small distance and accepts the corner only when both endpoints converge on the same intersection, both endpoints still have local frame ink, and the endpoint gap stays below a panel-scaled hard limit. Infinite extrapolation remains forbidden. Direct corners still require connected intersection support; bridged corners are explicitly logged as BRIDGED. Ownership remains deferred so this build tests only whether finite rails can recover the complete frame despite short border interruptions. V2.78.00 remains the stable production baseline.
 
 ## 🔒 Privacy
 Nth Shelf is designed around local-first storage. Your comics are stored on your device rather than uploaded to an Nth Shelf server simply to read them.

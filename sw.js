@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.15 — FINITE RAIL ENDPOINTS TEST
+// NTH SHELF V2.78.16 — ENDPOINT CONVERGENCE / SHORT-BRIDGE TEST
 
-const CACHE_NAME = "nth-shelf-shell-2.78.15";
+const CACHE_NAME = "nth-shelf-shell-2.78.16";
 const SHELL_FILES = [
   "./",
   "./index.html",
