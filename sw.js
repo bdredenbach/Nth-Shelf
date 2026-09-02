@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.13 — JUNCTION-LOCKED ENVELOPE TEST
+// NTH SHELF V2.78.14 — CONNECTED FRAME / BOUNDARY WALK TEST
 
-const CACHE_NAME = "nth-shelf-shell-2.78.13";
+const CACHE_NAME = "nth-shelf-shell-2.78.14";
 const SHELL_FILES = [
   "./",
   "./index.html",
