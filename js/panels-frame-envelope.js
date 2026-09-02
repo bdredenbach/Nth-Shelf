@@ -1,4 +1,4 @@
-// NTH SHELF V2.78.20 — TAP-NEIGHBORHOOD CONSENSUS / SIDE-RELATIVE RAIL PROOF
+// NTH SHELF V2.78.21 — ORTHOGONAL AUTHORITY / TAP-NEIGHBORHOOD CONSENSUS
 //
 // Generate multiple plausible finite rails per side, then choose one four-rail
 // FAMILY that closes around the tap.  Rails are no longer selected independently.
@@ -27,7 +27,12 @@ const PanelFrameEnvelope = {
     const primary=this._detectSingle(img,panel,log);
     const primaryRel=primary?._frameEnvelope?.relativeAdjScore||0;
     const seedArea=Math.max(.001,panel.w*panel.h);
-    const suspiciousSeed=panel.w>.55||panel.h>.58||seedArea>.24;
+    // A wide, shallow comic panel is not suspicious merely because its width
+    // exceeds half the page. Rescue is reserved for seeds that plausibly span
+    // multiple panels/a structural band. The router applies the same policy.
+    const suspiciousSeed=seedArea>.24||
+      (panel.w>.82&&panel.h>.28)||
+      (panel.h>.82&&panel.w>.28);
     if(primary&&!suspiciousSeed&&primaryRel>=.84)return primary;
 
     const tap=panel._tap||{x:panel.x+panel.w/2,y:panel.y+panel.h/2};

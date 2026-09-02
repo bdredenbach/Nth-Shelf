@@ -2395,9 +2395,13 @@ async setMode(mode) {
    const geometryLogger = this.debugMode
      ? (msg) => this.debugLog(`[V105 geometry p${pageIndex}] ${msg}`)
      : null;
-   const refineGeometry = async (seed) => {
+   const refineGeometry = async (seed, identitySource) => {
      if (!seed) return null;
-     const seeded = { ...seed, _tap: { x: relXImg, y: relYImg } };
+     const seeded = {
+       ...seed,
+       _tap: { x: relXImg, y: relYImg },
+       _identitySource: identitySource || seed._identitySource || 'unknown'
+     };
      if (!url || typeof PanelGeometry === 'undefined' || !PanelGeometry.refine) return seeded;
      return (await PanelGeometry.refine(url, seeded, geometryLogger)) || seeded;
    };
@@ -2408,7 +2412,7 @@ async setMode(mode) {
    const panel = this.findPanelAt(relXImg, relYImg);
    if (panel) {
      if (this.debugMode) this.debugLog("[V105] PASS 1 HIT (V73 identity) -> GEOMETRY ROUTER");
-     const shaped = await refineGeometry(panel);
+     const shaped = await refineGeometry(panel, 'v73');
      if (this.comic?.id === comicId && this.index === pageIndex && shaped) this.zoomToPanel(shaped, stageRect, imgRect);
      return;
    }
@@ -2423,7 +2427,7 @@ async setMode(mode) {
      const hybrid = await PanelDetect.detectTapHybrid(url, relXImg, relYImg, hybridLogger);
      if (this.comic?.id === comicId && this.index === pageIndex && hybrid) {
        if (this.debugMode) this.debugLog("[V105] PASS 2A HIT (V100 identity) -> GEOMETRY ROUTER");
-       const shaped = await refineGeometry(hybrid);
+       const shaped = await refineGeometry(hybrid, 'v100');
        if (this.comic?.id === comicId && this.index === pageIndex && shaped) this.zoomToPanel(shaped, stageRect, imgRect);
        return;
      }
@@ -2438,7 +2442,7 @@ async setMode(mode) {
      const fallback = await PanelDetect.detectTapLocalFallback(url, relXImg, relYImg, logger);
      if (this.comic?.id === comicId && this.index === pageIndex && fallback) {
        if (this.debugMode) this.debugLog(`[V105] LEGACY IDENTITY sides=${fallback._gutterSides || 0} -> GEOMETRY ROUTER`);
-       const shaped = await refineGeometry(fallback);
+       const shaped = await refineGeometry(fallback, 'v99');
        if (this.comic?.id === comicId && this.index === pageIndex && shaped) this.zoomToPanel(shaped, stageRect, imgRect);
        return;
      }

@@ -320,7 +320,11 @@ const PanelDetect = {
       w: best.pw / w,
       h: best.ph / h,
       _v87BoundarySet: true,
-      _gutterSides: best.sides
+      _gutterSides: best.sides,
+      // Reaching this return path means V92 found no sustained internal split.
+      // The geometry router uses this explicit proof to preserve local
+      // orthogonal panels instead of letting a later skew search replace them.
+      _v99InteriorClean: true
     };
 
     // V89: A good outer boundary set can still contain multiple panels.
