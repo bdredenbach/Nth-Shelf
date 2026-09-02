@@ -2449,6 +2449,26 @@ async setMode(mode) {
      if (this.debugMode) this.debugLog("[V92] PASS 2 MISS");
    }
 
+   // The legacy identity passes can miss a valid skewed cell entirely. Give
+   // geometry one final page-seed opportunity, but accept only a proven,
+   // connected four-rail envelope. An orthogonal page fallback is never shown.
+   if (url && this.comic?.id === comicId && this.index === pageIndex) {
+     if (this.debugMode) this.debugLog("[V106] IDENTITY MISS -> CLOSED-FRAME RESCUE");
+     const rescue = await refineGeometry(
+       { x: 0.011, y: 0.013, w: 0.954, h: 0.957, _geometryOnlyRescue: true },
+       'geometry-rescue'
+     );
+     const proven = rescue && rescue._geometryType === 'tap-neighborhood-frame' &&
+       Array.isArray(rescue._quad) && rescue._quad.length === 4 &&
+       rescue._frameEnvelope?.chainConnected === true;
+     if (this.comic?.id === comicId && this.index === pageIndex && proven) {
+       if (this.debugMode) this.debugLog("[V106] CLOSED-FRAME RESCUE HIT -> ZOOM");
+       this.zoomToPanel(rescue, stageRect, imgRect);
+       return;
+     }
+     if (this.debugMode) this.debugLog("[V106] CLOSED-FRAME RESCUE MISS");
+   }
+
    this.toggleChrome();
  },
 

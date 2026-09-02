@@ -1,4 +1,4 @@
-// NTH SHELF V2.78.21 — ORTHOGONAL AUTHORITY ROUTER
+// NTH SHELF V2.78.22 — ORTHOGONAL AUTHORITY / CLOSED-FRAME RESCUE ROUTER
 //
 // Stable/local orthogonal geometry is authoritative. The skew-frame envelope
 // may run only when V99 returns an oversized/composite structural band instead
@@ -29,7 +29,7 @@ const PanelGeometry = {
 
   async refine(imgUrl, panel, log) {
     if (!panel) return null;
-    if (log) log('ROUTER V2.78.21 orthogonal-authority start');
+    if (log) log('ROUTER V2.78.22 orthogonal-authority start');
 
     const policy=this._seedPolicy(panel);
     if(!policy.rescue){
