@@ -1,4 +1,4 @@
-// NTH SHELF V2.78.12 — FRAME ENVELOPE
+// NTH SHELF V2.78.13 — JUNCTION-LOCKED FRAME ENVELOPE
 //
 // Purpose: given the stable panel seed from panels.js, recover the COMPLETE
 // enclosing four-sided frame around the tap BEFORE deciding whether that frame
@@ -143,8 +143,63 @@ const PanelFrameEnvelope = {
       const x=(vl.m*hl.b+vl.b)/den;
       return {x,y:hl.m*x+hl.b};
     };
-    const q=[intersect(top,left),intersect(top,right),intersect(bottom,right),intersect(bottom,left)];
+    let q=[intersect(top,left),intersect(top,right),intersect(bottom,right),intersect(bottom,left)];
     if(q.some(p=>!p||!Number.isFinite(p.x)||!Number.isFinite(p.y))){if(log)log('ENVELOPE MISS intersections');return null;}
+
+    // V2.78.13 — Junction lock. Mathematical line intersections can escape well
+    // beyond the real comic frame even when both fitted rails are individually
+    // strong.  For each corner, search a compact neighborhood around the raw
+    // intersection and snap to the strongest point where BOTH neighboring rails
+    // have local dark support.  This keeps corners attached to visible frame
+    // junctions/T-junctions instead of free-floating in artwork or white space.
+    const junctionScore=(x,y,hRail,vRail)=>{
+      const rad=3;
+      let hs=0,hn=0,vs=0,vn=0;
+      for(let d=-rad;d<=rad;d++){
+        const yh=hRail.m*(x+d)+hRail.b;
+        if(yh>=1&&yh<h-1){hs+=Math.max(0,190-pixelLum(x+d,yh));hn++;}
+        const xv=vRail.m*(y+d)+vRail.b;
+        if(xv>=1&&xv<w-1){vs+=Math.max(0,190-pixelLum(xv,y+d));vn++;}
+      }
+      if(!hn||!vn)return -1;
+      const hDark=hs/(hn*190),vDark=vs/(vn*190);
+      // Require evidence from both directions; geometric mean punishes a weak arm.
+      return Math.sqrt(Math.max(0,hDark)*Math.max(0,vDark));
+    };
+
+    const lockCorner=(raw,hRail,vRail,index)=>{
+      const search=Math.max(8,Math.min(30,Math.round(Math.min(rw,rh)*.11)));
+      let best={x:raw.x,y:raw.y,score:junctionScore(raw.x,raw.y,hRail,vRail)};
+      for(let dy=-search;dy<=search;dy+=2){
+        for(let dx=-search;dx<=search;dx+=2){
+          const x=raw.x+dx,y=raw.y+dy;
+          if(x<2||x>w-3||y<2||y>h-3)continue;
+          const score=junctionScore(x,y,hRail,vRail);
+          const dist=Math.hypot(dx,dy);
+          const rank=score-dist/(search*9);
+          const bestRank=(best.score??-1)-Math.hypot(best.x-raw.x,best.y-raw.y)/(search*9);
+          if(rank>bestRank)best={x,y,score};
+        }
+      }
+      const move=Math.hypot(best.x-raw.x,best.y-raw.y);
+      if(log)log(`ENVELOPE junction ${index} raw=${raw.x.toFixed(1)},${raw.y.toFixed(1)} lock=${best.x.toFixed(1)},${best.y.toFixed(1)} score=${best.score.toFixed(2)} move=${move.toFixed(1)}`);
+      // A real corner should show both-direction ink near the junction. Keep the
+      // threshold conservative; failure falls back to stable orthogonal geometry.
+      if(best.score<.18){if(log)log(`ENVELOPE MISS junction-${index} weak=${best.score.toFixed(2)}`);return null;}
+      // Do not permit a corner to remain wildly extrapolated when no nearby
+      // supported junction exists.
+      if(move>search*1.15){if(log)log(`ENVELOPE MISS junction-${index} drift=${move.toFixed(1)}`);return null;}
+      return {x:best.x,y:best.y};
+    };
+
+    const locked=[
+      lockCorner(q[0],top,left,0),
+      lockCorner(q[1],top,right,1),
+      lockCorner(q[2],bottom,right,2),
+      lockCorner(q[3],bottom,left,3)
+    ];
+    if(locked.some(p=>!p))return null;
+    q=locked;
 
     const cross=(a,b,c)=>(b.x-a.x)*(c.y-b.y)-(b.y-a.y)*(c.x-b.x);
     const cs=[cross(q[0],q[1],q[2]),cross(q[1],q[2],q[3]),cross(q[2],q[3],q[0]),cross(q[3],q[0],q[1])];

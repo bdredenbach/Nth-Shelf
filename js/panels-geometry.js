@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.12 — FRAME ENVELOPE ROUTER
+// NTH SHELF V2.78.13 — FRAME ENVELOPE ROUTER
 //
-// V2.78.12 changes the order of operations:
+// V2.78.13 changes the order of operations:
 //   stable panel identity -> COMPLETE frame envelope -> later angle ownership.
 //
 // This test build intentionally does NOT ask orthogonal/skewed to own the tap.
@@ -12,7 +12,7 @@
 const PanelGeometry = {
   async refine(imgUrl, panel, log) {
     if (!panel) return null;
-    if (log) log('ROUTER V2.78.12 frame-envelope start');
+    if (log) log('ROUTER V2.78.13 junction-locked frame-envelope start');
 
     if (imgUrl && typeof PanelFrameEnvelope !== 'undefined' && PanelFrameEnvelope.detect) {
       const envelope = await PanelFrameEnvelope.detect(imgUrl, panel, log);
