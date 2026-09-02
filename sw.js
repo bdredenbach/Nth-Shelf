@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.17 — CHAIN-CONNECTED RAIL FAMILY TEST
+// NTH SHELF V2.78.20 — TAP-NEIGHBORHOOD CONSENSUS TEST
 
-const CACHE_NAME = "nth-shelf-shell-2.78.17";
+const CACHE_NAME = "nth-shelf-shell-2.78.20";
 const SHELL_FILES = [
   "./",
   "./index.html",

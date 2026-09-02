@@ -106,9 +106,18 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.17 Chain-Connected Rail Family Test**
+**Version 2.78.20 Tap-Neighborhood Frame Consensus Test**
 
 
+
+
+## V2.78.20 Tap-Neighborhood Frame Consensus Test
+
+V2.78.20 fixes two failures exposed by the `140153.jpg` sandbox comparison. Rail adjacency is now judged relative to the competing rails on the same side, so a strongly proven top or left divider can beat a corner-convenient artwork edge without requiring the outer page border to have bright pixels on both sides. When the stable detector supplies an oversized or weak seed, the envelope also runs a bounded set of local panel-scale seeds and nearby tap probes. Only already closed, convex, tap-containing four-rail families remain eligible; the rescue ranks those proven loops by side-relative evidence, geometry confidence, seed coverage, and cross-seed agreement. In the five-position sandbox sweep, center, upper, lower, left, and right taps inside the test panel converged on the same complete skewed frame. Ownership remains deferred. V2.78.00 remains the stable production baseline.
+
+## V2.78.19 Neighbor-Side Consistency Test
+
+V2.78.19 adds neighbor-side consistency as ranking evidence after closed-loop validation. Each candidate rail samples the dark rail and the image regions immediately on both sides. This evidence cannot manufacture an open rail or bypass the closed-family protections. The build showed that absolute adjacency alone was too weak and could give a correct outer page rail a score of zero; V2.78.20 replaces that final comparison with side-relative evidence and local-seed consensus.
 
 ## V2.78.17 Chain-Connected Rail Family Test
 
