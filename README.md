@@ -58,7 +58,7 @@ Auto Scroll is available in **Scroll, Manga,** and **Webcomic** modes.
 
 - The **Auto Scroll** button appears only in modes that support continuous scrolling.
 - The button is dark when off and red when active, matching the Bubble Zoom control style.
-- Use the speed control to select **0.0x, 0.33x, 0.50x, 0.66x,** or **1.0x**.
+- Use the speed control to select **0.0x, 0.33x, 0.50x, 0.66x, 1.00x** or **2.00x**.
 - Use the play/pause control to stop and resume scrolling without leaving the mode.
 - The control panel fades almost completely into the artwork while idle and becomes visible when interacted with.
 - The control panel can be moved to a more convenient position.
