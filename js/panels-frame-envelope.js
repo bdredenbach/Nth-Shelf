@@ -1,4 +1,4 @@
-// NTH SHELF V2.78.17 — CHAIN-CONNECTED RAIL FAMILY / CLOSED-LOOP TEST
+// NTH SHELF V2.78.20 — TAP-NEIGHBORHOOD CONSENSUS / SIDE-RELATIVE RAIL PROOF
 //
 // Generate multiple plausible finite rails per side, then choose one four-rail
 // FAMILY that closes around the tap.  Rails are no longer selected independently.
@@ -24,6 +24,84 @@ const PanelFrameEnvelope = {
   },
 
   _detect(img, panel, log) {
+    const primary=this._detectSingle(img,panel,log);
+    const primaryRel=primary?._frameEnvelope?.relativeAdjScore||0;
+    const seedArea=Math.max(.001,panel.w*panel.h);
+    const suspiciousSeed=panel.w>.55||panel.h>.58||seedArea>.24;
+    if(primary&&!suspiciousSeed&&primaryRel>=.84)return primary;
+
+    const tap=panel._tap||{x:panel.x+panel.w/2,y:panel.y+panel.h/2};
+    const widths=[.22,.28,.34],heights=[.22,.30,.38];
+    const trials=[];
+    if(primary)trials.push({result:primary,seed:panel,source:'primary'});
+    for(const sw of widths)for(const sh of heights){
+      const sxBase=tap.x>.78?.972-sw:tap.x<.22?.028:tap.x-sw/2;
+      const syBase=tap.y>.82?.972-sh:tap.y<.18?.028:tap.y-sh/2;
+      const sx=Math.max(.015,Math.min(.985-sw,sxBase));
+      const sy=Math.max(.015,Math.min(.985-sh,syBase));
+      const seed={...panel,x:sx,y:sy,w:sw,h:sh,_tap:tap,_multiscaleSeed:true};
+      const result=this._detectSingle(img,seed,null);
+      if(result)trials.push({result,seed,source:`${sw.toFixed(2)}x${sh.toFixed(2)}`});
+    }
+    {
+      const sw=.272,sh=.285;
+      const sxBase=tap.x>.78?.972-sw:tap.x<.22?.028:tap.x-sw*.56;
+      const syBase=tap.y>.82?.972-sh:tap.y<.18?.028:tap.y-sh*.54;
+      const sx=Math.max(.015,Math.min(.985-sw,sxBase));
+      const sy=Math.max(.015,Math.min(.985-sh,syBase));
+      const seed={...panel,x:sx,y:sy,w:sw,h:sh,_tap:tap,_multiscaleSeed:true};
+      const result=this._detectSingle(img,seed,null);
+      if(result)trials.push({result,seed,source:'edge-fit'});
+    }
+    {
+      const sw=.245,sh=.285;
+      const sxBase=tap.x-sw*.612;
+      const syBase=tap.y-sh*.537;
+      const sx=Math.max(.015,Math.min(.985-sw,sxBase));
+      const sy=Math.max(.015,Math.min(.985-sh,syBase));
+      const seed={...panel,x:sx,y:sy,w:sw,h:sh,_tap:tap,_multiscaleSeed:true};
+      const result=this._detectSingle(img,seed,null);
+      if(result)trials.push({result,seed,source:'balanced-fit'});
+    }
+    const originalInside=(quad)=>{let inside=false;for(let i=0,j=quad.length-1;i<quad.length;j=i++){
+      const a=quad[i],b=quad[j];
+      if(((a.y>tap.y)!==(b.y>tap.y))&&(tap.x<(b.x-a.x)*(tap.y-a.y)/(b.y-a.y+1e-9)+a.x))inside=!inside;
+    }return inside;};
+    const probes=[[-.10,0],[.10,0],[0,-.085],[0,.085]];
+    for(const [dx,dy] of probes){
+      const probe={x:Math.max(.04,Math.min(.96,tap.x+dx)),y:Math.max(.04,Math.min(.96,tap.y+dy))};
+      const sw=.245,sh=.285;
+      const sx=Math.max(.015,Math.min(.985-sw,probe.x-sw*.612));
+      const sy=Math.max(.015,Math.min(.985-sh,probe.y-sh*.537));
+      const seed={...panel,x:sx,y:sy,w:sw,h:sh,_tap:probe,_multiscaleSeed:true,_probeTap:true};
+      const source=`probe${dx>=0?'+':''}${dx.toFixed(2)},${dy>=0?'+':''}${dy.toFixed(2)}`;
+      const result=this._detectSingle(img,seed,null);
+      if(result&&originalInside(result._quad))trials.push({result,seed,source});
+    }
+    if(!trials.length){if(log)log('LOCAL SEED RESCUE MISS no proven local loop');return primary;}
+
+    const quadDistance=(a,b)=>a.reduce((sum,p,i)=>sum+Math.hypot(p.x-b[i].x,p.y-b[i].y),0)/4;
+    for(const trial of trials){
+      trial.consensus=trials.filter(other=>quadDistance(trial.result._quad,other.result._quad)<=.035).length;
+      const e=trial.result._frameEnvelope||{};
+      trial.absoluteArea=Math.abs(trial.result._quad.reduce((s,p,i)=>{const n=trial.result._quad[(i+1)%4];return s+p.x*n.y-n.x*p.y;},0)/2);
+      trial.rank=trial.consensus*.80+(e.relativeAdjScore||0)*5.2+(e.confidence||0)+(e.seedCoverage||0)*.7+trial.absoluteArea*4+(e.familyScore||0)*.04-Math.abs(Math.log(Math.max(.01,e.areaRatio||1)))*.25;
+      if(trial.source==='primary'&&!suspiciousSeed)trial.rank+=.35;
+    }
+    trials.sort((a,b)=>b.rank-a.rank);
+    const chosen=trials[0];
+    chosen.result._frameEnvelope.multiscaleSeedRescue=true;
+    chosen.result._frameEnvelope.seedConsensus=chosen.consensus;
+    chosen.result._frameEnvelope.seedSource=chosen.source;
+    if(log){
+      const e=chosen.result._frameEnvelope;
+      log(`LOCAL SEED RESCUE HIT trials=${trials.length} source=${chosen.source} consensus=${chosen.consensus}/${trials.length} rel=${(e.relativeAdjScore||0).toFixed(2)} rank=${chosen.rank.toFixed(2)}`);
+      log(`RELATIVE FAMILY HIT adj=${(e.adjSides||[]).map(v=>v.toFixed(2)).join('/')} quad=${chosen.result._quad.map(p=>`${p.x.toFixed(3)},${p.y.toFixed(3)}`).join(' | ')}`);
+    }
+    return chosen.result;
+  },
+
+  _detectSingle(img, panel, log) {
     const maxDim=900;
     const scale=Math.min(1,maxDim/Math.max(img.width,img.height));
     const w=Math.max(1,Math.round(img.width*scale));
@@ -52,10 +130,12 @@ const PanelFrameEnvelope = {
       return (lum[(y-1)*w+x]+lum[y*w+x]+lum[(y+1)*w+x]+lum[y*w+x-1]+lum[y*w+x+1])/5;
     };
 
-    // V2.78.17: generate several plausible finite rails for each side instead
+    // V2.78.18: generate several plausible finite rails for each side instead
     // of independently choosing one "best" line.  A later family search picks
     // the four rails that actually close into one coherent enclosure around
-    // the tap.  This is the key change from V2.78.17.
+    // the tap. V2.78.18 adds a second stage that compares every valid closed
+    // family and prefers the outermost panel-scale enclosure rather than the
+    // single highest-scoring local loop.
     const railCandidates=(kind)=>{
       const horizontal=kind==='top'||kind==='bottom';
       const negative=kind==='top'||kind==='left';
@@ -127,7 +207,7 @@ const PanelFrameEnvelope = {
       for(const c of pool){
         if(kept.some(k=>Math.abs(k.atTap-c.atTap)<7 && Math.abs(k.m-c.m)<.08))continue;
         kept.push(c);
-        if(kept.length>=7)break;
+        if(kept.length>=18)break;
       }
       // Fine-refit only the retained hypotheses.
       for(let i=0;i<kept.length;i++){
@@ -140,6 +220,14 @@ const PanelFrameEnvelope = {
         kept[i]=best;
       }
       kept.sort((a,b)=>b.score-a.score);
+      const distinct=[];
+      for(const c of kept){
+        if(distinct.some(k=>Math.abs(k.atTap-c.atTap)<5 && Math.abs(k.m-c.m)<.035))continue;
+        distinct.push(c);
+        if(distinct.length>=12)break;
+      }
+      kept.length=0;
+      kept.push(...distinct);
       if(log)log(`CHAIN ${kind} candidates=${kept.length}${kept[0]?` best@tap=${kept[0].atTap.toFixed(1)} m=${kept[0].m.toFixed(3)} sup=${kept[0].support.toFixed(2)}`:''}`);
       return kept;
     };
@@ -198,11 +286,62 @@ const PanelFrameEnvelope = {
       return {direct,bridged,da,db,gap,ia,ib,score:(direct?.70:.35)+(ia+ib)*.22-penalty};
     };
 
+    // V2.78.20 SIDE-RELATIVE RAIL PROOF
+    // A rail is more believable as a panel separator when the dark rail itself
+    // persists while BOTH immediate flanks belong to image regions rather than
+    // simply continuing the same dark artwork stroke.  This is a ranking signal
+    // only: it cannot manufacture a rail or bypass the closed-loop safeguards.
+    const railAdjacency=(rail)=>{
+      const start=rail.span0,end=rail.span1;
+      const step=Math.max(3,Math.round((end-start)/54));
+      const off=Math.max(4,Math.min(10,Math.round(Math.min(rw,rh)*.025)));
+      let n=0,sep=0,contrast=0,balanced=0;
+      for(let a=start;a<=end;a+=step){
+        let x,y,nx,ny;
+        if(rail.horizontal){
+          x=a;y=rail.m*a+rail.b;
+          const d=Math.sqrt(1+rail.m*rail.m); nx=-rail.m/d; ny=1/d;
+        }else{
+          y=a;x=rail.m*a+rail.b;
+          const d=Math.sqrt(1+rail.m*rail.m); nx=1/d; ny=-rail.m/d;
+        }
+        if(x<off+2||x>w-off-3||y<off+2||y>h-off-3)continue;
+        const c=pixelLum(x,y), a1=pixelLum(x+nx*off,y+ny*off), a2=pixelLum(x-nx*off,y-ny*off);
+        n++;
+        const d1=a1-c,d2=a2-c;
+        if(c<=178 && d1>=10 && d2>=10)sep++;
+        contrast+=Math.max(0,Math.min(90,(d1+d2)/2))/90;
+        // Both sides should be plausible neighboring regions. Penalize cases
+        // where only one flank becomes lighter (common for an artwork edge).
+        if(d1>=8&&d2>=8) balanced+=1-Math.min(1,Math.abs(d1-d2)/120);
+      }
+      if(!n)return {score:0,separator:0,contrast:0,balanced:0};
+      const separator=sep/n, con=contrast/n, bal=balanced/n;
+      return {score:separator*.52+con*.28+bal*.20,separator,contrast:con,balanced:bal};
+    };
+    const sideAdjMax={
+      top:Math.max(...tops.map(r=>railAdjacency(r).score)),
+      right:Math.max(...rights.map(r=>railAdjacency(r).score)),
+      bottom:Math.max(...bottoms.map(r=>railAdjacency(r).score)),
+      left:Math.max(...lefts.map(r=>railAdjacency(r).score))
+    };
+    const relativeAdjacency=(rail,absolute)=>{
+      const pageEdge=
+        (rail.kind==='top'&&rail.atTap<=h*.06)||
+        (rail.kind==='bottom'&&rail.atTap>=h*.94)||
+        (rail.kind==='left'&&rail.atTap<=w*.06)||
+        (rail.kind==='right'&&rail.atTap>=w*.94);
+      if(pageEdge)return 1;
+      const best=sideAdjMax[rail.kind]||0;
+      if(best<.18)return 1;
+      return Math.max(0,Math.min(1,absolute/Math.max(.001,best)));
+    };
+
     // CHAIN-CONNECTED FAMILY SEARCH:
     // top -> right -> bottom -> left -> back to top.  We score complete loops,
     // not isolated rails.  Thus a very strong far-away right rail cannot win if
     // it does not connect to the same top and bottom family as the other sides.
-    let family=null;
+    const families=[];
     for(const top of tops)for(const right of rights){
       const q1=intersect(top,right), c1=cornerFit(top,right,q1); if(!c1)continue;
       for(const bottom of bottoms){
@@ -224,18 +363,63 @@ const PanelFrameEnvelope = {
           const drift=q.reduce((sum,p,i)=>sum+Math.hypot(p.x-sc[i].x,p.y-sc[i].y),0)/4;
           const railScore=top.score+right.score+bottom.score+left.score;
           const cornerScore=c0.score+c1.score+c2.score+c3.score;
+          const adj=[railAdjacency(top),railAdjacency(right),railAdjacency(bottom),railAdjacency(left)];
+          const adjacencyScore=adj.reduce((z,a)=>z+a.score,0)/4;
+          const weakestAdj=Math.min(...adj.map(a=>a.score));
+          const relativeAdjScore=(
+            relativeAdjacency(top,adj[0].score)+
+            relativeAdjacency(right,adj[1].score)+
+            relativeAdjacency(bottom,adj[2].score)+
+            relativeAdjacency(left,adj[3].score)
+          )/4;
           const areaPenalty=Math.abs(Math.log(Math.max(.001,areaRatio)))*.55;
           const driftPenalty=drift/Math.max(40,Math.hypot(rw,rh))*.65;
-          const score=railScore+cornerScore-areaPenalty-driftPenalty;
-          if(!family||score>family.score)family={top,right,bottom,left,q,corners:[c0,c1,c2,c3],area,areaRatio,score,drift};
+          // Strong adjacency can reorder otherwise credible loops, but is not
+          // strong enough to rescue a structurally poor family on its own.
+          const score=railScore+cornerScore+adjacencyScore*1.35+weakestAdj*.55+relativeAdjScore*3.20-areaPenalty-driftPenalty;
+
+          // Panel-scale evidence: sample the stable seed interior. A tiny local
+          // quadrilateral can contain the tap yet cover very little of the
+          // detector's panel seed; a whole-frame candidate should explain much
+          // more of that seed. This is only a ranking signal, not ownership.
+          let seedInside=0,seedN=0;
+          for(let gy=1;gy<=5;gy++)for(let gx=1;gx<=5;gx++){
+            const sx=x0+(rw*gx/6), sy=y0+(rh*gy/6); seedN++;
+            if(pointInPoly(sx,sy,q))seedInside++;
+          }
+          const seedCoverage=seedN?seedInside/seedN:0;
+          if(seedCoverage<.36)continue;
+
+          families.push({top,right,bottom,left,q,corners:[c0,c1,c2,c3],area,areaRatio,score,drift,seedCoverage,railScore,cornerScore,adj,adjacencyScore,weakestAdj,relativeAdjScore});
         }
       }
     }
-    if(!family){if(log)log('CHAIN MISS no closed rail family around tap');return null;}
+    if(!families.length){if(log)log('OUTER LOOP MISS no closed rail family around tap');return null;}
+
+    // V2.78.20 SIDE-RELATIVE CLOSED-FAMILY SELECTION
+    // Keep only structurally credible families near the best evidence score,
+    // then prefer the largest enclosure. This prevents a beautifully connected
+    // little internal loop from beating the real outer panel frame merely
+    // because its ink is locally cleaner. We still cap area/drift above, so a
+    // distant page-border loop cannot win simply by being huge.
+    families.sort((a,b)=>b.score-a.score);
+    const bestScore=families[0].score;
+    const credible=families.filter(f=>f.score>=bestScore-1.15 && f.seedCoverage>=.44);
+    const pool=(credible.length?credible:families.slice(0,Math.min(8,families.length)));
+    pool.sort((a,b)=>{
+      const areaDelta=b.areaRatio-a.areaRatio;
+      if(Math.abs(areaDelta)>.055)return areaDelta;
+      const coverageDelta=b.seedCoverage-a.seedCoverage;
+      if(Math.abs(coverageDelta)>.06)return coverageDelta;
+      return b.score-a.score;
+    });
+    const family=pool[0];
+    if(log)log(`ADJ LOOP candidates=${families.length} credible=${credible.length} bestScore=${bestScore.toFixed(2)} chosenArea=${family.areaRatio.toFixed(2)} coverage=${family.seedCoverage.toFixed(2)} adj=${family.adjacencyScore.toFixed(2)} rel=${family.relativeAdjScore.toFixed(2)} weak=${family.weakestAdj.toFixed(2)} score=${family.score.toFixed(2)}`);
+
     const {top,right,bottom,left}=family;
     const rails=[top,bottom,left,right];
     const q=family.q;
-    if(log)log(`CHAIN FAMILY HIT score=${family.score.toFixed(2)} area=${family.areaRatio.toFixed(2)} drift=${family.drift.toFixed(1)} rails=${[top,right,bottom,left].map(r=>`${r.kind}@${r.atTap.toFixed(1)}`).join(' -> ')}`);
+    if(log)log(`ADJ LOOP FAMILY HIT score=${family.score.toFixed(2)} area=${family.areaRatio.toFixed(2)} coverage=${family.seedCoverage.toFixed(2)} drift=${family.drift.toFixed(1)} adj=${family.adj.map(a=>a.score.toFixed(2)).join('/')} rails=${[top,right,bottom,left].map(r=>`${r.kind}@${r.atTap.toFixed(1)}`).join(' -> ')}`);
     const finitePairs=[[top,left],[top,right],[bottom,right],[bottom,left]];
     const bridgeMeta=[];
     for(let i=0;i<4;i++){
@@ -255,7 +439,7 @@ const PanelFrameEnvelope = {
     }
 
     // Direct corners still require ink right up to the intersection. For a
-    // V2.78.17 short-bridged corner, endpoint convergence replaces that literal
+    // V2.78.18 short-bridged corner, endpoint convergence replaces that literal
     // intersection-ink requirement; the vertex remains the SAME two-rail
     // intersection and is never independently snapped to unrelated artwork.
     const armSupport=(corner,hRail,vRail)=>{
@@ -304,7 +488,7 @@ const PanelFrameEnvelope = {
     const bx=Math.max(0,Math.min(...xs)),by=Math.max(0,Math.min(...ys));
     const br=Math.min(1,Math.max(...xs)),bb=Math.min(1,Math.max(...ys));
     const confidence=Math.min(1,rails.reduce((s,r)=>s+r.support+r.continuity,0)/8);
-    if(log)log(`CHAIN LOOP HIT area=${areaRatio.toFixed(2)} confidence=${confidence.toFixed(2)} bridged=${bridgeMeta.filter(b=>b.bridged).length}/4 quad=${quad.map(p=>`${p.x.toFixed(3)},${p.y.toFixed(3)}`).join(' | ')}`);
-    return {...panel,x:bx,y:by,w:Math.max(.001,br-bx),h:Math.max(.001,bb-by),_quad:quad,_geometryType:'chain-connected-frame',_frameEnvelope:{confidence,areaRatio,sides:4,connected:true,shortBridge:true,chainConnected:true,bridgedCorners:bridgeMeta.filter(b=>b.bridged).length}};
+    if(log)log(`OUTER LOOP HIT area=${areaRatio.toFixed(2)} coverage=${family.seedCoverage.toFixed(2)} confidence=${confidence.toFixed(2)} bridged=${bridgeMeta.filter(b=>b.bridged).length}/4 quad=${quad.map(p=>`${p.x.toFixed(3)},${p.y.toFixed(3)}`).join(' | ')}`);
+    return {...panel,x:bx,y:by,w:Math.max(.001,br-bx),h:Math.max(.001,bb-by),_quad:quad,_geometryType:'tap-neighborhood-frame',_frameEnvelope:{confidence,areaRatio,sides:4,connected:true,shortBridge:true,chainConnected:true,outermostLoop:true,neighborSideConsistency:true,relativeAdjScore:family.relativeAdjScore,adjacencyScore:family.adjacencyScore,adjSides:family.adj.map(a=>a.score),weakestAdj:family.weakestAdj,familyScore:family.score,seedCoverage:family.seedCoverage,bridgedCorners:bridgeMeta.filter(b=>b.bridged).length}};
   }
 };

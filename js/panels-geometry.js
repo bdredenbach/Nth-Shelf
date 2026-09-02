@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.17 — CHAIN-CONNECTED RAIL FAMILY ROUTER
+// NTH SHELF V2.78.20 — TAP-NEIGHBORHOOD CONSENSUS ROUTER
 //
-// V2.78.17 keeps the order of operations:
+// V2.78.20 keeps the order of operations:
 //   stable panel identity -> COMPLETE frame envelope -> later angle ownership.
 //
 // This test build intentionally does NOT ask orthogonal/skewed to own the tap.
@@ -12,13 +12,13 @@
 const PanelGeometry = {
   async refine(imgUrl, panel, log) {
     if (!panel) return null;
-    if (log) log('ROUTER V2.78.17 chain-connected rail family start');
+    if (log) log('ROUTER V2.78.20 tap-neighborhood consensus start');
 
     if (imgUrl && typeof PanelFrameEnvelope !== 'undefined' && PanelFrameEnvelope.detect) {
       const envelope = await PanelFrameEnvelope.detect(imgUrl, panel, log);
       if (envelope && Array.isArray(envelope._quad) && envelope._quad.length===4) {
         envelope._geometryOwner='unclassified-envelope';
-        if (log) log('ROUTER -> CHAIN-CONNECTED FRAME (ownership deferred)');
+        if (log) log('ROUTER -> TAP-NEIGHBORHOOD FRAME (ownership deferred)');
         return envelope;
       }
     }
