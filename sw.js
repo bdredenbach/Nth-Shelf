@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.14 — CONNECTED FRAME / BOUNDARY WALK TEST
+// NTH SHELF V2.78.15 — FINITE RAIL ENDPOINTS TEST
 
-const CACHE_NAME = "nth-shelf-shell-2.78.14";
+const CACHE_NAME = "nth-shelf-shell-2.78.15";
 const SHELL_FILES = [
   "./",
   "./index.html",

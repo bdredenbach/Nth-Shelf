@@ -106,8 +106,13 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.14 Connected Frame / Boundary Walk Test**
+**Version 2.78.15 Finite Rail Endpoints Test**
 
+
+
+## V2.78.15 Finite Rail Endpoints Test
+
+V2.78.15 keeps the connected-frame/boundary-walk model from V2.78.14 but stops treating fitted frame rails as infinite mathematical lines. Every recovered top, bottom, left, and right rail now carries a finite supported span based on the actual dark frame evidence. A corner is legal only when the same two neighboring rails both have supported spans that reach the intersection, with only a small tolerance for thick or briefly interrupted ink. This directly targets the V2.78.14 failures where a real slanted rail was extrapolated hundreds of pixels into a distant or off-page corner. Ownership remains deferred; this test is still only about recovering one coherent whole frame around the tap. V2.78.00 remains the stable production baseline.
 
 ## 🔒 Privacy
 Nth Shelf is designed around local-first storage. Your comics are stored on your device rather than uploaded to an Nth Shelf server simply to read them.
