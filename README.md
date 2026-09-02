@@ -106,9 +106,13 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.78.22 Rail-Band Cell Integrity Test**
+**Version 2.78.23 Proven-Frame Ownership Test**
 
 ## 🧪 Release History (Newest First)
+
+## V2.78.23 Proven-Frame Ownership Test
+
+V2.78.23 classifies geometry ownership only after V2.78.22 proves the complete four-rail frame. A skewed owner must have a visibly non-axial rail whose neighbor-side separation and printed-band thickness are both strong, plus corroborating corner-angle or opposite-rail evidence. Proven skewed frames keep their four vertices; proven orthogonal frames render the bounding rectangle around those same rails. A small local V99 rectangle that occupies less than half of a larger proven orthogonal frame is treated as an interior fragment and replaced by the whole-frame rectangle, while a matching known-good orthogonal seed remains authoritative. Logs now report `FRAME OWNERSHIP angles=... axis=... trusted=... adj=...`, followed by `FRAME OWNERSHIP -> SKEWED` or `FRAME OWNERSHIP -> ORTHOGONAL`. On `140153.jpg`, all five tap positions agreed on ownership for every frame: top and both middle frames were orthogonal, while the bottom-left, narrow right strip, and bottom-right frames were skewed. All 30 app-path trials produced whole-panel pop-outs, both fragment seeds captured in `141470.mp4` expanded to full frames, and the earlier orthogonal-authority regression seed remained unchanged.
 
 ## V2.78.22 Rail-Band Cell Integrity Test
 

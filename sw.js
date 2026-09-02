@@ -1,6 +1,6 @@
-// NTH SHELF V2.78.22 — RAIL-BAND CELL INTEGRITY TEST
+// NTH SHELF V2.78.23 — PROVEN-FRAME OWNERSHIP TEST
 
-const CACHE_NAME = "nth-shelf-shell-2.78.22";
+const CACHE_NAME = "nth-shelf-shell-2.78.23";
 const SHELL_FILES = [
   "./",
   "./index.html",
