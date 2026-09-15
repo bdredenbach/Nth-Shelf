@@ -1,13 +1,14 @@
 // db.js — IndexedDB persistence layer for Nth Shelf
 // Stores: comics (metadata + progress), pages (blob per page, keyed by comicId+index),
-// panels (bubble/panel detection cache), collections, and a tiny meta store used to
+// panels (legacy detection cache), panelMaps (strict verified frame maps),
+// collections, and a tiny meta store used to
 // harden persistence across app-shell updates.
 //
 // IMPORTANT: DB_NAME intentionally remains "longbox" for backwards compatibility.
 // Renaming an IndexedDB database would make an existing library look brand new.
 
 const DB_NAME = "longbox";
-const DB_VERSION = 4;
+const DB_VERSION = 5;
 const STORAGE_MARKER_KEY = "nth-shelf-library-marker-v1";
 let dbPromise = null;
 
@@ -29,6 +30,10 @@ function openDB() {
       }
       if (!db.objectStoreNames.contains("panels")) {
         const store = db.createObjectStore("panels", { keyPath: "key" });
+        store.createIndex("comicId", "comicId", { unique: false });
+      }
+      if (!db.objectStoreNames.contains("panelMaps")) {
+        const store = db.createObjectStore("panelMaps", { keyPath: "key" });
         store.createIndex("comicId", "comicId", { unique: false });
       }
       if (!db.objectStoreNames.contains("meta")) {
@@ -142,7 +147,7 @@ const LongboxDB = {
   },
 
   async deleteComic(id) {
-    const t = await tx(["comics", "pages", "panels"], "readwrite");
+    const t = await tx(["comics", "pages", "panels", "panelMaps"], "readwrite");
     t.objectStore("comics").delete(id);
     const pageStore = t.objectStore("pages");
     const pageIdx = pageStore.index("comicId");
@@ -158,6 +163,16 @@ const LongboxDB = {
     const panelIdx = panelStore.index("comicId");
     const panelCursorReq = panelIdx.openCursor(IDBKeyRange.only(id));
     panelCursorReq.onsuccess = (e) => {
+      const cursor = e.target.result;
+      if (cursor) {
+        cursor.delete();
+        cursor.continue();
+      }
+    };
+    const panelMapStore = t.objectStore("panelMaps");
+    const panelMapIdx = panelMapStore.index("comicId");
+    const panelMapCursorReq = panelMapIdx.openCursor(IDBKeyRange.only(id));
+    panelMapCursorReq.onsuccess = (e) => {
       const cursor = e.target.result;
       if (cursor) {
         cursor.delete();
@@ -199,6 +214,29 @@ const LongboxDB = {
   async putPanels(comicId, index, panels) {
     const t = await tx(["panels"], "readwrite");
     t.objectStore("panels").put({ key: `${comicId}:${index}`, comicId, index, panels });
+    return txDone(t);
+  },
+
+  // ---------------- Strict verified panel maps ----------------
+  async getPanelMap(comicId, index) {
+    const t = await tx(["panelMaps"], "readonly");
+    return reqResult(t.objectStore("panelMaps").get(`${comicId}:${index}`));
+  },
+
+  async putPanelMap(comicId, index, panelMap) {
+    const t = await tx(["panelMaps"], "readwrite");
+    t.objectStore("panelMaps").put({
+      ...panelMap,
+      key: `${comicId}:${index}`,
+      comicId,
+      pageIndex: index,
+    });
+    return txDone(t);
+  },
+
+  async deletePanelMap(comicId, index) {
+    const t = await tx(["panelMaps"], "readwrite");
+    t.objectStore("panelMaps").delete(`${comicId}:${index}`);
     return txDone(t);
   },
 

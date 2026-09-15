@@ -48,7 +48,7 @@ function makeCanvas(){
 }
 
 const context={
-  console,setTimeout,clearTimeout,Uint8Array,Float32Array,DataView,WebAssembly,Math,Number,Array,Map,Set,
+  console,setTimeout,clearTimeout,Uint8Array,Float32Array,DataView,WebAssembly,Math,Number,Array,Map,Set,WeakMap,
   Image:TestImage,document:{createElement(kind){if(kind!=='canvas')throw new Error(`unsupported element ${kind}`);return makeCanvas();}}
 };
 context.window=context;context.globalThis=context;
@@ -61,10 +61,10 @@ if(process.env.NTH_DISABLE_WASM!=='1'){
     fs.readFileSync(path.join(appRoot,'js','panels-frame-kernel.wasm'))));
   vm.runInContext('PanelFrameWasm.attach(__nthFrameWasmInstance)',context);
 }
-for(const name of ['panels-geometry-orthogonal.js','panels-geometry-skewed.js','panels-frame-envelope.js','panels-geometry.js']){
+for(const name of ['panels-geometry-orthogonal.js','panels-geometry-skewed.js','panels-frame-envelope.js','panels-geometry.js','panel-map-core.js']){
   vm.runInContext(fs.readFileSync(path.join(appRoot,'js',name),'utf8'),context,{filename:name});
 }
-const api=vm.runInContext('({PanelDetect,PanelGeometry,PanelFrameEnvelope,PanelGeometrySkewed,PanelFrameWasm})',context);
+const api=vm.runInContext('({PanelDetect,PanelGeometry,PanelFrameEnvelope,PanelGeometrySkewed,PanelFrameWasm,PanelMapCore})',context);
 
 function contains(panel,x,y){
   if(Array.isArray(panel?._quad)){

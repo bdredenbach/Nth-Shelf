@@ -1,0 +1,73 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - Test_Branch
+    paths:
+      - ".github/workflows/android-apk.yml"
+      - "android/**"
+      - "index.html"
+      - "manifest.json"
+      - "manifest.webmanifest"
+      - "sw.js"
+      - "assets/**"
+      - "css/**"
+      - "icons/**"
+      - "js/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nth-shelf-android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-debug-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out tested source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle 8.9
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+
+      - name: Build installable debug APK
+        run: gradle --no-daemon --stacktrace -p android :app:assembleDebug
+
+      - name: Name release artifact
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk Nth-Shelf-V2.79.05-Panel-Map-Debug.apk
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Nth-Shelf-V2.79.05-Panel-Map-Debug
+          path: Nth-Shelf-V2.79.05-Panel-Map-Debug.apk
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish test APK prerelease
+        if: github.ref == 'refs/heads/Test_Branch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: v2.79.05-panel-map-test-${{ github.run_number }}
+        run: >-
+          gh release create "$RELEASE_TAG"
+          Nth-Shelf-V2.79.05-Panel-Map-Debug.apk
+          --repo "$GITHUB_REPOSITORY"
+          --target "$GITHUB_SHA"
+          --prerelease
+          --title "Nth Shelf 2.79.05 Panel Map Test"
+          --notes "Installable debug APK built from commit $GITHUB_SHA on Test_Branch. This is a test build, not a Play Store signed release."

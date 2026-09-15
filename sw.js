@@ -1,6 +1,6 @@
-// NTH SHELF V2.79.04 — OPTIONAL WEBASSEMBLY RAIL-KERNEL TEST
+// NTH SHELF V2.79.05 — BACKGROUND STRICT PANEL-MAP PROTOTYPE
 
-const CACHE_NAME = "nth-shelf-shell-2.79.04-wasm-test";
+const CACHE_NAME = "nth-shelf-shell-2.79.05-panel-map-test";
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -15,6 +15,9 @@ const SHELL_FILES = [
   "./js/panels-geometry-orthogonal.js",
   "./js/panels-geometry-skewed.js",
   "./js/panels-geometry.js",
+  "./js/panel-map-core.js",
+  "./js/panel-map.js",
+  "./js/panel-map-worker.js",
   "./js/bubbles.js",
   "./js/page-turn.js",
   "./js/reader.js",

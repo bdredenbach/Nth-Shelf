@@ -1,4 +1,4 @@
-// NTH SHELF V2.79.04 — OPTIONAL WEBASSEMBLY RAIL-EVALUATION KERNEL
+// NTH SHELF V2.79.05 — OPTIONAL WEBASSEMBLY RAIL-EVALUATION KERNEL
 //
 // The module owns no panel-selection policy. It evaluates the exact luminance,
 // continuity, contrast and finite-span math used by the JavaScript rail search.
@@ -17,6 +17,7 @@ const PanelFrameWasm={
   _sourceHeight:0,
   _outPtr:0,
   _view:null,
+  _initPromise:null,
 
   attach(compiled){
     const instance=compiled?.instance||compiled;
@@ -32,16 +33,20 @@ const PanelFrameWasm={
 
   async init(url){
     if(this.ready)return this;
-    try{
-      const response=await fetch(url);
-      if(!response.ok)throw new Error(`rail kernel HTTP ${response.status}`);
-      const bytes=await response.arrayBuffer();
-      this.attach(await WebAssembly.instantiate(bytes));
-    }catch(error){
-      this.error=String(error?.message||error);
-      this.ready=false;
-    }
-    return this;
+    if(this._initPromise)return this._initPromise;
+    this._initPromise=(async()=>{
+      try{
+        const response=await fetch(url);
+        if(!response.ok)throw new Error(`rail kernel HTTP ${response.status}`);
+        const bytes=await response.arrayBuffer();
+        this.attach(await WebAssembly.instantiate(bytes));
+      }catch(error){
+        this.error=String(error?.message||error);
+        this.ready=false;
+      }
+      return this;
+    })().finally(()=>{this._initPromise=null;});
+    return this._initPromise;
   },
 
   begin(smooth,width,height){
@@ -85,6 +90,8 @@ if(typeof fetch==='function'&&typeof WebAssembly!=='undefined'){
   try{
     if(typeof document!=='undefined'&&document.currentScript?.src){
       kernelUrl=new URL('panels-frame-kernel.wasm',document.currentScript.src).href;
+    }else if(typeof self!=='undefined'&&self.location?.href){
+      kernelUrl=new URL('panels-frame-kernel.wasm',self.location.href).href;
     }
   }catch(_){/* default relative URL remains valid */}
   PanelFrameWasm.init(kernelUrl);

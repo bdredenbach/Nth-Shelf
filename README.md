@@ -106,9 +106,17 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.04 Quick Proven-Frame Route**
+**Version 2.79.05 Paired-Row Panel Map Prototype**
 
 ## 🧪 Release History (Newest First)
+
+## V2.79.05 Paired-Row Panel Map Prototype
+
+V2.79.05 moves proven skew-frame work completely off the tap path. A dedicated Web Worker decodes the current page once, reuses its 900-pixel luminance buffer and WebAssembly rail kernel across six deterministic probes, and persists only strict V2.79.04-approved geometry in a SHA-256-versioned IndexedDB panel map. A tap first preserves V73 rectangle authority, then performs a synchronous smallest-containing-polygon lookup; a missing, incomplete, unsupported, or invalid map falls through to the unchanged V2.79.04 route. Broad precomputation initially exposed unsafe singleton crops and multi-panel unions on unrelated layouts, so background authority now requires two distinct skewed frames that independently prove a compatible page-wide row. Across the complete 74-page Wolverine regression comic, this retained only six visually valid background frames—two on page 13 and the four difficult skewed frames on the sepia stress page—while rejecting the page-39 artwork loop and every observed composite. The stress-page map built in roughly 0.72–0.78 seconds with WebAssembly, all eight canonical/moved skew-frame lookups matched V2.79.04 geometry, and in-memory lookup averaged under 0.001 ms. Forced JavaScript preparation also preserved geometry; it remained safely off-thread and the live V2.79.04 fallback stayed available.
+
+## V2.79.04 Optional WebAssembly Rail Kernel
+
+V2.79.04 transplants the exact finite-rail evidence kernel into WebAssembly while leaving JavaScript in control of routing, ownership, caching, and rendering. The compiled kernel evaluates the same luminance, continuity, contrast, finite-span, and candidate-ranking values as V2.79.03, with automatic JavaScript fallback when WebAssembly cannot initialize. All 12 cold stress taps passed in 0.49–0.86 seconds, consecutive first taps completed in 0.41–0.65 seconds, cached taps completed in 0.11–0.12 seconds, and all six canonical quadrilaterals matched the JavaScript route byte-for-byte apart from floating-point score noise near 10^-15. The 93-probe safety set rejected every known false candidate, and the forced JavaScript fallback passed all 12 frame tests.
 
 ## V2.79.03 Quick Proven-Frame Route
 

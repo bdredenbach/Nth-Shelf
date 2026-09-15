@@ -200,6 +200,7 @@ const Reader = {
  async open(comicId, startPage = null) {
    this.comic = await LongboxDB.getComic(comicId);
    if (!this.comic) return;
+   if (typeof PanelMap !== "undefined" && PanelMap.beginIssue) PanelMap.beginIssue(comicId);
    LongboxDB.updateComic(comicId, { lastOpenedAt: Date.now() });
    const requestedPage = Number.isInteger(startPage) ? startPage : (this.comic.lastPage || 0);
    this.index = Math.max(0, Math.min((this.comic.pageCount || 1) - 1, requestedPage));
@@ -337,6 +338,7 @@ const Reader = {
 
  close() {
    this.saveProgress();
+   if (typeof PanelMap !== "undefined" && PanelMap.endIssue) PanelMap.endIssue(this.comic?.id);
    this.revokeAll();
    window.LongboxApp.closeReader();
  },
@@ -768,6 +770,34 @@ const Reader = {
    [this.index + step, this.index - 1].forEach((i) => this.getPageUrl(i));
  },
 
+ preparePanelMaps(comicId=this.comic?.id,pageIndex=this.index) {
+   if (!this.panelZoomEnabled || this.mode !== "single" || !comicId ||
+       typeof PanelMap === "undefined" || !PanelMap.prepare) return;
+   const logger = this.debugMode
+     ? (msg) => this.debugLog(`[V2.79.05 map p${pageIndex}] ${msg}`)
+     : null;
+   (async()=>{
+     try {
+       const blob = await LongboxDB.getPage(comicId, pageIndex);
+       if (!blob || this.comic?.id !== comicId) return;
+       await PanelMap.prepare(comicId, pageIndex, blob, { logger });
+
+       // Only warm the following page if the reader is still on this page.
+       // A direct jump should prioritize its new current page instead of
+       // spending worker time on an obsolete neighbor.
+       if (this.comic?.id !== comicId || this.index !== pageIndex) return;
+       const nextIndex = pageIndex + 1;
+       if (nextIndex >= (this.comic?.pageCount || 0)) return;
+       const nextBlob = await LongboxDB.getPage(comicId, nextIndex);
+       if (nextBlob && this.comic?.id === comicId && this.index === pageIndex) {
+         await PanelMap.prepare(comicId, nextIndex, nextBlob, { logger });
+       }
+     } catch (error) {
+       if (logger) logger(`background preparation deferred: ${error?.message || error}`);
+     }
+   })();
+ },
+
  async loadPanelsForCurrentPage() {
    // V73: deliberately bypass the IndexedDB panel cache for this experiment.
    // Older panel rectangles must not influence the test.
@@ -778,6 +808,10 @@ const Reader = {
    const pageIndex = this.index;
    const token = ++this._panelLoadToken;
    const logger = this.debugMode ? (msg) => this.debugLog(`[V87 panels p${pageIndex}] ${msg}`) : null;
+
+   // Start strict frame preparation concurrently with the inexpensive V73
+   // identity pass. Nothing here blocks page rendering or a live tap.
+   this.preparePanelMaps(comicId, pageIndex);
 
    const url = await this.getPageUrl(pageIndex);
    const panels = url ? await PanelDetect.detect(url, logger) : [];
@@ -829,6 +863,7 @@ const Reader = {
  togglePanelZoom() {
    this.panelZoomEnabled = !this.panelZoomEnabled;
    localStorage.setItem(PANEL_ZOOM_KEY, this.panelZoomEnabled ? "1" : "0");
+   if (this.panelZoomEnabled) this.preparePanelMaps();
  },
  updatePanelToggleUI() {
    if (this.els.panelToggle) {
@@ -2391,10 +2426,28 @@ async setMode(mode) {
 
    const pageIndex = this.index;
    const comicId = this.comic?.id;
-   const url = await this.getPageUrl(pageIndex);
    const geometryLogger = this.debugMode
      ? (msg) => this.debugLog(`[V105 geometry p${pageIndex}] ${msg}`)
      : null;
+
+   // Preserve V73 identity authority exactly: a known stable rectangle owns
+   // its tap before any precomputed rescue frame is considered.
+   const panel = this.findPanelAt(relXImg, relYImg);
+
+   // V2.79.05: a verified map hit performs no decode, rail search, or async
+   // database work. Overlapping polygons use the same smallest-owner rule as
+   // the established in-memory proven-frame cache.
+   if (!panel && comicId && typeof PanelMap !== 'undefined' && PanelMap.findAt) {
+     const mapped = PanelMap.findAt(comicId, pageIndex, relXImg, relYImg);
+     if (mapped) {
+       if (this.debugMode) this.debugLog("[V2.79.05] STRICT PANEL MAP HIT -> ZOOM");
+       this.zoomToPanel(mapped, stageRect, imgRect);
+       return;
+     }
+     if (this.debugMode) this.debugLog("[V2.79.05] PANEL MAP MISS/INCOMPLETE -> V2.79.04 ROUTE");
+   }
+
+   const url = await this.getPageUrl(pageIndex);
    const refineGeometry = async (seed, identitySource) => {
      if (!seed) return null;
      const seeded = {
@@ -2410,7 +2463,6 @@ async setMode(mode) {
    // PASS 1: V73 baseline identifies the panel. Geometry is now a separate
    // concern: the router may preserve the orthogonal rectangle or prove a
    // skewed quadrilateral without changing panel identity.
-   const panel = this.findPanelAt(relXImg, relYImg);
    if (panel) {
      if (this.debugMode) this.debugLog("[V105] PASS 1 HIT (V73 identity) -> GEOMETRY ROUTER");
      const shaped = await refineGeometry(panel, 'v73');
@@ -2814,6 +2866,15 @@ async setMode(mode) {
    const ctx = this.getPanelImageContext();
    const img = ctx?.img;
    if (!img || !img.naturalWidth || !img.naturalHeight) return;
+
+   // Live strict proofs supplement a partial background map. Non-frame V73,
+   // V100 and V99 rectangles are rejected by PanelMapCore and remain session
+   // behavior only.
+   if (typeof PanelMap !== 'undefined' && PanelMap.remember) {
+     PanelMap.remember(this.comic?.id, this.index, panel, {
+       logger: this.debugMode ? (msg) => this.debugLog(`[V2.79.05 map] ${msg}`) : null
+     });
+   }
 
    this.focusMode = "panel";
    this.panelOverlayActive = false;

@@ -1,4 +1,4 @@
-// NTH SHELF V2.79.04 — OPTIONAL WASM RAIL KERNEL TEST
+// NTH SHELF V2.79.05 — BACKGROUND PANEL-MAP PROOF SUPPORT
 //
 // Generate multiple plausible finite rails per side, then choose one four-rail
 // FAMILY that closes around the tap.  Rails are no longer selected independently.
@@ -7,6 +7,7 @@
 
 const PanelFrameEnvelope = {
   _frameCache: new Map(),
+  _analysisCache: typeof WeakMap!=='undefined'?new WeakMap():null,
 
   _cachedFrame(imgUrl,panel,log){
     const tap=panel?._tap;
@@ -350,6 +351,21 @@ const PanelFrameEnvelope = {
     });
   },
 
+  // Panel-map workers already own a decoded page. Reuse that image and its
+  // luminance/WASM buffers instead of decoding the same page once per probe.
+  // This is the exact V2.79.04 bounded quick proof; it does not add a looser
+  // detector or enter the exhaustive fallback bank.
+  detectAdaptiveImage(img,panel,log){
+    if(!img||!panel)return null;
+    try{
+      return this._adaptiveFastDetect(img,panel,log,{localOnly:true});
+    }catch(err){
+      console.warn('Decoded quick connected frame failed:',err);
+      if(log)log(`DECODED QUICK CHAIN RAIL ERROR ${err.message}`);
+      return null;
+    }
+  },
+
   detect(imgUrl, panel, log) {
     if (!imgUrl || !panel) return Promise.resolve(null);
     const cached=this._cachedFrame(imgUrl,panel,log);
@@ -671,7 +687,8 @@ const PanelFrameEnvelope = {
     const w=Math.max(1,Math.round(img.width*scale));
     const h=Math.max(1,Math.round(img.height*scale));
     let lum,smooth;
-    const cached=img._nthFrameLumCache;
+    let cached=null;
+    try{cached=img._nthFrameLumCache||this._analysisCache?.get(img)||null;}catch(_){cached=null;}
     if(cached&&cached.width===w&&cached.height===h&&cached.lum?.length===w*h){
       lum=cached.lum;
       smooth=cached.smooth;
@@ -695,7 +712,9 @@ const PanelFrameEnvelope = {
           lum[y*w+x-1]+lum[y*w+x+1])/5;
       }
     }
-    try{img._nthFrameLumCache={width:w,height:h,lum,smooth};}catch(_){/* correctness unchanged */}
+    const analysis={width:w,height:h,lum,smooth};
+    try{img._nthFrameLumCache=analysis;}catch(_){/* host image may reject expandos */}
+    try{this._analysisCache?.set(img,analysis);}catch(_){/* correctness unchanged */}
     let wasmRailKernel=false;
     try{
       wasmRailKernel=typeof PanelFrameWasm!=='undefined'&&PanelFrameWasm.ready===true&&

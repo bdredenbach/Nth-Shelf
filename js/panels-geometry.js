@@ -1,4 +1,4 @@
-// NTH SHELF V2.79.03 — QUICK PROVEN-FRAME OWNERSHIP ROUTER
+// NTH SHELF V2.79.05 — QUICK PROVEN-FRAME OWNERSHIP ROUTER
 //
 // Frame extraction and geometry ownership are separate decisions. The envelope
 // first proves a complete four-rail cell; only that finished quadrilateral may
@@ -30,13 +30,7 @@ const PanelGeometry = {
     return {mode:'frame',source:String(inferred).toUpperCase(),reason:'oversized-composite',area};
   },
 
-  // Fast front route for a baseline miss. It accepts only the bounded
-  // one-search/local-consensus result and applies the same ownership classifier
-  // as the complete router. A miss returns null so V100/V99/V92 stay untouched.
-  async refineAdaptiveOnly(imgUrl,panel,log){
-    if(!imgUrl||!panel||typeof PanelFrameEnvelope==='undefined'||
-      !PanelFrameEnvelope.detectAdaptiveOnly)return null;
-    const envelope=await PanelFrameEnvelope.detectAdaptiveOnly(imgUrl,panel,log);
+  _shapeAdaptiveEnvelope(envelope,log){
     if(!envelope||!Array.isArray(envelope._quad)||envelope._quad.length!==4||
       envelope._frameEnvelope?.chainConnected!==true)return null;
     const ownership=(typeof PanelGeometrySkewed!=='undefined'&&PanelGeometrySkewed.classifyQuad)
@@ -54,6 +48,26 @@ const PanelGeometry = {
     ortho._frameOwnership=ownership;
     if(log)log('QUICK ROUTER -> ORTHOGONAL FRAME');
     return ortho;
+  },
+
+  // Fast front route for a baseline miss. It accepts only the bounded
+  // one-search/local-consensus result and applies the same ownership classifier
+  // as the complete router. A miss returns null so V100/V99/V92 stay untouched.
+  async refineAdaptiveOnly(imgUrl,panel,log){
+    if(!imgUrl||!panel||typeof PanelFrameEnvelope==='undefined'||
+      !PanelFrameEnvelope.detectAdaptiveOnly)return null;
+    const envelope=await PanelFrameEnvelope.detectAdaptiveOnly(imgUrl,panel,log);
+    return this._shapeAdaptiveEnvelope(envelope,log);
+  },
+
+  // Synchronous decoded-page twin used only by the background panel-map
+  // worker. Geometry ownership and all proof thresholds are shared with the
+  // live V2.79.04 route above.
+  refineAdaptiveImage(img,panel,log){
+    if(!img||!panel||typeof PanelFrameEnvelope==='undefined'||
+      !PanelFrameEnvelope.detectAdaptiveImage)return null;
+    const envelope=PanelFrameEnvelope.detectAdaptiveImage(img,panel,log);
+    return this._shapeAdaptiveEnvelope(envelope,log);
   },
 
   async refine(imgUrl, panel, log) {
