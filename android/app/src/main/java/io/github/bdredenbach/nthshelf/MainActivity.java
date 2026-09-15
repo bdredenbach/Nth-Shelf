@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -52,7 +53,8 @@ public final class MainActivity extends Activity {
         webView.setBackgroundColor(Color.rgb(13, 13, 15));
         webView.setWebViewClient(createWebViewClient());
         webView.setWebChromeClient(createWebChromeClient());
-        WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG);
+        boolean debuggable = (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        WebView.setWebContentsDebuggingEnabled(debuggable);
 
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
