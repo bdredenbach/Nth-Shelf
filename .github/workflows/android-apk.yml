@@ -47,6 +47,22 @@ jobs:
       - name: Build installable debug APK
         run: gradle --no-daemon --stacktrace -p android :app:assembleDebug
 
+      - name: Verify package metadata and signature
+        shell: bash
+        run: |
+          APK="android/app/build/outputs/apk/debug/app-debug.apk"
+          APKSIGNER="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner | sort -V | tail -n 1)"
+          AAPT="$(find "$ANDROID_HOME/build-tools" -type f -name aapt | sort -V | tail -n 1)"
+          test -x "$APKSIGNER"
+          test -x "$AAPT"
+          unzip -t "$APK"
+          "$APKSIGNER" verify --verbose --print-certs "$APK"
+          BADGING="$("$AAPT" dump badging "$APK")"
+          echo "$BADGING"
+          grep -F "package: name='io.github.bdredenbach.nthshelf'" <<<"$BADGING"
+          grep -F "versionCode='27905'" <<<"$BADGING"
+          grep -F "versionName='2.79.05'" <<<"$BADGING"
+
       - name: Name release artifact
         run: cp android/app/build/outputs/apk/debug/app-debug.apk Nth-Shelf-V2.79.05-Panel-Map-Debug.apk
 
