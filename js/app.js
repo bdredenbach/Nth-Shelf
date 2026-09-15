@@ -3,6 +3,11 @@
 const LongboxApp = {
   deferredInstallPrompt: null,
 
+  isAndroidApp() {
+    return document.documentElement.classList.contains("android-app") ||
+      /NthShelfAndroid\//i.test(navigator.userAgent || "");
+  },
+
   init() {
     Library.init();
     Reader.init();
@@ -20,7 +25,8 @@ const LongboxApp = {
   updateInstallButton() {
     const btn = document.getElementById("install-app-btn");
     if (!btn) return;
-    const standalone = window.matchMedia?.("(display-mode: standalone)").matches ||
+    const standalone = this.isAndroidApp() ||
+      window.matchMedia?.("(display-mode: standalone)").matches ||
       window.navigator.standalone === true;
     btn.style.display = standalone ? "none" : "";
     btn.textContent = this.deferredInstallPrompt ? "Install" : "Install";
@@ -30,7 +36,8 @@ const LongboxApp = {
   },
 
   async installPWA() {
-    const standalone = window.matchMedia?.("(display-mode: standalone)").matches ||
+    const standalone = this.isAndroidApp() ||
+      window.matchMedia?.("(display-mode: standalone)").matches ||
       window.navigator.standalone === true;
     if (standalone) return;
 
@@ -67,6 +74,41 @@ const LongboxApp = {
     document.getElementById("reader-view").classList.remove("active");
     document.getElementById("library-view").classList.add("active");
     Library.refresh();
+  },
+
+  // Called by Android before it falls back to WebView history or exits.
+  // Return true whenever the current app layer consumed the Back action.
+  handleBack() {
+    if (Modal?.el?.style.display && Modal.el.style.display !== "none") {
+      Modal.close();
+      return true;
+    }
+
+    const readerView = document.getElementById("reader-view");
+    if (readerView?.classList.contains("active")) {
+      if (Reader.els.helpDrawer?.classList.contains("open")) {
+        Reader.closeHelpDrawer();
+      } else if (Reader.focusMode || Reader.panelOverlayActive || Reader.bubbleOverlayActive) {
+        Reader.resetZoom({ animate: true });
+      } else {
+        Reader.close();
+      }
+      return true;
+    }
+
+    if (Library.shelfMode) {
+      Library.closeShelfMode();
+      return true;
+    }
+    if (Library.searchMode) {
+      Library.closeSearchMode();
+      return true;
+    }
+    if (Library.activeCollectionId) {
+      Library.showRoot();
+      return true;
+    }
+    return false;
   },
 };
 

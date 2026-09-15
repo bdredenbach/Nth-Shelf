@@ -106,9 +106,13 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.05 Paired-Row Panel Map Prototype**
+**Version 2.79.06 RC1 Android Polish**
 
 ## 🧪 Release History (Newest First)
+
+## V2.79.06 RC1 Android Polish
+
+V2.79.06 RC1 keeps the proven V2.79.05 panel-map and WebAssembly frame path unchanged while correcting the Android shell around it. The packaged app now uses the supplied Nth Shelf launcher icon, accepts directly selected CBZ and other supported comic archives through Android's document picker, hides the browser-only Install action, and routes Android Back through the active modal, focused frame, reader, shelf/search mode, or collection before exiting. Reader geometry now uses the safe visible viewport instead of a translated full-screen stage: Page sheets are centered, Two Page spreads stay within the system bars, and the empty-shelf artwork is shown uncropped. When Auto Scroll is active, revealing reader navigation also reveals its speed control; hiding navigation fades the control back into the page.
 
 ## V2.79.05 Paired-Row Panel Map Prototype
 

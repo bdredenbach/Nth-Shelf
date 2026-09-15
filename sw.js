@@ -1,6 +1,6 @@
-// NTH SHELF V2.79.05 — BACKGROUND STRICT PANEL-MAP PROTOTYPE
+// NTH SHELF V2.79.06 RC1 — ANDROID RELEASE-CANDIDATE POLISH
 
-const CACHE_NAME = "nth-shelf-shell-2.79.05-panel-map-test";
+const CACHE_NAME = "nth-shelf-shell-2.79.06-rc1";
 const SHELL_FILES = [
   "./",
   "./index.html",

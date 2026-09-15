@@ -6,9 +6,9 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@drawable/nth_shelf_icon"
+        android:icon="@drawable/nth_shelf_launcher"
         android:label="Nth Shelf"
-        android:roundIcon="@drawable/nth_shelf_icon"
+        android:roundIcon="@drawable/nth_shelf_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.NthShelf"
         android:usesCleartextTraffic="false">

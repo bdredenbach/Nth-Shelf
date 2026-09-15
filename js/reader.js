@@ -1719,6 +1719,7 @@ async setMode(mode) {
    this.debugLog(`showChrome(persist=${!!persist})`);
    this.chromeVisible = true;
    this.els.chrome.classList.add("visible");
+   if (this._autoScrollEnabled) this.keepAutoScrollControlsVisible();
    clearTimeout(this.chromeTimer);
    if (!persist) {
      this.chromeTimer = setTimeout(() => { this.debugLog("auto-hideChrome (1.0s timer)"); this.hideChrome(); }, 1000);
@@ -1729,6 +1730,13 @@ async setMode(mode) {
    this.debugLog("hideChrome()");
    this.chromeVisible = false;
    this.els.chrome.classList.remove("visible");
+   if (this._autoScrollEnabled && !this._autoScrollDrag) {
+     this.els.autoScrollPanel?.classList.remove("is-visible");
+     if (this._autoScrollControlHideTimer) {
+       clearTimeout(this._autoScrollControlHideTimer);
+       this._autoScrollControlHideTimer = null;
+     }
+   }
  },
 
  toggleChrome() {

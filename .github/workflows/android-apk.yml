@@ -60,17 +60,17 @@ jobs:
           BADGING="$("$AAPT" dump badging "$APK")"
           echo "$BADGING"
           grep -F "package: name='io.github.bdredenbach.nthshelf'" <<<"$BADGING"
-          grep -F "versionCode='27905'" <<<"$BADGING"
-          grep -F "versionName='2.79.05'" <<<"$BADGING"
+          grep -F "versionCode='27906'" <<<"$BADGING"
+          grep -F "versionName='2.79.06-rc1'" <<<"$BADGING"
 
       - name: Name release artifact
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk Nth-Shelf-V2.79.05-Panel-Map-Debug.apk
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk Nth-Shelf-V2.79.06-RC1-Debug.apk
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Nth-Shelf-V2.79.05-Panel-Map-Debug
-          path: Nth-Shelf-V2.79.05-Panel-Map-Debug.apk
+          name: Nth-Shelf-V2.79.06-RC1-Debug
+          path: Nth-Shelf-V2.79.06-RC1-Debug.apk
           if-no-files-found: error
           retention-days: 30
 
@@ -78,12 +78,12 @@ jobs:
         if: github.ref == 'refs/heads/Test_Branch'
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: v2.79.05-panel-map-test-${{ github.run_number }}
+          RELEASE_TAG: v2.79.06-rc1-${{ github.run_number }}
         run: >-
           gh release create "$RELEASE_TAG"
-          Nth-Shelf-V2.79.05-Panel-Map-Debug.apk
+          Nth-Shelf-V2.79.06-RC1-Debug.apk
           --repo "$GITHUB_REPOSITORY"
           --target "$GITHUB_SHA"
           --prerelease
-          --title "Nth Shelf 2.79.05 Panel Map Test"
+          --title "Nth Shelf 2.79.06 RC1"
           --notes "Installable debug APK built from commit $GITHUB_SHA on Test_Branch. This is a test build, not a Play Store signed release."

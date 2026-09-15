@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 <title>Nth Shelf — Comic Reader</title>
 <meta name="theme-color" content="#0d0d0f" />
+<script>
+  // Mark the packaged Android shell before CSS is parsed. This prevents a
+  // one-frame flash of browser-only controls and keeps native layout fixes
+  // isolated from the installable PWA.
+  if (/NthShelfAndroid\//i.test(navigator.userAgent || "")) {
+    document.documentElement.classList.add("android-app");
+  }
+</script>
 <link rel="manifest" href="manifest.webmanifest" />
 <script>
   // Keep the manifest link available even if the document is restored from
@@ -70,7 +78,10 @@
     <input type="file" id="restore-input" accept=".json,application/json" style="display:none" />
 
     <div class="empty-state" id="empty-state" style="display:none;" aria-label="Nth Shelf empty library">
-      <button class="empty-import-hit" id="empty-import-hit" type="button" aria-label="Import a comic"></button>
+      <div class="empty-artwork">
+        <img src="assets/nth-shelf-empty.png" alt="" aria-hidden="true" />
+        <button class="empty-import-hit" id="empty-import-hit" type="button" aria-label="Import a comic"></button>
+      </div>
     </div>
 
     <section class="shelf-search-mode" id="shelf-search-mode" hidden aria-label="Animated Nth Shelf search">

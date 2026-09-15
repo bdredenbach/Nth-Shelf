@@ -13,8 +13,8 @@ android {
         applicationId = "io.github.bdredenbach.nthshelf"
         minSdk = 24
         targetSdk = 35
-        versionCode = 27905
-        versionName = "2.79.05"
+        versionCode = 27906
+        versionName = "2.79.06-rc1"
     }
 
     buildTypes {
@@ -35,6 +35,9 @@ android {
     sourceSets.getByName("main").assets.srcDir(
         layout.buildDirectory.dir("generated/nthShelfAssets")
     )
+    sourceSets.getByName("main").res.srcDir(
+        layout.buildDirectory.dir("generated/nthShelfResources")
+    )
 }
 
 val syncWebAssets by tasks.registering(Sync::class) {
@@ -54,8 +57,15 @@ val syncWebAssets by tasks.registering(Sync::class) {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
+val syncLauncherIcon by tasks.registering(Sync::class) {
+    from(rootProject.projectDir.parentFile.resolve("icons/icon-maskable-512.png"))
+    into(layout.buildDirectory.dir("generated/nthShelfResources/drawable-nodpi"))
+    rename { "nth_shelf_launcher.png" }
+}
+
 tasks.named("preBuild").configure {
     dependsOn(syncWebAssets)
+    dependsOn(syncLauncherIcon)
 }
 
 dependencies {
