@@ -106,9 +106,13 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.06 RC1 Android Polish**
+**Version 2.79.06 RC2 Android Splash + Shelf Animation**
 
 ## 🧪 Release History (Newest First)
+
+## V2.79.06 RC2 Android Splash + Shelf Animation
+
+V2.79.06 RC2 replaces the Android 12–16 icon-only startup with a black system handoff and a full, safe-area-aware Nth Shelf launch composition. The artwork uses fit-center scaling so tall API 36 displays cannot crop or zoom it, and the transient empty-shelf headline and Import button are omitted. It also restores the intended first-tap shelf interaction: the selected comic lifts slightly before the second tap opens it. The root shelf's entrance animation now releases its transform when it finishes—or immediately when tapped—so it no longer suppresses that lift.
 
 ## V2.79.06 RC1 Android Polish
 

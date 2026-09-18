@@ -13,8 +13,8 @@ android {
         applicationId = "io.github.bdredenbach.nthshelf"
         minSdk = 24
         targetSdk = 35
-        versionCode = 27906
-        versionName = "2.79.06-rc1"
+        versionCode = 27907
+        versionName = "2.79.06-rc2"
     }
 
     buildTypes {
@@ -52,6 +52,9 @@ val syncWebAssets by tasks.registering(Sync::class) {
             "icons/**",
             "js/**"
         )
+        // The native launch artwork is copied into drawable-nodpi below; do
+        // not also package its 1.6 MB PNG inside the WebView asset bundle.
+        exclude("assets/nth-shelf-splash.webp")
     }
     into(layout.buildDirectory.dir("generated/nthShelfAssets/public"))
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -63,9 +66,16 @@ val syncLauncherIcon by tasks.registering(Sync::class) {
     rename { "nth_shelf_launcher.png" }
 }
 
+val syncSplashArtwork by tasks.registering(Sync::class) {
+    from(rootProject.projectDir.parentFile.resolve("assets/nth-shelf-splash.webp"))
+    into(layout.buildDirectory.dir("generated/nthShelfResources/drawable-nodpi"))
+    rename { "nth_shelf_splash.webp" }
+}
+
 tasks.named("preBuild").configure {
     dependsOn(syncWebAssets)
     dependsOn(syncLauncherIcon)
+    dependsOn(syncSplashArtwork)
 }
 
 dependencies {

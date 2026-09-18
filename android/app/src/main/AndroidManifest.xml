@@ -10,7 +10,7 @@
         android:label="Nth Shelf"
         android:roundIcon="@drawable/nth_shelf_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NthShelf"
+        android:theme="@style/Theme.NthShelf.Splash"
         android:usesCleartextTraffic="false">
 
         <activity

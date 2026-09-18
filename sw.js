@@ -1,6 +1,6 @@
-// NTH SHELF V2.79.06 RC1 — ANDROID RELEASE-CANDIDATE POLISH
+// NTH SHELF V2.79.06 RC2 — ANDROID SPLASH + SHELF-CARD LIFT
 
-const CACHE_NAME = "nth-shelf-shell-2.79.06-rc1";
+const CACHE_NAME = "nth-shelf-shell-2.79.06-rc2";
 const SHELL_FILES = [
   "./",
   "./index.html",

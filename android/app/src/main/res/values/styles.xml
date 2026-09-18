@@ -10,4 +10,5 @@
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
     </style>
+    <style name="Theme.NthShelf.Splash" parent="Theme.NthShelf" />
 </resources>

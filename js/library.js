@@ -372,6 +372,13 @@ const Library = {
       const card = item._isCollection ? this.renderCollectionCard(item) : this.renderComicCard(item);
       card.classList.add("cinematic-reveal");
       card.style.animationDelay = `${Math.min(index, 12) * 32}ms`;
+      const finishCinematicReveal = (event) => {
+        if (event.target !== card || event.animationName !== "cinematic-card-in") return;
+        card.classList.remove("cinematic-reveal");
+        card.style.removeProperty("animation-delay");
+        card.removeEventListener("animationend", finishCinematicReveal);
+      };
+      card.addEventListener("animationend", finishCinematicReveal);
       this.els.gridEl.appendChild(card);
     });
     this.searchItems = items;
@@ -779,6 +786,10 @@ const Library = {
         window.LongboxApp.openReader(comic.id);
         return;
       }
+      // The root-library entrance animation uses `animation-fill-mode: both`.
+      // Release its transform before applying the small first-tap lift.
+      card.classList.remove("cinematic-reveal");
+      card.style.removeProperty("animation-delay");
       document.querySelectorAll(".comic-card.cinematic-selected").forEach((el) => el.classList.remove("cinematic-selected"));
       card.classList.add("cinematic-selected");
       card.setAttribute("aria-label", `${comic.title}. Tap again to open.`);
@@ -814,6 +825,8 @@ const Library = {
         this.showCollection(col.id);
         return;
       }
+      card.classList.remove("cinematic-reveal");
+      card.style.removeProperty("animation-delay");
       document.querySelectorAll(".comic-card.cinematic-selected").forEach((el) => el.classList.remove("cinematic-selected"));
       card.classList.add("cinematic-selected");
       card.setAttribute("aria-label", `${col.title}. Tap again to open.`);

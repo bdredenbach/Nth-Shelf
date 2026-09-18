@@ -1980,6 +1980,9 @@ button.reader-btn.mini-btn {
   transform:translateY(-14px) rotateY(-5deg) scale(1.035);
   z-index:8;
 }
+.comic-card.cinematic-reveal.cinematic-selected {
+  animation:none;
+}
 .comic-card.cinematic-selected .comic-cover {
   border-color:rgba(232,53,43,.92);
   box-shadow:0 24px 46px rgba(0,0,0,.60), 0 0 30px rgba(232,53,43,.18);

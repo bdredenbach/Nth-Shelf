@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -18,6 +20,8 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,13 +35,19 @@ public final class MainActivity extends Activity {
     private static final String ASSET_HOST = "appassets.androidplatform.net";
     private static final String START_URL =
             "https://" + ASSET_HOST + "/assets/public/index.html";
+    private static final long MINIMUM_SPLASH_MILLIS = 700L;
+    private static final long MAXIMUM_SPLASH_MILLIS = 4000L;
 
+    private FrameLayout rootView;
     private WebView webView;
+    private ImageView splashView;
     private WebViewAssetLoader assetLoader;
     private ValueCallback<Uri[]> pendingFileChoice;
     private View customView;
     private WebChromeClient.CustomViewCallback customViewCallback;
     private boolean backDispatchPending;
+    private boolean splashDismissed;
+    private long splashShownAt;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -50,6 +60,9 @@ public final class MainActivity extends Activity {
         assetLoader = new WebViewAssetLoader.Builder()
                 .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
                 .build();
+
+        rootView = new FrameLayout(this);
+        rootView.setBackgroundColor(Color.BLACK);
 
         webView = new WebView(this);
         webView.setBackgroundColor(Color.rgb(13, 13, 15));
@@ -77,7 +90,24 @@ public final class MainActivity extends Activity {
         }
 
         installServiceWorkerAssetBridge();
-        setContentView(webView);
+        rootView.addView(
+                webView,
+                new FrameLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT
+                )
+        );
+        splashView = createSplashView();
+        rootView.addView(
+                splashView,
+                new FrameLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT
+                )
+        );
+        splashShownAt = System.currentTimeMillis();
+        setContentView(rootView);
+        splashView.postDelayed(this::dismissSplash, MAXIMUM_SPLASH_MILLIS);
 
         if (savedInstanceState == null || webView.restoreState(savedInstanceState) == null) {
             webView.loadUrl(START_URL);
@@ -93,6 +123,18 @@ public final class MainActivity extends Activity {
                     @NonNull WebResourceRequest request
             ) {
                 return assetLoader.shouldInterceptRequest(request.getUrl());
+            }
+
+            @Override
+            public void onPageFinished(@NonNull WebView view, @NonNull String url) {
+                super.onPageFinished(view, url);
+                ImageView splash = splashView;
+                if (splash == null) return;
+                long elapsed = System.currentTimeMillis() - splashShownAt;
+                splash.postDelayed(
+                        MainActivity.this::dismissSplash,
+                        Math.max(0L, MINIMUM_SPLASH_MILLIS - elapsed)
+                );
             }
 
             @Override
@@ -112,6 +154,44 @@ public final class MainActivity extends Activity {
                 return true;
             }
         };
+    }
+
+    private ImageView createSplashView() {
+        ImageView splash = new ImageView(this);
+        splash.setBackgroundColor(Color.BLACK);
+        splash.setImageResource(R.drawable.nth_shelf_splash);
+        splash.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        splash.setContentDescription(getString(R.string.app_name));
+        splash.setOnApplyWindowInsetsListener((view, insets) -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                android.graphics.Insets bars = insets.getInsets(WindowInsets.Type.systemBars());
+                view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+            } else {
+                view.setPadding(
+                        insets.getSystemWindowInsetLeft(),
+                        insets.getSystemWindowInsetTop(),
+                        insets.getSystemWindowInsetRight(),
+                        insets.getSystemWindowInsetBottom()
+                );
+            }
+            return insets;
+        });
+        return splash;
+    }
+
+    private void dismissSplash() {
+        if (splashDismissed || splashView == null) return;
+        splashDismissed = true;
+        splashView.animate()
+                .alpha(0f)
+                .setDuration(220L)
+                .withEndAction(() -> {
+                    if (splashView != null && splashView.getParent() == rootView) {
+                        rootView.removeView(splashView);
+                    }
+                    splashView = null;
+                })
+                .start();
     }
 
     private WebChromeClient createWebChromeClient() {
@@ -182,7 +262,7 @@ public final class MainActivity extends Activity {
             return;
         }
         customView = null;
-        setContentView(webView);
+        setContentView(rootView);
         if (customViewCallback != null) {
             customViewCallback.onCustomViewHidden();
             customViewCallback = null;
