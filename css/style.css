@@ -631,7 +631,7 @@ button {
 .nth-dialog small,.guide-count {color:#b4aba6;}
 .license-dialog pre {white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 monospace;}
 @media (orientation:landscape) and (max-height:500px) {
-  .shelf-mode-track {translate:0 -3vh;}
+  .shelf-mode-stage .shelf-mode-track {translate:0 -3vh;}
   .nth-dialog {max-height:90dvh;padding:16px;}
 }
 
