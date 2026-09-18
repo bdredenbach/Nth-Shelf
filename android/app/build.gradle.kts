@@ -60,22 +60,19 @@ val syncWebAssets by tasks.registering(Sync::class) {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-val syncLauncherIcon by tasks.registering(Sync::class) {
-    from(rootProject.projectDir.parentFile.resolve("icons/icon-maskable-512.png"))
+val syncAndroidArtwork by tasks.registering(Sync::class) {
+    from(rootProject.projectDir.parentFile.resolve("icons/icon-maskable-512.png")) {
+        rename { "nth_shelf_launcher.png" }
+    }
+    from(rootProject.projectDir.parentFile.resolve("assets/nth-shelf-splash.webp")) {
+        rename { "nth_shelf_splash.webp" }
+    }
     into(layout.buildDirectory.dir("generated/nthShelfResources/drawable-nodpi"))
-    rename { "nth_shelf_launcher.png" }
-}
-
-val syncSplashArtwork by tasks.registering(Sync::class) {
-    from(rootProject.projectDir.parentFile.resolve("assets/nth-shelf-splash.webp"))
-    into(layout.buildDirectory.dir("generated/nthShelfResources/drawable-nodpi"))
-    rename { "nth_shelf_splash.webp" }
 }
 
 tasks.named("preBuild").configure {
     dependsOn(syncWebAssets)
-    dependsOn(syncLauncherIcon)
-    dependsOn(syncSplashArtwork)
+    dependsOn(syncAndroidArtwork)
 }
 
 dependencies {
