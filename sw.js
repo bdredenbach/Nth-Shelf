@@ -1,6 +1,6 @@
-// NTH SHELF V2.79.06 RC2 — ANDROID SPLASH + SHELF-CARD LIFT
+// NTH SHELF V2.79.07 TEST 1 — AN NTH EXPERIENCE
 
-const CACHE_NAME = "nth-shelf-shell-2.79.06-rc2";
+const CACHE_NAME = "nth-shelf-shell-2.79.07-test1";
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -8,6 +8,13 @@ const SHELL_FILES = [
   "./css/style.css",
   "./js/db.js",
   "./js/library.js",
+  "./js/nth-page-deck.js",
+  "./js/page-mode.js",
+  "./js/native-shell.js",
+  "./js/transfers.js",
+  "./js/feature-guide.js",
+  "./js/vendor/jszip.min.js",
+  "./THIRD_PARTY_NOTICES.txt",
   "./js/panels.js",
   "./js/panels-frame-wasm.js",
   "./js/panels-frame-kernel.wasm",
@@ -27,7 +34,6 @@ const SHELL_FILES = [
   "./icons/icon-maskable-512.png",
   "./assets/nth-shelf-empty.png",
   "./assets/nth-shelf-dystopian-shelf.jpg",
-  "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js",
 ];
 
 self.addEventListener("install", (event) => {

@@ -13,8 +13,8 @@ android {
         applicationId = "io.github.bdredenbach.nthshelf"
         minSdk = 24
         targetSdk = 35
-        versionCode = 27907
-        versionName = "2.79.06-rc2"
+        versionCode = 27908
+        versionName = "2.79.07-test1"
     }
 
     buildTypes {
@@ -47,6 +47,7 @@ val syncWebAssets by tasks.registering(Sync::class) {
             "manifest.json",
             "manifest.webmanifest",
             "sw.js",
+            "THIRD_PARTY_NOTICES.txt",
             "assets/**",
             "css/**",
             "icons/**",

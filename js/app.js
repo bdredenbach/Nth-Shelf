@@ -11,6 +11,8 @@ const LongboxApp = {
   init() {
     Library.init();
     Reader.init();
+    ShelfTransfer.init();
+    ShelfGuide.init();
     this.updateInstallButton();
 
     if ("serviceWorker" in navigator) {
@@ -79,6 +81,10 @@ const LongboxApp = {
   // Called by Android before it falls back to WebView history or exits.
   // Return true whenever the current app layer consumed the Back action.
   handleBack() {
+    if (ShelfGuide.active) return ShelfGuide.finish();
+    if (ShelfTransfer.dialog?.open) { ShelfTransfer.dismiss(); return true; }
+    const dialog=document.querySelector("dialog[open]");
+    if(dialog) {dialog.close();return true;}
     if (Modal?.el?.style.display && Modal.el.style.display !== "none") {
       Modal.close();
       return true;

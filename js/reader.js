@@ -61,6 +61,7 @@ const Reader = {
 
    // v59.23: real Turn.js takeover for Page mode.
    this.turnPageMode = new LongboxPageMode({
+     canTurn: () => this.scale <= 1.02 && !this.focusMode,
      getIssue: () => this.comic,
      getPageUrl: (i) => this.getPageUrl(i),
      getIndex: () => this.index,
@@ -170,6 +171,7 @@ const Reader = {
      this.goTo(parseInt(e.target.value, 10), { fromSlider: true });
    });
 
+   this.bindZoomGestures();
    this.bindGestures();
 
    let continuousTimer = null;
@@ -205,6 +207,10 @@ const Reader = {
    const requestedPage = Number.isInteger(startPage) ? startPage : (this.comic.lastPage || 0);
    this.index = Math.max(0, Math.min((this.comic.pageCount || 1) - 1, requestedPage));
    this.mode = this.comic.readMode || "single";
+   if (this.mode !== "two-page" && this._nativeFullscreen) {
+     window.NthShelfNative?.setImmersive(false);
+     this._nativeFullscreen = false;
+   }
    this.theme = this.comic.theme || "dark";
    this.pageUrls = new Array(this.comic.pageCount).fill(null);
    this._pageDims = new Array(this.comic.pageCount).fill(null);
@@ -220,11 +226,8 @@ const Reader = {
    this.updateThemeSwatches();
    this.showChrome(true);
 
+   if (this.mode === "two-page") await this.enterTwoPageFullscreenLandscape();
    await this.render();
- if (!this._initialReaderGuideShown) {
-    this._initialReaderGuideShown = true;
-    requestAnimationFrame(() => this.openHelpDrawer());
-  }
 },
 
  async getAdjacentIssues() {
@@ -337,6 +340,9 @@ const Reader = {
  },
 
  close() {
+   window.NthShelfNative?.setImmersive(false);
+   this._nativeFullscreen = false;
+   this.turnPageMode?.destroy();
    this.saveProgress();
    if (typeof PanelMap !== "undefined" && PanelMap.endIssue) PanelMap.endIssue(this.comic?.id);
    this.revokeAll();
@@ -829,11 +835,10 @@ const Reader = {
        this.turnPageMode?.book) {
      try {
        const book = this.turnPageMode.book;
-       const view = book.turn("view");
-       const pageNumber = Array.isArray(view) ? Number(view[0]) : Number(view);
+       const pageNumber = book.currentPage;
        const data = book.data();
        const pageObj = data?.pageObjs?.[pageNumber];
-       const img = pageObj?.find?.("img")?.get?.(0);
+       const img = pageObj?.[0]?.querySelector("img");
        if (img) {
          const rect = img.getBoundingClientRect();
          if (rect.width > 1 && rect.height > 1) {
@@ -1164,7 +1169,7 @@ const Reader = {
    const btn = this.els.twoPageExitFullscreen;
    if (!btn) return;
    const visible = this.mode === "two-page" &&
-     !!document.fullscreenElement &&
+     (!!document.fullscreenElement || this._nativeFullscreen) &&
      this.isLandscapeViewport();
    btn.hidden = !visible;
    btn.classList.toggle("is-visible", visible);
@@ -1185,6 +1190,13 @@ const Reader = {
  },
 
  async enterTwoPageFullscreenLandscape() {
+   if (window.NthShelfNative?.setImmersive) {
+     this._nativeFullscreen = true;
+     await window.NthShelfNative.setImmersive(true);
+     await new Promise(resolve => setTimeout(resolve, 300));
+     this.updateTwoPageFullscreenButton();
+     return;
+   }
    // Request fullscreen immediately from the mode-button gesture. This is
    // more reliable on mobile browsers than waiting for orientation locking.
    if (!document.fullscreenElement && this.els.view?.requestFullscreen) {
@@ -1223,6 +1235,8 @@ const Reader = {
  },
 
  async exitTwoPageFullscreen() {
+   window.NthShelfNative?.setImmersive(false);
+   this._nativeFullscreen = false;
    if (this._twoPageOrientationLocked && screen.orientation?.unlock) {
      try { screen.orientation.unlock(); } catch (_) {}
    }
@@ -1544,6 +1558,8 @@ async setMode(mode) {
    // styles before a continuous mode gets a chance to measure/rebuild it.
    // The mode-specific CSS will then provide the correct display/size/overflow.
    if (leavingTwoPage) {
+     window.NthShelfNative?.setImmersive(false);
+     this._nativeFullscreen = false;
      if (this._twoPageOrientationLocked && screen.orientation?.unlock) {
        try { screen.orientation.unlock(); } catch (_) {}
      }
@@ -1828,6 +1844,59 @@ async setMode(mode) {
    this.ty = clamp(this.ty, -maxTy, maxTy);
  },
 
+ bindZoomGestures() {
+   const stage = this.els.stage;
+   let gesture = null, suppress = false;
+   const midpoint = t => ({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
+   const distance = t => Math.max(1, Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY));
+   const stop = e => { e.preventDefault(); e.stopImmediatePropagation(); };
+   stage.addEventListener("touchstart", e => {
+     if (!["single","two-page"].includes(this.mode) || this.focusMode) return;
+     if (e.touches.length === 2) {
+       stop(e);
+       stage.dispatchEvent(new Event("nth-zoom-start"));
+       this.turnPageMode?.cancelGesture();
+       const rect = stage.getBoundingClientRect(), mid = midpoint(e.touches);
+       gesture = {distance:distance(e.touches),scale:this.scale,tx:this.tx,ty:this.ty,
+         mid,cx:rect.left+rect.width/2,cy:rect.top+rect.height/2};
+       suppress = true;
+     } else if (this.scale > 1.02 && e.touches.length === 1) {
+       stop(e);
+       stage.dispatchEvent(new Event("nth-zoom-start"));
+       gesture = {pan:true,x:e.touches[0].clientX,y:e.touches[0].clientY,tx:this.tx,ty:this.ty};
+       suppress = true;
+     }
+   }, {capture:true,passive:false});
+   stage.addEventListener("touchmove", e => {
+     if (!suppress) return;
+     stop(e);
+     if (!gesture) return;
+     if (e.touches.length === 2 && !gesture.pan) {
+       const mid=midpoint(e.touches), scale=clamp(gesture.scale*distance(e.touches)/gesture.distance,1,5);
+       this.tx=mid.x-gesture.cx-(gesture.mid.x-gesture.cx-gesture.tx)*scale/gesture.scale;
+       this.ty=mid.y-gesture.cy-(gesture.mid.y-gesture.cy-gesture.ty)*scale/gesture.scale;
+       this.scale=scale;
+     } else if(e.touches.length === 1 && gesture.pan) {
+       this.tx=gesture.tx+e.touches[0].clientX-gesture.x;
+       this.ty=gesture.ty+e.touches[0].clientY-gesture.y;
+     }
+     this.constrainPan();
+     this.applyTransform();
+   }, {capture:true,passive:false});
+   const end = e => {
+     if (!suppress) return;
+     stop(e);
+     if(e.touches.length === 1) {
+       gesture={pan:true,x:e.touches[0].clientX,y:e.touches[0].clientY,tx:this.tx,ty:this.ty};
+     } else if (!e.touches.length) {
+       gesture=null; suppress=false;
+       if(this.scale<1.03) this.resetZoom({animate:false});
+     }
+   };
+   stage.addEventListener("touchend",end,{capture:true,passive:false});
+   stage.addEventListener("touchcancel",end,{capture:true,passive:false});
+ },
+
  bindGestures() {
    const stage = this.els.stage;
    let touches = [];
@@ -1852,6 +1921,12 @@ async setMode(mode) {
 
    const dist = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
    const mid = (a, b) => ({ x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 });
+   stage.addEventListener("nth-zoom-start", () => {
+     clearTimeout(holdTimer); clearTimeout(continuousHoldTimer); clearTimeout(pendingTapTimer);
+     holdTimer=null; continuousHoldTimer=null; pendingTapTimer=null;
+     panStart=null; continuousTapStart=null; twoPageGestureStart=null;
+     lastTapTime=0; lastTapPos=null; dragMoved=true;
+   });
 
    const getContinuousTargetAtPoint = (screenX, screenY) => {
      if (!(this.mode === "scroll" || this.mode === "webcomic" || this.mode === "manga" || this.mode === "two-page")) return null;

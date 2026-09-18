@@ -1,0 +1,117 @@
+const { chromium } = require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES ? process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES + '/playwright' : 'playwright');
+const assert = require('node:assert/strict');
+(async () => {
+ const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox']});
+ try {
+  const context=await browser.newContext({viewport:{width:412,height:915},hasTouch:true,isMobile:true,acceptDownloads:true});
+  const page=await context.newPage(),errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.goto('http://127.0.0.1:8765');
+  await page.waitForFunction(()=>window.ShelfTransfer?.dialog && window.ShelfGuide?.dialog);
+  await page.waitForTimeout(1500);
+  assert.equal(await page.evaluate(()=>ShelfGuide.active?.id),'library');
+  await page.evaluate(()=>ShelfGuide.finish());
+  await page.evaluate(async()=>{
+   // UI/transfer fixture, not a frame-detection benchmark.
+   Reader.loadPanelsForCurrentPage=async()=>{};Reader.preparePanelMaps=()=>{};
+   const canvas=document.createElement('canvas');canvas.width=600;canvas.height=900;
+   const ctx=canvas.getContext('2d');
+   await LongboxDB.addCollection({id:'fixture-col',title:'Test Collection',createdAt:Date.now()});
+   for(let j=0;j<2;j++){
+    let cover;
+    for(let i=0;i<4;i++){
+     ctx.fillStyle=['#c72c36','#206788','#4a8845','#e0a340'][i];ctx.fillRect(0,0,600,900);
+     ctx.fillStyle='white';ctx.font='60px sans-serif';ctx.fillText('Issue '+j+' Page '+i,35,100);
+     const blob=await new Promise(r=>canvas.toBlob(r,'image/png'));cover=canvas.toDataURL();
+     await LongboxDB.putPage('fixture-'+j,i,blob);
+    }
+    await LongboxDB.addComic({id:'fixture-'+j,title:'Issue '+j,pageCount:4,lastPage:0,bookmarks:[1],coverUrl:cover,
+      collectionId:'fixture-col',issueNumber:j,addedAt:Date.now(),readMode:'single',theme:'dark'});
+   }
+   await Library.refresh();
+   await LongboxApp.openReader('fixture-0');
+  });
+  await page.waitForTimeout(1400);
+  assert.equal(await page.evaluate(()=>ShelfGuide.active?.id),'single');
+  await page.evaluate(()=>ShelfGuide.finish());
+  assert.equal(await page.evaluate(()=>Reader.turnPageMode.book instanceof NthPageDeck),true);
+  await page.evaluate(()=>Reader.next());
+  await page.waitForFunction(()=>Reader.index===1 && !Reader.turnPageMode.book.motion);
+  await page.evaluate(()=>Reader.prev());
+  await page.waitForFunction(()=>Reader.index===0 && !Reader.turnPageMode.book.motion);
+  assert.equal(await page.evaluate(()=>Reader.getPanelImageContext()?.pageNumber),1);
+  const cdp=await context.newCDPSession(page);
+  const pinch=async()=>{
+   const b=await page.locator('#reader-stage').boundingBox(),x=b.x+b.width/2,y=b.y+b.height/2;
+   const points=d=>[{x:x-d,y,id:1},{x:x+d,y,id:2}];
+   await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:x-40,y,id:1}]});
+   await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:points(40)});
+   for(const d of [50,65,80])await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:points(d)});
+   await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+   assert.ok(await page.evaluate(()=>Reader.scale)>1.8,'pinch should zoom');
+   assert.equal(await page.evaluate(()=>Reader.index),0,'pinch must not turn a page');
+  };
+  await pinch();
+  await page.evaluate(()=>Reader.resetZoom({animate:false}));
+  await page.evaluate(async()=>{
+   window.immersiveCalls=[];
+   window.NthShelfNative={setImmersive:async value=>immersiveCalls.push(value)};
+   await Reader.setMode('two-page');
+  });
+  await page.waitForTimeout(1500);
+  await page.evaluate(()=>ShelfGuide.finish());
+  assert.deepEqual(await page.evaluate(()=>immersiveCalls),[true]);
+  await pinch();
+  await page.evaluate(async()=>{Reader.resetZoom({animate:false});await Reader.setMode('single');Reader.close();delete window.NthShelfNative;});
+  assert.equal(await page.evaluate(()=>immersiveCalls.at(-1)),false);
+  await page.evaluate(()=>Library.toggleShelfMode());
+  await page.waitForTimeout(1400);
+  assert.equal(await page.evaluate(()=>ShelfGuide.active?.id),'shelf');
+  await page.evaluate(()=>ShelfGuide.finish());
+  await page.screenshot({path:'/tmp/nth-shelf-raised.png'});
+  await page.evaluate(()=>Library.closeShelfMode());
+  const results=await page.evaluate(async()=>{
+   clearTimeout(ShelfGuide.timer);
+   window.saved=[];
+   ShelfTransfer.save=async(blob,name)=>{saved.push({blob,name});return 'Captured for round-trip test';};
+   await ShelfTransfer.backup();
+   if(saved.length!==1)throw Error(ShelfTransfer.dialog.textContent);
+   ShelfTransfer.dismiss();
+   const backup=saved[0],before=await LongboxDB.getAllComics();
+   await ShelfTransfer.restore(new File([backup.blob],backup.name),()=>{throw Error('Unexpected legacy route');});
+   const after=await LongboxDB.getAllComics();
+   if(after.length!==4)throw Error(ShelfTransfer.dialog.textContent);
+   for(const old of before){
+    const restored=after.find(c=>c.title===old.title&&c.id!==old.id);
+    if(!restored||restored.bookmarks[0]!==1)throw Error('Metadata mismatch');
+    for(let i=0;i<old.pageCount;i++){
+     const a=new Uint8Array(await (await LongboxDB.getPage(old.id,i)).arrayBuffer());
+     const b=new Uint8Array(await (await LongboxDB.getPage(restored.id,i)).arrayBuffer());
+     if(a.length!==b.length||!a.every((v,k)=>v===b[k]))throw Error('Page bytes changed');
+    }
+   }
+   ShelfTransfer.dismiss();
+   await ShelfTransfer.downloadCollection('fixture-col');
+   if(saved.length!==2)throw Error(ShelfTransfer.dialog.textContent);
+   const collection=await JSZip.loadAsync(saved[1].blob);
+   const files=Object.keys(collection.files).filter(f=>!collection.files[f].dir);
+   if(files.length!==2||!files.every(f=>f.endsWith('.cbz')))throw Error('Bad collection download');
+   for(const name of files) {
+    const issue=await JSZip.loadAsync(await collection.file(name).async('blob'));
+    if(Object.keys(issue.files).length!==4)throw Error('Missing CBZ pages');
+   }
+   ShelfTransfer.dismiss();
+   const broken=await JSZip.loadAsync(backup.blob);broken.remove('pages/0/000002.png');
+   const invalid=await broken.generateAsync({type:'blob'});
+   await ShelfTransfer.restore(new File([invalid],'broken.nthshelf'),()=>{});
+   if((await LongboxDB.getAllComics()).length!==4)throw Error('Invalid restore changed library');
+   if(!ShelfTransfer.dialog.textContent.includes('Transfer not completed'))throw Error('Corruption not reported');
+   ShelfTransfer.dismiss();
+   return {restoredComics:after.length-before.length,verifiedPages:8,collectionFiles:files,invalidRestore:'rejected before commit'};
+  });
+  await page.evaluate(()=>ShelfGuide.licenses());
+  await page.waitForFunction(()=>document.querySelector('.license-dialog pre')?.textContent.includes('JSZip'));
+  assert.deepEqual(errors,[]);
+  console.log(JSON.stringify({pageDeck:'next/previous passed',pinch:'single and two-page passed',nativeFullscreen:'entry and exit requested',guides:'first use and shelf passed',...results,errors},null,2));
+ } finally {await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

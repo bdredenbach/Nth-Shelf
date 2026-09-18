@@ -876,6 +876,11 @@ const Library = {
     if (!id) return;
     Modal.actions("Collection options", null, [
       {
+        label: "Download collection (ZIP of CBZ files)",
+        cls: "primary",
+        onClick: () => ShelfTransfer.downloadCollection(id),
+      },
+      {
         label: "Rename collection",
         cls: "neutral",
         onClick: () => this.promptRenameCollection(id),
@@ -1138,6 +1143,7 @@ const Library = {
     let matched = 0;
     const unmatched = [];
     for (const entry of payload.comics) {
+      window.ShelfTransfer?.progress(20+70*(matched+unmatched.length)/Math.max(1,payload.comics.length),"Restoring progress · "+entry.title);
       const current = currentComics.find((c) => c.title === entry.title);
       if (!current) {
         unmatched.push(entry.title);
@@ -1290,14 +1296,14 @@ const Library = {
     if (!this._filing) {
       // Use jsDelivr's browser ESM transformer. This avoids executing a
       // package's UMD/CommonJS wrapper as a plain browser script.
-      const mod = await import("https://cdn.jsdelivr.net/npm/filing/+esm");
+      const mod = await import("https://cdn.jsdelivr.net/npm/filing@0.1.2/+esm");
       const FilingBrowser = mod.FilingBrowser || mod.default?.FilingBrowser;
       if (!FilingBrowser) {
         throw new Error("The 7Z/RAR archive engine loaded, but its browser API was unavailable.");
       }
 
       this._filing = new FilingBrowser({
-        wasmUrl: "https://unpkg.com/filing/dist/esm/wasm/archive.wasm",
+        wasmUrl: "https://unpkg.com/filing@0.1.2/dist/esm/wasm/archive.wasm",
       });
     }
 

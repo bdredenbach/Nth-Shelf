@@ -604,6 +604,37 @@ button {
   pointer-events: none;
 }
 
+/* Independent An Nth Experience page-deck presentation. */
+.longbox-turn-book.nth-page-deck {
+  position:relative; margin:auto; overflow:hidden; isolation:isolate;
+  touch-action:none; contain:paint;
+}
+.nth-page-deck .nth-deck-page {
+  position:absolute; inset:0; width:100%; height:100%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  backface-visibility:visible; transform-style:flat;
+}
+.nth-turn-canvas {position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;}
+.nth-dialog {
+  box-sizing:border-box; width:min(92vw,520px); max-height:85dvh;
+  padding:26px; border:1px solid #a32628; border-radius:18px;
+  background:linear-gradient(145deg,#211214,#101012 55%);
+  color:#f3eee3; box-shadow:0 24px 90px #000c;
+  font:16px/1.5 system-ui,sans-serif; overflow:auto;
+}
+.nth-dialog::backdrop {background:#000b;}
+.nth-dialog h2 {font-size:24px;line-height:1.2;margin:12px 0;}
+.nth-dialog button {cursor:pointer;margin-top:18px;}
+.nth-eyebrow {color:#ef554b;letter-spacing:.13em;font-size:11px;font-weight:800;}
+.nth-dialog-actions {display:flex;justify-content:space-between;gap:12px;}
+.nth-dialog progress {width:100%;height:14px;accent-color:#e8352b;}
+.nth-dialog small,.guide-count {color:#b4aba6;}
+.license-dialog pre {white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 monospace;}
+@media (orientation:landscape) and (max-height:500px) {
+  .shelf-mode-track {translate:0 -3vh;}
+  .nth-dialog {max-height:90dvh;padding:16px;}
+}
+
 .mode-scroll .scroll-page {
   display: block;
   width: 100%;
@@ -1905,6 +1936,7 @@ button.reader-btn.mini-btn {
   z-index:5;
   width:100%; height:min(58vh, 540px);
   transform-style:preserve-3d;
+  translate:0 -14vh;
 }
 .shelf-mode-card {
   position:absolute;

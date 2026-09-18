@@ -40,6 +40,7 @@ public final class MainActivity extends Activity {
 
     private FrameLayout rootView;
     private WebView webView;
+    private ShelfBridge shelfBridge;
     private ImageView splashView;
     private WebViewAssetLoader assetLoader;
     private ValueCallback<Uri[]> pendingFileChoice;
@@ -65,6 +66,8 @@ public final class MainActivity extends Activity {
         rootView.setBackgroundColor(Color.BLACK);
 
         webView = new WebView(this);
+        shelfBridge = new ShelfBridge(this);
+        shelfBridge.install(webView);
         webView.setBackgroundColor(Color.rgb(13, 13, 15));
         webView.setWebViewClient(createWebViewClient());
         webView.setWebChromeClient(createWebChromeClient());
@@ -83,7 +86,7 @@ public final class MainActivity extends Activity {
         settings.setSupportMultipleWindows(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
         settings.setUserAgentString(
-                settings.getUserAgentString() + " NthShelfAndroid/2.79.06"
+                settings.getUserAgentString() + " NthShelfAndroid/2.79.07"
         );
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             settings.setSafeBrowsingEnabled(true);
@@ -271,6 +274,10 @@ public final class MainActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == ShelfBridge.SAVE_REQUEST) {
+            shelfBridge.result(resultCode, data);
+            return;
+        }
         if (requestCode == FILE_CHOOSER_REQUEST && pendingFileChoice != null) {
             Uri[] result = collectChosenUris(resultCode, data);
             pendingFileChoice.onReceiveValue(result);
@@ -328,6 +335,7 @@ public final class MainActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        if (shelfBridge != null) shelfBridge.destroy();
         if (pendingFileChoice != null) {
             pendingFileChoice.onReceiveValue(null);
             pendingFileChoice = null;

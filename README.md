@@ -106,9 +106,31 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.06 RC2 Android Splash + Shelf Animation**
+**Version 2.79.07 Test 1 — An Nth Experience**
 
 ## 🧪 Release History (Newest First)
+
+## V2.79.07 Test 1 — An Nth Experience
+
+Uses Nth Reader's independent Nth Page Deck for page folds and reverse turns.
+Turn.js (including its minified copy) and the jQuery runtime reference have been
+removed. Page and Two Page pinch gestures take priority over page turning.
+Android Two Page requests native immersive landscape and releases it on exit.
+The shelf carousel is raised, and first-use guides introduce each reading area.
+Replay a reading guide or open Licenses & Credits from the Reader Guide (?).
+
+Full .nthshelf backups contain comic page images, reading history, bookmarks,
+and collections. Restore validates pages before one atomic, additive database
+transaction; existing comics are never overwritten. Collection downloads
+reconstruct a ZIP of CBZ issues from stored pages, not original source archives.
+Transfers show progress; Android uses its save-document picker and reports the
+actual save result. Legacy progress-only JSON restore remains available.
+The in-memory transfer safety limit is 512 MiB; larger libraries need smaller
+collection exports. Full backups do not include disposable panel-map caches
+or device-specific preferences. The frame detection and WASM sources are unchanged.
+
+This is a device-test build, not commercial clearance. Review the optional
+filing/libarchive compiled dependency inventory before production publication.
 
 ## V2.79.06 RC2 Android Splash + Shelf Animation
 
