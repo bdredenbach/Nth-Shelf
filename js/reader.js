@@ -1851,8 +1851,9 @@ async setMode(mode) {
 
  bindNavigationSwipe() {
    const stage = this.els.stage;
+   const surface = document.getElementById("reader-view");
    let swipe = null;
-   stage.addEventListener("touchstart", e => {
+   surface.addEventListener("touchstart", e => {
      swipe = null;
      if (this.mode !== "single" || this.scale > 1.02 || this.focusMode || e.touches.length !== 1) return;
      const t = e.touches[0], r = stage.getBoundingClientRect();
@@ -1860,7 +1861,7 @@ async setMode(mode) {
      const side = t.clientY <= r.top + edge ? "top" : t.clientY >= r.bottom - edge ? "bottom" : null;
      if (side) swipe = {x:t.clientX, y:t.clientY, side, claimed:false};
    }, {capture:true, passive:true});
-   stage.addEventListener("touchmove", e => {
+   surface.addEventListener("touchmove", e => {
      if (!swipe) return;
      if (e.touches.length !== 1 || this.scale > 1.02 || this.focusMode) {swipe=null;return;}
      const dx=e.touches[0].clientX-swipe.x, dy=e.touches[0].clientY-swipe.y;
@@ -1882,8 +1883,8 @@ async setMode(mode) {
      }
      swipe=null;
    };
-   stage.addEventListener("touchend",finish,{capture:true,passive:false});
-   stage.addEventListener("touchcancel",finish,{capture:true,passive:false});
+   surface.addEventListener("touchend",finish,{capture:true,passive:false});
+   surface.addEventListener("touchcancel",finish,{capture:true,passive:false});
  },
 
  bindZoomGestures() {
