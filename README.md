@@ -58,7 +58,7 @@ Auto Scroll is available in **Scroll, Manga,** and **Webcomic** modes.
 
 - The **Auto Scroll** button appears only in modes that support continuous scrolling.
 - The button is dark when off and red when active, matching the Bubble Zoom control style.
-- Use the speed control to select **0.0x, 0.33x, 0.50x, 0.66x, 1.00x** or **2.00x**.
+- Use the linear **0–2×** speed slider and exact live readout. The **− / +** buttons adjust by **0.01×**.
 - Use the play/pause control to stop and resume scrolling without leaving the mode.
 - The control panel fades almost completely into the artwork while idle and becomes visible when interacted with.
 - The control panel can be moved to a more convenient position.
@@ -106,7 +106,7 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.08 Test 1 — An Nth Experience**
+**Version 2.79.12 Test 1 — Frame accuracy investigation**
 
 ## 🧪 Release History (Newest First)
 
@@ -300,3 +300,17 @@ Binary response API: https://developer.android.com/reference/androidx/webkit/Jav
 - Linear 0–2× scale, matching quarter-position labels, exact live readout and 0.01× minus/plus controls. The existing 1× pace remains 38 CSS pixels per second.
 - Fractional scroll targets survive rounded WebView offsets, so small speed changes accumulate proportionally. Manual scrolling and pause/resume rebase the target to avoid jumping back. Scroll, Manga and Webcomic use the same timing logic.
 - Deterministic scrolling checks cover 30/60/90/120 Hz, rounded offsets, speed changes, zero, bounds and pause/manual-scroll behavior. Browser checks exercise the visible controls and actual scroll distance. Phone testing remains necessary for Android rendering smoothness.
+
+
+## V2.79.12 Test 1 — Frame borders and geometry preservation
+
+Accuracy comes before speed in this series. Version 2.80.00 is reserved for verified whole-frame accuracy; automatic sequential frame focus at 0.15× scrolling is future work.
+
+- Close trailing gutters at page edges so right/bottom margins are not swallowed into the last baseline panel. The gutter thresholds are unchanged.
+- Preserve a valid, connected four-corner frame after an orthogonal classification instead of replacing it with its bounding rectangle. Unproven rectangular seeds retain their established behavior.
+- Compute frame angles in image proportions, not in a distorted unit square. Keep those dimensions when serializing panel maps, and invalidate older maps.
+- Regression checks distinguish geometry preservation from actual panel-boundary accuracy.
+
+**Known limitation discovered during visual review:** the supplied Wolverine #1000 image `1000-035.jpg` (reader page 36) contains overlapping/stepped visible regions. The historic six-tap test mistakenly treated two taps in the same large middle scene as different panels and missed the smaller sheriff close-up inset. Its stored quadrilaterals are not reliable ground truth. Preserving a detected polygon does not fix incorrectly detected boundaries. Historical parity/safety counts above must not be read as full-comic visual accuracy claims.
+
+The first test build repairs trailing-gutter cropping, geometry loss and classification; the overlapping-panel detector remains under investigation. No comic images are included in the repository or APK.

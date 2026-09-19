@@ -6,8 +6,8 @@
 // after which interaction is a smallest-containing-polygon lookup.
 
 const PanelMapCore = {
-  MAP_VERSION: 'panel-map-exp-1',
-  PROOF_VERSION: 'frame-proof-2.79.04',
+  MAP_VERSION: 'panel-map-exp-2',
+  PROOF_VERSION: 'frame-proof-2.79.12',
 
   // Two conservative columns cover the common left/right comic layout while
   // the three row anchors select the same stable adaptive seed families used
@@ -85,6 +85,8 @@ const PanelMapCore = {
       _geometryOwner:result._geometryOwner,
       _frameEnvelope:{
         chainConnected:true,
+        analysisWidth:this._finite(e.analysisWidth),
+        analysisHeight:this._finite(e.analysisHeight),
         confidence:this._finite(e.confidence),
         seedConsensus:this._finite(e.seedConsensus),
         seedSource:String(e.seedSource||''),
@@ -104,6 +106,7 @@ const PanelMapCore = {
         reason:String(ownership.reason||''),
         confidence:this._finite(ownership.confidence),
         trustedAxisDeparture:this._finite(ownership.trustedAxisDeparture),
+        angleSpace:String(ownership.angleSpace||''),
         relativeRailProof:ownership.relativeRailProof===true
       },
       _panelMapArea:this._area(result)

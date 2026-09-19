@@ -1,3 +1,5 @@
+// Historical output-parity check, NOT artwork-boundary ground truth.
+// See frame-accuracy/README.md for the page-36 overlap failures.
 'use strict';
 
 const {loadPage,api}=require('./harness');

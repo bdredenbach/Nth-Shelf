@@ -1,8 +1,8 @@
 // NTH SHELF V2.78.23 — PROVEN-FRAME OWNERSHIP CLASSIFIER
 //
 // Ownership is decided only after the rail-band envelope proves a complete
-// four-corner frame. Trusted tilted rails keep their quadrilateral; an
-// orthogonal classification renders the box around that same proven frame.
+// four-corner frame. Classification describes its physical rail angles;
+// both owners keep the proven quadrilateral for rendering.
 
 const PanelGeometrySkewed = {
   classify(imgUrl, panel, log) {
@@ -30,13 +30,22 @@ const PanelGeometrySkewed = {
   },
 
   // Classify the already-proven whole-frame quadrilateral. Ownership never
-  // moves a corner; it only decides whether the envelope keeps its four
-  // vertices or is rendered as the orthogonal box around those same rails.
+  // moves a corner. Page-normalized coordinates are not a physical angle
+  // space on a non-square page, so restore the analysis pixel aspect first.
   classifyQuad(panel, log) {
     const q=panel?._quad;
     if(!Array.isArray(q)||q.length!==4||q.some(p=>!Number.isFinite(p?.x)||!Number.isFinite(p?.y))){
       return {owns:false,owner:'orthogonal',reason:'missing-proven-quad',confidence:0};
     }
+    const frameEvidence=panel?._frameEnvelope||{};
+    const analysisWidth=Number(frameEvidence.analysisWidth);
+    const analysisHeight=Number(frameEvidence.analysisHeight);
+    const hasPixelAspect=Number.isFinite(analysisWidth)&&analysisWidth>1&&
+      Number.isFinite(analysisHeight)&&analysisHeight>1;
+    // Older callers without dimension evidence retain their diagnostic label;
+    // rendering no longer depends on this label erasing an accepted polygon.
+    const physicalQuad=hasPixelAspect
+      ?q.map(p=>({x:p.x*(analysisWidth-1),y:p.y*(analysisHeight-1)})):q;
     const angleAt=(prev,p,next)=>{
       const ax=prev.x-p.x,ay=prev.y-p.y,bx=next.x-p.x,by=next.y-p.y;
       const den=Math.hypot(ax,ay)*Math.hypot(bx,by);
@@ -49,11 +58,11 @@ const PanelGeometrySkewed = {
       return deg;
     };
     const diff180=(a,b)=>{const d=Math.abs(a-b);return Math.min(d,180-d);};
-    const angles=q.map((p,i)=>angleAt(q[(i+3)%4],p,q[(i+1)%4]));
+    const angles=physicalQuad.map((p,i)=>angleAt(physicalQuad[(i+3)%4],p,physicalQuad[(i+1)%4]));
     if(angles.some(a=>!Number.isFinite(a)))return {owns:false,owner:'orthogonal',reason:'invalid-angles',confidence:0};
     const deviations=angles.map(a=>Math.abs(a-90));
     const sortedDev=deviations.slice().sort((a,b)=>b-a);
-    const edgeAngles=q.map((p,i)=>orientation(p,q[(i+1)%4]));
+    const edgeAngles=physicalQuad.map((p,i)=>orientation(p,physicalQuad[(i+1)%4]));
     const axisDepartures=edgeAngles.map(a=>Math.min(a,Math.abs(a-90),180-a));
     const maxAxisDeparture=Math.max(...axisDepartures);
     const oppositeDivergence=Math.max(diff180(edgeAngles[0],edgeAngles[2]),diff180(edgeAngles[1],edgeAngles[3]));
@@ -64,7 +73,6 @@ const PanelGeometrySkewed = {
     // neighbor separation and printed-band integrity may prove skew ownership.
     const adjSides=panel?._frameEnvelope?.adjSides||[];
     const thicknessSides=panel?._frameEnvelope?.thicknessSides||[];
-    const frameEvidence=panel?._frameEnvelope||{};
     const relativeRailProof=(frameEvidence.seedConsensus||0)>=3&&
       (frameEvidence.relativeAdjScore||0)>=.82&&
       (frameEvidence.adjacencyScore||0)>=.23&&
@@ -88,7 +96,7 @@ const PanelGeometrySkewed = {
       reason:owns?'whole-frame-angle-proof':'orthogonal-angle-profile',confidence,
       angles,deviations,edgeAngles,axisDepartures,maxDev,secondDev,
       maxAxisDeparture,trustedAxisDeparture,oppositeDivergence,adjSides,thicknessSides,
-      relativeRailProof
+      relativeRailProof,angleSpace:hasPixelAspect?'analysis-pixels':'legacy-normalized'
     };
     if(log)log(`FRAME OWNERSHIP angles=${angles.map(a=>a.toFixed(1)).join('/')} dev=${deviations.map(a=>a.toFixed(1)).join('/')} axis=${axisDepartures.map(a=>a.toFixed(1)).join('/')} trusted=${trustedAxisDeparture.toFixed(1)} adj=${adjSides.map(a=>a.toFixed(2)).join('/')} opp=${oppositeDivergence.toFixed(1)}`);
     if(log)log(`FRAME OWNERSHIP -> ${owns?'SKEWED':'ORTHOGONAL'} confidence=${confidence.toFixed(2)} reason=${result.reason}`);

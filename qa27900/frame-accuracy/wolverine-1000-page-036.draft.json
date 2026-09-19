@@ -1,0 +1,200 @@
+{
+  "pageIndex": 35,
+  "humanPage": 36,
+  "imageDimensions": [
+    1988,
+    3056
+  ],
+  "status": "manual-review-draft",
+  "method": "Independent visual review of printed borders, normalized to page width and height. These are draft annotations, not historic detector outputs.",
+  "uncertainty": "Coordinates are approximate (roughly 0.005\u20130.008 normalized units) and require user/artwork review before serving as strict pixel-boundary ground truth. Borders are traced near ink-band centers. Top-left and middle-scene polygons describe visible portions with the foreground inset excluded; do not infer artwork hidden behind that inset.",
+  "frames": [
+    {
+      "id": "top-left",
+      "description": "Logan and sheriff conversation; lower-right corner occluded by sheriff close-up inset",
+      "tap": [
+        0.25,
+        0.15
+      ],
+      "visiblePolygon": [
+        [
+          0.031,
+          0.017
+        ],
+        [
+          0.497,
+          0.018
+        ],
+        [
+          0.497,
+          0.258
+        ],
+        [
+          0.418,
+          0.258
+        ],
+        [
+          0.418,
+          0.338
+        ],
+        [
+          0.031,
+          0.338
+        ]
+      ]
+    },
+    {
+      "id": "top-right",
+      "description": "Logan with his back turned, woods keeping secrets",
+      "tap": [
+        0.75,
+        0.14
+      ],
+      "visiblePolygon": [
+        [
+          0.507,
+          0.019
+        ],
+        [
+          0.974,
+          0.021
+        ],
+        [
+          0.974,
+          0.257
+        ],
+        [
+          0.507,
+          0.257
+        ]
+      ]
+    },
+    {
+      "id": "sheriff-inset",
+      "description": "Close-up of sheriff: There are things older than man, you're having dinner with us",
+      "tap": [
+        0.7,
+        0.33
+      ],
+      "visiblePolygon": [
+        [
+          0.418,
+          0.258
+        ],
+        [
+          0.958,
+          0.26
+        ],
+        [
+          0.958,
+          0.418
+        ],
+        [
+          0.413,
+          0.418
+        ]
+      ]
+    },
+    {
+      "id": "middle-scene",
+      "description": "Large scene from hallway on left through foreground Logan on right; no vertical panel divider between prior middle-left and middle-right canonical taps",
+      "tap": [
+        0.7,
+        0.55
+      ],
+      "sameOwnerTaps": [
+        [
+          0.2,
+          0.45
+        ],
+        [
+          0.7,
+          0.46
+        ],
+        [
+          0.78,
+          0.45
+        ]
+      ],
+      "visiblePolygon": [
+        [
+          0.032,
+          0.34
+        ],
+        [
+          0.413,
+          0.34
+        ],
+        [
+          0.413,
+          0.42
+        ],
+        [
+          0.963,
+          0.419
+        ],
+        [
+          0.965,
+          0.724
+        ],
+        [
+          0.036,
+          0.563
+        ]
+      ]
+    },
+    {
+      "id": "bottom-left",
+      "description": "Shower panel: Someone in my room",
+      "tap": [
+        0.14,
+        0.78
+      ],
+      "visiblePolygon": [
+        [
+          0.045,
+          0.566
+        ],
+        [
+          0.277,
+          0.603
+        ],
+        [
+          0.277,
+          0.987
+        ],
+        [
+          0.045,
+          0.987
+        ]
+      ]
+    },
+    {
+      "id": "bottom-right",
+      "description": "Logan and woman reading at desk: You mind?",
+      "tap": [
+        0.66,
+        0.83
+      ],
+      "visiblePolygon": [
+        [
+          0.284,
+          0.606
+        ],
+        [
+          0.963,
+          0.724
+        ],
+        [
+          0.962,
+          0.987
+        ],
+        [
+          0.284,
+          0.987
+        ]
+      ]
+    }
+  ],
+  "imageFile": "Wolverine (2010-2012) 1000-035.jpg"
+}

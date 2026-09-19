@@ -903,6 +903,28 @@ function dedupeBoundaryCandidates(list,posTol,maxKeep){
   }
   return out.sort((a,b)=>a.pos-b.pos);
 }
-function splitByGutter(arr,total,thresh,minGutterRun){const spans=[];let contentStart=0,inG=false,gStart=0;for(let i=0;i<=total;i++){const isG=i<total?arr[i]<thresh:true;if(isG){if(!inG){inG=true;gStart=i;}}else if(inG){const run=i-gStart;inG=false;if(run>=minGutterRun){if(gStart-contentStart>0)spans.push([contentStart,gStart]);contentStart=i;}}}if(total-contentStart>0)spans.push([contentStart,total]);return spans;}
+function splitByGutter(arr,total,thresh,minGutterRun){
+  const spans=[];
+  let contentStart=0,inG=false,gStart=0;
+  for(let i=0;i<total;i++){
+    if(arr[i]<thresh){
+      if(!inG){inG=true;gStart=i;}
+    }else if(inG){
+      const run=i-gStart;
+      inG=false;
+      if(run>=minGutterRun){
+        if(gStart>contentStart)spans.push([contentStart,gStart]);
+        contentStart=i;
+      }
+    }
+  }
+  // A trailing gutter has no following content sample to close its run.
+  // Apply the same minimum-run rule as an interior gutter instead of adding
+  // the quiet right/bottom page margin to the final panel. Short quiet runs
+  // remain content, and an entirely quiet profile has no content span.
+  const contentEnd=inG&&total-gStart>=minGutterRun?gStart:total;
+  if(contentEnd>contentStart)spans.push([contentStart,contentEnd]);
+  return spans;
+}
 function clamp01(v){return Math.min(1,Math.max(0,Number(v)||0));}
 window.PanelDetect=PanelDetect;
