@@ -19,7 +19,16 @@ function fixture(kind){
   for(let y=0;y<h;y++)for(let x=0;x<w;x++)pixel(x,y,55);
   for(let y=298;y<363;y++)for(let x=178;x<342;x++)pixel(x,y,15);
   for(let y=301;y<360;y++)for(let x=181;x<339;x++)pixel(x,y,250);
-  if(kind==='text'||kind==='thin'){
+  if(kind==='ragged-art'||kind==='ragged-text'){
+    // A wide light region with deep contour notches. Two isolated fence-like marks
+    // are not a caption; a substantial row of lettering remains selectable.
+    for(let y=301;y<360;y++)for(let x=181;x<339;x++)
+      pixel(x,y,(y>=323&&y<345)||x<189||x>=331?250:180);
+    const rows=['10001','10001','10101','10101','10101','10101','11111'];
+    const count=kind==='ragged-art'?2:10;
+    for(let n=0;n<count;n++)for(let y=0;y<7;y++)for(let x=0;x<5;x++)
+      if(rows[y][x]==='1')pixel((count===2?240:190)+n*13+x,330+y,10);
+  }else if(kind==='text'||kind==='thin'){
     const letters=['10001','10001','10101','10101','10101','10101','11111'];
     for(let row=0;row<2;row++)for(let char=0;char<10;char++){
       for(let y=0;y<7;y++)for(let x=0;x<5;x++)if(letters[y][x]==='1'){
@@ -63,7 +72,9 @@ async function check(f,tap,expected,label){
   await check(fixture('empty'),[.4,.34],false,'empty light patch');
   await check(fixture('speed-lines'),[.4,.34],false,'boundary-connected speed lines');
   await check(fixture('speckles'),[.4,.34],false,'unstructured enclosed art marks');
-  console.log('Bubble proof: 6 independent synthetic cases passed through detect + extract.');
+  await check(fixture('ragged-art'),[.4,.36],false,'sparse fence-like marks in ragged light artwork');
+  await check(fixture('ragged-text'),[.4,.36],true,'substantial text row in a ragged balloon');
+  console.log('Bubble proof: 8 independent synthetic cases passed through detect + extract.');
   const flag=process.argv.indexOf('--comic');
   if(flag<0)return;
   const root=process.argv[flag+1]||path.resolve(__dirname,'../../comic-wolverine-1000');
@@ -120,6 +131,9 @@ async function check(f,tap,expected,label){
   // The reviewed changed crops are faces, clothing, teeth and open sky, not
   // speech. Keep the stronger proof from drifting back into those regions.
   const artNegatives=[
+    // Broad plane artwork mixed with a sound effect is not an isolated caption.
+    {page:12,tap:[.5160839160839161,.6596906278434941]},
+    ...[[.7,.32],[.8,.32],[.7,.36],[.8,.36]].map(tap=>({page:11,tap})),
     {"page":12,"tap":[0.5174825174825175,0.7206551410373067]},
     {"page":12,"tap":[0.9482517482517483,0.924476797088262]},
     {"page":51,"tap":[0.2811188811188811,0.4212920837124659]},

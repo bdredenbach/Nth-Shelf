@@ -106,7 +106,35 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.16 Test 1 — Whole frames and double pop-outs**
+**Version 2.79.17 Test 1 — Separate bottom frames and snow rejection**
+
+Page 12's bottom-left Wolverine/airplanes and bottom-right searchlights now
+have separate whole-frame owners. Five page-12 frames pass 25 moved-tap Reader
+checks. All 130 established Reader controls remain passing; the 74-page identity
+comparison changes only page 12. Gray/colored exterior gutters propose complete
+ink-bounded frames while preserving existing identities and divider/inset vetoes.
+
+Page 11's snow/fence artwork is rejected as speech. Real caption controls,
+including short two-letter speech, retain their previous selections. Eight
+synthetic bubble cases and the wider local artwork replay cover this change.
+
+**Phone priorities:** repeat page 12's bottom pair and middle strip from five
+positions, then verify page 11 snow produces no second pop-out while real captions
+still work. One local resampling setting leaves the middle strip on its existing
+fallback; Android rendering is not certified by these local tests.
+
+**Still open:** page 7's red bomber strip, the upper composites on pages 9–11,
+and page 6's remaining two unproved identities. Overlapping/borderless artwork
+needs further ownership work. This release advances two targets; it does not
+complete the accuracy queue or move to 2.80.00.
+
+See [2.79.17 results](qa27900/frame-accuracy/queue-results-27917.md) and the
+[work queue](qa27900/frame-accuracy/work-queue.md). Comic pages, videos and
+source-artwork crops remain excluded from the repository and APK.
+
+## 🧪 Release History (Newest First)
+
+## V2.79.16 Test 1 — Whole frames and double pop-outs
 
 This accuracy test starts the queue from recording `179289.mp4`. The previously phone-confirmed page-5/page-13 fixes remain controls alongside pages 9 and 16.
 
@@ -122,8 +150,6 @@ Local tests pass **130 Reader handler probes**: 80 established controls on pages
 The older fallback can still crop incorrectly in unresolved areas. Page 6's remaining two frames, other queued pages and stepped/overlapping shapes stay open. Accuracy comes before speed tuning or automatic sequential pop-outs; this is not 2.80.00.
 
 See [queue results](qa27900/frame-accuracy/queue-results-27916.md) for changes, commands and evidence limits, and the [work queue](qa27900/frame-accuracy/work-queue.md) for remaining targets. Comic pages and recordings are excluded from the repository and APK.
-
-## 🧪 Release History (Newest First)
 
 ## V2.79.15 Test 1 — Connected panels and shared borders
 

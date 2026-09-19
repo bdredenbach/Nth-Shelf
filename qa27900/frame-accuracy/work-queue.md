@@ -1,10 +1,9 @@
 # Frame accuracy work queue
 
-Updated after **2.79.16 Test 1** phone recording `179317.mp4`. Current runtime:
-`f19244660cc9d05b130ee0dfa4d1e59cc4700f39`, branch `Test_Branch`.
-See [new phone findings](video-findings-27916.md) and the
-[local implementation results](queue-results-27916.md). Prior targets came
-from `179289.mp4` on 2.79.15; their timestamps below refer to that older video.
+Updated for **2.79.17 Test 1**, following phone recording `179317.mp4`.
+Branch: `Test_Branch`. See [current local results](queue-results-27917.md),
+[phone findings](video-findings-27916.md), and [prior results](queue-results-27916.md).
+Prior targets came from `179289.mp4`; their timestamps below refer to that video.
 
 Accuracy comes first. Keep the 2.79.xxx version series until the full frame goal
 is met; reserve 2.80.00. Performance tuning and automatic sequential pop-outs at
@@ -14,17 +13,17 @@ is met; reserve 2.80.00. Performance tuning and automatic sequential pop-outs at
 
 | ID | Page | Next target |
 | --- | --- | --- |
-| FQ-06 | 12 | Repeated bottom-pair merge; retain right-only and middle-strip successes. |
+| FQ-06 | 12 | Local fix: five frames and 25 stable Reader taps; bottom pair separate. Phone sweep pending; middle fallback remains at one resampling setting. |
 | FQ-07 | 7 | Red bomber strip crops differently across selections. |
 | FQ-08 | 9 | Upper three frames merge; preserve confirmed lower-right pair. |
 | FQ-09 | 10 | Upper motorcycle/inset group merges; respect overlapping borders. |
 | FQ-10 | 11 | Top forest strip and middle pair merge into one selection. |
-| FQ-11 | 11 | Snow/fence artwork passes bubble text evidence and pops out. |
+| FQ-11 | 11 | Local fix: four snow/fence taps reject through both bubble APIs; caption controls pass. Phone confirmation pending. |
 
-Start with FQ-06, then FQ-07 and the upper groups. FQ-11 is a separate
-caption-detection track with a locally reproduced non-text false positive.
-Acceptance checks and timestamps are in [the findings](video-findings-27916.md).
-This update records findings only; runtime and APK remain 2.79.16 Test 1.
+FQ-06/FQ-11 now have bounded local fixes in 2.79.17. Next detector work is
+FQ-07 and the upper groups. Page 10 needs overlapping-frame ownership; page 11
+has a borderless portrait. Acceptance checks and timestamps remain in
+[the findings](video-findings-27916.md). Local success is not phone confirmation.
 
 The new video shows page 3’s five whole strips and page 6’s two wider bottom
 frames opening separately. Page 6’s top-right and bottom-left also open in

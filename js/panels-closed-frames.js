@@ -112,7 +112,7 @@ const PanelClosedFrames = (() => {
     const weakH=lines(g,w,h,false,.05),weakV=lines(g,w,h,true,.05);
     const inside=(q,p)=>q[0]>=p[0]-3&&q[1]>=p[1]-3&&q[2]<=p[2]+3&&q[3]<=p[3]+3&&(q[2]-q[0])*(q[3]-q[1])<.85*(p[2]-p[0])*(p[3]-p[1]);
     function metric(vertical,pos,lo,hi){const m=Math.max(2,Math.floor((hi-lo)*.02));return [cover(vertical,pos,lo+m,hi-m),ridge(vertical,pos,lo,hi)];}
-    function removeAmbiguous(candidates){
+    function removeAmbiguous(candidates,attachedInsets=false){
     const threats=[];
     for(const vertical of [false,true]){const ls=vertical?weakV:weakH,along=vertical?h:w,cross=vertical?w:h;
       for(let j=0;j<ls.length;j++)for(let k=j+1;k<ls.length;k++){const a=ls[j],b=ls[k];if(b[0]-a[0]<cross*.06||Math.abs(a[1]-b[1])>10||Math.abs(a[2]-b[2])>10)continue;
@@ -120,7 +120,12 @@ const PanelClosedFrames = (() => {
         const rough=vertical?[a[0],lo,b[0],hi]:[lo,a[0],hi,b[0]];if(!candidates.some(p=>inside(rough,p.box)))continue;
         const metrics=[metric(vertical,a[0],lo,hi),metric(vertical,b[0],lo,hi)],ends=[];
         for(const guess of [lo,hi-1]){let best=null,quality=-1,where=guess;for(let q=guess-4;q<=guess+4;q++){if(q<8||q+9>=(vertical?h:w))continue;const met=metric(!vertical,q,a[0],b[0]),score=Math.min(...met)+.05*(met[0]+met[1]);if(score>quality){quality=score;best=met;where=q;}}metrics.push(best||[0,0]);ends.push(where);}
-        const cov=metrics.map(m=>m[0]).sort((a,b)=>a-b);if(cov[0]<.6||cov[1]<.96||Math.min(...metrics.map(m=>m[1]))<.4)continue;
+        const cov=metrics.map(m=>m[0]).sort((a,b)=>a-b);if(cov[0]<.6||cov[1]<.96)continue;
+        // Exterior gutters can reveal a parent whose inset has dark artwork
+        // attached to one border. Three separating ridges and a complete dark
+        // fourth side are sufficient to veto that parent, never to create it.
+        if(Math.min(...metrics.map(m=>m[1]))<.4&&
+           !(attachedInsets&&cov[0]>=.96&&metrics.filter(m=>m[1]>=.4).length>=3))continue;
         threats.push(vertical?[a[0],ends[0],b[0],ends[1]]:[ends[0],a[0],ends[1],b[0]]);
       }
     }
@@ -164,9 +169,39 @@ const PanelClosedFrames = (() => {
         extra.push(candidate);
       }
     }
-    const result=[...strict,...extra];
-    if(log)log(`closed frames: ${strict.length} strict, ${extra.length} shared-boundary candidates`);
+    // New gutter proposals cannot alter an existing identity. They must pass
+    // the same interior/inset vetoes as dark-frame candidates, and may only
+    // append a disjoint, fully ink-bounded frame. Three externally connected
+    // gutter sides allow dark artwork to touch the fourth printed border.
+    const gutter=[];
+    if(typeof PanelGutterFrames!=='undefined'){
+      const proposals=PanelGutterFrames.proposeRGBA(rgba,w,h).map(c=>({
+        box:[Math.min(...c.q.map(p=>p[0])),Math.min(...c.q.map(p=>p[1])),
+             Math.max(...c.q.map(p=>p[0])),Math.max(...c.q.map(p=>p[1]))].map(Math.round),
+        quad:c.q.map(p=>({x:p[0]/w,y:p[1]/h})),scores:c.ms.map(m=>m[0]),
+        ridges:c.ms.map(m=>m[1]),fits:c.fits.map(f=>({slope:f.m,offset:f.b})),
+        gutterProof:{method:'exterior-gutter',color:c.color,exteriorSupport:c.ms.map(m=>m[1])}
+      }));
+      for(const candidate of removeAmbiguous(proposals,true)){
+        const [x1,y1,x2,y2]=candidate.box;
+        if(hs.some(v=>v[0]>y1+10&&v[0]<y2-10&&v[1]<=x1+5&&v[2]>=x2-5&&cover(false,v[0],x1,x2)>.90&&ridge(false,v[0],x1,x2)>.05)||
+           vs.some(v=>v[0]>x1+10&&v[0]<x2-10&&v[1]<=y1+5&&v[2]>=y2-5&&cover(true,v[0],y1,y2)>.90&&ridge(true,v[0],y1,y2)>.05)||slopedDivider(candidate.box))continue;
+        // Each corner and its two short rail runs must be ink-connected.
+        const near=(x,y)=>{x=Math.round(x);y=Math.round(y);for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(x+dx>=0&&x+dx<w&&y+dy>=0&&y+dy<h&&g[(y+dy)*w+x+dx]<70)return true;return false;};
+        const q=candidate.quad.map(p=>[p.x*w,p.y*h]);let joined=true;
+        for(let i=0;i<4&&joined;i++)for(const j of [(i+1)%4,(i+3)%4]){
+          const a=q[i],b=q[j],length=Math.hypot(b[0]-a[0],b[1]-a[1]);let n=0;
+          for(let t=0;t<9;t++)n+=near(a[0]+(b[0]-a[0])*t/length,a[1]+(b[1]-a[1])*t/length);
+          if(n<8||!near(...a)){joined=false;break;}
+        }
+        if(!joined||[...strict,...extra,...gutter].some(other=>overlapArea(candidate.quad,other.quad)>1/(w*h)))continue;
+        gutter.push(candidate);
+      }
+    }
+    const result=[...strict,...extra,...gutter];
+    if(log)log(`closed frames: ${strict.length} strict, ${extra.length} shared-boundary, ${gutter.length} exterior-gutter candidates`);
     return result.map(c=>{const xs=c.quad.map(p=>p.x),ys=c.quad.map(p=>p.y),proof={version:1,connected:true,analysisWidth:w,analysisHeight:h,coverage:c.scores,ridge:c.ridges,railFits:c.fits};
+      if(c.gutterProof)proof.gutterProof=c.gutterProof;
       if(c.shared)proof.sharedTopProof={method:'neighbor-completion',neighborQuad:c.shared.neighborQuad,rail:c.shared.rail};
       return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:c.quad,_identitySource:'closed-frame',_geometryOwner:'orthogonal-frame',_geometryType:'closed-dark-frame',_closedFrameProof:proof};});
   }
