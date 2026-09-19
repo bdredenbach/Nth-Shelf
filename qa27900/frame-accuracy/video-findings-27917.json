@@ -1,0 +1,313 @@
+{
+  "recording": "179345.mp4",
+  "sha256": "f4e678effa2e782614693676e0704c1124c7aed86d07a39c2e47589588c6d8ed",
+  "duration_seconds": 227.206289,
+  "resolution": [
+    1080,
+    2424
+  ],
+  "audio": false,
+  "runtime_inferred": "2.79.17-test1",
+  "runtime_commit": "0f661037a503d9c5e0b3c985374f7729925bd93a",
+  "page_numbering": "one-based including cover",
+  "review_method": "2-second overview; 0.2-second page12 and page9 detail; 0.5-second page8/11/13/16/17 detail; source-artwork comparisons",
+  "limits": [
+    "No version screen; version inferred from delivery/feedback sequence.",
+    "Successful individual openings do not prove five-position coverage.",
+    "No exact gesture counts or latency claims.",
+    "New examples do not establish new regressions.",
+    "No runtime/APK change in this findings update."
+  ],
+  "items": [
+    {
+      "id": "FQ-06",
+      "page": 12,
+      "status": "phone sequence successful; five-position sweep pending",
+      "seconds": [
+        120.4,
+        122.6,
+        124.8,
+        126.8,
+        129.2
+      ],
+      "observation": "All five panels open separately; no bottom-pair union in this sequence."
+    },
+    {
+      "id": "FQ-07",
+      "page": 7,
+      "status": "open",
+      "seconds": [
+        28,
+        30,
+        40
+      ],
+      "observation": "Bomber/left and red right/narration crops remain inside one full-width printed strip."
+    },
+    {
+      "id": "FQ-08",
+      "page": 9,
+      "status": "open",
+      "seconds": [
+        64,
+        66
+      ],
+      "observation": "Three upper frames still merge."
+    },
+    {
+      "id": "FQ-09",
+      "page": 10,
+      "status": "open",
+      "seconds": [
+        92
+      ],
+      "observation": "Upper motorcycle and two right frames still merge."
+    },
+    {
+      "id": "FQ-10",
+      "page": 11,
+      "status": "open",
+      "seconds": [
+        108,
+        110.5
+      ],
+      "observation": "Top forest plus portrait/fortifications still merge; lower strips open separately."
+    },
+    {
+      "id": "FQ-11",
+      "page": 11,
+      "status": "local fix; phone confirmation pending",
+      "seconds": [],
+      "observation": "Earlier snow cutout is not visible, but the recording does not establish a deliberate repeat of its triggering request."
+    },
+    {
+      "id": "FQ-12",
+      "page": 9,
+      "status": "new; reproduced locally",
+      "seconds": [
+        87.8,
+        88.6
+      ],
+      "observation": "Non-text horizontal snow patch becomes a masked bubble after correct frame opening.",
+      "acceptance": "Reject artwork through both APIs and enlarged-frame gesture, retaining genuine caption and whole-frame selection."
+    },
+    {
+      "id": "FQ-13",
+      "page": 13,
+      "status": "new; reproduced with Skia resampling",
+      "seconds": [
+        136,
+        136.5
+      ],
+      "observation": "Pale artwork fragment next to Wolverine becomes a non-text cutout.",
+      "acceptance": "Reject at browser-like resampling; preserve real captions and intentional action-frame/SFX artwork."
+    },
+    {
+      "id": "FQ-14",
+      "page": 17,
+      "status": "new",
+      "seconds": [
+        220.5,
+        221.5,
+        223.5,
+        224.5
+      ],
+      "observation": "SNIKT column merges with portions of the two adjacent lower frames; right artwork truncated.",
+      "acceptance": "Three distinct complete frames at five interior positions; preserve top confrontation and knife-silhouette successes."
+    }
+  ],
+  "local_bubble_reproduction": [
+    {
+      "renderer": "sharp",
+      "page": 9,
+      "tap": [
+        0.8500000000000002,
+        0.805
+      ],
+      "detected": {
+        "x": 0.7388268156424581,
+        "y": 0.8109090909090909,
+        "w": 0.23324022346368714,
+        "h": 0.03727272727272727,
+        "threshold": 225
+      },
+      "extracted": {
+        "x": 0.7388268156424581,
+        "y": 0.8109090909090909,
+        "w": 0.23324022346368714,
+        "h": 0.03727272727272727,
+        "threshold": 225
+      },
+      "logs": [
+        "hit-test: tap=(608,885) lum=95 image=716x1100",
+        "try threshold=235: no bright seed within 14px",
+        "try threshold=225: nearest bright seed=(622,899) lum=226",
+        "bubble: accepted threshold=225 area=2171px bbox=(544,899)-(680,925) fill=0.59 boundary=0.49",
+        "bubble: extracted masked overlay 167x41 threshold=225"
+      ]
+    },
+    {
+      "renderer": "sharp",
+      "page": 9,
+      "tap": [
+        0.9250000000000003,
+        0.805
+      ],
+      "detected": {
+        "x": 0.7388268156424581,
+        "y": 0.8109090909090909,
+        "w": 0.23324022346368714,
+        "h": 0.04727272727272727,
+        "threshold": 215
+      },
+      "extracted": {
+        "x": 0.7388268156424581,
+        "y": 0.8109090909090909,
+        "w": 0.23324022346368714,
+        "h": 0.04727272727272727,
+        "threshold": 215
+      },
+      "logs": [
+        "hit-test: tap=(661,885) lum=65 image=716x1100",
+        "try threshold=235: no bright seed within 14px",
+        "try threshold=225: no bright seed within 14px",
+        "try threshold=215: nearest bright seed=(647,899) lum=221",
+        "bubble: accepted threshold=215 area=2905px bbox=(544,899)-(680,936) fill=0.56 boundary=0.54",
+        "bubble: extracted masked overlay 167x52 threshold=215"
+      ]
+    },
+    {
+      "renderer": "skia-low",
+      "page": 9,
+      "tap": [
+        0.8500000000000002,
+        0.805
+      ],
+      "detected": {
+        "x": 0.7388268156424581,
+        "y": 0.8109090909090909,
+        "w": 0.2346368715083799,
+        "h": 0.046363636363636364,
+        "threshold": 215
+      },
+      "extracted": {
+        "x": 0.7388268156424581,
+        "y": 0.8109090909090909,
+        "w": 0.2346368715083799,
+        "h": 0.046363636363636364,
+        "threshold": 215
+      },
+      "logs": [
+        "hit-test: tap=(608,885) lum=121 image=716x1100",
+        "try threshold=235: no bright seed within 14px",
+        "try threshold=225: no bright seed within 14px",
+        "try threshold=215: nearest bright seed=(622,899) lum=221",
+        "bubble: accepted threshold=215 area=3071px bbox=(544,899)-(681,935) fill=0.60 boundary=0.65",
+        "bubble: extracted masked overlay 168x51 threshold=215"
+      ]
+    },
+    {
+      "renderer": "skia-low",
+      "page": 9,
+      "tap": [
+        0.8750000000000002,
+        0.805
+      ],
+      "detected": {
+        "x": 0.7388268156424581,
+        "y": 0.8109090909090909,
+        "w": 0.2346368715083799,
+        "h": 0.038181818181818185,
+        "threshold": 225
+      },
+      "extracted": {
+        "x": 0.7388268156424581,
+        "y": 0.8109090909090909,
+        "w": 0.2346368715083799,
+        "h": 0.038181818181818185,
+        "threshold": 225
+      },
+      "logs": [
+        "hit-test: tap=(626,885) lum=132 image=716x1100",
+        "try threshold=235: nearest bright seed=(627,899) lum=236",
+        "try threshold=235: rejected, region too small (1px < 630px)",
+        "try threshold=225: nearest bright seed=(623,899) lum=231",
+        "bubble: accepted threshold=225 area=2341px bbox=(544,899)-(681,926) fill=0.61 boundary=0.63",
+        "bubble: extracted masked overlay 168x42 threshold=225"
+      ]
+    },
+    {
+      "renderer": "skia-low",
+      "page": 13,
+      "tap": [
+        0.7500000000000002,
+        0.41000000000000003
+      ],
+      "detected": {
+        "x": 0.7094972067039106,
+        "y": 0.38181818181818183,
+        "w": 0.12569832402234637,
+        "h": 0.13363636363636364,
+        "threshold": 215
+      },
+      "extracted": {
+        "x": 0.7094972067039106,
+        "y": 0.38181818181818183,
+        "w": 0.12569832402234637,
+        "h": 0.13363636363636364,
+        "threshold": 215
+      },
+      "logs": [
+        "hit-test: tap=(536,451) lum=222 image=716x1100",
+        "try threshold=235: nearest bright seed=(547,463) lum=236",
+        "try threshold=235: rejected, region too small (496px < 630px)",
+        "try threshold=225: nearest bright seed=(539,454) lum=226",
+        "try threshold=225: rejected, no enclosed text line",
+        "try threshold=215: nearest bright seed=(539,454) lum=226",
+        "bubble: accepted threshold=215 area=4053px bbox=(518,434)-(587,552) fill=0.49 boundary=0.50",
+        "bubble: extracted masked overlay 90x147 threshold=215"
+      ]
+    }
+  ],
+  "preserved_controls": [
+    {
+      "page": 8,
+      "seconds": [
+        49,
+        51.5,
+        54,
+        57,
+        59.5
+      ],
+      "description": "Five separate panels"
+    },
+    {
+      "page": 9,
+      "seconds": [
+        84,
+        86.6
+      ],
+      "description": "Established lower-right pair"
+    },
+    {
+      "page": 13,
+      "seconds": [
+        133,
+        135,
+        139,
+        141.5
+      ],
+      "description": "Airplane, both right action frames and complete star/bombs strip"
+    },
+    {
+      "page": 16,
+      "seconds": [
+        171,
+        173.5,
+        175.5,
+        177.5,
+        180
+      ],
+      "description": "Five separate whole strips"
+    }
+  ]
+}

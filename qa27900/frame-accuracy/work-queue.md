@@ -1,19 +1,40 @@
 # Frame accuracy work queue
 
-Updated for **2.79.17 Test 1**, following phone recording `179317.mp4`.
-Branch: `Test_Branch`. See [current local results](queue-results-27917.md),
-[phone findings](video-findings-27916.md), and [prior results](queue-results-27916.md).
-Prior targets came from `179289.mp4`; their timestamps below refer to that video.
+Updated after **2.79.17 Test 1** phone recording `179345.mp4`.
+Runtime commit: `0f661037a503d9c5e0b3c985374f7729925bd93a`, branch `Test_Branch`.
+See [new phone findings](video-findings-27917.md),
+[current local results](queue-results-27917.md), and
+[previous phone findings](video-findings-27916.md).
+Original targets came from `179289.mp4`; their timestamps below refer to that video.
 
 Accuracy comes first. Keep the 2.79.xxx version series until the full frame goal
 is met; reserve 2.80.00. Performance tuning and automatic sequential pop-outs at
 0.15x remain later work.
 
+## Latest phone findings: 179345.mp4
+
+**Preserve page 12's new result:** all five frames open separately around
+120–130 seconds, including the middle strip and both bottom panels. FQ-06 now
+has positive phone evidence; a full five-position device sweep remains pending.
+Page 8's five panels, page 9's lower-right pair, page 13's established frames,
+and page 16's five strips also have successful individual openings.
+
+| ID | Page | New target |
+| --- | --- | --- |
+| FQ-12 | 9 | Snow in the lower-right frame becomes a non-text bubble at 87.8–88.8s. Locally reproduced through detect/extract. |
+| FQ-13 | 13 | Pale artwork beside Wolverine becomes a non-text cutout at 136–136.5s. Reproduced with browser-like Skia resampling; Sharp alone missed it. |
+| FQ-14 | 17 | Tall SNIKT column merges with portions of both neighboring lower panels at 220.5–221.5s and 223.5–224.5s. |
+
+FQ-07/08/09/10 remain visible. FQ-11's specific page-11 snow request is not
+clearly repeated, so its phone confirmation stays pending. Keep first-level
+frame ownership and second-level caption selection as distinct test tracks.
+This is a findings-only update; runtime/APK remain 2.79.17 Test 1.
+
 ## New phone targets from 179317.mp4
 
 | ID | Page | Next target |
 | --- | --- | --- |
-| FQ-06 | 12 | Local fix: five frames and 25 stable Reader taps; bottom pair separate. Phone sweep pending; middle fallback remains at one resampling setting. |
+| FQ-06 | 12 | Local fix plus successful five-frame phone sequence in 179345; five-position device sweep pending. Middle fallback remains at one local resampling setting. |
 | FQ-07 | 7 | Red bomber strip crops differently across selections. |
 | FQ-08 | 9 | Upper three frames merge; preserve confirmed lower-right pair. |
 | FQ-09 | 10 | Upper motorcycle/inset group merges; respect overlapping borders. |
