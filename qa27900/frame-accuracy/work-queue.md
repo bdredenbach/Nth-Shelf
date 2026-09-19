@@ -1,14 +1,35 @@
 # Frame accuracy work queue
 
-Updated for **2.79.16 Test 1**, using the user's 2.79.15 feedback and recording
-`179289.mp4`. Prior runtime baseline:
-`a2d85bcf2aed3be1f6bf3642ff050036cd9beb26`, branch `Test_Branch`.
-Local implementation results are below; the new build still needs phone review.
-See [queue-results-27916.md](queue-results-27916.md) for test evidence and limits.
+Updated after **2.79.16 Test 1** phone recording `179317.mp4`. Current runtime:
+`f19244660cc9d05b130ee0dfa4d1e59cc4700f39`, branch `Test_Branch`.
+See [new phone findings](video-findings-27916.md) and the
+[local implementation results](queue-results-27916.md). Prior targets came
+from `179289.mp4` on 2.79.15; their timestamps below refer to that older video.
 
 Accuracy comes first. Keep the 2.79.xxx version series until the full frame goal
 is met; reserve 2.80.00. Performance tuning and automatic sequential pop-outs at
 0.15x remain later work.
+
+## New phone targets from 179317.mp4
+
+| ID | Page | Next target |
+| --- | --- | --- |
+| FQ-06 | 12 | Repeated bottom-pair merge; retain right-only and middle-strip successes. |
+| FQ-07 | 7 | Red bomber strip crops differently across selections. |
+| FQ-08 | 9 | Upper three frames merge; preserve confirmed lower-right pair. |
+| FQ-09 | 10 | Upper motorcycle/inset group merges; respect overlapping borders. |
+| FQ-10 | 11 | Top forest strip and middle pair merge into one selection. |
+| FQ-11 | 11 | Snow/fence artwork passes bubble text evidence and pops out. |
+
+Start with FQ-06, then FQ-07 and the upper groups. FQ-11 is a separate
+caption-detection track with a locally reproduced non-text false positive.
+Acceptance checks and timestamps are in [the findings](video-findings-27916.md).
+This update records findings only; runtime and APK remain 2.79.16 Test 1.
+
+The new video shows page 3’s five whole strips and page 6’s two wider bottom
+frames opening separately. Page 6’s top-right and bottom-left also open in
+individual examples, but FQ-05 still needs reliable multi-position proof.
+No whole-page or caption test is marked complete from an isolated success.
 
 ## Confirmed controls to preserve
 
@@ -26,8 +47,8 @@ remain in `phone-findings-27914.json`; do not replace them with detector output.
 
 | ID | Local result | Remaining check or work |
 | --- | --- | --- |
-| FQ-01 | Bottom-middle/right have distinct whole-frame owners at all five probe positions. The previous bottom-middle identity and evidence are exact. | Phone confirmation of separate, consecutive pop-outs. |
-| FQ-02 | All five page-3 strips pass five positions each; the pilot keeps its narration and left artwork. | Phone confirmation of stable whole-strip crops. |
+| FQ-01 | Bottom-middle/right have distinct whole-frame owners at all five probe positions. The previous bottom-middle identity and evidence are exact. | 179317 shows separate openings around 01:03 and 01:05–01:06; repeat at all five positions. |
+| FQ-02 | All five page-3 strips pass five positions each; the pilot keeps its narration and left artwork. | 179317 shows all five whole strips; complete moved-tap phone sweep remains. |
 | FQ-03 | Page-4 caption detection and Reader crop mapping/open-close checks pass. Pending-result cancellation and resize handling are covered. | Exercise the actual caption gesture and animation on the phone; the source video did not establish a failure. |
 | FQ-04 | Page-5 sky/propeller requests reject at three positions; all five page-5 captions and 17 wider-corpus caption controls pass. | Phone confirmation that the sky does not become a second pop-out and the genuine caption still does. |
 | FQ-05 | Five of seven page-6 frames have proved identities: top-left, middle-left/right, bottom-middle/right. | **Top-right gun/boot and narrow bottom-left pilot face remain unresolved.** They are the next detector targets. |
@@ -47,7 +68,8 @@ This does not certify the legacy per-tap fallback or every double-pop-out region
 | FQ-04 | Page 5: reject non-text artwork during second-level selection | The correct middle-left propeller frame appears at 02:45.5–02:45.9, followed at 02:46.1–02:46.7 by a stable irregular sky/propeller patch containing no caption. | A bubble/caption request must not promote a patch of sky to a text bubble. Check both hit mapping and the bubble detector; retain the confirmed whole-frame identity. |
 | FQ-05 | Page 6: complete coverage of all seven panels | Source artwork contains two upper, two middle and three lower panels. Other attempts appear in 02:57–03:09, but absence of a popup in sparse samples is not sufficient to certify individual misses. | Label all seven frames independently and test each at five interior positions. Log any misses or merges precisely; do not claim all seven are broken from this recording. |
 
-FQ-01 was the first detector target; FQ-05's two unresolved frames are next.
+FQ-01 was the first detector target. The new phone-target section above now
+sets the next priorities; FQ-05's remaining proof gaps stay open.
 FQ-03/FQ-04 are a separate interaction track:
 the intended second pop-out is a bubble or caption selected from an already
 opened frame. It must not be confused with two neighboring comic panels being

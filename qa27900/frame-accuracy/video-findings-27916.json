@@ -1,0 +1,194 @@
+{
+  "recording": "179317.mp4",
+  "sha256": "8e4519ddf4424c1ee7d5604f71b353b5931d7dc7bb13071baa44c9a6003e4ec6",
+  "duration_seconds": 184.376022,
+  "resolution": [
+    1080,
+    2424
+  ],
+  "runtime_inferred": "2.79.16-test1",
+  "runtime_commit": "f19244660cc9d05b130ee0dfa4d1e59cc4700f39",
+  "page_numbering": "one-based reader pages, including cover",
+  "review_method": "Entire recording sampled at 1 fps; source pages compared visually; page-12 165\u2013169s reviewed at 5 fps. Times are approximate samples, not measured tap latency.",
+  "limits": [
+    "No version screen is visible; version is inferred from the delivery/feedback sequence.",
+    "Do not infer tap count, exact source coordinate or missed response from sparse samples.",
+    "Successful individual openings are not five-position certification.",
+    "No new runtime fixes or APK are claimed by this findings update."
+  ],
+  "items": [
+    {
+      "id": "FQ-06",
+      "page": 12,
+      "target": "Separate bottom-left Wolverine/planes and bottom-right searchlight panels",
+      "seconds": [
+        167.6,
+        168.4,
+        172,
+        181
+      ],
+      "observation": "Repeated overlays include both bottom panels and the divider. The right searchlight panel opens alone around 178 seconds. The middle strip opens separately at 165.6\u2013166.2 seconds.",
+      "acceptance": "Distinct whole-frame owners at five interior positions per bottom panel; repeat open/close on both without clearing cache; preserve middle strip and other successful page-12 frames."
+    },
+    {
+      "id": "FQ-07",
+      "page": 7,
+      "target": "Complete red bomber/action strip above the bottom Wolverine panel",
+      "seconds": [
+        79,
+        82
+      ],
+      "observation": "A crop emphasizes the bomber/left portion; another isolates the red right side and its caption. Neither should define a new panel inside the continuous printed strip.",
+      "acceptance": "Same whole strip at center/left/right/north/south, including bomber, action lettering and right narration; separately verify genuine caption selection."
+    },
+    {
+      "id": "FQ-08",
+      "page": 9,
+      "target": "Three upper panels",
+      "seconds": [
+        111,
+        114,
+        116
+      ],
+      "observation": "Upper-left seated Wolverine and the two upper-right frames are returned together.",
+      "acceptance": "Three separate printed frames; preserve the established lower-right pair and all successful lower panels."
+    },
+    {
+      "id": "FQ-09",
+      "page": 10,
+      "target": "Upper motorcycle and two right-hand inset/overlapping frames",
+      "seconds": [
+        135,
+        137,
+        139
+      ],
+      "observation": "The upper group opens as one rectangle, including both right-hand images. Source artwork has staggered, overlapping frame borders; a simple shared-rail partition is not sufficient evidence.",
+      "acceptance": "Each visible printed frame retains its actual border and stacking relationship; reject the three-frame composite; preserve lower road and headlight strips."
+    },
+    {
+      "id": "FQ-10",
+      "page": 11,
+      "target": "Top forest strip and middle portrait/fortification panels",
+      "seconds": [
+        148,
+        150
+      ],
+      "observation": "The pop-out includes the top strip plus both middle panels.",
+      "acceptance": "Three separate frame owners with no cross-gutter merge; preserve the two lower strips."
+    },
+    {
+      "id": "FQ-11",
+      "page": 11,
+      "target": "Reject snowy fortification/fence artwork as a caption",
+      "seconds": [
+        151
+      ],
+      "observation": "An irregular white snow region with repeated X-shaped fortifications becomes a second-level cutout without text. Local BubbleDetect.detect reproduces accepted non-text regions at four independently selected source points.",
+      "acceptance": "Reject the snow/fence regions through detect and extract while preserving real narration, short speech and the existing page-4/page-5 caption controls."
+    }
+  ],
+  "local_snow_probe": {
+    "module": "js/bubbles.js from 2.79.16",
+    "analysis_size": [
+      716,
+      1100
+    ],
+    "coordinate_origin": "independently chosen on original source artwork, not recovered phone touch events",
+    "results": [
+      {
+        "tap": [
+          0.7,
+          0.32
+        ],
+        "result": {
+          "x": 0.5446927374301676,
+          "y": 0.2909090909090909,
+          "w": 0.2835195530726257,
+          "h": 0.03909090909090909,
+          "threshold": 235
+        }
+      },
+      {
+        "tap": [
+          0.8,
+          0.32
+        ],
+        "result": {
+          "x": 0.5446927374301676,
+          "y": 0.2909090909090909,
+          "w": 0.2835195530726257,
+          "h": 0.03909090909090909,
+          "threshold": 235
+        }
+      },
+      {
+        "tap": [
+          0.7,
+          0.36
+        ],
+        "result": {
+          "x": 0.6201117318435754,
+          "y": 0.3472727272727273,
+          "w": 0.3477653631284916,
+          "h": 0.05454545454545454,
+          "threshold": 235
+        }
+      },
+      {
+        "tap": [
+          0.8,
+          0.36
+        ],
+        "result": {
+          "x": 0.6201117318435754,
+          "y": 0.3472727272727273,
+          "w": 0.3477653631284916,
+          "h": 0.05454545454545454,
+          "threshold": 235
+        }
+      },
+      {
+        "tap": [
+          0.7,
+          0.4
+        ],
+        "result": null
+      },
+      {
+        "tap": [
+          0.8,
+          0.4
+        ],
+        "result": null
+      },
+      {
+        "tap": [
+          0.7,
+          0.44
+        ],
+        "result": null
+      },
+      {
+        "tap": [
+          0.8,
+          0.44
+        ],
+        "result": null
+      },
+      {
+        "tap": [
+          0.7,
+          0.48
+        ],
+        "result": null
+      },
+      {
+        "tap": [
+          0.8,
+          0.48
+        ],
+        "result": null
+      }
+    ]
+  }
+}
