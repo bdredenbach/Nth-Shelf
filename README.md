@@ -282,3 +282,14 @@ No phone speed multiplier is claimed. Compare the first backup (which prepares e
 ## V2.79.09 Test 2 — Welcome actions
 
 The empty library now has actual Import and Restore buttons in a bottom action row, clear of system insets. Import opens the existing comic picker; Restore opens the existing full-backup flow. The edited welcome artwork removes the painted Import button and blends into the continuous dark textured background. The artwork scales within the remaining height without cropping, including landscape. Pop-out and backup algorithms are unchanged from Test 1.
+
+
+## V2.79.10 Test 1 — Restore buffering and contextual tutorials
+
+Fixes a restore transport defect: a large destination buffer does not guarantee a large `ZipInputStream.read` result. The old bridge replied after one read, potentially sending only a few hundred bytes per request. `ArchiveIO.readChunk` now fills up to 1 MiB at the current entry boundary, checking cancellation between reads. Supported WebViews return binary ArrayBuffers; older WebViews retain the base64 fallback. ZIP compression and the backup format are unchanged, so existing v2/v3 backups can be retried directly. The progress window now identifies the page, bytes read, and saving stage. Source integrity, image validation, transaction publication and rollback remain in place.
+
+The native regression compares old short-read counts against filled bridge payloads on the same 600 MiB ZIP, verifies byte totals and cancellation, and runs under a 32 MiB heap. Browser tests cover binary and base64 restore. Device timing remains necessary; test-runner message counts are not a phone speed claim.
+
+Tutorials follow the contextual approach in Nth Reader's Android `js/feature-guide.js`: highlight the actual control, explain one action and its result, and position the guidance away from it. Nth Shelf has its own red/charcoal styling, Back/Next/Finish controls, replay, and first-use tracking. Empty and populated shelves receive separate tours. Each reader mode explains its gestures, controls, bookmarks and returning to the shelf. Tutorials only present the existing interface; they do not perform imports or change books.
+
+Binary response API: https://developer.android.com/reference/androidx/webkit/JavaScriptReplyProxy#postMessage(byte[])

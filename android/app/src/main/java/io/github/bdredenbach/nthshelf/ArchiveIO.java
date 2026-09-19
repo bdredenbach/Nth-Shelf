@@ -46,6 +46,19 @@ final class ArchiveIO {
         }
         public void close() throws IOException { zip.close(); }
     }
+    // InputStream.read is allowed to return a short block. ZIP often returns ~512 bytes.
+    // Fill one bridge message, stopping at the current ZIP entry's EOF, not at the first read.
+    static int readChunk(InputStream in, byte[] buffer, BooleanSupplier cancelled) throws IOException {
+        int count=0;
+        while(count<buffer.length) {
+            check(cancelled);
+            int n=in.read(buffer,count,buffer.length-count);
+            if(n<0)break;
+            if(n==0){int b=in.read();if(b<0)break;buffer[count++]=(byte)b;}
+            else count+=n;
+        }
+        check(cancelled);return count==0?-1:count;
+    }
     interface Progress { void update(long bytes); }
     static void verify(InputStream input, byte[] expected, BooleanSupplier cancelled, Progress progress) throws IOException {
         MessageDigest hash = digest(); byte[] buffer = new byte[65536]; long total=0; int n;

@@ -157,8 +157,14 @@ final class ArchiveBridge {
                     }
                     case "archiveRead": {
                         if(reader==null)throw new IOException("No backup is open.");
-                        byte[] bytes=new byte[ArchiveIO.CHUNK];int n=(nestedReader!=null?nestedReader:sourceInput!=null?sourceInput:reader).read(bytes);
+                        byte[] bytes=new byte[ArchiveIO.CHUNK];int n=ArchiveIO.readChunk(nestedReader!=null?nestedReader:sourceInput!=null?sourceInput:reader,bytes,()->cancelled);
                         if(n<0&&sourceInput!=null&&nestedReader==null){sourceInput=null;endCache();}
+                        if(n>0&&data.optBoolean("binary")&&androidx.webkit.WebViewFeature.isFeatureSupported(androidx.webkit.WebViewFeature.WEB_MESSAGE_ARRAY_BUFFER)) {
+                            byte[] packet=new byte[n+8];
+                            java.nio.ByteBuffer.wrap(packet).order(java.nio.ByteOrder.LITTLE_ENDIAN).putInt(0x4e544852).putInt(id);
+                            System.arraycopy(bytes,0,packet,8,n);
+                            activity.runOnUiThread(()->reply.postMessage(packet));return;
+                        }
                         result=n<0?JSONObject.NULL:Base64.encodeToString(bytes,0,n,Base64.NO_WRAP);break;
                     }
                     case "archiveClose":complete=true;cleanup();break;

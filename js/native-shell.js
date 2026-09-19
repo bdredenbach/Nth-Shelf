@@ -3,6 +3,14 @@ if (window.NthShelfHost) {
   const pending = new Map();
   let serial = 0;
   NthShelfHost.onmessage = event => {
+    if(event.data instanceof ArrayBuffer) {
+      if(event.data.byteLength<8)return;
+      const header=new DataView(event.data);
+      if(header.getUint32(0,true)!==0x4e544852)return;
+      const id=header.getUint32(4,true),request=pending.get(id);
+      if(request){pending.delete(id);request.resolve(new Uint8Array(event.data,8));}
+      return;
+    }
     const result = JSON.parse(event.data), request = pending.get(result.id);
     if (!request) return;
     if (result.progress != null) { request.progress?.(result.progress); return; }

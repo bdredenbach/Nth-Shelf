@@ -26,11 +26,25 @@ public final class ArchiveIOTest {
             ArchiveIO.Catalog catalog=ArchiveIO.inspect(new FileInputStream(file),()->false,n->{});
             if(catalog.bytes!=expected+manifest.length||catalog.entries!=7)throw new AssertionError("Archive contents differ");
             // Same sequential read pattern used by the native restore bridge.
-            long read=0;
+            long read=0,oldReplies=0;
             try(ZipInputStream zip=new ZipInputStream(new FileInputStream(file))) {
-                ZipEntry entry;while((entry=zip.getNextEntry())!=null){int n;while((n=zip.read(chunk))!=-1)read+=n;}
+                ZipEntry entry;while((entry=zip.getNextEntry())!=null){int n;while((n=zip.read(chunk))!=-1){read+=n;oldReplies++;}}
             }
             if(read!=catalog.bytes)throw new AssertionError("Round trip lost data");
+            long batchedBytes=0,newReplies=0;byte[] message=new byte[ArchiveIO.CHUNK];
+            try(ZipInputStream zip=new ZipInputStream(new FileInputStream(file))) {
+                while(zip.getNextEntry()!=null){int n;while((n=ArchiveIO.readChunk(zip,message,()->false))!=-1){batchedBytes+=n;newReplies++;}}
+            }
+            if(batchedBytes!=read||newReplies>610||oldReplies<newReplies*50)throw new AssertionError("Short-read batching failed");
+            System.out.println("PASS: restore bridge payloads: "+oldReplies+" short reads -> "+newReplies+" batched replies, same "+read+" bytes");
+            AtomicBoolean partialCancel=new AtomicBoolean();
+            InputStream shortReads=new ByteArrayInputStream(new byte[2048]) {
+                public synchronized int read(byte[] b,int o,int n){int result=super.read(b,o,Math.min(n,512));partialCancel.set(true);return result;}
+            };
+            boolean partialStopped=false;
+            try{ArchiveIO.readChunk(shortReads,message,partialCancel::get);}catch(IOException e){partialStopped=true;}
+            if(!partialStopped)throw new AssertionError("Cancellation during filled chunk failed");
+
             AtomicBoolean cancel=new AtomicBoolean();boolean stopped=false;
             try{ArchiveIO.verify(new FileInputStream(file),digest,cancel::get,n->{if(n>1048576)cancel.set(true);});}
             catch(IOException e){stopped=e.getMessage().contains("cancelled");}

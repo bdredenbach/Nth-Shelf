@@ -93,16 +93,19 @@ window.ShelfStream = {
       throw Error(error.message+' Any incomplete destination file should be discarded.');
     }
   },
-  async readBlob(type,limit=this.pageLimit) {
-    const chunks=[];let size=0,encoded;
-    while((encoded=await this.request('archiveRead'))!==null) {
-      const raw=atob(encoded);size+=raw.length;
+  async readBlob(type,limit=this.pageLimit,onProgress) {
+    const chunks=[];let size=0,data;
+    while((data=await this.request('archiveRead',{binary:!!this.capabilities?.binary}))!==null) {
+      let bytes;
+      if(data instanceof Uint8Array)bytes=data;
+      else {const raw=atob(data);bytes=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);}
+      size+=bytes.length;
       if(size>limit)throw Error('Archive image exceeds the supported size.');
-      chunks.push(Uint8Array.from(raw,c=>c.charCodeAt(0)));
+      chunks.push(bytes);onProgress?.(size);
     }
     return new Blob(chunks,{type});
   },
-  async restoreSource(source,progress) {
+  async restoreSource(source,progress,status) {
     const seen=new Set();
     const zip=/\.(cbz|zip)$/i.test(source.name),pending=new Map(source.pages.map((n,i)=>[n,i]));
     await this.request('archiveSourceOpen',{key:source.id,nested:zip});
@@ -118,11 +121,17 @@ window.ShelfStream = {
       let entry;
       while((entry=await this.request('archiveSourceNext'))!==null) {
         if(seen.has(entry.name))throw Error('Duplicate entry in comic archive.');seen.add(entry.name);
-        if(!entry.directory&&pending.has(entry.name))await put(entry.name,await this.readBlob(guessMime(entry.name)));
+        if(!entry.directory&&pending.has(entry.name)){
+          const label=source.row.title+' · page '+(pending.get(entry.name)+1)+' / '+source.pages.length;
+          status('Reading '+label);
+          const blob=await this.readBlob(guessMime(entry.name),this.pageLimit,n=>status('Reading '+label+' · '+(n/1048576).toFixed(1)+' MiB'));
+          status('Saving '+label);await put(entry.name,blob);
+        }
       }
     } else {
       // The existing 7Z/RAR/TAR importer processes one original archive at a time.
-      const blob=await this.readBlob('application/octet-stream',Number.MAX_SAFE_INTEGER);
+      const blob=await this.readBlob('application/octet-stream',Number.MAX_SAFE_INTEGER,n=>status('Reading '+source.name+' · '+(n/1048576).toFixed(1)+' / '+(source.size/1048576).toFixed(1)+' MiB'));
+      status('Opening '+source.name);
       const file=new File([blob],source.name);
       const entries=/\.(cbt|tar)$/i.test(source.name)?await Library.readTarEntries(file):await Library.readLibarchiveEntries(file);
       for(const e of entries)if(pending.has(e.name))await put(e.name,await e.getBlob());
@@ -162,6 +171,7 @@ window.ShelfStream = {
   async restore() {
     await this.ready;await this.recover();let staged=null,committed=false;
     try {
+      this.capabilities=await this.request('archiveCapabilities');
       ShelfTransfer.progress(0,'Choose a full-library backup…');
       const source=await this.request('archiveOpen',{},n=>ShelfTransfer.progress(0,'Checking archive integrity · '+Math.round(n/1048576)+' MiB'));
       this.check();const {collections,comics,wanted,sources}=this.catalog(JSON.parse(source.manifest));
@@ -172,7 +182,7 @@ window.ShelfStream = {
         this.check();
         const sourceEntry=sources.get(entry.name);
         if(sourceEntry) {
-          await this.restoreSource(sourceEntry,()=>{count++;ShelfTransfer.progress(5+90*count/Math.max(1,total),'Restoring '+sourceEntry.row.title);});
+          await this.restoreSource(sourceEntry,()=>{count++;ShelfTransfer.progress(5+90*count/Math.max(1,total),'Restoring '+sourceEntry.row.title);},text=>ShelfTransfer.progress(5+90*count/Math.max(1,total),text));
           retained.push({comicId:sourceEntry.id,name:sourceEntry.name,size:sourceEntry.size,pages:sourceEntry.pages,original:sourceEntry.original,native:true});
           sources.delete(entry.name);continue;
         }
@@ -182,14 +192,11 @@ window.ShelfStream = {
           if(!entry.directory&&entry.name!=='nth-shelf-backup.json')throw Error('Unexpected or repeated page in backup.');
           continue;
         }
-        const chunks=[];let bytes=0,encoded;
-        while((encoded=await this.request('archiveRead'))!==null) {
-          const raw=atob(encoded);bytes+=raw.length;
-          if(bytes>this.pageLimit)throw Error('One page exceeds the 128 MiB per-image limit.');
-          chunks.push(Uint8Array.from(raw,c=>c.charCodeAt(0)));
-        }
-        if(page.size!=null&&bytes!==page.size)throw Error('A page is incomplete in the backup.');
-        const blob=new Blob(chunks,{type:page.type});chunks.length=0;
+        const label=page.row.title+' · page '+(page.index+1)+' / '+page.row.pageCount;
+        ShelfTransfer.progress(5+90*count/Math.max(1,total),'Reading '+label);
+        const blob=await this.readBlob(page.type,this.pageLimit,n=>ShelfTransfer.progress(5+90*count/Math.max(1,total),'Reading '+label+' · '+(n/1048576).toFixed(1)+' MiB'));
+        if(page.size!=null&&blob.size!==page.size)throw Error('A page is incomplete in the backup.');
+        ShelfTransfer.progress(5+90*count/Math.max(1,total),'Saving '+label);
         this.check();const bitmap=await createImageBitmap(blob);bitmap.close();
         if(page.index===0)page.row.coverUrl=await blobToDataUrl(await makeThumbnail(blob));
         await LongboxDB.putPage(page.id,page.index,blob);wanted.delete(entry.name);

@@ -19,6 +19,7 @@ const assert=require('node:assert/strict');
    const originalId=await Library.importCbz(original);
    check((await LongboxDB.getSource(originalId)).blob.size===original.size,'Importer did not retain original');
    let saved=[],entry,parts,reading=[],offset=0,mode='normal',reads=0,book=null,bookPath,bookKey,entryKey;
+   let readBinaryCalls=0,readTextCalls=0;
    let nested=[],nestedEntry,sourceEntry,sourceKey,binary=true,inflight=0,maxInflight=0,binaryCalls=0,cachedCalls=0;
    const cache=new Map();
    const encode=bytes=>{let s='';for(let i=0;i<bytes.length;i+=8192)s+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(s);};
@@ -58,7 +59,7 @@ const assert=require('node:assert/strict');
      if(mode==='cancel'&&++reads===4)ShelfTransfer.cancelRequested=true;
      const b=(nestedEntry||sourceEntry||entry).blob;
      if(offset>=b.size){if(sourceEntry&&!nestedEntry){cache.set(sourceKey,b);sourceEntry=null;}return null;}
-     const bytes=new Uint8Array(await b.slice(offset,offset+1048576).arrayBuffer());offset+=bytes.length;return encode(bytes);
+     const bytes=new Uint8Array(await b.slice(offset,offset+1048576).arrayBuffer());offset+=bytes.length;if(v.binary){readBinaryCalls++;return bytes;}readTextCalls++;return encode(bytes);
     }
     throw Error('Unexpected action '+action);
    }};
@@ -86,7 +87,8 @@ const assert=require('node:assert/strict');
     check(await reqResult(t.objectStore('pages').count())===5,'Failed restore left staged pages');
     check(cache.size===2,'Failed restore left native source cache');ShelfTransfer.dismiss();
    }
-   mode='normal';await ShelfTransfer.openRestore();
+   mode='normal';binary=true;await ShelfTransfer.openRestore();
+   check(readBinaryCalls>0,'Binary restore path not exercised');
    let comics=await LongboxDB.getAllComics();check(comics.length===4,'Restore did not publish comics');
    const copy=comics.find(c=>c.title==='My comic'&&c.id!=='source');
    check(copy.lastPage===2&&copy.bookmarks[0]===1&&copy.collectionId!=='source-col','Metadata lost');
@@ -95,7 +97,7 @@ const assert=require('node:assert/strict');
    // Old v2 full-library backups must still restore.
    const legacy={app:'nth-shelf',version:2,collections:[],comics:[{id:'old',title:'Legacy',pageCount:1,pages:[{path:'pages/0/1.png',type:'image/png',size:blob.size}]}]};
    saved=[{name:'pages/0/1.png',blob},{name:'nth-shelf-backup.json',blob:new Blob([JSON.stringify(legacy)])}];
-   await ShelfTransfer.openRestore();check((await LongboxDB.getAllComics()).length===5,'v2 restore failed');ShelfTransfer.dismiss();
+   binary=false;await ShelfTransfer.openRestore();check(readTextCalls>0,'Base64 restore fallback missing');check((await LongboxDB.getAllComics()).length===5,'v2 restore failed');ShelfTransfer.dismiss();
    // Startup recovery removes incomplete pages and native sources together.
    await LongboxDB.putPage('orphan',0,blob);cache.set('orphan',blob);
    const db=await openDB(),t=db.transaction('meta','readwrite');t.objectStore('meta').put({key:ShelfStream.marker,ids:['orphan']});await txDone(t);
