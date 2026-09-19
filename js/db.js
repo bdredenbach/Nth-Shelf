@@ -8,7 +8,7 @@
 // Renaming an IndexedDB database would make an existing library look brand new.
 
 const DB_NAME = "longbox";
-const DB_VERSION = 5;
+const DB_VERSION = 6;
 const STORAGE_MARKER_KEY = "nth-shelf-library-marker-v1";
 let dbPromise = null;
 
@@ -18,6 +18,7 @@ function openDB() {
     const req = indexedDB.open(DB_NAME, DB_VERSION);
     req.onupgradeneeded = (e) => {
       const db = e.target.result;
+      if (!db.objectStoreNames.contains("sources")) db.createObjectStore("sources", {keyPath:"comicId"});
       if (!db.objectStoreNames.contains("comics")) {
         db.createObjectStore("comics", { keyPath: "id" });
       }
@@ -147,8 +148,10 @@ const LongboxDB = {
   },
 
   async deleteComic(id) {
-    const t = await tx(["comics", "pages", "panels", "panelMaps"], "readwrite");
+    const t = await tx(["comics", "pages", "panels", "panelMaps", "sources"], "readwrite");
     t.objectStore("comics").delete(id);
+    t.objectStore("sources").delete(id);
+    window.NthShelfNative?.request("archiveDropCache",{key:id}).catch(()=>{});
     const pageStore = t.objectStore("pages");
     const pageIdx = pageStore.index("comicId");
     const pageCursorReq = pageIdx.openCursor(IDBKeyRange.only(id));
@@ -188,6 +191,12 @@ const LongboxDB = {
     return done;
   },
 
+  async getSource(comicId) {
+    const t=await tx(['sources'],'readonly');return reqResult(t.objectStore('sources').get(comicId));
+  },
+  async putSource(source) {
+    const t=await tx(['sources'],'readwrite');t.objectStore('sources').put(source);return txDone(t);
+  },
   async putPage(comicId, index, blob) {
     const t = await tx(["pages"], "readwrite");
     t.objectStore("pages").put({ key: `${comicId}:${index}`, comicId, index, blob });

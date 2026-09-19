@@ -40,6 +40,9 @@ final class ShelfBridge {
             (web, message, origin, mainFrame, reply) -> {
                 if (!mainFrame) return;
                 try {
+                    if (message.getType()==androidx.webkit.WebMessageCompat.TYPE_ARRAY_BUFFER) {
+                        archives.receiveBinary(message.getArrayBuffer(),reply);return;
+                    }
                     JSONObject data = new JSONObject(message.getData());
                     int id = data.getInt("id");
                     String action = data.getString("action");

@@ -8,7 +8,7 @@ import java.util.zip.*;
 
 /** Bounded-buffer ZIP primitives, shared by Android and the plain JVM regression. */
 final class ArchiveIO {
-    static final int CHUNK = 196608;
+    static final int CHUNK = 1048576;
     static final int MANIFEST_LIMIT = 8 * 1024 * 1024;
     static void check(BooleanSupplier cancelled) throws IOException {
         if (cancelled.getAsBoolean()) throw new IOException("Transfer cancelled.");

@@ -266,3 +266,14 @@ support for older JSON and small ZIP backups.
 Regression gates: 600 MiB archive write/verify/read with a 32 MiB JVM heap, corrupt
 data rejection, cancellation, browser fixture round-trip, missing-page rollback and
 startup recovery. Native Android document-provider behavior still needs phone testing.
+
+
+## V2.79.09 Test 1 — Whole-archive backups
+
+Android full-library backups now contain `sources/` (one original CBZ/CB7/CBT/CBR/ZIP/7Z/RAR/TAR per book when retained) and a v3 `nth-shelf-backup.json` index. Reading positions, bookmarks and collections travel with the library. Newly imported original archives are retained; older page-only books are reconstructed as CBZ once during backup. Retained archives consume additional app storage, roughly their combined archive size. Removing a comic removes its retained source too.
+
+The first backup streams source bytes (or existing pages) into Android using bounded 1 MiB binary messages, with at most two awaiting acknowledgement, when supported by WebView. Older WebViews use the base64 transport. Android retains the resulting original/CBZ in private app files; later backups copy it directly without sending pages through JavaScript. ZIP compression remains level 0 because source archives and images are already compressed. Every completed backup is reopened and SHA-256 verified.
+
+Restore supports both v2 page backups and v3 source backups. CBZ/ZIP pages are streamed through a nested native ZIP reader. CBT/TAR/CB7/7Z/CBR/RAR use the existing import engine one archive at a time (these formats still require memory for an individual archive; the existing 7Z/RAR engine availability requirements apply). Restored sources are retained for subsequent backups. Publication is atomic after all pages validate; cancellation/failure rolls back staged pages and sources. Existing books remain intact.
+
+No phone speed multiplier is claimed. Compare the first backup (which prepares existing books) with a second unchanged-library backup on the same device and destination. Regression gates cover original byte preservation, reconstruction, warm native copying, binary/base64 paths, v2/v3 restore, metadata, rollback and crash recovery, plus native nested ZIP/cache parity and 600 MiB streaming under a 32 MiB JVM heap.

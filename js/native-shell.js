@@ -11,6 +11,14 @@ if (window.NthShelfHost) {
   };
   window.NthShelfNative = {
     streaming:true,
+    binaryChunk(bytes) {
+      return new Promise((resolve,reject)=>{
+        const id=++serial,packet=new Uint8Array(bytes.byteLength+8),header=new DataView(packet.buffer);
+        header.setUint32(0,0x4e544842,true);header.setUint32(4,id,true);packet.set(bytes,8);
+        pending.set(id,{resolve,reject});
+        try{NthShelfHost.postMessage(packet.buffer);}catch(error){pending.delete(id);reject(error);}
+      });
+    },
     request(action, values = {}, progress) {
       return new Promise((resolve,reject) => {
         const id=++serial; pending.set(id,{resolve,reject,progress});

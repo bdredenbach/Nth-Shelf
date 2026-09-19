@@ -1273,6 +1273,9 @@ const Library = {
       if (i === 0) coverUrl = await blobToDataUrl(await makeThumbnail(typedBlob));
     }
 
+    // Preserve the actual archive and its page order for full-library backups.
+    try {await LongboxDB.putSource({comicId:id,name:file.name,blob:file,size:file.size,
+      pages:entries.map(e=>e.name),original:true});} catch(error) {console.warn("Original archive could not be retained; backup will rebuild a CBZ.",error);}
     const title = file.name.replace(ARCHIVE_EXT, "");
     const info = parseSeriesInfo(title);
 
