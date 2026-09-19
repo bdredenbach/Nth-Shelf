@@ -128,7 +128,8 @@ const assert = require('node:assert/strict');
    await page.waitForTimeout(600); // The fold must remain attached during a slow hold.
    const distance=commit?b.width*.45:60;
    await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-distance,y:bottom?y-distance*1.2:y,id:1}]});
-   assert.ok(await page.evaluate(()=>Reader.turnPageMode.book.motion.progress)>before);
+   // Touch delivery/rendering is asynchronous; require progress after the event is processed.
+   await page.waitForFunction(previous=>Reader.turnPageMode.book.motion?.progress>previous,before,{timeout:1500});
    assert.equal(await page.evaluate(()=>Reader.focusMode),null);
    const index=await page.evaluate(()=>Reader.index);
    await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
