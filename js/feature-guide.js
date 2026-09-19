@@ -95,6 +95,10 @@ window.ShelfGuide = {
     this.active.index=next;this.render();
   },
   target(step) {
+    if(step.target==='#page-viewport'&&Reader.mode==='single') {
+      const image=Reader.turnPageMode?.book?.pageNode()?.querySelector('img');
+      if(image?.getBoundingClientRect().width)return image;
+    }
     return [...document.querySelectorAll(step.target)].find(el=>{const r=el.getBoundingClientRect();return r.width&&r.height&&!el.closest('[hidden]');});
   },
   render() {
