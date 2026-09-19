@@ -1,11 +1,12 @@
 // NTH SHELF V2.79.07 TEST 1 — AN NTH EXPERIENCE
 
-const CACHE_NAME = "nth-shelf-shell-2.79.07-test2";
+const CACHE_NAME = "nth-shelf-shell-2.79.07-test3";
 const SHELL_FILES = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./css/style.css",
+  "./assets/surface-noise.svg",
   "./js/db.js",
   "./js/library.js",
   "./js/nth-page-deck.js",

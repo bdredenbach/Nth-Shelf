@@ -1857,6 +1857,8 @@ async setMode(mode) {
      swipe = null;
      if (this.mode !== "single" || this.scale > 1.02 || this.focusMode || e.touches.length !== 1) return;
      const t = e.touches[0], r = stage.getBoundingClientRect();
+     // Paper corners own diagonal folds; the remaining top/bottom edge reveals controls.
+     if (this.turnPageMode?.cornerAt(t.clientX, t.clientY)) return;
      const edge = Math.min(160, r.height * 0.3);
      const side = t.clientY <= r.top + edge ? "top" : t.clientY >= r.bottom - edge ? "bottom" : null;
      if (side) swipe = {x:t.clientX, y:t.clientY, side, claimed:false};

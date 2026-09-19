@@ -160,8 +160,7 @@ public final class MainActivity extends Activity {
     }
 
     private ImageView createSplashView() {
-        ImageView splash = new ImageView(this);
-        splash.setBackgroundColor(Color.BLACK);
+        ImageView splash = new BrandedSplashView(this);
         splash.setImageResource(R.drawable.nth_shelf_splash);
         splash.setScaleType(ImageView.ScaleType.FIT_CENTER);
         splash.setContentDescription(getString(R.string.app_name));

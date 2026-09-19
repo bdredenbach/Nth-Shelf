@@ -344,26 +344,25 @@ window.LongboxPageMode = (() => {
       this._cornerTapCount = 0;
     }
 
-    _cornerInfo(e) {
-      if (!this._cornerTouchBook) return null;
-      const p = e.touches?.[0];
-      if (!p) return null;
-
+    cornerAt(clientX, clientY) {
+      if (!this.book || !this._cornerTouchBook) return null;
       const rect = this._cornerTouchBook.getBoundingClientRect();
-      const x = p.clientX - rect.left;
-      const y = p.clientY - rect.top;
-
       const bounds = this.book.pageBounds();
-      const corner = 100;
-      const nearLeft = x <= corner;
-      const nearRight = x >= rect.width - corner;
-      const nearTop = y <= bounds.y + corner;
-      const nearBottom = y >= bounds.y + bounds.height - corner;
-
+      const x = clientX - rect.left, y = clientY - rect.top;
+      const size = Math.min(96, bounds.width * 0.25, bounds.height * 0.25);
+      const outside = 24;
+      const nearLeft = x >= bounds.x - outside && x <= bounds.x + size;
+      const nearRight = x >= bounds.x + bounds.width - size && x <= bounds.x + bounds.width + outside;
+      const nearTop = y >= bounds.y - outside && y <= bounds.y + size;
+      const nearBottom = y >= bounds.y + bounds.height - size && y <= bounds.y + bounds.height + outside;
       if (!(nearLeft || nearRight) || !(nearTop || nearBottom)) return null;
+      return {rect, bounds, x, y, side:nearRight ? "right" : "left", topCorner:nearTop};
+    }
 
-      const side = nearLeft ? "left" : "right";
-      return { p, rect, x, y, side, topCorner: y < bounds.y + bounds.height / 2 };
+    _cornerInfo(e) {
+      const p = e.touches?.[0];
+      const info = p && this.cornerAt(p.clientX, p.clientY);
+      return info ? {...info, p} : null;
     }
 
     _cornerTouchStart(e) {
@@ -407,11 +406,10 @@ window.LongboxPageMode = (() => {
       if (Math.hypot(dx, dy) >= 8) g.moved = true;
 
       if (!g.triggered &&
-          Math.abs(dx) >= 8 &&
-          Math.abs(dx) >= Math.abs(dy) * 1.5) {
+          (g.side === "right" ? -dx : dx) >= 8) {
         g.moved = true;
         g.triggered = true;
-        g.direction = dx < 0 ? "next" : "prev";
+        g.direction = g.side === "right" ? "next" : "prev";
 
         const x = Math.max(
           1, Math.min(g.rect.width - 1, p.clientX - g.rect.left)
@@ -505,10 +503,7 @@ window.LongboxPageMode = (() => {
       const x = p.clientX - rect.left;
       const y = p.clientY - rect.top;
       const bounds = this.book.pageBounds();
-      const corner = 100;
-      const nearCorner =
-        (x < corner || x > rect.width - corner) &&
-        (y < bounds.y + corner || y > bounds.y + bounds.height - corner);
+      const nearCorner = !!this.cornerAt(p.clientX, p.clientY);
 
       // Don't compete with Nth Page Deck's native corner-grab gesture.
       if (nearCorner && e.touches) {

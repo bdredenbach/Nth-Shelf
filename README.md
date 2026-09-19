@@ -106,11 +106,11 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.07 Test 2 — An Nth Experience**
+**Version 2.79.07 Test 3 — An Nth Experience**
 
 ## 🧪 Release History (Newest First)
 
-## V2.79.07 Test 2 — An Nth Experience
+## V2.79.07 Test 3 — An Nth Experience
 
 Page navigation hides after five seconds. Swipe inward from the top or bottom to
 show it for another five seconds. Slow page drags begin after eight pixels of

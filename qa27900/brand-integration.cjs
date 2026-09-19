@@ -11,6 +11,16 @@ const assert = require('node:assert/strict');
   await page.waitForTimeout(1500);
   assert.equal(await page.evaluate(()=>ShelfGuide.active?.id),'library');
   await page.evaluate(()=>ShelfGuide.finish());
+  await page.evaluate(()=>{window.pendingTransfer=ShelfTransfer.run('Transfer check',()=>new Promise(r=>window.finishTransfer=r));});
+  await page.waitForFunction(()=>typeof window.finishTransfer==='function');
+  assert.equal(await page.locator('.transfer-dialog button').isVisible(),false);
+  await page.evaluate(async()=>{window.finishTransfer('Finished');await window.pendingTransfer;});
+  assert.equal(await page.locator('.transfer-dialog button').isVisible(),true);
+  await page.evaluate(()=>ShelfTransfer.dismiss());
+  await page.evaluate(()=>ShelfTransfer.run('Failure check',async()=>{throw Error('Expected test failure');}));
+  assert.equal(await page.locator('.transfer-dialog button').isVisible(),true);
+  await page.evaluate(()=>ShelfTransfer.dismiss());
+  await page.screenshot({path:'/tmp/nth-shelf-empty-blend.png'});
   await page.evaluate(async()=>{
    // UI/transfer fixture, not a frame-detection benchmark.
    Reader.loadPanelsForCurrentPage=async()=>{};Reader.preparePanelMaps=()=>{};
@@ -29,6 +39,11 @@ const assert = require('node:assert/strict');
       collectionId:'fixture-col',issueNumber:j,addedAt:Date.now(),readMode:'single',theme:'dark'});
    }
    await Library.refresh();
+  });
+  const sort=await page.locator('#sort-direction-btn').boundingBox(),recent=await page.locator('#sort-row [data-sort="recent"]').boundingBox();
+  assert.ok(Math.abs(sort.x-recent.x)<2 && sort.y>recent.y+recent.height,'Direction belongs beneath Recent');
+  await page.screenshot({path:'/tmp/nth-shelf-sort.png'});
+  await page.evaluate(async()=>{
    await LongboxApp.openReader('fixture-0');
   });
   await page.waitForTimeout(1400);
@@ -70,17 +85,18 @@ const assert = require('node:assert/strict');
     const r=Reader.turnPageMode.book.root.getBoundingClientRect(),p=Reader.turnPageMode.book.pageBounds();
     return {x:r.x,y:r.y,width:r.width,p};
    });
-   const x=b.x+b.width-25,y=b.y+b.p.y+(corner?45:b.p.height/2);
+   const bottom=corner === "bottom";
+   const x=b.x+b.p.x+b.p.width-18,y=b.y+b.p.y+(bottom?b.p.height-18:corner?18:b.p.height/2);
    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y,id:1}]});
    for(const d of [4,8,12,18]){
     await page.waitForTimeout(140);
-    await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-d,y,id:1}]});
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-d,y:bottom?y-d*1.8:y,id:1}]});
    }
    await page.waitForFunction(()=>Reader.turnPageMode.book.motion?.interactive && Reader.turnPageMode.book.motion?.curl.ready);
    const before=await page.evaluate(()=>Reader.turnPageMode.book.motion.progress);
    await page.waitForTimeout(600); // The fold must remain attached during a slow hold.
    const distance=commit?b.width*.45:60;
-   await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-distance,y,id:1}]});
+   await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-distance,y:bottom?y-distance*1.2:y,id:1}]});
    assert.ok(await page.evaluate(()=>Reader.turnPageMode.book.motion.progress)>before);
    assert.equal(await page.evaluate(()=>Reader.focusMode),null);
    const index=await page.evaluate(()=>Reader.index);
@@ -90,9 +106,12 @@ const assert = require('node:assert/strict');
   };
   await slowDrag(true,false);
   await slowDrag(false,false);
-  await slowDrag(true,true);
+  await page.evaluate(()=>{Reader.turnPageMode.book.root.style.width='300px';Reader.turnPageMode.book.size(300,Reader.turnPageMode.book.root.clientHeight);});
+  await slowDrag('bottom',false);
+  await slowDrag('bottom',true);
   await page.evaluate(()=>Reader.prev());
   await page.waitForFunction(()=>Reader.index===0&&!Reader.turnPageMode.book.motion);
+  await page.evaluate(()=>Reader.turnPageMode.resize());
   const pinch=async()=>{
    const b=await page.locator('#reader-stage').boundingBox(),x=b.x+b.width/2,y=b.y+b.height/2;
    const points=d=>[{x:x-d,y,id:1},{x:x+d,y,id:2}];

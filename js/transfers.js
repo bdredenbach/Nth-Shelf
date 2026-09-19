@@ -30,6 +30,7 @@ window.ShelfTransfer = {
     if(this.busy)return;
     this.busy=true;this.dialog.querySelector("h2").textContent=title;
     this.dialog.querySelector("button").disabled=true;
+    this.dialog.querySelector("button").hidden=true;
     this.progress(0,"Preparing…");this.dialog.showModal();
     await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
     try {
@@ -38,7 +39,7 @@ window.ShelfTransfer = {
     } catch(error) {
       this.dialog.querySelector("h2").textContent="Transfer not completed";
       this.dialog.querySelector(".transfer-detail").textContent=error.message || "Please try again.";
-    } finally {this.busy=false;this.dialog.querySelector("button").disabled=false;}
+    } finally {this.busy=false;this.dialog.querySelector("button").disabled=false;this.dialog.querySelector("button").hidden=false;}
   },
   safeName(name) {return String(name||"comic").replace(/[\\/:*?"<>|\u0000-\u001f]/g,"_").slice(0,120);},
   async save(blob,name) {

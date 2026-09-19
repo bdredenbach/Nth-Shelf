@@ -2271,3 +2271,15 @@ button.reader-btn.mini-btn {
   .shelf-mode-track { height:min(62vh, 560px); }
   .shelf-mode-card { width:min(31vw, 250px); }
 }
+
+/* Test 3: full-height textured surround, with softly blended artwork edges. */
+#library-view.empty-library {
+  background: #050505 url("../assets/surface-noise.svg") repeat;
+}
+#library-view.empty-library .empty-artwork img {
+  mask-image: linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
+}
+.transfer-dialog button[hidden] { display:none !important; }
+.library-sort-row::after {content:"";flex-basis:100%;order:1;}
+.library-sort-row .sort-direction-btn {order:2;margin-left:0;margin-right:auto;}
