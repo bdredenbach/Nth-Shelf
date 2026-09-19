@@ -20,6 +20,21 @@ const assert = require('node:assert/strict');
   await page.evaluate(()=>ShelfTransfer.run('Failure check',async()=>{throw Error('Expected test failure');}));
   assert.equal(await page.locator('.transfer-dialog .primary').isVisible(),true);
   await page.evaluate(()=>ShelfTransfer.dismiss());
+  // Welcome actions stay visible and open the established file pickers.
+  for(const viewport of [{width:412,height:915},{width:360,height:640},{width:915,height:412}]) {
+   await page.setViewportSize(viewport);
+   const buttons=await page.locator('.empty-actions').boundingBox();
+   assert.ok(buttons && buttons.y>=0 && buttons.y+buttons.height<=viewport.height-8,'Welcome actions clipped');
+   const art=await page.locator('.empty-artwork').boundingBox();
+   assert.ok(art.y+art.height<=buttons.y,'Welcome art overlaps actions');
+   assert.ok(await page.locator('.empty-artwork img').evaluate(img=>img.complete&&img.naturalWidth>0),'Welcome image missing');
+   await page.screenshot({path:'/tmp/nth-shelf-welcome-'+viewport.width+'.png'});
+  }
+  await page.setViewportSize({width:412,height:915});
+  for(const [selector,inputId] of [['#empty-import-hit','import-input'],['#empty-restore','restore-input']]) {
+   const chooser=page.waitForEvent('filechooser');await page.locator(selector).click();
+   assert.equal(await (await chooser).element().getAttribute('id'),inputId);
+  }
   await page.screenshot({path:'/tmp/nth-shelf-empty-blend.png'});
   await page.evaluate(async()=>{
    // UI/transfer fixture, not a frame-detection benchmark.

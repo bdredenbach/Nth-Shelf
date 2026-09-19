@@ -1764,11 +1764,7 @@ button.reader-btn.mini-btn {
   line-height: 1;
 }
 
-/* ================= NTH SHELF EMPTY LIBRARY =================
-   The supplied Nth Shelf artwork becomes the complete launch/empty state.
-   The normal library header and floating Import button disappear only while
-   the shelf is empty; the artwork contains its own visual Import button.
-*/
+/* Empty library: artwork and accessible actions share one continuous surface. */
 #library-view.empty-library {
   position: relative;
   width: 100%;
@@ -1778,79 +1774,70 @@ button.reader-btn.mini-btn {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background: #000;
+  background: #050505 url("../assets/surface-noise.svg") repeat;
 }
-#library-view.empty-library #library-root {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
+#library-view.empty-library #library-root { position:absolute; inset:0; width:100%; height:100%; }
 #library-view.empty-library #library-header,
 #library-view.empty-library .lib-header,
 #library-view.empty-library #continue-reading,
 #library-view.empty-library #library-search-wrap,
 #library-view.empty-library #lib-toolbar,
-#library-view.empty-library #comic-grid {
-  display: none !important;
-}
+#library-view.empty-library #comic-grid { display:none !important; }
 #library-view.empty-library .empty-state {
-  position: absolute;
-  inset: 0;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  opacity: 1;
-  z-index: 2;
+  position:absolute;
+  inset:0;
+  display:flex !important;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  height:100%;
+  box-sizing:border-box;
+  margin:0;
+  padding:calc(12px + var(--safe-top)) max(20px, var(--safe-right)) calc(24px + var(--safe-bottom)) max(20px, var(--safe-left));
+  border:0;
+  border-radius:0;
+  background:transparent;
+  opacity:1;
+  z-index:2;
 }
-#library-view.empty-library .empty-artwork {
-  position: relative;
-  width: min(100vw, 66.6667dvh);
-  max-width: 100%;
-  max-height: calc(100dvh - var(--safe-top) - var(--safe-bottom));
-  aspect-ratio: 2 / 3;
-}
+#library-view.empty-library .empty-artwork { flex:1; min-height:0; width:100%; max-width:680px; position:relative; }
 #library-view.empty-library .empty-artwork img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  user-select: none;
-  -webkit-user-drag: none;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  user-select:none;
+  -webkit-user-drag:none;
 }
-#library-view.empty-library .empty-import-hit {
-  position: absolute;
-  left: 50%;
-  top: 85.5%;
-  width: 38%;
-  height: 10%;
-  min-height: 0;
-  transform: translateX(-50%);
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  cursor: pointer;
-  z-index: 3;
+.empty-actions { display:grid; grid-template-columns:1fr 1fr; gap:14px; width:100%; max-width:520px; flex:none; }
+.empty-action {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-width:0;
+  min-height:56px;
+  padding:14px 12px;
+  border-radius:18px;
+  line-height:1.2;
+  font-family:inherit;
+  font-size:17px;
+  font-weight:700;
+  color:#fff;
+  cursor:pointer;
+  transition:transform .15s ease, background .15s ease;
 }
-#library-view.empty-library .empty-import-hit:focus-visible {
-  outline: 3px solid rgba(232,53,43,.95);
-  outline-offset: 4px;
-}
-#fab-import.empty-library-fab { display: none !important; }
-
-@media (max-width: 600px) {
-  #library-view.empty-library .empty-import-hit {
-    top: 85.5%;
-    width: 42%;
-    height: 10%;
-  }
+.empty-action-import { background:#ed3028; border:1px solid #ff4c43; box-shadow:0 6px 28px #e72b231c; }
+.empty-action-import span { font-size:25px; line-height:1; }
+.empty-action-restore { background:#171112; border:1px solid #8e302d; }
+.empty-action:hover { filter:brightness(1.12); }
+.empty-action:active { transform:scale(.97); }
+.empty-action:focus-visible { outline:3px solid #fff; outline-offset:4px; }
+#fab-import.empty-library-fab { display:none !important; }
+@media (max-height:480px) and (orientation:landscape) {
+  #library-view.empty-library .empty-state { padding-top:calc(8px + var(--safe-top)); padding-bottom:calc(12px + var(--safe-bottom)); gap:8px; }
+  .empty-action { min-height:48px; padding:10px 12px; }
 }
 
 /* The Android shell is already installed; browser installation UI is noise. */

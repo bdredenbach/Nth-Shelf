@@ -277,3 +277,8 @@ The first backup streams source bytes (or existing pages) into Android using bou
 Restore supports both v2 page backups and v3 source backups. CBZ/ZIP pages are streamed through a nested native ZIP reader. CBT/TAR/CB7/7Z/CBR/RAR use the existing import engine one archive at a time (these formats still require memory for an individual archive; the existing 7Z/RAR engine availability requirements apply). Restored sources are retained for subsequent backups. Publication is atomic after all pages validate; cancellation/failure rolls back staged pages and sources. Existing books remain intact.
 
 No phone speed multiplier is claimed. Compare the first backup (which prepares existing books) with a second unchanged-library backup on the same device and destination. Regression gates cover original byte preservation, reconstruction, warm native copying, binary/base64 paths, v2/v3 restore, metadata, rollback and crash recovery, plus native nested ZIP/cache parity and 600 MiB streaming under a 32 MiB JVM heap.
+
+
+## V2.79.09 Test 2 — Welcome actions
+
+The empty library now has actual Import and Restore buttons in a bottom action row, clear of system insets. Import opens the existing comic picker; Restore opens the existing full-backup flow. The edited welcome artwork removes the painted Import button and blends into the continuous dark textured background. The artwork scales within the remaining height without cropping, including landscape. Pop-out and backup algorithms are unchanged from Test 1.

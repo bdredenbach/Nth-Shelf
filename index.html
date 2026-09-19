@@ -78,8 +78,11 @@
 
     <div class="empty-state" id="empty-state" style="display:none;" aria-label="Nth Shelf empty library">
       <div class="empty-artwork">
-        <img src="assets/nth-shelf-empty.png" alt="" aria-hidden="true" />
-        <button class="empty-import-hit" id="empty-import-hit" type="button" aria-label="Import a comic"></button>
+        <img src="assets/nth-shelf-welcome.webp" alt="Your Nth Shelf is empty. Everything stays on this device. Supports CBZ, ZIP, CBT, CB7, 7Z, CBR and RAR." />
+      </div>
+      <div class="empty-actions" aria-label="Start your library">
+        <button class="empty-action empty-action-import" id="empty-import-hit" type="button"><span aria-hidden="true">+</span> Import</button>
+        <button class="empty-action empty-action-restore" id="empty-restore" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 10a9 9 0 1 1 1.7 7M3 4v6h6M12 7v5l3 2"/></svg> Restore</button>
       </div>
     </div>
 
@@ -374,6 +377,7 @@
   const openImport = () => importInput.click();
   document.getElementById("fab-import").addEventListener("click", openImport);
   document.getElementById("empty-import-hit").addEventListener("click", openImport);
+  document.getElementById("empty-restore").addEventListener("click", () => ShelfTransfer.openRestore());
 </script>
 </body>
 </html>
