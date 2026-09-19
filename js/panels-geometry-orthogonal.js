@@ -8,7 +8,8 @@ const PanelGeometryOrthogonal = {
     const q = panel?._quad;
     const connected = panel?._frameEnvelope?.chainConnected === true ||
       (panel?._pageLayoutProof?.kind === 'stacked-strips' && panel._pageLayoutProof.closed === true) ||
-      (panel?._closedFrameProof?.version === 1 && panel._closedFrameProof.connected === true);
+      (panel?._closedFrameProof?.version === 1 && panel._closedFrameProof.connected === true) ||
+      (panel?._partitionProof?.version === 1 && panel._partitionProof.connected === true);
     if (!connected ||
         !Array.isArray(q) || q.length !== 4 ||
         q.some(p => !Number.isFinite(p?.x) || !Number.isFinite(p?.y))) return null;

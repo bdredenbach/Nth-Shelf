@@ -20,6 +20,8 @@ const PanelGeometry = {
       return {mode:'hold',source:'PAGE-LAYOUT',reason:'complete-stacked-frame'};
     if(inferred==='closed-frame' && panel?._closedFrameProof?.version===1 && panel._closedFrameProof.connected===true)
       return {mode:'hold',source:'CLOSED-FRAME',reason:'independent-connected-borders'};
+    if(inferred==='page-partition' && panel?._partitionProof?.version===1 && panel._partitionProof.connected===true)
+      return {mode:'hold',source:'PAGE-PARTITION',reason:'complete-connected-partition'};
     if(inferred==='v73') return {mode:'hold',source:'V73',reason:'stable-orthogonal'};
     if(inferred==='v100'&&(fragment||composite||edgeClipped)) {
       return {mode:composite?'frame':'inspect',source:'V100',
@@ -84,6 +86,13 @@ const PanelGeometry = {
         ? PanelGeometryOrthogonal.refine(panel,log)
         : {...panel};
       held._geometryOwner='orthogonal-authority';
+      if(policy.source==='PAGE-PARTITION' && typeof PanelGeometrySkewed!=='undefined'){
+        const ownership=PanelGeometrySkewed.classifyQuad(held,log);
+        held._frameOwnership=ownership;
+        held._geometryOwner=ownership.owns?'skewed-frame':'orthogonal-frame';
+        if(log)log(`PARTITION AUTHORITY HOLD owner=${held._geometryOwner}`);
+        return held;
+      }
       if(log)log(`ORTHOGONAL AUTHORITY HOLD source=${policy.source} reason=${policy.reason}`);
       if(log)log('ROUTER -> ORTHOGONAL AUTHORITY');
       return held;

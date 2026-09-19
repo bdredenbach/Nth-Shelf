@@ -1,5 +1,14 @@
 # Frame accuracy reference set
 
+## 2.79.14 recording controls
+
+`179268.mp4`, supplied after the 2.79.14 APK, shows the whole page-13 airplane
+frame twice, at approximately 2:03 and 2:12. It also reveals different partial
+star/bombs crops and page-5 merged neighbors. Do not count page 13's middle-right
+explosion as phone-confirmed: that pop-out is not shown in this recording.
+See `connected-frames-27915.md` and `phone-findings-27914.json` for evidence,
+independent artwork labels, and the next regression checks.
+
 ## Phone-confirmed 2.79.13 regression controls
 
 The user tested the corrected trouble frames on reader pages 9 and 16 in

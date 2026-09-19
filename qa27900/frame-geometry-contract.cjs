@@ -143,6 +143,19 @@ async function renderedQuad(frame) {
     'closed frame rendering preserves each fitted border corner'));
   assert.equal(ortho.refine({ ...closed, _closedFrameProof: { version: 1, connected: false } })._quad, undefined,
     'incomplete closed borders cannot gain polygon authority');
+  for (const angle of [2, 6]) {
+    const partition = { ...proof(600, 900, angle), _identitySource: 'page-partition',
+      _partitionProof: { version: 1, connected: true, analysisWidth: 600, analysisHeight: 900 } };
+    delete partition._frameEnvelope;
+    const held = await router.refine(null, partition);
+    assert.deepEqual(plain(held._quad), partition._quad, 'a partition keeps all measured corners');
+    assert.equal(held._geometryOwner, angle === 6 ? 'skewed-frame' : 'orthogonal-frame',
+      'partition ownership follows physical angles after the frame is established');
+    assert.equal(held._frameOwnership.angleSpace, 'analysis-pixels');
+    const rendered = await renderedQuad(held);
+    rendered.forEach((p, i) => assert.ok(Math.hypot(p.x - partition._quad[i].x, p.y - partition._quad[i].y) < .00001,
+      'partition crop retains its exact fitted polygon'));
+  }
   reader.panelZoomEnabled = true;
   reader.currentPanels = [heldLayout];
   assert.equal(reader.findPanelAt(aboveRail.x, aboveRail.y), null,

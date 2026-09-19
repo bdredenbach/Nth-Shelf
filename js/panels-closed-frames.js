@@ -60,16 +60,38 @@ const PanelClosedFrames = (() => {
         }
       }return false;
     }
+    // A frame immediately below a proved neighbor may share its bottom rail.
+    // The shared interval must stay inside that existing rail: no extrapolation,
+    // recursive completion, or authority supplied by the tap position.
+    function sharedTop(neighbors,x1,y1,x2,y2){
+      for(const neighbor of neighbors){
+        const q=neighbor.quad,rail=neighbor.fits[1];
+        if(x1<Math.min(q[2].x,q[3].x)*w-2||x2>Math.max(q[2].x,q[3].x)*w+2)continue;
+        if(y2<=Math.max(q[2].y,q[3].y)*h+10)continue;
+        if(Math.max(Math.abs(rail.offset+rail.slope*x1-y1),Math.abs(rail.offset+rail.slope*x2-y1))>3)continue;
+        return {rail,neighborQuad:q};
+      }
+      return null;
+    }
+    function collect(neighbors=[]){
     const candidates=[];
     for(let j=0;j<hs.length;j++){const top=hs[j];for(let k=j+1;k<hs.length;k++){const bottom=hs[k],y1=top[0],y2=bottom[0];if(y2-y1<h*.085)continue;
       const sides=vs.filter(v=>v[1]<=y1+5&&v[2]>=y2-5&&cover(true,v[0],y1,y2)>.96&&ridge(true,v[0],y1,y2)>.45);
       for(let a=0;a<sides.length;a++)for(let b=a+1;b<sides.length;b++){const x1=sides[a][0],x2=sides[b][0];if(x2-x1<w*.14||(x2-x1)*(y2-y1)<w*h*.019)continue;
         if(top[1]>x1+5||top[2]<x2-5||bottom[1]>x1+5||bottom[2]<x2-5)continue;
         const scores=[cover(false,y1,x1,x2),cover(false,y2,x1,x2),cover(true,x1,y1,y2),cover(true,x2,y1,y2)];if(Math.min(...scores)<.96)continue;
-        const ridges=[ridge(false,y1,x1,x2),ridge(false,y2,x1,x2),ridge(true,x1,y1,y2),ridge(true,x2,y1,y2)];if(Math.min(...ridges)<.45)continue;
-        if(hs.some(v=>v[0]>y1+10&&v[0]<y2-10&&v[1]<=x1+5&&v[2]>=x2-5&&cover(false,v[0],x1,x2)>.90)||vs.some(v=>v[0]>x1+10&&v[0]<x2-10&&v[1]<=y1+5&&v[2]>=y2-5&&cover(true,v[0],y1,y2)>.90))continue;
+        const ridges=[ridge(false,y1,x1,x2),ridge(false,y2,x1,x2),ridge(true,x1,y1,y2),ridge(true,x2,y1,y2)];
+        let shared=null;
+        if(Math.min(...ridges)<.45){
+          if(ridges[1]>.45&&ridges[2]>.45&&ridges[3]>.45)shared=sharedTop(neighbors,x1,y1,x2,y2);
+          if(!shared)continue;
+        }
+        // Filled black artwork has full dark runs without a separating ridge.
+        // Only the independently anchored completion can distinguish those
+        // runs here; the original strict detector keeps its original veto.
+        if(hs.some(v=>v[0]>y1+10&&v[0]<y2-10&&v[1]<=x1+5&&v[2]>=x2-5&&cover(false,v[0],x1,x2)>.90&&(!shared||ridge(false,v[0],x1,x2)>.05))||vs.some(v=>v[0]>x1+10&&v[0]<x2-10&&v[1]<=y1+5&&v[2]>=y2-5&&cover(true,v[0],y1,y2)>.90&&(!shared||ridge(true,v[0],y1,y2)>.05)))continue;
         const box=[x1,y1,x2,y2];if(slopedDivider(box))continue;
-        const fits=[fit(false,y1,x1,x2),fit(false,y2,x1,x2),fit(true,x1,y1,y2),fit(true,x2,y1,y2)];if(fits.some(f=>!f))continue;
+        const fits=[shared?shared.rail:fit(false,y1,x1,x2),fit(false,y2,x1,x2),fit(true,x1,y1,y2),fit(true,x2,y1,y2)];if(fits.some(f=>!f))continue;
         const intersect=(horizontal,vertical)=>{const x=(vertical.offset+vertical.slope*horizontal.offset)/(1-vertical.slope*horizontal.slope);return {x:x/w,y:(horizontal.offset+horizontal.slope*x)/h};};
         const quad=[intersect(fits[0],fits[2]),intersect(fits[0],fits[3]),intersect(fits[1],fits[3]),intersect(fits[1],fits[2])];
         if(quad.some(p=>!Number.isFinite(p.x)||!Number.isFinite(p.y)||p.x<0||p.y<0||p.x>1||p.y>1))continue;
@@ -80,14 +102,18 @@ const PanelClosedFrames = (() => {
         if(quad.some((p,i)=>Math.hypot(p.x*w-corners[i][0],p.y*h-corners[i][1])>4||!darkNear(p.x*w,p.y*h)))continue;
         let joins=true;for(let i=0;i<4&&joins;i++)for(const neighbor of [(i+1)%4,(i+3)%4]){const p=quad[i],q=quad[neighbor],dx=(q.x-p.x)*w,dy=(q.y-p.y)*h,length=Math.hypot(dx,dy);let joined=0;for(let t=0;t<9;t++)joined+=darkNear(p.x*w+dx*t/length,p.y*h+dy*t/length);if(joined<8){joins=false;break;}}
         if(!joins)continue;
-        candidates.push({box,quad,scores,ridges,fits});if(candidates.length>180)return [];
+        candidates.push({box,quad,scores,ridges,fits,shared});if(candidates.length>180)return [];
       }
     }}
+    return candidates;
+    }
     // Short or partly obscured interior frames are uncertainty, never new output.
     // Their weaker rejection-only evidence prevents a large scene claiming insets.
-    const weakH=lines(g,w,h,false,.05),weakV=lines(g,w,h,true,.05),threats=[];
+    const weakH=lines(g,w,h,false,.05),weakV=lines(g,w,h,true,.05);
     const inside=(q,p)=>q[0]>=p[0]-3&&q[1]>=p[1]-3&&q[2]<=p[2]+3&&q[3]<=p[3]+3&&(q[2]-q[0])*(q[3]-q[1])<.85*(p[2]-p[0])*(p[3]-p[1]);
     function metric(vertical,pos,lo,hi){const m=Math.max(2,Math.floor((hi-lo)*.02));return [cover(vertical,pos,lo+m,hi-m),ridge(vertical,pos,lo,hi)];}
+    function removeAmbiguous(candidates){
+    const threats=[];
     for(const vertical of [false,true]){const ls=vertical?weakV:weakH,along=vertical?h:w,cross=vertical?w:h;
       for(let j=0;j<ls.length;j++)for(let k=j+1;k<ls.length;k++){const a=ls[j],b=ls[k];if(b[0]-a[0]<cross*.06||Math.abs(a[1]-b[1])>10||Math.abs(a[2]-b[2])>10)continue;
         const lo=Math.max(a[1],b[1]),hi=Math.min(a[2],b[2]);if(hi-lo<along*.10||(hi-lo)*(b[0]-a[0])<w*h*.019)continue;
@@ -113,8 +139,36 @@ const PanelClosedFrames = (() => {
     // Parent output is deferred until visible stepped masks are supported.
     let clean=candidates.filter(p=>!p.internalUncertainty).filter(p=>!threats.some(q=>inside(q,p.box))).filter(p=>!candidates.some(q=>q!==p&&q.box[0]>=p.box[0]-2&&q.box[1]>=p.box[1]-2&&q.box[2]<=p.box[2]+2&&q.box[3]<=p.box[3]+2&&(q.box[2]-q.box[0])*(q.box[3]-q.box[1])<.8*(p.box[2]-p.box[0])*(p.box[3]-p.box[1])));
     const unique=[];clean.sort((a,b)=>(a.box[2]-a.box[0])*(a.box[3]-a.box[1])-(b.box[2]-b.box[0])*(b.box[3]-b.box[1]));for(const c of clean)if(!unique.some(q=>c.box.every((v,i)=>Math.abs(v-q.box[i])<=8)))unique.push(c);
-    if(log)log(`closed frames: ${unique.length} complete candidates`);
-    return unique.map(c=>{const xs=c.quad.map(p=>p.x),ys=c.quad.map(p=>p.y);return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:c.quad,_identitySource:'closed-frame',_geometryOwner:'orthogonal-frame',_geometryType:'closed-dark-frame',_closedFrameProof:{version:1,connected:true,analysisWidth:w,analysisHeight:h,coverage:c.scores,ridge:c.ridges,railFits:c.fits}};});
+    return unique;
+    }
+    function overlapArea(subject,clip){
+      let points=subject;
+      const cross=(a,b,p)=>(b.x-a.x)*(p.y-a.y)-(b.y-a.y)*(p.x-a.x);
+      for(let i=0;i<clip.length&&points.length;i++){
+        const a=clip[i],b=clip[(i+1)%clip.length],input=points;points=[];
+        for(let j=0;j<input.length;j++){
+          const p=input[j],q=input[(j+1)%input.length],cp=cross(a,b,p),cq=cross(a,b,q),pin=cp>=-1e-12,qin=cq>=-1e-12;
+          if(pin)points.push(p);
+          if(pin!==qin){const t=cp/(cp-cq);points.push({x:p.x+t*(q.x-p.x),y:p.y+t*(q.y-p.y)});}
+        }
+      }
+      let area=0;for(let i=0;i<points.length;i++){const a=points[i],b=points[(i+1)%points.length];area+=a.x*b.y-b.x*a.y;}return Math.abs(area)/2;
+    }
+    // Preserve strict outputs and their ordering. The second pass may only
+    // append a non-overlapping frame using an original accepted neighbor.
+    const strict=removeAmbiguous(collect()),extra=[];
+    if(strict.length){
+      for(const candidate of removeAmbiguous(collect(strict))){
+        if(!candidate.shared)continue;
+        if([...strict,...extra].some(other=>overlapArea(candidate.quad,other.quad)>1/(w*h)))continue;
+        extra.push(candidate);
+      }
+    }
+    const result=[...strict,...extra];
+    if(log)log(`closed frames: ${strict.length} strict, ${extra.length} shared-boundary candidates`);
+    return result.map(c=>{const xs=c.quad.map(p=>p.x),ys=c.quad.map(p=>p.y),proof={version:1,connected:true,analysisWidth:w,analysisHeight:h,coverage:c.scores,ridge:c.ridges,railFits:c.fits};
+      if(c.shared)proof.sharedTopProof={method:'neighbor-completion',neighborQuad:c.shared.neighborQuad,rail:c.shared.rail};
+      return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:c.quad,_identitySource:'closed-frame',_geometryOwner:'orthogonal-frame',_geometryType:'closed-dark-frame',_closedFrameProof:proof};});
   }
   function analyzeImage(img,log){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log);}
   return {analyzeRGBA,analyzeImage};

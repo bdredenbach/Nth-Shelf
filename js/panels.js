@@ -32,6 +32,13 @@ const PanelDetect = {
           } catch (error) {
             if (log) log(`closed frames deferred: ${error.message}`);
           }
+          if (!closed.length) {
+            try {
+              if (typeof PanelPartition !== 'undefined') closed = PanelPartition.analyzeImage(img, log);
+            } catch (error) {
+              if (log) log(`page partition deferred: ${error.message}`);
+            }
+          }
           resolve(closed);
         }
         catch (err) {

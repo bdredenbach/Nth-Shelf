@@ -53,7 +53,7 @@ const context={
 };
 context.window=context;context.globalThis=context;
 vm.createContext(context);
-for(const name of ['panels-page-layout.js','panels-closed-frames.js','panels.js','panels-frame-wasm.js']){
+for(const name of ['panels-page-layout.js','panels-closed-frames.js','panels-partition.js','panels.js','panels-frame-wasm.js']){
   vm.runInContext(fs.readFileSync(path.join(appRoot,'js',name),'utf8'),context,{filename:name});
 }
 if(process.env.NTH_DISABLE_WASM!=='1'){

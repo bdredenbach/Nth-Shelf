@@ -37,7 +37,7 @@ const PanelGeometrySkewed = {
     if(!Array.isArray(q)||q.length!==4||q.some(p=>!Number.isFinite(p?.x)||!Number.isFinite(p?.y))){
       return {owns:false,owner:'orthogonal',reason:'missing-proven-quad',confidence:0};
     }
-    const frameEvidence=panel?._frameEnvelope||{};
+    const frameEvidence=panel?._frameEnvelope||panel?._partitionProof||{};
     const analysisWidth=Number(frameEvidence.analysisWidth);
     const analysisHeight=Number(frameEvidence.analysisHeight);
     const hasPixelAspect=Number.isFinite(analysisWidth)&&analysisWidth>1&&

@@ -106,21 +106,21 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.14 Test 1 — Independent closed borders**
+**Version 2.79.15 Test 1 — Connected panels and shared borders**
 
-This accuracy test targets reader page 13's airplane panel, which the old tap-dependent search split along the airplane artwork. A new page-level detector measures four complete dark borders and their actual corner intersections. It runs only when both established page routes have no identities, so existing baseline and stacked-page results keep their priority.
+The latest phone recording confirms the whole page-13 airplane crop, but shows merged neighboring panels on page 5 and two different partial crops of page 13's tall star-and-bombs strip. This accuracy test addresses those two patterns.
 
-- Preserve the fitted quadrilateral, including slight printed border slopes, from detection through the visible crop.
-- Reject outer boxes containing a full divider or evidence of an inset. Weaker evidence can veto a parent but cannot create a new selectable frame.
-- Keep the legacy fallback for taps outside independently proved frames. Clear old experimental panel-map cache records.
+- Measure a complete, closed page border and recursively fit the dividers that connect its sides. Page 5's six slightly tilted panels become separate identities, including the hand, small shattered-glass caption, and lower-right Wolverine frames.
+- Complete a frame beneath an independently proved neighbor by reusing their shared border and proving its other three sides. Page 13's star-and-bombs strip stays one whole frame. Existing frame geometry remains unchanged.
+- Reject uncertain partitions, interrupted dividers and inset conflicts. Run the partition route only when the established baseline, stacked-page and independent-frame routes have no result. Preserve fitted corners through physical-angle classification and rendering.
 
-The user confirmed the 2.79.13 trouble frames on reader pages 9 and 16 from left, right, center, north and south. The next build preserves those complete page identity arrays exactly in the local comparison. The reader tap-handler check passes 45 positions: 10 on page 9, 25 on page 16, and 10 on page 13's whole airplane and middle-right explosion frames. New page-13 bounds also match approximate, independently reviewed artwork labels.
+The local reader-handler test passes 80 tap positions across pages 5, 9, 13 and 16. Five positions within each tested frame return the same whole-frame geometry. Pages 9 and 16 and both previous page-13 identities match 2.79.14 exactly. The 74-page detector sweeps add only the one shared-border strip on page 13 and the six-panel partition on page 5; this does not certify all other fallback results.
 
-**Device test priorities:** on page 13, try center/left/right/north/south within the whole top airplane frame and the middle-right explosion frame. Please also repeat a few of the confirmed page-9 and page-16 taps.
+**Device test priorities:** page 5's six panels, then page 13's complete star-and-bombs strip. Try left/right/center/north/south inside each, and repeat the known-good airplane, page-9 and page-16 controls.
 
-**Still unresolved:** other missed or merged scenes, interrupted insets, and complex stepped/overlapping shapes may still enter the older fallback and crop incorrectly. This is not 2.80.00 or a complete-comic accuracy claim. Performance tuning and automatic sequential pop-outs remain deferred.
+**Still unresolved:** page 3's unresponsive/slow attempts in the recording, other missed or merged scenes, and complex stepped/overlapping shapes. The old fallback remains and can still crop incorrectly outside independently proved frames. Speed tuning and automatic sequential pop-outs remain deferred; this is not 2.80.00.
 
-Synthetic closed-border, corner-fit, missing-side, internal-divider, inset and route-priority checks run with the existing geometry and UI checks in the APK workflow. Detailed local scope and limits are recorded in `qa27900/frame-accuracy/closed-frames-27914.md`; the comic itself is excluded from the repository and APK.
+Run `node qa27900/phone-frame-check.cjs --comic` with the local 74-page fixture for the artwork tap tests. The comic and videos stay outside the repository/APK. CI runs the synthetic border, partition, neighbor, geometry, browser and transfer checks. See `qa27900/frame-accuracy/connected-frames-27915.md` for evidence and limitations.
 
 ## 🧪 Release History (Newest First)
 
