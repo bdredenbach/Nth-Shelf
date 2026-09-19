@@ -1,13 +1,31 @@
 # Frame accuracy work queue
 
-Current candidate: **2.79.18 Test 1**, based on the `179345.mp4` feedback.
-See [2.79.18 local results](queue-results-27918.md) and
-[latest phone findings](video-findings-27917.md). Phone confirmation remains
-pending for the new candidate. Earlier findings below retain their build context.
+Latest phone review: **2.79.18 Test 1**, recording `179355.mp4`.
+See [new phone findings](video-findings-27918.md) and
+[2.79.18 local results](queue-results-27918.md). Runtime/APK stay 2.79.18 Test 1.
 
 Accuracy comes first. Keep the 2.79.xxx series until the full frame goal is met;
-reserve 2.80.00. Performance tuning and automatic sequential pop-outs at 0.15x
-remain later work.
+reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
+
+## Latest phone results — 179355.mp4
+
+- FQ-07: page 7's complete bomber strip opens correctly around 88.6s. All five
+  page-7 panels have individual successful openings, including the bottom strip.
+- FQ-14: all six page-17 panels open separately around 233–246s. SNIKT and both
+  right neighbors are complete and separate. Preserve this new phone result.
+- Pages 5/6/8/12 also show separate whole-frame sequences. Page 6's top-right
+  and narrow bottom-left succeed individually but still need stable local and
+  five-position proof. Page-9 lower-right and page-13 controls remain visible.
+- FQ-08/09/10 persist on pages 9–11. They remain next detector targets.
+- **FQ-15, page 19:** inconsistent syringe crop, upper-right room/eye-strip
+  composite, left-column cross-scene composite, and cropped middle-room scene.
+  Exact intervals and acceptance criteria are in the new findings. This renews
+  an older backlog page; it is not evidence of a regression introduced by .18.
+- FQ-12/FQ-13 cutouts do not recur, but the recording does not clearly establish
+  deliberate second-level negative requests. Targeted phone confirmation stays
+  pending; do not equate an ordinary whole-frame opening with a bubble test.
+- These are successful individual openings, not full five-position device
+  certification. Keep the existing resampling and fallback limitations recorded.
 
 ## 2.79.18 candidate status
 

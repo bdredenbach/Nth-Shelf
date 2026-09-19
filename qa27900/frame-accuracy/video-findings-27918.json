@@ -1,0 +1,212 @@
+{
+  "recording": "179355.mp4",
+  "sha256": "737bda2d18429791b1c87bd0aca2b182a005b99c0207e57c0e0aaf03708f4d25",
+  "durationSeconds": 306.658922,
+  "width": 1080,
+  "height": 2424,
+  "audio": false,
+  "inferredBuild": "2.79.18-test1",
+  "runtimeCommit": "adc62a896a54465254f3bc6061888272512163e6",
+  "evidenceLimits": [
+    "Build inferred from feedback sequence; no version screen.",
+    "Times are approximate video seconds, not measured gesture latency.",
+    "Individual openings do not certify five-position stability.",
+    "Bubble negative requests are not clearly established."
+  ],
+  "positiveOpenings": [
+    {
+      "page": 7,
+      "regions": [
+        "upper-left",
+        "upper-right",
+        "mountain",
+        "whole bomber",
+        "bottom Wolverine"
+      ],
+      "timesSeconds": [
+        74.8,
+        77.8,
+        80.8,
+        88.6,
+        91.5
+      ],
+      "queue": "FQ-07"
+    },
+    {
+      "page": 17,
+      "regions": [
+        "top",
+        "middle-right",
+        "middle-left",
+        "SNIKT",
+        "lower-right embrace",
+        "bottom knife"
+      ],
+      "timesSeconds": [
+        233.3,
+        235.9,
+        238.1,
+        240.6,
+        243.1,
+        245.4
+      ],
+      "queue": "FQ-14"
+    },
+    {
+      "page": 12,
+      "timesSeconds": [
+        165.8,
+        168.5,
+        171.3,
+        173.7,
+        176.3
+      ],
+      "queue": "FQ-06"
+    },
+    {
+      "page": 6,
+      "timesSeconds": [
+        52.8,
+        55.5,
+        58,
+        60.5,
+        63.5,
+        65.8,
+        68.3
+      ],
+      "limit": "FQ-05 multi-position identity proof still open"
+    },
+    {
+      "page": 8,
+      "timesSeconds": [
+        101.5,
+        104.8,
+        107.5,
+        110,
+        112.3
+      ]
+    },
+    {
+      "page": 5,
+      "timesSeconds": [
+        34,
+        37,
+        39.5,
+        42,
+        44.5,
+        47.5
+      ]
+    },
+    {
+      "page": 9,
+      "regions": [
+        "lower-right upper",
+        "lower-right lower"
+      ],
+      "timesSeconds": [
+        133.3,
+        135.7
+      ]
+    },
+    {
+      "page": 13,
+      "timesSeconds": [
+        181.3,
+        184,
+        186.5,
+        190.7
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "id": "FQ-08",
+      "page": 9,
+      "intervalsSeconds": [
+        [
+          120,
+          122
+        ]
+      ],
+      "problem": "upper three-frame composite"
+    },
+    {
+      "id": "FQ-09",
+      "page": 10,
+      "intervalsSeconds": [
+        [
+          139,
+          140
+        ]
+      ],
+      "problem": "upper motorcycle/right-hand composite"
+    },
+    {
+      "id": "FQ-10",
+      "page": 11,
+      "intervalsSeconds": [
+        [
+          154,
+          155
+        ]
+      ],
+      "problem": "top forest and portrait/fortifications composite"
+    },
+    {
+      "id": "FQ-15a",
+      "page": 19,
+      "intervalsSeconds": [
+        [
+          269.2,
+          269.8
+        ],
+        [
+          274.8,
+          275.5
+        ]
+      ],
+      "problem": "syringe crop changes; first excludes upper speech, later includes it"
+    },
+    {
+      "id": "FQ-15b",
+      "page": 19,
+      "intervalsSeconds": [
+        [
+          281.2,
+          281.8
+        ],
+        [
+          283.5,
+          284.2
+        ]
+      ],
+      "problem": "upper room merges with eye/injection strip"
+    },
+    {
+      "id": "FQ-15c",
+      "page": 19,
+      "intervalsSeconds": [
+        [
+          289.8,
+          290.3
+        ]
+      ],
+      "problem": "left-column composite crosses scene boundary"
+    },
+    {
+      "id": "FQ-15d",
+      "page": 19,
+      "intervalsSeconds": [
+        [
+          296.8,
+          297.4
+        ]
+      ],
+      "problem": "middle room selection omits left Wolverine figure"
+    }
+  ],
+  "bubbleStatus": {
+    "FQ-12": "not observed; deliberate negative request unverified",
+    "FQ-13": "not observed; deliberate negative request unverified"
+  }
+}
