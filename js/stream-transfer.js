@@ -84,7 +84,7 @@ window.ShelfStream = {
     return {collections,comics,wanted};
   },
   async restore() {
-    await this.ready;let staged=null,committed=false;
+    await this.ready;await this.recover();let staged=null,committed=false;
     try {
       ShelfTransfer.progress(0,'Choose a full-library backup…');
       const source=await this.request('archiveOpen',{},n=>ShelfTransfer.progress(0,'Checking archive integrity · '+Math.round(n/1048576)+' MiB'));
