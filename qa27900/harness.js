@@ -53,7 +53,7 @@ const context={
 };
 context.window=context;context.globalThis=context;
 vm.createContext(context);
-for(const name of ['panels.js','panels-frame-wasm.js']){
+for(const name of ['panels-page-layout.js','panels.js','panels-frame-wasm.js']){
   vm.runInContext(fs.readFileSync(path.join(appRoot,'js',name),'utf8'),context,{filename:name});
 }
 if(process.env.NTH_DISABLE_WASM!=='1'){
@@ -87,8 +87,8 @@ async function appTap(pageIndex,x,y,{verbose=false,resetCache=true}={}){
   const seedBase={_tap:{x,y},_baselinePanelCount:baseline.length};
   const hit=baseline.find(panel=>contains(panel,x,y));
   if(hit){
-    const result=await api.PanelGeometry.refine(url,{...hit,...seedBase,_identitySource:'v73'},log);
-    return {pageIndex,x,y,stage:'v73',baselineCount:baseline.length,result,logs};
+    const result=await api.PanelGeometry.refine(url,{...hit,...seedBase,_identitySource:hit._identitySource||'v73'},log);
+    return {pageIndex,x,y,stage:hit._identitySource==='page-layout'?'page-layout':'v73',baselineCount:baseline.length,result,logs};
   }
   if(api.PanelGeometry.refineAdaptiveOnly){
     const quick=await api.PanelGeometry.refineAdaptiveOnly(url,{x:.011,y:.013,w:.954,h:.957,

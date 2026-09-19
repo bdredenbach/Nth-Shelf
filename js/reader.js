@@ -830,16 +830,20 @@ const Reader = {
    const token = ++this._panelLoadToken;
    const logger = this.debugMode ? (msg) => this.debugLog(`[V87 panels p${pageIndex}] ${msg}`) : null;
 
-   // Start strict frame preparation concurrently with the inexpensive V73
-   // identity pass. Nothing here blocks page rendering or a live tap.
+   // Prepare legacy rescue maps alongside the page-wide identity pass.
+   // Early taps wait for identities; rescue maps remain lower priority.
    this.preparePanelMaps(comicId, pageIndex);
 
-   const url = await this.getPageUrl(pageIndex);
-   const panels = url ? await PanelDetect.detect(url, logger) : [];
+   const promise = (async () => {
+     const url = await this.getPageUrl(pageIndex);
+     return url ? PanelDetect.detect(url, logger) : [];
+   })();
+   this._panelDetection = { comicId, pageIndex, token, promise };
+   const panels = await promise;
 
-   if (token !== this._panelLoadToken || this.comic.id !== comicId || this.index !== pageIndex) return;
+   if (token !== this._panelLoadToken || this.comic?.id !== comicId || this.index !== pageIndex || this.mode !== "single") return;
    this.currentPanels = panels;
-   if (logger) logger(`V87 currentPanels set: ${panels.length} fresh stable-gutter panel(s)`);
+   if (logger) logger(`currentPanels set: ${panels.length} fresh page identities (${panels[0]?._identitySource || 'stable-gutter'})`);
  },
 
  getPanelImageContext() {
@@ -874,6 +878,15 @@ const Reader = {
    if (!this.panelZoomEnabled) return null;
    for (const p of this.currentPanels) {
      if (relX >= p.x && relX <= p.x + p.w && relY >= p.y && relY <= p.y + p.h) {
+       if (Array.isArray(p._quad) && p._quad.length === 4) {
+         let inside = false;
+         for (let i = 0, j = 3; i < 4; j = i++) {
+           const a = p._quad[i], b = p._quad[j];
+           if ((a.y > relY) !== (b.y > relY) &&
+               relX < (b.x - a.x) * (relY - a.y) / (b.y - a.y) + a.x) inside = !inside;
+         }
+         if (!inside) continue;
+       }
        return p;
      }
    }
@@ -2567,6 +2580,15 @@ async setMode(mode) {
  async handleSingleTap(pos) {
    if (this.mode !== "single" || this.scale > 1.02) return;
 
+   // An early tap must not race the page-wide identity pass and escape into
+   // the old tap-dependent search while its correct frame list is loading.
+   const pending = this._panelDetection;
+   if (pending && pending.comicId === this.comic?.id && pending.pageIndex === this.index) {
+     await pending.promise;
+     if (pending.token !== this._panelLoadToken || this.comic?.id !== pending.comicId ||
+         this.index !== pending.pageIndex || this.mode !== "single" || this.scale > 1.02) return;
+   }
+
    const stageRect = this.els.stage.getBoundingClientRect();
    const ctx = this.getPanelImageContext();
    const img = ctx?.img;
@@ -2619,8 +2641,8 @@ async setMode(mode) {
    // concern: the router may preserve the orthogonal rectangle or prove a
    // skewed quadrilateral without changing panel identity.
    if (panel) {
-     if (this.debugMode) this.debugLog("[V105] PASS 1 HIT (V73 identity) -> GEOMETRY ROUTER");
-     const shaped = await refineGeometry(panel, 'v73');
+     if (this.debugMode) this.debugLog(`[V105] PASS 1 HIT (${panel._identitySource || 'V73'} identity) -> GEOMETRY ROUTER`);
+     const shaped = await refineGeometry(panel, panel._identitySource || 'v73');
      if (this.comic?.id === comicId && this.index === pageIndex && shaped) this.zoomToPanel(shaped, stageRect, imgRect);
      return;
    }

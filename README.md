@@ -106,7 +106,21 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.12 Test 1 — Frame accuracy investigation**
+**Version 2.79.13 Test 1 — Nested panels and full-width strips**
+
+This accuracy test build addresses two patterns from the 2.79.12 recordings:
+
+- Recursively inspect an existing rectangular group for full-span internal gutters. This separates nested rows and columns without changing an unsplit rectangle.
+- Identify complete stacks of horizontal panels from the page's measured dark outer frame and independent internal dividers. Mildly tilted dividers retain their fitted quadrilateral. Partial dividers, vertical subdivisions, uncertain margins and unsupported layouts cause this new route to abstain.
+- Wait for the current page's identities on an early tap, and test membership against the polygon rather than its bounding box. Clear older experimental panel-map records.
+
+The local 74-page Wolverine fixture shows nine additional divisions on reader pages 9, 15, 20, 31, 48 and 50. The new stacked-page route accepts reader page 16 with five complete strips and abstains on the other 73 pages. The six-page gutter change and the page-16 change are separate; the other 67 baseline page results are unchanged. Source-page overlays were checked against the artwork. Approximate manual boundaries are QA labels, never runtime coordinates.
+
+**Device test priorities:** page 9's lower-right pair, then left/center/right taps in each of page 16's five strips. Verify that a moved tap keeps the same whole panel and that the bottom two previously successful strips remain correct. Broader controls are recorded in `qa27900/frame-accuracy/video-findings-27912.json`.
+
+**Still unresolved:** the airplane artwork mistaken for a diagonal frame, several merged neighboring scenes, undetected insets, and complex stepped/overlapping shapes. A broader four-border experiment was withheld after review exposed merged frames and missing inset ownership. This is not 2.80.00, a complete-comic accuracy claim, or a speed-focused build. First-page analysis may take longer; phone testing remains necessary.
+
+Synthetic geometry, nested-layout, sloped-strip, interrupted-border, vertical-subdivision and early-tap checks run in the APK workflow. `node qa27900/internal-gutters.cjs --comic` additionally checks the local comic fixture, which is not included in the repository or APK.
 
 ## 🧪 Release History (Newest First)
 

@@ -1,6 +1,6 @@
 // NTH SHELF V2.79.07 TEST 1 — AN NTH EXPERIENCE
 
-const CACHE_NAME = "nth-shelf-shell-2.79.12-test1-r1";
+const CACHE_NAME = "nth-shelf-shell-2.79.13-test1-r1";
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -18,6 +18,7 @@ const SHELL_FILES = [
   "./js/vendor/jszip.min.js",
   "./THIRD_PARTY_NOTICES.txt",
   "./js/panels.js",
+  "./js/panels-page-layout.js",
   "./js/panels-frame-wasm.js",
   "./js/panels-frame-kernel.wasm",
   "./js/panels-frame-envelope.js",

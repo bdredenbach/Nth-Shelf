@@ -22,7 +22,8 @@ const document = {
 };
 const context = vm.createContext({
   console, document, localStorage: { getItem() { return null; } },
-  requestAnimationFrame() {}, clamp01: value => Math.max(0, Math.min(1, value))
+  requestAnimationFrame() {}, clamp01: value => Math.max(0, Math.min(1, value)),
+  clamp: (value, low, high) => Math.max(low, Math.min(high, value))
 });
 for (const file of ['panels-geometry-orthogonal.js', 'panels-geometry-skewed.js',
   'panels-geometry.js', 'panel-map-core.js', 'reader.js']) {
@@ -124,5 +125,42 @@ async function renderedQuad(frame) {
   }
   assert.equal(router._shapeAdaptiveEnvelope({ ...proof(600, 900, 6),
     _frameEnvelope: { chainConnected: false } }), null, 'unconnected evidence is still rejected');
+
+  const layout = { ...shallow, _identitySource: 'page-layout',
+    _pageLayoutProof: { kind: 'stacked-strips', closed: true, analysisWidth: 600, analysisHeight: 900 } };
+  delete layout._frameEnvelope;
+  const heldLayout = await router.refine(null, layout);
+  assert.deepEqual(plain(heldLayout._quad), layout._quad,
+    'independently validated stacked borders survive the geometry router');
+  reader.panelZoomEnabled = true;
+  reader.currentPanels = [heldLayout];
+  assert.equal(reader.findPanelAt(aboveRail.x, aboveRail.y), null,
+    'live page lookup must test the sloped polygon, not just its bounding box');
+  assert.equal(reader.findPanelAt(.4, .5), heldLayout);
+
+  // A tap arriving before the page detector finishes must wait for that page's
+  // identities. Leaving the page while waiting must not open a stale crop.
+  const rect = { left: 0, top: 0, width: 600, height: 900 };
+  reader.mode = 'single'; reader.scale = 1; reader.index = 15;
+  reader.comic = { id: 'qa-comic' }; reader._panelLoadToken = 1;
+  reader.getPanelImageContext = () => ({ img: {}, rect });
+  reader.els.stage.getBoundingClientRect = () => rect;
+  reader.getPageUrl = async () => 'qa-page';
+  const crops = [];
+  reader.zoomToPanel = frame => crops.push(frame);
+  reader.currentPanels = [];
+  let finish;
+  reader._panelDetection = { comicId: 'qa-comic', pageIndex: 15, token: 1,
+    promise: new Promise(resolve => { finish = resolve; }) };
+  const waiting = reader.handleSingleTap({ x: 240, y: 450 });
+  await Promise.resolve();
+  assert.equal(crops.length, 0, 'no legacy crop while page identity is pending');
+  reader.currentPanels = [layout]; finish(); await waiting;
+  assert.equal(crops.length, 1, 'ready page uses its independent frame');
+  assert.deepEqual(plain(crops[0]._quad), layout._quad);
+  reader._panelDetection.promise = new Promise(resolve => { finish = resolve; });
+  const stale = reader.handleSingleTap({ x: 240, y: 450 });
+  reader.index = 16; finish(); await stale;
+  assert.equal(crops.length, 1, 'a pending tap cannot focus a different page');
   console.log(`Frame geometry contract passed: ${physicalCases} physical-angle/crop cases, live and persisted rendering, tap containment and invalid-proof controls.`);
 })().catch(error => { console.error(error); process.exitCode = 1; });

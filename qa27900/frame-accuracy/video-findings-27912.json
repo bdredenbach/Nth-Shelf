@@ -1,0 +1,1222 @@
+{
+  "schemaVersion": 1,
+  "status": "observations-and-draft-artwork-references",
+  "observedBuild": "2.79.12-test1",
+  "comic": "Wolverine (2010-2012) 1000",
+  "pageNumbering": "One-based; cover is page 1. pageIndex and source filename suffix are zero-based.",
+  "coordinateSystem": "Normalized source-image coordinates; boundsNormalized is [x0,y0,x1,y1].",
+  "timestampConvention": "Seconds relative to named clip, not the on-screen recorder counter. Listed times show observed frames, not exact tap latency.",
+  "limitations": [
+    "No cases are marked solved by this manifest.",
+    "Successful-looking controls were visually checked at recording resolution; they are not pixel-level certified.",
+    "Draft artwork boxes must be visually reviewed before strict automated acceptance; 0.008 is a provisional per-edge tolerance.",
+    "Suggested probe points are independent regression inputs, not recovered touch coordinates.",
+    "Only explicit visibleTouch entries identify observed initiating touches, still approximately.",
+    "Caption/bubble crops and pale transition masks were excluded from confirmed frame failures.",
+    "Supplied comic artwork and recordings are private test inputs and are not included in the repository.",
+    "These annotations are QA-only. They must never be imported by runtime detection or shipped as page-specific lookup fixes.",
+    "These observations cover clips 179232 through 179237; clip 179238 is outside this document."
+  ],
+  "sourcePages": [
+    {
+      "pageNumber": 3,
+      "pageIndex": 2,
+      "sourceFile": "Wolverine (2010-2012) 1000-002.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "67477bd18fbf31f971e30cea815bc76760f50476078786b412e9f8c78a65e80c"
+    },
+    {
+      "pageNumber": 4,
+      "pageIndex": 3,
+      "sourceFile": "Wolverine (2010-2012) 1000-003.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "a6e1225841f784a2d48f1d128ee4c70feaea1ac393fff2bb255804cfea2b6eda"
+    },
+    {
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "sourceFile": "Wolverine (2010-2012) 1000-004.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "81ea1d0368afae91da30d2b0c3fb05e8cea26373d3a4529c2658d9f48c986083"
+    },
+    {
+      "pageNumber": 6,
+      "pageIndex": 5,
+      "sourceFile": "Wolverine (2010-2012) 1000-005.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "0322218207dc70a8542b1fad785ffca05792b035cd41c45d54bbb41d8ece01ad"
+    },
+    {
+      "pageNumber": 7,
+      "pageIndex": 6,
+      "sourceFile": "Wolverine (2010-2012) 1000-006.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "8821a161f424274f7440e06ba44de728816705e9255341147d5ac91c44341408"
+    },
+    {
+      "pageNumber": 8,
+      "pageIndex": 7,
+      "sourceFile": "Wolverine (2010-2012) 1000-007.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "45bd49698e5103d592ea5b792a9a85e767880775cbb8a775caef3350a182a739"
+    },
+    {
+      "pageNumber": 9,
+      "pageIndex": 8,
+      "sourceFile": "Wolverine (2010-2012) 1000-008.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "06bd363a43c99e53c63d266184d68b5ab4bb83aa017aa314ca0431d4f9b83be9"
+    },
+    {
+      "pageNumber": 10,
+      "pageIndex": 9,
+      "sourceFile": "Wolverine (2010-2012) 1000-009.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "d03b18d137b3830ba1892b7517f3e7b8f844acb25b46f9e07bcead4f1bc932b2"
+    },
+    {
+      "pageNumber": 11,
+      "pageIndex": 10,
+      "sourceFile": "Wolverine (2010-2012) 1000-010.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "a3566b5bb995d99f2691b26215aadac1de7d69ecaabc29d75fc2464ea627eacd"
+    },
+    {
+      "pageNumber": 12,
+      "pageIndex": 11,
+      "sourceFile": "Wolverine (2010-2012) 1000-011.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "638c0b03ab068ce86d36c08d4e65286c92d1d7cdee329f9168afaa0db62b08ab"
+    },
+    {
+      "pageNumber": 13,
+      "pageIndex": 12,
+      "sourceFile": "Wolverine (2010-2012) 1000-012.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "26c072f75ffbc0612d13ab8da8a3acb39ccb699329b267b95f17d1cab6286ec6"
+    },
+    {
+      "pageNumber": 14,
+      "pageIndex": 13,
+      "sourceFile": "Wolverine (2010-2012) 1000-013.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "15bf880c3479b7c58de979ef7c4aba30bf85989ad431aed2f52583da238f8b2d"
+    },
+    {
+      "pageNumber": 16,
+      "pageIndex": 15,
+      "sourceFile": "Wolverine (2010-2012) 1000-015.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "841e06c0b24021bca414d80bffab288abf26768517f3bf1fbcf7c3b952fb943f"
+    },
+    {
+      "pageNumber": 17,
+      "pageIndex": 16,
+      "sourceFile": "Wolverine (2010-2012) 1000-016.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "b873354d831521c805eef56cd8e35d3989a35cdf4779af738a91493092ca83fd"
+    },
+    {
+      "pageNumber": 18,
+      "pageIndex": 17,
+      "sourceFile": "Wolverine (2010-2012) 1000-017.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "fb89560ae00005da77ecd6cd2e24d1d7092242c4eaa1490a0cfcc737ac60feb4"
+    },
+    {
+      "pageNumber": 19,
+      "pageIndex": 18,
+      "sourceFile": "Wolverine (2010-2012) 1000-018.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "28e4754cabd5bdaa300e69bb19c8cdffc77a5a22c682f515c57de5a91aed308a"
+    },
+    {
+      "pageNumber": 20,
+      "pageIndex": 19,
+      "sourceFile": "Wolverine (2010-2012) 1000-019.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "e04bd07cd9f17725276fcfc13964cf85794a300a0da1e3b1972f48b69b7aa10b"
+    },
+    {
+      "pageNumber": 21,
+      "pageIndex": 20,
+      "sourceFile": "Wolverine (2010-2012) 1000-020.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "ca0d2ce5f16dd543eea2f004cab3aed0a945c1ebab897a504bee962dc79b6fc7"
+    },
+    {
+      "pageNumber": 22,
+      "pageIndex": 21,
+      "sourceFile": "Wolverine (2010-2012) 1000-021.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "a9798feb689a0d88ead2fb73261b1144e114267fbaff307ec72ad9e2f9ad7af1"
+    },
+    {
+      "pageNumber": 25,
+      "pageIndex": 24,
+      "sourceFile": "Wolverine (2010-2012) 1000-024.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "c82ea976977b21b0df78955867f6f19f522556634e8d408923b07dd56de3fa79"
+    },
+    {
+      "pageNumber": 27,
+      "pageIndex": 26,
+      "sourceFile": "Wolverine (2010-2012) 1000-026.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "80ce12863f06f72deafbefc6197413fdec695cc31264ba85db919af2e3b74bd6"
+    },
+    {
+      "pageNumber": 59,
+      "pageIndex": 58,
+      "sourceFile": "Wolverine (2010-2012) 1000-058.jpg",
+      "width": 1988,
+      "height": 3056,
+      "sha256": "eeb1f75e3fecb39c455d38724d2ab0e5cd5f24b8aaeb57c18a7717bdc60bdf08"
+    }
+  ],
+  "observations": [
+    {
+      "id": "p003-horizontal-strips",
+      "pageNumber": 3,
+      "pageIndex": 2,
+      "video": "179232.mp4",
+      "sampleTimesSeconds": [
+        8,
+        12,
+        16,
+        22
+      ],
+      "classification": "successful-looking-control",
+      "description": "Top, cockpit, gunner and bottom-flame strips appear individually bounded."
+    },
+    {
+      "id": "p004-lower-title",
+      "pageNumber": 4,
+      "pageIndex": 3,
+      "video": "179232.mp4",
+      "sampleTimesSeconds": [
+        44
+      ],
+      "classification": "successful-looking-control",
+      "description": "Large lower falling-man/title scene appears independently bounded."
+    },
+    {
+      "id": "p005-middle-right-merge",
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "video": "179232.mp4",
+      "sampleTimesSeconds": [
+        67.25,
+        68,
+        69
+      ],
+      "classification": "confirmed-failure",
+      "description": "Middle-right hand panel merges with right slice of top flying scene; horizontal frame line remains inside popup.",
+      "failureKinds": [
+        "neighbor-contamination",
+        "multi-panel-merge"
+      ],
+      "suggestedProbePoints": [
+        [
+          0.84,
+          0.4
+        ]
+      ]
+    },
+    {
+      "id": "p005-bottom-right-merge",
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "video": "179232.mp4",
+      "sampleTimesSeconds": [
+        88
+      ],
+      "classification": "confirmed-failure",
+      "description": "Upper small slash/action strip and bottom-right cockpit panel appear as one owner.",
+      "failureKinds": [
+        "multi-panel-merge"
+      ],
+      "suggestedProbePoints": [
+        [
+          0.73,
+          0.62
+        ],
+        [
+          0.73,
+          0.83
+        ]
+      ]
+    },
+    {
+      "id": "p005-middle-left",
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "video": "179232.mp4",
+      "sampleTimesSeconds": [
+        56
+      ],
+      "classification": "successful-looking-control",
+      "description": "Middle-left airplane and claws scene appears isolated."
+    },
+    {
+      "id": "p006-middle-and-bottom",
+      "pageNumber": 6,
+      "pageIndex": 5,
+      "video": "179232.mp4",
+      "sampleTimesSeconds": [
+        100,
+        108
+      ],
+      "classification": "successful-looking-control",
+      "description": "Middle-left red airplane and bottom-middle falling figure appear separately."
+    },
+    {
+      "id": "p007-horizontal-strips",
+      "pageNumber": 7,
+      "pageIndex": 6,
+      "video": "179233.mp4",
+      "sampleTimesSeconds": [
+        4,
+        10,
+        18
+      ],
+      "classification": "control-with-gesture-caveat",
+      "description": "Top radio strip and middle airplane strip pop; text inclusion differs between radio samples, so exact geometry requires route trace."
+    },
+    {
+      "id": "p008-three-panels",
+      "pageNumber": 8,
+      "pageIndex": 7,
+      "video": "179233.mp4",
+      "sampleTimesSeconds": [
+        36,
+        44,
+        49
+      ],
+      "classification": "successful-looking-control",
+      "description": "Top airplane, lower-left tall orange panel and lower-right explosion appear separated."
+    },
+    {
+      "id": "p009-upper-group",
+      "pageNumber": 9,
+      "pageIndex": 8,
+      "video": "179233.mp4",
+      "sampleTimesSeconds": [
+        53.25,
+        55,
+        63
+      ],
+      "classification": "confirmed-failure",
+      "description": "Left crouching figure and two stacked right scenes merge as entire upper group.",
+      "failureKinds": [
+        "multi-panel-merge"
+      ],
+      "suggestedProbePoints": [
+        [
+          0.3,
+          0.19
+        ],
+        [
+          0.78,
+          0.11
+        ],
+        [
+          0.78,
+          0.27
+        ]
+      ]
+    },
+    {
+      "id": "p009-middle-small-panels",
+      "pageNumber": 9,
+      "pageIndex": 8,
+      "video": "179233.mp4",
+      "sampleTimesSeconds": [
+        64,
+        67,
+        69
+      ],
+      "classification": "successful-looking-control",
+      "description": "Three middle-row panels appear individually bounded."
+    },
+    {
+      "id": "p009-lower-left",
+      "pageNumber": 9,
+      "pageIndex": 8,
+      "video": "179233.mp4",
+      "sampleTimesSeconds": [
+        71
+      ],
+      "classification": "successful-looking-control",
+      "description": "Tall lower-left standing figure appears isolated."
+    },
+    {
+      "id": "p009-lower-right-pair",
+      "pageNumber": 9,
+      "pageIndex": 8,
+      "video": "179233.mp4",
+      "sampleTimesSeconds": [
+        77
+      ],
+      "classification": "confirmed-failure",
+      "description": "Two stacked lower-right scenes merge across gray horizontal gutter.",
+      "failureKinds": [
+        "multi-panel-merge"
+      ],
+      "referenceFrameIds": [
+        "p009-lower-right-upper",
+        "p009-lower-right-lower"
+      ]
+    },
+    {
+      "id": "p010-middle-wide",
+      "pageNumber": 10,
+      "pageIndex": 9,
+      "video": "179234.mp4",
+      "sampleTimesSeconds": [
+        0
+      ],
+      "classification": "successful-looking-control",
+      "description": "Wide motorcycle/snow scene appears separately."
+    },
+    {
+      "id": "p011-upper-group",
+      "pageNumber": 11,
+      "pageIndex": 10,
+      "video": "179234.mp4",
+      "sampleTimesSeconds": [
+        5.75,
+        6,
+        8.25,
+        9,
+        11,
+        11.5
+      ],
+      "classification": "confirmed-failure",
+      "description": "Top forest strip, borderless head and bounded fortifications scene merge. The initial top-strip touch is visibly separate from both lower scenes.",
+      "failureKinds": [
+        "multi-panel-merge"
+      ],
+      "visibleTouch": {
+        "timeSeconds": 4.5,
+        "approximateNormalizedPoint": [
+          0.6,
+          0.085
+        ]
+      },
+      "suggestedProbePoints": [
+        [
+          0.6,
+          0.085
+        ],
+        [
+          0.25,
+          0.4
+        ],
+        [
+          0.73,
+          0.39
+        ]
+      ]
+    },
+    {
+      "id": "p011-lower-strips",
+      "pageNumber": 11,
+      "pageIndex": 10,
+      "video": "179234.mp4",
+      "sampleTimesSeconds": [
+        14,
+        17
+      ],
+      "classification": "successful-looking-control",
+      "description": "Narrow crawling strip and bottom soldiers scene each appear independently bounded."
+    },
+    {
+      "id": "p012-left-panels",
+      "pageNumber": 12,
+      "pageIndex": 11,
+      "video": "179234.mp4",
+      "sampleTimesSeconds": [
+        24,
+        36
+      ],
+      "classification": "successful-looking-control",
+      "description": "Top-left red fighting scene and lower-left Wolverine/planes scene appear isolated."
+    },
+    {
+      "id": "p013-top-false-skew",
+      "pageNumber": 13,
+      "pageIndex": 12,
+      "video": "179234.mp4",
+      "sampleTimesSeconds": [
+        45.75,
+        46
+      ],
+      "classification": "confirmed-failure",
+      "description": "Rectangular top airplane panel becomes diagonal quadrilateral, excluding right-side artwork.",
+      "failureKinds": [
+        "invented-border",
+        "incomplete-frame",
+        "false-skew"
+      ],
+      "visibleTouch": {
+        "timeSeconds": 45.25,
+        "approximateNormalizedPoint": [
+          0.22,
+          0.17
+        ]
+      },
+      "referenceFrameIds": [
+        "p013-top"
+      ]
+    },
+    {
+      "id": "p013-left-tall",
+      "pageNumber": 13,
+      "pageIndex": 12,
+      "video": "179234.mp4",
+      "sampleTimesSeconds": [
+        58
+      ],
+      "classification": "confirmed-failure",
+      "description": "Tall star/bombs strip is truncated and includes part of top airplane scene.",
+      "failureKinds": [
+        "incomplete-frame",
+        "neighbor-contamination"
+      ],
+      "suggestedProbePoints": [
+        [
+          0.16,
+          0.5
+        ],
+        [
+          0.16,
+          0.8
+        ]
+      ]
+    },
+    {
+      "id": "p013-lower-right",
+      "pageNumber": 13,
+      "pageIndex": 12,
+      "video": "179234.mp4",
+      "sampleTimesSeconds": [
+        68
+      ],
+      "classification": "successful-looking-control",
+      "description": "Bottom-right explosion panel appears separately."
+    },
+    {
+      "id": "p014-lower-right",
+      "pageNumber": 14,
+      "pageIndex": 13,
+      "video": "179234.mp4",
+      "sampleTimesSeconds": [
+        80
+      ],
+      "classification": "successful-looking-control",
+      "description": "Bottom-right explosion scene appears separately."
+    },
+    {
+      "id": "p016-upper-strips",
+      "pageNumber": 16,
+      "pageIndex": 15,
+      "video": "179235.mp4",
+      "sampleTimesSeconds": [
+        10,
+        12.25,
+        14.75,
+        21.25,
+        27.75,
+        28.25
+      ],
+      "classification": "confirmed-failure",
+      "description": "Top strips merge across horizontal boundaries and split into invented left/right pieces. All five intended frames are full width.",
+      "failureKinds": [
+        "multi-panel-merge",
+        "invented-border",
+        "incomplete-frame"
+      ],
+      "referenceFrameIds": [
+        "p016-strip-1",
+        "p016-strip-2",
+        "p016-strip-3",
+        "p016-strip-4",
+        "p016-strip-5"
+      ]
+    },
+    {
+      "id": "p016-lower-strips",
+      "pageNumber": 16,
+      "pageIndex": 15,
+      "video": "179235.mp4",
+      "sampleTimesSeconds": [
+        34.75,
+        40.75,
+        41.25
+      ],
+      "classification": "successful-looking-control",
+      "description": "Fourth and fifth horizontal frames appear full width.",
+      "referenceFrameIds": [
+        "p016-strip-4",
+        "p016-strip-5"
+      ]
+    },
+    {
+      "id": "p017-top-clipped",
+      "pageNumber": 17,
+      "pageIndex": 16,
+      "video": "179235.mp4",
+      "sampleTimesSeconds": [
+        49.25,
+        49.75
+      ],
+      "classification": "confirmed-failure",
+      "description": "First horizontal scene excludes narration boxes at left and right.",
+      "failureKinds": [
+        "incomplete-frame"
+      ]
+    },
+    {
+      "id": "p017-second-row",
+      "pageNumber": 17,
+      "pageIndex": 16,
+      "video": "179235.mp4",
+      "sampleTimesSeconds": [
+        54.75,
+        55.25,
+        57.25
+      ],
+      "classification": "confirmed-failure",
+      "description": "Knife silhouette and lunging-woman panels merge across their vertical divider.",
+      "failureKinds": [
+        "multi-panel-merge"
+      ]
+    },
+    {
+      "id": "p017-right-stack",
+      "pageNumber": 17,
+      "pageIndex": 16,
+      "video": "179235.mp4",
+      "sampleTimesSeconds": [
+        62.75,
+        63.25
+      ],
+      "classification": "confirmed-failure",
+      "description": "Right scene in second row merges with separate frame below.",
+      "failureKinds": [
+        "multi-panel-merge"
+      ]
+    },
+    {
+      "id": "p017-bottom-right-false-skew",
+      "pageNumber": 17,
+      "pageIndex": 16,
+      "video": "179235.mp4",
+      "sampleTimesSeconds": [
+        69.5,
+        70
+      ],
+      "classification": "confirmed-failure",
+      "description": "Bottom-right arm/wound frame has a diagonal left edge instead of its vertical border.",
+      "failureKinds": [
+        "false-skew",
+        "incomplete-frame"
+      ]
+    },
+    {
+      "id": "p018-laboratory",
+      "pageNumber": 18,
+      "pageIndex": 17,
+      "video": "179235.mp4",
+      "sampleTimesSeconds": [
+        86
+      ],
+      "classification": "successful-looking-control",
+      "description": "Wide jars/laboratory panel appears as one crop."
+    },
+    {
+      "id": "p019-upper-right",
+      "pageNumber": 19,
+      "pageIndex": 18,
+      "video": "179235.mp4",
+      "sampleTimesSeconds": [
+        105,
+        105.5
+      ],
+      "classification": "confirmed-failure",
+      "description": "Upper-right ritual scene merges with eye/syringe scene below and clips text at sides.",
+      "failureKinds": [
+        "multi-panel-merge",
+        "incomplete-frame"
+      ]
+    },
+    {
+      "id": "p020-bottom-left",
+      "pageNumber": 20,
+      "pageIndex": 19,
+      "video": "179236.mp4",
+      "sampleTimesSeconds": [
+        22.5
+      ],
+      "classification": "successful-looking-control",
+      "description": "Standing transformed soldier panel appears independently bounded."
+    },
+    {
+      "id": "p021-top-left",
+      "pageNumber": 21,
+      "pageIndex": 20,
+      "video": "179236.mp4",
+      "sampleTimesSeconds": [
+        32.75,
+        33.25
+      ],
+      "classification": "confirmed-failure",
+      "description": "Narrow top-left face includes strip from adjacent action panel.",
+      "failureKinds": [
+        "neighbor-contamination"
+      ]
+    },
+    {
+      "id": "p021-top-group",
+      "pageNumber": 21,
+      "pageIndex": 20,
+      "video": "179236.mp4",
+      "sampleTimesSeconds": [
+        40.25
+      ],
+      "classification": "confirmed-failure",
+      "description": "Top face and action panels merge.",
+      "failureKinds": [
+        "multi-panel-merge"
+      ]
+    },
+    {
+      "id": "p021-middle-wide",
+      "pageNumber": 21,
+      "pageIndex": 20,
+      "video": "179236.mp4",
+      "sampleTimesSeconds": [
+        47.25,
+        47.75
+      ],
+      "classification": "successful-looking-control",
+      "description": "Middle wide orange fight scene appears separately."
+    },
+    {
+      "id": "p021-bottom-group",
+      "pageNumber": 21,
+      "pageIndex": 20,
+      "video": "179236.mp4",
+      "sampleTimesSeconds": [
+        54.25,
+        55.25,
+        58
+      ],
+      "classification": "confirmed-failure",
+      "description": "Tall lower-left panel and stacked lower-right panels merge; crop also truncates left frame.",
+      "failureKinds": [
+        "multi-panel-merge",
+        "incomplete-frame"
+      ]
+    },
+    {
+      "id": "p022-top-group",
+      "pageNumber": 22,
+      "pageIndex": 21,
+      "video": "179236.mp4",
+      "sampleTimesSeconds": [
+        65.25
+      ],
+      "classification": "confirmed-failure",
+      "description": "Top-left and top-right merge, with lower edge intruding into middle row.",
+      "failureKinds": [
+        "multi-panel-merge",
+        "neighbor-contamination"
+      ]
+    },
+    {
+      "id": "p022-top-right",
+      "pageNumber": 22,
+      "pageIndex": 21,
+      "video": "179236.mp4",
+      "sampleTimesSeconds": [
+        71.75,
+        72.25
+      ],
+      "classification": "successful-looking-control",
+      "description": "Leaping character at top-right appears independently bounded; exact corners require source comparison."
+    },
+    {
+      "id": "p022-middle-left",
+      "pageNumber": 22,
+      "pageIndex": 21,
+      "video": "179236.mp4",
+      "sampleTimesSeconds": [
+        79.25,
+        79.75
+      ],
+      "classification": "successful-looking-control",
+      "description": "Wolverine grabbing medal appears independently bounded."
+    },
+    {
+      "id": "p022-middle-group",
+      "pageNumber": 22,
+      "pageIndex": 21,
+      "video": "179236.mp4",
+      "sampleTimesSeconds": [
+        86.75,
+        87.25
+      ],
+      "classification": "confirmed-failure",
+      "description": "Middle-left and narrow right scene merge, with contamination from frame above.",
+      "failureKinds": [
+        "multi-panel-merge",
+        "neighbor-contamination"
+      ]
+    },
+    {
+      "id": "p022-lower-group",
+      "pageNumber": 22,
+      "pageIndex": 21,
+      "video": "179236.mp4",
+      "sampleTimesSeconds": [
+        94
+      ],
+      "classification": "confirmed-failure",
+      "description": "Lower-left medal panel includes parts of lower-right and middle panels.",
+      "failureKinds": [
+        "multi-panel-merge",
+        "neighbor-contamination"
+      ]
+    },
+    {
+      "id": "p025-wide-strip",
+      "pageNumber": 25,
+      "pageIndex": 24,
+      "video": "179236.mp4",
+      "sampleTimesSeconds": [
+        110
+      ],
+      "classification": "successful-looking-control",
+      "description": "Fourth horizontal couple/conversation scene appears isolated."
+    },
+    {
+      "id": "p027-upper-right-pair",
+      "pageNumber": 27,
+      "pageIndex": 26,
+      "video": "179237.mp4",
+      "sampleTimesSeconds": [
+        14
+      ],
+      "classification": "confirmed-failure",
+      "description": "Two upper-right vertical panels merge across intact internal divider.",
+      "failureKinds": [
+        "multi-panel-merge"
+      ]
+    },
+    {
+      "id": "p027-narrow-right-strip",
+      "pageNumber": 27,
+      "pageIndex": 26,
+      "video": "179237.mp4",
+      "sampleTimesSeconds": [
+        21
+      ],
+      "classification": "successful-looking-control",
+      "description": "Narrow horizontal scene under upper-right pair appears isolated."
+    },
+    {
+      "id": "p027-middle-wide",
+      "pageNumber": 27,
+      "pageIndex": 26,
+      "video": "179237.mp4",
+      "sampleTimesSeconds": [
+        29.25,
+        29.75
+      ],
+      "classification": "successful-looking-control",
+      "description": "Middle van conversation appears isolated; lettering overlaps source lower border."
+    },
+    {
+      "id": "p027-middle-lower-merge",
+      "pageNumber": 27,
+      "pageIndex": 26,
+      "video": "179237.mp4",
+      "sampleTimesSeconds": [
+        36.75,
+        37.25
+      ],
+      "classification": "confirmed-failure",
+      "description": "Slice from van conversation merges with upper portion of lower woman/van scene.",
+      "failureKinds": [
+        "multi-panel-merge",
+        "incomplete-frame"
+      ]
+    },
+    {
+      "id": "p027-bottom-left",
+      "pageNumber": 27,
+      "pageIndex": 26,
+      "video": "179237.mp4",
+      "sampleTimesSeconds": [
+        42.75,
+        43.25
+      ],
+      "classification": "successful-looking-control",
+      "description": "Narrow bottom-left van/window frame appears isolated."
+    },
+    {
+      "id": "p059-right-stack",
+      "pageNumber": 59,
+      "pageIndex": 58,
+      "video": "179237.mp4",
+      "sampleTimesSeconds": [
+        69.5,
+        70
+      ],
+      "classification": "confirmed-failure",
+      "description": "Crop spans right slice of full-width second panel plus both lower-right panels; white gutters remain inside crop.",
+      "failureKinds": [
+        "multi-panel-merge"
+      ],
+      "referenceFrameIds": [
+        "p059-lower-right-upper",
+        "p059-lower-right-lower"
+      ]
+    }
+  ],
+  "draftReferenceFrames": [
+    {
+      "id": "p013-top",
+      "pageNumber": 13,
+      "pageIndex": 12,
+      "label": "Top airplane scene",
+      "shape": "axis-aligned-rectangle",
+      "boundsNormalized": [
+        0.0246,
+        0.027,
+        0.9692,
+        0.3624
+      ],
+      "probePoints": [
+        [
+          0.22,
+          0.17
+        ],
+        [
+          0.5,
+          0.18
+        ],
+        [
+          0.82,
+          0.28
+        ]
+      ],
+      "status": "manual-draft",
+      "perEdgeToleranceNormalized": 0.008,
+      "annotationMethod": "Manual inspection of original artwork, not detector output",
+      "boundaryConvention": "Approximate outer ink border/envelope; tolerate small border thickness differences"
+    },
+    {
+      "id": "p016-strip-1",
+      "pageNumber": 16,
+      "pageIndex": 15,
+      "label": "Full-width strip 1",
+      "shape": "axis-aligned-rectangle",
+      "boundsNormalized": [
+        0.0294,
+        0.0268,
+        0.9682,
+        0.2028
+      ],
+      "probePoints": [
+        [
+          0.17,
+          0.1148
+        ],
+        [
+          0.5,
+          0.1148
+        ],
+        [
+          0.83,
+          0.1148
+        ]
+      ],
+      "status": "manual-draft",
+      "perEdgeToleranceNormalized": 0.008,
+      "annotationMethod": "Manual inspection of original artwork, not detector output",
+      "boundaryConvention": "Approximate outer ink border/envelope; tolerate small border thickness differences"
+    },
+    {
+      "id": "p016-strip-2",
+      "pageNumber": 16,
+      "pageIndex": 15,
+      "label": "Full-width strip 2",
+      "shape": "axis-aligned-rectangle",
+      "boundsNormalized": [
+        0.0294,
+        0.2051,
+        0.9682,
+        0.3887
+      ],
+      "probePoints": [
+        [
+          0.17,
+          0.2969
+        ],
+        [
+          0.5,
+          0.2969
+        ],
+        [
+          0.83,
+          0.2969
+        ]
+      ],
+      "status": "manual-draft",
+      "perEdgeToleranceNormalized": 0.008,
+      "annotationMethod": "Manual inspection of original artwork, not detector output",
+      "boundaryConvention": "Approximate outer ink border/envelope; tolerate small border thickness differences"
+    },
+    {
+      "id": "p016-strip-3",
+      "pageNumber": 16,
+      "pageIndex": 15,
+      "label": "Full-width strip 3",
+      "shape": "axis-aligned-rectangle",
+      "boundsNormalized": [
+        0.0294,
+        0.3917,
+        0.9682,
+        0.5815
+      ],
+      "probePoints": [
+        [
+          0.17,
+          0.4866
+        ],
+        [
+          0.5,
+          0.4866
+        ],
+        [
+          0.83,
+          0.4866
+        ]
+      ],
+      "status": "manual-draft",
+      "perEdgeToleranceNormalized": 0.008,
+      "annotationMethod": "Manual inspection of original artwork, not detector output",
+      "boundaryConvention": "Approximate outer ink border/envelope; tolerate small border thickness differences"
+    },
+    {
+      "id": "p016-strip-4",
+      "pageNumber": 16,
+      "pageIndex": 15,
+      "label": "Full-width strip 4",
+      "shape": "axis-aligned-rectangle",
+      "boundsNormalized": [
+        0.0294,
+        0.5845,
+        0.9682,
+        0.7774
+      ],
+      "probePoints": [
+        [
+          0.17,
+          0.6809
+        ],
+        [
+          0.5,
+          0.6809
+        ],
+        [
+          0.83,
+          0.6809
+        ]
+      ],
+      "status": "manual-draft",
+      "perEdgeToleranceNormalized": 0.008,
+      "annotationMethod": "Manual inspection of original artwork, not detector output",
+      "boundaryConvention": "Approximate outer ink border/envelope; tolerate small border thickness differences"
+    },
+    {
+      "id": "p016-strip-5",
+      "pageNumber": 16,
+      "pageIndex": 15,
+      "label": "Full-width strip 5",
+      "shape": "axis-aligned-rectangle",
+      "boundsNormalized": [
+        0.0294,
+        0.7804,
+        0.9682,
+        0.9725
+      ],
+      "probePoints": [
+        [
+          0.17,
+          0.8764
+        ],
+        [
+          0.5,
+          0.8764
+        ],
+        [
+          0.83,
+          0.8764
+        ]
+      ],
+      "status": "manual-draft",
+      "perEdgeToleranceNormalized": 0.008,
+      "annotationMethod": "Manual inspection of original artwork, not detector output",
+      "boundaryConvention": "Approximate outer ink border/envelope; tolerate small border thickness differences"
+    },
+    {
+      "id": "p009-lower-right-upper",
+      "pageNumber": 9,
+      "pageIndex": 8,
+      "label": "Bent figure above gray gutter",
+      "shape": "axis-aligned-rectangle",
+      "boundsNormalized": [
+        0.4554,
+        0.5686,
+        0.9554,
+        0.7297
+      ],
+      "probePoints": [
+        [
+          0.56,
+          0.63
+        ],
+        [
+          0.72,
+          0.65
+        ],
+        [
+          0.88,
+          0.68
+        ]
+      ],
+      "status": "manual-draft",
+      "perEdgeToleranceNormalized": 0.008,
+      "annotationMethod": "Manual inspection of original artwork, not detector output",
+      "boundaryConvention": "Approximate outer ink border/envelope; tolerate small border thickness differences"
+    },
+    {
+      "id": "p009-lower-right-lower",
+      "pageNumber": 9,
+      "pageIndex": 8,
+      "label": "Shoulder and snowy trees below gray gutter",
+      "shape": "axis-aligned-rectangle",
+      "boundsNormalized": [
+        0.4554,
+        0.7407,
+        0.9554,
+        0.977
+      ],
+      "probePoints": [
+        [
+          0.56,
+          0.83
+        ],
+        [
+          0.72,
+          0.87
+        ],
+        [
+          0.88,
+          0.91
+        ]
+      ],
+      "status": "manual-draft",
+      "perEdgeToleranceNormalized": 0.008,
+      "annotationMethod": "Manual inspection of original artwork, not detector output",
+      "boundaryConvention": "Approximate outer ink border/envelope; tolerate small border thickness differences"
+    },
+    {
+      "id": "p059-lower-right-upper",
+      "pageNumber": 59,
+      "pageIndex": 58,
+      "label": "Upper right guard and wrist scene",
+      "shape": "axis-aligned-rectangle",
+      "boundsNormalized": [
+        0.5035,
+        0.5754,
+        0.96,
+        0.7789
+      ],
+      "probePoints": [
+        [
+          0.6,
+          0.65
+        ],
+        [
+          0.73,
+          0.68
+        ],
+        [
+          0.88,
+          0.71
+        ]
+      ],
+      "status": "manual-draft",
+      "perEdgeToleranceNormalized": 0.008,
+      "annotationMethod": "Manual inspection of original artwork, not detector output",
+      "boundaryConvention": "Approximate outer ink border/envelope; tolerate small border thickness differences"
+    },
+    {
+      "id": "p059-lower-right-lower",
+      "pageNumber": 59,
+      "pageIndex": 58,
+      "label": "Lower right guard and smiling character",
+      "shape": "axis-aligned-rectangle",
+      "boundsNormalized": [
+        0.5035,
+        0.7842,
+        0.96,
+        0.9824
+      ],
+      "probePoints": [
+        [
+          0.6,
+          0.84
+        ],
+        [
+          0.73,
+          0.88
+        ],
+        [
+          0.88,
+          0.93
+        ]
+      ],
+      "status": "manual-draft",
+      "perEdgeToleranceNormalized": 0.008,
+      "annotationMethod": "Manual inspection of original artwork, not detector output",
+      "boundaryConvention": "Approximate outer ink border/envelope; tolerate small border thickness differences"
+    }
+  ]
+}

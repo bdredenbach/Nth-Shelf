@@ -10,7 +10,18 @@ const PanelDetect = {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
-        try { resolve(this._analyze(img, log)); }
+        try {
+          const baseline = this._analyze(img, log);
+          // The stacked-page route establishes every strip from page-wide
+          // border evidence, independently of the finger or legacy seed bank.
+          let layout = [];
+          try {
+            if (typeof PanelPageLayout !== 'undefined') layout = PanelPageLayout.analyze(img, log);
+          } catch (error) {
+            if (log) log(`page-layout deferred: ${error.message}`);
+          }
+          resolve(layout.length >= 4 ? layout : baseline);
+        }
         catch (err) {
           console.warn("Panel detection failed:", err);
           if (log) log(`ERROR: ${err.message}`);
@@ -860,6 +871,79 @@ const PanelDetect = {
     }
   },
 
+  // A row-then-column scan can leave a nested panel group intact: after a
+  // vertical split, horizontal gutters may span that child but not its parent.
+  // Refine only already-detected rectangles, requiring the same full-span
+  // quiet corridor as the baseline plus textured artwork on both sides.
+  _splitInternalGutters(data, w, h, panels, log) {
+    const lum = new Float32Array(w * h);
+    for (let p = 0; p < lum.length; p++) {
+      const i = p * 4;
+      lum[p] = .299 * data[i] + .587 * data[i + 1] + .114 * data[i + 2];
+    }
+    let splitCount = 0;
+    const split = (rect, depth) => {
+      if (depth > 5) return [rect];
+      const [x0, y0, x1, y1] = rect;
+      const width = x1 - x0, height = y1 - y0;
+      let best = null;
+      for (const axis of ['H', 'V']) {
+        const total = axis === 'H' ? height : width;
+        const span = axis === 'H' ? width : height;
+        if (span < 30) continue;
+        const profile = new Float32Array(total);
+        for (let p = 0; p < total; p++) {
+          let sum = 0, square = 0;
+          // Do not trim the endpoints or tolerate holes: that can turn long
+          // artwork strokes into false separators on a dark page.
+          for (let v = 0; v < span; v++) {
+            const value = axis === 'H'
+              ? lum[(y0 + p) * w + x0 + v]
+              : lum[(y0 + v) * w + x0 + p];
+            sum += value;
+            square += value * value;
+          }
+          profile[p] = Math.sqrt(Math.max(0, square / span - (sum / span) ** 2));
+        }
+        const minRun = Math.max(2, Math.round((axis === 'H' ? h : w) * .006));
+        for (let p = 0; p < total; p++) {
+          if (profile[p] >= 10) continue;
+          const start = p;
+          while (p < total && profile[p] < 10) p++;
+          const end = p;
+          if (end - start < minRun || start < total * .12 || total - end < total * .12) continue;
+          let before = 0, after = 0;
+          for (let i = Math.max(0, start - 5); i < start; i++) before = Math.max(before, profile[i]);
+          for (let i = end; i < Math.min(total, end + 5); i++) after = Math.max(after, profile[i]);
+          if (before < 20 || after < 20) continue;
+          const first = axis === 'H' ? [x0, y0, x1, y0 + start] : [x0, y0, x0 + start, y1];
+          const second = axis === 'H' ? [x0, y0 + end, x1, y1] : [x0 + end, y0, x1, y1];
+          if ([first, second].some(child => {
+            const cw = child[2] - child[0], ch = child[3] - child[1];
+            return cw < w * .05 || ch < h * .05 || cw * ch < w * h * .012;
+          })) continue;
+          const score = (end - start) * Math.min(before, after);
+          if (!best || score > best.score) best = { first, second, score };
+        }
+      }
+      if (!best) return [rect];
+      splitCount++;
+      return [...split(best.first, depth + 1), ...split(best.second, depth + 1)];
+    };
+    const refined = panels.flatMap(panel => {
+      const rect = [Math.round(panel.x * w), Math.round(panel.y * h),
+        Math.round((panel.x + panel.w) * w), Math.round((panel.y + panel.h) * h)];
+      const children = split(rect, 0);
+      // Preserve the original object and exact coordinates when no internal
+      // separation is proven; this pass cannot expand any baseline crop.
+      if (children.length === 1) return [panel];
+      return children.map(child => ({ ...panel, x: child[0] / w, y: child[1] / h,
+        w: (child[2] - child[0]) / w, h: (child[3] - child[1]) / h }));
+    });
+    if (log && splitCount) log(`internal-gutter refinement: ${panels.length} -> ${refined.length} panels (${splitCount} proven splits)`);
+    return refined;
+  },
+
   _analyze(img, log) {
     const maxDim = 900;
     const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
@@ -878,7 +962,8 @@ const PanelDetect = {
     const panels=[];
     for(const [sy,ey] of strips){const stripH=ey-sy;if(stripH<h*.05)continue;const colStd=new Array(w);for(let x=0;x<w;x++){let sum=0,sumSq=0;for(let y=sy;y<ey;y++){const l=lumAt(x,y);sum+=l;sumSq+=l*l;}const mean=sum/stripH;colStd[x]=Math.sqrt(Math.max(0,sumSq/stripH-mean*mean));}const cols=splitByGutter(colStd,w,thresh,minCol);for(const [sx,ex] of cols){const pw=ex-sx;if(pw<w*.05)continue;panels.push({x:sx/w,y:sy/h,w:pw/w,h:stripH/h});}}
     if(log)log(`raw panel count before collapse-check: ${panels.length}`);
-    if(panels.length<=1){if(log)log("-> collapsed to 0 (<=1 panel found)");return [];}return panels;
+    if(panels.length<=1){if(log)log("-> collapsed to 0 (<=1 panel found)");return [];}
+    return this._splitInternalGutters(data,w,h,panels,log);
   }
 };
 

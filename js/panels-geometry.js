@@ -16,6 +16,8 @@ const PanelGeometry = {
     const inferred=panel?._identitySource||
       (panel?._v100Hybrid?'v100':panel?._v87BoundarySet?'v99':'unknown');
 
+    if(inferred==='page-layout' && panel?._pageLayoutProof?.closed===true)
+      return {mode:'hold',source:'PAGE-LAYOUT',reason:'complete-stacked-frame'};
     if(inferred==='v73') return {mode:'hold',source:'V73',reason:'stable-orthogonal'};
     if(inferred==='v100'&&(fragment||composite||edgeClipped)) {
       return {mode:composite?'frame':'inspect',source:'V100',

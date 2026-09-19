@@ -6,7 +6,9 @@
 const PanelGeometryOrthogonal = {
   _provenQuad(panel) {
     const q = panel?._quad;
-    if (panel?._frameEnvelope?.chainConnected !== true ||
+    const connected = panel?._frameEnvelope?.chainConnected === true ||
+      (panel?._pageLayoutProof?.kind === 'stacked-strips' && panel._pageLayoutProof.closed === true);
+    if (!connected ||
         !Array.isArray(q) || q.length !== 4 ||
         q.some(p => !Number.isFinite(p?.x) || !Number.isFinite(p?.y))) return null;
     const turns = q.map((p, i) => {
