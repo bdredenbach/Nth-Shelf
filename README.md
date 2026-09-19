@@ -106,7 +106,34 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.18 Test 1 — Whole bomber and SNIKT frames; artwork-cutout rejection**
+**Version 2.79.19 Test 1 — Whole page-19 middle scene**
+
+Page 19's middle room scene now has one complete frame owner, including
+Wolverine at the left. Its bottom full-width scene also has a stable identity.
+Both pass center/left/right/north/south Reader taps under three browser-like
+Skia resampling settings. The full syringe panel and upper speech are recovered
+under Sharp, but remain unproved under Skia; that case is still open.
+
+The new partial recovery runs only when all established identity routes return
+empty, requires a uniformly dark exterior, and retains independently closed
+leaves. An uncertain neighboring region does not become a panel. Full-length
+ink, attached separators, missing-border and inset checks remain required.
+The 74-page comparison changes only page 19; every existing identity remains
+exact. Previously confirmed pages 7/17 and the earlier controls remain passing.
+
+**Phone priorities:** on page 19, tap left/right/center/north/south inside the
+middle room scene. Every result should retain Wolverine and the whole room.
+Recheck the bottom scene and report the syringe result. The upper-right room
+and eye/injection strip, and the upper groups on pages 9–11, remain queued.
+Bubble behavior is unchanged; its explicit second-level phone checks remain.
+
+See [2.79.19 results](qa27900/frame-accuracy/queue-results-27919.md) and the
+[work queue](qa27900/frame-accuracy/work-queue.md). This remains the 2.79 accuracy
+series. Comic pages and recordings are excluded from the repository and APK.
+
+## 🧪 Release History (Newest First)
+
+## V2.79.18 Test 1 — Whole bomber and SNIKT frames
 
 Page 7's red bomber strip has one whole-frame owner. Page 17 now has six
 independent frames, including the full-height SNIKT column and both neighboring
@@ -133,8 +160,6 @@ right frame is still unproved. This is another 2.79 accuracy test, not 2.80.00.
 See [2.79.18 results](qa27900/frame-accuracy/queue-results-27918.md) and the
 [work queue](qa27900/frame-accuracy/work-queue.md). Comic pages and recordings
 remain excluded from the repository and APK.
-
-## 🧪 Release History (Newest First)
 
 ## V2.79.17 Test 1 — Separate bottom frames and snow rejection
 

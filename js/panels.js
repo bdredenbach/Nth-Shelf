@@ -51,6 +51,12 @@ const PanelDetect = {
           } catch (error) {
             if (log) log(`ink-core supplement deferred: ${error.message}`);
           }
+          if(!closed.length){
+            try {
+              if(typeof PanelPartition!=='undefined'&&PanelPartition.completeDarkImage)
+                closed=PanelPartition.completeDarkImage(img,log);
+            } catch(error) { if(log)log(`dark partition completion deferred: ${error.message}`); }
+          }
           resolve(closed);
         }
         catch (err) {

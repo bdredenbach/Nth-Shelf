@@ -35,6 +35,20 @@ for(const opts of [{inset:true},{inset:true,partialInset:true},{broken:true},{on
  assert.equal(run({darkMargin:true,...opts}).ps.length,0,'dark exterior never exempts interrupted/inset/absent borders');
 assert.equal(det.analyzeRGBA(new Uint8Array(8),420,700).length,0,'malformed data rejected');
 console.log('page-partition: independently drawn connected leaves, two-axis tilt, insets, partial borders and malformed input passed');
+// Low-contrast partial recovery must retain proved siblings without granting
+// ownership to interrupted borders or weakening nested-frame uncertainty.
+for(const opts of [{}, {darkMargin:true,flat:true}, {darkMargin:true,brokenOuter:true},
+ {darkMargin:true,inset:true}, {darkMargin:true,inset:true,partialInset:true}]){
+ const f=fixture(opts);assert.equal(det.analyzeRGBA(f.data,f.w,f.h,null,{inkCompletion:true,allowPartial:true}).length,0);
+}
+for(const [opts,count] of [[{darkMargin:true},5],[{darkMargin:true,broken:true},2],
+ [{darkMargin:true,oneEnded:true},3],[{darkMargin:true,thinDivider:1},4],[{darkMargin:true,edgeDivider:true},4]]){
+ const f=fixture(opts),ps=det.analyzeRGBA(f.data,f.w,f.h,null,{inkCompletion:true,allowPartial:true});
+ assert.equal(ps.length,count);
+ for(const p of ps){assert(f.expected.some(q=>p._quad.every((v,c)=>Math.hypot(v.x*f.w-q[c][0],v.y*f.h-q[c][1])<4)), 'partial result must match an independently drawn whole leaf');}
+ if(count<5)assert(ps.every(p=>p._partitionProof.complete===false&&p._partitionProof.unresolvedLeafCount>0));
+}
+console.log('dark partial recovery: intact siblings retained; interrupted/inset/uniform regions never become owners');
 // Existing independent frames keep priority unless a complete partition proves
 // matching borders and disjoint additions (covered by partition-completion).
 const fs=require('node:fs'),vm=require('node:vm');
@@ -51,5 +65,12 @@ const fs=require('node:fs'),vm=require('node:vm');
  base=[];stack=Array.from({length:5},(_,i)=>({id:i}));assert.equal(await reader.detect('fixture'),stack);assert.equal(calls,1);
  stack=[];assert.equal(await reader.detect('fixture'),offered);assert.equal(calls,2,'partition can fill an empty page identity result');
  fail=true;assert.equal((await reader.detect('fixture')).length,0,'partition failure leaves the original tap fallback available');
+ let retry=0;const recovered=[{id:'independently-proved-dark-leaf'}];
+ scope.PanelPartition.completeDarkImage=()=>{retry++;return recovered;};
+ base=[{id:'baseline'}];assert.equal(await reader.detect('fixture'),base);assert.equal(retry,0);
+ base=[];closed=[{id:'closed'}];assert.equal(await reader.detect('fixture'),closed);assert.equal(retry,0);
+ closed=[];assert.equal(await reader.detect('fixture'),recovered);assert.equal(retry,1);
+ scope.PanelPartition.completeDarkImage=()=>{throw new Error('uncertain dark margin');};
+ assert.equal((await reader.detect('fixture')).length,0,'failed dark recovery preserves empty fallback');
  console.log('page-partition: established route priority and failure fallback passed');
 })().catch(error=>{console.error(error);process.exitCode=1;});

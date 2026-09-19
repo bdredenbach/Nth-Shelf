@@ -2,10 +2,27 @@
 
 Latest phone review: **2.79.18 Test 1**, recording `179355.mp4`.
 See [new phone findings](video-findings-27918.md) and
-[2.79.18 local results](queue-results-27918.md). Runtime/APK stay 2.79.18 Test 1.
+[2.79.18 local results](queue-results-27918.md). The review describes 2.79.18; the current candidate is 2.79.19 Test 1.
 
 Accuracy comes first. Keep the 2.79.xxx series until the full frame goal is met;
 reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
+
+## 2.79.19 candidate status
+
+- FQ-15d: page-19 middle scene retains Wolverine and the whole room under
+  Sharp and all three Skia qualities, five moved taps each. Phone check pending.
+- Page-19 bottom full-width scene is a new stable control under the same tests.
+- FQ-15a/c: the whole syringe and its upper speech gain a Sharp identity, but
+  the grid background still causes Skia abstention. Do not mark these solved.
+  Taps in the left portion of the middle scene now use its full-scene identity.
+- FQ-15b: balloon-crossed upper-right room/eye strip stays unresolved.
+- FQ-08/09/10: overlapping/stepped and borderless groups on pages 9–11 stay open.
+- All previous .18 identities remain exact across the 74-page comparison.
+  Pages 7/17 and earlier confirmed frame controls retain their results.
+- Bubble code is unchanged; FQ-12/FQ-13 targeted phone checks remain pending.
+
+See [2.79.19 local results](queue-results-27919.md). Prior sections retain their
+historical build context.
 
 ## Latest phone results — 179355.mp4
 

@@ -21,6 +21,11 @@ const PanelPartition = (() => {
     }}
     if(roots.length>1)return [];
     const darkMargin=roots.length===0;
+    // This optional recovery is isolated from established maps. It requires a
+    // dark exterior and retains only individually proved leaves; uncertainty
+    // continues to block its own region, including balloon-crossed dividers.
+    const inkCompletion=options.inkCompletion===true;
+    if(inkCompletion&&!darkMargin)return [];
     function outerFit(box,side){const vertical=side%2===0,inward=side<2?1:-1,pos=box[side],lo=vertical?box[1]:box[0],hi=vertical?box[3]:box[2],count=vertical?w:h,samples=[];
       for(let t=lo+5;t<hi-4;t++){let best=null;for(let d=-6;d<=6;d++){const p=pos+d;if(p<8||p>=count-8||at(vertical,p,t)>=70)continue;let bright=0;for(let k=2;k<=4;k++)bright+=at(vertical,p-inward*k,t)>220;if(bright<3)continue;const center=p+inward*.5;if(best===null||Math.abs(center-pos)<Math.abs(best-pos))best=center;}if(best!==null)samples.push([t,best]);}
       if(samples.length/(hi-lo)<.9)return null;const f=regress(samples);if(!f||Math.abs(f.slope)>.02||f.residual>1.5)return null;return f;
@@ -38,7 +43,7 @@ const PanelPartition = (() => {
         for(let t=Math.ceil(along*.02);t<along*.98;t++){
           for(let d=3;d<cross*.08;d++){
             const p=inward>0?d:cross-1-d;
-            if(at(vertical,p,t)<=70)continue;
+            if(at(vertical,p,t)<=(inkCompletion?25:70))continue;
             if([1,2,3].every(k=>at(vertical,p-inward*k,t)<55))points.push([t,p-inward*2]);
             break;
           }
@@ -53,7 +58,7 @@ const PanelPartition = (() => {
           }
         }
         if(best.length/along<.45)return null;
-        const f=regress(best);if(!f||Math.abs(f.slope)>.02||f.residual>1)return null;
+        const f=regress(best);if(!f||Math.abs(f.slope)>.02||f.residual>(inkCompletion?1.5:1))return null;
         fits.push({...f,support:best.length/along});
       }
       return fits;
@@ -105,18 +110,35 @@ const PanelPartition = (() => {
           if(hi-lo>9||lo<=y-8||hi>=y+8||lo<3||hi+3>=bound||Math.min(at(vertical,lo-3,x),at(vertical,hi+3,x))-at(vertical,y,x)<20)continue;
           samples.push([x,(lo+hi)/2]);
         }
-        if(samples.length/(best.ends[1][0]-best.ends[0][0])<.45)continue;
+        const sparseCore=inkCompletion&&core;
+        const span=best.ends[1][0]-best.ends[0][0];
+        if(samples.length/span < (sparseCore ? .25 : .45))continue;
+        // Dark adjacent artwork may hide ridge samples. A sparse fit must
+        // still have samples in every quarter, plus constant full-length ink
+        // and attachment at both ends after fitting. A local art fragment
+        // cannot supply a rail for the entire cell.
+        if(sparseCore && [0,1,2,3].some(k=>samples.filter(p=>
+          p[0]>=best.ends[0][0]+span*k/4 &&
+          p[0]<best.ends[0][0]+span*(k+1)/4).length<span*.035))continue;
         const f=regress(samples);if(!f||f.residual>1.5||Math.abs(f.slope)>.13)continue;
         const ends=endpoints(f.slope,f.offset);
         if(ends.some((p,i)=>Math.hypot(p[0]-best.ends[i][0],p[1]-best.ends[i][1])>4)||ends[0][1]<=qq[0][1]+8||ends[0][1]>=qq[3][1]-8||ends[1][1]<=qq[1][1]+8||ends[1][1]>=qq[2][1]-8)continue;
-        const m=evidence(f.slope,f.offset,ends);if(!m||m.dark<.97||m.mean>=30||m.std>=25||m.ridge<.55||(m.thick<.70&&!(darkMargin&&m.paired>=.85&&m.dark>=.995&&m.mean<15&&m.std<8&&m.ridge>=.70&&m.attached&&f.residual<1)))continue;
+        const m=evidence(f.slope,f.offset,ends);
+        if(sparseCore&&(!m||m.dark<.995||m.mean>=15||m.std>=8||!m.attached||f.residual>1))continue;
+        if(!m||m.dark<.97||m.mean>=30||m.std>=25||m.ridge<.55||(m.thick<.70&&!(darkMargin&&m.paired>=.85&&m.dark>=.995&&m.mean<15&&m.std<8&&m.ridge>=.70&&m.attached&&f.residual<1)))continue;
         best={...best,...f,evidence:m,points:vertical?ends.map(p=>p.slice().reverse()):ends};return {best,uncertain};
       }
       return {best:null,uncertain:true};
     }
     const leaves=[],blocked=[],splits=[];let failed=false;
     function walk(q,depth){if(failed)return;if(depth>7||leaves.length+splits.length>24||!closed(q)){failed=true;return;}const hcut=find(q,false),vcut=find(q,true),choices=[hcut.best,vcut.best].filter(Boolean);if(!choices.length){if(hcut.uncertain||vcut.uncertain){if(options.allowPartial===true)blocked.push(q);else failed=true;return;}leaves.push(q);return;}const c=choices.sort((a,b)=>b.score-a.score)[0],[a,b]=c.points;splits.push(c);if(c.vertical){walk([q[0],a,b,q[3]],depth+1);walk([a,q[1],q[2],b],depth+1);}else{walk([q[0],q[1],b,a],depth+1);walk([a,b,q[2],q[3]],depth+1);}}
-    walk(root,0);if(failed||leaves.length<4||leaves.length>12||!splits.some(c=>c.vertical)||!splits.some(c=>!c.vertical))return [];
+    walk(root,0);
+    // Partial recovery can prove two full-width siblings while a third region
+    // remains unresolved. It still needs two attached separators and all the
+    // same closed-boundary/inset checks; no uncertain parent is emitted.
+    if(failed || leaves.length<(inkCompletion?2:4) || leaves.length>12 ||
+       (!inkCompletion&&!splits.some(c=>c.vertical)) ||
+       !splits.some(c=>!c.vertical) || (inkCompletion&&splits.length<2))return [];
     // Closed or partly interrupted nested boxes only veto the map. They cannot
     // become output without independent semantic/visibility ownership.
     // Keep all weak evidence, including unresolved regions, within a bounded
@@ -164,10 +186,11 @@ const PanelPartition = (() => {
       for(let i=0;i<leaves.length;i++)leaves[i]=adjusted[i];
     }
     if(log)log(`page partition: ${leaves.length} closed leaves, ${splits.length} attached separators${blocked.length?`, ${blocked.length} unresolved regions`:""}`);
-    return leaves.map(q=>{const quad=q.map(p=>({x:p[0]/w,y:p[1]/h})),xs=quad.map(p=>p.x),ys=quad.map(p=>p.y);return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:quad,_identitySource:'page-partition',_geometryOwner:'orthogonal-frame',_geometryType:'connected-page-partition',_partitionProof:{version:1,connected:true,analysisWidth:w,analysisHeight:h,leafCount:leaves.length,separatorCount:splits.length,...(darkMargin?{outerMethod:'dark-margin-transition'}:{}),outerFits:edges,...(blocked.length?{complete:false,unresolvedLeafCount:blocked.length,unresolvedRegions:blocked.map(q=>q.map(p=>({x:p[0]/w,y:p[1]/h})))}:{})}};});
+    return leaves.map(q=>{const quad=q.map(p=>({x:p[0]/w,y:p[1]/h})),xs=quad.map(p=>p.x),ys=quad.map(p=>p.y);return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:quad,_identitySource:'page-partition',_geometryOwner:'orthogonal-frame',_geometryType:'connected-page-partition',_partitionProof:{version:1,connected:true,analysisWidth:w,analysisHeight:h,leafCount:leaves.length,separatorCount:splits.length,...(darkMargin?{outerMethod:inkCompletion?'dark-margin-low-contrast':'dark-margin-transition'}:{}),outerFits:edges,...(blocked.length?{complete:false,unresolvedLeafCount:blocked.length,unresolvedRegions:blocked.map(q=>q.map(p=>({x:p[0]/w,y:p[1]/h})))}:{})}};});
   }
   function analyzeImage(img,log,options){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log,options);}
-  return {analyzeRGBA,analyzeImage};
+  return {analyzeRGBA,analyzeImage,
+    completeDarkImage:(img,log)=>analyzeImage(img,log,{inkCompletion:true,allowPartial:true})};
 })();
 if(typeof window!=='undefined')window.PanelPartition=PanelPartition;
 if(typeof module!=='undefined')module.exports=PanelPartition;
