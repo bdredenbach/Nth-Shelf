@@ -165,7 +165,58 @@ const assert = require('node:assert/strict');
   await page.evaluate(()=>ShelfGuide.finish());
   assert.deepEqual(await page.evaluate(()=>immersiveCalls),[true]);
   await pinch();
-  await page.evaluate(async()=>{Reader.resetZoom({animate:false});await Reader.setMode('single');Reader.close();delete window.NthShelfNative;});
+  await page.evaluate(async()=>{Reader.resetZoom({animate:false});await Reader.setMode('scroll');});
+  await page.waitForTimeout(1400);
+  await page.evaluate(()=>{ShelfGuide.finish();Reader.startAutoScroll();Reader.pauseAutoScroll();});
+  const speed = page.locator('#auto-scroll-speed');
+  const selectSpeed = value => speed.evaluate((el,value)=>{el.value=value;el.dispatchEvent(new Event('input',{bubbles:true}));},value);
+  const sliderBox=await speed.boundingBox();
+  await speed.click({position:{x:sliderBox.width/2,y:sliderBox.height/2}});
+  assert.equal(await page.locator('#auto-scroll-value').innerText(),'1.00×');
+  await selectSpeed('0.33');
+  assert.equal(await page.locator('#auto-scroll-value').innerText(),'0.33×');
+  await speed.press('ArrowRight');
+  assert.equal(await speed.inputValue(),'0.34');
+  await page.locator('#auto-scroll-slower').click();
+  assert.equal(await speed.inputValue(),'0.33');
+  await page.locator('#auto-scroll-faster').click();
+  assert.equal(await page.locator('#auto-scroll-value').innerText(),'0.34×');
+  assert.equal(await speed.getAttribute('aria-valuetext'),'0.34× speed');
+  await selectSpeed('0');assert.equal(await page.locator('#auto-scroll-slower').isDisabled(),true);
+  await selectSpeed('2');assert.equal(await page.locator('#auto-scroll-faster').isDisabled(),true);
+  await selectSpeed('0.40');
+  for (const width of [360,412]) {
+   await page.setViewportSize({width,height:915});
+   await page.evaluate(()=>Reader.revealAutoScrollControls());
+   const panel=await page.locator('.auto-scroll-control-inner').boundingBox();
+   assert.ok(panel.x>=0 && panel.x+panel.width<=width,'Auto Scroll panel clipped');
+   const track=await speed.boundingBox();
+   const ticks=await page.locator('.auto-scroll-ticks span').evaluateAll(nodes=>nodes.map(n=>{const r=n.getBoundingClientRect();return r.x+r.width/2;}));
+   for(let i=0;i<ticks.length;i++)assert.ok(Math.abs(ticks[i]-(track.x+8+(track.width-16)*i/4))<1,'Tick does not match multiplier');
+   await page.screenshot({path:'/tmp/nth-shelf-auto-scroll-'+width+'.png'});
+  }
+  const scrollTravel=[];
+  for(const mode of ['scroll','manga','webcomic']) {
+   await page.evaluate(async mode=>{Reader.stopAutoScroll();await Reader.setMode(mode);},mode);
+   await page.waitForTimeout(1400);
+   await page.evaluate(()=>ShelfGuide.finish());
+   for(const multiplier of [.33,.4,.5]) {
+    const result=await page.evaluate(async multiplier=>{
+     const axis=Reader.mode==='webcomic'?'scrollTop':'scrollLeft',sign=Reader.mode==='manga'?-1:1;
+     const stage=Reader.els.stage;stage[axis]=sign*100;
+     Reader.setAutoScrollSpeed(multiplier);Reader.startAutoScroll();
+     await new Promise(requestAnimationFrame);
+     const start=stage[axis],time=performance.now();
+     await new Promise(resolve=>setTimeout(resolve,1100));
+     const seconds=(performance.now()-time)/1000,distance=sign*(stage[axis]-start);
+     Reader.stopAutoScroll();return {seconds,distance};
+    },multiplier);
+    assert.ok(Math.abs(result.distance-multiplier*38*result.seconds)<3,JSON.stringify({mode,multiplier,...result}));
+    scrollTravel.push({mode,multiplier,...result});
+   }
+  }
+  console.log('Actual browser scroll travel:',JSON.stringify(scrollTravel));
+  await page.evaluate(async()=>{await Reader.setMode('single');Reader.close();delete window.NthShelfNative;});
   assert.equal(await page.evaluate(()=>immersiveCalls.at(-1)),false);
   await page.evaluate(()=>Library.toggleShelfMode());
   await page.waitForTimeout(1400);

@@ -25,6 +25,8 @@ const Reader = {
  _autoScrollAnimation: null,
  _autoScrollLastTime: 0,
  _autoScrollSpeed: 38,
+ _autoScrollPosition: null,
+ _autoScrollObservedPosition: null,
  _autoScrollPaused: false,
   _autoScrollControlHideTimer: null,
   _autoScrollDrag: null,
@@ -104,6 +106,17 @@ const Reader = {
     this.els.autoScrollPanel = document.getElementById("auto-scroll-control-panel");
     this.els.autoScrollSpeed = document.getElementById("auto-scroll-speed");
     this.els.autoScrollPlay = document.getElementById("auto-scroll-play");
+    this.els.autoScrollValue = document.getElementById("auto-scroll-value");
+    this.els.autoScrollSlower = document.getElementById("auto-scroll-slower");
+    this.els.autoScrollFaster = document.getElementById("auto-scroll-faster");
+    for (const [button, step] of [[this.els.autoScrollSlower, -1], [this.els.autoScrollFaster, 1]]) {
+      button?.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.setAutoScrollSpeed((Math.round(this._autoScrollSpeed / 38 * 100) + step) / 100);
+        this.revealAutoScrollControls();
+      });
+    }
+    this.setAutoScrollSpeed(this._autoScrollSpeed / 38);
 
     const wakeAutoScrollControls = () => this.revealAutoScrollControls();
     const holdAutoScrollControls = () => this.keepAutoScrollControlsVisible();
@@ -1436,6 +1449,8 @@ const Reader = {
     }
     this._autoScrollAnimation = null;
     this._autoScrollLastTime = 0;
+    this._autoScrollPosition = null;
+    this._autoScrollObservedPosition = null;
     this._autoScrollEnabled = false;
     this._autoScrollPaused = false;
     this.updateAutoScrollControl();
@@ -1453,12 +1468,16 @@ const Reader = {
     this._autoScrollEnabled = true;
     this._autoScrollPaused = false;
     this._autoScrollLastTime = 0;
+    this._autoScrollPosition = null;
+    this._autoScrollObservedPosition = null;
     this.updateAutoScrollControl();
 
     const tick = (now) => {
       if (!this._autoScrollEnabled || this._autoScrollPaused) {
         this._autoScrollAnimation = null;
         this._autoScrollLastTime = 0;
+        this._autoScrollPosition = null;
+        this._autoScrollObservedPosition = null;
         this.updateAutoScrollControl();
         return;
       }
@@ -1476,34 +1495,27 @@ const Reader = {
       const speed = Number(this._autoScrollSpeed || 0);
       const distance = speed * dt / 1000;
 
-      if (mode === "webcomic") {
-        const maxY = Math.max(0, stage.scrollHeight - stage.clientHeight);
-        const nextY = Math.max(0, Math.min(maxY, stage.scrollTop + distance));
-        stage.scrollTop = nextY;
+      const axis = mode === "webcomic" ? "scrollTop" : "scrollLeft";
+      const extent = mode === "webcomic"
+        ? Math.max(0, stage.scrollHeight - stage.clientHeight)
+        : Math.max(0, stage.scrollWidth - stage.clientWidth);
+      const reverse = mode === "manga";
+      const min = reverse ? -extent : 0;
+      const max = reverse ? 0 : extent;
+      const observed = stage[axis];
+      // Keep the exact target separately: a WebView may round scroll offsets.
+      // Rebase after a manual scroll (or layout clamp), not after our own rounding.
+      if (this._autoScrollPosition === null || observed !== this._autoScrollObservedPosition) {
+        this._autoScrollPosition = observed;
+      }
+      this._autoScrollPosition = Math.max(min, Math.min(max,
+        this._autoScrollPosition + (reverse ? -distance : distance)));
+      if (distance !== 0) stage[axis] = this._autoScrollPosition;
+      this._autoScrollObservedPosition = stage[axis];
 
-        if ((speed > 0 && nextY >= maxY - 1) || (speed < 0 && nextY <= 1)) {
-          this.stopAutoScroll();
-          return;
-        }
-      } else if (mode === "manga") {
-        const maxX = Math.max(0, stage.scrollWidth - stage.clientWidth);
-        const minX = -maxX;
-        const nextX = Math.max(minX, Math.min(0, stage.scrollLeft - distance));
-        stage.scrollLeft = nextX;
-
-        if ((speed > 0 && nextX <= minX + 1) || (speed < 0 && nextX >= -1)) {
-          this.stopAutoScroll();
-          return;
-        }
-      } else {
-        const maxX = Math.max(0, stage.scrollWidth - stage.clientWidth);
-        const nextX = Math.max(0, Math.min(maxX, stage.scrollLeft + distance));
-        stage.scrollLeft = nextX;
-
-        if ((speed > 0 && nextX >= maxX - 1) || (speed < 0 && nextX <= 1)) {
-          this.stopAutoScroll();
-          return;
-        }
+      if (speed > 0 && (reverse ? this._autoScrollPosition <= min : this._autoScrollPosition >= max)) {
+        this.stopAutoScroll();
+        return;
       }
 
       this._autoScrollAnimation = requestAnimationFrame(tick);
@@ -1517,6 +1529,8 @@ const Reader = {
     if (this._autoScrollAnimation) cancelAnimationFrame(this._autoScrollAnimation);
     this._autoScrollAnimation = null;
     this._autoScrollLastTime = 0;
+    this._autoScrollPosition = null;
+    this._autoScrollObservedPosition = null;
     this._autoScrollPaused = true;
     this.revealAutoScrollControls();
     this.updateAutoScrollControl();
@@ -1526,6 +1540,8 @@ const Reader = {
     if (!this._autoScrollEnabled || !this._autoScrollPaused) return;
     this._autoScrollPaused = false;
     this._autoScrollLastTime = 0;
+    this._autoScrollPosition = null;
+    this._autoScrollObservedPosition = null;
     this.updateAutoScrollControl();
     this.startAutoScroll();
   },
@@ -1539,7 +1555,16 @@ const Reader = {
   setAutoScrollSpeed(value) {
     const speed = Number(value);
     if (!Number.isFinite(speed)) return;
-    this._autoScrollSpeed = Math.max(0, Math.min(2, speed)) * 38;
+    const multiplier = Math.round(Math.max(0, Math.min(2, speed)) * 100) / 100;
+    this._autoScrollSpeed = multiplier * 38;
+    const label = multiplier.toFixed(2) + "×";
+    if (this.els.autoScrollSpeed) {
+      this.els.autoScrollSpeed.value = multiplier.toFixed(2);
+      this.els.autoScrollSpeed.setAttribute("aria-valuetext", label + (multiplier === 0 ? " (stopped)" : " speed"));
+    }
+    if (this.els.autoScrollValue) this.els.autoScrollValue.textContent = label;
+    if (this.els.autoScrollSlower) this.els.autoScrollSlower.disabled = multiplier === 0;
+    if (this.els.autoScrollFaster) this.els.autoScrollFaster.disabled = multiplier === 2;
   },
 
   toggleAutoScroll() {

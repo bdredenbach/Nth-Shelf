@@ -2139,44 +2139,48 @@ button.reader-btn.mini-btn {
   color: rgba(255,255,255,.55);
   white-space: nowrap;
 }
+.auto-scroll-speed-adjust { display: flex; align-items: center; gap: 6px; }
+.auto-scroll-scale { flex: 1; min-width: 0; }
+.auto-scroll-step {
+  flex: 0 0 44px; width: 44px; height: 44px;
+  border: 1px solid rgba(255,255,255,.18); border-radius: 10px;
+  background: rgba(255,255,255,.06); color: #fff; font-size: 22px;
+  touch-action: manipulation;
+}
+.auto-scroll-step:disabled { opacity: .3; }
+.auto-scroll-step:focus-visible, #auto-scroll-speed:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+#auto-scroll-value { font-variant-numeric: tabular-nums; }
 .auto-scroll-slider-wrap {
-  position: relative;
-  height: 22px;
-  display: flex;
-  align-items: center;
+  position: relative; height: 32px; display: flex; align-items: center;
 }
 .auto-scroll-slider-wrap input[type="range"] {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  margin: 0;
-  accent-color: var(--red);
+  position: relative; z-index: 2; width: 100%; margin: 0;
+  appearance: none; -webkit-appearance: none; background: transparent;
+  height: 32px; touch-action: pan-y;
 }
-.auto-scroll-ticks {
-  position: absolute;
-  left: 4px;
-  right: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
-  z-index: 1;
+#auto-scroll-speed::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: #777; }
+#auto-scroll-speed::-moz-range-track { height: 4px; border-radius: 2px; background: #777; }
+#auto-scroll-speed::-webkit-slider-thumb {
+  appearance: none; -webkit-appearance: none;
+  width: 16px; height: 16px; margin-top: -6px; border: 0; border-radius: 50%; background: var(--red);
 }
-.auto-scroll-ticks span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--red);
-  box-shadow: 0 0 0 2px rgba(10,10,12,.9);
+#auto-scroll-speed::-moz-range-thumb {
+  width: 16px; height: 16px; border: 0; border-radius: 50%; background: var(--red);
 }
+.auto-scroll-ticks, .auto-scroll-speed-labels {
+  position: absolute; left: 8px; right: 8px; pointer-events: none;
+}
+.auto-scroll-ticks { top: 24px; height: 4px; }
+.auto-scroll-ticks span, .auto-scroll-speed-labels span { position: absolute; transform: translateX(-50%); }
+.auto-scroll-ticks span { width: 2px; height: 4px; background: rgba(255,255,255,.5); }
+.auto-scroll-ticks span:nth-child(1), .auto-scroll-speed-labels span:nth-child(1) { left: 0; }
+.auto-scroll-ticks span:nth-child(2), .auto-scroll-speed-labels span:nth-child(2) { left: 25%; }
+.auto-scroll-ticks span:nth-child(3), .auto-scroll-speed-labels span:nth-child(3) { left: 50%; }
+.auto-scroll-ticks span:nth-child(4), .auto-scroll-speed-labels span:nth-child(4) { left: 75%; }
+.auto-scroll-ticks span:nth-child(5), .auto-scroll-speed-labels span:nth-child(5) { left: 100%; }
 .auto-scroll-speed-labels {
-  display: flex;
-  justify-content: space-between;
-  color: rgba(255,255,255,.72);
-  font-size: 9px;
-  line-height: 1;
-  margin-top: -1px;
+  position: relative; width: calc(100% - 16px); height: 12px;
+  color: rgba(255,255,255,.72); font-size: 9px; line-height: 1;
 }
 .auto-scroll-play {
   flex: 0 0 auto;
@@ -2245,10 +2249,7 @@ button.reader-btn.mini-btn {
   .auto-scroll-speed-labels {
     font-size: 8px;
   }
-  .auto-scroll-ticks span {
-    width: 6px;
-    height: 6px;
-  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

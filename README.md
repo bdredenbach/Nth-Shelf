@@ -293,3 +293,10 @@ The native regression compares old short-read counts against filled bridge paylo
 Tutorials follow the contextual approach in Nth Reader's Android `js/feature-guide.js`: highlight the actual control, explain one action and its result, and position the guidance away from it. Nth Shelf has its own red/charcoal styling, Back/Next/Finish controls, replay, and first-use tracking. Empty and populated shelves receive separate tours. Each reader mode explains its gestures, controls, bookmarks and returning to the shelf. Tutorials only present the existing interface; they do not perform imports or change books.
 
 Binary response API: https://developer.android.com/reference/androidx/webkit/JavaScriptReplyProxy#postMessage(byte[])
+
+
+## V2.79.11 Test 1 — Accurate Auto Scroll speed
+
+- Linear 0–2× scale, matching quarter-position labels, exact live readout and 0.01× minus/plus controls. The existing 1× pace remains 38 CSS pixels per second.
+- Fractional scroll targets survive rounded WebView offsets, so small speed changes accumulate proportionally. Manual scrolling and pause/resume rebase the target to avoid jumping back. Scroll, Manga and Webcomic use the same timing logic.
+- Deterministic scrolling checks cover 30/60/90/120 Hz, rounded offsets, speed changes, zero, bounds and pause/manual-scroll behavior. Browser checks exercise the visible controls and actual scroll distance. Phone testing remains necessary for Android rendering smoothness.

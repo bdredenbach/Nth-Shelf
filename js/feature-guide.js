@@ -48,7 +48,7 @@ window.ShelfGuide = {
         step('#two-page-exit-fullscreen','Leave fullscreen','Use this fullscreen-exit button to release fullscreen and orientation. You can also switch reading mode or return to the shelf.'),...controls];
       case 'scroll': case 'manga': case 'webcomic':return [
         step('#page-viewport',id==='manga'?'Read right to left':id==='webcomic'?'Read down the page':'Scroll through your comic',id==='manga'?'Swipe horizontally through the comic in right-to-left order.':id==='webcomic'?'Swipe upward to move down through the vertically stacked pages.':'Swipe horizontally to move through your comic pages.'),
-        step('#auto-scroll-toggle','Let the pages move for you','Tap Auto Scroll to start automatic movement. Tap the page to reveal navigation and the speed control.','Use the speed slider to adjust the pace and the pause button to stop or resume. The slider fades when navigation hides.'),...controls];
+        step('#auto-scroll-toggle','Let the pages move for you','Tap Auto Scroll to start automatic movement. Tap the page to reveal navigation and the speed control.','The slider runs evenly from 0× to 2×, with your exact speed shown above it. Tap − or + for 0.01× adjustments; use pause to stop or resume. The slider fades when navigation hides.'),...controls];
       default:return [];
     }
   },
