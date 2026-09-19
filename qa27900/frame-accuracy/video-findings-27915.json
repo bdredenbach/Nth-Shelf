@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Timestamped phone observations and queue evidence only; not detector outputs, runtime inputs or a claim of new fixes.",
+  "runtimeBaseline": {
+    "version": "2.79.15-test1",
+    "commit": "a2d85bcf2aed3be1f6bf3642ff050036cd9beb26",
+    "branch": "Test_Branch",
+    "evidence": "Delivered-build and feedback sequence; no version screen appears in the recording."
+  },
+  "video": {
+    "name": "179289.mp4",
+    "sha256": "1184f8061c7152b911dd485e44fddc3c6fd457a9de17e2657393bcecb08203f6",
+    "bytes": 297362716,
+    "durationSeconds": 195.289722,
+    "dimensions": [
+      1080,
+      2424
+    ],
+    "hasAudio": false
+  },
+  "numbering": "Reader pages are one-based including cover. JPG suffix and pageIndex are zero-based.",
+  "sourcePages": [
+    {
+      "pageNumber": 3,
+      "name": "Wolverine (2010-2012) 1000-002.jpg",
+      "sha256": "67477bd18fbf31f971e30cea815bc76760f50476078786b412e9f8c78a65e80c",
+      "bytes": 2163772,
+      "dimensions": [
+        1988,
+        3056
+      ]
+    },
+    {
+      "pageNumber": 4,
+      "name": "Wolverine (2010-2012) 1000-003.jpg",
+      "sha256": "a6e1225841f784a2d48f1d128ee4c70feaea1ac393fff2bb255804cfea2b6eda",
+      "bytes": 1681792,
+      "dimensions": [
+        1988,
+        3056
+      ]
+    },
+    {
+      "pageNumber": 5,
+      "name": "Wolverine (2010-2012) 1000-004.jpg",
+      "sha256": "81ea1d0368afae91da30d2b0c3fb05e8cea26373d3a4529c2658d9f48c986083",
+      "bytes": 2317526,
+      "dimensions": [
+        1988,
+        3056
+      ]
+    },
+    {
+      "pageNumber": 6,
+      "name": "Wolverine (2010-2012) 1000-005.jpg",
+      "sha256": "0322218207dc70a8542b1fad785ffca05792b035cd41c45d54bbb41d8ece01ad",
+      "bytes": 2614850,
+      "dimensions": [
+        1988,
+        3056
+      ]
+    },
+    {
+      "pageNumber": 13,
+      "name": "Wolverine (2010-2012) 1000-012.jpg",
+      "sha256": "26c072f75ffbc0612d13ab8da8a3acb39ccb699329b267b95f17d1cab6286ec6",
+      "bytes": 2166560,
+      "dimensions": [
+        1988,
+        3056
+      ]
+    }
+  ],
+  "reviewMethod": "Whole clip inspected at one-second and overview intervals; selected second-half transitions sampled at five frames per second; full-resolution stills compared with original source artwork.",
+  "evidenceLimits": [
+    "Times identify visible result frames, not exact gestures or tap-to-result latency.",
+    "No exact tap count inferred. A dim original page behind a popup is normal, not proof of duplicate layers.",
+    "Caption/bubble zoom is an intended second-level interaction. Keep it separate from whole-frame detection.",
+    "No runtime code, version or APK changed by this evidence update."
+  ],
+  "userConfirmation": {
+    "targets": [
+      "Page5 all six whole panels",
+      "Page13 whole star-and-bombs strip"
+    ],
+    "scope": "First-level whole-frame ownership on the reported phone tests; not all page13 frames or second-level behavior."
+  },
+  "observations": [
+    {
+      "id": "v15-p5-top",
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "scene": "top airplanes",
+      "status": "phone-confirmed-control",
+      "sampleTimesSeconds": [
+        10,
+        12,
+        14
+      ],
+      "observed": "Whole airplane panel opens repeatedly.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames."
+    },
+    {
+      "id": "v15-p5-propeller",
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "scene": "middle-left propeller and aircraft",
+      "status": "phone-confirmed-control",
+      "sampleTimesSeconds": [
+        21,
+        23,
+        28,
+        30,
+        165.7
+      ],
+      "observed": "Whole middle-left panel opens with its intended border and caption.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames."
+    },
+    {
+      "id": "v15-p5-hand",
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "scene": "middle-right hand",
+      "status": "phone-confirmed-control",
+      "sampleTimesSeconds": [
+        33,
+        38,
+        40,
+        42,
+        168
+      ],
+      "observed": "Narrow hand panel opens independently.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames."
+    },
+    {
+      "id": "v15-p5-bottom-left",
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "scene": "bottom-left airplane",
+      "status": "phone-confirmed-control",
+      "sampleTimesSeconds": [
+        49,
+        51,
+        53
+      ],
+      "observed": "Whole lower-left airplane panel opens independently.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames."
+    },
+    {
+      "id": "v15-p5-glass",
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "scene": "shattered-glass strip",
+      "status": "phone-confirmed-control",
+      "sampleTimesSeconds": [
+        60
+      ],
+      "observed": "Shattered-glass strip opens separately from the Wolverine panel below.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames."
+    },
+    {
+      "id": "v15-p5-wolverine",
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "scene": "bottom-right Wolverine",
+      "status": "phone-confirmed-control",
+      "sampleTimesSeconds": [
+        62,
+        174.6
+      ],
+      "observed": "Whole bottom-right frame opens separately from the strip above.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames."
+    },
+    {
+      "id": "v15-p13-star",
+      "pageNumber": 13,
+      "pageIndex": 12,
+      "scene": "whole star and bombs",
+      "status": "phone-confirmed-control",
+      "sampleTimesSeconds": [
+        73,
+        78,
+        80
+      ],
+      "observed": "The strip includes its star, horizontal stripe and full bomb sequence.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames."
+    },
+    {
+      "id": "v15-p3-pilot-partial",
+      "pageNumber": 3,
+      "pageIndex": 2,
+      "scene": "second strip: pilot at controls",
+      "status": "visible-partial-crop",
+      "sampleTimesSeconds": [
+        102.4,
+        102.6,
+        102.8
+      ],
+      "observed": "Selected pilot crop excludes the narration and some left-side artwork, unlike later whole-strip selections. Input route is not established by video alone.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames.",
+      "expected": "First-level frame selection retains the complete strip; replay single and double taps independently.",
+      "queueId": "FQ-02"
+    },
+    {
+      "id": "v15-p3-pilot-full",
+      "pageNumber": 3,
+      "pageIndex": 2,
+      "scene": "second strip: pilot at controls",
+      "status": "successful-looking-control",
+      "sampleTimesSeconds": [
+        108.5,
+        120
+      ],
+      "observed": "Later selections include the left narration and the complete visible pilot strip. Pixel-perfect borders are not certified.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames."
+    },
+    {
+      "id": "v15-p3-gunner",
+      "pageNumber": 3,
+      "pageIndex": 2,
+      "scene": "third strip: gunner",
+      "status": "successful-looking-control",
+      "sampleTimesSeconds": [
+        114
+      ],
+      "observed": "Gunner strip appears as an individual panel. This contradicts any blanket claim that all page-3 panels are unresponsive.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames."
+    },
+    {
+      "id": "v15-p4-upper",
+      "pageNumber": 4,
+      "pageIndex": 3,
+      "scene": "upper damaged bomber",
+      "status": "interaction-coverage-no-confirmed-failure",
+      "sampleTimesSeconds": [
+        129,
+        144,
+        156,
+        157.1
+      ],
+      "observed": "The upper frame remains selected. Review at 5fps found no caption-touch sequence during the static interval; a visible touch on smoke/art near157.1 precedes closing. Duration alone does not prove failure.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames.",
+      "expected": "Add explicit caption double-tap coverage from the enlarged frame.",
+      "queueId": "FQ-03"
+    },
+    {
+      "id": "v15-p4-lower",
+      "pageNumber": 4,
+      "pageIndex": 3,
+      "scene": "lower title/action panel",
+      "status": "successful-looking-control",
+      "sampleTimesSeconds": [
+        159
+      ],
+      "observed": "The separate title/action panel opens; preserve its independent ownership.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames."
+    },
+    {
+      "id": "v15-p5-sky",
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "scene": "middle-left propeller: second-level interaction",
+      "status": "visible-nontext-selection-needs-route-reproduction",
+      "sampleTimesSeconds": [
+        166.1,
+        166.3,
+        166.7
+      ],
+      "observed": "A stable irregular light-sky/propeller patch follows the whole-panel result at165.7. It contains no caption. This is separate from first-level whole-frame confirmation.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames.",
+      "expected": "A bubble/caption request must reject non-text sky artwork. Record mapped coordinates and detector output to locate the cause.",
+      "queueId": "FQ-04"
+    },
+    {
+      "id": "v15-p5-caption",
+      "pageNumber": 5,
+      "pageIndex": 4,
+      "scene": "bottom-right Wolverine narration",
+      "status": "second-level-positive-example",
+      "sampleTimesSeconds": [
+        174.9,
+        175.3,
+        175.7
+      ],
+      "observed": "An isolated narration rectangle follows the whole-panel result at174.6. Caption-only zoom is an intended feature, not automatically a comic-frame defect.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames.",
+      "expected": "Preserve intentional caption selection and verify close/reopen without changing whole-frame identity."
+    },
+    {
+      "id": "v15-p6-coverage",
+      "pageNumber": 6,
+      "pageIndex": 5,
+      "scene": "seven-panel page",
+      "status": "coverage-request",
+      "sampleTimesSeconds": [
+        177,
+        180,
+        183,
+        186,
+        189
+      ],
+      "observed": "Source artwork has two upper, two middle and three lower frames. Sparse unchanged-page samples do not certify which attempted taps missed.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames.",
+      "expected": "Independently label all seven and record center/left/right/north/south probes.",
+      "queueId": "FQ-05"
+    },
+    {
+      "id": "v15-p6-middle",
+      "pageNumber": 6,
+      "pageIndex": 5,
+      "scene": "bottom-middle falling Wolverine",
+      "status": "successful-looking-control",
+      "sampleTimesSeconds": [
+        190.2
+      ],
+      "observed": "The bottom-middle frame opens alone before the later merged result.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames.",
+      "expected": "Preserve this standalone boundary while separating the right neighbor.",
+      "queueId": "FQ-01"
+    },
+    {
+      "id": "v15-p6-merged",
+      "pageNumber": 6,
+      "pageIndex": 5,
+      "scene": "bottom-middle plus bottom-right",
+      "status": "confirmed-merged-neighbors",
+      "sampleTimesSeconds": [
+        191.9,
+        192.1,
+        192.3
+      ],
+      "observed": "One selected crop includes the bottom-middle and bottom-right panels, their distinct captions and the intervening vertical divider.",
+      "gestureEvidence": "Not instrumented; do not infer exact tap count or latency from result frames.",
+      "expected": "Each panel opens independently from all interior test points; their union is never a single frame.",
+      "queueId": "FQ-01"
+    }
+  ],
+  "queue": [
+    {
+      "id": "FQ-01",
+      "status": "open-confirmed-visual-defect",
+      "pageNumber": 6,
+      "observations": [
+        "v15-p6-middle",
+        "v15-p6-merged"
+      ]
+    },
+    {
+      "id": "FQ-02",
+      "status": "open-visual-defect-route-unconfirmed",
+      "pageNumber": 3,
+      "observations": [
+        "v15-p3-pilot-partial",
+        "v15-p3-pilot-full"
+      ]
+    },
+    {
+      "id": "FQ-03",
+      "status": "test-coverage-no-confirmed-defect",
+      "pageNumber": 4,
+      "observations": [
+        "v15-p4-upper"
+      ]
+    },
+    {
+      "id": "FQ-04",
+      "status": "open-nontext-selection-route-unconfirmed",
+      "pageNumber": 5,
+      "observations": [
+        "v15-p5-propeller",
+        "v15-p5-sky",
+        "v15-p5-caption"
+      ]
+    },
+    {
+      "id": "FQ-05",
+      "status": "test-coverage",
+      "pageNumber": 6,
+      "observations": [
+        "v15-p6-coverage"
+      ]
+    }
+  ]
+}

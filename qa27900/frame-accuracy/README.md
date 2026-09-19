@@ -1,5 +1,20 @@
 # Frame accuracy reference set
 
+## Current queue and phone-confirmed 2.79.15 controls
+
+The user confirmed page 5's six whole panels and page 13's complete star-and-bombs
+strip after 2.79.15 Test 1. Recording `179289.mp4` shows these results repeatedly.
+Preserve them alongside the page-9/page-16 controls below. This confirmation
+covers first-level whole-frame ownership; second-level bubble/caption interaction
+has its own work queue.
+
+See [work-queue.md](work-queue.md) for the next targets and
+[video-findings-27915.json](video-findings-27915.json) for timestamped observations.
+The clearest new failure is page 6's merged bottom-middle/right pair; page 3's
+pilot strip also changes its visible crop. Double-pop-out checks include page 4's
+caption interaction and page 5's non-text sky selection. Successful caption-only
+zoom is an intended capability, not automatically a frame defect.
+
 ## 2.79.14 recording controls
 
 `179268.mp4`, supplied after the 2.79.14 APK, shows the whole page-13 airplane
@@ -41,3 +56,4 @@ The old middle-left tap (0.20, 0.45) and middle-right tap (0.70, 0.46) are in th
 ## 2.79.12 findings
 
 The geometry contract passes 18 physical-angle cases and live/persisted crop checks. A before/after sweep across all 74 pages gives the same six background-map polygons on two pages; this confirms scope, not their visual correctness. Exploratory long-dark-separator segmentation finds five large regions on page 36, merging the inset and middle scene. A looser threshold falsely divides artwork into nine regions. That experiment is not shipped.
+
