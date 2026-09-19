@@ -6,8 +6,10 @@ window.ShelfTransfer = {
     this.dialog=document.createElement("dialog");
     this.dialog.className="nth-dialog transfer-dialog";
     this.dialog.setAttribute("aria-labelledby","transfer-title");
-    this.dialog.innerHTML='<div class="nth-eyebrow">AN NTH EXPERIENCE</div><h2 id="transfer-title"></h2><p class="transfer-detail" aria-live="polite"></p><progress max="100" value="0"></progress><p class="transfer-percent"></p><small>Keep Nth Shelf open. Device may get warm during transfer.</small><button class="modal-btn primary">Done</button>';
+    this.dialog.innerHTML='<div class="nth-eyebrow">AN NTH EXPERIENCE</div><h2 id="transfer-title"></h2><p class="transfer-detail" aria-live="polite"></p><progress max="100" value="0"></progress><p class="transfer-percent"></p><small>Keep Nth Shelf open. Device may get warm during transfer.</small><button class="modal-btn primary">Done</button><button class="modal-btn transfer-cancel" hidden>Cancel</button>';
     document.body.append(this.dialog);
+    if(window.ShelfStream)ShelfStream.ready=ShelfStream.recover();
+    this.dialog.querySelector(".transfer-cancel").onclick=()=>this.cancel();
     this.dialog.querySelector("button").onclick=()=>this.dismiss();
     this.dialog.addEventListener("cancel",e=>{e.preventDefault();this.dismiss();});
     const legacyRestore=Library.restoreBackup.bind(Library);
@@ -16,7 +18,8 @@ window.ShelfTransfer = {
     Library.openBackupMenu=()=>Modal.actions("Protect your shelf",
       "A full backup includes comic pages, collections, bookmarks, and reading progress. Restore adds copies without replacing your current comics. Legacy progress-only JSON backups are still supported.",
       [{label:"Back up entire library",cls:"primary",onClick:()=>this.backup()},
-       {label:"Restore a backup",cls:"neutral",onClick:()=>document.getElementById("restore-input").click()},
+       {label:"Restore a backup",cls:"neutral",onClick:()=>this.openRestore()},
+       {label:"Import legacy backup",cls:"neutral",onClick:()=>document.getElementById("restore-input").click()},
        {label:"Cancel",cls:"subtle"}]);
     document.getElementById("restore-input").accept=".nthshelf,.zip,.json,application/zip,application/json";
   },
@@ -26,8 +29,20 @@ window.ShelfTransfer = {
     this.dialog.querySelector(".transfer-percent").textContent=Math.round(value)+"%";
     this.dialog.querySelector(".transfer-detail").textContent=detail;
   },
-  async run(title,action) {
+  openRestore() {
+    if(window.NthShelfNative?.streaming)return this.run("Restoring full library",()=>ShelfStream.restore(),true);
+    document.getElementById("restore-input").click();
+  },
+  setCancellable(value) {this.cancellable=value;this.dialog.querySelector('.transfer-cancel').hidden=!value;},
+  cancel() {
+    if(!this.busy||!this.cancellable)return;
+    this.cancelRequested=true;this.setCancellable(false);
+    this.dialog.querySelector('.transfer-detail').textContent='Cancelling and cleaning up…';
+    window.NthShelfNative?.request('archiveCancel').catch(()=>{});
+  },
+  async run(title,action,cancellable=false) {
     if(this.busy)return;
+    this.cancelRequested=false;this.setCancellable(cancellable);
     this.busy=true;this.dialog.querySelector("h2").textContent=title;
     this.dialog.querySelector("button").disabled=true;
     this.dialog.querySelector("button").hidden=true;
@@ -39,7 +54,7 @@ window.ShelfTransfer = {
     } catch(error) {
       this.dialog.querySelector("h2").textContent="Transfer not completed";
       this.dialog.querySelector(".transfer-detail").textContent=error.message || "Please try again.";
-    } finally {this.busy=false;this.dialog.querySelector("button").disabled=false;this.dialog.querySelector("button").hidden=false;}
+    } finally {this.setCancellable(false);this.busy=false;this.dialog.querySelector("button").disabled=false;this.dialog.querySelector("button").hidden=false;}
   },
   safeName(name) {return String(name||"comic").replace(/[\\/:*?"<>|\u0000-\u001f]/g,"_").slice(0,120);},
   async save(blob,name) {
@@ -66,7 +81,9 @@ window.ShelfTransfer = {
       await new Promise(r=>setTimeout(r,0));
     }
   },
-  backup() {return this.run("Backing up Nth Shelf",async()=>{
+  backup() {
+    if(window.NthShelfNative?.streaming)return this.run("Backing up full library",()=>ShelfStream.backup(),true);
+    return this.run("Backing up Nth Shelf",async()=>{
     const comics=await LongboxDB.getAllComics(),collections=await LongboxDB.getAllCollections();
     const zip=new JSZip(),manifest={app:"nth-shelf",version:2,createdAt:new Date().toISOString(),comics:[],collections};
     const counts={bytes:0,done:0,total:comics.reduce((n,c)=>n+c.pageCount,0)};

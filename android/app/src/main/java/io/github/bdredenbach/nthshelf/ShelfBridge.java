@@ -23,6 +23,7 @@ import java.util.concurrent.Executors;
 final class ShelfBridge {
     static final int SAVE_REQUEST = 27920;
     private final Activity activity;
+    final ArchiveBridge archives;
     private final ExecutorService io = Executors.newSingleThreadExecutor();
     private File pending;
     private OutputStream output;
@@ -30,7 +31,7 @@ final class ShelfBridge {
     private JavaScriptReplyProxy saveReply;
     private int saveId;
     private boolean saving;
-    ShelfBridge(Activity activity) { this.activity = activity; }
+    ShelfBridge(Activity activity) { this.activity = activity; this.archives=new ArchiveBridge(activity); }
 
     void install(WebView view) {
         if (!WebViewFeature.isFeatureSupported(WebViewFeature.WEB_MESSAGE_LISTENER)) return;
@@ -42,7 +43,9 @@ final class ShelfBridge {
                     JSONObject data = new JSONObject(message.getData());
                     int id = data.getInt("id");
                     String action = data.getString("action");
-                    if ("immersive".equals(action)) {
+                    if (action.startsWith("archive")) {
+                        archives.receive(data,id,action,reply);
+                    } else if ("immersive".equals(action)) {
                         immersive(data.optBoolean("enabled"));
                         respond(reply, id, true, "");
                     } else {
@@ -143,5 +146,5 @@ final class ShelfBridge {
         if (pending != null) pending.delete();
         pending = null;
     }
-    void destroy() { io.execute(this::cleanup); io.shutdown(); }
+    void destroy() { archives.destroy(); io.execute(this::cleanup); io.shutdown(); }
 }

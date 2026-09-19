@@ -74,7 +74,7 @@ Auto Scroll is available in **Scroll, Manga,** and **Webcomic** modes.
 Use the built-in theme swatches to change the reading appearance.
 
 ## 💾 Backup & Restore
-Full .nthshelf backups include pages, collections, bookmarks and reading progress, with a 512 MiB limit in this test build. Legacy JSON restores contain metadata only and require the original comic archives.
+Android full .nthshelf backups stream pages to the selected destination and verify the written archive. Android restores stage pages on disk and publish only after validation. The former 512 MiB total-size ceiling remains only in the browser/legacy route. Legacy JSON restores contain metadata only and require the original comic archives.
 
 **Recommendation:** keep a current backup before major browser or device changes.
 
@@ -106,11 +106,11 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.07 Test 3 — An Nth Experience**
+**Version 2.79.08 Test 1 — An Nth Experience**
 
 ## 🧪 Release History (Newest First)
 
-## V2.79.07 Test 3 — An Nth Experience
+## V2.79.08 Test 1 — An Nth Experience
 
 Page navigation hides after five seconds. Swipe inward from the top or bottom to
 show it for another five seconds. Slow page drags begin after eight pixels of
@@ -247,3 +247,22 @@ Nth Shelf is designed around local-first storage. Your comics are stored on your
 ## 📜 License
 
 This project is licensed under the **MIT License**. The license applies to the software and does not grant rights to comic artwork or other copyrighted material imported by users.
+
+## V2.79.08 Test 1 — Streaming full-library backups
+
+Android Backup and Restore now use bounded archive chunks through the native bridge.
+All comic pages, collection records, bookmarks and reading positions are included.
+Comic covers are regenerated on restore; panel detection caches and device preferences
+are not included. Restore adds copies and never overwrites existing comics.
+Cancel removes staged pages; interrupted restores are cleaned up on the next startup.
+Backup reads the saved file back and compares SHA-256 before reporting success.
+A failed/cancelled export attempts to delete its incomplete file; discard any partial
+file a storage provider leaves behind. Keep the app open throughout the operation.
+Available storage/provider limits still apply. There is a 128 MiB per-image limit and
+an 8 MiB manifest limit, not a 512 MiB whole-library limit. Collection downloads and
+browser backups still use the existing 512 MiB route. Import legacy backup preserves
+support for older JSON and small ZIP backups.
+
+Regression gates: 600 MiB archive write/verify/read with a 32 MiB JVM heap, corrupt
+data rejection, cancellation, browser fixture round-trip, missing-page rollback and
+startup recovery. Native Android document-provider behavior still needs phone testing.

@@ -86,7 +86,7 @@ public final class MainActivity extends Activity {
         settings.setSupportMultipleWindows(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
         settings.setUserAgentString(
-                settings.getUserAgentString() + " NthShelfAndroid/2.79.07"
+                settings.getUserAgentString() + " NthShelfAndroid/2.79.08"
         );
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             settings.setSafeBrowsingEnabled(true);
@@ -273,6 +273,10 @@ public final class MainActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == ArchiveBridge.SAVE || requestCode == ArchiveBridge.OPEN) {
+            shelfBridge.archives.result(resultCode,data);
+            return;
+        }
         if (requestCode == ShelfBridge.SAVE_REQUEST) {
             shelfBridge.result(resultCode, data);
             return;

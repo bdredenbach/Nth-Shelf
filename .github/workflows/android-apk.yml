@@ -17,6 +17,7 @@ on:
       - "icons/**"
       - "js/**"
       - "qa27900/brand-integration.cjs"
+      - "qa27900/stream-integration.cjs"
       - "THIRD_PARTY_NOTICES.txt"
 
 permissions:
@@ -42,6 +43,7 @@ jobs:
           npm install --no-save --package-lock=false playwright@1.51.1
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/nth-http.log 2>&1 &
           node qa27900/brand-integration.cjs
+          node qa27900/stream-integration.cjs
 
       - name: Preserve browser test screenshots
         if: always()
@@ -56,6 +58,12 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
+
+      - name: Native streaming archive regression (600 MiB, 32 MiB heap)
+        run: |
+          mkdir -p /tmp/nth-archive-tests
+          javac -d /tmp/nth-archive-tests android/app/src/main/java/io/github/bdredenbach/nthshelf/ArchiveIO.java android/archive-tests/ArchiveIOTest.java
+          java -ea -Xmx32m -cp /tmp/nth-archive-tests io.github.bdredenbach.nthshelf.ArchiveIOTest
 
       - name: Set up Gradle 8.9
         uses: gradle/actions/setup-gradle@v4
@@ -78,17 +86,17 @@ jobs:
           BADGING="$("$AAPT" dump badging "$APK")"
           echo "$BADGING"
           grep -F "package: name='io.github.bdredenbach.nthshelf'" <<<"$BADGING"
-          grep -F "versionCode='27910'" <<<"$BADGING"
-          grep -F "versionName='2.79.07-test3'" <<<"$BADGING"
+          grep -F "versionCode='27911'" <<<"$BADGING"
+          grep -F "versionName='2.79.08-test1'" <<<"$BADGING"
 
       - name: Name release artifact
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk Nth-Shelf-V2.79.07-Test3.apk
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk Nth-Shelf-V2.79.08-Test1.apk
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Nth-Shelf-V2.79.07-Test3
-          path: Nth-Shelf-V2.79.07-Test3.apk
+          name: Nth-Shelf-V2.79.08-Test1
+          path: Nth-Shelf-V2.79.08-Test1.apk
           if-no-files-found: error
           retention-days: 30
 
@@ -96,12 +104,12 @@ jobs:
         if: github.ref == 'refs/heads/Test_Branch'
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: v2.79.07-test3-${{ github.run_number }}
+          RELEASE_TAG: v2.79.08-test1-${{ github.run_number }}
         run: >-
           gh release create "$RELEASE_TAG"
-          Nth-Shelf-V2.79.07-Test3.apk
+          Nth-Shelf-V2.79.08-Test1.apk
           --repo "$GITHUB_REPOSITORY"
           --target "$GITHUB_SHA"
           --prerelease
-          --title "Nth Shelf 2.79.07 Test 3"
+          --title "Nth Shelf 2.79.08 Test 1"
           --notes "Installable debug APK built from commit $GITHUB_SHA on Test_Branch. This is a test build, not a Play Store signed release."

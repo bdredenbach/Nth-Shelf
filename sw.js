@@ -1,6 +1,6 @@
 // NTH SHELF V2.79.07 TEST 1 — AN NTH EXPERIENCE
 
-const CACHE_NAME = "nth-shelf-shell-2.79.07-test3";
+const CACHE_NAME = "nth-shelf-shell-2.79.08-test1";
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -13,6 +13,7 @@ const SHELL_FILES = [
   "./js/page-mode.js",
   "./js/native-shell.js",
   "./js/transfers.js",
+  "./js/stream-transfer.js",
   "./js/feature-guide.js",
   "./js/vendor/jszip.min.js",
   "./THIRD_PARTY_NOTICES.txt",

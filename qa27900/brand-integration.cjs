@@ -13,12 +13,12 @@ const assert = require('node:assert/strict');
   await page.evaluate(()=>ShelfGuide.finish());
   await page.evaluate(()=>{window.pendingTransfer=ShelfTransfer.run('Transfer check',()=>new Promise(r=>window.finishTransfer=r));});
   await page.waitForFunction(()=>typeof window.finishTransfer==='function');
-  assert.equal(await page.locator('.transfer-dialog button').isVisible(),false);
+  assert.equal(await page.locator('.transfer-dialog .primary').isVisible(),false);
   await page.evaluate(async()=>{window.finishTransfer('Finished');await window.pendingTransfer;});
-  assert.equal(await page.locator('.transfer-dialog button').isVisible(),true);
+  assert.equal(await page.locator('.transfer-dialog .primary').isVisible(),true);
   await page.evaluate(()=>ShelfTransfer.dismiss());
   await page.evaluate(()=>ShelfTransfer.run('Failure check',async()=>{throw Error('Expected test failure');}));
-  assert.equal(await page.locator('.transfer-dialog button').isVisible(),true);
+  assert.equal(await page.locator('.transfer-dialog .primary').isVisible(),true);
   await page.evaluate(()=>ShelfTransfer.dismiss());
   await page.screenshot({path:'/tmp/nth-shelf-empty-blend.png'});
   await page.evaluate(async()=>{

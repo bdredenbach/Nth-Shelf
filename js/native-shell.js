@@ -5,13 +5,15 @@ if (window.NthShelfHost) {
   NthShelfHost.onmessage = event => {
     const result = JSON.parse(event.data), request = pending.get(result.id);
     if (!request) return;
+    if (result.progress != null) { request.progress?.(result.progress); return; }
     pending.delete(result.id);
-    result.ok ? request.resolve(result.message) : request.reject(new Error(result.message));
+    result.ok ? request.resolve(result.data !== undefined ? result.data : result.message) : request.reject(new Error(result.message));
   };
   window.NthShelfNative = {
-    request(action, values = {}) {
+    streaming:true,
+    request(action, values = {}, progress) {
       return new Promise((resolve,reject) => {
-        const id=++serial; pending.set(id,{resolve,reject});
+        const id=++serial; pending.set(id,{resolve,reject,progress});
         NthShelfHost.postMessage(JSON.stringify({id,action,...values}));
       });
     },
