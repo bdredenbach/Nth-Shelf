@@ -32,12 +32,16 @@ const PanelDetect = {
           } catch (error) {
             if (log) log(`closed frames deferred: ${error.message}`);
           }
-          if (!closed.length) {
-            try {
-              if (typeof PanelPartition !== 'undefined') closed = PanelPartition.analyzeImage(img, log);
-            } catch (error) {
-              if (log) log(`page partition deferred: ${error.message}`);
+          try {
+            if (typeof PanelPartition !== 'undefined') {
+              const partition = PanelPartition.analyzeImage(img, log, {
+                allowPartial: closed.length > 0,
+                anchors: closed
+              });
+              closed = this._completePartition(closed, partition, log);
             }
+          } catch (error) {
+            if (log) log(`page partition deferred: ${error.message}`);
           }
           resolve(closed);
         }
@@ -50,6 +54,70 @@ const PanelDetect = {
       img.onerror = () => resolve([]);
       img.src = imgUrl;
     });
+  },
+
+  // A connected partition can fill gaps in a partial closed-frame
+  // list, but cannot replace, subdivide or enlarge any established identity.
+  _completePartition(closed, partition, log) {
+    if (!closed.length) return partition;
+    if (partition.length < 4 || partition.length > 12 || partition.length <= closed.length) return closed;
+    const proof = partition[0]?._partitionProof;
+    const w = proof?.analysisWidth, h = proof?.analysisHeight;
+    if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) return closed;
+    const pixels = p => Array.isArray(p?._quad) && p._quad.length === 4
+      ? p._quad.map(v => [v.x * w, v.y * h]) : null;
+    const cross = (a, b, c) => (b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+    const valid = q => q && q.every((p, i) => p.every(Number.isFinite) &&
+      p[0] >= 0 && p[0] <= w && p[1] >= 0 && p[1] <= h &&
+      cross(p, q[(i+1)%4], q[(i+2)%4]) > 0);
+    const leaves = partition.map(pixels);
+    if (partition.some((p, i) => p._identitySource !== 'page-partition' ||
+        !p._partitionProof?.connected || p._partitionProof.analysisWidth !== w ||
+        p._partitionProof.analysisHeight !== h || !valid(leaves[i]))) return closed;
+    const established = closed.map(pixels);
+    if (closed.some((p, i) => !p._closedFrameProof?.connected || !valid(established[i]))) return closed;
+
+    // Check the offered leaves themselves are disjoint. Shared ink borders
+    // have zero area; duplicated or overlapping interiors are not a map.
+    function intersectionArea(a, b) {
+      let subject = a;
+      for (let e = 0; e < 4 && subject.length; e++) {
+        const start = b[e], end = b[(e+1)%4], clipped = [];
+        for (let i = 0; i < subject.length; i++) {
+          const p = subject[i], q = subject[(i+1)%subject.length];
+          const cp = cross(start, end, p), cq = cross(start, end, q);
+          if (cp >= 0) clipped.push(p);
+          if ((cp >= 0) !== (cq >= 0)) {
+            const t = cp / (cp-cq);
+            clipped.push([p[0]+t*(q[0]-p[0]), p[1]+t*(q[1]-p[1])]);
+          }
+        }
+        subject = clipped;
+      }
+      return Math.abs(subject.reduce((sum, p, i) => {
+        const q = subject[(i+1)%subject.length]; return sum+p[0]*q[1]-p[1]*q[0];
+      }, 0)) / 2;
+    }
+    for (let i = 0; i < leaves.length; i++) for (let j = i+1; j < leaves.length; j++) {
+      if (intersectionArea(leaves[i], leaves[j]) > 1) return closed;
+    }
+
+    const matched = new Set();
+    for (const q of established) {
+      // Both independent detectors fit the same finite-width printed ink.
+      // Three analysis pixels allow their different center fits, not a new
+      // edge through artwork or a composite covering two partition leaves.
+      const matches = leaves.map((leaf, i) => leaf.every((p, c) =>
+        Math.hypot(p[0]-q[c][0], p[1]-q[c][1]) <= 3) ? i : -1).filter(i => i >= 0);
+      if (matches.length !== 1 || matched.has(matches[0])) return closed;
+      matched.add(matches[0]);
+    }
+    const additions = partition.filter((_, i) => !matched.has(i));
+    for (const q of established) for (const p of additions) {
+      if (intersectionArea(q, pixels(p)) > 1) return closed;
+    }
+    if (log) log(`page partition completion: preserved ${closed.length}, added ${additions.length}`);
+    return closed.concat(additions);
   },
 
   // V100 HYBRID TEST: page-structure partitioner.

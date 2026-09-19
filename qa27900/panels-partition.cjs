@@ -27,8 +27,8 @@ assert.equal(run({noVertical:true}).ps.length,0,'one-axis layout outside conserv
 assert.equal(run({flat:true}).ps.length,0,'uniform dark artwork abstains');
 assert.equal(det.analyzeRGBA(new Uint8Array(8),420,700).length,0,'malformed data rejected');
 console.log('page-partition: independently drawn connected leaves, two-axis tilt, insets, partial borders and malformed input passed');
-// Existing independent frames must keep priority even when the new complete
-// partition might also describe the page. Only an empty result may fall through.
+// Existing independent frames keep priority unless a complete partition proves
+// matching borders and disjoint additions (covered by partition-completion).
 const fs=require('node:fs'),vm=require('node:vm');
 (async()=>{
  let base=[],stack=[],closed=[{id:'already-proved'}],calls=0,fail=false;
@@ -38,10 +38,10 @@ const fs=require('node:fs'),vm=require('node:vm');
    PanelPartition:{analyzeImage(){calls++;if(fail)throw new Error('uncertain');return offered;}}};
  vm.createContext(scope);vm.runInContext(fs.readFileSync(require.resolve('../js/panels.js'),'utf8'),scope);
  const reader=scope.window.PanelDetect;reader._analyze=()=>base;
- assert.equal(await reader.detect('fixture'),closed);assert.equal(calls,0,'a proved independent frame bypasses partition');
- closed=[];base=[{id:'baseline'}];assert.equal(await reader.detect('fixture'),base);assert.equal(calls,0);
- base=[];stack=Array.from({length:5},(_,i)=>({id:i}));assert.equal(await reader.detect('fixture'),stack);assert.equal(calls,0);
- stack=[];assert.equal(await reader.detect('fixture'),offered);assert.equal(calls,1,'partition fills only an empty page identity result');
+ assert.equal(await reader.detect('fixture'),closed);assert.equal(calls,1,'an incomplete partition cannot alter an established identity');
+ closed=[];base=[{id:'baseline'}];assert.equal(await reader.detect('fixture'),base);assert.equal(calls,1);
+ base=[];stack=Array.from({length:5},(_,i)=>({id:i}));assert.equal(await reader.detect('fixture'),stack);assert.equal(calls,1);
+ stack=[];assert.equal(await reader.detect('fixture'),offered);assert.equal(calls,2,'partition can fill an empty page identity result');
  fail=true;assert.equal((await reader.detect('fixture')).length,0,'partition failure leaves the original tap fallback available');
  console.log('page-partition: established route priority and failure fallback passed');
 })().catch(error=>{console.error(error);process.exitCode=1;});

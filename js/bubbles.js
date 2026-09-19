@@ -423,6 +423,15 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
       continue;
     }
 
+    // Boundary ink alone is not text: aircraft, hatching and speed lines can
+    // surround a pale patch. Require isolated dark letter strokes aligned as
+    // lettering before creating a second pop-out. This proof is identical for detect() and extract(), so masking
+    // cannot weaken it.
+    if (!this._hasTextLayout(data, w, visited, { minX, maxX, minY, maxY }, threshold)) {
+      if (log) log(`try threshold=${threshold}: rejected, no enclosed text line`);
+      continue;
+    }
+
     result = { threshold, seedX, seedY, count, minX, maxX, minY, maxY, fill, boundaryScore, rowMin, rowMax, component };
     if (log) log(`bubble: accepted threshold=${threshold} area=${count}px bbox=(${minX},${minY})-(${maxX},${maxY}) fill=${fill.toFixed(2)} boundary=${boundaryScore.toFixed(2)}`);
     break;
@@ -483,6 +492,93 @@ BubbleDetect._floodFill = function(img, w, h, data, relX, relY, log, wantMask = 
 
   if (log) log(`bubble: extracted masked overlay ${cw}x${ch} threshold=${threshold}`);
   return { ...rect, canvas: out };
+};
+
+// Use dark letter cores rather than holes in the high-threshold white mask:
+// anti-aliasing can join whole words (or multiple lines) at the bright cutoff.
+// Eight-connected dark groups touching the candidate bounds are exterior ink,
+// not enclosed letters. Similar height and baseline prove a text arrangement;
+// two close letters can prove short speech such as "NO" without a three-word
+// requirement. This is layout evidence, not OCR.
+BubbleDetect._hasTextLayout = function(data, w, bright, bounds, threshold) {
+  const { minX, maxX, minY, maxY } = bounds;
+  const bw = maxX - minX + 1, bh = maxY - minY + 1;
+  const seen = new Uint8Array(bw * bh);
+  const queue = new Int32Array(bw * bh);
+  const groups = [];
+  const dark = Math.max(75, threshold - 85);
+  const isInk = (x, y) => {
+    const pixel = ((y + minY) * w + x + minX) * 4;
+    return .299 * data[pixel] + .587 * data[pixel + 1] + .114 * data[pixel + 2] < dark;
+  };
+  for (let sy = 0; sy < bh; sy++) {
+    for (let sx = 0; sx < bw; sx++) {
+      const start = sy * bw + sx;
+      if (seen[start] || !isInk(sx, sy)) continue;
+      let size = 1, cursor = 0, exterior = false, ink = 0;
+      let left = bw, right = -1, top = bh, bottom = -1;
+      queue[0] = start;
+      seen[start] = 1;
+      while (cursor < size) {
+        const index = queue[cursor++], x = index % bw, y = Math.floor(index / bw);
+        if (x === 0 || y === 0 || x === bw - 1 || y === bh - 1) exterior = true;
+        const pixel = ((y + minY) * w + x + minX) * 4;
+        if (.299 * data[pixel] + .587 * data[pixel + 1] + .114 * data[pixel + 2] < dark) {
+          ink++;
+          left = Math.min(left, x); right = Math.max(right, x);
+          top = Math.min(top, y); bottom = Math.max(bottom, y);
+        }
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            const xx = x + dx, yy = y + dy;
+            if (xx < 0 || yy < 0 || xx >= bw || yy >= bh) continue;
+            const next = yy * bw + xx;
+            if (seen[next] || !isInk(xx, yy)) continue;
+            seen[next] = 1;
+            queue[size++] = next;
+          }
+        }
+      }
+      if (exterior || ink < 2) continue;
+      const width = right - left + 1, height = bottom - top + 1;
+      // Retain thin "I" strokes and joined letters, but not long shallow
+      // speed lines or sparse diagonal fragments of the artwork.
+      if (height < 3 || height > bh * .78 || width > height * 4 || width > bw * .85 || ink / (width * height) < .17) continue;
+      // A bbox can enclose artwork outside an irregular white region. The
+      // light around a putative letter must belong to this exact selected
+      // interior; pale pixels from a neighboring shape do not count. Sampling
+      // both sides tolerates tight line spacing where one side meets text.
+      const sideSupport = [];
+      for (const yy of [top - 2, bottom + 2]) {
+        let support = 0;
+        for (let xx = left - 1; xx <= right + 1; xx++) {
+          if (yy >= 0 && yy < bh && xx >= 0 && xx < bw &&
+              bright[(yy + minY) * w + xx + minX]) support++;
+        }
+        sideSupport.push(support / (width + 2));
+      }
+      if (Math.max(...sideSupport) < .55 || (sideSupport[0] + sideSupport[1]) / 2 < .35) continue;
+      groups.push({ left, right, top, bottom, height });
+    }
+  }
+  for (const anchor of groups) {
+    const tolerance = Math.max(2, anchor.height * .3);
+    const line = groups.filter(group =>
+      group.height >= anchor.height * .6 && group.height <= anchor.height * 1.7 &&
+      Math.abs(group.bottom - anchor.bottom) <= tolerance
+    ).sort((a, b) => a.left - b.left);
+    let run = 0, start = 0, end = -1;
+    for (const group of line) {
+      if (!run || group.left - end > anchor.height * 1.4 || group.left < end - 1) {
+        run = 0;
+        start = group.left;
+      }
+      end = group.right;
+      run++;
+      if (run >= 2 && end - start + 1 >= anchor.height * 1.3) return true;
+    }
+  }
+  return false;
 };
 
 function clampInt(v, min, max) { return Math.max(min, Math.min(max, v)); }

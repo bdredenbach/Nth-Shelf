@@ -1,6 +1,18 @@
 # Frame accuracy reference set
 
-## Current queue and phone-confirmed 2.79.15 controls
+## Current implementation: 2.79.16 Test 1
+
+The [queue results](queue-results-27916.md) record five complete page-3 strips,
+five proved page-6 frames, caption/artwork checks and asynchronous double-pop-out
+handling. All 130 targeted Reader handler probes pass. The integrated 74-page
+identity sweep changes only pages 3 and 6; the other 72 outputs remain exact.
+
+Page 6's top-right gun/boot and narrow bottom-left pilot face are still
+unresolved. This build has not yet been verified on the user's phone. Preserve
+that distinction from the earlier phone-confirmed controls below; local handler
+checks do not certify native gestures, animation or all legacy fallback results.
+
+## Queue and phone-confirmed 2.79.15 controls
 
 The user confirmed page 5's six whole panels and page 13's complete star-and-bombs
 strip after 2.79.15 Test 1. Recording `179289.mp4` shows these results repeatedly.
@@ -10,8 +22,8 @@ has its own work queue.
 
 See [work-queue.md](work-queue.md) for the next targets and
 [video-findings-27915.json](video-findings-27915.json) for timestamped observations.
-The clearest new failure is page 6's merged bottom-middle/right pair; page 3's
-pilot strip also changes its visible crop. Double-pop-out checks include page 4's
+The recording established page 6's merged bottom-middle/right pair and page 3's
+changing pilot crop; 2.79.16 addresses these locally, pending phone confirmation. Double-pop-out checks include page 4's
 caption interaction and page 5's non-text sky selection. Successful caption-only
 zoom is an intended capability, not automatically a frame defect.
 

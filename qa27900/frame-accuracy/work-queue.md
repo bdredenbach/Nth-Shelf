@@ -1,9 +1,10 @@
 # Frame accuracy work queue
 
-Updated from the user's 2.79.15 Test 1 feedback and recording `179289.mp4`.
-Runtime baseline: `a2d85bcf2aed3be1f6bf3642ff050036cd9beb26`, branch `Test_Branch`.
-This update records evidence and next acceptance checks; it does not change the
-detector or claim that the newly queued issues are fixed.
+Updated for **2.79.16 Test 1**, using the user's 2.79.15 feedback and recording
+`179289.mp4`. Prior runtime baseline:
+`a2d85bcf2aed3be1f6bf3642ff050036cd9beb26`, branch `Test_Branch`.
+Local implementation results are below; the new build still needs phone review.
+See [queue-results-27916.md](queue-results-27916.md) for test evidence and limits.
 
 Accuracy comes first. Keep the 2.79.xxx version series until the full frame goal
 is met; reserve 2.80.00. Performance tuning and automatic sequential pop-outs at
@@ -21,7 +22,22 @@ The page-5/page-13 confirmation is targeted. It does not certify every other
 frame on page 13 or all second-level interactions. Existing independent labels
 remain in `phone-findings-27914.json`; do not replace them with detector output.
 
-## Next work, in order
+## 2.79.16 implementation status
+
+| ID | Local result | Remaining check or work |
+| --- | --- | --- |
+| FQ-01 | Bottom-middle/right have distinct whole-frame owners at all five probe positions. The previous bottom-middle identity and evidence are exact. | Phone confirmation of separate, consecutive pop-outs. |
+| FQ-02 | All five page-3 strips pass five positions each; the pilot keeps its narration and left artwork. | Phone confirmation of stable whole-strip crops. |
+| FQ-03 | Page-4 caption detection and Reader crop mapping/open-close checks pass. Pending-result cancellation and resize handling are covered. | Exercise the actual caption gesture and animation on the phone; the source video did not establish a failure. |
+| FQ-04 | Page-5 sky/propeller requests reject at three positions; all five page-5 captions and 17 wider-corpus caption controls pass. | Phone confirmation that the sky does not become a second pop-out and the genuine caption still does. |
+| FQ-05 | Five of seven page-6 frames have proved identities: top-left, middle-left/right, bottom-middle/right. | **Top-right gun/boot and narrow bottom-left pilot face remain unresolved.** They are the next detector targets. |
+
+The 130 Reader handler probes include all 80 existing controls and 50 new
+page-3/page-6 probes. The integrated 74-page identity comparison changes only
+pages 3 and 6 (one to five identities each); the other 72 outputs are exact.
+This does not certify the legacy per-tap fallback or every double-pop-out region.
+
+## Recorded targets and acceptance checks
 
 | ID | Target | Evidence | Required outcome |
 | --- | --- | --- | --- |
@@ -31,7 +47,8 @@ remain in `phone-findings-27914.json`; do not replace them with detector output.
 | FQ-04 | Page 5: reject non-text artwork during second-level selection | The correct middle-left propeller frame appears at 02:45.5–02:45.9, followed at 02:46.1–02:46.7 by a stable irregular sky/propeller patch containing no caption. | A bubble/caption request must not promote a patch of sky to a text bubble. Check both hit mapping and the bubble detector; retain the confirmed whole-frame identity. |
 | FQ-05 | Page 6: complete coverage of all seven panels | Source artwork contains two upper, two middle and three lower panels. Other attempts appear in 02:57–03:09, but absence of a popup in sparse samples is not sufficient to certify individual misses. | Label all seven frames independently and test each at five interior positions. Log any misses or merges precisely; do not claim all seven are broken from this recording. |
 
-FQ-01 is the first detector target. FQ-03/FQ-04 are a separate interaction track:
+FQ-01 was the first detector target; FQ-05's two unresolved frames are next.
+FQ-03/FQ-04 are a separate interaction track:
 the intended second pop-out is a bubble or caption selected from an already
 opened frame. It must not be confused with two neighboring comic panels being
 merged into one crop.
@@ -54,7 +71,7 @@ merged into one crop.
   should become the next focus owner. A dim original page behind a selected
   overlay is normal and is not evidence of two simultaneous pop-out layers.
 
-## Acceptance for the next implementation
+## Acceptance for each implementation
 
 1. Use the supplied original comic and independently reviewed visible borders;
    one-based reader pages include the cover. Page 6 is image suffix `005`.
@@ -66,8 +83,8 @@ merged into one crop.
    Bounds alone cannot certify a sloped border.
 4. Re-run all established page-5/page-9/page-13/page-16 controls, then repeat
    consecutive open/close interactions without clearing cache.
-5. Only after those checks, produce the next 2.79.xxx test APK for phone review.
-   This queue update requires no APK or version bump.
+5. After local checks, produce a 2.79.xxx test APK for phone review. Mark a
+   target phone-confirmed only after the user verifies the corresponding build.
 
 ## Earlier backlog remains open
 

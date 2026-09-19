@@ -106,7 +106,26 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.15 Test 1 — Connected panels and shared borders**
+**Version 2.79.16 Test 1 — Whole frames and double pop-outs**
+
+This accuracy test starts the queue from recording `179289.mp4`. The previously phone-confirmed page-5/page-13 fixes remain controls alongside pages 9 and 16.
+
+- Page 3 receives five complete horizontal frame identities. Taps in its pilot strip retain the left narration and artwork.
+- Page 6's bottom-middle and bottom-right frames are separate. Five frames now have proved identities: top-left, both middle frames and the two wider bottom frames. The existing bottom-middle identity is preserved exactly. **The top-right and narrow bottom-left frames remain unresolved.**
+- Second-level bubble selection requires aligned letter evidence inside the selected light region. The page-5 sky/propeller patch is rejected while its captions remain available.
+- Double pop-outs map through the actual rendered frame crop. Dismissal, a newer focus or navigation cancels stale caption results; a pending result uses the current layout after rotation.
+
+Local tests pass **130 Reader handler probes**: 80 established controls on pages 5/9/13/16 and 50 new probes on pages 3/6. The complete 74-page page-identity comparison changes only pages 3 and 6, each from one identity to five; all other 72 outputs are exactly unchanged. Caption and interaction tests also pass. These are source-artwork and handler checks, not Android device or animation verification.
+
+**Phone test priorities:** page 6's two separate wider bottom frames, page 3's complete pilot strip, then caption open/close on pages 4/5. Recheck all established controls. Try center/left/right/north/south within each target and repeat consecutive openings.
+
+The older fallback can still crop incorrectly in unresolved areas. Page 6's remaining two frames, other queued pages and stepped/overlapping shapes stay open. Accuracy comes before speed tuning or automatic sequential pop-outs; this is not 2.80.00.
+
+See [queue results](qa27900/frame-accuracy/queue-results-27916.md) for changes, commands and evidence limits, and the [work queue](qa27900/frame-accuracy/work-queue.md) for remaining targets. Comic pages and recordings are excluded from the repository and APK.
+
+## 🧪 Release History (Newest First)
+
+## V2.79.15 Test 1 — Connected panels and shared borders
 
 The latest phone recording confirms the whole page-13 airplane crop, but shows merged neighboring panels on page 5 and two different partial crops of page 13's tall star-and-bombs strip. This accuracy test addresses those two patterns.
 
@@ -121,8 +140,6 @@ The local reader-handler test passes 80 tap positions across pages 5, 9, 13 and 
 **Still unresolved:** page 3's unresponsive/slow attempts in the recording, other missed or merged scenes, and complex stepped/overlapping shapes. The old fallback remains and can still crop incorrectly outside independently proved frames. Speed tuning and automatic sequential pop-outs remain deferred; this is not 2.80.00.
 
 Run `node qa27900/phone-frame-check.cjs --comic` with the local 74-page fixture for the artwork tap tests. The comic and videos stay outside the repository/APK. CI runs the synthetic border, partition, neighbor, geometry, browser and transfer checks. See `qa27900/frame-accuracy/connected-frames-27915.md` for evidence and limitations.
-
-## 🧪 Release History (Newest First)
 
 ## V2.79.08 Test 1 — An Nth Experience
 

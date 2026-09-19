@@ -1,14 +1,16 @@
-/* Whole-page partitions joined to a closed printed frame. Uncertain leaves
- * invalidate the map; the existing independent frame routes remain available.
+/* Partitions joined to a closed printed frame. Default detection requires a
+ * complete map. An explicit completion request may retain only proven leaves;
+ * unresolved regions never become panels. Nested-frame ambiguity still vetoes
+ * the map, and existing independent identities remain the caller's authority.
  */
 const PanelPartition = (() => {
   'use strict';
-  function analyzeRGBA(rgba,w,h,log){
+  function analyzeRGBA(rgba,w,h,log,options={}){
     if(!Number.isInteger(w)||!Number.isInteger(h)||w<100||h<160||w>900||h>900||!rgba||rgba.length!==w*h*4)return [];
     const g=new Float32Array(w*h);for(let i=0;i<g.length;i++)g[i]=.299*rgba[i*4]+.587*rgba[i*4+1]+.114*rgba[i*4+2];
     let lineOverflow=false;const at=(v,p,t)=>v?g[t*w+p]:g[p*w+t];
     function lines(vertical,minRatio){const length=vertical?h:w,count=vertical?w:h,min=Math.max(30,length*minRatio),out=[];
-      for(let p=2;p<count-2;p++)for(let t=0;t<length;t++){if(Math.min(at(vertical,p-1,t),at(vertical,p,t),at(vertical,p+1,t))>=70)continue;const lo=t;while(++t<length&&Math.min(at(vertical,p-1,t),at(vertical,p,t),at(vertical,p+1,t))<70){}if(t-lo<min)continue;const c=[p,lo,t];if(!out.some(a=>Math.abs(a[0]-p)<3&&Math.abs(a[1]-lo)<8&&Math.abs(a[2]-t)<8))out.push(c);if(out.length>600){lineOverflow=true;return [];}}
+      for(let p=2;p<count-2;p++)for(let t=0;t<length;t++){if(Math.min(at(vertical,p-1,t),at(vertical,p,t),at(vertical,p+1,t))>=70)continue;const lo=t;while(++t<length&&Math.min(at(vertical,p-1,t),at(vertical,p,t),at(vertical,p+1,t))<70){}if(t-lo<min)continue;const c=[p,lo,t];if(!out.some(a=>Math.abs(a[0]-p)<3&&Math.abs(a[1]-lo)<8&&Math.abs(a[2]-t)<8))out.push(c);if(out.length>1500){lineOverflow=true;return [];}}
       return out;
     }
     function metric(vertical,p,lo,hi){if(p<8||p+9>=(vertical?w:h)||hi-lo<10)return [0,0];let dark=0,ridge=0,n=0;const trim=Math.max(2,Math.floor((hi-lo)*.02));
@@ -42,25 +44,83 @@ const PanelPartition = (() => {
           const m=evidence(slope,offset,ends);if(!m)continue;if(m.ridge>=.40&&(m.dark>=.60&&m.attached||m.dark>=.80&&m.oneAttached))uncertain=true;
           if(!room||m.dark<.97||m.mean>=30||m.std>=25||m.ridge<.55||m.thick<.70)continue;const score=m.ridge+m.thick*.25+(1-m.mean/30)*.15+(1-m.std/25)*.1;if(!best||score>best.score)best={slope,offset,ends,score,evidence:m,vertical};
         }}
-      if(!best)return {best:null,uncertain};const samples=[];
-      for(let x=Math.ceil(best.ends[0][0])+3;x<Math.floor(best.ends[1][0])-2;x++){const y=Math.round(best.slope*x+best.offset);if(at(vertical,y,x)>=70)continue;let lo=y,hi=y;while(lo>y-8&&at(vertical,lo-1,x)<70)lo--;while(hi<y+8&&at(vertical,hi+1,x)<70)hi++;if(hi-lo>9||lo<=y-8||hi>=y+8||lo<3||hi+3>=bound||Math.min(at(vertical,lo-3,x),at(vertical,hi+3,x))-at(vertical,y,x)<20)continue;samples.push([x,(lo+hi)/2]);}
-      if(samples.length/(best.ends[1][0]-best.ends[0][0])<.45)return {best:null,uncertain:true};const f=regress(samples);if(!f||f.residual>1.5||Math.abs(f.slope)>.13)return {best:null,uncertain:true};const ends=endpoints(f.slope,f.offset);if(ends.some((p,i)=>Math.hypot(p[0]-best.ends[i][0],p[1]-best.ends[i][1])>4)||ends[0][1]<=qq[0][1]+8||ends[0][1]>=qq[3][1]-8||ends[1][1]<=qq[1][1]+8||ends[1][1]>=qq[2][1]-8)return {best:null,uncertain:true};const m=evidence(f.slope,f.offset,ends);if(!m||m.dark<.97||m.mean>=30||m.std>=25||m.ridge<.55||m.thick<.70)return {best:null,uncertain:true};
-      best={...best,...f,evidence:m,points:vertical?ends.map(p=>p.slice().reverse()):ends};return {best,uncertain};
+      if(!best)return {best:null,uncertain};
+      // Keep the original fit first. Dark artwork can join the broad <70 run;
+      // a second pass isolates the low-variance ink core, then repeats every
+      // full-length separation and attachment proof on the fitted line.
+      for(const core of [false,true]){
+        const samples=[];
+        if(core&&(best.evidence.mean>=15||best.evidence.std>=8||!best.evidence.attached))continue;
+        for(let x=Math.ceil(best.ends[0][0])+3;x<Math.floor(best.ends[1][0])-2;x++){
+          const y=Math.round(best.slope*x+best.offset);if(at(vertical,y,x)>=70)continue;
+          let threshold=70;
+          if(core){let ink=255;for(let d=-3;d<=3;d++)ink=Math.min(ink,at(vertical,y+d,x));threshold=ink+8;if(threshold>=30||at(vertical,y,x)>=threshold)continue;}
+          let lo=y,hi=y;while(lo>y-8&&at(vertical,lo-1,x)<threshold)lo--;while(hi<y+8&&at(vertical,hi+1,x)<threshold)hi++;
+          if(hi-lo>9||lo<=y-8||hi>=y+8||lo<3||hi+3>=bound||Math.min(at(vertical,lo-3,x),at(vertical,hi+3,x))-at(vertical,y,x)<20)continue;
+          samples.push([x,(lo+hi)/2]);
+        }
+        if(samples.length/(best.ends[1][0]-best.ends[0][0])<.45)continue;
+        const f=regress(samples);if(!f||f.residual>1.5||Math.abs(f.slope)>.13)continue;
+        const ends=endpoints(f.slope,f.offset);
+        if(ends.some((p,i)=>Math.hypot(p[0]-best.ends[i][0],p[1]-best.ends[i][1])>4)||ends[0][1]<=qq[0][1]+8||ends[0][1]>=qq[3][1]-8||ends[1][1]<=qq[1][1]+8||ends[1][1]>=qq[2][1]-8)continue;
+        const m=evidence(f.slope,f.offset,ends);if(!m||m.dark<.97||m.mean>=30||m.std>=25||m.ridge<.55||m.thick<.70)continue;
+        best={...best,...f,evidence:m,points:vertical?ends.map(p=>p.slice().reverse()):ends};return {best,uncertain};
+      }
+      return {best:null,uncertain:true};
     }
-    const leaves=[],splits=[];let failed=false;
-    function walk(q,depth){if(failed)return;if(depth>7||leaves.length+splits.length>24||!closed(q)){failed=true;return;}const hcut=find(q,false),vcut=find(q,true),choices=[hcut.best,vcut.best].filter(Boolean);if(!choices.length){if(hcut.uncertain||vcut.uncertain){failed=true;return;}leaves.push(q);return;}const c=choices.sort((a,b)=>b.score-a.score)[0],[a,b]=c.points;splits.push(c);if(c.vertical){walk([q[0],a,b,q[3]],depth+1);walk([a,q[1],q[2],b],depth+1);}else{walk([q[0],q[1],b,a],depth+1);walk([a,b,q[2],q[3]],depth+1);}}
+    const leaves=[],blocked=[],splits=[];let failed=false;
+    function walk(q,depth){if(failed)return;if(depth>7||leaves.length+splits.length>24||!closed(q)){failed=true;return;}const hcut=find(q,false),vcut=find(q,true),choices=[hcut.best,vcut.best].filter(Boolean);if(!choices.length){if(hcut.uncertain||vcut.uncertain){if(options.allowPartial===true)blocked.push(q);else failed=true;return;}leaves.push(q);return;}const c=choices.sort((a,b)=>b.score-a.score)[0],[a,b]=c.points;splits.push(c);if(c.vertical){walk([q[0],a,b,q[3]],depth+1);walk([a,q[1],q[2],b],depth+1);}else{walk([q[0],q[1],b,a],depth+1);walk([a,b,q[2],q[3]],depth+1);}}
     walk(root,0);if(failed||leaves.length<4||leaves.length>12||!splits.some(c=>c.vertical)||!splits.some(c=>!c.vertical))return [];
     // Closed or partly interrupted nested boxes only veto the map. They cannot
     // become output without independent semantic/visibility ownership.
+    // Keep all weak evidence, including unresolved regions, within a bounded
+    // inventory. An overflow rejects the map instead of discarding weak rails.
     const weak=[lines(false,.05),lines(true,.05)];if(lineOverflow)return [];
     const inside=(p,q)=>{let sign=0;for(let i=0;i<4;i++){const a=q[i],b=q[(i+1)%4],cross=(b[0]-a[0])*(p[1]-a[1])-(b[1]-a[1])*(p[0]-a[0]);if(Math.abs(cross)<2)continue;if(sign&&Math.sign(cross)!==sign)return false;sign=Math.sign(cross);}return true;};
-    for(let axis=0;axis<2;axis++){const vertical=axis===1,ls=weak[axis],along=vertical?h:w,cross=vertical?w:h;for(let j=0;j<ls.length;j++)for(let k=j+1;k<ls.length;k++){const a=ls[j],b=ls[k];if(b[0]-a[0]<cross*.06||Math.abs(a[1]-b[1])>10||Math.abs(a[2]-b[2])>10)continue;const lo=Math.max(a[1],b[1]),hi=Math.min(a[2],b[2]);if(hi-lo<along*.1||(hi-lo)*(b[0]-a[0])<w*h*.019)continue;const rough=vertical?[[a[0],lo],[b[0],lo],[b[0],hi],[a[0],hi]]:[[lo,a[0]],[hi,a[0]],[hi,b[0]],[lo,b[0]]];if(!leaves.some(q=>rough.every(p=>inside(p,q))&&Math.abs((hi-lo)*(b[0]-a[0]))<.85*Math.abs(q.reduce((s,p,i)=>{const n=q[(i+1)%4];return s+p[0]*n[1]-n[0]*p[1];},0)/2)))continue;
+    for(let axis=0;axis<2;axis++){const vertical=axis===1,ls=weak[axis],along=vertical?h:w,cross=vertical?w:h;for(let j=0;j<ls.length;j++)for(let k=j+1;k<ls.length;k++){const a=ls[j],b=ls[k];if(b[0]-a[0]<cross*.06||Math.abs(a[1]-b[1])>10||Math.abs(a[2]-b[2])>10)continue;const lo=Math.max(a[1],b[1]),hi=Math.min(a[2],b[2]);if(hi-lo<along*.1||(hi-lo)*(b[0]-a[0])<w*h*.019)continue;const rough=vertical?[[a[0],lo],[b[0],lo],[b[0],hi],[a[0],hi]]:[[lo,a[0]],[hi,a[0]],[hi,b[0]],[lo,b[0]]];if(![...leaves,...blocked].some(q=>rough.every(p=>inside(p,q))&&Math.abs((hi-lo)*(b[0]-a[0]))<.85*Math.abs(q.reduce((s,p,i)=>{const n=q[(i+1)%4];return s+p[0]*n[1]-n[0]*p[1];},0)/2)))continue;
         const ms=[metric(vertical,a[0],lo,hi),metric(vertical,b[0],lo,hi)];for(const guess of [lo,hi-1]){let best=[0,0],score=-1;for(let pos=guess-4;pos<=guess+4;pos++){const m=metric(!vertical,pos,a[0],b[0]),s=Math.min(...m)+.05*(m[0]+m[1]);if(s>score){score=s;best=m;}}ms.push(best);}const coverage=ms.map(m=>m[0]).sort((a,b)=>a-b);if(coverage[0]>=.6&&coverage[1]>=.96&&ms.every(m=>m[1]>=.4))return [];
       }}
-    if(log)log(`page partition: ${leaves.length} closed leaves, ${splits.length} attached separators`);
-    return leaves.map(q=>{const quad=q.map(p=>({x:p[0]/w,y:p[1]/h})),xs=quad.map(p=>p.x),ys=quad.map(p=>p.y);return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:quad,_identitySource:'page-partition',_geometryOwner:'orthogonal-frame',_geometryType:'connected-page-partition',_partitionProof:{version:1,connected:true,analysisWidth:w,analysisHeight:h,leafCount:leaves.length,separatorCount:splits.length,outerFits:edges}};});
+    // Independently proved frames remain authoritative. Two centerline fits
+    // through the same thick printed divider can differ by a fraction of a
+    // pixel. Reconcile only an entire shared leaf edge to that existing rail;
+    // partial overlaps and T junctions do not authorize changing a boundary.
+    if(Array.isArray(options.anchors)&&options.anchors.length){
+      const anchored=new Map(),distance=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+      for(const anchor of options.anchors){
+        if(!Array.isArray(anchor?._quad)||anchor._quad.length!==4||anchor._quad.some(p=>!p||!Number.isFinite(p.x)||!Number.isFinite(p.y)))return [];
+        const q=anchor._quad.map(p=>[p.x*w,p.y*h]);if(!closed(q))return [];
+        const matches=[];for(let i=0;i<leaves.length;i++)if(q.every((p,k)=>distance(p,leaves[i][k])<=3))matches.push(i);
+        if(matches.length!==1||anchored.has(matches[0]))return [];
+        anchored.set(matches[0],q);
+      }
+      const original=leaves.map(q=>q.map(p=>p.slice())),adjusted=[];
+      function crossing(a,b,c,d){const ux=b[0]-a[0],uy=b[1]-a[1],vx=d[0]-c[0],vy=d[1]-c[1],den=ux*vy-uy*vx;if(Math.abs(den)<1e-8)return null;const t=((c[0]-a[0])*vy-(c[1]-a[1])*vx)/den;return [a[0]+t*ux,a[1]+t*uy];}
+      for(let i=0;i<original.length;i++){
+        if(anchored.has(i)){adjusted.push(anchored.get(i));continue;}
+        const q=original[i],rails=q.map((p,k)=>[p,q[(k+1)%4]]);let changed=false;
+        for(let k=0;k<4;k++){
+          let replacement=null;
+          for(const [j,anchor]of anchored)for(let e=0;e<4;e++){
+            const source=original[j],next=(e+1)%4;
+            if(distance(q[k],source[next])>1e-5||distance(q[(k+1)%4],source[e])>1e-5)continue;
+            const candidate=[anchor[next],anchor[e]];
+            if(candidate.some((p,t)=>distance(p,rails[k][t])>3))return [];
+            if(replacement&&candidate.some((p,t)=>distance(p,replacement[t])>1e-5))return [];
+            replacement=candidate;
+          }
+          if(replacement){rails[k]=replacement;changed=true;}
+        }
+        if(!changed){adjusted.push(q);continue;}
+        const fitted=rails.map((rail,k)=>crossing(...rails[(k+3)%4],...rail));
+        if(fitted.some((p,k)=>!p||distance(p,q[k])>3)||!closed(fitted))return [];
+        adjusted.push(fitted);
+      }
+      for(let i=0;i<leaves.length;i++)leaves[i]=adjusted[i];
+    }
+    if(log)log(`page partition: ${leaves.length} closed leaves, ${splits.length} attached separators${blocked.length?`, ${blocked.length} unresolved regions`:""}`);
+    return leaves.map(q=>{const quad=q.map(p=>({x:p[0]/w,y:p[1]/h})),xs=quad.map(p=>p.x),ys=quad.map(p=>p.y);return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:quad,_identitySource:'page-partition',_geometryOwner:'orthogonal-frame',_geometryType:'connected-page-partition',_partitionProof:{version:1,connected:true,analysisWidth:w,analysisHeight:h,leafCount:leaves.length,separatorCount:splits.length,outerFits:edges,...(blocked.length?{complete:false,unresolvedLeafCount:blocked.length,unresolvedRegions:blocked.map(q=>q.map(p=>({x:p[0]/w,y:p[1]/h})))}:{})}};});
   }
-  function analyzeImage(img,log){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log);}
+  function analyzeImage(img,log,options){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log,options);}
   return {analyzeRGBA,analyzeImage};
 })();
 if(typeof window!=='undefined')window.PanelPartition=PanelPartition;

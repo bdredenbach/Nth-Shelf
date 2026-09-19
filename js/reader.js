@@ -40,6 +40,7 @@ const Reader = {
  bubbleOverlayActive: false,
  panelOverlayActive: false,
  panelOverlayToken: 0,
+ _bubbleRequestToken: 0,
  focusMode: null,          // null | panel | bubble
  focusAnimationTimer: null,
  _panelLoadToken: 0,      // guards against a slow detection landing on the wrong page
@@ -922,6 +923,7 @@ const Reader = {
  },
 
  removePanelOverlay(animate = false) {
+   this._bubbleRequestToken++;
    this.panelOverlayToken++;
    const overlay = this.els.panelOverlay;
    if (!overlay) {
@@ -995,6 +997,7 @@ const Reader = {
  },
 
  removeBubbleOverlay(animate = false) {
+   this._bubbleRequestToken++;
    const overlay = this.els.bubbleOverlay;
    if (overlay && animate) {
      overlay.classList.remove("active");
@@ -2731,9 +2734,13 @@ async setMode(mode) {
    if (!pending) return false;
 
    this._deferredPanelTap = null;
+   const token = ++this._bubbleRequestToken;
+   const current = () => token === this._bubbleRequestToken && this.mode === "single" &&
+     this.comic?.id === pending.comicId && this.index === pending.pageIndex;
 
    try {
      const result = await pending.promise;
+     if (!current()) return true;
      if (!result || !result.bubble) {
        // No bubble: because this was a genuine double tap on an already
        // focused frame, dismiss the frame instead of sending the tap back
@@ -2753,109 +2760,90 @@ async setMode(mode) {
      this.showBubbleOverlay(
        result.bubble,
        stageRect,
-       result.imgRect
+       this.getPanelImageContext()?.rect || result.imgRect
      );
      return true;
    } catch (_) {
      // If detection fails, preserve the normal frame interaction.
-     this.handleSingleTap(pending.pos);
+     if (current()) this.handleSingleTap(pending.pos);
      return true;
    }
  },
 
  async handleDoubleTap(pos) {
    if (this.mode !== "single") return;
-
-   // An active bubble owns the next double-tap. Do this BEFORE checking any
-   // deferred panel tap, otherwise the bubble can become impossible to close.
    if (this.bubbleOverlayActive) {
      this._deferredPanelTap = null;
      this.removeBubbleOverlay(true);
      return;
    }
-
-   if (this._deferredPanelTap) {
-     const handled = await this.handleDeferredPanelDoubleTap(pos);
-     if (handled) return;
-   }
-
-   const stageRect = this.els.stage.getBoundingClientRect();
-
+   if (this._deferredPanelTap && await this.handleDeferredPanelDoubleTap(pos)) return;
    if (!this.bubbleAltZoomEnabled) {
      if (this.focusMode === "panel") this.resetZoom({ animate: true });
      return;
    }
 
-   if (this.bubbleOverlayActive) {
-     this.removeBubbleOverlay(true);
-     return;
-   }
-
-   const comicId = this.comic?.id;
-   const pageIndex = this.index;
-   const url = await this.getPageUrl(pageIndex);
-   if (!url) return;
-
-   const logger = this.debugMode
-     ? (msg) => this.debugLog(`[bubble-alt] ${msg}`)
-     : null;
-
-   // IMPORTANT: when a panel is already popped out, the tap is landing on
-   // the enlarged panel overlay. Map that screen coordinate back through the
-   // panel crop to the original comic page before running BubbleDetect.
-   if (this.focusMode === "panel" &&
-       this.panelOverlayActive &&
-       this.panelFocusMeta &&
-       this.els.panelOverlay) {
-     const overlayRect = this.els.panelOverlay.getBoundingClientRect();
-     if (overlayRect.width > 1 && overlayRect.height > 1) {
-       const localX = clamp((pos.x - overlayRect.left) / overlayRect.width, 0, 1);
-       const localY = clamp((pos.y - overlayRect.top) / overlayRect.height, 0, 1);
-       const panel = this.panelFocusMeta.panel;
-       const pageRelX = clamp(panel.x + localX * panel.w, 0, 1);
-       const pageRelY = clamp(panel.y + localY * panel.h, 0, 1);
-
-       const bubble = await BubbleDetect.extract(
-         url, pageRelX, pageRelY, logger
-       );
-
-       if (!this.comic || this.comic.id !== comicId || this.index !== pageIndex) return;
-
-       if (bubble) {
-         // Return to the real page geometry for the bubble overlay, then put
-         // the detected bubble on top as the new focus owner.
-         const ctx = this.getPanelImageContext();
-         const imgRect = ctx?.rect || stageRect;
-         this.removePanelOverlay(false);
-         this.focusMode = null;
-         this.setFocusDim(false, false);
-         this.showBubbleOverlay(bubble, stageRect, imgRect);
-       } else {
-         // No bubble at the double-tapped location: the focused frame owns
-         // this interaction, so close it.
-         this._deferredPanelTap = null;
-         this.resetZoom({ animate: true });
-       }
-       return;
-     }
-
-     this.resetZoom({ animate: true });
-     return;
-   }
-
-   // Normal page (no panel focus): use the actual Turn.js-visible image.
+   // Snapshot the gesture before any URL or detector work. A later result
+   // cannot retarget a different crop or resurrect a dismissed focus.
+   const token = ++this._bubbleRequestToken;
+   const comicId = this.comic?.id, pageIndex = this.index;
+   const focus = this.focusMode, overlay = this.els.panelOverlay, meta = this.panelFocusMeta;
+   const stageRect = this.els.stage.getBoundingClientRect();
    const ctx = this.getPanelImageContext();
    const imgRect = ctx?.rect || stageRect;
-   if (!imgRect.width || !imgRect.height) return;
+   const current = () => token === this._bubbleRequestToken && this.mode === "single" &&
+     this.comic?.id === comicId && this.index === pageIndex && this.focusMode === focus &&
+     (focus !== "panel" || (this.panelOverlayActive && this.els.panelOverlay === overlay && this.panelFocusMeta === meta));
+   const logger = this.debugMode ? (msg) => this.debugLog(`[bubble-alt] ${msg}`) : null;
+   let pageX, pageY;
+   if (focus === "panel") {
+     const bounds = overlay?.getBoundingClientRect();
+     if (!this.panelOverlayActive || !meta || !bounds || bounds.width <= 1 || bounds.height <= 1) {
+       this.resetZoom({ animate: true });
+       return;
+     }
+     const u = (pos.x-bounds.left)/bounds.width, v = (pos.y-bounds.top)/bounds.height;
+     const panel = meta.panel;
+     pageX = panel.x+u*panel.w; pageY = panel.y+v*panel.h;
+     let inside = Number.isFinite(u) && Number.isFinite(v) && u >= 0 && u <= 1 && v >= 0 && v <= 1;
+     // A clipped corner of a sloping frame is transparent, not a caption hit.
+     const quad = panel._quad;
+     if (inside && Array.isArray(quad) && quad.length === 4) {
+       let sign = 0;
+       for (let i = 0; i < 4; i++) {
+         const a = quad[i], b = quad[(i+1)%4];
+         const cross = (b.x-a.x)*(pageY-a.y)-(b.y-a.y)*(pageX-a.x);
+         if (Math.abs(cross) <= 1e-10) continue;
+         if (sign && Math.sign(cross) !== sign) { inside = false; break; }
+         sign = Math.sign(cross);
+       }
+     }
+     if (!inside) {
+       this.resetZoom({ animate: true });
+       return;
+     }
+   } else {
+     if (!imgRect.width || !imgRect.height) return;
+     pageX = clamp((pos.x-imgRect.left)/imgRect.width, 0, 1);
+     pageY = clamp((pos.y-imgRect.top)/imgRect.height, 0, 1);
+   }
 
-   const relXImg = clamp((pos.x - imgRect.left) / imgRect.width, 0, 1);
-   const relYImg = clamp((pos.y - imgRect.top) / imgRect.height, 0, 1);
-
-   const bubble = await BubbleDetect.extract(url, relXImg, relYImg, logger);
-   if (!this.comic || this.comic.id !== comicId || this.index !== pageIndex) return;
-
+   const url = await this.getPageUrl(pageIndex);
+   if (!url || !current()) return;
+   if (logger) logger(`focus=${focus || 'page'} source=(${pageX.toFixed(5)},${pageY.toFixed(5)})`);
+   const bubble = await BubbleDetect.extract(url, pageX, pageY, logger);
+   if (!current()) return;
    if (bubble) {
-     this.showBubbleOverlay(bubble, stageRect, imgRect);
+     if (focus === "panel") {
+       this.removePanelOverlay(false);
+       this.focusMode = null;
+       this.setFocusDim(false, false);
+     }
+     this.showBubbleOverlay(bubble, this.els.stage.getBoundingClientRect(),
+       this.getPanelImageContext()?.rect || imgRect);
+   } else if (focus === "panel") {
+     this._deferredPanelTap = null;
+     this.resetZoom({ animate: true });
    }
  },
 
@@ -3043,6 +3031,7 @@ async setMode(mode) {
    const ctx = this.getPanelImageContext();
    const img = ctx?.img;
    if (!img || !img.naturalWidth || !img.naturalHeight) return;
+   this._bubbleRequestToken++;
 
    // Live strict proofs supplement a partial background map. Non-frame V73,
    // V100 and V99 rectangles are rejected by PanelMapCore and remain session
@@ -3092,7 +3081,7 @@ async setMode(mode) {
    const sh = geom.h * img.naturalHeight;
 
    this.panelFocusMeta = {
-     panel: { x: panel.x, y: panel.y, w: panel.w, h: panel.h, _quad: quad || undefined },
+     panel: { ...geom, _quad: quad || undefined },
      pageIndex: this.index
    };
 
