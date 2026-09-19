@@ -69,3 +69,7 @@ The old middle-left tap (0.20, 0.45) and middle-right tap (0.70, 0.46) are in th
 
 The geometry contract passes 18 physical-angle cases and live/persisted crop checks. A before/after sweep across all 74 pages gives the same six background-map polygons on two pages; this confirms scope, not their visual correctness. Exploratory long-dark-separator segmentation finds five large regions on page 36, merging the inset and middle scene. A looser threshold falsely divides artwork into nine regions. That experiment is not shipped.
 
+
+Latest local candidate: [2.79.18 results](queue-results-27918.md), with
+[independent new labels](queue-artwork-27918.json). Run `ink-frame-artwork.cjs`
+with `--comic --skia` for optional source-artwork and resampling checks.

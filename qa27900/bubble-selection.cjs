@@ -19,13 +19,21 @@ function fixture(kind){
   for(let y=0;y<h;y++)for(let x=0;x<w;x++)pixel(x,y,55);
   for(let y=298;y<363;y++)for(let x=178;x<342;x++)pixel(x,y,15);
   for(let y=301;y<360;y++)for(let x=181;x<339;x++)pixel(x,y,250);
-  if(kind==='ragged-art'||kind==='ragged-text'){
+  if(kind==='tall-flecks'){
+    // A tall irregular pale patch with two tiny aligned marks is artwork,
+    // even though the marks could be mistaken for a short word in isolation.
+    for(let y=298;y<425;y++)for(let x=178;x<342;x++)pixel(x,y,55);
+    for(let y=301;y<421;y++)for(let x=181;x<261;x++)
+      if(x>=197&&x<245||y<309||y>=413)pixel(x,y,250);
+    const glyph=['10001','10001','10101','10101','10101','10101','11111'];
+    for(let n=0;n<2;n++)for(let y=0;y<7;y++)for(let x=0;x<5;x++)if(glyph[y][x]==='1')pixel(204+n*13+x,355+y,10);
+  }else if(kind==='ragged-art'||kind==='ragged-text'||kind==='ragged-wide'){
     // A wide light region with deep contour notches. Two isolated fence-like marks
     // are not a caption; a substantial row of lettering remains selectable.
     for(let y=301;y<360;y++)for(let x=181;x<339;x++)
-      pixel(x,y,(y>=323&&y<345)||x<189||x>=331?250:180);
+      pixel(x,y,(y>=(kind==='ragged-wide'?315:323)&&y<345)||x<189||x>=331?250:180);
     const rows=['10001','10001','10101','10101','10101','10101','11111'];
-    const count=kind==='ragged-art'?2:10;
+    const count=kind!=='ragged-text'?2:10;
     for(let n=0;n<count;n++)for(let y=0;y<7;y++)for(let x=0;x<5;x++)
       if(rows[y][x]==='1')pixel((count===2?240:190)+n*13+x,330+y,10);
   }else if(kind==='text'||kind==='thin'){
@@ -74,7 +82,9 @@ async function check(f,tap,expected,label){
   await check(fixture('speckles'),[.4,.34],false,'unstructured enclosed art marks');
   await check(fixture('ragged-art'),[.4,.36],false,'sparse fence-like marks in ragged light artwork');
   await check(fixture('ragged-text'),[.4,.36],true,'substantial text row in a ragged balloon');
-  console.log('Bubble proof: 8 independent synthetic cases passed through detect + extract.');
+  await check(fixture('ragged-wide'),[.4,.36],false,'sparse marks in a moderately filled wide light region');
+  await check(fixture('tall-flecks'),[.37,.4],false,'tiny aligned flecks in tall pale artwork');
+  console.log('Bubble proof: 10 independent synthetic cases passed through detect + extract.');
   const flag=process.argv.indexOf('--comic');
   if(flag<0)return;
   const root=process.argv[flag+1]||path.resolve(__dirname,'../../comic-wolverine-1000');
@@ -131,6 +141,8 @@ async function check(f,tap,expected,label){
   // The reviewed changed crops are faces, clothing, teeth and open sky, not
   // speech. Keep the stronger proof from drifting back into those regions.
   const artNegatives=[
+    {page:9,tap:[.85,.805]},
+    {page:13,tap:[.75,.41]},
     // Broad plane artwork mixed with a sound effect is not an isolated caption.
     {page:12,tap:[.5160839160839161,.6596906278434941]},
     ...[[.7,.32],[.8,.32],[.7,.36],[.8,.36]].map(tap=>({page:11,tap})),
@@ -149,6 +161,25 @@ async function check(f,tap,expected,label){
     const file=path.join(root,`Wolverine (2010-2012) 1000-${String(page-1).padStart(3,'0')}.jpg`);
     const {data,info}=await sharp(file).resize({width:1100,height:1100,fit:'inside',withoutEnlargement:true}).ensureAlpha().raw().toBuffer({resolveWithObject:true});
     await check({data,w:info.width,h:info.height,img:{width:info.width,height:info.height}},tap,false,`page${page} artwork is not speech`);
+  }
+  if(process.argv.includes('--skia')){
+    const {loadImage,createCanvas}=require('@napi-rs/canvas');
+    const oldScope=vm.createContext({console,window:{}});
+    assert(process.env.NTH_BASELINE_ROOT,'--skia requires NTH_BASELINE_ROOT for same-resampling caption controls');
+    vm.runInContext(fs.readFileSync(path.resolve(process.env.NTH_BASELINE_ROOT,'js/bubbles.js'),'utf8'),oldScope);
+    let preserved=0,misses=0;
+    for(const quality of ['low','medium','high']){
+      for(const {page,tap}of [{page:9,tap:[.85,.805]},{page:13,tap:[.75,.41]},...regressions]){
+        const img=await loadImage(path.join(root,`Wolverine (2010-2012) 1000-${String(page-1).padStart(3,'0')}.jpg`)),w=Math.round(img.width*1100/img.height),h=1100,c=createCanvas(w,h),ctx=c.getContext('2d');
+        ctx.imageSmoothingQuality=quality;ctx.drawImage(img,0,0,w,h);
+        const f={img,w,h,data:ctx.getImageData(0,0,w,h).data};
+        const previous=oldScope.window.BubbleDetect._floodFill(img,w,h,f.data,...tap);
+        const expected=page!==9&&page!==13?!!previous:false;
+        const result=await check(f,tap,expected,`Skia ${quality} page${page}`);
+        if(page!==9&&page!==13){assert.deepEqual(plain(result),plain(previous),'same-resampling caption result is exact');if(expected)preserved++;else misses++;}
+      }
+    }
+    console.log(`Skia: six artwork-negative checks passed; ${preserved} accepted captions preserved exactly, ${misses} baseline misses unchanged across three resampling qualities.`);
   }
   console.log(`${artNegatives.length} wider-corpus non-text artwork selections rejected.`);
   console.log('Artwork: page4 caption stable at 3 taps; all 5 page5 captions retained; bottom-right stable at 3 taps; propeller sky rejected at 3 taps.');

@@ -1,13 +1,14 @@
 'use strict';
 const assert=require('node:assert/strict'),det=require('../js/panels-partition');
-function fixture({tilted=false,inset=false,partialInset=false,broken=false,noVertical=false,flat=false,thinDivider=0,edgeDivider=false,oneEnded=false}={}){
+function fixture({tilted=false,inset=false,partialInset=false,broken=false,noVertical=false,flat=false,thinDivider=0,edgeDivider=false,oneEnded=false,darkMargin=false,thinMain=false,brokenOuter=false}={}){
  const w=420,h=700,data=new Uint8Array(w*h*4),pad=20,rx=w-pad,by=h-pad;
- for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=(y*w+x)*4;const v=x<pad||x>rx||y<pad||y>by?250:150+35*Math.sin(x*.083+y*.12)+20*Math.sin(x*.157-y*.111);data[i]=data[i+1]=data[i+2]=flat?5:Math.round(v);data[i+3]=255;}
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=(y*w+x)*4;const v=x<pad||x>rx||y<pad||y>by?(darkMargin?5:250):150+35*Math.sin(x*.083+y*.12)+20*Math.sin(x*.157-y*.111);data[i]=data[i+1]=data[i+2]=flat?5:Math.round(v);data[i+3]=255;}
  function line(a,b,gap=false,thickness=2.2){const dx=b[0]-a[0],dy=b[1]-a[1],length=dx*dx+dy*dy;for(let y=Math.max(0,Math.floor(Math.min(a[1],b[1])-3));y<=Math.min(h-1,Math.ceil(Math.max(a[1],b[1])+3));y++)for(let x=Math.max(0,Math.floor(Math.min(a[0],b[0])-3));x<=Math.min(w-1,Math.ceil(Math.max(a[0],b[0])+3));x++){const t=((x-a[0])*dx+(y-a[1])*dy)/length;if(t<0||t>1||gap&&t>.32&&t<.54)continue;if(Math.hypot(x-a[0]-dx*t,y-a[1]-dy*t)>thickness)continue;const i=(y*w+x)*4;data[i]=data[i+1]=data[i+2]=5;}}
- const top=[pad,pad],right=[rx,pad],bottomR=[rx,by],bottomL=[pad,by];for(const[a,b]of[[top,right],[right,bottomR],[bottomR,bottomL],[bottomL,top]])line(a,b);
+ const top=[pad,pad],right=[rx,pad],bottomR=[rx,by],bottomL=[pad,by];for(const[a,b]of[[top,right],[right,bottomR],[bottomR,bottomL],[bottomL,top]])line(a,b,brokenOuter&&a===top);
  const h1=[[pad,210],[rx,tilted?224:210]],h2=[[pad,450],[rx,tilted?432:450]];line(...h1,broken);line(...h2);
- const middleX=270,bottomX=180,bottomEnd=tilted?160:bottomX;const at=(seg,x)=>seg[0][1]+(seg[1][1]-seg[0][1])*(x-seg[0][0])/(seg[1][0]-seg[0][0]);
- const mp=[middleX,at(h1,middleX)],mq=[tilted?276:middleX,at(h2,tilted?276:middleX)],bp=[bottomX,at(h2,bottomX)],bq=[bottomEnd,by];if(!noVertical){line(mp,mq);line(bp,bq);}
+ const middleX=thinMain?270.5:270,bottomX=180,bottomEnd=tilted?160:bottomX;const at=(seg,x)=>seg[0][1]+(seg[1][1]-seg[0][1])*(x-seg[0][0])/(seg[1][0]-seg[0][0]);
+ const mp=[middleX,at(h1,middleX)],mq=[tilted?(thinMain?276.5:276):middleX,at(h2,tilted?(thinMain?276.5:276):middleX)],bp=[bottomX,at(h2,bottomX)],bq=[bottomEnd,by];if(!noVertical){line(mp,mq,false,thinMain?1.35:2.2);line(bp,bq);}
+ if(brokenOuter&&darkMargin)for(let y=0;y<25;y++)for(let x=140;x<200;x++){const i=(y*w+x)*4;data[i]=data[i+1]=data[i+2]=180;}
  if(inset){const iq=[[55,65],[170,65],[170,145],[55,145]];for(let i=0;i<4;i++)line(iq[i],iq[(i+1)%4],partialInset&&i===3);}
  if(thinDivider){const y=110+(thinDivider%2===0?.5:0);line([pad,y],[rx,y],false,thinDivider/2-.01);}
  if(edgeDivider)line([pad,34],[rx,34]);
@@ -25,6 +26,13 @@ for(const thinDivider of [1,2])assert.equal(run({thinDivider}).ps.length,0,'thin
 assert.equal(run({edgeDivider:true}).ps.length,0,'narrow edge panel must defer rather than merge');
 assert.equal(run({noVertical:true}).ps.length,0,'one-axis layout outside conservative partition scope');
 assert.equal(run({flat:true}).ps.length,0,'uniform dark artwork abstains');
+for(const tilted of [false,true]){
+ const {f,ps}=run({darkMargin:true,tilted,thinMain:tilted});
+ assert.equal(ps.length,5,'black-margin thin printed divider keeps all five leaves');
+ ps.forEach((p,k)=>{assert.equal(p._partitionProof.outerMethod,'dark-margin-transition');p._quad.forEach((v,c)=>assert(Math.hypot(v.x*f.w-f.expected[k][c][0],v.y*f.h-f.expected[k][c][1])<4));});
+}
+for(const opts of [{inset:true},{inset:true,partialInset:true},{broken:true},{oneEnded:true},{brokenOuter:true},{flat:true},{noVertical:true}])
+ assert.equal(run({darkMargin:true,...opts}).ps.length,0,'dark exterior never exempts interrupted/inset/absent borders');
 assert.equal(det.analyzeRGBA(new Uint8Array(8),420,700).length,0,'malformed data rejected');
 console.log('page-partition: independently drawn connected leaves, two-axis tilt, insets, partial borders and malformed input passed');
 // Existing independent frames keep priority unless a complete partition proves

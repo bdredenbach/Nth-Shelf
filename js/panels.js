@@ -43,6 +43,14 @@ const PanelDetect = {
           } catch (error) {
             if (log) log(`page partition deferred: ${error.message}`);
           }
+          try {
+            if (typeof PanelClosedFrames !== 'undefined' && PanelClosedFrames.supplementImage) {
+              const additions = PanelClosedFrames.supplementImage(img, closed, log);
+              if (additions.length) closed = closed.concat(additions);
+            }
+          } catch (error) {
+            if (log) log(`ink-core supplement deferred: ${error.message}`);
+          }
           resolve(closed);
         }
         catch (err) {

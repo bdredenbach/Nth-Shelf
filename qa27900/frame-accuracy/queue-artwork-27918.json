@@ -1,0 +1,245 @@
+{
+  "description": "Independent visual labels from original comic: page 7 full-width bomber and lower Wolverine strips; page 17 six visible panels including tall SNIKT column. Approximate normalized printed borders, not detector output.",
+  "frames": [
+    {
+      "page": 7,
+      "name": "red bomber strip",
+      "quad": [
+        [
+          0.03,
+          0.53
+        ],
+        [
+          0.965,
+          0.53
+        ],
+        [
+          0.965,
+          0.74
+        ],
+        [
+          0.027,
+          0.74
+        ]
+      ],
+      "tolerance": 0.009,
+      "source": "closed-frame"
+    },
+    {
+      "page": 7,
+      "name": "lower Wolverine strip",
+      "quad": [
+        [
+          0.027,
+          0.74
+        ],
+        [
+          0.965,
+          0.74
+        ],
+        [
+          0.964,
+          0.97
+        ],
+        [
+          0.027,
+          0.97
+        ]
+      ],
+      "tolerance": 0.009,
+      "source": "closed-frame"
+    },
+    {
+      "page": 17,
+      "name": "top knife strip",
+      "quad": [
+        [
+          0.03,
+          0.026
+        ],
+        [
+          0.97,
+          0.028
+        ],
+        [
+          0.97,
+          0.258
+        ],
+        [
+          0.028,
+          0.256
+        ]
+      ],
+      "tolerance": 0.009,
+      "source": "page-partition"
+    },
+    {
+      "page": 17,
+      "name": "middle left blade",
+      "quad": [
+        [
+          0.028,
+          0.256
+        ],
+        [
+          0.41,
+          0.258
+        ],
+        [
+          0.41,
+          0.531
+        ],
+        [
+          0.027,
+          0.53
+        ]
+      ],
+      "tolerance": 0.009,
+      "source": "page-partition"
+    },
+    {
+      "page": 17,
+      "name": "middle right attacker",
+      "quad": [
+        [
+          0.41,
+          0.258
+        ],
+        [
+          0.97,
+          0.258
+        ],
+        [
+          0.968,
+          0.534
+        ],
+        [
+          0.41,
+          0.531
+        ]
+      ],
+      "tolerance": 0.009,
+      "source": "page-partition"
+    },
+    {
+      "page": 17,
+      "name": "tall SNIKT column",
+      "quad": [
+        [
+          0.027,
+          0.53
+        ],
+        [
+          0.248,
+          0.532
+        ],
+        [
+          0.245,
+          0.97
+        ],
+        [
+          0.025,
+          0.968
+        ]
+      ],
+      "tolerance": 0.009,
+      "source": "page-partition"
+    },
+    {
+      "page": 17,
+      "name": "lower right embrace",
+      "quad": [
+        [
+          0.248,
+          0.532
+        ],
+        [
+          0.968,
+          0.534
+        ],
+        [
+          0.968,
+          0.76
+        ],
+        [
+          0.245,
+          0.758
+        ]
+      ],
+      "tolerance": 0.009,
+      "source": "page-partition"
+    },
+    {
+      "page": 17,
+      "name": "bottom knife closeup",
+      "quad": [
+        [
+          0.245,
+          0.758
+        ],
+        [
+          0.968,
+          0.76
+        ],
+        [
+          0.968,
+          0.972
+        ],
+        [
+          0.245,
+          0.97
+        ]
+      ],
+      "tolerance": 0.009,
+      "source": "page-partition"
+    },
+    {
+      "page": 8,
+      "name": "lower-right machine-gun strip",
+      "quad": [
+        [
+          0.347,
+          0.531
+        ],
+        [
+          0.965,
+          0.532
+        ],
+        [
+          0.965,
+          0.666
+        ],
+        [
+          0.347,
+          0.663
+        ]
+      ],
+      "tolerance": 0.009,
+      "source": "closed-frame"
+    },
+    {
+      "page": 58,
+      "name": "bottom office conversation strip",
+      "quad": [
+        [
+          0.054,
+          0.82
+        ],
+        [
+          0.947,
+          0.819
+        ],
+        [
+          0.947,
+          0.983
+        ],
+        [
+          0.054,
+          0.983
+        ]
+      ],
+      "tolerance": 0.009,
+      "source": "closed-frame"
+    }
+  ]
+}

@@ -29,27 +29,29 @@ const PanelClosedFrames = (() => {
     for(const v of found){if(merged.some(q=>Math.abs(v[0]-q[0])<5&&Math.min(v[2],q[2])-Math.max(v[1],q[1])>.85*Math.min(v[2]-v[1],q[2]-q[1])))continue;merged.push(v);if(merged.length>=250)break;}
     return merged.sort((a,b)=>a[0]-b[0]);
   }
-  function analyzeRGBA(rgba,w,h,log){
+  function analyzeRGBA(rgba,w,h,log,options={}){
     if(!Number.isInteger(w)||!Number.isInteger(h)||w<80||h<80||w>900||h>900||!rgba||rgba.length!==w*h*4)return [];
     const g=new Float32Array(w*h);for(let i=0;i<g.length;i++)g[i]=.299*rgba[i*4]+.587*rgba[i*4+1]+.114*rgba[i*4+2];
     const hs=lines(g,w,h),vs=lines(g,w,h,true),at=(vertical,p,t)=>vertical?g[t*w+p]:g[p*w+t];
     function cover(vertical,pos,lo,hi){let n=0;for(let t=lo;t<hi;t++){let yes=false;for(let d=-2;d<=2;d++)if(pos+d>=0&&pos+d<(vertical?w:h)&&at(vertical,pos+d,t)<70){yes=true;break;}n+=yes;}return n/Math.max(1,hi-lo);}
     function ridge(vertical,pos,lo,hi){const margin=Math.max(2,Math.floor((hi-lo)*.02));lo+=margin;hi-=margin;if(hi<=lo||pos<8||pos+9>=(vertical?w:h))return 0;let n=0;
       for(let t=lo;t<hi;t++){let mid=255,before=0,after=0;for(let d=-2;d<=2;d++)mid=Math.min(mid,at(vertical,pos+d,t));for(let d=-8;d<-3;d++)before+=at(vertical,pos+d,t);for(let d=3;d<9;d++)after+=at(vertical,pos+d,t);n+=before/5-mid>25&&after/6-mid>25;}return n/(hi-lo);}
-    function fit(vertical,pos,lo,hi){const samples=[];const trim=Math.max(3,Math.round((hi-lo)*.02));
+    function fit(vertical,pos,lo,hi,allowCore=false,core=false){
+      if(core){let sum=0,square=0,n=0;for(let t=lo;t<hi;t++){let ink=255;for(let d=-2;d<=2;d++)ink=Math.min(ink,at(vertical,pos+d,t));sum+=ink;square+=ink*ink;n++;}const mean=sum/n,std=Math.sqrt(Math.max(0,square/n-mean*mean));if(mean>=15||std>=8)return null;}
+      const samples=[];const trim=Math.max(3,Math.round((hi-lo)*.02));
       for(let t=lo+trim;t<hi-trim;t++){
         let pick=-1,best=Infinity;for(let p=pos-2;p<=pos+2;p++)if(p>=8&&p+9<(vertical?w:h)){const v=at(vertical,p,t);if(v<best){best=v;pick=p;}}
-        if(pick<0||best>=70)continue;let a=pick,b=pick;while(a>pick-7&&at(vertical,a-1,t)<70)a--;while(b<pick+7&&at(vertical,b+1,t)<70)b++;
+        if(pick<0||best>=70)continue;const threshold=core?best+8:70;if(core&&threshold>=30)continue;let a=pick,b=pick;while(a>pick-7&&at(vertical,a-1,t)<threshold)a--;while(b<pick+7&&at(vertical,b+1,t)<threshold)b++;
         if(b-a>8||a<=pick-7||b>=pick+7||a<4||b+4>=(vertical?w:h))continue;
         let pre=0,post=0;for(let d=2;d<=4;d++){pre+=at(vertical,a-d,t);post+=at(vertical,b+d,t);}if(Math.min(pre/3-best,post/3-best)<=25)continue;
         samples.push([t,(a+b)/2]);
       }
-      if(samples.length/(hi-lo)<.35){if(log)log(`closed fit sparse ${vertical} ${pos} ${lo}:${hi} ${samples.length/(hi-lo)}`);return null;}
+      if(samples.length/(hi-lo)<.35){if(log)log(`closed fit sparse ${vertical} ${pos} ${lo}:${hi} ${samples.length/(hi-lo)}`);return !allowCore||core?null:fit(vertical,pos,lo,hi,true,true);}
       let sx=0,sy=0;for(const p of samples){sx+=p[0];sy+=p[1];}sx/=samples.length;sy/=samples.length;let cov=0,variance=0;for(const p of samples){cov+=(p[0]-sx)*(p[1]-sy);variance+=(p[0]-sx)**2;}const slope=cov/variance,offset=sy-slope*sx;
       if(!Number.isFinite(slope)||Math.abs(slope)>.015)return null;const errors=samples.map(p=>Math.abs(p[1]-offset-slope*p[0])).sort((a,b)=>a-b);if(errors[Math.floor(errors.length*.9)]>2){if(log)log(`closed fit residual ${vertical} ${pos} ${lo}:${hi} ${errors[Math.floor(errors.length*.9)]}`);return null;}
       if(Math.max(Math.abs(offset+slope*lo-pos),Math.abs(offset+slope*hi-pos))>3)return null;
       let darkness=0;for(let t=lo;t<hi;t++){const p=Math.round(offset+slope*t);darkness+=Math.min(at(vertical,p-1,t),at(vertical,p,t),at(vertical,p+1,t))<70;}if(darkness/(hi-lo)<.96){if(log)log(`closed fit dark ${vertical} ${pos} ${lo}:${hi} ${darkness/(hi-lo)} slope=${slope}`);return null;}
-      return {slope,offset,support:samples.length/(hi-lo)};
+      return {slope,offset,support:samples.length/(hi-lo),...(core?{inkCore:true}:{})};
     }
     function slopedDivider(box){const [x1,y1,x2,y2]=box;
       for(const vertical of [false,true]){const lo=vertical?y1:x1,hi=vertical?y2:x2,b1=vertical?x1:y1,b2=vertical?x2:y2,margin=Math.max(12,(b2-b1)*.085),center=(lo+hi)/2;
@@ -73,7 +75,7 @@ const PanelClosedFrames = (() => {
       }
       return null;
     }
-    function collect(neighbors=[]){
+    function collect(neighbors=[],allowCore=false){
     const candidates=[];
     for(let j=0;j<hs.length;j++){const top=hs[j];for(let k=j+1;k<hs.length;k++){const bottom=hs[k],y1=top[0],y2=bottom[0];if(y2-y1<h*.085)continue;
       const sides=vs.filter(v=>v[1]<=y1+5&&v[2]>=y2-5&&cover(true,v[0],y1,y2)>.96&&ridge(true,v[0],y1,y2)>.45);
@@ -91,7 +93,7 @@ const PanelClosedFrames = (() => {
         // runs here; the original strict detector keeps its original veto.
         if(hs.some(v=>v[0]>y1+10&&v[0]<y2-10&&v[1]<=x1+5&&v[2]>=x2-5&&cover(false,v[0],x1,x2)>.90&&(!shared||ridge(false,v[0],x1,x2)>.05))||vs.some(v=>v[0]>x1+10&&v[0]<x2-10&&v[1]<=y1+5&&v[2]>=y2-5&&cover(true,v[0],y1,y2)>.90&&(!shared||ridge(true,v[0],y1,y2)>.05)))continue;
         const box=[x1,y1,x2,y2];if(slopedDivider(box))continue;
-        const fits=[shared?shared.rail:fit(false,y1,x1,x2),fit(false,y2,x1,x2),fit(true,x1,y1,y2),fit(true,x2,y1,y2)];if(fits.some(f=>!f))continue;
+        const fits=[shared?shared.rail:fit(false,y1,x1,x2,allowCore),fit(false,y2,x1,x2,allowCore),fit(true,x1,y1,y2,allowCore),fit(true,x2,y1,y2,allowCore)];if(fits.some(f=>!f))continue;
         const intersect=(horizontal,vertical)=>{const x=(vertical.offset+vertical.slope*horizontal.offset)/(1-vertical.slope*horizontal.slope);return {x:x/w,y:(horizontal.offset+horizontal.slope*x)/h};};
         const quad=[intersect(fits[0],fits[2]),intersect(fits[0],fits[3]),intersect(fits[1],fits[3]),intersect(fits[1],fits[2])];
         if(quad.some(p=>!Number.isFinite(p.x)||!Number.isFinite(p.y)||p.x<0||p.y<0||p.x>1||p.y>1))continue;
@@ -161,7 +163,7 @@ const PanelClosedFrames = (() => {
     }
     // Preserve strict outputs and their ordering. The second pass may only
     // append a non-overlapping frame using an original accepted neighbor.
-    const strict=removeAmbiguous(collect()),extra=[];
+    const strict=options.supplementOnly?[]:removeAmbiguous(collect()),extra=[];
     if(strict.length){
       for(const candidate of removeAmbiguous(collect(strict))){
         if(!candidate.shared)continue;
@@ -174,7 +176,7 @@ const PanelClosedFrames = (() => {
     // append a disjoint, fully ink-bounded frame. Three externally connected
     // gutter sides allow dark artwork to touch the fourth printed border.
     const gutter=[];
-    if(typeof PanelGutterFrames!=='undefined'){
+    if(!options.supplementOnly&&typeof PanelGutterFrames!=='undefined'){
       const proposals=PanelGutterFrames.proposeRGBA(rgba,w,h).map(c=>({
         box:[Math.min(...c.q.map(p=>p[0])),Math.min(...c.q.map(p=>p[1])),
              Math.max(...c.q.map(p=>p[0])),Math.max(...c.q.map(p=>p[1]))].map(Math.round),
@@ -198,15 +200,47 @@ const PanelClosedFrames = (() => {
         gutter.push(candidate);
       }
     }
-    const result=[...strict,...extra,...gutter];
+    const coreFrames=[];
+    if(options.supplementOnly){
+      // Run only after original closed-frame/partition reconciliation. Existing
+      // identities are immutable anchors, including their border-center fits.
+      const anchors=options.anchors||[];
+      if(anchors.some(p=>!Array.isArray(p._quad)||p._quad.length!==4))return [];
+      const accepted=anchors.map(p=>({quad:p._quad}));
+      const disjoint=q=>accepted.every(p=>overlapArea(q,p.quad)<=1/(w*h));
+      const intersect=(a,b)=>{const x=(b.offset+b.slope*a.offset)/(1-b.slope*a.slope);return {x:x/w,y:(a.offset+a.slope*x)/h};};
+      const quadFor=f=>[intersect(f[0],f[2]),intersect(f[0],f[3]),intersect(f[1],f[3]),intersect(f[1],f[2])];
+      for(let c of removeAmbiguous(collect([],true))){
+        if(!c.fits.some(f=>f.inkCore))continue;
+        if(!disjoint(c.quad)){
+          // Independent fits can overlap within the width of shared ink. Move
+          // only the new edge inward, at most two analysis pixels, and require
+          // its entire new rail to remain on dark ink. Never move an anchor.
+          let trimmed=null;
+          for(let d=.5;d<=2&&!trimmed;d+=.5)for(let side=0;side<4;side++){
+            const fits=c.fits.map(f=>({...f}));fits[side].offset+=(side===0||side===2?1:-1)*d;
+            const q=quadFor(fits);if(!disjoint(q))continue;
+            const ends=side===0?[q[0],q[1]]:side===1?[q[3],q[2]]:side===2?[q[0],q[3]]:[q[1],q[2]];
+            const [a,b]=ends,n=Math.ceil(Math.hypot((b.x-a.x)*w,(b.y-a.y)*h));let dark=0,joined=true;
+            for(let t=0;t<=n;t++){const x=Math.round((a.x+(b.x-a.x)*t/n)*w),y=Math.round((a.y+(b.y-a.y)*t/n)*h),ink=x>=0&&x<w&&y>=0&&y<h&&g[y*w+x]<70;dark+=ink;if((t<8||t>n-8)&&!ink)joined=false;}
+            if(dark/(n+1)<.96||!joined||q.some((p,i)=>Math.hypot((p.x-c.quad[i].x)*w,(p.y-c.quad[i].y)*h)>2.1))continue;
+            trimmed={...c,quad:q,fits,inkTrim:{side,inwardPixels:d}};break;
+          }
+          if(!trimmed)continue;c=trimmed;
+        }
+        coreFrames.push(c);accepted.push(c);
+      }
+    }
+    const result=[...strict,...extra,...gutter,...coreFrames];
     if(log)log(`closed frames: ${strict.length} strict, ${extra.length} shared-boundary, ${gutter.length} exterior-gutter candidates`);
     return result.map(c=>{const xs=c.quad.map(p=>p.x),ys=c.quad.map(p=>p.y),proof={version:1,connected:true,analysisWidth:w,analysisHeight:h,coverage:c.scores,ridge:c.ridges,railFits:c.fits};
+      if(c.fits.some(f=>f.inkCore))proof.inkCoreProof={method:'uniform-ink-core',...(c.inkTrim?{ownershipTrim:c.inkTrim}:{})};
       if(c.gutterProof)proof.gutterProof=c.gutterProof;
       if(c.shared)proof.sharedTopProof={method:'neighbor-completion',neighborQuad:c.shared.neighborQuad,rail:c.shared.rail};
       return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:c.quad,_identitySource:'closed-frame',_geometryOwner:'orthogonal-frame',_geometryType:'closed-dark-frame',_closedFrameProof:proof};});
   }
-  function analyzeImage(img,log){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log);}
-  return {analyzeRGBA,analyzeImage};
+  function analyzeImage(img,log,options){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log,options);}
+  return {analyzeRGBA,analyzeImage,supplementImage:(img,anchors,log)=>analyzeImage(img,log,{supplementOnly:true,anchors})};
 })();
 if(typeof window!=='undefined')window.PanelClosedFrames=PanelClosedFrames;
 if(typeof module!=='undefined')module.exports=PanelClosedFrames;

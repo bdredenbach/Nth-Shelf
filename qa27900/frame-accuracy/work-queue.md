@@ -1,15 +1,30 @@
 # Frame accuracy work queue
 
-Updated after **2.79.17 Test 1** phone recording `179345.mp4`.
-Runtime commit: `0f661037a503d9c5e0b3c985374f7729925bd93a`, branch `Test_Branch`.
-See [new phone findings](video-findings-27917.md),
-[current local results](queue-results-27917.md), and
-[previous phone findings](video-findings-27916.md).
-Original targets came from `179289.mp4`; their timestamps below refer to that video.
+Current candidate: **2.79.18 Test 1**, based on the `179345.mp4` feedback.
+See [2.79.18 local results](queue-results-27918.md) and
+[latest phone findings](video-findings-27917.md). Phone confirmation remains
+pending for the new candidate. Earlier findings below retain their build context.
 
-Accuracy comes first. Keep the 2.79.xxx version series until the full frame goal
-is met; reserve 2.80.00. Performance tuning and automatic sequential pop-outs at
-0.15x remain later work.
+Accuracy comes first. Keep the 2.79.xxx series until the full frame goal is met;
+reserve 2.80.00. Performance tuning and automatic sequential pop-outs at 0.15x
+remain later work.
+
+## 2.79.18 candidate status
+
+- FQ-07: full red bomber strip owns all five tested positions on page 7, also
+  across low/medium/high Skia resampling. The bottom strip remains resampling
+  dependent; the upper-right panel remains unproved.
+- FQ-12/FQ-13: page-9 snow and page-13 pale artwork reject through detect/extract;
+  genuine caption controls are preserved. These need device confirmation.
+- FQ-14: all six page-17 frames pass moved-tap checks; the tall SNIKT column and
+  the two neighboring lower panels stay separate across three Skia settings.
+- FQ-08/09/10 remain open. The upper groups on pages 9–11 require ownership for
+  overlapping/stepped or borderless art, beyond the complete rectangular proofs
+  added here. No arbitrary portrait rectangle or partial inset crop was added.
+- Page-5/9/13/16 controls, page-3/page-6 checks and page-12 whole-frame controls
+  remain passing. FQ-05's two unresolved page-6 identities stay open.
+- Incidental whole-frame additions on page 8 (machine-gun strip) and page 58
+  (bottom conversation strip) follow independently inspected printed borders.
 
 ## Latest phone findings: 179345.mp4
 
@@ -28,7 +43,7 @@ and page 16's five strips also have successful individual openings.
 FQ-07/08/09/10 remain visible. FQ-11's specific page-11 snow request is not
 clearly repeated, so its phone confirmation stays pending. Keep first-level
 frame ownership and second-level caption selection as distinct test tracks.
-This is a findings-only update; runtime/APK remain 2.79.17 Test 1.
+Those findings describe the 2.79.17 phone build; the candidate status above records subsequent work.
 
 ## New phone targets from 179317.mp4
 

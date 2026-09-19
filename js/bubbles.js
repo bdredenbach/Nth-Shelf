@@ -575,11 +575,13 @@ BubbleDetect._hasTextLayout = function(data, w, bright, bounds, threshold) {
       }
       end = group.right;
       run++;
-      // Sparse marks in a ragged region are not enough. A low-fill shape
-      // needs a substantial text line; compact bubbles may hold short speech.
+      // Sparse marks in an irregular light region are not enough. Short
+      // speech needs letters sized for its compact balloon; otherwise a
+      // substantial line must explain the selected region.
       const span = end - start + 1;
       if (run >= 2 && span >= anchor.height * 1.3 &&
-          (bounds.fill >= .55 || bw <= bh * 2.5 || span >= bw * .45)) return true;
+          (bounds.fill >= .70 ||
+           (bw <= bh * 2.5 && anchor.height >= bh * .15) || span >= bw * .45)) return true;
     }
   }
   return false;

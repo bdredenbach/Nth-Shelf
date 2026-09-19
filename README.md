@@ -106,7 +106,37 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.17 Test 1 — Separate bottom frames and snow rejection**
+**Version 2.79.18 Test 1 — Whole bomber and SNIKT frames; artwork-cutout rejection**
+
+Page 7's red bomber strip has one whole-frame owner. Page 17 now has six
+independent frames, including the full-height SNIKT column and both neighboring
+lower panels. These targets also pass three Skia resampling settings. Sparse
+marks in page 9 snow and page 13 pale artwork no longer create caption cutouts;
+real caption controls retain their previous selections.
+
+The 74-page identity comparison adds frames only on pages 7, 8, 17 and 58.
+All previous identities and their evidence remain exact. Page 8 adds the
+machine-gun strip; page 58 adds the bottom conversation strip. The original
+155 Reader-handler controls remain passing; new artwork checks and synthetic
+missing-border/inset tests cover the additions.
+
+**Phone priorities:** move taps around page 7's red bomber strip; open all six
+page-17 frames, especially SNIKT and its right neighbors; then try the page-9
+snow and page-13 pale artwork as second-level selections. Real captions should
+still open. These are local test results pending confirmation on the phone.
+
+**Still open:** upper composites on pages 9–11, page 6's remaining two unproved
+identities, and resampling-dependent misses. Page 7's bottom strip gains an
+identity with Sharp but remains on its prior fallback with Skia. Page 7's upper
+right frame is still unproved. This is another 2.79 accuracy test, not 2.80.00.
+
+See [2.79.18 results](qa27900/frame-accuracy/queue-results-27918.md) and the
+[work queue](qa27900/frame-accuracy/work-queue.md). Comic pages and recordings
+remain excluded from the repository and APK.
+
+## 🧪 Release History (Newest First)
+
+## V2.79.17 Test 1 — Separate bottom frames and snow rejection
 
 Page 12's bottom-left Wolverine/airplanes and bottom-right searchlights now
 have separate whole-frame owners. Five page-12 frames pass 25 moved-tap Reader
@@ -131,8 +161,6 @@ complete the accuracy queue or move to 2.80.00.
 See [2.79.17 results](qa27900/frame-accuracy/queue-results-27917.md) and the
 [work queue](qa27900/frame-accuracy/work-queue.md). Comic pages, videos and
 source-artwork crops remain excluded from the repository and APK.
-
-## 🧪 Release History (Newest First)
 
 ## V2.79.16 Test 1 — Whole frames and double pop-outs
 
