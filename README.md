@@ -74,7 +74,7 @@ Auto Scroll is available in **Scroll, Manga,** and **Webcomic** modes.
 Use the built-in theme swatches to change the reading appearance.
 
 ## 💾 Backup & Restore
-Back up and restore the metadata for your comics, collections, bookmarks, reading progress, and library. You'll need to re sync your collection, however if db gets destroyed.
+Full .nthshelf backups include pages, collections, bookmarks and reading progress, with a 512 MiB limit in this test build. Legacy JSON restores contain metadata only and require the original comic archives.
 
 **Recommendation:** keep a current backup before major browser or device changes.
 
@@ -106,11 +106,15 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.07 Test 1 — An Nth Experience**
+**Version 2.79.07 Test 2 — An Nth Experience**
 
 ## 🧪 Release History (Newest First)
 
-## V2.79.07 Test 1 — An Nth Experience
+## V2.79.07 Test 2 — An Nth Experience
+
+Page navigation hides after five seconds. Swipe inward from the top or bottom to
+show it for another five seconds. Slow page drags begin after eight pixels of
+horizontal intent, and the touched page stays connected throughout the fold.
 
 Uses Nth Reader's independent Nth Page Deck for page folds and reverse turns.
 Turn.js (including its minified copy) and the jQuery runtime reference have been

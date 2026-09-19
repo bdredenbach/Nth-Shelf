@@ -404,9 +404,10 @@ window.LongboxPageMode = (() => {
       const dy = p.clientY - g.y0;
       g.lastX = p.clientX;
       g.lastY = p.clientY;
+      if (Math.hypot(dx, dy) >= 8) g.moved = true;
 
       if (!g.triggered &&
-          Math.abs(dx) >= 40 &&
+          Math.abs(dx) >= 8 &&
           Math.abs(dx) >= Math.abs(dy) * 1.5) {
         g.moved = true;
         g.triggered = true;
@@ -504,7 +505,7 @@ window.LongboxPageMode = (() => {
       const x = p.clientX - rect.left;
       const y = p.clientY - rect.top;
       const bounds = this.book.pageBounds();
-      const corner = 110;
+      const corner = 100;
       const nearCorner =
         (x < corner || x > rect.width - corner) &&
         (y < bounds.y + corner || y > bounds.y + bounds.height - corner);
@@ -543,8 +544,7 @@ window.LongboxPageMode = (() => {
       g.lastY = p.clientY;
 
       if (!g.triggered) {
-        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-        if (performance.now() - g.intentStarted < 90) return;
+        if (Math.abs(dx) < 8 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
       }
 
       const rect = this._gestureBook.getBoundingClientRect();
@@ -560,7 +560,7 @@ window.LongboxPageMode = (() => {
       const y = Math.max(1, Math.min(rect.height - 1, p.clientY - rect.top));
 
       if (!g.triggered) {
-        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+        if (Math.abs(dx) < 8 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
 
         g.triggered = true;
         g.direction = dx < 0 ? "next" : "prev";

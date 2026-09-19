@@ -10,7 +10,7 @@ window.ShelfGuide = {
     search:[["Find your next read","Browse and search your shelf here. Close Search Mode to return to the comic grid."]],
     single:[["Read your way","Swipe or drag to turn a page with the Nth page fold. Pinch with two fingers to zoom; drag while zoomed to pan."],
       ["Look closer","Tap a panel to pop out the whole frame. Double-tap a focused frame to release it. Bubble Zoom can enlarge speech bubbles."],
-      ["Controls are nearby","Tap the middle to show navigation. Use the page slider, bookmark button, reading modes and ? guide."]],
+      ["Controls are nearby","Swipe inward from the top or bottom to show navigation for five seconds. You can also tap the middle. Use the page slider, bookmark button, reading modes and ? guide."]],
     "two-page":[["A full spread","In Android, Two Page enters fullscreen landscape. Swipe to change pairs. Pinch to zoom and drag to pan; pinch inward to fit again."],
       ["Return to normal view","Use the fullscreen-exit button, switch mode, or return to your shelf to release fullscreen and orientation."]],
     scroll:[["Scroll through your comic","Swipe horizontally through pages. Tap to reveal navigation. Auto Scroll reveals its speed slider with those controls."]],
@@ -66,7 +66,9 @@ window.ShelfGuide = {
     if(!this.active)return false;
     this.seen[this.active.id]=true;this.active=null;
     try{localStorage.setItem(this.key,JSON.stringify(this.seen));}catch(_){}
-    this.dialog.close();this.previousFocus?.focus?.();this.schedule();return true;
+    this.dialog.close();this.previousFocus?.focus?.();
+    if(document.getElementById("reader-view").classList.contains("active"))Reader.showChrome();
+    this.schedule();return true;
   },
   async licenses() {
     const dialog=document.createElement("dialog");dialog.className="nth-dialog license-dialog";

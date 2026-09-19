@@ -191,7 +191,7 @@ window.NthPageDeck = class {
     this.preparePage(current,backward?1:2);this.preparePage(target,backward?2:1);
     if(backward) {
       // 0.38.05: the previous sheet returns along the left spine, from -179.6° to flat.
-      this.root.replaceChildren(current,target);
+      this.root.appendChild(target);
       // The wrapper includes margins around the paper. Hinging at wrapper x=0
       // moves the paper's left edge in depth, so perspective shifts its lower
       // corner away from the binding. Keep the entire paper spine at z=0.
@@ -201,7 +201,8 @@ window.NthPageDeck = class {
       target.style.transform="perspective(1800px) rotateY(-179.6deg)";
       return {current,target,sheet:target,renderer:"sheet",curl:{width:this.root.clientWidth,height:this.root.clientHeight,pageBox}};
     }
-    this.root.replaceChildren(target,current);
+    // Keep the touched page connected so Android continues delivering the drag.
+    this.root.insertBefore(target,current);
     const pageBox=this.pageBounds(current);
     const canvas=document.createElement("canvas");canvas.className="nth-turn-canvas";
     canvas.setAttribute("aria-hidden","true");canvas.style.display="none";

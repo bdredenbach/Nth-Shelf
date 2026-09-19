@@ -172,6 +172,7 @@ const Reader = {
    });
 
    this.bindZoomGestures();
+   this.bindNavigationSwipe();
    this.bindGestures();
 
    let continuousTimer = null;
@@ -228,6 +229,7 @@ const Reader = {
 
    if (this.mode === "two-page") await this.enterTwoPageFullscreenLandscape();
    await this.render();
+   this.showChrome();
 },
 
  async getAdjacentIssues() {
@@ -992,6 +994,7 @@ const Reader = {
  },
  closeHelpDrawer() {
    this.els.helpDrawer.classList.remove("open");
+   this.showChrome();
  },
 
  debugMode: false,
@@ -1738,12 +1741,14 @@ async setMode(mode) {
    if (this._autoScrollEnabled) this.keepAutoScrollControlsVisible();
    clearTimeout(this.chromeTimer);
    if (!persist) {
-     this.chromeTimer = setTimeout(() => { this.debugLog("auto-hideChrome (1.0s timer)"); this.hideChrome(); }, 1000);
+     const delay = this.mode === "single" ? 5000 : 1000;
+     this.chromeTimer = setTimeout(() => this.hideChrome(), delay);
    }
  },
 
  hideChrome() {
    this.debugLog("hideChrome()");
+   clearTimeout(this.chromeTimer);
    this.chromeVisible = false;
    this.els.chrome.classList.remove("visible");
    if (this._autoScrollEnabled && !this._autoScrollDrag) {
@@ -1844,6 +1849,43 @@ async setMode(mode) {
    this.ty = clamp(this.ty, -maxTy, maxTy);
  },
 
+ bindNavigationSwipe() {
+   const stage = this.els.stage;
+   let swipe = null;
+   stage.addEventListener("touchstart", e => {
+     swipe = null;
+     if (this.mode !== "single" || this.scale > 1.02 || this.focusMode || e.touches.length !== 1) return;
+     const t = e.touches[0], r = stage.getBoundingClientRect();
+     const edge = Math.min(160, r.height * 0.3);
+     const side = t.clientY <= r.top + edge ? "top" : t.clientY >= r.bottom - edge ? "bottom" : null;
+     if (side) swipe = {x:t.clientX, y:t.clientY, side, claimed:false};
+   }, {capture:true, passive:true});
+   stage.addEventListener("touchmove", e => {
+     if (!swipe) return;
+     if (e.touches.length !== 1 || this.scale > 1.02 || this.focusMode) {swipe=null;return;}
+     const dx=e.touches[0].clientX-swipe.x, dy=e.touches[0].clientY-swipe.y;
+     if (!swipe.claimed) {
+       if (Math.abs(dx) >= 8 && Math.abs(dx) > Math.abs(dy)*1.5) {swipe=null;return;}
+       const inward=swipe.side === "top" ? dy : -dy;
+       if (inward < 24 || Math.abs(dy) < Math.abs(dx)*1.5) return;
+       swipe.claimed=true;
+       this.turnPageMode?.cancelGesture();
+       stage.dispatchEvent(new Event("nth-navigation-swipe"));
+       this.showChrome();
+     }
+     e.preventDefault();e.stopImmediatePropagation();
+   }, {capture:true, passive:false});
+   const finish=e=>{
+     if (swipe?.claimed) {
+       e.preventDefault();e.stopImmediatePropagation();
+       this.showChrome();
+     }
+     swipe=null;
+   };
+   stage.addEventListener("touchend",finish,{capture:true,passive:false});
+   stage.addEventListener("touchcancel",finish,{capture:true,passive:false});
+ },
+
  bindZoomGestures() {
    const stage = this.els.stage;
    let gesture = null, suppress = false;
@@ -1921,12 +1963,14 @@ async setMode(mode) {
 
    const dist = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
    const mid = (a, b) => ({ x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 });
-   stage.addEventListener("nth-zoom-start", () => {
+   const cancelPendingTouch = () => {
      clearTimeout(holdTimer); clearTimeout(continuousHoldTimer); clearTimeout(pendingTapTimer);
      holdTimer=null; continuousHoldTimer=null; pendingTapTimer=null;
      panStart=null; continuousTapStart=null; twoPageGestureStart=null;
      lastTapTime=0; lastTapPos=null; dragMoved=true;
-   });
+   };
+   stage.addEventListener("nth-zoom-start", cancelPendingTouch);
+   stage.addEventListener("nth-navigation-swipe", cancelPendingTouch);
 
    const getContinuousTargetAtPoint = (screenX, screenY) => {
      if (!(this.mode === "scroll" || this.mode === "webcomic" || this.mode === "manga" || this.mode === "two-page")) return null;
@@ -2186,7 +2230,7 @@ async setMode(mode) {
            clearTimeout(holdTimer);
            holdTimer = null;
          }
-       } else if (Math.abs(dx) > 10) {
+       } else if (Math.hypot(dx, dy) >= 8) {
          dragMoved = true;
          clearTimeout(holdTimer);
          holdTimer = null;

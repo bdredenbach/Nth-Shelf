@@ -41,6 +41,58 @@ const assert = require('node:assert/strict');
   await page.waitForFunction(()=>Reader.index===0 && !Reader.turnPageMode.book.motion);
   assert.equal(await page.evaluate(()=>Reader.getPanelImageContext()?.pageNumber),1);
   const cdp=await context.newCDPSession(page);
+  // The controls expire after five seconds, including after a first-use guide.
+  assert.equal(await page.evaluate(()=>Reader.chromeVisible),true);
+  await page.waitForTimeout(4200);
+  assert.equal(await page.evaluate(()=>Reader.chromeVisible),true);
+  await page.waitForTimeout(1000);
+  assert.equal(await page.evaluate(()=>Reader.chromeVisible),false);
+  const navSwipe=async(side)=>{
+   const r=await page.locator('#reader-stage').boundingBox();
+   const x=r.x+r.width/2,y=side==='top'?r.y+35:r.y+r.height-35,sign=side==='top'?1:-1;
+   await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y,id:1}]});
+   for(const d of [12,30,60])await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x,y:y+sign*d,id:1}]});
+   await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+   assert.equal(await page.evaluate(()=>Reader.chromeVisible),true);
+   assert.equal(await page.evaluate(()=>Reader.index),0);
+   assert.equal(await page.evaluate(()=>Reader.focusMode),null);
+  };
+  await navSwipe('bottom');
+  await page.waitForTimeout(4200);
+  assert.equal(await page.evaluate(()=>Reader.chromeVisible),true);
+  await navSwipe('top'); // Refresh the existing timer, rather than toggling off.
+  await page.waitForTimeout(4200);
+  assert.equal(await page.evaluate(()=>Reader.chromeVisible),true);
+  await page.waitForTimeout(1000);
+  assert.equal(await page.evaluate(()=>Reader.chromeVisible),false);
+  const slowDrag=async(corner,commit)=>{
+   const b=await page.evaluate(()=>{
+    const r=Reader.turnPageMode.book.root.getBoundingClientRect(),p=Reader.turnPageMode.book.pageBounds();
+    return {x:r.x,y:r.y,width:r.width,p};
+   });
+   const x=b.x+b.width-25,y=b.y+b.p.y+(corner?45:b.p.height/2);
+   await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y,id:1}]});
+   for(const d of [4,8,12,18]){
+    await page.waitForTimeout(140);
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-d,y,id:1}]});
+   }
+   await page.waitForFunction(()=>Reader.turnPageMode.book.motion?.interactive && Reader.turnPageMode.book.motion?.curl.ready);
+   const before=await page.evaluate(()=>Reader.turnPageMode.book.motion.progress);
+   await page.waitForTimeout(600); // The fold must remain attached during a slow hold.
+   const distance=commit?b.width*.45:60;
+   await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-distance,y,id:1}]});
+   assert.ok(await page.evaluate(()=>Reader.turnPageMode.book.motion.progress)>before);
+   assert.equal(await page.evaluate(()=>Reader.focusMode),null);
+   const index=await page.evaluate(()=>Reader.index);
+   await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+   await page.waitForFunction(()=>!Reader.turnPageMode.book.motion);
+   assert.equal(await page.evaluate(()=>Reader.index),index+(commit?1:0));
+  };
+  await slowDrag(true,false);
+  await slowDrag(false,false);
+  await slowDrag(true,true);
+  await page.evaluate(()=>Reader.prev());
+  await page.waitForFunction(()=>Reader.index===0&&!Reader.turnPageMode.book.motion);
   const pinch=async()=>{
    const b=await page.locator('#reader-stage').boundingBox(),x=b.x+b.width/2,y=b.y+b.height/2;
    const points=d=>[{x:x-d,y,id:1},{x:x+d,y,id:2}];
