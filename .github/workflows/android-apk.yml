@@ -23,6 +23,7 @@ on:
       - "qa27900/gutter-boundaries.cjs"
       - "qa27900/internal-gutters.cjs"
       - "qa27900/page-layout.cjs"
+      - "qa27900/closed-frames.cjs"
       - "THIRD_PARTY_NOTICES.txt"
 
 permissions:
@@ -52,6 +53,7 @@ jobs:
           node qa27900/gutter-boundaries.cjs
           node qa27900/internal-gutters.cjs
           node qa27900/page-layout.cjs
+          node qa27900/closed-frames.cjs
           node qa27900/brand-integration.cjs
           node qa27900/stream-integration.cjs
 
@@ -96,17 +98,17 @@ jobs:
           BADGING="$("$AAPT" dump badging "$APK")"
           echo "$BADGING"
           grep -F "package: name='io.github.bdredenbach.nthshelf'" <<<"$BADGING"
-          grep -F "versionCode='27917'" <<<"$BADGING"
-          grep -F "versionName='2.79.13-test1'" <<<"$BADGING"
+          grep -F "versionCode='27918'" <<<"$BADGING"
+          grep -F "versionName='2.79.14-test1'" <<<"$BADGING"
 
       - name: Name release artifact
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk Nth-Shelf-V2.79.13-Test1.apk
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk Nth-Shelf-V2.79.14-Test1.apk
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Nth-Shelf-V2.79.13-Test1
-          path: Nth-Shelf-V2.79.13-Test1.apk
+          name: Nth-Shelf-V2.79.14-Test1
+          path: Nth-Shelf-V2.79.14-Test1.apk
           if-no-files-found: error
           retention-days: 30
 
@@ -114,12 +116,12 @@ jobs:
         if: github.ref == 'refs/heads/Test_Branch'
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: v2.79.13-test1-${{ github.run_number }}
+          RELEASE_TAG: v2.79.14-test1-${{ github.run_number }}
         run: >-
           gh release create "$RELEASE_TAG"
-          Nth-Shelf-V2.79.13-Test1.apk
+          Nth-Shelf-V2.79.14-Test1.apk
           --repo "$GITHUB_REPOSITORY"
           --target "$GITHUB_SHA"
           --prerelease
-          --title "Nth Shelf 2.79.13 Test 1"
+          --title "Nth Shelf 2.79.14 Test 1"
           --notes "Installable debug APK built from commit $GITHUB_SHA on Test_Branch. This is a test build, not a Play Store signed release."

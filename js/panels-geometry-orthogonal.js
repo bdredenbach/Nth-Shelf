@@ -7,7 +7,8 @@ const PanelGeometryOrthogonal = {
   _provenQuad(panel) {
     const q = panel?._quad;
     const connected = panel?._frameEnvelope?.chainConnected === true ||
-      (panel?._pageLayoutProof?.kind === 'stacked-strips' && panel._pageLayoutProof.closed === true);
+      (panel?._pageLayoutProof?.kind === 'stacked-strips' && panel._pageLayoutProof.closed === true) ||
+      (panel?._closedFrameProof?.version === 1 && panel._closedFrameProof.connected === true);
     if (!connected ||
         !Array.isArray(q) || q.length !== 4 ||
         q.some(p => !Number.isFinite(p?.x) || !Number.isFinite(p?.y))) return null;

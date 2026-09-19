@@ -1,0 +1,123 @@
+/* Complete dark frames, independently proved before selecting a tap owner.
+ * Acceptance requires four connected ridges; weaker interior evidence only vetoes.
+ */
+const PanelClosedFrames = (() => {
+  'use strict';
+  function lines(g,w,h,vertical=false,minimum=.14){
+    const length=vertical?h:w, count=vertical?w:h, min=Math.max(30,Math.floor(length*minimum));
+    const at=(p,t)=>vertical?g[t*w+p]:g[p*w+t];
+    const groups=[];let active=[];
+    for(let p=0;p<count;p++){
+      const next=[];
+      for(let t=0;t<length;t++){
+        const dark=q=>at(q,t)<70;
+        if(!dark(p)&&!(p&&dark(p-1))&&!(p+1<count&&dark(p+1)))continue;
+        const lo=t;
+        while(++t<length&&(at(p,t)<70||(p&&at(p-1,t)<70)||(p+1<count&&at(p+1,t)<70))){}
+        const hi=t;if(hi-lo<min)continue;
+        let best=-1,score=Infinity;
+        for(const k of active){const last=groups[k][groups[k].length-1],a=Math.abs(last[1]-lo),b=Math.abs(last[2]-hi);if(a<12&&b<12&&a+b<score){best=k;score=a+b;}}
+        if(best<0){best=groups.length;groups.push([]);}groups[best].push([p,lo,hi]);next.push(best);
+      }active=next;
+    }
+    const found=[];
+    for(const group of groups){if(group.length>30)continue;let best=null,score=0;
+      for(const line of group){let n=0;for(let t=line[1];t<line[2];t++)n+=at(line[0],t)<70;n/=(line[2]-line[1]);if(n>score){best=line;score=n;}}
+      if(score>=.6)found.push([...best,score,group.length]);
+    }
+    found.sort((a,b)=>(b[2]-b[1])-(a[2]-a[1]));const merged=[];
+    for(const v of found){if(merged.some(q=>Math.abs(v[0]-q[0])<5&&Math.min(v[2],q[2])-Math.max(v[1],q[1])>.85*Math.min(v[2]-v[1],q[2]-q[1])))continue;merged.push(v);if(merged.length>=250)break;}
+    return merged.sort((a,b)=>a[0]-b[0]);
+  }
+  function analyzeRGBA(rgba,w,h,log){
+    if(!Number.isInteger(w)||!Number.isInteger(h)||w<80||h<80||w>900||h>900||!rgba||rgba.length!==w*h*4)return [];
+    const g=new Float32Array(w*h);for(let i=0;i<g.length;i++)g[i]=.299*rgba[i*4]+.587*rgba[i*4+1]+.114*rgba[i*4+2];
+    const hs=lines(g,w,h),vs=lines(g,w,h,true),at=(vertical,p,t)=>vertical?g[t*w+p]:g[p*w+t];
+    function cover(vertical,pos,lo,hi){let n=0;for(let t=lo;t<hi;t++){let yes=false;for(let d=-2;d<=2;d++)if(pos+d>=0&&pos+d<(vertical?w:h)&&at(vertical,pos+d,t)<70){yes=true;break;}n+=yes;}return n/Math.max(1,hi-lo);}
+    function ridge(vertical,pos,lo,hi){const margin=Math.max(2,Math.floor((hi-lo)*.02));lo+=margin;hi-=margin;if(hi<=lo||pos<8||pos+9>=(vertical?w:h))return 0;let n=0;
+      for(let t=lo;t<hi;t++){let mid=255,before=0,after=0;for(let d=-2;d<=2;d++)mid=Math.min(mid,at(vertical,pos+d,t));for(let d=-8;d<-3;d++)before+=at(vertical,pos+d,t);for(let d=3;d<9;d++)after+=at(vertical,pos+d,t);n+=before/5-mid>25&&after/6-mid>25;}return n/(hi-lo);}
+    function fit(vertical,pos,lo,hi){const samples=[];const trim=Math.max(3,Math.round((hi-lo)*.02));
+      for(let t=lo+trim;t<hi-trim;t++){
+        let pick=-1,best=Infinity;for(let p=pos-2;p<=pos+2;p++)if(p>=8&&p+9<(vertical?w:h)){const v=at(vertical,p,t);if(v<best){best=v;pick=p;}}
+        if(pick<0||best>=70)continue;let a=pick,b=pick;while(a>pick-7&&at(vertical,a-1,t)<70)a--;while(b<pick+7&&at(vertical,b+1,t)<70)b++;
+        if(b-a>8||a<=pick-7||b>=pick+7||a<4||b+4>=(vertical?w:h))continue;
+        let pre=0,post=0;for(let d=2;d<=4;d++){pre+=at(vertical,a-d,t);post+=at(vertical,b+d,t);}if(Math.min(pre/3-best,post/3-best)<=25)continue;
+        samples.push([t,(a+b)/2]);
+      }
+      if(samples.length/(hi-lo)<.35){if(log)log(`closed fit sparse ${vertical} ${pos} ${lo}:${hi} ${samples.length/(hi-lo)}`);return null;}
+      let sx=0,sy=0;for(const p of samples){sx+=p[0];sy+=p[1];}sx/=samples.length;sy/=samples.length;let cov=0,variance=0;for(const p of samples){cov+=(p[0]-sx)*(p[1]-sy);variance+=(p[0]-sx)**2;}const slope=cov/variance,offset=sy-slope*sx;
+      if(!Number.isFinite(slope)||Math.abs(slope)>.015)return null;const errors=samples.map(p=>Math.abs(p[1]-offset-slope*p[0])).sort((a,b)=>a-b);if(errors[Math.floor(errors.length*.9)]>2){if(log)log(`closed fit residual ${vertical} ${pos} ${lo}:${hi} ${errors[Math.floor(errors.length*.9)]}`);return null;}
+      if(Math.max(Math.abs(offset+slope*lo-pos),Math.abs(offset+slope*hi-pos))>3)return null;
+      let darkness=0;for(let t=lo;t<hi;t++){const p=Math.round(offset+slope*t);darkness+=Math.min(at(vertical,p-1,t),at(vertical,p,t),at(vertical,p+1,t))<70;}if(darkness/(hi-lo)<.96){if(log)log(`closed fit dark ${vertical} ${pos} ${lo}:${hi} ${darkness/(hi-lo)} slope=${slope}`);return null;}
+      return {slope,offset,support:samples.length/(hi-lo)};
+    }
+    function slopedDivider(box){const [x1,y1,x2,y2]=box;
+      for(const vertical of [false,true]){const lo=vertical?y1:x1,hi=vertical?y2:x2,b1=vertical?x1:y1,b2=vertical?x2:y2,margin=Math.max(12,(b2-b1)*.085),center=(lo+hi)/2;
+        for(let si=-20;si<=20;si++){if(Math.abs(si)<2)continue;const slope=si*.005;
+          for(let p=Math.ceil(b1+margin);p<b2-margin;p+=2){if(p-Math.abs(slope*(hi-lo)/2)<=b1+margin||p+Math.abs(slope*(hi-lo)/2)>=b2-margin)continue;let dark=0,n=0;for(let t=lo+3;t<hi-2;t++){const q=Math.round(p+slope*(t-center));dark+=at(vertical,q,t)<70;n++;}if(dark/n<=.97)continue;let ridgeCount=0;
+            for(let t=lo+3;t<hi-2;t++){const q=Math.round(p+slope*(t-center)),v=at(vertical,q,t);let a=0,b=0;for(let d=4;d<=7;d++){a+=at(vertical,q-d,t);b+=at(vertical,q+d,t);}ridgeCount+=a/4-v>15&&b/4-v>15;}if(ridgeCount/n>.20)return true;
+          }
+        }
+      }return false;
+    }
+    const candidates=[];
+    for(let j=0;j<hs.length;j++){const top=hs[j];for(let k=j+1;k<hs.length;k++){const bottom=hs[k],y1=top[0],y2=bottom[0];if(y2-y1<h*.085)continue;
+      const sides=vs.filter(v=>v[1]<=y1+5&&v[2]>=y2-5&&cover(true,v[0],y1,y2)>.96&&ridge(true,v[0],y1,y2)>.45);
+      for(let a=0;a<sides.length;a++)for(let b=a+1;b<sides.length;b++){const x1=sides[a][0],x2=sides[b][0];if(x2-x1<w*.14||(x2-x1)*(y2-y1)<w*h*.019)continue;
+        if(top[1]>x1+5||top[2]<x2-5||bottom[1]>x1+5||bottom[2]<x2-5)continue;
+        const scores=[cover(false,y1,x1,x2),cover(false,y2,x1,x2),cover(true,x1,y1,y2),cover(true,x2,y1,y2)];if(Math.min(...scores)<.96)continue;
+        const ridges=[ridge(false,y1,x1,x2),ridge(false,y2,x1,x2),ridge(true,x1,y1,y2),ridge(true,x2,y1,y2)];if(Math.min(...ridges)<.45)continue;
+        if(hs.some(v=>v[0]>y1+10&&v[0]<y2-10&&v[1]<=x1+5&&v[2]>=x2-5&&cover(false,v[0],x1,x2)>.90)||vs.some(v=>v[0]>x1+10&&v[0]<x2-10&&v[1]<=y1+5&&v[2]>=y2-5&&cover(true,v[0],y1,y2)>.90))continue;
+        const box=[x1,y1,x2,y2];if(slopedDivider(box))continue;
+        const fits=[fit(false,y1,x1,x2),fit(false,y2,x1,x2),fit(true,x1,y1,y2),fit(true,x2,y1,y2)];if(fits.some(f=>!f))continue;
+        const intersect=(horizontal,vertical)=>{const x=(vertical.offset+vertical.slope*horizontal.offset)/(1-vertical.slope*horizontal.slope);return {x:x/w,y:(horizontal.offset+horizontal.slope*x)/h};};
+        const quad=[intersect(fits[0],fits[2]),intersect(fits[0],fits[3]),intersect(fits[1],fits[3]),intersect(fits[1],fits[2])];
+        if(quad.some(p=>!Number.isFinite(p.x)||!Number.isFinite(p.y)||p.x<0||p.y<0||p.x>1||p.y>1))continue;
+        // Intersections must lie at the independently observed endpoints. Prove
+        // the joining ink at every corner and both adjoining short rail runs.
+        const corners=[[x1,y1],[x2,y1],[x2,y2],[x1,y2]];
+        const darkNear=(x,y)=>{x=Math.round(x);y=Math.round(y);for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(x+dx>=0&&y+dy>=0&&x+dx<w&&y+dy<h&&g[(y+dy)*w+x+dx]<70)return true;return false;};
+        if(quad.some((p,i)=>Math.hypot(p.x*w-corners[i][0],p.y*h-corners[i][1])>4||!darkNear(p.x*w,p.y*h)))continue;
+        let joins=true;for(let i=0;i<4&&joins;i++)for(const neighbor of [(i+1)%4,(i+3)%4]){const p=quad[i],q=quad[neighbor],dx=(q.x-p.x)*w,dy=(q.y-p.y)*h,length=Math.hypot(dx,dy);let joined=0;for(let t=0;t<9;t++)joined+=darkNear(p.x*w+dx*t/length,p.y*h+dy*t/length);if(joined<8){joins=false;break;}}
+        if(!joins)continue;
+        candidates.push({box,quad,scores,ridges,fits});if(candidates.length>180)return [];
+      }
+    }}
+    // Short or partly obscured interior frames are uncertainty, never new output.
+    // Their weaker rejection-only evidence prevents a large scene claiming insets.
+    const weakH=lines(g,w,h,false,.05),weakV=lines(g,w,h,true,.05),threats=[];
+    const inside=(q,p)=>q[0]>=p[0]-3&&q[1]>=p[1]-3&&q[2]<=p[2]+3&&q[3]<=p[3]+3&&(q[2]-q[0])*(q[3]-q[1])<.85*(p[2]-p[0])*(p[3]-p[1]);
+    function metric(vertical,pos,lo,hi){const m=Math.max(2,Math.floor((hi-lo)*.02));return [cover(vertical,pos,lo+m,hi-m),ridge(vertical,pos,lo,hi)];}
+    for(const vertical of [false,true]){const ls=vertical?weakV:weakH,along=vertical?h:w,cross=vertical?w:h;
+      for(let j=0;j<ls.length;j++)for(let k=j+1;k<ls.length;k++){const a=ls[j],b=ls[k];if(b[0]-a[0]<cross*.06||Math.abs(a[1]-b[1])>10||Math.abs(a[2]-b[2])>10)continue;
+        const lo=Math.max(a[1],b[1]),hi=Math.min(a[2],b[2]);if(hi-lo<along*.10||(hi-lo)*(b[0]-a[0])<w*h*.019)continue;
+        const rough=vertical?[a[0],lo,b[0],hi]:[lo,a[0],hi,b[0]];if(!candidates.some(p=>inside(rough,p.box)))continue;
+        const metrics=[metric(vertical,a[0],lo,hi),metric(vertical,b[0],lo,hi)],ends=[];
+        for(const guess of [lo,hi-1]){let best=null,quality=-1,where=guess;for(let q=guess-4;q<=guess+4;q++){if(q<8||q+9>=(vertical?h:w))continue;const met=metric(!vertical,q,a[0],b[0]),score=Math.min(...met)+.05*(met[0]+met[1]);if(score>quality){quality=score;best=met;where=q;}}metrics.push(best||[0,0]);ends.push(where);}
+        const cov=metrics.map(m=>m[0]).sort((a,b)=>a-b);if(cov[0]<.6||cov[1]<.96||Math.min(...metrics.map(m=>m[1]))<.4)continue;
+        threats.push(vertical?[a[0],ends[0],b[0],ends[1]]:[ends[0],a[0],ends[1],b[0]]);
+      }
+    }
+    // A divider obscured in its middle can still join both outside rails. The
+    // separated line ends veto the union; they do not establish either child.
+    for(const p of candidates){const [x1,y1,x2,y2]=p.box;let ambiguous=false;
+      for(const vertical of [false,true]){const ls=vertical?weakV:weakH,lo=vertical?y1:x1,hi=vertical?y2:x2,b1=vertical?x1:y1,b2=vertical?x2:y2;
+        for(const a of ls){if(a[0]<=b1+10||a[0]>=b2-10||Math.abs(a[1]-lo)>5||a[2]-a[1]<(hi-lo)*.1)continue;
+          for(const b of ls){if(a===b||Math.abs(b[0]-a[0])>3||Math.abs(b[2]-hi)>5||b[2]-b[1]<(hi-lo)*.1)continue;
+            const pos=Math.round((a[0]+b[0])/2);if(cover(vertical,pos,lo,hi)>=.60&&ridge(vertical,pos,lo,hi)>=.40){ambiguous=true;break;}
+          }if(ambiguous)break;
+        }if(ambiguous)break;
+      }if(ambiguous)p.internalUncertainty=true;
+    }
+    // A proved inset is still foreign artwork inside its parent's rectangle.
+    // Parent output is deferred until visible stepped masks are supported.
+    let clean=candidates.filter(p=>!p.internalUncertainty).filter(p=>!threats.some(q=>inside(q,p.box))).filter(p=>!candidates.some(q=>q!==p&&q.box[0]>=p.box[0]-2&&q.box[1]>=p.box[1]-2&&q.box[2]<=p.box[2]+2&&q.box[3]<=p.box[3]+2&&(q.box[2]-q.box[0])*(q.box[3]-q.box[1])<.8*(p.box[2]-p.box[0])*(p.box[3]-p.box[1])));
+    const unique=[];clean.sort((a,b)=>(a.box[2]-a.box[0])*(a.box[3]-a.box[1])-(b.box[2]-b.box[0])*(b.box[3]-b.box[1]));for(const c of clean)if(!unique.some(q=>c.box.every((v,i)=>Math.abs(v-q.box[i])<=8)))unique.push(c);
+    if(log)log(`closed frames: ${unique.length} complete candidates`);
+    return unique.map(c=>{const xs=c.quad.map(p=>p.x),ys=c.quad.map(p=>p.y);return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:c.quad,_identitySource:'closed-frame',_geometryOwner:'orthogonal-frame',_geometryType:'closed-dark-frame',_closedFrameProof:{version:1,connected:true,analysisWidth:w,analysisHeight:h,coverage:c.scores,ridge:c.ridges,railFits:c.fits}};});
+  }
+  function analyzeImage(img,log){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log);}
+  return {analyzeRGBA,analyzeImage};
+})();
+if(typeof window!=='undefined')window.PanelClosedFrames=PanelClosedFrames;
+if(typeof module!=='undefined')module.exports=PanelClosedFrames;

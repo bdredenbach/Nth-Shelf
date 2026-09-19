@@ -1,5 +1,14 @@
 # Frame accuracy reference set
 
+## Phone-confirmed 2.79.13 regression controls
+
+The user tested the corrected trouble frames on reader pages 9 and 16 in
+2.79.13 Test 1 and confirmed correct pop-outs from left, right, center, north
+and south positions. Preserve these whole-frame identities in later builds.
+This is targeted device feedback, not certification of other pages or every
+pixel along the borders. Page 9's lower-right pair and page 16's five horizontal
+strips remain explicit acceptance controls.
+
 Version 2.79.12 begins an artwork-based accuracy investigation. The supplied 74-page Wolverine #1000 comic stays outside the repository. Draft coordinates here are independently reviewed annotations, not detector-generated answers. They remain approximate until reviewed against the original artwork and user feedback.
 
 ## Page numbering

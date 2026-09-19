@@ -132,6 +132,17 @@ async function renderedQuad(frame) {
   const heldLayout = await router.refine(null, layout);
   assert.deepEqual(plain(heldLayout._quad), layout._quad,
     'independently validated stacked borders survive the geometry router');
+  const closed = { ...shallow, _identitySource: 'closed-frame',
+    _closedFrameProof: { version: 1, connected: true, analysisWidth: 600, analysisHeight: 900 } };
+  delete closed._frameEnvelope;
+  const heldClosed = await router.refine(null, closed);
+  assert.deepEqual(plain(heldClosed._quad), closed._quad,
+    'independently fitted closed borders survive routing without a second seed search');
+  const closedCrop = await renderedQuad(heldClosed);
+  closedCrop.forEach((p, i) => assert.ok(Math.hypot(p.x - closed._quad[i].x, p.y - closed._quad[i].y) < .00001,
+    'closed frame rendering preserves each fitted border corner'));
+  assert.equal(ortho.refine({ ...closed, _closedFrameProof: { version: 1, connected: false } })._quad, undefined,
+    'incomplete closed borders cannot gain polygon authority');
   reader.panelZoomEnabled = true;
   reader.currentPanels = [heldLayout];
   assert.equal(reader.findPanelAt(aboveRail.x, aboveRail.y), null,

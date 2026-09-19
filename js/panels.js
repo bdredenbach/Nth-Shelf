@@ -20,7 +20,19 @@ const PanelDetect = {
           } catch (error) {
             if (log) log(`page-layout deferred: ${error.message}`);
           }
-          resolve(layout.length >= 4 ? layout : baseline);
+          if (layout.length >= 4 || baseline.length) {
+            resolve(layout.length >= 4 ? layout : baseline);
+            return;
+          }
+          // Only empty baseline pages may use the independent closed-border
+          // route. Established identities retain their existing priority.
+          let closed = [];
+          try {
+            if (typeof PanelClosedFrames !== 'undefined') closed = PanelClosedFrames.analyzeImage(img, log);
+          } catch (error) {
+            if (log) log(`closed frames deferred: ${error.message}`);
+          }
+          resolve(closed);
         }
         catch (err) {
           console.warn("Panel detection failed:", err);

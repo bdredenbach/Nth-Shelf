@@ -18,6 +18,8 @@ const PanelGeometry = {
 
     if(inferred==='page-layout' && panel?._pageLayoutProof?.closed===true)
       return {mode:'hold',source:'PAGE-LAYOUT',reason:'complete-stacked-frame'};
+    if(inferred==='closed-frame' && panel?._closedFrameProof?.version===1 && panel._closedFrameProof.connected===true)
+      return {mode:'hold',source:'CLOSED-FRAME',reason:'independent-connected-borders'};
     if(inferred==='v73') return {mode:'hold',source:'V73',reason:'stable-orthogonal'};
     if(inferred==='v100'&&(fragment||composite||edgeClipped)) {
       return {mode:composite?'frame':'inspect',source:'V100',
