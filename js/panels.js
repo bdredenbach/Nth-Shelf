@@ -86,6 +86,12 @@ const PanelDetect = {
                 closed=PanelPartition.completeDarkImage(img,log);
             } catch(error) { if(log)log(`dark partition completion deferred: ${error.message}`); }
           }
+          try {
+            if(closed.length&&typeof PanelPartition!=='undefined'&&PanelPartition.supplementDarkImage){
+              const additions=PanelPartition.supplementDarkImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`uniform ink-core supplement deferred: ${error.message}`);}
           resolve(closed);
         }
         catch (err) {

@@ -12,5 +12,5 @@ gradle -p android :app:assembleDebug
 ```
 
 The application ID is `io.github.bdredenbach.nthshelf` and the current Android
-version is `2.79.23-test1` (`27927`). This is a test debug package, not a Play Store signed
+version is `2.79.24-test1` (`27928`). This is a test debug package, not a Play Store signed
 release.

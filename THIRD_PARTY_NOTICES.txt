@@ -663,3 +663,7 @@ Licensed under Apache License 2.0.
    limitations under the License.
 
 
+
+Nth Shelf brand wordmark outlines use DejaVu Sans Bold (Bitstream Vera/DejaVu license).
+The font has been converted to vector outlines; no font runtime dependency.
+See assets/DejaVu-LICENSE.txt for the original redistribution terms.

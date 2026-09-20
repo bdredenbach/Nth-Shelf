@@ -72,22 +72,33 @@ const PanelPartition = (() => {
     if(!closed(root)||darkMargin&&(Math.min(root[1][0]-root[0][0],root[2][0]-root[3][0])<w*.75||Math.min(root[3][1]-root[0][1],root[2][1]-root[1][1])<h*.75))return [];
     function find(q,vertical){const qq=vertical?[q[0].slice().reverse(),q[3].slice().reverse(),q[2].slice().reverse(),q[1].slice().reverse()]:q,side=(a,b)=>{const slope=(b[0]-a[0])/(b[1]-a[1]);return [slope,a[0]-slope*a[1]];},[lm,lb]=side(qq[0],qq[3]),[rm,rb]=side(qq[1],qq[2]);
       const xmin=Math.min(...qq.map(p=>p[0])),xmax=Math.max(...qq.map(p=>p[0])),ymin=Math.min(...qq.map(p=>p[1])),ymax=Math.max(...qq.map(p=>p[1])),center=(xmin+xmax)/2,n=Math.ceil(xmax-xmin),bound=vertical?w:h;
-      if(ymax-ymin<70||xmax-xmin<70)return {best:null,uncertain:true};let best=null,uncertain=false;
+      if(ymax-ymin<70||xmax-xmin<70)return {best:null,uncertain:true};let best=null,uncertain=false,coreBest=null;
       function endpoints(slope,offset){const left=(lb+lm*offset)/(1-lm*slope),right=(rb+rm*offset)/(1-rm*slope);return [[left,slope*left+offset],[right,slope*right+offset]];}
       function evidence(slope,offset,ends,weak=false){const [a,b]=ends;let sum=0,square=0,dark=0,ridge=0,thick=0,paired=0,first=0,last=0;const count=Math.max(20,Math.ceil(b[0]-a[0]));
         for(let t=0;t<=count;t++){const x=Math.round(a[0]+(b[0]-a[0])*t/count),y=Math.round(slope*x+offset);if(y<8||y>=bound-8||x<0||x>=(vertical?h:w))return null;const v=at(vertical,y,x);sum+=v;square+=v*v;dark+=v<70;if(t<12)first+=v<70;if(t>count-12)last+=v<70;thick+=at(vertical,y-1,x)<70&&at(vertical,y+1,x)<70;paired+=v<70&&(at(vertical,y-1,x)<70||at(vertical,y+1,x)<70);let before=0,after=0;for(let d=4;d<=8;d++){before+=at(vertical,y-d,x);after+=at(vertical,y+d,x);}ridge+=before/5-v>20&&after/5-v>20;}
         const total=count+1,mean=sum/total,std=Math.sqrt(Math.max(0,square/total-mean*mean));return {dark:dark/total,ridge:ridge/total,thick:thick/total,paired:paired/total,mean,std,attached:first>=11&&last>=11,oneAttached:first>=11||last>=11};
       }
+      // An opt-in supplement can use a continuous, low-variance ink core
+      // when dark adjacent artwork hides some contrast. Both attachments,
+      // paired thickness and a distributed fitted core remain mandatory.
+      const uniformCoreEvidence=m=>m&&m.dark>=.995&&m.paired>=.99&&m.thick>=.85&&
+        m.mean<12&&m.std<3&&m.attached&&m.ridge>=.40;
       for(let si=-48;si<=48;si++){const slope=si*.0025;for(let pos=Math.ceil(ymin+8);pos<=Math.floor(ymax-8);pos++){const offset=pos-slope*center,ends=endpoints(slope,offset),[a,b]=ends;if(a[1]<=qq[0][1]+8||a[1]>=qq[3][1]-8||b[1]<=qq[1][1]+8||b[1]>=qq[2][1]-8)continue;const room=a[1]>qq[0][1]+(qq[3][1]-qq[0][1])*.1&&a[1]<qq[3][1]-(qq[3][1]-qq[0][1])*.1&&b[1]>qq[1][1]+(qq[2][1]-qq[1][1])*.1&&b[1]<qq[2][1]-(qq[2][1]-qq[1][1])*.1;
           let probes=0;for(let j=0;j<16;j++){const x=Math.round(a[0]+(b[0]-a[0])*j/15),y=Math.round(slope*x+offset);if(y>=8&&y<bound-8)probes+=at(vertical,y,x)<70;}if(probes<10)continue;
           const m=evidence(slope,offset,ends);if(!m)continue;if(m.ridge>=.40&&(m.dark>=.60&&m.attached||m.dark>=.80&&m.oneAttached))uncertain=true;
+          if(options.uniformCore===true&&inkCompletion&&room&&uniformCoreEvidence(m)){
+            const score=m.ridge+m.thick*.25+(1-m.mean/30)*.15+(1-m.std/25)*.1;
+            if(!coreBest||score>coreBest.score)coreBest={slope,offset,ends,score,evidence:m,vertical,uniformCore:true};
+          }
           if(!room||m.dark<.97||m.mean>=30||m.std>=25||m.ridge<.55||m.thick<(darkMargin?.35:.70))continue;const score=m.ridge+m.thick*.25+(1-m.mean/30)*.15+(1-m.std/25)*.1;if(!best||score>best.score)best={slope,offset,ends,score,evidence:m,vertical};
         }}
+      if(!best)best=coreBest;
       if(!best)return {best:null,uncertain};
       // Keep the original fit first. Dark artwork can join the broad <70 run;
       // a second pass isolates the low-variance ink core, then repeats every
       // full-length separation and attachment proof on the fitted line.
       for(const core of [false,true]){
+        if(best.uniformCore&&!core)continue;
         const samples=[];
         if(core&&darkMargin){
           if(!best.evidence.attached)continue;
@@ -125,7 +136,8 @@ const PanelPartition = (() => {
         if(ends.some((p,i)=>Math.hypot(p[0]-best.ends[i][0],p[1]-best.ends[i][1])>4)||ends[0][1]<=qq[0][1]+8||ends[0][1]>=qq[3][1]-8||ends[1][1]<=qq[1][1]+8||ends[1][1]>=qq[2][1]-8)continue;
         const m=evidence(f.slope,f.offset,ends);
         if(sparseCore&&(!m||m.dark<.995||m.mean>=15||m.std>=8||!m.attached||f.residual>1))continue;
-        if(!m||m.dark<.97||m.mean>=30||m.std>=25||m.ridge<.55||(m.thick<.70&&!(darkMargin&&m.paired>=.85&&m.dark>=.995&&m.mean<15&&m.std<8&&m.ridge>=.70&&m.attached&&f.residual<1)))continue;
+        if(best.uniformCore&&(!uniformCoreEvidence(m)||f.residual>1))continue;
+        if(!m||m.dark<.97||m.mean>=30||m.std>=25||m.ridge<(best.uniformCore?.40:.55)||(m.thick<.70&&!(darkMargin&&m.paired>=.85&&m.dark>=.995&&m.mean<15&&m.std<8&&m.ridge>=.70&&m.attached&&f.residual<1)))continue;
         best={...best,...f,evidence:m,points:vertical?ends.map(p=>p.slice().reverse()):ends};return {best,uncertain};
       }
       return {best:null,uncertain:true};
@@ -186,10 +198,32 @@ const PanelPartition = (() => {
       for(let i=0;i<leaves.length;i++)leaves[i]=adjusted[i];
     }
     if(log)log(`page partition: ${leaves.length} closed leaves, ${splits.length} attached separators${blocked.length?`, ${blocked.length} unresolved regions`:""}`);
-    return leaves.map(q=>{const quad=q.map(p=>({x:p[0]/w,y:p[1]/h})),xs=quad.map(p=>p.x),ys=quad.map(p=>p.y);return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:quad,_identitySource:'page-partition',_geometryOwner:'orthogonal-frame',_geometryType:'connected-page-partition',_partitionProof:{version:1,connected:true,analysisWidth:w,analysisHeight:h,leafCount:leaves.length,separatorCount:splits.length,...(darkMargin?{outerMethod:inkCompletion?'dark-margin-low-contrast':'dark-margin-transition'}:{}),outerFits:edges,...(blocked.length?{complete:false,unresolvedLeafCount:blocked.length,unresolvedRegions:blocked.map(q=>q.map(p=>({x:p[0]/w,y:p[1]/h})))}:{})}};});
+    return leaves.map(q=>{const quad=q.map(p=>({x:p[0]/w,y:p[1]/h})),xs=quad.map(p=>p.x),ys=quad.map(p=>p.y);return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:quad,_identitySource:'page-partition',_geometryOwner:'orthogonal-frame',_geometryType:'connected-page-partition',_partitionProof:{version:1,connected:true,analysisWidth:w,analysisHeight:h,leafCount:leaves.length,separatorCount:splits.length,...(darkMargin?{outerMethod:inkCompletion?'dark-margin-low-contrast':'dark-margin-transition'}:{}),outerFits:edges,...(options.uniformCore?{uniformCoreRefinement:true,uniformCoreFits:splits.filter(c=>c.uniformCore).map(c=>({slope:c.slope,offset:c.offset,residual:c.residual,evidence:c.evidence}))}:{}),...(blocked.length?{complete:false,unresolvedLeafCount:blocked.length,unresolvedRegions:blocked.map(q=>q.map(p=>({x:p[0]/w,y:p[1]/h})))}:{})}};});
   }
   function analyzeImage(img,log,options){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log,options);}
-  return {analyzeRGBA,analyzeImage,
+  function supplementDarkImage(img,anchors,log){
+    if(!Array.isArray(anchors)||anchors.length<2||anchors.some(p=>p?._identitySource!=='page-partition'||
+       p._partitionProof?.outerMethod!=='dark-margin-low-contrast'||p._partitionProof.connected!==true))return [];
+    const unresolved=anchors[0]._partitionProof.unresolvedRegions;
+    if(!Array.isArray(unresolved)||!unresolved.some(q=>Math.max(...q.map(p=>p.x))-Math.min(...q.map(p=>p.x))>=.8))return [];
+    const candidate=analyzeImage(img,log,{inkCompletion:true,allowPartial:true,uniformCore:true});
+    return mergeDarkSupplement(anchors,candidate);
+  }
+  function mergeDarkSupplement(anchors,candidate){
+    if(!Array.isArray(anchors)||anchors.length<2||!Array.isArray(candidate)||candidate.length<=anchors.length)return [];
+    const proof=anchors[0]._partitionProof,unresolved=proof?.unresolvedRegions;
+    if(!Array.isArray(unresolved)||!unresolved.length||proof?.outerMethod!=='dark-margin-low-contrast')return [];
+    const same=(a,b)=>Array.isArray(a?._quad)&&Array.isArray(b?._quad)&&a._quad.length===4&&b._quad.length===4&&a._quad.every((p,i)=>p.x===b._quad[i].x&&p.y===b._quad[i].y);
+    if(anchors.some(p=>p._partitionProof?.connected!==true||!candidate.some(c=>same(p,c))))return [];
+    const inside=(p,q)=>q.length===4&&q.every((a,i)=>{const b=q[(i+1)%4];return (b.x-a.x)*(p.y-a.y)-(b.y-a.y)*(p.x-a.x)>=-1e-9;});
+    const additions=candidate.filter(c=>!anchors.some(p=>same(p,c)));
+    if(additions.some(c=>c._partitionProof?.connected!==true||c._partitionProof.uniformCoreRefinement!==true||
+       !c._partitionProof.uniformCoreFits?.length||!Array.isArray(c._quad)||c._quad.length!==4||
+       c._quad.some(p=>!Number.isFinite(p.x)||!Number.isFinite(p.y))||
+       !unresolved.some(q=>c._quad.every(p=>inside(p,q)))))return [];
+    return additions;
+  }
+  return {analyzeRGBA,analyzeImage,supplementDarkImage,mergeDarkSupplement,
     completeDarkImage:(img,log)=>analyzeImage(img,log,{inkCompletion:true,allowPartial:true})};
 })();
 if(typeof window!=='undefined')window.PanelPartition=PanelPartition;

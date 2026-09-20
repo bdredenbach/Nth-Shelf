@@ -106,26 +106,28 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.23 Test 1 — Overlapping upper panels on pages 9–10**
+**Version 2.79.24 Test 1 — Sharper artwork and the page-19 syringe frame**
 
-Page 11's five frames are now phone-confirmed. This build targets the three
-upper scenes on each of pages 9 and 10. The detector proves the exposed borders
-of a rear panel and its two foreground panels, then keeps their visible
-outlines. The stepped edge preserves the rear artwork without including its
-neighbors. Page 9's overhanging caption stays with the motorcycle inset.
+Pages 9 and 10 are now phone-confirmed, joining page 11 and earlier controls.
+The launch and empty-shelf screens now share a sharper central illustration,
+matching top/bottom city artwork, vector branding and live text. Launcher icons
+are regenerated from the vector master, including 1024-pixel assets.
 
-The reader uses those same outlines for taps, crops and second-level tap
-mapping. Transparent cutouts cannot select a neighboring caption. Existing
-frame identities and fallback composites are retained. The new layout rule
-uses image evidence; no comic coordinates or page numbers enter runtime code.
+Page 19's tall syringe panel gains a whole-frame identity in real Chromium,
+including the upper speech balloon. A continuous uniform ink core can prove
+its border where adjacent dark artwork hides contrast. Existing frame identities
+are preserved exactly; ambiguous grid/balloon boundaries remain deferred.
+No comic coordinates or page numbers enter runtime detector code.
 
-**Phone priorities:** on pages 9 and 10, try five positions in each of the
-three upper scenes, closing the pop-out between taps. On page 9 also tap the
-caption extending left of the motorcycle inset. Recheck the confirmed lower
-panels and page 11. These new page-9/10 crops still need phone confirmation.
+**Phone priorities:** inspect the splash, initialization/empty-shelf screen and
+launcher icon. On page 19, tap center/left/right/top/bottom within the tall syringe
+panel, closing between taps. Check that its upper speech and entire syringe stay
+included. Recheck the whole middle scene, bottom scene and confirmed pages 9–11.
+The new syringe advance still needs phone confirmation.
 
-See [2.79.23 results](qa27900/frame-accuracy/queue-results-27923.md) and the
-[work queue](qa27900/frame-accuracy/work-queue.md). Page-19 upper groups/syringe,
+See [2.79.24 results](qa27900/frame-accuracy/queue-results-27924.md),
+[artwork notes](qa27900/brand-artwork-27924.md) and the
+[work queue](qa27900/frame-accuracy/work-queue.md). Page-19 upper groups,
 page-6 uncertainty and explicit bubble checks remain queued. Accuracy work
 stays in the 2.79 series. Source comics and recordings are excluded from the
 repository/APK.

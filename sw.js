@@ -1,6 +1,6 @@
 // NTH SHELF V2.79.07 TEST 1 — AN NTH EXPERIENCE
 
-const CACHE_NAME = "nth-shelf-shell-2.79.23-test1-r1";
+const CACHE_NAME = "nth-shelf-shell-2.79.24-test1-r1";
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -39,6 +39,12 @@ const SHELL_FILES = [
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./icons/icon-maskable-512.png",
+  "./assets/nth-shelf-brand.svg",
+  "./assets/nth-shelf-hero-hd.webp",
+  "./assets/nth-shelf-top-hd.webp",
+  "./assets/nth-shelf-bottom-hd.webp",
+  "./icons/icon-1024.png",
+  "./icons/icon-maskable-1024.png",
   "./assets/nth-shelf-welcome.webp",
   "./assets/nth-shelf-dystopian-shelf.jpg",
 ];

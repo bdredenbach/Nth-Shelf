@@ -78,7 +78,23 @@
 
     <div class="empty-state" id="empty-state" style="display:none;" aria-label="Nth Shelf empty library">
       <div class="empty-artwork">
-        <img src="assets/nth-shelf-welcome.webp" alt="Your Nth Shelf is empty. Everything stays on this device. Supports CBZ, ZIP, CBT, CB7, 7Z, CBR and RAR." />
+        <div class="welcome-composition">
+          <img class="welcome-brand" src="assets/nth-shelf-brand.svg" alt="Nth Shelf" />
+          <img class="welcome-hero" src="assets/nth-shelf-hero-hd.webp" alt="Comic books inside a red circle, a caped figure and a gothic city" />
+          <h2 class="welcome-title">YOUR N<sup>TH</sup> SHELF IS EMPTY</h2>
+          <div class="welcome-rule" aria-hidden="true">✦</div>
+          <p class="welcome-privacy">Everything stays on this device.</p>
+          <ul class="welcome-formats" aria-label="Supported comic formats">
+            <li><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M4 1h10l6 6v19H4zM14 1v7h6M8 13h8M8 17h8M8 21h5"/></svg><span>CBZ</span></li>
+            <li><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M4 1h10l6 6v19H4zM14 1v7h6M8 13h8M8 17h8M8 21h5"/></svg><span>ZIP</span></li>
+            <li><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M4 1h10l6 6v19H4zM14 1v7h6M8 13h8M8 17h8M8 21h5"/></svg><span>CBT</span></li>
+            <li><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M4 1h10l6 6v19H4zM14 1v7h6M8 13h8M8 17h8M8 21h5"/></svg><span>CB7</span></li>
+            <li><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M4 1h10l6 6v19H4zM14 1v7h6M8 13h8M8 17h8M8 21h5"/></svg><span>7Z</span></li>
+            <li><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M4 1h10l6 6v19H4zM14 1v7h6M8 13h8M8 17h8M8 21h5"/></svg><span>CBR</span></li>
+            <li><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M4 1h10l6 6v19H4zM14 1v7h6M8 13h8M8 17h8M8 21h5"/></svg><span>RAR</span></li>
+          </ul>
+          <div class="welcome-rule" aria-hidden="true">✦</div>
+        </div>
       </div>
       <div class="empty-actions" aria-label="Start your library">
         <button class="empty-action empty-action-import" id="empty-import-hit" type="button"><span aria-hidden="true">+</span> Import</button>

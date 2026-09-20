@@ -25,7 +25,7 @@ const positions=[[.5,.5],[.16,.5],[.84,.5],[.5,.16],[.5,.84]];
       const old=require(path.resolve(process.env.NTH_BASELINE_ROOT,'qa27900/harness'));
       const previous=await old.api.PanelDetect.detect(old.pages[page-1]);
       previous.forEach(p=>assert.ok(panels.some(n=>JSON.stringify(plain(n))===JSON.stringify(plain(p))),
-        `page${page}: preserve every existing .17 frame and all its evidence`));
+        `page${page}: preserve every existing baseline frame and all its evidence`));
     }
     reader.index=page-1;reader.currentPanels=panels;reader.getPageUrl=async()=>fresh.pages[page-1];
     let targets=labels.frames.filter(f=>f.page===page);
@@ -54,9 +54,16 @@ const positions=[[.5,.5],[.16,.5],[.84,.5],[.5,.16],[.5,.84]];
       const code=['panels-page-layout.js','panels-gutter-frames.js','panels-closed-frames.js','panels-partition.js','panels.js'].map(n=>fs.readFileSync(path.join(__dirname,'../js',n),'utf8')).join('\n');
       const detect=new Function('Image','document','window',code+'\nreturn PanelDetect;')(Image,document,{});
       reader.currentPanels=await detect.detect(fresh.pages[18]);
-      assert.equal(reader.currentPanels.length,2,`${quality}: retain two proved scenes; grid/balloon uncertainty remains`);
+      assert.ok([2,3].includes(reader.currentPanels.length),`${quality}: no extra identities beyond the three labeled frames`);
+      if(process.env.NTH_BASELINE_ROOT){
+        const oldCode=['panels-page-layout.js','panels-gutter-frames.js','panels-closed-frames.js','panels-partition.js','panels.js'].map(n=>fs.readFileSync(path.join(process.env.NTH_BASELINE_ROOT,'js',n),'utf8')).join('\n');
+        const oldDetect=new Function('Image','document','window',oldCode+'\nreturn PanelDetect;')(Image,document,{});
+        const previous=await oldDetect.detect(fresh.pages[18]);
+        previous.forEach(p=>assert.ok(reader.currentPanels.some(n=>JSON.stringify(plain(n))===JSON.stringify(plain(p))),`${quality}: preserve every baseline identity and its evidence`));
+      }
+      console.log(`Skia ${quality}: ${reader.currentPanels.length} proven frames`);
       reader.index=18;reader.getPageUrl=async()=>fresh.pages[18];
-      for(const target of labels.frames.slice(1)){
+      for(const target of (reader.currentPanels.length===3?labels.frames:labels.frames.slice(1))){
         captures=[];
         for(const [u,v]of positions){const[x,y]=point(target.quad,u,v);assert(reader.findPanelAt(x,y));await reader.handleSingleTap({x:x*600,y:y*900});}
         assert.equal(captures.length,5);

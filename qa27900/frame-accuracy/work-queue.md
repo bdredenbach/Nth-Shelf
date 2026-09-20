@@ -1,13 +1,32 @@
 # Frame accuracy work queue
 
-Latest phone confirmation: after **2.79.22 Test 1**, the user confirms
-**all page-11 frames are working**. FQ-10 is now phone-confirmed; preserve all
-five regions, including forest/portrait captions and the fortifications crop.
-Next detector targets are FQ-08 (page 9 upper group) and FQ-09 (page 10 upper
-overlapping group). This confirmation concerns frames, not second-level bubbles.
+Latest phone confirmation: after **2.79.23 Test 1**, the user confirms
+**pages 9 and 10 are fixed**. FQ-08 and FQ-09 are now phone-confirmed for frames.
+Page 11's five frames remain confirmed from 2.79.22. Preserve these controls.
+The next candidate is page 19's whole tall syringe panel and upper speech.
+These confirmations concern frames, not second-level bubbles.
 
 Accuracy comes first. Keep the 2.79.xxx series until the full frame goal is met;
 reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
+
+## Phone confirmation — 2.79.23
+
+The user reports: “Page 9 and 10 are fixed.” Close FQ-08/09's frame targets,
+including the overlapping upper scenes and retained page-9 caption. Their
+identities join page 11 and all earlier confirmed frames as regression controls.
+
+## 2.79.24 candidate — page-19 syringe and artwork restoration
+
+- Rebuild splash/empty-shelf art with an HD central illustration, matching top
+  and bottom artwork, vector branding, live text and sharper launcher icons.
+- Page 19 gains the complete tall syringe frame in real Chromium, including
+  its upper speech balloon. Continuous uniform ink can prove its separator
+  where adjacent dark artwork hides contrast; all prior identities stay exact.
+- Only page 19 changes in the 74-page Chromium comparison. Thirty real-browser
+  touch/render checks cover its three proven frames; phone confirmation is pending.
+- Weak grid/balloon boundaries remain unresolved when evidence is insufficient.
+  Page-19 upper-room/eye groups, page-6 gaps and second-level checks remain queued.
+- See [2.79.24 results](queue-results-27924.md) for limits and device priorities.
 
 ## Phone confirmation — 2.79.22
 
@@ -17,7 +36,7 @@ three panels. No additional recording was needed. FQ-10's frame targets are
 confirmed; all five become required controls for subsequent changes.
 Second-level caption/artwork tests and other pages keep their prior status.
 
-## 2.79.23 candidate — FQ-08 and FQ-09
+## 2.79.23 implementation — FQ-08 and FQ-09 (subsequently phone-confirmed)
 
 - Each upper composite now has three independently outlined visible regions:
   rear scene plus two right-edge foreground panels. Their bounding rectangles
@@ -25,7 +44,7 @@ Second-level caption/artwork tests and other pages keep their prior status.
 - Page 9's protruding caption is proved by a closed paper boundary and the
   existing text-layout check, and retained with the upper motorcycle inset.
 - Every old identity remains exact. FQ-10/page 11 is a required phone-confirmed
-  control, alongside the earlier controls. FQ-08/09 remain pending device checks.
+  control, alongside the earlier controls. FQ-08/09 were subsequently confirmed by the user.
 - Test five interior positions in each of the six new upper regions, dismissing
   between taps; include the protruding page-9 caption. Recheck lower regions.
 - See [2.79.23 local results](queue-results-27923.md). Page-19 upper groups/syringe,

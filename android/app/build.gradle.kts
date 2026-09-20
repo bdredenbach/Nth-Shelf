@@ -13,8 +13,8 @@ android {
         applicationId = "io.github.bdredenbach.nthshelf"
         minSdk = 24
         targetSdk = 35
-        versionCode = 27927
-        versionName = "2.79.23-test1"
+        versionCode = 27928
+        versionName = "2.79.24-test1"
     }
 
     buildTypes {
@@ -53,8 +53,8 @@ val syncWebAssets by tasks.registering(Sync::class) {
             "icons/**",
             "js/**"
         )
-        // The native launch artwork is copied into drawable-nodpi below; do
-        // not also package its 1.6 MB PNG inside the WebView asset bundle.
+        // Retire the old poster from the WebView bundle. The new shared hero
+        // is packaged for both native launch and the empty-shelf composition.
         exclude("assets/nth-shelf-splash.webp")
     }
     into(layout.buildDirectory.dir("generated/nthShelfAssets/public"))
@@ -62,10 +62,10 @@ val syncWebAssets by tasks.registering(Sync::class) {
 }
 
 val syncAndroidArtwork by tasks.registering(Sync::class) {
-    from(rootProject.projectDir.parentFile.resolve("icons/icon-maskable-512.png")) {
+    from(rootProject.projectDir.parentFile.resolve("icons/icon-maskable-1024.png")) {
         rename { "nth_shelf_launcher.png" }
     }
-    from(rootProject.projectDir.parentFile.resolve("assets/nth-shelf-splash.webp")) {
+    from(rootProject.projectDir.parentFile.resolve("assets/nth-shelf-hero-hd.webp")) {
         rename { "nth_shelf_splash.webp" }
     }
     into(layout.buildDirectory.dir("generated/nthShelfResources/drawable-nodpi"))

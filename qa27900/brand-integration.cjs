@@ -37,7 +37,13 @@ const assert = require('node:assert/strict');
    assert.ok(buttons && buttons.y>=0 && buttons.y+buttons.height<=viewport.height-8,'Welcome actions clipped');
    const art=await page.locator('.empty-artwork').boundingBox();
    assert.ok(art.y+art.height<=buttons.y,'Welcome art overlaps actions');
-   assert.ok(await page.locator('.empty-artwork img').evaluate(img=>img.complete&&img.naturalWidth>0),'Welcome image missing');
+   assert.ok(await page.locator('.welcome-hero').evaluate(img=>img.complete&&img.naturalWidth>=1400),'HD welcome image missing');
+   assert.ok(await page.locator('.welcome-brand').evaluate(img=>img.complete&&img.naturalWidth>0),'Vector brand missing');
+   assert.equal(await page.locator('.welcome-formats li').count(),7);
+   for(const selector of ['.welcome-brand','.welcome-hero','.welcome-title','.welcome-formats']) {
+    const box=await page.locator(selector).boundingBox();
+    assert.ok(box&&box.x>=0&&box.y>=0&&box.x+box.width<=viewport.width+1&&box.y+box.height<=buttons.y+1,selector+' remains inside the welcome area');
+   }
    await page.screenshot({path:'/tmp/nth-shelf-welcome-'+viewport.width+'.png'});
   }
   await page.setViewportSize({width:412,height:915});
