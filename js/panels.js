@@ -1,4 +1,4 @@
-// NTH SHELF V2.79.21 — PROVED FRAME REFINEMENT OVER LEGACY DETECTION
+// NTH SHELF V2.79.22 — PROVED FRAME REFINEMENT OVER LEGACY DETECTION
 // Legacy regions remain authoritative outside independently proved refinements.
 // V92 keeps the V91 boundary-set + iterative internal-gutter path, then adds
 // a conservative interior validation gate. A fallback result is rejected if
@@ -24,8 +24,15 @@ const PanelDetect = {
             let identities=layout.length >= 4 ? layout : baseline;
             if(layout.length<4 && baseline.some(p=>p.w*p.h>.30 && p.w>.7 && p.h>.35)){
               try {
-                if(typeof PanelClosedFrames!=='undefined'&&PanelClosedFrames.gradientImage)
-                  identities=this._refineComposites(baseline,PanelClosedFrames.gradientImage(img,log),log);
+                if(typeof PanelClosedFrames!=='undefined'&&PanelClosedFrames.gradientImage){
+                  const frames=PanelClosedFrames.gradientImage(img,log);
+                  identities=this._refineComposites(baseline,frames,log);
+                  if(PanelClosedFrames.openRegionsImage){
+                    const regions=PanelClosedFrames.openRegionsImage(img,frames);
+                    const added=this._refineOpenRegions(baseline,identities,regions);
+                    identities=added.concat(identities);
+                  }
+                }
               } catch(error) { if(log)log(`gradient frame refinement deferred: ${error.message}`); }
             }
             resolve(identities);
@@ -102,6 +109,32 @@ const PanelDetect = {
     if(!accepted.length)return baseline;
     if(log)log(`gradient frame refinement: ${accepted.length} isolated frames; ${baseline.length} legacy identities preserved`);
     return accepted.concat(baseline);
+  },
+
+  _refineOpenRegions(baseline,identities,regions){
+    const quad=p=>p._quad||[{x:p.x,y:p.y},{x:p.x+p.w,y:p.y},{x:p.x+p.w,y:p.y+p.h},{x:p.x,y:p.y+p.h}];
+    const overlap=(a,b)=>{
+      let points=quad(a);const clip=quad(b),cross=(a,b,p)=>(b.x-a.x)*(p.y-a.y)-(b.y-a.y)*(p.x-a.x);
+      for(let i=0;i<4&&points.length;i++){
+        const input=points;points=[];const c=clip[i],d=clip[(i+1)%4];
+        for(let j=0;j<input.length;j++){
+          const p=input[j],q=input[(j+1)%input.length],cp=cross(c,d,p),cq=cross(c,d,q);
+          if(cp>=0)points.push(p);
+          if((cp>=0)!==(cq>=0)){const t=cp/(cp-cq);points.push({x:p.x+(q.x-p.x)*t,y:p.y+(q.y-p.y)*t});}
+        }
+      }
+      return Math.abs(points.reduce((area,p,i)=>{const q=points[(i+1)%points.length];return area+p.x*q.y-p.y*q.x;},0))/2;
+    };
+    const out=[];
+    for(const r of regions){
+      const p=r._openRegionProof;
+      if(r._identitySource!=='open-region'||p?.method!=='three-neighbor-matte'||p.connected!==true||p.version!==1||
+        p.exteriorSupport?.length!==4||p.exteriorSupport.some(v=>!Number.isFinite(v)||v<1)||
+        p.neighborQuads?.length!==3||r._quad?.length!==4||r.w*r.h<.08)continue;
+      const parents=baseline.filter(b=>!b._quad&&!b._identitySource&&b.w>.7&&b.h>.35&&overlap(r,b)/(r.w*r.h)>.95);
+      if(parents.length!==1||[...identities,...out].some(b=>b!==parents[0]&&overlap(r,b)>.00001))continue;
+      out.push(r);
+    }return out;
   },
 
   // A connected partition can fill gaps in a partial closed-frame

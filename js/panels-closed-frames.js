@@ -53,11 +53,25 @@ const PanelClosedFrames = (() => {
       let darkness=0;for(let t=lo;t<hi;t++){const p=Math.round(offset+slope*t);darkness+=Math.min(at(vertical,p-1,t),at(vertical,p,t),at(vertical,p+1,t))<70;}if(darkness/(hi-lo)<.96){if(log)log(`closed fit dark ${vertical} ${pos} ${lo}:${hi} ${darkness/(hi-lo)} slope=${slope}`);return null;}
       return {slope,offset,support:samples.length/(hi-lo),...(core?{inkCore:true}:{})};
     }
+    function dividerEnds(vertical,pos,lo,hi,slope=0){
+      // A separating line must reach both frame edges as a ridge. A tree or
+      // building that merges into a broad ink mass cannot split that scene.
+      const center=(lo+hi)/2,span=Math.max(8,Math.min(18,(hi-lo)*.15));
+      for(const start of [lo+3,hi-3-span]){let n=0,total=0;
+        for(let t=Math.ceil(start);t<start+span;t++){
+          const q=Math.round(pos+slope*(t-center));let mid=255,a=0,b=0;
+          for(let d=-1;d<=1;d++)mid=Math.min(mid,at(vertical,q+d,t));
+          for(let d=4;d<=7;d++){a+=at(vertical,q-d,t);b+=at(vertical,q+d,t);}
+          n+=a/4-mid>15&&b/4-mid>15;total++;
+        }
+        if(n/total<.5)return false;
+      }return true;
+    }
     function slopedDivider(box){const [x1,y1,x2,y2]=box;
       for(const vertical of [false,true]){const lo=vertical?y1:x1,hi=vertical?y2:x2,b1=vertical?x1:y1,b2=vertical?x2:y2,margin=Math.max(12,(b2-b1)*.085),center=(lo+hi)/2;
         for(let si=-20;si<=20;si++){if(Math.abs(si)<2)continue;const slope=si*.005;
           for(let p=Math.ceil(b1+margin);p<b2-margin;p+=2){if(p-Math.abs(slope*(hi-lo)/2)<=b1+margin||p+Math.abs(slope*(hi-lo)/2)>=b2-margin)continue;let dark=0,n=0;for(let t=lo+3;t<hi-2;t++){const q=Math.round(p+slope*(t-center));dark+=at(vertical,q,t)<70;n++;}if(dark/n<=.97)continue;let ridgeCount=0;
-            for(let t=lo+3;t<hi-2;t++){const q=Math.round(p+slope*(t-center)),v=at(vertical,q,t);let a=0,b=0;for(let d=4;d<=7;d++){a+=at(vertical,q-d,t);b+=at(vertical,q+d,t);}ridgeCount+=a/4-v>15&&b/4-v>15;}if(ridgeCount/n>.20)return true;
+            for(let t=lo+3;t<hi-2;t++){const q=Math.round(p+slope*(t-center)),v=at(vertical,q,t);let a=0,b=0;for(let d=4;d<=7;d++){a+=at(vertical,q-d,t);b+=at(vertical,q+d,t);}ridgeCount+=a/4-v>15&&b/4-v>15;}if(ridgeCount/n>.20&&(!options.gradientOnly||dividerEnds(vertical,p,lo,hi,slope)))return true;
           }
         }
       }return false;
@@ -203,8 +217,8 @@ const PanelClosedFrames = (() => {
       }));
       for(const candidate of removeAmbiguous(proposals,true)){
         const [x1,y1,x2,y2]=candidate.box;
-        if(hs.some(v=>v[0]>y1+10&&v[0]<y2-10&&v[1]<=x1+5&&v[2]>=x2-5&&cover(false,v[0],x1,x2)>.90&&ridge(false,v[0],x1,x2)>.05)||
-           vs.some(v=>v[0]>x1+10&&v[0]<x2-10&&v[1]<=y1+5&&v[2]>=y2-5&&cover(true,v[0],y1,y2)>.90&&ridge(true,v[0],y1,y2)>.05)||slopedDivider(candidate.box))continue;
+        if(hs.some(v=>v[0]>y1+10&&v[0]<y2-10&&v[1]<=x1+5&&v[2]>=x2-5&&cover(false,v[0],x1,x2)>.90&&ridge(false,v[0],x1,x2)>.05&&(!options.gradientOnly||dividerEnds(false,v[0],x1,x2)))||
+           vs.some(v=>v[0]>x1+10&&v[0]<x2-10&&v[1]<=y1+5&&v[2]>=y2-5&&cover(true,v[0],y1,y2)>.90&&ridge(true,v[0],y1,y2)>.05&&(!options.gradientOnly||dividerEnds(true,v[0],y1,y2)))||slopedDivider(candidate.box))continue;
         // Each corner and its two short rail runs must be ink-connected.
         const near=(x,y)=>{x=Math.round(x);y=Math.round(y);for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(x+dx>=0&&x+dx<w&&y+dy>=0&&y+dy<h&&g[(y+dy)*w+x+dx]<70)return true;return false;};
         const q=candidate.quad.map(p=>[p.x*w,p.y*h]);let joined=true;
@@ -256,8 +270,9 @@ const PanelClosedFrames = (() => {
       if(c.shared)proof.sharedTopProof={method:'neighbor-completion',neighborQuad:c.shared.neighborQuad,rail:c.shared.rail};
       return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:c.quad,_identitySource:'closed-frame',_geometryOwner:'orthogonal-frame',_geometryType:'closed-dark-frame',_closedFrameProof:proof};});
   }
-  function analyzeImage(img,log,options){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log,options);}
-  return {analyzeRGBA,analyzeImage,gradientImage:(img,log)=>analyzeImage(img,log,{gradientOnly:true}),supplementImage:(img,anchors,log)=>analyzeImage(img,log,{supplementOnly:true,anchors})};
+  function analyzeImage(img,log,options){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);const rgba=ctx.getImageData(0,0,w,h).data;return options?.openRegions?
+    PanelGutterFrames.openRegionsRGBA(rgba,w,h,options.anchors):analyzeRGBA(rgba,w,h,log,options);}
+  return {analyzeRGBA,analyzeImage,openRegionsImage:(img,anchors)=>analyzeImage(img,null,{openRegions:true,anchors}),gradientImage:(img,log)=>analyzeImage(img,log,{gradientOnly:true}),supplementImage:(img,anchors,log)=>analyzeImage(img,log,{supplementOnly:true,anchors})};
 })();
 if(typeof window!=='undefined')window.PanelClosedFrames=PanelClosedFrames;
 if(typeof module!=='undefined')module.exports=PanelClosedFrames;

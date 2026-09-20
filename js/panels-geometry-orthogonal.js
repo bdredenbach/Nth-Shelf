@@ -6,7 +6,8 @@
 const PanelGeometryOrthogonal = {
   _provenQuad(panel) {
     const q = panel?._quad;
-    const connected = panel?._frameEnvelope?.chainConnected === true ||
+    const connected = (panel?._openRegionProof?.version === 1 && panel._openRegionProof.connected === true) ||
+      panel?._frameEnvelope?.chainConnected === true ||
       (panel?._pageLayoutProof?.kind === 'stacked-strips' && panel._pageLayoutProof.closed === true) ||
       (panel?._closedFrameProof?.version === 1 && panel._closedFrameProof.connected === true) ||
       (panel?._partitionProof?.version === 1 && panel._partitionProof.connected === true);

@@ -13,8 +13,8 @@ android {
         applicationId = "io.github.bdredenbach.nthshelf"
         minSdk = 24
         targetSdk = 35
-        versionCode = 27925
-        versionName = "2.79.21-test1"
+        versionCode = 27926
+        versionName = "2.79.22-test1"
     }
 
     buildTypes {

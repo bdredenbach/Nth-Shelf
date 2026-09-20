@@ -106,31 +106,33 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.21 Test 1 — Browser gutter continuity**
+**Version 2.79.22 Test 1 — Whole forest and borderless portrait**
 
-The 2.79.20 phone test still merged page 11's fortifications with its neighbors,
-despite passing simulated-canvas tests. Real Chromium with the original JPEG
-reproduces that failure: downsampling interrupts the quiet gutter beside the
-left printed rail for four analysis pixels, splitting the rail into fragments.
+Page 11's forest and Wolverine portrait now have separate whole-region owners.
+The forest's tree trunks no longer count as dividers merely because they run
+through dark ground: on the exterior-gradient route, a divider must remain a
+separating ridge where it joins both outside borders. Existing full/interrupted
+divider and inset rejection tests remain.
 
-The gradient route now keeps a nearby rail track across at most five missing
-samples. Complete fitted borders, exterior support, corner joins and all
-interior-divider/inset checks still apply. Other gutter routes are unchanged.
-The target remains the whole fortifications panel with both captions. This is
-a test candidate; phone confirmation is required.
+The borderless portrait uses a separate background proof, not invented ink
+borders. Three independently accepted neighboring frames enclose its row;
+a completely exterior-connected quiet perimeter separates the artwork and
+both captions from those neighbors. Missing neighbors, ambiguous multiple
+scenes, inset frames or artwork crossing that perimeter cause abstention.
 
-The forest and borderless portrait remain unresolved. Preserve the confirmed
-page-19 middle scene, pages 7/17 and the earlier frame controls. Pages 9–10's
-upper groups, page 19's upper-right pair and reliable syringe cropping remain
-queued. Bubble behavior is unchanged.
+The phone-confirmed fortifications crop and both lower strips are preserved.
+The original composite remains as fallback outside the new proved regions.
+Keep the confirmed page-19 middle scene and earlier frame controls. Pages 9–10,
+page-19 upper groups/syringe, page-6 uncertainty and explicit bubble checks
+remain queued. This candidate still needs phone verification.
 
-**Phone priorities:** tap left/right/center/north/south inside the page-11
-fortifications panel, then recheck page 19's middle room. Every fortifications
-opening should retain both captions and exclude the forest and portrait.
+**Phone priorities:** repeat left/right/center/north/south taps in the page-11
+forest and portrait. Each should open separately with both captions. Recheck
+the fortifications, both lower strips and page 19's middle room.
 
-See [2.79.21 results](qa27900/frame-accuracy/queue-results-27921.md) and the
-[work queue](qa27900/frame-accuracy/work-queue.md). This remains the 2.79 accuracy
-series. Source comics and recordings are excluded from the repository and APK.
+See [2.79.22 results](qa27900/frame-accuracy/queue-results-27922.md) and the
+[work queue](qa27900/frame-accuracy/work-queue.md). Accuracy work stays in the
+2.79 series. Source comics and recordings are excluded from the repository/APK.
 
 ## 🧪 Release History (Newest First)
 

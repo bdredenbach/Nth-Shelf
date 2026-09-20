@@ -1,0 +1,125 @@
+{
+  "source": "Independent visual whole-artwork labels from original page 11, including both forest captions and both borderless portrait captions; approximate boundaries. No comic coordinates in runtime.",
+  "frames": [
+    {
+      "name": "forest",
+      "quad": [
+        [
+          0.031,
+          0.028
+        ],
+        [
+          0.974,
+          0.028
+        ],
+        [
+          0.973,
+          0.177
+        ],
+        [
+          0.031,
+          0.174
+        ]
+      ],
+      "source": "closed-frame",
+      "page": 11,
+      "tolerance": 0.01
+    },
+    {
+      "name": "portrait",
+      "quad": [
+        [
+          0.026,
+          0.177
+        ],
+        [
+          0.468,
+          0.178
+        ],
+        [
+          0.465,
+          0.585
+        ],
+        [
+          0.026,
+          0.584
+        ]
+      ],
+      "source": "open-region",
+      "page": 11,
+      "tolerance": 0.01
+    },
+    {
+      "page": 11,
+      "name": "whole fortifications panel",
+      "quad": [
+        [
+          0.4698133918770582,
+          0.18785714285714286
+        ],
+        [
+          0.973655323819978,
+          0.18857142857142858
+        ],
+        [
+          0.9714599341383096,
+          0.5757142857142857
+        ],
+        [
+          0.46871569703622395,
+          0.5742857142857143
+        ]
+      ],
+      "tolerance": 0.01,
+      "source": "closed-frame"
+    },
+    {
+      "name": "crawling strip",
+      "quad": [
+        [
+          0.0325,
+          0.5856
+        ],
+        [
+          0.9744,
+          0.5856
+        ],
+        [
+          0.9744,
+          0.7344
+        ],
+        [
+          0.0325,
+          0.7344
+        ]
+      ],
+      "source": "v73",
+      "page": 11,
+      "tolerance": 0.01
+    },
+    {
+      "name": "bottom strip",
+      "quad": [
+        [
+          0.0308,
+          0.7456
+        ],
+        [
+          0.9709,
+          0.7456
+        ],
+        [
+          0.9709,
+          0.9733
+        ],
+        [
+          0.0308,
+          0.9733
+        ]
+      ],
+      "source": "v73",
+      "page": 11,
+      "tolerance": 0.01
+    }
+  ]
+}

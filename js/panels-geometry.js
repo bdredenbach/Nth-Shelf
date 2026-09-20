@@ -16,6 +16,8 @@ const PanelGeometry = {
     const inferred=panel?._identitySource||
       (panel?._v100Hybrid?'v100':panel?._v87BoundarySet?'v99':'unknown');
 
+    if(inferred==='open-region'&&panel?._openRegionProof?.version===1&&panel._openRegionProof.connected===true)
+      return {mode:'hold',source:'OPEN-REGION',reason:'neighbor-bounded-matte'};
     if(inferred==='page-layout' && panel?._pageLayoutProof?.closed===true)
       return {mode:'hold',source:'PAGE-LAYOUT',reason:'complete-stacked-frame'};
     if(inferred==='closed-frame' && panel?._closedFrameProof?.version===1 && panel._closedFrameProof.connected===true)

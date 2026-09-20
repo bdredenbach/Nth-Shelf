@@ -4,7 +4,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),assert=require('node:assert/strict');
 if(!process.argv.includes('--comic')){console.log('Use --comic with the local 74-page Wolverine fixture.');process.exit(0);}
 const fresh=require('./harness'),plain=v=>JSON.parse(JSON.stringify(v));
-const labels=require('./frame-accuracy/queue-artwork-27920.json');
+const labels=require('./frame-accuracy/queue-artwork-27922.json');
 const ctx=vm.createContext({console,PanelGeometry:fresh.api.PanelGeometry,localStorage:{getItem(){return null;}},
   requestAnimationFrame(){},clamp:(v,a,b)=>Math.max(a,Math.min(b,v))});
 vm.runInContext(fs.readFileSync(path.join(__dirname,'../js/reader.js'),'utf8'),ctx);
@@ -38,7 +38,7 @@ const positions=[[.5,.5],[.16,.5],[.84,.5],[.5,.16],[.5,.84]];
         `page${page}: preserve every existing .17 frame and all its evidence`));
     }
     reader.index=page-1;reader.currentPanels=panels;reader.getPageUrl=async()=>fresh.pages[page-1];
-    let targets=labels.frames.filter(f=>f.page===page);
+    let targets=labels.frames.filter(f=>f.page===page&&f.source!=='v73');
     const owners=new Set();
     for(const target of targets){
       captures=[];
@@ -67,7 +67,7 @@ const positions=[[.5,.5],[.16,.5],[.84,.5],[.5,.16],[.5,.84]];
       reader.currentPanels=await detect.detect(fresh.pages[10]);
       assert(reader.currentPanels.length>=4,`${quality}: refined fortifications plus three unchanged legacy identities`);
       reader.index=10;reader.getPageUrl=async()=>fresh.pages[10];
-      for(const target of labels.frames){
+      for(const target of labels.frames.filter(f=>f.source!=='v73')){
         captures=[];
         for(const [u,v]of positions){const[x,y]=point(target.quad,u,v);assert(reader.findPanelAt(x,y));await reader.handleSingleTap({x:x*600,y:y*900});}
         assert.equal(captures.length,5);

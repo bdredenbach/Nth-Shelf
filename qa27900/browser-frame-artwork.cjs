@@ -45,7 +45,7 @@ function matches(p){return p?._quad?.length===4&&p._quad.every((v,i)=>Math.abs(v
   window.frameCaptures=[];const zoom=Reader.zoomToPanel;
   Reader.zoomToPanel=function(p,...args){frameCaptures.push(JSON.parse(JSON.stringify(p)));return zoom.call(this,p,...args);};
  },source(10));
- await page.waitForFunction(()=>Reader.currentPanels.length===4);
+ await page.waitForFunction(()=>Reader.currentPanels.length>=4);
  const positions=[[.5,.5],[.16,.5],[.84,.5],[.5,.16],[.5,.84]];
  // Two runs without clearing cache exercise open/close and repeat ownership.
  for(let round=0;round<2;round++)for(const [u,v]of positions){

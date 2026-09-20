@@ -26,6 +26,7 @@ on:
       - "qa27900/closed-frames.cjs"
       - "qa27900/exterior-gutter-frames.cjs"
       - "qa27900/gradient-gutter-frames.cjs"
+      - "qa27900/open-regions.cjs"
       - "qa27900/neighbor-frames.cjs"
       - "qa27900/panels-partition.cjs"
       - "qa27900/pilot-strips.cjs"
@@ -65,6 +66,7 @@ jobs:
           node qa27900/closed-frames.cjs
           node qa27900/exterior-gutter-frames.cjs
           node qa27900/gradient-gutter-frames.cjs
+          node qa27900/open-regions.cjs
           node qa27900/neighbor-frames.cjs
           node qa27900/panels-partition.cjs
           node qa27900/pilot-strips.cjs

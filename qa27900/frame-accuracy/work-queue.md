@@ -10,6 +10,32 @@ provide phone evidence; a complete five-position device sweep is not established
 Accuracy comes first. Keep the 2.79.xxx series until the full frame goal is met;
 reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
 
+## 2.79.22 candidate status
+
+- FQ-10 local advance: forest and borderless portrait open independently,
+  preserving both captions in each region. Fortifications and both lower
+  strips retain their exact earlier identities.
+- Forest: exterior borders already passed. Tree trunks were incorrectly vetoing
+  the strip as internal dividers. Gradient-route divider checks now require
+  separating ridges at both outside-border joins; full/interrupted separator
+  and inset negatives still pass.
+- Portrait: three independently proved neighbors bound an open artwork region.
+  Its full perimeter must be exterior-connected quiet background. The detector
+  includes the whole main artwork and separate captions, rejects ambiguous
+  multiple dominant scenes, and uses polygon overlap to preserve neighbors.
+- Real Chromium: 50 actual touch/rendered-overlay checks across all five page-11
+  panels, five positions each repeated twice. Broader local artwork checks
+  include Sharp and three Skia resampling settings. These are not phone passes.
+- Next phone check: all five positions inside the forest and portrait, then
+  fortifications, both lower strips and page-19's confirmed middle scene.
+- Keep FQ-10 open until the device result is confirmed. After that, FQ-08/09
+  and page-19's unresolved upper groups/syringe remain detector targets;
+  page-6 proof gaps and explicit second-level bubble checks remain recorded.
+
+See [2.79.22 results](queue-results-27922.md). The original composite remains
+as fallback outside independently proved refinements; no whole-comic accuracy
+or performance claim is made.
+
 ## Latest phone results — 179382.mp4
 
 - FQ-10 fortifications: separate complete crop around 7.5–15.5s and 21.2–21.5s,

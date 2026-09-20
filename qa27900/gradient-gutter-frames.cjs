@@ -2,13 +2,17 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 global.PanelGutterFrames=require('../js/panels-gutter-frames');
 const closed=require('../js/panels-closed-frames');
-function fixture({gap=false,edgeGap=0,divider=false,interrupted=false,inset=false,partialInset=false,flat=false,mixed=false}={}){
+function fixture({gap=false,edgeGap=0,trunks=false,divider=false,interrupted=false,inset=false,partialInset=false,flat=false,mixed=false}={}){
  const w=400,h=500,data=new Uint8Array(w*h*4);
  const background=(x,y)=>{const light=Math.round(25*Math.sin(y/h*Math.PI)+8*x/w);return [75+light,105+light,107+light];};
  function fill(x,y,r,b,color){for(let yy=y;yy<=b;yy++)for(let xx=x;xx<=r;xx++){const c=color||background(xx,yy),i=(yy*w+xx)*4;for(let k=0;k<3;k++)data[i+k]=c[k];data[i+3]=255;}}
  function frame(x,y,r,b){fill(x,y,r,b,[8,8,8]);fill(x+3,y+3,r-3,b-3,[190,170,140]);}
  fill(0,0,w-1,h-1);
  if(!flat){frame(25,30,370,310);fill(28,33,367,75,[8,8,8]);}
+ if(trunks){
+  fill(28,278,367,307,[8,8,8]);
+  for(const x of [100,210,310])fill(x,60,x+6,295,[8,8,8]);
+ }
  if(gap)fill(360,130,379,165);
  // Interrupt only the exterior quiet-color evidence; keep the printed ink.
  // This models a browser-resampled fringe, not a missing border.
@@ -21,6 +25,8 @@ function fixture({gap=false,edgeGap=0,divider=false,interrupted=false,inset=fals
 const run=o=>{const f=fixture(o);return closed.analyzeRGBA(f.data,f.w,f.h,null,{gradientOnly:true});};
 const owns=(p,x,y)=>p.x<x&&p.y<y&&p.x+p.w>x&&p.y+p.h>y;
 const positive=run({});assert.equal(positive.length,1);
+assert.equal(run({trunks:true}).length,1,'trunks merging into continuous ground do not create panel divisions');
+for(const interrupted of [false,true])assert(!run({trunks:true,divider:true,interrupted}).some(p=>p.w>.8&&p.h>.5),'real full/interrupted divider still vetoes the forest-like union');
 assert.equal(run({edgeGap:4}).length,1,'short gutter interruption retains the complete ink-bounded frame');
 assert.equal(run({edgeGap:9}).length,0,'long disconnected gutter segments do not join');
 assert.equal(positive[0]._closedFrameProof.gutterProof.method,'exterior-gradient-gutter');
