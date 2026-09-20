@@ -1,0 +1,29 @@
+{
+  "source": "Independent visual label from original page 11, one-based including cover; approximate printed corners. No comic coordinates in runtime.",
+  "frames": [
+    {
+      "page": 11,
+      "name": "whole fortifications panel",
+      "quad": [
+        [
+          0.4698133918770582,
+          0.18785714285714286
+        ],
+        [
+          0.973655323819978,
+          0.18857142857142858
+        ],
+        [
+          0.9714599341383096,
+          0.5757142857142857
+        ],
+        [
+          0.46871569703622395,
+          0.5742857142857143
+        ]
+      ],
+      "tolerance": 0.01,
+      "source": "closed-frame"
+    }
+  ]
+}

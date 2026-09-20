@@ -3,7 +3,7 @@
 // before any proposal can own a tap.
 const PanelGutterFrames = (() => {
   'use strict';
-  function proposeRGBA(rgba, w, h) {
+  function proposeRGBA(rgba, w, h, options = {}) {
     if (!Number.isInteger(w) || !Number.isInteger(h) || w < 80 || h < 80 ||
         w > 900 || h > 900 || !rgba || rgba.length !== w * h * 4) return [];
     const pixel = (x, y, c) => rgba[(y * w + x) * 4 + c];
@@ -19,7 +19,20 @@ const PanelGutterFrames = (() => {
     // Absolute color bounds prevent gradual drift from a gutter into artwork.
     const background = new Uint8Array(w * h), queue = new Int32Array(w * h);
     let size = 0, cursor = 0;
-    const matches = i => [0, 1, 2].every(c => Math.abs(rgba[i * 4 + c] - rgb[c]) <= 14);
+    let matches = i => [0, 1, 2].every(c => Math.abs(rgba[i * 4 + c] - rgb[c]) <= 14);
+    if (options.gradient === true) {
+      // A tinted background may change brightness across the page. Its palette
+      // must come from the actual exterior, with almost uniform chroma. Never
+      // grow the palette while flooding: artwork cannot cause color drift.
+      const palette = border.filter(p =>
+        Math.abs((p[1]-p[0])-(rgb[1]-rgb[0])) < 10 &&
+        Math.abs((p[2]-p[0])-(rgb[2]-rgb[0])) < 10);
+      if (palette.length / border.length < .97) return [];
+      const colors = [...new Map(palette.map(p =>
+        [p.map(c => Math.round(c/3)).join(','), p])).values()];
+      if (colors.length > 150) return [];
+      matches = i => colors.some(p => [0,1,2].every(c => Math.abs(rgba[i*4+c]-p[c]) <= 8));
+    }
     function offer(i) {
       if (background[i] || !matches(i)) return;
       background[i] = 1;
@@ -146,6 +159,9 @@ const PanelGutterFrames = (() => {
       if (q.some(p => p[0] < 1 || p[0] > w - 2 || p[1] < 1 || p[1] > h - 2)) continue;
       const ms = metrics(q);
       if (ms.some(m => m[0] < .97) || ms.filter(m => m[1] > .6).length < 3) continue;
+      // Refining an existing composite requires exterior-connected quiet
+      // background on all four sides, not a merely enclosed artwork inset.
+      if (options.gradient === true && ms.some(m => m[1] < .95)) continue;
       const area = (r.b - l.b) * (hi - lo) / (w * h);
       if (area < .02 || area > .65) continue;
       // Connected gutter inside a proposal indicates a likely neighbor union.

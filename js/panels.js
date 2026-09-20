@@ -1,5 +1,5 @@
-// NTH SHELF V92 — V91 BASELINE / PANEL INTERIOR VALIDATION
-// V73 remains authoritative whenever it contains the tap.
+// NTH SHELF V2.79.20 — PROVED FRAME REFINEMENT OVER LEGACY DETECTION
+// Legacy regions remain authoritative outside independently proved refinements.
 // V92 keeps the V91 boundary-set + iterative internal-gutter path, then adds
 // a conservative interior validation gate. A fallback result is rejected if
 // a strong, sustained internal gutter still cuts through its interior.
@@ -21,7 +21,14 @@ const PanelDetect = {
             if (log) log(`page-layout deferred: ${error.message}`);
           }
           if (layout.length >= 4 || baseline.length) {
-            resolve(layout.length >= 4 ? layout : baseline);
+            let identities=layout.length >= 4 ? layout : baseline;
+            if(layout.length<4 && baseline.some(p=>p.w*p.h>.30 && p.w>.7 && p.h>.35)){
+              try {
+                if(typeof PanelClosedFrames!=='undefined'&&PanelClosedFrames.gradientImage)
+                  identities=this._refineComposites(baseline,PanelClosedFrames.gradientImage(img,log),log);
+              } catch(error) { if(log)log(`gradient frame refinement deferred: ${error.message}`); }
+            }
+            resolve(identities);
             return;
           }
           // Only empty baseline pages may use the independent closed-border
@@ -68,6 +75,33 @@ const PanelDetect = {
       img.onerror = () => resolve([]);
       img.src = imgUrl;
     });
+  },
+
+  // A proved exterior-isolated frame can refine an unproved legacy bucket.
+  // Retain the old bucket and all other identities verbatim. Only taps inside
+  // the new frame gain priority; unresolved portions keep their prior route.
+  _refineComposites(baseline,candidates,log){
+    const eligible=p=>!p._quad&&!p._identitySource&&p.w*p.h>.30&&p.w>.7&&p.h>.35;
+    const overlap=(a,b)=>Math.max(0,Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x))*
+      Math.max(0,Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y));
+    const accepted=[];
+    for(const c of candidates){
+      const proof=c?._closedFrameProof,gutter=proof?.gutterProof;
+      if(c?._identitySource!=='closed-frame'||proof?.connected!==true||
+         gutter?.method!=='exterior-gradient-gutter'||
+         !Array.isArray(gutter.exteriorSupport)||gutter.exteriorSupport.length!==4||
+         gutter.exteriorSupport.some(v=>!Number.isFinite(v)||v<.95)||
+         !Array.isArray(c._quad)||c._quad.length!==4||c.w*c.h<.08)continue;
+      const owners=baseline.filter(p=>eligible(p)&&c.x>=p.x-.004&&c.y>=p.y-.004&&
+        c.x+c.w<=p.x+p.w+.004&&c.y+c.h<=p.y+p.h+.004&&c.w*c.h<p.w*p.h*.75);
+      if(owners.length!==1)continue;
+      if(baseline.some(p=>p!==owners[0]&&overlap(c,p)>.00001)||
+         accepted.some(p=>overlap(c,p)>.00001))continue;
+      accepted.push(c);
+    }
+    if(!accepted.length)return baseline;
+    if(log)log(`gradient frame refinement: ${accepted.length} isolated frames; ${baseline.length} legacy identities preserved`);
+    return accepted.concat(baseline);
   },
 
   // A connected partition can fill gaps in a partial closed-frame

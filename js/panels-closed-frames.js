@@ -128,6 +128,15 @@ const PanelClosedFrames = (() => {
         // fourth side are sufficient to veto that parent, never to create it.
         if(Math.min(...metrics.map(m=>m[1]))<.4&&
            !(attachedInsets&&cov[0]>=.96&&metrics.filter(m=>m[1]>=.4).length>=3))continue;
+        if(options.gradientOnly){
+          // Tree trunks and buildings can form rough dark boxes. On this
+          // exterior-connected route, a nested-frame veto needs three fitted
+          // rails; the fourth may remain interrupted. Existing routes retain
+          // their original weak-box veto unchanged.
+          const rails=[fit(vertical,a[0],lo,hi,true),fit(vertical,b[0],lo,hi,true),
+            fit(!vertical,ends[0],a[0],b[0],true),fit(!vertical,ends[1],a[0],b[0],true)];
+          if(rails.filter(Boolean).length<3)continue;
+        }
         threats.push(vertical?[a[0],ends[0],b[0],ends[1]]:[ends[0],a[0],ends[1],b[0]]);
       }
     }
@@ -137,7 +146,15 @@ const PanelClosedFrames = (() => {
       for(const vertical of [false,true]){const ls=vertical?weakV:weakH,lo=vertical?y1:x1,hi=vertical?y2:x2,b1=vertical?x1:y1,b2=vertical?x2:y2;
         for(const a of ls){if(a[0]<=b1+10||a[0]>=b2-10||Math.abs(a[1]-lo)>5||a[2]-a[1]<(hi-lo)*.1)continue;
           for(const b of ls){if(a===b||Math.abs(b[0]-a[0])>3||Math.abs(b[2]-hi)>5||b[2]-b[1]<(hi-lo)*.1)continue;
-            const pos=Math.round((a[0]+b[0])/2);if(cover(vertical,pos,lo,hi)>=.60&&ridge(vertical,pos,lo,hi)>=.40){ambiguous=true;break;}
+            const pos=Math.round((a[0]+b[0])/2);if(cover(vertical,pos,lo,hi)>=.60&&ridge(vertical,pos,lo,hi)>=.40){
+              if(options.gradientOnly){
+                const start=fit(vertical,a[0],a[1],a[2],true);
+                const end=fit(vertical,b[0],b[1],b[2],true);
+                if(!start||!end||Math.abs(start.slope-end.slope)>.01||
+                   Math.abs((start.offset+start.slope*(lo+hi)/2)-(end.offset+end.slope*(lo+hi)/2))>3)continue;
+              }
+              ambiguous=true;break;
+            }
           }if(ambiguous)break;
         }if(ambiguous)break;
       }if(ambiguous)p.internalUncertainty=true;
@@ -163,7 +180,7 @@ const PanelClosedFrames = (() => {
     }
     // Preserve strict outputs and their ordering. The second pass may only
     // append a non-overlapping frame using an original accepted neighbor.
-    const strict=options.supplementOnly?[]:removeAmbiguous(collect()),extra=[];
+    const strict=options.supplementOnly||options.gradientOnly?[]:removeAmbiguous(collect()),extra=[];
     if(strict.length){
       for(const candidate of removeAmbiguous(collect(strict))){
         if(!candidate.shared)continue;
@@ -177,12 +194,12 @@ const PanelClosedFrames = (() => {
     // gutter sides allow dark artwork to touch the fourth printed border.
     const gutter=[];
     if(!options.supplementOnly&&typeof PanelGutterFrames!=='undefined'){
-      const proposals=PanelGutterFrames.proposeRGBA(rgba,w,h).map(c=>({
+      const proposals=PanelGutterFrames.proposeRGBA(rgba,w,h,{gradient:options.gradientOnly===true}).map(c=>({
         box:[Math.min(...c.q.map(p=>p[0])),Math.min(...c.q.map(p=>p[1])),
              Math.max(...c.q.map(p=>p[0])),Math.max(...c.q.map(p=>p[1]))].map(Math.round),
         quad:c.q.map(p=>({x:p[0]/w,y:p[1]/h})),scores:c.ms.map(m=>m[0]),
         ridges:c.ms.map(m=>m[1]),fits:c.fits.map(f=>({slope:f.m,offset:f.b})),
-        gutterProof:{method:'exterior-gutter',color:c.color,exteriorSupport:c.ms.map(m=>m[1])}
+        gutterProof:{method:options.gradientOnly?'exterior-gradient-gutter':'exterior-gutter',color:c.color,exteriorSupport:c.ms.map(m=>m[1])}
       }));
       for(const candidate of removeAmbiguous(proposals,true)){
         const [x1,y1,x2,y2]=candidate.box;
@@ -240,7 +257,7 @@ const PanelClosedFrames = (() => {
       return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:c.quad,_identitySource:'closed-frame',_geometryOwner:'orthogonal-frame',_geometryType:'closed-dark-frame',_closedFrameProof:proof};});
   }
   function analyzeImage(img,log,options){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log,options);}
-  return {analyzeRGBA,analyzeImage,supplementImage:(img,anchors,log)=>analyzeImage(img,log,{supplementOnly:true,anchors})};
+  return {analyzeRGBA,analyzeImage,gradientImage:(img,log)=>analyzeImage(img,log,{gradientOnly:true}),supplementImage:(img,anchors,log)=>analyzeImage(img,log,{supplementOnly:true,anchors})};
 })();
 if(typeof window!=='undefined')window.PanelClosedFrames=PanelClosedFrames;
 if(typeof module!=='undefined')module.exports=PanelClosedFrames;

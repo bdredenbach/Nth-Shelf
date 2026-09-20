@@ -106,7 +106,36 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.19 Test 1 — Whole page-19 middle scene**
+**Version 2.79.20 Test 1 — Separate page-11 fortifications panel**
+
+Page 11's right-hand fortifications panel now opens on its own, with both
+captions and its complete printed border. Five interior tap positions pass
+under Sharp and low/medium/high Skia resampling. The forest and borderless
+portrait remain unresolved; taps there retain their previous behavior.
+
+Tinted gutters can now use the palette observed at the page exterior. A new
+frame requires connected quiet background on all four sides, complete ink
+borders and corner joins, plus divider/inset checks. It can take tap priority
+inside a large unproved legacy composite; all existing identities are retained
+verbatim. The 74-page identity comparison changes only page 11.
+
+**Preserve the phone-confirmed page-19 middle scene:** the user confirmed the
+2.79.19 test worked, including Wolverine at the left. That result, pages 7/17,
+and the earlier frame controls stay unchanged.
+
+**Phone priorities:** on page 11, tap left/right/center/north/south inside the
+right-hand fortifications panel. Every opening should contain the whole panel
+and both captions. Recheck page 19's middle room and the established controls.
+Pages 9–10's upper groups, page 11's forest/portrait, page 19's upper-right pair
+and reliable syringe cropping remain queued. Bubble behavior is unchanged.
+
+See [2.79.20 results](qa27900/frame-accuracy/queue-results-27920.md) and the
+[work queue](qa27900/frame-accuracy/work-queue.md). This remains the 2.79 accuracy
+series. Source comics and recordings are excluded from the repository and APK.
+
+## 🧪 Release History (Newest First)
+
+## V2.79.19 Test 1 — Whole page-19 middle scene
 
 Page 19's middle room scene now has one complete frame owner, including
 Wolverine at the left. Its bottom full-width scene also has a stable identity.
@@ -130,8 +159,6 @@ Bubble behavior is unchanged; its explicit second-level phone checks remain.
 See [2.79.19 results](qa27900/frame-accuracy/queue-results-27919.md) and the
 [work queue](qa27900/frame-accuracy/work-queue.md). This remains the 2.79 accuracy
 series. Comic pages and recordings are excluded from the repository and APK.
-
-## 🧪 Release History (Newest First)
 
 ## V2.79.18 Test 1 — Whole bomber and SNIKT frames
 

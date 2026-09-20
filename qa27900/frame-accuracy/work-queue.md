@@ -2,15 +2,37 @@
 
 Latest phone review: **2.79.18 Test 1**, recording `179355.mp4`.
 See [new phone findings](video-findings-27918.md) and
-[2.79.18 local results](queue-results-27918.md). The review describes 2.79.18; the current candidate is 2.79.19 Test 1.
+[2.79.18 local results](queue-results-27918.md). The review describes 2.79.18; the current candidate is 2.79.20 Test 1.
 
 Accuracy comes first. Keep the 2.79.xxx series until the full frame goal is met;
 reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
 
+## 2.79.20 candidate status
+
+- FQ-10 partial advance: page-11 fortifications has a complete independent crop,
+  including both captions. Five interior points pass in Sharp and three Skia
+  settings. Its printed border takes priority inside the old upper composite.
+- The old composite remains for unresolved taps in the forest and borderless
+  portrait. This is not a complete page-11 fix or a complete disjoint page map.
+- The 74-page comparison preserves every old identity exactly; only page 11
+  gains a new preferred frame. Confirmed page-19 middle-scene behavior remains.
+- FQ-08/09, the rest of FQ-10, FQ-15a/b/c and earlier uncertainty remain queued.
+  Bubble code is unchanged; explicit second-level phone checks remain pending.
+
+See [2.79.20 local results](queue-results-27920.md). Phone confirmation is still
+required for the fortifications panel.
+
+## Phone confirmation — 2.79.19
+
+The user reports the requested page-19 test worked. FQ-15d's whole middle room
+scene, including Wolverine at the left, is now phone-confirmed and must be
+preserved. This does not close the syringe, upper-right room/eye-strip, or
+other untested regions. Keep the bottom full-width scene as a local control.
+
 ## 2.79.19 candidate status
 
 - FQ-15d: page-19 middle scene retains Wolverine and the whole room under
-  Sharp and all three Skia qualities, five moved taps each. Phone check pending.
+  Sharp and all three Skia qualities, five moved taps each. Now phone-confirmed.
 - Page-19 bottom full-width scene is a new stable control under the same tests.
 - FQ-15a/c: the whole syringe and its upper speech gain a Sharp identity, but
   the grid background still causes Skia abstention. Do not mark these solved.
