@@ -1,0 +1,98 @@
+{
+  "recording": "179382.mp4",
+  "sha256": "ab9903397b6e2b819a3babe1fcb211127770a864753c452260ad89ec76eee7c5",
+  "durationSeconds": 32.203578,
+  "width": 1080,
+  "height": 2424,
+  "audio": false,
+  "inferredBuild": "2.79.21-test1",
+  "runtimeCommit": "2185aa577ca5229a5eb953c590c81f448e585f89",
+  "pagesReviewed": [
+    11
+  ],
+  "positiveOpenings": [
+    {
+      "page": 11,
+      "region": "fortifications",
+      "intervalsSeconds": [
+        [
+          7.5,
+          15.5
+        ],
+        [
+          21.17,
+          21.5
+        ]
+      ],
+      "result": "Whole independent frame with both captions; excludes forest and portrait."
+    },
+    {
+      "page": 11,
+      "region": "Wolverine crawling strip",
+      "intervalsSeconds": [
+        [
+          23.5,
+          23.83
+        ]
+      ],
+      "result": "Complete separate strip including right caption."
+    },
+    {
+      "page": 11,
+      "region": "bottom boot/soldiers strip",
+      "intervalsSeconds": [
+        [
+          25.83,
+          26.5
+        ]
+      ],
+      "result": "Complete separate strip including caption."
+    }
+  ],
+  "findings": [
+    {
+      "queue": "FQ-10",
+      "page": 11,
+      "region": "borderless portrait",
+      "status": "unresolved",
+      "mergedCropIntervalsSeconds": [
+        [
+          3.5,
+          5.17
+        ]
+      ],
+      "result": "Forest, portrait and fortifications remain combined."
+    },
+    {
+      "queue": "FQ-10",
+      "page": 11,
+      "region": "forest strip",
+      "status": "unresolved",
+      "mergedCropIntervalsSeconds": [
+        [
+          18.17,
+          18.83
+        ],
+        [
+          28.83,
+          29.5
+        ]
+      ],
+      "result": "Forest, portrait and fortifications remain combined."
+    }
+  ],
+  "evidenceLimits": [
+    "Build inferred from delivery/feedback sequence; no version screen.",
+    "Full-stream 3 fps sampling and larger fortifications still inspection. Approximate intervals, not measured latency.",
+    "Touches while the overlay remains open do not certify five independent first-level openings.",
+    "Second-level caption and artwork-negative gesture intent is not established.",
+    "Only page 11 is shown; earlier page-19 and other confirmations are preserved without new testing."
+  ],
+  "nextTargets": [
+    "Separate whole forest strip ownership.",
+    "Resolve borderless portrait ownership without cutting artwork or captions.",
+    "Preserve fortifications, both lower strips and earlier confirmed controls."
+  ],
+  "runtimeChanged": false,
+  "newApkBuilt": false
+}

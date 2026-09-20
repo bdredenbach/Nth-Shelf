@@ -1,14 +1,29 @@
 # Frame accuracy work queue
 
-Latest phone review: **2.79.20 Test 1**, recording `179375.mp4`.
-**Page-11 fortifications still opens the upper composite on the phone.**
-See [new phone findings](video-findings-27920.md) and
-[2.79.20 local results](queue-results-27920.md). Local passes do not close FQ-10;
-the discrepancy is reproduced and addressed by the 2.79.21 candidate below. Phone
-acceptance remains the first check before advancing this target.
+Latest phone review: **179382.mp4**, following delivery of **2.79.21 Test 1**.
+**Page-11 fortifications now opens independently with both captions intact.**
+Both lower full-width strips also open separately. The top forest strip and
+borderless Wolverine portrait still open the upper composite and are next.
+See [latest phone findings](video-findings-27921.md). These individual openings
+provide phone evidence; a complete five-position device sweep is not established.
 
 Accuracy comes first. Keep the 2.79.xxx series until the full frame goal is met;
 reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
+
+## Latest phone results — 179382.mp4
+
+- FQ-10 fortifications: separate complete crop around 7.5–15.5s and 21.2–21.5s,
+  retaining both captions. Preserve this newly observed phone success.
+- Both lower full-width strips open individually around 23.5–23.8s and
+  25.8–26.5s, with their captions visible.
+- FQ-10 remains open for the borderless portrait (upper composite around
+  3.5–5.2s) and forest strip (upper composite around 18.2–18.8s and 28.8–29.5s).
+- Next: separate forest and portrait ownership while retaining the complete
+  fortifications crop and both lower strips. Do not use an arbitrary portrait
+  rectangle or remove artwork/captions to force disjoint boxes.
+- Touches during the held-open fortifications crop are not independent
+  first-level openings. Five-position device coverage and explicit bubble
+  checks remain pending. Page 19 and other pages are not retested here.
 
 ## 2.79.21 candidate status
 
@@ -22,14 +37,16 @@ reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
 - Chromium's 74-page before/after comparison changes only page 11 (3 to 4
   identities); every prior identity remains exact. Ten real browser touch and
   overlay checks pass through IndexedDB and the actual Reader load path.
-- This closes the reproduced browser gap, **not phone acceptance**. Retest the
-  fortifications panel at left/right/center/north/south positions on 2.79.21.
+- The subsequent 179382 recording now supplies independent fortifications
+  openings on the phone. A complete left/right/center/north/south first-level
+  device sweep remains pending; the whole page is not yet solved.
 - Forest/portrait ownership, pages 9–10, page-19 upper groups/syringe, page-6
   uncertainty and explicit second-level bubble checks remain queued. Preserve
   the phone-confirmed page-19 middle scene and earlier frame controls.
 
-See [2.79.21 results](queue-results-27921.md). No phone claim is made from the
-browser's successful image analysis or touch sequence.
+See [2.79.21 local results](queue-results-27921.md) and the separate
+[phone findings](video-findings-27921.md). Historical sections below describe
+the earlier builds and retain their original evidence limits.
 
 ## Latest phone results — 179375.mp4
 
