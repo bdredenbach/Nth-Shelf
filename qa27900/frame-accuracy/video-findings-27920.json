@@ -1,0 +1,138 @@
+{
+  "recording": "179375.mp4",
+  "sha256": "c98b5381750b403359820cdeaac65a34f313890cf2110a9c0fd76cd3092ea454",
+  "durationSeconds": 49.380911,
+  "width": 1080,
+  "height": 2424,
+  "audio": false,
+  "inferredBuild": "2.79.20-test1",
+  "runtimeCommit": "cfe6c34f4567dec10b0048b00fb0508541137bd1",
+  "pagesReviewed": [
+    11
+  ],
+  "positiveOpenings": [],
+  "evidenceLimits": [
+    "Build inferred from delivery/feedback sequence; no version screen.",
+    "Full-stream sampling at 3 fps and detailed full-stream sampling at 10 fps. Times approximate, not measured response latency.",
+    "Touch indicators identify visible regions, not exact mapped source coordinates or handler routes.",
+    "No complete five-position success; no isolated fortifications opening observed.",
+    "Other pages and second-level caption/artwork requests are not tested by this recording.",
+    "Failure does not establish stale cache, installation state, or a particular detector cause."
+  ],
+  "findings": [
+    {
+      "queue": "FQ-10",
+      "page": 11,
+      "region": "fortifications",
+      "status": "phone failure; local/device discrepancy",
+      "result": "Every reviewed targeted opening contains forest, portrait and fortifications together.",
+      "observations": [
+        {
+          "touchRegion": "upper-left tree, inside fortifications",
+          "touchIntervalSeconds": [
+            27.95,
+            28.15
+          ],
+          "mergedCropIntervalSeconds": [
+            28.75,
+            29.15
+          ]
+        },
+        {
+          "touchRegion": "lower-left artwork, inside fortifications",
+          "touchIntervalSeconds": [
+            30.05,
+            30.25
+          ],
+          "mergedCropIntervalSeconds": [
+            30.95,
+            31.35
+          ]
+        },
+        {
+          "touchRegion": "lower artwork beside bottom caption",
+          "touchIntervalSeconds": [
+            32.35,
+            32.55
+          ],
+          "mergedCropIntervalSeconds": [
+            33.15,
+            33.55
+          ]
+        },
+        {
+          "touchRegion": "central snow and fence",
+          "touchIntervalSeconds": [
+            34.55,
+            34.75
+          ],
+          "mergedCropIntervalSeconds": [
+            35.45,
+            35.85
+          ]
+        },
+        {
+          "touchRegion": "right-side artwork near border",
+          "touchIntervalSeconds": [
+            36.85,
+            37.05
+          ],
+          "mergedCropIntervalSeconds": [
+            37.85,
+            38.15
+          ]
+        },
+        {
+          "touchRegion": "upper-right snow",
+          "touchIntervalSeconds": [
+            39.05,
+            39.25
+          ],
+          "mergedCropIntervalSeconds": [
+            39.95,
+            40.35
+          ]
+        },
+        {
+          "touchRegion": "upper-right near printed border",
+          "touchIntervalSeconds": [
+            41.35,
+            41.55
+          ],
+          "mergedCropIntervalSeconds": [
+            42.15,
+            42.5
+          ]
+        }
+      ],
+      "requiredOutcome": "Whole independent fortifications frame with both captions at moved interior taps; exclude forest and portrait."
+    },
+    {
+      "queue": "FQ-10",
+      "page": 11,
+      "region": "forest and borderless portrait",
+      "status": "still unresolved",
+      "mergedCropExamplesSeconds": [
+        3.83,
+        6.83,
+        9.83,
+        12.83,
+        15.83,
+        18.17,
+        20.83,
+        23.5,
+        25.83,
+        44.83
+      ],
+      "result": "Repeated upper composite remains; no separate forest or portrait success."
+    }
+  ],
+  "nextDiagnostic": [
+    "Capture active runtime version, original decoded source dimensions and page-wide detection logs in the actual Android WebView path.",
+    "Determine whether the gradient candidate is absent/rejected, lost before currentPanels assignment, or bypassed by hit mapping/selection.",
+    "Replay visible interior points using the actual image decode and canvas path; retain the independent artwork label.",
+    "Preserve previously confirmed controls and require phone confirmation before closing FQ-10."
+  ],
+  "runtimeChanged": false,
+  "newApkBuilt": false
+}

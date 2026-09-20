@@ -1,15 +1,31 @@
 # Frame accuracy work queue
 
-Latest phone review: **2.79.18 Test 1**, recording `179355.mp4`.
-See [new phone findings](video-findings-27918.md) and
-[2.79.18 local results](queue-results-27918.md). The review describes 2.79.18; the current candidate is 2.79.20 Test 1.
+Latest phone review: **2.79.20 Test 1**, recording `179375.mp4`.
+**Page-11 fortifications still opens the upper composite on the phone.**
+See [new phone findings](video-findings-27920.md) and
+[2.79.20 local results](queue-results-27920.md). Local passes do not close FQ-10;
+the device discrepancy is the first queued diagnostic target.
 
 Accuracy comes first. Keep the 2.79.xxx series until the full frame goal is met;
 reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
 
+## Latest phone results — 179375.mp4
+
+- FQ-10: fortifications touches at multiple positions around 28–42 seconds
+  repeatedly open forest + portrait + fortifications together. No independent
+  fortifications crop is observed. This remains a phone failure despite the
+  local five-point Sharp/Skia passes.
+- The forest and borderless portrait also remain merged in repeated attempts.
+- Next: inspect active runtime, image decode/canvas, candidate acceptance,
+  `currentPanels` assignment and hit selection in the Android WebView path.
+  The recording does not identify which stage causes the discrepancy.
+- The recording covers only page 11. Prior page-19 and other control
+  confirmations remain recorded; no new pass or regression is inferred.
+- Explicit second-level bubble checks remain pending. Runtime/APK unchanged.
+
 ## 2.79.20 candidate status
 
-- FQ-10 partial advance: page-11 fortifications has a complete independent crop,
+- FQ-10 local-only advance: page-11 fortifications has a complete independent crop,
   including both captions. Five interior points pass in Sharp and three Skia
   settings. Its printed border takes priority inside the old upper composite.
 - The old composite remains for unresolved taps in the forest and borderless
@@ -19,8 +35,8 @@ reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
 - FQ-08/09, the rest of FQ-10, FQ-15a/b/c and earlier uncertainty remain queued.
   Bubble code is unchanged; explicit second-level phone checks remain pending.
 
-See [2.79.20 local results](queue-results-27920.md). Phone confirmation is still
-required for the fortifications panel.
+See [2.79.20 local results](queue-results-27920.md). The latest phone recording
+fails the fortifications acceptance check; diagnose the local/device mismatch.
 
 ## Phone confirmation — 2.79.19
 
