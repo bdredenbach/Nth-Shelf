@@ -61,6 +61,12 @@ const PanelGutterFrames = (() => {
     let overflow = false;
     function rails(vertical, direction) {
       const length = vertical ? h : w, width = vertical ? w : h, groups = [];
+      // Browser downsampling can interrupt a quiet-gutter edge for a few
+      // pixels even when its printed ink is continuous. Keep a nearby track
+      // alive across that short interruption on the gradient route only.
+      // The fitted rail, full-side ink/exterior support, corners and interior
+      // vetoes below still have to prove the complete frame.
+      const maxGap = options.gradient === true ? 6 : 3;
       let active = [];
       for (let t = 0; t < length; t++) {
         const positions = [], next = [];
@@ -72,7 +78,7 @@ const PanelGutterFrames = (() => {
         for (const p of positions) {
           let best = null;
           for (const group of active) {
-            if (t - group.lastT <= 3 && Math.abs(group.lastP - p) <= 2 &&
+            if (t - group.lastT <= maxGap && Math.abs(group.lastP - p) <= 2 &&
                 (!best || Math.abs(group.lastP - p) < Math.abs(best.lastP - p))) best = group;
           }
           if (!best) {
@@ -81,7 +87,7 @@ const PanelGutterFrames = (() => {
           }
           best.points.push([t, p]); best.lastT = t; best.lastP = p; next.push(best);
         }
-        active = [...new Set([...next, ...active.filter(group => t - group.lastT < 3)])];
+        active = [...new Set([...next, ...active.filter(group => t - group.lastT < maxGap)])];
       }
       const found = [];
       for (const group of groups) {

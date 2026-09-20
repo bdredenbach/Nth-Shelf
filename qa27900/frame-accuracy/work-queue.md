@@ -4,10 +4,32 @@ Latest phone review: **2.79.20 Test 1**, recording `179375.mp4`.
 **Page-11 fortifications still opens the upper composite on the phone.**
 See [new phone findings](video-findings-27920.md) and
 [2.79.20 local results](queue-results-27920.md). Local passes do not close FQ-10;
-the device discrepancy is the first queued diagnostic target.
+the discrepancy is reproduced and addressed by the 2.79.21 candidate below. Phone
+acceptance remains the first check before advancing this target.
 
 Accuracy comes first. Keep the 2.79.xxx series until the full frame goal is met;
 reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
+
+## 2.79.21 candidate status
+
+- FQ-10's phone-style failure is reproduced in real Chromium using the original
+  JPEG: its canvas output interrupts the exterior gutter alongside the left
+  fortifications rail for four analysis rows. The old three-row tracking limit
+  splits that rail and never proposes the whole frame.
+- The gradient route now allows at most five missing samples between nearby
+  rail points. All existing line-fit, full-side support, corner and interior
+  checks remain. Other proposal routes retain their original tracking limit.
+- Chromium's 74-page before/after comparison changes only page 11 (3 to 4
+  identities); every prior identity remains exact. Ten real browser touch and
+  overlay checks pass through IndexedDB and the actual Reader load path.
+- This closes the reproduced browser gap, **not phone acceptance**. Retest the
+  fortifications panel at left/right/center/north/south positions on 2.79.21.
+- Forest/portrait ownership, pages 9–10, page-19 upper groups/syringe, page-6
+  uncertainty and explicit second-level bubble checks remain queued. Preserve
+  the phone-confirmed page-19 middle scene and earlier frame controls.
+
+See [2.79.21 results](queue-results-27921.md). No phone claim is made from the
+browser's successful image analysis or touch sequence.
 
 ## Latest phone results — 179375.mp4
 

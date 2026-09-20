@@ -1,4 +1,4 @@
-// NTH SHELF V2.79.20 — PROVED FRAME REFINEMENT OVER LEGACY DETECTION
+// NTH SHELF V2.79.21 — PROVED FRAME REFINEMENT OVER LEGACY DETECTION
 // Legacy regions remain authoritative outside independently proved refinements.
 // V92 keeps the V91 boundary-set + iterative internal-gutter path, then adds
 // a conservative interior validation gate. A fallback result is rejected if

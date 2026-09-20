@@ -1,5 +1,9 @@
 # 2.79.20 Test 1 — separate page-11 fortifications
 
+**Subsequent phone review failed:** see [the recording findings](video-findings-27920.md)
+and [the browser reproduction/fix](queue-results-27921.md). The results below
+record the earlier simulated-canvas checks, not phone acceptance.
+
 FQ-10 advances by one complete frame: the right-hand fortifications panel on
 page 11, including both captions. The user confirmed the preceding 2.79.19
 page-19 middle-scene test worked; that result is now a phone-confirmed control.
