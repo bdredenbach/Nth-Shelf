@@ -16,6 +16,8 @@ const PanelGeometry = {
     const inferred=panel?._identitySource||
       (panel?._v100Hybrid?'v100':panel?._v87BoundarySet?'v99':'unknown');
 
+    if(inferred==='overlap-frame'&&panel?._overlapProof?.version===1&&panel._overlapProof.connected===true)
+      return {mode:'hold',source:'OVERLAP-FRAME',reason:'visible-occlusion-outline'};
     if(inferred==='open-region'&&panel?._openRegionProof?.version===1&&panel._openRegionProof.connected===true)
       return {mode:'hold',source:'OPEN-REGION',reason:'neighbor-bounded-matte'};
     if(inferred==='page-layout' && panel?._pageLayoutProof?.closed===true)

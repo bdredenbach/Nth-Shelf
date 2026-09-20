@@ -1,16 +1,37 @@
 # Frame accuracy work queue
 
-Latest phone review: **179382.mp4**, following delivery of **2.79.21 Test 1**.
-**Page-11 fortifications now opens independently with both captions intact.**
-Both lower full-width strips also open separately. The top forest strip and
-borderless Wolverine portrait still open the upper composite and are next.
-See [latest phone findings](video-findings-27921.md). These individual openings
-provide phone evidence; a complete five-position device sweep is not established.
+Latest phone confirmation: after **2.79.22 Test 1**, the user confirms
+**all page-11 frames are working**. FQ-10 is now phone-confirmed; preserve all
+five regions, including forest/portrait captions and the fortifications crop.
+Next detector targets are FQ-08 (page 9 upper group) and FQ-09 (page 10 upper
+overlapping group). This confirmation concerns frames, not second-level bubbles.
 
 Accuracy comes first. Keep the 2.79.xxx series until the full frame goal is met;
 reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
 
-## 2.79.22 candidate status
+## Phone confirmation — 2.79.22
+
+The user reports: “yes, page 11 frames are all confirmed working.” This follows
+the requested five-position forest/portrait checks and recheck of the other
+three panels. No additional recording was needed. FQ-10's frame targets are
+confirmed; all five become required controls for subsequent changes.
+Second-level caption/artwork tests and other pages keep their prior status.
+
+## 2.79.23 candidate — FQ-08 and FQ-09
+
+- Each upper composite now has three independently outlined visible regions:
+  rear scene plus two right-edge foreground panels. Their bounding rectangles
+  overlap; their visible polygons assign the occluded area to the foreground.
+- Page 9's protruding caption is proved by a closed paper boundary and the
+  existing text-layout check, and retained with the upper motorcycle inset.
+- Every old identity remains exact. FQ-10/page 11 is a required phone-confirmed
+  control, alongside the earlier controls. FQ-08/09 remain pending device checks.
+- Test five interior positions in each of the six new upper regions, dismissing
+  between taps; include the protruding page-9 caption. Recheck lower regions.
+- See [2.79.23 local results](queue-results-27923.md). Page-19 upper groups/syringe,
+  page-6 gaps and explicit second-level checks remain queued.
+
+## 2.79.22 implementation status (subsequently phone-confirmed)
 
 - FQ-10 local advance: forest and borderless portrait open independently,
   preserving both captions in each region. Fortifications and both lower
@@ -26,9 +47,8 @@ reserve 2.80.00. Performance tuning and sequential pop-outs remain later work.
 - Real Chromium: 50 actual touch/rendered-overlay checks across all five page-11
   panels, five positions each repeated twice. Broader local artwork checks
   include Sharp and three Skia resampling settings. These are not phone passes.
-- Next phone check: all five positions inside the forest and portrait, then
-  fortifications, both lower strips and page-19's confirmed middle scene.
-- Keep FQ-10 open until the device result is confirmed. After that, FQ-08/09
+- The requested page-11 frame checks are now confirmed by the user.
+- FQ-10 is closed for frames. FQ-08/09
   and page-19's unresolved upper groups/syringe remain detector targets;
   page-6 proof gaps and explicit second-level bubble checks remain recorded.
 

@@ -20,7 +20,7 @@ const positions=[[.5,.5],[.16,.5],[.84,.5],[.5,.16],[.5,.84]];
   let count=0;
   for(const page of [9,16,13,5]){
     const panels=await fresh.api.PanelDetect.detect(fresh.pages[page-1]);
-    assert.equal(panels.length,{9:7,16:5,13:3,5:6}[page],`page${page}: independently identified frame count`);
+    assert.equal(panels.length,{9:10,16:5,13:3,5:6}[page],`page${page}: independently identified frame count`);
     if(process.env.NTH_BASELINE_ROOT&&page!==5){
       const old=require(path.resolve(process.env.NTH_BASELINE_ROOT,'qa27900/harness'));
       const previous=await old.api.PanelDetect.detect(old.pages[page-1]);

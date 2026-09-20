@@ -106,33 +106,29 @@ Nth Shelf can be installed as a PWA on supported devices. The app shell is cache
 7. Use Backup/Restore to keep a safety copy.
 
 ## 🧪 Current Release
-**Version 2.79.22 Test 1 — Whole forest and borderless portrait**
+**Version 2.79.23 Test 1 — Overlapping upper panels on pages 9–10**
 
-Page 11's forest and Wolverine portrait now have separate whole-region owners.
-The forest's tree trunks no longer count as dividers merely because they run
-through dark ground: on the exterior-gradient route, a divider must remain a
-separating ridge where it joins both outside borders. Existing full/interrupted
-divider and inset rejection tests remain.
+Page 11's five frames are now phone-confirmed. This build targets the three
+upper scenes on each of pages 9 and 10. The detector proves the exposed borders
+of a rear panel and its two foreground panels, then keeps their visible
+outlines. The stepped edge preserves the rear artwork without including its
+neighbors. Page 9's overhanging caption stays with the motorcycle inset.
 
-The borderless portrait uses a separate background proof, not invented ink
-borders. Three independently accepted neighboring frames enclose its row;
-a completely exterior-connected quiet perimeter separates the artwork and
-both captions from those neighbors. Missing neighbors, ambiguous multiple
-scenes, inset frames or artwork crossing that perimeter cause abstention.
+The reader uses those same outlines for taps, crops and second-level tap
+mapping. Transparent cutouts cannot select a neighboring caption. Existing
+frame identities and fallback composites are retained. The new layout rule
+uses image evidence; no comic coordinates or page numbers enter runtime code.
 
-The phone-confirmed fortifications crop and both lower strips are preserved.
-The original composite remains as fallback outside the new proved regions.
-Keep the confirmed page-19 middle scene and earlier frame controls. Pages 9–10,
-page-19 upper groups/syringe, page-6 uncertainty and explicit bubble checks
-remain queued. This candidate still needs phone verification.
+**Phone priorities:** on pages 9 and 10, try five positions in each of the
+three upper scenes, closing the pop-out between taps. On page 9 also tap the
+caption extending left of the motorcycle inset. Recheck the confirmed lower
+panels and page 11. These new page-9/10 crops still need phone confirmation.
 
-**Phone priorities:** repeat left/right/center/north/south taps in the page-11
-forest and portrait. Each should open separately with both captions. Recheck
-the fortifications, both lower strips and page 19's middle room.
-
-See [2.79.22 results](qa27900/frame-accuracy/queue-results-27922.md) and the
-[work queue](qa27900/frame-accuracy/work-queue.md). Accuracy work stays in the
-2.79 series. Source comics and recordings are excluded from the repository/APK.
+See [2.79.23 results](qa27900/frame-accuracy/queue-results-27923.md) and the
+[work queue](qa27900/frame-accuracy/work-queue.md). Page-19 upper groups/syringe,
+page-6 uncertainty and explicit bubble checks remain queued. Accuracy work
+stays in the 2.79 series. Source comics and recordings are excluded from the
+repository/APK.
 
 ## 🧪 Release History (Newest First)
 

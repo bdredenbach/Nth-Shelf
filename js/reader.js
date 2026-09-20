@@ -875,19 +875,27 @@ const Reader = {
    return null;
  },
 
+ panelPolygon(panel) {
+   const outline=typeof PanelGeometryOrthogonal!=='undefined'?PanelGeometryOrthogonal._provenOutline(panel):null;
+   if(outline)return outline;
+   return Array.isArray(panel?._quad)&&panel._quad.length===4?panel._quad:null;
+ },
+
+ pointInPolygon(q,x,y) {
+   let inside=false;
+   for(let i=0,j=q.length-1;i<q.length;j=i++){
+     const a=q[i],b=q[j],cross=(b.x-a.x)*(y-a.y)-(b.y-a.y)*(x-a.x);
+     if(Math.abs(cross)<1e-10&&x>=Math.min(a.x,b.x)&&x<=Math.max(a.x,b.x)&&y>=Math.min(a.y,b.y)&&y<=Math.max(a.y,b.y))return true;
+     if((a.y>y)!==(b.y>y)&&x<(b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x)inside=!inside;
+   }return inside;
+ },
+
  findPanelAt(relX, relY) {
    if (!this.panelZoomEnabled) return null;
    for (const p of this.currentPanels) {
      if (relX >= p.x && relX <= p.x + p.w && relY >= p.y && relY <= p.y + p.h) {
-       if (Array.isArray(p._quad) && p._quad.length === 4) {
-         let inside = false;
-         for (let i = 0, j = 3; i < 4; j = i++) {
-           const a = p._quad[i], b = p._quad[j];
-           if ((a.y > relY) !== (b.y > relY) &&
-               relX < (b.x - a.x) * (relY - a.y) / (b.y - a.y) + a.x) inside = !inside;
-         }
-         if (!inside) continue;
-       }
+       const polygon=this.panelPolygon(p);
+       if(polygon&&!this.pointInPolygon(polygon,relX,relY))continue;
        return p;
      }
    }
@@ -2807,6 +2815,8 @@ async setMode(mode) {
      pageX = panel.x+u*panel.w; pageY = panel.y+v*panel.h;
      let inside = Number.isFinite(u) && Number.isFinite(v) && u >= 0 && u <= 1 && v >= 0 && v <= 1;
      // A clipped corner of a sloping frame is transparent, not a caption hit.
+     const outline=panel._outline;
+     if(inside&&Array.isArray(outline)&&outline.length>=4)inside=this.pointInPolygon(outline,pageX,pageY);
      const quad = panel._quad;
      if (inside && Array.isArray(quad) && quad.length === 4) {
        let sign = 0;
@@ -3049,16 +3059,18 @@ async setMode(mode) {
    // V2.78.05 geometry router: skewed panels may carry a proven four-corner polygon.
    // Build the overlay from its bounding box, then clip the canvas to the
    // fitted frame. Legacy/V73/V92 rectangles continue unchanged.
-   const quad = Array.isArray(panel._quad) && panel._quad.length === 4 ? panel._quad : null;
+   const polygon=this.panelPolygon(panel);
+   const quad=panel._outline?null:polygon;
+   const outline=panel._outline?polygon:null;
    let geom = { x: panel.x, y: panel.y, w: panel.w, h: panel.h };
    let clipPolygon = null;
-   if (quad) {
-     const xs = quad.map(p => p.x), ys = quad.map(p => p.y);
+   if (polygon) {
+     const xs = polygon.map(p => p.x), ys = polygon.map(p => p.y);
      const qx0 = Math.max(0, Math.min(...xs)), qx1 = Math.min(1, Math.max(...xs));
      const qy0 = Math.max(0, Math.min(...ys)), qy1 = Math.min(1, Math.max(...ys));
      if (qx1-qx0 > .01 && qy1-qy0 > .01) {
        geom = { x: qx0, y: qy0, w: qx1-qx0, h: qy1-qy0 };
-       clipPolygon = quad.map(p => ({
+       clipPolygon = polygon.map(p => ({
          x: ((p.x-qx0)/(qx1-qx0))*100,
          y: ((p.y-qy0)/(qy1-qy0))*100
        }));
@@ -3081,7 +3093,7 @@ async setMode(mode) {
    const sh = geom.h * img.naturalHeight;
 
    this.panelFocusMeta = {
-     panel: { ...geom, _quad: quad || undefined },
+     panel: { ...geom, _quad: quad || undefined, _outline: outline || undefined, _overlapProof: outline?panel._overlapProof:undefined },
      pageIndex: this.index
    };
 
@@ -3096,7 +3108,7 @@ async setMode(mode) {
      const clip = `polygon(${clipPolygon.map(p=>`${p.x.toFixed(3)}% ${p.y.toFixed(3)}%`).join(',')})`;
      overlay.style.clipPath = clip;
      overlay.style.webkitClipPath = clip;
-     overlay.dataset.geometry = 'quad';
+     overlay.dataset.geometry = outline?'outline':'quad';
      if (this.debugMode) this.debugLog(`[V105 geometry ${panel._geometryType || 'quad'}] polygon clip ${clip}`);
    }
 

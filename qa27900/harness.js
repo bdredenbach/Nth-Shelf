@@ -53,7 +53,7 @@ const context={
 };
 context.window=context;context.globalThis=context;
 vm.createContext(context);
-for(const name of ['panels-page-layout.js','panels-gutter-frames.js','panels-closed-frames.js','panels-partition.js','panels.js','panels-frame-wasm.js']){
+for(const name of ['panels-page-layout.js','panels-gutter-frames.js','panels-closed-frames.js','panels-overlap-frames.js','bubbles.js','panels-partition.js','panels.js','panels-frame-wasm.js']){
   vm.runInContext(fs.readFileSync(path.join(appRoot,'js',name),'utf8'),context,{filename:name});
 }
 if(process.env.NTH_DISABLE_WASM!=='1'){
@@ -67,8 +67,8 @@ for(const name of ['panels-geometry-orthogonal.js','panels-geometry-skewed.js','
 const api=vm.runInContext('({PanelDetect,PanelGeometry,PanelFrameEnvelope,PanelGeometrySkewed,PanelFrameWasm,PanelMapCore})',context);
 
 function contains(panel,x,y){
-  if(Array.isArray(panel?._quad)){
-    let hit=false,q=panel._quad;
+  if(Array.isArray(panel?._outline)||Array.isArray(panel?._quad)){
+    let hit=false,q=panel._outline||panel._quad;
     for(let i=0,j=q.length-1;i<q.length;j=i++){
       const a=q[i],b=q[j];
       if(((a.y>y)!==(b.y>y))&&x<(b.x-a.x)*(y-a.y)/(b.y-a.y+1e-9)+a.x)hit=!hit;

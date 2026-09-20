@@ -13,6 +13,7 @@ function element(){return {style:{setProperty(){}},dataset:{},classList:{add(){}
 const ctx=vm.createContext({console,setTimeout,clearTimeout,requestAnimationFrame(){},
  localStorage:{getItem:()=>null},document:{createElement:element},
  BubbleDetect:{extract(...args){requests.push(args);return extract(...args);}}});
+vm.runInContext(fs.readFileSync(require.resolve('../js/panels-geometry-orthogonal.js'),'utf8'),ctx);
 vm.runInContext(fs.readFileSync(require.resolve('../js/reader.js'),'utf8'),ctx);
 const r=vm.runInContext('Reader',ctx);
 r.mode='single';r.scale=1;r.comic={id:'fixture'};r.index=0;r.bubbleAltZoomEnabled=true;
@@ -85,5 +86,16 @@ async function open(p=frame){r.resetZoom({animate:false});r.index=0;r.mode='sing
  await open();extract=async()=>({caption:'outside'});await r.handleDoubleTap({x:50,y:350});
  assert.equal(requests.length,0,'outside gesture must not be clamped onto edge caption');
  assert.equal(r.focusMode,null,'outside double tap dismisses focused panel');
+ // Concave overlap outlines: the missing corner is not a caption target.
+ const concave={x:.2,y:.3,w:.6,h:.4,
+  _overlapProof:{version:1,connected:true,method:'paired-edge-insets'},
+  _outline:[{x:.2,y:.3},{x:.8,y:.3},{x:.8,y:.4},{x:.6,y:.4},{x:.6,y:.6},{x:.8,y:.6},{x:.8,y:.7},{x:.2,y:.7}]};
+ await open(concave);assert.equal(r.els.panelOverlay.dataset.geometry,'outline');
+ extract=async()=>({caption:'hidden neighbor'});await r.handleDoubleTap({x:450,y:350});
+ assert.equal(requests.length,0,'transparent notch cannot target covered neighboring artwork');
+ assert.equal(r.focusMode,null,'notch double tap dismisses the panel');
+ await open(concave);extract=async()=>({caption:'visible'});await r.handleDoubleTap({x:200,y:350});
+ assert.equal(shown.length,1,'visible area retains second-level caption behavior');
+ assert.ok(Math.abs(requests[0][1]-.35)<1e-9&&Math.abs(requests[0][2]-.5)<1e-9,'concave crop maps to exact source point');
  console.log('Double pop-out: crop mapping, caption open/close, cancellation, request order, deferred navigation and outside taps passed');
 })().catch(e=>{console.error(e);process.exitCode=1;});

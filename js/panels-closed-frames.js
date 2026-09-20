@@ -179,6 +179,7 @@ const PanelClosedFrames = (() => {
     const unique=[];clean.sort((a,b)=>(a.box[2]-a.box[0])*(a.box[3]-a.box[1])-(b.box[2]-b.box[0])*(b.box[3]-b.box[1]));for(const c of clean)if(!unique.some(q=>c.box.every((v,i)=>Math.abs(v-q.box[i])<=8)))unique.push(c);
     return unique;
     }
+    if(options.vetoCandidates)return removeAmbiguous(options.vetoCandidates,true);
     function overlapArea(subject,clip){
       let points=subject;
       const cross=(a,b,p)=>(b.x-a.x)*(p.y-a.y)-(b.y-a.y)*(p.x-a.x);
@@ -272,7 +273,7 @@ const PanelClosedFrames = (() => {
   }
   function analyzeImage(img,log,options){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);const rgba=ctx.getImageData(0,0,w,h).data;return options?.openRegions?
     PanelGutterFrames.openRegionsRGBA(rgba,w,h,options.anchors):analyzeRGBA(rgba,w,h,log,options);}
-  return {analyzeRGBA,analyzeImage,openRegionsImage:(img,anchors)=>analyzeImage(img,null,{openRegions:true,anchors}),gradientImage:(img,log)=>analyzeImage(img,log,{gradientOnly:true}),supplementImage:(img,anchors,log)=>analyzeImage(img,log,{supplementOnly:true,anchors})};
+  return {analyzeRGBA,analyzeImage,vetoRegionsRGBA:(rgba,w,h,candidates)=>analyzeRGBA(rgba,w,h,null,{gradientOnly:true,vetoCandidates:candidates}),openRegionsImage:(img,anchors)=>analyzeImage(img,null,{openRegions:true,anchors}),gradientImage:(img,log)=>analyzeImage(img,log,{gradientOnly:true}),supplementImage:(img,anchors,log)=>analyzeImage(img,log,{supplementOnly:true,anchors})};
 })();
 if(typeof window!=='undefined')window.PanelClosedFrames=PanelClosedFrames;
 if(typeof module!=='undefined')module.exports=PanelClosedFrames;

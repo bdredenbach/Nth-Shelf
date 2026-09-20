@@ -35,6 +35,21 @@ const PanelDetect = {
                 }
               } catch(error) { if(log)log(`gradient frame refinement deferred: ${error.message}`); }
             }
+            try {
+              if(layout.length<4&&typeof PanelOverlapFrames!=='undefined'){
+                const additions=PanelOverlapFrames.analyzeImage(img,baseline,log);
+                // Keep every prior identity. The complete three-outline group
+                // may only refine its own legacy composite, not a neighbor.
+                const accepted=[];
+                for(let i=0;i<additions.length;i+=3){
+                  const group=additions.slice(i,i+3);if(group.length!==3)continue;
+                  const parent=baseline.find(p=>['x','y','w','h'].every(k=>p[k]===group[0]._overlapProof.parent[k]));
+                  if(!parent||group.some(c=>identities.some(p=>p!==parent&&Math.max(0,Math.min(c.x+c.w,p.x+p.w)-Math.max(c.x,p.x))*Math.max(0,Math.min(c.y+c.h,p.y+p.h)-Math.max(c.y,p.y))>.00001)))continue;
+                  accepted.push(...group);
+                }
+                identities=accepted.concat(identities);
+              }
+            }catch(error){if(log)log(`overlap outlines deferred: ${error.message}`);}
             resolve(identities);
             return;
           }
