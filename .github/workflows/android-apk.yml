@@ -1,0 +1,176 @@
+name: Build Test33 APK
+
+on:
+  push:
+    branches: [Test_Branch]
+    paths:
+      - '.github/workflows/android-apk.yml'
+      - 'android/**'
+      - 'js/**'
+      - 'css/**'
+      - 'assets/**'
+      - 'icons/**'
+      - 'qa27900/**'
+      - 'index.html'
+      - 'sw.js'
+      - 'manifest.json'
+      - 'manifest.webmanifest'
+      - 'THIRD_PARTY_NOTICES.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nth-shelf-test33-apk
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.repository == 'bdredenbach/Nth-Shelf' && github.ref == 'refs/heads/Test_Branch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax and retained frame regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          find js -name '*.js' -print0 | xargs -0 -n1 node --check
+          node --check sw.js
+          for suite in auto-scroll frame-geometry-contract gutter-boundaries internal-gutters page-layout closed-frames exterior-gutter-frames gradient-gutter-frames open-regions overlap-frames neighbor-frames panels-partition pilot-strips partition-queue partition-completion uniform-core-partition bubble-selection double-popout; do
+            node "qa27900/$suite.cjs" 2>&1 | tee -a dist/regression-checks.txt
+          done
+          node qa27900/frame-accuracy/test33/curved-rim-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test33/service-worker.test.cjs 2>&1 | tee -a dist/regression-checks.txt
+
+      - name: Set up browser test dependencies
+        run: |
+          npm install --no-save --package-lock=false playwright@1.51.1
+          npx playwright install --with-deps chromium
+
+      - name: Browser interaction and backup round-trip checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          unset CHROME_BIN CODEX_PRIMARY_RUNTIME_NODE_MODULES
+          python3 -m http.server 8765 --bind 127.0.0.1 > dist/http-server.txt 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8765/ > /dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:8765/ > /dev/null
+          node qa27900/brand-integration.cjs 2>&1 | tee dist/branding-check.txt
+          node qa27900/stream-integration.cjs 2>&1 | tee dist/backup-check.txt
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Native streaming archive regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/nth-archive-tests"
+          javac -d "$RUNNER_TEMP/nth-archive-tests" android/app/src/main/java/io/github/bdredenbach/nthshelf/ArchiveIO.java android/archive-tests/ArchiveIOTest.java
+          java -ea -Xmx32m -cp "$RUNNER_TEMP/nth-archive-tests" io.github.bdredenbach.nthshelf.ArchiveIOTest | tee dist/native-check.txt
+
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Install Android SDK 35
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+
+      - name: Build isolated Test33 APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          gradle --no-daemon --stacktrace -p android :app:assembleDebug 2>&1 | tee dist/gradle-build.txt
+
+      - name: Verify APK signature, identity and exact packaged web files
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK=android/app/build/outputs/apk/debug/app-debug.apk
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$APK" | tee dist/signature.txt
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" > dist/package.txt
+          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest33'" dist/package.txt
+          grep -F "versionCode='27961'" dist/package.txt
+          grep -F "versionName='2.79.33'" dist/package.txt
+          grep -F "application-label:'Nth Shelf Test33'" dist/package.txt
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess, zipfile
+          root = pathlib.Path('.')
+          apk = root / 'android/app/build/outputs/apk/debug/app-debug.apk'
+          singles = {'index.html', 'manifest.json', 'manifest.webmanifest', 'sw.js', 'THIRD_PARTY_NOTICES.txt'}
+          directories = {'assets', 'css', 'icons', 'js'}
+          tracked = subprocess.check_output(['git', 'ls-files', '-z']).decode().split('\0')
+          expected = {p for p in tracked if p and (p in singles or p.split('/', 1)[0] in directories)}
+          expected.discard('assets/nth-shelf-splash.webp')
+          with zipfile.ZipFile(apk) as z:
+              if z.testzip():
+                  raise SystemExit('APK ZIP integrity check failed')
+              prefix = 'assets/public/'
+              packaged = {n[len(prefix):] for n in z.namelist() if n.startswith(prefix) and not n.endswith('/')}
+              if packaged != expected:
+                  raise SystemExit('Web asset set mismatch: '+repr({'missing': sorted(expected-packaged), 'unexpected': sorted(packaged-expected)}))
+              hashes = {}
+              for rel in sorted(expected):
+                  source = (root / rel).read_bytes()
+                  if z.read(prefix+rel) != source:
+                      raise SystemExit('Packaged web file differs from source: '+rel)
+                  hashes[rel] = hashlib.sha256(source).hexdigest()
+              if 'js/panels-curved-rims.js' not in hashes:
+                  raise SystemExit('Page42 detector missing')
+          subprocess.run(['git', 'diff', '--exit-code', 'HEAD', '--'], check=True)
+          digest = hashlib.sha256(apk.read_bytes()).hexdigest()
+          record = {
+              'versionName': '2.79.33', 'versionCode': 27961,
+              'applicationId': 'io.github.bdredenbach.nthshelf.frametest33',
+              'label': 'Nth Shelf Test33', 'sourceCommit': os.environ['GITHUB_SHA'],
+              'signing': 'CI debug key; not a Play Store production key',
+              'apkSha256': digest, 'apkBytes': apk.stat().st_size,
+              'verifiedWebAssetCount': len(hashes), 'webAssetSha256': hashes,
+              'phoneAcceptance': 'pending',
+              'comicArtworkTests': 'Saved results retained; comic artwork fixture is not uploaded or rerun by this workflow'
+          }
+          (root / 'dist/BUILD.json').write_text(json.dumps(record, indent=2)+'\n')
+          (root / 'dist/Nth-Shelf-2.79.33-Test33.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.33-Test33.apk\n')
+          (root / 'dist/INSTALL.txt').write_text('Keep Test32 installed. Install Nth-Shelf-2.79.33-Test33.apk as the separate Nth Shelf Test33 app. Import the comic into its own empty library. Test page42 and recheck accepted page41 panels. Phone acceptance is pending.\n')
+          print(json.dumps({'sourceCommit': record['sourceCommit'], 'verifiedWebAssetCount': len(hashes), 'apkSha256': digest}, indent=2))
+          PY
+          cp "$APK" dist/Nth-Shelf-2.79.33-Test33.apk
+          git archive --format=zip --output=dist/Nth-Shelf-2.79.33-Test33-Source.zip HEAD
+
+      - name: Upload verified APK, source and build record
+        uses: actions/upload-artifact@v4
+        with:
+          name: Nth-Shelf-2.79.33-Test33
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Preserve failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test33-build-diagnostics
+          path: |
+            dist/*.txt
+            dist/*.json
+            /tmp/nth-shelf-*.png
+          if-no-files-found: ignore
+          retention-days: 14
