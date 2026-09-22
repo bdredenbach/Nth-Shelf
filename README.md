@@ -2,61 +2,61 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
-## 2.79.34 — broad-spectrum irregular-frame candidate
+## 2.79.35 — broad-spectrum matte-cell candidate
 
-This iteration turns the page42 pale-rim work into a broader, reusable visual
-evidence family. The runtime does **not** key this route by comic title, filename,
-page number, image hash, stored crop, or QA coordinates. It measures the image
-itself: exterior matte, supported pale/dark rim paths, non-crossing topology,
-artwork texture, connected visible regions, balloon ownership and final contours.
+Test35 extends the general frame system rather than adding a page44 exception.
+The new `js/panels-matte-cells.js` route derives frames from **edge-connected
+exterior matte or paper, measured separators, artwork connectivity and final
+pixel contours**. It contains no comic title, filename, page number, image hash,
+QA coordinate or stored crop.
 
-The established detector stack still has priority. The broad pale-rim route runs
-only when all earlier page-level routes leave the map empty, so it cannot replace
-or reorder already-proven identities. It first attempts the exact Test33 legacy
-raster. Only if that complete proof fails may it retry ownership using the sampled
-exterior matte color and the broader component reconciliation.
+The new family is strictly **empty-map-only**: all established panel detectors run
+first. If a page already has proven identities, Test35 never replaces or reorders
+them. Ambiguous or incomplete new maps are withheld instead of being turned into
+speculative rectangles.
 
-### Current evidence
+### What this iteration proves
 
-| Check | Result |
-| --- | --- |
-| Reader page42 | 7 panels; complete Test33 descriptor list remains byte-for-byte identical |
-| Page42 descriptor SHA-256 | `2d53afd93eec812094eb52a3ba810cdcfea8b390981d140e77191e06127c9d0a` |
-| Reader page43 | 5 pixel-derived contour panels |
-| Page43 QA ownership points | 20/20 |
-| Reader + NthPageDeck page43 touches | 5/5 |
-| Page43 rendered contour pixels | 0 differences from independent reference crops |
-| Previously-empty Test33 page sweep | Only page43 changes; pages 1, 26, 44, 58, 65, 66, 70, 71 remain empty |
-| Prior non-empty pages | Protected by the empty-map-only routing gate |
-| Reader page44 | Still pending |
-| Phone acceptance | Pending |
+- **Reader page44:** 0 → **7** complete contour panels.
+- **Reader page58:** 0 → **4** complete paper-cell panels.
+- **Reader page70:** 0 → **4** complete paper-cell panels.
+- **Reader page71:** 0 → **4** complete paper-cell panels; two disconnected snow
+  islands in the same framed column are correctly reunited.
+- **Reader page65:** a partial two-panel interpretation is deliberately rejected
+  because it fails the map coverage requirement. Its established interactive
+  fallback remains available instead of being displaced by an incomplete map.
+- Reader pages42 and43 are **byte-for-byte identical** to Test34 when re-run from
+  the same comic fixture.
 
-The previous Test33 74-page fixture contained 305 entries after page42. The new
-page43 route adds five, giving an effective fixture total of 310 under the routing
-checks above. This was not a single monolithic fresh 74-page capture: all formerly
-empty pages were directly re-run, prior non-empty pages bypass this route by
-design, and page42 was separately compared exactly. The historical Test32
-301-versus-298 capture discrepancy remains historical and is not claimed resolved.
+The directly re-run remaining-zero-page set is 1, 26, 44, 58, 65, 66, 70 and71.
+Only 44, 58, 70 and71 gain identities. Combined with the Test34 effective fixture
+count, this moves 310 → **329** page-wide descriptors. This is not described as a
+new monolithic 74-page capture: earlier non-empty pages are protected by the
+empty-map routing invariant, while pages42 and43 were separately compared exactly.
 
-See [Test34 evidence](qa27900/frame-accuracy/test34/RESULTS.md),
-[Test33 page42 evidence](qa27900/frame-accuracy/test33/RESULTS.md), and the
-[2.79.34 handoff](HANDOFF-2.79.34.md). Comic artwork and generated reading
+### Page44 Reader verification
+
+The real Reader/NthPageDeck browser harness checked **35/35 ownership anchors**
+and **7/7 touchscreen pop-outs** (one for every new page44 panel). The focused
+contour canvases matched independent reference crops at all **6,480,484** tested
+pixel positions with **zero differences** and no page errors.
+
+These are browser/source tests using an in-memory storage fixture, not Android
+phone acceptance. See [Test35 results](qa27900/frame-accuracy/test35/RESULTS.md)
+and the [2.79.35 handoff](HANDOFF-2.79.35.md). Comic artwork and generated
 screenshots are not committed.
 
-## Why this should transfer to future comics
+## Why this work transfers to future comics
 
-The detector is organized around reusable visual proof rather than named pages.
-A page may qualify even when the precise page42 terminal shape is absent: four or
-more strongly supported transverse rims can establish the tier network, bounded
-interruptions may be bridged when the remaining evidence is strong, and substantial
-disconnected artwork islands can remain inside one proven cell when dark ink or
-projecting lettering touches the surrounding matte. Complete contours and proof
-validation are still mandatory. Ambiguous evidence returns no new panel.
+Nth Shelf now has several independent evidence families: orthogonal and skewed
+rails, gutters/partitions, occluded and overlapping frames, local/inset/rim
+families, curved pale-rim networks, and edge-connected matte/paper cells. Each
+family must prove its own geometry. A new comic is matched by the pixels it
+contains, not by where it came from.
 
-This is deliberately **broad-spectrum, not universal**. New comic layouts should
-first generalize shared evidence/assembly rules; page-specific runtime patches are
-not the preferred path. Every accepted historical page remains a regression
-requirement.
+The preferred development rule is to broaden shared evidence/assembly logic
+before creating another detector. Every previously accepted page remains a
+regression requirement.
 
 ## Reader and library
 
@@ -66,36 +66,37 @@ library, save bookmarks, and resume reading from the saved position.
 
 Read in Page, Two Page, Scroll, Manga or Webcomic mode. Panel and bubble pop-outs
 remain evidence-driven. Auto Scroll is available in continuous reading modes
-with speed and playback controls. Existing tap, bubble, page-turn and shelf
-behaviors are retained by this frame iteration.
+with speed and playback controls. Existing tap, bubble, page-turn, shelf and
+backup behavior is retained by this frame iteration.
 
 Android full `.nthshelf` backups stream pages to the selected destination and
 verify the written archive. Restore stages pages before publishing the library.
 Keep a backup before major device or browser changes.
 
-## Offline/cache and Test34 identity
+## Offline/cache and Test35 identity
 
-The shell cache is `nth-shelf-shell-2.79.34`. Activation waits for a successful
+The shell cache is `nth-shelf-shell-2.79.35`. Activation waits for a successful
 complete precache; cleanup is restricted to Nth Shelf shell cache names and does
 not delete IndexedDB books, bookmarks or reading progress.
 
-Geometry proof/cache identifiers are `frame-proof-2.79.34` and `panel-map-exp-43`.
-The Android candidate is versionName **2.79.34**, versionCode **27962**. Debug APKs
-use `io.github.bdredenbach.nthshelf.frametest34` and label **Nth Shelf Test34**, so
-Test32 and Test33 can remain installed with their own data. GitHub's APK workflow
-verifies package identity, version, signature and exact packaged web files before
-publishing the artifact.
+Geometry proof/cache identifiers are `frame-proof-2.79.35` and
+`panel-map-exp-44`. The Android candidate is versionName **2.79.35**, versionCode
+**27963**. Debug APKs use `io.github.bdredenbach.nthshelf.frametest35` and label
+**Nth Shelf Test35**, so earlier test builds can remain installed independently.
 
-## Run the source checks
+GitHub's APK workflow verifies regression contracts, browser/backup checks, the
+native archive test, Android package identity, signature and exact packaged web
+files before publishing the artifact.
 
-From the repository root:
+## Source checks
 
 ```sh
 node qa27900/frame-accuracy/test33/curved-rim-contract.cjs
 node qa27900/frame-accuracy/test34/broad-rim-contract.cjs
-node qa27900/frame-accuracy/test34/service-worker.test.cjs
+node qa27900/frame-accuracy/test35/matte-cell-contract.cjs
+node qa27900/frame-accuracy/test35/service-worker.test.cjs
 ```
 
-The saved Test34 Reader result records a mobile-emulated Chromium test with the
-real Reader, NthPageDeck and canvas overlay, but an in-memory storage fixture. It
-is not Android-device acceptance or an import/persistence test.
+The private comic can additionally be used with
+`qa27900/frame-accuracy/test35/reader-touch.py` for the recorded page44 Reader
+check. The comic itself is not stored in Git.

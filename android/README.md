@@ -11,15 +11,14 @@ Gradle 8.9:
 gradle -p android :app:assembleDebug
 ```
 
-## Test34 identity
+## Test35 identity
 
-The current broad-spectrum frame candidate is version **2.79.34**
-(`versionCode 27962`). Debug builds use the separate application ID
-`io.github.bdredenbach.nthshelf.frametest34` and label **Nth Shelf Test34**.
-That keeps the stable app, Frame Test32, and Test33 installed independently.
+The current broad-spectrum frame candidate is version **2.79.35**
+(`versionCode 27963`). Debug builds use the separate application ID
+`io.github.bdredenbach.nthshelf.frametest35` and label **Nth Shelf Test35**.
+That keeps the stable app and earlier frame-test APKs installed independently.
 
-Test34 broadens the pale/irregular-rim evidence route that first proved page42.
-It does not include comic pages or private signing material. The GitHub workflow
-uses the standard debug signing key and verifies the APK package identity, version,
-and exact packaged web files before publishing the artifact. Phone acceptance is
-still a separate test step.
+Test35 adds the reusable edge-connected matte/paper cell family used by page44
+and the remaining-empty-page sweep. It does not include comic artwork or private
+signing material. GitHub Actions verifies package identity, version, signature
+and exact packaged web files before publishing the debug artifact.

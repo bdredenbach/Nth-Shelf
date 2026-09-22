@@ -16,6 +16,8 @@ const PanelGeometry = {
     const inferred=panel?._identitySource||
       (panel?._v100Hybrid?'v100':panel?._v87BoundarySet?'v99':'unknown');
 
+    if(inferred==='matte-cell-frame'&&typeof PanelMatteCells!=='undefined'&&PanelMatteCells.validPanel(panel))
+      return {mode:'hold',source:'MATTE-CELL',reason:'measured-edge-connected-matte-cell'};
     if(inferred==='curved-rim-frame'&&typeof PanelCurvedRims!=='undefined'&&PanelCurvedRims.validPanel(panel))
       return {mode:'hold',source:'CURVED-RIM',reason:'measured-noncrossing-pale-rim-network'};
     if(inferred==='terminal-rim-frame'&&typeof PanelTerminalFrames!=='undefined'&&PanelTerminalFrames.validPanel(panel))
@@ -119,6 +121,7 @@ const PanelGeometry = {
         ? PanelGeometryOrthogonal.refine(panel,log)
         : {...panel};
       held._geometryOwner='orthogonal-authority';
+      if(policy.source==='MATTE-CELL'){held._geometryOwner='matte-cell-contours';held._geometryType='edge-connected-matte-cell';return held;}
       if(policy.source==='CURVED-RIM'){held._geometryOwner='curved-rim-contours';held._geometryType='noncrossing-pale-rim-network';return held;}
       if(policy.source==='TERMINAL-RIM'){held._geometryOwner='terminal-rim-outline';held._geometryType='four-observed-dark-rims';return held;}
       if(policy.source==='CORNER-RIM'){held._geometryOwner='corner-rim-outline';held._geometryType='four-observed-dark-rims';return held;}

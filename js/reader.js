@@ -905,7 +905,7 @@ const Reader = {
    for (const p of this.currentPanels) {
      if (relX >= p.x && relX <= p.x + p.w && relY >= p.y && relY <= p.y + p.h) {
        const contours=this.panelContours(p);
-       if(['composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame'].includes(p._identitySource)&&!contours)continue;
+       if(['composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame','matte-cell-frame'].includes(p._identitySource)&&!contours)continue;
        if(contours&&!this.pointInContours(contours,relX,relY))continue;
        const polygon=this.panelPolygon(p);
        if(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(p._identitySource)&&!polygon)continue;
@@ -3054,7 +3054,7 @@ async setMode(mode) {
  async zoomToPanel(panel, stageRect, imgRect) {
    if (this.focusMode) return;
    const contours=this.panelContours(panel);
-   if(['composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame'].includes(panel?._identitySource)&&!contours)return;
+   if(['composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame','matte-cell-frame'].includes(panel?._identitySource)&&!contours)return;
    if(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel?._identitySource)&&!this.panelPolygon(panel))return;
    const token = ++this.panelOverlayToken;
    const ctx = this.getPanelImageContext();
@@ -3142,7 +3142,10 @@ async setMode(mode) {
    if(outline&&panel._identitySource==='abutment-frame')Object.assign(this.panelFocusMeta.panel,{
      _identitySource:'abutment-frame',_abutmentProof:panel._abutmentProof
    });
-   if(contours&&panel._identitySource==='curved-rim-frame')Object.assign(this.panelFocusMeta.panel,{
+   if(contours&&panel._identitySource==='matte-cell-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'matte-cell-frame',_geometryOwner:'matte-cell-contours',_geometryType:'edge-connected-matte-cell',_contours:contours,_matteCellProof:panel._matteCellProof
+   });
+   else if(contours&&panel._identitySource==='curved-rim-frame')Object.assign(this.panelFocusMeta.panel,{
      _identitySource:'curved-rim-frame',_contours:contours,_curvedRimProof:panel._curvedRimProof
    });
    else if(contours&&panel._identitySource==='inset-neighbor-frame')Object.assign(this.panelFocusMeta.panel,{

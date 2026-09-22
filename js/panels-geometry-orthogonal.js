@@ -5,6 +5,7 @@
 
 const PanelGeometryOrthogonal = {
   _provenContours(panel) {
+    if(panel?._identitySource==='matte-cell-frame')return typeof PanelMatteCells!=='undefined'&&PanelMatteCells.validPanel(panel)?panel._contours.map(r=>r.map(p=>({x:p.x,y:p.y}))):null;
     if(panel?._identitySource==='curved-rim-frame')return typeof PanelCurvedRims!=='undefined'&&PanelCurvedRims.validPanel(panel)?panel._contours.map(r=>r.map(p=>({x:p.x,y:p.y}))):null;
     if(panel?._identitySource==='inset-neighbor-frame')return typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.validPanel(panel)?panel._contours.map(r=>r.map(p=>({x:p.x,y:p.y}))):null;
     if(panel?._identitySource==='rim-frame')return typeof PanelRimFrames!=='undefined'&&PanelRimFrames.validPanel(panel)?panel._contours.map(r=>r.map(p=>({x:p.x,y:p.y}))):null;
@@ -13,7 +14,7 @@ const PanelGeometryOrthogonal = {
   },
 
   _provenQuad(panel) {
-    if(['curved-rim-frame','inset-neighbor-frame','rim-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel?._identitySource))return null;
+    if(['matte-cell-frame','curved-rim-frame','inset-neighbor-frame','rim-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel?._identitySource))return null;
     const q = panel?._quad;
     const connected = (panel?._openRegionProof?.version === 1 && panel._openRegionProof.connected === true) ||
       panel?._frameEnvelope?.chainConnected === true ||
@@ -84,7 +85,7 @@ const PanelGeometryOrthogonal = {
     if(panel?._identitySource==='terminal-rim-frame')return typeof PanelTerminalFrames!=='undefined'&&PanelTerminalFrames.validPanel(panel)?panel._outline.map(p=>({x:p.x,y:p.y})):null;
     if(panel?._identitySource==='corner-rim-frame')return typeof PanelCornerFrames!=='undefined'&&PanelCornerFrames.validPanel(panel)?panel._outline.map(p=>({x:p.x,y:p.y})):null;
     if(panel?._identitySource==='sloping-edge-frame'&&!(typeof PanelEdgeCells!=='undefined'&&PanelEdgeCells.validPanel(panel)))return null;
-    if(['curved-rim-frame','inset-neighbor-frame'].includes(panel?._identitySource))return null;
+    if(['matte-cell-frame','curved-rim-frame','inset-neighbor-frame'].includes(panel?._identitySource))return null;
     if(panel?._identitySource==='bordered-inset-frame'&&!(typeof PanelFramedInsets!=='undefined'&&PanelFramedInsets.validPanel(panel)))return null;
     if(panel?._identitySource==='matte-neighbor-frame'&&!(typeof PanelLocalIslands!=='undefined'&&PanelLocalIslands.validNeighbor?.(panel)))return null;
     if(panel?._identitySource==='local-island-frame'&&!(typeof PanelLocalIslands!=='undefined'&&PanelLocalIslands.validPanel(panel)))return null;

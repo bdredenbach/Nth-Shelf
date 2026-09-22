@@ -336,6 +336,12 @@ const PanelDetect = {
             try{if(typeof PanelCurvedRims!=='undefined')closed=PanelCurvedRims.analyzeImage(img,log);}
             catch(error){if(log)log(`curved rim network deferred: ${error.message}`);}
           }
+          // Final broad-spectrum empty-map route: derive cells only from
+          // edge-connected page matte/paper and measured internal separators.
+          if(!closed.length){
+            try{if(typeof PanelMatteCells!=='undefined')closed=PanelMatteCells.analyzeImage(img,log);}
+            catch(error){if(log)log(`matte cell network deferred: ${error.message}`);}
+          }
           resolve(closed);
         }
         catch (err) {
