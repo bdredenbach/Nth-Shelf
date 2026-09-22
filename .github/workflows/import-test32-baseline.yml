@@ -1,0 +1,43 @@
+name: Import accepted Test32 baseline
+
+on:
+  push:
+    branches: [Test_Branch]
+    paths:
+      - qa27900/frame-accuracy/test32/recovery/READY.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nth-shelf-test32-baseline-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    if: github.repository == 'bdredenbach/Nth-Shelf' && github.ref == 'refs/heads/Test_Branch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the exact import request
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Verify and recover the accepted web source
+        run: python3 scripts/import-test32-baseline.py
+      - name: Validate recovered JavaScript and service-worker contract
+        run: |
+          find js -type f -name '*.js' -print0 | xargs -0 -n 1 node --check
+          node --check sw.js
+          node qa27900/frame-accuracy/test32/service-worker.test.cjs
+      - name: Commit the verified baseline without rewriting history
+        run: |
+          git add -- README.md index.html sw.js js
+          if git diff --cached --quiet; then
+            echo 'The accepted baseline is already present.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Sync accepted Frame Test32 source; reserve 2.79.33 for page42'
+          git push origin HEAD:refs/heads/Test_Branch
