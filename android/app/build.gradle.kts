@@ -15,9 +15,15 @@ android {
         targetSdk = 35
         versionCode = 27961
         versionName = "2.79.33"
+        manifestPlaceholders["appLabel"] = "Nth Shelf"
     }
 
     buildTypes {
+        // Isolated test install: leave stable Nth Shelf and Frame Test32 data alone.
+        getByName("debug") {
+            applicationIdSuffix = ".frametest33"
+            manifestPlaceholders["appLabel"] = "Nth Shelf Test33"
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
