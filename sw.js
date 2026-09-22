@@ -1,6 +1,8 @@
-// NTH SHELF V2.79.07 TEST 1 — AN NTH EXPERIENCE
-
-const CACHE_NAME = "nth-shelf-shell-2.79.24-test1-r1";
+// NTH SHELF — TEST32 IMPORT CHECKPOINT (OLDER RUNTIME SOURCE)
+// Repository/cache maintenance only. Version 2.79.33 is reserved for page42.
+// A failed precache must leave the previous worker in control.
+const CACHE_PREFIX = "nth-shelf-shell-";
+const CACHE_NAME = "nth-shelf-shell-2.79.24-checkpoint-r2";
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -46,46 +48,50 @@ const SHELL_FILES = [
   "./icons/icon-1024.png",
   "./icons/icon-maskable-1024.png",
   "./assets/nth-shelf-welcome.webp",
-  "./assets/nth-shelf-dystopian-shelf.jpg",
+  "./assets/nth-shelf-dystopian-shelf.jpg"
 ];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) =>
-      cache.addAll(SHELL_FILES).catch((err) => {
-        // Don't fail install if the CDN is briefly unreachable; retry on next fetch.
-        console.warn("Shell precache partial failure:", err);
-      })
-    )
-  );
-  self.skipWaiting();
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.addAll(SHELL_FILES);
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    )
-  );
-  self.clients.claim();
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter((key) =>
+      key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME
+    ).map((key) => caches.delete(key)));
+    await self.clients.claim();
+  })());
 });
 
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
 
-  event.respondWith(
-    caches.match(req).then((cached) => {
-      if (cached) return cached;
-      return fetch(req)
-        .then((res) => {
-          if (res && res.ok && (req.url.startsWith(self.location.origin) || req.url.includes("cdnjs.cloudflare.com"))) {
-            const copy = res.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
-          }
-          return res;
-        })
-        .catch(() => cached);
-    })
-  );
+  event.respondWith((async () => {
+    // Never serve another application's cache, or an older Nth Shelf shell.
+    const cache = await caches.open(CACHE_NAME);
+    const cached = await cache.match(req);
+    if (cached) return cached;
+    try {
+      const response = await fetch(req);
+      const url = new URL(req.url);
+      const cacheableOrigin = url.origin === self.location.origin ||
+        url.origin === "https://cdnjs.cloudflare.com";
+      if (response && response.ok && cacheableOrigin) {
+        event.waitUntil(cache.put(req, response.clone()).catch((error) => {
+          console.warn("Nth Shelf runtime cache write failed:", error);
+        }));
+      }
+      return response;
+    } catch (_) {
+      // respondWith must receive a Response, not undefined, when offline.
+      return Response.error();
+    }
+  })());
 });
