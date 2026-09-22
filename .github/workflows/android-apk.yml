@@ -87,6 +87,9 @@ jobs:
           java -ea -Xmx32m -cp "$RUNNER_TEMP/nth-archive-tests" io.github.bdredenbach.nthshelf.ArchiveIOTest | tee dist/native-check.txt
 
       - uses: android-actions/setup-android@v3
+        with:
+          # Override v3's default: the obsolete 'tools' package is unavailable.
+          packages: 'platform-tools'
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
