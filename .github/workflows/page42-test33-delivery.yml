@@ -155,7 +155,7 @@ jobs:
                   name=step.get('name','').lower()
                   script=step.get('run','')
                   if script and any(word in name for word in ['web assets','web files','web bundle','sync web','copy web','stage web']):
-                      if '${{' in script:
+                      if chr(36) + '{{' in script:
                           raise SystemExit('Asset staging requires an unresolved workflow expression: '+name)
                       subprocess.run(['bash','-e','-o','pipefail','-c',script],check=True)
                       staged=True
