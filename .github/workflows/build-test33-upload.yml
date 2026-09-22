@@ -1,0 +1,194 @@
+name: Build Test33 from uploaded ZIP
+
+on:
+  push:
+    branches: [Test_Branch]
+    paths: ['Nth-Shelf-2.79.33-Test33-Full-Source.zip']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nth-shelf-test33-upload
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.repository == 'bdredenbach/Nth-Shelf' && github.ref == 'refs/heads/Test_Branch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Verify and extract the complete Test33 source ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, os, pathlib, stat, zipfile
+          name = 'Nth-Shelf-2.79.33-Test33-Full-Source.zip'
+          expected = 'b1c49b436b26e14c2651897d700a95161c106dc17590a013b11fa6671ac7f2b9'
+          archive = pathlib.Path(os.environ['GITHUB_WORKSPACE']) / name
+          if not archive.is_file():
+              raise SystemExit('Upload '+name+' unchanged to the root of Test_Branch first.')
+          if hashlib.sha256(archive.read_bytes()).hexdigest() != expected:
+              raise SystemExit('Wrong or damaged source ZIP; use the exact supplied Full-Source ZIP.')
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'nth-test33-upload'
+          target.mkdir(exist_ok=False)
+          with zipfile.ZipFile(archive) as z:
+              items = z.infolist()
+              if len(items) > 1000 or sum(i.file_size for i in items) > 64*1024*1024:
+                  raise SystemExit('Archive exceeds expected source bounds.')
+              seen = set()
+              for item in items:
+                  p = pathlib.PurePosixPath(item.filename)
+                  if (p.is_absolute() or '..' in p.parts or '\\' in item.filename
+                      or not p.parts or p.parts[0] != 'Nth-Shelf-2.79.33'
+                      or stat.S_ISLNK(item.external_attr >> 16) or item.filename in seen):
+                      raise SystemExit('Unsafe or duplicate archive member: '+item.filename)
+                  seen.add(item.filename)
+              if z.testzip():
+                  raise SystemExit('Archive CRC verification failed.')
+              z.extractall(target)
+          source = target / 'Nth-Shelf-2.79.33'
+          out = pathlib.Path(os.environ['RUNNER_TEMP']) / 'nth-test33-output'
+          out.mkdir(exist_ok=False)
+          with open(os.environ['GITHUB_ENV'], 'a') as env:
+              env.write(f'SOURCE_DIR={source}\nOUTPUT_DIR={out}\nSOURCE_ZIP_SHA256={expected}\n')
+          print(f'Verified {len(items)} archive entries; building only this isolated source tree.')
+          PY
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify all source hashes and JavaScript syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$SOURCE_DIR"
+          python3 qa27900/frame-accuracy/test33/delivery/verify-source.py | tee "$OUTPUT_DIR/source-check.json"
+          find js -name '*.js' -print0 | xargs -0 -n1 node --check
+          node --check sw.js
+
+      - name: Run retained geometry and service-worker contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$SOURCE_DIR"
+          for suite in auto-scroll frame-geometry-contract gutter-boundaries internal-gutters page-layout closed-frames exterior-gutter-frames gradient-gutter-frames open-regions overlap-frames neighbor-frames panels-partition pilot-strips partition-queue partition-completion uniform-core-partition bubble-selection double-popout; do
+            node "qa27900/$suite.cjs" 2>&1 | tee -a "$OUTPUT_DIR/regression-checks.txt"
+          done
+          node qa27900/frame-accuracy/test33/curved-rim-contract.cjs | tee -a "$OUTPUT_DIR/regression-checks.txt"
+          node qa27900/frame-accuracy/test33/service-worker.test.cjs | tee -a "$OUTPUT_DIR/regression-checks.txt"
+          node qa27900/frame-accuracy/test32/service-worker.test.cjs qa27900/frame-accuracy/test32/sw-baseline.js | tee -a "$OUTPUT_DIR/regression-checks.txt"
+
+      - name: Run synthetic browser branding and backup checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$SOURCE_DIR"
+          npm install --no-save --package-lock=false playwright@1.51.1
+          npx playwright install --with-deps chromium
+          unset CHROME_BIN CODEX_PRIMARY_RUNTIME_NODE_MODULES
+          python3 -m http.server 8765 --bind 127.0.0.1 > "$OUTPUT_DIR/http-server.txt" 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8765/ > /dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:8765/ > /dev/null
+          node qa27900/brand-integration.cjs 2>&1 | tee "$OUTPUT_DIR/branding-check.txt"
+          node qa27900/stream-integration.cjs 2>&1 | tee "$OUTPUT_DIR/backup-check.txt"
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Run native streaming archive regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$SOURCE_DIR"
+          mkdir -p "$RUNNER_TEMP/nth-archive-tests"
+          javac -d "$RUNNER_TEMP/nth-archive-tests" android/app/src/main/java/io/github/bdredenbach/nthshelf/ArchiveIO.java android/archive-tests/ArchiveIOTest.java
+          java -ea -Xmx32m -cp "$RUNNER_TEMP/nth-archive-tests" io.github.bdredenbach.nthshelf.ArchiveIOTest | tee "$OUTPUT_DIR/native-check.txt"
+
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Install Android SDK 35
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+
+      - name: Build isolated Test33 APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$SOURCE_DIR"
+          gradle --no-daemon --stacktrace -p android :app:assembleDebug 2>&1 | tee "$OUTPUT_DIR/gradle-build.txt"
+
+      - name: Verify APK signature, identity and exact packaged web source
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$SOURCE_DIR"
+          APK=android/app/build/outputs/apk/debug/app-debug.apk
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$APK" | tee "$OUTPUT_DIR/signature.txt"
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" > "$OUTPUT_DIR/package.txt"
+          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest33'" "$OUTPUT_DIR/package.txt"
+          grep -F "versionCode='27961'" "$OUTPUT_DIR/package.txt"
+          grep -F "versionName='2.79.33'" "$OUTPUT_DIR/package.txt"
+          grep -F "application-label:'Nth Shelf Test33'" "$OUTPUT_DIR/package.txt"
+          python3 qa27900/frame-accuracy/test33/delivery/verify-source.py --apk "$APK" | tee "$OUTPUT_DIR/web-assets.json"
+          cp "$APK" "$OUTPUT_DIR/Nth-Shelf-2.79.33-Test33.apk"
+          cp "$GITHUB_WORKSPACE/Nth-Shelf-2.79.33-Test33-Full-Source.zip" "$OUTPUT_DIR/"
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib
+          out = pathlib.Path(os.environ['OUTPUT_DIR'])
+          apk = out / 'Nth-Shelf-2.79.33-Test33.apk'
+          digest = hashlib.sha256(apk.read_bytes()).hexdigest()
+          record = {
+              'versionName': '2.79.33', 'versionCode': 27961,
+              'applicationId': 'io.github.bdredenbach.nthshelf.frametest33',
+              'label': 'Nth Shelf Test33', 'signing': 'CI debug key, not a production key',
+              'repositoryCommitContainingSourceZip': os.environ['GITHUB_SHA'],
+              'sourceZipSha256': os.environ['SOURCE_ZIP_SHA256'],
+              'buildSource': 'Isolated extraction of the verified Full-Source ZIP; not the repository-root runtime',
+              'workflowRun': 'https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/actions/runs/'+os.environ['GITHUB_RUN_ID'],
+              'apkSha256': digest, 'apkBytes': apk.stat().st_size,
+              'signatureVerified': True,
+              'sourceVerification': json.loads((out / 'web-assets.json').read_text()),
+              'phoneAcceptance': 'pending', 'separateInstallFromTest32': True,
+              'comicFixture': 'Not uploaded or rerun by this workflow; saved artwork results remain historical'
+          }
+          (out / 'BUILD.json').write_text(json.dumps(record, indent=2)+'\n')
+          (out / 'Nth-Shelf-2.79.33-Test33.apk.sha256').write_text(digest+'  '+apk.name+'\n')
+          (out / 'INSTALL.txt').write_text('Install Nth-Shelf-2.79.33-Test33.apk. Keep Test32 installed. Test33 has its own empty library; import the comic into Test33. Test page42 and recheck page41. Phone acceptance is pending. This workflow builds the committed source ZIP and does not overwrite the repository-root runtime.\n')
+          PY
+
+      - name: Upload verified Test33 APK and source
+        uses: actions/upload-artifact@v4
+        with:
+          name: Nth-Shelf-2.79.33-Test33
+          path: ${{ runner.temp }}/nth-test33-output/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Preserve failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test33-upload-build-diagnostics
+          path: |
+            ${{ runner.temp }}/nth-test33-output/*.txt
+            ${{ runner.temp }}/nth-test33-output/*.json
+            /tmp/nth-shelf-*.png
+          if-no-files-found: ignore
+          retention-days: 14
