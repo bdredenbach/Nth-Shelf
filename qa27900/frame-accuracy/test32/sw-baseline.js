@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.33 — PAGE42 CURVED-RIM CANDIDATE
-// Browser-tested candidate; Android build and phone acceptance remain pending.
+// NTH SHELF — ACCEPTED FRAME TEST32 BASELINE
+// Repository/cache maintenance only. Version 2.79.33 is reserved for page42.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.33";
+const CACHE_NAME = "nth-shelf-shell-2.79.24-frame32-baseline-r2";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -67,8 +67,7 @@ const SHELL_FILES = [
   "./js/panels-inset-neighbors.js",
   "./js/panels-edge-cells.js",
   "./js/panels-corner-frames.js",
-  "./js/panels-terminal-frames.js",
-  "./js/panels-curved-rims.js"
+  "./js/panels-terminal-frames.js"
 ];
 
 self.addEventListener("install", (event) => {

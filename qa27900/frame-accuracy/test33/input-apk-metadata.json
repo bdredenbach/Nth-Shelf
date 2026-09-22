@@ -1,0 +1,9 @@
+{
+  "versionCode": 27960,
+  "versionName": "2.79.24-frame32",
+  "compileSdkVersion": 35,
+  "compileSdkVersionCodename": "15",
+  "package": "io.github.bdredenbach.nthshelf.frametest32",
+  "platformBuildVersionCode": 35,
+  "platformBuildVersionName": 15
+}

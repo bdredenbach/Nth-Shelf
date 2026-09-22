@@ -35,6 +35,32 @@ const PanelDetect = {
                 }
               } catch(error) { if(log)log(`gradient frame refinement deferred: ${error.message}`); }
             }
+            // The legacy strip detector can merge offset panels on a near-
+            // black page matte. Refine only its unproved large composites,
+            // using four exterior-connected boundaries, never the tap seed.
+            // All existing identities, including previous supplements, remain.
+            if(layout.length<4&&baseline.some(p=>!p._quad&&!p._identitySource&&p.w*p.h>.30&&p.w>.7&&p.h>.35)){
+              try {
+                if(typeof PanelClosedFrames!=='undefined'&&PanelClosedFrames.darkMatteImage){
+                  const frames=PanelClosedFrames.darkMatteImage(img,log);
+                  identities=this._refineComposites(identities,frames,log,'exterior-dark-matte');
+                  // Only the new, narrow-column route opts into shorter
+                  // component proposals. Existing component maps retain their
+                  // old minimum. Both children must be proved as a pair.
+                  if(baseline.length>=3&&baseline.length<=12&&baseline.some(p=>this._matteColumnParent(p))&&
+                     frames.length&&PanelClosedFrames.shortDarkComponentsImage&&PanelClosedFrames.matteColumnRemainderImage){
+                    const strips=PanelClosedFrames.shortDarkComponentsImage(img,log);
+                    identities=this._refineMatteColumns(img,identities,baseline,frames,strips,log);
+                  }
+                }
+              }catch(error){if(log)log(`dark matte refinement deferred: ${error.message}`);}
+            }
+            // Independently prove a complete shared-rail montage. Existing
+            // identities and unclassified composites keep their old geometry.
+            try {
+              if(layout.length<4&&typeof PanelCompositeFrames!=='undefined')
+                identities=PanelCompositeFrames.refineImage(img,identities,baseline,log);
+            } catch(error) { if(log)log(`hybrid montage deferred: ${error.message}`); }
             try {
               if(layout.length<4&&typeof PanelOverlapFrames!=='undefined'){
                 const additions=PanelOverlapFrames.analyzeImage(img,baseline,log);
@@ -50,6 +76,32 @@ const PanelDetect = {
                 identities=accepted.concat(identities);
               }
             }catch(error){if(log)log(`overlap outlines deferred: ${error.message}`);}
+            try {
+              if(layout.length<4&&typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.refineCompositePairImage){
+                const additions=PanelInsetNeighbors.refineCompositePairImage(img,identities,baseline,log);
+                if(additions.length===3)identities=additions.concat(identities);
+              }
+            }catch(error){if(log)log(`paired inset refinement deferred: ${error.message}`);}
+            try {
+              if(layout.length<4&&typeof PanelTerminalFrames!=='undefined'&&PanelTerminalFrames.refineWideImage){
+                const additions=PanelTerminalFrames.refineWideImage(img,identities,baseline,log);
+                if(additions.length===1)identities=additions.concat(identities);
+              }
+            }catch(error){if(log)log(`wide terminal refinement deferred: ${error.message}`);}
+            // Keep the accepted bottom scene; add only its independently
+            // enclosed neighbor ahead of the unclassified legacy fallback.
+            try {
+              if(layout.length<4&&typeof PanelTerminalFrames!=='undefined'&&PanelTerminalFrames.refineAdjacentImage){
+                const additions=PanelTerminalFrames.refineAdjacentImage(img,identities,baseline,log);
+                if(additions.length===1)identities=additions.concat(identities);
+              }
+            }catch(error){if(log)log(`adjacent terminal refinement deferred: ${error.message}`);}
+            try {
+              if(layout.length<4&&typeof PanelTerminalFrames!=='undefined'&&PanelTerminalFrames.refineColumnsImage){
+                const additions=PanelTerminalFrames.refineColumnsImage(img,identities,baseline,log);
+                if(additions.length>=2)identities=additions.concat(identities);
+              }
+            }catch(error){if(log)log(`column bank refinement deferred: ${error.message}`);}
             resolve(identities);
             return;
           }
@@ -80,6 +132,12 @@ const PanelDetect = {
           } catch (error) {
             if (log) log(`ink-core supplement deferred: ${error.message}`);
           }
+          try {
+            if(closed.length&&typeof PanelPartition!=='undefined'&&PanelPartition.supplementArtworkImage){
+              const additions=PanelPartition.supplementArtworkImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`artwork junction supplement deferred: ${error.message}`);}
           if(!closed.length){
             try {
               if(typeof PanelPartition!=='undefined'&&PanelPartition.completeDarkImage)
@@ -92,6 +150,191 @@ const PanelDetect = {
               if(additions.length)closed=closed.concat(additions);
             }
           }catch(error){if(log)log(`uniform ink-core supplement deferred: ${error.message}`);}
+          try {
+            if(closed.length&&typeof PanelOccludedFrames!=='undefined'){
+              const additions=PanelOccludedFrames.supplementImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`balloon divider supplement deferred: ${error.message}`);}
+          // Only an otherwise-empty identity map can use the component route.
+          // Each cell has four independently fitted exterior-matte sides and
+          // passes the same divider/inset vetoes. Existing maps are untouched.
+          if(!closed.length){
+            try {
+              if(typeof PanelClosedFrames!=='undefined'&&PanelClosedFrames.darkComponentsImage){
+                closed=this._admitDarkComponents(PanelClosedFrames.darkComponentsImage(img,log));
+                if(closed.length&&PanelClosedFrames.pairedOutlinesImage){
+                  const outlines=PanelClosedFrames.pairedOutlinesImage(img,closed,log);
+                  if(outlines.length===2){
+                    closed=closed.concat(outlines);
+                    if(log)log('paired matte silhouettes: 2 independent edge-bleed frames');
+                  }
+                }
+              }
+            }catch(error){if(log)log(`dark component frames deferred: ${error.message}`);}
+          }
+          // Empty maps only: butt-joined panels may have no visible gutter.
+          // A complete, independently proved six-face network is atomic.
+          if(!closed.length){
+            try {
+              if(typeof PanelAbuttingFrames!=='undefined')
+                closed=PanelAbuttingFrames.analyzeImage(img,log);
+            } catch(error) { if(log)log(`abutting seam network deferred: ${error.message}`); }
+          }
+          if(!closed.length){
+            try {
+              if(typeof PanelAbuttingFrames!=='undefined'&&PanelAbuttingFrames.analyzeBleedStripsImage)
+                closed=PanelAbuttingFrames.analyzeBleedStripsImage(img,log);
+            } catch(error) { if(log)log(`side-bleed strip deferred: ${error.message}`); }
+          }
+          // A retained exterior-strip anchor can prove an interrupted tall rim.
+          // New ownership is confined to its measured contour; anchors persist.
+          try {
+            if(typeof PanelRimFrames!=='undefined'){
+              const additions=PanelRimFrames.supplementImage(img,closed,log);
+              if(additions.length)closed=additions.concat(closed);
+            }
+          }catch(error){if(log)log(`interrupted rim deferred: ${error.message}`);}
+          if(!closed.length){
+            try { if(typeof PanelTerracedFrames!=='undefined')closed=PanelTerracedFrames.analyzeImage(img,log); }
+            catch(error){if(log)log(`local matte stack deferred: ${error.message}`);}
+          }
+          // Paired local matte hulls: no global quiet margin is assumed.
+          // This final route cannot replace or reorder an established map.
+          if(!closed.length){
+            try {if(typeof PanelLocalIslands!=='undefined')closed=PanelLocalIslands.analyzeImage(img,log);}
+            catch(error){if(log)log(`paired local islands deferred: ${error.message}`);}
+          }
+          // Add one independently closed edge-bleed neighbour. Existing pair
+          // identities, order, and fallback routes outside it are unchanged.
+          try {
+            if(typeof PanelLocalIslands!=='undefined'&&PanelLocalIslands.neighborImage){
+              const additions=PanelLocalIslands.neighborImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`local matte neighbour deferred: ${error.message}`);}
+          // A closed light-rim inset can bridge two independently witnessed
+          // exterior gutters. No existing identity or priority is replaced.
+          if(!closed.length){
+            try {if(typeof PanelFramedInsets!=='undefined')closed=PanelFramedInsets.analyzeImage(img,log);}
+            catch(error){if(log)log(`framed inset deferred: ${error.message}`);}
+          }
+          // A validated crossing inset can authorize its surrounding quiet
+          // corridor cells. The inset keeps its original priority and identity.
+          try {
+            if(typeof PanelInsetNeighbors!=='undefined'){
+              const additions=PanelInsetNeighbors.supplementImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`inset neighbours deferred: ${error.message}`);}
+          // Empty maps only: two fixed exterior palettes must independently
+          // enclose a complete tall cell with a measured sloping rail.
+          if(!closed.length){
+            try {if(typeof PanelEdgeCells!=='undefined')closed=PanelEdgeCells.analyzeImage(img,log);}
+            catch(error){if(log)log(`sloping edge cells deferred: ${error.message}`);}
+          }
+          // A re-proved sloping edge cell permits a bounded search for a
+          // separate corner with four observed dark rims. Existing identities
+          // retain their exact order and geometry.
+          try {
+            if(typeof PanelCornerFrames!=='undefined'){
+              const additions=PanelCornerFrames.supplementImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`corner rims deferred: ${error.message}`);}
+          // A bounded terminal band can prove itself without a prior anchor.
+          // This empty-map-only route cannot replace or reorder old identities.
+          if(!closed.length){
+            try {if(typeof PanelTerminalFrames!=='undefined')closed=PanelTerminalFrames.analyzeImage(img,log);}
+            catch(error){if(log)log(`terminal rims deferred: ${error.message}`);}
+          }
+          // Test19: retain the terminal scene exactly, then independently
+          // prove a light-rim inset crossing its side gutter. No old identity
+          // is removed, reordered, or used as a rectangular fallback crop.
+          try {
+            if(typeof PanelFramedInsets!=='undefined'&&PanelFramedInsets.supplementTerminalImage){
+              const additions=PanelFramedInsets.supplementTerminalImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`terminal inset deferred: ${error.message}`);}
+          // Test20: retain the terminal/inset anchors, and add only a complete
+          // pair of independently witnessed stepped/notched neighboring cells.
+          try {
+            if(typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.supplementTerminalBandImage){
+              const additions=PanelInsetNeighbors.supplementTerminalBandImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`terminal inset neighbours deferred: ${error.message}`);}
+          // Test21: append only a complete independently witnessed upper tier.
+          // The accepted four-cell anchor group is never replaced or reordered.
+          try {
+            if(typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.supplementTierImage){
+              const additions=PanelInsetNeighbors.supplementTierImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`staggered upper tier deferred: ${error.message}`);}
+          // Test22: append a new route ONLY to an otherwise empty stable map.
+          // Four traced rim sections and an exterior row-break crossing must
+          // independently prove the wide inset. No prior identities change.
+          if(!closed.length){
+            try {if(typeof PanelFramedInsets!=='undefined'&&PanelFramedInsets.wideInsetsImage)closed=PanelFramedInsets.wideInsetsImage(img,log);}
+            catch(error){if(log)log(`wide framed inset deferred: ${error.message}`);}
+          }
+          // Test23: preserve the wide inset, append only its independently
+          // enclosed terminal neighbour. Never replace an earlier identity.
+          try {
+            if(typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.supplementWideTerminalImage){
+              const additions=PanelInsetNeighbors.supplementWideTerminalImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`wide terminal neighbour deferred: ${error.message}`);}
+          // Test24: append a separately enclosed flank above the wide inset.
+          // A component cannot win without all four observed boundary paths.
+          try {
+            if(typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.supplementWideFlankImage){
+              const additions=PanelInsetNeighbors.supplementWideFlankImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`wide inset flank deferred: ${error.message}`);}
+          // Test25: a separately witnessed inner cell; append, never replace anchors.
+          try{
+            if(typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.supplementWideInnerImage){
+              const additions=PanelInsetNeighbors.supplementWideInnerImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`wide inset inner deferred: ${error.message}`);}
+
+          // Test26: preserve the four wide-inset cells, append a separately
+          // observed pale-rim callout and its connected projecting effect.
+          try {
+            if(typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.supplementWideCalloutImage){
+              const additions=PanelInsetNeighbors.supplementWideCalloutImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`pale-rim callout deferred: ${error.message}`);}
+
+          // Test27: measure the upper neighbor's exposed rims and subtract
+          // the independently proved callout; keep all earlier identities.
+          try {
+            if(typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.supplementWideActionImage){
+              const additions=PanelInsetNeighbors.supplementWideActionImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`upper crossed-rim scene deferred: ${error.message}`);}
+          // Test28: complete a separately witnessed residual cell; no old
+          // descriptor or visible crop is rewritten to make room for it.
+          try {
+            if(typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.supplementWideResidualImage){
+              const additions=PanelInsetNeighbors.supplementWideResidualImage(img,closed,log);
+              if(additions.length)closed=closed.concat(additions);
+            }
+          }catch(error){if(log)log(`residual exterior scene deferred: ${error.message}`);}
+          // Curved pale-rim network: strictly empty-map-only. Earlier results
+          // keep their exact descriptor bytes and order.
+          if(!closed.length){
+            try{if(typeof PanelCurvedRims!=='undefined')closed=PanelCurvedRims.analyzeImage(img,log);}
+            catch(error){if(log)log(`curved rim network deferred: ${error.message}`);}
+          }
           resolve(closed);
         }
         catch (err) {
@@ -108,15 +351,81 @@ const PanelDetect = {
   // A proved exterior-isolated frame can refine an unproved legacy bucket.
   // Retain the old bucket and all other identities verbatim. Only taps inside
   // the new frame gain priority; unresolved portions keep their prior route.
-  _refineComposites(baseline,candidates,log){
+  // Validate the opt-in proof before letting it outrank a legacy composite.
+  // Fitted rails and vertices must describe the same current analysis grid.
+  _validDarkMatteFrame(c,component=false){
+    const p=c?._closedFrameProof,g=p?.gutterProof,q=c?._quad;
+    const w=p?.analysisWidth,h=p?.analysisHeight,f=p?.railFits;
+    if(p?.version!==1||p.connected!==true||g?.method!==(component?'exterior-dark-component':'exterior-dark-matte')||
+       !Number.isInteger(w)||!Number.isInteger(h)||w<80||h<80||w>900||h>900||
+       !Array.isArray(g.color)||g.color.length!==3||g.color.some(v=>!Number.isFinite(v)||v<0||v>255)||
+       g.color[0]*.299+g.color[1]*.587+g.color[2]*.114>25||
+       !Array.isArray(p.coverage)||p.coverage.length!==4||p.coverage.some(v=>!Number.isFinite(v)||v<.97||v>1)||
+       !Array.isArray(f)||f.length!==4||f.some(r=>!Number.isFinite(r?.slope)||!Number.isFinite(r?.offset)||Math.abs(r.slope)>(component ? .12 : .025))||
+       !Array.isArray(q)||q.length!==4||q.some(v=>!Number.isFinite(v?.x)||!Number.isFinite(v?.y)||v.x<0||v.y<0||v.x>1||v.y>1))return false;
+    const cross=(a,b,c)=>(b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x);
+    if(q.some((v,i)=>cross(v,q[(i+1)%4],q[(i+2)%4])<=1e-10))return false;
+    const meet=(a,b)=>{const x=(b.offset+b.slope*a.offset)/(1-b.slope*a.slope);return {x:x/w,y:(a.offset+a.slope*x)/h};};
+    const fitted=[meet(f[0],f[2]),meet(f[0],f[3]),meet(f[1],f[3]),meet(f[1],f[2])];
+    if(fitted.some((v,i)=>Math.hypot((v.x-q[i].x)*w,(v.y-q[i].y)*h)>.05))return false;
+    const xs=q.map(v=>v.x),ys=q.map(v=>v.y);
+    return Math.abs(c.x-Math.min(...xs))<1e-9&&Math.abs(c.y-Math.min(...ys))<1e-9&&
+      Math.abs(c.w-(Math.max(...xs)-Math.min(...xs)))<1e-9&&Math.abs(c.h-(Math.max(...ys)-Math.min(...ys)))<1e-9;
+  },
+
+  _validDarkComponentFrame(c){
+    if(!this._validDarkMatteFrame(c,true)||c?._identitySource!=='closed-frame')return false;
+    const proof=c._closedFrameProof,g=proof.gutterProof,p=g.componentProof;
+    const w=proof.analysisWidth,h=proof.analysisHeight,q=c._quad;
+    const area=Math.abs(q.reduce((sum,v,i)=>{const n=q[(i+1)%4];return sum+v.x*n.y-v.y*n.x;},0))/2;
+    const ratios=(a,min)=>Array.isArray(a)&&a.length===4&&a.every(v=>Number.isFinite(v)&&v>=min&&v<=1);
+    if(p?.method!=='four-observed-component-sides'||!ratios(g.exteriorSupport,.97)||
+       !ratios(p.sideSupport,.88)||!ratios(p.inwardSupport,.90)||
+       !Number.isInteger(p.pixelCount)||p.pixelCount<w*h*.02||p.pixelCount>w*h||
+       !Number.isInteger(p.outsidePixels)||p.outsidePixels<0||p.outsidePixels>2||
+       !Number.isInteger(p.foreignPixels)||p.foreignPixels<0||p.foreignPixels>2||
+       !Number.isFinite(p.interiorMatteRatio)||p.interiorMatteRatio<0||p.interiorMatteRatio>.008||
+       !Number.isFinite(p.componentAreaRatio)||p.componentAreaRatio<.93||p.componentAreaRatio>1.005||
+       Math.abs(p.pixelCount/(area*w*h)-p.componentAreaRatio)>1e-8||area<.02||area>.65)return false;
+    return true;
+  },
+
+  _admitDarkComponents(candidates){
+    if(!Array.isArray(candidates)||candidates.length>12)return [];
+    // Reject duplicate/conflicting offers rather than selecting a winner by
+    // size. The component mask already supplies disjoint physical regions.
+    const accepted=[];
+    const cross=(a,b,p)=>(b.x-a.x)*(p.y-a.y)-(b.y-a.y)*(p.x-a.x);
+    function overlap(a,b){
+      let polygon=a._quad;
+      for(let i=0;i<4&&polygon.length;i++){
+        const c=b._quad[i],d=b._quad[(i+1)%4],input=polygon;polygon=[];
+        for(let j=0;j<input.length;j++){
+          const p=input[j],q=input[(j+1)%input.length],cp=cross(c,d,p),cq=cross(c,d,q);
+          if(cp>=0)polygon.push(p);
+          if((cp>=0)!==(cq>=0)){const t=cp/(cp-cq);polygon.push({x:p.x+t*(q.x-p.x),y:p.y+t*(q.y-p.y)});}
+        }
+      }
+      return Math.abs(polygon.reduce((sum,p,i)=>{const q=polygon[(i+1)%polygon.length];return sum+p.x*q.y-p.y*q.x;},0))/2;
+    }
+    for(const c of candidates){
+      if(!this._validDarkComponentFrame(c))return [];
+      if(accepted.some(p=>overlap(p,c)>1e-10))return [];
+      accepted.push(c);
+    }
+    return accepted;
+  },
+  _refineComposites(baseline,candidates,log,method='exterior-gradient-gutter'){
+    if(!['exterior-gradient-gutter','exterior-dark-matte'].includes(method))return baseline;
     const eligible=p=>!p._quad&&!p._identitySource&&p.w*p.h>.30&&p.w>.7&&p.h>.35;
     const overlap=(a,b)=>Math.max(0,Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x))*
       Math.max(0,Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y));
     const accepted=[];
     for(const c of candidates){
+      if(method==='exterior-dark-matte'&&!this._validDarkMatteFrame(c))continue;
       const proof=c?._closedFrameProof,gutter=proof?.gutterProof;
       if(c?._identitySource!=='closed-frame'||proof?.connected!==true||
-         gutter?.method!=='exterior-gradient-gutter'||
+         gutter?.method!==method||
          !Array.isArray(gutter.exteriorSupport)||gutter.exteriorSupport.length!==4||
          gutter.exteriorSupport.some(v=>!Number.isFinite(v)||v<.95)||
          !Array.isArray(c._quad)||c._quad.length!==4||c.w*c.h<.08)continue;
@@ -128,8 +437,94 @@ const PanelDetect = {
       accepted.push(c);
     }
     if(!accepted.length)return baseline;
-    if(log)log(`gradient frame refinement: ${accepted.length} isolated frames; ${baseline.length} legacy identities preserved`);
+    if(log)log(`${method} refinement: ${accepted.length} isolated frames; ${baseline.length} legacy identities preserved`);
     return accepted.concat(baseline);
+  },
+
+
+  _matteColumnParent(p){
+    return !!p&&!p._quad&&!p._outline&&!p._identitySource&&
+      ['x','y','w','h'].every(k=>Number.isFinite(p[k]))&&p.x>=0&&p.y>=0&&
+      p.x+p.w<=1&&p.y+p.h<=1&&p.w>=.25&&p.w<=.60&&p.h>=.30&&p.h<=.75&&p.w*p.h>=.12;
+  },
+
+  _validMatteColumnRegion(r,parent,strip,anchor){
+    const p=r?._openRegionProof,q=r?._quad;
+    const W=p?.analysisWidth,H=p?.analysisHeight,within=(x,a,b)=>Number.isFinite(x)&&x>=a&&x<=b;
+    const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+    if(!this._matteColumnParent(parent)||!this._validDarkComponentFrame(strip)||!this._validDarkMatteFrame(anchor)||
+       r?._identitySource!=='open-region'||p?.version!==1||p.connected!==true||p.method!=='strip-separated-exterior-matte'||
+       !Number.isInteger(W)||!Number.isInteger(H)||W<80||H<80||W>900||H>900||
+       W!==strip._closedFrameProof.analysisWidth||H!==strip._closedFrameProof.analysisHeight||
+       W!==anchor._closedFrameProof.analysisWidth||H!==anchor._closedFrameProof.analysisHeight||
+       !same(p.stripQuad,strip._quad)||!same(p.anchorQuad,anchor._quad)||
+       !same(p.parent,{x:parent.x,y:parent.y,w:parent.w,h:parent.h})||
+       !Array.isArray(p.color)||p.color.length!==3||p.color.some(v=>!Number.isInteger(v)||!within(v,0,255))||
+       !same(p.color,strip._closedFrameProof.gutterProof.color)||
+       !Array.isArray(q)||q.length!==4||q.some(v=>!within(v?.x,0,1)||!within(v?.y,0,1))||
+       !Array.isArray(p.foregroundBox)||p.foregroundBox.length!==4||p.foregroundBox.some(v=>!Number.isInteger(v))||
+       !Array.isArray(p.searchBox)||p.searchBox.length!==4||p.searchBox.some(v=>!Number.isInteger(v))||
+       p.cropPadding!==2||p.lostPixels!==0||p.retainedPixels!==p.foregroundPixels||
+       !Number.isInteger(p.foregroundPixels)||p.foregroundPixels<W*H*.025||
+       !Array.isArray(p.componentSizes)||!p.componentSizes.length||p.componentSizes.some(v=>!Number.isInteger(v)||v<=0)||
+       p.componentSizes.reduce((a,b)=>a+b,0)!==p.foregroundPixels||p.componentSizes.some((v,i)=>i&&v>p.componentSizes[i-1])||
+       p.componentSizes[0]/p.foregroundPixels<.80||(p.componentSizes[1]||0)/p.foregroundPixels>.08||
+       !Array.isArray(p.exteriorSupport)||p.exteriorSupport.length!==4||p.exteriorSupport.some(v=>v!==1)||
+       p.separatorSupport!==1||!Array.isArray(p.separatorRows)||p.separatorRows.length!==2||
+       p.separatorRows.some(v=>!Number.isInteger(v))||!['top','bottom'].includes(p.stripSide))return false;
+    const [l,t,rr,b]=p.foregroundBox,box=p.searchBox,crop=[l-2,t-2,rr+2,b+2];
+    if(l>=rr||t>=b||box[0]<2||box[1]<2||box[2]>W-3||box[3]>H-3||
+       crop[0]<box[0]||crop[1]<box[1]||crop[2]>box[2]||crop[3]>box[3])return false;
+    const expected=[[crop[0],crop[1]],[crop[2],crop[1]],[crop[2],crop[3]],[crop[0],crop[3]]];
+    if(q.some((v,i)=>Math.abs(v.x*W-expected[i][0])>1e-8||Math.abs(v.y*H-expected[i][1])>1e-8)||
+       Math.abs(r.x*W-crop[0])>1e-8||Math.abs(r.y*H-crop[1])>1e-8||
+       Math.abs(r.w*W-crop[2]+crop[0])>1e-8||Math.abs(r.h*H-crop[3]+crop[1])>1e-8)return false;
+    const area=r.w*r.h*W*H,gap=p.separatorRows[1]-p.separatorRows[0]+1;
+    if(!within(area/(W*H),.06,.35)||!within(p.foregroundFraction,.18,.80)||
+       Math.abs(p.foregroundFraction-p.foregroundPixels/area)>1e-9||gap<4||gap>H*.08||
+       p.separatorPixels!==gap*(box[2]-box[0]+1))return false;
+    const sy=strip._quad.map(v=>v.y*H);
+    if(p.stripSide==='top'?
+      p.separatorRows[0]!==Math.ceil(Math.max(...sy))+1||p.separatorRows[1]!==t-1:
+      p.separatorRows[0]!==b+1||p.separatorRows[1]!==Math.floor(Math.min(...sy))-1)return false;
+    return true;
+  },
+
+  _refineMatteColumns(img,identities,baseline,anchors,strips,log){
+    if(!Array.isArray(strips)||strips.length>12||!Array.isArray(anchors)||anchors.length>12)return identities;
+    const overlap=(a,b)=>Math.max(0,Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x))*
+      Math.max(0,Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y));
+    const matches=(a,b,W,H)=>Math.max(Math.abs((a.x-b.x)*W),Math.abs((a.y-b.y)*H),
+      Math.abs((a.x+a.w-b.x-b.w)*W),Math.abs((a.y+a.h-b.y-b.h)*H))<=3;
+    const groups=[];
+    for(const parent of baseline){
+      if(!this._matteColumnParent(parent))continue;
+      const proposals=[];
+      for(const strip of strips){
+        if(!this._validDarkComponentFrame(strip))continue;
+        const W=strip._closedFrameProof.analysisWidth,H=strip._closedFrameProof.analysisHeight;
+        if(strip.h>parent.h*.30||Math.abs((strip.x-parent.x)*W)>3||
+           Math.abs((strip.x+strip.w-parent.x-parent.w)*W)>3||
+           Math.min(Math.abs((strip.y-parent.y)*H),Math.abs((strip.y+strip.h-parent.y-parent.h)*H))>3)continue;
+        const partners=anchors.filter(a=>{
+          if(!this._validDarkMatteFrame(a)||a._closedFrameProof.analysisWidth!==W||a._closedFrameProof.analysisHeight!==H||
+             Math.abs((a.y-parent.y)*H)>3||Math.abs((a.y+a.h-parent.y-parent.h)*H)>3)return false;
+          const gap=Math.max((parent.x-a.x-a.w)*W,(a.x-parent.x-parent.w)*W);
+          return gap>=3&&gap<=18&&baseline.filter(b=>b!==parent&&!b._identitySource&&!b._quad&&matches(a,b,W,H)).length===1;
+        });
+        if(partners.length!==1)continue;
+        const anchor=partners[0],region=PanelClosedFrames.matteColumnRemainderImage(img,parent,strip,anchor,log);
+        if(!this._validMatteColumnRegion(region,parent,strip,anchor)||overlap(strip,region)>1e-10)continue;
+        const children=[strip,region];
+        if(children.some(c=>identities.some(p=>p!==parent&&overlap(c,p)>1e-5)))continue;
+        proposals.push(children);
+      }
+      // Multiple plausible splits are ambiguity, never a size-based winner.
+      if(proposals.length===1)groups.push(proposals[0]);
+    }
+    const accepted=groups.filter((g,i)=>!groups.some((other,j)=>i!==j&&g.some(a=>other.some(b=>overlap(a,b)>1e-10)))).flat();
+    if(accepted.length&&log)log(`matte column refinement: ${accepted.length} strip/artwork identities; all ${identities.length} previous identities preserved`);
+    return accepted.length?accepted.concat(identities):identities;
   },
 
   _refineOpenRegions(baseline,identities,regions){

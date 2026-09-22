@@ -1,0 +1,18 @@
+{
+  "pages": 74,
+  "before": 298,
+  "after": 305,
+  "preservedDescriptorsExactAndOrdered": 298,
+  "changedPages": [
+    {
+      "readerPage": 42,
+      "before": 0,
+      "after": 7
+    }
+  ],
+  "page41Unchanged": true,
+  "pages43And44StillEmpty": true,
+  "pageErrors": [],
+  "currentDetectorScriptHashesMatch": true,
+  "historical301CountReproduced": false
+}

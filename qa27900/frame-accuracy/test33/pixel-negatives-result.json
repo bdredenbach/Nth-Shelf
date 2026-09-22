@@ -1,0 +1,36 @@
+{
+  "positivePanels": 7,
+  "valid": true,
+  "desktopRouteMs": 733.3000000000466,
+  "negatives": [
+    {
+      "name": "blank-black",
+      "count": 0
+    },
+    {
+      "name": "blank-white",
+      "count": 0
+    },
+    {
+      "name": "one-transparent-pixel",
+      "count": 0
+    },
+    {
+      "name": "wrong-exterior-matte",
+      "count": 0
+    },
+    {
+      "name": "transverse-rim-erased",
+      "count": 0
+    },
+    {
+      "name": "terminal-seam-erased",
+      "count": 0
+    },
+    {
+      "name": "unstructured-noise",
+      "count": 0
+    }
+  ],
+  "browser": "144.0.7559.96"
+}

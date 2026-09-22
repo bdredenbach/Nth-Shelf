@@ -2,69 +2,81 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
-## Development checkpoint — Frame Test32
+## 2.79.33 — page42 curved-frame candidate
 
-**Repository status: Test32 runtime import is still pending.** The accepted APK
-was recovered locally, but its bulk source has not yet been uploaded to this
-branch. This commit upgrades documentation, cache safety and the import path;
-it must not be mistaken for a completed Test32 detector sync.
+**Local source and browser-tested candidate, not a confirmed phone release.**
+The seven irregular panels on reader page42 now receive separate pixel-derived
+contours. The crossing dialogue balloon stays complete, the large lower-left
+scene stays together, and the projecting “SNIKT!” lettering belongs to the final
+panel. No page number, filename, image hash, annotation points, or stored crop
+table is consulted by the detector.
 
-**Page41 is accepted and protected.** Pages42–44 are still open. Start with page42;
-reserve **2.79.33** for the iteration in which its frames work and pass acceptance.
-This checkpoint is not a 2.79.33 release and does not introduce new frame geometry.
+The new `js/panels-curved-rims.js` route handles a bounded layout family: dark
+exterior matte, strongly supported pale irregular rims, noncrossing transverse
+scenes, and a lower fan of panels. It is **not a claim that all irregular comics
+are solved**. It runs only when the established page-level routes return no
+identities. Missing or ambiguous evidence returns no new candidate; accepted
+older identities are not replaced, reordered, or enlarged.
 
-## Keep the proven work
+### Verification recorded for this iteration
 
-Retain all existing `qa27900/` tests and reports. Treat accepted frame identities,
-complete artwork, speech balloons, tails and projecting lettering as regression
-requirements; do not trade them away for a higher detection count.
+| Check | Recorded result |
+| --- | --- |
+| Fresh 74-page descriptor comparison | Only page42 changes, 0 → 7; total 298 → 305 |
+| Prior identities | All 298 descriptors exact, in original per-page order |
+| Previously accepted page41 | All nine entries unchanged: eight intended scenes plus retained legacy merged fallback |
+| Manual page42 ownership anchors | 54/54 |
+| Actual Reader + NthPageDeck | 35 touchscreen-driven contour renders in mobile-emulated Chromium |
+| Existing regression suites rerun | 17 passed; original tests remain unchanged |
+| Malformed/tampered proofs | 161 rejections, plus four malformed raw inputs |
+| Raw-pixel negatives | Seven rejected, including erased transverse and terminal seams |
+| Android APK / on-device acceptance | Not executed in this handoff |
 
-The earlier Test32 handoff reported 162 page41 touch/crop checks, 400 selected
-Page Deck checks, and preservation of all 296 prior descriptors. Its 74-page
-comparison reported 301 entries. Those figures are retained as **historical
-reported results**, not described as newly rerun tests: the original Test32
-patch/report archive was not supplied in this handoff.
+The Reader harness uses the real UI, detector, geometry routing, Page Deck and
+canvas renderer, with an in-memory storage fixture and inline local assets. It
+is not a database persistence, import, network, service-worker browser lifecycle,
+or Android-device test. Service-worker behavior has its own isolated contract
+suite. Read the [iteration report](qa27900/frame-accuracy/test33/RESULTS.md) for
+exact scope, evidence, rerun commands and limitations.
 
-A fresh capture of the uploaded APK's unmodified detector code in Chromium
-144.0.7559.96 completed all 74 images and returned **298 entries**. Page41 returned
-nine entries, including all five version-4 column panels. Nine entries are not
-nine real scenes: the accepted layout has eight intended scenes plus a retained
-legacy merged fallback. Pages42, 43 and 44 returned no page-level identities in
-this capture; interactive fallback behavior is a separate test.
+## Preserve the established work
 
-The 298-versus-301 total is **not a reproduced parity result**. Keep both records;
-resolve the environment/fixture difference before asserting full historical
-parity. No detector was changed to make this new total match an old report.
-See [checkpoint evidence and queue](qa27900/frame-accuracy/test32/BASELINE.md).
+All existing `qa27900/` tests and Test32 records remain. Page41 stays protected.
+Pages43 and44 are still queued; neither is claimed fixed by this iteration.
 
-## Recover the exact accepted source
+The earlier Test32 handoff reported 301 total entries, 162 page41 touch/crop
+checks, 400 selected Page Deck checks and preservation of 296 prior descriptors.
+Those remain **historical reported results**, not newly reproduced facts. The
+original Test32 patch/report archive was not supplied. The fresh unmodified-APK
+capture had 298 entries. This iteration compares against that exact fresh
+298-entry capture and does not erase or explain away the 301-versus-298 gap.
 
-The original input is `Nth-Shelf-Frame-Test32.apk` (64 packaged web assets), not a
-full native-source project archive. Its SHA-256 is:
+Historical documentation is preserved in [the pre-Test32 README](docs/README-before-test32.md),
+[the Test32 checkpoint README](docs/README-test32-checkpoint.md), and
+[the Test32 handoff](HANDOFF-Test32.md). Their status statements describe those
+earlier checkpoints, not this candidate.
+
+## Repository and source status
+
+The latest remote branch read in this session was `Test_Branch` at
+`015bacff2d4c8d051c7232c3e6b180deedcc67f8`. That commit contains checkpoint
+maintenance, not this completed source overlay. The GitHub actions exposed in
+this session were read-only; direct Git transport failed to connect.
+**No new remote commit, push, Actions run, APK upload or release is claimed.**
+The supplied full project archive contains the recovered Test32 web baseline
+plus the complete 2.79.33 candidate, documentation and tests. `main` and `android`
+were not changed remotely.
+
+The Test32 web assets were recovered from the supplied APK, SHA-256:
 
 ```text
 cfdadc80042b1e57c462f239c13206c27c093abf52337d29e0c40c3811dbcff3
 ```
 
-To import it in GitHub, upload that exact APK to the root of `Test_Branch` as
-`Nth-Shelf-Frame-Test32.apk`. The one-time import workflow validates its checksum,
-refuses conflicting/newer runtime files, extracts only the web assets, applies
-the prepared README/service worker, runs syntax/cache checks, and commits the
-result without a force push. A completion marker prevents a later workflow run
-from overwriting page42 work. It never imports the comic ZIP or decompiles native
-classes.
-
-For a local checkout:
-
-```sh
-python3 scripts/import-test32-baseline.py /path/to/Nth-Shelf-Frame-Test32.apk --verify-only
-python3 scripts/import-test32-baseline.py /path/to/Nth-Shelf-Frame-Test32.apk
-node qa27900/frame-accuracy/test32/service-worker.test.cjs
-```
-
-The script's local invocation edits the checkout; it does not push automatically.
-Review and commit those changes normally. A full source overlay is also supplied
-with the handoff. No comic pages or recordings belong in the repository or APK.
+Do not rerun the one-time Test32 import over this candidate. Its completion
+marker and conflict checks remain in place to refuse that overwrite. No comic
+pages, recordings, private signing keys or generated reading screenshots belong
+in the repository or packaged app.
 
 ## Reader and library
 
@@ -73,33 +85,53 @@ multiple supported archives. Organize collections, search the shelf, sort the
 library, save bookmarks, and resume reading from the saved position.
 
 Read in Page, Two Page, Scroll, Manga or Webcomic mode. Panel and bubble pop-outs
-remain evidence-driven rather than page-specific stored crops. Auto Scroll is
-available in the continuous reading modes with speed and playback controls.
+remain evidence-driven. Auto Scroll is available in continuous reading modes
+with speed and playback controls. The existing tap and bubble controls are
+retained; this change extends shape ownership rather than replacing gestures.
 
 Android full `.nthshelf` backups stream pages to the selected destination and
 verify the written archive. Restore stages pages before publishing the library.
 The browser/legacy route retains its existing limits. Keep a backup before major
-device or browser changes.
+device or browser changes. These features were not all re-tested in this frame
+iteration.
 
-## Offline/cache maintenance
+## Offline/cache and versioning
 
-The service worker now activates only after its shell precache succeeds. Cleanup
-is restricted to Nth Shelf shell-cache names, current requests do not search
-unrelated caches, and offline failures return a valid error response. These
-changes do not delete IndexedDB, books, bookmarks or reading progress.
+The shell cache is now `nth-shelf-shell-2.79.33`, and it includes the new detector.
+Activation waits for a successful complete precache; obsolete-cache removal
+remains restricted to Nth Shelf shell names. Unrelated caches and the existing
+`longbox` IndexedDB library are not deleted.
 
-The repository checkpoint cache and the recovered-Test32 cache have separate
-names so older source is not mislabeled as Test32. The post-import cache is
-`nth-shelf-shell-2.79.24-frame32-baseline-r2`. The cache contract has 16 local checks.
+Geometry proof/cache identifiers advance to `frame-proof-2.79.33` and
+`panel-map-exp-42`. This invalidates stale geometry certificates, not books,
+bookmarks or reading progress. The document title and application-version meta
+label identify 2.79.33.
 
-## Native build and release discipline
+Gradle and the existing Android workflow now agree on versionName **2.79.33** and
+versionCode **27961**. The uploaded Test32 APK had code 27960 and a separate
+`.frametest32` application ID. The repository keeps its existing
+`io.github.bdredenbach.nthshelf` ID; a build from it is not an automatic update of
+the separate Test32 app. Native Java source remains unchanged, and no newly
+built or signed APK is included in this handoff.
 
-This handoff does not rebuild or replace the Android Java source. The existing
-Gradle metadata remains versionCode `27928`, versionName `2.79.24-test1`; no new
-APK or store release is claimed. Synchronize native version fields, workflow
-artifact labels, visible build labels and cache/proof identifiers when page42
-qualifies for **2.79.33**, not before.
+## Run the local checks
 
-All pre-checkpoint README content is preserved in
-[the historical README](docs/README-before-test32.md). Existing native source,
-WASM source, older tests and release history remain in Git.
+From the repository root:
+
+```sh
+node qa27900/frame-accuracy/test33/curved-rim-contract.cjs
+node qa27900/frame-accuracy/test33/service-worker.test.cjs
+node qa27900/frame-accuracy/test32/service-worker.test.cjs \
+  qa27900/frame-accuracy/test32/sw-baseline.js
+python3 qa27900/frame-accuracy/test33/reader-touch.py \
+  --comic /private/path/to/comic.zip --out /tmp/nth-reader42 \
+  --browser /path/to/chromium
+python3 qa27900/frame-accuracy/test33/pixel-negatives.py \
+  --comic /private/path/to/comic.zip --out /tmp/nth-rim-negatives.json \
+  --browser /path/to/chromium
+```
+
+The Python browser tests require Playwright and Chromium. Comic input is local
+and private. Screenshots produced by the Reader harness must stay outside the
+repository. The Android build workflow retains its existing app-wide gates; it
+was updated, not executed here.

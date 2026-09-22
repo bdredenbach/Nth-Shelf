@@ -16,6 +16,35 @@ const PanelGeometry = {
     const inferred=panel?._identitySource||
       (panel?._v100Hybrid?'v100':panel?._v87BoundarySet?'v99':'unknown');
 
+    if(inferred==='curved-rim-frame'&&typeof PanelCurvedRims!=='undefined'&&PanelCurvedRims.validPanel(panel))
+      return {mode:'hold',source:'CURVED-RIM',reason:'measured-noncrossing-pale-rim-network'};
+    if(inferred==='terminal-rim-frame'&&typeof PanelTerminalFrames!=='undefined'&&PanelTerminalFrames.validPanel(panel))
+      return {mode:'hold',source:'TERMINAL-RIM',reason:'dual-luminance-terminal-band-four-observed-rims'};
+    if(inferred==='corner-rim-frame'&&typeof PanelCornerFrames!=='undefined'&&PanelCornerFrames.validPanel(panel))
+      return {mode:'hold',source:'CORNER-RIM',reason:'dual-luminance-four-observed-rims'};
+    if(inferred==='sloping-edge-frame'&&typeof PanelEdgeCells!=='undefined'&&PanelEdgeCells.validPanel(panel))
+      return {mode:'hold',source:'SLOPING-EDGE',reason:'dual-matte-enclosed-sloping-edge-cell'};
+    if(inferred==='inset-neighbor-frame'&&typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.validPanel(panel))
+      return {mode:'hold',source:'INSET-NEIGHBOR',reason:'measured-exterior-corridors-around-proved-inset'};
+    if(inferred==='bordered-inset-frame'&&typeof PanelFramedInsets!=='undefined'&&PanelFramedInsets.validPanel(panel))
+      return {mode:'hold',source:'BORDERED-INSET',reason:'closed-rim-and-two-exterior-gutter-crossings'};
+    if(inferred==='matte-neighbor-frame'&&typeof PanelLocalIslands!=='undefined'&&PanelLocalIslands.validNeighbor?.(panel))
+      return {mode:'hold',source:'MATTE-NEIGHBOR',reason:'edge-component-and-closed-matte-band'};
+    if(inferred==='local-island-frame'&&typeof PanelLocalIslands!=='undefined'&&PanelLocalIslands.validPanel(panel))
+      return {mode:'hold',source:'LOCAL-ISLANDS',reason:'paired-isolated-artwork-and-measured-matte'};
+    if(inferred==='terraced-frame'&&typeof PanelTerracedFrames!=='undefined'&&PanelTerracedFrames.validPanel(panel))
+      return {mode:'hold',source:'LOCAL-MATTE-STACK',reason:'closed-local-cells-and-segmented-shared-seams'};
+    if(inferred==='rim-frame'&&typeof PanelRimFrames!=='undefined'&&PanelRimFrames.validPanel(panel))
+      return {mode:'hold',source:'RIM-CONTOURS',reason:'measured-interrupted-rim-and-local-foreground'};
+    if(inferred==='bleed-strip-frame'&&typeof PanelAbuttingFrames!=='undefined'&&PanelAbuttingFrames.validBleedStrip?.(panel))
+      return {mode:'hold',source:'BLEED-STRIP',reason:'three-local-exterior-sides-and-measured-shared-seam'};
+    if(inferred==='abutment-frame'&&typeof PanelAbuttingFrames!=='undefined'&&PanelAbuttingFrames.validPanel(panel))
+      return {mode:'hold',source:'ABUTTING-SEAMS',reason:'complete-connected-shared-seam-network'};
+    if(inferred==='composite-frame'&&typeof PanelCompositeFrames!=='undefined'&&PanelCompositeFrames.validPanel(panel))
+      return {mode:'hold',source:'COMPOSITE-CONTOURS',reason:'measured-shared-rails-and-foreground-ownership'};
+    if(inferred==='matte-component-outline'&&typeof PanelGeometryOrthogonal!=='undefined'&&
+       PanelGeometryOrthogonal._validMatteOutlineProof(panel))
+      return {mode:'hold',source:'MATTE-OUTLINE',reason:'paired-exterior-separated-silhouettes'};
     if(inferred==='overlap-frame'&&panel?._overlapProof?.version===1&&panel._overlapProof.connected===true)
       return {mode:'hold',source:'OVERLAP-FRAME',reason:'visible-occlusion-outline'};
     if(inferred==='open-region'&&panel?._openRegionProof?.version===1&&panel._openRegionProof.connected===true)
@@ -90,7 +119,32 @@ const PanelGeometry = {
         ? PanelGeometryOrthogonal.refine(panel,log)
         : {...panel};
       held._geometryOwner='orthogonal-authority';
-      if(policy.source==='PAGE-PARTITION' && typeof PanelGeometrySkewed!=='undefined'){
+      if(policy.source==='CURVED-RIM'){held._geometryOwner='curved-rim-contours';held._geometryType='noncrossing-pale-rim-network';return held;}
+      if(policy.source==='TERMINAL-RIM'){held._geometryOwner='terminal-rim-outline';held._geometryType='four-observed-dark-rims';return held;}
+      if(policy.source==='CORNER-RIM'){held._geometryOwner='corner-rim-outline';held._geometryType='four-observed-dark-rims';return held;}
+      if(policy.source==='SLOPING-EDGE'){held._geometryOwner='sloping-edge-outline';held._geometryType='dual-matte-enclosed-edge-cell';return held;}
+      if(policy.source==='INSET-NEIGHBOR'){held._geometryOwner='inset-neighbor-contours';held._geometryType='inset-guided-corridor-cell';return held;}
+      if(policy.source==='BORDERED-INSET'){held._geometryOwner='bordered-inset-outline';held._geometryType='closed-rim-over-gutters';return held;}
+      if(policy.source==='MATTE-NEIGHBOR'){held._geometryOwner='matte-neighbor-outline';held._geometryType='pair-anchored-edge-cell';return held;}
+      if(policy.source==='LOCAL-ISLANDS'){held._geometryOwner='local-island-outline';held._geometryType='exterior-isolated-pixel-hull';return held;}
+      if(policy.source==='RIM-CONTOURS'){held._geometryOwner='rim-outline';held._geometryType='interrupted-matte-rim-contours';return held;}
+      if(policy.source==='ABUTTING-SEAMS'){
+        held._geometryOwner='shared-seam-outline';held._geometryType='abutting-seam-network';
+        if(log)log('ABUTTING SEAM AUTHORITY HOLD: retain stepped shared boundaries');
+        return held;
+      }
+      if(policy.source==='COMPOSITE-CONTOURS'){
+        held._geometryOwner='composite-outline';held._geometryType='shared-rail-foreground-contours';
+        if(log)log('COMPOSITE CONTOUR AUTHORITY HOLD: retain cutouts and visible islands');
+        return held;
+      }
+      if(policy.source==='MATTE-OUTLINE'){
+        held._geometryOwner='matte-outline';held._geometryType='matte-silhouette-frame';
+        if(log)log('MATTE OUTLINE AUTHORITY HOLD: preserve complete measured silhouette');
+        return held;
+      }
+      if((policy.source==='PAGE-PARTITION'||(policy.source==='CLOSED-FRAME'&&
+          panel?._closedFrameProof?.gutterProof?.method==='exterior-dark-component')) && typeof PanelGeometrySkewed!=='undefined'){
         const ownership=PanelGeometrySkewed.classifyQuad(held,log);
         held._frameOwnership=ownership;
         held._geometryOwner=ownership.owns?'skewed-frame':'orthogonal-frame';

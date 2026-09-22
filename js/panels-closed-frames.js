@@ -31,6 +31,10 @@ const PanelClosedFrames = (() => {
   }
   function analyzeRGBA(rgba,w,h,log,options={}){
     if(!Number.isInteger(w)||!Number.isInteger(h)||w<80||h<80||w>900||h>900||!rgba||rgba.length!==w*h*4)return [];
+    // Reject non-matte pages before paying for a second structural pass.
+    const matteProposals=options.darkMatte===true&&!options.vetoCandidates&&typeof PanelGutterFrames!=='undefined'
+      ? (options.componentMatte===true ? PanelGutterFrames.componentProposalsRGBA(rgba,w,h,{shortPanels:options.shortPanels===true}) : PanelGutterFrames.proposeRGBA(rgba,w,h,{gradient:true,darkMatte:true})):null;
+    if(options.darkMatte===true&&!options.vetoCandidates&&(!matteProposals||!matteProposals.length))return [];
     const g=new Float32Array(w*h);for(let i=0;i<g.length;i++)g[i]=.299*rgba[i*4]+.587*rgba[i*4+1]+.114*rgba[i*4+2];
     const hs=lines(g,w,h),vs=lines(g,w,h,true),at=(vertical,p,t)=>vertical?g[t*w+p]:g[p*w+t];
     function cover(vertical,pos,lo,hi){let n=0;for(let t=lo;t<hi;t++){let yes=false;for(let d=-2;d<=2;d++)if(pos+d>=0&&pos+d<(vertical?w:h)&&at(vertical,pos+d,t)<70){yes=true;break;}n+=yes;}return n/Math.max(1,hi-lo);}
@@ -67,11 +71,65 @@ const PanelClosedFrames = (() => {
         if(n/total<.5)return false;
       }return true;
     }
+    // A uniformly dark wall can satisfy a dark-pixel chord at many arbitrary
+    // angles. On the opt-in matte route, a sloped-divider veto also needs an
+    // observed thin ink rail following that angle, not merely a dark path.
+    // This mirrors the existing four-rail fit, but samples around the slope
+    // hypothesis rather than around a constant x/y. No established route uses it.
+    function fittedMatteDivider(vertical,pos,lo,hi,slope,core=false){
+      const center=(lo+hi)/2,trim=Math.max(3,Math.round((hi-lo)*.02)),samples=[];
+      const limit=vertical?w:h;
+      for(let t=lo+trim;t<hi-trim;t++){
+        const expected=pos+slope*(t-center),q=Math.round(expected);
+        let pick=-1,best=Infinity;
+        for(let p=q-2;p<=q+2;p++)if(p>=12&&p+12<limit){
+          const value=at(vertical,p,t);if(value<best){best=value;pick=p;}
+        }
+        if(pick<0||best>=70)continue;
+        const threshold=core?best+8:70;
+        if(core&&threshold>=30)continue;
+        let a=pick,b=pick;
+        while(a>pick-7&&at(vertical,a-1,t)<threshold)a--;
+        while(b<pick+7&&at(vertical,b+1,t)<threshold)b++;
+        if(b-a>8||a<=pick-7||b>=pick+7)continue;
+        let pre=0,post=0;
+        for(let d=2;d<=4;d++){pre+=at(vertical,a-d,t);post+=at(vertical,b+d,t);}
+        if(Math.min(pre/3-best,post/3-best)<=25)continue;
+        samples.push([t,(a+b)/2]);
+      }
+      const fail=()=>core?false:fittedMatteDivider(vertical,pos,lo,hi,slope,true);
+      if(samples.length/(hi-lo)<.35)return fail();
+      let sx=0,sy=0;
+      for(const p of samples){sx+=p[0];sy+=p[1];}
+      sx/=samples.length;sy/=samples.length;
+      let cov=0,variance=0;
+      for(const p of samples){cov+=(p[0]-sx)*(p[1]-sy);variance+=(p[0]-sx)**2;}
+      const m=cov/variance,b=sy-m*sx;
+      if(!Number.isFinite(m)||Math.abs(m-slope)>.012)return fail();
+      const errors=samples.map(p=>Math.abs(p[1]-b-m*p[0])).sort((a,b)=>a-b);
+      if(errors[Math.floor(errors.length*.9)]>2||
+         Math.max(...[lo,hi].map(t=>Math.abs(b+m*t-(pos+slope*(t-center)))))>3)return fail();
+      let darkness=0;
+      for(let t=lo;t<hi;t++){
+        const p=Math.round(b+m*t);
+        if(p<1||p+1>=limit)return fail();
+        darkness+=Math.min(at(vertical,p-1,t),at(vertical,p,t),at(vertical,p+1,t))<70;
+      }
+      if(darkness/(hi-lo)>=.96)return true;
+      // Two separated, collinear ink fragments are enough to veto a union,
+      // not enough to create either child. Require measured support near
+      // both outside rails; a short interior mark is not a divider.
+      const span=(hi-lo)*.18;
+      const start=samples.filter(p=>p[0]<lo+span).length/span;
+      const end=samples.filter(p=>p[0]>hi-span).length/span;
+      if(darkness/(hi-lo)>=.60&&samples.length/(hi-lo)>=.42&&start>=.35&&end>=.35)return true;
+      return fail();
+    }
     function slopedDivider(box){const [x1,y1,x2,y2]=box;
       for(const vertical of [false,true]){const lo=vertical?y1:x1,hi=vertical?y2:x2,b1=vertical?x1:y1,b2=vertical?x2:y2,margin=Math.max(12,(b2-b1)*.085),center=(lo+hi)/2;
-        for(let si=-20;si<=20;si++){if(Math.abs(si)<2)continue;const slope=si*.005;
-          for(let p=Math.ceil(b1+margin);p<b2-margin;p+=2){if(p-Math.abs(slope*(hi-lo)/2)<=b1+margin||p+Math.abs(slope*(hi-lo)/2)>=b2-margin)continue;let dark=0,n=0;for(let t=lo+3;t<hi-2;t++){const q=Math.round(p+slope*(t-center));dark+=at(vertical,q,t)<70;n++;}if(dark/n<=.97)continue;let ridgeCount=0;
-            for(let t=lo+3;t<hi-2;t++){const q=Math.round(p+slope*(t-center)),v=at(vertical,q,t);let a=0,b=0;for(let d=4;d<=7;d++){a+=at(vertical,q-d,t);b+=at(vertical,q+d,t);}ridgeCount+=a/4-v>15&&b/4-v>15;}if(ridgeCount/n>.20&&(!options.gradientOnly||dividerEnds(vertical,p,lo,hi,slope)))return true;
+        for(let si=-20;si<=20;si++){if(Math.abs(si)<2&&!options.darkMatte)continue;const slope=si*.005;
+          for(let p=Math.ceil(b1+margin);p<b2-margin;p+=2){if(p-Math.abs(slope*(hi-lo)/2)<=b1+margin||p+Math.abs(slope*(hi-lo)/2)>=b2-margin)continue;let dark=0,n=0;for(let t=lo+3;t<hi-2;t++){const q=Math.round(p+slope*(t-center));dark+=at(vertical,q,t)<70;n++;}if(dark/n<=(options.darkMatte?.60:.97))continue;let ridgeCount=0;
+            for(let t=lo+3;t<hi-2;t++){const q=Math.round(p+slope*(t-center)),v=at(vertical,q,t);let a=0,b=0;for(let d=4;d<=7;d++){a+=at(vertical,q-d,t);b+=at(vertical,q+d,t);}ridgeCount+=a/4-v>15&&b/4-v>15;}if(ridgeCount/n>.20&&(options.darkMatte?fittedMatteDivider(vertical,p,lo,hi,slope):(!options.gradientOnly||dividerEnds(vertical,p,lo,hi,slope))))return true;
           }
         }
       }return false;
@@ -126,13 +184,29 @@ const PanelClosedFrames = (() => {
     // Short or partly obscured interior frames are uncertainty, never new output.
     // Their weaker rejection-only evidence prevents a large scene claiming insets.
     const weakH=lines(g,w,h,false,.05),weakV=lines(g,w,h,true,.05);
+    if(options.darkMatte){
+      // Near-black inset strokes must not disappear into gray cross-hatching
+      // merely because the legacy line collector groups every value below 70.
+      // These extra proposals are veto-only and still need the original
+      // connected-box metrics and three independent fitted rails.
+      const core=new Float32Array(g.length);
+      for(let i=0;i<g.length;i++)core[i]=g[i]<30?0:255;
+      weakH.push(...lines(core,w,h,false,.05));
+      weakV.push(...lines(core,w,h,true,.05));
+      weakH.sort((a,b)=>a[0]-b[0]);weakV.sort((a,b)=>a[0]-b[0]);
+    }
     const inside=(q,p)=>q[0]>=p[0]-3&&q[1]>=p[1]-3&&q[2]<=p[2]+3&&q[3]<=p[3]+3&&(q[2]-q[0])*(q[3]-q[1])<.85*(p[2]-p[0])*(p[3]-p[1]);
     function metric(vertical,pos,lo,hi){const m=Math.max(2,Math.floor((hi-lo)*.02));return [cover(vertical,pos,lo+m,hi-m),ridge(vertical,pos,lo,hi)];}
     function removeAmbiguous(candidates,attachedInsets=false){
     const threats=[];
+    // The opt-in portrait remainder is much smaller than a full page. Its
+    // inset rejection threshold is local to that proved crop; otherwise a
+    // clear small inset can fall below the old page-wide area threshold.
+    // Only vetoes are widened: this option cannot construct a new frame.
+    const localArea=options.localMatteInset===true?Math.min(...candidates.map(p=>(p.box[2]-p.box[0])*(p.box[3]-p.box[1]))):null;
     for(const vertical of [false,true]){const ls=vertical?weakV:weakH,along=vertical?h:w,cross=vertical?w:h;
-      for(let j=0;j<ls.length;j++)for(let k=j+1;k<ls.length;k++){const a=ls[j],b=ls[k];if(b[0]-a[0]<cross*.06||Math.abs(a[1]-b[1])>10||Math.abs(a[2]-b[2])>10)continue;
-        const lo=Math.max(a[1],b[1]),hi=Math.min(a[2],b[2]);if(hi-lo<along*.10||(hi-lo)*(b[0]-a[0])<w*h*.019)continue;
+      for(let j=0;j<ls.length;j++)for(let k=j+1;k<ls.length;k++){const a=ls[j],b=ls[k];if(b[0]-a[0]<(localArea?20:cross*.06)||Math.abs(a[1]-b[1])>10||Math.abs(a[2]-b[2])>10)continue;
+        const lo=Math.max(a[1],b[1]),hi=Math.min(a[2],b[2]);if(hi-lo<(localArea?24:along*.10)||(hi-lo)*(b[0]-a[0])<(localArea?Math.max(w*h*.0025,localArea*.035):w*h*.019))continue;
         const rough=vertical?[a[0],lo,b[0],hi]:[lo,a[0],hi,b[0]];if(!candidates.some(p=>inside(rough,p.box)))continue;
         const metrics=[metric(vertical,a[0],lo,hi),metric(vertical,b[0],lo,hi)],ends=[];
         for(const guess of [lo,hi-1]){let best=null,quality=-1,where=guess;for(let q=guess-4;q<=guess+4;q++){if(q<8||q+9>=(vertical?h:w))continue;const met=metric(!vertical,q,a[0],b[0]),score=Math.min(...met)+.05*(met[0]+met[1]);if(score>quality){quality=score;best=met;where=q;}}metrics.push(best||[0,0]);ends.push(where);}
@@ -147,8 +221,20 @@ const PanelClosedFrames = (() => {
           // exterior-connected route, a nested-frame veto needs three fitted
           // rails; the fourth may remain interrupted. Existing routes retain
           // their original weak-box veto unchanged.
+          const endFit=pos=>{
+            const direct=fit(!vertical,pos,a[0],b[0],true);if(direct||!localArea)return direct;
+            // A coverage tie can pick the fringe two pixels outside a thick
+            // small inset's ink center. Seek a measured fit in that same
+            // bounded endpoint neighborhood; never extend a rail or relax its
+            // residual, darkness, support, or straightness requirements.
+            for(let d=1;d<=4;d++)for(const sign of [-1,1]){
+              const at=pos+d*sign;if(at<8||at+9>=(vertical?h:w))continue;
+              const f=fit(!vertical,at,a[0],b[0],true);if(f)return f;
+            }
+            return null;
+          };
           const rails=[fit(vertical,a[0],lo,hi,true),fit(vertical,b[0],lo,hi,true),
-            fit(!vertical,ends[0],a[0],b[0],true),fit(!vertical,ends[1],a[0],b[0],true)];
+            endFit(ends[0]),endFit(ends[1])];
           if(rails.filter(Boolean).length<3)continue;
         }
         threats.push(vertical?[a[0],ends[0],b[0],ends[1]]:[ends[0],a[0],ends[1],b[0]]);
@@ -179,7 +265,10 @@ const PanelClosedFrames = (() => {
     const unique=[];clean.sort((a,b)=>(a.box[2]-a.box[0])*(a.box[3]-a.box[1])-(b.box[2]-b.box[0])*(b.box[3]-b.box[1]));for(const c of clean)if(!unique.some(q=>c.box.every((v,i)=>Math.abs(v-q.box[i])<=8)))unique.push(c);
     return unique;
     }
-    if(options.vetoCandidates)return removeAmbiguous(options.vetoCandidates,true);
+    if(options.vetoCandidates){
+      const clean=removeAmbiguous(options.vetoCandidates,true);
+      return options.darkMatte?clean.filter(c=>!slopedDivider(c.box)):clean;
+    }
     function overlapArea(subject,clip){
       let points=subject;
       const cross=(a,b,p)=>(b.x-a.x)*(p.y-a.y)-(b.y-a.y)*(p.x-a.x);
@@ -209,12 +298,12 @@ const PanelClosedFrames = (() => {
     // gutter sides allow dark artwork to touch the fourth printed border.
     const gutter=[];
     if(!options.supplementOnly&&typeof PanelGutterFrames!=='undefined'){
-      const proposals=PanelGutterFrames.proposeRGBA(rgba,w,h,{gradient:options.gradientOnly===true}).map(c=>({
+      const proposals=(matteProposals||PanelGutterFrames.proposeRGBA(rgba,w,h,{gradient:options.gradientOnly===true})).map(c=>({
         box:[Math.min(...c.q.map(p=>p[0])),Math.min(...c.q.map(p=>p[1])),
              Math.max(...c.q.map(p=>p[0])),Math.max(...c.q.map(p=>p[1]))].map(Math.round),
         quad:c.q.map(p=>({x:p[0]/w,y:p[1]/h})),scores:c.ms.map(m=>m[0]),
         ridges:c.ms.map(m=>m[1]),fits:c.fits.map(f=>({slope:f.m,offset:f.b})),
-        gutterProof:{method:options.gradientOnly?'exterior-gradient-gutter':'exterior-gutter',color:c.color,exteriorSupport:c.ms.map(m=>m[1])}
+        gutterProof:{...(c.componentProof?{componentProof:c.componentProof}:{}),method:options.componentMatte?'exterior-dark-component':options.darkMatte?'exterior-dark-matte':options.gradientOnly?'exterior-gradient-gutter':'exterior-gutter',color:c.color,exteriorSupport:c.ms.map(m=>m[1])}
       }));
       for(const candidate of removeAmbiguous(proposals,true)){
         const [x1,y1,x2,y2]=candidate.box;
@@ -273,7 +362,44 @@ const PanelClosedFrames = (() => {
   }
   function analyzeImage(img,log,options){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);const rgba=ctx.getImageData(0,0,w,h).data;return options?.openRegions?
     PanelGutterFrames.openRegionsRGBA(rgba,w,h,options.anchors):analyzeRGBA(rgba,w,h,log,options);}
-  return {analyzeRGBA,analyzeImage,vetoRegionsRGBA:(rgba,w,h,candidates)=>analyzeRGBA(rgba,w,h,null,{gradientOnly:true,vetoCandidates:candidates}),openRegionsImage:(img,anchors)=>analyzeImage(img,null,{openRegions:true,anchors}),gradientImage:(img,log)=>analyzeImage(img,log,{gradientOnly:true}),supplementImage:(img,anchors,log)=>analyzeImage(img,log,{supplementOnly:true,anchors})};
+
+  function pairedOutlinesRGBA(rgba,w,h,anchors,log){
+    if(typeof PanelGutterFrames==='undefined'||!PanelGutterFrames.pairedOutlinesRGBA)return [];
+    const candidates=PanelGutterFrames.pairedOutlinesRGBA(rgba,w,h,anchors);
+    if(candidates.length!==2)return [];
+    // Existing near-black inset and measured-divider vetoes are rejection-only.
+    // They cannot generate an outline or substitute a component's boundaries.
+    const clean=analyzeRGBA(rgba,w,h,log,{gradientOnly:true,darkMatte:true,vetoCandidates:candidates});
+    if(clean.length!==2)return [];
+    return candidates.map(c=>{const xs=c.q.map(p=>p[0]/w),ys=c.q.map(p=>p[1]/h);return {
+      x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),
+      _outline:c.q.map(p=>({x:p[0]/w,y:p[1]/h})),_identitySource:'matte-component-outline',
+      _geometryType:'matte-silhouette-frame',_geometryOwner:'matte-outline',_matteOutlineProof:c.proof};});
+  }
+  function pairedOutlinesImage(img,anchors,log){
+    const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.round(img.width*scale),h=Math.round(img.height*scale);
+    const c=document.createElement('canvas');c.width=w;c.height=h;
+    const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);
+    return pairedOutlinesRGBA(ctx.getImageData(0,0,w,h).data,w,h,anchors,log);
+  }
+
+
+  function matteColumnRemainderImage(img,parent,strip,anchor,log){
+    const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.round(img.width*scale),h=Math.round(img.height*scale);
+    const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+    const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);
+    const rgba=ctx.getImageData(0,0,w,h).data;
+    const r=PanelGutterFrames.matteColumnRemainderRGBA(rgba,w,h,parent,strip,anchor);
+    if(!r)return null;
+    // Rejection-only guards also apply to a borderless scene. An inset or a
+    // measured internal divider must not be swallowed merely because a crop
+    // is surrounded by black matte.
+    const candidate={box:[r.x*w,r.y*h,(r.x+r.w)*w,(r.y+r.h)*h].map(Math.round)};
+    const clean=analyzeRGBA(rgba,w,h,log,{gradientOnly:true,darkMatte:true,vetoCandidates:[candidate],localMatteInset:true});
+    return clean.length===1?r:null;
+  }
+
+  return {analyzeRGBA,analyzeImage,pairedOutlinesRGBA,pairedOutlinesImage,matteColumnRemainderImage,shortDarkComponentsImage:(img,log)=>analyzeImage(img,log,{gradientOnly:true,darkMatte:true,componentMatte:true,shortPanels:true}),vetoRegionsRGBA:(rgba,w,h,candidates)=>analyzeRGBA(rgba,w,h,null,{gradientOnly:true,vetoCandidates:candidates}),openRegionsImage:(img,anchors)=>analyzeImage(img,null,{openRegions:true,anchors}),gradientImage:(img,log)=>analyzeImage(img,log,{gradientOnly:true}),darkMatteImage:(img,log)=>analyzeImage(img,log,{gradientOnly:true,darkMatte:true}),darkComponentsImage:(img,log)=>analyzeImage(img,log,{gradientOnly:true,darkMatte:true,componentMatte:true}),supplementImage:(img,anchors,log)=>analyzeImage(img,log,{supplementOnly:true,anchors})};
 })();
 if(typeof window!=='undefined')window.PanelClosedFrames=PanelClosedFrames;
 if(typeof module!=='undefined')module.exports=PanelClosedFrames;

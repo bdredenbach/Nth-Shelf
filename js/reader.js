@@ -875,8 +875,18 @@ const Reader = {
    return null;
  },
 
+ panelContours(panel) {
+   return typeof PanelGeometryOrthogonal!=='undefined'?PanelGeometryOrthogonal._provenContours(panel):null;
+ },
+
+ pointInContours(rings,x,y) {
+   let inside=false;for(const ring of rings)if(this.pointInPolygon(ring,x,y))inside=!inside;
+   return inside;
+ },
+
  panelPolygon(panel) {
    const outline=typeof PanelGeometryOrthogonal!=='undefined'?PanelGeometryOrthogonal._provenOutline(panel):null;
+   if(['bleed-strip-frame','rim-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel?._identitySource))return outline;
    if(outline)return outline;
    return Array.isArray(panel?._quad)&&panel._quad.length===4?panel._quad:null;
  },
@@ -894,7 +904,11 @@ const Reader = {
    if (!this.panelZoomEnabled) return null;
    for (const p of this.currentPanels) {
      if (relX >= p.x && relX <= p.x + p.w && relY >= p.y && relY <= p.y + p.h) {
+       const contours=this.panelContours(p);
+       if(['composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame'].includes(p._identitySource)&&!contours)continue;
+       if(contours&&!this.pointInContours(contours,relX,relY))continue;
        const polygon=this.panelPolygon(p);
+       if(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(p._identitySource)&&!polygon)continue;
        if(polygon&&!this.pointInPolygon(polygon,relX,relY))continue;
        return p;
      }
@@ -2815,6 +2829,8 @@ async setMode(mode) {
      pageX = panel.x+u*panel.w; pageY = panel.y+v*panel.h;
      let inside = Number.isFinite(u) && Number.isFinite(v) && u >= 0 && u <= 1 && v >= 0 && v <= 1;
      // A clipped corner of a sloping frame is transparent, not a caption hit.
+     const contours=this.panelContours(panel);
+     if(inside&&contours)inside=this.pointInContours(contours,pageX,pageY);
      const outline=panel._outline;
      if(inside&&Array.isArray(outline)&&outline.length>=4)inside=this.pointInPolygon(outline,pageX,pageY);
      const quad = panel._quad;
@@ -3037,6 +3053,9 @@ async setMode(mode) {
 
  async zoomToPanel(panel, stageRect, imgRect) {
    if (this.focusMode) return;
+   const contours=this.panelContours(panel);
+   if(['composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame'].includes(panel?._identitySource)&&!contours)return;
+   if(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel?._identitySource)&&!this.panelPolygon(panel))return;
    const token = ++this.panelOverlayToken;
    const ctx = this.getPanelImageContext();
    const img = ctx?.img;
@@ -3093,9 +3112,48 @@ async setMode(mode) {
    const sh = geom.h * img.naturalHeight;
 
    this.panelFocusMeta = {
-     panel: { ...geom, _quad: quad || undefined, _outline: outline || undefined, _overlapProof: outline?panel._overlapProof:undefined },
+     panel: { ...geom, _quad: quad || undefined, _outline: outline || undefined, _overlapProof: outline?panel._overlapProof:undefined, _occlusionProof: outline?panel._occlusionProof:undefined, _partitionProof: outline?panel._partitionProof:undefined, _matteOutlineProof: outline?panel._matteOutlineProof:undefined },
      pageIndex: this.index
    };
+   if(outline&&panel._identitySource==='terminal-rim-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'terminal-rim-frame',_terminalProof:panel._terminalProof
+   });
+   if(outline&&panel._identitySource==='corner-rim-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'corner-rim-frame',_cornerProof:panel._cornerProof
+   });
+   if(outline&&panel._identitySource==='sloping-edge-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'sloping-edge-frame',_edgeCellProof:panel._edgeCellProof
+   });
+   if(outline&&panel._identitySource==='bordered-inset-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'bordered-inset-frame',_insetRimProof:panel._insetRimProof
+   });
+   if(outline&&panel._identitySource==='matte-neighbor-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'matte-neighbor-frame',_neighborProof:panel._neighborProof
+   });
+   if(outline&&panel._identitySource==='local-island-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'local-island-frame',_islandProof:panel._islandProof
+   });
+   if(outline&&panel._identitySource==='terraced-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'terraced-frame',_terraceProof:panel._terraceProof
+   });
+   if(outline&&panel._identitySource==='bleed-strip-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'bleed-strip-frame',_bleedStripProof:panel._bleedStripProof
+   });
+   if(outline&&panel._identitySource==='abutment-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'abutment-frame',_abutmentProof:panel._abutmentProof
+   });
+   if(contours&&panel._identitySource==='curved-rim-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'curved-rim-frame',_contours:contours,_curvedRimProof:panel._curvedRimProof
+   });
+   else if(contours&&panel._identitySource==='inset-neighbor-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'inset-neighbor-frame',_contours:contours,_insetNeighborProof:panel._insetNeighborProof
+   });
+   else if(contours&&panel._identitySource==='rim-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'rim-frame',_contours:contours,_rimFrameProof:panel._rimFrameProof
+   });
+   else if(contours)Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'composite-frame',_contours:contours,_compositeFrameProof:panel._compositeFrameProof
+   });
 
    const overlay = document.createElement("div");
    overlay.className = "panel-focus-overlay";
@@ -3119,7 +3177,25 @@ async setMode(mode) {
    canvas.style.height = "100%";
    canvas.getContext("2d").imageSmoothingEnabled = true;
    canvas.getContext("2d").imageSmoothingQuality = "high";
-   canvas.getContext("2d").drawImage(img, sx, sy, sw, sh, 0, 0, canvasW, canvasH);
+   const context=canvas.getContext("2d");
+   const cropContours=contours||(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel._identitySource)&&outline?[outline]:null);
+   if(cropContours){
+     // Clip original-resolution pixels with an even-odd compound path. Unlike
+     // a rectangular crop or convex envelope this preserves the transparent
+     // space inside a bent finger and any separate visible neighbour island.
+     context.save();context.beginPath();
+     for(const ring of cropContours){
+       ring.forEach((p,i)=>{const x=(p.x-geom.x)/geom.w*canvasW,y=(p.y-geom.y)/geom.h*canvasH;
+         if(i)context.lineTo(x,y);else context.moveTo(x,y);});
+       context.closePath();
+     }
+     context.clip('evenodd');
+     overlay.dataset.geometry='contours';
+     overlay.style.boxShadow='none';
+     canvas.style.filter='drop-shadow(0 5px 12px rgba(0,0,0,.42))';
+   }
+   context.drawImage(img, sx, sy, sw, sh, 0, 0, canvasW, canvasH);
+   if(cropContours)context.restore();
    overlay.appendChild(canvas);
 
    const pagePad = Math.max(8, Math.min(18, Math.round(Math.min(imgRect.width, imgRect.height) * 0.018)));

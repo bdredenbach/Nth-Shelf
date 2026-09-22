@@ -1,0 +1,22 @@
+{
+  "sourceApkSha256": "cfdadc80042b1e57c462f239c13206c27c093abf52337d29e0c40c3811dbcff3",
+  "webAssetsRecovered": 64,
+  "unchangedWebAssets": 63,
+  "intentionalWebAssetChange": "sw.js",
+  "javascriptSyntaxPasses": 40,
+  "importSafetyChecksPassed": 4,
+  "serviceWorkerChecksPassedPerVariant": 16,
+  "serviceWorkerVariantsChecked": 2,
+  "freshSweepPages": 74,
+  "freshSweepEntries": 298,
+  "historicalReportedEntries": 301,
+  "historicalParityReproduced": false,
+  "readerPage41Entries": 9,
+  "readerPage41NewColumns": 5,
+  "page42Complete": false,
+  "nextVersionReserved": "2.79.33",
+  "nativeApkRebuilt": false,
+  "verifiedAgainstActualRepositoryCheckout": true,
+  "repositoryCheckpointCommit": "015bacff2d4c8d051c7232c3e6b180deedcc67f8",
+  "fullRuntimeUploadedToGitHub": false
+}

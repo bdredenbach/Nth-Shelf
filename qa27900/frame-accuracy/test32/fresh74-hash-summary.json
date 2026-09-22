@@ -1,0 +1,530 @@
+{
+  "browser": "144.0.7559.96",
+  "pageCount": 74,
+  "totalEntries": 298,
+  "pageErrors": [],
+  "sourceApkSha256": "cfdadc80042b1e57c462f239c13206c27c093abf52337d29e0c40c3811dbcff3",
+  "numbering": "readerPage is one-based; archiveIndex is zero-based; page41 corresponds to archive index040.",
+  "historicalReportedTotal": 301,
+  "historicalParityReproduced": false,
+  "pages": [
+    {
+      "archiveIndex": 0,
+      "readerPage": 1,
+      "count": 0,
+      "imageSha256": "6a87b6c58e3670a654cb9cb58119f3de715a57f645f2e78b88c35f5dc16417ac",
+      "descriptorSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "archiveIndex": 1,
+      "readerPage": 2,
+      "count": 5,
+      "imageSha256": "3426a5ffa289cbfef13d93309ce861b63ed667e72eaf3bdb4f0fa7a7103137fc",
+      "descriptorSha256": "ffd4f5223adc8354d3dbd7fb299bbdf0d3870c0c67d1fb421496ffac1592121c"
+    },
+    {
+      "archiveIndex": 2,
+      "readerPage": 3,
+      "count": 5,
+      "imageSha256": "67477bd18fbf31f971e30cea815bc76760f50476078786b412e9f8c78a65e80c",
+      "descriptorSha256": "6a58c8fb57659389e17f01447643a1e834db6850b4aa0b82f5b621188d011479"
+    },
+    {
+      "archiveIndex": 3,
+      "readerPage": 4,
+      "count": 2,
+      "imageSha256": "a6e1225841f784a2d48f1d128ee4c70feaea1ac393fff2bb255804cfea2b6eda",
+      "descriptorSha256": "9ec6b03efbb8567ba05afa8bdc140ff7b56044a032c7b941df505af2b56974b9"
+    },
+    {
+      "archiveIndex": 4,
+      "readerPage": 5,
+      "count": 6,
+      "imageSha256": "81ea1d0368afae91da30d2b0c3fb05e8cea26373d3a4529c2658d9f48c986083",
+      "descriptorSha256": "fc7e38cca408fa24ca66275f56d78de846132aa0989e80c597155f66729a9656"
+    },
+    {
+      "archiveIndex": 5,
+      "readerPage": 6,
+      "count": 6,
+      "imageSha256": "0322218207dc70a8542b1fad785ffca05792b035cd41c45d54bbb41d8ece01ad",
+      "descriptorSha256": "67752c0beaad33e64a88bc1769e2169c7b6b4b68d1c7f0ce00a25e9937a860fb"
+    },
+    {
+      "archiveIndex": 6,
+      "readerPage": 7,
+      "count": 4,
+      "imageSha256": "8821a161f424274f7440e06ba44de728816705e9255341147d5ac91c44341408",
+      "descriptorSha256": "0fab6baa98900b66878a10750ff44ab52862d0d183e2a07793b23812d0a67905"
+    },
+    {
+      "archiveIndex": 7,
+      "readerPage": 8,
+      "count": 2,
+      "imageSha256": "45bd49698e5103d592ea5b792a9a85e767880775cbb8a775caef3350a182a739",
+      "descriptorSha256": "24cd45341b68b8c433cf4d6be9acfd39659667ff2c5d007da397e1f562ecc5a6"
+    },
+    {
+      "archiveIndex": 8,
+      "readerPage": 9,
+      "count": 7,
+      "imageSha256": "06bd363a43c99e53c63d266184d68b5ab4bb83aa017aa314ca0431d4f9b83be9",
+      "descriptorSha256": "f50c76963170b8ea37c08f064f3765521808f6aa5ff6c81114718e2de680bac1"
+    },
+    {
+      "archiveIndex": 9,
+      "readerPage": 10,
+      "count": 6,
+      "imageSha256": "d03b18d137b3830ba1892b7517f3e7b8f844acb25b46f9e07bcead4f1bc932b2",
+      "descriptorSha256": "1e54b95d4ca1baa760485bbae173aabc977f1eff3f5b658738c57fbde7a325d7"
+    },
+    {
+      "archiveIndex": 10,
+      "readerPage": 11,
+      "count": 6,
+      "imageSha256": "a3566b5bb995d99f2691b26215aadac1de7d69ecaabc29d75fc2464ea627eacd",
+      "descriptorSha256": "61620351a271ad608ca91f36fe95c12280e557e1a572ccb8c17b6edb21213013"
+    },
+    {
+      "archiveIndex": 11,
+      "readerPage": 12,
+      "count": 4,
+      "imageSha256": "638c0b03ab068ce86d36c08d4e65286c92d1d7cdee329f9168afaa0db62b08ab",
+      "descriptorSha256": "24cbc8317ec5e9d10b34bca80dc89ae4aa8d486623eb95fc6405db72782a11bc"
+    },
+    {
+      "archiveIndex": 12,
+      "readerPage": 13,
+      "count": 3,
+      "imageSha256": "26c072f75ffbc0612d13ab8da8a3acb39ccb699329b267b95f17d1cab6286ec6",
+      "descriptorSha256": "d384b6b491edba12a31b939dfe0ab63c8885a1df66437e23edca52a7ecde79fa"
+    },
+    {
+      "archiveIndex": 13,
+      "readerPage": 14,
+      "count": 4,
+      "imageSha256": "15bf880c3479b7c58de979ef7c4aba30bf85989ad431aed2f52583da238f8b2d",
+      "descriptorSha256": "af91fccc30ccf9a8384080f51309c1dfdb91f2b3f6e997288f4df0277e4714da"
+    },
+    {
+      "archiveIndex": 14,
+      "readerPage": 15,
+      "count": 6,
+      "imageSha256": "8702fca3a9e97f1117db5a15e2f0545a79d48d07efa031b3e6aa6c0f2ead6282",
+      "descriptorSha256": "f0ea256ba2d247532af74d9493df77d80c294723d5cf9e051ed5273aecb76758"
+    },
+    {
+      "archiveIndex": 15,
+      "readerPage": 16,
+      "count": 5,
+      "imageSha256": "841e06c0b24021bca414d80bffab288abf26768517f3bf1fbcf7c3b952fb943f",
+      "descriptorSha256": "091c9cf3df8d357952eef6f42ea7cbbf5200236f490cd07c5cf78960c81e8446"
+    },
+    {
+      "archiveIndex": 16,
+      "readerPage": 17,
+      "count": 6,
+      "imageSha256": "b873354d831521c805eef56cd8e35d3989a35cdf4779af738a91493092ca83fd",
+      "descriptorSha256": "2d11a807a3d05999353c94e043787d1bc056f1ee18de48cadb86b14e3c04fa17"
+    },
+    {
+      "archiveIndex": 17,
+      "readerPage": 18,
+      "count": 7,
+      "imageSha256": "fb89560ae00005da77ecd6cd2e24d1d7092242c4eaa1490a0cfcc737ac60feb4",
+      "descriptorSha256": "5b73f782ab6c4beb14170f1dfa89c8d50c0f16a8ddc6ea0897e898d0d510261d"
+    },
+    {
+      "archiveIndex": 18,
+      "readerPage": 19,
+      "count": 5,
+      "imageSha256": "28e4754cabd5bdaa300e69bb19c8cdffc77a5a22c682f515c57de5a91aed308a",
+      "descriptorSha256": "2839cdf4a4e5e278f4288fcabb9f99403529a2f2c78eb7b3bd21c8ae8e10733b"
+    },
+    {
+      "archiveIndex": 19,
+      "readerPage": 20,
+      "count": 10,
+      "imageSha256": "e04bd07cd9f17725276fcfc13964cf85794a300a0da1e3b1972f48b69b7aa10b",
+      "descriptorSha256": "8efd4785b7fa79453de58f62aa2cdd139f60348897b1b0e6c84e0d3a4eaf20eb"
+    },
+    {
+      "archiveIndex": 20,
+      "readerPage": 21,
+      "count": 6,
+      "imageSha256": "ca0d2ce5f16dd543eea2f004cab3aed0a945c1ebab897a504bee962dc79b6fc7",
+      "descriptorSha256": "bbb8bfa3e1a57cc964b67f4d7e3dc0c2e2a8153a9ef4a8582fb1bf563f93635e"
+    },
+    {
+      "archiveIndex": 21,
+      "readerPage": 22,
+      "count": 6,
+      "imageSha256": "a9798feb689a0d88ead2fb73261b1144e114267fbaff307ec72ad9e2f9ad7af1",
+      "descriptorSha256": "926002f2de6b3a8f955233c093ea00cea1a3aa902eb0157beff2ded47a51dd19"
+    },
+    {
+      "archiveIndex": 22,
+      "readerPage": 23,
+      "count": 2,
+      "imageSha256": "18db78948fef8708e03dd988a1e5c3d06fde0a08c6bfeec041c208dcabdb3222",
+      "descriptorSha256": "e2653a3e3e4656a81afb5f8d2c9dba35a4489d884cbe4b32f07d9cb68267f602"
+    },
+    {
+      "archiveIndex": 23,
+      "readerPage": 24,
+      "count": 5,
+      "imageSha256": "c12203ab2a1a032daab93e1731be93ebf042ef8fda785fd203b4f4d6ab03287d",
+      "descriptorSha256": "ccce67e904d7f33b8f2c7499fc9989d3dd3bb354fb359abe7231d22b83371d43"
+    },
+    {
+      "archiveIndex": 24,
+      "readerPage": 25,
+      "count": 5,
+      "imageSha256": "c82ea976977b21b0df78955867f6f19f522556634e8d408923b07dd56de3fa79",
+      "descriptorSha256": "0ff2d14853dc10e6bad8bc74fd204596c318bd384f73c1b99f50ad66d5c86d93"
+    },
+    {
+      "archiveIndex": 25,
+      "readerPage": 26,
+      "count": 0,
+      "imageSha256": "866e59ec6905eb98b1606d1514215a58e8d442864c862c1d7b6f0864239d76ff",
+      "descriptorSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "archiveIndex": 26,
+      "readerPage": 27,
+      "count": 3,
+      "imageSha256": "80ce12863f06f72deafbefc6197413fdec695cc31264ba85db919af2e3b74bd6",
+      "descriptorSha256": "b55d3af3579c58cc54624a9a7aebda9ec5dc3cf59f9efd2fd1a09064da77d500"
+    },
+    {
+      "archiveIndex": 27,
+      "readerPage": 28,
+      "count": 2,
+      "imageSha256": "242d5b1db336b249b7177e90c9863f0f05ab4da75677b2231324112b06b85e41",
+      "descriptorSha256": "9ed7866441a32cecf92c1fd1c05f466d92630613477a51322590a5764e1a4565"
+    },
+    {
+      "archiveIndex": 28,
+      "readerPage": 29,
+      "count": 6,
+      "imageSha256": "cc8a66bed83d00cff637b2669b602dcd6a3a8bdacfeb5de2014cb3eb885516a0",
+      "descriptorSha256": "e3bf4b88dbfc450a990b9a77ae4dfe88aed4774609301ce67d2b6607ba3c54ba"
+    },
+    {
+      "archiveIndex": 29,
+      "readerPage": 30,
+      "count": 9,
+      "imageSha256": "43e0e536fb726bebc867a9798bb67bce8e77d6e3ed9fc14d78f0ed2292d265ce",
+      "descriptorSha256": "5efd81d11fd692bb55c3f4ed0ceb7b1b356cfa94f7e239d225feeee8da64b1a9"
+    },
+    {
+      "archiveIndex": 30,
+      "readerPage": 31,
+      "count": 7,
+      "imageSha256": "c178697d4778c383c988f215ad48e1ae1f72ad553171276a042e1c4046f6cb0b",
+      "descriptorSha256": "eeca95b2601d2276216dbc39a24cf1fa095275440bc193d1e11330fa07989475"
+    },
+    {
+      "archiveIndex": 31,
+      "readerPage": 32,
+      "count": 6,
+      "imageSha256": "bfcb55c5cbaa118e9bf4f0515b4ea7d6a1279963db5045f9bd897b296f7cab1f",
+      "descriptorSha256": "91582c09319fe5c5762835b9bd9efea8ba778bf12f82e5e020f34b78324a417e"
+    },
+    {
+      "archiveIndex": 32,
+      "readerPage": 33,
+      "count": 3,
+      "imageSha256": "d279ab7d794f4acf27ecbece27e0efe149d0aef1769860c3519200d738514d7b",
+      "descriptorSha256": "577ee00b83fd358a54ee6579b4ec8d2157cfb92bbe92eba17dadfef30fedcc18"
+    },
+    {
+      "archiveIndex": 33,
+      "readerPage": 34,
+      "count": 10,
+      "imageSha256": "5432e6e5501e546547ce04fc671abb21268b3d03441658b1df4198906c0c6168",
+      "descriptorSha256": "addde7d2f3abea8bb4cab3128d4ab3f4d09950c1c083074aac49e8e9f17e284d"
+    },
+    {
+      "archiveIndex": 34,
+      "readerPage": 35,
+      "count": 4,
+      "imageSha256": "e717fa720ec34448fd184d20c419364ad7e3ecbd9d9ef66a65efa74085297842",
+      "descriptorSha256": "18d57bee5b51a643d3cf19e5328794c019b61171d09dae3875ddb54372ac8229"
+    },
+    {
+      "archiveIndex": 35,
+      "readerPage": 36,
+      "count": 2,
+      "imageSha256": "5d42b98e9a9dc2371eb9ba60a1fba4a97487468f76a18741323f3adb790b7b43",
+      "descriptorSha256": "1f7a4a02e442df2191ee4df436024f62600f7db3c1f47a2627565a8c59aaac4d"
+    },
+    {
+      "archiveIndex": 36,
+      "readerPage": 37,
+      "count": 9,
+      "imageSha256": "410266f72f4c27d0303a06a3215de60eef4fd2f93b4c28541bdec66209e3d0e8",
+      "descriptorSha256": "a73f7a4638cc0ce7fa85b54525250e539d1a8805133c2a364c4f202fdf134c29"
+    },
+    {
+      "archiveIndex": 37,
+      "readerPage": 38,
+      "count": 7,
+      "imageSha256": "2bb8b88dd0e7631c1636b3d2b5a9925a987bdba5ded6212117c6be6f15397a31",
+      "descriptorSha256": "1afb04cfdf220f4590c68735d56c1405d68fcd4e63749e2701ec4fd6affec2dd"
+    },
+    {
+      "archiveIndex": 38,
+      "readerPage": 39,
+      "count": 7,
+      "imageSha256": "1a313d5c4e4adcc92e25553e52bb0ad81b10f91ecd6b0518cd21e3113a3340a8",
+      "descriptorSha256": "84a5bde2d5d1661eecc253fdf8f3f6b5b8a22fcc7fe4f655d8db1220096c6107"
+    },
+    {
+      "archiveIndex": 39,
+      "readerPage": 40,
+      "count": 7,
+      "imageSha256": "567ae9e3ef719a56b5ea23f211befc3d263e063339a486f443032046c3981520",
+      "descriptorSha256": "25120772e857730f89efb730185e95f2b4a3dbcca2c055040d955cea057253cd"
+    },
+    {
+      "archiveIndex": 40,
+      "readerPage": 41,
+      "count": 9,
+      "imageSha256": "a904ce9d4ac8828d1ea3984c401f64a5414e89c55e0b279b5cbafeb60803ada9",
+      "descriptorSha256": "30f462fd7e495531ec27a6d08943c4fd0c44dec9ac0e40a84b91aac1b401ac87"
+    },
+    {
+      "archiveIndex": 41,
+      "readerPage": 42,
+      "count": 0,
+      "imageSha256": "fdba80116f43770a5f87a9309b7266b3dd37071505fc9d735f31cb5d5bfb9841",
+      "descriptorSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "archiveIndex": 42,
+      "readerPage": 43,
+      "count": 0,
+      "imageSha256": "b155ad69833884a89a172dd070a1c3b26195fa613249dfa5e02260c2fb572faa",
+      "descriptorSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "archiveIndex": 43,
+      "readerPage": 44,
+      "count": 0,
+      "imageSha256": "acbee896220ee344f867cc9a4fbea9bbca8c800f9d0b2bca269d942b83636882",
+      "descriptorSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "archiveIndex": 44,
+      "readerPage": 45,
+      "count": 3,
+      "imageSha256": "b5043f95d062d10d645c182075c416d9ff6eb5af403f4459a1f585e40ca7ebef",
+      "descriptorSha256": "d74e62c08bdb64faf9035b436b242e6152149034e312ac3c98cfb17c44338af5"
+    },
+    {
+      "archiveIndex": 45,
+      "readerPage": 46,
+      "count": 6,
+      "imageSha256": "098b9ccd6a08ea902f42943afbea685bbeab8d9a2da7b5ffdcbad112d898166f",
+      "descriptorSha256": "9792a7e069ea470d2cdbf93a448b13c2a3f780f4478aad546cb3ceb72ddc0474"
+    },
+    {
+      "archiveIndex": 46,
+      "readerPage": 47,
+      "count": 2,
+      "imageSha256": "10a0e65bbc2924fbeba8a6fc0b50da9af9aff7069b96fac8bd4bdaaabea6d0e3",
+      "descriptorSha256": "0674154142c0a394223af3b5cae0e64a7080e9f686aad4271592853618b5e28d"
+    },
+    {
+      "archiveIndex": 47,
+      "readerPage": 48,
+      "count": 6,
+      "imageSha256": "b3be88bfadddb719eca7ea7e4174163131fee5be211e380124b956524af8fe41",
+      "descriptorSha256": "0a16bbbd819a563ba79d4495703f7414f5b9a93db3fb0e8bf0cd2e0daaad00e6"
+    },
+    {
+      "archiveIndex": 48,
+      "readerPage": 49,
+      "count": 2,
+      "imageSha256": "d2c5355c1c5575c12ca726e82683a35bfd709f131a362127b1ca91dd48796800",
+      "descriptorSha256": "cdffb8100fbc5a50fdfd55f087fec604ccd1a6591c913782b53eb14b4024afd0"
+    },
+    {
+      "archiveIndex": 49,
+      "readerPage": 50,
+      "count": 4,
+      "imageSha256": "e49b0d52f97344a89d21abb1669f443fb8cf962708794aaf1686b5ae1ae24e32",
+      "descriptorSha256": "888f39bbd2b18f89cdf9a1b92acfbd98396cc63d1903c72d189adca2a7a23189"
+    },
+    {
+      "archiveIndex": 50,
+      "readerPage": 51,
+      "count": 2,
+      "imageSha256": "f87bd256d476a60a923e692eb3674c364f06f4fe5b8e708b62e599d100da64dd",
+      "descriptorSha256": "d2c2012f15db28cb89671e1d212c97670669e0b03a15bc4f36f49f62eb6d15f1"
+    },
+    {
+      "archiveIndex": 51,
+      "readerPage": 52,
+      "count": 3,
+      "imageSha256": "a917a824f221954ea317ab34563c53a3116fddd4dd727cded217ed39fe8e4796",
+      "descriptorSha256": "4296a660119972c0d5a61bed46fd3f1441377d3bd8c9b48ce0612f72d01ca7c7"
+    },
+    {
+      "archiveIndex": 52,
+      "readerPage": 53,
+      "count": 2,
+      "imageSha256": "01531ef2c513a3f2a514a87e7e021cf3bb03ecdacfd4c0d5fbf3e8a0b19186cc",
+      "descriptorSha256": "7402bb6db3dde0adf3dfe19db806ea4db6178a9ea895c5e763bb54817e4d1da5"
+    },
+    {
+      "archiveIndex": 53,
+      "readerPage": 54,
+      "count": 3,
+      "imageSha256": "f101b6c874cdf093df427ac161f1c40bdec03e7534deab4fc88a89e6e745ae93",
+      "descriptorSha256": "a3ad46fe10037f0883eeeb47fee360f64610ece385a4a3f9b10f61114b4c6064"
+    },
+    {
+      "archiveIndex": 54,
+      "readerPage": 55,
+      "count": 3,
+      "imageSha256": "9c6b4eedcea565884b867104faf1d4a78b3c1c23e828f738d1925bafe597a495",
+      "descriptorSha256": "27c629423b870e3337b2348c386133b3df68828c1f871f76a4c7512e263e99aa"
+    },
+    {
+      "archiveIndex": 55,
+      "readerPage": 56,
+      "count": 7,
+      "imageSha256": "055abbb6471de119f6872c35113bc4120e86f2b968592f93b441485fabb56ad0",
+      "descriptorSha256": "5b85bee6f7aa77ca13248abe4c1af29229a3058ea5b86fa4f5b204c5dd2fe13f"
+    },
+    {
+      "archiveIndex": 56,
+      "readerPage": 57,
+      "count": 3,
+      "imageSha256": "5c77dc29c4a4dcc1e59675d4d63d6d3abfd5e52333221dd5ae46a18be9cda339",
+      "descriptorSha256": "d54c9143a2c9c804f378188b4313d0c8ce82ca0192f2e1d32307c9e3769ff002"
+    },
+    {
+      "archiveIndex": 57,
+      "readerPage": 58,
+      "count": 0,
+      "imageSha256": "2c1eceea15ffb840c6ce5992488a478be50b9f98ddc2ff42ef3d84a3722409fb",
+      "descriptorSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "archiveIndex": 58,
+      "readerPage": 59,
+      "count": 2,
+      "imageSha256": "eeb1f75e3fecb39c455d38724d2ab0e5cd5f24b8aaeb57c18a7717bdc60bdf08",
+      "descriptorSha256": "82c13bb0c749522db9104e3a3e53d34cd368530698c07925b671ccd18a0fb00c"
+    },
+    {
+      "archiveIndex": 59,
+      "readerPage": 60,
+      "count": 3,
+      "imageSha256": "985e2d797f037a2ae055366dbc1d0214db65d887bab3c01ab1d1ee852b22552e",
+      "descriptorSha256": "4f8bf839d71fed2ce1d5b30629816257f4986d0e65824eee5628cf8d7e731bea"
+    },
+    {
+      "archiveIndex": 60,
+      "readerPage": 61,
+      "count": 5,
+      "imageSha256": "0e9072260277a8d05747dc986417a74ed4313b9013b6f8e36ceec6763ef2de34",
+      "descriptorSha256": "b3101dc8336903b0793297ff16a79db67a9ae6baa1ead69f2f72d69917da3f28"
+    },
+    {
+      "archiveIndex": 61,
+      "readerPage": 62,
+      "count": 2,
+      "imageSha256": "ddb40aac2e155124c0d90792c7a06bc5533577eadd269c1d0bd025fa80cf0959",
+      "descriptorSha256": "ae2b582ef0dfcda91292a26361e7d49b36fce2dd19ff71b4a2e1616aa2188e49"
+    },
+    {
+      "archiveIndex": 62,
+      "readerPage": 63,
+      "count": 2,
+      "imageSha256": "e769a6ae9de734d941af161bab1dd4b60699e507ac3859342297e896f4b479b5",
+      "descriptorSha256": "8a53d876e8d054a4fdff83a621d92f6926fa7762fdc7bd15202c0d2931bccaf6"
+    },
+    {
+      "archiveIndex": 63,
+      "readerPage": 64,
+      "count": 1,
+      "imageSha256": "15b94a00c60959e83f99e3762a2e824d5352b985925a747c0d5e2fd926e0ec70",
+      "descriptorSha256": "77fe6158a8b8d5579025a304cb6dc6dcd6d9d73268a512d50747f82b53eff5f5"
+    },
+    {
+      "archiveIndex": 64,
+      "readerPage": 65,
+      "count": 0,
+      "imageSha256": "c5b5eb4dea3d190759759f24fa3894f296043ca3f19f2d8335f478c951238ec1",
+      "descriptorSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "archiveIndex": 65,
+      "readerPage": 66,
+      "count": 0,
+      "imageSha256": "ef00bcf253919e8c91ceb7caf84fc1e2e809bfd2936eb1467ff1d5c7f76cfb26",
+      "descriptorSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "archiveIndex": 66,
+      "readerPage": 67,
+      "count": 4,
+      "imageSha256": "92c23e47cb63a3a188d05e28745145c0e5382ca38ccca698558b109eb8052286",
+      "descriptorSha256": "df9dec4140aa01d2e7a0012bc51285a2b21dacb85c9ac5e3d3a139c9846b275f"
+    },
+    {
+      "archiveIndex": 67,
+      "readerPage": 68,
+      "count": 4,
+      "imageSha256": "4ccee72fb0b3fd88b4dff7ea07ebea8d9dfd99ef3cdbe2e77903c312617edf6f",
+      "descriptorSha256": "35a9d564d7fc1d02638fb52db32ab58cb0ec28830c35af05ad51cee8702be5ed"
+    },
+    {
+      "archiveIndex": 68,
+      "readerPage": 69,
+      "count": 3,
+      "imageSha256": "8cafcf039e9a82d857395c72b99d90437af25eab9e1f5eecdfb000523b15a1b3",
+      "descriptorSha256": "2785ddbe105e2c439fc5b3aafde66713f47115dbee0bf85a2be86266524bb6e4"
+    },
+    {
+      "archiveIndex": 69,
+      "readerPage": 70,
+      "count": 0,
+      "imageSha256": "ec4dc610ea0c384c37bfed5b177369c6edba06a801f074c48f3a3883c17bf5ea",
+      "descriptorSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "archiveIndex": 70,
+      "readerPage": 71,
+      "count": 0,
+      "imageSha256": "edf35664b9fc0437b29e27fffab97a5937c5d039b573d3e1507e43057017e904",
+      "descriptorSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "archiveIndex": 71,
+      "readerPage": 72,
+      "count": 4,
+      "imageSha256": "6fed0d11fd41e7331e4fcb3aa003507f51c7e024ff0311f23a8192f6c96d8faa",
+      "descriptorSha256": "a62d28d8ee3cc61f3d9d59f1ff64c6422f781341a25dabec29288dffb123c92c"
+    },
+    {
+      "archiveIndex": 72,
+      "readerPage": 73,
+      "count": 2,
+      "imageSha256": "18f9810b0aa7ef3c5626fd281ca910aa7e99b2c3222071cc26a5e562ca12d3b2",
+      "descriptorSha256": "090feda5da9051f8100d305ec5453af11b89b9925b088b70ae10f14025c57265"
+    },
+    {
+      "archiveIndex": 73,
+      "readerPage": 74,
+      "count": 6,
+      "imageSha256": "75b8e9be16118ec807a88d9c096609d89dcefda085e3f5bd163c3ed149220612",
+      "descriptorSha256": "1f3012e45bf03ce8ed82f61cefa112f77231ecf546e095db52ded3478918edc4"
+    }
+  ]
+}
