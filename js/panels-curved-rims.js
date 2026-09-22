@@ -1,4 +1,4 @@
-/* Nth Shelf — curved pale-rim network (2.79.33 candidate).
+/* Nth Shelf — broad-spectrum pale-rim network (2.79.34 candidate).
  * EMPTY MAP ONLY. Pixel-derived transverse paths plus a terminal fan; no
  * filenames, page indices, fingerprints, supplied points, or saved crop table.
  * Path search proposes separators, not rectangles. A complete noncrossing
@@ -57,7 +57,7 @@ const PanelCurvedRims = (() => {
     const x0=Math.round(w*.045),x1=w-1-x0,L=x1-x0+1,left=new Float64Array(h),right=new Float64Array(h);
     for(let y=0;y<h;y++)for(let dx=0;dx<12;dx++){left[y]+=score[y*w+x0+dx]/12;right[y]+=score[y*w+x1-dx]/12;}
     const starts=bands(left,.65,0,h),ends=bands(right,.65,0,h),candidates=[];
-    if(starts.length<5||starts.length>24||ends.length<5||ends.length>24)return null;
+    if(starts.length<4||starts.length>24||ends.length<4||ends.length>24)return null;
     for(const [lo,hi] of starts){
       let dp=new Float64Array(h).fill(1e6);for(let y=lo;y<=hi;y++)dp[y]=0;
       const back=new Int16Array(L*h);
@@ -92,11 +92,11 @@ const PanelCurvedRims = (() => {
     let chosen=null;
     for(let i=0;i<candidates.length;i++)if(candidates[i].average>h*.94&&(!chosen||best[i].ids.length>chosen.ids.length||best[i].ids.length===chosen.ids.length&&best[i].cost<chosen.cost))chosen=best[i];
     // Several transverse scenes and a separate terminal fan are compulsory.
-    if(!chosen||chosen.ids.length<6||chosen.ids.length>10)return null;
+    if(!chosen||chosen.ids.length<4||chosen.ids.length>10)return null;
     const paths=chosen.ids.map(c=>c.ys),evidence=paths.map(p=>pathEvidence(score,p.map((y,i)=>[x0+i,y]),w));
-    if(evidence.some((e,i)=>e.matched/e.samples<(i===paths.length-1?.94:.96)||e.maxGap>(i===paths.length-1?20:10)))return null;
+    if(evidence.some(e=>e.matched/e.samples<.94||e.maxGap>20))return null;
     const terminal=paths[paths.length-2],drop=Math.max(...terminal)-(terminal[0]+terminal[L-1])/2;
-    if(drop<h*.12||mean(paths[paths.length-1])-mean(terminal)<h*.18)return null;
+    if(mean(paths[paths.length-1])-mean(terminal)<h*.18)return null;
     log?.('curved rims: transverse paths '+paths.length);
     return {x0,x1,paths,evidence};
   }
@@ -122,10 +122,10 @@ const PanelCurvedRims = (() => {
           if(Math.abs(y-upper[x])<=2&&y0-y>h*.15){const c=next[x]/(y0-y+1);if(c<best){best=c;bx=x;by=y;}}
         }dp=next;
       }
-      if(best>=.14){rejected.push({bottom:[lo,hi],cost:best});continue;}
+      if(best>=.16){rejected.push({bottom:[lo,hi],cost:best});continue;}
       let x=bx;const path=[];for(let y=by;y<=y0;y++){path.push([x,y]);x=back[y*w+x];}
       const ev=pathEvidence(score,path,w);
-      if(ev.matched/ev.samples<.96||ev.maxGap>10){rejected.push({bottom:[lo,hi],...ev});continue;}
+      if(ev.matched/ev.samples<.94||ev.maxGap>10){rejected.push({bottom:[lo,hi],...ev});continue;}
       if(paths.some(p=>Math.abs(p[p.length-1][0]-path[path.length-1][0])<w*.08))return null;
       paths.push(path);evidence.push(ev);
     }
@@ -199,17 +199,50 @@ const PanelCurvedRims = (() => {
     if(discarded>w*h*.002)return null;
     return {reassigned,discarded};
   }
-  function raster(rgba,gray,w,h,model,fan,base){
+  function reconcileComponentsBroad(labels,gray,w,h,count){
+    const core=new Uint8Array(w*h),small=[];let discarded=0,reassigned=0,retainedComponents=0;
+    const minCore=w*h*.001;
+    for(let k=1;k<=count;k++){
+      const mask=new Uint8Array(w*h);for(let i=0;i<mask.length;i++)mask[i]=labels[i]===k;
+      const cc=components(mask,w,h);if(!cc||!cc.items.length)return null;
+      const sorted=cc.items.slice().sort((a,b)=>b.pixels-a.pixels),total=sum(sorted.map(c=>c.pixels));
+      if(total<w*h*.035||sorted[0].pixels<w*h*.012)return null;
+      const large=new Set(sorted.filter(c=>c.pixels>=minCore).map(c=>c.id));
+      if(large.size>24)return null;
+      const tiny=new Set(sorted.filter(c=>c.pixels<minCore).map(c=>c.id));
+      const pixels=new Map(sorted.filter(c=>tiny.has(c.id)).map(c=>[c.id,[]]));
+      retainedComponents+=large.size;
+      for(let i=0;i<labels.length;i++){
+        const id=cc.ids[i];
+        if(large.has(id)){core[i]=k;}
+        else if(tiny.has(id))pixels.get(id).push(i);
+      }
+      for(const a of pixels.values())small.push({owner:k,pixels:a});
+    }
+    for(const s of small){
+      const owners=new Set();
+      for(const i of s.pixels){const x=i%w,y=i/w|0;for(const j of [x?i-1:-1,x+1<w?i+1:-1,y?i-w:-1,y+1<h?i+w:-1])if(j>=0&&core[j])owners.add(core[j]);}
+      const owner=owners.size===1?[...owners][0]:0;
+      for(const i of s.pixels){labels[i]=owner;if(owner)reassigned++;else discarded++;}
+    }
+    if(discarded>w*h*.02)return null;
+    return {reassigned,discarded,retainedComponents,mode:'broad'};
+  }
+  function raster(rgba,gray,w,h,model,fan,matte,mode='legacy'){
     const paths=model.paths.map(p=>extended(p,model.x0,w)),upper=paths[paths.length-2],labels=new Uint8Array(w*h),terminal=paths.length-1,count=terminal+fan.paths.length;
     const fanX=fan.paths.map(ps=>Array.from({length:h},(_,y)=>ps[Math.max(0,Math.min(ps.length-1,y-ps[0][1]))][0]));
-    const mask=new Uint8Array(w*h);for(let i=0;i<mask.length;i++)mask[i]=gray[i]<=base+15;const outside=flood(mask,w,h);
+    const mask=new Uint8Array(w*h);
+    if(mode==='edge-color'){
+      const c=matte.color;for(let i=0;i<mask.length;i++)mask[i]=Math.max(Math.abs(rgba[i*4]-c[0]),Math.abs(rgba[i*4+1]-c[1]),Math.abs(rgba[i*4+2]-c[2]))<=18;
+    }else for(let i=0;i<mask.length;i++)mask[i]=gray[i]<=matte.base+15;
+    const outside=flood(mask,w,h);
     for(let y=0;y<h;y++)for(let x=0;x<w;x++){
       let k=1;for(let j=1;j<paths.length-1;j++)if(y>=paths[j][x])k++;
       if(k>=terminal)for(const xs of fanX)if(x>xs[y])k++;
       labels[y*w+x]=outside[y*w+x]?0:k;
     }
     const balloons=whiteOwnership(rgba,gray,labels,w,h,count);if(!balloons)return null;
-    const cleanup=reconcileComponents(labels,gray,w,h,count);if(!cleanup)return null;
+    const cleanup=(mode==='edge-color'?reconcileComponentsBroad:reconcileComponents)(labels,gray,w,h,count);if(!cleanup)return null;
     const stats=Array.from({length:count},()=>({pixels:0,total:0,total2:0,dark:0,light:0}));
     for(let i=0;i<labels.length;i++)if(labels[i]){const s=stats[labels[i]-1],g=gray[i];s.pixels++;s.total+=g;s.total2+=g*g;s.dark+=g<45;s.light+=g>170;}
     for(const s of stats){s.mean=s.total/s.pixels;s.variance=s.total2/s.pixels-s.mean*s.mean;delete s.total;delete s.total2;}
@@ -246,8 +279,10 @@ const PanelCurvedRims = (() => {
     const image=input(rgba,w,h);if(!image)return [];
     const hs=evidenceImage(image.gray,image.pale,w,h,false),model=horizontal(hs,w,h,log);if(!model)return [];
     const vs=evidenceImage(image.gray,image.pale,w,h,true),fan=terminalFan(vs,w,h,model,log);if(!fan)return [];
-    const r=raster(rgba,image.gray,w,h,model,fan,image.matte.base);if(!r){log?.('curved rims: raster/ownership withheld');return [];}
-    const network={model,fan,matte:image.matte,balloons:r.balloons,cleanup:r.cleanup,stats:r.stats};
+    let rasterMode='legacy',r=raster(rgba,image.gray,w,h,model,fan,image.matte,rasterMode);
+    if(!r){rasterMode='edge-color';r=raster(rgba,image.gray,w,h,model,fan,image.matte,rasterMode);}
+    if(!r){log?.('curved rims: raster/ownership withheld');return [];}
+    const network={model,fan,matte:image.matte,balloons:r.balloons,cleanup:r.cleanup,stats:r.stats};if(rasterMode!=='legacy')network.rasterMode=rasterMode;
     const out=[];
     for(let k=1;k<=r.count;k++){
       const rings=trace(r.labels,w,h,k);if(!rings||!rasterMatches(rings,r.labels,w,h,k))return [];
@@ -261,31 +296,34 @@ const PanelCurvedRims = (() => {
     const p=panel?._curvedRimProof,w=p?.analysisWidth,h=p?.analysisHeight,n=p?.network,m=n?.model,f=n?.fan,rings=p?.pixelContours;
     if(panel?._identitySource!=='curved-rim-frame'||p.version!==1||p.method!==METHOD||!Number.isInteger(w)||!Number.isInteger(h)||!ok(w,300,900)||!ok(h,500,900)||!ok(w/h,.50,.85)||!m||!f)return false;
     if(panel._geometryOwner!==undefined&&panel._geometryOwner!=='curved-rim-contours'||panel._geometryType!==undefined&&panel._geometryType!=='noncrossing-pale-rim-network')return false;
-    if(m.x0!==Math.round(w*.045)||m.x1!==w-1-m.x0||!Array.isArray(m.paths)||!ok(m.paths.length,6,10)||!Array.isArray(f.paths)||!ok(f.paths.length,2,5))return false;
+    if(m.x0!==Math.round(w*.045)||m.x1!==w-1-m.x0||!Array.isArray(m.paths)||!ok(m.paths.length,4,10)||!Array.isArray(f.paths)||!ok(f.paths.length,2,5))return false;
     const L=m.x1-m.x0+1,count=m.paths.length-1+f.paths.length;
     if(!Number.isInteger(p.index)||!ok(p.index,0,count-1)||m.paths.some(ps=>!Array.isArray(ps)||ps.length!==L||ps.some((y,i)=>!Number.isInteger(y)||y<0||y>=h||i&&Math.abs(y-ps[i-1])>3)))return false;
     if(mean(m.paths[0])>=h*.06||mean(m.paths[m.paths.length-1])<=h*.94)return false;
     for(let k=1;k<m.paths.length;k++)if(m.paths[k].some((y,i)=>y<=m.paths[k-1][i]))return false;
     const ev=(e,min,gap)=>e&&Number.isInteger(e.samples)&&e.samples>100&&Number.isInteger(e.matched)&&ok(e.matched/e.samples,min,1)&&Number.isInteger(e.maxGap)&&ok(e.maxGap,0,gap)&&ok(e.cost,0,.20)&&Array.isArray(e.quarters)&&e.quarters.length===4&&e.quarters.every(q=>Number.isInteger(q.samples)&&Number.isInteger(q.matched)&&ok(q.matched,0,q.samples))&&sum(e.quarters.map(q=>q.samples))===e.samples&&sum(e.quarters.map(q=>q.matched))===e.matched;
-    if(!Array.isArray(m.evidence)||m.evidence.length!==m.paths.length||m.evidence.some((e,i)=>e.samples!==L||!ev(e,i===m.paths.length-1?.94:.96,i===m.paths.length-1?20:10)))return false;
-    if(!Array.isArray(f.evidence)||f.evidence.length!==f.paths.length||f.evidence.some(e=>!ev(e,.96,10)))return false;
+    if(!Array.isArray(m.evidence)||m.evidence.length!==m.paths.length||m.evidence.some((e,i)=>e.samples!==L||!ev(e,.94,20)))return false;
+    if(!Array.isArray(f.evidence)||f.evidence.length!==f.paths.length||f.evidence.some(e=>!ev(e,.94,10)))return false;
     if(f.paths.some((ps,k)=>!Array.isArray(ps)||ps.length!==f.evidence[k].samples||ps.some((p,i)=>!Array.isArray(p)||p.length!==2||p.some(v=>!Number.isInteger(v))||!ok(p[0],0,w-1)||!ok(p[1],0,h-1)||i&&(p[1]!==ps[i-1][1]+1||Math.abs(p[0]-ps[i-1][0])>3))))return false;
     // The proof's terminal seams must still join the measured upper/lower rims,
     // stay in the terminal region, and remain disjoint in left-to-right order.
     if(panel._quad||panel._outline)return false;
     const top=m.paths[m.paths.length-2],bottom=m.paths[m.paths.length-1];
     const yy=(ps,x)=>ps[Math.max(0,Math.min(L-1,x-m.x0))];
-    if(Math.max(...top)-(top[0]+top[L-1])/2<h*.12||mean(bottom)-mean(top)<h*.18)return false;
+    if(mean(bottom)-mean(top)<h*.18)return false;
     for(let k=0;k<f.paths.length;k++){
       const ps=f.paths[k],a=ps[0],b=ps[ps.length-1];
       if(Math.abs(a[1]-yy(top,a[0]))>4||Math.abs(b[1]-yy(bottom,b[0]))>16||ps.some(([x,y])=>y<yy(top,x)-4||y>yy(bottom,x)+4))return false;
       if(k){const prior=f.paths[k-1];for(const [x,y] of ps){const i=y-prior[0][1];if(i>=0&&i<prior.length&&x<=prior[i][0])return false;}}
     }
     const matte=n.matte;if(!matte||!Array.isArray(matte.color)||matte.color.length!==3||matte.color.some(v=>!Number.isInteger(v)||!ok(v,0,255))||matte.base!==matte.color[0]*.299+matte.color[1]*.587+matte.color[2]*.114||!ok(matte.base,0,25)||!Number.isInteger(matte.samples)||matte.samples!==2*(Math.ceil(w/2)+Math.ceil(h/2))||!Number.isInteger(matte.matched)||!ok(matte.matched/matte.samples,.96,1))return false;
+    if(n.rasterMode!==undefined&&n.rasterMode!=='edge-color')return false;
     if(!Array.isArray(n.stats)||n.stats.length!==count||n.stats.some(s=>!Number.isInteger(s.pixels)||!ok(s.pixels/(w*h),.035,.4)||!ok(s.mean,20,210)||!ok(s.variance,500,16257)||!Number.isInteger(s.dark)||!ok(s.dark/s.pixels,.04,1)||!Number.isInteger(s.light)||!ok(s.light/s.pixels,.015,1)))return false;
     if(!Number.isInteger(p.pixels)||p.pixels!==n.stats[p.index].pixels||!Array.isArray(rings)||!ok(rings.length,1,64)||rings.some(q=>!Array.isArray(q)||!ok(q.length,4,4096)||q.some((v,i)=>!Array.isArray(v)||v.length!==2||v.some(a=>!Number.isInteger(a))||!ok(v[0],0,w)||!ok(v[1],0,h)||(v[0]!==q[(i+1)%q.length][0]&&v[1]!==q[(i+1)%q.length][1]))))return false;
     if(sum(rings.map(area))!==p.pixels||JSON.stringify(panel._contours)!==JSON.stringify(rings.map(q=>q.map(([x,y])=>({x:x/w,y:y/h})))))return false;
-    if(!n.cleanup||!Number.isInteger(n.cleanup.discarded)||!ok(n.cleanup.discarded,0,w*h*.002)||!Number.isInteger(n.cleanup.reassigned)||n.cleanup.reassigned<0||!Array.isArray(n.balloons))return false;
+    const cleanupLimit=n.rasterMode==='edge-color'?w*h*.02:w*h*.002;
+    if(!n.cleanup||!Number.isInteger(n.cleanup.discarded)||!ok(n.cleanup.discarded,0,cleanupLimit)||!Number.isInteger(n.cleanup.reassigned)||n.cleanup.reassigned<0||!Array.isArray(n.balloons))return false;
+    if(n.rasterMode==='edge-color'&&n.cleanup.mode!=='broad')return false;
     if(n.balloons.some(b=>!Number.isInteger(b.owner)||!ok(b.owner,1,count)||!Number.isInteger(b.filled)||b.filled<250||!Array.isArray(b.votes)||b.votes.length!==count+1||sum(b.votes)!==b.filled||b.votes[b.owner]/b.filled<.55||b.pixels/b.filled<.5))return false;
     const b=bounds(rings.flat());return ['x','y','w','h'].every(k=>Number.isFinite(panel[k]))&&Math.max(Math.abs(panel.x-b[0]/w),Math.abs(panel.y-b[1]/h),Math.abs(panel.w-(b[2]-b[0])/w),Math.abs(panel.h-(b[3]-b[1])/h))<1e-10;
   }catch(_){return false;}}

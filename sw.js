@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.33 — PAGE42 CURVED-RIM CANDIDATE
-// Browser-tested candidate; Android build and phone acceptance remain pending.
+// NTH SHELF 2.79.34 — BROAD-SPECTRUM IRREGULAR-RIM CANDIDATE
+// Page42 preservation + page43 browser candidate; phone acceptance remains pending.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.33";
+const CACHE_NAME = "nth-shelf-shell-2.79.34";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",

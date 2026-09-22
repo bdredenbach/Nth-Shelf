@@ -329,8 +329,9 @@ const PanelDetect = {
               if(additions.length)closed=closed.concat(additions);
             }
           }catch(error){if(log)log(`residual exterior scene deferred: ${error.message}`);}
-          // Curved pale-rim network: strictly empty-map-only. Earlier results
-          // keep their exact descriptor bytes and order.
+          // Broad-spectrum pale-rim network: strictly empty-map-only. Earlier results
+          // keep their exact descriptor bytes and order; alternate matte ownership
+          // is used only when the legacy raster cannot prove a complete map.
           if(!closed.length){
             try{if(typeof PanelCurvedRims!=='undefined')closed=PanelCurvedRims.analyzeImage(img,log);}
             catch(error){if(log)log(`curved rim network deferred: ${error.message}`);}

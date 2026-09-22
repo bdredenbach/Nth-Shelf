@@ -1,0 +1,19 @@
+{
+  "count": 5,
+  "owners": [0, 1, 2, 3, 4],
+  "touches": [
+    {"index":0,"mode":"edge-color","focusValid":true,"contoursEqual":true,"geometry":"contours","canvasSize":[1934,1199],"pixelReference":{"differences":0,"pixels":2318866}},
+    {"index":1,"mode":"edge-color","focusValid":true,"contoursEqual":true,"geometry":"contours","canvasSize":[1923,1314],"pixelReference":{"differences":0,"pixels":2526822}},
+    {"index":2,"mode":"edge-color","focusValid":true,"contoursEqual":true,"geometry":"contours","canvasSize":[690,1355],"pixelReference":{"differences":0,"pixels":934950}},
+    {"index":3,"mode":"edge-color","focusValid":true,"contoursEqual":true,"geometry":"contours","canvasSize":[867,1341],"pixelReference":{"differences":0,"pixels":1162647}},
+    {"index":4,"mode":"edge-color","focusValid":true,"contoursEqual":true,"geometry":"contours","canvasSize":[850,1321],"pixelReference":{"differences":0,"pixels":1122850}}
+  ],
+  "pageErrors": [],
+  "browser": "144.0.7559.96",
+  "fixture": {
+    "readerPage": 43,
+    "archiveIndex": 42,
+    "imageSha256": "b155ad69833884a89a172dd070a1c3b26195fa613249dfa5e02260c2fb572faa",
+    "committedComicArtwork": false
+  }
+}
