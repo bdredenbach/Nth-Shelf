@@ -2,6 +2,12 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.38 — occluded bottom-tier structural candidate
+
+Test38 fixes Reader page27's lower tier without tap-dependent geometry rescue. Two straight lower panels are now orthogonal page-wide owners, while the foreground-occluded middle/right boundary produces one larger outlined right scene. The new route is a bounded extension of `js/panels-structural-grid.js`; it requires two validated local-island anchors, one validated matte-neighbor anchor, a complete structural grid, an interrupted dark seam and a terminal cap. No comic/page identity keys are used.
+
+Page27 browser verification passed 11/11 lower-tier directional taps plus an extra foreground-under-middle tap with zero page errors. Page23's Test37 descriptors remain exact. Page13 and page23 are phone-accepted; page27 phone acceptance is pending. See [Test38 results](qa27900/frame-accuracy/test38/RESULTS.md) and [handoff](HANDOFF-2.79.38.md).
+
 ## 2.79.37 — tap-independent structural grid candidate
 
 Test37 promotes conservative V100 guillotine evidence into a page-wide map only when two stronger perimeter anchors (`rim-frame` + `bleed-strip-frame`) independently corroborate the grid. Reader page23 now has six page-wide owners instead of two, so four panels no longer depend on tap-position rescue. The existing irregular upper-left rim and bottom bleed strip are preserved exactly.
@@ -108,6 +114,11 @@ The private comic can additionally be used with
 check. The comic itself is not stored in Git.
 
 
-## Current Test37 identity
+## Test37 identity
 
 The current shell cache is `nth-shelf-shell-2.79.37`. Android debug builds use versionName **2.79.37**, versionCode **27965**, package `io.github.bdredenbach.nthshelf.frametest37`, and label **Nth Shelf Test37**. Test37 adds `js/panels-structural-grid.js`; Test36 edge-spill behavior remains included.
+
+
+## Current Test38 identity
+
+The current shell cache is `nth-shelf-shell-2.79.38`. Android debug builds use versionName **2.79.38**, versionCode **27966**, package `io.github.bdredenbach.nthshelf.frametest38`, and label **Nth Shelf Test38**. Test36 edge-spill and Test37 structural-grid behavior remain included.

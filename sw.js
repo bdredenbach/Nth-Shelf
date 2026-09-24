@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.37 — TAP-INDEPENDENT STRUCTURAL GRID CANDIDATE
-// Pages42-44 preservation/expansion plus whole-comic empty-map sweep; phone acceptance remains pending.
+// NTH SHELF 2.79.38 — OCCLUDED BOTTOM-TIER STRUCTURAL CANDIDATE
+// Page13 and page23 accepted; page27 bottom-tier completion pending phone acceptance.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.37";
+const CACHE_NAME = "nth-shelf-shell-2.79.38";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",

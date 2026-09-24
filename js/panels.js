@@ -350,6 +350,16 @@ const PanelDetect = {
               if(completed.length>closed.length)closed=completed;
             }
           }catch(error){if(log)log(`structural grid completion deferred: ${error.message}`);}
+          // Test38: a three-anchor structural page may contain a terminal
+          // bottom tier where foreground art occludes one internal seam. The
+          // two straight cells remain orthogonal; the larger remainder keeps
+          // an explicit visible L-outline instead of four tap-derived quads.
+          try {
+            if(typeof PanelStructuralGrid!=='undefined'&&closed.length===3&&PanelStructuralGrid.completeOccludedTierImage){
+              const completed=PanelStructuralGrid.completeOccludedTierImage(img,closed,log);
+              if(completed.length>closed.length)closed=completed;
+            }
+          }catch(error){if(log)log(`occluded structural tier deferred: ${error.message}`);}
           resolve(closed);
         }
         catch (err) {

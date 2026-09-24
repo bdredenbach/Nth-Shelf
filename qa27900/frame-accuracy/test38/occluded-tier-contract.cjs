@@ -1,0 +1,13 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'../../..'),D=require(path.join(root,'js/panels-structural-grid.js'));
+const W=300,H=450,leftBox=[0,300,62,412],mergedBox=[66,300,299,449],seam=120,cap=430;
+const base={version:2,method:'tap-independent-bottom-tier-occluded-seam-v1',connected:true,analysisWidth:W,analysisHeight:H,anchorSources:['local-island-frame','local-island-frame','matte-neighbor-frame'],gridCount:7,gridCoverage:.94,leftBox,mergedBox,seam,cap,seamBand:[116,126],capBand:[427,432],vertical:{samples:120,quiet:110,both:80,a:90,b:95,maxGap:5},horizontal:{samples:50,quiet:50,both:40,a:50,b:40,maxGap:0},clusterCount:20,cut:58};
+const middleBox=[66,300,120,430],middlePixels=(120-66+1)*(430-300+1),middle={x:66/W,y:300/H,w:(120-66+1)/W,h:(430-300+1)/H,_identitySource:'structural-grid-frame',_geometryType:'orthogonal',_structuralGridProof:{...base,role:'middle',box:middleBox,stats:{pixels:middlePixels,mean:90,variance:2200,dark:3000,light:1200}}};
+const q=[[121,300],[300,300],[300,450],[66,450],[66,431],[121,431]],rightPixels=(299-120)*(449-300+1),right={x:66/W,y:300/H,w:(300-66)/W,h:(450-300)/H,_identitySource:'structural-grid-frame',_geometryType:'occluded-tier-outline',_geometryOwner:'structural-grid-outline',_outline:q.map(([x,y])=>({x:x/W,y:y/H})),_structuralGridProof:{...base,role:'right',outline:q,stats:{pixels:rightPixels,mean:72,variance:1800,dark:12000,light:2500}}};
+assert(D.validPanel(middle));assert(D.validPanel(right));
+let bad=JSON.parse(JSON.stringify(middle));bad._structuralGridProof.vertical.quiet=20;assert(!D.validPanel(bad));
+bad=JSON.parse(JSON.stringify(right));bad._outline[3].x+=.02;assert(!D.validPanel(bad));
+bad=JSON.parse(JSON.stringify(right));bad._structuralGridProof.anchorSources[2]='anything-else';assert(!D.validPanel(bad));
+const src=fs.readFileSync(path.join(root,'js/panels-structural-grid.js'),'utf8');for(const forbidden of ['Wolverine (2010-2012) 1000-026.jpg','readerPage:27','80ce12863f06f72deafbefc6197413fdec695cc31264ba85db919af2e3b74bd6'])assert(!src.includes(forbidden));
+console.log(JSON.stringify({middleOrthogonalValid:true,rightOccludedOutlineValid:true,weakRailRejected:true,tamperedOutlineRejected:true,anchorFamilyTamperRejected:true,runtimeFixtureKeysAbsent:true}));

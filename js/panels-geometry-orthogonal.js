@@ -82,6 +82,7 @@ const PanelGeometryOrthogonal = {
   },
 
   _provenOutline(panel) {
+    if(panel?._identitySource==='structural-grid-frame'&&Array.isArray(panel?._outline))return typeof PanelStructuralGrid!=='undefined'&&PanelStructuralGrid.validPanel(panel)?panel._outline.map(p=>({x:p.x,y:p.y})):null;
     if(panel?._identitySource==='terminal-rim-frame')return typeof PanelTerminalFrames!=='undefined'&&PanelTerminalFrames.validPanel(panel)?panel._outline.map(p=>({x:p.x,y:p.y})):null;
     if(panel?._identitySource==='corner-rim-frame')return typeof PanelCornerFrames!=='undefined'&&PanelCornerFrames.validPanel(panel)?panel._outline.map(p=>({x:p.x,y:p.y})):null;
     if(panel?._identitySource==='sloping-edge-frame'&&!(typeof PanelEdgeCells!=='undefined'&&PanelEdgeCells.validPanel(panel)))return null;

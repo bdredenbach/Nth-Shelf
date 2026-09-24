@@ -9,3 +9,8 @@ Recorded private-fixture result: page23 **2 → 6** page-wide identities; four n
 Real Reader/NthPageDeck browser checks: **30/30** center/left/right/north/south ownership points across all six panels; **20/20** focus renders across the four new cells; zero page errors. A middle-right south-point render contains only the intended face panel, not the prior T-shaped merge. Local harness focus calls for the four new page-wide cells took 0.005–0.027 s; the prior V100 center rescue on this page took about 11.6 s. These are local browser timings, not Android guarantees.
 
 Synthetic contract accepts a six-cell grid, rejects proof tampering, and verifies runtime fixture keys are absent. Test36 page13 is phone-accepted. Android build and page23 phone acceptance remain separate gates.
+
+
+## Phone acceptance update — 2026-09-24
+
+The user confirmed Test37 worked on the phone. Reader page23 is accepted. The manual page-by-page queue now advances to page27.
