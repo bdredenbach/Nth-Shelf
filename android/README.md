@@ -22,3 +22,8 @@ Test35 adds the reusable edge-connected matte/paper cell family used by page44
 and the remaining-empty-page sweep. It does not include comic artwork or private
 signing material. GitHub Actions verifies package identity, version, signature
 and exact packaged web files before publishing the debug artifact.
+
+
+## Test37 identity
+
+The current candidate is version **2.79.37** (`versionCode 27965`). Debug builds use `io.github.bdredenbach.nthshelf.frametest37` with label **Nth Shelf Test37**, so Test36 and earlier installs can remain side-by-side. Test37 adds the tap-independent structural-grid completion route used for Reader page23; Test36 edge-spill behavior remains packaged.

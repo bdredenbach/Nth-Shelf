@@ -53,6 +53,8 @@ const PanelGeometry = {
       return {mode:'hold',source:'OPEN-REGION',reason:'neighbor-bounded-matte'};
     if(inferred==='page-layout' && panel?._pageLayoutProof?.closed===true)
       return {mode:'hold',source:'PAGE-LAYOUT',reason:'complete-stacked-frame'};
+    if(inferred==='structural-grid-frame'&&typeof PanelStructuralGrid!=='undefined'&&PanelStructuralGrid.validPanel(panel))
+      return {mode:'hold',source:'STRUCTURAL-GRID',reason:'complete-tap-independent-guillotine-cell'};
     if(inferred==='closed-frame' && panel?._closedFrameProof?.version===1 && panel._closedFrameProof.connected===true)
       return {mode:'hold',source:'CLOSED-FRAME',reason:'independent-connected-borders'};
     if(inferred==='page-partition' && panel?._partitionProof?.version===1 && panel._partitionProof.connected===true)

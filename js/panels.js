@@ -342,6 +342,14 @@ const PanelDetect = {
             try{if(typeof PanelMatteCells!=='undefined')closed=PanelMatteCells.analyzeImage(img,log);}
             catch(error){if(log)log(`matte cell network deferred: ${error.message}`);}
           }
+          // A complete tap-independent guillotine grid may fill missing
+          // cells only when two stronger perimeter anchors corroborate it.
+          try {
+            if(typeof PanelStructuralGrid!=='undefined'&&closed.length===2){
+              const completed=PanelStructuralGrid.completeImage(img,closed,log);
+              if(completed.length>closed.length)closed=completed;
+            }
+          }catch(error){if(log)log(`structural grid completion deferred: ${error.message}`);}
           resolve(closed);
         }
         catch (err) {

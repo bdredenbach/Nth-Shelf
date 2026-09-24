@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.36 — OWNED PAGE-EDGE FOREGROUND SPILL CANDIDATE
+// NTH SHELF 2.79.37 — TAP-INDEPENDENT STRUCTURAL GRID CANDIDATE
 // Pages42-44 preservation/expansion plus whole-comic empty-map sweep; phone acceptance remains pending.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.36";
+const CACHE_NAME = "nth-shelf-shell-2.79.37";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -70,7 +70,8 @@ const SHELL_FILES = [
   "./js/panels-terminal-frames.js",
   "./js/panels-curved-rims.js",
   "./js/panels-matte-cells.js",
-  "./js/panels-edge-spill.js"
+  "./js/panels-edge-spill.js",
+  "./js/panels-structural-grid.js"
 ];
 
 self.addEventListener("install", (event) => {

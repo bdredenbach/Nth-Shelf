@@ -2,6 +2,12 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.37 — tap-independent structural grid candidate
+
+Test37 promotes conservative V100 guillotine evidence into a page-wide map only when two stronger perimeter anchors (`rim-frame` + `bleed-strip-frame`) independently corroborate the grid. Reader page23 now has six page-wide owners instead of two, so four panels no longer depend on tap-position rescue. The existing irregular upper-left rim and bottom bleed strip are preserved exactly.
+
+Page23 browser verification: 30/30 center/left/right/north/south ownership checks and 20/20 focus renders across the four new structural cells, with no page errors. Page13 Test36 is phone-accepted; page23 phone acceptance is pending. See [Test37 results](qa27900/frame-accuracy/test37/RESULTS.md) and [handoff](HANDOFF-2.79.37.md).
+
 ## 2.79.35 — broad-spectrum matte-cell candidate
 
 Test35 extends the general frame system rather than adding a page44 exception.
@@ -100,3 +106,8 @@ node qa27900/frame-accuracy/test35/service-worker.test.cjs
 The private comic can additionally be used with
 `qa27900/frame-accuracy/test35/reader-touch.py` for the recorded page44 Reader
 check. The comic itself is not stored in Git.
+
+
+## Current Test37 identity
+
+The current shell cache is `nth-shelf-shell-2.79.37`. Android debug builds use versionName **2.79.37**, versionCode **27965**, package `io.github.bdredenbach.nthshelf.frametest37`, and label **Nth Shelf Test37**. Test37 adds `js/panels-structural-grid.js`; Test36 edge-spill behavior remains included.

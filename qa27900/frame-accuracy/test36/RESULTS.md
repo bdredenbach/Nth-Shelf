@@ -7,3 +7,8 @@ Private source check at 585×900: the bottom-right frame yields exactly two bott
 Runtime contains no comic title, page number, image hash, tap coordinate or stored crop. Synthetic contract accepts a crossing outlined glyph, rejects a disconnected exterior mark, rejects a tampered proof, and checks runtime fixture keys are absent.
 
 Android build and phone acceptance are pending. Retest page13 bottom-right first, then the other three page13 panels. Do not advance to the page14 marker until page13 is accepted or returned for another focused iteration.
+
+
+## Phone acceptance update — 2026-09-24
+
+The user confirmed Test36 worked on the phone. Reader page13 is accepted; the manual page-by-page queue now advances only when the user names the next page.
