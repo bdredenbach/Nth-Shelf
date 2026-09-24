@@ -10,40 +10,73 @@ The user supplied 12 phone recordings: `180928_1.mp4` through `180928_12.mp4`.
 The recordings were reviewed using two independent signals:
 
 1. The deliberate stop marker is the Reader chrome revealed by the user's inward navigation swipe. The marker is visible through the red **PAGE** and **BUBBLE ZOOM** controls.
-2. Each marked frame is matched back to the original 74-page Wolverine source by artwork features, including panel-focus views, rather than by assuming sequential page order.
+2. Each marked interval is matched back to the original 74-page Wolverine source using an exact ffmpeg timestamp frame and artwork features. Page numbers below are the **Reader page numbers shown on the phone**.
 
 A stop interval is retained when Reader chrome remains visible for about one second or longer.
 
-## Result
+### Numbering rule
 
-There are **36 marked stop intervals** and **34 unique flagged pages**.
+The source archive image suffix is zero-based while the Reader label is one-based:
 
-Flagged pages, in source/Reader order:
+`Reader page = archive image suffix + 1`
 
-**13, 18, 25, 27, 28, 29, 32, 33, 34, 35, 43, 44, 45, 47, 49, 50, 51, 52, 53, 54, 55, 57, 58, 60, 61, 62, 63, 64, 68, 69, 70, 71, 72, 73**
+Example: archive image `...-012.jpg` is Reader **13 / 74**.
 
-Repeated markers:
-- page 13: two stop intervals in part 2
-- page 73: marked at the end of part 11 and again in part 12
+The first draft of this file used approximate OpenCV timestamp seeking and therefore collapsed or shifted several markers. The exact ffmpeg timestamp pass below supersedes that draft.
+
+## Corrected result
+
+There are **36 marked stop intervals** and **36 unique flagged Reader pages**.
+
+Flagged Reader pages, in order:
+
+**13, 14, 18, 25, 27, 28, 29, 32, 33, 35, 36, 43, 44, 45, 47, 49, 50, 51, 52, 53, 54, 55, 57, 59, 60, 61, 62, 63, 64, 68, 69, 70, 71, 72, 73, 74**
 
 Parts with no deliberate navigation-stop marker:
 - part 1
 - part 4
 - part 8
 
-## Marker-to-page trace
+## Exact marker-to-page trace
 
-| Video | Marked interval(s) | Matched page(s) |
-| --- | --- | --- |
-| 180928_2 | 61.0–63.0, 64.5–65.5 | 13, 13 |
-| 180928_3 | 48.5–53.0 | 18 |
-| 180928_5 | 15.0–19.5, 65.5–70.0, 83.0–87.5, 106.0–110.5 | 25, 27, 28, 29 |
-| 180928_6 | 57.5–62.0, 82.5–87.0 | 32, 33 |
-| 180928_7 | 20.5–25.0, 48.5–52.5 | 34, 35 |
-| 180928_9 | 8.5–13.0, 43.5–48.0, 53.5–58.0, 76.0–80.5, 98.0–103.0, 108.0–112.5, 117.0–121.5 | 43, 44, 45, 47, 49, 50, 51 |
-| 180928_10 | 2.5–7.0, 16.5–21.0, 25.5–30.5, 35.0–40.0, 64.0–68.5, 82.5–87.0, 101.0–105.5, 114.5–119.0, 129.0–133.5 | 52, 53, 54, 55, 57, 58, 60, 61, 62 |
-| 180928_11 | 1.0–5.5, 14.0–19.0, 85.5–90.0, 94.5–99.5, 111.5–116.0, 123.0–127.5, 133.0–137.5, 145.5–150.0 | 63, 64, 68, 69, 70, 71, 72, 73 |
-| 180928_12 | 11.5–14.0 | 73 |
+| Video | Marked interval | Archive suffix | Reader page |
+| --- | --- | ---: | ---: |
+| 180928_2 | 61.0–63.0 | 012 | 13 |
+| 180928_2 | 64.5–65.5 | 013 | 14 |
+| 180928_3 | 48.5–53.0 | 017 | 18 |
+| 180928_5 | 15.0–19.5 | 024 | 25 |
+| 180928_5 | 65.5–70.0 | 026 | 27 |
+| 180928_5 | 83.0–87.5 | 027 | 28 |
+| 180928_5 | 106.0–110.5 | 028 | 29 |
+| 180928_6 | 57.5–62.0 | 031 | 32 |
+| 180928_6 | 82.5–87.0 | 032 | 33 |
+| 180928_7 | 20.5–25.0 | 034 | 35 |
+| 180928_7 | 48.5–52.5 | 035 | 36 |
+| 180928_9 | 8.5–13.0 | 042 | 43 |
+| 180928_9 | 43.5–48.0 | 043 | 44 |
+| 180928_9 | 53.5–58.0 | 044 | 45 |
+| 180928_9 | 76.0–80.5 | 046 | 47 |
+| 180928_9 | 98.0–103.0 | 048 | 49 |
+| 180928_9 | 108.0–112.5 | 049 | 50 |
+| 180928_9 | 117.0–121.5 | 050 | 51 |
+| 180928_10 | 2.5–7.0 | 051 | 52 |
+| 180928_10 | 16.5–21.0 | 052 | 53 |
+| 180928_10 | 25.5–30.5 | 053 | 54 |
+| 180928_10 | 35.0–40.0 | 054 | 55 |
+| 180928_10 | 64.0–68.5 | 056 | 57 |
+| 180928_10 | 82.5–87.0 | 058 | 59 |
+| 180928_10 | 101.0–105.5 | 059 | 60 |
+| 180928_10 | 114.5–119.0 | 060 | 61 |
+| 180928_10 | 129.0–133.5 | 061 | 62 |
+| 180928_11 | 1.0–5.5 | 062 | 63 |
+| 180928_11 | 14.0–19.0 | 063 | 64 |
+| 180928_11 | 85.5–90.0 | 067 | 68 |
+| 180928_11 | 94.5–99.5 | 068 | 69 |
+| 180928_11 | 111.5–116.0 | 069 | 70 |
+| 180928_11 | 123.0–127.5 | 070 | 71 |
+| 180928_11 | 133.0–137.5 | 071 | 72 |
+| 180928_11 | 145.5–150.0 | 072 | 73 |
+| 180928_12 | 11.5–14.0 | 073 | 74 |
 
 ## Implementation rule
 
@@ -62,6 +95,6 @@ Work in small related batches (normally 1–3 pages). For every batch:
 
 ## First Test36 batch
 
-Start with **pages 13, 18 and 25**. Page 13 already has historically accepted frame behavior, so its new stop is treated first as a regression check rather than permission to replace the established identity. Pages 18 and 25 are reviewed beside it to identify the first generalizable failure mode.
+Start with **Reader pages 13, 14 and 18**. Pages 13–14 are consecutive stop markers and should be reviewed together. Page 13 already contains historically accepted frame behavior, so its marker is first treated as a regression/coverage check rather than permission to replace established identities. Page 18 is the third exact stop and provides the next independent layout.
 
 Accuracy remains the priority. Keep the 2.79.xx series until frame behavior is consistently correct; 2.80.00 remains reserved for that milestone.
