@@ -2844,6 +2844,11 @@ async setMode(mode) {
          sign = Math.sign(cross);
        }
      }
+     const spillFrame = panel._edgeSpillFrame;
+     if (inside && spillFrame && !Array.isArray(outline) && !(Array.isArray(quad) && quad.length === 4)) {
+       inside = pageX >= spillFrame.x && pageX <= spillFrame.x + spillFrame.w &&
+         pageY >= spillFrame.y && pageY <= spillFrame.y + spillFrame.h;
+     }
      if (!inside) {
        this.resetZoom({ animate: true });
        return;
@@ -3051,6 +3056,14 @@ async setMode(mode) {
    this.applyTransform();
  },
 
+ drawPanelEdgeSpill(context,img,geom,canvasW,canvasH,spill) {
+   if(!spill||!Array.isArray(spill.box)||spill.box.length!==4||!Array.isArray(spill.matte)||spill.matte.length!==3)return;
+   const b=spill.box,dx=(b[0]-geom.x)/geom.w*canvasW,dy=(b[1]-geom.y)/geom.h*canvasH,dw=(b[2]-b[0])/geom.w*canvasW,dh=(b[3]-b[1])/geom.h*canvasH;
+   if(![dx,dy,dw,dh].every(Number.isFinite)||dw<.5||dh<.5)return;const tmp=document.createElement("canvas");tmp.width=Math.max(1,Math.ceil(dw));tmp.height=Math.max(1,Math.ceil(dh));const t=tmp.getContext("2d",{willReadFrequently:true});if(!t)return;t.imageSmoothingEnabled=true;t.imageSmoothingQuality="high";
+   t.drawImage(img,b[0]*img.naturalWidth,b[1]*img.naturalHeight,(b[2]-b[0])*img.naturalWidth,(b[3]-b[1])*img.naturalHeight,0,0,tmp.width,tmp.height);const data=t.getImageData(0,0,tmp.width,tmp.height),a=data.data,matte=spill.matte,cut=Number.isFinite(spill.renderThreshold)?spill.renderThreshold:10;
+   for(let i=0;i<a.length;i+=4){const d=Math.max(Math.abs(a[i]-matte[0]),Math.abs(a[i+1]-matte[1]),Math.abs(a[i+2]-matte[2]));if(d<=cut)a[i+3]=0;else if(d<cut+8)a[i+3]=Math.round(a[i+3]*(d-cut)/8);}t.putImageData(data,0,0);context.drawImage(tmp,dx,dy,dw,dh);
+ },
+
  async zoomToPanel(panel, stageRect, imgRect) {
    if (this.focusMode) return;
    const contours=this.panelContours(panel);
@@ -3096,6 +3109,10 @@ async setMode(mode) {
      }
    }
 
+   const frameGeom={...geom};
+   const edgeSpill=(typeof PanelEdgeSpill!=="undefined"&&PanelEdgeSpill.analyzeImage)?PanelEdgeSpill.analyzeImage(img,panel,this.debugMode?(msg)=>this.debugLog(`[edge-spill] ${msg}`):null):null;
+   if(edgeSpill?.spills?.length){let x0=geom.x,y0=geom.y,x1=geom.x+geom.w,y1=geom.y+geom.h;for(const s of edgeSpill.spills){x0=Math.min(x0,s.box[0]);y0=Math.min(y0,s.box[1]);x1=Math.max(x1,s.box[2]);y1=Math.max(y1,s.box[3]);}geom={x:x0,y:y0,w:x1-x0,h:y1-y0};clipPolygon=null;if(this.debugMode)this.debugLog(`[edge-spill] preserving ${edgeSpill.spills.length} owned margin component(s)`);}
+
    const sourceLeft = imgRect.left + geom.x * imgRect.width;
    const sourceTop = imgRect.top + geom.y * imgRect.height;
    const sourceW = Math.max(8, geom.w * imgRect.width);
@@ -3112,7 +3129,7 @@ async setMode(mode) {
    const sh = geom.h * img.naturalHeight;
 
    this.panelFocusMeta = {
-     panel: { ...geom, _quad: quad || undefined, _outline: outline || undefined, _overlapProof: outline?panel._overlapProof:undefined, _occlusionProof: outline?panel._occlusionProof:undefined, _partitionProof: outline?panel._partitionProof:undefined, _matteOutlineProof: outline?panel._matteOutlineProof:undefined },
+     panel: { ...geom, _quad: quad || undefined, _outline: outline || undefined, _overlapProof: outline?panel._overlapProof:undefined, _occlusionProof: outline?panel._occlusionProof:undefined, _partitionProof: outline?panel._partitionProof:undefined, _matteOutlineProof: outline?panel._matteOutlineProof:undefined, _edgeSpillProof:edgeSpill||undefined, _edgeSpillFrame:edgeSpill?frameGeom:undefined },
      pageIndex: this.index
    };
    if(outline&&panel._identitySource==='terminal-rim-frame')Object.assign(this.panelFocusMeta.panel,{
@@ -3182,23 +3199,10 @@ async setMode(mode) {
    canvas.getContext("2d").imageSmoothingQuality = "high";
    const context=canvas.getContext("2d");
    const cropContours=contours||(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel._identitySource)&&outline?[outline]:null);
-   if(cropContours){
-     // Clip original-resolution pixels with an even-odd compound path. Unlike
-     // a rectangular crop or convex envelope this preserves the transparent
-     // space inside a bent finger and any separate visible neighbour island.
-     context.save();context.beginPath();
-     for(const ring of cropContours){
-       ring.forEach((p,i)=>{const x=(p.x-geom.x)/geom.w*canvasW,y=(p.y-geom.y)/geom.h*canvasH;
-         if(i)context.lineTo(x,y);else context.moveTo(x,y);});
-       context.closePath();
-     }
-     context.clip('evenodd');
-     overlay.dataset.geometry='contours';
-     overlay.style.boxShadow='none';
-     canvas.style.filter='drop-shadow(0 5px 12px rgba(0,0,0,.42))';
-   }
-   context.drawImage(img, sx, sy, sw, sh, 0, 0, canvasW, canvasH);
-   if(cropContours)context.restore();
+   const frameRect=[[frameGeom.x,frameGeom.y],[frameGeom.x+frameGeom.w,frameGeom.y],[frameGeom.x+frameGeom.w,frameGeom.y+frameGeom.h],[frameGeom.x,frameGeom.y+frameGeom.h]].map(([x,y])=>({x,y}));
+   const baseContours=cropContours||(edgeSpill?(polygon?[polygon]:[frameRect]):null),drawBase=()=>context.drawImage(img,sx,sy,sw,sh,0,0,canvasW,canvasH);
+   if(baseContours){context.save();context.beginPath();for(const ring of baseContours){ring.forEach((p,i)=>{const x=(p.x-geom.x)/geom.w*canvasW,y=(p.y-geom.y)/geom.h*canvasH;if(i)context.lineTo(x,y);else context.moveTo(x,y);});context.closePath();}context.clip(cropContours?'evenodd':'nonzero');drawBase();context.restore();overlay.style.boxShadow='none';canvas.style.filter='drop-shadow(0 5px 12px rgba(0,0,0,.42))';overlay.dataset.geometry=cropContours?'contours':'frame-plus-spill';}else drawBase();
+   if(edgeSpill?.spills?.length){for(const spill of edgeSpill.spills)this.drawPanelEdgeSpill(context,img,geom,canvasW,canvasH,spill);overlay.dataset.geometry='edge-spill';}
    overlay.appendChild(canvas);
 
    const pagePad = Math.max(8, Math.min(18, Math.round(Math.min(imgRect.width, imgRect.height) * 0.018)));

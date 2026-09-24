@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.35 — BROAD-SPECTRUM MATTE-CELL CANDIDATE
+// NTH SHELF 2.79.36 — OWNED PAGE-EDGE FOREGROUND SPILL CANDIDATE
 // Pages42-44 preservation/expansion plus whole-comic empty-map sweep; phone acceptance remains pending.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.35";
+const CACHE_NAME = "nth-shelf-shell-2.79.36";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -69,7 +69,8 @@ const SHELL_FILES = [
   "./js/panels-corner-frames.js",
   "./js/panels-terminal-frames.js",
   "./js/panels-curved-rims.js",
-  "./js/panels-matte-cells.js"
+  "./js/panels-matte-cells.js",
+  "./js/panels-edge-spill.js"
 ];
 
 self.addEventListener("install", (event) => {
