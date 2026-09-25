@@ -57,3 +57,8 @@ The current candidate is version **2.79.42** (`versionCode 27970`). Debug builds
 ## Test43 identity
 
 The current candidate is version **2.79.43** (`versionCode 27971`). Debug builds use `io.github.bdredenbach.nthshelf.frametest43` with label **Nth Shelf Test43**. Test43 keeps Test36–42 frame behavior and changes Page-mode forward corner geometry plus the matching tutorial cues.
+
+
+## Test44 identity
+
+The current candidate is version **2.79.44** (`versionCode 27972`). Debug builds use `io.github.bdredenbach.nthshelf.frametest44` with label **Nth Shelf Test44**. Test44 moves the forward top/bottom right-corner hot zones inward and makes the tutorial consume the same live-zone metrics.

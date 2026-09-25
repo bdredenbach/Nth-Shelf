@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.43 — CORNER-FURL PAGE TURN / PRECISION TUTORIAL
+// NTH SHELF 2.79.44 — INSET CORNER GRAB ZONES / CORNER FURL
 // Pages13, 23, 27, 28, 32 and33 accepted; page35 branched stack pending phone acceptance.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.43";
+const CACHE_NAME = "nth-shelf-shell-2.79.44";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",

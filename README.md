@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.44 — inset live corner zones
+
+Test44 calibrates the forward Page-mode grab zones from the follow-up phone video. Test43's furl geometry works once caught, but its upper-right zone begins too close to the page top and its lower-right zone too close to the page bottom.
+
+The upper live zone is now moved **down into the comic** and the lower live zone **up into the comic** by the same responsive inset (about 4.5% of page height, capped at half the grab-zone size). Forward touches outside the visible paper no longer start a corner turn. The tutorial uses the exact same `PageMode.cornerZoneMetrics()` function, so its two red boxes are the actual live hit areas rather than approximations.
+
+Test43's mirrored top-down / bottom-up furl path is retained unchanged. Test42 frame behavior remains packaged. See [Test44 handoff](HANDOFF-2.79.44.md).
+
 ## 2.79.43 — corner-furl page turn + precision tutorial
 
 Test43 targets the Page-mode corner-turn behavior shown in the supplied phone video. The deck already knew whether the upper or lower corner had been grabbed, but an almost-horizontal drag kept that corner at the same Y coordinate; the resulting perpendicular-bisector crease was vertical and looked like the page was rotating from its middle.
@@ -179,3 +187,8 @@ The current shell cache is `nth-shelf-shell-2.79.42`. Android debug builds use v
 ## Current Test43 identity
 
 The current shell cache is `nth-shelf-shell-2.79.43`. Android debug builds use versionName **2.79.43**, versionCode **27971**, package `io.github.bdredenbach.nthshelf.frametest43`, and label **Nth Shelf Test43**.
+
+
+## Current Test44 identity
+
+The current shell cache is `nth-shelf-shell-2.79.44`. Android debug builds use versionName **2.79.44**, versionCode **27972**, package `io.github.bdredenbach.nthshelf.frametest44`, and label **Nth Shelf Test44**.

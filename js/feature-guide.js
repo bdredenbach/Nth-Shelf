@@ -39,7 +39,7 @@ window.ShelfGuide = {
         step('#shelf-carousel','Browse the results','Swipe through covers or use the arrows to move through the results.'),
         step('#search-mode-close','Go back to the shelf','Use Done to close Search Mode and return to the comic grid.')];
       case 'single':return [
-        {...step('#page-viewport','Lift the page from a corner','For a forward turn, start on the comic itself. Drag the lower-right corner inward to lift and furl it UP. Drag the upper-right corner inward to fold it DOWN. Keep your finger down so the corner and crease follow your hand instead of hinging from the page middle.','The two red corner markers are the live grab zones: lower-right ↖ curls up; upper-right ↙ curls down. Use the left edge to go back.'),zone:'turn-corners'},
+        {...step('#page-viewport','Lift the page from inside the corner','For a forward turn, start inside the comic at one of the two red right-edge zones. The upper zone sits slightly BELOW the top corner: drag it inward/down to curl the page DOWN. The lower zone sits slightly ABOVE the bottom corner: drag it inward/up to furl the page UP. Keep your finger down so the corner and crease follow your hand.','The red boxes are the exact live grab zones — not decoration. Start inside a box, then pull inward in the arrow direction. Use the left edge to go back.'),zone:'turn-corners'},
         step('#page-viewport','Look closer at a frame','Tap inside a panel to enlarge that whole frame. Double-tap the focused frame to return to the page.','You can also pinch with two fingers to zoom and drag while zoomed to pan.'),
         step('#bubble-zoom-toggle','Enlarge a speech bubble','Enable Bubble Zoom, then double-tap inside a speech bubble to enlarge its text.'),...controls];
       case 'two-page':return [
@@ -124,10 +124,11 @@ window.ShelfGuide = {
     if(cues){
       cues.hidden=!cornerStep;
       if(cornerStep){
-        const side=Math.min(88,box.width/3,box.height/3),left=Math.max(6,Math.min(w-side-6,box.right-side));
+        const metrics=Reader.turnPageMode?.constructor?.cornerZoneMetrics?.(box.width,box.height)||{size:Math.min(96,box.width*.25,box.height*.25),inset:Math.min(48,box.height*.045)};
+        const side=metrics.size,inset=metrics.inset,left=Math.max(6,Math.min(w-side-6,box.right-side));
         const topCue=cues.querySelector('.top'),bottomCue=cues.querySelector('.bottom');
-        Object.assign(topCue.style,{left:left+'px',top:Math.max(6,box.top)+'px',width:side+'px',height:side+'px'});
-        Object.assign(bottomCue.style,{left:left+'px',top:Math.max(6,Math.min(h-side-6,box.bottom-side))+'px',width:side+'px',height:side+'px'});
+        Object.assign(topCue.style,{left:left+'px',top:Math.max(6,box.top+inset)+'px',width:side+'px',height:side+'px'});
+        Object.assign(bottomCue.style,{left:left+'px',top:Math.max(6,Math.min(h-side-6,box.bottom-inset-side))+'px',width:side+'px',height:side+'px'});
       }
     }
     focus.hidden=cornerStep||!box||box.bottom<0||box.top>h;
