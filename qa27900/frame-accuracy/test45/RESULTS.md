@@ -25,3 +25,8 @@ Runtime contains no comic title, filename, reader page number, image hash, tap c
 A full direct matte-cell sweep over all 74 source pages found five pages with seven matte cells: **17, 32, 36, 44 and56**. Running the Test45 topology gate over those five produced **only page36**; the other four return no completion.
 
 Retained Test37–44 contracts pass locally. Android build and page36 phone acceptance remain separate gates.
+
+
+## Phone rejection update
+
+The user tested Test45 and supplied both a recording and a hand-marked page. The six-owner interpretation was correct, but the rendered polygons were not: the middle scene contained black cutouts / missing regions and the lower shared boundaries did not follow the actual bottom-panel frame edges. Test45 is therefore **not phone-accepted**. Test46 keeps the six-owner grouping but replaces the geometry construction.

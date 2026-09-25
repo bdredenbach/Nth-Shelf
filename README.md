@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.46 — page36 stepped shared-scene v2
+
+Test45 got the **six-frame count** right on Reader page36 but the phone video showed the reconstructed polygons were wrong: the middle scene had black cutouts / missing artwork and the shared lower edges did not match the actual frame rails. The user supplied a marked screenshot confirming the intended six visible owners.
+
+Test46 stops inventing a replacement seam. It keeps the independently proved top-right and two bottom frame envelopes, detects the missing vertical step beside the sheriff inset from its sustained dark rail, and builds the middle scene using the **same proven top edges of the two bottom panels**. The top-left becomes the correct stepped polygon, the sheriff inset remains separate, hallway + Logan remain one middle scene, and the bottom pair stay independent.
+
+The Test46 proof is versioned separately from Test45 so the older contract remains a regression fixture. The same seven-cell eligibility gate is retained, and the added step-rail proof further narrows activation. Page36 phone acceptance is pending.
+
 ## 2.79.45 — stepped shared-scene candidate
 
 Test45 fixes Reader page36's matte-cell over-segmentation. Test44 publishes seven page-wide matte identities, but independent artwork review and phone evidence show **six real frames**: top-left, top-right, sheriff inset, one complete middle scene, bottom-left, and bottom-right. The left hallway and right Logan portions of the middle scene are one owner.
@@ -205,3 +213,8 @@ The current shell cache is `nth-shelf-shell-2.79.44`. Android debug builds use v
 ## Current Test45 identity
 
 The current shell cache is `nth-shelf-shell-2.79.45`. Android debug builds use versionName **2.79.45**, versionCode **27973**, package `io.github.bdredenbach.nthshelf.frametest45`, and label **Nth Shelf Test45**.
+
+
+## Current Test46 identity
+
+The current shell cache is `nth-shelf-shell-2.79.46`. Android debug builds use versionName **2.79.46**, versionCode **27974**, package `io.github.bdredenbach.nthshelf.frametest46`, and label **Nth Shelf Test46**.

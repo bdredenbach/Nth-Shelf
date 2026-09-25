@@ -5,3 +5,8 @@ Test45 targets Reader page36. The existing matte detector over-segments the page
 Local checks: page36 7→6 owners; 30/30 directional ownership/geometry checks; only page36 qualifies among all five seven-cell matte pages in the 74-page fixture. Test44 corner-furl/hot-zone behavior and page35 are phone-accepted.
 
 Android debug identity: `io.github.bdredenbach.nthshelf.frametest45`, version 2.79.45 / code 27973, label `Nth Shelf Test45`. Page36 phone acceptance is pending.
+
+
+## Phone rejection
+
+Test45 was rejected on-device. Owner count was correct, geometry was not. Use Test46 or later for page36.

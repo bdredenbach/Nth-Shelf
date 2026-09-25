@@ -380,6 +380,15 @@ const PanelDetect = {
             try{if(typeof PanelMatteCells!=='undefined')closed=PanelMatteCells.analyzeImage(img,log);}
             catch(error){if(log)log(`matte cell network deferred: ${error.message}`);}
           }
+          // Test46: refine the six-owner interpretation with the real stepped
+          // top-left/inset topology and reuse the independently proved top
+          // edges of the two bottom panels as the shared lower seam.
+          try {
+            if(typeof PanelStructuralGrid!=='undefined'&&closed.length===7&&PanelStructuralGrid.completeSteppedSharedSceneV2Image){
+              const completed=PanelStructuralGrid.completeSteppedSharedSceneV2Image(img,closed,log);
+              if(completed.length===6)closed=completed;
+            }
+          }catch(error){if(log)log(`stepped shared-scene v2 deferred: ${error.message}`);}
           // Test45: one real middle scene can be fragmented by dark artwork
           // into two overlapping matte cells around a separately proved inset.
           // Reconstruct the six visible owners and share one smooth lower seam.

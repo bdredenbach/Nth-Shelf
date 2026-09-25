@@ -5,9 +5,9 @@
     1988,
     3056
   ],
-  "status": "manual-review-draft",
-  "method": "Independent visual review of printed borders, normalized to page width and height. These are draft annotations, not historic detector outputs.",
-  "uncertainty": "Coordinates are approximate (roughly 0.005\u20130.008 normalized units) and require user/artwork review before serving as strict pixel-boundary ground truth. Borders are traced near ink-band centers. Top-left and middle-scene polygons describe visible portions with the foreground inset excluded; do not infer artwork hidden behind that inset.",
+  "status": "user-confirmed-six-frame-structure",
+  "method": "User-marked phone screenshot plus source-page review. Coordinates remain approximate QA annotations and are not runtime detector inputs.",
+  "uncertainty": "The six visible owners are user-confirmed. Coordinates are still approximate (roughly 0.005–0.008 normalized units); runtime Test46 must prove boundaries from page pixels rather than copy these numbers.",
   "frames": [
     {
       "id": "top-left",

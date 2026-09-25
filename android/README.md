@@ -67,3 +67,8 @@ The current candidate is version **2.79.44** (`versionCode 27972`). Debug builds
 ## Test45 identity
 
 The current candidate is version **2.79.45** (`versionCode 27973`). Debug builds use `io.github.bdredenbach.nthshelf.frametest45` with label **Nth Shelf Test45**. Test45 adds the six-owner stepped shared-scene completion used by Reader page36 while retaining Test36–44 frame and corner-furl behavior.
+
+
+## Test46 identity
+
+The current candidate is version **2.79.46** (`versionCode 27974`). Debug builds use `io.github.bdredenbach.nthshelf.frametest46` with label **Nth Shelf Test46**. Test46 retains Test36–45 and Test44 corner behavior, but replaces page36's Test45 polygon reconstruction with the stepped shared-scene v2 proof.
