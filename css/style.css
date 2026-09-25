@@ -2312,6 +2312,24 @@ button.reader-btn.mini-btn {
 .guide-focus { position:fixed; box-sizing:border-box; border:2px solid #ff695b; border-radius:12px;
   box-shadow:0 0 0 9999px #000b,0 0 22px #f43a2b88; pointer-events:none; }
 .guide-dialog.guide-no-target { background:#000b; }
+.guide-corner-cues { position:fixed; inset:0; pointer-events:none; }
+.guide-corner-cue {
+  position:fixed; display:grid; place-items:center; box-sizing:border-box;
+  border:2px solid #ff695b; border-radius:14px; color:#fff;
+  background:rgba(18,10,11,.22);
+  box-shadow:0 0 0 1px #ffffff24,0 0 24px #f43a2baa;
+  font-size:34px; font-weight:900; line-height:1;
+  text-shadow:0 2px 6px #000;
+}
+.guide-corner-cue::before {
+  position:absolute; left:50%; transform:translateX(-50%); width:max-content;
+  max-width:150px; padding:4px 7px; border-radius:999px;
+  background:#171013e8; border:1px solid #ff695b99; color:#fff;
+  font-size:10px; font-weight:800; letter-spacing:.04em; line-height:1.15;
+}
+.guide-corner-cue.top::before { content:"TOP · CURL DOWN"; top:calc(100% + 6px); }
+.guide-corner-cue.bottom::before { content:"BOTTOM · CURL UP"; bottom:calc(100% + 6px); }
+.guide-corner-cues[hidden] { display:none !important; }
 .guide-card { position:fixed; left:50%; transform:translateX(-50%); width:min(92vw,440px);
   max-height:calc(100dvh - 32px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   overflow:auto; box-sizing:border-box; padding:22px; border:1px solid #9c3934; border-radius:20px;

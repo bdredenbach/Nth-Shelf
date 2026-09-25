@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.43 — corner-furl page turn + precision tutorial
+
+Test43 targets the Page-mode corner-turn behavior shown in the supplied phone video. The deck already knew whether the upper or lower corner had been grabbed, but an almost-horizontal drag kept that corner at the same Y coordinate; the resulting perpendicular-bisector crease was vertical and looked like the page was rotating from its middle.
+
+The new corner path guarantees a minimum vertical arc while preserving any stronger finger motion: **lower-right lifts/furls upward** and **upper-right folds downward**. The arc is zero when the page is flat, peaks around mid-turn, and returns smoothly to zero as the sheet lands. The tutorial now marks both actual right-corner grab zones with matching ↖ / ↙ direction cues and explains the same geometry in words.
+
+Test42's page35 frame candidate remains included; page35 phone acceptance is not implied by this animation build. See [Test43 handoff](HANDOFF-2.79.43.md).
+
 ## 2.79.42 — branched stack with curved shared seam
 
 Test42 fixes Reader page35. Test41 publishes one giant upper owner plus three false fragments cut from the final hotel panel. Test42 proves the actual seven-frame topology from a sustained main spine, a second upper-right divider, two horizontal rails, the terminal rail, and a traced curved shared seam between the sheriff and forest panels.
@@ -166,3 +174,8 @@ The current shell cache is `nth-shelf-shell-2.79.41`. Android debug builds use v
 ## Current Test42 identity
 
 The current shell cache is `nth-shelf-shell-2.79.42`. Android debug builds use versionName **2.79.42**, versionCode **27970**, package `io.github.bdredenbach.nthshelf.frametest42`, and label **Nth Shelf Test42**.
+
+
+## Current Test43 identity
+
+The current shell cache is `nth-shelf-shell-2.79.43`. Android debug builds use versionName **2.79.43**, versionCode **27971**, package `io.github.bdredenbach.nthshelf.frametest43`, and label **Nth Shelf Test43**.

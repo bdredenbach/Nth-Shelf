@@ -39,7 +39,7 @@ window.ShelfGuide = {
         step('#shelf-carousel','Browse the results','Swipe through covers or use the arrows to move through the results.'),
         step('#search-mode-close','Go back to the shelf','Use Done to close Search Mode and return to the comic grid.')];
       case 'single':return [
-        {...step('#page-viewport','Turn from a page corner','Drag inward from the upper-right or lower-right corner of the comic to turn forward. Start on the comic itself and keep your finger down to control the fold.','A slow drag should reveal the fold as you move. Use the left edge to go back.'),zone:'corner'},
+        {...step('#page-viewport','Lift the page from a corner','For a forward turn, start on the comic itself. Drag the lower-right corner inward to lift and furl it UP. Drag the upper-right corner inward to fold it DOWN. Keep your finger down so the corner and crease follow your hand instead of hinging from the page middle.','The two red corner markers are the live grab zones: lower-right ↖ curls up; upper-right ↙ curls down. Use the left edge to go back.'),zone:'turn-corners'},
         step('#page-viewport','Look closer at a frame','Tap inside a panel to enlarge that whole frame. Double-tap the focused frame to return to the page.','You can also pinch with two fingers to zoom and drag while zoomed to pan.'),
         step('#bubble-zoom-toggle','Enlarge a speech bubble','Enable Bubble Zoom, then double-tap inside a speech bubble to enlarge its text.'),...controls];
       case 'two-page':return [
@@ -56,7 +56,7 @@ window.ShelfGuide = {
     try{this.seen=JSON.parse(localStorage.getItem(this.key)||'{}');}catch(_){}
     this.dialog=document.createElement('dialog');this.dialog.className='nth-dialog guide-dialog';
     this.dialog.setAttribute('aria-labelledby','nth-guide-title');this.dialog.setAttribute('aria-describedby','nth-guide-copy');
-    this.dialog.innerHTML='<div class="guide-focus" aria-hidden="true" hidden></div><section class="guide-card"><div class="nth-eyebrow">AN NTH EXPERIENCE · NTH SHELF</div><p class="guide-count"></p><h2 id="nth-guide-title" tabindex="-1"></h2><p class="guide-copy" id="nth-guide-copy"></p><p class="guide-tip"></p><div class="nth-dialog-actions"><button class="modal-btn subtle guide-skip">Finish tutorial</button><button class="modal-btn neutral guide-back">← Back</button><button class="modal-btn primary guide-next">Next →</button></div></section>';
+    this.dialog.innerHTML='<div class="guide-focus" aria-hidden="true" hidden></div><div class="guide-corner-cues" aria-hidden="true" hidden><span class="guide-corner-cue top">↙</span><span class="guide-corner-cue bottom">↖</span></div><section class="guide-card"><div class="nth-eyebrow">AN NTH EXPERIENCE · NTH SHELF</div><p class="guide-count"></p><h2 id="nth-guide-title" tabindex="-1"></h2><p class="guide-copy" id="nth-guide-copy"></p><p class="guide-tip"></p><div class="nth-dialog-actions"><button class="modal-btn subtle guide-skip">Finish tutorial</button><button class="modal-btn neutral guide-back">← Back</button><button class="modal-btn primary guide-next">Next →</button></div></section>';
     document.body.append(this.dialog);this.card=this.dialog.querySelector('.guide-card');
     this.dialog.querySelector('.guide-next').onclick=()=>this.advance(1);
     this.dialog.querySelector('.guide-back').onclick=()=>this.advance(-1);
@@ -120,10 +120,19 @@ window.ShelfGuide = {
     const step=this.active.steps[this.active.index],target=this.target(step),focus=this.dialog.querySelector('.guide-focus');
     const h=window.visualViewport?.height||innerHeight,w=window.visualViewport?.width||innerWidth;
     let box=target?.getBoundingClientRect();
-    if(box&&step.zone==='corner'){const side=Math.min(88,box.width/3,box.height/3);box={left:box.right-side,right:box.right,top:box.bottom-side,bottom:box.bottom,width:side,height:side};}
-    focus.hidden=!box||box.bottom<0||box.top>h;
+    const cues=this.dialog.querySelector('.guide-corner-cues'),cornerStep=!!box&&step.zone==='turn-corners';
+    if(cues){
+      cues.hidden=!cornerStep;
+      if(cornerStep){
+        const side=Math.min(88,box.width/3,box.height/3),left=Math.max(6,Math.min(w-side-6,box.right-side));
+        const topCue=cues.querySelector('.top'),bottomCue=cues.querySelector('.bottom');
+        Object.assign(topCue.style,{left:left+'px',top:Math.max(6,box.top)+'px',width:side+'px',height:side+'px'});
+        Object.assign(bottomCue.style,{left:left+'px',top:Math.max(6,Math.min(h-side-6,box.bottom-side))+'px',width:side+'px',height:side+'px'});
+      }
+    }
+    focus.hidden=cornerStep||!box||box.bottom<0||box.top>h;
     if(!focus.hidden){const left=Math.max(6,box.left-5),top=Math.max(6,box.top-5),right=Math.min(w-6,box.right+5),bottom=Math.min(h-6,box.bottom+5);Object.assign(focus.style,{left:left+'px',top:top+'px',width:Math.max(0,right-left)+'px',height:Math.max(0,bottom-top)+'px'});}
-    this.dialog.classList.toggle('guide-no-target',focus.hidden);
+    this.dialog.classList.toggle('guide-no-target',!cornerStep&&focus.hidden);
     this.card.style.top=box&&box.top>h/2?'max(16px, env(safe-area-inset-top))':'auto';
     this.card.style.bottom=box&&box.top>h/2?'auto':'max(16px, env(safe-area-inset-bottom))';
   },

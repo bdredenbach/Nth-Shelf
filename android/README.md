@@ -52,3 +52,8 @@ The current candidate is version **2.79.41** (`versionCode 27969`). Debug builds
 ## Test42 identity
 
 The current candidate is version **2.79.42** (`versionCode 27970`). Debug builds use `io.github.bdredenbach.nthshelf.frametest42` with label **Nth Shelf Test42**. Test42 adds the branched-stack / curved-shared-seam completion used by Reader page35 while retaining Test36–41 behavior.
+
+
+## Test43 identity
+
+The current candidate is version **2.79.43** (`versionCode 27971`). Debug builds use `io.github.bdredenbach.nthshelf.frametest43` with label **Nth Shelf Test43**. Test43 keeps Test36–42 frame behavior and changes Page-mode forward corner geometry plus the matching tutorial cues.
