@@ -124,21 +124,23 @@ const assert = require('node:assert/strict');
   assert.equal(await page.evaluate(()=>Reader.chromeVisible),false);
   const slowDrag=async(corner,commit)=>{
    const b=await page.evaluate(()=>{
-    const r=Reader.turnPageMode.book.root.getBoundingClientRect(),p=Reader.turnPageMode.book.pageBounds();
-    return {x:r.x,y:r.y,width:r.width,p};
+    const r=Reader.turnPageMode.book.root.getBoundingClientRect(),p=Reader.turnPageMode.book.pageBounds(),m=Reader.turnPageMode.constructor.cornerZoneMetrics(p.width,p.height);
+    return {x:r.x,y:r.y,width:r.width,p,m};
    });
-   const bottom=corner === "bottom";
-   const x=b.x+b.p.x+b.p.width-18,y=b.y+b.p.y+(bottom?b.p.height-18:corner?18:b.p.height/2);
+   const bottom=corner === "bottom",top=corner === true;
+   const x=b.x+b.p.x+b.p.width-18;
+   const y=b.y+b.p.y+(bottom?b.p.height-b.m.inset-b.m.size/2:top?b.m.inset+b.m.size/2:b.p.height/2);
    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y,id:1}]});
    for(const d of [4,8,12,18]){
     await page.waitForTimeout(140);
-    await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-d,y:bottom?y-d*1.8:y,id:1}]});
+    const yy=bottom?y-d*1.8:top?y+d*1.8:y;
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-d,y:yy,id:1}]});
    }
    await page.waitForFunction(()=>Reader.turnPageMode.book.motion?.interactive && Reader.turnPageMode.book.motion?.curl.ready);
    const before=await page.evaluate(()=>Reader.turnPageMode.book.motion.progress);
    await page.waitForTimeout(600); // The fold must remain attached during a slow hold.
    const distance=commit?b.width*.45:60;
-   await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-distance,y:bottom?y-distance*1.2:y,id:1}]});
+   await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-distance,y:bottom?y-distance*1.2:top?y+distance*1.2:y,id:1}]});
    // Touch delivery/rendering is asynchronous; require progress after the event is processed.
    await page.waitForFunction(previous=>Reader.turnPageMode.book.motion?.progress>previous,before,{timeout:1500});
    assert.equal(await page.evaluate(()=>Reader.focusMode),null);
