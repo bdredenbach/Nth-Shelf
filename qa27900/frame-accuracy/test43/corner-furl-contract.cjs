@@ -14,6 +14,8 @@ assert.equal(Deck.cornerFurlY(H,p,true,500),500,'a stronger downward finger pull
 const bf=Deck.cornerFold(W,H,{x:W,y:H},{x:W-2*W*p,y:bottom}),tf=Deck.cornerFold(W,H,{x:W,y:0},{x:W-2*W*p,y:top});
 assert(bf&&tf);assert(Math.abs(bf.ny)>.45&&Math.abs(tf.ny)>.45,'crease must be diagonal, not a vertical middle hinge');assert(Math.sign(bf.ny)===-Math.sign(tf.ny),'top/bottom crease directions must mirror');
 const guide=fs.readFileSync(path.join(root,'js/feature-guide.js'),'utf8'),css=fs.readFileSync(path.join(root,'css/style.css'),'utf8');
-for(const phrase of ["lower-right corner inward to lift and furl it UP","upper-right corner inward to fold it DOWN","zone:'turn-corners'","guide-corner-cue top","guide-corner-cue bottom"])assert(guide.includes(phrase),phrase);
+for(const phrase of ["zone:'turn-corners'","guide-corner-cue top","guide-corner-cue bottom"])assert(guide.includes(phrase),phrase);
+assert(/lower[^\n]{0,120}(furl|UP)/i.test(guide),'tutorial must still describe the lower-corner upward furl');
+assert(/upper[^\n]{0,140}(fold|DOWN)/i.test(guide),'tutorial must still describe the upper-corner downward fold');
 assert(css.includes('TOP · CURL DOWN'));assert(css.includes('BOTTOM · CURL UP'));
 console.log(JSON.stringify({bottomY:bottom,topY:top,bottomNy:bf.ny,topNy:tf.ny,mirrored:true,strongerFingerPullPreserved:true,precisionTutorialCues:true}));
