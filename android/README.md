@@ -47,3 +47,8 @@ The current candidate is version **2.79.40** (`versionCode 27968`). Debug builds
 ## Test41 identity
 
 The current candidate is version **2.79.41** (`versionCode 27969`). Debug builds use `io.github.bdredenbach.nthshelf.frametest41` with label **Nth Shelf Test41**. Test41 adds the five-column-bank structural completion used by Reader page33 while retaining Test36–40 behavior.
+
+
+## Test42 identity
+
+The current candidate is version **2.79.42** (`versionCode 27970`). Debug builds use `io.github.bdredenbach.nthshelf.frametest42` with label **Nth Shelf Test42**. Test42 adds the branched-stack / curved-shared-seam completion used by Reader page35 while retaining Test36–41 behavior.

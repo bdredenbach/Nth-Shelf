@@ -121,6 +121,15 @@ const PanelDetect = {
                 if(completed.length>identities.length)identities=completed;
               }
             }catch(error){if(log)log(`five-column bank completion deferred: ${error.message}`);}
+            // Test42: a coarse upper body plus fragmented terminal row may hide
+            // a branched top stack, two shared full-width strips and a curved
+            // shared seam. Re-prove all seven owners from sustained rails.
+            try {
+              if(layout.length<4&&typeof PanelStructuralGrid!=='undefined'&&baseline.length===4&&identities.length===4&&PanelStructuralGrid.completeBranchedStackImage&&identities.every(p=>baseline.includes(p)&&!p._identitySource&&!p._quad&&!p._outline&&!p._contours)){
+                const completed=PanelStructuralGrid.completeBranchedStackImage(img,baseline,log);
+                if(completed.length>identities.length)identities=completed;
+              }
+            }catch(error){if(log)log(`branched stack completion deferred: ${error.message}`);}
             // Test40: a bottom legacy composite may contain a tall closed inset
             // between two surrounding orthogonal scenes. Prove the closed inset
             // from two long edge rails plus independent top/bottom caps, then

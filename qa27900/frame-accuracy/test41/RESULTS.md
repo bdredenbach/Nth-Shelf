@@ -21,3 +21,8 @@ Reader ownership: **40/40** center/left/right/north/south points across all eigh
 A targeted sweep covered every page that was a three-entry page in the preserved Test32 fixture and still remained eligible under Test40. Page27 is already repaired to eight entries; page13 and page60 are not plain three-slab maps. Eligible plain-three candidates were pages **33, 45, 52, 54, 55, 57 and69**. **Only page33 qualified** for Test41; every other candidate returned no completion.
 
 Retained Test37, Test38, Test39 and Test40 contracts pass unchanged. Android build and page33 phone acceptance are separate gates.
+
+
+## Phone acceptance update — page33
+
+The user advanced from page33 to page35 after testing Test41. Reader page33 is accepted for the manual page-by-page queue.

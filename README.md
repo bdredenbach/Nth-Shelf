@@ -2,6 +2,12 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.42 — branched stack with curved shared seam
+
+Test42 fixes Reader page35. Test41 publishes one giant upper owner plus three false fragments cut from the final hotel panel. Test42 proves the actual seven-frame topology from a sustained main spine, a second upper-right divider, two horizontal rails, the terminal rail, and a traced curved shared seam between the sheriff and forest panels.
+
+Reader verification passed **35/35** center/left/right/north/south ownership points across all seven owners. A targeted applicability sweep of every preserved four-entry page found **only page35** eligible for this route. Page33 is phone-accepted; page35 phone acceptance is pending. See [Test42 results](qa27900/frame-accuracy/test42/RESULTS.md) and [handoff](HANDOFF-2.79.42.md).
+
 ## 2.79.41 — five-column bank candidate
 
 Test41 fixes Reader page33's lower slab. Test40 leaves the page as three coarse wide owners; the bottom owner actually contains five vertical panels over one terminal full-width panel. Test41 re-proves that tier from four sustained dark vertical rails spanning the whole bank, so large lettering and artwork cannot create tap-dependent horizontal splits.
@@ -155,3 +161,8 @@ The current shell cache is `nth-shelf-shell-2.79.40`. Android debug builds use v
 ## Current Test41 identity
 
 The current shell cache is `nth-shelf-shell-2.79.41`. Android debug builds use versionName **2.79.41**, versionCode **27969**, package `io.github.bdredenbach.nthshelf.frametest41`, and label **Nth Shelf Test41**.
+
+
+## Current Test42 identity
+
+The current shell cache is `nth-shelf-shell-2.79.42`. Android debug builds use versionName **2.79.42**, versionCode **27970**, package `io.github.bdredenbach.nthshelf.frametest42`, and label **Nth Shelf Test42**.
