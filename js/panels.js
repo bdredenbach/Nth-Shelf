@@ -102,6 +102,15 @@ const PanelDetect = {
                 if(additions.length>=2)identities=additions.concat(identities);
               }
             }catch(error){if(log)log(`column bank refinement deferred: ${error.message}`);}
+            // Test39: if the only surviving map is still the original pair of
+            // unproved full-width legacy slabs, require a complete nested
+            // structural leaf map before publishing either slab as an owner.
+            try {
+              if(layout.length<4&&typeof PanelStructuralGrid!=='undefined'&&baseline.length===2&&identities.length===2&&PanelStructuralGrid.completeNestedImage&&identities.every(p=>baseline.includes(p)&&!p._identitySource&&!p._quad&&!p._outline&&!p._contours)){
+                const completed=PanelStructuralGrid.completeNestedImage(img,baseline,log);
+                if(completed.length>identities.length)identities=completed;
+              }
+            }catch(error){if(log)log(`nested structural baseline completion deferred: ${error.message}`);}
             resolve(identities);
             return;
           }

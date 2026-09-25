@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.38 — OCCLUDED BOTTOM-TIER STRUCTURAL CANDIDATE
+// NTH SHELF 2.79.39 — NESTED STRUCTURAL LEAF CANDIDATE
 // Page13 and page23 accepted; page27 bottom-tier completion pending phone acceptance.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.38";
+const CACHE_NAME = "nth-shelf-shell-2.79.39";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",

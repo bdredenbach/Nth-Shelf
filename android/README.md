@@ -32,3 +32,8 @@ The current candidate is version **2.79.37** (`versionCode 27965`). Debug builds
 ## Test38 identity
 
 The current candidate is version **2.79.38** (`versionCode 27966`). Debug builds use `io.github.bdredenbach.nthshelf.frametest38` with label **Nth Shelf Test38**, so earlier frame-test installs can remain side-by-side. Test38 extends the structural-grid family with a bounded occluded-bottom-tier completion route for Reader page27.
+
+
+## Test39 identity
+
+The current candidate is version **2.79.39** (`versionCode 27967`). Debug builds use `io.github.bdredenbach.nthshelf.frametest39` with label **Nth Shelf Test39**. Test39 adds nested structural leaf completion for Reader page28 while retaining Test36–38 frame behavior.

@@ -1,4 +1,4 @@
-name: Build Test38 APK
+name: Build Test39 APK
 
 on:
   push:
@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: nth-shelf-test38-apk
+  group: nth-shelf-test39-apk
   cancel-in-progress: false
 
 jobs:
@@ -55,7 +55,9 @@ jobs:
           node qa27900/frame-accuracy/test36/edge-spill-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test37/structural-grid-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test38/occluded-tier-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
-          node qa27900/frame-accuracy/test38/service-worker.test.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test38/occluded-tier-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test39/nested-grid-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test39/service-worker.test.cjs 2>&1 | tee -a dist/regression-checks.txt
 
       - name: Set up browser test dependencies
         run: |
@@ -102,7 +104,7 @@ jobs:
       - name: Install Android SDK 35
         run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
 
-      - name: Build isolated Test38 APK
+      - name: Build isolated Test39 APK
         shell: bash
         run: |
           set -euo pipefail
@@ -115,10 +117,10 @@ jobs:
           APK=android/app/build/outputs/apk/debug/app-debug.apk
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$APK" | tee dist/signature.txt
           "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" > dist/package.txt
-          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest38'" dist/package.txt
-          grep -F "versionCode='27966'" dist/package.txt
-          grep -F "versionName='2.79.38'" dist/package.txt
-          grep -F "application-label:'Nth Shelf Test38'" dist/package.txt
+          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest39'" dist/package.txt
+          grep -F "versionCode='27967'" dist/package.txt
+          grep -F "versionName='2.79.39'" dist/package.txt
+          grep -F "application-label:'Nth Shelf Test39'" dist/package.txt
           python3 - <<'PY'
           import hashlib, json, os, pathlib, subprocess, zipfile
           root = pathlib.Path('.')
@@ -147,9 +149,9 @@ jobs:
           subprocess.run(['git', 'diff', '--exit-code', 'HEAD', '--'], check=True)
           digest = hashlib.sha256(apk.read_bytes()).hexdigest()
           record = {
-              'versionName': '2.79.38', 'versionCode': 27966,
-              'applicationId': 'io.github.bdredenbach.nthshelf.frametest38',
-              'label': 'Nth Shelf Test38', 'sourceCommit': os.environ['GITHUB_SHA'],
+              'versionName': '2.79.39', 'versionCode': 27967,
+              'applicationId': 'io.github.bdredenbach.nthshelf.frametest39',
+              'label': 'Nth Shelf Test39', 'sourceCommit': os.environ['GITHUB_SHA'],
               'signing': 'CI debug key; not a Play Store production key',
               'apkSha256': digest, 'apkBytes': apk.stat().st_size,
               'verifiedWebAssetCount': len(hashes), 'webAssetSha256': hashes,
@@ -157,17 +159,17 @@ jobs:
               'comicArtworkTests': 'Saved results retained; comic artwork fixture is not uploaded or rerun by this workflow'
           }
           (root / 'dist/BUILD.json').write_text(json.dumps(record, indent=2)+'\n')
-          (root / 'dist/Nth-Shelf-2.79.38-Test38.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.38-Test38.apk\n')
-          (root / 'dist/INSTALL.txt').write_text('Keep earlier test builds installed. Install Nth-Shelf-2.79.38-Test38.apk as the separate Nth Shelf Test38 app. Import the comic into its own empty library. Reader pages13 and23 are phone-accepted. Test Reader page27 next: the bottom tier must be exactly three owners — left orthogonal, middle orthogonal, and one larger bottom-right outlined scene. Recheck multiple taps in all three, including the foreground below the middle panel. Phone acceptance for page27 is pending.\n')
+          (root / 'dist/Nth-Shelf-2.79.39-Test39.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.39-Test39.apk\n')
+          (root / 'dist/INSTALL.txt').write_text('Keep earlier test builds installed. Install Nth-Shelf-2.79.39-Test39.apk as the separate Nth Shelf Test39 app. Import the comic into its own empty library. Reader pages13, 23 and27 are phone-accepted. Test Reader page28 next: all six panels must pop independently as 2 top + 1 middle strip + 3 bottom columns. Recheck multiple taps in every panel. Phone acceptance for page28 is pending.\n')
           print(json.dumps({'sourceCommit': record['sourceCommit'], 'verifiedWebAssetCount': len(hashes), 'apkSha256': digest}, indent=2))
           PY
-          cp "$APK" dist/Nth-Shelf-2.79.38-Test38.apk
-          git archive --format=zip --output=dist/Nth-Shelf-2.79.38-Test38-Source.zip HEAD
+          cp "$APK" dist/Nth-Shelf-2.79.39-Test39.apk
+          git archive --format=zip --output=dist/Nth-Shelf-2.79.39-Test39-Source.zip HEAD
 
       - name: Upload verified APK, source and build record
         uses: actions/upload-artifact@v4
         with:
-          name: Nth-Shelf-2.79.38-Test38
+          name: Nth-Shelf-2.79.39-Test39
           path: dist/
           if-no-files-found: error
           retention-days: 30
@@ -176,7 +178,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Test38-build-diagnostics
+          name: Test39-build-diagnostics
           path: |
             dist/*.txt
             dist/*.json

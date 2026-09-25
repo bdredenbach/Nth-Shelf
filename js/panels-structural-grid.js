@@ -49,8 +49,27 @@ const PanelStructuralGrid = (() => {
       }
     };
     split(x0,x1,y0,y1,0);if(splits.length<3||splits.length>18||leaves.length<4||leaves.length>12)return null;
-    const cells=[];
-    for(const box of leaves){const [a,c,b,d]=box,rw=b-a+1,rh=d-c+1,pixels=rw*rh;if(pixels<w*h*.018)continue;let sum=0,sq=0,dark=0,light=0;for(let y=c;y<=d;y++)for(let x=a;x<=b;x++){const v=lum[y*w+x];sum+=v;sq+=v*v;dark+=v<65;light+=v>140;}const mean=sum/pixels,variance=sq/pixels-mean*mean,st={pixels,mean,variance,dark,light};if(!range(mean,20,235)||variance<500||dark/pixels<.02||dark/pixels>.94||light/pixels<.015||light/pixels>.95)continue;cells.push({box,stats:st});}
+    const statsFor=box=>{const [a,c,b,d]=box,pixels=(b-a+1)*(d-c+1);let sum=0,sq=0,dark=0,light=0;for(let y=c;y<=d;y++)for(let x=a;x<=b;x++){const v=lum[y*w+x];sum+=v;sq+=v*v;dark+=v<65;light+=v>140;}const mean=sum/pixels;return {pixels,mean,variance:sq/pixels-mean*mean,dark,light};};
+    const strictScene=st=>st.pixels>=w*h*.018&&range(st.mean,20,235)&&st.variance>=500&&range(st.dark/st.pixels,.02,.94)&&range(st.light/st.pixels,.015,.95);
+    const cells=[];for(const box of leaves){const st=statsFor(box);if(strictScene(st))cells.push({box,stats:st});}
+    // A narrow vertical panel can contain a nearly full-width dark artwork rail
+    // that looks like a horizontal separator. If that split leaves one strict
+    // scene child and one substantial dark-but-textured child, while the unsplit
+    // parent is itself a strict scene, retract only that orphan split. A real
+    // panel boundary must leave two independently viable scene branches.
+    const sameBox=(a,b)=>a&&b&&a.length===4&&b.length===4&&a.every((v,i)=>v===b[i]);
+    const leafSet=new Set(leaves.map(b=>b.join(',')));
+    for(const s of [...splits].sort((a,b)=>b.depth-a.depth)){
+      const [a,c,b,d]=s.region,rw=b-a+1,rh=d-c+1;if(s.axis!=='H'||!range(rw/w,.10,.32)||!range(rh/h,.25,.50))continue;
+      const A=[a,c,b,Math.max(c,s.pos-s.pad)],B=[a,Math.min(d,s.pos+s.pad),b,d];
+      if(!leafSet.has(A.join(','))||!leafSet.has(B.join(',')))continue;
+      const ia=cells.findIndex(x=>sameBox(x.box,A)),ib=cells.findIndex(x=>sameBox(x.box,B));if((ia>=0)===(ib>=0))continue;
+      const kept=ia>=0?ia:ib,rejected=ia>=0?B:A,rs=statsFor(rejected),ps=statsFor(s.region);
+      const darkArtwork=rs.pixels>=w*h*.018&&range(rs.mean,15,235)&&rs.variance>=500&&range(rs.dark/rs.pixels,.02,.98)&&rs.light/rs.pixels<.015;
+      if(!darkArtwork||!strictScene(ps))continue;
+      cells[kept]={box:s.region.slice(),stats:ps};const at=splits.indexOf(s);if(at>=0)splits.splice(at,1);
+      log?.(`structural grid: retracted orphan ${s.axis} split at ${s.pos} inside narrow scene`);
+    }
     if(cells.length<4||cells.length>10)return null;const area=cells.reduce((s,c)=>s+c.stats.pixels,0)/(w*h);if(!range(area,.62,.975))return null;
     if(splits.length<cells.length-1||splits.length>cells.length+3)return null;
     log?.(`structural grid: ${cells.length} textured cells from ${splits.length} proved splits; coverage=${area.toFixed(3)}`);
@@ -94,6 +113,21 @@ const PanelStructuralGrid = (() => {
     const q=[[ev.seam+1,my0],[mx1+1,my0],[mx1+1,my1+1],[mx0,my1+1],[mx0,ev.cap+1],[ev.seam+1,ev.cap+1]],outline=q.map(([x,y])=>({x:x/w,y:y/h}));const right={x:mx0/w,y:my0/h,w:(mx1+1-mx0)/w,h:(my1+1-my0)/h,_identitySource:'structural-grid-frame',_geometryType:'occluded-tier-outline',_geometryOwner:'structural-grid-outline',_outline:outline,_structuralGridProof:{...proof,role:'right',outline:q,stats:ev.rightStats}};if(!validPanel(middle)||!validPanel(right))return[];
     const out=[];for(let i=0;i<grid.length;i++){if(ev.owner[i])out.push(ev.owner[i]);else if(i===ev.pair.merged.index)out.push(middle,right);else out.push(grid[i]);}log?.(`occluded structural completion: 3 anchors + ${out.length-3} proved cells = ${out.length}`);return out;
   }
+  function completeNestedImage(img,baseline,log){
+    if(!Array.isArray(baseline)||baseline.length!==2||baseline.some(p=>!p||p._identitySource||p._quad||p._outline||p._contours||!['x','y','w','h'].every(k=>finite(p[k]))))return[];
+    const slabs=[...baseline].sort((a,b)=>a.y-b.y);
+    if(slabs.some(p=>p.x>.04||p.x+p.w<.94||!range(p.w,.88,1)||!range(p.h,.20,.62))||slabs[0].y>.03||slabs[1].y+slabs[1].h<.94||!range(slabs[1].y-(slabs[0].y+slabs[0].h),.008,.08))return[];
+    const grid=analyzeImage(img,log);if(grid.length!==6||!grid.every(validPanel))return[];
+    const groups=slabs.map(()=>[]);
+    for(const cell of grid){const cy=cell.y+cell.h/2,matches=slabs.map((s,i)=>cy>=s.y-.02&&cy<=s.y+s.h+.02?i:-1).filter(i=>i>=0);if(matches.length!==1)return[];groups[matches[0]].push(cell);}
+    if(groups[0].length!==2||groups[1].length!==4)return[];
+    const top=[...groups[0]].sort((a,b)=>a.x-b.x);if(top.some(c=>c.y>.025||c.y+c.h<slabs[0].y+slabs[0].h-.035)||top[0].x>.04||top[1].x+top[1].w<.96||top[1].x-(top[0].x+top[0].w)>.035)return[];
+    const lower=[...groups[1]].sort((a,b)=>a.y-b.y||a.x-b.x),strip=lower[0],bottom=lower.slice(1).sort((a,b)=>a.x-b.x);
+    if(strip.w<.88||!range(strip.h,.07,.24)||strip.y>slabs[1].y+.04||bottom.length!==3||bottom.some(c=>c.y<strip.y+strip.h-.025||c.y+c.h<slabs[1].y+slabs[1].h-.035)||bottom[0].x>.04||bottom[2].x+bottom[2].w<.96)return[];
+    for(let i=1;i<bottom.length;i++)if(bottom[i].x-(bottom[i-1].x+bottom[i-1].w)>.035)return[];
+    const bandCoverage=(slab,cells)=>cells.reduce((sum,c)=>sum+overlap(slab,c),0)/(slab.w*slab.h);if(bandCoverage(slabs[0],top)<.84||bandCoverage(slabs[1],[strip,...bottom])<.82)return[];
+    log?.('nested structural completion: two coarse slabs -> 2 top + 1 strip + 3 bottom cells');return grid;
+  }
   function completeImage(img,anchors,log){
     if(!Array.isArray(anchors)||anchors.length!==2||anchors.some(a=>!a||!a._identitySource||!['x','y','w','h'].every(k=>finite(a[k]))))return[];
     const rims=anchors.filter(a=>a._identitySource==='rim-frame'&&typeof PanelRimFrames!=='undefined'&&PanelRimFrames.validPanel?.(a));
@@ -104,7 +138,7 @@ const PanelStructuralGrid = (() => {
     const additions=owner.filter(x=>!x).length;if(additions<2)return[];const merged=grid.map((c,i)=>owner[i]||c);
     log?.(`structural grid completion: 2 perimeter anchors + ${additions} proved cells = ${merged.length}`);return merged;
   }
-  return {analyzeRGBA,analyzeImage,completeImage,completeOccludedTierImage,validPanel};
+  return {analyzeRGBA,analyzeImage,completeImage,completeNestedImage,completeOccludedTierImage,validPanel};
 })();
 if(typeof window!=='undefined')window.PanelStructuralGrid=PanelStructuralGrid;
 if(typeof module!=='undefined'&&module.exports)module.exports=PanelStructuralGrid;

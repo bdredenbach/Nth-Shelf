@@ -2,6 +2,12 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.39 — nested structural leaf candidate
+
+Test39 fixes Reader page28 by refusing to publish two coarse stacked slabs when their interiors still contain a complete six-cell structural hierarchy. The accepted map is **2 top + 1 middle strip + 3 bottom columns**. A dark artwork rail inside the narrow bottom-middle panel is reunited with its parent unless both sides independently validate as scenes.
+
+Reader verification passed **30/30** directional ownership taps with zero page errors. Pages23 and27 and every other preserved two-entry page checked remain exact; only page28 changes. Page27 is phone-accepted; page28 phone acceptance is pending. See [Test39 results](qa27900/frame-accuracy/test39/RESULTS.md) and [handoff](HANDOFF-2.79.39.md).
+
 ## 2.79.38 — occluded bottom-tier structural candidate
 
 Test38 fixes Reader page27's lower tier without tap-dependent geometry rescue. Two straight lower panels are now orthogonal page-wide owners, while the foreground-occluded middle/right boundary produces one larger outlined right scene. The new route is a bounded extension of `js/panels-structural-grid.js`; it requires two validated local-island anchors, one validated matte-neighbor anchor, a complete structural grid, an interrupted dark seam and a terminal cap. No comic/page identity keys are used.
@@ -122,3 +128,8 @@ The current shell cache is `nth-shelf-shell-2.79.37`. Android debug builds use v
 ## Current Test38 identity
 
 The current shell cache is `nth-shelf-shell-2.79.38`. Android debug builds use versionName **2.79.38**, versionCode **27966**, package `io.github.bdredenbach.nthshelf.frametest38`, and label **Nth Shelf Test38**. Test36 edge-spill and Test37 structural-grid behavior remain included.
+
+
+## Current Test39 identity
+
+The current shell cache is `nth-shelf-shell-2.79.39`. Android debug builds use versionName **2.79.39**, versionCode **27967**, package `io.github.bdredenbach.nthshelf.frametest39`, and label **Nth Shelf Test39**.

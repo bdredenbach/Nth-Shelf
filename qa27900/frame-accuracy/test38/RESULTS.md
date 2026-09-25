@@ -33,3 +33,8 @@ The two small panels render as orthogonal rectangles. The larger right scene ren
 `test38/occluded-tier-contract.cjs` validates synthetic middle/right version-2 structural proofs, rejects weak rail evidence, rejects a tampered right outline, rejects the wrong anchor-family combination, and verifies that private fixture keys are absent from runtime source. The Test37 structural-grid contract continues to pass unchanged.
 
 Page13 and page23 are phone-accepted. Android build and page27 phone acceptance remain separate gates.
+
+
+## Phone acceptance update — page27
+
+The user confirmed Test38 worked on the phone and advanced directly to Reader page28. Page27 is accepted.
