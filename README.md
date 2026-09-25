@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.45 — stepped shared-scene candidate
+
+Test45 fixes Reader page36's matte-cell over-segmentation. Test44 publishes seven page-wide matte identities, but independent artwork review and phone evidence show **six real frames**: top-left, top-right, sheriff inset, one complete middle scene, bottom-left, and bottom-right. The left hallway and right Logan portions of the middle scene are one owner.
+
+The new bounded route starts only from a seven-cell matte map with a specific overlapping/inset/bottom-pair topology. It independently re-fits the top/inset/bottom anchors, reunites the two middle fragments, and gives the middle scene plus the two bottom panels one smooth shared sloped boundary. Local verification passes **30/30** center/left/right/north/south ownership checks across the six frames. A full matte-cell applicability sweep found five seven-cell pages (17, 32, 36, 44, 56); **only page36 qualifies** for Test45.
+
+Page35 and the Test44 furl/hot-zone behavior are phone-accepted. Page36 phone acceptance is pending. See [Test45 results](qa27900/frame-accuracy/test45/RESULTS.md) and [handoff](HANDOFF-2.79.45.md).
+
 ## 2.79.44 — inset live corner zones
 
 Test44 calibrates the forward Page-mode grab zones from the follow-up phone video. Test43's furl geometry works once caught, but its upper-right zone begins too close to the page top and its lower-right zone too close to the page bottom.
@@ -192,3 +200,8 @@ The current shell cache is `nth-shelf-shell-2.79.43`. Android debug builds use v
 ## Current Test44 identity
 
 The current shell cache is `nth-shelf-shell-2.79.44`. Android debug builds use versionName **2.79.44**, versionCode **27972**, package `io.github.bdredenbach.nthshelf.frametest44`, and label **Nth Shelf Test44**.
+
+
+## Current Test45 identity
+
+The current shell cache is `nth-shelf-shell-2.79.45`. Android debug builds use versionName **2.79.45**, versionCode **27973**, package `io.github.bdredenbach.nthshelf.frametest45`, and label **Nth Shelf Test45**.

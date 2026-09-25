@@ -21,3 +21,8 @@ Reader ownership/geometry verification: **35/35** center/left/right/north/south 
 The preserved 74-page Test32 descriptor fixture has eight four-entry pages: **7, 12, 14, 35, 50, 67, 68 and72**. Re-running the Test42 completion against those page images and preserved owners yields **only page35**; all seven others reject the topology. Retained Test37–41 contracts remain part of CI.
 
 Page13, page23, page27, page28, page32 and page33 are phone-accepted. Android build and page35 phone acceptance are separate gates.
+
+
+## Phone acceptance update — page35
+
+The user confirmed the page35 frame repair worked while testing the later Test44 build. Reader page35 is accepted for the manual page-by-page queue.

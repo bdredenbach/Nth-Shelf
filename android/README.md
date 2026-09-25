@@ -62,3 +62,8 @@ The current candidate is version **2.79.43** (`versionCode 27971`). Debug builds
 ## Test44 identity
 
 The current candidate is version **2.79.44** (`versionCode 27972`). Debug builds use `io.github.bdredenbach.nthshelf.frametest44` with label **Nth Shelf Test44**. Test44 moves the forward top/bottom right-corner hot zones inward and makes the tutorial consume the same live-zone metrics.
+
+
+## Test45 identity
+
+The current candidate is version **2.79.45** (`versionCode 27973`). Debug builds use `io.github.bdredenbach.nthshelf.frametest45` with label **Nth Shelf Test45**. Test45 adds the six-owner stepped shared-scene completion used by Reader page36 while retaining Test36–44 frame and corner-furl behavior.

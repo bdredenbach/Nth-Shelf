@@ -380,6 +380,15 @@ const PanelDetect = {
             try{if(typeof PanelMatteCells!=='undefined')closed=PanelMatteCells.analyzeImage(img,log);}
             catch(error){if(log)log(`matte cell network deferred: ${error.message}`);}
           }
+          // Test45: one real middle scene can be fragmented by dark artwork
+          // into two overlapping matte cells around a separately proved inset.
+          // Reconstruct the six visible owners and share one smooth lower seam.
+          try {
+            if(typeof PanelStructuralGrid!=='undefined'&&closed.length===7&&PanelStructuralGrid.completeSteppedSharedSceneImage){
+              const completed=PanelStructuralGrid.completeSteppedSharedSceneImage(img,closed,log);
+              if(completed.length===6)closed=completed;
+            }
+          }catch(error){if(log)log(`stepped shared-scene completion deferred: ${error.message}`);}
           // A complete tap-independent guillotine grid may fill missing
           // cells only when two stronger perimeter anchors corroborate it.
           try {

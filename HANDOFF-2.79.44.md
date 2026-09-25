@@ -9,3 +9,8 @@ The Reader tutorial uses that same function to position its red upper/lower cues
 The Test44 contract rejects the extreme top/bottom right corners, accepts the two inset forward zones, rejects touches outside the paper right edge, and verifies the legacy left reverse corner still works.
 
 Android debug identity: `io.github.bdredenbach.nthshelf.frametest44`, version 2.79.44 / code 27972, label `Nth Shelf Test44`.
+
+
+## Phone acceptance update
+
+The user confirmed both the corner furl and the inset upper/lower live grab zones work on the phone. Test44 corner behavior is accepted.
