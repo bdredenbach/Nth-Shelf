@@ -111,6 +111,16 @@ const PanelDetect = {
                 if(completed.length>identities.length)identities=completed;
               }
             }catch(error){if(log)log(`nested structural baseline completion deferred: ${error.message}`);}
+            // Test41: three coarse stacked slabs may hide a bank of narrow
+            // orthogonal scenes over a terminal full-width panel. Re-prove the
+            // bank from four sustained vertical rails across the entire tier so
+            // lettering/artwork cannot create tap-dependent horizontal splits.
+            try {
+              if(layout.length<4&&typeof PanelStructuralGrid!=='undefined'&&baseline.length===3&&identities.length===3&&PanelStructuralGrid.completeColumnBankImage&&identities.every(p=>baseline.includes(p)&&!p._identitySource&&!p._quad&&!p._outline&&!p._contours)){
+                const completed=PanelStructuralGrid.completeColumnBankImage(img,baseline,log);
+                if(completed.length>identities.length)identities=completed;
+              }
+            }catch(error){if(log)log(`five-column bank completion deferred: ${error.message}`);}
             // Test40: a bottom legacy composite may contain a tall closed inset
             // between two surrounding orthogonal scenes. Prove the closed inset
             // from two long edge rails plus independent top/bottom caps, then

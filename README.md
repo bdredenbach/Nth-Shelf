@@ -2,6 +2,12 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.41 — five-column bank candidate
+
+Test41 fixes Reader page33's lower slab. Test40 leaves the page as three coarse wide owners; the bottom owner actually contains five vertical panels over one terminal full-width panel. Test41 re-proves that tier from four sustained dark vertical rails spanning the whole bank, so large lettering and artwork cannot create tap-dependent horizontal splits.
+
+Reader verification passed **40/40** ownership points across all eight page owners and **30/30 actual touchscreen pop-outs** across the six repaired lower owners, with zero page errors. A targeted applicability sweep of every preserved three-entry candidate found **only page33** eligible. Page32 is phone-accepted; page33 phone acceptance is pending. See [Test41 results](qa27900/frame-accuracy/test41/RESULTS.md) and [handoff](HANDOFF-2.79.41.md).
+
 ## 2.79.40 — framed inset triplet candidate
 
 Test40 fixes Reader page32's lower composite. Test39 publishes the already-correct lower-left scene plus one giant lower-right owner. Test40 proves the tall eye inset from two long vertical edge rails and independent top/bottom caps, then replaces only that giant parent with three owners: left surrounding scene, inset, and right surrounding scene.
@@ -144,3 +150,8 @@ The current shell cache is `nth-shelf-shell-2.79.39`. Android debug builds use v
 ## Current Test40 identity
 
 The current shell cache is `nth-shelf-shell-2.79.40`. Android debug builds use versionName **2.79.40**, versionCode **27968**, package `io.github.bdredenbach.nthshelf.frametest40`, and label **Nth Shelf Test40**.
+
+
+## Current Test41 identity
+
+The current shell cache is `nth-shelf-shell-2.79.41`. Android debug builds use versionName **2.79.41**, versionCode **27969**, package `io.github.bdredenbach.nthshelf.frametest41`, and label **Nth Shelf Test41**.

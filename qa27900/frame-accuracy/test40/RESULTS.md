@@ -23,3 +23,8 @@ The actual Reader geometry/ownership harness checked center/left/right/north/sou
 The Test40 contract accepts valid left/inset/right version-3 proofs and rejects a weakened cap, weakened vertical rail, altered rail separation, and a tampered outline. Test37, Test38 and Test39 retained contracts also pass unchanged.
 
 Page13, page23, page27 and page28 are phone-accepted. Android build and page32 phone acceptance are separate gates.
+
+
+## Phone acceptance update — page32
+
+The user advanced from page32 to page33 after testing Test40. Reader page32 is accepted for the manual page-by-page queue.

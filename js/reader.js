@@ -3132,6 +3132,9 @@ async setMode(mode) {
      panel: { ...geom, _quad: quad || undefined, _outline: outline || undefined, _overlapProof: outline?panel._overlapProof:undefined, _occlusionProof: outline?panel._occlusionProof:undefined, _partitionProof: outline?panel._partitionProof:undefined, _matteOutlineProof: outline?panel._matteOutlineProof:undefined, _edgeSpillProof:edgeSpill||undefined, _edgeSpillFrame:edgeSpill?frameGeom:undefined },
      pageIndex: this.index
    };
+   if(panel._identitySource==='structural-grid-frame'&&panel._structuralGridProof)Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'structural-grid-frame',_geometryOwner:panel._geometryOwner,_geometryType:panel._geometryType,_structuralGridProof:panel._structuralGridProof
+   });
    if(outline&&panel._identitySource==='terminal-rim-frame')Object.assign(this.panelFocusMeta.panel,{
      _identitySource:'terminal-rim-frame',_terminalProof:panel._terminalProof
    });

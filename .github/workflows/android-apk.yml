@@ -1,4 +1,4 @@
-name: Build Test40 APK
+name: Build Test41 APK
 
 on:
   push:
@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: nth-shelf-test40-apk
+  group: nth-shelf-test41-apk
   cancel-in-progress: false
 
 jobs:
@@ -55,11 +55,10 @@ jobs:
           node qa27900/frame-accuracy/test36/edge-spill-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test37/structural-grid-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test38/occluded-tier-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
-          node qa27900/frame-accuracy/test38/occluded-tier-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
-          node qa27900/frame-accuracy/test39/nested-grid-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test39/nested-grid-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test40/framed-inset-triplet-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
-          node qa27900/frame-accuracy/test40/service-worker.test.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test41/five-column-bank-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test41/service-worker.test.cjs 2>&1 | tee -a dist/regression-checks.txt
 
       - name: Set up browser test dependencies
         run: |
@@ -106,7 +105,7 @@ jobs:
       - name: Install Android SDK 35
         run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
 
-      - name: Build isolated Test40 APK
+      - name: Build isolated Test41 APK
         shell: bash
         run: |
           set -euo pipefail
@@ -119,10 +118,10 @@ jobs:
           APK=android/app/build/outputs/apk/debug/app-debug.apk
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$APK" | tee dist/signature.txt
           "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" > dist/package.txt
-          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest40'" dist/package.txt
-          grep -F "versionCode='27968'" dist/package.txt
-          grep -F "versionName='2.79.40'" dist/package.txt
-          grep -F "application-label:'Nth Shelf Test40'" dist/package.txt
+          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest41'" dist/package.txt
+          grep -F "versionCode='27969'" dist/package.txt
+          grep -F "versionName='2.79.41'" dist/package.txt
+          grep -F "application-label:'Nth Shelf Test41'" dist/package.txt
           python3 - <<'PY'
           import hashlib, json, os, pathlib, subprocess, zipfile
           root = pathlib.Path('.')
@@ -151,9 +150,9 @@ jobs:
           subprocess.run(['git', 'diff', '--exit-code', 'HEAD', '--'], check=True)
           digest = hashlib.sha256(apk.read_bytes()).hexdigest()
           record = {
-              'versionName': '2.79.40', 'versionCode': 27968,
-              'applicationId': 'io.github.bdredenbach.nthshelf.frametest40',
-              'label': 'Nth Shelf Test40', 'sourceCommit': os.environ['GITHUB_SHA'],
+              'versionName': '2.79.41', 'versionCode': 27969,
+              'applicationId': 'io.github.bdredenbach.nthshelf.frametest41',
+              'label': 'Nth Shelf Test41', 'sourceCommit': os.environ['GITHUB_SHA'],
               'signing': 'CI debug key; not a Play Store production key',
               'apkSha256': digest, 'apkBytes': apk.stat().st_size,
               'verifiedWebAssetCount': len(hashes), 'webAssetSha256': hashes,
@@ -161,17 +160,17 @@ jobs:
               'comicArtworkTests': 'Saved results retained; comic artwork fixture is not uploaded or rerun by this workflow'
           }
           (root / 'dist/BUILD.json').write_text(json.dumps(record, indent=2)+'\n')
-          (root / 'dist/Nth-Shelf-2.79.40-Test40.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.40-Test40.apk\n')
-          (root / 'dist/INSTALL.txt').write_text('Keep earlier test builds installed. Install Nth-Shelf-2.79.40-Test40.apk as the separate Nth Shelf Test40 app. Import the comic into its own empty library. Reader pages13, 23, 27 and28 are phone-accepted. Test Reader page32 next: the lower composite must resolve to left scene + tall eye inset + right scene while the existing bottom-left panel remains unchanged. Recheck multiple taps in all three new owners. Phone acceptance for page32 is pending.\n')
+          (root / 'dist/Nth-Shelf-2.79.41-Test41.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.41-Test41.apk\n')
+          (root / 'dist/INSTALL.txt').write_text('Keep earlier test builds installed. Install Nth-Shelf-2.79.41-Test41.apk as the separate Nth Shelf Test41 app. Import the comic into its own empty library. Reader pages13, 23, 27, 28 and32 are phone-accepted. Test Reader page33 next: the lower slab must resolve to five vertical panels plus one terminal full-width panel while the top two wide panels remain unchanged. Recheck multiple taps in all six repaired lower owners. Phone acceptance for page33 is pending.\n')
           print(json.dumps({'sourceCommit': record['sourceCommit'], 'verifiedWebAssetCount': len(hashes), 'apkSha256': digest}, indent=2))
           PY
-          cp "$APK" dist/Nth-Shelf-2.79.40-Test40.apk
-          git archive --format=zip --output=dist/Nth-Shelf-2.79.40-Test40-Source.zip HEAD
+          cp "$APK" dist/Nth-Shelf-2.79.41-Test41.apk
+          git archive --format=zip --output=dist/Nth-Shelf-2.79.41-Test41-Source.zip HEAD
 
       - name: Upload verified APK, source and build record
         uses: actions/upload-artifact@v4
         with:
-          name: Nth-Shelf-2.79.40-Test40
+          name: Nth-Shelf-2.79.41-Test41
           path: dist/
           if-no-files-found: error
           retention-days: 30
@@ -180,7 +179,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Test40-build-diagnostics
+          name: Test41-build-diagnostics
           path: |
             dist/*.txt
             dist/*.json
