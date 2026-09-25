@@ -37,3 +37,8 @@ The current candidate is version **2.79.38** (`versionCode 27966`). Debug builds
 ## Test39 identity
 
 The current candidate is version **2.79.39** (`versionCode 27967`). Debug builds use `io.github.bdredenbach.nthshelf.frametest39` with label **Nth Shelf Test39**. Test39 adds nested structural leaf completion for Reader page28 while retaining Test36–38 frame behavior.
+
+
+## Test40 identity
+
+The current candidate is version **2.79.40** (`versionCode 27968`). Debug builds use `io.github.bdredenbach.nthshelf.frametest40` with label **Nth Shelf Test40**. Test40 adds the framed-inset triplet completion used by Reader page32 while retaining Test36–39 behavior.

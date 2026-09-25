@@ -2,6 +2,12 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.40 — framed inset triplet candidate
+
+Test40 fixes Reader page32's lower composite. Test39 publishes the already-correct lower-left scene plus one giant lower-right owner. Test40 proves the tall eye inset from two long vertical edge rails and independent top/bottom caps, then replaces only that giant parent with three owners: left surrounding scene, inset, and right surrounding scene.
+
+The full 74-page applicability sweep found **page32 as the only page** that qualifies for this route. Reader verification passed **15/15** center/left/right/north/south taps across the three new owners with zero page errors. Page28 is phone-accepted; page32 phone acceptance is pending. See [Test40 results](qa27900/frame-accuracy/test40/RESULTS.md) and [handoff](HANDOFF-2.79.40.md).
+
 ## 2.79.39 — nested structural leaf candidate
 
 Test39 fixes Reader page28 by refusing to publish two coarse stacked slabs when their interiors still contain a complete six-cell structural hierarchy. The accepted map is **2 top + 1 middle strip + 3 bottom columns**. A dark artwork rail inside the narrow bottom-middle panel is reunited with its parent unless both sides independently validate as scenes.
@@ -133,3 +139,8 @@ The current shell cache is `nth-shelf-shell-2.79.38`. Android debug builds use v
 ## Current Test39 identity
 
 The current shell cache is `nth-shelf-shell-2.79.39`. Android debug builds use versionName **2.79.39**, versionCode **27967**, package `io.github.bdredenbach.nthshelf.frametest39`, and label **Nth Shelf Test39**.
+
+
+## Current Test40 identity
+
+The current shell cache is `nth-shelf-shell-2.79.40`. Android debug builds use versionName **2.79.40**, versionCode **27968**, package `io.github.bdredenbach.nthshelf.frametest40`, and label **Nth Shelf Test40**.

@@ -111,6 +111,16 @@ const PanelDetect = {
                 if(completed.length>identities.length)identities=completed;
               }
             }catch(error){if(log)log(`nested structural baseline completion deferred: ${error.message}`);}
+            // Test40: a bottom legacy composite may contain a tall closed inset
+            // between two surrounding orthogonal scenes. Prove the closed inset
+            // from two long edge rails plus independent top/bottom caps, then
+            // partition only that parent into left / inset / right owners.
+            try {
+              if(layout.length<4&&typeof PanelStructuralGrid!=='undefined'&&PanelStructuralGrid.completeInsetTripletImage){
+                const completed=PanelStructuralGrid.completeInsetTripletImage(img,identities,baseline,log);
+                if(completed.length>identities.length)identities=completed;
+              }
+            }catch(error){if(log)log(`framed inset triplet deferred: ${error.message}`);}
             resolve(identities);
             return;
           }
