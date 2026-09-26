@@ -13,3 +13,5 @@ All additional reader runs pass:549 touches total;100717 dense samples. Final pa
 Final tested source: complete retained gate and74-page sweep pass after all border fixes. Publish this tree and build Test56. Next batch66–74 was inspected read-only; probe and native pixels in recovery-pages66-74. No Test57 source changes yet.
 
 Published source0b18e8a166a4b6a0138a9d32e8752edf6331e782, treeeb4d259bb84b6c951ef1e6f523400bc6b4a4a1d7. Build Test56 APK run36276077171 is in progress. Resume this run; verify downloaded artifact and all68 assets against this source before delivery.
+
+Build36276077171 succeeded; artifact10917072428. Archive digest f5c621afe590f15aebbddc39291b85c2dd7e8ed17c01ddd4160f1b255fe71c51 verified. APK2.79.56/code27984/frametest56, v2 signature, and all68 packaged web assets match source0b18e8a166a4b6a0138a9d32e8752edf6331e782. APK3,292,354 bytes, SHA-256a786f1ff933034883dd0773c4d8fb8a0bdbe88cf550f2c9d3e70711636ddebac. Test56 delivered in commentary; phone acceptance pending. Continue authorized pages66–74 now, then detector generalization. Baseline-test56 worktree at published source is ready for regression comparisons.
