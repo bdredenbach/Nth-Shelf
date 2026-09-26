@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.53 — THIN WHITE GUTTER FRAME COMPLETION
+// NTH SHELF 2.79.54 — EXTERIOR PAPER FRAMES AND INSET OWNERSHIP
 // Pages13, 23, 27, 28, 32 and33 accepted; page35 branched stack pending phone acceptance.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.53";
+const CACHE_NAME = "nth-shelf-shell-2.79.54";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",

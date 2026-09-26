@@ -1,0 +1,90 @@
+[
+  {
+    "page": 50,
+    "setup": "reader",
+    "touches": 63,
+    "denseSamples": 10514,
+    "allOpaque": true,
+    "geometryPreserved": true,
+    "foreignExcluded": true,
+    "captionRetained": true,
+    "errors": []
+  },
+  {
+    "page": 51,
+    "setup": "reader",
+    "touches": 54,
+    "denseSamples": 10674,
+    "allOpaque": true,
+    "geometryPreserved": true,
+    "foreignExcluded": true,
+    "captionRetained": true,
+    "errors": []
+  },
+  {
+    "page": 52,
+    "setup": "reader",
+    "touches": 54,
+    "denseSamples": 10577,
+    "allOpaque": true,
+    "geometryPreserved": true,
+    "foreignExcluded": true,
+    "captionRetained": true,
+    "errors": []
+  },
+  {
+    "page": 53,
+    "setup": "reader",
+    "touches": 36,
+    "denseSamples": 11171,
+    "allOpaque": true,
+    "geometryPreserved": true,
+    "foreignExcluded": true,
+    "captionRetained": true,
+    "errors": []
+  },
+  {
+    "page": 50,
+    "setup": "reader-high",
+    "touches": 63,
+    "denseSamples": 10514,
+    "allOpaque": true,
+    "geometryPreserved": true,
+    "foreignExcluded": true,
+    "captionRetained": true,
+    "errors": []
+  },
+  {
+    "page": 51,
+    "setup": "reader-high",
+    "touches": 54,
+    "denseSamples": 10674,
+    "allOpaque": true,
+    "geometryPreserved": true,
+    "foreignExcluded": true,
+    "captionRetained": true,
+    "errors": []
+  },
+  {
+    "page": 52,
+    "setup": "reader-high",
+    "touches": 54,
+    "denseSamples": 10577,
+    "allOpaque": true,
+    "geometryPreserved": true,
+    "foreignExcluded": true,
+    "captionRetained": true,
+    "errors": []
+  },
+  {
+    "page": 53,
+    "setup": "reader-high",
+    "touches": 36,
+    "denseSamples": 11171,
+    "allOpaque": true,
+    "geometryPreserved": true,
+    "foreignExcluded": true,
+    "captionRetained": true,
+    "errors": []
+  }
+]

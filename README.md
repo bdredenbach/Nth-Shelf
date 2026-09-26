@@ -2,11 +2,21 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.54 — pages50–53: separated scenes and insets
+
+Test54 addresses the user's four-page batch. Reader pages50/51/52/53 now have7/6/6/4 selections, counting one independent inset on each. White exterior paper identifies the main frames; sustained black rims independently validate them. Page51's borderless scene keeps all its dialogue. The eye inset on page50 retains its crossing speech balloon. Parent scenes exclude inset pixels from their masks.
+
+The six already-separated lower selections across pages50/52/53 remain exact. A native-pixel retry handles a page53 resize variant that otherwise loses the legacy gutter map, retaining its bottom closed-frame anchor. The full74-page comparison changes only50–53; all other70 maps, including phone-confirmed page49, are byte-identical. No page IDs, hashes, titles or saved coordinates drive runtime detection.
+
+Current identity: **2.79.54 / code27982**, package `io.github.bdredenbach.nthshelf.frametest54`, label **Nth Shelf Test54**. Cache/proof identifiers: `nth-shelf-shell-2.79.54`, `panel-map-exp-52`, `frame-proof-2.79.54`. See [results](qa27900/frame-accuracy/test54/RESULTS.md) and [checkpoint](HANDOFF-2.79.54.md). Phone acceptance pending.
+
+Page49 was confirmed on phone by the user. The user authorized pages50–53 together for this batch. Continue the remaining Wolverine pages first; generalization across comics remains the next task after that campaign.
+
 ## 2.79.53 — page49: thin gutters with independent frame rims
 
 Test53 replaces the upper composite with four measured frames and preserves the bottom conversation. Page49 has five selections. The admission check requires white paper outside all sixteen dark rims; it does not relax the global gutter threshold. Geometry comes from explicit native-image resampling, with no page IDs, titles, hashes or saved coordinates in runtime.
 
-Current identity: **2.79.53 / code27981**, package `io.github.bdredenbach.nthshelf.frametest53`, label **Nth Shelf Test53**. Cache/proof identifiers: `nth-shelf-shell-2.79.53`, `panel-map-exp-51`, `frame-proof-2.79.53`. See [results](qa27900/frame-accuracy/test53/RESULTS.md) and [checkpoint](HANDOFF-2.79.53.md). Phone acceptance is pending.
+Previous identity: **2.79.53 / code27981**, package `io.github.bdredenbach.nthshelf.frametest53`, label **Nth Shelf Test53**. Cache/proof identifiers: `nth-shelf-shell-2.79.53`, `panel-map-exp-51`, `frame-proof-2.79.53`. See [results](qa27900/frame-accuracy/test53/RESULTS.md) and [checkpoint](HANDOFF-2.79.53.md). Phone acceptance is pending.
 
 User-approved sequence (2026-09-26): finish the remaining Wolverine pages with per-page phone checks first. Generalizing the detector across comics is the next task after that campaign. Preserve accepted page maps and collect failures as regression examples; defer a broad redesign until the remaining pages are reviewed.
 

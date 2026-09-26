@@ -127,6 +127,12 @@ const PanelDetect = {
                 if(completed.length)identities=completed;
               }
             }catch(error){if(log)log(`thin gutter completion deferred: ${error.message}`);}
+            try {
+              if(layout.length<4&&typeof PanelStructuralGrid!=='undefined'&&baseline.length>=2&&baseline.length<=4&&identities.length===baseline.length&&identities.every(p=>baseline.includes(p)&&!p._identitySource&&!p._quad&&!p._outline&&!p._contours)){
+                const completed=PanelStructuralGrid.completePaperInsetsImage(img,baseline,log);
+                if(completed.length)identities=completed;
+              }
+            }catch(error){if(log)log(`exterior paper completion deferred: ${error.message}`);}
             // Test41: three coarse stacked slabs may hide a bank of narrow
             // orthogonal scenes over a terminal full-width panel. Re-prove the
             // bank from four sustained vertical rails across the entire tier so
@@ -175,6 +181,14 @@ const PanelDetect = {
           } catch (error) {
             if (log) log(`closed frames deferred: ${error.message}`);
           }
+          // Some resamplers erase the legacy gutter map entirely. Recheck
+          // native paper evidence after closed-frame discovery; retain anchors.
+          try {
+            if(closed.length===3&&typeof PanelStructuralGrid!=='undefined'){
+              const completed=PanelStructuralGrid.completePaperInsetsImage(img,baseline,log,closed);
+              if(completed.length){resolve(completed);return;}
+            }
+          }catch(error){if(log)log(`native paper recovery deferred: ${error.message}`);}
           try {
             if (typeof PanelPartition !== 'undefined') {
               const partition = PanelPartition.analyzeImage(img, log, {

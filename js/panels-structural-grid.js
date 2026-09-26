@@ -245,7 +245,7 @@ const PanelStructuralGrid = (() => {
     log?.('witnessed stepped completion: retained two perimeter anchors, added four whole visible scenes');return baseline.concat(added);
   }
 
-  function validPanel(p){try{const pr=p?._structuralGridProof,w=pr?.analysisWidth,h=pr?.analysisHeight;if(pr?.version===11)return validThinRimsPanel(p);if(pr?.version===10)return validWhiteStackPanel(p);if(pr?.version===9)return validMixedRimsPanel(p);if(pr?.version===8)return validWitnessedPanel(p);if(pr?.version===7)return validSteppedSharedV2Panel(p);if(pr?.version===6)return validSteppedSharedPanel(p);if(pr?.version===5)return validBranchedStackPanel(p);if(pr?.version===4)return validColumnBankPanel(p);if(pr?.version===3)return validInsetTripletPanel(p);if(pr?.version===2)return validOccludedPanel(p);if(p?._identitySource!=='structural-grid-frame'||pr?.version!==1||pr.method!==METHOD||pr.connected!==true||!Number.isInteger(w)||!Number.isInteger(h)||!range(w,120,900)||!range(h,160,900)||!Number.isInteger(pr.index)||!Number.isInteger(pr.count)||!range(pr.count,4,10)||!range(pr.index,0,pr.count-1)||!Array.isArray(pr.box)||pr.box.length!==4||pr.box.some(v=>!Number.isInteger(v))||!Array.isArray(pr.splits)||pr.splits.length<pr.count-1||pr.splits.length>pr.count+3||pr.splits.some(s=>!validSplit(s,w,h))||!range(pr.coverage,.62,.975))return false;const [x0,y0,x1,y1]=pr.box,pixels=(x1-x0+1)*(y1-y0+1);if(x0<0||y0<0||x1>=w||y1>=h||x1<=x0||y1<=y0||!validStats(pr.stats,pixels))return false;return ['x','y','w','h'].every(k=>finite(p[k]))&&Math.max(Math.abs(p.x-x0/w),Math.abs(p.y-y0/h),Math.abs(p.w-(x1-x0+1)/w),Math.abs(p.h-(y1-y0+1)/h))<1e-10;}catch(_){return false;}}
+  function validPanel(p){try{const pr=p?._structuralGridProof,w=pr?.analysisWidth,h=pr?.analysisHeight;if(pr?.version===12)return validPaperInsetsPanel(p);if(pr?.version===11)return validThinRimsPanel(p);if(pr?.version===10)return validWhiteStackPanel(p);if(pr?.version===9)return validMixedRimsPanel(p);if(pr?.version===8)return validWitnessedPanel(p);if(pr?.version===7)return validSteppedSharedV2Panel(p);if(pr?.version===6)return validSteppedSharedPanel(p);if(pr?.version===5)return validBranchedStackPanel(p);if(pr?.version===4)return validColumnBankPanel(p);if(pr?.version===3)return validInsetTripletPanel(p);if(pr?.version===2)return validOccludedPanel(p);if(p?._identitySource!=='structural-grid-frame'||pr?.version!==1||pr.method!==METHOD||pr.connected!==true||!Number.isInteger(w)||!Number.isInteger(h)||!range(w,120,900)||!range(h,160,900)||!Number.isInteger(pr.index)||!Number.isInteger(pr.count)||!range(pr.count,4,10)||!range(pr.index,0,pr.count-1)||!Array.isArray(pr.box)||pr.box.length!==4||pr.box.some(v=>!Number.isInteger(v))||!Array.isArray(pr.splits)||pr.splits.length<pr.count-1||pr.splits.length>pr.count+3||pr.splits.some(s=>!validSplit(s,w,h))||!range(pr.coverage,.62,.975))return false;const [x0,y0,x1,y1]=pr.box,pixels=(x1-x0+1)*(y1-y0+1);if(x0<0||y0<0||x1>=w||y1>=h||x1<=x0||y1<=y0||!validStats(pr.stats,pixels))return false;return ['x','y','w','h'].every(k=>finite(p[k]))&&Math.max(Math.abs(p.x-x0/w),Math.abs(p.y-y0/h),Math.abs(p.w-(x1-x0+1)/w),Math.abs(p.h-(y1-y0+1)/h))<1e-10;}catch(_){return false;}}
   function analyzeRGBA(rgba,w,h,log){const m=partitionRGBA(rgba,w,h,log);if(!m)return[];const proofBase={version:1,method:METHOD,connected:true,analysisWidth:w,analysisHeight:h,count:m.cells.length,outer:m.outer,coverage:m.coverage,splits:m.splits};const out=m.cells.map((c,index)=>({x:c.box[0]/w,y:c.box[1]/h,w:(c.box[2]-c.box[0]+1)/w,h:(c.box[3]-c.box[1]+1)/h,_identitySource:'structural-grid-frame',_geometryType:'orthogonal',_structuralGridProof:{...proofBase,index,box:c.box,stats:c.stats}}));return out.every(validPanel)?out:[];}
   function imageData(img){const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!W||!H)return null;const s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s),c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return null;g.drawImage(img,0,0,w,h);return {rgba:g.getImageData(0,0,w,h).data,w,h};}
   function analyzeImage(img,log){const d=imageData(img);return d?analyzeRGBA(d.rgba,d.w,d.h,log):[];}
@@ -459,13 +459,13 @@ const PanelStructuralGrid = (() => {
     const ids=new Int32Array(w*h),queue=new Int32Array(w*h),items=[];let id=0;
     for(let seed=0;seed<ids.length;seed++)if(lum[seed]>220&&!ids[seed]){id++;let head=0,n=1,x0=w,y0=h,x1=0,y1=0;queue[0]=seed;ids[seed]=id;while(head<n){const i=queue[head++],x=i%w,y=i/w|0;x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);const add=j=>{if(!ids[j]&&lum[j]>220){ids[j]=id;queue[n++]=j;}};if(x)add(i-1);if(x<w-1)add(i+1);if(y)add(i-w);if(y<h-1)add(i+w);}if(n>=1)items.push({id,pixels:n,box:[x0,y0,x1+1,y1+1]});}return {ids,items};
   }
-  function whiteInsetRims(lum,w,h,box){
-    const [x0,y0,x1,y1]=box,raw=[],minimum=Math.max(h*.07,(y1-y0)*.40);
+  function whiteInsetRims(lum,w,h,box,allowCaption=false){
+    const [x0,y0,x1,y1]=box,raw=[],minimum=allowCaption?Math.max(h*.065,(y1-y0)*.12):Math.max(h*.07,(y1-y0)*.40);
     for(let x=x0+12;x<x1-12;x++){let start=-1;for(let y=y0+8;y<=y1-7;y++){const dark=y<y1-7&&Math.min(lum[y*w+x-1],lum[y*w+x],lum[y*w+x+1])<65;if(dark&&start<0)start=y;if(!dark&&start>=0){if(y-start>=minimum)raw.push({x,lo:start,hi:y});start=-1;}}}
     const groups=[];for(const r of raw){const g=groups.find(g=>r.x-g.at(-1).x<=1&&r.x>=g.at(-1).x&&Math.min(r.hi,g[0].hi)-Math.max(r.lo,g[0].lo)>=minimum*.8);if(g)g.push(r);else groups.push([r]);}
     const median=a=>a.sort((a,b)=>a-b)[a.length>>1],rails=groups.filter(g=>g.length>=2&&g.length<=12).map(g=>({x:median(g.map(r=>r.x)),lo:median(g.map(r=>r.lo)),hi:median(g.map(r=>r.hi)),left:g[0].x+1,right:g.at(-1).x})),out=[];
     const horizontal=(y,L,R)=>{let n=0,dark=0;for(let x=L+3;x<R-2;x++){n++;let v=255;for(let d=-2;d<=2;d++)v=Math.min(v,lum[(y+d)*w+x]);dark+=v<65;}return {samples:n,dark};};
-    for(let i=0;i<rails.length;i++)for(let j=i+1;j<rails.length;j++){const a=rails[i],b=rails[j];if(!range((b.x-a.x)/w,.20,.50)||Math.abs(a.lo-b.lo)>5||Math.abs(a.hi-b.hi)>5)continue;const top=Math.min(a.lo,b.lo)-1,bottom=Math.max(a.hi,b.hi),A=horizontal(top,a.x,b.x),B=horizontal(bottom-1,a.x,b.x);if(A.dark/A.samples<.68||B.dark/B.samples<.48)continue;out.push({box:[a.left,top,b.right,bottom],left:a,right:b,top:A,bottom:B});}return out;
+    for(let i=0;i<rails.length;i++)for(let j=i+1;j<rails.length;j++){const a=rails[i],b=rails[j];if(!range((b.x-a.x)/w,.20,.50)||Math.abs(a.lo-b.lo)>5||Math.abs(a.hi-b.hi)>(allowCaption?100:5))continue;const top=Math.min(a.lo,b.lo)-1,bottom=Math.max(a.hi,b.hi),A=horizontal(top,a.x,b.x),B=horizontal(bottom-1,a.x,b.x);if(A.dark/A.samples<.68||B.dark/B.samples<.48)continue;out.push({box:[a.left,top,b.right,bottom],left:a,right:b,top:A,bottom:B});}return out;
   }
   function completeWhiteStackRGBA(rgba,w,h,baseline,log){
     if(typeof PanelMatteCells==='undefined'||!Array.isArray(baseline)||baseline.length!==2||baseline.some(p=>!p||p._identitySource||p._quad||p._outline||p._contours)||rgba?.length!==w*h*4||w<300||h<500||w>900||h>900)return[];
@@ -500,15 +500,15 @@ const PanelStructuralGrid = (() => {
   const THIN_RIM_METHOD='native-thin-gutter-independent-four-rims';
   // Grid leaves are proposals only: every edge must have a sustained dark rim
   // and white paper immediately outside it. Never lower the legacy gutter cut.
-  function thinRim(lum,w,h,axis,guess,a,b,direction){
+  function thinRim(lum,w,h,axis,guess,a,b,direction,radius=30,minimumWhite=.92){
     const limit=axis==='V'?w:h,other=axis==='V'?h:w;
     a=Math.max(10,a+10);b=Math.min(other-11,b-10);if(b-a<45)return null;
     const at=(q,t)=>axis==='V'?lum[t*w+q]:lum[q*w+t];let best=null;
-    for(let q=Math.max(8,guess-30);q<=Math.min(limit-9,guess+30);q++){
+    for(let q=Math.max(8,guess-radius);q<=Math.min(limit-9,guess+radius);q++){
       let dark=0,white=0,both=0;const samples=b-a+1;
       for(let t=a;t<=b;t++){const black=at(q,t)<65;let paper=0;for(let k=3;k<=7;k++)paper=Math.max(paper,at(q+direction*k,t));dark+=black;white+=paper>220;both+=black&&paper>220;}
       const score=dark/samples+white/samples+both/samples-.0001*Math.abs(q-guess);
-      if(dark/samples>=.88&&white/samples>=.92&&both/samples>=.85&&(!best||score>best.score))best={axis,pos:q,a,b,direction,samples,dark,white,both,score};
+      if(dark/samples>=.88&&white/samples>=minimumWhite&&both/samples>=Math.min(.85,minimumWhite-.02)&&(!best||score>best.score))best={axis,pos:q,a,b,direction,samples,dark,white,both,score};
     }return best;
   }
   function completeThinRimsRGBA(rgba,w,h,baseline,log){
@@ -546,7 +546,77 @@ const PanelStructuralGrid = (() => {
     const sampled=document.createElement('canvas');sampled.width=w;sampled.height=h;sampled.getContext('2d').putImageData(new ImageData(rgba,w,h),0,0);const out=completeThinRimsRGBA(rgba,w,h,PanelDetect._analyze(sampled),log);if(out.length)out[out.length-1]=[...baseline].sort((a,b)=>a.y-b.y)[1];return out;
   }
 
-  return {completeThinRimsImage,completeThinRimsRGBA,completeWhiteStackImage,completeWhiteStackRGBA,completeMixedRimsImage,completeMixedRimsRGBA,completeWitnessedSteppedImage,analyzeRGBA,analyzeImage,completeImage,completeNestedImage,completeColumnBankImage,completeBranchedStackImage,completeSteppedSharedSceneV2Image,completeSteppedSharedSceneImage,completeOccludedTierImage,completeInsetTripletImage,validPanel};
+  const PAPER_INSET_METHOD='native-exterior-paper-frames-and-enclosed-inset';
+  function paperComponents(lum,w,h){
+    const outside=new Uint8Array(w*h),queue=new Int32Array(w*h);let n=0,head=0;
+    const add=i=>{if(!outside[i]&&lum[i]>220){outside[i]=1;queue[n++]=i;}};
+    for(let x=0;x<w;x++){add(x);add((h-1)*w+x);}for(let y=0;y<h;y++){add(y*w);add(y*w+w-1);}
+    while(head<n){const i=queue[head++],x=i%w,y=i/w|0;if(x)add(i-1);if(x<w-1)add(i+1);if(y)add(i-w);if(y<h-1)add(i+w);}
+    const seen=outside.slice(),items=[];for(let seed=0;seed<seen.length;seed++)if(!seen[seed]){head=0;n=1;queue[0]=seed;seen[seed]=1;let a=w,b=h,c=0,d=0;while(head<n){const i=queue[head++],x=i%w,y=i/w|0;a=Math.min(a,x);b=Math.min(b,y);c=Math.max(c,x+1);d=Math.max(d,y+1);const put=j=>{if(!seen[j]){seen[j]=1;queue[n++]=j;}};if(x)put(i-1);if(x<w-1)put(i+1);if(y)put(i-w);if(y<h-1)put(i+w);}if(n>=250)items.push({box:[a,b,c,d],pixels:n});}return items;
+  }
+  function completePaperInsetsRGBA(rgba,w,h,baseline,log){
+    if(typeof PanelMatteCells==='undefined'||!(rgba instanceof Uint8Array||rgba instanceof Uint8ClampedArray)||!Number.isInteger(w)||!Number.isInteger(h)||!range(w,300,900)||!range(h,500,900)||rgba.length!==w*h*4||!Array.isArray(baseline)||!range(baseline.length,2,4)||baseline.some(p=>!p||p._identitySource||p._quad||p._outline||p._contours))return[];
+    const lum=luminanceRGBA(rgba,w,h);let edge=0,white=0;for(let i=0;i<lum.length;i++){if(rgba[i*4+3]!==255)return[];if(i<w||i>=(h-1)*w||i%w===0||i%w===w-1){edge++;white+=lum[i]>225;}}if(white/edge<.98)return[];
+    const components=paperComponents(lum,w,h),frames=[],unframed=[];
+    for(const component of components){const [a,b,c,d]=component.box;
+      if(component.pixels/((c-a)*(d-b))<.87||c-a<w*.17||d-b<h*.085){unframed.push(component);continue;}
+      const rims=[thinRim(lum,w,h,'V',a,b,d,-1,40),thinRim(lum,w,h,'V',c,b,d,1,40),thinRim(lum,w,h,'H',b,a,c,-1,40),thinRim(lum,w,h,'H',d,a,c,1,40)];
+      // A borderless neighbor's objects can touch one otherwise continuous rim.
+      // Permit this only below a proved frame with the very same left rail.
+      let shared=false;if(!rims[0]&&rims.slice(1).every(Boolean)){const e=thinRim(lum,w,h,'V',a,b,d,-1,40,.80);if(e&&e.dark/e.samples>=.98&&frames.some(f=>Math.abs(f.rims[0].pos-e.pos)<=3&&f.box[3]<=b&&b-f.box[3]<h*.03)){rims[0]=e;shared=true;}}
+      if(rims.some(e=>!e))return[];
+      const box=[rims[0].pos-3,rims[2].pos-3,rims[1].pos+4,rims[3].pos+4];if(box[0]<0||box[1]<0||box[2]>w||box[3]>h)return[];frames.push({box,rims,shared,component});
+    }
+    if(!range(frames.length,3,6))return[];
+    let open=null;
+    const shared=frames.filter(f=>f.shared);if(shared.length){if(shared.length!==1||frames.length!==4)return[];const lower=shared[0],upper=frames.find(f=>f!==lower&&Math.abs(f.box[0]-lower.box[0])<=3&&f.box[3]<=lower.box[1]&&lower.box[1]-f.box[3]<h*.03);if(!upper)return[];
+      const left=Math.min(...frames.map(f=>f.box[0])),box=[left,upper.box[1],Math.min(upper.box[0],lower.box[0]),lower.box[3]],contained=unframed.filter(c=>c.box[0]>=box[0]&&c.box[2]<=box[2]&&c.box[1]>=box[1]&&c.box[3]<=box[3]);
+      if(contained.length<3||box[2]-box[0]<w*.25||box[3]-box[1]<h*.40)return[];open={box,components:contained,neighborBoxes:[upper.box,lower.box]};
+    }else if(unframed.some(c=>c.pixels>w*h*.015))return[];
+    // This route requires exactly one separately enclosed inset. Main frames
+    // come from exterior paper, so framed pictures inside scenes are not cells.
+    const insetCandidates=[];for(const f of frames)for(const inset of whiteInsetRims(lum,w,h,f.box,true)){if(inset.top.dark/inset.top.samples>=.90&&inset.bottom.dark/inset.bottom.samples>=.90)insetCandidates.push({parent:f,...inset});}
+    if(insetCandidates.length!==1)return[];const inset=insetCandidates[0],ib=inset.box;if(inset.parent.box[2]-inset.parent.box[0]<w*.85)return[];
+    if(ib[0]-inset.parent.box[0]<8||ib[1]-inset.parent.box[1]<8||inset.parent.box[2]-ib[2]<8||inset.parent.box[3]-ib[3]<8)return[];
+    const mains=frames.map(f=>({...f,kind:'frame'}));if(open)mains.push({...open,kind:'open'});
+    // Group only near-equal top edges; preserve normal left-to-right reading.
+    mains.sort((a,b)=>Math.abs(a.box[1]-b.box[1])<=h*.015?a.box[0]-b.box[0]:a.box[1]-b.box[1]);
+    for(let i=0;i<mains.length;i++)for(let j=0;j<i;j++){const a=mains[i].box,b=mains[j].box;if(Math.min(a[2],b[2])>Math.max(a[0],b[0])&&Math.min(a[3],b[3])>Math.max(a[1],b[1]))return[];}
+    const parentIndex=mains.findIndex(f=>f.box===inset.parent.box),owners=mains.flatMap((f,i)=>i===parentIndex?[f,{box:ib,kind:'inset'}]:[f]),labels=new Uint16Array(w*h);
+    const fill=(b,id)=>{for(let y=b[1];y<b[3];y++)for(let x=b[0];x<b[2];x++)labels[y*w+x]=id;};owners.forEach((f,i)=>fill(f.box,i+1));const insetIndex=parentIndex+1,insetId=insetIndex+1;
+    const cc=whiteComponents(lum,w,h),attachments=[];
+    for(const c of cc.items){const[a,b,z,d]=c.box;if(c.pixels<50||c.pixels>w*h*.02||z-a>w*.20||d-b>h*.15||a>=ib[0]&&b>=ib[1]&&z<=ib[2]&&d<=ib[3]||z<=ib[0]||a>=ib[2]||d<=ib[1]||b>=ib[3])continue;let inside=0;for(let y=b;y<d;y++)for(let x=a;x<z;x++)if(cc.ids[y*w+x]===c.id&&x>=ib[0]&&x<ib[2]&&y>=ib[1]&&y<ib[3])inside++;
+      if(!range(inside/c.pixels,.05,.90))continue;const parent=inset.parent.box;if(a-2<parent[0]||b-2<parent[1]||z+2>parent[2]||d+2>parent[3])return[];
+      // Fill enclosed lettering holes row-wise, then retain the black outline.
+      for(let y=b;y<d;y++){let lo=w,hi=-1;for(let x=a;x<z;x++)if(cc.ids[y*w+x]===c.id){lo=Math.min(lo,x);hi=Math.max(hi,x);}if(hi<lo)continue;for(let Y=y-2;Y<=y+2;Y++)for(let X=lo-2;X<=hi+2;X++)labels[Y*w+X]=insetId;}
+      attachments.push({box:c.box,pixels:c.pixels,inside});
+    }
+    if(attachments.length>1)return[];
+    const missing=Math.abs(inset.left.hi-inset.right.hi)>5;if(missing&&attachments.length!==1)return[];
+    const evidence={version:12,method:PAPER_INSET_METHOD,connected:true,analysisWidth:w,analysisHeight:h,count:owners.length,frames:frames.map(f=>({box:f.box,rims:f.rims,shared:f.shared})),open,inset:{box:ib,left:inset.left,right:inset.right,top:inset.top,bottom:inset.bottom,parentBox:inset.parent.box},attachments,edge,white,ownerBoxes:owners.map(f=>f.box),parentIndex,insetIndex};
+    const out=[];for(let id=1;id<=owners.length;id++){const f=owners[id-1],box=f.box,rect={x:box[0]/w,y:box[1]/h,w:(box[2]-box[0])/w,h:(box[3]-box[1])/h};
+      const anchor=f.kind==='frame'&&id-1!==parentIndex?baseline.find(p=>overlap(p,rect)/Math.max(p.w*p.h,rect.w*rect.h)>.94):null;if(anchor){out.push(anchor);continue;}
+      const rings=PanelMatteCells.tracePixelContours(labels,w,h,id);if(!rings)return[];let pixels=0,sum=0,sq=0;for(let i=0;i<labels.length;i++)if(labels[i]===id){pixels++;sum+=lum[i];sq+=lum[i]*lum[i];}const pts=rings.flat(),a=Math.min(...pts.map(p=>p[0])),b=Math.min(...pts.map(p=>p[1])),c=Math.max(...pts.map(p=>p[0])),d=Math.max(...pts.map(p=>p[1]));
+      const p={x:a/w,y:b/h,w:(c-a)/w,h:(d-b)/h,_identitySource:'structural-grid-frame',_geometryOwner:'structural-grid-contours',_geometryType:'paper-frame-inset-ownership',_contours:rings.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),_structuralGridProof:{...evidence,index:id-1,pixelContours:rings,pixels,variance:sq/pixels-(sum/pixels)**2}};if(!validPanel(p))return[];out.push(p);
+    }
+    log?.(`exterior-paper completion: ${frames.length} framed scenes, ${open?1:0} borderless scene, one exclusive inset`);return out;
+  }
+  function validPaperInsetsPanel(p){try{const pr=p?._structuralGridProof,w=pr?.analysisWidth,h=pr?.analysisHeight;if(p?._identitySource!=='structural-grid-frame'||pr?.version!==12||pr.method!==PAPER_INSET_METHOD||pr.connected!==true||!Number.isInteger(w)||!Number.isInteger(h)||!range(w,300,900)||!range(h,500,900)||!Number.isInteger(pr.count)||!range(pr.count,4,8)||!Number.isInteger(pr.index)||!range(pr.index,0,pr.count-1)||!range(pr.white/pr.edge,.98,1)||!range(pr.variance,200,16257)||!Array.isArray(pr.frames)||!range(pr.frames.length,3,6)||pr.ownerBoxes?.length!==pr.count)return false;
+    const goodBox=b=>Array.isArray(b)&&b.length===4&&b.every(Number.isInteger)&&b[0]>=0&&b[1]>=0&&b[2]<=w&&b[3]<=h&&b[2]>b[0]&&b[3]>b[1];
+    if(pr.ownerBoxes.some(b=>!goodBox(b)))return false;for(const f of pr.frames){if(!goodBox(f.box)||f.rims?.length!==4)return false;for(let j=0;j<4;j++){const e=f.rims[j],lo=f.shared&&j===0?.80:.92;if(e.axis!==(j<2?'V':'H')||e.direction!==(j%2?1:-1)||!Number.isInteger(e.pos)||e.samples!==e.b-e.a+1||e.samples<46||!range(e.dark/e.samples,f.shared&&j===0?.98:.88,1)||!range(e.white/e.samples,lo,1)||!range(e.both/e.samples,f.shared&&j===0?.78:.85,1))return false;}if(JSON.stringify(f.box)!==JSON.stringify([f.rims[0].pos-3,f.rims[2].pos-3,f.rims[1].pos+4,f.rims[3].pos+4]))return false;}
+    if(pr.open&&(!goodBox(pr.open.box)||pr.open.components?.length<3||!pr.frames.some(f=>f.shared)))return false;
+    if(pr.count!==pr.frames.length+1+(pr.open?1:0)||!Number.isInteger(pr.parentIndex)||!range(pr.parentIndex,0,pr.count-2)||pr.insetIndex!==pr.parentIndex+1||pr.edge!==2*w+2*h-4||!Array.isArray(pr.attachments))return false;
+    const i=pr.inset;if(!goodBox(i?.box)||!goodBox(i.parentBox)||!range(i.top.dark/i.top.samples,.90,1)||!range(i.bottom.dark/i.bottom.samples,.90,1)||Math.abs(i.left.lo-i.right.lo)>5||Math.min(i.left.hi-i.left.lo,i.right.hi-i.right.lo)<h*.065||Math.abs(i.left.hi-i.right.hi)>100||pr.attachments?.length>1)return false;
+    if(i.parentBox[2]-i.parentBox[0]<w*.85||JSON.stringify(pr.ownerBoxes[pr.parentIndex])!==JSON.stringify(i.parentBox)||JSON.stringify(pr.ownerBoxes[pr.insetIndex])!==JSON.stringify(i.box)||!pr.frames.some(f=>JSON.stringify(f.box)===JSON.stringify(i.parentBox)))return false;
+    if(Math.abs(i.left.hi-i.right.hi)>5&&pr.attachments.length!==1)return false;if(pr.attachments.some(a=>!goodBox(a.box)||!range(a.inside/a.pixels,.05,.90)))return false;
+    const rings=pr.pixelContours;if(!Array.isArray(rings)||!range(rings.length,1,12)||rings.some(q=>!Array.isArray(q)||!range(q.length,4,4096)||q.some((v,i)=>!Array.isArray(v)||v.length!==2||!Number.isInteger(v[0])||!Number.isInteger(v[1])||!range(v[0],0,w)||!range(v[1],0,h)||(v[0]!==q[(i+1)%q.length][0]&&v[1]!==q[(i+1)%q.length][1]))))return false;
+    const area=Math.round(rings.reduce((s,q)=>s+q.reduce((t,a,i)=>{const b=q[(i+1)%q.length];return t+a[0]*b[1]-b[0]*a[1];},0)/2,0));if(Math.abs(area)!==pr.pixels||pr.pixels<w*h*.01||JSON.stringify(p._contours)!==JSON.stringify(rings.map(q=>q.map(([x,y])=>({x:x/w,y:y/h})))))return false;const pts=rings.flat(),a=Math.min(...pts.map(v=>v[0])),b=Math.min(...pts.map(v=>v[1])),c=Math.max(...pts.map(v=>v[0])),d=Math.max(...pts.map(v=>v[1]));return ['x','y','w','h'].every((k,j)=>Math.abs(p[k]-[a/w,b/h,(c-a)/w,(d-b)/h][j])<1e-10);
+  }catch(_){return false;}}
+  function completePaperInsetsImage(img,baseline,log,closedAnchors=[]){
+    if(typeof PanelMatteCells==='undefined'||!Array.isArray(baseline)||!(range(baseline.length,2,4)||baseline.length===0&&closedAnchors.length===3)||baseline.some(p=>p._identitySource||p._quad||p._outline||p._contours))return[];const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!W||!H||W*H>24000000)return[];const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return[];g.drawImage(img,0,0);const s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s),rgba=PanelMatteCells.sampleBilinearRGBA(g.getImageData(0,0,W,H).data,W,H,w,h);let anchors=baseline;if(!anchors.length){const sampled=document.createElement('canvas');sampled.width=w;sampled.height=h;sampled.getContext('2d').putImageData(new ImageData(rgba,w,h),0,0);anchors=PanelDetect._analyze(sampled);}const out=completePaperInsetsRGBA(rgba,w,h,anchors,log);return out.map(p=>p._structuralGridProof?.version===12?p:(closedAnchors.find(a=>overlap(a,p)/Math.max(a.w*a.h,p.w*p.h)>.94)||p));
+  }
+
+  return {completePaperInsetsImage,completePaperInsetsRGBA,completeThinRimsImage,completeThinRimsRGBA,completeWhiteStackImage,completeWhiteStackRGBA,completeMixedRimsImage,completeMixedRimsRGBA,completeWitnessedSteppedImage,analyzeRGBA,analyzeImage,completeImage,completeNestedImage,completeColumnBankImage,completeBranchedStackImage,completeSteppedSharedSceneV2Image,completeSteppedSharedSceneImage,completeOccludedTierImage,completeInsetTripletImage,validPanel};
 })();
 if(typeof window!=='undefined')window.PanelStructuralGrid=PanelStructuralGrid;
 if(typeof module!=='undefined'&&module.exports)module.exports=PanelStructuralGrid;
