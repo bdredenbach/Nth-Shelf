@@ -11,3 +11,5 @@ Validation complete:396 normal-raster touches and all44 render inspections pass;
 All additional reader runs pass:549 touches total;100717 dense samples. Final page65 narrow-panel renders inspected after dark-gutter correction; both rectangles retain independent borders. Final source gate and74-page sweep are finishing before publication.
 
 Final tested source: complete retained gate and74-page sweep pass after all border fixes. Publish this tree and build Test56. Next batch66–74 was inspected read-only; probe and native pixels in recovery-pages66-74. No Test57 source changes yet.
+
+Published source0b18e8a166a4b6a0138a9d32e8752edf6331e782, treeeb4d259bb84b6c951ef1e6f523400bc6b4a4a1d7. Build Test56 APK run36276077171 is in progress. Resume this run; verify downloaded artifact and all68 assets against this source before delivery.
