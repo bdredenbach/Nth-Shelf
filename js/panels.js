@@ -380,6 +380,14 @@ const PanelDetect = {
             try{if(typeof PanelMatteCells!=='undefined')closed=PanelMatteCells.analyzeImage(img,log);}
             catch(error){if(log)log(`matte cell network deferred: ${error.message}`);}
           }
+          // Complete a dark-matte map from independently measured pale rims.
+          // Standalone matte proposals remain unchanged for other detectors.
+          try {
+            if(typeof PanelMatteCells!=='undefined'&&closed.length>=4&&closed.every(p=>p._identitySource==='matte-cell-frame'&&p._matteCellProof?.mode==='dark')){
+              const completed=PanelMatteCells.completeRimNetworkImage(img,closed,log);
+              if(completed.length)closed=completed;
+            }
+          }catch(error){if(log)log(`pale rim completion deferred: ${error.message}`);}
           // A partial map with two independently proved perimeter anchors
           // needs completion before count-gated legacy matte refinements.
           try {

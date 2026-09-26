@@ -2,13 +2,23 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.49 — page44: eight frames, nine taps each
+
+Test49 restores incomplete dark-art masks and detects the missing narrow red-background profile on page44. All eight visible frames pass nine real browser touch/crop checks each: **72/72**. Visual review also caught and corrected the claw strip's clipped lower border.
+
+The full 74-page comparison changes only page44. **Phone acceptance is pending.** See [results](qa27900/frame-accuracy/test49/RESULTS.md) and [handoff](HANDOFF-2.79.49.md).
+
+Current identity: **2.79.49 / code27977**, package `io.github.bdredenbach.nthshelf.frametest49`, label **Nth Shelf Test49**. Cache/proof identifiers: `nth-shelf-shell-2.79.49`, `panel-map-exp-47`, `frame-proof-2.79.49`.
+
+Earlier candidates and recorded results follow.
+
 ## 2.79.48 — page43 corner taps select the complete frame
 
 A tiny break in page43's pale border let the exterior scan remove dark artwork from the middle slanted frame's mask. Test48 repairs that measured leak so the highlighted corner and center select the same whole K-KRASH scene.
 
 All 32 browser touch/crop checks pass. A full 74-page comparison changes only this frame; its four neighbors and all other pages remain exact. **Phone acceptance is pending.** See [results](qa27900/frame-accuracy/test48/RESULTS.md) and [handoff](HANDOFF-2.79.48.md).
 
-Current identity: **2.79.48 / code27976**, package `io.github.bdredenbach.nthshelf.frametest48`, label **Nth Shelf Test48**. Cache/proof identifiers: `nth-shelf-shell-2.79.48`, `panel-map-exp-46`, `frame-proof-2.79.48`.
+Test48 identity: **2.79.48 / code27976**, package `io.github.bdredenbach.nthshelf.frametest48`, label **Nth Shelf Test48**. Cache/proof identifiers: `nth-shelf-shell-2.79.48`, `panel-map-exp-46`, `frame-proof-2.79.48`.
 
 Earlier candidates and their recorded results follow.
 

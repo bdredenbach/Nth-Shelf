@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "missing-red-profile-divider",
+      "count": 0
+    },
+    {
+      "name": "transparent-image",
+      "count": 0
+    },
+    {
+      "name": "flat-matte",
+      "count": 0
+    }
+  ]
+}

@@ -80,3 +80,7 @@ Current candidate: **2.79.47** (`versionCode 27975`), package `io.github.bdreden
 ## Test48 identity
 
 Current candidate: **2.79.48** (`versionCode 27976`), package `io.github.bdredenbach.nthshelf.frametest48`, label **Nth Shelf Test48**. Page43 corner and center taps now share the complete middle-scene mask. Install separately and import the comic. Phone acceptance is pending.
+
+## Test49 identity
+
+Current candidate: **2.79.49** (`versionCode 27977`), package `io.github.bdredenbach.nthshelf.frametest49`, label **Nth Shelf Test49**. Page44: eight scenes, nine browser touch checks per scene. Install separately and import the comic. Phone acceptance is pending.

@@ -148,9 +148,116 @@ const PanelMatteCells = (() => {
     }
     return [];
   }
+  function rasterContours(rings,w,h){
+    const mask=new Uint8Array(w*h);
+    for(let y=0;y<h;y++){
+      const xs=[];for(const q of rings)for(let j=0;j<q.length;j++){const a=q[j],b=q[(j+1)%q.length];if((a[1]>y+.5)!==(b[1]>y+.5))xs.push(a[0]+(y+.5-a[1])*(b[0]-a[0])/(b[1]-a[1]));}
+      xs.sort((a,b)=>a-b);for(let k=0;k+1<xs.length;k+=2)for(let x=Math.max(0,Math.ceil(xs[k]-.5));x<Math.min(w,xs[k+1]-.5);x++)mask[y*w+x]=1;
+    }return mask;
+  }
+  function rimMetric(labels,id,pale,w,h){
+    let samples=0,matched=0;
+    const near=dilate(dilate(dilate(pale,w,h),w,h),w,h);
+    for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){
+      const i=y*w+x;if(labels[i]===id&&[i-1,i+1,i-w,i+w].some(j=>labels[j]!==id)){samples++;matched+=near[i];}
+    }return {samples,matched};
+  }
+  function validCompletion(p,w,h){
+    const c=p.rimCompletion,e=c?.enclosure;
+    if(e&&!(e.radius===5&&e.fringe===2&&Number.isInteger(e.corePixels)&&ok(e.corePixels/(w*h),.008,.40)&&Number.isInteger(e.matchedPixels)&&ok(e.matchedPixels/e.corePixels,.98,1)&&ok(e.otherFraction,0,.001)&&Number.isInteger(e.addedPixels)&&ok(e.addedPixels/(w*h),.003,.03)&&Number.isInteger(e.rim?.samples)&&e.rim.samples>100&&Number.isInteger(e.rim.matched)&&ok(e.rim.matched/e.rim.samples,.92,1)))return false;
+    return c?.method==='pale-rim-core-completion'&&c.matteTolerance===18&&c.rimRadius===3&&c.growPasses===6&&
+      Number.isInteger(c.baselineCount)&&ok(c.baselineCount,4,12)&&Number.isInteger(c.count)&&ok(c.count,c.baselineCount,c.baselineCount+2)&&
+      Number.isInteger(c.index)&&ok(c.index,0,c.count-1)&&Number.isInteger(c.priorIndex)&&ok(c.priorIndex,-1,c.baselineCount-1)&&
+      Number.isInteger(c.beforePixels)&&c.beforePixels>=0&&c.retainedPixels===c.beforePixels&&p.pixels>c.beforePixels&&
+      Array.isArray(c.matches)&&c.matches.length===c.baselineCount&&new Set(c.matches.map(m=>m.index)).size===c.baselineCount&&
+      c.matches.every(m=>Number.isInteger(m.index)&&ok(m.index,0,c.count-1)&&Number.isInteger(m.pixels)&&m.pixels>0&&Number.isInteger(m.matched)&&ok(m.matched/m.pixels,.80,1)&&ok(m.otherFraction,0,.03))&&
+      (c.priorIndex<0?c.beforePixels===0&&c.matches.every(m=>m.index!==c.index):c.matches[c.priorIndex].index===c.index&&c.beforePixels===c.matches[c.priorIndex].pixels)&&
+      Number.isInteger(c.rim?.samples)&&c.rim.samples>100&&Number.isInteger(c.rim.matched)&&ok(c.rim.matched/c.rim.samples,c.priorIndex<0?.96:.90,1)&&
+      ok(c.coverage,.65,.95)&&p.mode==='dark'&&ok(p.edgeBase,0,30)&&p.edgeMatched/p.edgeSamples>=.94;
+  }
+  // Reconstruct whole cells from a neutral rim network only when it agrees
+  // uniquely with every existing dark-matte identity. This operates before
+  // taps; seed points, filenames and page coordinates are not inputs.
+  function completeRimNetworkRGBA(rgba,w,h,baseline,log){
+    if(!Array.isArray(baseline)||baseline.length<4||baseline.length>12||!baseline.every(p=>validPanel(p)&&p._matteCellProof.version===1&&p._matteCellProof.mode==='dark'&&p._matteCellProof.analysisWidth===w&&p._matteCellProof.analysisHeight===h))return [];
+    if(!rgba||rgba.length!==w*h*4)return [];
+    const page=w*h,color=baseline[0]._matteCellProof.edgeColor,gray=new Float64Array(page),bg=new Uint8Array(page),pale=new Uint8Array(page);
+    for(let i=0;i<page;i++){
+      if(rgba[i*4+3]!==255)return [];const r=rgba[i*4],g=rgba[i*4+1],b=rgba[i*4+2];gray[i]=r*.299+g*.587+b*.114;
+      bg[i]=Math.max(Math.abs(r-color[0]),Math.abs(g-color[1]),Math.abs(b-color[2]))<=18;
+      pale[i]=gray[i]>120&&Math.max(r,g,b)-Math.min(r,g,b)<80;
+    }
+    const ex=exterior(bg,w,h);if(!ex)return [];
+    const parent=new Uint8Array(page),art=new Uint8Array(page),wall=dilate(dilate(dilate(pale,w,h),w,h),w,h);
+    for(let i=0;i<page;i++){parent[i]=!ex.out[i];art[i]=parent[i]&&!wall[i];}
+    const cc=components(art,w,h);if(!cc)return [];
+    const cells=cc.items.filter(c=>c.pixels>=page*.008&&c.box[2]-c.box[0]>=w*.035&&c.box[3]-c.box[1]>=h*.05&&c.box[0]>0&&c.box[1]>0&&c.box[2]<w&&c.box[3]<h);
+    if(cells.length<baseline.length||cells.length>baseline.length+2)return [];
+    cells.sort((a,b)=>Math.abs(a.box[1]-b.box[1])<h*.08?a.box[0]-b.box[0]:a.box[1]-b.box[1]);
+    const lookup=new Map(cells.map((c,i)=>[c.id,i+1])),labels=new Uint16Array(page);
+    for(let i=0;i<page;i++)labels[i]=lookup.get(cc.ids[i])||0;
+    assignGrow(labels,parent,w,h,6);
+    // White lettering and isolated ink inside a closed cell belong to it.
+    for(let id=1;id<=cells.length;id++){
+      const inverse=new Uint8Array(page);for(let i=0;i<page;i++)inverse[i]=labels[i]!==id;
+      const outside=exterior(inverse,w,h);if(!outside)return [];
+      for(let i=0;i<page;i++)if(!outside.out[i]){if(labels[i]&&labels[i]!==id)return [];labels[i]=id;}
+    }
+    // A white rim can enclose a black border that the matte flood removed.
+    // A second, closed pale-only envelope may restore it, but only with
+    // near-total agreement on one existing cell and no reassigned pixels.
+    const enclosures=new Map(),wideWall=dilate(dilate(wall,w,h),w,h),inside=new Uint8Array(page);
+    for(let i=0;i<page;i++)inside[i]=!wideWall[i];
+    const enclosed=components(inside,w,h);if(!enclosed)return [];
+    for(const cell of enclosed.items){
+      if(cell.pixels<page*.008||cell.pixels>page*.40||cell.box[0]===0||cell.box[1]===0||cell.box[2]===w||cell.box[3]===h)continue;
+      const votes=new Array(cells.length+1).fill(0),core=new Uint8Array(page);
+      for(let i=0;i<page;i++)if(enclosed.ids[i]===cell.id){core[i]=1;votes[labels[i]]++;}
+      let owner=1;for(let k=2;k<votes.length;k++)if(votes[k]>votes[owner])owner=k;
+      const foreign=votes.reduce((n,v,k)=>n+(k&&k!==owner?v:0),0)/cell.pixels;
+      if(votes[owner]/cell.pixels<.98||foreign>.001||enclosures.has(owner-1))continue;
+      const priorRim=rimMetric(labels,owner,pale,w,h);if(priorRim.matched/priorRim.samples>=.85)continue;
+      let expanded=core;for(let pass=0;pass<7;pass++)expanded=dilate(expanded,w,h);
+      const proposed=labels.slice();let added=0;for(let i=0;i<page;i++)if(expanded[i]&&!labels[i]){proposed[i]=owner;added++;}
+      if(!ok(added/page,.003,.03))continue;
+      const rim=rimMetric(proposed,owner,pale,w,h);if(rim.matched/rim.samples<.92)continue;
+      labels.set(proposed);enclosures.set(owner-1,{radius:5,fringe:2,corePixels:cell.pixels,matchedPixels:votes[owner],otherFraction:foreign,addedPixels:added,rim});
+    }
+    const priorMasks=baseline.map(p=>rasterContours(p._matteCellProof.pixelContours,w,h)),matches=[];
+    for(const mask of priorMasks){
+      const votes=new Array(cells.length+1).fill(0);let pixels=0;for(let i=0;i<page;i++)if(mask[i]){pixels++;votes[labels[i]]++;}
+      let id=1;for(let k=2;k<votes.length;k++)if(votes[k]>votes[id])id=k;
+      const other=votes.reduce((s,n,k)=>s+(k&&k!==id?n:0),0)/pixels;
+      if(votes[id]/pixels<.80||other>.03||matches.some(m=>m.index===id-1))return [];
+      matches.push({index:id-1,pixels,matched:votes[id],otherFraction:other});
+    }
+    const candidateSizes=cells.map((_,k)=>labels.reduce((n,v)=>n+(v===k+1),0)),keep=new Map();
+    matches.forEach((m,i)=>{if(m.matched/candidateSizes[m.index]>=.95)keep.set(m.index,baseline[i]);});
+    // Existing ownership wins at shared rims. No old selectable pixel is lost.
+    for(let j=0;j<priorMasks.length;j++)for(let i=0;i<page;i++)if(priorMasks[j][i])labels[i]=matches[j].index+1;
+    // For retained cells, discard new fringe so their descriptors remain exact.
+    for(const [index]of keep){const prior=matches.findIndex(m=>m.index===index),mask=priorMasks[prior];for(let i=0;i<page;i++)if(labels[i]===index+1&&!mask[i])labels[i]=0;}
+    const coverage=labels.reduce((n,v)=>n+(v>0),0)/page;if(!ok(coverage,.65,.95))return [];
+    const out=[];
+    for(let index=0;index<cells.length;index++){
+      if(keep.has(index)){out.push(keep.get(index));continue;}
+      let pixels=0,total=0,sq=0,dark=0,light=0;for(let i=0;i<page;i++)if(labels[i]===index+1){const g=gray[i];pixels++;total+=g;sq+=g*g;dark+=g<50;light+=g>170;}
+      const rings=trace(labels,w,h,index+1);if(!rings)return [];
+      const priorIndex=matches.findIndex(m=>m.index===index),beforePixels=priorIndex<0?0:matches[priorIndex].pixels,rim=rimMetric(labels,index+1,pale,w,h);
+      const proof={...baseline[0]._matteCellProof,version:2,source:'component',pixels,mean:total/pixels,variance:sq/pixels-(total/pixels)**2,dark,light,pixelContours:rings,rimCompletion:{method:'pale-rim-core-completion',matteTolerance:18,rimRadius:3,growPasses:6,baselineCount:baseline.length,count:cells.length,index,priorIndex,beforePixels,retainedPixels:beforePixels,matches,rim,coverage,...(enclosures.has(index)?{enclosure:enclosures.get(index)}:{})}};
+      const b=bounds(rings.flat()),panel={x:b[0]/w,y:b[1]/h,w:(b[2]-b[0])/w,h:(b[3]-b[1])/h,_contours:rings.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),_identitySource:'matte-cell-frame',_geometryOwner:'matte-cell-contours',_geometryType:'edge-connected-matte-cell',_matteCellProof:proof};
+      if(!validPanel(panel)){log?.('rim completion withheld: proof '+index+' rim '+rim.matched/rim.samples);return [];}out.push(panel);
+    }
+    if(out.every(p=>baseline.includes(p)))return [];
+    log?.('pale rim network completed '+out.length+' whole cells; retained '+keep.size+' exact identities');return out;
+  }
+  function completeRimNetworkImage(img,baseline,log){
+    try{const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height,s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);return completeRimNetworkRGBA(ctx.getImageData(0,0,w,h).data,w,h,baseline,log);}catch(e){log?.('rim completion deferred: '+e.message);return [];}
+  }
   function validPanel(panel){try{
     const p=panel?._matteCellProof,w=p?.analysisWidth,h=p?.analysisHeight,rings=p?.pixelContours;
-    if(panel?._identitySource!=='matte-cell-frame'||p?.version!==1||p.method!==METHOD||!['dark','paper'].includes(p.mode)||!Number.isInteger(w)||!Number.isInteger(h)||!ok(w,250,900)||!ok(h,350,900))return false;
+    if(panel?._identitySource!=='matte-cell-frame'||![1,2].includes(p?.version)||p.method!==METHOD||!['dark','paper'].includes(p.mode)||!Number.isInteger(w)||!Number.isInteger(h)||!ok(w,250,900)||!ok(h,350,900))return false;
+    if(p.version===2?!validCompletion(p,w,h):p.rimCompletion!==undefined)return false;
     if(panel._geometryOwner!=='matte-cell-contours'||panel._geometryType!=='edge-connected-matte-cell'||panel._quad||panel._outline)return false;
     if(!Array.isArray(p.edgeColor)||p.edgeColor.length!==3||p.edgeColor.some(v=>!Number.isInteger(v)||!ok(v,0,255))||!Number.isInteger(p.edgeSamples)||p.edgeSamples<500||!Number.isInteger(p.edgeMatched)||!ok(p.edgeMatched,0,p.edgeSamples)||!Number.isInteger(p.exteriorPixels)||!ok(p.exteriorPixels,w*h*.015,w*h))return false;
     if(!['component','split'].includes(p.source)||!Number.isInteger(p.pixels)||p.pixels<w*h*.012||!ok(p.mean,0,255)||!ok(p.variance,180,17000)||!Number.isInteger(p.dark)||!Number.isInteger(p.light))return false;
@@ -163,7 +270,7 @@ const PanelMatteCells = (() => {
     if(!img||!Number.isFinite(img.width)||!Number.isFinite(img.height)||img.width<1||img.height<1)return [];
     try{const s=Math.min(1,900/Math.max(img.width,img.height)),w=Math.round(img.width*s),h=Math.round(img.height*s),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});if(!ctx)return [];ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log);}catch(e){log?.('matte cell route deferred: '+e.message);return [];}
   }
-  return {analyzeImage,analyzeRGBA,validPanel};
+  return {analyzeImage,analyzeRGBA,validPanel,completeRimNetworkImage,completeRimNetworkRGBA};
 })();
 if(typeof window!=='undefined')window.PanelMatteCells=PanelMatteCells;
 if(typeof module!=='undefined')module.exports=PanelMatteCells;

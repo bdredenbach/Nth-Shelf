@@ -1,0 +1,410 @@
+[
+  {
+    "name": "top-fight",
+    "expectedPriorIndex": 0,
+    "points": [
+      {
+        "x": 90,
+        "y": 65,
+        "priorOwner": 0
+      },
+      {
+        "x": 295,
+        "y": 65,
+        "priorOwner": 0
+      },
+      {
+        "x": 510,
+        "y": 65,
+        "priorOwner": -1
+      },
+      {
+        "x": 75,
+        "y": 125,
+        "priorOwner": 0
+      },
+      {
+        "x": 290,
+        "y": 125,
+        "priorOwner": 0
+      },
+      {
+        "x": 510,
+        "y": 125,
+        "priorOwner": 0
+      },
+      {
+        "x": 70,
+        "y": 180,
+        "priorOwner": 0
+      },
+      {
+        "x": 270,
+        "y": 210,
+        "priorOwner": 0
+      },
+      {
+        "x": 500,
+        "y": 195,
+        "priorOwner": 0
+      }
+    ]
+  },
+  {
+    "name": "left-portrait",
+    "expectedPriorIndex": 1,
+    "points": [
+      {
+        "x": 42,
+        "y": 250,
+        "priorOwner": 1
+      },
+      {
+        "x": 83,
+        "y": 250,
+        "priorOwner": 1
+      },
+      {
+        "x": 126,
+        "y": 250,
+        "priorOwner": 1
+      },
+      {
+        "x": 36,
+        "y": 390,
+        "priorOwner": 1
+      },
+      {
+        "x": 76,
+        "y": 390,
+        "priorOwner": -1
+      },
+      {
+        "x": 121,
+        "y": 390,
+        "priorOwner": 1
+      },
+      {
+        "x": 35,
+        "y": 510,
+        "priorOwner": 1
+      },
+      {
+        "x": 68,
+        "y": 510,
+        "priorOwner": 1
+      },
+      {
+        "x": 110,
+        "y": 510,
+        "priorOwner": 1
+      }
+    ]
+  },
+  {
+    "name": "shlik-strip",
+    "expectedPriorIndex": 2,
+    "points": [
+      {
+        "x": 175,
+        "y": 255,
+        "priorOwner": 2
+      },
+      {
+        "x": 185,
+        "y": 255,
+        "priorOwner": 2
+      },
+      {
+        "x": 195,
+        "y": 255,
+        "priorOwner": 2
+      },
+      {
+        "x": 160,
+        "y": 340,
+        "priorOwner": 2
+      },
+      {
+        "x": 169,
+        "y": 340,
+        "priorOwner": 2
+      },
+      {
+        "x": 180,
+        "y": 340,
+        "priorOwner": 2
+      },
+      {
+        "x": 150,
+        "y": 435,
+        "priorOwner": 2
+      },
+      {
+        "x": 153,
+        "y": 435,
+        "priorOwner": 2
+      },
+      {
+        "x": 160,
+        "y": 435,
+        "priorOwner": 2
+      }
+    ]
+  },
+  {
+    "name": "red-profile",
+    "expectedPriorIndex": -1,
+    "points": [
+      {
+        "x": 237,
+        "y": 266,
+        "priorOwner": -1
+      },
+      {
+        "x": 260,
+        "y": 266,
+        "priorOwner": -1
+      },
+      {
+        "x": 285,
+        "y": 266,
+        "priorOwner": -1
+      },
+      {
+        "x": 205,
+        "y": 365,
+        "priorOwner": -1
+      },
+      {
+        "x": 226,
+        "y": 365,
+        "priorOwner": -1
+      },
+      {
+        "x": 246,
+        "y": 365,
+        "priorOwner": -1
+      },
+      {
+        "x": 177,
+        "y": 470,
+        "priorOwner": -1
+      },
+      {
+        "x": 188,
+        "y": 470,
+        "priorOwner": -1
+      },
+      {
+        "x": 201,
+        "y": 470,
+        "priorOwner": -1
+      }
+    ]
+  },
+  {
+    "name": "blam-scene",
+    "expectedPriorIndex": 3,
+    "points": [
+      {
+        "x": 344,
+        "y": 322,
+        "priorOwner": 3
+      },
+      {
+        "x": 420,
+        "y": 313,
+        "priorOwner": -1
+      },
+      {
+        "x": 522,
+        "y": 317,
+        "priorOwner": 3
+      },
+      {
+        "x": 301,
+        "y": 409,
+        "priorOwner": 3
+      },
+      {
+        "x": 399,
+        "y": 409,
+        "priorOwner": 3
+      },
+      {
+        "x": 515,
+        "y": 409,
+        "priorOwner": 3
+      },
+      {
+        "x": 260,
+        "y": 474,
+        "priorOwner": 3
+      },
+      {
+        "x": 400,
+        "y": 462,
+        "priorOwner": 3
+      },
+      {
+        "x": 525,
+        "y": 446,
+        "priorOwner": 3
+      }
+    ]
+  },
+  {
+    "name": "upper-lower-strip",
+    "expectedPriorIndex": 4,
+    "points": [
+      {
+        "x": 258,
+        "y": 555,
+        "priorOwner": 4
+      },
+      {
+        "x": 402,
+        "y": 515,
+        "priorOwner": 4
+      },
+      {
+        "x": 530,
+        "y": 500,
+        "priorOwner": 4
+      },
+      {
+        "x": 178,
+        "y": 590,
+        "priorOwner": 4
+      },
+      {
+        "x": 383,
+        "y": 564,
+        "priorOwner": 4
+      },
+      {
+        "x": 530,
+        "y": 560,
+        "priorOwner": 4
+      },
+      {
+        "x": 80,
+        "y": 635,
+        "priorOwner": 4
+      },
+      {
+        "x": 376,
+        "y": 603,
+        "priorOwner": 4
+      },
+      {
+        "x": 528,
+        "y": 625,
+        "priorOwner": 4
+      }
+    ]
+  },
+  {
+    "name": "claw-strip",
+    "expectedPriorIndex": 5,
+    "points": [
+      {
+        "x": 78,
+        "y": 682,
+        "priorOwner": 5
+      },
+      {
+        "x": 276,
+        "y": 643,
+        "priorOwner": 5
+      },
+      {
+        "x": 433,
+        "y": 665,
+        "priorOwner": 5
+      },
+      {
+        "x": 88,
+        "y": 712,
+        "priorOwner": 5
+      },
+      {
+        "x": 285,
+        "y": 680,
+        "priorOwner": 5
+      },
+      {
+        "x": 489,
+        "y": 693,
+        "priorOwner": 5
+      },
+      {
+        "x": 85,
+        "y": 759,
+        "priorOwner": 5
+      },
+      {
+        "x": 280,
+        "y": 712,
+        "priorOwner": 5
+      },
+      {
+        "x": 429,
+        "y": 701,
+        "priorOwner": 5
+      }
+    ]
+  },
+  {
+    "name": "bottom-strip",
+    "expectedPriorIndex": 6,
+    "points": [
+      {
+        "x": 185,
+        "y": 817,
+        "priorOwner": 6
+      },
+      {
+        "x": 364,
+        "y": 766,
+        "priorOwner": 6
+      },
+      {
+        "x": 488,
+        "y": 745,
+        "priorOwner": -1
+      },
+      {
+        "x": 165,
+        "y": 832,
+        "priorOwner": 6
+      },
+      {
+        "x": 360,
+        "y": 795,
+        "priorOwner": 6
+      },
+      {
+        "x": 490,
+        "y": 791,
+        "priorOwner": -1
+      },
+      {
+        "x": 116,
+        "y": 847,
+        "priorOwner": 6
+      },
+      {
+        "x": 354,
+        "y": 838,
+        "priorOwner": 6
+      },
+      {
+        "x": 493,
+        "y": 840,
+        "priorOwner": -1
+      }
+    ]
+  }
+]
