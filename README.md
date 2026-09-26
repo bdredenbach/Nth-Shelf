@@ -2,13 +2,21 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.51 — page45: ten separate frames
+
+Test51 replaces page45's three composite crops with ten measured outlines: four top frames, the fire strip, the conversation scene and four bottom frames. Pale sloping rims and dark vertical gutters must form a complete network before the old composites are replaced. Native-pixel sampling and a canonical coarse map keep the outlines consistent across image scaling variants.
+
+All 73 other pages, including page44's eight Test50 frames, remain byte-for-byte identical in the full 74-page comparison. See [test results](qa27900/frame-accuracy/test51/RESULTS.md) and [recovery checkpoint](HANDOFF-2.79.51.md). Phone acceptance is pending.
+
+Current identity: **2.79.51 / code27979**, package `io.github.bdredenbach.nthshelf.frametest51`, label **Nth Shelf Test51**. Cache/proof identifiers: `nth-shelf-shell-2.79.51`, `panel-map-exp-49`, `frame-proof-2.79.51`.
+
 ## 2.79.50 — page44 device-resampling repair
 
 **Test49 failed phone testing.** Its successful Chromium raster hid failures in four other scaled-image variants: completion disappeared and old partial masks/fallback crops returned.
 
 Test50 reads native image pixels, explicitly resamples once and completes the matte map on that same raster. A thin, already proved rim cell survives the core-eroding step. All four previously failing variants now yield identical eight-frame maps. Reader checks pass **216 touches**, with **16,670 dense interior-opacity samples** across two failing-scaling replays. Every other page in the 74-page comparison is unchanged. All eight rendered crops were inspected.
 
-**Phone acceptance remains pending.** See [results](qa27900/frame-accuracy/test50/RESULTS.md) and [recovery checkpoint](HANDOFF-2.79.50.md). Current identity: **2.79.50 / code27978**, package `io.github.bdredenbach.nthshelf.frametest50`, label **Nth Shelf Test50**. Cache/proof identifiers: `nth-shelf-shell-2.79.50`, `panel-map-exp-48`, `frame-proof-2.79.50`.
+**Phone acceptance remains pending.** See [results](qa27900/frame-accuracy/test50/RESULTS.md) and [recovery checkpoint](HANDOFF-2.79.50.md). Historical identity: **2.79.50 / code27978**, package `io.github.bdredenbach.nthshelf.frametest50`, label **Nth Shelf Test50**. Cache/proof identifiers: `nth-shelf-shell-2.79.50`, `panel-map-exp-48`, `frame-proof-2.79.50`.
 
 ## 2.79.49 — page44: eight frames, nine taps each
 

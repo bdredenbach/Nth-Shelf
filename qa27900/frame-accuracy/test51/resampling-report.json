@@ -1,0 +1,58 @@
+[
+  {
+    "app": "baseline-test50",
+    "quality": "low",
+    "injected": 8,
+    "count": 3,
+    "geometrySha256": "d74e62c08bdb64faf9035b436b242e6152149034e312ac3c98cfb17c44338af5"
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "low",
+    "injected": 8,
+    "count": 10,
+    "geometrySha256": "c0429dac03d0da4f1cad763ac1a6c81040ef217907b2efcc97ee388f99a66788"
+  },
+  {
+    "app": "baseline-test50",
+    "quality": "medium",
+    "injected": 8,
+    "count": 3,
+    "geometrySha256": "d74e62c08bdb64faf9035b436b242e6152149034e312ac3c98cfb17c44338af5"
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "medium",
+    "injected": 8,
+    "count": 10,
+    "geometrySha256": "c0429dac03d0da4f1cad763ac1a6c81040ef217907b2efcc97ee388f99a66788"
+  },
+  {
+    "app": "baseline-test50",
+    "quality": "high",
+    "injected": 8,
+    "count": 3,
+    "geometrySha256": "d74e62c08bdb64faf9035b436b242e6152149034e312ac3c98cfb17c44338af5"
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "high",
+    "injected": 8,
+    "count": 10,
+    "geometrySha256": "c0429dac03d0da4f1cad763ac1a6c81040ef217907b2efcc97ee388f99a66788"
+  },
+  {
+    "app": "baseline-test50",
+    "quality": "sharp",
+    "injected": 8,
+    "count": 3,
+    "geometrySha256": "e6011e320118c5b3bc352ce8ab67fffc6bede7a806f4759f6a5704695c1128ca"
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "sharp",
+    "injected": 8,
+    "count": 10,
+    "geometrySha256": "c0429dac03d0da4f1cad763ac1a6c81040ef217907b2efcc97ee388f99a66788"
+  }
+]

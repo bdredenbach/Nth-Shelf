@@ -1,0 +1,51 @@
+Auto Scroll: 240 timing, monotonicity and lifecycle checks passed.
+Frame geometry contract passed: 18 physical-angle/crop cases, live and persisted rendering, tap containment and invalid-proof controls.
+Gutter boundaries: 10 profiles and a four-panel image passed.
+Internal gutter synthetic checks passed: nested H/V/H geometry and five artwork/fragment controls.
+page-layout: synthetic stacks, skewed rails, ownership vetoes, finite quads passed
+closed-frames: drawn corners, measured tilt, missing sides, internal divisions and inset ownership passed
+closed-frames: established baseline and stack priority, empty-page routing and safe failure passed
+exterior gutters: connected dark frames, five-position ownership, neighbor separation, missing sides, dividers and inset vetoes passed
+closed-frames: drawn corners, measured tilt, missing sides, internal divisions and inset ownership passed
+neighbor frames: positive five-position ownership and five rejection/partition scenarios passed
+closed-frames: established baseline and stack priority, empty-page routing and safe failure passed
+gradient gutter: five interior positions, missing sides, palette mismatch, full/partial dividers and insets; legacy priority and overlap gates passed
+open regions: whole artwork/captions, mirror, empty/two-scene/crossing/inset negatives, neighbor proof and identity preservation passed
+Overlap frames passed: three synthetic visible outlines, four ownership probes, geometry preservation, nine missing-border/inset/caption negatives, invalid-polygon and proof guards.
+neighbor frames: positive five-position ownership and five rejection/partition scenarios passed
+page-partition: independently drawn connected leaves, two-axis tilt, insets, partial borders and malformed input passed
+dark partial recovery: intact siblings retained; interrupted/inset/uniform regions never become owners
+page-partition: established route priority and failure fallback passed
+pilot-strips: complete white-margin stacks, attached dark artwork, tilted rails, missing/divided/inset negatives passed
+partition queue: dark-adjacent ink fits, distinct leaves, noisy thin interrupted dividers and partial-map abstention passed
+partition queue: full shared-edge anchors, unchanged unrelated rails, distance bounds, duplicate anchors and off-ink rejection passed
+partition completion: exact old identity, disjoint additions, conflicting borders and composite veto passed
+synthetic old/new 2 4 [
+  [ 0.05, 0.03, 0.29523809523809524, 0.47 ],
+  [ 0.34523809523809523, 0.03, 0.6047619047619047, 0.47 ],
+  [ 0.05, 0.5, 0.8999999999999999, 0.2142857142857143 ],
+  [ 0.05, 0.7142857142857143, 0.8999999999999999, 0.25571428571428567 ]
+]
+Uniform ink-core supplement: independent layout, exact old boundaries, seven negative images and invalid-anchor gates passed.
+Bubble proof: 10 independent synthetic cases passed through detect + extract.
+Double pop-out: crop mapping, caption open/close, cancellation, request order, deferred navigation and outside taps passed
+{"panels":7,"ownership":54,"proofRejections":161,"malformedInputs":4}
+{"page42ProofsAccepted":7,"page42SavedDescriptorSha256":"2d53afd93eec812094eb52a3ba810cdcfea8b390981d140e77191e06127c9d0a","broadModeAccepted":true,"unknownModeRejected":true,"broadModeRequiresBroadCleanup":true,"tamperedEvidenceRejected":true,"runtimeFixtureKeysAbsent":true}
+{"syntheticProofAccepted":true,"tamperedProofsRejected":9,"page44RecordedAnchors":35,"page44RecordedTouchRenders":7,"remainingEmptySweep":{"1":0,"26":0,"44":7,"58":4,"65":0,"66":0,"70":4,"71":4}}
+{"syntheticOwnedBottomSpill":true,"disconnectedExteriorRejected":true,"tamperedProofRejected":true,"runtimeFixtureKeysAbsent":true,"spills":1}
+{"syntheticCells":6,"allProofsValid":true,"tamperRejected":true,"runtimeFixtureKeysAbsent":true}
+{"middleOrthogonalValid":true,"rightOccludedOutlineValid":true,"weakRailRejected":true,"tamperedOutlineRejected":true,"anchorFamilyTamperRejected":true,"runtimeFixtureKeysAbsent":true}
+{"syntheticCells":6,"narrowPanelReunited":true,"remainingSplits":5,"allProofsValid":true,"runtimeFixtureKeysAbsent":true}
+{"leftValid":true,"insetValid":true,"rightValid":true,"weakCapRejected":true,"tamperedOutlineRejected":true,"weakRailRejected":true,"separationTamperRejected":true,"runtimeFixtureKeysAbsent":true}
+{"sixProofsValid":true,"weakRailRejected":true,"tamperedSeparatorRejected":true,"terminalGapTamperRejected":true,"runtimeFixtureKeysAbsent":true}
+{"sevenProofsValid":true,"weakSeamRejected":true,"weakSpineRejected":true,"tamperedOutlineRejected":true,"seamEndpointTamperRejected":true,"runtimeFixtureKeysAbsent":true}
+{"bottomY":596,"topY":204,"bottomNy":0.7140728391445788,"topNy":-0.7140728391445788,"mirrored":true,"strongerFingerPullPreserved":true,"precisionTutorialCues":true}
+{"size":96,"inset":47.205,"extremeCornersRejected":true,"insetUpperAccepted":true,"insetLowerAccepted":true,"outsideRightRejected":true,"leftReversePreserved":true}
+{"sixProofsValid":true,"weakSeamRejected":true,"badSplitRejected":true,"anchorTamperRejected":true,"outlineTamperRejected":true,"runtimeFixtureKeysAbsent":true}
+{"sixProofsValid":true,"weakStepRailRejected":true,"tamperedOutlineRejected":true,"anchorTamperRejected":true}
+{"capturedProofsValid":4,"tamperedProofsRejected":44,"incompleteAnchorsRejected":true}
+{"capturedProofAccepted":true,"tamperedProofsRejected":12}
+{"validFrames":8,"version2Proofs":6,"independentPoints":72,"tamperedProofsRejected":76}
+PASS explicit native-pixel sampling, edge/alpha handling, eight proofs and rejection mutations
+PASS ten mixed-rim proofs, 100 evidence/geometry mutations, invalid input, flat image and existing-owner rejection
+{"cache":"nth-shelf-shell-2.79.51","uniqueShellFiles":68,"rimCompletionIncluded":true}

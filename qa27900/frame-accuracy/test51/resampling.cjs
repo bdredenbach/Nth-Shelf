@@ -1,0 +1,11 @@
+// Private fixture check: emulate alternative scaled-canvas decoders while
+// retaining the original native-resolution image for the canonical route.
+const fs=require('fs'),assert=require('assert/strict'),{chromium}=require('playwright');
+const origin=process.env.QA_ORIGIN||'http://127.0.0.1:8765',out=process.env.QA_OUTPUT||'/tmp/nth-shelf-test51',root=process.env.QA_APP_PATH||'nth-shelf-current',before=process.env.QA_BASELINE_PATH||'baseline-test50',fixture=process.env.QA_RASTER_PATH||'recovery-page45';fs.mkdirSync(out,{recursive:true});
+(async()=>{const b=await chromium.launch({executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});try{const results=[];
+for(const quality of ['low','medium','high','sharp'])for(const app of [before,root]){const p=await b.newPage();await p.goto(origin+'/'+app+'/');const r=await p.evaluate(async({quality,fixture})=>{
+const raw=new Uint8ClampedArray(await(await fetch('/'+fixture+'/'+quality+'51.rgba')).arrayBuffer()),draw=CanvasRenderingContext2D.prototype.drawImage;
+let injected=0;CanvasRenderingContext2D.prototype.drawImage=function(im,...args){if((im.naturalWidth||im.width)===1988&&(im.naturalHeight||im.height)===3056&&this.canvas.width===585&&this.canvas.height===900&&args.length===4&&args[0]===0&&args[1]===0&&args[2]===585&&args[3]===900){injected++;this.putImageData(new ImageData(raw,585,900),0,0);return;}return draw.call(this,im,...args);};
+const logs=[],panels=await PanelDetect.detect('/comic-wolverine-1000/'+encodeURIComponent('Wolverine (2010-2012) 1000-044.jpg'),v=>logs.push(v));return{injected,panels,logs};},{quality,fixture});results.push({app,quality,...r});console.log(app,quality,r.panels.length,r.panels.map(p=>p._identitySource),r.logs.slice(-4));await p.close();}
+const targets=results.filter(r=>r.app===root);assert(targets.every(r=>r.injected>0&&r.panels.length===10));assert(targets.every(r=>JSON.stringify(r.panels)===JSON.stringify(targets[0].panels)),'All alternative scaling paths must yield identical canonical contours');assert(results.filter(r=>r.app===before).every(r=>JSON.stringify(r.panels)!==JSON.stringify(targets[0].panels)));
+fs.writeFileSync(out+'/resampling-report.json',JSON.stringify(results));console.log('PASS identical ten-frame maps across four formerly failing scaled rasters');}finally{await b.close()}})().catch(e=>{console.error(e);process.exitCode=1});

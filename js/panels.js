@@ -121,6 +121,14 @@ const PanelDetect = {
                 if(completed.length>identities.length)identities=completed;
               }
             }catch(error){if(log)log(`five-column bank completion deferred: ${error.message}`);}
+            // Complete a mixed pale-rim / dark-gutter network only while every
+            // current owner is still an unclassified legacy composite.
+            try {
+              if(layout.length<4&&typeof PanelStructuralGrid!=='undefined'&&baseline.length===3&&identities.length===3&&identities.every(p=>baseline.includes(p)&&!p._identitySource&&!p._quad&&!p._outline&&!p._contours)){
+                const completed=PanelStructuralGrid.completeMixedRimsImage(img,baseline,log);
+                if(completed.length)identities=completed;
+              }
+            }catch(error){if(log)log(`mixed rim completion deferred: ${error.message}`);}
             // Test42: a coarse upper body plus fragmented terminal row may hide
             // a branched top stack, two shared full-width strips and a curved
             // shared seam. Re-prove all seven owners from sustained rails.
