@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.54 — EXTERIOR PAPER FRAMES AND INSET OWNERSHIP
+// NTH SHELF 2.79.55 — NESTED PAPER FRAMES AND COMPACT INSETS
 // Pages13, 23, 27, 28, 32 and33 accepted; page35 branched stack pending phone acceptance.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.54";
+const CACHE_NAME = "nth-shelf-shell-2.79.55";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",

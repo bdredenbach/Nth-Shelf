@@ -133,6 +133,12 @@ const PanelDetect = {
                 if(completed.length)identities=completed;
               }
             }catch(error){if(log)log(`exterior paper completion deferred: ${error.message}`);}
+            try {
+              if(layout.length<4&&typeof PanelStructuralGrid!=='undefined'&&identities.length===baseline.length&&identities.every(p=>baseline.includes(p)&&!p._identitySource&&!p._quad&&!p._outline&&!p._contours)){
+                const completed=PanelStructuralGrid.completeNestedPaperImage(img,baseline,log);
+                if(completed.length)identities=completed;
+              }
+            }catch(error){if(log)log(`nested paper completion deferred: ${error.message}`);}
             // Test41: three coarse stacked slabs may hide a bank of narrow
             // orthogonal scenes over a terminal full-width panel. Re-prove the
             // bank from four sustained vertical rails across the entire tier so
@@ -173,6 +179,12 @@ const PanelDetect = {
             resolve(identities);
             return;
           }
+          try {
+            if(typeof PanelStructuralGrid!=='undefined'){
+              const completed=PanelStructuralGrid.completeNestedPaperImage(img,baseline,log);
+              if(completed.length){resolve(completed);return;}
+            }
+          }catch(error){if(log)log(`native nested paper completion deferred: ${error.message}`);}
           // Only empty baseline pages may use the independent closed-border
           // route. Established identities retain their existing priority.
           let closed = [];

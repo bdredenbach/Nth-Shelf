@@ -2,13 +2,23 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.55 — pages54–57: nested insets and complete borders
+
+Test55 addresses the user's next four-page batch. Reader pages54/55/56/57 have8/6/7/6 selections, including two insets on54 and one on55. The compact inset detector proves both caps independently and retains page55's crossing speech balloon. Native exterior-paper component bounds keep the entire frame rim and avoid overlap across narrow gutters.
+
+Page56 already found seven frames in this browser, but the former fitted bounds missed33 of63 sampled positions near their borders. The new native bounds pass all63, with seven stable frame identities. Page54's lower-left, page55's tall lower-right and page57's upper two selections remain exact. The full74-page comparison changes only54–57; other70 maps are byte-identical.
+
+Current identity: **2.79.55 / code27983**, package `io.github.bdredenbach.nthshelf.frametest55`, label **Nth Shelf Test55**. Cache/proof identifiers: `nth-shelf-shell-2.79.55`, `panel-map-exp-53`, `frame-proof-2.79.55`. See [results](qa27900/frame-accuracy/test55/RESULTS.md) and [checkpoint](HANDOFF-2.79.55.md). Phone acceptance pending.
+
+Continue remaining Wolverine pages first; generalization across comics remains the next task after the page campaign.
+
 ## 2.79.54 — pages50–53: separated scenes and insets
 
 Test54 addresses the user's four-page batch. Reader pages50/51/52/53 now have7/6/6/4 selections, counting one independent inset on each. White exterior paper identifies the main frames; sustained black rims independently validate them. Page51's borderless scene keeps all its dialogue. The eye inset on page50 retains its crossing speech balloon. Parent scenes exclude inset pixels from their masks.
 
 The six already-separated lower selections across pages50/52/53 remain exact. A native-pixel retry handles a page53 resize variant that otherwise loses the legacy gutter map, retaining its bottom closed-frame anchor. The full74-page comparison changes only50–53; all other70 maps, including phone-confirmed page49, are byte-identical. No page IDs, hashes, titles or saved coordinates drive runtime detection.
 
-Current identity: **2.79.54 / code27982**, package `io.github.bdredenbach.nthshelf.frametest54`, label **Nth Shelf Test54**. Cache/proof identifiers: `nth-shelf-shell-2.79.54`, `panel-map-exp-52`, `frame-proof-2.79.54`. See [results](qa27900/frame-accuracy/test54/RESULTS.md) and [checkpoint](HANDOFF-2.79.54.md). Phone acceptance pending.
+Previous identity: **2.79.54 / code27982**, package `io.github.bdredenbach.nthshelf.frametest54`, label **Nth Shelf Test54**. Cache/proof identifiers: `nth-shelf-shell-2.79.54`, `panel-map-exp-52`, `frame-proof-2.79.54`. See [results](qa27900/frame-accuracy/test54/RESULTS.md) and [checkpoint](HANDOFF-2.79.54.md). Phone acceptance pending.
 
 Page49 was confirmed on phone by the user. The user authorized pages50–53 together for this batch. Continue the remaining Wolverine pages first; generalization across comics remains the next task after that campaign.
 

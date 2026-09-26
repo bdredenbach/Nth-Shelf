@@ -1,0 +1,11 @@
+# Test55 checkpoint — pages54–57 batch
+
+2026-09-26. User requested pages54–57 next, reporting incorrect detector behavior. No new screenshots; inspected the original comic's private source indices53–56. Baseline85a35b5dbd06e59316a8177d20d107c82364cbde (Test54). Continue remaining Wolverine pages first; generalization across comics next. Existing push/build/delivery authorization persists.
+
+Baseline counts3/3/7/3. Native paper components and sustained dark rims now produce8/6/7/6, including two insets on54 and one compact inset on55. Four measured layout classes admit only complete maps. Insets use independently checked top/bottom caps, and page55's crossing balloon retains its lettering and tail. New masks use tight exterior-component bounds to include the ink rim without overlapping narrow neighboring gutters. No page IDs, titles, hashes or QA coordinates drive runtime.
+
+Page56's old count was seven here, but fitted frame polygons missed33/63 sampled near-border positions. Canonical native bounds pass63/63. Its seven masks are now independent of resampler and tap location. Preserve original lower-left owner on54, tall lower-right on55, and upper two on57 byte-for-byte. Others70 maps remain exact in the full74-page comparison.
+
+Private fixtures: comic-wolverine-1000 and recovery-pages54-57. Do not commit artwork/screenshots. Numeric reports/scripts: qa27900/frame-accuracy/test55. Sixteen alternative rasters pass with identical new masks; baseline retained owners remain exact. 108 erased main/inset rims reject; flat/transparent/proved-owner negatives reject. 23 captured proofs survive geometry routing;375 mutations reject. Final486 touch checks pass across two rendering setups, including63 actual page56 near-border/center taps in the high-quality run.84,712 dense artwork samples pass; foreign inset pixels excluded and page55 balloon retained. All27 rendered crops inspected. Complete retained syntax/regression gate passes.
+
+Identity2.79.55/code27983/frametest55. Next: finish validation/render inspection, publish tested tree, build Test55, verify artifact digest/identity/signature/all68 assets, save/deliver. Phone acceptance pending. After confirmation continue at page58 through74, then generalize across comics.
