@@ -111,6 +111,14 @@ const PanelDetect = {
                 if(completed.length>identities.length)identities=completed;
               }
             }catch(error){if(log)log(`nested structural baseline completion deferred: ${error.message}`);}
+            // A white-paper stack can hide framed insets inside its merged
+            // lower rows. Publish only a complete, exclusive ownership map.
+            try {
+              if(layout.length<4&&typeof PanelStructuralGrid!=='undefined'&&baseline.length===2&&identities.length===2&&identities.every(p=>baseline.includes(p)&&!p._identitySource&&!p._quad&&!p._outline&&!p._contours)){
+                const completed=PanelStructuralGrid.completeWhiteStackImage(img,baseline,log);
+                if(completed.length)identities=completed;
+              }
+            }catch(error){if(log)log(`white stack completion deferred: ${error.message}`);}
             // Test41: three coarse stacked slabs may hide a bank of narrow
             // orthogonal scenes over a terminal full-width panel. Re-prove the
             // bank from four sustained vertical rails across the entire tier so

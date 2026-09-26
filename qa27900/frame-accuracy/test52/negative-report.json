@@ -1,0 +1,52 @@
+[
+  {
+    "name": "positive",
+    "count": 6,
+    "nativeCount": 6,
+    "logs": [
+      "white stack: preserved top owner + five exclusive lower owners"
+    ]
+  },
+  {
+    "name": "erased-row-rim",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": [
+      "white stack: horizontal rims 7"
+    ]
+  },
+  {
+    "name": "erased-classroom-inset",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": [
+      "white stack: inset rims 0,0,1"
+    ]
+  },
+  {
+    "name": "erased-screen-inset",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": [
+      "white stack: inset rims 1,0,0"
+    ]
+  },
+  {
+    "name": "transparent",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": []
+  },
+  {
+    "name": "flat",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": []
+  },
+  {
+    "name": "already-proved-owner",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": []
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "app": "baseline-test51",
+    "quality": "low",
+    "injected": 9,
+    "count": 2,
+    "geometrySha256": "2587110329da3c51b6a794a5faa0a10381283b335362f3aaef8edf01c857d550",
+    "newGeometrySha256": "3c0e72bad9755d805d93ee91e633c988f3848b7de1a243b991ed68fa38e88b39"
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "low",
+    "injected": 9,
+    "count": 6,
+    "geometrySha256": "ce6b09ab7bbedc1b89170a8d35abe90e40fb6c6a3655c65d8a2de9a032136388",
+    "newGeometrySha256": "dfe9726db08ef18aa6a5de394caf423de397dc06abf377dbf44b37889536e9eb"
+  },
+  {
+    "app": "baseline-test51",
+    "quality": "medium",
+    "injected": 9,
+    "count": 2,
+    "geometrySha256": "f3599a3c32e2cb9f9037c6ca743d63a231c8bed676652d54decc3df5aab6c345",
+    "newGeometrySha256": "1f264a543e54be3c66bcf37523890d0b705c6695e604913cf7bd4b823ac66f90"
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "medium",
+    "injected": 9,
+    "count": 6,
+    "geometrySha256": "a05079d9b0e992d98dbec0ffd9438279d31913da508a7e851b4b298995a25cc3",
+    "newGeometrySha256": "dfe9726db08ef18aa6a5de394caf423de397dc06abf377dbf44b37889536e9eb"
+  },
+  {
+    "app": "baseline-test51",
+    "quality": "high",
+    "injected": 9,
+    "count": 2,
+    "geometrySha256": "2587110329da3c51b6a794a5faa0a10381283b335362f3aaef8edf01c857d550",
+    "newGeometrySha256": "3c0e72bad9755d805d93ee91e633c988f3848b7de1a243b991ed68fa38e88b39"
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "high",
+    "injected": 9,
+    "count": 6,
+    "geometrySha256": "ce6b09ab7bbedc1b89170a8d35abe90e40fb6c6a3655c65d8a2de9a032136388",
+    "newGeometrySha256": "dfe9726db08ef18aa6a5de394caf423de397dc06abf377dbf44b37889536e9eb"
+  },
+  {
+    "app": "baseline-test51",
+    "quality": "sharp",
+    "injected": 9,
+    "count": 2,
+    "geometrySha256": "0674154142c0a394223af3b5cae0e64a7080e9f686aad4271592853618b5e28d",
+    "newGeometrySha256": "751c6d64e1a49d75daafedb3dca43e9c7e58d79ca46470a5920223c69744542b"
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "sharp",
+    "injected": 9,
+    "count": 6,
+    "geometrySha256": "a05079d9b0e992d98dbec0ffd9438279d31913da508a7e851b4b298995a25cc3",
+    "newGeometrySha256": "dfe9726db08ef18aa6a5de394caf423de397dc06abf377dbf44b37889536e9eb"
+  }
+]

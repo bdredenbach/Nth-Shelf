@@ -3174,6 +3174,9 @@ async setMode(mode) {
    else if(contours&&panel._identitySource==='rim-frame')Object.assign(this.panelFocusMeta.panel,{
      _identitySource:'rim-frame',_contours:contours,_rimFrameProof:panel._rimFrameProof
    });
+   else if(contours&&panel._identitySource==='structural-grid-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'structural-grid-frame',_contours:contours,_structuralGridProof:panel._structuralGridProof
+   });
    else if(contours)Object.assign(this.panelFocusMeta.panel,{
      _identitySource:'composite-frame',_contours:contours,_compositeFrameProof:panel._compositeFrameProof
    });

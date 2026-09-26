@@ -5,6 +5,7 @@
 
 const PanelGeometryOrthogonal = {
   _provenContours(panel) {
+    if(panel?._identitySource==='structural-grid-frame'&&Array.isArray(panel._contours))return typeof PanelStructuralGrid!=='undefined'&&PanelStructuralGrid.validPanel(panel)?panel._contours.map(r=>r.map(p=>({x:p.x,y:p.y}))):null;
     if(panel?._identitySource==='matte-cell-frame')return typeof PanelMatteCells!=='undefined'&&PanelMatteCells.validPanel(panel)?panel._contours.map(r=>r.map(p=>({x:p.x,y:p.y}))):null;
     if(panel?._identitySource==='curved-rim-frame')return typeof PanelCurvedRims!=='undefined'&&PanelCurvedRims.validPanel(panel)?panel._contours.map(r=>r.map(p=>({x:p.x,y:p.y}))):null;
     if(panel?._identitySource==='inset-neighbor-frame')return typeof PanelInsetNeighbors!=='undefined'&&PanelInsetNeighbors.validPanel(panel)?panel._contours.map(r=>r.map(p=>({x:p.x,y:p.y}))):null;

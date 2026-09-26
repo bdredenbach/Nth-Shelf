@@ -2,13 +2,21 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.52 — page47: separate rows and insets
+
+Test52 preserves the bedroom selection and replaces the merged lower area with five independent selections: classroom, classroom inset, hallway, fallen-book scene and screen inset. Each surrounding scene excludes inset artwork. The classroom inset retains its caption and outlined lettering.
+
+Validation:108 real browser touch dispatches,18,710 dense opacity samples, four alternate scaled-raster checks and a full74-page comparison. Only page47 changes; all other73 maps, including pages44 and45, remain exact. See [results](qa27900/frame-accuracy/test52/RESULTS.md) and [recovery checkpoint](HANDOFF-2.79.52.md). Phone confirmation is pending.
+
+Current identity: **2.79.52 / code27980**, package `io.github.bdredenbach.nthshelf.frametest52`, label **Nth Shelf Test52**. Cache/proof identifiers: `nth-shelf-shell-2.79.52`, `panel-map-exp-50`, `frame-proof-2.79.52`.
+
 ## 2.79.51 — page45: ten separate frames
 
 Test51 replaces page45's three composite crops with ten measured outlines: four top frames, the fire strip, the conversation scene and four bottom frames. Pale sloping rims and dark vertical gutters must form a complete network before the old composites are replaced. Native-pixel sampling and a canonical coarse map keep the outlines consistent across image scaling variants.
 
 All 73 other pages, including page44's eight Test50 frames, remain byte-for-byte identical in the full 74-page comparison. See [test results](qa27900/frame-accuracy/test51/RESULTS.md) and [recovery checkpoint](HANDOFF-2.79.51.md). Phone acceptance is pending.
 
-Current identity: **2.79.51 / code27979**, package `io.github.bdredenbach.nthshelf.frametest51`, label **Nth Shelf Test51**. Cache/proof identifiers: `nth-shelf-shell-2.79.51`, `panel-map-exp-49`, `frame-proof-2.79.51`.
+Historical identity: **2.79.51 / code27979**, package `io.github.bdredenbach.nthshelf.frametest51`, label **Nth Shelf Test51**. Cache/proof identifiers: `nth-shelf-shell-2.79.51`, `panel-map-exp-49`, `frame-proof-2.79.51`.
 
 ## 2.79.50 — page44 device-resampling repair
 
