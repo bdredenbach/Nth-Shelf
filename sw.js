@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.57 — PALE PAPER AND CROSSING FIGURES
-// Pages13, 23, 27, 28, 32 and33 accepted; page35 branched stack pending phone acceptance.
+// NTH SHELF 2.79.58 — MONOCHROME GUTTER GRAPH
+// Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.57";
+const CACHE_NAME = "nth-shelf-shell-2.79.58";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -72,7 +72,8 @@ const SHELL_FILES = [
   "./js/panels-matte-cells.js",
   "./js/panels-edge-spill.js",
   "./js/panels-structural-grid.js",
-  "./js/panels-pale-completion.js"
+  "./js/panels-pale-completion.js",
+  "./js/panels-gutter-graph.js"
 ];
 
 self.addEventListener("install", (event) => {

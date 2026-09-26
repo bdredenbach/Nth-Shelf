@@ -2,11 +2,19 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.58 — general monochrome frame detection
+
+Test58 adds a detector based on exterior paper, measured frame edges and separating gutters. It handles varying panel counts, slanted layouts, narrow strips, open page edges and outlined artwork crossing a gutter. Runtime decisions use image evidence; they do not use chapter IDs, page numbers, stored coordinates or fixed panel-count templates. Unsupported layouts continue through the existing detector.
+
+The supplied 41-page manga chapter has 228 audited frames on pages 3–41. The cover and logo have no internal frames. All 74 Wolverine page maps are unchanged. See [validation results](qa27900/frame-accuracy/test58/RESULTS.md) and [checkpoint](HANDOFF-2.79.58.md). This is a broader monochrome path, not evidence of coverage across most comics: more independent books and borderless/color layouts remain to be evaluated.
+
+Current identity: **2.79.58 / code 27986**, package `io.github.bdredenbach.nthshelf.frametest58`, label **Nth Shelf Test58**. Cache/proof identifiers: `nth-shelf-shell-2.79.58`, `panel-map-exp-56`, `frame-proof-2.79.58`. Phone acceptance is pending.
+
 ## 2.79.57 — pages66–74: pale gutters and crossing figures
 
 Test57 separates the remaining merged scenes and preserves artwork crossing panel boundaries. Reader pages68/69/70/71/72/73 have7/4/4/6/5/5 selections. Page68 retains its inset caption, page70 keeps the portrait dialogue and separates the standing figure, pages71–72 retain foreground figures and claws, and page73 separates five strips with its translator note. Page66 is a single advertisement; existing maps on67 and74 remain unchanged.
 
-Current identity: **2.79.57 / code27985**, package `io.github.bdredenbach.nthshelf.frametest57`, label **Nth Shelf Test57**. Cache/proof identifiers: `nth-shelf-shell-2.79.57`, `panel-map-exp-55`, `frame-proof-2.79.57`. See [results](qa27900/frame-accuracy/test57/RESULTS.md) and [checkpoint](HANDOFF-2.79.57.md). This cumulative build includes Test56's pages59–65 changes. Phone acceptance is pending; generalization across comics remains the next task after the page campaign.
+Previous identity: **2.79.57 / code27985**, package `io.github.bdredenbach.nthshelf.frametest57`, label **Nth Shelf Test57**. Cache/proof identifiers: `nth-shelf-shell-2.79.57`, `panel-map-exp-55`, `frame-proof-2.79.57`. See [results](qa27900/frame-accuracy/test57/RESULTS.md) and [checkpoint](HANDOFF-2.79.57.md). This cumulative build includes Test56's pages59–65 changes. Phone acceptance is pending; generalization across comics remains the next task after the page campaign.
 
 ## 2.79.56 — pages59–65: bleed and overlapping frames
 

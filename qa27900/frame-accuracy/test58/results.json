@@ -1,0 +1,367 @@
+{
+  "chapterPages": 41,
+  "unframedPages": [
+    1,
+    2
+  ],
+  "auditedFrames": 228,
+  "actualMobileTouches": 1140,
+  "denseInteriorAlphaSamples": 36334,
+  "pageReports": [
+    {
+      "page": 3,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 965,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "ea8d9823103a7ef2c6622b66aeb9f34dbf61ed3e7c651ef78f858b9ebebb8186"
+    },
+    {
+      "page": 4,
+      "frames": 4,
+      "touches": 20,
+      "denseInteriorSamples": 688,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "978134c9030893d9fdb435539c486df77e5fb65db0f22a40d49ed9ca24d45bfa"
+    },
+    {
+      "page": 5,
+      "frames": 5,
+      "touches": 25,
+      "denseInteriorSamples": 905,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "a8afa03742981699c847bbfe79c8e424fbe8f729edc79eab960e48c2cda071c7"
+    },
+    {
+      "page": 6,
+      "frames": 4,
+      "touches": 20,
+      "denseInteriorSamples": 732,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "6ad8c6d7abe2ed338d35c7407f4a84bbdfae1ea801c1f0980f0e43055430aacc"
+    },
+    {
+      "page": 7,
+      "frames": 2,
+      "touches": 10,
+      "denseInteriorSamples": 340,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "60f1cf8b5ea25873956c5c49d373a75cba10de6c61edb6552b7cdf3d9e51a78e"
+    },
+    {
+      "page": 8,
+      "frames": 4,
+      "touches": 20,
+      "denseInteriorSamples": 709,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "0bd9ee5d6e375f0cd5f3f18a92f6d77fa8a14e94a3d85399f6fc6627e4939ad1"
+    },
+    {
+      "page": 9,
+      "frames": 7,
+      "touches": 35,
+      "denseInteriorSamples": 1149,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "76802c81495d94f64a3ec1f8ee5a11fa57dcf0f82df036fb61e110cf7999bb8b"
+    },
+    {
+      "page": 10,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 921,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "7a8166a1c2ab7e393a0e889a0cd500ba1b7ab6a52c8be019bc35923180eeede1"
+    },
+    {
+      "page": 11,
+      "frames": 7,
+      "touches": 35,
+      "denseInteriorSamples": 801,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "5757066848cfd4a9592675a9945ca8b0226ad6e7fdb8a37e4db72693863c1e73"
+    },
+    {
+      "page": 12,
+      "frames": 7,
+      "touches": 35,
+      "denseInteriorSamples": 903,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "d5951947d670d4f9dabc6638df0ce5310db3fcdcab45e606c15949a93e3298d8"
+    },
+    {
+      "page": 13,
+      "frames": 5,
+      "touches": 25,
+      "denseInteriorSamples": 758,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "64b9247508aa24f8fe0d5064f8fb5c95fbc863b55df57eddd17c999c907d3172"
+    },
+    {
+      "page": 14,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 969,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "3ef0e86f9a1abce5715493e4c84e8e3cbf75f53fd0f4d106372eafb6056faf88"
+    },
+    {
+      "page": 15,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 1122,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "5e526d1d88e21d88c4cd9ada9e0103f8f01ab9bfb37a880cb2ab30cf0835edea"
+    },
+    {
+      "page": 16,
+      "frames": 5,
+      "touches": 25,
+      "denseInteriorSamples": 980,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "d7c2bcea9afb323e81dee10df11fea6c6f2498709d0560dd4d53bfceba18de4f"
+    },
+    {
+      "page": 17,
+      "frames": 5,
+      "touches": 25,
+      "denseInteriorSamples": 905,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "b8c75c46b8207c7ea5e99d44b086846458adb60cfe97013f39276cbc1dd54b4c"
+    },
+    {
+      "page": 18,
+      "frames": 8,
+      "touches": 40,
+      "denseInteriorSamples": 1091,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "5e1dce163a28320ee0181d069c9ab455ddb8f482f86fed662fe9723739a2abbf"
+    },
+    {
+      "page": 19,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 992,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "9e1ab49ffab0b5b66e22aa27cac7131fc5a5ef869a818b61fc5d46e60eef0f0d"
+    },
+    {
+      "page": 20,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 1097,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "919ce7a32b96abf0b827e8be148036ce4fe9711ef5ca72068631b2ec851dd6a6"
+    },
+    {
+      "page": 21,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 976,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "178972505143d2b9d4a2a0e1f0a7d84e471e0086661179a3c95ce585963c4b9b"
+    },
+    {
+      "page": 22,
+      "frames": 8,
+      "touches": 40,
+      "denseInteriorSamples": 1145,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "2af16a07b0256acceb835a42b70014ec492841711c734424dd004d6c0f6bf62d"
+    },
+    {
+      "page": 23,
+      "frames": 5,
+      "touches": 25,
+      "denseInteriorSamples": 724,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "5e6cd69765fa631d1b51d9ea156f6872bb54c4b093993de175fd2005567ee63b"
+    },
+    {
+      "page": 24,
+      "frames": 4,
+      "touches": 20,
+      "denseInteriorSamples": 709,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "b677c309d355b789250a16d831b94e17532131084d81f209ac115c4857fbd257"
+    },
+    {
+      "page": 25,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 1009,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "867ad0dce1f9d60e56ea32b9ec128bb2b8b2acf3eedefc081c5a0fbed8a61e5b"
+    },
+    {
+      "page": 26,
+      "frames": 7,
+      "touches": 35,
+      "denseInteriorSamples": 1117,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "79c175ebec6a807785ff1a4461ea03bd3744f1ef72be207010912bcc444aeb3b"
+    },
+    {
+      "page": 27,
+      "frames": 7,
+      "touches": 35,
+      "denseInteriorSamples": 1012,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "cc8c97e5cc8c922713caa276c91bd690713508fdcb3d814ef3fdcec44735bde8"
+    },
+    {
+      "page": 28,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 934,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "bc0e2080714376c4f4bf8aceab3dea64e62cabbd8bbeb333a5560c35a5c1b164"
+    },
+    {
+      "page": 29,
+      "frames": 7,
+      "touches": 35,
+      "denseInteriorSamples": 1113,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "12b1e90a3048462e1696687f974695be08fcb9e65abdb9404b4eee24a59455be"
+    },
+    {
+      "page": 30,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 951,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "4d7685f88e37cc5d5530c6367828b81a13504590e7566c0d34607695bd9b02fb"
+    },
+    {
+      "page": 31,
+      "frames": 5,
+      "touches": 25,
+      "denseInteriorSamples": 865,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "ba5c709ab004b0d5718569e3a4897fd295afb3dab2177feef89ae95bc20e775c"
+    },
+    {
+      "page": 32,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 896,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "f82639044f96798020eb3ed98eeb1c4883b373ce910bfcaa18ceea77fe467971"
+    },
+    {
+      "page": 33,
+      "frames": 7,
+      "touches": 35,
+      "denseInteriorSamples": 1018,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "2666741cc4372cfb9e31f816c44984a2ec4501d4be0857a3e34dd63cc0180bab"
+    },
+    {
+      "page": 34,
+      "frames": 7,
+      "touches": 35,
+      "denseInteriorSamples": 1224,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "10a67ce5b6ddfee09f8d62b31a166305213e25b98e8b314d571532e800bb1305"
+    },
+    {
+      "page": 35,
+      "frames": 7,
+      "touches": 35,
+      "denseInteriorSamples": 1213,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "c0ded34f23eb2fb176f57be4b1d58190f106218bb6d582e068171c860943153b"
+    },
+    {
+      "page": 36,
+      "frames": 8,
+      "touches": 40,
+      "denseInteriorSamples": 1181,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "87041f99d4de96869a2f563d9b2af52112e6664b1dd6649b7b01d21f16dbd4e8"
+    },
+    {
+      "page": 37,
+      "frames": 2,
+      "touches": 10,
+      "denseInteriorSamples": 392,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "8edc08f8253438a0ef908de436b48dc330580d940504435215b658545179d245"
+    },
+    {
+      "page": 38,
+      "frames": 7,
+      "touches": 35,
+      "denseInteriorSamples": 958,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "e6b3854a3a8fc2c3007c5787611d3a046ab64288f7f4877eafef4ee724ce76ae"
+    },
+    {
+      "page": 39,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 1049,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "1c70207185ce050296b127cdfa034cafd97527d74eae280d9c0d7c301cf75a2d"
+    },
+    {
+      "page": 40,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 959,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "39a6d4772305b5d3e2c690abf85fed1d695c302b5f36a0db27dadff4f0f524a2"
+    },
+    {
+      "page": 41,
+      "frames": 6,
+      "touches": 30,
+      "denseInteriorSamples": 862,
+      "sameGeometry": true,
+      "opaqueInterior": true,
+      "reportSha256": "41a85ccda38c1e666088ec886d23dd5bbe3ec866278c447fb5bab62b543345b0"
+    }
+  ],
+  "mirroredPages": 39,
+  "unchangedWolverineMaps": 74,
+  "readerMode": "single/PAGE",
+  "phoneAcceptance": "pending"
+}

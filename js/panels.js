@@ -11,6 +11,16 @@ const PanelDetect = {
       const img = new Image();
       img.onload = () => {
         try {
+          // A complete monochrome frame graph is independent of legacy page
+          // templates. Unsupported or unproved layouts use the existing path.
+          if (typeof PanelGutterGraph !== 'undefined') {
+            try {
+              const graph = PanelGutterGraph.analyzeImage(img, log);
+              if (graph) { resolve(graph.panels); return; }
+            } catch (error) {
+              if (log) log(`gutter graph deferred: ${error.message}`);
+            }
+          }
           const baseline = this._analyze(img, log);
           // The stacked-page route establishes every strip from page-wide
           // border evidence, independently of the finger or legacy seed bank.
