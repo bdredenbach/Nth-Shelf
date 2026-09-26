@@ -2,13 +2,23 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.48 — page43 corner taps select the complete frame
+
+A tiny break in page43's pale border let the exterior scan remove dark artwork from the middle slanted frame's mask. Test48 repairs that measured leak so the highlighted corner and center select the same whole K-KRASH scene.
+
+All 32 browser touch/crop checks pass. A full 74-page comparison changes only this frame; its four neighbors and all other pages remain exact. **Phone acceptance is pending.** See [results](qa27900/frame-accuracy/test48/RESULTS.md) and [handoff](HANDOFF-2.79.48.md).
+
+Current identity: **2.79.48 / code27976**, package `io.github.bdredenbach.nthshelf.frametest48`, label **Nth Shelf Test48**. Cache/proof identifiers: `nth-shelf-shell-2.79.48`, `panel-map-exp-46`, `frame-proof-2.79.48`.
+
+Earlier candidates and their recorded results follow.
+
 ## 2.79.47 — page36 completion in the actual Reader
 
 The recovered Test46 build returned only two proven page36 frames, so its seven-cell repair never ran. Test47 preserves those two frames and adds four outlines after checking the visible borders and foreground silhouette. The sheriff stays separate from the whole hallway/Logan scene, and the bottom-right room excludes the shower.
 
 All 35 browser touch/crop checks pass. A complete 74-page comparison changes only page36 (2 → 6), preserving every old frame descriptor. **Phone acceptance is pending.** See [results](qa27900/frame-accuracy/test47/RESULTS.md) and [recovery handoff](HANDOFF-2.79.47.md).
 
-Current identity: **2.79.47 / code27975**, package `io.github.bdredenbach.nthshelf.frametest47`, label **Nth Shelf Test47**. Current cache/proof identifiers: `nth-shelf-shell-2.79.47`, `panel-map-exp-45`, `frame-proof-2.79.47`.
+Test47 identity: **2.79.47 / code27975**, package `io.github.bdredenbach.nthshelf.frametest47`, label **Nth Shelf Test47**. Test47 cache/proof identifiers: `nth-shelf-shell-2.79.47`, `panel-map-exp-45`, `frame-proof-2.79.47`.
 
 The following sections record earlier candidates; their expectations are superseded by the current results above.
 

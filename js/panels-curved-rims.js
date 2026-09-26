@@ -228,14 +228,14 @@ const PanelCurvedRims = (() => {
     if(discarded>w*h*.02)return null;
     return {reassigned,discarded,retainedComponents,mode:'broad'};
   }
-  function raster(rgba,gray,w,h,model,fan,matte,mode='legacy'){
+  function raster(rgba,gray,w,h,model,fan,matte,mode='legacy',outsideOverride=null){
     const paths=model.paths.map(p=>extended(p,model.x0,w)),upper=paths[paths.length-2],labels=new Uint8Array(w*h),terminal=paths.length-1,count=terminal+fan.paths.length;
     const fanX=fan.paths.map(ps=>Array.from({length:h},(_,y)=>ps[Math.max(0,Math.min(ps.length-1,y-ps[0][1]))][0]));
     const mask=new Uint8Array(w*h);
     if(mode==='edge-color'){
       const c=matte.color;for(let i=0;i<mask.length;i++)mask[i]=Math.max(Math.abs(rgba[i*4]-c[0]),Math.abs(rgba[i*4+1]-c[1]),Math.abs(rgba[i*4+2]-c[2]))<=18;
     }else for(let i=0;i<mask.length;i++)mask[i]=gray[i]<=matte.base+15;
-    const outside=flood(mask,w,h);
+    const outside=outsideOverride||flood(mask,w,h);
     for(let y=0;y<h;y++)for(let x=0;x<w;x++){
       let k=1;for(let j=1;j<paths.length-1;j++)if(y>=paths[j][x])k++;
       if(k>=terminal)for(const xs of fanX)if(x>xs[y])k++;
@@ -248,6 +248,60 @@ const PanelCurvedRims = (() => {
     for(const s of stats){s.mean=s.total/s.pixels;s.variance=s.total2/s.pixels-s.mean*s.mean;delete s.total;delete s.total2;}
     if(stats.some(s=>!ok(s.pixels/(w*h),.035,.40)||!ok(s.mean,20,210)||s.variance<500||s.dark/s.pixels<.04||s.light/s.pixels<.015))return null;
     return {labels,balloons,cleanup,stats,count};
+  }
+  // An exterior-colored ink region can connect to the page matte through a
+  // single analysis-pixel neck in an interrupted pale rim. Opening the matte
+  // is only a proposal: require one large region, one tier owner, a tiny neck
+  // with pale rim arms on opposite sides, and retain every existing owner.
+  function repairRimLeak(rgba,image,w,h,model,fan,original){
+    const mask=new Uint8Array(w*h),eroded=new Uint8Array(w*h),color=image.matte.color;
+    for(let i=0;i<mask.length;i++)mask[i]=Math.max(...color.map((v,c)=>Math.abs(rgba[i*4+c]-v)))<=18;
+    const outside=flood(mask,w,h);
+    for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+      let yes=mask[y*w+x];for(let dy=-1;dy<=1&&yes;dy++)for(let dx=-1;dx<=1;dx++)if(x+dx>=0&&x+dx<w&&y+dy>=0&&y+dy<h&&!mask[(y+dy)*w+x+dx]){yes=0;break;}
+      eroded[y*w+x]=yes;
+    }
+    const open=flood(eroded,w,h),reachable=new Uint8Array(w*h),recovered=new Uint8Array(w*h);
+    for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+      let yes=0;for(let dy=-1;dy<=1&&!yes;dy++)for(let dx=-1;dx<=1;dx++)if(x+dx>=0&&x+dx<w&&y+dy>=0&&y+dy<h&&open[(y+dy)*w+x+dx]){yes=1;break;}
+      const i=y*w+x;reachable[i]=yes&&mask[i];recovered[i]=outside[i]&&!reachable[i];
+    }
+    const cc=components(recovered,w,h);if(!cc)return null;
+    const large=cc.items.filter(c=>c.pixels>=w*h*.035);if(large.length!==1||large[0].pixels>w*h*.12)return null;
+    const candidate=large[0];if(candidate.box[0]<=0||candidate.box[1]<=0||candidate.box[2]>=w||candidate.box[3]>=h)return null;
+    const paths=model.paths.map(p=>extended(p,model.x0,w)),votes=new Array(original.count+1).fill(0),neck=[];
+    for(let i=0;i<cc.ids.length;i++)if(cc.ids[i]===candidate.id){
+      const x=i%w,y=i/w|0;let owner=1;for(let j=1;j<paths.length-1;j++)if(y>=paths[j][x])owner++;
+      // Terminal fan cells need a different perimeter proof.
+      if(owner>=paths.length-1)return null;votes[owner]++;
+      if([x?i-1:-1,x+1<w?i+1:-1,y?i-w:-1,y+1<h?i+w:-1].some(j=>j>=0&&reachable[j]))neck.push([x,y]);
+    }
+    const owner=votes.indexOf(Math.max(...votes)),fraction=votes[owner]/candidate.pixels;
+    if(fraction<.999||neck.length<1||neck.length>4||neck.some(p=>Math.abs(p[0]-neck[0][0])+Math.abs(p[1]-neck[0][1])>4))return null;
+    const arms=neck.map(([x,y])=>{
+      const count=(vertical,sign)=>{let n=0;for(let d=1;d<=12;d++){let yes=false;for(let side=-3;side<=3;side++){
+        const X=x+(vertical?side:sign*d),Y=y+(vertical?sign*d:side);if(X>=0&&X<w&&Y>=0&&Y<h&&image.pale[Y*w+X]>175)yes=true;
+      }n+=yes;}return n;};
+      const pairs=[[count(true,-1),count(true,1)],[count(false,-1),count(false,1)]];return pairs.sort((a,b)=>Math.min(...b)-Math.min(...a))[0];
+    });
+    if(arms.some(a=>Math.min(...a)<2))return null;
+    const blocked=outside.slice();for(let i=0;i<blocked.length;i++)if(cc.ids[i]===candidate.id)blocked[i]=0;
+    const fresh=raster(rgba,image.gray,w,h,model,fan,image.matte,'edge-color',blocked);if(!fresh)return null;
+    const labels=original.labels.slice();let added=0;
+    for(let i=0;i<labels.length;i++)if(!labels[i]&&fresh.labels[i]===owner){labels[i]=owner;added++;}
+    if(!ok(added/(w*h),.035,.12))return null;
+    const stats=original.stats.slice(),st={pixels:0,dark:0,light:0};let total=0,total2=0;
+    for(let i=0;i<labels.length;i++)if(labels[i]===owner){const v=image.gray[i];st.pixels++;st.dark+=v<45;st.light+=v>170;total+=v;total2+=v*v;}
+    st.mean=total/st.pixels;st.variance=total2/st.pixels-st.mean*st.mean;stats[owner-1]=st;
+    return {labels,stats,seal:{method:'bounded-matte-neck',radius:1,owner,componentPixels:candidate.pixels,componentBox:candidate.box,ownerFraction:fraction,neck,arms,beforePixels:original.stats[owner-1].pixels,addedPixels:added}};
+  }
+  function validRimSeal(seal,p,w,h){
+    return seal?.method==='bounded-matte-neck'&&seal.radius===1&&seal.owner===p.index+1&&p.index<p.network.model.paths.length-2&&
+      Number.isInteger(seal.componentPixels)&&ok(seal.componentPixels/(w*h),.035,.12)&&ok(seal.ownerFraction,.999,1)&&
+      Array.isArray(seal.componentBox)&&seal.componentBox.length===4&&seal.componentBox.every(Number.isInteger)&&seal.componentBox[0]>=0&&seal.componentBox[1]>=0&&seal.componentBox[2]<=w&&seal.componentBox[3]<=h&&seal.componentBox[0]<seal.componentBox[2]&&seal.componentBox[1]<seal.componentBox[3]&&
+      Array.isArray(seal.neck)&&ok(seal.neck.length,1,4)&&seal.neck.every(q=>Array.isArray(q)&&q.length===2&&q.every(Number.isInteger)&&q[0]>=0&&q[0]<w&&q[1]>=0&&q[1]<h&&Math.abs(q[0]-seal.neck[0][0])+Math.abs(q[1]-seal.neck[0][1])<=4)&&
+      Array.isArray(seal.arms)&&seal.arms.length===seal.neck.length&&seal.arms.every(q=>Array.isArray(q)&&q.length===2&&q.every(v=>Number.isInteger(v)&&ok(v,2,12)))&&
+      Number.isInteger(seal.beforePixels)&&seal.beforePixels>0&&Number.isInteger(seal.addedPixels)&&ok(seal.addedPixels/(w*h),.035,.12)&&seal.beforePixels+seal.addedPixels===p.pixels;
   }
   function trace(labels,w,h,id){
     const edges=[],next=new Map(),stride=w+1;
@@ -289,12 +343,24 @@ const PanelCurvedRims = (() => {
       const b=bounds(rings.flat()),proof={version:1,method:METHOD,analysisWidth:w,analysisHeight:h,index:k-1,network,pixels:r.stats[k-1].pixels,pixelContours:rings};
       out.push({x:b[0]/w,y:b[1]/h,w:(b[2]-b[0])/w,h:(b[3]-b[1])/h,_contours:rings.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),_identitySource:'curved-rim-frame',_geometryOwner:'curved-rim-contours',_geometryType:'noncrossing-pale-rim-network',_curvedRimProof:proof});
     }
+    if(rasterMode==='edge-color'&&out.every(validPanel)){
+      const repaired=repairRimLeak(rgba,image,w,h,model,fan,r);
+      if(repaired){
+        const index=repaired.seal.owner-1,rings=trace(repaired.labels,w,h,index+1);
+        if(rings&&rasterMatches(rings,repaired.labels,w,h,index+1)){
+          const b=bounds(rings.flat()),proof={...out[index]._curvedRimProof,version:2,network:{...network,stats:repaired.stats,rimSeal:repaired.seal},pixels:repaired.stats[index].pixels,pixelContours:rings};
+          const panel={...out[index],x:b[0]/w,y:b[1]/h,w:(b[2]-b[0])/w,h:(b[3]-b[1])/h,_contours:rings.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),_curvedRimProof:proof};
+          if(validPanel(panel)){out[index]=panel;log?.('curved rim neck repaired; prior neighboring owners retained');}
+        }
+      }
+    }
     log?.('curved rims: '+out.length+' candidates, valid='+out.map(validPanel).join(','));
     return out.every(validPanel)?out:[];
   }
   function validPanel(panel){try{
     const p=panel?._curvedRimProof,w=p?.analysisWidth,h=p?.analysisHeight,n=p?.network,m=n?.model,f=n?.fan,rings=p?.pixelContours;
-    if(panel?._identitySource!=='curved-rim-frame'||p.version!==1||p.method!==METHOD||!Number.isInteger(w)||!Number.isInteger(h)||!ok(w,300,900)||!ok(h,500,900)||!ok(w/h,.50,.85)||!m||!f)return false;
+    if(panel?._identitySource!=='curved-rim-frame'||![1,2].includes(p.version)||p.method!==METHOD||!Number.isInteger(w)||!Number.isInteger(h)||!ok(w,300,900)||!ok(h,500,900)||!ok(w/h,.50,.85)||!m||!f)return false;
+    if(p.version===2?!(n.rasterMode==='edge-color'&&validRimSeal(n.rimSeal,p,w,h)):n.rimSeal!==undefined)return false;
     if(panel._geometryOwner!==undefined&&panel._geometryOwner!=='curved-rim-contours'||panel._geometryType!==undefined&&panel._geometryType!=='noncrossing-pale-rim-network')return false;
     if(m.x0!==Math.round(w*.045)||m.x1!==w-1-m.x0||!Array.isArray(m.paths)||!ok(m.paths.length,4,10)||!Array.isArray(f.paths)||!ok(f.paths.length,2,5))return false;
     const L=m.x1-m.x0+1,count=m.paths.length-1+f.paths.length;

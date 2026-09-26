@@ -76,3 +76,7 @@ The current candidate is version **2.79.46** (`versionCode 27974`). Debug builds
 ## Test47 identity
 
 Current candidate: **2.79.47** (`versionCode 27975`), package `io.github.bdredenbach.nthshelf.frametest47`, label **Nth Shelf Test47**. Page36 now completes from the actual two-frame baseline. Install separately, import the comic, and check the six marked scenes. Phone acceptance is pending. See the Test47 handoff.
+
+## Test48 identity
+
+Current candidate: **2.79.48** (`versionCode 27976`), package `io.github.bdredenbach.nthshelf.frametest48`, label **Nth Shelf Test48**. Page43 corner and center taps now share the complete middle-scene mask. Install separately and import the comic. Phone acceptance is pending.
