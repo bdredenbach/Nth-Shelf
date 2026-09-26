@@ -72,3 +72,7 @@ The current candidate is version **2.79.45** (`versionCode 27973`). Debug builds
 ## Test46 identity
 
 The current candidate is version **2.79.46** (`versionCode 27974`). Debug builds use `io.github.bdredenbach.nthshelf.frametest46` with label **Nth Shelf Test46**. Test46 retains Test36–45 and Test44 corner behavior, but replaces page36's Test45 polygon reconstruction with the stepped shared-scene v2 proof.
+
+## Test47 identity
+
+Current candidate: **2.79.47** (`versionCode 27975`), package `io.github.bdredenbach.nthshelf.frametest47`, label **Nth Shelf Test47**. Page36 now completes from the actual two-frame baseline. Install separately, import the comic, and check the six marked scenes. Phone acceptance is pending. See the Test47 handoff.

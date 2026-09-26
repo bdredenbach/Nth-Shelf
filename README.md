@@ -2,6 +2,16 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.47 — page36 completion in the actual Reader
+
+The recovered Test46 build returned only two proven page36 frames, so its seven-cell repair never ran. Test47 preserves those two frames and adds four outlines after checking the visible borders and foreground silhouette. The sheriff stays separate from the whole hallway/Logan scene, and the bottom-right room excludes the shower.
+
+All 35 browser touch/crop checks pass. A complete 74-page comparison changes only page36 (2 → 6), preserving every old frame descriptor. **Phone acceptance is pending.** See [results](qa27900/frame-accuracy/test47/RESULTS.md) and [recovery handoff](HANDOFF-2.79.47.md).
+
+Current identity: **2.79.47 / code27975**, package `io.github.bdredenbach.nthshelf.frametest47`, label **Nth Shelf Test47**. Current cache/proof identifiers: `nth-shelf-shell-2.79.47`, `panel-map-exp-45`, `frame-proof-2.79.47`.
+
+The following sections record earlier candidates; their expectations are superseded by the current results above.
+
 ## 2.79.46 — page36 stepped shared-scene v2
 
 Test45 got the **six-frame count** right on Reader page36 but the phone video showed the reconstructed polygons were wrong: the middle scene had black cutouts / missing artwork and the shared lower edges did not match the actual frame rails. The user supplied a marked screenshot confirming the intended six visible owners.
@@ -215,6 +225,6 @@ The current shell cache is `nth-shelf-shell-2.79.44`. Android debug builds use v
 The current shell cache is `nth-shelf-shell-2.79.45`. Android debug builds use versionName **2.79.45**, versionCode **27973**, package `io.github.bdredenbach.nthshelf.frametest45`, and label **Nth Shelf Test45**.
 
 
-## Current Test46 identity
+## Historical Test46 identity
 
-The current shell cache is `nth-shelf-shell-2.79.46`. Android debug builds use versionName **2.79.46**, versionCode **27974**, package `io.github.bdredenbach.nthshelf.frametest46`, and label **Nth Shelf Test46**.
+The Test46 shell cache was `nth-shelf-shell-2.79.46`. Android debug builds use versionName **2.79.46**, versionCode **27974**, package `io.github.bdredenbach.nthshelf.frametest46`, and label **Nth Shelf Test46**.

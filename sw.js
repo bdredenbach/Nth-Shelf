@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.46 — STEPPED SHARED-SCENE V2 CANDIDATE
+// NTH SHELF 2.79.47 — STEPPED SHARED-SCENE V2 CANDIDATE
 // Pages13, 23, 27, 28, 32 and33 accepted; page35 branched stack pending phone acceptance.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.46";
+const CACHE_NAME = "nth-shelf-shell-2.79.47";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",

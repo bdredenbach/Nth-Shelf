@@ -1,3 +1,9 @@
+# Current checkpoint — Test47, 2026-09-26
+
+Active: Wolverine 1000 page36. Six marked frames pass 35 browser touches and full 74-page comparison; only page36 changes. Await phone acceptance of Test47. See [handoff](../../HANDOFF-2.79.47.md) and [results](test47/RESULTS.md).
+
+The queue below is historical and predates the recovered Test46/Test47 work.
+
 # Frame accuracy work queue
 
 Latest phone confirmation: after **2.79.23 Test 1**, the user confirms

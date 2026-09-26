@@ -380,6 +380,14 @@ const PanelDetect = {
             try{if(typeof PanelMatteCells!=='undefined')closed=PanelMatteCells.analyzeImage(img,log);}
             catch(error){if(log)log(`matte cell network deferred: ${error.message}`);}
           }
+          // A partial map with two independently proved perimeter anchors
+          // needs completion before count-gated legacy matte refinements.
+          try {
+            if(typeof PanelStructuralGrid!=='undefined'&&closed.length===2&&PanelStructuralGrid.completeWitnessedSteppedImage){
+              const completed=PanelStructuralGrid.completeWitnessedSteppedImage(img,closed,log);
+              if(completed.length===6)closed=completed;
+            }
+          }catch(error){if(log)log(`witnessed stepped completion deferred: ${error.message}`);}
           // Test46: refine the six-owner interpretation with the real stepped
           // top-left/inset topology and reuse the independently proved top
           // edges of the two bottom panels as the shared lower seam.
