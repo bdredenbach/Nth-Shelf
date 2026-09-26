@@ -2,13 +2,19 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.56 — pages59–65: bleed and overlapping frames
+
+Test56 recovers6/6/6/5/8/6/7 selections on reader pages59–65. Native exterior-paper topology admits a measured ink-rail network, including skewed panels, page-edge scenes and overlapping foreground frames. Masks assign overlapping artwork to one owner, retain page59's crossing speech balloon and page64's sound-effect lettering, and preserve light artwork at bleed edges. Border recovery also handles a page62 resize variant that otherwise returns two coarse composites.
+
+Current identity: **2.79.56 / code27984**, package `io.github.bdredenbach.nthshelf.frametest56`, label **Nth Shelf Test56**. Cache/proof identifiers: `nth-shelf-shell-2.79.56`, `panel-map-exp-54`, `frame-proof-2.79.56`. See [results](qa27900/frame-accuracy/test56/RESULTS.md) and [checkpoint](HANDOFF-2.79.56.md). Phone acceptance pending. The user queued pages66–74 next, then detector generalization across comics.
+
 ## 2.79.55 — pages54–57: nested insets and complete borders
 
 Test55 addresses the user's next four-page batch. Reader pages54/55/56/57 have8/6/7/6 selections, including two insets on54 and one on55. The compact inset detector proves both caps independently and retains page55's crossing speech balloon. Native exterior-paper component bounds keep the entire frame rim and avoid overlap across narrow gutters.
 
 Page56 already found seven frames in this browser, but the former fitted bounds missed33 of63 sampled positions near their borders. The new native bounds pass all63, with seven stable frame identities. Page54's lower-left, page55's tall lower-right and page57's upper two selections remain exact. The full74-page comparison changes only54–57; other70 maps are byte-identical.
 
-Current identity: **2.79.55 / code27983**, package `io.github.bdredenbach.nthshelf.frametest55`, label **Nth Shelf Test55**. Cache/proof identifiers: `nth-shelf-shell-2.79.55`, `panel-map-exp-53`, `frame-proof-2.79.55`. See [results](qa27900/frame-accuracy/test55/RESULTS.md) and [checkpoint](HANDOFF-2.79.55.md). Phone acceptance pending.
+Previous identity: **2.79.55 / code27983**, package `io.github.bdredenbach.nthshelf.frametest55`, label **Nth Shelf Test55**. Cache/proof identifiers: `nth-shelf-shell-2.79.55`, `panel-map-exp-53`, `frame-proof-2.79.55`. See [results](qa27900/frame-accuracy/test55/RESULTS.md) and [checkpoint](HANDOFF-2.79.55.md). Phone acceptance pending.
 
 Continue remaining Wolverine pages first; generalization across comics remains the next task after the page campaign.
 

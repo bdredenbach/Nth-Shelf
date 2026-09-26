@@ -20,6 +20,9 @@ const PanelDetect = {
           } catch (error) {
             if (log) log(`page-layout deferred: ${error.message}`);
           }
+          if(layout.length<4&&baseline.length===2){
+            try {const completed=PanelStructuralGrid.completeBleedNetworkImage(img,[],log);if(completed.length){resolve(completed);return;}}catch(error){if(log)log(`native bleed composite deferred: ${error.message}`);}
+          }
           if (layout.length >= 4 || baseline.length) {
             let identities=layout.length >= 4 ? layout : baseline;
             if(layout.length<4 && baseline.some(p=>p.w*p.h>.30 && p.w>.7 && p.h>.35)){
@@ -193,6 +196,12 @@ const PanelDetect = {
           } catch (error) {
             if (log) log(`closed frames deferred: ${error.message}`);
           }
+          try {
+            if(typeof PanelStructuralGrid!=='undefined'){
+              const completed=PanelStructuralGrid.completeBleedNetworkImage(img,closed,log);
+              if(completed.length){resolve(completed);return;}
+            }
+          }catch(error){if(log)log(`native bleed network deferred: ${error.message}`);}
           // Some resamplers erase the legacy gutter map entirely. Recheck
           // native paper evidence after closed-frame discovery; retain anchors.
           try {
