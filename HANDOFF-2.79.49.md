@@ -8,4 +8,4 @@ QA: all eight frames receive nine real browser touchscreen taps (72 total), with
 
 Android candidate: 2.79.49, code27977, io.github.bdredenbach.nthshelf.frametest49, label Nth Shelf Test49. Install separately and import the comic. BUILD.json in the workflow artifact ties the APK digest and exact web assets to the source commit.
 
-Next: await phone testing of page44, especially both narrow middle strips and the claw/bottom strips. Do not mark phone acceptance until explicit confirmation. Moving on from earlier pages is not explicit confirmation of those builds. Earlier handoffs remain historical.
+Update 2026-09-26: PHONE FAILED. User screenshots 209637–209643 show partial masks and crops spanning neighbors. See HANDOFF-2.79.50.md for the resampling reproduction and follow-up. The following next step is historical: await phone testing of page44, especially both narrow middle strips and the claw/bottom strips. Do not mark phone acceptance until explicit confirmation. Moving on from earlier pages is not explicit confirmation of those builds. Earlier handoffs remain historical.

@@ -384,7 +384,8 @@ const PanelDetect = {
           // Standalone matte proposals remain unchanged for other detectors.
           try {
             if(typeof PanelMatteCells!=='undefined'&&closed.length>=4&&closed.every(p=>p._identitySource==='matte-cell-frame'&&p._matteCellProof?.mode==='dark')){
-              const completed=PanelMatteCells.completeRimNetworkImage(img,closed,log);
+              const canonical=PanelMatteCells.completeNativeRimNetworkImage?.(img,closed,log)||[];
+              const completed=canonical.length?canonical:PanelMatteCells.completeRimNetworkImage(img,closed,log);
               if(completed.length)closed=completed;
             }
           }catch(error){if(log)log(`pale rim completion deferred: ${error.message}`);}

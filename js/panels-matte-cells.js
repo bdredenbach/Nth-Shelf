@@ -192,10 +192,27 @@ const PanelMatteCells = (() => {
     for(let i=0;i<page;i++){parent[i]=!ex.out[i];art[i]=parent[i]&&!wall[i];}
     const cc=components(art,w,h);if(!cc)return [];
     const cells=cc.items.filter(c=>c.pixels>=page*.008&&c.box[2]-c.box[0]>=w*.035&&c.box[3]-c.box[1]>=h*.05&&c.box[0]>0&&c.box[1]>0&&c.box[2]<w&&c.box[3]<h);
-    if(cells.length<baseline.length||cells.length>baseline.length+2)return [];
+    if(cells.length<baseline.length-2||cells.length>baseline.length+2)return [];
     cells.sort((a,b)=>Math.abs(a.box[1]-b.box[1])<h*.08?a.box[0]-b.box[0]:a.box[1]-b.box[1]);
     const lookup=new Map(cells.map((c,i)=>[c.id,i+1])),labels=new Uint16Array(page);
     for(let i=0;i<page;i++)labels[i]=lookup.get(cc.ids[i])||0;
+    // Rim expansion can consume a narrow, already proved cell (especially
+    // one containing pale lettering). Keep that independent witness instead
+    // of rejecting the whole map. It must be almost disjoint from the new
+    // cores and its original perimeter must still follow the measured rim.
+    for(const panel of baseline){
+      const mask=rasterContours(panel._matteCellProof.pixelContours,w,h);
+      let pixels=0,overlap=0;
+      for(let i=0;i<page;i++)if(mask[i]){pixels++;overlap+=!!labels[i];}
+      if(overlap/pixels>.05)continue;
+      const witness=new Uint16Array(page);
+      for(let i=0;i<page;i++)if(mask[i])witness[i]=1;
+      const rim=rimMetric(witness,1,pale,w,h);
+      if(rim.samples<=100||rim.matched/rim.samples<.90)return [];
+      cells.push({retainedRimWitness:true});
+      for(let i=0;i<page;i++)if(mask[i]&&!labels[i])labels[i]=cells.length;
+    }
+    if(cells.length<baseline.length||cells.length>baseline.length+2)return [];
     assignGrow(labels,parent,w,h,6);
     // White lettering and isolated ink inside a closed cell belong to it.
     for(let id=1;id<=cells.length;id++){
@@ -254,6 +271,46 @@ const PanelMatteCells = (() => {
   function completeRimNetworkImage(img,baseline,log){
     try{const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height,s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);return completeRimNetworkRGBA(ctx.getImageData(0,0,w,h).data,w,h,baseline,log);}catch(e){log?.('rim completion deferred: '+e.message);return [];}
   }
+  // Canvas scaling may select different JPEG decode sizes / filters across
+  // Chromium and Android. Read native pixels first, then explicitly sample
+  // them so both the initial cells and their completion see the same raster.
+  // This path is only requested for an existing multi-cell dark-matte map.
+  function sampleBilinearRGBA(src,W,H,w,h){
+    if(![W,H,w,h].every(Number.isInteger)||Math.min(W,H,w,h)<1||!src||src.length!==W*H*4)return null;
+    const out=new Uint8ClampedArray(w*h*4);
+    for(let y=0;y<h;y++){
+      const Y=Math.max(0,Math.min(H-1,(y+.5)*H/h-.5)),y0=Math.floor(Y),y1=Math.min(H-1,y0+1),ty=Y-y0;
+      for(let x=0;x<w;x++){
+        const X=Math.max(0,Math.min(W-1,(x+.5)*W/w-.5)),x0=Math.floor(X),x1=Math.min(W-1,x0+1),tx=X-x0;
+        const a=(y0*W+x0)*4,b=(y0*W+x1)*4,c=(y1*W+x0)*4,d=(y1*W+x1)*4,j=(y*w+x)*4;
+        for(let k=0;k<4;k++)out[j+k]=(src[a+k]*(1-tx)+src[b+k]*tx)*(1-ty)+(src[c+k]*(1-tx)+src[d+k]*tx)*ty;
+      }
+    }
+    return out;
+  }
+  function completeNativeRimNetworkImage(img,baseline,log){
+    if(!Array.isArray(baseline)||baseline.length<4||baseline.length>12||!baseline.every(p=>validPanel(p)&&p._matteCellProof.mode==='dark'))return [];
+    let canvas;
+    try{
+      const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;
+      // Bound the extra allocation on mobile; an oversized source defers to
+      // the existing route rather than risking an out-of-memory failure.
+      if(!Number.isInteger(W)||!Number.isInteger(H)||W*H>24000000)return [];
+      const scale=Math.min(1,900/Math.max(W,H)),w=Math.round(W*scale),h=Math.round(H*scale);
+      canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
+      const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)return [];
+      ctx.drawImage(img,0,0);
+      const rgba=sampleBilinearRGBA(ctx.getImageData(0,0,W,H).data,W,H,w,h);
+      const nativeBaseline=analyzeRGBA(rgba,w,h,log);
+      const completed=completeRimNetworkRGBA(rgba,w,h,nativeBaseline,log);
+      if(!completed.length||Math.abs(completed.length-baseline.length)>2)return [];
+      // Preserve reading order even when a narrow retained witness was
+      // inserted after the larger cores during reconstruction.
+      completed.sort((a,b)=>Math.abs(a.y-b.y)<.08?a.x-b.x:a.y-b.y);
+      log?.('native-pixel rim completion: '+completed.length+' cells');return completed;
+    }catch(e){log?.('native-pixel rim completion deferred: '+e.message);return [];}
+    finally{if(canvas){canvas.width=1;canvas.height=1;}}
+  }
   function validPanel(panel){try{
     const p=panel?._matteCellProof,w=p?.analysisWidth,h=p?.analysisHeight,rings=p?.pixelContours;
     if(panel?._identitySource!=='matte-cell-frame'||![1,2].includes(p?.version)||p.method!==METHOD||!['dark','paper'].includes(p.mode)||!Number.isInteger(w)||!Number.isInteger(h)||!ok(w,250,900)||!ok(h,350,900))return false;
@@ -270,7 +327,7 @@ const PanelMatteCells = (() => {
     if(!img||!Number.isFinite(img.width)||!Number.isFinite(img.height)||img.width<1||img.height<1)return [];
     try{const s=Math.min(1,900/Math.max(img.width,img.height)),w=Math.round(img.width*s),h=Math.round(img.height*s),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});if(!ctx)return [];ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log);}catch(e){log?.('matte cell route deferred: '+e.message);return [];}
   }
-  return {analyzeImage,analyzeRGBA,validPanel,completeRimNetworkImage,completeRimNetworkRGBA};
+  return {analyzeImage,analyzeRGBA,validPanel,completeRimNetworkImage,completeRimNetworkRGBA,completeNativeRimNetworkImage,sampleBilinearRGBA};
 })();
 if(typeof window!=='undefined')window.PanelMatteCells=PanelMatteCells;
 if(typeof module!=='undefined')module.exports=PanelMatteCells;

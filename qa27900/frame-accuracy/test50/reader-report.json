@@ -1,0 +1,191 @@
+{
+  "default": {
+    "touches": 72,
+    "errors": [],
+    "denseSamples": 0,
+    "frames": [
+      {
+        "name": "top-fight",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "left-portrait",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "shlik-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "red-profile",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "blam-scene",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "upper-lower-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "claw-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "bottom-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      }
+    ]
+  },
+  "low": {
+    "touches": 72,
+    "errors": [],
+    "denseSamples": 8335,
+    "frames": [
+      {
+        "name": "top-fight",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "left-portrait",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "shlik-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "red-profile",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "blam-scene",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "upper-lower-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "claw-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "bottom-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      }
+    ]
+  },
+  "high": {
+    "touches": 72,
+    "errors": [],
+    "denseSamples": 8335,
+    "frames": [
+      {
+        "name": "top-fight",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "left-portrait",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "shlik-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "red-profile",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "blam-scene",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "upper-lower-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "claw-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      },
+      {
+        "name": "bottom-strip",
+        "touches": 9,
+        "allCropsMatch": true,
+        "allNineOpaque": true,
+        "allDenseOpaque": true
+      }
+    ]
+  }
+}

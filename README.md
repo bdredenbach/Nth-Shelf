@@ -2,13 +2,21 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.50 — page44 device-resampling repair
+
+**Test49 failed phone testing.** Its successful Chromium raster hid failures in four other scaled-image variants: completion disappeared and old partial masks/fallback crops returned.
+
+Test50 reads native image pixels, explicitly resamples once and completes the matte map on that same raster. A thin, already proved rim cell survives the core-eroding step. All four previously failing variants now yield identical eight-frame maps. Reader checks pass **216 touches**, with **16,670 dense interior-opacity samples** across two failing-scaling replays. Every other page in the 74-page comparison is unchanged. All eight rendered crops were inspected.
+
+**Phone acceptance remains pending.** See [results](qa27900/frame-accuracy/test50/RESULTS.md) and [recovery checkpoint](HANDOFF-2.79.50.md). Current identity: **2.79.50 / code27978**, package `io.github.bdredenbach.nthshelf.frametest50`, label **Nth Shelf Test50**. Cache/proof identifiers: `nth-shelf-shell-2.79.50`, `panel-map-exp-48`, `frame-proof-2.79.50`.
+
 ## 2.79.49 — page44: eight frames, nine taps each
 
 Test49 restores incomplete dark-art masks and detects the missing narrow red-background profile on page44. All eight visible frames pass nine real browser touch/crop checks each: **72/72**. Visual review also caught and corrected the claw strip's clipped lower border.
 
-The full 74-page comparison changes only page44. **Phone acceptance is pending.** See [results](qa27900/frame-accuracy/test49/RESULTS.md) and [handoff](HANDOFF-2.79.49.md).
+The full 74-page comparison changed only page44. **Subsequent phone test failed; superseded by Test50.** See [results](qa27900/frame-accuracy/test49/RESULTS.md) and [handoff](HANDOFF-2.79.49.md).
 
-Current identity: **2.79.49 / code27977**, package `io.github.bdredenbach.nthshelf.frametest49`, label **Nth Shelf Test49**. Cache/proof identifiers: `nth-shelf-shell-2.79.49`, `panel-map-exp-47`, `frame-proof-2.79.49`.
+Historical identity: **2.79.49 / code27977**, package `io.github.bdredenbach.nthshelf.frametest49`, label **Nth Shelf Test49**. Cache/proof identifiers: `nth-shelf-shell-2.79.49`, `panel-map-exp-47`, `frame-proof-2.79.49`.
 
 Earlier candidates and recorded results follow.
 
