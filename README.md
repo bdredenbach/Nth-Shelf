@@ -2,11 +2,17 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.57 — pages66–74: pale gutters and crossing figures
+
+Test57 separates the remaining merged scenes and preserves artwork crossing panel boundaries. Reader pages68/69/70/71/72/73 have7/4/4/6/5/5 selections. Page68 retains its inset caption, page70 keeps the portrait dialogue and separates the standing figure, pages71–72 retain foreground figures and claws, and page73 separates five strips with its translator note. Page66 is a single advertisement; existing maps on67 and74 remain unchanged.
+
+Current identity: **2.79.57 / code27985**, package `io.github.bdredenbach.nthshelf.frametest57`, label **Nth Shelf Test57**. Cache/proof identifiers: `nth-shelf-shell-2.79.57`, `panel-map-exp-55`, `frame-proof-2.79.57`. See [results](qa27900/frame-accuracy/test57/RESULTS.md) and [checkpoint](HANDOFF-2.79.57.md). This cumulative build includes Test56's pages59–65 changes. Phone acceptance is pending; generalization across comics remains the next task after the page campaign.
+
 ## 2.79.56 — pages59–65: bleed and overlapping frames
 
 Test56 recovers6/6/6/5/8/6/7 selections on reader pages59–65. Native exterior-paper topology admits a measured ink-rail network, including skewed panels, page-edge scenes and overlapping foreground frames. Masks assign overlapping artwork to one owner, retain page59's crossing speech balloon and page64's sound-effect lettering, and preserve light artwork at bleed edges. Border recovery also handles a page62 resize variant that otherwise returns two coarse composites.
 
-Current identity: **2.79.56 / code27984**, package `io.github.bdredenbach.nthshelf.frametest56`, label **Nth Shelf Test56**. Cache/proof identifiers: `nth-shelf-shell-2.79.56`, `panel-map-exp-54`, `frame-proof-2.79.56`. See [results](qa27900/frame-accuracy/test56/RESULTS.md) and [checkpoint](HANDOFF-2.79.56.md). Phone acceptance pending. The user queued pages66–74 next, then detector generalization across comics.
+Previous identity: **2.79.56 / code27984**, package `io.github.bdredenbach.nthshelf.frametest56`, label **Nth Shelf Test56**. Cache/proof identifiers: `nth-shelf-shell-2.79.56`, `panel-map-exp-54`, `frame-proof-2.79.56`. See [results](qa27900/frame-accuracy/test56/RESULTS.md) and [checkpoint](HANDOFF-2.79.56.md). Phone acceptance pending. The user queued pages66–74 next, then detector generalization across comics.
 
 ## 2.79.55 — pages54–57: nested insets and complete borders
 

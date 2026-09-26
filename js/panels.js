@@ -20,6 +20,9 @@ const PanelDetect = {
           } catch (error) {
             if (log) log(`page-layout deferred: ${error.message}`);
           }
+          if(layout.length<4&&baseline.length<=4&&typeof PanelPaleCompletion!=='undefined'){
+            try {const completed=PanelPaleCompletion.analyzeImage(img,baseline,log);if(completed.length){resolve(completed);return;}}catch(error){if(log)log(`native pale composite deferred: ${error.message}`);}
+          }
           if(layout.length<4&&baseline.length===2){
             try {const completed=PanelStructuralGrid.completeBleedNetworkImage(img,[],log);if(completed.length){resolve(completed);return;}}catch(error){if(log)log(`native bleed composite deferred: ${error.message}`);}
           }

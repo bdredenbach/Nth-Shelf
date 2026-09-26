@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.56 — BLEED AND OVERLAPPING FRAME NETWORKS
+// NTH SHELF 2.79.57 — PALE PAPER AND CROSSING FIGURES
 // Pages13, 23, 27, 28, 32 and33 accepted; page35 branched stack pending phone acceptance.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.56";
+const CACHE_NAME = "nth-shelf-shell-2.79.57";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -71,7 +71,8 @@ const SHELL_FILES = [
   "./js/panels-curved-rims.js",
   "./js/panels-matte-cells.js",
   "./js/panels-edge-spill.js",
-  "./js/panels-structural-grid.js"
+  "./js/panels-structural-grid.js",
+  "./js/panels-pale-completion.js"
 ];
 
 self.addEventListener("install", (event) => {
