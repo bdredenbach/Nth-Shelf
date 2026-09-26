@@ -2,13 +2,21 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.53 — page49: thin gutters with independent frame rims
+
+Test53 replaces the upper composite with four measured frames and preserves the bottom conversation. Page49 has five selections. The admission check requires white paper outside all sixteen dark rims; it does not relax the global gutter threshold. Geometry comes from explicit native-image resampling, with no page IDs, titles, hashes or saved coordinates in runtime.
+
+Current identity: **2.79.53 / code27981**, package `io.github.bdredenbach.nthshelf.frametest53`, label **Nth Shelf Test53**. Cache/proof identifiers: `nth-shelf-shell-2.79.53`, `panel-map-exp-51`, `frame-proof-2.79.53`. See [results](qa27900/frame-accuracy/test53/RESULTS.md) and [checkpoint](HANDOFF-2.79.53.md). Phone acceptance is pending.
+
+User-approved sequence (2026-09-26): finish the remaining Wolverine pages with per-page phone checks first. Generalizing the detector across comics is the next task after that campaign. Preserve accepted page maps and collect failures as regression examples; defer a broad redesign until the remaining pages are reviewed.
+
 ## 2.79.52 — page47: separate rows and insets
 
 Test52 preserves the bedroom selection and replaces the merged lower area with five independent selections: classroom, classroom inset, hallway, fallen-book scene and screen inset. Each surrounding scene excludes inset artwork. The classroom inset retains its caption and outlined lettering.
 
 Validation:108 real browser touch dispatches,18,710 dense opacity samples, four alternate scaled-raster checks and a full74-page comparison. Only page47 changes; all other73 maps, including pages44 and45, remain exact. See [results](qa27900/frame-accuracy/test52/RESULTS.md) and [recovery checkpoint](HANDOFF-2.79.52.md). Phone confirmation is pending.
 
-Current identity: **2.79.52 / code27980**, package `io.github.bdredenbach.nthshelf.frametest52`, label **Nth Shelf Test52**. Cache/proof identifiers: `nth-shelf-shell-2.79.52`, `panel-map-exp-50`, `frame-proof-2.79.52`.
+Previous identity: **2.79.52 / code27980**, package `io.github.bdredenbach.nthshelf.frametest52`, label **Nth Shelf Test52**. Cache/proof identifiers: `nth-shelf-shell-2.79.52`, `panel-map-exp-50`, `frame-proof-2.79.52`.
 
 ## 2.79.51 — page45: ten separate frames
 

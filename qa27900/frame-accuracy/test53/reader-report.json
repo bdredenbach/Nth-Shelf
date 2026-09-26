@@ -1,0 +1,18 @@
+[
+  {
+    "setup": "reader",
+    "touches": 45,
+    "denseSamples": 11353,
+    "errors": [],
+    "allOpaque": true,
+    "geometryPreserved": true
+  },
+  {
+    "setup": "reader-high",
+    "touches": 45,
+    "denseSamples": 11353,
+    "errors": [],
+    "allOpaque": true,
+    "geometryPreserved": true
+  }
+]

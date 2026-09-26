@@ -245,7 +245,7 @@ const PanelStructuralGrid = (() => {
     log?.('witnessed stepped completion: retained two perimeter anchors, added four whole visible scenes');return baseline.concat(added);
   }
 
-  function validPanel(p){try{const pr=p?._structuralGridProof,w=pr?.analysisWidth,h=pr?.analysisHeight;if(pr?.version===10)return validWhiteStackPanel(p);if(pr?.version===9)return validMixedRimsPanel(p);if(pr?.version===8)return validWitnessedPanel(p);if(pr?.version===7)return validSteppedSharedV2Panel(p);if(pr?.version===6)return validSteppedSharedPanel(p);if(pr?.version===5)return validBranchedStackPanel(p);if(pr?.version===4)return validColumnBankPanel(p);if(pr?.version===3)return validInsetTripletPanel(p);if(pr?.version===2)return validOccludedPanel(p);if(p?._identitySource!=='structural-grid-frame'||pr?.version!==1||pr.method!==METHOD||pr.connected!==true||!Number.isInteger(w)||!Number.isInteger(h)||!range(w,120,900)||!range(h,160,900)||!Number.isInteger(pr.index)||!Number.isInteger(pr.count)||!range(pr.count,4,10)||!range(pr.index,0,pr.count-1)||!Array.isArray(pr.box)||pr.box.length!==4||pr.box.some(v=>!Number.isInteger(v))||!Array.isArray(pr.splits)||pr.splits.length<pr.count-1||pr.splits.length>pr.count+3||pr.splits.some(s=>!validSplit(s,w,h))||!range(pr.coverage,.62,.975))return false;const [x0,y0,x1,y1]=pr.box,pixels=(x1-x0+1)*(y1-y0+1);if(x0<0||y0<0||x1>=w||y1>=h||x1<=x0||y1<=y0||!validStats(pr.stats,pixels))return false;return ['x','y','w','h'].every(k=>finite(p[k]))&&Math.max(Math.abs(p.x-x0/w),Math.abs(p.y-y0/h),Math.abs(p.w-(x1-x0+1)/w),Math.abs(p.h-(y1-y0+1)/h))<1e-10;}catch(_){return false;}}
+  function validPanel(p){try{const pr=p?._structuralGridProof,w=pr?.analysisWidth,h=pr?.analysisHeight;if(pr?.version===11)return validThinRimsPanel(p);if(pr?.version===10)return validWhiteStackPanel(p);if(pr?.version===9)return validMixedRimsPanel(p);if(pr?.version===8)return validWitnessedPanel(p);if(pr?.version===7)return validSteppedSharedV2Panel(p);if(pr?.version===6)return validSteppedSharedPanel(p);if(pr?.version===5)return validBranchedStackPanel(p);if(pr?.version===4)return validColumnBankPanel(p);if(pr?.version===3)return validInsetTripletPanel(p);if(pr?.version===2)return validOccludedPanel(p);if(p?._identitySource!=='structural-grid-frame'||pr?.version!==1||pr.method!==METHOD||pr.connected!==true||!Number.isInteger(w)||!Number.isInteger(h)||!range(w,120,900)||!range(h,160,900)||!Number.isInteger(pr.index)||!Number.isInteger(pr.count)||!range(pr.count,4,10)||!range(pr.index,0,pr.count-1)||!Array.isArray(pr.box)||pr.box.length!==4||pr.box.some(v=>!Number.isInteger(v))||!Array.isArray(pr.splits)||pr.splits.length<pr.count-1||pr.splits.length>pr.count+3||pr.splits.some(s=>!validSplit(s,w,h))||!range(pr.coverage,.62,.975))return false;const [x0,y0,x1,y1]=pr.box,pixels=(x1-x0+1)*(y1-y0+1);if(x0<0||y0<0||x1>=w||y1>=h||x1<=x0||y1<=y0||!validStats(pr.stats,pixels))return false;return ['x','y','w','h'].every(k=>finite(p[k]))&&Math.max(Math.abs(p.x-x0/w),Math.abs(p.y-y0/h),Math.abs(p.w-(x1-x0+1)/w),Math.abs(p.h-(y1-y0+1)/h))<1e-10;}catch(_){return false;}}
   function analyzeRGBA(rgba,w,h,log){const m=partitionRGBA(rgba,w,h,log);if(!m)return[];const proofBase={version:1,method:METHOD,connected:true,analysisWidth:w,analysisHeight:h,count:m.cells.length,outer:m.outer,coverage:m.coverage,splits:m.splits};const out=m.cells.map((c,index)=>({x:c.box[0]/w,y:c.box[1]/h,w:(c.box[2]-c.box[0]+1)/w,h:(c.box[3]-c.box[1]+1)/h,_identitySource:'structural-grid-frame',_geometryType:'orthogonal',_structuralGridProof:{...proofBase,index,box:c.box,stats:c.stats}}));return out.every(validPanel)?out:[];}
   function imageData(img){const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!W||!H)return null;const s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s),c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return null;g.drawImage(img,0,0,w,h);return {rgba:g.getImageData(0,0,w,h).data,w,h};}
   function analyzeImage(img,log){const d=imageData(img);return d?analyzeRGBA(d.rgba,d.w,d.h,log):[];}
@@ -497,7 +497,56 @@ const PanelStructuralGrid = (() => {
     if(typeof PanelMatteCells==='undefined'||!Array.isArray(baseline)||baseline.length!==2||baseline.some(p=>!p||p._identitySource||p._quad||p._outline||p._contours))return[];const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!W||!H||W*H>24000000)return[];const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return[];g.drawImage(img,0,0);const s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s),rgba=PanelMatteCells.sampleBilinearRGBA(g.getImageData(0,0,W,H).data,W,H,w,h);const sampled=document.createElement('canvas');sampled.width=w;sampled.height=h;sampled.getContext('2d').putImageData(new ImageData(rgba,w,h),0,0);const canonical=PanelDetect._analyze(sampled),out=completeWhiteStackRGBA(rgba,w,h,canonical,log);if(out.length)out[0]=[...baseline].sort((a,b)=>a.y-b.y)[0];return out;
   }
 
-  return {completeWhiteStackImage,completeWhiteStackRGBA,completeMixedRimsImage,completeMixedRimsRGBA,completeWitnessedSteppedImage,analyzeRGBA,analyzeImage,completeImage,completeNestedImage,completeColumnBankImage,completeBranchedStackImage,completeSteppedSharedSceneV2Image,completeSteppedSharedSceneImage,completeOccludedTierImage,completeInsetTripletImage,validPanel};
+  const THIN_RIM_METHOD='native-thin-gutter-independent-four-rims';
+  // Grid leaves are proposals only: every edge must have a sustained dark rim
+  // and white paper immediately outside it. Never lower the legacy gutter cut.
+  function thinRim(lum,w,h,axis,guess,a,b,direction){
+    const limit=axis==='V'?w:h,other=axis==='V'?h:w;
+    a=Math.max(10,a+10);b=Math.min(other-11,b-10);if(b-a<45)return null;
+    const at=(q,t)=>axis==='V'?lum[t*w+q]:lum[q*w+t];let best=null;
+    for(let q=Math.max(8,guess-30);q<=Math.min(limit-9,guess+30);q++){
+      let dark=0,white=0,both=0;const samples=b-a+1;
+      for(let t=a;t<=b;t++){const black=at(q,t)<65;let paper=0;for(let k=3;k<=7;k++)paper=Math.max(paper,at(q+direction*k,t));dark+=black;white+=paper>220;both+=black&&paper>220;}
+      const score=dark/samples+white/samples+both/samples-.0001*Math.abs(q-guess);
+      if(dark/samples>=.88&&white/samples>=.92&&both/samples>=.85&&(!best||score>best.score))best={axis,pos:q,a,b,direction,samples,dark,white,both,score};
+    }return best;
+  }
+  function completeThinRimsRGBA(rgba,w,h,baseline,log){
+    if(!(rgba instanceof Uint8ClampedArray||rgba instanceof Uint8Array)||rgba.length!==w*h*4||!range(w,300,900)||!range(h,500,900)||!Array.isArray(baseline)||baseline.length!==2||baseline.some(p=>!p||p._identitySource||p._quad||p._outline||p._contours))return[];
+    const slabs=[...baseline].sort((a,b)=>a.y-b.y),upper=slabs[0],bottom=slabs[1];
+    if(!range(upper.h,.63,.78)||!range(bottom.h,.18,.34)||slabs.some(p=>p.x>.06||p.w<.88)||upper.y>.04||bottom.y+bottom.h<.94)return[];
+    for(let i=3;i<rgba.length;i+=4)if(rgba[i]!==255)return[];
+    const grid=partitionRGBA(rgba,w,h,log);if(!grid||grid.cells.length!==5)return[];
+    const cells=grid.cells.filter(c=>(c.box[1]+c.box[3])/2<(upper.y+upper.h)*h);
+    if(cells.length!==4)return[];const lum=luminanceRGBA(rgba,w,h),boxes=[],rims=[];
+    for(const cell of cells){const [a,b,c,d]=cell.box,edges=[thinRim(lum,w,h,'V',a,b,d,-1),thinRim(lum,w,h,'V',c,b,d,1),thinRim(lum,w,h,'H',b,a,c,-1),thinRim(lum,w,h,'H',d,a,c,1)];if(edges.some(e=>!e))return[];
+      const box=[edges[0].pos-3,edges[2].pos-3,edges[1].pos+4,edges[3].pos+4];if(box[0]<0||box[1]<0||box[2]>w||box[3]>h||box[2]-box[0]<w*.12||box[3]-box[1]<h*.08)return[];boxes.push(box);rims.push(edges);
+    }
+    // Require a tall left frame, two right frames and one full-width strip.
+    const [left,top,right,strip]=boxes;
+    if(!(left[0]<top[0]&&Math.abs(left[1]-top[1])<=7&&Math.abs(left[3]-right[3])<=7&&Math.abs(top[0]-right[0])<=7&&strip[1]>=left[3]&&strip[2]-strip[0]>w*.88&&strip[3]<=bottom.y*h+3))return[];
+    let area=0;for(let i=0;i<boxes.length;i++){const a=boxes[i];area+=(a[2]-a[0])*(a[3]-a[1]);for(let j=0;j<i;j++){const b=boxes[j];if(Math.min(a[2],b[2])>Math.max(a[0],b[0])&&Math.min(a[3],b[3])>Math.max(a[1],b[1]))return[];}}
+    const coverage=area/(upper.w*upper.h*w*h);if(!range(coverage,.88,1.08))return[];
+    const out=boxes.map((box,index)=>{const [a,b,c,d]=box,q=[[a,b],[c,b],[c,d],[a,d]];return{x:a/w,y:b/h,w:(c-a)/w,h:(d-b)/h,_identitySource:'structural-grid-frame',_geometryOwner:'structural-grid-outline',_geometryType:'orthogonal',_outline:q.map(([x,y])=>({x:x/w,y:y/h})),_structuralGridProof:{version:11,method:THIN_RIM_METHOD,connected:true,analysisWidth:w,analysisHeight:h,count:4,index,boxes,rims,coverage,box,stats:statsRect(lum,w,[a,b,c-1,d-1])}};});
+    if(!out.every(validPanel))return[];log?.('thin-gutter completion: four independently framed upper scenes; bottom owner preserved');return out.concat(bottom);
+  }
+  function validThinRimsPanel(p){try{const pr=p?._structuralGridProof,w=pr?.analysisWidth,h=pr?.analysisHeight;
+    if(p?._identitySource!=='structural-grid-frame'||pr?.version!==11||pr.method!==THIN_RIM_METHOD||pr.connected!==true||pr.count!==4||!Number.isInteger(pr.index)||!range(pr.index,0,3)||!Number.isInteger(w)||!Number.isInteger(h)||!range(w,300,900)||!range(h,500,900)||!range(pr.coverage,.88,1.08)||pr.boxes?.length!==4||pr.rims?.length!==4)return false;
+    for(let i=0;i<4;i++){const box=pr.boxes[i],edges=pr.rims[i];if(!Array.isArray(box)||box.length!==4||box.some(v=>!Number.isInteger(v))||box[0]<0||box[1]<0||box[2]>w||box[3]>h||box[2]<=box[0]||box[3]<=box[1]||edges?.length!==4)return false;
+      for(let j=0;j<4;j++){const e=edges[j];if(e.axis!==(j<2?'V':'H')||e.direction!==(j%2?1:-1)||!Number.isInteger(e.pos)||!Number.isInteger(e.a)||!Number.isInteger(e.b)||e.samples!==e.b-e.a+1||e.samples<46||!range(e.dark/e.samples,.88,1)||!range(e.white/e.samples,.92,1)||!range(e.both/e.samples,.85,1))return false;}
+      if(JSON.stringify(box)!==JSON.stringify([edges[0].pos-3,edges[2].pos-3,edges[1].pos+4,edges[3].pos+4]))return false;
+    }
+    const box=pr.boxes[pr.index];if(JSON.stringify(box)!==JSON.stringify(pr.box))return false;const[a,b,c,d]=box;if(!validStats(pr.stats,(c-a)*(d-b)))return false;
+    const q=[[a,b],[c,b],[c,d],[a,d]].map(([x,y])=>({x:x/w,y:y/h}));return JSON.stringify(q)===JSON.stringify(p._outline)&&['x','y','w','h'].every((k,i)=>Math.abs(p[k]-[a/w,b/h,(c-a)/w,(d-b)/h][i])<1e-10);
+  }catch(_){return false;}}
+  function completeThinRimsImage(img,baseline,log){
+    if(typeof PanelMatteCells==='undefined'||!Array.isArray(baseline)||baseline.length!==2||baseline.some(p=>p._identitySource||p._outline||p._quad||p._contours))return[];
+    const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!W||!H||W*H>24000000)return[];
+    const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return[];g.drawImage(img,0,0);const s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s),rgba=PanelMatteCells.sampleBilinearRGBA(g.getImageData(0,0,W,H).data,W,H,w,h);
+    const sampled=document.createElement('canvas');sampled.width=w;sampled.height=h;sampled.getContext('2d').putImageData(new ImageData(rgba,w,h),0,0);const out=completeThinRimsRGBA(rgba,w,h,PanelDetect._analyze(sampled),log);if(out.length)out[out.length-1]=[...baseline].sort((a,b)=>a.y-b.y)[1];return out;
+  }
+
+  return {completeThinRimsImage,completeThinRimsRGBA,completeWhiteStackImage,completeWhiteStackRGBA,completeMixedRimsImage,completeMixedRimsRGBA,completeWitnessedSteppedImage,analyzeRGBA,analyzeImage,completeImage,completeNestedImage,completeColumnBankImage,completeBranchedStackImage,completeSteppedSharedSceneV2Image,completeSteppedSharedSceneImage,completeOccludedTierImage,completeInsetTripletImage,validPanel};
 })();
 if(typeof window!=='undefined')window.PanelStructuralGrid=PanelStructuralGrid;
 if(typeof module!=='undefined'&&module.exports)module.exports=PanelStructuralGrid;
