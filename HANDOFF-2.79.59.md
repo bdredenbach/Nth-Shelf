@@ -1,0 +1,11 @@
+# Test59 checkpoint — chapter31
+
+User supplied `30_Chapter_31.cbz` and asked to use the same detectors and workflow. Original upload is unchanged. Current Test58 base is a769b35d32556119edc03b737d60a1141b46c152; source comparison worktree baseline-test58 points to7b65360b4f201373a5769dd8b9e0252756e5f120.
+
+Local implementation and new-chapter reader QA are complete. Generic changes to panels-gutter-graph.js: saturated exterior-background graphic suppression; unresolved interior ink inside a proved open-edge scene no longer vetoes the scene; strongly owned thick strokes crossing measured horizontal gutters keep their tips, preserving earlier outlined-body ownership. No page IDs, hashes, counts or layout templates in runtime.
+
+41 pages audited: cover has no internal frames; pages2–41 contain193 frames. All193 tested at five points each (965 touchscreen taps) with unchanged geometry through focus and opaque interior/owned crossing probes. Page11 manual probe moved off its lower gutter; no runtime change for that. Final native maps match every tested browser map. Page16 top scene, page23 and33 crossing tips visually checked. All40 horizontally mirrored content pages preserve audited counts. Chapter30's41 maps match Test58 exactly. Final74-page Wolverine sweep passed: all maps exactly unchanged. Full retained gate passed including bothTest58/Test59 proof contracts, 3299 new corruption rejections, synthetic cover/color-frame/open-edge scenarios,70 shell assets.
+
+Private files: manga-chapter31/page-NN.png, recovery-manga31 with native RGBA, overlays, readerNN reports, logs, regression outputs. Never commit source art/screenshots. Numeric geometry only in qa27900/frame-accuracy/test59 compressed fixture. Final summary saved in qa27900/frame-accuracy/test59/results.json:965 touches and30909 opaque interior samples. All40 reader reports exist. Final code version2.79.59/code27987/frametest59; cache shell2.79.59/map-exp57/proof2.79.59. NoTest59APK yet.
+
+Next: publish the exact tested source tree onTest_Branch, then build/verify/save/deliverAPK. Workflow stilluses70 assets. Reference recovery-manga30/verify-apk.py and monitor.py for previous build. Existing authorization permits push/build; no new approval needed. Broader majority-of-comics coverage and phone acceptance remain unproved; use PAGE mode for frame pop-outs.

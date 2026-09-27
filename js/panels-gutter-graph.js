@@ -23,13 +23,32 @@ const PanelGutterGraph=(()=>{
   return possible.sort((a,b)=>b.support*b.paper-a.support*a.paper).slice(0,4);
  }
  function inside(q,x,y){let z=false;for(let i=0,j=q.length-1;i<q.length;j=i++){const a=q[i],b=q[j];if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])z=!z;}return z;}
- function analyzeRGBA(rgba,w,h,log){if(!Number.isInteger(w)||!Number.isInteger(h)||w<250||h<350||w>900||h>900||rgba?.length!==w*h*4)return null;const lum=new Uint8Array(w*h),white=new Uint8Array(w*h);let colored=0;for(let i=0;i<lum.length;i++){const r=rgba[i*4],g=rgba[i*4+1],b=rgba[i*4+2];if(rgba[i*4+3]!==255)return null;colored+=Math.max(r,g,b)-Math.min(r,g,b)>12;lum[i]=Math.round(.299*r+.587*g+.114*b);white[i]=lum[i]>220;}if(colored>lum.length*.004)return null;
+ // A saturated, nearly uniform outer background can cut title lettering into
+ // apparent rectangles. Require connected background evidence and the absence
+ // of any independently framed large region before suppressing those cuts.
+ function graphicBackground(rgba,w,h,lum,log){
+  const samples=[];for(let x=0;x<w;x+=4){samples.push(x,(h-1)*w+x);}for(let y=0;y<h;y+=4){samples.push(y*w,y*w+w-1);}
+  const color=[0,1,2].map(c=>{const a=samples.map(i=>rgba[i*4+c]).sort((a,b)=>a-b);return a[a.length>>1];});
+  if(Math.max(...color)-Math.min(...color)<45)return null;
+  const match=i=>Math.max(...color.map((v,c)=>Math.abs(v-rgba[i*4+c])))<=15;
+  if(samples.filter(match).length<samples.length*.95)return null;
+  const mask=new Uint8Array(w*h);for(let i=0;i<mask.length;i++)mask[i]=match(i)?1:0;
+  const ext=exterior(mask,w,h),fraction=ext.reduce((s,v)=>s+v,0)/(w*h);if(fraction<.40||fraction>.80)return null;
+  const large=components(ext.map(v=>1-v),w,h).items.filter(c=>c.pixels>w*h*.008);if(large.length<4)return null;
+  if(large.some(c=>quadFor(c.indices,w,h,lum,ext)))return null;
+  log?.('gutter graph: unframed saturated background graphic');return{panels:[],kind:'unframed',coverage:0};
+ }
+ function analyzeRGBA(rgba,w,h,log){if(!Number.isInteger(w)||!Number.isInteger(h)||w<250||h<350||w>900||h>900||rgba?.length!==w*h*4)return null;const lum=new Uint8Array(w*h),white=new Uint8Array(w*h);let colored=0;for(let i=0;i<lum.length;i++){const r=rgba[i*4],g=rgba[i*4+1],b=rgba[i*4+2];if(rgba[i*4+3]!==255)return null;colored+=Math.max(r,g,b)-Math.min(r,g,b)>12;lum[i]=Math.round(.299*r+.587*g+.114*b);white[i]=lum[i]>220;}if(colored>lum.length*.004)return graphicBackground(rgba,w,h,lum,log);
   const ext=exterior(white,w,h),cc=components(ext.map(v=>1-v),w,h),large=cc.items.filter(c=>c.pixels>w*h*.008&&!(c.pixels<w*h*.012&&c.box[1]>h*.95&&c.box[3]-c.box[1]<h*.04)),frames=[],splits=[];
   const divide=(indices,depth=0)=>{const box=bounds(indices,w),candidates=depth<4?[...gutterCandidates(lum,ext,w,h,box,'V'),...gutterCandidates(lum,ext,w,h,box,'H')].sort((a,b)=>b.support*b.paper-a.support*a.paper):[];
    for(const c of candidates){const sides=[[],[]];for(const i of indices){const x=i%w-c.origin[0],y=(i/w|0)-c.origin[1],v=c.axis==='V'?x-c.m*y-c.b:y-c.m*x-c.b;sides[v<0?0:1].push(i);}if(sides.some(s=>s.length<w*h*.008))continue;const quads=sides.map(s=>quadFor(s,w,h,lum,ext));if(quads.every(Boolean)){splits.push(c);return sides.flatMap(s=>divide(s,depth+1));}}
    const frame=quadFor(indices,w,h,lum,ext);return frame?[{...frame,indices}]:[];
   };
-  let unresolved=0;for(const c of large){const found=divide(c.indices);if(!found.length)unresolved+=c.pixels;frames.push(...found);}
+  const unresolvedComponents=[];for(const c of large){const found=divide(c.indices);if(!found.length)unresolvedComponents.push(c);frames.push(...found);}
+  // An open page edge exposes white inside the scene to the exterior flood.
+  // Disconnected interior ink is artwork when a proved frame encloses it.
+  // It must not veto that complete frame or become a second character-sized panel.
+  let unresolved=0;for(const c of unresolvedComponents){const enclosed=frames.some(f=>{let n=0;for(const i of c.indices)if(inside(f.quad,i%w+.5,(i/w|0)+.5))n++;return n>=c.pixels*.985;});if(!enclosed)unresolved+=c.pixels;}
   const coverage=frames.reduce((s,f)=>s+area(f.quad),0)/(w*h);if(frames.length<2||frames.length>24||coverage<.48){const totalInk=lum.reduce((s,v)=>s+(v<180),0);let upperInk=0;for(let y=0;y<h*.55;y++)for(let x=0;x<w;x++)upperInk+=lum[y*w+x]<180;if(totalInk>100&&totalInk<w*h*.12&&upperInk<totalInk*.005&&large.every(c=>c.box[1]>h*.55))return{panels:[],kind:'unframed',coverage};log?.('gutter graph withheld '+frames.length+' coverage '+coverage.toFixed(3));return null;}if(unresolved>w*h*.008){log?.('gutter graph withheld unresolved component '+unresolved);return null;}
   frames.sort((a,b)=>a.box[1]-b.box[1]||a.box[0]-b.box[0]);const labels=new Uint16Array(w*h);for(let k=0;k<frames.length;k++){const f=frames[k],q=f.quad,x0=Math.max(0,Math.floor(Math.min(...q.map(p=>p[0])))),x1=Math.min(w,Math.ceil(Math.max(...q.map(p=>p[0])))),y0=Math.max(0,Math.floor(Math.min(...q.map(p=>p[1])))),y1=Math.min(h,Math.ceil(Math.max(...q.map(p=>p[1]))));for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++)if(inside(q,x+.5,y+.5))labels[y*w+x]=k+1;}
   // Keep outlined white lettering, balloons and blades with the scene
@@ -39,6 +58,23 @@ const PanelGutterGraph=(()=>{
    const mask=new Uint8Array(w*h),[a,b,z,d]=c.box;for(let y=b;y<d;y++){let lo=w,hi=-1;for(let x=a;x<z;x++)if(bodies.ids[y*w+x]===c.id){lo=Math.min(lo,x);hi=Math.max(hi,x);}for(let x=lo;x<=hi;x++)mask[y*w+x]=1;}
    let grown=mask;for(let step=0;step<8;step++){const next=grown.slice();for(let y=Math.max(0,b-8);y<Math.min(h,d+8);y++)for(let x=Math.max(0,a-8);x<Math.min(w,z+8);x++){const i=y*w+x;if(grown[i])continue;if(step&&lum[i]>220)continue;if((x&&grown[i-1])||(x+1<w&&grown[i+1])||(y&&grown[i-w])||(y+1<h&&grown[i+w]))next[i]=1;}grown=next;}
    for(let i=0;i<labels.length;i++)if(grown[i])labels[i]=owner;attachments.push({owner,box:c.box,pixels:c.pixels,bodyInside:counts[owner]});
+  }
+  // Thick outlined lettering can bridge a measured gutter while its thin
+  // tip enters the next scene. Remove one-pixel drawing/rail connections,
+  // use the parent ink component as additional ownership evidence.
+  if(splits.some(s=>s.axis==='H')){
+   let core=new Uint8Array(w*h);for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){const i=y*w+x;if(lum[i]>=130)continue;let yes=true;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(lum[i+dy*w+dx]>=130)yes=false;if(yes)core[i]=1;}
+   const inkComponents=components(lum.map(v=>v<130?1:0),w,h),inkOwners=new Map();
+   for(const c of inkComponents.items){if(c.pixels<150)continue;const count=new Uint32Array(frames.length+1);for(const i of c.indices)count[labels[i]]++;let owner=1;for(let k=2;k<count.length;k++)if(count[k]>count[owner])owner=k;if(count[owner]>=c.pixels*.90)inkOwners.set(c.id,owner);}
+   for(const c of components(core,w,h).items){if(c.pixels<150)continue;const counts=new Uint32Array(frames.length+1);for(const i of c.indices)counts[labels[i]]++;let owner=1;for(let k=2;k<counts.length;k++)if(counts[k]>counts[owner])owner=k;if(counts[owner]<c.pixels*.90){const linked=inkOwners.get(inkComponents.ids[c.indices[0]]);if(!linked||counts[linked]<c.pixels*.15)continue;owner=linked;}
+    if(attachments.some(a=>a.owner===owner&&c.box[0]<a.box[2]&&c.box[2]>a.box[0]&&c.box[1]<a.box[3]&&c.box[3]>a.box[1]))continue;
+    const foreign=c.indices.filter(i=>labels[i]&&labels[i]!==owner);if(foreign.length<8||foreign.length>w*h*.012)continue;
+    // Only a short protrusion across a measured gutter is eligible.
+    const q=frames[owner-1].quad,near=i=>{const x=i%w,y=i/w|0;let best=Infinity;for(let k=0;k<4;k++){const a=q[k],b=q[(k+1)%4],dx=b[0]-a[0],dy=b[1]-a[1],u=clamp(((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy),0,1);best=Math.min(best,Math.hypot(x-a[0]-u*dx,y-a[1]-u*dy));}return best<72;};if(!foreign.every(near))continue;
+    const mark=new Uint8Array(w*h);for(const i of c.indices)mark[i]=1;let mask=mark;for(let step=0;step<2;step++){const next=mask.slice();for(let y=Math.max(1,c.box[1]-2);y<Math.min(h-1,c.box[3]+2);y++)for(let x=Math.max(1,c.box[0]-2);x<Math.min(w-1,c.box[2]+2);x++){const i=y*w+x;if(!mask[i]&&lum[i]<220&&(mask[i-1]||mask[i+1]||mask[i-w]||mask[i+w]))next[i]=1;}mask=next;}
+    for(let y=c.box[1];y<c.box[3];y++){let lo=w,hi=-1;for(let x=c.box[0];x<c.box[2];x++)if(mask[y*w+x]&&!inside(q,x+.5,y+.5)){lo=Math.min(lo,x);hi=Math.max(hi,x);}if(hi-lo>0&&hi-lo<100)for(let x=lo;x<=hi;x++)if(near(y*w+x))mask[y*w+x]=1;}
+    for(let i=0;i<mask.length;i++)if(mask[i])labels[i]=owner;
+   }
   }
   // Exterior connected protrusions are retained rather than clipped to the
   // fitted quadrilateral. Propagation is confined to the original ink region.

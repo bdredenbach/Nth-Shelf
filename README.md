@@ -2,13 +2,21 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.59 — second manga chapter and crossing strokes
+
+Test59 applies the same measured-gutter detector to `30_Chapter_31.cbz`. It removes false panel selections in the cover lettering, keeps the complete open-edge scene on page 16, and retains the crossing sound-effect tips on pages 23 and 33. These rules use background connectivity, frame containment and stroke ownership, without page-specific runtime templates.
+
+The 41-page chapter has 193 audited frames on pages 2–41. All frames passed five mobile-browser touchscreen taps. The prior manga chapter and Wolverine remain regression controls. See [validation results](qa27900/frame-accuracy/test59/RESULTS.md) and [checkpoint](HANDOFF-2.79.59.md).
+
+Current identity: **2.79.59 / code 27987**, package `io.github.bdredenbach.nthshelf.frametest59`, label **Nth Shelf Test59**. Cache/proof identifiers: `nth-shelf-shell-2.79.59`, `panel-map-exp-57`, `frame-proof-2.79.59`. Phone acceptance is pending; frame pop-outs use PAGE mode. Additional independent books are still needed to measure broader coverage.
+
 ## 2.79.58 — general monochrome frame detection
 
 Test58 adds a detector based on exterior paper, measured frame edges and separating gutters. It handles varying panel counts, slanted layouts, narrow strips, open page edges and outlined artwork crossing a gutter. Runtime decisions use image evidence; they do not use chapter IDs, page numbers, stored coordinates or fixed panel-count templates. Unsupported layouts continue through the existing detector.
 
 The supplied 41-page manga chapter has 228 audited frames on pages 3–41. The cover and logo have no internal frames. All 74 Wolverine page maps are unchanged. See [validation results](qa27900/frame-accuracy/test58/RESULTS.md) and [checkpoint](HANDOFF-2.79.58.md). This is a broader monochrome path, not evidence of coverage across most comics: more independent books and borderless/color layouts remain to be evaluated.
 
-Current identity: **2.79.58 / code 27986**, package `io.github.bdredenbach.nthshelf.frametest58`, label **Nth Shelf Test58**. Cache/proof identifiers: `nth-shelf-shell-2.79.58`, `panel-map-exp-56`, `frame-proof-2.79.58`. Phone acceptance is pending.
+Previous identity: **2.79.58 / code 27986**, package `io.github.bdredenbach.nthshelf.frametest58`, label **Nth Shelf Test58**. Cache/proof identifiers: `nth-shelf-shell-2.79.58`, `panel-map-exp-56`, `frame-proof-2.79.58`. Phone acceptance is pending.
 
 ## 2.79.57 — pages66–74: pale gutters and crossing figures
 
