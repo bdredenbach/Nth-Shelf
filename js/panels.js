@@ -1,4 +1,4 @@
-// NTH SHELF V2.79.65 — PROVED FRAME REFINEMENT OVER LEGACY DETECTION
+// NTH SHELF V2.79.66 — PROVED FRAME REFINEMENT OVER LEGACY DETECTION
 // Legacy regions remain authoritative outside independently proved refinements.
 // V92 keeps the V91 boundary-set + iterative internal-gutter path, then adds
 // a conservative interior validation gate. A fallback result is rejected if
@@ -15,6 +15,24 @@ const PanelDetect = {
             panels=PanelMatteCells.completeMatteImage(img,panels,log);
           }
         } catch(error) { log?.(`stable matte partition deferred: ${error.message}`); }
+        try {
+          if(typeof PanelRaggedGutters!=='undefined'){
+            const additions=PanelRaggedGutters.supplementContinuousImage?.(img,panels,log)||[];
+            if(additions.length)panels=panels.concat(additions);
+          }
+        } catch(error) { log?.(`continuous colored matte deferred: ${error.message}`); }
+        try {
+          if(!panels.length&&typeof PanelPaperRecovery!=='undefined'){
+            const recovered=PanelPaperRecovery.completeImage(img,panels,log);
+            if(recovered.length)panels=recovered;
+          }
+        } catch(error) { log?.(`stable paper recovery deferred: ${error.message}`); }
+        try {
+          if(!panels.length&&typeof PanelColoredRims!=='undefined'){
+            const recovered=PanelColoredRims.completeImage(img,panels,log);
+            if(recovered.length)panels=recovered;
+          }
+        } catch(error) { log?.(`chromatic rim recovery deferred: ${error.message}`); }
         done(panels);
       };
       const img = new Image();

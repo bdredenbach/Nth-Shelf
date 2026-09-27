@@ -3,13 +3,37 @@
  * page, fixed layout or tap coordinates participate in detection. */
 const PanelRaggedGutters=(()=>{
  'use strict';
- const METHOD='exterior-color-field-ragged-cells',RECOVERY='independent-exterior-cells',BOUNDARY='independent-boundary-cell',finite=Number.isFinite;
+ const METHOD='exterior-color-field-ragged-cells',RECOVERY='independent-exterior-cells',BOUNDARY='independent-boundary-cell',CONTINUOUS='continuous-exterior-gamut-cell',finite=Number.isFinite;
  const area=q=>q.reduce((s,a,i)=>{const b=q[(i+1)%q.length];return s+a[0]*b[1]-b[0]*a[1]},0)/2;
  function cc(mask,w,h){const ids=new Int32Array(w*h),queue=new Int32Array(w*h),items=[];let id=0;for(let seed=0;seed<mask.length;seed++)if(mask[seed]&&!ids[seed]){let n=1,head=0,x0=w,y0=h,x1=0,y1=0;queue[0]=seed;ids[seed]=++id;while(head<n){const i=queue[head++],x=i%w,y=i/w|0;x0=Math.min(x0,x);x1=Math.max(x1,x+1);y0=Math.min(y0,y);y1=Math.max(y1,y+1);for(const j of[x?i-1:-1,x+1<w?i+1:-1,y?i-w:-1,y+1<h?i+w:-1])if(j>=0&&mask[j]&&!ids[j]){ids[j]=id;queue[n++]=j;}}items.push({id,pixels:n,box:[x0,y0,x1,y1],indices:queue.slice(0,n)});}return{ids,items};}
  function exterior(mask,w,h){const out=new Uint8Array(w*h),queue=new Int32Array(w*h);let n=0,head=0;const add=i=>{if(mask[i]&&!out[i]){out[i]=1;queue[n++]=i;}};for(let x=0;x<w;x++){add(x);add((h-1)*w+x);}for(let y=0;y<h;y++){add(y*w);add(y*w+w-1);}while(head<n){const i=queue[head++],x=i%w,y=i/w|0;if(x)add(i-1);if(x+1<w)add(i+1);if(y)add(i-w);if(y+1<h)add(i+w);}return{mask:out,pixels:n};}
  function dilate(a,w,h){const b=a.slice();for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=y*w+x;if(!a[i]&&((x&&a[i-1])||(x+1<w&&a[i+1])||(y&&a[i-w])||(y+1<h&&a[i+w])))b[i]=1;}return b;}
  function hsv(c){const max=Math.max(...c),min=Math.min(...c),d=max-min;let h=0;if(d)h=max===c[0]?((c[1]-c[2])/d+6)%6:max===c[1]?(c[2]-c[0])/d+2:(c[0]-c[1])/d+4;return[h/6,max?d/max:0,max/255];}
  function palette(rgba,w,h){const hist=new Map(),edge=[];for(let x=0;x<w;x+=2){edge.push(x,(h-1)*w+x);}for(let y=0;y<h;y+=2){edge.push(y*w,y*w+w-1);}for(const i of edge){const key=[0,1,2].map(c=>Math.floor(rgba[i*4+c]/12)).join(',');hist.set(key,(hist.get(key)||0)+1);}const ranked=[...hist].sort((a,b)=>b[1]-a[1]),primary=ranked[0][0].split(',').map(v=>Math.min(255,12*v+6)),[ph,ps]=hsv(primary),colors=[];for(const[key,n]of ranked.slice(0,30)){if(n<edge.length*.01)continue;const c=key.split(',').map(v=>Math.min(255,12*v+6)),[ch,cs]=hsv(c);if(ps<.15&&Math.max(...c.map((v,k)=>Math.abs(v-primary[k])))>20)continue;if(ps>=.15&&(Math.min(Math.abs(ch-ph),1-Math.abs(ch-ph))>.06||cs<ps*.65))continue;if(colors.some(q=>Math.max(...q.map((v,k)=>Math.abs(v-c[k])))<16))continue;colors.push(c);}const paper=Math.min(...primary)>220;return{colors,paper,edgeSamples:edge.length,edgeMatched:edge.filter(i=>paper?Math.min(rgba[i*4],rgba[i*4+1],rgba[i*4+2])>232:colors.some(c=>c.every((v,k)=>Math.abs(v-rgba[i*4+k])<=16))).length};}
+ // A smooth colored matte can pass between discrete edge-palette samples.
+ // Interpolate only adjacent samples on one saturated color ramp. The edge
+ // flood, compact unsplit seed and independent enclosure checks still decide
+ // ownership; this never bridges arbitrary hues or substitutes a rectangle.
+ function gamutSegments(p){
+  if(!p||p.paper||!Array.isArray(p.colors)||p.colors.length<3||p.colors.length>30)return[];
+  const colors=p.colors;
+  if(colors.some(c=>!Array.isArray(c)||c.length!==3||c.some(v=>!finite(v)||v<0||v>255)||hsv(c)[1]<.35))return[];
+  const hues=colors.map(c=>hsv(c)[0]),first=hues[0];
+  if(hues.some(h=>Math.min(Math.abs(h-first),1-Math.abs(h-first))>.06))return[];
+  const order=colors.map((c,i)=>i).sort((a,b)=>colors[a].reduce((s,v)=>s+v,0)-colors[b].reduce((s,v)=>s+v,0)||a-b),out=[];
+  for(let k=1;k<order.length;k++){
+   const a=order[k-1],b=order[k],delta=colors[a].map((v,i)=>colors[b][i]-v),norm=delta.reduce((s,v)=>s+v*v,0);
+   if(norm>=16*16&&norm<=160*160)out.push({a,b,delta,norm});
+  }
+  return out;
+ }
+ function gamutMatch(colors,segments,r,g,b){
+  for(const s of segments){
+   const a=colors[s.a],d=s.delta,t=Math.max(0,Math.min(1,((r-a[0])*d[0]+(g-a[1])*d[1]+(b-a[2])*d[2])/s.norm));
+   if(Math.abs(r-a[0]-t*d[0])<=16&&Math.abs(g-a[1]-t*d[1])<=16&&Math.abs(b-a[2]-t*d[2])<=16)return true;
+  }
+  return false;
+ }
  function splitSeeds(items,ext,w,h){
   const result=[],size=w*h;
   function divide(c,depth){
@@ -38,13 +62,22 @@ const PanelRaggedGutters=(()=>{
   // detached fringe from the neighboring scene instead of preserving it.
   return result.map(c=>{if(!c.splits?.length)return c;const mask=new Uint8Array(size);for(const i of c.indices)mask[i]=1;const main=cc(mask,w,h).items.sort((a,b)=>b.pixels-a.pixels)[0];return {...main,splits:c.splits};});
  }
- function analyzeRGBA(rgba,w,h,log,recover=false){
-  if(!Number.isInteger(w)||!Number.isInteger(h)||w<250||h<350||w>900||h>900||rgba?.length!==w*h*4||typeof PanelMatteCells==='undefined')return[];
-  const size=w*h,p=palette(rgba,w,h),bg=new Uint8Array(size),white=new Uint8Array(size),lum=new Float64Array(size);if(p.edgeMatched<p.edgeSamples*.25)return[];
+ function analyzeRGBA(rgba,w,h,log,recover=false,continuous=false,seedRadius=2){
+  if(![2,4,6].includes(seedRadius)||!Number.isInteger(w)||!Number.isInteger(h)||w<250||h<350||w>900||h>900||rgba?.length!==w*h*4||typeof PanelMatteCells==='undefined')return[];
+  const size=w*h,p=palette(rgba,w,h),bg=new Uint8Array(size),white=new Uint8Array(size),lum=new Float64Array(size),segments=continuous?gamutSegments(p):null;if(p.edgeMatched<p.edgeSamples*.25||continuous&&!segments.length)return[];
   for(let i=0;i<size;i++){const r=rgba[i*4],g=rgba[i*4+1],b=rgba[i*4+2];if(rgba[i*4+3]!==255)return[];white[i]=Math.min(r,g,b)>232;lum[i]=.299*r+.587*g+.114*b;bg[i]=p.paper?white[i]:p.colors.some(c=>Math.abs(c[0]-r)<=16&&Math.abs(c[1]-g)<=16&&Math.abs(c[2]-b)<=16);}
-  const ext=exterior(bg,w,h);if(ext.pixels<size*.04||ext.pixels>size*.60)return[];const art=ext.mask.map(v=>1-v);let separators=p.paper?bg:ext.mask;
+  let gamut;
+  if(continuous){
+   const baseExteriorPixels=exterior(bg,w,h).pixels;
+   for(let i=0;i<size;i++)if(!bg[i]&&gamutMatch(p.colors,segments,rgba[i*4],rgba[i*4+1],rgba[i*4+2]))bg[i]=1;
+   gamut={version:1,method:'adjacent-edge-palette-segments',tolerance:16,maximumLength:160,segments,baseExteriorPixels};
+  }
+  const ext=exterior(bg,w,h);
+  if(gamut){gamut.additionalExteriorPixels=ext.pixels-gamut.baseExteriorPixels;if(gamut.additionalExteriorPixels<Math.max(16,Math.ceil(size*.0001)))return[];}
+  if(ext.pixels<size*.04||ext.pixels>size*.60)return[];const art=ext.mask.map(v=>1-v);let separators=p.paper?bg:ext.mask;
   if(!p.paper){let near=ext.mask;for(let k=0;k<12;k++)near=dilate(near,w,h);separators=ext.mask.map((v,i)=>v||near[i]&&white[i]?1:0);}
-  const wall=dilate(dilate(separators,w,h),w,h),core=cc(wall.map(v=>1-v),w,h),seeds=splitSeeds(core.items.filter(c=>c.pixels>=size*.012&&(c.box[2]-c.box[0])>=w*.06&&(c.box[3]-c.box[1])>=h*.04),ext.mask,w,h);
+  let wall=separators;for(let radius=0;radius<seedRadius;radius++)wall=dilate(wall,w,h);
+  const core=cc(wall.map(v=>1-v),w,h),seeds=splitSeeds(core.items.filter(c=>c.pixels>=size*.012&&(c.box[2]-c.box[0])>=w*.06&&(c.box[3]-c.box[1])>=h*.04),ext.mask,w,h);
   if(seeds.length<(recover?2:3)||seeds.length>24)return[];
   const labels=new Uint16Array(size),queue=new Int32Array(size);let n=0,head=0;seeds.sort((a,b)=>a.box[1]-b.box[1]||a.box[0]-b.box[0]);for(let start=0;start<seeds.length;){let end=start+1;const top=seeds[start].box[1],tolerance=Math.min(h*.06,(seeds[start].box[3]-top)*.20);while(end<seeds.length&&seeds[end].box[1]-top<tolerance)end++;const row=seeds.slice(start,end).sort((a,b)=>a.box[0]-b.box[0]);seeds.splice(start,end-start,...row);start=end;}for(let k=0;k<seeds.length;k++)for(const i of seeds[k].indices){labels[i]=k+1;queue[n++]=i;}
   while(head<n){const i=queue[head++],x=i%w,y=i/w|0;for(const j of[x?i-1:-1,x+1<w?i+1:-1,y?i-w:-1,y+1<h?i+w:-1])if(j>=0&&art[j]&&!labels[j]){labels[j]=labels[i];queue[n++]=j;}}
@@ -62,7 +95,7 @@ const PanelRaggedGutters=(()=>{
    for(const part of parts.items)if(part.pixels<24)for(const i of part.indices)labels[i]=0;
   }
   const covered=labels.reduce((s,v)=>s+!!v,0);if(covered<size*.50)return[];const out=[];
-  for(let k=0;k<seeds.length;k++){const rings=PanelMatteCells.tracePixelContours(labels,w,h,k+1);if(!rings){if(recover)continue;return[];}const pts=rings.flat(),xs=pts.map(a=>a[0]),ys=pts.map(a=>a[1]),box=[Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)];let pixels=0,sum=0,sq=0;for(let i=0;i<size;i++)if(labels[i]===k+1){pixels++;sum+=lum[i];sq+=lum[i]*lum[i];}const variance=sq/pixels-(sum/pixels)**2;if(variance<180){if(recover)continue;return[];}const proof={version:18,method:METHOD,connected:true,analysisWidth:w,analysisHeight:h,count:seeds.length,index:k,palette:p,exteriorPixels:ext.pixels,coverage:covered/size,seed:{box:seeds[k].box,pixels:seeds[k].pixels,splits:seeds[k].splits||[]},pixelContours:rings,pixels,variance};const panel={x:box[0]/w,y:box[1]/h,w:(box[2]-box[0])/w,h:(box[3]-box[1])/h,_identitySource:'structural-grid-frame',_geometryOwner:'structural-grid-contours',_geometryType:'ragged-gutter-cells',_contours:rings.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),_structuralGridProof:proof};if(!recover&&!validPanel(panel))return[];out.push(panel);}
+  for(let k=0;k<seeds.length;k++){const rings=PanelMatteCells.tracePixelContours(labels,w,h,k+1);if(!rings){if(recover)continue;return[];}const pts=rings.flat(),xs=pts.map(a=>a[0]),ys=pts.map(a=>a[1]),box=[Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)];let pixels=0,sum=0,sq=0;for(let i=0;i<size;i++)if(labels[i]===k+1){pixels++;sum+=lum[i];sq+=lum[i]*lum[i];}const variance=sq/pixels-(sum/pixels)**2;if(variance<180){if(recover)continue;return[];}const proof={version:18,method:METHOD,connected:true,analysisWidth:w,analysisHeight:h,count:seeds.length,index:k,palette:p,exteriorPixels:ext.pixels,coverage:covered/size,seed:{box:seeds[k].box,pixels:seeds[k].pixels,splits:seeds[k].splits||[]},pixelContours:rings,pixels,variance,...(gamut?{gamut}:{}),...(seedRadius===2?{}:{seedRadius})};const panel={x:box[0]/w,y:box[1]/h,w:(box[2]-box[0])/w,h:(box[3]-box[1])/h,_identitySource:'structural-grid-frame',_geometryOwner:'structural-grid-contours',_geometryType:'ragged-gutter-cells',_contours:rings.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),_structuralGridProof:proof};if(!recover&&!validPanel(panel))return[];out.push(panel);}
   if(recover){
    const overlap=(a,b)=>Math.max(0,Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x))*Math.max(0,Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y))/Math.min(a.w*a.h,b.w*b.h);
    const fill=a=>a._structuralGridProof.pixels/(a.w*a.h*size);
@@ -80,11 +113,11 @@ const PanelRaggedGutters=(()=>{
    // Reuse this raster and its cells when the established route is empty.
    // Successful v18 maps keep their exact geometry and evidence unchanged.
    const legacyFill=seeds.some(s=>s.splits?.length)?.80:.50;
-   if(recover==='fallback'&&out.length===seeds.length&&out.every(a=>validPanel(a)&&fill(a)>=legacyFill&&a.w*a.h<=.65&&clearGutter(a,.42,.28)&&!out.some(b=>a!==b&&overlap(a,b)>.65)))return out;
+   if(recover==='fallback'&&!continuous&&out.length===seeds.length&&out.every(a=>validPanel(a)&&fill(a)>=legacyFill&&a.w*a.h<=.65&&clearGutter(a,.42,.28)&&!out.some(b=>a!==b&&overlap(a,b)>.65)))return out;
    // A large set of compact, exclusive cells can contain balloon protrusions.
    // Apply this only after the established detector returned an empty map.
    let mode='coherent-set',kept=out;
-   if(out.length<5||out.length!==seeds.length||out.some(a=>fill(a)<.75||a.w*a.h>.65||!clearGutter(a,.42,.28)||out.some(b=>a!==b&&overlap(a,b)>.65))){
+   if(continuous||out.length<5||out.length!==seeds.length||out.some(a=>fill(a)<.75||a.w*a.h>.65||!clearGutter(a,.42,.28)||out.some(b=>a!==b&&overlap(a,b)>.65))){
     mode='isolated';
     // Ambiguous neighbors do not invalidate an independently enclosed cell.
     // No inferred straight cut is allowed in this partial recovery route.
@@ -133,7 +166,20 @@ const PanelRaggedGutters=(()=>{
   }
   log?.('ragged gutter cells: '+out.length);return out;
  }
- function validPanel(p){try{const v=p?._structuralGridProof,w=v?.analysisWidth,h=v?.analysisHeight,boundary=v?.version===20,recovered=boundary||v?.version===19;if(p?._identitySource!=='structural-grid-frame'||(!recovered&&v?.version!==18)||v.method!==(boundary?BOUNDARY:recovered?RECOVERY:METHOD)||v.connected!==true||!Number.isInteger(w)||!Number.isInteger(h)||w<250||h<350||w>900||h>900||!Number.isInteger(v.count)||v.count<(recovered?1:3)||v.count>24||!Number.isInteger(v.index)||v.index<0||v.index>=v.count||!finite(v.coverage)||v.coverage<.5||v.coverage>1||!Number.isInteger(v.exteriorPixels)||v.exteriorPixels<w*h*.04||v.exteriorPixels>w*h*.60||!finite(v.variance)||v.variance<180||v.variance>16257||!Number.isInteger(v.seed?.pixels)||v.seed.pixels<w*h*.012||v.seed.box?.length!==4||v.seed.box.some((a,i)=>!Number.isInteger(a)||a<0||a>(i%2?h:w))||!v.palette?.colors?.length||v.palette.colors.some(c=>c.length!==3||c.some(a=>!finite(a)||a<0||a>255))||v.palette.edgeMatched<v.palette.edgeSamples*.25)return false;if(v.seed.box[2]<=v.seed.box[0]||v.seed.box[3]<=v.seed.box[1]||v.seed.pixels>(v.seed.box[2]-v.seed.box[0])*(v.seed.box[3]-v.seed.box[1])||!Array.isArray(v.seed.splits)||v.seed.splits.length>6||v.seed.splits.some(s=>![0,1].includes(s.axis)||!Number.isInteger(s.pos)||s.pos<0||s.pos>=(s.axis?w:h)||!finite(s.support)||s.support<.62||s.support>1||!finite(s.flank)||s.flank<.40||s.flank>1||!finite(s.score)||Math.abs(s.score-s.support-.1*s.flank)>1e-9)||typeof v.palette.paper!=='boolean'||!Number.isInteger(v.palette.edgeSamples)||v.palette.edgeSamples!==2*Math.ceil(w/2)+2*Math.ceil(h/2)||!Number.isInteger(v.palette.edgeMatched)||v.palette.edgeMatched>v.palette.edgeSamples||v.palette.colors.length>30||!Number.isInteger(v.pixels)||v.pixels>w*h)return false;if(recovered){
+ function validPanel(p){try{
+  if(p?._structuralGridProof?.version===21){
+   const v=p._structuralGridProof,w=v.analysisWidth,h=v.analysisHeight,g=v.gamut,b=v.seed?.box;
+   if(v.method!==CONTINUOUS||p._geometryOwner!=='structural-grid-contours'||p._geometryType!=='continuous-gamut-cell'||p._quad||p._outline||
+      !g||g.version!==1||g.method!=='adjacent-edge-palette-segments'||g.tolerance!==16||g.maximumLength!==160||
+      !Number.isInteger(g.baseExteriorPixels)||g.baseExteriorPixels<0||!Number.isInteger(g.additionalExteriorPixels)||
+      g.additionalExteriorPixels<Math.max(16,Math.ceil(w*h*.0001))||g.baseExteriorPixels+g.additionalExteriorPixels!==v.exteriorPixels||
+      !gamutSegments(v.palette).length||JSON.stringify(g.segments)!==JSON.stringify(gamutSegments(v.palette))||
+      v.recovery?.mode!=='continuous-isolated'||v.seed?.splits?.length||!b||
+      p.x*w<3||p.y*h<3||(p.x+p.w)*w>w-3||(p.y+p.h)*h>h-3||p.w*p.h>.48||
+      v.pixels/(p.w*p.h*w*h)<.85||v.seed.pixels/((b[2]-b[0])*(b[3]-b[1]))<.85)return false;
+   return validPanel({...p,_structuralGridProof:{...v,version:20,method:BOUNDARY,recovery:{...v.recovery,mode:'isolated-boundary'}}});
+  }
+  const v=p?._structuralGridProof;if(v?.seedRadius!==undefined&&(!v.palette?.paper||![4,6].includes(v.seedRadius)))return false;const w=v?.analysisWidth,h=v?.analysisHeight,boundary=v?.version===20,recovered=boundary||v?.version===19;if(p?._identitySource!=='structural-grid-frame'||(!recovered&&v?.version!==18)||v.method!==(boundary?BOUNDARY:recovered?RECOVERY:METHOD)||v.connected!==true||!Number.isInteger(w)||!Number.isInteger(h)||w<250||h<350||w>900||h>900||!Number.isInteger(v.count)||v.count<(recovered?1:3)||v.count>24||!Number.isInteger(v.index)||v.index<0||v.index>=v.count||!finite(v.coverage)||v.coverage<.5||v.coverage>1||!Number.isInteger(v.exteriorPixels)||v.exteriorPixels<w*h*.04||v.exteriorPixels>w*h*.60||!finite(v.variance)||v.variance<180||v.variance>16257||!Number.isInteger(v.seed?.pixels)||v.seed.pixels<w*h*.012||v.seed.box?.length!==4||v.seed.box.some((a,i)=>!Number.isInteger(a)||a<0||a>(i%2?h:w))||!v.palette?.colors?.length||v.palette.colors.some(c=>c.length!==3||c.some(a=>!finite(a)||a<0||a>255))||v.palette.edgeMatched<v.palette.edgeSamples*.25)return false;if(v.seed.box[2]<=v.seed.box[0]||v.seed.box[3]<=v.seed.box[1]||v.seed.pixels>(v.seed.box[2]-v.seed.box[0])*(v.seed.box[3]-v.seed.box[1])||!Array.isArray(v.seed.splits)||v.seed.splits.length>6||v.seed.splits.some(s=>![0,1].includes(s.axis)||!Number.isInteger(s.pos)||s.pos<0||s.pos>=(s.axis?w:h)||!finite(s.support)||s.support<.62||s.support>1||!finite(s.flank)||s.flank<.40||s.flank>1||!finite(s.score)||Math.abs(s.score-s.support-.1*s.flank)>1e-9)||typeof v.palette.paper!=='boolean'||!Number.isInteger(v.palette.edgeSamples)||v.palette.edgeSamples!==2*Math.ceil(w/2)+2*Math.ceil(h/2)||!Number.isInteger(v.palette.edgeMatched)||v.palette.edgeMatched>v.palette.edgeSamples||v.palette.colors.length>30||!Number.isInteger(v.pixels)||v.pixels>w*h)return false;if(recovered){
    const r=v.recovery,b=v.seed.box,fill=v.pixels/(p.w*p.h*w*h),seedFill=v.seed.pixels/((b[2]-b[0])*(b[3]-b[1]));
    if(!r||!Number.isInteger(r.sourceCount)||r.sourceCount<Math.max(2,v.count)||r.sourceCount>24)return false;
    if(boundary){if(r.mode!=='isolated-boundary'||v.seed.splits.length||[p.x*w<3,p.y*h<3,(p.x+p.w)*w>w-3,(p.y+p.h)*h>h-3].filter(Boolean).length>1||p.w*p.h>.48||fill<.73||seedFill<.68)return false;}
@@ -142,9 +188,56 @@ const PanelRaggedGutters=(()=>{
    else return false;
   }else if(v.recovery)return false;
   const rings=v.pixelContours;if(!Array.isArray(rings)||!rings.length||rings.length>64||rings.some(q=>q.length>4096||q.length<4||q.some(a=>a.length!==2||!Number.isInteger(a[0])||!Number.isInteger(a[1])||a[0]<0||a[1]<0||a[0]>w||a[1]>h))||Math.abs(rings.reduce((s,q)=>s+area(q),0))!==v.pixels||v.pixels<v.seed.pixels||JSON.stringify(p._contours)!==JSON.stringify(rings.map(q=>q.map(([x,y])=>({x:x/w,y:y/h})))))return false;const pts=rings.flat(),xs=pts.map(a=>a[0]),ys=pts.map(a=>a[1]),b=[Math.min(...xs)/w,Math.min(...ys)/h,(Math.max(...xs)-Math.min(...xs))/w,(Math.max(...ys)-Math.min(...ys))/h];return['x','y','w','h'].every((key,i)=>finite(p[key])&&Math.abs(p[key]-b[i])<1e-10);}catch(_){return false;}}
+ function continuousCandidatesRGBA(rgba,w,h,log){
+  const raw=analyzeRGBA(rgba,w,h,null,'fallback',true),kept=raw.filter(a=>{
+   const v=a._structuralGridProof,b=v.seed.box;
+   return !v.seed.splits.length&&a.x*w>=3&&a.y*h>=3&&(a.x+a.w)*w<=w-3&&(a.y+a.h)*h<=h-3&&
+    a.w*a.h<=.48&&v.pixels/(a.w*a.h*w*h)>=.85&&v.seed.pixels/((b[2]-b[0])*(b[3]-b[1]))>=.85;
+  });
+  const out=kept.map((a,k)=>({...a,_geometryType:'continuous-gamut-cell',_structuralGridProof:{...a._structuralGridProof,
+   version:21,method:CONTINUOUS,count:kept.length,index:k,recovery:{mode:'continuous-isolated',sourceCount:a._structuralGridProof.recovery?.sourceCount||a._structuralGridProof.count}}}));
+  return out.every(validPanel)?out:[];
+ }
+ function contourPixels(rings,w,h,visit){
+  for(let y=0;y<h;y++){
+   const xs=[];
+   for(const q of rings)for(let k=0;k<q.length;k++){const a=q[k],b=q[(k+1)%q.length];if((a[1]>y+.5)!==(b[1]>y+.5))xs.push(a[0]);}
+   xs.sort((a,b)=>a-b);
+   for(let k=0;k<xs.length;k+=2)for(let x=xs[k];x<xs[k+1];x++)if(visit(y*w+x)===false)return false;
+  }
+  return true;
+ }
+ function continuousEligible(baseline){return Array.isArray(baseline)&&baseline.every(p=>[18,19,20,21].includes(p?._structuralGridProof?.version)&&validPanel(p));}
+ function supplementContinuousRGBA(rgba,w,h,baseline,log){
+  if(!continuousEligible(baseline)||baseline.some(p=>p._structuralGridProof.analysisWidth!==w||p._structuralGridProof.analysisHeight!==h))return[];
+  const proposed=continuousCandidatesRGBA(rgba,w,h),occupied=new Uint8Array(w*h);
+  for(const p of baseline)contourPixels(p._structuralGridProof.pixelContours,w,h,i=>{occupied[i]=1;});
+  const additions=[];
+  for(const p of proposed){
+   if(!contourPixels(p._structuralGridProof.pixelContours,w,h,i=>!occupied[i]))continue;
+   // Pixel-disjoint scenes may still have conflicting envelopes. Preserve
+   // the earlier map and withhold a competing inset or foreground silhouette.
+   if(baseline.some(b=>{
+    const overlap=Math.max(0,Math.min(p.x+p.w,b.x+b.w)-Math.max(p.x,b.x))*Math.max(0,Math.min(p.y+p.h,b.y+b.h)-Math.max(p.y,b.y));
+    return overlap>.20*Math.min(p.w*p.h,b.w*b.h);
+   }))continue;
+   additions.push(p);contourPixels(p._structuralGridProof.pixelContours,w,h,i=>{occupied[i]=1;});
+  }
+  if(additions.length)log?.('continuous colored matte: '+additions.length+' independently enclosed additions');
+  return additions;
+ }
+ function supplementContinuousImage(img,baseline,log){
+  if(!continuousEligible(baseline)||typeof PanelMatteCells==='undefined')return[];
+  const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!W||!H||W*H>24000000)return[];
+  let c;try{
+   c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return[];g.drawImage(img,0,0);
+   const s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s);
+   return supplementContinuousRGBA(PanelMatteCells.sampleBilinearRGBA(g.getImageData(0,0,W,H).data,W,H,w,h),w,h,baseline,log);
+  }finally{if(c){c.width=1;c.height=1;}}
+ }
  function analyzeImage(img,log,recover=false){const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!W||!H||W*H>24000000)return[];const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(img,0,0);const s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s);return analyzeRGBA(PanelMatteCells.sampleBilinearRGBA(g.getImageData(0,0,W,H).data,W,H,w,h),w,h,log,recover);}
  function eligible(baseline){return Array.isArray(baseline)&&baseline.every(p=>p&&!p._identitySource&&!p._quad&&!p._outline&&!p._contours);}
  function completeImage(img,baseline,log){if(!eligible(baseline))return[];const out=analyzeImage(img,log,baseline.length?false:'fallback');return out.length>baseline.length?out:[];}
- return{analyzeRGBA,analyzeRecoveryRGBA:(rgba,w,h,log)=>analyzeRGBA(rgba,w,h,log,true),analyzeImage,completeImage,eligible,validPanel};
+ return{analyzePaperRecoveryRGBA:(rgba,w,h,radius,log)=>analyzeRGBA(rgba,w,h,log,true,false,radius),supplementContinuousRGBA,supplementContinuousImage,continuousCandidatesRGBA,continuousEligible,analyzeRGBA,analyzeRecoveryRGBA:(rgba,w,h,log)=>analyzeRGBA(rgba,w,h,log,true),analyzeImage,completeImage,eligible,validPanel};
 })();
 if(typeof module!=='undefined')module.exports=PanelRaggedGutters;

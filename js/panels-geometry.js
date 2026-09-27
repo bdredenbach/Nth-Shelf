@@ -123,6 +123,10 @@ const PanelGeometry = {
         ? PanelGeometryOrthogonal.refine(panel,log)
         : {...panel};
       held._geometryOwner='orthogonal-authority';
+      if(policy.source==='STRUCTURAL-GRID'&&[21,22,23].includes(panel._structuralGridProof?.version)){
+        held._geometryOwner=panel._geometryOwner;held._geometryType=panel._geometryType;
+        return held;
+      }
       if(policy.source==='MATTE-CELL'){held._geometryOwner='matte-cell-contours';held._geometryType='edge-connected-matte-cell';return held;}
       if(policy.source==='CURVED-RIM'){held._geometryOwner='curved-rim-contours';held._geometryType='noncrossing-pale-rim-network';return held;}
       if(policy.source==='TERMINAL-RIM'){held._geometryOwner='terminal-rim-outline';held._geometryType='four-observed-dark-rims';return held;}

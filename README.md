@@ -2,13 +2,31 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.66 — independent Apocalypse frame recovery
+
+Test66 adds three general recovery paths: continuous colored gutters, stable paper cells at two seed scales, and enclosed colored rims with measured speech-balloon ownership. Accepted frame maps retain their existing selections. Runtime detection uses image evidence, with no page identities, filenames, saved frame coordinates, or tap-specific templates.
+
+Test66 adds four complete visible frames on three Rise of Apocalypse pages (reader numbering, including covers):
+
+| Issue | Page | New selections |
+| --- | --- | --- |
+| 1 | 9 | Upper-center red-bordered scene, including its top dialogue balloon; the overlapping foreground balloon remains excluded. |
+| 1 | 14 | Tall upper-left corridor scene, including all three speech balloons. |
+| 3 | 5 | Two tall lower-left scenes, including their EN and SABAH balloons. |
+
+Validation passed across 312 page comparisons: only the three target pages changed, all prior owners were preserved, and all 221 earlier Wolverine, manga, and Magneto page maps stayed unchanged. The four additions passed 46 real reader taps, independent screenshot review, and 0.67×/1.5× resize checks.
+
+These pages remain partial. This is an accuracy experiment, not a claim that Apocalypse is fully detected. See [validation](TEST66-VALIDATION.json), [contracts](qa27900/frame-accuracy/test66/README.md), and [handoff](HANDOFF-2.79.66.md).
+
+Current identity: **2.79.66 / code 27994**, package `io.github.bdredenbach.nthshelf.frametest66`, label **Nth Shelf Test66**. Cache/proof identifiers: `nth-shelf-shell-2.79.66`, `panel-map-exp-64`, `frame-proof-2.79.66`. This installs as a separate test app; phone acceptance is pending.
+
 ## 2.79.59 — second manga chapter and crossing strokes
 
 Test59 applies the same measured-gutter detector to `30_Chapter_31.cbz`. It removes false panel selections in the cover lettering, keeps the complete open-edge scene on page 16, and retains the crossing sound-effect tips on pages 23 and 33. These rules use background connectivity, frame containment and stroke ownership, without page-specific runtime templates.
 
 The 41-page chapter has 193 audited frames on pages 2–41. All frames passed five mobile-browser touchscreen taps. The prior manga chapter and Wolverine remain regression controls. See [validation results](qa27900/frame-accuracy/test59/RESULTS.md) and [checkpoint](HANDOFF-2.79.59.md).
 
-Current identity: **2.79.59 / code 27987**, package `io.github.bdredenbach.nthshelf.frametest59`, label **Nth Shelf Test59**. Cache/proof identifiers: `nth-shelf-shell-2.79.59`, `panel-map-exp-57`, `frame-proof-2.79.59`. Phone acceptance is pending; frame pop-outs use PAGE mode. Additional independent books are still needed to measure broader coverage.
+Previous identity: **2.79.59 / code 27987**, package `io.github.bdredenbach.nthshelf.frametest59`, label **Nth Shelf Test59**. Cache/proof identifiers: `nth-shelf-shell-2.79.59`, `panel-map-exp-57`, `frame-proof-2.79.59`. Phone acceptance is pending; frame pop-outs use PAGE mode. Additional independent books are still needed to measure broader coverage.
 
 ## 2.79.58 — general monochrome frame detection
 
