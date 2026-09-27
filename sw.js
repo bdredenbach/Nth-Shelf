@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.68 — OCCLUDED DARK OVERLAY RECOVERY
+// NTH SHELF 2.79.69 — ORTHOGONAL WHITE GUTTER PROOF
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.68";
+const CACHE_NAME = "nth-shelf-shell-2.79.69";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -71,7 +71,7 @@ const SHELL_FILES = [
   "./js/panels-curved-rims.js",
   "./js/panels-matte-cells.js",
   "./js/panels-edge-spill.js",
-  "./js/panels-ragged-gutters.js",
+  "./js/panels-ragged-gutters.js",\n  "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",
   "./js/panels-dark-overlay-insets.js",
