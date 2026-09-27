@@ -1,0 +1,53 @@
+{
+  "version": "2.79.68",
+  "code": 27996,
+  "package": "io.github.bdredenbach.nthshelf.frametest68",
+  "sourceBase": "e1ae37a0d76eb9a934f985c075cc2ae02480eb8d",
+  "sourceCommit": null,
+  "scope": "One large black-framed overlay inset recovered on Rise of Apocalypse issue 4 page 15; broader Apocalypse detection remains incomplete",
+  "localValidation": "passed",
+  "build": { "status": "pending" },
+  "apocalypsePagesInSuppliedSet": 91,
+  "directProof25Scan": {
+    "pagesWithOwners": 1,
+    "pagesAbstained": 90,
+    "ownerCount": 1,
+    "changedPage": { "book": "apocalypse-4", "page": 15, "baselineOwners": 0, "test68Owners": 1 }
+  },
+  "fullPipelineChecks": [
+    { "book": "apocalypse-4", "page": 15, "owners": 1, "proofVersion": 25, "method": "three-dark-rails-one-occluded-overlay-rail" },
+    { "book": "apocalypse-4", "page": 11, "owners": 2, "proofVersion": 24, "status": "retained Test67 blue inset pair" }
+  ],
+  "newProof": {
+    "version": 25,
+    "method": "three-dark-rails-one-occluded-overlay-rail",
+    "runtimeMaxDimension": 480,
+    "requiredCompleteRails": 3,
+    "minimumWeakRailSupport": 0.74,
+    "syntheticOwnerCount": 1,
+    "proofTamperRejections": 13,
+    "fourCompleteRailsRejected": true,
+    "openRailRejected": true,
+    "flatInteriorRejected": true,
+    "darkExteriorRejected": true
+  },
+  "retainedContracts": [
+    "Test66 continuous-gamut",
+    "Test66 paper-recovery",
+    "Test66 colored-rim",
+    "Test67 paired-chromatic"
+  ],
+  "retainedContractsStatus": "passed",
+  "geometryAuthority": "proof versions 21/22/23/24/25 preserve complete contours",
+  "readerEdgeSpill": "proof versions 21/22/23/24/25 suppress unrelated edge-spill expansion",
+  "fullPriorArtworkCorpusRerun": "not available in this chat runtime; retained contracts and late empty-map route isolation are used before CI",
+  "runtimePageIdentityLookups": false,
+  "comicArtworkCommitted": false,
+  "phoneAcceptance": "pending",
+  "allFramesCorrect": false,
+  "knownLimitations": [
+    "Apocalypse pages remain partially detected.",
+    "The prior 312-page artwork corpus was not available for a fresh local rerun in this chat.",
+    "Owner counts do not establish semantic accuracy for the whole series."
+  ]
+}
