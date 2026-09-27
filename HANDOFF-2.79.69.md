@@ -36,5 +36,17 @@ Identity: version `2.79.69`, code `27997`, package
 `nth-shelf-shell-2.79.69`, map `panel-map-exp-67`, proof
 `frame-proof-2.79.69`.
 
-Build/source publication fields are pending until the Test69 checkpoint is
-pushed and CI artifact verification completes.
+Source published as `424580427c94e50973bf99baf2b682d8b47e290a` (tree
+`5e0b548cb5e05486b8918b3cc79eb71b995366f9`). CI run `36342463997`
+passed every retained detector, browser, native, Android build, package-identity,
+asset-integrity, and signature gate and produced artifact `10939582568`.
+
+The isolated Test69 APK is 3,349,007 bytes with SHA-256
+`a84e1c6bd2320eaf1b7c097ed4c6367ef5f9598573aba20cdc167da66b720df7`.
+The downloaded artifact ZIP SHA-256 is
+`9db015ff5fb2afb98b553a411f260165dba48a4123ca2dbff7997280383b3fa8`;
+the source archive SHA-256 is
+`fc3bc5ad2d3c8e8484034dc8421242120470e0f437a8c032066824ff56625a7e`.
+All 75 packaged web assets match the tested source exactly. Package identity,
+version/label, archive integrity, and CI apksigner v2 verification passed.
+Phone acceptance remains pending.
