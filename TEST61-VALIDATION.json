@@ -2693,5 +2693,22 @@
       "mapUnchanged": true,
       "sha256": "4b815a4b1b7d3d64e58ab3df6a78f2409f17189922bfeca3bffdbdaaadf04170"
     }
-  ]
+  ],
+  "build": {
+    "sourceCommit": "9da37299601812eb0f9ba2f72e97c08c02fcf9a0",
+    "versionName": "2.79.61",
+    "versionCode": 27989,
+    "applicationId": "io.github.bdredenbach.nthshelf.frametest61",
+    "apkSha256": "91d664161f9af2f7b30705cb85a9b3bfd965bc9f2fdcfb592a765c27d60d087c",
+    "apkBytes": 3319710,
+    "verifiedWebAssetCount": 71,
+    "artifactZipSha256": "671a511da68db8447439d0ba12877bc5eaa643b8e218e975145a1aee4b9c5696",
+    "signatureV2": true,
+    "allPackagedAssetsMatchSource": true,
+    "runId": 36291230073,
+    "artifactId": 10922401761,
+    "conclusion": "success",
+    "libraryFileId": "libfile_ffceae721aac8191b9970b16bd5d4902"
+  },
+  "storyPagesWithNoDetectedFrames": 54
 }
