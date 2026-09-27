@@ -1,0 +1,4005 @@
+{
+  "version": "2.79.62",
+  "code": 27990,
+  "sourceBase": "8f39723666544940b301905afcf4985c96eba54d",
+  "sourceCommit": "8cf8fda06cb8604ab9db7798b879c9eb5a90c8f7",
+  "recoveredBaseBlobsVerified": 483,
+  "scope": "Incremental independent-frame recovery; batch unfinished",
+  "pagesCompared": 312,
+  "unchangedPages": 307,
+  "earlierPagesUnchanged": 221,
+  "newFrames": 13,
+  "newFramePages": {
+    "apocalypse-1": {
+      "14": 3,
+      "18": 1
+    },
+    "apocalypse-2": {
+      "4": 1
+    },
+    "apocalypse-3": {
+      "9": 3,
+      "16": 5
+    }
+  },
+  "fullyRecoveredPages": {
+    "apocalypse-3": [
+      16
+    ]
+  },
+  "partiallyRecoveredPages": {
+    "apocalypse-1": [
+      14,
+      18
+    ],
+    "apocalypse-2": [
+      4
+    ],
+    "apocalypse-3": [
+      9
+    ]
+  },
+  "detectedApocalypseFrames": 125,
+  "touches": 78,
+  "independentSceneCenterTaps": 13,
+  "denseSamples": 20893,
+  "singleRasterEquivalencePages": 91,
+  "contracts": {
+    "retainedGateExitCode": 0,
+    "newProofs": 13,
+    "rejectedMutations": 195,
+    "arbitraryPartialRasters": 2,
+    "retainedLogSha256": "7a2b529282a6afa7ca3d693385af3ecad42a47de8d517d15ab0061c7a174d30a"
+  },
+  "storyPagesWithNoDetectedFrames": {
+    "1": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      17,
+      19,
+      20,
+      22,
+      24
+    ],
+    "2": [
+      3,
+      5,
+      6,
+      9,
+      10,
+      11,
+      14,
+      15,
+      17,
+      18,
+      21,
+      22
+    ],
+    "3": [
+      4,
+      5,
+      7,
+      8,
+      10,
+      17,
+      18,
+      19,
+      22,
+      23
+    ],
+    "4": [
+      3,
+      7,
+      8,
+      10,
+      11,
+      12,
+      14,
+      16,
+      17,
+      21
+    ]
+  },
+  "allFramesCorrect": false,
+  "phoneAcceptance": "pending",
+  "knownLimitations": [
+    "49 story pages still produce no frames.",
+    "Four improved pages remain partial; other incomplete maps are unchanged.",
+    "Selection/opacity checks do not prove semantic completeness.",
+    "Complex inset, overlapping, foreground-bleed and gradient-gutter layouts remain unresolved.",
+    "The recovered five-frame page has been visually reviewed; automated reading-order acceptance on a phone remains pending."
+  ],
+  "pages": [
+    {
+      "book": "apocalypse-1",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "c527010b2f011bee8e8d5fdc52bae3d0b7beaff10343b159a37c8b18e4e0494c",
+      "sourceSha256": "c2e96bf85cf8ebb9d22e5ffbbe625e8f710b57df862852e8c792046dcbb42a18",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "be80bfa86f38bd03bb0c4cfc3f7b7f1fd8388d694f2900b5a730430019bd242b",
+      "sourceSha256": "34450450b0c31775a70bda0306b4654115d7861f096c226889f3b0c28f124d56",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 3,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "d4c9424fcde5dca916349aed3a7c5bcf3474fcd140c97226c0259df1b17d261c",
+      "sourceSha256": "324057703b9126645b3c9a8735050d657ccb7ae4136d9412bf9d3c8b00472431",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 4,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "4a2ac88afd9c11070d414317d1b83dfc50180bdcfa313e2cf1e597d008414752",
+      "sourceSha256": "411c75470f5884c70beccfdcbf4b129df2f9a10c20a448e4eccb9a507be7f9fc",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 5,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "e39af8018190dc7fb3f827c02b4643cddeec931ff212fe6367a5e01de1edcc88",
+      "sourceSha256": "641c1f109faa7a7ff239f498ec3874be20576aa3fe6692e114003ddddd895956",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 6,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "a389dbf66b9ec5d396e5ad2a6272f7add80bfea479ae79e89d804cc0b3da6fa1",
+      "sourceSha256": "c08b1d3b07ae97872721fc23aa2028ba024e575eb645a8d9962506a8548e77e0",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 7,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "869d6146ae7d8c347bfa9f9b1c528e6cab28c2952983efdc0e9ec94e62c4eff8",
+      "sourceSha256": "50eb5a30225c88f7697ddf462031565e686cab98c8f5835c21c5408f47f32bd4",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 8,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "7218cca2aabceabd984c971d2b966ec5097b772b0e32c95abd313f0ccd87d5f6",
+      "sourceSha256": "58ca5e06d4194a0cb118e914951d18e3a39f06cb733c53a25e863de9ca8b9fe4",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 9,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "761296d5119fa1aa03fce3c40a61bfcf64e933e01346ab0801fef0c3e8130584",
+      "sourceSha256": "9c32ed6303d8e33242be95fb4b0d1a8bd4dbd113b85014673688c4e27771e39f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "3c08404943fb1a54805a7b842c6b2d9168f18a768a4421a49d10b2ba52afb22c",
+      "sourceSha256": "afddeae9f59672095d4cd26d3512cf65e121aa928b1e678f01b1db7aea20e336",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 11,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "d26fa8008d1634f54b33c8ff5c1dbc31c56ff623d2929f307764ba33f0ad2f15",
+      "sourceSha256": "a1587c081bb2bfd22e22004fdedb4316a6044182dc05158623ac4fe72413f9b3",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 12,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "228612ae2946e3ed6f9cd22548fd4776527ba288a6767149ca9b31a604e964fc",
+      "sourceSha256": "f24144128cf36685e0522c3682c5107dd9598782fa0574b2f7445088785851f8",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 13,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "d95d986e205b1b73b2d2cd3e1dd172984ab29eae35fe9f2ed0e5a9f945525ed6",
+      "sourceSha256": "45c249b6d80cfc7f066b94ab966a16541a90d0f5ff471a63e3def6de69937af5",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 14,
+      "before": 0,
+      "after": 3,
+      "unchanged": false,
+      "reportSha256": "9367936358411e8ecdc1fbe5d1cdf83fdcfa83715ec1030d09eae1f8f733530b",
+      "sourceSha256": "2431e9d6eaa7a53190ffc35f72d263043f0515b3cf374e06d231785fabb6bbd8",
+      "accuracy": "partial recovery; unresolved scenes remain"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 15,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "abd7f983723215c7382d036e69bcadf99ac264146c691a299571f4bf439bc143",
+      "sourceSha256": "cf82c9cc95c9c64001fcddcc958fd80226687fdc30fff92770dbdcf653781abe",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 16,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "c01b9b8f2bb586e3b44f872819c7e071549e0a5ec617ce3f4ffcbc39fffe27ef",
+      "sourceSha256": "c39c11f791e34b64d416bfe4aefb163aa0a8b739c71403ad5f0eb7a65c1dc014",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "1ee3d1b5e8045e4ca9f8735b705ab4b4376dc16c297848112cf907baa6267fb0",
+      "sourceSha256": "3e8b05a66720870336672d4a1e14050b97b65f5a45d6edc462252c2e49b698d9",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 18,
+      "before": 0,
+      "after": 1,
+      "unchanged": false,
+      "reportSha256": "8c782901f113d7ac85965a5606e71f468f595e92c27703bf4b253c5ba912a1de",
+      "sourceSha256": "d526d96026b627b00b48121034a52e12242c03fa1255dbeefbfcca5fddd57225",
+      "accuracy": "partial recovery; unresolved scenes remain"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 19,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "7316e504b704330a1752bc3c4c433ddfb7b3bb66ecab604aba966da82a6065ae",
+      "sourceSha256": "0f14a8546e61bcd0f3b14d2ec205e754e29038621318cd4835f47ccffa4ad498",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 20,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "1a1bf582fbb21cd125de229aad4f544cfaf0d659f90282b431e1884877fdedf2",
+      "sourceSha256": "4fea6b20064ab8d0a82fc24b9b7454d68fe6e5b26531ac73e92422ca9883fe60",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 21,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "6174c334dd1209e9720a3516d385e96c31f38a2e8ace0259c6b3effbeab358a1",
+      "sourceSha256": "c26d02a6c56aaceee344def0b930fc1decc5317c79dbe30ef6df95b9cd6b3972",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 22,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "a0b302b54307cdefd0ee3fda5bf8eb205a8d4a1c7b6a03087e0dab9c1c98497f",
+      "sourceSha256": "adc7e2f79135ceefd175599432c5540d995b51cf789ff7bb319a5d7002b71ddd",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 23,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "38ad3a356bba0c028631b70062a688be822622c9473ddd06b8165e21cf247c5f",
+      "sourceSha256": "7540cee1c8610fe5b661cf8fcd848ca843688a8f96927632c4acefa47455ae5b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 24,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "2e6257b855201bf412b21792a8903ef91f13e126d92feb77c3bdd22cd0c7c454",
+      "sourceSha256": "630f55e661c37eda0f93910ce9b41109172a428c46422850037b4e5dbdc4eac8",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "7b650e487ec78e48cee321a514a293232573556a8dba12fa950ec4883586aaf4",
+      "sourceSha256": "82ff68673f6c83070365ff057042c3921ef746c917d3ab3a09446acba4324d33",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "3bef4e0d0cd8ec971a8a66caec0b2c3fda89a30546e58dbe9577999ac507eb08",
+      "sourceSha256": "3dc4c3bce1898f61ec96f2220053cb6c33e0903b7047ad61425551f00ef96492",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 3,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "94aaf0450621dfd56e8dae0835abfc838a717af836460a5c8b7453203243eeae",
+      "sourceSha256": "0a0aa927d825bf9e9e1a62246e18119db962998d92a261e2d46322678c3ef6e7",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 4,
+      "before": 0,
+      "after": 1,
+      "unchanged": false,
+      "reportSha256": "c2950e855497528d6df6d13489dac9de2caea0a7cc2b79fa1190047cf71380d2",
+      "sourceSha256": "7abcb63b3ac55d81bfb9d6e185024415cd60dc437c3af0d63e8c8881b3ba09e1",
+      "accuracy": "partial recovery; unresolved scenes remain"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 5,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "4d92d2d1edc55049e6a8006cdca92c779a46568de3d211de280873af8466d1f6",
+      "sourceSha256": "bc9b566423a7d32c549a1e492bb130e3b9ae83784d58532316ae1e497644b47d",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 6,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "d21beda367d40212dd645188b1b58c28f8c53490f850d7639e983588cb559a72",
+      "sourceSha256": "666293ca377f87a6be6aedbd48a7065626f9e57557268cc9bd2acb1231a45e3b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 7,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "37b7a66160ecbe0c775135576feda68e7b667fe7a1f561de533bb65ceaf52207",
+      "sourceSha256": "079c922144901ad99691f7c22df592f290c62b88a6de872e5dbb27461ee87796",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 8,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "29e5949aaaea336a9603e81a1e7af31afb0757a14d4dc27da69f5a00e025f142",
+      "sourceSha256": "2803b12f0215209acfbfda55d37b6003d628dddfbb9f618b750f044e780be665",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 9,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "5d0f6cdbbe5cb22a3fc5b2d844a48fbe75448fc305602d7e9532ebe3249a16e0",
+      "sourceSha256": "ed075c52862083732cc03c51bfe3393b34c505b5ef639223c239f3c4e4ccf87e",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "35b47acf2807943e2def4c517dd92e52a9fb77d6c2e7ba38c99e81d966a1cf16",
+      "sourceSha256": "0b1a1295c13c9dbbef3b895c962dc7dede656aafd44cefb553b4a6981ba6f034",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 11,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "e3c0bc319171daa7e31620108015559940fadf78df444a46c798f71092a91524",
+      "sourceSha256": "6a3dcbea112c4598fa3f8c24e4c7baa3eec0a8a800576cbaee23101b50c77633",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 12,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "f9c30485f1907120fb1803a761c09ee259ada338d5245e0a49f5c4aa96a2ed04",
+      "sourceSha256": "10fee25a7ae60cd1bc06892896fc7468a5b17ae8af18207e3959e92f656f9f04",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 13,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "1cb6a0ef6a02221dd59ad84bf298f110acbfcecd63cd607837fb7c4309af6075",
+      "sourceSha256": "587ba78fadff80629063f81c78bea5db2fe9c3ec7f7d684bf574965f5a607401",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 14,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "ffa6f520e9c3a23ac7c40ff691ce2362e392e878300e099561f32ad880fb38fa",
+      "sourceSha256": "c52a289ac67c6a3382418a97aab581a6c6cdb2c2e101da1187658b64e8bc4854",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 15,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "76af8b6706249989b43942c532368b5bb7879d00f9eb76d1588300c8dc23de7d",
+      "sourceSha256": "e37109865cdc97c685153bd63cbce40d1340a061c8cdc508abe3c1ae41d50eca",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 16,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "fe258b854cfadb1e8ed7a90d81173246c98b43dc07b9053516ed409d3e3e93e4",
+      "sourceSha256": "8ede3774f4a0c0adb7175f49590b9a4464f82077fd327460a19d7e71ec5b513c",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "1c571186560b78a54cf0ee6f16171f48c7516b5ae1bc1eb3c12d38127f1bf521",
+      "sourceSha256": "17d5ffd2355818547b8249bf9112cd76b5598b05a8b3fa598fe72ef0039f3c55",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 18,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "698a324e3929cc5978fad4b4354194d31072e6ad1f8b8b5ec2b2e0db71b710ab",
+      "sourceSha256": "24f5444bb882ae78da041c41deadb83d66a1b76753e13c95b4ea47e86fe0ac5d",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 19,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "89de72ddcb6d8be9973445ebf3573be73189cff68152610c9d0d9f753a191895",
+      "sourceSha256": "8391cf4ddc7f84c43eb5e3323c2a18510dd780c8d471acf42be9c69ecd7da829",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 20,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "3ef9855cec180ea428509d1d24c4b82614959d648002f512d0975ee01efb95ce",
+      "sourceSha256": "e3025398ff796b691c6567af8d05aafb91608626c61d1fcd1f21231bf250cc8e",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 21,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "99ac4c2124d2109c410db43be44ce0864d2eda2c9247489eec0d979f5a9544f5",
+      "sourceSha256": "9f2d2311bbda551f26831fdae6f7672e4b8a5cd1cb79cf73a4e0b9b50d9e7597",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 22,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "c11c6f86e854378ab244a506d32340be449c1ac1c3d343f2ecc63380782b8d83",
+      "sourceSha256": "585c8c244e61e6a498e38c6d89a95e7244570087988b4093731c416745ddc32f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 23,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "57c38655cb6ed9c467bb99c2f1c87f6d98a4b014a8fadf10fb7ee7df68ad4140",
+      "sourceSha256": "bffa2d1c659324750234580f998233239f0ea9847e912eebb0022bf33c547305",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "ca2264a1d08dd0ea8bef8dd524d936f185dc0543873d258e3acb8d6ea187f1ef",
+      "sourceSha256": "85311b5e91494132d80067fbc6abc7d5e40c0294754a67fa14164dbceb2d2eeb",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "a04aced29ca8ee8b55911e058593a70eafe724fb08b994d7ca9f9f22ea29f872",
+      "sourceSha256": "2f5539d34706c5f8b3d6fc02d845623ec66b9f59d921d537fa32632f919f7a97",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 3,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "caaa7007057d7da71fa2a83cbb5650b13b60cab2a6b23b00125edee1ec18aa33",
+      "sourceSha256": "14fe85d9e7bfb9e1b1b75d9a5413420f62dfc9a144141dfc89cb7f1ca9072ac7",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 4,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "8a2f1914693c8f2f344ac78175d9ceb82c9ae2b03c9551ad1e7f484e070254f2",
+      "sourceSha256": "b7197d909b6cae790a8a64fe37f083dc21cc0d647ecc6ee6e314437bc2e2802a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 5,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "c335cef90ff6d50e358071141bfcd1d1960de697dc40fb0561696496caf1454f",
+      "sourceSha256": "f910c267e4b04d247eafbc38a9401466d57826916a121690bdfacce40f596797",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 6,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "7fa5f5ec3676d9c10c83c90ef26ee874278caa63a8909a2faecdc52c863290bf",
+      "sourceSha256": "235543cc72d24005f243019bd7a8f71f56d72a694f584f5c6a81bd08d2b50ae5",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 7,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "932dc9547c6a4790a83e2b6b68cc2cf710ecef247a90047f2ab3aa7a7bda1ca9",
+      "sourceSha256": "176705f8cc1e5c68568b5e2c27f6236c6fa3632a05c21ff5040ae2a80f29a786",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 8,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "81ab3b89fe4cd284f11a54c545d39c13d076632bc37d3eee8dc629017b0c2650",
+      "sourceSha256": "2360b217608d56c395794f954cc1f98896b61b770198d0305e8c2862a08dade3",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 9,
+      "before": 0,
+      "after": 3,
+      "unchanged": false,
+      "reportSha256": "607a73f936df38d8c695a4be2ea6f6595685e40b928a9cff317f5afeb8af4399",
+      "sourceSha256": "284c8ca384650cf41374a73450c3b30ee0cb587a44741023fc0d68bdd07ca3d2",
+      "accuracy": "partial recovery; unresolved scenes remain"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "be8be709dcb81dab99e2c95fb05c9c137998619af9991ac1c533b3563d1b0cb6",
+      "sourceSha256": "193e92c53df6c9eda20b9b278432981cbf2944c3a4b6e78fe6a3e7c175eab8b6",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 11,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "c02d48438fde75e038cd011d136675f13fc66d8e90319adc8f2aa8e5cb10a71d",
+      "sourceSha256": "10721b17a1d47f3d5cc904d6f246904ca0a9e950ac3971e2c248091d91fe4f75",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 12,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "975b30b4ad0c52692221d378e9e92db4994500267c684e49bd462ea2ef68f01a",
+      "sourceSha256": "e84bd33d69f3ab8664e6acc10a895204462489a2ec483e582a41bed8c5193571",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 13,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "fe1f237440f6d12c1a942cafcbfd63c8eb29f89bee0da3a9fa4f177bdc3406e5",
+      "sourceSha256": "75ad5992462f05d768854b7ea7ad3e4d883611e361d03c91d25bf9d366d43234",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 14,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "9f8102f55d0f9f2bc3edb21a2e53f36e33ff3bc3b4c604581a2586859c9d9c1c",
+      "sourceSha256": "3d5f634a3455be0a779d7c9798145da2517b0f712e8480ba34f857dba19f6e55",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 15,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "4c408c65a516c6edae78e431c8b5ffebaa2c67c6bcca285b111cb4589d017826",
+      "sourceSha256": "83b4ce63acc24dea357ef3db8a073a514650fea643375c652c917a42ba4a8a78",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 16,
+      "before": 0,
+      "after": 5,
+      "unchanged": false,
+      "reportSha256": "df2ed83f74f8aed259e581ed141e0139689d7aa60c94822be75d96c5ea90b543",
+      "sourceSha256": "4d49c780d686b26960451e638f85eaae6aa6590b92586ffbfb30a1e85003051c",
+      "accuracy": "all five visible frames reviewed"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "9efdb47782e53424b76eea419e42bfe7986020b17eab697c775bb3cf5d3919df",
+      "sourceSha256": "db388db39519be88c5043d1382feae17142ad980ab6116a126ee825cbabb2f65",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 18,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "ac30b7c88ffa15e98800ed6bc17b57d0b8f869981ebd36d2253b1240d06dede8",
+      "sourceSha256": "33f13e35fcb0eb83072e81be52c18fb9321e21698afe83b3af943a3a6dc38e34",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 19,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "81fafc9061e088a4db411d8d9ac5f036943b00e08e362c1faec04a63384a431b",
+      "sourceSha256": "36bcd8460039edd71ff9386355db46831697c2118b6808b4673563ab24aadb50",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 20,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "9ba3b30604a20326f5ba6289cc68fba460cc53559614e946c1b1251f33bc3288",
+      "sourceSha256": "0a7edd39b6a5b897abe1978f660c0ec20d807b1472dbc8cd40a9c90b811de33a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 21,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "8e68d5b1f72742e6381ac24bb35670a6354932a99d5b3e057fcdfc0c87237c02",
+      "sourceSha256": "7b07f187adc124005ab487e83e24143a0f674867c7439092879676a8906e43d9",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 22,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "17292536a830e687d7334520b0e460393c8c86157d09b9a0ad331afe2902ce28",
+      "sourceSha256": "7ae31668858acc1642f9ebc0b03ba26254c43fb7e4b0fe69492406f2c3798447",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 23,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "703c4ceda2170dad8dacc920b304d6e64d794c91062ff80d0dfe02b264bfb430",
+      "sourceSha256": "652210a6bb40a89836e801228dc9a34ce609f5d4f8d2654a792f3b7bb33cc98e",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "6857fe8f1d033152d19dab4af9d2aeb017ba1b29ce599ff167126837476b0bfb",
+      "sourceSha256": "d860da35f8cc8e7b97236ed8c9af039fbee036b2d7b3c6bb1ab903660dbebd40",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "21daac237caeb7d1d15b073b20dca35137f3aa7b5b5f090c182f36ea62492bc9",
+      "sourceSha256": "f96290546494fb2e9ae41aea4b37d107ce29d2bff5a3f963c99092df113e7b5d",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 3,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "e85aa0ae33252f6365b7a730c2d45b2f33b9270a7b1a78783bfc1adca6671111",
+      "sourceSha256": "a8fa7e596bcd2dcc5f554d9ad91f0a2f49e746b0f077a0bb3d6d6a2514d3a0fa",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 4,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "64c30f1d18975afd18b307d8363957b5d1ba394ffcded07822481c63e5531b1f",
+      "sourceSha256": "73835cfdc08d56ab716f89e732b8080eb1a77b9e42c1a62dd6c48fbc02bc530e",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 5,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "5855c80d8665175a0a05225742a2a951f9fb1d90d64f66bca5bbc39885be918c",
+      "sourceSha256": "31d94d8369cf2e9e8bb3ceaf3a5e3be3d682ae291c1b1acf623346a3c2c75633",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 6,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "a4544d4620dc3551700e7268616140874bc59cac90dde84a9a9ccc6df8da5a3f",
+      "sourceSha256": "2f7908bcc7b0eeb0391e30052b2e90fb06b6e64a8b976d4ef6011316197a5bc6",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 7,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "10d58430df1cd8569bb0f5e7d82d6faae77c5338f83e43d52923e65a60fbc5ea",
+      "sourceSha256": "f07fbfce01368e0b18fee10e85631a2dbf1ddfc12f0f783a5b23c17333c43dea",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 8,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "31a2727e8c5cc6811d3da8ed813a30dc2fd18b73bab81f26fee97de18f73bb1f",
+      "sourceSha256": "3703b1c9524a053cc66f70b2267c438b1c47fe565598cbc64768e0c1f965a018",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 9,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "c0f37f2dc939d0c1b9673fef7ed81dd89788924d66667792aeb46eb4995d8fc9",
+      "sourceSha256": "008ebeea1f7a30917d3ff3ec57c5b2514b267e341350e6ea63c31e53782d34f4",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "ce1158aa6abb2b2bcd727fb5f2f0bdad8181a1cec4d47389949297f13adedb60",
+      "sourceSha256": "86dca146ae7f4e59f5f97b0a66956829ed8fe7587aee0218d9668863fa4e07c4",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 11,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "08856d236678c1fa645a99591d925590bfdd38ba0bb10b4eb5085cae4fabde66",
+      "sourceSha256": "5f3009d45b5479ec0d73f86fde27362e740e79288df2210f3fd51f650fb8579f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 12,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "02e5747e29c18b7031b42c16b7bc317df0be19b87750b1e95e02bdf7ea691d43",
+      "sourceSha256": "6946698d953a63908ed31a5067098eab9f9d94981376ca98852210ff604399d2",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 13,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "8f7b3f53db6ed78753f1d9c488d3d9bb08b7ef6834d0fbaa49841b8047a66db0",
+      "sourceSha256": "fd9a32bd5a7f021c4d0cca2a29555e82d8db589fbe4f9105c7520eec65d7f084",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 14,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "ec0a3d453cbfaeceafec5ff987629d0c08b55c1a7d91c9cd5f41a36430533745",
+      "sourceSha256": "366012d86d65fa2c8e0e343ce98933ddebcdc9d4296a68cd917dec48c38bc29a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 15,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "a4e9a1d5500bc2f43ef26c3bcde6fe8b8daca1425acd6ab336aa8a661ce13936",
+      "sourceSha256": "34315e0efbc07d2c121638b4db902729986a42581c23c3330ba0237073a5e123",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 16,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "88399b10883d33cb47a343f1e439030bc7d5b1c044366f6c1dc000a7906fbe32",
+      "sourceSha256": "5260ee030d4e63caad00a9355327f669bd47a684078cf6ab61d65e323ab2ef34",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "f89185fc47162a93d8cdf45a30caf28156863319b2e2c3ef2f883bab3fe78915",
+      "sourceSha256": "7de07ecdef60156f1d7f2441e0659e0f09fbe673c2d9fdf4c09b07b4edd0468b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 18,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "9c319f54197c0ec6e7463319598c7aff1dd438efe84eef5cb768714f86fd56ab",
+      "sourceSha256": "ac77a9f0dac90129a3e6dcfcd38a975f5db418c099008f49fad0ae22c6164c55",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 19,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "351b7ee10ccdf2acddf34ab5d9a3dc7fee893aa5113b1266d3965f233a8efb10",
+      "sourceSha256": "a4de0844afebbbcab44728eed39a714af691dfc0a0158529be1ef500ad35c99b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 20,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "b42a2ec22ddbc8e0c7b0a06a58488d48970239eedfed739ed467ffbf6b0dfa7c",
+      "sourceSha256": "6c0b6eeb885708fa31b292b61d4933989f2fc35a014983eaece30ecab5e1038c",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 21,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "c2fd6e41d32979805d24c048a9bed9dbe2b9c611e8693bb8852a44cb30b0474c",
+      "sourceSha256": "fcb19dc54244953b9ddbebaf353288d645573bfdcf6ec0f4b81dcb5f0e80bfb9",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "c378f55f837ca355a3a957f07f9783dfc4728baf4fc7cb26d4ddcca991c41291",
+      "sourceSha256": "6a87b6c58e3670a654cb9cb58119f3de715a57f645f2e78b88c35f5dc16417ac",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 2,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "d0b95f194b8453c25b62340b2658b0f45af5b0445e5baca58ce41e828c4e7c5b",
+      "sourceSha256": "3426a5ffa289cbfef13d93309ce861b63ed667e72eaf3bdb4f0fa7a7103137fc",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 3,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "a6e3ce2df02fb22c724aef4a3bfb7199e6ba227367cd9696c79f8d043069a517",
+      "sourceSha256": "67477bd18fbf31f971e30cea815bc76760f50476078786b412e9f8c78a65e80c",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 4,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "6ad86dd57cff831e4330abd224fb78d3f5e2615e8ac024e30c7b613d021f9136",
+      "sourceSha256": "a6e1225841f784a2d48f1d128ee4c70feaea1ac393fff2bb255804cfea2b6eda",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 5,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "8cadebac6a117f6581d68907505524c70b98cd4c85f89ae664c720f2da82d7ab",
+      "sourceSha256": "81ea1d0368afae91da30d2b0c3fb05e8cea26373d3a4529c2658d9f48c986083",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 6,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "62df9186ac51ce3aa797c5dcc8b2a0bd44d56e3bb41a1146cde5b616c835572d",
+      "sourceSha256": "0322218207dc70a8542b1fad785ffca05792b035cd41c45d54bbb41d8ece01ad",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 7,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "eeb2f6595564aae4d45e4d8d7bccfafb6ab34d046e2224f691813b6dac292c82",
+      "sourceSha256": "8821a161f424274f7440e06ba44de728816705e9255341147d5ac91c44341408",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 8,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "700dd1aef07fbb00f64bbb5cf34d5e6ed1a7e7c67e0c15b6e2dc7b48a5668246",
+      "sourceSha256": "45bd49698e5103d592ea5b792a9a85e767880775cbb8a775caef3350a182a739",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 9,
+      "before": 10,
+      "after": 10,
+      "unchanged": true,
+      "reportSha256": "37a7d3c0ef313a5f1a9ed19dc777e715e22ce0dffb50b079c264eb46e9733e4e",
+      "sourceSha256": "06bd363a43c99e53c63d266184d68b5ab4bb83aa017aa314ca0431d4f9b83be9",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 10,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "a8f734fcb5a762633db4233cc64dc4c61818ea5b0a2fb714c95d82972d3c8704",
+      "sourceSha256": "d03b18d137b3830ba1892b7517f3e7b8f844acb25b46f9e07bcead4f1bc932b2",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 11,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "7cbb090f3c72fafceeafc2d13ad70cdbe308aea0826e55a29f2a6d16b6742052",
+      "sourceSha256": "a3566b5bb995d99f2691b26215aadac1de7d69ecaabc29d75fc2464ea627eacd",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 12,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "26765edc153ca35ea97123cd657b2551ddd6fd7516c6f217c87a49dd10a204e7",
+      "sourceSha256": "638c0b03ab068ce86d36c08d4e65286c92d1d7cdee329f9168afaa0db62b08ab",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 13,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "235c47c658417a624ae9790ef2e70e846b489f6c2762c8d1dd6576b937cf99f4",
+      "sourceSha256": "26c072f75ffbc0612d13ab8da8a3acb39ccb699329b267b95f17d1cab6286ec6",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 14,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "cd6c06490bdd3985d76668d7fc4a309edeaf7b9556a333ff698d9d172a0e9e50",
+      "sourceSha256": "15bf880c3479b7c58de979ef7c4aba30bf85989ad431aed2f52583da238f8b2d",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 15,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "dbdcf64f3d25b34a2143b9c56cf3263ac7a58fcb829c1409cc92f4359af3afcb",
+      "sourceSha256": "8702fca3a9e97f1117db5a15e2f0545a79d48d07efa031b3e6aa6c0f2ead6282",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 16,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "5396dad6c0ed3d56223467f028bf94fd9771af5400724549962a396a1945d46a",
+      "sourceSha256": "841e06c0b24021bca414d80bffab288abf26768517f3bf1fbcf7c3b952fb943f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 17,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "96ad8e059249356386002b66c6fba93aa42f93494f6ee88909eb77f34f903ec8",
+      "sourceSha256": "b873354d831521c805eef56cd8e35d3989a35cdf4779af738a91493092ca83fd",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 18,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "8a97d558b90202e2557b9c02119805432941ce85d17fdf6d34c28c57261f29b1",
+      "sourceSha256": "fb89560ae00005da77ecd6cd2e24d1d7092242c4eaa1490a0cfcc737ac60feb4",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 19,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "7c9a80f3e323637523c4c4c07eefc9024efceffe1b8c4e2daa5da78a23fbedf1",
+      "sourceSha256": "28e4754cabd5bdaa300e69bb19c8cdffc77a5a22c682f515c57de5a91aed308a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 20,
+      "before": 10,
+      "after": 10,
+      "unchanged": true,
+      "reportSha256": "3fbd95bbc5b8546dc89e45eff2cdf41b91bce0e8aa5ce711744568dea1734784",
+      "sourceSha256": "e04bd07cd9f17725276fcfc13964cf85794a300a0da1e3b1972f48b69b7aa10b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 21,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "a0330a1d31175b94a68e11e1eded992dca7c71d40616d6a810771b5c1d4f365d",
+      "sourceSha256": "ca0d2ce5f16dd543eea2f004cab3aed0a945c1ebab897a504bee962dc79b6fc7",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 22,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "73f49277316c1754a1a2275e144287305696539cebdcb229494a38737e18d7e8",
+      "sourceSha256": "a9798feb689a0d88ead2fb73261b1144e114267fbaff307ec72ad9e2f9ad7af1",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 23,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "721c63314a842408dffcf7372966c21c9f95fdd1e8591dc916f7248954ae3643",
+      "sourceSha256": "18db78948fef8708e03dd988a1e5c3d06fde0a08c6bfeec041c208dcabdb3222",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 24,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "e44ec927396663d826571c96773997e0799e3e69ded13c521a8b6fea79c816e5",
+      "sourceSha256": "c12203ab2a1a032daab93e1731be93ebf042ef8fda785fd203b4f4d6ab03287d",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 25,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "00b6cc9f992aa8ba23f587de184da4df919014a1fbf4499fcd120a303116bc64",
+      "sourceSha256": "c82ea976977b21b0df78955867f6f19f522556634e8d408923b07dd56de3fa79",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 26,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "dc157c358e2c0fcc92d4959b5a6e311099ed7206415a40673a95f3501978e811",
+      "sourceSha256": "866e59ec6905eb98b1606d1514215a58e8d442864c862c1d7b6f0864239d76ff",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 27,
+      "before": 8,
+      "after": 8,
+      "unchanged": true,
+      "reportSha256": "ca46f3abb3e7fd18481f375a520c841168ba469abc2f84d582900df1f033a4d6",
+      "sourceSha256": "80ce12863f06f72deafbefc6197413fdec695cc31264ba85db919af2e3b74bd6",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 28,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "117503e1bf4e4a23f0d3bd6e735d7b41cd4e5fdc5e3743379ec6110c2aef1392",
+      "sourceSha256": "242d5b1db336b249b7177e90c9863f0f05ab4da75677b2231324112b06b85e41",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 29,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "e6df14e812868bb66a6d7bbe19cfc409a8928e62bea8aa8b350ca04468cb7f81",
+      "sourceSha256": "cc8a66bed83d00cff637b2669b602dcd6a3a8bdacfeb5de2014cb3eb885516a0",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 30,
+      "before": 9,
+      "after": 9,
+      "unchanged": true,
+      "reportSha256": "6bb10975948b3ab23868906570bc7e9df64070fdba93a053bc115fb5018b667a",
+      "sourceSha256": "43e0e536fb726bebc867a9798bb67bce8e77d6e3ed9fc14d78f0ed2292d265ce",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 31,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "b0e94fde48c0180e9dc034e5db82cf5ff9d519c43a68e850141ca541ef035c4e",
+      "sourceSha256": "c178697d4778c383c988f215ad48e1ae1f72ad553171276a042e1c4046f6cb0b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 32,
+      "before": 8,
+      "after": 8,
+      "unchanged": true,
+      "reportSha256": "e964f4cb7565bbb3cf06ed4ec4b6856b40a552de811ed8eadb9e8f64eb9ddf30",
+      "sourceSha256": "bfcb55c5cbaa118e9bf4f0515b4ea7d6a1279963db5045f9bd897b296f7cab1f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 33,
+      "before": 8,
+      "after": 8,
+      "unchanged": true,
+      "reportSha256": "e1008477f7599f225486a78e9f1aac95cd9ada79b748d85ba176d377d6fad99f",
+      "sourceSha256": "d279ab7d794f4acf27ecbece27e0efe149d0aef1769860c3519200d738514d7b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 34,
+      "before": 10,
+      "after": 10,
+      "unchanged": true,
+      "reportSha256": "66e871140fbb3364f90d0ce654e89c9411eb38cd2dd0321dbb3a6c552506bb2c",
+      "sourceSha256": "5432e6e5501e546547ce04fc671abb21268b3d03441658b1df4198906c0c6168",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 35,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "72ee9ca19d82ef463765482a1bb9f83525fe1eee999686e175cab5d5b70d813c",
+      "sourceSha256": "e717fa720ec34448fd184d20c419364ad7e3ecbd9d9ef66a65efa74085297842",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 36,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "fbd251462f30edac6e4a95d295290a2d54b49a95545d54f596c4ff08a7574b6f",
+      "sourceSha256": "5d42b98e9a9dc2371eb9ba60a1fba4a97487468f76a18741323f3adb790b7b43",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 37,
+      "before": 9,
+      "after": 9,
+      "unchanged": true,
+      "reportSha256": "0cf3f0d4ca56d9f7eba4e698876d58a42589c105b03fd2ced9a3f30392d03da8",
+      "sourceSha256": "410266f72f4c27d0303a06a3215de60eef4fd2f93b4c28541bdec66209e3d0e8",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 38,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "a19bb56ed535f94498adb5d939695b7422d8ec6fff307dee5c6ff82a1e2eb971",
+      "sourceSha256": "2bb8b88dd0e7631c1636b3d2b5a9925a987bdba5ded6212117c6be6f15397a31",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 39,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "7a715fa2f15382c537b43f50c4867b68933cf3934bac5e4d0ecb425c6bd2a6f1",
+      "sourceSha256": "1a313d5c4e4adcc92e25553e52bb0ad81b10f91ecd6b0518cd21e3113a3340a8",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 40,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "4d1327e0d7f137aa95735f72703cb0b3d3e4b4d635518b2c917c3615bc4867b5",
+      "sourceSha256": "567ae9e3ef719a56b5ea23f211befc3d263e063339a486f443032046c3981520",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 41,
+      "before": 9,
+      "after": 9,
+      "unchanged": true,
+      "reportSha256": "003e039387ae820a0220cd03a47029222aab22987b96630348606534521c2ddb",
+      "sourceSha256": "a904ce9d4ac8828d1ea3984c401f64a5414e89c55e0b279b5cbafeb60803ada9",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 42,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "fc79466e7e72d5065c3a3822894de18177bdb7ef0f94fb2168d68d09fa58bb1c",
+      "sourceSha256": "fdba80116f43770a5f87a9309b7266b3dd37071505fc9d735f31cb5d5bfb9841",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 43,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "45f64e4acb243e719bdbf6ce3f866ac7487c7b2ae2a60a8fdcdbf971cf2acf2a",
+      "sourceSha256": "b155ad69833884a89a172dd070a1c3b26195fa613249dfa5e02260c2fb572faa",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 44,
+      "before": 8,
+      "after": 8,
+      "unchanged": true,
+      "reportSha256": "4cefd0729ca85ffee5705356c2e3e2be902db326a6554c045e6348b1691bd9ab",
+      "sourceSha256": "acbee896220ee344f867cc9a4fbea9bbca8c800f9d0b2bca269d942b83636882",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 45,
+      "before": 10,
+      "after": 10,
+      "unchanged": true,
+      "reportSha256": "5e22e988dbfe48951bd5020e4b8889f3b71f6f8ee649c04f51c28a3d92d374ec",
+      "sourceSha256": "b5043f95d062d10d645c182075c416d9ff6eb5af403f4459a1f585e40ca7ebef",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 46,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "140d86be06a182c25f01d35c4912dffa11658a09580abc6567112ff85ae31d0e",
+      "sourceSha256": "098b9ccd6a08ea902f42943afbea685bbeab8d9a2da7b5ffdcbad112d898166f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 47,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "277ae27a25f3b7a5e397d6053d993a9228ce91fe1e21cb71f01a1c96add04624",
+      "sourceSha256": "10a0e65bbc2924fbeba8a6fc0b50da9af9aff7069b96fac8bd4bdaaabea6d0e3",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 48,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "e4d602742fcbc0ba7a90a215a7ff4cdc2978510deb3fc5c46aa5c10987dfd96a",
+      "sourceSha256": "b3be88bfadddb719eca7ea7e4174163131fee5be211e380124b956524af8fe41",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 49,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "4dcd8ded9419df5801c91c5fb53214d04c68131a505727b720c0501429bd560b",
+      "sourceSha256": "d2c5355c1c5575c12ca726e82683a35bfd709f131a362127b1ca91dd48796800",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 50,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "516affbf1b64d01428cf9f73b4ff4b28be3520b539ec4a5b25e94eeeb82f2b08",
+      "sourceSha256": "e49b0d52f97344a89d21abb1669f443fb8cf962708794aaf1686b5ae1ae24e32",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 51,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "758c4cc49aa86bf29a8e3ecc028e90d1f097ad84b643abb98b3ec18d24cd2e08",
+      "sourceSha256": "f87bd256d476a60a923e692eb3674c364f06f4fe5b8e708b62e599d100da64dd",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 52,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "8d360e79da1562527c02d8e602aaa1df319bdbb131bb9a832d5552c89f63e1ff",
+      "sourceSha256": "a917a824f221954ea317ab34563c53a3116fddd4dd727cded217ed39fe8e4796",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 53,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "7d4eb661511839c22d275fec4185ec19bd67aa9baf987a029c594638b69ec1a5",
+      "sourceSha256": "01531ef2c513a3f2a514a87e7e021cf3bb03ecdacfd4c0d5fbf3e8a0b19186cc",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 54,
+      "before": 8,
+      "after": 8,
+      "unchanged": true,
+      "reportSha256": "82fb695b4ab8290152adf564b53e87591088adff6d99d5dda2320d08284c5868",
+      "sourceSha256": "f101b6c874cdf093df427ac161f1c40bdec03e7534deab4fc88a89e6e745ae93",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 55,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "89ec338b90aa55fd5adf990c2aa5533da73672f25d3d3d845d9cc3b5ccc4751b",
+      "sourceSha256": "9c6b4eedcea565884b867104faf1d4a78b3c1c23e828f738d1925bafe597a495",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 56,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "e7307a03e5a45d59f407cb16227c65d7f3a0375cc5cbddec1612ea5a1986e0a5",
+      "sourceSha256": "055abbb6471de119f6872c35113bc4120e86f2b968592f93b441485fabb56ad0",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 57,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "e486fc53e995e8ac555b6081a2c6dc1959927c0788122f14ae94e40a44a03045",
+      "sourceSha256": "5c77dc29c4a4dcc1e59675d4d63d6d3abfd5e52333221dd5ae46a18be9cda339",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 58,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "338e086e413274d2e711f53f453d7d69540cc821bd79153ffab82bed094edb72",
+      "sourceSha256": "2c1eceea15ffb840c6ce5992488a478be50b9f98ddc2ff42ef3d84a3722409fb",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 59,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "a12e65bdab7952fc7f38f786975209955da710c1fc375d669da243f3e7f29a07",
+      "sourceSha256": "eeb1f75e3fecb39c455d38724d2ab0e5cd5f24b8aaeb57c18a7717bdc60bdf08",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 60,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "8186c3b9077e826731cb8a14021f1af61a11908759841de2186be065321209e9",
+      "sourceSha256": "985e2d797f037a2ae055366dbc1d0214db65d887bab3c01ab1d1ee852b22552e",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 61,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "f3336a30f8dfe3e97fe6b7f68593dde3a6f7be1191372b973a17e228e0c70230",
+      "sourceSha256": "0e9072260277a8d05747dc986417a74ed4313b9013b6f8e36ceec6763ef2de34",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 62,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "9a8ef4c5402c0ed3b8142edab9a5ed6768da1c7f943712318338e37984054a04",
+      "sourceSha256": "ddb40aac2e155124c0d90792c7a06bc5533577eadd269c1d0bd025fa80cf0959",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 63,
+      "before": 8,
+      "after": 8,
+      "unchanged": true,
+      "reportSha256": "9f3ed0ba77a50dad460bdaa99499eb70fef97bde247e25901c1646108d2b5e83",
+      "sourceSha256": "e769a6ae9de734d941af161bab1dd4b60699e507ac3859342297e896f4b479b5",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 64,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "5285adbb7994b3a7e015e481e23e4fbdeedbfa16cc7ba65ae2dc3d763613e3e8",
+      "sourceSha256": "15b94a00c60959e83f99e3762a2e824d5352b985925a747c0d5e2fd926e0ec70",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 65,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "5ac1b71021b0247849e6157ecb01363720b6a1024ddebf5448ce4198ea1aeb51",
+      "sourceSha256": "c5b5eb4dea3d190759759f24fa3894f296043ca3f19f2d8335f478c951238ec1",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 66,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "a713ee026e73af160aab3dc9461200228d22140f495aff0129e73ee45db4bda1",
+      "sourceSha256": "ef00bcf253919e8c91ceb7caf84fc1e2e809bfd2936eb1467ff1d5c7f76cfb26",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 67,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "2a89aba0a3ffb05b9f84f26df078839d25a3a539ca541e2b5e67374a2e14e2c3",
+      "sourceSha256": "92c23e47cb63a3a188d05e28745145c0e5382ca38ccca698558b109eb8052286",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 68,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "fc1e7904cbd6dddb6b259591248fc3f119f5b89721f40df1e4d3632048adbd97",
+      "sourceSha256": "4ccee72fb0b3fd88b4dff7ea07ebea8d9dfd99ef3cdbe2e77903c312617edf6f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 69,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "e3c3cbc638e2238aae836d9d30f8326f142b917d891560c7995c6ebb2f17ee6f",
+      "sourceSha256": "8cafcf039e9a82d857395c72b99d90437af25eab9e1f5eecdfb000523b15a1b3",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 70,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "a2dbd1210da2eeb74c62ae5a5f9bb82c8cb492b7fc4e84437e246f2ffc320e9c",
+      "sourceSha256": "ec4dc610ea0c384c37bfed5b177369c6edba06a801f074c48f3a3883c17bf5ea",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 71,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "9e130c41fe2cdd9afa643294fdf9e173f6ff2dda3fe584764da8f7545a17c5e2",
+      "sourceSha256": "edf35664b9fc0437b29e27fffab97a5937c5d039b573d3e1507e43057017e904",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 72,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "43a7d7f62c28bc2187b825daa37519b2345463d7336acc67efd455b831ecbd88",
+      "sourceSha256": "6fed0d11fd41e7331e4fcb3aa003507f51c7e024ff0311f23a8192f6c96d8faa",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 73,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "de89e9708c5f88cdb12117c2346461d8f9d4d16a528948465f9a545c811c67af",
+      "sourceSha256": "18f9810b0aa7ef3c5626fd281ca910aa7e99b2c3222071cc26a5e562ca12d3b2",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 74,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "a84754e6cd8c1b45e46d84ce645cf90e01f20fa01ee25aa4fc26ae19c67fab29",
+      "sourceSha256": "75b8e9be16118ec807a88d9c096609d89dcefda085e3f5bd163c3ed149220612",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "53813f0715f82af7d8568ff9ed7491ee8be405c52eae49ba762a0861668612df",
+      "sourceSha256": "57123f4796d47fa2c76b6b3da16939a8c1ca335c6633c8a5426bd757a7de588c",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 2,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "8e9c9f4be8c17da247f62570dbdecab37f37161f595d2307693577f2cee3a640",
+      "sourceSha256": "5acd4aefa872ba80f18607048502973d1130a615b8382bcc05a783c5cb386d87",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 3,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "645305ea9fc0761afa626738c5f47f85e9fef7cea50a7f5bff5b49d979e5b6eb",
+      "sourceSha256": "1f1f8edf77b740855fa1c06f94aa5b210ddb8478a820c10c89d3ab3a871d9ae0",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 4,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "524b4bdd7851a7b3d79878b3be6c4f65e9546a97a752a94ffeffa86e8404c525",
+      "sourceSha256": "b97d47541655ebcc9c7c5f7954b4be9905d4e83a0e308bbea70c86b946a56145",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 5,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "94b9a947c5172fa154f3d0008ab366c92ecaa519099f5f465cf6ebd7d3ea53ed",
+      "sourceSha256": "c6abcd4f4020c9814186f352bc39c3353ebe9325d20f27ce5a9cb830a8807114",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 6,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "006e9c72bea4363bcc68bcc7e8e61b5f8a2a10e65fa2d6086d910056cd256d2e",
+      "sourceSha256": "f8ed789c16ca8f35c2a29375a633e22404453708b67416d3f0af0eee7888d3aa",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 7,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "ce867bfb95dc9ffe5e417d3a8287051b4f5ab33c5fd923d352be02d8449389a1",
+      "sourceSha256": "1d78d2823adb71554670b9fb98ab8d693e78c920deae312b3b32f535ac9362b5",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 8,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "7be9e0973a412e2e0427f23447c3d1b27958327a547cab998030d8950e48c28e",
+      "sourceSha256": "8215d7bc941d9a8aa153253dec95bb5e6120fd7e517d4bd6fc93d0056b8bb79a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 9,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "dcf5a5f286b6a6fcd3a5caa64708d840d267bb044ee1c0ba4678677d7bb44e5e",
+      "sourceSha256": "ac9a990a6d967ebdc5451a56ba00b62fd9d6aff45d6c95c5b39a88cbc073b912",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 10,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "afb4a9f6f817860d79d47dfb9e4f0ceb339f87c7393a3918f92aaaffda1027db",
+      "sourceSha256": "92a61dc68f8362da38619d4ab9ca49ad865937048f994471c013df57bad4589f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 11,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "aa7fcf8b2640b64e8b56bbf3a07c64a57cdcefa40081d8a9cbe0cb31eaf636f6",
+      "sourceSha256": "749c68811fba089a2c26349cd6f182e153025ab60aa6e872352fc2c7692c996b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 12,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "52d76f0295d90b08bd2bb6a0af1d9ca417813bb90a1e91c79d079d2e89c9bd72",
+      "sourceSha256": "f8399ecb7b48481d00951aecb2466c47a9df5d6d7dcc941b3825a0f3f1124c32",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 13,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "f897f0960031ef03764118311af1eba49aeb4a2a6d98dbaad758fa75e3ea7225",
+      "sourceSha256": "998755157a5716ad5c2a2b0e6f1a53b70e0c3451499ab459d415ed6485319137",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 14,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "5d91f46c20d49d099fcfcec979b2d96c7a4159b2384814039283749ffdc1c817",
+      "sourceSha256": "8da3a66d5e9957a3fc1110a72a93158e21d309721af9dd057eadb08c358b3dd7",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 15,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "73e606ee6550db57fe69683be814d34f60fdae2c6bfeccac1db3e3a769e1f014",
+      "sourceSha256": "cc074f42a8b1af5c6c44b6d7fafd655fa1ef72c73dad2d5f9e29558b5f4653c8",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 16,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "1074941f8d6858430032c482e58148df457dd1bbaee1346a60cf6d61a298d88d",
+      "sourceSha256": "a56fff11ae2829cd4f097d74f4c43d91a30cc24f61115c82fdfeac063d05c095",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 17,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "b04733de365144c4dcec62991395b0b25d033c2b5ee1df5e2cac7cb2a6236acb",
+      "sourceSha256": "4e0aa786156f3e63f10a48afc7734d6f96290f3cb61f103d7b174e57994de286",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 18,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "bb1c38a1b7f3f70ebb5615e7732c141a7681a520125cc12d406babd73019becb",
+      "sourceSha256": "0e3e247681794fdc1489be62402791cf578679a52b036b11c45dde6aa5b36226",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 19,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "2921e72acde1845064eeb583cf735476c266b39388586652b2091a6e872fa166",
+      "sourceSha256": "a2c389b43fd9eb42b4ae3530cb69d280c6db80556565da94ec23a89822474d8f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 20,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "30e551bb133b5f0fade87d909862cc0e30eb0f0d3835ec66d76cfead888cf6fd",
+      "sourceSha256": "158c1fe44f17641d37b1f7e3610f501249cb63423c47babc8482bf399773935e",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 21,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "9b8d8f83354786933513acbd2d6f2e1a94ce436ac3f8a34d5ce1de790a57cd90",
+      "sourceSha256": "f4af3a694aa45b24c9bcf9f12f3fdab9866d6c098b047d99a26bb93ba72635d0",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 22,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "934e691b53073fdc485e18e9fb3c005d134c6c2fcfdb590cefb770cc48411cc3",
+      "sourceSha256": "e058b2fa9d0d76b0c8a3dc70e6cf51da936611a11f6cb8218ae2c37e0eb07d62",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 23,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "f297ff06d4b7bd59e04598c200d1a9c729d7e69fb1297f9a97ae1be050f5d961",
+      "sourceSha256": "36b43c75ed9cd2ad0edf16ee9e90a5fae5b82947447e4f4ef0a7346e493449ba",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 24,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "5385d30a47ea3e9ce5d901206396685abdcce53244e52533c8832a1deace8981",
+      "sourceSha256": "2c6983be42d346b8cedb532e5734d540fe8a166b77d321dac5f57cfefe238cc5",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "ba24a34d908b394fc7451c68392829d8aa99810cdcb74ae3875ab7a346146dc3",
+      "sourceSha256": "3272588946134623c40596d0c9af32868d8b91bd6b05b154e36ebc3befc15ad4",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "6e767deac164ad32e7dbc68eef4b581de2a76c6c03eaffd41d8f268ddece5fcd",
+      "sourceSha256": "d54d0cfa253376f0d45acb1d4ce14093879b3023b2e503a6224a7a5114490756",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 3,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "374aae9a50294fe22d67e6d244b1d4c6b426f87ffe6796d25815918861fe8531",
+      "sourceSha256": "87f17fde76aeb70c3e1941df7fabca1d3f7a04ba6fc9543ded2b46b047ad0351",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 4,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "e4b72eab4f353d2005aca38e8a36fb8e4ae5fdaa8299847155eabbbda76845d6",
+      "sourceSha256": "31a3dbe4d02ab14010e7bb95727a2b1e66f8ceb75b7cbb0d60e1b57556d51a8e",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 5,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "6e72c74cb8c6bdeee27ed9fffceb7b42f33ec98033f8f893cb0f93dd4d4ae6d3",
+      "sourceSha256": "5fa62eebd7f592ce717367d03ceba5de54b78018a2bb219d50896ea9edc2b39f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 6,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "0f060c75be78b4258bef39d0a85da62483014fc4c4691f508f5ffd38ec4d7903",
+      "sourceSha256": "5042666e580db64ac767b8557e5cf257d956f3b54b3407132136e2cc8625a723",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 7,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "3dddc09f3a490c260b3c53af21309a8882aeff132bbc6e53de04cb29bcb8bd21",
+      "sourceSha256": "8da1f46bd4418dbeb3da207c47142c0d26bc0d0a97f2266c398060bd8bc28c88",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 8,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "2b28245da5446e18f341743e646ecb6f313b8170e46df920d7c477dd959ebe01",
+      "sourceSha256": "8bf27c0f9435187ee2ed1d9f79eaa21097095118a34944b929de0cde801fc3a5",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 9,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "1740469bf040c696d1d84495578afd7473e965ef9ef1e852b033d1cab4837895",
+      "sourceSha256": "b75331eab2042bd04dcc0f6a92abe14b5c811864f48ffa5a426e480eccd7293c",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 10,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "c5a9ba7056f4f89df31feba90f42d51f89435c7bad52cb7f65a921abd7b99b8c",
+      "sourceSha256": "6a83e211a8fe2948a6d5d27a03d6d0f14739cb9714ea04119a541bf71c93abea",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 11,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "5be52f2031610278edfa867d752bd3064feb6ca5ecb189f0c1193ef37d82c341",
+      "sourceSha256": "39972a6ffb98b856ed4890cd2ee8716910ab78849d481da89ab0bcdd856d78eb",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 12,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "d41e3f7e97c76f8e180fc0132a0a96f253d9e3c629bfc9ac421360b7f92862c0",
+      "sourceSha256": "a9b72b057a0dbc3e15584dc13eaf1a50a2f4cf7eac5c25122c9423546568deff",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 13,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "ababb59c6e8de347b00f7e3e18595a25c284dc8b32ab9f52be9d8f853dda01e6",
+      "sourceSha256": "916288f3db875f82632303e93e475cb8813709165d946d4548f6bf6a338395cd",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 14,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "f1b8ed94fd0f06dabd1175079e5577d2d21ed392d7fc3412933688b411d30779",
+      "sourceSha256": "0af2303f3c601eeec553953822638cb366bd0ed90b4ff75928e8a3174af026e5",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 15,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "a7ddbc843c63347d870e827b8e37790b6c953b45e8ffd0295622effebabe46bd",
+      "sourceSha256": "db76ea828d78dbed967a3fd80800fc027b1891be52248d75f21a546b3224780f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 16,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "e67c960662d4e2713ef10f18577427dd8d75eac6a044f110c2793bf3da36f534",
+      "sourceSha256": "fc3729c6babdbd59e822385b641e16b388c20ffde28f19a12ad3e45622b743da",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 17,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "7a7cc02acfec7d5a07107aa0ec6d9d3de4b7c4801eb1b192e4fdcc56668630e8",
+      "sourceSha256": "5d1f667ac858a57dc87c6ae9ce7dd9876fe0b290ccee602929f08ac709b6e7ef",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 18,
+      "before": 8,
+      "after": 8,
+      "unchanged": true,
+      "reportSha256": "b3011b3970e3590ee4c0cd8fbc35d99d671778ce650a76ac00e037d5e3c2361a",
+      "sourceSha256": "4298f114b4e5df5e94d9dbd9dba5ff9594eeed9bc5120b3851e096ed0a48a76b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 19,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "0f44634ff0152dcfe1f059194eed41451cb990c9f92a71327255c4af53c1d4f1",
+      "sourceSha256": "d38d27fcaf2c1f733a85f8d6026d6e4b20f95a896b3d36ad3c2dabc80a65f804",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 20,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "bc3d2269b770d62117a0fa5bd9ebbf84e8d2c785e385a3519fff25c3a904133c",
+      "sourceSha256": "68eed09ad86c8cc644a69d7bc0549a124264f3b37386859b14e3e099bbdc2970",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 21,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "4a3b4dc952c79bf68671ea0adb71945f137d2f9e680e825a1d02e0ab74dc8629",
+      "sourceSha256": "47e5a32cbccf655ecd28fbcaeb70bf226205dea851e0d95547c07306b54a887c",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 22,
+      "before": 8,
+      "after": 8,
+      "unchanged": true,
+      "reportSha256": "1624191bd1e79878160a86470b6d76ee8e298176132fc6bf05e45f432489a49b",
+      "sourceSha256": "a2a7ebe471c4732562fc268bb2046dd1f911036eb3ebe89fb33577fa237946ab",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 23,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "6b1151c934912b71dbb54b89dc791a70c128c28a54b1a6cc18f53c82a2353a33",
+      "sourceSha256": "c61dc4c7fd155658619aa4082b079d9f80c0280c75248ff4c2fa03a870556e0a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 24,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "f006a6f6f0e0285faa57988482551623fbad692189afd733fe124f27191727c1",
+      "sourceSha256": "bf81c4535bce06f8c3f8198550810f251f236cc211abb35342641af1f42a52ba",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 25,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "e73684ea56f6ebe7d25942af8bd2b3e8708d9329bfefedc093d3de64239466d4",
+      "sourceSha256": "be4d95de71731b587cbd2e79dd4714b06addb9027403df88e85c2c3571ce8c91",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 26,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "d134f7217df2948843f2a315039c7d3ad4e0d0db90237814648009525548dd5a",
+      "sourceSha256": "f1852be3e3214bb077cd9a2438166f749fbce5b4f81a20486a9f46383568b4e5",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 27,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "17a7604c01540e8efcdd83ca9ec8ea1ee5f25bf1b36cd4b821db71b152aaa8e9",
+      "sourceSha256": "afd8030d5ab809323f992dbe41811cf132d3023856d0d15591a7838f62ff4a0a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 28,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "dd6d2dd22324b413f0c265c9f2a2d0341333424f634a7a938f0347c5318ee560",
+      "sourceSha256": "20ee6c0e9192ea9b8055b1528d00ea96aea27a9f696e3981903b4776aa282ea8",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 29,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "517237cb4895a805d3400ff36eb927f919438d5128e7d0b26753a7e6d3061ff4",
+      "sourceSha256": "dbe83c635dd30ecf134857c9a3e6c8c302a98afe3890fdb007a09550c468dd79",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 30,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "1ef361c47c1d55376d0134d28cfcab0b8fefd9fb0ed5f519aaaa3f0c7b156c06",
+      "sourceSha256": "5f610b7d380e4ae8f43c975aed6047adc1f8ff8ca10d13e16242c56e1beb89e9",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 31,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "ac341fe0d941da767616b5e7fa261ca9614aa4801a05769090178c0661ec22e5",
+      "sourceSha256": "586325880e5cba10398ab33dae0b9234ebf3af9ab647d3e974bf7e49297e6133",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 32,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "53dee60fb7c493e7067ccebf940d41c2a5b6312d6ef144780dc1440c5d6c9cee",
+      "sourceSha256": "0ca53fc50f2c66a00951c2949eb606ffcad171c483ad19cbe17578d9f247961b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 33,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "594e1be14b674112f550924489851ab85898e5826e39715dd1c65710f026e5ac",
+      "sourceSha256": "54326767cd10c9b943e264ff69b69e48b4e4c19a18ac1e1df68d27d6abb03081",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 34,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "eaa55cf1c5000f79a760a783d5bfad6b350e5eea0b06cbbf452e37a1f8b1720c",
+      "sourceSha256": "8e8c759d23bac998f0e934c9147f850277f455cbc0a7dddf1c54aef6021e22b7",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 35,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "f067be7e77576264f8be04824fd76728b9302c0c6d793ec537ae84f0aa498977",
+      "sourceSha256": "901b048226e716ad1f055d7a88c813f694829af0c52e3209a60a87ccd90762e9",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 36,
+      "before": 8,
+      "after": 8,
+      "unchanged": true,
+      "reportSha256": "c37898592eca38ac3b11fb7a52b7b1b89d26317d81206d896dc43e9aed4b9849",
+      "sourceSha256": "48363eb2c9ccdf3795da48be5e87a766a7be3e9ffc8253b098e86ddde35dcc30",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 37,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "3691b7f960673173d92df7825102b4608564705181543a42442af1cb2443e2b7",
+      "sourceSha256": "b787df33403882612e6e797efa29815d5af86a78aeb721a6cd10f8bb209abf52",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 38,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "98159f92b6094337afbe6b5ac8813bbeef43f5cdf65014bb9726072cfb327efd",
+      "sourceSha256": "8a9c01f1642c30c88b539081d337e17bd43df6bde2583e058280238e22297c15",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 39,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "8d93f3ea387fd28940260458fb7fc3a96a7518a12e54dd511ced4fd81e0b441c",
+      "sourceSha256": "80cc8b463c3745a285d16cf4d2c1d057561ac4749649300aae9258bc6d344f8a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 40,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "c836ec2ce5adb51d6c3ee3d03cc9bfe988cac634ce82cbed2b516a1f42b82ab0",
+      "sourceSha256": "38bd1f0373b5ed638ec08fdb5107cef0d96e02888806a72330d2f312a25ea86f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 41,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "ce70d1cea6c5eb6e11fa564e14a9023f8d487daba2871e932b9eab69cf20e739",
+      "sourceSha256": "26aa74b4127f4b860f2d080fb18e9dbab84c9485fe9bc5f266518b8a056d273a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "dfd587b09a75a48ad4ded3b37b643523d4e273b15f443badf0d674051cc7074f",
+      "sourceSha256": "1f60c2f4fb08b14497adc78e06f9a34da74f2ecd422e5381fd53666e6da9dcde",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 2,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "a51d6a2a240d119b21c786eb840fa06be52ac9a292c30c347d5bc509227296d8",
+      "sourceSha256": "b88d76196f7629279712e22021830534f58c99ec941112eda989913e07c2fe43",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 3,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "921cd5d908bb1d5701da5b584f919f46ceea9253853f4279c7b0d09f720e1a8b",
+      "sourceSha256": "0d889198d9b6f6c1e1da3441582bdfd02e926f41f676e9b9d3e4ed433ad9c665",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 4,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "e566b100ac59fc334bf77b61f9fd06064a56fad443f1b2f884452e1789316f2b",
+      "sourceSha256": "7ab408f31ecdfb0455317537da9baf110e090e42930dee0216a4610c424b45af",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 5,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "c6ef0459f1d232d25b975d06d5213ff2b813ab9318e0734ca03a06c83b403ba5",
+      "sourceSha256": "22d60e1e5b9f094d4d176b977300aafc110d7002118a26b3178241910e1fd079",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 6,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "b6d3d6f9e1b8e8263ff3fe9db58da43da4e1c32a3d8e0e8a9547ff074ee708cb",
+      "sourceSha256": "8489432b2d4f4c36cd1e95348fdc6e2b5c30b67ceb3435a7a51fc49dd552f529",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 7,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "f23965529ee9239872731111078684d9bf8d03c5e26336af10fd0f04c82cba22",
+      "sourceSha256": "b349ee15e232451a00ef002b95877ff65c6ae791064938d8bebb4941df34e9d4",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 8,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "539d440d5066e1a79237ab735ba21163eed63468b1b741b8aa1f4251508d1832",
+      "sourceSha256": "22aea5be64780b6670b352e9fc4045eb180f49ebc51dc3113ca399751d5e8117",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 9,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "608f0081fb77d69207027fb577c7d1592a82e08a4e8b06fb27cc176d4d1d43ee",
+      "sourceSha256": "ab729c85b7944990d81c042a648125152b991d7633360bb26b3e995c2f5bf0cc",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 10,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "de8d99353e42db229d8026ac9fcdbff28023fb344c733276d2f8b60855d4a835",
+      "sourceSha256": "b8b5def772004a0a83eaaa96a9918a5eb3bd86ad5d1a978e6162647ae770e91c",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 11,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "2ba8e383d65cf2d059b72ea6db741c6b9648a4b25ae9abbcebf2a3d0e05bf4e8",
+      "sourceSha256": "de58c7fece899f5be1d7781adeccd02d370e7b7123a2e84e25e236196cb0ca64",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 12,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "aca3610674f59d91c4e49dfb8abca58489f5c64271fff4f353a1eb5338e879e6",
+      "sourceSha256": "f738a303c6512a3f1eb813b3ad7247da6621f0f6a88138e6468f77e02c55266a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 13,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "7fc3f06a5386e84de882fc26d959d0da91618612cd3f5b38482f8b4dbb1b31fd",
+      "sourceSha256": "0cc7f91c74fff885a7f11f8860713af55e679c059878c93d97f7fcf3f7e4e2e4",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 14,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "397060e8af10a098857faade2d93093c18eb66f3a6a4723251cb862ee2ec30e9",
+      "sourceSha256": "6d9af9cb663e3e9894a37fadac08e776928d7ff84fc3b0b62da6aef10e762a23",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 15,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "cfdf0fe7b547c4009f98b5da189a769814e4d0121787b8afddbccee5bcd0e805",
+      "sourceSha256": "5d020203b2b732f7413aadd578d0bd9ac17ff5561978f6b15aa6675fb93300cf",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 16,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "18deee73de52ba726a02989dad0e3a1e1e6cf6f0f4167e4f624991b09aece3ee",
+      "sourceSha256": "6672de0bca08f264ac3388f3d4eebd32a490eb9618b664867df39f7bf41f6138",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 17,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "1bc9e78d5b559d8f4d2c166e34b0258ff49a7ad9029bd1b696a97e7481739167",
+      "sourceSha256": "9abd85b66c63718e7bec45a1b26086272d5091e6b2ca29ce230a585fb228fd8c",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 18,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "e32bb768031cc1dbb1d1c18bfdffc569fe9466a93c02a9917b7cb17feeed520c",
+      "sourceSha256": "ab117d7644c86ebe942a462b36872893dbca2525bc695ed64d3acfe0198a3e7e",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 19,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "1b1d09af73af8d6de5c3ad296d20f929d5615151ad5259a9efa5f1a223bf5cec",
+      "sourceSha256": "38a50e86bb4ef841cdb654f7215310210fa41297c5df05172372cb39b00f70e3",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 20,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "e266224ae9793979245128b7e56afb78f0cd48d10485b090f5c3771fa4f985bb",
+      "sourceSha256": "d09fb4eb166c131aa7f2da149e444cfd6a7929932e054cd0c75b69b462d5c40b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 21,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "7345f9d1f8d4adb273c00dbf876d26aef978c7a7814137acfda35303809e6509",
+      "sourceSha256": "f8e5c753ad368f534694697430622819fb465d43dce20de64323921d3987cd10",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 22,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "b0c41667556da1d0433680cc04250c3f1e6983e35b3e4441a8192506e39473e6",
+      "sourceSha256": "16de6906342192b395635ca27e614087f96903ca41c7c989b1b331108afc4252",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 23,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "b481e252e5dacf8bfbc11ff687bfa5c23c6e200713a9b2016970101ee86fd0dc",
+      "sourceSha256": "8c65ff94e4fc959f33dc36c6943a5c93ef26b75df1fdf5d0f9424c98a3a42a70",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 24,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "38fb3d2c30643cb71e8deca2468601572806d79054362dfa31634e43593718a5",
+      "sourceSha256": "7e31892c5a5520bfeff0046b9fdce1b8a1df3979b13e0d8d0adc3bbc05b8f61a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 25,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "f77f8112381f0f39d6fda07a47f76f926b80011375cfce44576b0f8ad62444d9",
+      "sourceSha256": "ffd9041697c6cb93b6705ae120a8e904556b6ed5ec5c1479a93a910ce9f63f70",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 26,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "52fa0283b42b4de2b7f920a9b2a71969732417c8b5e81d4cef08954d1bac2c9e",
+      "sourceSha256": "ab8e31cca1b35648cd151d1fc92f578fad7955e99fa2d03030a510f05bad958c",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 27,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "62f8863d4a55774f60e1fb2519d2af0413251901b208676caf58ac04d3e12d00",
+      "sourceSha256": "1782f75772974d4ba8ee6ce462e28efea579f21e9061c971ff8da880e9e35368",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 28,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "41f6aa5fd13e0c15cd9011d4b5f315debebd87a56232816b1cb8ccba0d118e53",
+      "sourceSha256": "41a9c5d29a669060686c5041bd01a764e02e341ab04cd2c8d500d6cd750f33b8",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 29,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "bcd2ca6c741e8914fd63311350fa092958eb622738e24e7692a59883ab690646",
+      "sourceSha256": "4e3c793610c6646a1b675aa4eceb30518cda3720888c773cb544a59c6d701a9d",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 30,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "66aecfb0d8146dff9a577d90f52dc7d7bfd77f68187b9d37d7cf2193b0a71248",
+      "sourceSha256": "ac0a803f5a10fee17722d22a5bf55b09afd70a97aa0429622f07b11bccd554b1",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 31,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "8cfa1a60d3700ef666f246466185873cf4bb323294ff48248444e256aaf9e8f7",
+      "sourceSha256": "889f54f08bfeb972307f8a28e0ca69c6c75242f5129fdcc18d2bc8e57420639b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 32,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "790cd0d8eea6c3d600f0a86c8509c1171b737d9210aef33511ac3a85d0b6fb51",
+      "sourceSha256": "a2a5b092f5e6ef2ee36f59f5537f07ebe55bd85ce6dc918fd30b20ca52fc5a77",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 33,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "c735b7b208f66b70faa1faa3347d575933946727190e0a8f90ca2aa2208fe579",
+      "sourceSha256": "204724c2eadfbc9d2eff8b5b5363c1989fd09b3c2a49a557a361426622694792",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 34,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "8dc574d137e6a18af0cbfd23b676b18cbf0daffb1d6b076d519f641f3af97d7a",
+      "sourceSha256": "43666397d058450c68e518e3943b8105fa7df629b8b8fba030793f386e85fc2d",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 35,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "72700a6f32be62977f7a85f2184aeccdaf69fef5a68be22efd2cc8388b4544cb",
+      "sourceSha256": "2be9d631baf568b3e7b130719495ac6f44a6c0e27ad121f03436f132a7e49cf2",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 36,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "acf0f2062eade0467a28c0d7813c87ca824af53c7ae9c016b891e22b0e497ba3",
+      "sourceSha256": "3a2be7e7444abe479b245de9ded776f7cc94066750bb41ae9fb20e878da4e1c3",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 37,
+      "before": 8,
+      "after": 8,
+      "unchanged": true,
+      "reportSha256": "51ec0852a5534931dd27f4e99742e2b10d29d1923ae4c9cbec485852f12071b5",
+      "sourceSha256": "99977e8ae18f8176df8a11dcc04dee776c944e4390d0d2efe80e3c9e09ffe477",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 38,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "62a33b99cdfe090118b329f8440d15a5b72f1e7b17b00a2c128393807cef8ae0",
+      "sourceSha256": "47a6311f654ffe67231e695e30454034bda65052379af067e78455ad12dec841",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 39,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "3e2fdc38f359b758f411e7daf352070856a77b0857057370e1ad7df708720847",
+      "sourceSha256": "088aa794d0f116d00897e3cde143ebbc5220f7e5010df5c9b44d3f9384ac52a3",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 40,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "03aabd323cd3db26bd526be25c80a54d12c5c610d29c409fc737a2feeab5d6c4",
+      "sourceSha256": "f45013bc5618c35dfb4f9a896fefff39363b8a30043e37d385a0d50037c54b21",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 41,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "7903dac8f68f804185960425b1b3ed21d2994264ab80b294fee1e0c22e9a86b0",
+      "sourceSha256": "f72cdb21e52f40dd67174131e16bc492d9c36363123b4631b725ec8cbcd52511",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true,
+      "reportSha256": "1bbae4419259242a4532c8d576fc5cd18887fecdfc5f7980b561682ab93b5c50",
+      "sourceSha256": "d91e9e04f2159235216f4aeca8bab038179b662f86b094e18ae4e559aed32224",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 2,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "0a5d52904244aa4e69a40b87e2950114cd20874e3f37a013026d73264e0521c3",
+      "sourceSha256": "a976a3abe510f2e25cb5a5413b1e93757fc3c1b725ebfcd5ad884dab0940b5bf",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 3,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "37545806ff9d7a2f043ed74b1aa32d48444662979012a1df02367b67b5d80b84",
+      "sourceSha256": "76cb4a9060300c721846efc7ae8ec644242537b0e5a1f03c8eeb43522c5e1752",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 4,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "e4b50f947b0b54e2fefc1ad90d8a90fb00e3d0771871b1d0822797cd0772cff0",
+      "sourceSha256": "c08935cd4ca6362849f0174ee8eca38edf52f2aaeb5b48fa0bfff1c2461188ee",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 5,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "aa47d13bd08603a4cc48c7c027b4007f4919fe8b0b51317066a748204746dd15",
+      "sourceSha256": "b693e9d486c323de71c1bb4ecce3c05ea96347653a4b184ad730f7206ebe19ef",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 6,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "bc3a026f12c00091aa23dcae6f1733f5b7b85a6d636ee2ee86985d7c50ae1939",
+      "sourceSha256": "42eaa69da826b508ab07ce53ef64a4f633f42c0bb4984f5e1cd3839156587cf7",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 7,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "8b5e33b6999bcfc8ffd9e1a6db669559fc2668db613f45a3ba9b9c5782a0b5f4",
+      "sourceSha256": "8e2301b1a64dffb51066b0237df6447c412f3c9df8c1cfbf2d66c205a0991584",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 8,
+      "before": 8,
+      "after": 8,
+      "unchanged": true,
+      "reportSha256": "ab2825129eb7fb06cc938c6252c3b1917adce8ba07eed0bcc8ef3937eef776d2",
+      "sourceSha256": "9a40c194d0d178d69db1ecd296245186f247269dd64132c17937389ddd49c09a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 9,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "a88f7c35fe353cceeca215c3698246cd75e3a979f357e5f4facb5ed3bdb750cc",
+      "sourceSha256": "054f6c136ef84b2aeb2d8b090b5bdca07c55ae35cc746fd25a6379a33c138958",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 10,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "851c8cd8fe8ac3ed6ffe469761cbaa96265d541a8161f0178df6d30551943262",
+      "sourceSha256": "ef9867d6454f4eb3936b263aa81dedcaadd008787bf458c8961858ae73f85cc9",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 11,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "46e58f3ea0e8979c658dcbf217383b9e4becf4a530ccac1ea7bd5cbb2cc4e9ee",
+      "sourceSha256": "54c89c79023eda2ed0d46fdbe73500b5382243fc5f70ef7e68719ba1f3367a78",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 12,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "d5d6a7f0f402d0bebe91abc1652b1873b497edacf2ed826f211e60a16b959f62",
+      "sourceSha256": "a0aaa103095877f2565bacc94cfee0b401922a6baa93a88ec0c2f8c614c7a0a0",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 13,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "7951f220db839a4239b1a540c7314c52545ffb33151e8559caead8564ae3cf0a",
+      "sourceSha256": "4a32f9d634dd4e2de68666c7f600ca2421235b17df3654e8729157526622460d",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 14,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "d1c06db175052b2b2a8067868a05d6468ed2a8260db4bd20ceecc0c14df2c748",
+      "sourceSha256": "93d016f2f42dc82bae94a6332671cd3cd28b9f0112b9fa32595b6ec1d6a044e9",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 15,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "4008695332a7386266522be142c115a93ec29bdac53fa154dee80d9ebea9e175",
+      "sourceSha256": "2561f342feaca96e90f52358496ceadbc766c9f1efc580cb8651b853169510be",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 16,
+      "before": 7,
+      "after": 7,
+      "unchanged": true,
+      "reportSha256": "32dba4e5c78e297a6c78a6095a1fd9705c6d6d14add25e8df24d7333b5fa0333",
+      "sourceSha256": "8cf1451cb212da35b9c1dabd9758781ff6d5b57cd9026d68b54b386ef1bc35c1",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 17,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "197a00ede455fab64817a29209edc07a889fd8a8afc679826a59842f97dbb737",
+      "sourceSha256": "3b78b8249c8d8ef2ee5f7de1c66a42981648745400f519377c5ae35935fa47cb",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 18,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "e8225051e8d74cfdd0bf557db8bb37ede75bc493a99415f72ba87c2eefa2907f",
+      "sourceSha256": "c74cc3683647c22c971d6c6808588e178ac0e00c710388649e80e93d75463246",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 19,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "e4589589d29e18692007e8dbb47efa2f0beeb562de402465f4ae7f4836519379",
+      "sourceSha256": "c877a047b5e55b3a29ef50999e969ed9ff2aab40704552abf40a3dcb1cfa98ab",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 20,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "595dffa30f79b83672ab9cb7b7d00db1f9d729c5fb674735fb6c3399f3c028e1",
+      "sourceSha256": "19aefc1679b7d3c587c88b8d10c880e09d4d6c8f091fac20bc91343b16ca9896",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 21,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "d56aeb845f7726a8ffca112af79b8764cb5033938999468bfe8661f42bd811ce",
+      "sourceSha256": "092988013c4aff3aa2598b25bd978f044e408b686e775ac96760f36f560c865b",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 22,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "135bf75cf39d56c9eb71d5b342eaa906a8ca08d8497d10d75285906e6f41f4f0",
+      "sourceSha256": "2bbd9f54147c9cf3e87bcafc9b787c295836cad916606ec1d6217533526803aa",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 23,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "7b617dd407510b6daad5d14336b7521e9265f766f0d65055792af44f9ec8f370",
+      "sourceSha256": "a17e0e317c339f22565b85f037e919604366c364d15ce0330565dc577f053a23",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 24,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "37ceaf20be6aacbe6f1bd20793993408bf470b979d9866035cdc8c4df98cc92f",
+      "sourceSha256": "4b673949873f57f89dc3483b3b0f82e3cdb160a12550275d0319d8c4758357f0",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 25,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "ab7764de12353babfd078cc6ebd826b86207255f626539074e1cc221e1e324a9",
+      "sourceSha256": "43d5b1603d7624c684847cc188ff48865fbaa215963483a617e7f189cb5d37c5",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 26,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "bc795fd60a307e61b117cdc5ab76247439cee14c0a166b681597244e0df66fab",
+      "sourceSha256": "79d6e9fe0f96930b2b808654c0ae4b1217451022f8884762a68e43e516b51f8f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 27,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "b0fb40114724160ea3d6de9df9c5b452e102d788c6d79f89706da9e72eaa8a97",
+      "sourceSha256": "8774fd9870e7038f6d3062bbaa01f693bd4de29dd96ee8f456bba2171d894ad0",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 28,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "4d2dcfa297243e14b2935e119643e458aa94e12cea96d5a4778693b789eb44be",
+      "sourceSha256": "5efd905966726ae9e4f7372023d61fdf0291282ae19c89b2bdcb0b2c7fde5919",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 29,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "c46785cb755deace200e88a10201642552862e50ec6028bc078ed815e2a38dbd",
+      "sourceSha256": "a259612e819015f2231fef54a39511654dd40631557b820388730f9416a0e95c",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 30,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "e7892ef3663523c3451fbabaad956b8a605b0afff03edc0a78b3f0101e97db2d",
+      "sourceSha256": "81cefd80e11de755a204a77e141d33195e7b267a43ef8cd87b1404b8c78d7c16",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 31,
+      "before": 3,
+      "after": 3,
+      "unchanged": true,
+      "reportSha256": "526189da173fb8af614c57e8598c7dda108abe90f1be6f113aa806155d0b55f7",
+      "sourceSha256": "d8f02b4ddbf5617773d322a775e74ec1f41bf4ce530978878afba5f8529388dd",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 32,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "dbd404280553e598ddfa160e2c41f18318d8d4016387c92e88e44d6153b1bad9",
+      "sourceSha256": "2e1c87740efe350605dee7d9e6ae9b00fbd07d71c5e0d7502acbf5ca392aa325",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 33,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "9f0ccdd3a0fc296fe690e1470914176148f2ee15a3bc0cc72ba6c8bc7f941334",
+      "sourceSha256": "396284c329885b0c241be063442576ee0aeee2972e4456800281a89d1ff6f937",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 34,
+      "before": 2,
+      "after": 2,
+      "unchanged": true,
+      "reportSha256": "72c28ad9cbdcb1d2297fa2332efdfa0c62f96d057f3470d113d31ef33f846b0b",
+      "sourceSha256": "17eb3a6dc2cefa3f5254870ab838fa853219b9d1624b8fea050e7a6e1ca4d516",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 35,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "7006121be414823341fe082432d62501d5a87ed0d10fed6110306ac94f639780",
+      "sourceSha256": "593f08bbddaf66dd48f5d9262f344c825d131af63b9ae19829212e1f7329add0",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 36,
+      "before": 5,
+      "after": 5,
+      "unchanged": true,
+      "reportSha256": "49a5165277618d55d22632cd4dcfd7c1093ee756badd623181d7b695243341b6",
+      "sourceSha256": "6e0b221ca7b5b38b2d2597e38624617b2fb6783125aee9f2eac71c19a971cafb",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 37,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "474fd8b4dfc1b9197b4e52348c910bc30cb77a00f44fc23b30f8b9cfbd988855",
+      "sourceSha256": "3de9bfb6693e8a8594dd308ac084f4e3b23d5af30f1be2f804166e2b4e997605",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 38,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "c2ac8294dff8b1432398dd1f316ba5dd0e6c37ea38b9f41b6a621da72745f770",
+      "sourceSha256": "509b5fe75728e565d2e711f70011fb19161dc99f0d192a555444a5111cd2531f",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 39,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "2af343b851ad3fb089c1cfad60bf5f1a3d7e783a6feb485d0fb5aae15342ba9a",
+      "sourceSha256": "75819a1cfade07c0c0952f6cdb8934f423b58b8c753f59cc18cdd54c0d7589a4",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 40,
+      "before": 6,
+      "after": 6,
+      "unchanged": true,
+      "reportSha256": "6c1cd889609b4ff8fc57167c5445a843f1dd22cd21f45ca16711158a2a34a1ee",
+      "sourceSha256": "d022f562c00c058a0d0308df4c813f57294927f75e36b51de3a950b613eace4a",
+      "accuracy": "unchanged; not a new accuracy certification"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 41,
+      "before": 4,
+      "after": 4,
+      "unchanged": true,
+      "reportSha256": "d7a3bcf6e73ceef3e24e2eaba1baa1c0ff19f663d276d325ef79abde870af26f",
+      "sourceSha256": "5ea6ef990ce201d3e4b9970455b735687812dc8abd3f4c43acd2e0dd5ed259b2",
+      "accuracy": "unchanged; not a new accuracy certification"
+    }
+  ],
+  "readerReports": [
+    {
+      "book": "apocalypse-1",
+      "page": 18,
+      "frames": 1,
+      "touches": [
+        {
+          "owner": 0,
+          "point": [
+            100,
+            560
+          ],
+          "dense": 866,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            175,
+            483
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            117,
+            530
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            105,
+            574
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            37,
+            618
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            96,
+            663
+          ],
+          "dense": 0,
+          "pass": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 14,
+      "frames": 3,
+      "touches": [
+        {
+          "owner": 0,
+          "point": [
+            350,
+            100
+          ],
+          "dense": 1560,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            218,
+            37
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            310,
+            74
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            460,
+            110
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            220,
+            147
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            383,
+            183
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            235,
+            310
+          ],
+          "dense": 883,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            166,
+            209
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            245,
+            267
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            271,
+            324
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            251,
+            381
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            274,
+            438
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            420,
+            290
+          ],
+          "dense": 1480,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            498,
+            209
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            381,
+            267
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            436,
+            324
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            511,
+            381
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            554,
+            439
+          ],
+          "dense": 0,
+          "pass": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 16,
+      "frames": 5,
+      "touches": [
+        {
+          "owner": 0,
+          "point": [
+            160,
+            140
+          ],
+          "dense": 1236,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            50,
+            28
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            44,
+            75
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            48,
+            118
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            226,
+            160
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            27,
+            210
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            430,
+            340
+          ],
+          "dense": 3637,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            560,
+            20
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            533,
+            175
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            486,
+            318
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            307,
+            456
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            322,
+            600
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            155,
+            460
+          ],
+          "dense": 2514,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            83,
+            215
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            199,
+            327
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            51,
+            416
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            211,
+            503
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            258,
+            597
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 3,
+          "point": [
+            330,
+            700
+          ],
+          "dense": 1801,
+          "pass": true
+        },
+        {
+          "owner": 3,
+          "point": [
+            72,
+            605
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 3,
+          "point": [
+            533,
+            649
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 3,
+          "point": [
+            198,
+            681
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 3,
+          "point": [
+            193,
+            713
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 3,
+          "point": [
+            31,
+            756
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 4,
+          "point": [
+            420,
+            810
+          ],
+          "dense": 740,
+          "pass": true
+        },
+        {
+          "owner": 4,
+          "point": [
+            336,
+            760
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 4,
+          "point": [
+            523,
+            789
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 4,
+          "point": [
+            404,
+            812
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 4,
+          "point": [
+            288,
+            836
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 4,
+          "point": [
+            327,
+            862
+          ],
+          "dense": 0,
+          "pass": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 9,
+      "frames": 3,
+      "touches": [
+        {
+          "owner": 0,
+          "point": [
+            300,
+            100
+          ],
+          "dense": 1812,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            16,
+            30
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            446,
+            70
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            108,
+            102
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            372,
+            133
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            417,
+            174
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            305,
+            395
+          ],
+          "dense": 1683,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            296,
+            175
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            387,
+            280
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            337,
+            381
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            287,
+            478
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 1,
+          "point": [
+            393,
+            576
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            490,
+            410
+          ],
+          "dense": 1455,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            427,
+            185
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            457,
+            284
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            537,
+            378
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            511,
+            471
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 2,
+          "point": [
+            414,
+            571
+          ],
+          "dense": 0,
+          "pass": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 4,
+      "frames": 1,
+      "touches": [
+        {
+          "owner": 0,
+          "point": [
+            405,
+            105
+          ],
+          "dense": 1226,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            256,
+            33
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            329,
+            68
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            457,
+            100
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            307,
+            133
+          ],
+          "dense": 0,
+          "pass": true
+        },
+        {
+          "owner": 0,
+          "point": [
+            423,
+            168
+          ],
+          "dense": 0,
+          "pass": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "build": {
+    "status": "verified",
+    "sourceCommit": "8cf8fda06cb8604ab9db7798b879c9eb5a90c8f7",
+    "runId": 36308340955,
+    "artifactId": 10927503729,
+    "archiveSha256": "b4dc3360b3ae9443a6bd5083fc77730fb0ade0796b720c37cbb0bf000c678ea2",
+    "apkSha256": "c0115aea3cf98d0a2d2f6104ffabc8a11d1cd0eed476d188cac4b3cdfb4e14e4",
+    "apkBytes": 3320930,
+    "assetCount": 71,
+    "apkPath": "/workspace/scratch/9419335135cd/recovery-test62/Test62/Nth-Shelf-2.79.62-Test62.apk",
+    "signature": "CI apksigner v2 passed; artifact bytes checked locally",
+    "package": "io.github.bdredenbach.nthshelf.frametest62",
+    "version": "2.79.62",
+    "versionCode": 27990,
+    "libraryFileId": "libfile_5c3dc221df648191bcf77cc753f3644e",
+    "saved": true
+  }
+}
