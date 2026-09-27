@@ -1,4 +1,4 @@
-name: Build Test67 APK
+name: Build Test68 APK
 
 on:
   push:
@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: nth-shelf-test67-apk
+  group: nth-shelf-test68-apk
   cancel-in-progress: false
 
 jobs:
@@ -88,7 +88,8 @@ jobs:
           node qa27900/frame-accuracy/test66/colored-rim-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test66/reader-contour-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test67/paired-chromatic-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
-          node qa27900/frame-accuracy/test67/service-worker.test.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test68/dark-overlay-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test68/service-worker.test.cjs 2>&1 | tee -a dist/regression-checks.txt
 
       - name: Set up browser test dependencies
         run: |
@@ -135,7 +136,7 @@ jobs:
       - name: Install Android SDK 35
         run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
 
-      - name: Build isolated Test67 APK
+      - name: Build isolated Test68 APK
         shell: bash
         run: |
           set -euo pipefail
@@ -148,10 +149,10 @@ jobs:
           APK=android/app/build/outputs/apk/debug/app-debug.apk
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$APK" | tee dist/signature.txt
           "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" > dist/package.txt
-          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest67'" dist/package.txt
-          grep -F "versionCode='27995'" dist/package.txt
-          grep -F "versionName='2.79.67'" dist/package.txt
-          grep -F "application-label:'Nth Shelf Test67'" dist/package.txt
+          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest68'" dist/package.txt
+          grep -F "versionCode='27996'" dist/package.txt
+          grep -F "versionName='2.79.68'" dist/package.txt
+          grep -F "application-label:'Nth Shelf Test68'" dist/package.txt
           python3 - <<'PY'
           import hashlib, json, os, pathlib, subprocess, zipfile
           root = pathlib.Path('.')
@@ -174,15 +175,15 @@ jobs:
                   if z.read(prefix+rel) != source:
                       raise SystemExit('Packaged web file differs from source: '+rel)
                   hashes[rel] = hashlib.sha256(source).hexdigest()
-              for required_detector in ['js/panels-ragged-gutters.js','js/panels-paper-recovery.js','js/panels-colored-rims.js','js/panels-curved-rims.js','js/panels-matte-cells.js','js/panels-edge-spill.js','js/panels-structural-grid.js','js/panels-pale-completion.js','js/panels-gutter-graph.js']:
+              for required_detector in ['js/panels-ragged-gutters.js','js/panels-paper-recovery.js','js/panels-colored-rims.js','js/panels-dark-overlay-insets.js','js/panels-curved-rims.js','js/panels-matte-cells.js','js/panels-edge-spill.js','js/panels-structural-grid.js','js/panels-pale-completion.js','js/panels-gutter-graph.js']:
                   if required_detector not in hashes:
                       raise SystemExit('Frame detector missing: '+required_detector)
           subprocess.run(['git', 'diff', '--exit-code', 'HEAD', '--'], check=True)
           digest = hashlib.sha256(apk.read_bytes()).hexdigest()
           record = {
-              'versionName': '2.79.67', 'versionCode': 27995,
-              'applicationId': 'io.github.bdredenbach.nthshelf.frametest67',
-              'label': 'Nth Shelf Test67', 'sourceCommit': os.environ['GITHUB_SHA'],
+              'versionName': '2.79.68', 'versionCode': 27996,
+              'applicationId': 'io.github.bdredenbach.nthshelf.frametest68',
+              'label': 'Nth Shelf Test68', 'sourceCommit': os.environ['GITHUB_SHA'],
               'signing': 'CI debug key; not a Play Store production key',
               'apkSha256': digest, 'apkBytes': apk.stat().st_size,
               'verifiedWebAssetCount': len(hashes), 'webAssetSha256': hashes,
@@ -190,17 +191,17 @@ jobs:
               'comicArtworkTests': 'Saved results retained; comic artwork fixture is not uploaded or rerun by this workflow'
           }
           (root / 'dist/BUILD.json').write_text(json.dumps(record, indent=2)+'\n')
-          (root / 'dist/Nth-Shelf-2.79.67-Test67.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.67-Test67.apk\n')
-          (root / 'dist/INSTALL.txt').write_text('Install Nth-Shelf-2.79.67-Test67.apk as the separate Nth Shelf Test67 app. Adds the two blue-bordered inset scenes on Rise of Apocalypse issue 4 page 11 while retaining Test66 recovery. Apocalypse detection remains incomplete. Phone acceptance pending.\n')
+          (root / 'dist/Nth-Shelf-2.79.68-Test68.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.68-Test68.apk\n')
+          (root / 'dist/INSTALL.txt').write_text('Install Nth-Shelf-2.79.68-Test68.apk as the separate Nth Shelf Test68 app. Adds the large black-framed overlay inset on Rise of Apocalypse issue 4 page 15 while retaining Test67 recovery. Apocalypse detection remains incomplete. Phone acceptance pending.\n')
           print(json.dumps({'sourceCommit': record['sourceCommit'], 'verifiedWebAssetCount': len(hashes), 'apkSha256': digest}, indent=2))
           PY
-          cp "$APK" dist/Nth-Shelf-2.79.67-Test67.apk
-          git archive --format=zip --output=dist/Nth-Shelf-2.79.67-Test67-Source.zip HEAD
+          cp "$APK" dist/Nth-Shelf-2.79.68-Test68.apk
+          git archive --format=zip --output=dist/Nth-Shelf-2.79.68-Test68-Source.zip HEAD
 
       - name: Upload verified APK, source and build record
         uses: actions/upload-artifact@v4
         with:
-          name: Nth-Shelf-2.79.67-Test67
+          name: Nth-Shelf-2.79.68-Test68
           path: dist/
           if-no-files-found: error
           retention-days: 30
@@ -209,7 +210,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Test67-build-diagnostics
+          name: Test68-build-diagnostics
           path: |
             dist/*.txt
             dist/*.json
