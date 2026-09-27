@@ -193,6 +193,12 @@ const PanelDetect = {
               }
             }catch(error){if(log)log(`framed inset triplet deferred: ${error.message}`);}
             try {const overlays=PanelFramedInsets.completeOverlayImage(img,identities,log);if(overlays.length)identities=overlays;}catch(error){log?.(`closed ink overlay deferred: ${error.message}`);}
+            try {
+              if(typeof PanelRaggedGutters!=='undefined'&&layout.length<4&&!baseline._provedInternalGutters){
+                const completed=PanelRaggedGutters.completeImage(img,identities,log);
+                if(completed.length)identities=completed;
+              }
+            }catch(error){log?.(`ragged gutter completion deferred: ${error.message}`);}
             resolve(identities);
             return;
           }
@@ -507,6 +513,12 @@ const PanelDetect = {
             }
           }catch(error){if(log)log(`occluded structural tier deferred: ${error.message}`);}
           if(!closed.length)try {const overlays=PanelFramedInsets.completeOverlayImage(img,closed,log);if(overlays.length)closed=overlays;}catch(error){log?.(`closed ink overlay deferred: ${error.message}`);}
+          try {
+            if(typeof PanelRaggedGutters!=='undefined'){
+              const completed=PanelRaggedGutters.completeImage(img,closed,log);
+              if(completed.length)closed=completed;
+            }
+          }catch(error){log?.(`ragged gutter completion deferred: ${error.message}`);}
           resolve(closed);
         }
         catch (err) {
@@ -1697,6 +1709,9 @@ const PanelDetect = {
         w: (child[2] - child[0]) / w, h: (child[3] - child[1]) / h }));
     });
     if (log && splitCount) log(`internal-gutter refinement: ${panels.length} -> ${refined.length} panels (${splitCount} proven splits)`);
+    // Non-enumerable provenance keeps saved panel descriptors byte-identical.
+    // Later fallbacks must preserve independently measured internal gutters.
+    Object.defineProperty(refined,'_provedInternalGutters',{value:splitCount>0});
     return refined;
   },
 

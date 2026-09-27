@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.60 — MONOCHROME GUTTER GRAPH
+// NTH SHELF 2.79.61 — MONOCHROME GUTTER GRAPH
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.60";
+const CACHE_NAME = "nth-shelf-shell-2.79.61";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -71,6 +71,7 @@ const SHELL_FILES = [
   "./js/panels-curved-rims.js",
   "./js/panels-matte-cells.js",
   "./js/panels-edge-spill.js",
+  "./js/panels-ragged-gutters.js",
   "./js/panels-structural-grid.js",
   "./js/panels-pale-completion.js",
   "./js/panels-gutter-graph.js"

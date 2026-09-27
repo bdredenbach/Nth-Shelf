@@ -1,0 +1,2697 @@
+{
+  "version": "2.79.61",
+  "code": 27989,
+  "scope": "Incremental correction; not full-frame coverage certification",
+  "sourceBase": "2285428759e7616e1fdf593e266db978fd58beeb",
+  "pagesAudited": 91,
+  "correctedPages": {
+    "1": [
+      16,
+      23
+    ],
+    "2": [
+      7
+    ],
+    "3": [
+      20
+    ],
+    "4": [
+      5,
+      9,
+      13
+    ]
+  },
+  "detectedOwners": 112,
+  "previousDetectedOwners": 87,
+  "touches": 560,
+  "denseSamples": 183833,
+  "independentSceneCenterTaps": 33,
+  "earlierPagesUnchanged": 221,
+  "allFramesCorrect": false,
+  "phoneAcceptance": "pending",
+  "knownLimitations": [
+    "Many overlapping, inset, gradient-background and foreground-bleed layouts remain unresolved.",
+    "An empty map on a story page is not counted as accurate detection.",
+    "Detected-owner counts and generated probes do not certify semantic segmentation.",
+    "Pixel masks are sampled at at most 900 pixels; narrow fringe errors remain possible."
+  ],
+  "testCorrections": [
+    "One old-page dense probe landed on a contour boundary; explicit contour-edge exclusion corrected the QA mask.",
+    "Measured internal-gutter provenance prevents a proposed extra split on Wolverine page48."
+  ],
+  "contracts": {
+    "capturedProofs": 33,
+    "rejectedMutations": 612,
+    "syntheticLayouts": 4,
+    "fullRouterRoundTrips": true,
+    "retainedGate": true
+  },
+  "pages": [
+    {
+      "issue": 1,
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "cover",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "5f8721b980b7a6c41344304226a16ff0d604e1812e568aa632ed556fe0e10d9f",
+      "readerReportSha256": "9ccaf90ba0e214f2332489ce6ddc3258feaf1ed666b34b8ae5b5ad3f8be950df"
+    },
+    {
+      "issue": 1,
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "cover",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "e50e740bb364ac5de92126891e05ac69146ca9f1d980033386a706c860012866",
+      "readerReportSha256": "9622400c9f85991ae866c6c1950320bb1b71c9204774c064fa9f11eb22c29491"
+    },
+    {
+      "issue": 1,
+      "page": 3,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "9f0c0f763613e2e27eff0a07b6d6e8506c8af72b6ef3cf8e2400f9b1e227f338",
+      "readerReportSha256": "383a57cea88eaa8e0ca7db41c509b594366619158df1dc28bf3cc8157ede81ba"
+    },
+    {
+      "issue": 1,
+      "page": 4,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "3ebcc935cbd1baebc105e0f7b0ce78db5c4b0b7a46a1cd84a3fc02812bafd212",
+      "readerReportSha256": "9ed27bdb70c4147ab4e28e783bcb3cd7d69c12eda1c55da96d3fb8c582fdba60"
+    },
+    {
+      "issue": 1,
+      "page": 5,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "c26cb53e38288698d8a642b55517bf980390864561542c4b2fa7e13029b42317",
+      "readerReportSha256": "8c251df84ed11f6b9e2b00d0feee3b9fa81b467a5a0c441a2d820f80ea87f758"
+    },
+    {
+      "issue": 1,
+      "page": 6,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "f3160d0ea78abf4c31c6c3b0c8c38bc1a226ac95436dfbd7ab46a1e953a67670",
+      "readerReportSha256": "527f0eb0d8df8e70259328398da9723f64785d32cda063bcca82fe410a90c8ae"
+    },
+    {
+      "issue": 1,
+      "page": 7,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "9242027efaa9beb4021a332d99ac65eaa254790c1e0f6427c2df5f13ba4406e0",
+      "readerReportSha256": "8c38fddb606220cbef708ce6b64b36050d6af3950d947f2d7c2ed1ca4098b7ef"
+    },
+    {
+      "issue": 1,
+      "page": 8,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "1aef869457c919be8460234fd64692b08d16d027fff3b8b0d51d04856d3df027",
+      "readerReportSha256": "e6dca63b37d45087460ac94a1489e56d96921f937e5611c17e26d30b28729bbc"
+    },
+    {
+      "issue": 1,
+      "page": 9,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "dc417167539d7b30addefa5572d5b9befb589798f457b0ca5a86e198a06ee969",
+      "readerReportSha256": "72f5f241351ff616d4d7732a3af0cdf153ba4cc327b68aa90ae294029abbd3fb"
+    },
+    {
+      "issue": 1,
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "8690bac41738f8b523c17f7ed85dc6ee8844e4c45065abf55ceb31523f8e6adc",
+      "readerReportSha256": "61e05e4c106dc30abe1cc49b907bf3a3d7148980ca355bd3b9edf3d62e6f97c4"
+    },
+    {
+      "issue": 1,
+      "page": 11,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "ec8b5b7939c9e0812d68a8fab426d649dac868c6ffab16209b6acf93b69e2d03",
+      "readerReportSha256": "13779f0da54bc2bc549460e6394b525188632f59916ab35c7088be549bbd0197"
+    },
+    {
+      "issue": 1,
+      "page": 12,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "be663b3ec9841117eee776b7b536c62f0c231971d3ed17c23c728ef0e23c6b4a",
+      "readerReportSha256": "484f6a0a4cf199ca65b7c89d8adb5d086e34f89ba67db4418813dc08f351a95d"
+    },
+    {
+      "issue": 1,
+      "page": 13,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "a0151118bdd912cafe54d8f4a0b94d8466471e1370a15c624162b7bf348e4509",
+      "readerReportSha256": "c82cc44ae9f4206626f993baa9d7278de044b439c32961afa0f0dd7adf5a612a"
+    },
+    {
+      "issue": 1,
+      "page": 14,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "e0a5f9699bf02c1f083bf9f1b20291119ffc4768e05aa3c29db34cbdfa8d0edb",
+      "readerReportSha256": "b3fa5eae96d2323c89c26ef4ca172178b155169a4093c95fbe002eb1acf72aaf"
+    },
+    {
+      "issue": 1,
+      "page": 15,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "0ee053b3de3d9629074dcc82cb4bb2639f0ad9aecd0d4265fd0190b9ae1668a2",
+      "readerReportSha256": "feab8cb281ede19b95fd3c509d081f2578017a20283329e39e34e060db53d671"
+    },
+    {
+      "issue": 1,
+      "page": 16,
+      "before": 2,
+      "after": 6,
+      "changed": true,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "confirmed-correction",
+      "readerPass": true,
+      "taps": 30,
+      "denseSamples": 6362,
+      "mapSha256": "18e6b3509197f321bdcdfcdebe1c2892a96e87de9ce1a64c82e38ea80cb94f66",
+      "readerReportSha256": "8d7e23047df4c2c02ebc66dae57cac889b0d0c71d2b4b53ffc0a251ddf183631"
+    },
+    {
+      "issue": 1,
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "735a583c9d9208507c7c5f9e06715b3e8ccc4f1a59d087786339b102a7439610",
+      "readerReportSha256": "fc6110fa7b1630c6920400f0be748c00fea2dff8fb40b7d9de9dda89c93856d9"
+    },
+    {
+      "issue": 1,
+      "page": 18,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "2f48fe45dcc4e680c64be8e199fe50007a33af15e0fe89c8fb69455960f868d6",
+      "readerReportSha256": "3a3621e28cdd2b3e16c0904b58474f1d1c22795dbdbc1ad53153d105ad273bb4"
+    },
+    {
+      "issue": 1,
+      "page": 19,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "8c8ffe5abc1708aeb9115c280a30ce2054a97495ce4ff685fc6465b567b721cb",
+      "readerReportSha256": "4c5958a37c9e2063dca54f11efc47827687f9da2a514d7bb5ad31109e795ad4c"
+    },
+    {
+      "issue": 1,
+      "page": 20,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "a93d454a0425a265a5ff4adbe431fbb6597b3a775af0c4ab298a3153fb628e56",
+      "readerReportSha256": "9f81414ae99d3a0508cf896c474341ce1586b9c062ae3b5cf7116b01510c2745"
+    },
+    {
+      "issue": 1,
+      "page": 21,
+      "before": 3,
+      "after": 3,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 15,
+      "denseSamples": 6902,
+      "mapSha256": "e230a6f9f76ac4c709543c2dd704f1d1520d9816883352e2b67de36e1ae400ed",
+      "readerReportSha256": "089f1b8f7e7eb5aad764d034cbd35573bcbdc7eaf3fa48e70ad418080182f604"
+    },
+    {
+      "issue": 1,
+      "page": 22,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "77d54f99a67b65d787c418c72bb13110150c3bb5deb094cdd26acbc4a2821451",
+      "readerReportSha256": "14fe6efb3359c5d190d30121fd8dc5cb121fd62b3d915f7ba6a4289306a0fb00"
+    },
+    {
+      "issue": 1,
+      "page": 23,
+      "before": 0,
+      "after": 3,
+      "changed": true,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "confirmed-correction",
+      "readerPass": true,
+      "taps": 15,
+      "denseSamples": 6850,
+      "mapSha256": "eb3898de137faa7540584f2c5b295f3a60e38cff688de2f39615b32ca01d56e7",
+      "readerReportSha256": "ea9d25b96ffec6012f210f02a27fc43fdbd713d04c506ce6b9c31078195814a4"
+    },
+    {
+      "issue": 1,
+      "page": 24,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "f925d82ac40233894b34cba326c9a1a329716a8f16bbfcf2855d3b5c0a4f889e",
+      "readerReportSha256": "152747fad4b0ea5f54feefe7dbe6725b2ea5ffa68f6bfaac06f91fac8582d517"
+    },
+    {
+      "issue": 2,
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "cover",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "1c3e831aa61665370615f326d3b5f13b93e6f3108d15d8d9743b91960afede5e",
+      "readerReportSha256": "9ccaf90ba0e214f2332489ce6ddc3258feaf1ed666b34b8ae5b5ad3f8be950df"
+    },
+    {
+      "issue": 2,
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "cover",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "8dccc0539eaf7353df6c939a21782a535c4a95e2bedfdb14dd868cab7c79fec5",
+      "readerReportSha256": "9622400c9f85991ae866c6c1950320bb1b71c9204774c064fa9f11eb22c29491"
+    },
+    {
+      "issue": 2,
+      "page": 3,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "e9d70e39c1c3689240aaf74f8eea6df8091d8e3d17a870af25d2c395d474b3f2",
+      "readerReportSha256": "383a57cea88eaa8e0ca7db41c509b594366619158df1dc28bf3cc8157ede81ba"
+    },
+    {
+      "issue": 2,
+      "page": 4,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "c2aa70fd6d903f9b55b4df6c9fcb2116552e4769142e7f8914e5a37f04b28fa3",
+      "readerReportSha256": "9ed27bdb70c4147ab4e28e783bcb3cd7d69c12eda1c55da96d3fb8c582fdba60"
+    },
+    {
+      "issue": 2,
+      "page": 5,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "6317362ebcdb907307005e8d8590c5c1872af959b5d90ef7c2c649004d95c171",
+      "readerReportSha256": "8c251df84ed11f6b9e2b00d0feee3b9fa81b467a5a0c441a2d820f80ea87f758"
+    },
+    {
+      "issue": 2,
+      "page": 6,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "bcb6018ba9f9244488325c85046549211929d39373d1ece3c8431d110b17e40c",
+      "readerReportSha256": "527f0eb0d8df8e70259328398da9723f64785d32cda063bcca82fe410a90c8ae"
+    },
+    {
+      "issue": 2,
+      "page": 7,
+      "before": 4,
+      "after": 6,
+      "changed": true,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "confirmed-correction",
+      "readerPass": true,
+      "taps": 30,
+      "denseSamples": 6146,
+      "mapSha256": "d4547668b9ebea312c20799269c04671190c23c39e2b23cf0016c39e90f08843",
+      "readerReportSha256": "40633468e6bc356043949a4645cc7fbad7e19ab431a36a60f0afd55d5091ea6e"
+    },
+    {
+      "issue": 2,
+      "page": 8,
+      "before": 2,
+      "after": 2,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 10,
+      "denseSamples": 9072,
+      "mapSha256": "03b6b3094e515fa61d8dd41f06981ffd2ad8f834603d74d74d4151a4ba905817",
+      "readerReportSha256": "30acf41512b164b42a949327b9ebeb2b11db667a129508ec0078a664c44ac392"
+    },
+    {
+      "issue": 2,
+      "page": 9,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "4bb192ec9d637e4e8fd88970ed92859c4e84df82efdc8e015235e9a33400ff01",
+      "readerReportSha256": "72f5f241351ff616d4d7732a3af0cdf153ba4cc327b68aa90ae294029abbd3fb"
+    },
+    {
+      "issue": 2,
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "29d83005363e4b34b94a430ea6287f4a5744ec231c1bc9bca9dc153ebe1c8367",
+      "readerReportSha256": "61e05e4c106dc30abe1cc49b907bf3a3d7148980ca355bd3b9edf3d62e6f97c4"
+    },
+    {
+      "issue": 2,
+      "page": 11,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "523fd1113bacfbc70d541641dcba3ed96acd8da56228436b62f98a49d3e4198b",
+      "readerReportSha256": "13779f0da54bc2bc549460e6394b525188632f59916ab35c7088be549bbd0197"
+    },
+    {
+      "issue": 2,
+      "page": 12,
+      "before": 3,
+      "after": 3,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 15,
+      "denseSamples": 6887,
+      "mapSha256": "09e3766f3ae6d93f731efaacaabd019dab72a39f014fd0c4fb63478c1051cea0",
+      "readerReportSha256": "1c8f472babd9f6ee66fa04654fb453e563caeb36f5ded992529d123e48653235"
+    },
+    {
+      "issue": 2,
+      "page": 13,
+      "before": 5,
+      "after": 5,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 25,
+      "denseSamples": 5554,
+      "mapSha256": "5ac2d2e4848bbb8cb02cf5bc3425a5bf7112ac4a0b1d441e20a51d0f715a4f05",
+      "readerReportSha256": "80ee27779a0e521b6919d041117cb754169522e5d3178408959455f1f6996a53"
+    },
+    {
+      "issue": 2,
+      "page": 14,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "53f5c43f85e99d07a5588451207d42ce3dcae70e63c0007172875c8edcb3ba29",
+      "readerReportSha256": "b3fa5eae96d2323c89c26ef4ca172178b155169a4093c95fbe002eb1acf72aaf"
+    },
+    {
+      "issue": 2,
+      "page": 15,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "c2dbf6c6bd791b8ed76b224a5125970b0bd7f5659af06f774400770a1f3c4d23",
+      "readerReportSha256": "feab8cb281ede19b95fd3c509d081f2578017a20283329e39e34e060db53d671"
+    },
+    {
+      "issue": 2,
+      "page": 16,
+      "before": 3,
+      "after": 3,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 15,
+      "denseSamples": 6465,
+      "mapSha256": "1e11ddb74edd363d623db82dac816caaec02d18f2c91fa4c92b6c783bdef6579",
+      "readerReportSha256": "5b6c3514ed562a6aa33ea8f1bca64e3a13f5bf6c447217fbb9bbe3c0f6ab729e"
+    },
+    {
+      "issue": 2,
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "4dfa0cb12acddd5a1a7eb2638cd1c217dbd95f711b621cee8c738aa55d8b4366",
+      "readerReportSha256": "fc6110fa7b1630c6920400f0be748c00fea2dff8fb40b7d9de9dda89c93856d9"
+    },
+    {
+      "issue": 2,
+      "page": 18,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "caff3a1cd778fd3a41423e5fd0c1e99913201fa5c85084a05cca54948885909f",
+      "readerReportSha256": "3a3621e28cdd2b3e16c0904b58474f1d1c22795dbdbc1ad53153d105ad273bb4"
+    },
+    {
+      "issue": 2,
+      "page": 19,
+      "before": 5,
+      "after": 5,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 25,
+      "denseSamples": 6415,
+      "mapSha256": "d8af6692bc0d4c70677c850d3d94e51bb2c952ad6ed92104c2e7a8f4445174b7",
+      "readerReportSha256": "3ecf3266407324c1769b764a149f9b694bbeb7a712947f3e8f85e7b694129f22"
+    },
+    {
+      "issue": 2,
+      "page": 20,
+      "before": 6,
+      "after": 6,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 30,
+      "denseSamples": 6229,
+      "mapSha256": "87dd44789f73e0b23e4b2c09ffd666bba036c865650556e606f510d43b9ec11d",
+      "readerReportSha256": "c7008907d077ef7063f3dd44b1a00bb48ff3a19b9a7238a4fe844a0c7ca2fa0b"
+    },
+    {
+      "issue": 2,
+      "page": 21,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "42d72d1c24bce35c5a2879feaef73c2637a111aa7d85eefbe250cff7522cf1c3",
+      "readerReportSha256": "b7ffcca5222ced4cb69bd19781bdb1ae554ee9ae7029556f1e42a9b5cc8035e9"
+    },
+    {
+      "issue": 2,
+      "page": 22,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "09a6e1699dc18a354df3297ed475836dc77ebc7383962fb3b3962b739605bd51",
+      "readerReportSha256": "14fe6efb3359c5d190d30121fd8dc5cb121fd62b3d915f7ba6a4289306a0fb00"
+    },
+    {
+      "issue": 2,
+      "page": 23,
+      "before": 3,
+      "after": 3,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 15,
+      "denseSamples": 6185,
+      "mapSha256": "a2916547292749b4330c7cfffd88261cf00d10a3c9f154c03e7a4b5f694aead8",
+      "readerReportSha256": "9e9d083788a5b8a221d5e02842ff9554b6a23469261bad1f452bc2909b7d2362"
+    },
+    {
+      "issue": 3,
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "cover",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "1ca31f625d5269ef3bb146b0215b7d875347c5fd920694327e528015b7925ad3",
+      "readerReportSha256": "9ccaf90ba0e214f2332489ce6ddc3258feaf1ed666b34b8ae5b5ad3f8be950df"
+    },
+    {
+      "issue": 3,
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "cover",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "09a7f12c7c8f30feb6287943544f4e3b4c5fc8bb4b77e09f6cad004f0b6590b5",
+      "readerReportSha256": "9622400c9f85991ae866c6c1950320bb1b71c9204774c064fa9f11eb22c29491"
+    },
+    {
+      "issue": 3,
+      "page": 3,
+      "before": 3,
+      "after": 3,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 15,
+      "denseSamples": 6431,
+      "mapSha256": "d403fed1f051ff1d62aaaa060a53f01269e7b52ce5ef4bf1f45925cc9694ebde",
+      "readerReportSha256": "6daea39425f208a9cf6b6dc0b3a93c70ea68e6ec3574f661901baab7393f7462"
+    },
+    {
+      "issue": 3,
+      "page": 4,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "5d1ad61af3c7e41bd22d98211bf7b8300f0c567b6349163c24550d9ac0bbdc02",
+      "readerReportSha256": "9ed27bdb70c4147ab4e28e783bcb3cd7d69c12eda1c55da96d3fb8c582fdba60"
+    },
+    {
+      "issue": 3,
+      "page": 5,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "2cdc4582b3ed8e32be012de02797d65463391c7c62cfb4d9bfa7f3d3483e8a6b",
+      "readerReportSha256": "8c251df84ed11f6b9e2b00d0feee3b9fa81b467a5a0c441a2d820f80ea87f758"
+    },
+    {
+      "issue": 3,
+      "page": 6,
+      "before": 5,
+      "after": 5,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 25,
+      "denseSamples": 4349,
+      "mapSha256": "f17cba436c7d3b8e6502044272f20482e33ec2b9bb6a8f31eab2381a7404676a",
+      "readerReportSha256": "8b54e56ddb108c12c61eed404bfc81e4368e8e01e70dacd73f8390bd29836544"
+    },
+    {
+      "issue": 3,
+      "page": 7,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "05c192c83e5932e65a1e039b9d28f5579de74d345aa6f3025919578ab67c0f7d",
+      "readerReportSha256": "8c38fddb606220cbef708ce6b64b36050d6af3950d947f2d7c2ed1ca4098b7ef"
+    },
+    {
+      "issue": 3,
+      "page": 8,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "fe33c287666a343a44960e3fee72ffce8b6f09d8369db4e0a1760d3fc87bdd48",
+      "readerReportSha256": "e6dca63b37d45087460ac94a1489e56d96921f937e5611c17e26d30b28729bbc"
+    },
+    {
+      "issue": 3,
+      "page": 9,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "697a9f34d338ff957d81e81786d1d36849ddc8d366a1344d53f072807b4f13e6",
+      "readerReportSha256": "72f5f241351ff616d4d7732a3af0cdf153ba4cc327b68aa90ae294029abbd3fb"
+    },
+    {
+      "issue": 3,
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "cd4ec77e2955fcbb886beea71b5d1d52447cf03157ae5bf22b58f3b47379f714",
+      "readerReportSha256": "61e05e4c106dc30abe1cc49b907bf3a3d7148980ca355bd3b9edf3d62e6f97c4"
+    },
+    {
+      "issue": 3,
+      "page": 11,
+      "before": 5,
+      "after": 5,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 25,
+      "denseSamples": 5370,
+      "mapSha256": "7503d975fbcb4b5fc9f59c071d7b3de46164a124ad80def44501950576188f3d",
+      "readerReportSha256": "c6f535dfc30e60db664a6bc93434ee1990481c736ffeed8be6c75a55e974b7d8"
+    },
+    {
+      "issue": 3,
+      "page": 12,
+      "before": 4,
+      "after": 4,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 20,
+      "denseSamples": 5776,
+      "mapSha256": "e4130e1ddad8995b316fbd18ead87e96846e22a549a7d574bf46cbdbf26b06aa",
+      "readerReportSha256": "e8b754f05f76c585cce72daab5aa446ce09d51268b069b88fb040860ac081ee6"
+    },
+    {
+      "issue": 3,
+      "page": 13,
+      "before": 6,
+      "after": 6,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 30,
+      "denseSamples": 4596,
+      "mapSha256": "e69b3149dc34ee6397b5a204c61f0cc2c7fba2f2ded38e989bd6fd2838cea2fa",
+      "readerReportSha256": "3aa21aa2142c5ffd9f96c2699e88145e37b4397941b4b8a62682295ceb65ded9"
+    },
+    {
+      "issue": 3,
+      "page": 14,
+      "before": 4,
+      "after": 4,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 20,
+      "denseSamples": 5882,
+      "mapSha256": "8cfa9d2f72a3622354dc63428954299e0cf38fbbaaed70e229af8adce8e6b75e",
+      "readerReportSha256": "c159f00229e1d35fead27e883f4a04c99526fed38bd61e62e104779475fd8d9d"
+    },
+    {
+      "issue": 3,
+      "page": 15,
+      "before": 3,
+      "after": 3,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 15,
+      "denseSamples": 6193,
+      "mapSha256": "bd5789df8658a98cebc8f50fa76d71db09f0516bb20fcd68dcd52f97bb548c0b",
+      "readerReportSha256": "9764cc8db2b074ead34cd85cd04c99016db0e7e38cce0a38a51d182257a76535"
+    },
+    {
+      "issue": 3,
+      "page": 16,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "8c8cdd33bed39741d5020c5232a4bd8068edcf36bca9c844b714e78decda8d82",
+      "readerReportSha256": "2d33c832f1f3acd0c1f51765fbf567494684666fc6f944507ecd6f709ca0b6ff"
+    },
+    {
+      "issue": 3,
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "22558bb5254be0afff132447649021a94fa97a4326b196f1ddd362c432dafd59",
+      "readerReportSha256": "fc6110fa7b1630c6920400f0be748c00fea2dff8fb40b7d9de9dda89c93856d9"
+    },
+    {
+      "issue": 3,
+      "page": 18,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "b65aaeb810478219c3662a991cc27405d3db803e24e17785f0b8fe22c3dedf31",
+      "readerReportSha256": "3a3621e28cdd2b3e16c0904b58474f1d1c22795dbdbc1ad53153d105ad273bb4"
+    },
+    {
+      "issue": 3,
+      "page": 19,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "f64dc1f14a3fcd44b0c854cfa68cf20526f700341c4742d36a24b24752fddc54",
+      "readerReportSha256": "4c5958a37c9e2063dca54f11efc47827687f9da2a514d7bb5ad31109e795ad4c"
+    },
+    {
+      "issue": 3,
+      "page": 20,
+      "before": 0,
+      "after": 5,
+      "changed": true,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "confirmed-correction",
+      "readerPass": true,
+      "taps": 25,
+      "denseSamples": 6414,
+      "mapSha256": "2b72f648ebb992b2266e40821adb8429632556dd978efc39bcfcdbd7d6a1bf73",
+      "readerReportSha256": "58a6d01d3b59e5bca6137ff7972678fd77073b3fcde325fc1fe56ca46b561a71"
+    },
+    {
+      "issue": 3,
+      "page": 21,
+      "before": 2,
+      "after": 2,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 10,
+      "denseSamples": 6976,
+      "mapSha256": "3c216333f6ca7d55ff2f0cc8bf178e1dc9f013887f7594a9a655464cf165bfd7",
+      "readerReportSha256": "d92e4293f14829711fbbc5d186960504315645f55c67c5d95a9af2fd54eb1fc8"
+    },
+    {
+      "issue": 3,
+      "page": 22,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "86a8ef216540f3fc00bec1ca3665edfc888d39e6ad20bd32b638870fe6b14069",
+      "readerReportSha256": "14fe6efb3359c5d190d30121fd8dc5cb121fd62b3d915f7ba6a4289306a0fb00"
+    },
+    {
+      "issue": 3,
+      "page": 23,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "917c0efb5a433f118a74b3c03300d60dd54415c39b9392effebb0484af3bd1a5",
+      "readerReportSha256": "248e062579adcff08674c972b711849782f80bdaf310e4e63fccea745cd42980"
+    },
+    {
+      "issue": 4,
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "cover",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "0bd0d551711293961841c503fd227c699750f0d6259ee6e92d3a7e6d7153963b",
+      "readerReportSha256": "9ccaf90ba0e214f2332489ce6ddc3258feaf1ed666b34b8ae5b5ad3f8be950df"
+    },
+    {
+      "issue": 4,
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "cover",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "5ed3ab012a3cf9a36f7d1c8587807494bf1d325f8bb0609282ff986000a94817",
+      "readerReportSha256": "9622400c9f85991ae866c6c1950320bb1b71c9204774c064fa9f11eb22c29491"
+    },
+    {
+      "issue": 4,
+      "page": 3,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "177df4f3bdaf266fffb8c81901fc01815eb033fcaeed68e879d689b16e44c7b9",
+      "readerReportSha256": "383a57cea88eaa8e0ca7db41c509b594366619158df1dc28bf3cc8157ede81ba"
+    },
+    {
+      "issue": 4,
+      "page": 4,
+      "before": 2,
+      "after": 2,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 10,
+      "denseSamples": 8038,
+      "mapSha256": "15a44eeda007cb8fa3c84d0197a5a93cc4e6d8e41dc926df01d055399e795bff",
+      "readerReportSha256": "3656b403ff4922fe02fc7b4e4cd3b35b71b062ca0e6096ac4d2fc730cb35019f"
+    },
+    {
+      "issue": 4,
+      "page": 5,
+      "before": 0,
+      "after": 6,
+      "changed": true,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "confirmed-correction",
+      "readerPass": true,
+      "taps": 30,
+      "denseSamples": 6377,
+      "mapSha256": "cc0cdd89047022dfecf7aad9664182ee6b579e829812a668587b4c4d048445de",
+      "readerReportSha256": "ce070082d28ff542742931b4d5c2bb3125e544ecaaa7af95e997eb69bd3f9c62"
+    },
+    {
+      "issue": 4,
+      "page": 6,
+      "before": 4,
+      "after": 4,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 20,
+      "denseSamples": 6134,
+      "mapSha256": "fbc68a32eabacda930ea5f621d47a7f77e99b2e7e4657568307e3d0d30a1c681",
+      "readerReportSha256": "7b7f5a16dafc49b01fae0fa5dcda29c46b812a182e944bcc6856a9d19a51e86b"
+    },
+    {
+      "issue": 4,
+      "page": 7,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "747d77c69bd47385b00396fc8f8b965665b739109085bfe49b2f1f81dde1d8fa",
+      "readerReportSha256": "8c38fddb606220cbef708ce6b64b36050d6af3950d947f2d7c2ed1ca4098b7ef"
+    },
+    {
+      "issue": 4,
+      "page": 8,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "c17f39081e6531d9c0c2633027b49c0bd0d8d11340e5658b0f664139f97e88d9",
+      "readerReportSha256": "e6dca63b37d45087460ac94a1489e56d96921f937e5611c17e26d30b28729bbc"
+    },
+    {
+      "issue": 4,
+      "page": 9,
+      "before": 0,
+      "after": 3,
+      "changed": true,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "confirmed-correction",
+      "readerPass": true,
+      "taps": 15,
+      "denseSamples": 6591,
+      "mapSha256": "6c5780ec087a454df9db237964ea7e0ae20e6fd14c085616386dfb8e3e0145c3",
+      "readerReportSha256": "d0147efdd86c3791e3c377f699c0b156e33fc64731922bfccc99bf308b2ac802"
+    },
+    {
+      "issue": 4,
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "7342225c2e7b7ce75352a013d339795640f5dcbce0ac2f86a2f954bff6fcb73c",
+      "readerReportSha256": "61e05e4c106dc30abe1cc49b907bf3a3d7148980ca355bd3b9edf3d62e6f97c4"
+    },
+    {
+      "issue": 4,
+      "page": 11,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "0bff4b2f5112b25fce0d939275dae2a9d1ba9396ab69ea98590892859f064559",
+      "readerReportSha256": "13779f0da54bc2bc549460e6394b525188632f59916ab35c7088be549bbd0197"
+    },
+    {
+      "issue": 4,
+      "page": 12,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "b66c95af91c80de29fc7035eef3d1eb0f52cc990b1d60050ec2f5f8b6156a791",
+      "readerReportSha256": "484f6a0a4cf199ca65b7c89d8adb5d086e34f89ba67db4418813dc08f351a95d"
+    },
+    {
+      "issue": 4,
+      "page": 13,
+      "before": 2,
+      "after": 4,
+      "changed": true,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "confirmed-correction",
+      "readerPass": true,
+      "taps": 20,
+      "denseSamples": 6358,
+      "mapSha256": "ffeda3ff0932bbb5dc59fb2fb2722b76e5c2f0a433286bf90e66370deb2fb9b9",
+      "readerReportSha256": "a29779b7e913a9b6631a7bee01d2aa88e61e2d22ee60ffed6a317e1d96781533"
+    },
+    {
+      "issue": 4,
+      "page": 14,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "cc851f1d3fefb36df2bed5760189130e900a33499175d1f0b8b7cb908e993d8a",
+      "readerReportSha256": "b3fa5eae96d2323c89c26ef4ca172178b155169a4093c95fbe002eb1acf72aaf"
+    },
+    {
+      "issue": 4,
+      "page": 15,
+      "before": 2,
+      "after": 2,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 10,
+      "denseSamples": 7627,
+      "mapSha256": "83aeeff5e6b7e6530751b445cbe88de57200100ee9ee8efc7304255dbb61bef3",
+      "readerReportSha256": "28f3533d1af445de45b5632869ce8053cb632d25618fe7526a032e39b1f0c09a"
+    },
+    {
+      "issue": 4,
+      "page": 16,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "9a6f2d81b46be33246b5495c19c4024793fb5ca114d5049bbaf1def5e048f38c",
+      "readerReportSha256": "2d33c832f1f3acd0c1f51765fbf567494684666fc6f944507ecd6f709ca0b6ff"
+    },
+    {
+      "issue": 4,
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "dab767bd27c573aa87182ba671cbf16793395d2ae912111750a8127d08838ade",
+      "readerReportSha256": "fc6110fa7b1630c6920400f0be748c00fea2dff8fb40b7d9de9dda89c93856d9"
+    },
+    {
+      "issue": 4,
+      "page": 18,
+      "before": 2,
+      "after": 2,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 10,
+      "denseSamples": 5499,
+      "mapSha256": "125718c16f281fd8cdab9eceee8dca129b819fb4facd0bed27d12b0ce1692abf",
+      "readerReportSha256": "b282da3e6732f466d1f2f583ecf961e61735cf840ac0d17e9a4ab4df82e5d51c"
+    },
+    {
+      "issue": 4,
+      "page": 19,
+      "before": 2,
+      "after": 2,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 10,
+      "denseSamples": 6204,
+      "mapSha256": "6f6647ad412d8c18624cd1e034427543a95077d679fc80a584af80d330ce8c19",
+      "readerReportSha256": "0cd86ded94fdedecb91796cf9cc65192a7669e5ea61dc23a7a87562b4e5a25f4"
+    },
+    {
+      "issue": 4,
+      "page": 20,
+      "before": 5,
+      "after": 5,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 25,
+      "denseSamples": 5951,
+      "mapSha256": "681d4ae08f6e86c11f643d93dbc6e434f829a78dfb50115057414f61c6a9b345",
+      "readerReportSha256": "eee7c57d585164b4074f14151e0ee131c609f0c24ff13444dd3e75630da6f618"
+    },
+    {
+      "issue": 4,
+      "page": 21,
+      "before": 0,
+      "after": 0,
+      "changed": false,
+      "sourceVisuallyReviewed": true,
+      "accuracy": "not-certified",
+      "readerPass": true,
+      "taps": 0,
+      "denseSamples": 0,
+      "mapSha256": "4d8883760ea18b8e2267a4b0dc92d244e60719f7ff29c723f75068dd27417e51",
+      "readerReportSha256": "b7ffcca5222ced4cb69bd19781bdb1ae554ee9ae7029556f1e42a9b5cc8035e9"
+    }
+  ],
+  "manual": [
+    {
+      "issue": 1,
+      "page": 16,
+      "taps": 6,
+      "sha256": "977753c3dc4e797c6b381a69e46485ab54c5c67b4166270f3c2924b8cb2653dc"
+    },
+    {
+      "issue": 1,
+      "page": 23,
+      "taps": 3,
+      "sha256": "3d4291a75f182f1974bb39d2dba07eaa9b4c6497598b804b093a19fdc6b21cdc"
+    },
+    {
+      "issue": 2,
+      "page": 7,
+      "taps": 6,
+      "sha256": "dc46cc942da817b67f28d591616490b58b912d1a753fd7611b5c5b0cc39660a1"
+    },
+    {
+      "issue": 3,
+      "page": 20,
+      "taps": 5,
+      "sha256": "f712026ccd409ae1558bd05a523108a0c5e55ab9d5def9edf4192ac69e6bdfa6"
+    },
+    {
+      "issue": 4,
+      "page": 5,
+      "taps": 6,
+      "sha256": "677e4292adbafc4443ea2cafed9a7c07f67cf151c10a1816e41acc6dbd551614"
+    },
+    {
+      "issue": 4,
+      "page": 9,
+      "taps": 3,
+      "sha256": "0eb385f7eec72c9497fbf2344041026bb6fb25ca0389c0d1645966aceedaaf07"
+    },
+    {
+      "issue": 4,
+      "page": 13,
+      "taps": 4,
+      "sha256": "9643339b8b6ee270fc54cc0df13f10976d5e1d0ad75006cf31d7fa3dd44615e4"
+    }
+  ],
+  "regression": [
+    {
+      "book": "manga-chapter30",
+      "page": 1,
+      "mapUnchanged": true,
+      "sha256": "a5ff94ec143d8f71257eefb4936d952267ce160555a69fabb9b040c8f54f0b24"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 2,
+      "mapUnchanged": true,
+      "sha256": "346e0b26289798b158bf4b60ef2c9d77873d2ca460b8e7307871246c0f401ade"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 3,
+      "mapUnchanged": true,
+      "sha256": "6644ec1cc83a01423c6750d387841a530d8d6c19c0db31706ed8b36e8a53c304"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 4,
+      "mapUnchanged": true,
+      "sha256": "6c6f6c8c794ab2b68769e450a5dbe6d71a276a2946db62feee54e8b3cfa4ba58"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 5,
+      "mapUnchanged": true,
+      "sha256": "2058a42c9d308a01b2d99f9df8e3d0ae640f3e80f3597652a0a457b4c526ef78"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 6,
+      "mapUnchanged": true,
+      "sha256": "0bbf9377eacf9158c387ce108edd9d39ec3a31c3b0ef26e1af90b7c90db5f554"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 7,
+      "mapUnchanged": true,
+      "sha256": "f4afdbe4d4b91fac4e59227ad75fb8910eafcc4e4de6db966456d79a7148e0bc"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 8,
+      "mapUnchanged": true,
+      "sha256": "c93ae9426440a655acb1eda297e69b85b082f0e4dfd3d8afed6effd63892f2ec"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 9,
+      "mapUnchanged": true,
+      "sha256": "11abb418fb141f84c89eb119e038ca4a81d9589e9b2cfc252cae24c1de0784a1"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 10,
+      "mapUnchanged": true,
+      "sha256": "1f3fb1722c70f3ec2204caec96d2c4ff05c5861f81bcb73ec83f1d3631281fe9"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 11,
+      "mapUnchanged": true,
+      "sha256": "6215086bbc653d5b7cd828c4e8d1ab14cf573dd65f72115a2711fb711b7b8a39"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 12,
+      "mapUnchanged": true,
+      "sha256": "ab2c7e6f152f3c68000fcec8bd829bd3740bbd30084771bfc9e073bfaacd9620"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 13,
+      "mapUnchanged": true,
+      "sha256": "d87cd884faa65352c201cf3a63bd1d7d263f742bb7fbd797ab0c02e998337eb8"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 14,
+      "mapUnchanged": true,
+      "sha256": "827b2ee0b4d6579a6d426ed5fc104e7f91606c882ee7fa5e6602527d0db8ef4b"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 15,
+      "mapUnchanged": true,
+      "sha256": "01c9870dfcc174bc12263932dd2c07b0a4297c82013902ffba8fc03fba69cb0b"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 16,
+      "mapUnchanged": true,
+      "sha256": "2a2afc4881127630025a0da16fe59d07285d7f5c113d759d896fba8d70ea85f6"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 17,
+      "mapUnchanged": true,
+      "sha256": "46eb60918112a29a4e7c8bdcace80081208600ee8a26d559fa953d2d64f7e20d"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 18,
+      "mapUnchanged": true,
+      "sha256": "c4716ce400927b72c7a95a65345413dff2c69b0a42d5c1ebc68d3bdde7cc1466"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 19,
+      "mapUnchanged": true,
+      "sha256": "a3e991f7f53d8644fc9aafb3d0bbb56fbcbfac66e5f6ca373f51f2d1810dac5a"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 20,
+      "mapUnchanged": true,
+      "sha256": "ae8b15f27c94800b1704f90e454c596bda456a9309edc4f20b8e00165bbd8ece"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 21,
+      "mapUnchanged": true,
+      "sha256": "7105e83c093a531362bbc156e4eb956189c5e97ec15037e1bf582c3bb6760a16"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 22,
+      "mapUnchanged": true,
+      "sha256": "9c80089589113d9867c2c6d26e660e2dc0383f0ddb5ee96a04140c3357844bbc"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 23,
+      "mapUnchanged": true,
+      "sha256": "184caa94a57035d4274b1e960d7063a8bbc95d73a2013848742b4c94cd2db110"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 24,
+      "mapUnchanged": true,
+      "sha256": "98831615fc0c6156f4eb54bf5bdecb07d230d60b96b2f15625062406c8bee262"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 25,
+      "mapUnchanged": true,
+      "sha256": "227d11173f49db89c1a2139184781c9791ae9002131659b750547436c332df11"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 26,
+      "mapUnchanged": true,
+      "sha256": "444d32ca8bea98daf0e7ba7dfbd9fddc35da9484a7796e84ba75d1dba09d28b7"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 27,
+      "mapUnchanged": true,
+      "sha256": "fc531e321431ef4792bca0950b58f8e4cc427c0e184b9d4e84bf0aa895dd783c"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 28,
+      "mapUnchanged": true,
+      "sha256": "dc42700e82cebd37715e32c27dc3e0f1d275c984d9709b50dee1b73d2b73484d"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 29,
+      "mapUnchanged": true,
+      "sha256": "2bc16eb427e490ce0406ad1dad641df1e7fcbd71ff33bc2b6cb6ff923941c68b"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 30,
+      "mapUnchanged": true,
+      "sha256": "3d6b8d50557714eb7c8fca187a56e43ed8543d12f5535219cd5f0f2d9d0af694"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 31,
+      "mapUnchanged": true,
+      "sha256": "ba5bbf095a34772a5440964b9ac1b87dbfcf3db33ad68aa4988d8c7437519f8e"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 32,
+      "mapUnchanged": true,
+      "sha256": "222c1e5d0efaa557a60c789403647baed46c8618b32b745b1d62bc9b72d2bafd"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 33,
+      "mapUnchanged": true,
+      "sha256": "ec997f275a5ce7dcc3dfcd9ffa1b25e934548913d4d349402a4882169cfa9202"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 34,
+      "mapUnchanged": true,
+      "sha256": "33aaf245b44971d02df63c475ac069789d55960b8bcf8da25169347420374b20"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 35,
+      "mapUnchanged": true,
+      "sha256": "9d5950607e8be93600148807cec4c6c139db88ab34a844768c116553a872fdd3"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 36,
+      "mapUnchanged": true,
+      "sha256": "12fc757434b0ca8bcfcc61bd31f76c2c734475d78d8d8fee1cb737fdfb9d11e3"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 37,
+      "mapUnchanged": true,
+      "sha256": "8fd23364d4e0c5a209a84f2bd90a6fc6861c73d079aa571106b53fb8890550cd"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 38,
+      "mapUnchanged": true,
+      "sha256": "afcce156757ae2559c998d2aaee15515033bce8ae33d9da4792603c4910bacbb"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 39,
+      "mapUnchanged": true,
+      "sha256": "c0cd5855d9f110d55898f0a7380dd9c9eb427d9635cae3a62b0c48c62f6b5e6b"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 40,
+      "mapUnchanged": true,
+      "sha256": "e55bc3845ae8c348c6eb4a117601cfef7e02190d624a9b01d33f5ef8026e1ac5"
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 41,
+      "mapUnchanged": true,
+      "sha256": "97030d291135fa6f779e0b23d7ad84ea950abc1c5a9d3d665c1c10a421205dcd"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 1,
+      "mapUnchanged": true,
+      "sha256": "461924e5a03ac3825c91cc1a7640cd41aeee528c7624f8b6b051c1c4489717b7"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 2,
+      "mapUnchanged": true,
+      "sha256": "41f8560c17663aee3d2ca1dffae445d55a3e9a72250b9615b84f8cc1f656156c"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 3,
+      "mapUnchanged": true,
+      "sha256": "73ba436133fe61b0712ccc21a07ebd9be580fff2d3daf83d97687371e0f13fee"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 4,
+      "mapUnchanged": true,
+      "sha256": "1c8f0945d16d7e65fde413eef80a536de4032113d2052bb7d4c1348668dc42a6"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 5,
+      "mapUnchanged": true,
+      "sha256": "6b8e18c99e484dd816fc461d0c30e30f3a3910eb4d61372da94f6a06d891e69a"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 6,
+      "mapUnchanged": true,
+      "sha256": "e769bbb45f24ed7f3efdbb8b1fe8f716a57470e223efc1a9811cbf01dcfd6fae"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 7,
+      "mapUnchanged": true,
+      "sha256": "97b0bcc3190693814b32d1d3dba807f47bd82cfc832b6e959fddff925629d6cf"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 8,
+      "mapUnchanged": true,
+      "sha256": "258342cf8e3dfb06f255c146f24ce9f3fd7bd4e6fde1dc1fbf9a188f5828b2cd"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 9,
+      "mapUnchanged": true,
+      "sha256": "17b8614e36a8f908ad7ede169bba4e7620bd94e66736e942c6067e5714e4811f"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 10,
+      "mapUnchanged": true,
+      "sha256": "4ec0a11a8d8b702e1a073ab87a525a801f8e0f8aec8269d89c24aa3053725bcd"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 11,
+      "mapUnchanged": true,
+      "sha256": "d096a4df0b658d8164dedbf5ed054c5e9e587351a4e33c7975d39c03a4d86443"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 12,
+      "mapUnchanged": true,
+      "sha256": "bf86ac12506c4bae8d667fbfa0bbee93120612025a33d8e22d69c38c6be5c0b2"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 13,
+      "mapUnchanged": true,
+      "sha256": "1c2703d28f337dc507c778cc0f0ed64d5f6ac3101331f44136b7e49782cc0140"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 14,
+      "mapUnchanged": true,
+      "sha256": "5db6582522bac1b180a72a92b1ccc1306240ae9b3471e7155dbfff540a739311"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 15,
+      "mapUnchanged": true,
+      "sha256": "812405c4b9f5ad95dfe59c08bda3109ecedee3ed6968923901e922e2c570fcd9"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 16,
+      "mapUnchanged": true,
+      "sha256": "2492146571da0776f7742dbaf8ade39fb553ae9ec75a2d5566cb7b39cbe5d040"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 17,
+      "mapUnchanged": true,
+      "sha256": "98a1d7df9d80552c74615be53847c8afc0537bf1e83ad64aa5cb9d97527e125c"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 18,
+      "mapUnchanged": true,
+      "sha256": "a5016e8d670e1b4a59c562af633fede1b02b13986b5584d5d651de36adf55083"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 19,
+      "mapUnchanged": true,
+      "sha256": "ca5e9c0cd927cac9057ed467661e810da48040c483913bdfd6954ed44bf9b09f"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 20,
+      "mapUnchanged": true,
+      "sha256": "514ea65fb169e61d7705c3e6623e35d66249bfdadd402153807234fe635f37d6"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 21,
+      "mapUnchanged": true,
+      "sha256": "af4e47829af7b64df60659f6e2c9556923d397a8b26953e4840abcb9978c60e6"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 22,
+      "mapUnchanged": true,
+      "sha256": "f20a04ee4c03b3b4bed6c017db2bdc15afb237899ca3990f4ba7b36a3172e6b4"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 23,
+      "mapUnchanged": true,
+      "sha256": "1e5c2436067a8ffbbaa129f8ea9b455883d7e8c87de00bbbe63d43208f3ea916"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 24,
+      "mapUnchanged": true,
+      "sha256": "a8e72e03de6ecad127ff7fda14b5184720d03b95127831d2ab3c919c99a453f0"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 25,
+      "mapUnchanged": true,
+      "sha256": "e188870824dd947bc88b73178e208e285c402327efa3d77702b84383a528512a"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 26,
+      "mapUnchanged": true,
+      "sha256": "e5a338b02c608abda68cea3a6b64dbdbe962e012345d2adeae61dd8043f1bef4"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 27,
+      "mapUnchanged": true,
+      "sha256": "24e688db9bf2a0abfc9998d16120b5e25bcfabd0ebbe29975ca5118fb66f3290"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 28,
+      "mapUnchanged": true,
+      "sha256": "5bb0d9e145fdf35ead1dd9799ab1083301013dcc41a6e1138e2b66c295f8f538"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 29,
+      "mapUnchanged": true,
+      "sha256": "31d64a29fc3e068470841276403f39a5ca2995ca343935e8db31b228f2b7e491"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 30,
+      "mapUnchanged": true,
+      "sha256": "9978a55de7a0ec9d862716e227baef49f81a6d26032d6ab3a5c9a1718f16da62"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 31,
+      "mapUnchanged": true,
+      "sha256": "c5c3711c4cc78677ce931d7830865c79cc0086aef83df711a7e6a81983c70dcf"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 32,
+      "mapUnchanged": true,
+      "sha256": "3f8e87b8562ded1f1b6b15f516178a3f6a3d549f7ae2b0caa79ee4bbd3f051e0"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 33,
+      "mapUnchanged": true,
+      "sha256": "8eee0e7e086ba5368de607d3b88cc9e23cabab4076cb1223c5765d59fe5d6b8f"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 34,
+      "mapUnchanged": true,
+      "sha256": "7e8cf49262daba1e37fc8bfc22f225e07575c7b4e5b2d8144ec0dcc0ea4912ce"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 35,
+      "mapUnchanged": true,
+      "sha256": "25834890ff13edfbceb1b6d543cc8d15b88a7345d44a277fde69a6aff33822e4"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 36,
+      "mapUnchanged": true,
+      "sha256": "bc48d212e1569b89f9800059d5accff4b4332ae5c17de4adbb007e2100906c57"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 37,
+      "mapUnchanged": true,
+      "sha256": "cfbe2871a4bcabe29be92ae340013c010d1d2f1dbfb7596fab78138186c73d00"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 38,
+      "mapUnchanged": true,
+      "sha256": "b9c09e3fdd91b45f7c321b10ee24f81da0fcf2ae53b188a22ba93bbd6ca49452"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 39,
+      "mapUnchanged": true,
+      "sha256": "bda5db084f9d831801ab7100e16efb6d4cadd2c03c1732e42393e8002d4d34fd"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 40,
+      "mapUnchanged": true,
+      "sha256": "b38c57ed2e94c4e7170246772063df5e2563383c34638fd558b07576c5bf3c4c"
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 41,
+      "mapUnchanged": true,
+      "sha256": "5889776354c5428453b37ebd3932f3ed28e7f4e19b3bbe05b7cb886654f406c5"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 1,
+      "mapUnchanged": true,
+      "sha256": "c9dfea919f294e4555cb04d707e0ba3fe664bf13c69d1dc46d5bc83093cdeb6c"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 2,
+      "mapUnchanged": true,
+      "sha256": "cedcb23c365b4470f38e1516627b5db816ea5eab0444941515d5401216b73774"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 3,
+      "mapUnchanged": true,
+      "sha256": "d458ba6dda782c9710d3537720a8576f5f8044fd68b67d6125fc8b6eaf4af15f"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 4,
+      "mapUnchanged": true,
+      "sha256": "dac5bb8aa1e3175872be6cfe4a92890e77292ae120134422e9700d38dd447fc2"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 5,
+      "mapUnchanged": true,
+      "sha256": "411b0a4ef97b5c753ddb6f06577d2d9079d43dc1964a3d75fcd865f462e9b0a1"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 6,
+      "mapUnchanged": true,
+      "sha256": "11db4e53b3f7a9f9b453964198166abaee4d05cf080dabbf83e3c3cf05529c05"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 7,
+      "mapUnchanged": true,
+      "sha256": "a3afbfe405b06b3ffb328b9ea3b0f923775dbf300b13ff200713f8e98d8ec859"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 8,
+      "mapUnchanged": true,
+      "sha256": "0dc3222d8ef54def9db1c5bda84f81057f7f277f2439c61ec74c0e86587eb943"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 9,
+      "mapUnchanged": true,
+      "sha256": "43ff75e1d5d04f0ecc899a90c90ed7c3a68aa30bf610aabe43273bd3e8d4fbbf"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 10,
+      "mapUnchanged": true,
+      "sha256": "f5b90494ca1109215fb162b2c4f474a7f121e3628f4bb7358b11fc6bb5a1780c"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 11,
+      "mapUnchanged": true,
+      "sha256": "08cffd45db3b6547c3202da85f2323e3640f2adbd3f6b861c869bd2b6ec7b23c"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 12,
+      "mapUnchanged": true,
+      "sha256": "865740cdd02159e087e70025a6a237f067d7774add0ea204e763b82d9734fbd3"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 13,
+      "mapUnchanged": true,
+      "sha256": "ee2e63ff159e3d21e5ab1973007839e601dcec60a7e409ecfc0b358f7d8db603"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 14,
+      "mapUnchanged": true,
+      "sha256": "9e40cfd60fab25496f7302d4139f7303fb8c7ef36bc155f8293eece2b350894d"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 15,
+      "mapUnchanged": true,
+      "sha256": "647674d3b1637e5ddd86cfc7d9838915c2def2a8b7489da4e607e45706b4e5f0"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 16,
+      "mapUnchanged": true,
+      "sha256": "f34a2920120c9ec2b140c67287996047c51e366897b81135b51bb7f2c1574549"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 17,
+      "mapUnchanged": true,
+      "sha256": "6f484d0f3d6241c1261342bbcf448fff142f3087aaad10b0dcfb8e5b91ea578c"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 18,
+      "mapUnchanged": true,
+      "sha256": "05e597b9c4d2589b1033ae71baaaeb82ae4be9b43abc686facbb29db611d71eb"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 19,
+      "mapUnchanged": true,
+      "sha256": "4cc9a16584b208fab2a9b0d25ff0f769ccef9a6570095b373bfeeb5b7926d095"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 20,
+      "mapUnchanged": true,
+      "sha256": "61075d21a2fd47216fa220c79dc396f3e91edd86812ae41d06ceb39baf5aea4d"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 21,
+      "mapUnchanged": true,
+      "sha256": "c1b1be2f41e8af179ef5463276420f48c5c7217eee737c9d8fc8611068062b82"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 22,
+      "mapUnchanged": true,
+      "sha256": "3f9ade34661ebbd81904ef408d386cad04fa5aed1cd97f9e55463c94dd84c31d"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 23,
+      "mapUnchanged": true,
+      "sha256": "cfd56c7e704ec40f145860dcb32b1dd99f8e6c35d9386667f296e6146c8fbd2a"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 24,
+      "mapUnchanged": true,
+      "sha256": "6842a9cf45db853dbe8b9c19902fa52a519552fc7829a0bbfa861ca30fddd2b0"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 25,
+      "mapUnchanged": true,
+      "sha256": "e6a2fccdd7100dedf542113a24cfd022ee213a795fbf8f0d7ceab8754816eb4a"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 26,
+      "mapUnchanged": true,
+      "sha256": "0af5889d6c57d1eaa35f24e0101b430a15608fadb52f90167ed97bce8e7d0dae"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 27,
+      "mapUnchanged": true,
+      "sha256": "09b2824f7f8022f6905de6c7d83aefe28024b022a7131951642289fe1144e7d3"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 28,
+      "mapUnchanged": true,
+      "sha256": "2fa3cf1e84060a477d6ab086f9e15731e4db293664b2503be7b0f287b1c9ebfa"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 29,
+      "mapUnchanged": true,
+      "sha256": "8e83f138509d1837f04b16b8b758247944c5a055251f40c9e55543a229cd405f"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 30,
+      "mapUnchanged": true,
+      "sha256": "f0263031c63bdac0b95e025c23f51d1488b4fd61ad6938513ad3ad98af53af7d"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 31,
+      "mapUnchanged": true,
+      "sha256": "d77ea7c29000ce7d03596f9a6243dff92ac381e0c24c0ca4192e500baf551322"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 32,
+      "mapUnchanged": true,
+      "sha256": "9422030312ca2cd9ef5fd1a94f3ca6706d4b73ea34746d5312e87bb30e4d4f2e"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 33,
+      "mapUnchanged": true,
+      "sha256": "01b891e7a2f1da31184454530878276d41c815c59f295f614a1a1372d0f82ba5"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 34,
+      "mapUnchanged": true,
+      "sha256": "e03c2574e02d0f94870b5ac7a90a91da44724db08cd5c7b0dd5853962bfe0bc8"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 35,
+      "mapUnchanged": true,
+      "sha256": "7a18421778bde6e864ed2a8ac676c87105fa44390a2cd74894d8a1fe3bb9cd3b"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 36,
+      "mapUnchanged": true,
+      "sha256": "d2b11ff69bf2f384c70f982bb30fdc3323ad054b1a1a20baebf319325056a811"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 37,
+      "mapUnchanged": true,
+      "sha256": "9b3b360b5dd311e5ba742ed82fe3616b0902f9eb79c3e773ee4e8c578241b214"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 38,
+      "mapUnchanged": true,
+      "sha256": "87552e660e0c22f662e278172bdc0ecdbec49996fc0671c83f30b7c85bea4330"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 39,
+      "mapUnchanged": true,
+      "sha256": "aab4d4b2b7b4f13bf406c69571835f705e3a19a7d934dd64fc575f0514505826"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 40,
+      "mapUnchanged": true,
+      "sha256": "5d6aaf39de0eea984c1a04ef2606a1be8d7390accdf40e71eb983590350c715e"
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 41,
+      "mapUnchanged": true,
+      "sha256": "4001d5c024d08b41909d1573371d65d13b263f11d796312a6258f291e854f5e2"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 1,
+      "mapUnchanged": true,
+      "sha256": "c5273faee1c8aa5b823ea9ec94ebc7f8928ad73c47915c45be5db7af46a74b72"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 2,
+      "mapUnchanged": true,
+      "sha256": "8030858a49e91b77c6031e2a7b35ae63fb78ff0fb06b5fb8093d3941a00881a8"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 3,
+      "mapUnchanged": true,
+      "sha256": "35d3c364142523938f327c084691d5f779636a3020b8b645b3db2358f7609c74"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 4,
+      "mapUnchanged": true,
+      "sha256": "2e6dd6e21e562fa2b58bc065650c3f85cfa6501364145acf931aa9eafe43fe31"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 5,
+      "mapUnchanged": true,
+      "sha256": "759f8dcfe64a002eac71f6ff1da8b16852c91c41b067477d1d1680d835fe0cd0"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 6,
+      "mapUnchanged": true,
+      "sha256": "b84237630fa1a3256e0d87b93b5246b5c8a1d79b1c64d837ba2fa875a58384d2"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 7,
+      "mapUnchanged": true,
+      "sha256": "965a86112ab3e57c90387b86f2dc3a0edf2e6f42f613c803885d12a4c71b9bd1"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 8,
+      "mapUnchanged": true,
+      "sha256": "1b62ff97443b64244a160e3011f80d55e5a1c6204203eb66636244e24029cdcd"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 9,
+      "mapUnchanged": true,
+      "sha256": "e01ecf70f0b98210635a0b1876e853103a46b13aa66affe3e0402792aacae7f8"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 10,
+      "mapUnchanged": true,
+      "sha256": "2ce7bef049f0fded733b196697b8a82da4a066a768a23410f855bbaed50e64b0"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 11,
+      "mapUnchanged": true,
+      "sha256": "de7ad6630f00e2e8f5159efb094041ce1c751e24fd6610af36e98fad8d3fddbe"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 12,
+      "mapUnchanged": true,
+      "sha256": "5f09964a72188d2dbbbda9cbcfa61108e09987563915310b7fbe6c7f7467e2ce"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 13,
+      "mapUnchanged": true,
+      "sha256": "54dfa5495dd18b937cd29fdbc1690d0820a0f7c41eb72fd7826cf357b6b964f7"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 14,
+      "mapUnchanged": true,
+      "sha256": "f36b2d3ed2ff7b8d6a982f5a37d620cf7fc87f4727e67e15b89a3819af21f53d"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 15,
+      "mapUnchanged": true,
+      "sha256": "1330be052bbd5d333001f49f2559309c206083f8312c0a98f96d5a941c63b498"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 16,
+      "mapUnchanged": true,
+      "sha256": "416810ea6f10553d60c5c1bffb738680559a52a295d78419fb6811b4a0f2f884"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 17,
+      "mapUnchanged": true,
+      "sha256": "9dd7e079b4c100c9d7e1e72315dba351bba87571c9e12df7dc24b8ee9a7516c8"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 18,
+      "mapUnchanged": true,
+      "sha256": "7bb92808d106f506764f29029a9ee94c48dc56a6817a4bdef1e28ec229c594d6"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 19,
+      "mapUnchanged": true,
+      "sha256": "5875de8342e6d9aaff39fb0a0e3f6791a68f43ea4ad0131ffd984453bbdf1272"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 20,
+      "mapUnchanged": true,
+      "sha256": "d8e21718995da9d822e985e3ae5eb3e17291f4abcc6a30a6d1bdd85bc1428d5c"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 21,
+      "mapUnchanged": true,
+      "sha256": "fab9ade824147013aae0fa9fec3ee41ffc848d8bc6984623601aed6a301808f6"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 22,
+      "mapUnchanged": true,
+      "sha256": "725cc25379b654997dec3b6dc1d8d3aadc4cd766882d33b932ea5f74c543c3d5"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 23,
+      "mapUnchanged": true,
+      "sha256": "48be3f60ced035d1db36da6a302c9b4525f166604ced467319f6dbf1aa29641d"
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 24,
+      "mapUnchanged": true,
+      "sha256": "9e95f54df6cf952edc9502410b5d7b712bd6b2643f4530c727a6cd1571b32132"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 1,
+      "mapUnchanged": true,
+      "sha256": "d6dd7e4bdf6cafa2d089011abfa15401573d9adbaef58db28bdf718a9a75bb1f"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 2,
+      "mapUnchanged": true,
+      "sha256": "5c462c521275ab4d0e681668c1ac6603cfc7845375f17638a5a5fba25f1e8d13"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 3,
+      "mapUnchanged": true,
+      "sha256": "e773f25d2a5587a564cc06e117e169f99c1c384a941b9023e13a52c7d37c7ed0"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 4,
+      "mapUnchanged": true,
+      "sha256": "fa11f6152a05455d3dc10a19eb537132532fbb385a3707768dd88755c87ef953"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 5,
+      "mapUnchanged": true,
+      "sha256": "0d90b3faf39cf1acac5f34fc9d6eff12b73680f49d0fa02ae3bffd80e8552b38"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 6,
+      "mapUnchanged": true,
+      "sha256": "f19b5b3951834e04c9299848a0b4323be4a0f416c2eb718063e5170162b4d75c"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 7,
+      "mapUnchanged": true,
+      "sha256": "5a5982dbaca4745545b193399ef654f600b99162ffc5a86f040f679e0cab9594"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 8,
+      "mapUnchanged": true,
+      "sha256": "7e7398e7a1df9df209c0e2cc092f9b8e86f29b05d3f7b5cf01bd96b4d528b3d8"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 9,
+      "mapUnchanged": true,
+      "sha256": "bd447f1435e08473df50c0ee0e28d26699ab01fb748d1a6e0ab54d164a35dd0d"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 10,
+      "mapUnchanged": true,
+      "sha256": "cacbf411bf7004116705d7a326092cde42a0c07d693be3423bda6c04296ddf28"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 11,
+      "mapUnchanged": true,
+      "sha256": "7a268483a0f45d56035514c26ad1bf089b7818cb19c0b0fe2523fb5a566b1279"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 12,
+      "mapUnchanged": true,
+      "sha256": "26cb61b2ed44b26b3ac0f52e8d83ce7fb634f7edac424ff416b473f77c794cba"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 13,
+      "mapUnchanged": true,
+      "sha256": "e99ef7ccace27557f6532bdfa9bb7f3f9d4adea756c059f2b6ddb7a8d89491cb"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 14,
+      "mapUnchanged": true,
+      "sha256": "29d4b8eb097f2af0c6bd1b04219ab1a0956f742e398757e7c7ac99b46926e1f7"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 15,
+      "mapUnchanged": true,
+      "sha256": "09e72b03b6148fc163adfda756b0628c160deda61fb1137c09b1326952844130"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 16,
+      "mapUnchanged": true,
+      "sha256": "5f7889614fdfe453866af0209530ed1fdeb40e2378bb2d9119252892a4fd5011"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 17,
+      "mapUnchanged": true,
+      "sha256": "189de895b6037939860d95d643b5ff2b47e0ceb84d3be228bd20ea5ff1fe46bc"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 18,
+      "mapUnchanged": true,
+      "sha256": "e86cd5cacecb9465191a7a0c695c61808146a3a20f53663170f29caee53bc136"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 19,
+      "mapUnchanged": true,
+      "sha256": "0148d9611ef9582e2daa013b9e9426301e422adcd075e4674e8a482415cf0ac2"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 20,
+      "mapUnchanged": true,
+      "sha256": "29fbf702ee4c6ec624b5e6ae64181679ea7d41d040c9365d1dcfe7237c070fbe"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 21,
+      "mapUnchanged": true,
+      "sha256": "26a9d6d42f4abc3d92999734d1bd5827296121d0b67f0e9830cee921ae90c5ca"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 22,
+      "mapUnchanged": true,
+      "sha256": "0c2ce1badc5f96612ae98848dfcd9cc00f3dc4b7027452a549abcc60fd8a96dc"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 23,
+      "mapUnchanged": true,
+      "sha256": "9f2728ced7c6f56d0514c1551cb326d5f7be2b3752b8bfb3a0554087bba9fe51"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 24,
+      "mapUnchanged": true,
+      "sha256": "31a9cfab55d9c452b66c95cef3855f4734a7e0b81e19d932795779e114e4095d"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 25,
+      "mapUnchanged": true,
+      "sha256": "1bef0aefb38fb30208ec7c4cef0f4ccc554dcdedd7d66f67592488ea3bc45c30"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 26,
+      "mapUnchanged": true,
+      "sha256": "4b1280fb895e1b995dfab56a94755ee33b84d64d49b5ca285f7fb34dc1523db0"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 27,
+      "mapUnchanged": true,
+      "sha256": "64d3fab8a3179da51dffe291ffc359ea2e8a775af3b5670afcf4bc100396ebb7"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 28,
+      "mapUnchanged": true,
+      "sha256": "a8a27ea209390d0e4817f867bc69dcc16db9153df009875b80d8e355269edbfa"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 29,
+      "mapUnchanged": true,
+      "sha256": "d541451f15bfda69f672c4e146974d860aa9e8f858629281cf9e345f8c66d566"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 30,
+      "mapUnchanged": true,
+      "sha256": "626de191675ec07ed6aab333d5a7e677c85b83b27f2359e11eb1b58a02869e55"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 31,
+      "mapUnchanged": true,
+      "sha256": "e5cf9b2a227c8c662c4569b7d5b69f625d0f7de1e835b1ab6996b9b614623d4e"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 32,
+      "mapUnchanged": true,
+      "sha256": "6952540d5021d61293fe81932bec9b17cf649e5e426b6584e4ac7d37f3e1f2da"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 33,
+      "mapUnchanged": true,
+      "sha256": "682f553675ce83e5ed53450e1755a9c61b9052c14852934c9bf8a22f66d237c1"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 34,
+      "mapUnchanged": true,
+      "sha256": "78a3dbd6bbb1f80cdb6e868354986d7eccf76940da695a1c76db96e7984a93df"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 35,
+      "mapUnchanged": true,
+      "sha256": "2f4d535a170cc65cfdea246acc23c23cdb962618099632bbe6548c054aa8213b"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 36,
+      "mapUnchanged": true,
+      "sha256": "be03d0ae3bb970ee56137e005c36037a0bcecbc7583036d31d1dff39bd2df767"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 37,
+      "mapUnchanged": true,
+      "sha256": "d1e33aaa5e3862b6c6925f6880717b843d53da0cdbb86686e25eddf119826f2f"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 38,
+      "mapUnchanged": true,
+      "sha256": "dd0b86e47a9b69c7a20afd45e68519d3b08a257b46d9c4058171b9223ca025cd"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 39,
+      "mapUnchanged": true,
+      "sha256": "9d9f07acdca9ffb49de9ab324e7bacbd2c843e611bfb6bdb0a2a81609d5a19dd"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 40,
+      "mapUnchanged": true,
+      "sha256": "ad0d168936b0831b0463df8a69a8b9094d00a24d8161e63de8f468b5f9a7e717"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 41,
+      "mapUnchanged": true,
+      "sha256": "f7f4ea7e0ad00504ffd55ee01adbc1fc0918481bc6a19151abd97198b53ebe20"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 42,
+      "mapUnchanged": true,
+      "sha256": "8dd0ce9367fe3f9e55ee3b0a758477876e2a65b52437d6c3b536ef21c6757662"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 43,
+      "mapUnchanged": true,
+      "sha256": "997d3ec64f9a2636bd5e2ca9586ae62f725552dfd682c6340f7a51478cd15ad1"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 44,
+      "mapUnchanged": true,
+      "sha256": "347fec31f8009f77395eecde6fe1ea493085a23e71a2f19055228ee3568faa6d"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 45,
+      "mapUnchanged": true,
+      "sha256": "d9d7e89883f453f729368c5ab40558bade747aa9f6018d5def709d2e18b0a420"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 46,
+      "mapUnchanged": true,
+      "sha256": "cdc46aae7501caf1083b0bf657e165bb1e45cc8b570df6d502bf4953e395308d"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 47,
+      "mapUnchanged": true,
+      "sha256": "352ddf6c85973fc261b6244d6c825bc0f7bfd823fcc42a99bd36d485183b265e"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 48,
+      "mapUnchanged": true,
+      "sha256": "18dfaa381efb5b7fbd98868b1cdc69bf6b1adab7c2d57b6f8092fd93e3d42421"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 49,
+      "mapUnchanged": true,
+      "sha256": "e6f706c986697b9d3e1db23b24d025c8d9dbeb8b1be471aeeeb53a25502aab22"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 50,
+      "mapUnchanged": true,
+      "sha256": "4f9c5895b68e6926ef1f5d966059d61a89c3a6a8d42d891eac28bb60dd0ba43b"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 51,
+      "mapUnchanged": true,
+      "sha256": "fac9c5f25c2c4406e362e297d29f17b5d25ed1b85667054ee5dd9b2e186dd470"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 52,
+      "mapUnchanged": true,
+      "sha256": "51891d212dfb3c10c8de33aaad91f6b4b10855914b5fdc7801f2b095ab7d4fa0"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 53,
+      "mapUnchanged": true,
+      "sha256": "9166ad90872a2a34183a77ef4a716a5ee6c6bf3f84ee8ff9cbf70816dcb122c8"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 54,
+      "mapUnchanged": true,
+      "sha256": "4207b3d1f99fc0acc95b7991d98b607cfdadf69221712745f856a268ab6f8f84"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 55,
+      "mapUnchanged": true,
+      "sha256": "3b5683d96abc1e27e779edc68af5a4b7b60ac5d551f37aea7a2a75814baf8218"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 56,
+      "mapUnchanged": true,
+      "sha256": "e9f8a82163dc890d3b071d8e6bfc164ca876f4027ede68c7fc64a1bad93c1e47"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 57,
+      "mapUnchanged": true,
+      "sha256": "2cf3288229c6f018056749ffe8e85efe650fd9329e3830777d80a26d75354527"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 58,
+      "mapUnchanged": true,
+      "sha256": "675dd59c9f9a174e864c092a938ce420b0a0c20c051a7485a26a88b117cf82ec"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 59,
+      "mapUnchanged": true,
+      "sha256": "36212b6ea1e78db55a5caf22e97337ee478f728e7e3e634e1761f6085f988a34"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 60,
+      "mapUnchanged": true,
+      "sha256": "ef291e5d2e9852ecd1f949312b6495697c597ac80375833bd48fe4200523d515"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 61,
+      "mapUnchanged": true,
+      "sha256": "fe6daaa0389ff035d98be7e51b8513319ec24e4a054fa056e2eb723b1980ae68"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 62,
+      "mapUnchanged": true,
+      "sha256": "f43f90c1731737f742df7fdfbf8b26c07001d8c57c2257e0a89da20a0f424022"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 63,
+      "mapUnchanged": true,
+      "sha256": "b2687aa0a66285b49cc270c9ccc37bcf1c08658bab5f2067b469781cec303f6d"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 64,
+      "mapUnchanged": true,
+      "sha256": "5a231aa8e3aafd18af8b57c9b466914a222757f63d4ee201667f985991850bc5"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 65,
+      "mapUnchanged": true,
+      "sha256": "39c2c1ee30c3ea3e587b2106d546fb66f770bee0a81673c9d075379cf035fee5"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 66,
+      "mapUnchanged": true,
+      "sha256": "137afc9f2a5e05baef4fdfd7815b4caf043d98bfbe1737b6d273db43f1a3b6fa"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 67,
+      "mapUnchanged": true,
+      "sha256": "42ac27dae3570896b1b1d67715709d9eb8ceec86606f3a404fbbd46c1757d30e"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 68,
+      "mapUnchanged": true,
+      "sha256": "963466c1877c7fc976188dc6165e80332607bf7c0b1277f7ca861a8c8c195796"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 69,
+      "mapUnchanged": true,
+      "sha256": "ff262541f4536775ab41be9c5fd1de107c39c604c8dc1fcb47fe665c43167065"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 70,
+      "mapUnchanged": true,
+      "sha256": "33b6c914bf098fd9337e8d0128c268e8a2543710da75ca24cdcab2dd8264d444"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 71,
+      "mapUnchanged": true,
+      "sha256": "b364107843aeecec32056ba5cd0fd55aed9ffc5d872abe95c16aa78f590c5e5d"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 72,
+      "mapUnchanged": true,
+      "sha256": "0c3d25aba30dd675e3e524691845fbcd9302ec69e6b62e093dee80d6ff5dba4b"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 73,
+      "mapUnchanged": true,
+      "sha256": "daa4a6bc677ad3602ba48dd43fb2339b1308cf0c36e7d2781ebb05fe4584e6c1"
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 74,
+      "mapUnchanged": true,
+      "sha256": "4b815a4b1b7d3d64e58ab3df6a78f2409f17189922bfeca3bffdbdaaadf04170"
+    }
+  ]
+}
