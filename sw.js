@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.67 — PAIRED CHROMATIC INSET RECOVERY
+// NTH SHELF 2.79.68 — OCCLUDED DARK OVERLAY RECOVERY
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.67";
+const CACHE_NAME = "nth-shelf-shell-2.79.68";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -74,6 +74,7 @@ const SHELL_FILES = [
   "./js/panels-ragged-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",
+  "./js/panels-dark-overlay-insets.js",
   "./js/panels-structural-grid.js",
   "./js/panels-pale-completion.js",
   "./js/panels-gutter-graph.js"
