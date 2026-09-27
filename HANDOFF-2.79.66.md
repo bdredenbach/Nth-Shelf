@@ -71,4 +71,13 @@ contract verifies four new crops and preserves three legacy spill owners.
 All retained gates and the three new detector contracts passed. No additional
 runtime edits or optional regression repetitions are needed before delivery.
 
-CI build and artifact verification pending the source checkpoint push.
+Source published as `186e9e9f29ed505e62746ff859219cf9fbeba7e7` (tree
+`e9e5528efc9644d7731780cd82b098e92666aa9c`), identical to the local
+verified tree. CI run `36321640630` passed all gates and produced artifact `10932623179`.
+The isolated Test66 APK was downloaded and verified: 3,339,970 bytes,
+SHA-256 `96cc53f1e6542981a97e10d9d9a201e5645f89d06aca179833c7e28b61807a07`.
+All 73 packaged web assets match the tested checkout exactly. Package identity,
+version, archive integrity, and the CI apksigner v2 result passed. The downloaded
+artifact ZIP also matches GitHub digest
+`067aaa115586041dc3d8d260379e9989dc2fffcbe891d43fc8f1485597885345`.
+Phone acceptance remains pending; the four new frame targets are listed above.

@@ -3,12 +3,26 @@
   "code": 27994,
   "package": "io.github.bdredenbach.nthshelf.frametest66",
   "sourceBase": "9361e57465ddd212e9dce3265525fa530b0687bc",
-  "sourceCommit": null,
+  "sourceCommit": "186e9e9f29ed505e62746ff859219cf9fbeba7e7",
   "sourceHash": "f1178cf4da1c21be8ee77721eee79e8f08db7934c489a0ee991077b239ce12ad",
   "scope": "Four complete visible frames added on three partial Apocalypse pages; general detector remains incomplete",
   "localValidation": "passed",
   "build": {
-    "status": "pending"
+    "status": "success",
+    "runId": 36321640630,
+    "artifactId": 10932623179,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/36321640630",
+    "sourceCommit": "186e9e9f29ed505e62746ff859219cf9fbeba7e7",
+    "apkSha256": "96cc53f1e6542981a97e10d9d9a201e5645f89d06aca179833c7e28b61807a07",
+    "apkBytes": 3339970,
+    "archiveSha256": "067aaa115586041dc3d8d260379e9989dc2fffcbe891d43fc8f1485597885345",
+    "packagedWebAssets": 73,
+    "exactPackagedWebBytes": "passed",
+    "signature": "CI apksigner v2 passed; artifact bytes checked locally",
+    "package": "io.github.bdredenbach.nthshelf.frametest66",
+    "version": "2.79.66",
+    "versionCode": 27994,
+    "allCIGates": "passed"
   },
   "pagesCompared": 312,
   "unchangedPages": 309,
@@ -130,5 +144,6 @@
     "Owner counts do not establish semantic accuracy for the whole corpus."
   ],
   "runtimePageIdentityLookups": false,
-  "comicArtworkCommitted": false
+  "comicArtworkCommitted": false,
+  "sourceTree": "e9e5528efc9644d7731780cd82b098e92666aa9c"
 }
