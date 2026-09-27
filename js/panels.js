@@ -1,4 +1,4 @@
-// NTH SHELF V2.79.68 — PROVED FRAME REFINEMENT OVER LEGACY DETECTION
+// NTH SHELF V2.79.69 — PROVED FRAME REFINEMENT OVER LEGACY DETECTION
 // Legacy regions remain authoritative outside independently proved refinements.
 // V92 keeps the V91 boundary-set + iterative internal-gutter path, then adds
 // a conservative interior validation gate. A fallback result is rejected if
@@ -39,6 +39,12 @@ const PanelDetect = {
             if(recovered.length)panels=recovered;
           }
         } catch(error) { log?.(`dark overlay inset recovery deferred: ${error.message}`); }
+        try {
+          if(typeof PanelOrthogonalWhiteGutters!=='undefined'){
+            const specialized=PanelOrthogonalWhiteGutters.refinePanels(panels,log);
+            if(specialized.length&&specialized.length===panels.length)panels=specialized;
+          }
+        } catch(error) { log?.(`orthogonal white gutter proof deferred: ${error.message}`); }
         done(panels);
       };
       const img = new Image();
