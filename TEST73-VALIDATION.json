@@ -4,9 +4,24 @@
   "package": "io.github.bdredenbach.nthshelf.frametest73",
   "label": "Nth Shelf Test73",
   "sourceBase": "d64931b09daf2dc10b76098a657cc2d6a24300fd",
-  "sourceCommit": null,
+  "sourceCommit": "05c50439999d802ec21e6a053fff67739ace49f9",
   "build": {
-    "status": "pending"
+    "status": "success",
+    "runId": 36359681762,
+    "artifactId": 10945705579,
+    "sourceCommit": "05c50439999d802ec21e6a053fff67739ace49f9",
+    "sourceTree": "82f25897a2c31f279444518aa7eb0a46dc4c39fc",
+    "apkBytes": 3365085,
+    "apkSha256": "a7363590a954cbad7f76f24de30d13e2384133dfd1a4dedeb25498772f135db9",
+    "artifactSha256": "cb00aded9c68cbd014ea21f6ea19685022db28f84287f2bce8cc4a783e91104b",
+    "sourceZipSha256": "ad782c9e57363465d96eca0ddea75eb7e4792d67d487b8d77ebc6a99135ef72b",
+    "exactPackagedWebAssets": 78,
+    "exactChangedSourceFiles": 31,
+    "allCIGates": "passed",
+    "signature": "CI apksigner v2 passed; downloaded archive and APK bytes checked locally",
+    "packageIdentity": "2.79.73 /28001 /io.github.bdredenbach.nthshelf.frametest73",
+    "buildType": "fresh GitHub Actions / Gradle debug build, not a repackaged native shell",
+    "phoneAcceptance": "pending"
   },
   "localValidation": "passed",
   "baseline": "Phone-confirmed Test71; Test72 source-only validator replacement is not used",
@@ -93,5 +108,6 @@
     "Most remaining comic misses are not resolved by this bounded paper-cell supplement.",
     "Near-edge enclosure is supported, not arbitrary unframed page-edge guesses.",
     "The untested Test72 proximity-only fallback and proof27 replacement are not carried forward."
-  ]
+  ],
+  "sourceTree": "82f25897a2c31f279444518aa7eb0a46dc4c39fc"
 }
