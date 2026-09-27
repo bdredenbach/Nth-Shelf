@@ -1,85 +1,104 @@
 # Test71 — accepted-neighbor paper-cell completion
 
-## Baseline and result
+Base detector: user-accepted Test70 source. Remote base was Test69 checkpoint
+`864df8e05266c6d03422d0480fbe65c10f638871`. This publication includes both the
+accepted Test70 interrupted-gutter work and Test71, on `Test_Branch` in
+`bdredenbach/Nth-Shelf`. Accuracy remains ahead of speed.
 
-Repository `bdredenbach/Nth-Shelf`, branch `Test_Branch`; last published checkpoint
-`864df8e05266c6d03422d0480fbe65c10f638871` is Test69. This checkpoint includes
-both the user-accepted Test70 source (previously local only) and Test71. Test70's
-local APK was confirmed working by the user. This iteration's comparison baseline
-is the complete supplied Test70 source, not the older repository checkout.
+## New frame
 
-Test71 adds one complete frame: **Rise of Apocalypse #1, image index17, reader
-18/24**, the lower-middle dialogue panel on the double-page spread, immediately
-right of the previously working lower-left panel. All five speech balloons are
-retained. The old lower-left frame remains an independent selection.
-
-The final native-Chromium sweep compared every serialized descriptor on all91
-supplied Apocalypse pages: 90 complete maps are identical, all149 previous owners
-are preserved in their existing order, and the target page changes from1 to2.
-The corpus now has150 detected owners. Counts do not establish semantic accuracy
-for unresolved pages.
+Rise of Apocalypse #1, image index 17, reader **18/24**: the lower-middle dialogue
+frame on the double-page spread, immediately right of the preserved lower-left
+frame. All five speech balloons are included. This page changes from one owner
+to two; the previous descriptor and selection remain unchanged.
 
 ## Implementation
 
-`panels-neighbor-completion.js` installs after the geometry router. It delegates
-all older validation, geometry and spill behavior unchanged. It accepts existing
-validated contour maps across prior proof families, including proof26. It does
-not loosen or rewrite Test70's earlier supplement.
+`js/panels-neighbor-completion.js` is a late supplement over the existing
+PanelDetect pipeline. It runs on validated nonempty contour maps, including
+proof26, and obtains read-only paper-cell candidates at seed radii4 and6. The
+candidate contours must match exactly across both scales, be fully enclosed and
+compact, and have no inferred seed split. For speech-heavy candidates, measured
+enclosed white bodies must explain the fragmented seed at both scales.
 
-A read-only candidate interface in `panels-ragged-gutters.js` exposes independently
-valid source cells before whole-map rejection. Two seed radii4/6 must agree exactly
-on the complete pixel contour. Candidates must be fully enclosed, compact,
-unsplit, contain measured enclosed white content, have no unresolved exterior-paper
-internal divider, and overlap none of the existing owner pixels. A measured
-exterior-connected white corridor must separate the candidate from an already
-accepted neighbor. New owners append; originals are never trimmed or reassigned.
+Every addition needs an exterior-connected white corridor to an already accepted
+neighbor, zero overlap with prior owner pixels, and no strong unresolved internal
+gutter. The supplement appends only: old geometry, descriptor contents and order
+are not changed. A common normalized raster is used for conflict checks.
 
-Proof27 is `stable-paper-cell-with-accepted-neighbor`. It retains both source
-proofs, the independently accepted neighbor and measured separating rays.
-Complete geometry and edge-spill suppression are bound only for valid proof27.
-No title, filename, page, hash or saved-tap lookup participates in detection.
-This is the first shared-neighbor paper-cell recovery, not general black/white/
-diagonal boundary fusion. Ambiguous strip/sliver candidates from other pages
-were rejected rather than shipped.
+Proof27 method: `stable-paper-cell-with-accepted-neighbor`. Its validated contours
+are authoritative. Idempotent bindings route proof27 validation, preserve its
+geometry, and suppress unrelated edge-spill expansion; other proofs use the old
+functions. Default reader.js, panels-geometry.js and panels-structural-grid.js
+remain unchanged from Test70. The ragged detector exposes an opt-in candidate
+path; its default behavior is unchanged. New proof27 owners are not recursively
+used as supporting neighbors in this iteration.
 
-## Checks
+There are no runtime book/title/filename/page/hash/tap lookups or stored target
+coordinates. Fixture files store geometry and evidence, not comic artwork.
+This is the first conservative paper-neighbor completion, not a universal
+black/white/diagonal mixed-boundary assembler.
 
-- Final original-image corpus: 91/91, 90 exact unchanged maps, 149/149 descriptors
-  preserved, one added owner.
-- Actual Reader touchscreen path in native Chromium, mobile412x915:12 new-frame
-  taps (including balloons),5 previous-frame taps;144 inclusion and84 exclusion
-  alpha checks;55,079 strictly interior samples checked per new-frame tap with
-  zero failures; no browser errors. Minimal offline DOM, not physical Android.
-- Target variants:0.67x,1.25x and horizontal mirror each return the new owner and
-  pass every independent inclusion/exclusion point. The1.25x limit keeps the
-  original double-page spread within the existing24-million-pixel input cap.
-- 62 local Node contract commands plus all-JS/service-worker syntax checks pass.
-- Native Java streaming/cancellation/corruption tests pass, including600MiB
-  archive processing with32MiB heap.
-- Synthetic neighboring-cell test adds2 adjacent cells while rejecting the
-  diagonal unwitnessed cell; proof26 eligibility, preserved descriptors,
-  idempotent integration and19 proof-tamper rejections pass.
+## Validation
 
-The historic Wolverine/manga/Magneto source artwork is unavailable in this
-runtime. Do not claim a fresh312-page original-image comparison. Its saved
-contract tests remain in the CI gate. The dense-reader harness excludes points
-within2.5 canvas pixels of any contour segment; an initial axial-only boundary
-filter was corrected without changing runtime geometry.
+Fresh complete-pipeline native Chromium comparison on all91 Apocalypse originals:
+90 maps identical; all149 previous descriptors preserved; total149 to150. Only
+issue1/index17 gains an owner. Stored detailed results are under
+`qa27900/frame-accuracy/test71/`.
 
-## Identity and publication
+Actual reader gesture/selection/geometry/canvas checks passed12 new-frame touches
+and5 prior-owner touches,144 inclusion checks,84 exclusion checks and55,079
+strictly interior opacity samples on each new-frame touch. Zero browser errors.
+The offline mobile Chromium harness uses a minimal DOM; full branding/backup
+browser tests passed separately in CI. Physical Android acceptance is pending.
+The dense sampler excludes points within2.5 canvas pixels of any contour segment;
+an initial axial-only boundary filter was corrected without runtime changes.
+
+Full-pipeline variants0.67x,1.25x and horizontal mirror passed the independent
+inclusion/exclusion points. All62 Node contract commands, JS/SW syntax and native
+Java archive tests passed locally and in the relevant CI gates. Synthetic tests
+cover adjacent versus diagonal candidates, proof26 eligibility, exact old
+geometry, idempotent routing and19 proof-tamper rejections. The native archive
+test includes600MiB streaming under32MiB heap.
+
+Original Wolverine/manga/Magneto artwork is unavailable here. Do not claim a fresh
+312-page original-image comparison; their saved contracts remain in the suite.
+Most remaining Apocalypse misses are unresolved. Rejected exploration candidates
+are not delivered.
+
+## Verified source and APK
 
 Version2.79.71, code27999, package
 `io.github.bdredenbach.nthshelf.frametest71`, label `Nth Shelf Test71`.
 Shell `nth-shelf-shell-2.79.71`, map `panel-map-exp-69`, proof identity
-`frame-proof-2.79.71`. All77 packaged web files must match the frozen manifest
-in `qa27900/frame-accuracy/test71/web-assets.json`.
+`frame-proof-2.79.71`.
 
-GitHub source publication and fresh Gradle/CI build are pending. This is not the
-local native-shell repackaging used for Test70. Update TEST71-VALIDATION.json
-and this section only after the real build and downloaded artifact are verified.
-Phone acceptance remains pending.
+Source commit: `e4eb075d109f8a758ad4166f91c6c0680db176d3`.
+Source tree: `3826a9d628932a5fc6557ca7b1f8356e44fc1ae8`.
+CI run: `36349568192`; verified artifact: `10940734838`.
+All detector, browser, backup, native archive, Gradle compilation, package,
+version/label, exact packaged web bytes and signature gates passed.
+
+This is a **fresh Gradle/CI APK**, not the local shell repackaging used for Test70.
+All77 packaged web files match the locally frozen source exactly. The source ZIP
+also matches all36 cumulative changed files. No temporary transfer files or
+signing keys are in the final source tree. The authorized GitHub connector
+published the verified tree after the temporary transfer job's restricted
+GITHUB_TOKEN could not update workflow files; no detector tests failed.
+
+APK bytes:3358711.
+APK SHA256:`a75be512e60f7b00be8fa4203289c09828e02a3bc1400e9ea95d88a8a4383431`.
+Artifact ZIP SHA256:`f61ace99d53c09a815595a38f3edafc56a35f7a8ef4a4b6c514511b4bde3ff44`.
+Source ZIP SHA256:`17caa556246ff36e6dff3b3c56a7aa0f99b33b05c0b658ee93696e65f7eb1351`.
+Web manifest SHA256:`1283d1943406963c2b29696d7a6bf7c93bf6f35fe9c3b97f3119bae6156b2803`.
+CI apksigner v2 verification passed; downloaded artifact and APK digests were
+rechecked locally. Signing is the CI debug key, not a Play Store production key.
+
+Phone acceptance remains pending. Test the new frame and its five balloons at
+reader18/24, then confirm the prior lower-left frame remains independent.
+Keep Test70 installed as a comparison.
 
 Private reproduction workspace: `/mnt/data/test71_workspace` contains frozen
-Test70 source,91 original page images, both final map sets, target reader reports,
-variants and rejected trials. Comic artwork and private signing keys are not in
-the repository. Continue from this checkpoint after an interruption.
+Test70 source,91 original images, final map sets, reader reports, variants,
+rejected trials and downloaded CI verification. Continue from this checkpoint
+rather than repeating finished corpus work after an interruption.
