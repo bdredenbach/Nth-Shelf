@@ -3,20 +3,55 @@
   "code": 27996,
   "package": "io.github.bdredenbach.nthshelf.frametest68",
   "sourceBase": "e1ae37a0d76eb9a934f985c075cc2ae02480eb8d",
-  "sourceCommit": null,
+  "sourceCommit": "958a519d8f91b5244c739e67955bcf2be98db1f3",
   "scope": "One large black-framed overlay inset recovered on Rise of Apocalypse issue 4 page 15; broader Apocalypse detection remains incomplete",
   "localValidation": "passed",
-  "build": { "status": "pending" },
+  "build": {
+    "status": "success",
+    "runId": 36333687581,
+    "artifactId": 10936447029,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/36333687581",
+    "sourceCommit": "958a519d8f91b5244c739e67955bcf2be98db1f3",
+    "sourceTree": "97e7c837e61abbfe2376e6bcc0da5ec4a3aafae7",
+    "apkSha256": "3ba88ff9dd9ee370dd1927ee059e50e6c688c3d1041b104a66eb25a451690d49",
+    "apkBytes": 3346222,
+    "archiveSha256": "0d7d2e53fb56fc634c7d97c68dcd5190d837ed91398cea5ed3c44a41293ba4df",
+    "sourceArchiveSha256": "2b56dc8d66ce2cee73b2d79f9845348d98cfffb537a2f1388948143436ceab73",
+    "packagedWebAssets": 74,
+    "exactPackagedWebBytes": "passed",
+    "signature": "CI apksigner v2 passed; downloaded artifact bytes rechecked",
+    "package": "io.github.bdredenbach.nthshelf.frametest68",
+    "version": "2.79.68",
+    "versionCode": 27996,
+    "allCIGates": "passed"
+  },
   "apocalypsePagesInSuppliedSet": 91,
   "directProof25Scan": {
     "pagesWithOwners": 1,
     "pagesAbstained": 90,
     "ownerCount": 1,
-    "changedPage": { "book": "apocalypse-4", "page": 15, "baselineOwners": 0, "test68Owners": 1 }
+    "changedPage": {
+      "book": "apocalypse-4",
+      "page": 15,
+      "baselineOwners": 0,
+      "test68Owners": 1
+    }
   },
   "fullPipelineChecks": [
-    { "book": "apocalypse-4", "page": 15, "owners": 1, "proofVersion": 25, "method": "three-dark-rails-one-occluded-overlay-rail" },
-    { "book": "apocalypse-4", "page": 11, "owners": 2, "proofVersion": 24, "status": "retained Test67 blue inset pair" }
+    {
+      "book": "apocalypse-4",
+      "page": 15,
+      "owners": 1,
+      "proofVersion": 25,
+      "method": "three-dark-rails-one-occluded-overlay-rail"
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 11,
+      "owners": 2,
+      "proofVersion": 24,
+      "status": "retained Test67 blue inset pair"
+    }
   ],
   "newProof": {
     "version": 25,
@@ -49,5 +84,6 @@
     "Apocalypse pages remain partially detected.",
     "The prior 312-page artwork corpus was not available for a fresh local rerun in this chat.",
     "Owner counts do not establish semantic accuracy for the whole series."
-  ]
+  ],
+  "sourceTree": "97e7c837e61abbfe2376e6bcc0da5ec4a3aafae7"
 }
