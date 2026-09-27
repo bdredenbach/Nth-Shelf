@@ -123,7 +123,7 @@ const PanelGeometry = {
         ? PanelGeometryOrthogonal.refine(panel,log)
         : {...panel};
       held._geometryOwner='orthogonal-authority';
-      if(policy.source==='STRUCTURAL-GRID'&&[21,22,23,24].includes(panel._structuralGridProof?.version)){
+      if(policy.source==='STRUCTURAL-GRID'&&[21,22,23,24,25].includes(panel._structuralGridProof?.version)){
         held._geometryOwner=panel._geometryOwner;held._geometryType=panel._geometryType;
         return held;
       }
