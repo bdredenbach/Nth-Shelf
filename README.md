@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.68 — occluded dark overlay inset recovery
+
+Test68 adds a conservative empty-map fallback for a large dark-framed inset whose fourth rail is partially covered by foreground artwork. Three rails must be independently complete, the fourth must remain the unique weak rail, every side needs measured exterior contrast, and the enclosed scene must remain strongly textured. The runtime analysis is capped at 480 pixels and contains no page IDs, titles, filenames, hashes, saved coordinates, or tap templates.
+
+Across all 91 supplied Rise of Apocalypse page images, the new proof abstains on 90 and adds exactly one selection on issue 4 page 15: the large upper black-framed inset. A complete-pipeline check confirms Test67 had no owner there and Test68 returns one proof-25 owner; issue 4 page 11 retains Test67's two blue-bordered proof-24 insets.
+
+Current identity: **2.79.68 / code 27996**, package `io.github.bdredenbach.nthshelf.frametest68`, label **Nth Shelf Test68**. Cache/proof identifiers: `nth-shelf-shell-2.79.68`, `panel-map-exp-66`, `frame-proof-2.79.68`. See [validation](TEST68-VALIDATION.json), [contracts](qa27900/frame-accuracy/test68/README.md), and [handoff](HANDOFF-2.79.68.md). Phone acceptance is pending.
+
 ## 2.79.67 — paired chromatic Apocalypse insets
 
 Test67 adds a conservative fallback for colored decorative frames whose four sides are split across one or two nearby chromatic components. It requires four measured perimeter sides, a sparse rim, and a textured enclosed scene. The new path runs only when the earlier Test66 colored-rim route returns no owner; runtime logic contains no page IDs, filenames, hashes, saved coordinates, or tap templates.
