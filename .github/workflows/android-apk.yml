@@ -1,4 +1,4 @@
-name: Build Test64 APK
+name: Build Test65 APK
 
 on:
   push:
@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: nth-shelf-test64-apk
+  group: nth-shelf-test65-apk
   cancel-in-progress: false
 
 jobs:
@@ -82,7 +82,8 @@ jobs:
           node qa27900/frame-accuracy/test62/independent-cells-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test63/independent-boundary-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test64/stable-partition-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
-          node qa27900/frame-accuracy/test64/service-worker.test.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test65/white-body-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test65/service-worker.test.cjs 2>&1 | tee -a dist/regression-checks.txt
 
       - name: Set up browser test dependencies
         run: |
@@ -129,7 +130,7 @@ jobs:
       - name: Install Android SDK 35
         run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
 
-      - name: Build isolated Test64 APK
+      - name: Build isolated Test65 APK
         shell: bash
         run: |
           set -euo pipefail
@@ -142,10 +143,10 @@ jobs:
           APK=android/app/build/outputs/apk/debug/app-debug.apk
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$APK" | tee dist/signature.txt
           "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" > dist/package.txt
-          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest64'" dist/package.txt
-          grep -F "versionCode='27992'" dist/package.txt
-          grep -F "versionName='2.79.64'" dist/package.txt
-          grep -F "application-label:'Nth Shelf Test64'" dist/package.txt
+          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest65'" dist/package.txt
+          grep -F "versionCode='27993'" dist/package.txt
+          grep -F "versionName='2.79.65'" dist/package.txt
+          grep -F "application-label:'Nth Shelf Test65'" dist/package.txt
           python3 - <<'PY'
           import hashlib, json, os, pathlib, subprocess, zipfile
           root = pathlib.Path('.')
@@ -174,9 +175,9 @@ jobs:
           subprocess.run(['git', 'diff', '--exit-code', 'HEAD', '--'], check=True)
           digest = hashlib.sha256(apk.read_bytes()).hexdigest()
           record = {
-              'versionName': '2.79.64', 'versionCode': 27992,
-              'applicationId': 'io.github.bdredenbach.nthshelf.frametest64',
-              'label': 'Nth Shelf Test64', 'sourceCommit': os.environ['GITHUB_SHA'],
+              'versionName': '2.79.65', 'versionCode': 27993,
+              'applicationId': 'io.github.bdredenbach.nthshelf.frametest65',
+              'label': 'Nth Shelf Test65', 'sourceCommit': os.environ['GITHUB_SHA'],
               'signing': 'CI debug key; not a Play Store production key',
               'apkSha256': digest, 'apkBytes': apk.stat().st_size,
               'verifiedWebAssetCount': len(hashes), 'webAssetSha256': hashes,
@@ -184,17 +185,17 @@ jobs:
               'comicArtworkTests': 'Saved results retained; comic artwork fixture is not uploaded or rerun by this workflow'
           }
           (root / 'dist/BUILD.json').write_text(json.dumps(record, indent=2)+'\n')
-          (root / 'dist/Nth-Shelf-2.79.64-Test64.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.64-Test64.apk\n')
-          (root / 'dist/INSTALL.txt').write_text('Install Nth-Shelf-2.79.64-Test64.apk as the separate Nth Shelf Test64 app and import Rise of Apocalypse issues 1-4. Stable splitting of merged pop-outs: issue2 page16; issue3 pages14 and15; issue4 pages6,18 and19. Seven additional owners; original selected pixels preserved. Existing missing balloons and other merged frames remain. 42 story pages still have no detected frames. Phone acceptance is pending.\n')
+          (root / 'dist/Nth-Shelf-2.79.65-Test65.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.65-Test65.apk\n')
+          (root / 'dist/INSTALL.txt').write_text('Install Nth-Shelf-2.79.65-Test65.apk as the separate Nth Shelf Test65 app. Repairs 36 omitted white speech/caption regions across nine Apocalypse pages, plus the top frame of issue2 page14. Existing merged scenes and ambiguous balloons remain. 41 story pages still have no detected frames. Phone acceptance pending.\n')
           print(json.dumps({'sourceCommit': record['sourceCommit'], 'verifiedWebAssetCount': len(hashes), 'apkSha256': digest}, indent=2))
           PY
-          cp "$APK" dist/Nth-Shelf-2.79.64-Test64.apk
-          git archive --format=zip --output=dist/Nth-Shelf-2.79.64-Test64-Source.zip HEAD
+          cp "$APK" dist/Nth-Shelf-2.79.65-Test65.apk
+          git archive --format=zip --output=dist/Nth-Shelf-2.79.65-Test65-Source.zip HEAD
 
       - name: Upload verified APK, source and build record
         uses: actions/upload-artifact@v4
         with:
-          name: Nth-Shelf-2.79.64-Test64
+          name: Nth-Shelf-2.79.65-Test65
           path: dist/
           if-no-files-found: error
           retention-days: 30
@@ -203,7 +204,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Test64-build-diagnostics
+          name: Test65-build-diagnostics
           path: |
             dist/*.txt
             dist/*.json

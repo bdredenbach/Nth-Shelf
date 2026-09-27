@@ -422,7 +422,142 @@ const PanelMatteCells = (() => {
     return refined?out:panels;
   }
 
+  // White bodies can leak into the paper gutter at antialiased outlines.
+  // Recover only enclosed bodies with ink inside and an unambiguous adjacent
+  // owner. The original labels are immutable: this pass only fills omissions.
+  const repairCache=new Map(),REPAIR_METHOD='enclosed-white-body-repair';
+  const repairable=p=>[1,3].includes(p?._matteCellProof?.version)&&validPanel(p);
+  function crossDilate(a,w,h){
+    const b=a.slice();for(let i=0;i<a.length;i++)if(a[i]){const x=i%w,y=i/w|0;if(x)b[i-1]=1;if(x+1<w)b[i+1]=1;if(y)b[i-w]=1;if(y+1<h)b[i+w]=1;}return b;
+  }
+  function whiteBodyShape(rings,w,h){
+    if(!Array.isArray(rings)||rings.length!==1||rings[0].length<4||rings[0].length>4096)return null;
+    const q=rings[0];
+    if(q.some((a,i)=>!Array.isArray(a)||a.length!==2||a.some(v=>!Number.isInteger(v))||a[0]<2||a[1]<2||a[0]>w-2||a[1]>h-2||(a[0]!==q[(i+1)%q.length][0]&&a[1]!==q[(i+1)%q.length][1])))return null;
+    const box=bounds(q),bw=box[2]-box[0],bh=box[3]-box[1],mask=rasterContours(rings,w,h),pixels=mask.reduce((s,v)=>s+v,0);
+    if(pixels!==Math.abs(areaRing(q))||bw<20||bh<15||bw>w*.55||bh>h*.22||pixels>w*h*.10)return null;
+    return {box,mask,pixels};
+  }
+  function repairedGeometry(parent,repairs){
+    if(!repairable(parent)||!Array.isArray(repairs)||!repairs.length||repairs.length>32)return null;
+    const key=JSON.stringify([parent,repairs]);if(repairCache.has(key))return repairCache.get(key);
+    const p=parent._matteCellProof,w=p.analysisWidth,h=p.analysisHeight,mask=rasterContours(p.pixelContours,w,h),original=mask.slice();
+    for(const r of repairs){
+      const body=whiteBodyShape(r.bodyContours,w,h),a=r.attachment;if(!body)return null;
+      const [x0,y0,x1,y1]=body.box,white=r.whitePixels,ink=body.pixels-white;
+      if(!Number.isInteger(white)||white<400||white>w*h*.06||white/((x1-x0)*(y1-y0))<.30||ink!==r.inkPixels||ink<Math.max(15,.04*body.pixels)||ink>.5*body.pixels)return null;
+      if(!a||![a.samples,a.matched,a.foreign].every(Number.isInteger)||a.samples<=0||a.matched<a.samples*.60||a.matched>a.samples||a.foreign<0||a.foreign>a.samples-a.matched||a.matched<(a.matched+a.foreign)*.98)return null;
+      const expanded=r.expandedContours;
+      if(!Array.isArray(expanded)||!expanded.length||expanded.length>64||expanded.some(q=>!Array.isArray(q)||q.length<4||q.length>4096||q.some((v,i)=>!Array.isArray(v)||v.length!==2||v.some(n=>!Number.isInteger(n))||v[0]<0||v[1]<0||v[0]>w||v[1]>h||(v[0]!==q[(i+1)%q.length][0]&&v[1]!==q[(i+1)%q.length][1]))))return null;
+      const addition=rasterContours(expanded,w,h),limit=crossDilate(body.mask,w,h);let missing=0,added=0,extent=0;
+      for(let i=0;i<mask.length;i++){
+        if(body.mask[i]&&!addition[i]||addition[i]&&!limit[i])return null;
+        missing+=!!body.mask[i]&&!original[i];extent+=addition[i];
+        if(addition[i]&&!mask[i]){mask[i]=1;added++;}
+      }
+      if(missing<body.pixels*.20||added!==r.addedPixels||!added||extent!==Math.abs(expanded.reduce((s,q)=>s+areaRing(q),0)))return null;
+    }
+    const rings=trace(mask,w,h,1);if(!rings)return null;const box=bounds(rings.flat()),pixels=mask.reduce((s,v)=>s+v,0);
+    const geometry={x:box[0]/w,y:box[1]/h,w:(box[2]-box[0])/w,h:(box[3]-box[1])/h,pixelContours:rings,pixels};
+    repairCache.set(key,JSON.stringify(geometry));if(repairCache.size>8)repairCache.delete(repairCache.keys().next().value);
+    return repairCache.get(key);
+  }
+  function validWhiteRepair(panel){
+    const p=panel?._matteCellProof;
+    if(p?.version!==4||p.method!==REPAIR_METHOD||panel._identitySource!=='matte-cell-frame'||panel._geometryOwner!=='matte-cell-contours'||panel._geometryType!=='edge-connected-matte-cell'||panel._quad||panel._outline||p.analysisWidth!==p.parent?._matteCellProof?.analysisWidth||p.analysisHeight!==p.parent?._matteCellProof?.analysisHeight)return false;
+    const serialized=repairedGeometry(p.parent,p.repairs);if(!serialized)return false;const g=JSON.parse(serialized),w=p.analysisWidth,h=p.analysisHeight;
+    return ['x','y','w','h'].every(k=>Number.isFinite(panel[k])&&Math.abs(panel[k]-g[k])<1e-10)&&p.pixels===g.pixels&&JSON.stringify(p.pixelContours)===JSON.stringify(g.pixelContours)&&JSON.stringify(panel._contours)===JSON.stringify(g.pixelContours.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))));
+  }
+  function repairWhiteBodiesRGBA(rgba,w,h,panels,log){
+    if(!Array.isArray(panels)||!panels.length||panels.length>12||!panels.every(p=>repairable(p)&&p._matteCellProof.analysisWidth===w&&p._matteCellProof.analysisHeight===h)||rgba?.length!==w*h*4)return panels;
+    const size=w*h,old=new Uint16Array(size),labels=new Uint16Array(size),white=new Uint8Array(size);
+    for(let k=0;k<panels.length;k++){
+      const mask=rasterContours(panels[k]._matteCellProof.pixelContours,w,h);
+      for(let i=0;i<size;i++)if(mask[i]){if(old[i])return panels;old[i]=k+1;}
+    }
+    labels.set(old);for(let i=0;i<size;i++){if(rgba[i*4+3]!==255)return panels;white[i]=Math.min(rgba[i*4],rgba[i*4+1],rgba[i*4+2])>232?1:0;}
+    const found=components(white,w,h);if(!found)return panels;
+    const repairs=panels.map(()=>[]);
+    for(const c of found.items){
+      const [x0,y0,x1,y1]=c.box,bw=x1-x0,bh=y1-y0;
+      if(c.pixels<400||c.pixels>size*.06||bw<20||bh<15||bw>w*.55||bh>h*.22||c.pixels/(bw*bh)<.30||x0<2||y0<2||x1>w-2||y1>h-2)continue;
+      const lw=bw+12,lh=bh+12,local=new Uint8Array(lw*lh);
+      for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++)if(found.ids[y*w+x]===c.id)local[(y-y0+6)*lw+x-x0+6]=1;
+      const outside=exterior(local.map(v=>1-v),lw,lh);if(!outside)continue;
+      const body=outside.out.map(v=>1-v),filled=body.reduce((s,v)=>s+v,0),ink=filled-c.pixels;
+      if(ink<Math.max(15,.04*filled)||ink>.5*filled)continue;
+      let band=body;for(let k=0;k<4;k++)band=crossDilate(band,lw,lh);
+      const counts=new Uint32Array(panels.length+1);let missing=0,samples=0;
+      for(let i=0;i<body.length;i++)if(band[i]){
+        const x=i%lw+x0-6,y=(i/lw|0)+y0-6,id=x>=0&&y>=0&&x<w&&y<h?old[y*w+x]:0;
+        if(body[i])missing+=!id;else {counts[id]++;samples++;}
+      }
+      if(missing<filled*.20)continue;
+      let owner=1;for(let k=2;k<counts.length;k++)if(counts[k]>counts[owner])owner=k;
+      const contact=counts[owner],nonzero=counts.reduce((s,v,k)=>s+(k?v:0),0);
+      if(contact<samples*.60||contact<nonzero*.98)continue;
+      const bodyMask=new Uint8Array(size),addition=new Uint8Array(size);let conflict=false;
+      for(let i=0;i<body.length;i++)if(body[i]){
+        const x=i%lw+x0-6,y=(i/lw|0)+y0-6,j=y*w+x;
+        if(labels[j]&&labels[j]!==owner){conflict=true;break;}bodyMask[j]=addition[j]=1;
+      }
+      if(conflict)continue;
+      const expanded=crossDilate(body,lw,lh);
+      for(let i=0;i<expanded.length;i++)if(expanded[i]&&!body[i]){
+        const x=i%lw+x0-6,y=(i/lw|0)+y0-6,j=y*w+x;
+        if(x>=0&&y>=0&&x<w&&y<h&&!labels[j]&&Math.max(rgba[j*4],rgba[j*4+1],rgba[j*4+2])<180)addition[j]=1;
+      }
+      const bodyContours=trace(bodyMask,w,h,1),expandedContours=trace(addition,w,h,1);if(!bodyContours||bodyContours.length!==1||!expandedContours)continue;
+      let added=0;for(let i=0;i<size;i++)if(addition[i]&&!labels[i])added++;
+      if(!added||repairs[owner-1].length>=32)continue;
+      repairs[owner-1].push({bodyContours,expandedContours,whitePixels:c.pixels,inkPixels:ink,addedPixels:added,attachment:{samples,matched:contact,foreign:nonzero-contact}});
+      for(let i=0;i<size;i++)if(addition[i]&&!labels[i])labels[i]=owner;
+    }
+    let count=0;const out=panels.map((parent,k)=>{
+      if(!repairs[k].length)return parent;
+      const serialized=repairedGeometry(parent,repairs[k]);if(!serialized)return parent;
+      const g=JSON.parse(serialized),proof={version:4,method:REPAIR_METHOD,analysisWidth:w,analysisHeight:h,parent,repairs:repairs[k],pixelContours:g.pixelContours,pixels:g.pixels};
+      const panel={x:g.x,y:g.y,w:g.w,h:g.h,_identitySource:'matte-cell-frame',_geometryOwner:'matte-cell-contours',_geometryType:'edge-connected-matte-cell',_contours:g.pixelContours.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),_matteCellProof:proof};
+      if(!validPanel(panel))return parent;count+=repairs[k].length;return panel;
+    });
+    if(count)log?.(`enclosed white-body repair: ${count} bodies, original ownership preserved`);
+    return count?out:panels;
+  }
+  function recoverNativeCellsRGBA(rgba,w,h,log){
+    const candidates=analyzeRGBA(rgba,w,h).filter(p=>{
+      const v=p._matteCellProof;
+      if(v.version!==1||v.source!=='component'||p.w*p.h>.48||v.pixels/(p.w*p.h*w*h)<.85)return false;
+      const mask=rasterContours(v.pixelContours,w,h),box=bounds(v.pixelContours.flat());
+      for(let axis=0;axis<2;axis++){
+        const length=axis?box[2]-box[0]:box[3]-box[1],span=axis?box[3]-box[1]:box[2]-box[0],band=Math.max(8,Math.round(length*.04));
+        for(let pos=Math.max(band*2,Math.round(length*.12));pos<length-Math.max(band*2,Math.round(length*.12));pos++){
+          let gap=0,flank=0;
+          for(let t=0;t<span;t++){
+            const i=(axis?box[1]+t:box[1]+pos)*w+(axis?box[0]+pos:box[0]+t),step=axis?1:w;
+            if(!mask[i]){gap++;flank+=!!mask[i-band*step]&&!!mask[i+band*step];}
+          }
+          if(gap/span>.28&&flank/span>.18)return false;
+        }
+      }
+      return true;
+    });
+    if(candidates.length)log?.(`native compact matte recovery: ${candidates.length} independent cells`);
+    return candidates;
+  }
+  function completeMatteImage(img,panels,log){
+    if(!Array.isArray(panels)||panels.length&&!panels.every(repairable))return panels;
+    const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!W||!H||W*H>24000000)return panels;
+    let canvas;try{
+      canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)return panels;ctx.drawImage(img,0,0);
+      const scale=Math.min(1,900/Math.max(W,H)),w=Math.round(W*scale),h=Math.round(H*scale);
+      const rgba=sampleBilinearRGBA(ctx.getImageData(0,0,W,H).data,W,H,w,h);
+      if(!panels.length)panels=recoverNativeCellsRGBA(rgba,w,h,log);
+      return repairWhiteBodiesRGBA(rgba,w,h,panels,log);
+    }finally{if(canvas){canvas.width=1;canvas.height=1;}}
+  }
+
   function validPanel(panel){try{
+    if(panel?._matteCellProof?.version===4)return validWhiteRepair(panel);
     if(panel?._matteCellProof?.version===3)return validRefinement(panel);
     const p=panel?._matteCellProof,w=p?.analysisWidth,h=p?.analysisHeight,rings=p?.pixelContours;
     if(panel?._identitySource!=='matte-cell-frame'||![1,2].includes(p?.version)||p.method!==METHOD||!['dark','paper'].includes(p.mode)||!Number.isInteger(w)||!Number.isInteger(h)||!ok(w,250,900)||!ok(h,350,900))return false;
@@ -439,7 +574,7 @@ const PanelMatteCells = (() => {
     if(!img||!Number.isFinite(img.width)||!Number.isFinite(img.height)||img.width<1||img.height<1)return [];
     try{const s=Math.min(1,900/Math.max(img.width,img.height)),w=Math.round(img.width*s),h=Math.round(img.height*s),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});if(!ctx)return [];ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log);}catch(e){log?.('matte cell route deferred: '+e.message);return [];}
   }
-  return {refinePanels,tracePixelContours:trace,analyzeImage,analyzeRGBA,validPanel,completeRimNetworkImage,completeRimNetworkRGBA,completeNativeRimNetworkImage,sampleBilinearRGBA};
+  return {repairWhiteBodiesRGBA,completeMatteImage,recoverNativeCellsRGBA,refinePanels,tracePixelContours:trace,analyzeImage,analyzeRGBA,validPanel,completeRimNetworkImage,completeRimNetworkRGBA,completeNativeRimNetworkImage,sampleBilinearRGBA};
 })();
 if(typeof window!=='undefined')window.PanelMatteCells=PanelMatteCells;
 if(typeof module!=='undefined')module.exports=PanelMatteCells;
