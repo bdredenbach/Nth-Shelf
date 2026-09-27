@@ -192,6 +192,7 @@ const PanelDetect = {
                 if(completed.length>identities.length)identities=completed;
               }
             }catch(error){if(log)log(`framed inset triplet deferred: ${error.message}`);}
+            try {const overlays=PanelFramedInsets.completeOverlayImage(img,identities,log);if(overlays.length)identities=overlays;}catch(error){log?.(`closed ink overlay deferred: ${error.message}`);}
             resolve(identities);
             return;
           }
@@ -505,6 +506,7 @@ const PanelDetect = {
               if(completed.length>closed.length)closed=completed;
             }
           }catch(error){if(log)log(`occluded structural tier deferred: ${error.message}`);}
+          if(!closed.length)try {const overlays=PanelFramedInsets.completeOverlayImage(img,closed,log);if(overlays.length)closed=overlays;}catch(error){log?.(`closed ink overlay deferred: ${error.message}`);}
           resolve(closed);
         }
         catch (err) {
