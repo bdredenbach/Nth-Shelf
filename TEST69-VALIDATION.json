@@ -3,11 +3,27 @@
   "code": 27997,
   "package": "io.github.bdredenbach.nthshelf.frametest69",
   "sourceBase": "77e25a6a08c7b49673c446c0fcf9213e39f28a98",
-  "sourceCommit": null,
+  "sourceCommit": "424580427c94e50973bf99baf2b682d8b47e290a",
   "scope": "Promote a proved orthogonal white-gutter layout to explicit proof26 without changing source geometry",
   "localValidation": "passed",
   "build": {
-    "status": "pending"
+    "status": "success",
+    "runId": 36342463997,
+    "artifactId": 10939582568,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/36342463997",
+    "sourceCommit": "424580427c94e50973bf99baf2b682d8b47e290a",
+    "sourceTree": "5e0b548cb5e05486b8918b3cc79eb71b995366f9",
+    "apkSha256": "a84e1c6bd2320eaf1b7c097ed4c6367ef5f9598573aba20cdc167da66b720df7",
+    "apkBytes": 3349007,
+    "archiveSha256": "9db015ff5fb2afb98b553a411f260165dba48a4123ca2dbff7997280383b3fa8",
+    "sourceArchiveSha256": "fc3bc5ad2d3c8e8484034dc8421242120470e0f437a8c032066824ff56625a7e",
+    "packagedWebAssets": 75,
+    "exactPackagedWebBytes": "passed",
+    "signature": "CI apksigner v2 passed; downloaded artifact bytes rechecked",
+    "package": "io.github.bdredenbach.nthshelf.frametest69",
+    "version": "2.79.69",
+    "versionCode": 27997,
+    "allCIGates": "passed"
   },
   "apocalypsePagesInSuppliedSet": 91,
   "directProof26Scan": {
@@ -43,5 +59,6 @@
     "Proof26 specializes already-proved paper-cell ownership; it does not invent geometry for pages the source raster cannot segment.",
     "The prior 312-page artwork corpus was not available for a fresh local rerun in this chat.",
     "Broader interrupted-white-gutter recovery remains a separate future problem."
-  ]
+  ],
+  "sourceTree": "5e0b548cb5e05486b8918b3cc79eb71b995366f9"
 }
