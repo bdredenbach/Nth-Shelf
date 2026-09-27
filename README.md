@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.67 — paired chromatic Apocalypse insets
+
+Test67 adds a conservative fallback for colored decorative frames whose four sides are split across one or two nearby chromatic components. It requires four measured perimeter sides, a sparse rim, and a textured enclosed scene. The new path runs only when the earlier Test66 colored-rim route returns no owner; runtime logic contains no page IDs, filenames, hashes, saved coordinates, or tap templates.
+
+Across all 91 supplied Rise of Apocalypse page images, the new proof abstains on 90 and adds exactly two selections on issue 4 page 11: the tall upper-left blue-bordered inset and the wide lower-right blue-bordered portrait inset. Test66 returned no owners on that page. Existing Test66 detector contracts remain in the CI gate, and Test67 adds synthetic connected/split-rim, open-frame, flat-interior, proof-tamper, geometry, and reader-authority checks.
+
+Current identity: **2.79.67 / code 27995**, package `io.github.bdredenbach.nthshelf.frametest67`, label **Nth Shelf Test67**. Cache/proof identifiers: `nth-shelf-shell-2.79.67`, `panel-map-exp-65`, `frame-proof-2.79.67`. See [validation](TEST67-VALIDATION.json), [contracts](qa27900/frame-accuracy/test67/README.md), and [handoff](HANDOFF-2.79.67.md). Phone acceptance is pending.
+
 ## 2.79.66 — independent Apocalypse frame recovery
 
 Test66 adds three general recovery paths: continuous colored gutters, stable paper cells at two seed scales, and enclosed colored rims with measured speech-balloon ownership. Accepted frame maps retain their existing selections. Runtime detection uses image evidence, with no page identities, filenames, saved frame coordinates, or tap-specific templates.
