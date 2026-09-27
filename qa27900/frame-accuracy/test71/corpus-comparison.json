@@ -1,0 +1,828 @@
+{
+  "pages": 91,
+  "exactlyUnchangedPages": 90,
+  "beforeOwners": 149,
+  "afterOwners": 150,
+  "priorDescriptorsPreserved": 149,
+  "pagesCompared": [
+    {
+      "issue": 1,
+      "imageIndex": 0,
+      "readerPage": 1,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 1,
+      "readerPage": 2,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 2,
+      "readerPage": 3,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 3,
+      "readerPage": 4,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 4,
+      "readerPage": 5,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 5,
+      "readerPage": 6,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 6,
+      "readerPage": 7,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 7,
+      "readerPage": 8,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 8,
+      "readerPage": 9,
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 9,
+      "readerPage": 10,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 10,
+      "readerPage": 11,
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 11,
+      "readerPage": 12,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 12,
+      "readerPage": 13,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 13,
+      "readerPage": 14,
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 14,
+      "readerPage": 15,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 15,
+      "readerPage": 16,
+      "before": 6,
+      "after": 6,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 16,
+      "readerPage": 17,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 17,
+      "readerPage": 18,
+      "before": 1,
+      "after": 2,
+      "exactMapUnchanged": false,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 18,
+      "readerPage": 19,
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 19,
+      "readerPage": 20,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 20,
+      "readerPage": 21,
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 21,
+      "readerPage": 22,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 22,
+      "readerPage": 23,
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 1,
+      "imageIndex": 23,
+      "readerPage": 24,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 0,
+      "readerPage": 1,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 1,
+      "readerPage": 2,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 2,
+      "readerPage": 3,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 3,
+      "readerPage": 4,
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 4,
+      "readerPage": 5,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 5,
+      "readerPage": 6,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 6,
+      "readerPage": 7,
+      "before": 6,
+      "after": 6,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 7,
+      "readerPage": 8,
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 8,
+      "readerPage": 9,
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 9,
+      "readerPage": 10,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 10,
+      "readerPage": 11,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 11,
+      "readerPage": 12,
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 12,
+      "readerPage": 13,
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 13,
+      "readerPage": 14,
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 14,
+      "readerPage": 15,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 15,
+      "readerPage": 16,
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 16,
+      "readerPage": 17,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 17,
+      "readerPage": 18,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 18,
+      "readerPage": 19,
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 19,
+      "readerPage": 20,
+      "before": 6,
+      "after": 6,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 20,
+      "readerPage": 21,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 21,
+      "readerPage": 22,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 2,
+      "imageIndex": 22,
+      "readerPage": 23,
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 0,
+      "readerPage": 1,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 1,
+      "readerPage": 2,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 2,
+      "readerPage": 3,
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 3,
+      "readerPage": 4,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 4,
+      "readerPage": 5,
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 5,
+      "readerPage": 6,
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 6,
+      "readerPage": 7,
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 7,
+      "readerPage": 8,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 8,
+      "readerPage": 9,
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 9,
+      "readerPage": 10,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 10,
+      "readerPage": 11,
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 11,
+      "readerPage": 12,
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 12,
+      "readerPage": 13,
+      "before": 6,
+      "after": 6,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 13,
+      "readerPage": 14,
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 14,
+      "readerPage": 15,
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 15,
+      "readerPage": 16,
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 16,
+      "readerPage": 17,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 17,
+      "readerPage": 18,
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 18,
+      "readerPage": 19,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 19,
+      "readerPage": 20,
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 20,
+      "readerPage": 21,
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 21,
+      "readerPage": 22,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 3,
+      "imageIndex": 22,
+      "readerPage": 23,
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 0,
+      "readerPage": 1,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 1,
+      "readerPage": 2,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 2,
+      "readerPage": 3,
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 3,
+      "readerPage": 4,
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 4,
+      "readerPage": 5,
+      "before": 6,
+      "after": 6,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 5,
+      "readerPage": 6,
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 6,
+      "readerPage": 7,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 7,
+      "readerPage": 8,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 8,
+      "readerPage": 9,
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 9,
+      "readerPage": 10,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 10,
+      "readerPage": 11,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 11,
+      "readerPage": 12,
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 12,
+      "readerPage": 13,
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 13,
+      "readerPage": 14,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 14,
+      "readerPage": 15,
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 15,
+      "readerPage": 16,
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 16,
+      "readerPage": 17,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 17,
+      "readerPage": 18,
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 18,
+      "readerPage": 19,
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 19,
+      "readerPage": 20,
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    },
+    {
+      "issue": 4,
+      "imageIndex": 20,
+      "readerPage": 21,
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "allPriorDescriptorsIdentical": true
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-name: Build Test69 APK
+name: Build Test71 APK
 
 on:
   push:
@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: nth-shelf-test69-apk
+  group: nth-shelf-test71-apk
   cancel-in-progress: false
 
 jobs:
@@ -90,7 +90,9 @@ jobs:
           node qa27900/frame-accuracy/test67/paired-chromatic-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test68/dark-overlay-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
           node qa27900/frame-accuracy/test69/orthogonal-white-gutter-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
-          node qa27900/frame-accuracy/test69/service-worker.test.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test70/interrupted-gutter-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test71/neighbor-completion-contract.cjs 2>&1 | tee -a dist/regression-checks.txt
+          node qa27900/frame-accuracy/test71/service-worker.test.cjs 2>&1 | tee -a dist/regression-checks.txt
 
       - name: Set up browser test dependencies
         run: |
@@ -137,7 +139,7 @@ jobs:
       - name: Install Android SDK 35
         run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
 
-      - name: Build isolated Test69 APK
+      - name: Build isolated Test71 APK
         shell: bash
         run: |
           set -euo pipefail
@@ -150,10 +152,10 @@ jobs:
           APK=android/app/build/outputs/apk/debug/app-debug.apk
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$APK" | tee dist/signature.txt
           "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" > dist/package.txt
-          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest69'" dist/package.txt
-          grep -F "versionCode='27997'" dist/package.txt
-          grep -F "versionName='2.79.69'" dist/package.txt
-          grep -F "application-label:'Nth Shelf Test69'" dist/package.txt
+          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest71'" dist/package.txt
+          grep -F "versionCode='27999'" dist/package.txt
+          grep -F "versionName='2.79.71'" dist/package.txt
+          grep -F "application-label:'Nth Shelf Test71'" dist/package.txt
           python3 - <<'PY'
           import hashlib, json, os, pathlib, subprocess, zipfile
           root = pathlib.Path('.')
@@ -176,15 +178,15 @@ jobs:
                   if z.read(prefix+rel) != source:
                       raise SystemExit('Packaged web file differs from source: '+rel)
                   hashes[rel] = hashlib.sha256(source).hexdigest()
-              for required_detector in ['js/panels-ragged-gutters.js','js/panels-orthogonal-white-gutters.js','js/panels-paper-recovery.js','js/panels-colored-rims.js','js/panels-dark-overlay-insets.js','js/panels-curved-rims.js','js/panels-matte-cells.js','js/panels-edge-spill.js','js/panels-structural-grid.js','js/panels-pale-completion.js','js/panels-gutter-graph.js']:
+              for required_detector in ['js/panels-ragged-gutters.js','js/panels-interrupted-gutters.js','js/panels-neighbor-completion.js','js/panels-orthogonal-white-gutters.js','js/panels-paper-recovery.js','js/panels-colored-rims.js','js/panels-dark-overlay-insets.js','js/panels-curved-rims.js','js/panels-matte-cells.js','js/panels-edge-spill.js','js/panels-structural-grid.js','js/panels-pale-completion.js','js/panels-gutter-graph.js']:
                   if required_detector not in hashes:
                       raise SystemExit('Frame detector missing: '+required_detector)
           subprocess.run(['git', 'diff', '--exit-code', 'HEAD', '--'], check=True)
           digest = hashlib.sha256(apk.read_bytes()).hexdigest()
           record = {
-              'versionName': '2.79.69', 'versionCode': 27997,
-              'applicationId': 'io.github.bdredenbach.nthshelf.frametest69',
-              'label': 'Nth Shelf Test69', 'sourceCommit': os.environ['GITHUB_SHA'],
+              'versionName': '2.79.71', 'versionCode': 27999,
+              'applicationId': 'io.github.bdredenbach.nthshelf.frametest71',
+              'label': 'Nth Shelf Test71', 'sourceCommit': os.environ['GITHUB_SHA'],
               'signing': 'CI debug key; not a Play Store production key',
               'apkSha256': digest, 'apkBytes': apk.stat().st_size,
               'verifiedWebAssetCount': len(hashes), 'webAssetSha256': hashes,
@@ -192,17 +194,17 @@ jobs:
               'comicArtworkTests': 'Saved results retained; comic artwork fixture is not uploaded or rerun by this workflow'
           }
           (root / 'dist/BUILD.json').write_text(json.dumps(record, indent=2)+'\n')
-          (root / 'dist/Nth-Shelf-2.79.69-Test69.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.69-Test69.apk\n')
-          (root / 'dist/INSTALL.txt').write_text('Install Nth-Shelf-2.79.69-Test69.apk as the separate Nth Shelf Test69 app. Promotes the six orthogonal white-gutter cells on Rise of Apocalypse issue 2 page 6 to explicit proof26 while preserving their geometry and retaining Test68 recovery. Phone acceptance pending.\n')
+          (root / 'dist/Nth-Shelf-2.79.71-Test71.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.71-Test71.apk\n')
+          (root / 'dist/INSTALL.txt').write_text('Install Nth-Shelf-2.79.71-Test71.apk as the separate Nth Shelf Test71 app. Adds the lower-middle dialogue frame on Rise of Apocalypse issue 1 image index 17 (reader 18/24) using an accepted neighboring frame. Includes the accepted Test70 interrupted-gutter recovery. Preserves all previous selections; general frame detection remains incomplete. Phone acceptance pending.\n')
           print(json.dumps({'sourceCommit': record['sourceCommit'], 'verifiedWebAssetCount': len(hashes), 'apkSha256': digest}, indent=2))
           PY
-          cp "$APK" dist/Nth-Shelf-2.79.69-Test69.apk
-          git archive --format=zip --output=dist/Nth-Shelf-2.79.69-Test69-Source.zip HEAD
+          cp "$APK" dist/Nth-Shelf-2.79.71-Test71.apk
+          git archive --format=zip --output=dist/Nth-Shelf-2.79.71-Test71-Source.zip HEAD
 
       - name: Upload verified APK, source and build record
         uses: actions/upload-artifact@v4
         with:
-          name: Nth-Shelf-2.79.69-Test69
+          name: Nth-Shelf-2.79.71-Test71
           path: dist/
           if-no-files-found: error
           retention-days: 30
@@ -211,7 +213,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Test69-build-diagnostics
+          name: Test71-build-diagnostics
           path: |
             dist/*.txt
             dist/*.json

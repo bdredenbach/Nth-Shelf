@@ -2,6 +2,24 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.71 — complete a paper frame using an accepted neighbor
+
+Test71 adds one independently verified frame on **Rise of Apocalypse #1, reader18/24 (image index17)**: the lower-middle dialogue scene on the double-page spread, with all five speech balloons. The prior lower-left frame remains unchanged. Across all91 original Apocalypse page images,90 maps match Test70 exactly and all149 existing descriptors are preserved; the total increases to150.
+
+A new optional supplement accepts prior validated contour maps, including orthogonal-white-gutter proof26. Two seed scales must produce the exact same complete contour; measured enclosed white content explains sparse speech-heavy seeds. A separating exterior-paper corridor must connect the candidate to an already accepted neighbor, with zero pixel overlap and no strong unresolved internal divider. This is an image-derived first shared-neighbor recovery, not a universal mixed-boundary assembler.
+
+The checkpoint also publishes the user-accepted Test70 changes that were previously delivered locally only. Test71 identity is **2.79.71 /27999**, package `io.github.bdredenbach.nthshelf.frametest71`, label **Nth Shelf Test71**. See [validation](TEST71-VALIDATION.json), [contracts](qa27900/frame-accuracy/test71/README.md), and [handoff](HANDOFF-2.79.71.md). Targeted mobile Chromium tests and all62 local Node contracts passed; physical Android acceptance remains pending. Fresh CI status is recorded in the validation file.
+
+## 2.79.70 — stable interrupted white-gutter recovery
+
+Test70 reconnects short, witnessed white-gutter interruptions and requires the exact same frame contour under two independent gap limits. The change supplements eligible maps without replacing, reordering, or overlapping earlier owners. Whole speech balloons remain governed by the existing image-derived ownership pass; no runtime page or tap templates are used.
+
+On **Rise of Apocalypse #3, reader 7/23 (image index 6)**, the wide pointing-guard/fire scene now pops independently with both speech balloons. That page increases from one owner to two. Across the 91-page Apocalypse comparison, the other 90 maps and all 148 prior owners are unchanged. Twelve reader touchscreen taps, contour/alpha checks, two resizes, one horizontal mirror, and the retained local Node/native archive tests passed.
+
+**Publication status:** source is prepared locally, not pushed; GitHub CI has not run. The separate local test APK reuses the verified Test69 native shell with the tested Test70 web assets and a local v2 signature. It is not a fresh Gradle compilation and requires phone installation/behavior confirmation. Local package: `io.github.bdredenbach.nthshelf.frameloc070`; future CI package: `io.github.bdredenbach.nthshelf.frametest70`. Version **2.79.70 / code 27998**.
+
+See [validation](TEST70-VALIDATION.json), [contracts and evidence](qa27900/frame-accuracy/test70/README.md), and [handoff](HANDOFF-2.79.70.md). This adds one proven case, not general coverage of all interrupted gutters.
+
 ## 2.79.69 — explicit orthogonal white-gutter proof
 
 Test69 formalizes clean orthogonal white gutters as their own detector proof. It does not add a second image scan: an already-valid proof-18 paper-cell map is promoted only when all cells form coherent near-orthogonal rows, the page edge is fully paper, no inferred splits are present, and owner/seed fill remain strong. Pixel contours and x/y/w/h geometry are preserved exactly.

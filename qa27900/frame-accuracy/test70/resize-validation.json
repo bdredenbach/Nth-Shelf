@@ -1,0 +1,128 @@
+[
+  {
+    "scale": 0.67,
+    "mirror": false,
+    "width": 1332,
+    "height": 2048,
+    "owners": 2,
+    "added": 1,
+    "positive": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "negative": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "box": [
+      [
+        0.29914529914529914,
+        0.24555555555555555,
+        0.6923076923076923,
+        0.24
+      ]
+    ],
+    "passed": true
+  },
+  {
+    "scale": 1.5,
+    "mirror": false,
+    "width": 2982,
+    "height": 4584,
+    "owners": 2,
+    "added": 1,
+    "positive": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "negative": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "box": [
+      [
+        0.29914529914529914,
+        0.24555555555555555,
+        0.6923076923076923,
+        0.24
+      ]
+    ],
+    "passed": true
+  },
+  {
+    "scale": 1,
+    "mirror": true,
+    "width": 1988,
+    "height": 3056,
+    "owners": 2,
+    "added": 1,
+    "positive": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "negative": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "box": [
+      [
+        0.008547008547008548,
+        0.24555555555555555,
+        0.6923076923076923,
+        0.24
+      ]
+    ],
+    "passed": true
+  }
+]

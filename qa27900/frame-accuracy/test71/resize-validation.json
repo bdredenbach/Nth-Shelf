@@ -1,0 +1,98 @@
+[
+  {
+    "count": 2,
+    "newCount": 1,
+    "positives": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "negatives": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "name": "0.67x",
+    "size": [
+      2663,
+      2048
+    ]
+  },
+  {
+    "count": 2,
+    "newCount": 1,
+    "positives": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "negatives": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "name": "1.25x",
+    "size": [
+      4969,
+      3820
+    ]
+  },
+  {
+    "count": 2,
+    "newCount": 1,
+    "positives": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "negatives": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "name": "mirror",
+    "size": [
+      3975,
+      3056
+    ]
+  }
+]

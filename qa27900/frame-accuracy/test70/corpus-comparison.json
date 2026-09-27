@@ -1,0 +1,654 @@
+{
+  "pagesCompared": 91,
+  "unchangedPages": 90,
+  "beforeOwners": 148,
+  "afterOwners": 149,
+  "changed": [
+    {
+      "page": "issue3-006",
+      "before": 1,
+      "after": 2,
+      "exactMapUnchanged": false,
+      "existingOwnersExact": true
+    }
+  ],
+  "records": [
+    {
+      "page": "issue1-000",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-001",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-002",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-003",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-004",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-005",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-006",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-007",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-008",
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-009",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-010",
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-011",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-012",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-013",
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-014",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-015",
+      "before": 6,
+      "after": 6,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-016",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-017",
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-018",
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-019",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-020",
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-021",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-022",
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue1-023",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-000",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-001",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-002",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-003",
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-004",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-005",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-006",
+      "before": 6,
+      "after": 6,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-007",
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-008",
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-009",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-010",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-011",
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-012",
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-013",
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-014",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-015",
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-016",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-017",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-018",
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-019",
+      "before": 6,
+      "after": 6,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-020",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-021",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue2-022",
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-000",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-001",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-002",
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-003",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-004",
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-005",
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-006",
+      "before": 1,
+      "after": 2,
+      "exactMapUnchanged": false,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-007",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-008",
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-009",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-010",
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-011",
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-012",
+      "before": 6,
+      "after": 6,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-013",
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-014",
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-015",
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-016",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-017",
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-018",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-019",
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-020",
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-021",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue3-022",
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-000",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-001",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-002",
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-003",
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-004",
+      "before": 6,
+      "after": 6,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-005",
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-006",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-007",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-008",
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-009",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-010",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-011",
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-012",
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-013",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-014",
+      "before": 2,
+      "after": 2,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-015",
+      "before": 1,
+      "after": 1,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-016",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-017",
+      "before": 4,
+      "after": 4,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-018",
+      "before": 3,
+      "after": 3,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-019",
+      "before": 5,
+      "after": 5,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    },
+    {
+      "page": "issue4-020",
+      "before": 0,
+      "after": 0,
+      "exactMapUnchanged": true,
+      "existingOwnersExact": true
+    }
+  ]
+}
