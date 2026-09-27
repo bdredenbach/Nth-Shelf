@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.71 — INTERRUPTED WHITE GUTTER RECOVERY
+// NTH SHELF 2.79.73 — INTERRUPTED WHITE GUTTER RECOVERY
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.71";
+const CACHE_NAME = "nth-shelf-shell-2.79.73";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -74,6 +74,7 @@ const SHELL_FILES = [
   "./js/panels-ragged-gutters.js",
   "./js/panels-interrupted-gutters.js",
   "./js/panels-neighbor-completion.js",
+  "./js/panels-shared-boundaries.js",
   "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",

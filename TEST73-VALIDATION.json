@@ -1,0 +1,97 @@
+{
+  "version": "2.79.73",
+  "versionCode": 28001,
+  "package": "io.github.bdredenbach.nthshelf.frametest73",
+  "label": "Nth Shelf Test73",
+  "sourceBase": "d64931b09daf2dc10b76098a657cc2d6a24300fd",
+  "sourceCommit": null,
+  "build": {
+    "status": "pending"
+  },
+  "localValidation": "passed",
+  "baseline": "Phone-confirmed Test71; Test72 source-only validator replacement is not used",
+  "corpus": {
+    "pages": 91,
+    "unchangedMaps": 89,
+    "beforeOwners": 150,
+    "afterOwners": 154,
+    "priorDescriptorsPreserved": 150
+  },
+  "changes": [
+    {
+      "issue": 3,
+      "imageIndex": 8,
+      "readerPage": "9/23",
+      "before": 3,
+      "after": 6,
+      "frames": [
+        "left tall",
+        "lower wide",
+        "bottom wide"
+      ]
+    },
+    {
+      "issue": 1,
+      "imageIndex": 18,
+      "readerPage": "19/24",
+      "before": 1,
+      "after": 2,
+      "frames": [
+        "lower left"
+      ]
+    }
+  ],
+  "reader": {
+    "newFrameTouches": 33,
+    "priorFrameTouches": 30,
+    "positiveAlphaChecks": 273,
+    "negativeAlphaChecks": 198,
+    "distinctInteriorSamples": 130871,
+    "distinctExteriorSamples": 33865,
+    "alphaFailures": 0,
+    "browserErrors": 0,
+    "resizedOrMirroredPageVariantsPassed": 6,
+    "environment": "Native Chromium touchscreen / actual Reader with minimal offline DOM; not physical Android"
+  },
+  "proof": {
+    "version": 29,
+    "method": "boundary-stable-rooted-paper-network",
+    "candidateRadii": [
+      4,
+      6,
+      8
+    ],
+    "comparisonPairs": [
+      [
+        4,
+        6
+      ],
+      [
+        6,
+        8
+      ]
+    ],
+    "oldOwnersRewritten": false,
+    "output": "intersection consensus after protecting accepted ownership",
+    "maximumDifferenceFraction": 0.002,
+    "maximumPageDifferenceFraction": 0.00035,
+    "boundaryBandPixels": 3,
+    "maximumReconciledOwnershipFraction": 0.025,
+    "maxRootedDepth": 3,
+    "imageEvidence": "Measured exterior-white-gutter rays to one or multiple accepted neighbors",
+    "pageIdentityLookup": false
+  },
+  "localNodeContracts": 63,
+  "syntax": "passed",
+  "nativeArchiveTests": "passed",
+  "webAssetCount": 78,
+  "phoneAcceptance": "pending",
+  "historical312PageArtworkRerun": false,
+  "comicArtworkCommitted": false,
+  "limitations": [
+    "Only the 91 supplied Apocalypse originals were rerun; earlier Wolverine/manga/Magneto artwork was unavailable, with saved contracts retained.",
+    "Most remaining comic misses are not resolved by this bounded paper-cell supplement.",
+    "Near-edge enclosure is supported, not arbitrary unframed page-edge guesses.",
+    "The untested Test72 proximity-only fallback and proof27 replacement are not carried forward."
+  ]
+}
