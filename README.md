@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## 2.79.69 — explicit orthogonal white-gutter proof
+
+Test69 formalizes clean orthogonal white gutters as their own detector proof. It does not add a second image scan: an already-valid proof-18 paper-cell map is promoted only when all cells form coherent near-orthogonal rows, the page edge is fully paper, no inferred splits are present, and owner/seed fill remain strong. Pixel contours and x/y/w/h geometry are preserved exactly.
+
+Across all 91 supplied Rise of Apocalypse pages, only issue 2 page 6 qualifies. Its six existing paper-cell selections are promoted to six proof-26 `orthogonal-white-gutter-cell` owners across two rows; the other 90 pages abstain. Synthetic tests reject misaligned rows and a cross-row art bridge.
+
+Current identity: **2.79.69 / code 27997**, package `io.github.bdredenbach.nthshelf.frametest69`, label **Nth Shelf Test69**. Cache/proof identifiers: `nth-shelf-shell-2.79.69`, `panel-map-exp-67`, `frame-proof-2.79.69`. See [validation](TEST69-VALIDATION.json), [contracts](qa27900/frame-accuracy/test69/README.md), and [handoff](HANDOFF-2.79.69.md). Phone acceptance is pending.
+
 ## 2.79.68 — occluded dark overlay inset recovery
 
 Test68 adds a conservative empty-map fallback for a large dark-framed inset whose fourth rail is partially covered by foreground artwork. Three rails must be independently complete, the fourth must remain the unique weak rail, every side needs measured exterior contrast, and the enclosed scene must remain strongly textured. The runtime analysis is capped at 480 pixels and contains no page IDs, titles, filenames, hashes, saved coordinates, or tap templates.
