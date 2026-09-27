@@ -3,11 +3,27 @@
   "code": 27995,
   "package": "io.github.bdredenbach.nthshelf.frametest67",
   "sourceBase": "555d0c3f5a7c01a576864c1e29ffc1ec4706f003",
-  "sourceCommit": null,
+  "sourceCommit": "d7989792a6514827d832d03b4427a6a3abe437a2",
   "scope": "Two blue-bordered inset frames recovered on Rise of Apocalypse issue 4 page 11; broader Apocalypse detection remains incomplete",
   "localValidation": "passed",
   "build": {
-    "status": "pending"
+    "status": "success",
+    "runId": 36329590592,
+    "artifactId": 10934663473,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/36329590592",
+    "sourceCommit": "d7989792a6514827d832d03b4427a6a3abe437a2",
+    "sourceTree": "3784a553bc925bfcce40c20cecc96d37fd1aa372",
+    "apkSha256": "acb78a0de035ff95d651ddca3f396e8f2a042173981f6107b36dc83a170af6e8",
+    "apkBytes": 3342014,
+    "archiveSha256": "33083b88d9399207d53abb4e1c20dbd41fa7d87be1bf63406de8452f5456a286",
+    "sourceArchiveSha256": "e7553c5a058c311746873137123ef6a2d94a248cf65e4d85f848bbdc77d23084",
+    "packagedWebAssets": 73,
+    "exactPackagedWebBytes": "passed",
+    "signature": "CI apksigner v2 passed; downloaded artifact bytes rechecked",
+    "package": "io.github.bdredenbach.nthshelf.frametest67",
+    "version": "2.79.67",
+    "versionCode": 27995,
+    "allCIGates": "passed"
   },
   "apocalypsePagesInSuppliedSet": 91,
   "newRoutePagesWithOwners": 1,
@@ -60,5 +76,6 @@
     "Apocalypse pages remain partially detected.",
     "The prior 312-page artwork corpus was not available for a fresh local rerun in this chat.",
     "Owner counts do not establish semantic accuracy for the whole series."
-  ]
+  ],
+  "sourceTree": "3784a553bc925bfcce40c20cecc96d37fd1aa372"
 }
