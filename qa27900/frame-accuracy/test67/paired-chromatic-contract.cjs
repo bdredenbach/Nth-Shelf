@@ -65,7 +65,7 @@ for(const mutate of [
   const p=clone(base);mutate(p);assert.equal(D.validPanel(p),false);mutations++;
 }
 const reader=require('node:fs').readFileSync(require('node:path').resolve(__dirname,'../../../js/reader.js'),'utf8');
-assert(reader.includes('[21,22,23,24,25].includes(panel._structuralGridProof?.version)'));
+assert(reader.includes('[21,22,23,24,25,26].includes(panel._structuralGridProof?.version)'));
 const geometry=require('node:fs').readFileSync(require('node:path').resolve(__dirname,'../../../js/panels-geometry.js'),'utf8');
-assert(geometry.includes('[21,22,23,24,25].includes(panel._structuralGridProof?.version)'));
+assert(geometry.includes('[21,22,23,24,25,26].includes(panel._structuralGridProof?.version)'));
 console.log(JSON.stringify({passed:true,syntheticSizes:sizes.length,owners:proofs.length,pairedOwners:proofs.filter(p=>p._structuralGridProof.components.length===2).length,mutations}));
