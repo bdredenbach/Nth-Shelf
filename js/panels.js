@@ -1,4 +1,4 @@
-// NTH SHELF V2.79.22 — PROVED FRAME REFINEMENT OVER LEGACY DETECTION
+// NTH SHELF V2.79.64 — PROVED FRAME REFINEMENT OVER LEGACY DETECTION
 // Legacy regions remain authoritative outside independently proved refinements.
 // V92 keeps the V91 boundary-set + iterative internal-gutter path, then adds
 // a conservative interior validation gate. A fallback result is rejected if
@@ -7,7 +7,13 @@
 
 const PanelDetect = {
   detect(imgUrl, log) {
-    return new Promise((resolve) => {
+    return new Promise((done) => {
+      const resolve=panels=>{
+        try {
+          if(typeof PanelMatteCells!=='undefined')panels=PanelMatteCells.refinePanels(panels,log);
+        } catch(error) { log?.(`stable matte partition deferred: ${error.message}`); }
+        done(panels);
+      };
       const img = new Image();
       img.onload = () => {
         try {

@@ -1,5 +1,6 @@
-/* Nth Shelf — broad-spectrum exterior-matte / paper-cell detector (2.79.35).
- * EMPTY MAP ONLY. No page number, filename, fingerprint or saved crop is used.
+/* Nth Shelf — exterior-matte / paper-cell detector with stable refinement.
+ * Base detection is empty-map only; refinement partitions existing masks.
+ * No page number, filename, fingerprint or saved crop is used.
  * The page exterior is proved from edge-connected matte/paper pixels. Large
  * dark-matte unions may be split only by measured pale neutral rims; large
  * paper unions may be split only by measured paper separators. Ambiguous
@@ -311,7 +312,118 @@ const PanelMatteCells = (() => {
     }catch(e){log?.('native-pixel rim completion deferred: '+e.message);return [];}
     finally{if(canvas){canvas.width=1;canvas.height=1;}}
   }
+  // Test64: split only stable large lobes of an already proved matte cell.
+  // Erosion proposes owners; it never becomes a crop. A widest-path flood
+  // restores every original pixel, including thin tips, and cannot add pixels.
+  // Two independent erosion radii must produce exactly the same ownership.
+  const refinementCache=new Map();
+  function rasterContours(rings,w,h){
+    const mask=new Uint8Array(w*h);
+    for(let y=0;y<h;y++){
+      const xs=[];
+      for(const ring of rings)for(let k=0;k<ring.length;k++){
+        const a=ring[k],b=ring[(k+1)%ring.length];
+        if((a[1]>y+.5)!==(b[1]>y+.5))xs.push(a[0]);
+      }
+      xs.sort((a,b)=>a-b);
+      for(let k=0;k<xs.length;k+=2)for(let x=xs[k];x<xs[k+1];x++)mask[y*w+x]=1;
+    }
+    return mask;
+  }
+  function neckPartition(mask,w,h,radius){
+    const size=w*h,distance=new Uint16Array(size).fill(w+h),queue=new Int32Array(size);
+    let head=0,n=0;
+    for(let i=0;i<size;i++)if(!mask[i]){distance[i]=0;queue[n++]=i;}
+    const neighbors=i=>{const x=i%w,y=i/w|0;return [x?i-1:-1,x+1<w?i+1:-1,y?i-w:-1,y+1<h?i+w:-1];};
+    while(head<n){const i=queue[head++];for(const j of neighbors(i))if(j>=0&&distance[j]>distance[i]+1){distance[j]=distance[i]+1;queue[n++]=j;}}
+    const core=new Uint8Array(size);
+    for(let i=0;i<size;i++)core[i]=mask[i]&&distance[i]>radius?1:0;
+    const cc=components(core,w,h);if(!cc)return null;
+    const seeds=cc.items.filter(c=>c.pixels>=size*.015&&c.box[2]-c.box[0]>=w*.08&&c.box[3]-c.box[1]>=h*.05);
+    if(seeds.length<2||seeds.length>12)return null;
+    const labels=new Uint16Array(size),owners=new Map(seeds.map((s,k)=>[s.id,k+1]));
+    for(let i=0;i<size;i++)labels[i]=owners.get(cc.ids[i])||0;
+    const queued=new Int16Array(size).fill(-1),buckets=Array.from({length:radius+1},()=>[]),offsets=new Uint32Array(radius+1);
+    const offer=(i,level)=>{
+      for(const j of neighbors(i))if(j>=0&&mask[j]&&!labels[j]){
+        const clearance=Math.min(level,distance[j]);
+        if(clearance>queued[j]){queued[j]=clearance;buckets[clearance].push([j,labels[i]]);}
+      }
+    };
+    for(let i=0;i<size;i++)if(labels[i])offer(i,radius);
+    for(let level=radius;level>=0;level--){
+      const bucket=buckets[level];
+      while(offsets[level]<bucket.length){
+        const [i,owner]=bucket[offsets[level]++];
+        if(labels[i]||queued[i]!==level)continue;
+        labels[i]=owner;offer(i,level);
+      }
+    }
+    const parts=seeds.map(s=>({pixels:0,contacts:0,thickness:0,seedPixels:s.pixels,box:[w,h,0,0]}));
+    for(let i=0;i<size;i++)if(mask[i]){
+      if(!labels[i])return null;
+      const p=parts[labels[i]-1],x=i%w,y=i/w|0;p.pixels++;
+      p.box[0]=Math.min(p.box[0],x);p.box[1]=Math.min(p.box[1],y);p.box[2]=Math.max(p.box[2],x+1);p.box[3]=Math.max(p.box[3],y+1);
+      if(neighbors(i).some(j=>j>=0&&labels[j]&&labels[j]!==labels[i])){p.contacts++;p.thickness=Math.max(p.thickness,distance[i]);}
+    }
+    // A narrow appendage or a long cut through artwork is not another frame.
+    if(parts.some(p=>p.contacts>4||p.thickness>2||p.seedPixels<p.pixels*.65||p.pixels<.55*(p.box[2]-p.box[0])*(p.box[3]-p.box[1])))return null;
+    for(let i=0;i<parts.length;i++)for(let j=i+1;j<parts.length;j++){
+      const a=parts[i].box,b=parts[j].box,overlap=Math.max(0,Math.min(a[2],b[2])-Math.max(a[0],b[0]))*Math.max(0,Math.min(a[3],b[3])-Math.max(a[1],b[1]));
+      if(overlap>.15*Math.min(parts[i].pixels,parts[j].pixels))return null;
+    }
+    return {labels,parts};
+  }
+  function stableRefinement(parent){
+    if(parent?._matteCellProof?.version!==1||parent._matteCellProof.source!=='component'||!validPanel(parent))return null;
+    const key=JSON.stringify(parent);
+    if(refinementCache.has(key))return refinementCache.get(key);
+    const p=parent._matteCellProof,w=p.analysisWidth,h=p.analysisHeight,mask=rasterContours(p.pixelContours,w,h);
+    const a=neckPartition(mask,w,h,2),b=a&&neckPartition(mask,w,h,4);
+    let result=null;
+    if(a&&b&&a.parts.length===b.parts.length&&a.labels.every((v,i)=>v===b.labels[i])){
+      const children=[];
+      for(let k=0;k<a.parts.length;k++){
+        const rings=trace(a.labels,w,h,k+1);if(!rings){children.length=0;break;}
+        const part=a.parts[k],box=part.box;
+        children.push({x:box[0]/w,y:box[1]/h,w:(box[2]-box[0])/w,h:(box[3]-box[1])/h,
+          _identitySource:'matte-cell-frame',_geometryOwner:'matte-cell-contours',_geometryType:'edge-connected-matte-cell',
+          _contours:rings.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),
+          _matteCellProof:{version:3,method:'stable-matte-cell-partition',analysisWidth:w,analysisHeight:h,
+            index:k,count:a.parts.length,radii:[2,4],pixels:part.pixels,contacts:part.contacts,thickness:part.thickness,
+            pixelContours:rings,parent}});
+      }
+      if(children.length===a.parts.length&&children.reduce((s,c)=>s+c._matteCellProof.pixels,0)===p.pixels)
+        result=children.map(c=>JSON.stringify(c));
+    }
+    // Serialized values make this cache safe against descriptor mutation and
+    // keep tap-time validation cheap. A changed parent receives a fresh check.
+    refinementCache.set(key,result);
+    if(refinementCache.size>8)refinementCache.delete(refinementCache.keys().next().value);
+    return result;
+  }
+  function validRefinement(panel){
+    const p=panel?._matteCellProof;
+    if(p?.version!==3||!Number.isInteger(p.index)||panel._quad||panel._outline)return false;
+    const group=stableRefinement(p.parent),serialized=group?.[p.index];if(!serialized)return false;
+    const expected=JSON.parse(serialized);
+    return ['_identitySource','_geometryOwner','_geometryType'].every(k=>panel[k]===expected[k])&&
+      ['x','y','w','h'].every(k=>Number.isFinite(panel[k])&&Math.abs(panel[k]-expected[k])<1e-10)&&
+      JSON.stringify(p)===JSON.stringify(expected._matteCellProof)&&JSON.stringify(panel._contours)===JSON.stringify(expected._contours);
+  }
+  function refinePanels(panels,log){
+    if(!Array.isArray(panels))return panels;
+    const out=[];let refined=0;
+    for(const parent of panels){
+      const group=stableRefinement(parent);
+      if(group){out.push(...group.map(s=>JSON.parse(s)));refined++;}else out.push(parent);
+    }
+    if(refined)log?.(`stable matte partition: ${refined} composites, ${out.length-panels.length} additional owners, exact pixel union`);
+    return refined?out:panels;
+  }
+
   function validPanel(panel){try{
+    if(panel?._matteCellProof?.version===3)return validRefinement(panel);
     const p=panel?._matteCellProof,w=p?.analysisWidth,h=p?.analysisHeight,rings=p?.pixelContours;
     if(panel?._identitySource!=='matte-cell-frame'||![1,2].includes(p?.version)||p.method!==METHOD||!['dark','paper'].includes(p.mode)||!Number.isInteger(w)||!Number.isInteger(h)||!ok(w,250,900)||!ok(h,350,900))return false;
     if(p.version===2?!validCompletion(p,w,h):p.rimCompletion!==undefined)return false;
@@ -327,7 +439,7 @@ const PanelMatteCells = (() => {
     if(!img||!Number.isFinite(img.width)||!Number.isFinite(img.height)||img.width<1||img.height<1)return [];
     try{const s=Math.min(1,900/Math.max(img.width,img.height)),w=Math.round(img.width*s),h=Math.round(img.height*s),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});if(!ctx)return [];ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log);}catch(e){log?.('matte cell route deferred: '+e.message);return [];}
   }
-  return {tracePixelContours:trace,analyzeImage,analyzeRGBA,validPanel,completeRimNetworkImage,completeRimNetworkRGBA,completeNativeRimNetworkImage,sampleBilinearRGBA};
+  return {refinePanels,tracePixelContours:trace,analyzeImage,analyzeRGBA,validPanel,completeRimNetworkImage,completeRimNetworkRGBA,completeNativeRimNetworkImage,sampleBilinearRGBA};
 })();
 if(typeof window!=='undefined')window.PanelMatteCells=PanelMatteCells;
 if(typeof module!=='undefined')module.exports=PanelMatteCells;
