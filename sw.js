@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.66 — INDEPENDENT FRAME RECOVERY
+// NTH SHELF 2.79.67 — PAIRED CHROMATIC INSET RECOVERY
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.66";
+const CACHE_NAME = "nth-shelf-shell-2.79.67";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
