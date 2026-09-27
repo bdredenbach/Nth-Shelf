@@ -1,0 +1,47 @@
+{
+  "version": "2.79.69",
+  "code": 27997,
+  "package": "io.github.bdredenbach.nthshelf.frametest69",
+  "sourceBase": "77e25a6a08c7b49673c446c0fcf9213e39f28a98",
+  "sourceCommit": null,
+  "scope": "Promote a proved orthogonal white-gutter layout to explicit proof26 without changing source geometry",
+  "localValidation": "passed",
+  "build": {
+    "status": "pending"
+  },
+  "apocalypsePagesInSuppliedSet": 91,
+  "directProof26Scan": {
+    "pagesWithOwners": 1,
+    "pagesAbstained": 90,
+    "book": "apocalypse-2",
+    "page": 6,
+    "sourceOwners": 6,
+    "proof26Owners": 6,
+    "rowCount": 2,
+    "geometryChanged": false
+  },
+  "newProof": {
+    "version": 26,
+    "method": "orthogonal-white-gutter-grid",
+    "minimumOwners": 4,
+    "maximumOwners": 12,
+    "minimumBboxFill": 0.82,
+    "minimumSeedFill": 0.68,
+    "maximumRowEdgeSpread": 0.04,
+    "syntheticOwners": 4,
+    "tamperRejections": 12,
+    "misalignedGridRejected": true,
+    "crossRowBridgeRejected": true
+  },
+  "geometryAuthority": "proof versions 21/22/23/24/25/26 preserve complete contours",
+  "readerEdgeSpill": "proof versions 21/22/23/24/25/26 suppress unrelated edge-spill expansion",
+  "runtimePageIdentityLookups": false,
+  "comicArtworkCommitted": false,
+  "phoneAcceptance": "pending",
+  "allFramesCorrect": false,
+  "knownLimitations": [
+    "Proof26 specializes already-proved paper-cell ownership; it does not invent geometry for pages the source raster cannot segment.",
+    "The prior 312-page artwork corpus was not available for a fresh local rerun in this chat.",
+    "Broader interrupted-white-gutter recovery remains a separate future problem."
+  ]
+}
