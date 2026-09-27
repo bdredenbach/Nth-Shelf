@@ -12,4 +12,13 @@ Retained Test66 contracts for continuous gamut, stable paper, colored rims, and 
 
 Identity: version `2.79.67`, code `27995`, package `io.github.bdredenbach.nthshelf.frametest67`, label `Nth Shelf Test67`, shell `nth-shelf-shell-2.79.67`, map `panel-map-exp-65`, proof `frame-proof-2.79.67`.
 
-Build/source publication fields are pending until the Test67 checkpoint is pushed and CI artifact verification completes.
+Source published as `d7989792a6514827d832d03b4427a6a3abe437a2` (tree
+`3784a553bc925bfcce40c20cecc96d37fd1aa372`). CI run `36329590592`
+passed every gate and produced artifact `10934663473`. The isolated Test67 APK
+is 3,342,014 bytes with SHA-256
+`acb78a0de035ff95d651ddca3f396e8f2a042173981f6107b36dc83a170af6e8`.
+The downloaded artifact ZIP SHA-256 is
+`33083b88d9399207d53abb4e1c20dbd41fa7d87be1bf63406de8452f5456a286`.
+All 73 packaged web assets match the tested source exactly. Package identity,
+version/label, archive integrity, and CI apksigner v2 verification passed.
+Phone acceptance remains pending.
