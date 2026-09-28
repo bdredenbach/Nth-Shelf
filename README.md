@@ -2,6 +2,12 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## Test75 — gradient-guided separation of touching frames
+
+Test75 adds a bounded edge-guided watershed supplement. Two seed scales and two contact-window widths must agree exactly; the original RGB edges determine the split where paper-cell scenes touch. The entire foreground statue head stays in the lower throne scene, not partly in the upper pyramid scene on **Rise of Apocalypse #1, reader8/24**. Earlier detector paths and owner descriptors remain unchanged. See [validation](TEST75-VALIDATION.json), [handoff](HANDOFF-2.79.75.md), and [contracts](qa27900/frame-accuracy/test75/README.md).
+
+Identity: **2.79.75 /28003**, package `io.github.bdredenbach.nthshelf.frametest75`, label **Nth Shelf Test75**. The original-artwork corpus comparison and browser touch/crop checks are recorded separately from CI and physical Android acceptance. This is an incremental expansion, not a claim that all panels now work.
+
 ## Test73 — shared-boundary completion
 
 Version **2.79.73**, Android code **28001**, isolated package

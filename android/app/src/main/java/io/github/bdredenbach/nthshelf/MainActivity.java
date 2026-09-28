@@ -86,7 +86,7 @@ public final class MainActivity extends Activity {
         settings.setSupportMultipleWindows(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
         settings.setUserAgentString(
-                settings.getUserAgentString() + " NthShelfAndroid/2.79.74"
+                settings.getUserAgentString() + " NthShelfAndroid/2.79.75"
         );
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             settings.setSafeBrowsingEnabled(true);
