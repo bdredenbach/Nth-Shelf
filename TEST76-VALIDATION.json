@@ -1,0 +1,40 @@
+{
+  "version": "2.79.76",
+  "versionCode": 28004,
+  "package": "io.github.bdredenbach.nthshelf.frametest76",
+  "label": "Nth Shelf Test76",
+  "sourceBase": "eaae18fb4a259f372cc44a8506e8d77dc41b0fdb",
+  "sourceCommit": null,
+  "build": {"status": "pending"},
+  "localValidation": "passed",
+  "scope": "Two complete touching red-rimmed inset scenes on Rise of Apocalypse issue 4 image index 13 (reader 14/21).",
+  "corpus": {
+    "pages": 91,
+    "test75Owners": 161,
+    "test76Owners": 163,
+    "priorDescriptorsPreserved": 161,
+    "newHitPages": 1,
+    "newOwners": 2,
+    "target": "4-013",
+    "test75TargetOwners": 0,
+    "test76TargetOwners": 2
+  },
+  "variants": {
+    "0.67x": {"owners": 2, "valid": true},
+    "1.25x": {"owners": 2, "valid": true},
+    "horizontalMirror": {"owners": 2, "valid": true}
+  },
+  "proof": {
+    "version": 32,
+    "method": "two-core-stable-chromatic-shared-border",
+    "existingOwnerVeto": true,
+    "pageIdentityLookup": false,
+    "syntheticOwners": 2,
+    "tamperRejections": 20,
+    "negativeCases": ["weak shared edge", "open chromatic rim", "flat interior", "broad bridge", "prior-owner overlap"]
+  },
+  "retainedTest75Suite": "passed",
+  "phoneAcceptance": "pending",
+  "allPanelsDetected": false,
+  "comicArtworkCommitted": false
+}
