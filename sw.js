@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.75 — INDEPENDENT PAPER ENCLOSURE
+// NTH SHELF 2.79.76 — CHROMATIC SHARED-BORDER SEPARATION
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.75";
+const CACHE_NAME = "nth-shelf-shell-2.79.76";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -77,6 +77,7 @@ const SHELL_FILES = [
   "./js/panels-shared-boundaries.js",
   "./js/panels-exterior-completion.js",
   "./js/panels-edge-guided-paper.js",
+  "./js/panels-chromatic-shared-border.js",
   "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",
