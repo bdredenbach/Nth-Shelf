@@ -1,0 +1,79 @@
+{
+  "version": "2.79.77",
+  "versionCode": 28005,
+  "package": "io.github.bdredenbach.nthshelf.frametest77",
+  "label": "Nth Shelf Test77",
+  "sourceBase": "user-confirmed Test76 on Test_Branch",
+  "sourceCommit": null,
+  "build": {
+    "status": "pending"
+  },
+  "localValidation": "passed",
+  "target": {
+    "issue": 1,
+    "imageIndex": 11,
+    "readerPage": "12/24",
+    "before": 1,
+    "after": 2,
+    "scene": "upper-left scratching hand inset including full yellow caption and SKRITCH lettering"
+  },
+  "corpus": {
+    "pages": 91,
+    "test76Owners": 163,
+    "test77Owners": 164,
+    "priorDescriptorsPreserved": 163,
+    "rawCandidatePages": [
+      "1-011",
+      "2-003"
+    ],
+    "existingOwnerRejects": [
+      "2-003"
+    ],
+    "newTargetPages": [
+      "1-011"
+    ],
+    "test76ChangedPage": "4-013",
+    "ownershipBasis": "Test75 saved maps show one owner on 1-011 and 2-003; Test76 changed only 4-013, so those maps are inherited unchanged."
+  },
+  "cropReview": {
+    "fullYellowCaption": true,
+    "fullSKRITCH": true,
+    "neighborBluePanelExcluded": true
+  },
+  "variants": {
+    "0.67x": {
+      "owners": 1,
+      "valid": true
+    },
+    "1.25x": {
+      "owners": 1,
+      "valid": true
+    },
+    "horizontalMirror": {
+      "owners": 1,
+      "valid": true
+    }
+  },
+  "proof": {
+    "version": 33,
+    "method": "four-narrow-ink-rails",
+    "safetyInsetPixels": 1,
+    "existingOwnerVeto": true,
+    "pageIdentityLookup": false,
+    "test76Proof32Delegates": true,
+    "syntheticOwners": 2,
+    "tamperRejections": 19,
+    "negativeCases": [
+      "open side",
+      "broad black field",
+      "flat interior",
+      "monochrome text-like rectangle",
+      "existing owner overlap"
+    ]
+  },
+  "retainedTest76Suite": "passed exit0",
+  "phoneAcceptance": "pending",
+  "historical312PageArtworkRerun": false,
+  "allPanelsDetected": false,
+  "comicArtworkCommitted": false
+}
