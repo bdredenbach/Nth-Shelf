@@ -4,8 +4,14 @@
   "package": "io.github.bdredenbach.nthshelf.frametest76",
   "label": "Nth Shelf Test76",
   "sourceBase": "eaae18fb4a259f372cc44a8506e8d77dc41b0fdb",
-  "sourceCommit": null,
-  "build": {"status": "pending"},
+  "sourceCommit": "9b5cd47edc5bf710e2e0bf468ef3466273f97c67",
+  "build": {
+    "status": "passed",
+    "githubActionsRun": 36631632763,
+    "artifactId": 11062780548,
+    "apkSha256": "8447b7f591b4657c8c8530a440281deddb552e4056aedf6cb5f8a4adb9d2e07a",
+    "verifiedWebAssets": 81
+  },
   "localValidation": "passed",
   "scope": "Two complete touching red-rimmed inset scenes on Rise of Apocalypse issue 4 image index 13 (reader 14/21).",
   "corpus": {
@@ -20,9 +26,18 @@
     "test76TargetOwners": 2
   },
   "variants": {
-    "0.67x": {"owners": 2, "valid": true},
-    "1.25x": {"owners": 2, "valid": true},
-    "horizontalMirror": {"owners": 2, "valid": true}
+    "0.67x": {
+      "owners": 2,
+      "valid": true
+    },
+    "1.25x": {
+      "owners": 2,
+      "valid": true
+    },
+    "horizontalMirror": {
+      "owners": 2,
+      "valid": true
+    }
   },
   "proof": {
     "version": 32,
@@ -31,10 +46,16 @@
     "pageIdentityLookup": false,
     "syntheticOwners": 2,
     "tamperRejections": 20,
-    "negativeCases": ["weak shared edge", "open chromatic rim", "flat interior", "broad bridge", "prior-owner overlap"]
+    "negativeCases": [
+      "weak shared edge",
+      "open chromatic rim",
+      "flat interior",
+      "broad bridge",
+      "prior-owner overlap"
+    ]
   },
   "retainedTest75Suite": "passed",
-  "phoneAcceptance": "pending",
+  "phoneAcceptance": "user-confirmed",
   "allPanelsDetected": false,
   "comicArtworkCommitted": false
 }
