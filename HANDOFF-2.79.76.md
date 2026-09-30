@@ -30,7 +30,7 @@ mutations.
 - No book/page/hash/tap identity lookup is present.
 - General frame detection remains incomplete; this is one recovered frame family.
 - Original comic artwork and private signing material are not committed.
-- Physical Android acceptance remains pending until the user tests the APK.
+- Physical Android acceptance is user-confirmed on the verified Test76 APK.
 
 ## Identity
 
@@ -38,3 +38,7 @@ Version 2.79.76, code 28004, debug package
 `io.github.bdredenbach.nthshelf.frametest76`, label `Nth Shelf Test76`, cache
 `nth-shelf-shell-2.79.76`, panel map `panel-map-exp-74`, proof identity
 `frame-proof-2.79.76`.
+
+## Acceptance
+
+User-confirmed working on phone. GitHub Actions run `36631632763` completed successfully; verified artifact `11062780548`, APK SHA-256 `8447b7f591b4657c8c8530a440281deddb552e4056aedf6cb5f8a4adb9d2e07a`. This is the durable baseline for the next detector experiment.
