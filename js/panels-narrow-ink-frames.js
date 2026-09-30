@@ -28,8 +28,6 @@ const PanelNarrowInkFrames=(()=>{
      if(!dark&&start!==null){if(y-start>=1&&y-start<=8&&start>pos-6&&y<pos+7)found.push([start,y]);start=null;}
     }runs.push(found);
    }
-   // A single fitted rail disambiguates a real border from a neighboring
-   // parallel stroke. Only local image-measured dark bands can support it.
    let intercept=pos,slope=0,best=null;
    for(let offset=-5;offset<=5;offset+=.25)for(let tilt=-.04;tilt<=.04001;tilt+=.002){
     let hits=0,n=0;
@@ -53,12 +51,7 @@ const PanelNarrowInkFrames=(()=>{
   for(let k=0;k<4;k++){const ar=e.sides[k],pos=[b[1],b[3],b[0],b[2]][k];if(!Array.isArray(ar)||ar.length!==(k<2?x1-x0:y1-y0)||ar.some(v=>!Number.isInteger(v)||Math.abs(v-pos)>5))return null;}
   let m=new Uint8Array(w*h);
   for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++)if(y>=e.sides[0][x-x0]&&y<e.sides[1][x-x0]&&x>=e.sides[2][y-y0]&&x<e.sides[3][y-y0])m[y*w+x]=1;
-  // Stay one analysis pixel inside the measured black rim. This avoids
-  // including neighboring colour through antialiased/downsampled edge pixels.
-  // This route admits only nearly continuous ink rails, never balloon crossings.
   const interior=new Uint8Array(m.length);for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){const i=y*w+x;if(m[i]&&m[i-1]&&m[i+1]&&m[i-w]&&m[i+w])interior[i]=1;}m=interior;
-  // Intersecting side traces can leave isolated corner specks. Keep one
-  // connected rim/body only, rejecting any substantial detached region.
   const seen=new Uint8Array(m.length),queue=new Int32Array(m.length);let main=[],total=0;
   for(let seed=0;seed<m.length;seed++)if(m[seed]&&!seen[seed]){let n=1,head=0;queue[0]=seed;seen[seed]=1;while(head<n){const i=queue[head++],x=i%w,y=(i/w)|0;for(const j of[x?i-1:-1,x+1<w?i+1:-1,y?i-w:-1,y+1<h?i+w:-1])if(j>=0&&m[j]&&!seen[j]){seen[j]=1;queue[n++]=j;}}total+=n;if(n>main.length)main=queue.slice(0,n);}
   if(!main.length||total-main.length>16)return null;const clean=new Uint8Array(m.length);for(const i of main)clean[i]=1;return clean;
@@ -86,7 +79,6 @@ const PanelNarrowInkFrames=(()=>{
     const l=vs[u],r=vs[z],W=r.pos-l.pos,T=b.pos-t.pos,area=W*T/N;if(W<w*.12||!range(area,.025,.23)||l.pos<10||r.pos>w-10||t.pos<10||b.pos>h-10)continue;
     const box=[l.pos,t.pos,r.pos,b.pos],rr=[rail(L,w,h,t.pos,l.pos,r.pos,false,true),rail(L,w,h,b.pos,l.pos,r.pos,false,true),rail(L,w,h,l.pos,t.pos,b.pos,true,true),rail(L,w,h,r.pos,t.pos,b.pos,true,true)];
     if(rr.some(q=>q.dark/q.samples<.98||q.narrow/q.samples<.40)||rr.filter(q=>q.narrow/q.samples>=.64).length<3)continue;
-    // A complete internal rail indicates a composite, not one frame.
     if(H.some(q=>q.pos>t.pos+12&&q.pos<b.pos-12&&q.lo<=l.pos+5&&q.hi>=r.pos-5&&q.score>=.64)||V.some(q=>q.pos>l.pos+12&&q.pos<r.pos-12&&q.lo<=t.pos+5&&q.hi>=b.pos-5&&q.score>=.64))continue;
     let n=0,s=0,sq=0,color=0,overlap=false;for(let y=t.pos-2;y<b.pos+3;y++)for(let x=l.pos-2;x<r.pos+3;x++)if(occupied[y*w+x])overlap=true;if(overlap)continue;
     for(let y=t.pos+7;y<b.pos-7;y++)for(let x=l.pos+7;x<r.pos-7;x++){const i=y*w+x,v=L[i];n++;s+=v;sq+=v*v;color+=Math.max(rgba[i*4],rgba[i*4+1],rgba[i*4+2])-Math.min(rgba[i*4],rgba[i*4+1],rgba[i*4+2])>16;}const variance=sq/n-(s/n)**2;if(variance<700||color/n<.12)continue;
@@ -98,7 +90,6 @@ const PanelNarrowInkFrames=(()=>{
    const box=d.box,v={version:VERSION,method:METHOD,connected:true,analysisWidth:w,analysisHeight:h,railBox:b,box,rails:q.rr,variance:q.variance,colorFraction:q.colorFraction,safetyInset:1,originalOwnerOverlap:0,pixelContours:d.rings,pixels:d.pixels,boundaries:bound};const p={x:box[0]/w,y:box[1]/h,w:(box[2]-box[0])/w,h:(box[3]-box[1])/h,_identitySource:'structural-grid-frame',_geometryOwner:'structural-grid-contours',_geometryType:'narrow-ink-inset',_contours:d.rings.map(r=>r.map(([x,y])=>({x:x/w,y:y/h}))),_structuralGridProof:v};if(validPanel(p)){out.push(p);for(let i=0;i<N;i++)occupied[i]|=m[i];}
   }if(out.length)log?.('narrow ink frames: '+out.length+' independently closed insets');return out;
  }
-
  function supplementImage(img,prior,log){if(typeof PanelMatteCells==='undefined')return[];const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!W||!H||W*H>24000000)return[];let c;try{c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return[];g.drawImage(img,0,0);const s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s);return analyzeRGBA(PanelMatteCells.sampleBilinearRGBA(g.getImageData(0,0,W,H).data,W,H,w,h),w,h,prior,log);}finally{if(c)c.width=c.height=1;}}
  function bind(){if(typeof PanelStructuralGrid!=='undefined'&&!PanelStructuralGrid._narrowInk){const old=PanelStructuralGrid.validPanel;PanelStructuralGrid.validPanel=p=>p?._structuralGridProof?.version===VERSION?validPanel(p):old(p);PanelStructuralGrid._narrowInk=true;}if(typeof PanelGeometry!=='undefined'&&!PanelGeometry._narrowInk){const old=PanelGeometry.refine;PanelGeometry.refine=async function(url,p,log){return validPanel(p)?{...p}:old.call(this,url,p,log);};PanelGeometry._narrowInk=true;}if(typeof PanelEdgeSpill!=='undefined'&&!PanelEdgeSpill._narrowInk){for(const name of ['analyzeImage','analyzeRGBA']){const old=PanelEdgeSpill[name];if(typeof old==='function')PanelEdgeSpill[name]=function(...args){return validPanel(args[name==='analyzeImage'?1:3])?null:old.apply(this,args);};}PanelEdgeSpill._narrowInk=true;}}
  function install(detector){bind();if(!detector||detector._narrowInk)return;const old=detector.detect;detector.detect=async function(url,log){const prior=await old.call(this,url,log);try{const img=new Image();img.src=url;await img.decode();const out=supplementImage(img,prior,log);return out.length?prior.concat(out):prior;}catch(e){log?.('narrow ink deferred: '+e.message);return prior;}};detector._narrowInk=true;}
