@@ -2,6 +2,12 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## Test77 — narrow black inset rails
+
+Test77 adds an append-only four-rail detector for independently enclosed black-bordered insets. It requires nearly continuous thin dark rails with two-sided contrast, textured/color interior evidence, no prior-owner overlap, and a one-analysis-pixel safety inset. The narrow-ink proof uses **version 33** so Test76's accepted chromatic shared-border proof32 owners continue to route unchanged. On the supplied Rise of Apocalypse corpus it adds exactly one complete inset on issue 1 reader 12/24: the SKRITCH hand scene including the yellow OR SO THEY HOPED caption.
+
+Identity: **2.79.77 / 28005**, package `io.github.bdredenbach.nthshelf.frametest77`, label **Nth Shelf Test77**. The accepted Test76 count is 163; this checkpoint raises the saved count to 164 pending phone acceptance.
+
 ## Test76 — chromatic shared-border separation
 
 Test76 adds an append-only separator for two scenes enclosed by one connected chromatic perimeter but divided by a strong black shared edge. Two independently eroded seed cores must produce the same bounded minimum-barrier watershed, prior owners are never reassigned, and weak/open/flat/broad-bridge negatives are rejected. On the supplied Rise of Apocalypse corpus this adds exactly two complete owners on issue 4 reader 14/21 while retaining all 161 Test75 selections. See [handoff](HANDOFF-2.79.76.md) and [contracts](qa27900/frame-accuracy/test76/README.md).
