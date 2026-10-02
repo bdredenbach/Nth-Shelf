@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.78 — EMPTY-MAP ISOLATED BOUNDARY RECOVERY
+// NTH SHELF 2.79.79 — TOP ROW DUAL BARRIER RECOVERY
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.78";
+const CACHE_NAME = "nth-shelf-shell-2.79.79";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -79,6 +79,7 @@ const SHELL_FILES = [
   "./js/panels-edge-guided-paper.js",
   "./js/panels-chromatic-shared-border.js",
   "./js/panels-narrow-ink-frames.js",
+  "./js/panels-top-row-barrier.js",
   "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",

@@ -1,0 +1,70 @@
+{
+  "version": "2.79.79",
+  "versionCode": 28007,
+  "package": "io.github.bdredenbach.nthshelf.frametest79",
+  "label": "Nth Shelf Test79",
+  "sourceBase": "Test78 / 166 owners",
+  "localValidation": "pending",
+  "build": {
+    "status": "pending"
+  },
+  "corpus": {
+    "pages": 91,
+    "test78Owners": 166,
+    "test79Owners": 169,
+    "newOwners": 3,
+    "proposalHits": [
+      "3-004"
+    ],
+    "otherProposalHits": 0
+  },
+  "target": {
+    "issue": 3,
+    "imageIndex": 3,
+    "readerPage": "4",
+    "beforeOwners": 2,
+    "afterOwners": 5,
+    "addedTopOwners": 3,
+    "mutualPixelOverlap": 0,
+    "priorOwnerPixelOverlap": 0
+  },
+  "proof": {
+    "version": 1,
+    "method": "stable-top-row-dual-barrier",
+    "existingOwnerPriority": true,
+    "lowerOwnerGate": true,
+    "barrierHalfWidths": [
+      0,
+      1,
+      2
+    ],
+    "maximumBoxDrift": 2,
+    "corridorEvidenceMinimum": 2,
+    "pageIdentityLookup": false
+  },
+  "variants": {
+    "original": {
+      "added": 3,
+      "valid": true
+    },
+    "scale1.25": {
+      "added": 3,
+      "valid": true
+    },
+    "horizontalMirror": {
+      "added": 3,
+      "valid": true
+    },
+    "jpeg0.82": {
+      "added": 3,
+      "valid": true
+    },
+    "preScale0.67": {
+      "added": 0,
+      "safeWithhold": true
+    }
+  },
+  "allPanelsDetected": false,
+  "comicArtworkCommitted": false,
+  "phoneAcceptance": "pending"
+}

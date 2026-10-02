@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## Test79 — stable top-row dual-barrier recovery
+
+Test79 recovers a three-panel top row when the established detector already owns only lower-page contour cells and a conservative cooperative pass proves one narrow top anchor plus one merged top region. A second, independent interrupted-paper corridor supplies the missing separator. Two measured barriers are used only to split seed ownership; final contours are re-grown from the original artwork and must remain valid under three barrier half-widths (0, 1, and 2 analysis pixels).
+
+On the supplied 91-page Rise of Apocalypse corpus, this pattern fires on exactly one page: issue 3 reader **4**, where it adds the three missing top panels. All three additions are pixel-disjoint from each other and from the two established lower-page owners. The corpus checkpoint therefore moves from **166 to 169** owners. The route also survives horizontal mirroring, 1.25x source scaling, and JPEG quality 0.82 recompression. A deliberately harsher 0.67x pre-resample loses the anchor proof and safely returns no additions rather than guessing.
+
+Identity: **2.79.79 / 28007**, package `io.github.bdredenbach.nthshelf.frametest79`, label **Nth Shelf Test79**. Physical Android acceptance is pending.
+
 ## Test78 — empty-map isolated boundary recovery
 
 Test78 scales an already-proven detector path instead of loosening a new threshold. Only after every established panel-owner route leaves a page empty, it asks the retained ragged-gutter detector for its strict proof-version-20 `independent-boundary-cell` recovery. Exactly one valid contour may be published; any existing owner, multiple recovery candidates, or malformed proof leaves the map unchanged.
