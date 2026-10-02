@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.77 — NARROW INK INSET RECOVERY
+// NTH SHELF 2.79.78 — EMPTY-MAP ISOLATED BOUNDARY RECOVERY
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.77";
+const CACHE_NAME = "nth-shelf-shell-2.79.78";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",

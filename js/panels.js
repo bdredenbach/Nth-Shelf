@@ -558,6 +558,15 @@ const PanelDetect = {
               if(completed.length)closed=completed;
             }
           }catch(error){log?.(`ragged gutter completion deferred: ${error.message}`);}
+          // Test78: expose the already-strict v20 independent-boundary proof only
+          // after every established owner path has left the page empty. One proven
+          // contour may fill an otherwise blank map; prior owners are never touched.
+          if(!closed.length)try {
+            if(typeof PanelRaggedGutters!=='undefined'&&PanelRaggedGutters.analyzeImage&&PanelRaggedGutters.validPanel){
+              const recovered=PanelRaggedGutters.analyzeImage(img,log,true);
+              if(recovered.length===1&&recovered.every(p=>PanelRaggedGutters.validPanel(p)))closed=recovered;
+            }
+          }catch(error){log?.(`isolated boundary recovery deferred: ${error.message}`);}
           resolve(closed);
         }
         catch (err) {

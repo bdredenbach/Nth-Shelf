@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## Test78 — empty-map isolated boundary recovery
+
+Test78 scales an already-proven detector path instead of loosening a new threshold. Only after every established panel-owner route leaves a page empty, it asks the retained ragged-gutter detector for its strict proof-version-20 `independent-boundary-cell` recovery. Exactly one valid contour may be published; any existing owner, multiple recovery candidates, or malformed proof leaves the map unchanged.
+
+Across the **39** still-empty maps in the supplied Rise of Apocalypse corpus, the exact recovery pass fires on only two pages: issue 2 reader **18/23** (isolated upper-right hand/scarab scene) and issue 4 reader **21/21** (isolated upper-right close-up/caption scene). The other 37 empty maps remain empty. The saved corpus count therefore moves from **164 to 166** while all 164 Test77 owners retain priority. Both additions survive 0.67x, 1.25x and horizontal-mirror source transforms.
+
+Identity: **2.79.78 / 28006**, package `io.github.bdredenbach.nthshelf.frametest78`, label **Nth Shelf Test78**. This is an incremental detector checkpoint; physical Android acceptance is pending.
+
 ## Test77 — narrow black inset rails
 
 Test77 adds an append-only four-rail detector for independently enclosed black-bordered insets. It requires nearly continuous thin dark rails with two-sided contrast, textured/color interior evidence, no prior-owner overlap, and a one-analysis-pixel safety inset. The narrow-ink proof uses **version 33** so Test76's accepted chromatic shared-border proof32 owners continue to route unchanged. On the supplied Rise of Apocalypse corpus it adds exactly one complete inset on issue 1 reader 12/24: the SKRITCH hand scene including the yellow OR SO THEY HOPED caption.
