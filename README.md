@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## Test80 — stable full-width torn-paper tiers
+
+Test80 adds a conservative horizontal-tier route for portrait pages where the established detector has exactly one owner and the artwork contains two or three strong white-paper separators. The separators are used only as temporary seed barriers. Final contours are re-grown from source pixels by the retained ragged-gutter detector and must remain valid and geometrically stable at barrier half-widths 0, 1, and 2. Exactly one recovered tier must match the established owner; that owner is retained byte-for-byte and only the other tiers are appended.
+
+Across the supplied 91-page Rise of Apocalypse corpus, the route fires on exactly two one-owner pages: issue 2 reader **15/23**, which gains three panels (1 → 4), and issue 4 reader **3/21**, which gains two panels (1 → 3). The checkpoint therefore moves from **169 to 174** owners. Both targets keep the same additions after 0.67x and 1.25x source scaling, horizontal mirroring, and JPEG quality-82 recompression.
+
+Identity: **2.79.80 / 28008**, package `io.github.bdredenbach.nthshelf.frametest80`, label **Nth Shelf Test80**. Physical Android acceptance is pending.
+
 ## Test79 — stable top-row dual-barrier recovery
 
 Test79 recovers a three-panel top row when the established detector already owns only lower-page contour cells and a conservative cooperative pass proves one narrow top anchor plus one merged top region. A second, independent interrupted-paper corridor supplies the missing separator. Two measured barriers are used only to split seed ownership; final contours are re-grown from the original artwork and must remain valid under three barrier half-widths (0, 1, and 2 analysis pixels).
