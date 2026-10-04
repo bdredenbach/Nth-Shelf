@@ -1,0 +1,2081 @@
+{
+  "environment": "@napi-rs/canvas original 900px analysis planes",
+  "sourceBase": "f887656a0b727937714e7f29c577798bedf3877e / accepted Test82",
+  "pages": 230,
+  "baselineOwners": 851,
+  "afterOwners": 852,
+  "priorOwnerDescriptorsPreserved": 851,
+  "zeroPixelOverlap": true,
+  "results": [
+    {
+      "key": "1-000",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 496,
+      "windows": 6
+    },
+    {
+      "key": "1-001",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 0,
+      "windows": 0
+    },
+    {
+      "key": "1-002",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 3178,
+      "windows": 6
+    },
+    {
+      "key": "1-003",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 20,
+      "windows": 0
+    },
+    {
+      "key": "1-004",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 3110,
+      "windows": 6
+    },
+    {
+      "key": "1-005",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 3757,
+      "windows": 6
+    },
+    {
+      "key": "1-006",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 3780,
+      "windows": 6
+    },
+    {
+      "key": "1-007",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 140,
+      "windows": 0
+    },
+    {
+      "key": "1-008",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2584,
+      "windows": 6
+    },
+    {
+      "key": "1-009",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2060,
+      "windows": 6
+    },
+    {
+      "key": "1-010",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2688,
+      "windows": 6
+    },
+    {
+      "key": "1-011",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1891,
+      "windows": 6
+    },
+    {
+      "key": "1-012",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 5997,
+      "windows": 6
+    },
+    {
+      "key": "1-013",
+      "book": "apocalypse",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1751,
+      "windows": 6
+    },
+    {
+      "key": "1-014",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2039,
+      "windows": 6
+    },
+    {
+      "key": "1-015",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 77,
+      "windows": 0
+    },
+    {
+      "key": "1-016",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 969,
+      "windows": 6
+    },
+    {
+      "key": "1-017",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 5,
+      "windows": 0
+    },
+    {
+      "key": "1-018",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2771,
+      "windows": 6
+    },
+    {
+      "key": "1-019",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1436,
+      "windows": 6
+    },
+    {
+      "key": "1-020",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 136,
+      "windows": 0
+    },
+    {
+      "key": "1-021",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1239,
+      "windows": 6
+    },
+    {
+      "key": "1-022",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 30,
+      "windows": 0
+    },
+    {
+      "key": "1-023",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1568,
+      "windows": 6
+    },
+    {
+      "key": "2-000",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2825,
+      "windows": 6
+    },
+    {
+      "key": "2-001",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 0,
+      "windows": 0
+    },
+    {
+      "key": "2-002",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2906,
+      "windows": 6
+    },
+    {
+      "key": "2-003",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 3239,
+      "windows": 6
+    },
+    {
+      "key": "2-004",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2683,
+      "windows": 6
+    },
+    {
+      "key": "2-005",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1439,
+      "windows": 6
+    },
+    {
+      "key": "2-006",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 28,
+      "windows": 0
+    },
+    {
+      "key": "2-007",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 15,
+      "windows": 0
+    },
+    {
+      "key": "2-008",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1425,
+      "windows": 6
+    },
+    {
+      "key": "2-009",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 4492,
+      "windows": 6
+    },
+    {
+      "key": "2-010",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1619,
+      "windows": 6
+    },
+    {
+      "key": "2-011",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 36,
+      "windows": 0
+    },
+    {
+      "key": "2-012",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 41,
+      "windows": 0
+    },
+    {
+      "key": "2-013",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 84,
+      "windows": 0
+    },
+    {
+      "key": "2-014",
+      "book": "apocalypse",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 37,
+      "windows": 0
+    },
+    {
+      "key": "2-015",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 37,
+      "windows": 0
+    },
+    {
+      "key": "2-016",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1020,
+      "windows": 6
+    },
+    {
+      "key": "2-017",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 3228,
+      "windows": 6
+    },
+    {
+      "key": "2-018",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 77,
+      "windows": 0
+    },
+    {
+      "key": "2-019",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 59,
+      "windows": 0
+    },
+    {
+      "key": "2-020",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 3736,
+      "windows": 6
+    },
+    {
+      "key": "2-021",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2507,
+      "windows": 6
+    },
+    {
+      "key": "2-022",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 28,
+      "windows": 0
+    },
+    {
+      "key": "3-000",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 21,
+      "windows": 6
+    },
+    {
+      "key": "3-001",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 0,
+      "windows": 0
+    },
+    {
+      "key": "3-002",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1474,
+      "windows": 6
+    },
+    {
+      "key": "3-003",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2,
+      "windows": 0
+    },
+    {
+      "key": "3-004",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 3531,
+      "windows": 6
+    },
+    {
+      "key": "3-005",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2055,
+      "windows": 6
+    },
+    {
+      "key": "3-006",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2096,
+      "windows": 6
+    },
+    {
+      "key": "3-007",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1131,
+      "windows": 6
+    },
+    {
+      "key": "3-008",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 72,
+      "windows": 0
+    },
+    {
+      "key": "3-009",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1467,
+      "windows": 6
+    },
+    {
+      "key": "3-010",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1984,
+      "windows": 6
+    },
+    {
+      "key": "3-011",
+      "book": "apocalypse",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1786,
+      "windows": 6
+    },
+    {
+      "key": "3-012",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2107,
+      "windows": 6
+    },
+    {
+      "key": "3-013",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 41,
+      "windows": 0
+    },
+    {
+      "key": "3-014",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1873,
+      "windows": 6
+    },
+    {
+      "key": "3-015",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2109,
+      "windows": 6
+    },
+    {
+      "key": "3-016",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 940,
+      "windows": 6
+    },
+    {
+      "key": "3-017",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1669,
+      "windows": 6
+    },
+    {
+      "key": "3-018",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2129,
+      "windows": 6
+    },
+    {
+      "key": "3-019",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 45,
+      "windows": 0
+    },
+    {
+      "key": "3-020",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 43,
+      "windows": 0
+    },
+    {
+      "key": "3-021",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1900,
+      "windows": 6
+    },
+    {
+      "key": "3-022",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 3328,
+      "windows": 6
+    },
+    {
+      "key": "4-000",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1861,
+      "windows": 6
+    },
+    {
+      "key": "4-001",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 0,
+      "windows": 0
+    },
+    {
+      "key": "4-002",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 150,
+      "windows": 0
+    },
+    {
+      "key": "4-003",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 27,
+      "windows": 0
+    },
+    {
+      "key": "4-004",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 235,
+      "windows": 0
+    },
+    {
+      "key": "4-005",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 232,
+      "windows": 0
+    },
+    {
+      "key": "4-006",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2812,
+      "windows": 6
+    },
+    {
+      "key": "4-007",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1202,
+      "windows": 6
+    },
+    {
+      "key": "4-008",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 106,
+      "windows": 0
+    },
+    {
+      "key": "4-009",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 346,
+      "windows": 6
+    },
+    {
+      "key": "4-010",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2884,
+      "windows": 6
+    },
+    {
+      "key": "4-011",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1003,
+      "windows": 6
+    },
+    {
+      "key": "4-012",
+      "book": "apocalypse",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 77,
+      "windows": 0
+    },
+    {
+      "key": "4-013",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 10,
+      "windows": 0
+    },
+    {
+      "key": "4-014",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 10,
+      "windows": 0
+    },
+    {
+      "key": "4-015",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 18,
+      "windows": 6
+    },
+    {
+      "key": "4-016",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 19,
+      "windows": 0
+    },
+    {
+      "key": "4-017",
+      "book": "apocalypse",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2057,
+      "windows": 6
+    },
+    {
+      "key": "4-018",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2493,
+      "windows": 6
+    },
+    {
+      "key": "4-019",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2086,
+      "windows": 5
+    },
+    {
+      "key": "4-020",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 3285,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-000.jpg",
+      "book": "wolverine",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 701,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-001.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 185,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-002.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 116,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-003.jpg",
+      "book": "wolverine",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 59,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-004.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 17,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-005.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1161,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-006.jpg",
+      "book": "wolverine",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1053,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-007.jpg",
+      "book": "wolverine",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1278,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-008.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 20,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-009.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1694,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-010.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2213,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-011.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1842,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-012.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2697,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-013.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2601,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-014.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 16,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-015.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 64,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-016.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 25,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-017.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 24,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-018.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 12477,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-019.jpg",
+      "book": "wolverine",
+      "before": 9,
+      "after": 9,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 76,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-020.jpg",
+      "book": "wolverine",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 13013,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-021.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 56,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-022.jpg",
+      "book": "wolverine",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 4320,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-023.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 169,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-024.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 23,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-025.jpg",
+      "book": "wolverine",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2621,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-026.jpg",
+      "book": "wolverine",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 12467,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-027.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 3211,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-028.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 18,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-029.jpg",
+      "book": "wolverine",
+      "before": 9,
+      "after": 9,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 20,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-030.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 17,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-031.jpg",
+      "book": "wolverine",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 66,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-032.jpg",
+      "book": "wolverine",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 25,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-033.jpg",
+      "book": "wolverine",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 4347,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-034.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 61,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-035.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 25,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-036.jpg",
+      "book": "wolverine",
+      "before": 9,
+      "after": 9,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 27,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-037.jpg",
+      "book": "wolverine",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2777,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-038.jpg",
+      "book": "wolverine",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 6120,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-039.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 13,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-040.jpg",
+      "book": "wolverine",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 19,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-041.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 181,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-042.jpg",
+      "book": "wolverine",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2753,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-043.jpg",
+      "book": "wolverine",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 2021,
+      "windows": 4
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-044.jpg",
+      "book": "wolverine",
+      "before": 10,
+      "after": 10,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 74,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-045.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 21,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-046.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 33,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-047.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 17,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-048.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 52,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-049.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 26,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-050.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 18,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-051.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 20,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-052.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 20,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-053.jpg",
+      "book": "wolverine",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 59,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-054.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 24,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-055.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 16,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-056.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 16,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-057.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 38,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-058.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 64,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-059.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 20,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-060.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 22,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-061.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 16,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-062.jpg",
+      "book": "wolverine",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 32,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-063.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 70,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-064.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 31,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-065.jpg",
+      "book": "wolverine",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1096,
+      "windows": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-066.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 14,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-067.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 31,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-068.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 12,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-069.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 85,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-070.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 152,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-071.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 61,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-072.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 14,
+      "windows": 0
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-073.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 15,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320000.png",
+      "book": "manga32",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 995,
+      "windows": 6
+    },
+    {
+      "key": "manga32/00000000_00320001.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 40,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320002.png",
+      "book": "manga32",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 46,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320003.png",
+      "book": "manga32",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 41,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320004.png",
+      "book": "manga32",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 65,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320005.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 52,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320006.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 22,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320007.png",
+      "book": "manga32",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 55,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320008.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 36,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320009.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 75,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320010.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 39,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320011.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 25,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320012.png",
+      "book": "manga32",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 53,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320013.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 48,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320014.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 103,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320015.png",
+      "book": "manga32",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 45,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320016.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 31,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320017.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 43,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320018.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 25,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320019.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 98,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320020.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 34,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320021.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 51,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320022.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 69,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320023.png",
+      "book": "manga32",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 22,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320024.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 47,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320025.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 69,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320026.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 42,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320027.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 37,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320028.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 34,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320029.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 23,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320030.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 27,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320031.png",
+      "book": "manga32",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 56,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320032.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 58,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320033.png",
+      "book": "manga32",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 16,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320034.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 24,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320035.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 36,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320036.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 41,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320037.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 67,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320038.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 42,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320039.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 35,
+      "windows": 0
+    },
+    {
+      "key": "manga32/00000000_00320040.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 20,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0001.jpg",
+      "book": "magneto",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1214,
+      "windows": 6
+    },
+    {
+      "key": "magneto/0002.jpg",
+      "book": "magneto",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 58,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0003.jpg",
+      "book": "magneto",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 17,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0004.jpg",
+      "book": "magneto",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 25,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0005.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 15,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0006.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 16,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0007.jpg",
+      "book": "magneto",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 48,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0008.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 24,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0009.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 21,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0010.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 16,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0011.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 17,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0012.jpg",
+      "book": "magneto",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 5,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0013.jpg",
+      "book": "magneto",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 610,
+      "windows": 6
+    },
+    {
+      "key": "magneto/0014.jpg",
+      "book": "magneto",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 12,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0015.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 18,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0016.jpg",
+      "book": "magneto",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 13,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0017.jpg",
+      "book": "magneto",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 13,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0018.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 16,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0019.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 16,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0020.jpg",
+      "book": "magneto",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 18,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0021.jpg",
+      "book": "magneto",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 46,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0022.jpg",
+      "book": "magneto",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 1388,
+      "windows": 6
+    },
+    {
+      "key": "magneto/0023.jpg",
+      "book": "magneto",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 5,
+      "windows": 0
+    },
+    {
+      "key": "magneto/0024.jpg",
+      "book": "magneto",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "supplementMs": 0,
+      "windows": 0
+    }
+  ]
+}

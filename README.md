@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## Test83 — context-stable enclosed-cell recovery
+
+Test83 adds a conservative supplement that discovers complete cells in local page windows. Two independent seed radii and an expanded window must agree; the original page must prove the perimeter, and existing frames keep exclusive ownership. The reader preserves the new complete contour. Runtime detection contains no book or page lookups.
+
+The 230-page local supplement comparison preserves all **851** existing frame descriptors. Apocalypse measures **179 → 180** across 91 pages; the only new target is issue3 reader **23/23**, the lower-right scene. Wolverine, manga chapter32 and Magneto gain no new frames. Test82 was accepted by the user; no updated phone count was supplied. Physical Test83 acceptance is pending, and the **360+ goal remains incomplete**.
+
+Identity: **2.79.83 / 28011**, package `io.github.bdredenbach.nthshelf.frametest83`, label **Nth Shelf Test83**. See [handoff](HANDOFF-2.79.83.md), [validation](TEST83-VALIDATION.json), and [contracts](qa27900/frame-accuracy/test83/README.md).
+
 ## Test82 — independently enclosed contour recovery
 
 Test82 adds a conservative contour supplement: independent ragged-gutter seed radii must agree, each boundary needs local paper/matte or ink evidence, internal dividers veto merged scenes, and additions must be pixel-disjoint from existing owners. The reader preserves the complete validated contour. Runtime detection contains no book or page lookups.

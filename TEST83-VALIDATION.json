@@ -1,0 +1,147 @@
+{
+  "version": "2.79.83",
+  "versionCode": 28011,
+  "package": "io.github.bdredenbach.nthshelf.frametest83",
+  "label": "Nth Shelf Test83",
+  "sourceBase": "f887656a0b727937714e7f29c577798bedf3877e / user accepted Test82",
+  "localValidation": "230-page supplement corpus and target integration passed; retained/full integration in progress",
+  "build": {
+    "status": "pending",
+    "phoneAcceptance": "pending"
+  },
+  "corpus": {
+    "pages": 91,
+    "localBaselineOwners": 179,
+    "localAfterOwners": 180,
+    "newLocalOwners": 1,
+    "previousOwnerDescriptorsPreserved": 179,
+    "unchangedLocalMaps": 90,
+    "rasterEnvironment": "@napi-rs/canvas; separate from physical Android and historical saved174"
+  },
+  "regression": {
+    "pages": 230,
+    "baselineOwners": 851,
+    "afterOwners": 852,
+    "previousOwnerDescriptorsPreserved": 851,
+    "zeroPixelOverlap": true,
+    "books": [
+      {
+        "book": "Apocalypse",
+        "pages": 91,
+        "before": 179,
+        "after": 180
+      },
+      {
+        "book": "Wolverine",
+        "pages": 74,
+        "before": 383,
+        "after": 383
+      },
+      {
+        "book": "manga chapter32",
+        "pages": 41,
+        "before": 188,
+        "after": 188
+      },
+      {
+        "book": "Magneto",
+        "pages": 24,
+        "before": 101,
+        "after": 101
+      }
+    ]
+  },
+  "newTargets": [
+    {
+      "book": "Rise of Apocalypse issue3",
+      "readerPage": "23/23",
+      "scene": "lower-right enclosed scene"
+    }
+  ],
+  "integratedApocalypseReplay": {
+    "status": "running"
+  },
+  "goal": "360+ remains incomplete",
+  "phoneCount": "No updated Test82 phone count supplied; Test83 pending",
+  "transformedSourceVariants": [
+    {
+      "key": "3-022",
+      "variant": "original",
+      "count": 1,
+      "allValid": true,
+      "ms": 5327,
+      "boxes": [
+        [
+          0.6735042735042736,
+          0.47,
+          0.29572649572649573,
+          0.4033333333333333
+        ]
+      ]
+    },
+    {
+      "key": "3-022",
+      "variant": "scale067",
+      "count": 0,
+      "allValid": true,
+      "ms": 19495,
+      "boxes": []
+    },
+    {
+      "key": "3-022",
+      "variant": "scale125",
+      "count": 1,
+      "allValid": true,
+      "ms": 28987,
+      "boxes": [
+        [
+          0.6735042735042736,
+          0.47,
+          0.29572649572649573,
+          0.4033333333333333
+        ]
+      ]
+    },
+    {
+      "key": "3-022",
+      "variant": "mirror",
+      "count": 1,
+      "allValid": true,
+      "ms": 23482,
+      "boxes": [
+        [
+          0.03076923076923077,
+          0.47,
+          0.29572649572649573,
+          0.4033333333333333
+        ]
+      ]
+    },
+    {
+      "key": "3-022",
+      "variant": "jpeg82",
+      "count": 1,
+      "allValid": true,
+      "ms": 23438,
+      "boxes": [
+        [
+          0.6735042735042736,
+          0.47,
+          0.29572649572649573,
+          0.4033333333333333
+        ]
+      ]
+    }
+  ],
+  "integratedTarget": {
+    "status": "passed",
+    "key": "3-022",
+    "before": 2,
+    "after": 3,
+    "previousOwnerDescriptorsPreserved": true
+  },
+  "retainedTests": {
+    "local": "first58 outputs passed; repeat with trace running",
+    "ci": "pending"
+  }
+}

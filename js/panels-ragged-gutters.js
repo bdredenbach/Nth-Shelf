@@ -84,7 +84,7 @@ const PanelRaggedGutters=(()=>{
   }
   let wall=separators;for(let radius=0;radius<seedRadius;radius++)wall=dilate(wall,w,h);
   const core=cc(wall.map(v=>1-v),w,h),seeds=splitSeeds(core.items.filter(c=>c.pixels>=size*.012&&(c.box[2]-c.box[0])>=w*.06&&(c.box[3]-c.box[1])>=h*.04),ext.mask,w,h);
-  if(seeds.length<(recover?2:3)||seeds.length>24)return[];
+  if(seeds.length<(recover==='single-cooperative-candidates'?1:recover?2:3)||seeds.length>24)return[];
   const labels=new Uint16Array(size),queue=new Int32Array(size);let n=0,head=0;seeds.sort((a,b)=>a.box[1]-b.box[1]||a.box[0]-b.box[0]);for(let start=0;start<seeds.length;){let end=start+1;const top=seeds[start].box[1],tolerance=Math.min(h*.06,(seeds[start].box[3]-top)*.20);while(end<seeds.length&&seeds[end].box[1]-top<tolerance)end++;const row=seeds.slice(start,end).sort((a,b)=>a.box[0]-b.box[0]);seeds.splice(start,end-start,...row);start=end;}for(let k=0;k<seeds.length;k++)for(const i of seeds[k].indices){labels[i]=k+1;queue[n++]=i;}
   while(head<n){const i=queue[head++],x=i%w,y=i/w|0;for(const j of[x?i-1:-1,x+1<w?i+1:-1,y?i-w:-1,y+1<h?i+w:-1])if(j>=0&&art[j]&&!labels[j]){labels[j]=labels[i];queue[n++]=j;}}
   // Restore complete enclosed balloon bodies to their dominant scene.
@@ -102,7 +102,7 @@ const PanelRaggedGutters=(()=>{
   }
   const covered=labels.reduce((s,v)=>s+!!v,0);if(covered<size*.50)return[];const out=[];
   for(let k=0;k<seeds.length;k++){const rings=PanelMatteCells.tracePixelContours(labels,w,h,k+1);if(!rings){if(recover)continue;return[];}const pts=rings.flat(),xs=pts.map(a=>a[0]),ys=pts.map(a=>a[1]),box=[Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)];let pixels=0,sum=0,sq=0;for(let i=0;i<size;i++)if(labels[i]===k+1){pixels++;sum+=lum[i];sq+=lum[i]*lum[i];}const variance=sq/pixels-(sum/pixels)**2;if(variance<180){if(recover)continue;return[];}const proof={version:18,method:METHOD,connected:true,analysisWidth:w,analysisHeight:h,count:seeds.length,index:k,palette:p,exteriorPixels:ext.pixels,coverage:covered/size,seed:{box:seeds[k].box,pixels:seeds[k].pixels,splits:seeds[k].splits||[]},pixelContours:rings,pixels,variance,...(gamut?{gamut}:{}),...(seedRadius===2?{}:{seedRadius})};const panel={x:box[0]/w,y:box[1]/h,w:(box[2]-box[0])/w,h:(box[3]-box[1])/h,_identitySource:'structural-grid-frame',_geometryOwner:'structural-grid-contours',_geometryType:'ragged-gutter-cells',_contours:rings.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),_structuralGridProof:proof};if(!recover&&!validPanel(panel))return[];out.push(panel);}
-  if(recover==='cooperative-candidates')return out;
+  if(recover==='cooperative-candidates'||recover==='single-cooperative-candidates')return out;
   if(recover){
    const overlap=(a,b)=>Math.max(0,Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x))*Math.max(0,Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y))/Math.min(a.w*a.h,b.w*b.h);
    const fill=a=>a._structuralGridProof.pixels/(a.w*a.h*size);
@@ -246,6 +246,6 @@ const PanelRaggedGutters=(()=>{
  function analyzeImage(img,log,recover=false){const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!W||!H||W*H>24000000)return[];const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(img,0,0);const s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s);return analyzeRGBA(PanelMatteCells.sampleBilinearRGBA(g.getImageData(0,0,W,H).data,W,H,w,h),w,h,log,recover);}
  function eligible(baseline){return Array.isArray(baseline)&&baseline.every(p=>p&&!p._identitySource&&!p._quad&&!p._outline&&!p._contours);}
  function completeImage(img,baseline,log){if(!eligible(baseline))return[];const out=analyzeImage(img,log,baseline.length?false:'fallback');return out.length>baseline.length?out:[];}
- return{analyzeCooperativeRGBA:(rgba,w,h,radius)=>analyzeRGBA(rgba,w,h,null,'cooperative-candidates',false,radius),analyzeWithBarriersRGBA:(rgba,w,h,mask)=>analyzeRGBA(rgba,w,h,null,'fallback',false,2,mask),analyzePaperRecoveryRGBA:(rgba,w,h,radius,log)=>analyzeRGBA(rgba,w,h,log,true,false,radius),supplementContinuousRGBA,supplementContinuousImage,continuousCandidatesRGBA,continuousEligible,analyzeRGBA,analyzeRecoveryRGBA:(rgba,w,h,log)=>analyzeRGBA(rgba,w,h,log,true),analyzeImage,completeImage,eligible,validPanel};
+ return{analyzeContextCandidatesRGBA:(rgba,w,h,radius)=>[4,6].includes(radius)?analyzeRGBA(rgba,w,h,null,'single-cooperative-candidates',false,radius):[],analyzeCooperativeRGBA:(rgba,w,h,radius)=>analyzeRGBA(rgba,w,h,null,'cooperative-candidates',false,radius),analyzeWithBarriersRGBA:(rgba,w,h,mask)=>analyzeRGBA(rgba,w,h,null,'fallback',false,2,mask),analyzePaperRecoveryRGBA:(rgba,w,h,radius,log)=>analyzeRGBA(rgba,w,h,log,true,false,radius),supplementContinuousRGBA,supplementContinuousImage,continuousCandidatesRGBA,continuousEligible,analyzeRGBA,analyzeRecoveryRGBA:(rgba,w,h,log)=>analyzeRGBA(rgba,w,h,log,true),analyzeImage,completeImage,eligible,validPanel};
 })();
 if(typeof module!=='undefined')module.exports=PanelRaggedGutters;
