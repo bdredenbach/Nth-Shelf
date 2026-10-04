@@ -16,7 +16,7 @@
     "downloadedArtifactSha256Verified": true,
     "downloadedAPKWebBytesVerified": true,
     "signatureAndIdentity": "CI passed; downloaded APK hash matches the verified build record",
-    "phoneAcceptance": "pending"
+    "phoneAcceptance": "accepted by user 2026-10-04; updated phone total not supplied"
   },
   "corpus": {
     "pages": 91,
