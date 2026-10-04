@@ -3112,7 +3112,7 @@ async setMode(mode) {
    const frameGeom={...geom};
    // These complete contour proofs already account for their owned balloons
    // and frame edges. A second margin heuristic could add a neighboring rail.
-   const completeContour=contours&&panel._identitySource==='structural-grid-frame'&&[21,22,23,24,25,26].includes(panel._structuralGridProof?.version);
+   const completeContour=contours&&panel._identitySource==='structural-grid-frame'&&[21,22,23,24,25,26,34].includes(panel._structuralGridProof?.version);
    const edgeSpill=(!completeContour&&typeof PanelEdgeSpill!=="undefined"&&PanelEdgeSpill.analyzeImage)?PanelEdgeSpill.analyzeImage(img,panel,this.debugMode?(msg)=>this.debugLog(`[edge-spill] ${msg}`):null):null;
    if(edgeSpill?.spills?.length){let x0=geom.x,y0=geom.y,x1=geom.x+geom.w,y1=geom.y+geom.h;for(const s of edgeSpill.spills){x0=Math.min(x0,s.box[0]);y0=Math.min(y0,s.box[1]);x1=Math.max(x1,s.box[2]);y1=Math.max(y1,s.box[3]);}geom={x:x0,y:y0,w:x1-x0,h:y1-y0};clipPolygon=null;if(this.debugMode)this.debugLog(`[edge-spill] preserving ${edgeSpill.spills.length} owned margin component(s)`);}
 

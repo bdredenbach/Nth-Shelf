@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## Test82 — independently enclosed contour recovery
+
+Test82 adds a conservative contour supplement: independent ragged-gutter seed radii must agree, each boundary needs local paper/matte or ink evidence, internal dividers veto merged scenes, and additions must be pixel-disjoint from existing owners. The reader preserves the complete validated contour. Runtime detection contains no book or page lookups.
+
+Across the supplied 91-page Rise of Apocalypse corpus, this environment's native-canvas replay measures **175 → 179** frames with every prior descriptor preserved. The saved **174** checkpoint is a separate measurement. Three new saved-checkpoint targets are issue 1 readers **7/24** and **17/24**, and issue 3 reader **10/23**; issue 2 reader **18/23** is a fallback restoration of an already accepted frame. Issue 3 reader 10 abstains on the reduced-scale and JPEG-recompressed variants. Physical Android acceptance is pending, and the 360+ goal remains incomplete.
+
+Identity: **2.79.82 / 28010**, package `io.github.bdredenbach.nthshelf.frametest82`, label **Nth Shelf Test82**. See [handoff](HANDOFF-2.79.82.md), [validation](TEST82-VALIDATION.json), and [contracts](qa27900/frame-accuracy/test82/README.md).
+
 ## Test80 — stable full-width torn-paper tiers
 
 Test80 adds a conservative horizontal-tier route for portrait pages where the established detector has exactly one owner and the artwork contains two or three strong white-paper separators. The separators are used only as temporary seed barriers. Final contours are re-grown from source pixels by the retained ragged-gutter detector and must remain valid and geometrically stable at barrier half-widths 0, 1, and 2. Exactly one recovered tier must match the established owner; that owner is retained byte-for-byte and only the other tiers are appended.

@@ -1,0 +1,1328 @@
+{
+  "pages": 91,
+  "savedCheckpoint": 174,
+  "localBaselineOwners": 175,
+  "localAfterOwners": 179,
+  "newLocalOwners": 4,
+  "previousOwnerDescriptorsPreserved": 175,
+  "unchangedLocalMaps": 87,
+  "rasterEnvironment": "@napi-rs/canvas; not Chromium or physical Android",
+  "savedVsLocalDiscrepancies": [
+    {
+      "key": "2-013",
+      "saved": 1,
+      "local": 2
+    },
+    {
+      "key": "2-015",
+      "saved": 4,
+      "local": 3
+    },
+    {
+      "key": "2-017",
+      "saved": 1,
+      "local": 0
+    },
+    {
+      "key": "3-003",
+      "saved": 4,
+      "local": 1
+    },
+    {
+      "key": "3-004",
+      "saved": 2,
+      "local": 5
+    },
+    {
+      "key": "3-014",
+      "saved": 4,
+      "local": 5
+    },
+    {
+      "key": "4-016",
+      "saved": 0,
+      "local": 2
+    },
+    {
+      "key": "4-020",
+      "saved": 1,
+      "local": 0
+    }
+  ],
+  "perPage": [
+    {
+      "key": "1-000",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-001",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-002",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-003",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-004",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-005",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-006",
+      "before": 0,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 2,
+        "overlap": 0,
+        "boundary": 1,
+        "divider": 0,
+        "accepted": 1
+      }
+    },
+    {
+      "key": "1-007",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 1,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-008",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-009",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-010",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 1,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-011",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 2,
+        "overlap": 2,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-012",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 2,
+        "overlap": 0,
+        "boundary": 1,
+        "divider": 1,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-013",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 6,
+        "stable": 6,
+        "overlap": 4,
+        "boundary": 2,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-014",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-015",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 7,
+        "stable": 5,
+        "overlap": 5,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-016",
+      "before": 0,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 2,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 1,
+        "accepted": 1
+      }
+    },
+    {
+      "key": "1-017",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-018",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 2,
+        "overlap": 2,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-019",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-020",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 4,
+        "stable": 4,
+        "overlap": 4,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-021",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-022",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 3,
+        "stable": 3,
+        "overlap": 3,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "1-023",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 0,
+        "boundary": 1,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-000",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-001",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-002",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-003",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 2,
+        "overlap": 1,
+        "boundary": 1,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-004",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-005",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-006",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 6,
+        "stable": 6,
+        "overlap": 6,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-007",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-008",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 1,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-009",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 3,
+        "stable": 3,
+        "overlap": 0,
+        "boundary": 3,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-010",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-011",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 4,
+        "stable": 4,
+        "overlap": 4,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-012",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 5,
+        "stable": 5,
+        "overlap": 5,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-013",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 3,
+        "stable": 3,
+        "overlap": 3,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-014",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 1,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-015",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 3,
+        "stable": 3,
+        "overlap": 3,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-016",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-017",
+      "before": 0,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 2,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 1,
+        "accepted": 1
+      }
+    },
+    {
+      "key": "2-018",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 5,
+        "stable": 5,
+        "overlap": 5,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-019",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 6,
+        "stable": 6,
+        "overlap": 6,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-020",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 0,
+        "boundary": 1,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-021",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 1,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "2-022",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 5,
+        "stable": 4,
+        "overlap": 4,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-000",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-001",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-002",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 2,
+        "overlap": 2,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-003",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-004",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 4,
+        "stable": 3,
+        "overlap": 3,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-005",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 4,
+        "stable": 3,
+        "overlap": 3,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-006",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 2,
+        "overlap": 1,
+        "boundary": 1,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-007",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-008",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 5,
+        "stable": 4,
+        "overlap": 4,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-009",
+      "before": 0,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 2,
+        "overlap": 0,
+        "boundary": 1,
+        "divider": 0,
+        "accepted": 1
+      }
+    },
+    {
+      "key": "3-010",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 3,
+        "stable": 1,
+        "overlap": 1,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-011",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 4,
+        "stable": 2,
+        "overlap": 2,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-012",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 5,
+        "stable": 3,
+        "overlap": 3,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-013",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 5,
+        "stable": 5,
+        "overlap": 5,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-014",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 5,
+        "stable": 5,
+        "overlap": 5,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-015",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 5,
+        "stable": 5,
+        "overlap": 5,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-016",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-017",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 3,
+        "stable": 3,
+        "overlap": 2,
+        "boundary": 0,
+        "divider": 1,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-018",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-019",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 4,
+        "stable": 2,
+        "overlap": 2,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-020",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-021",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 1,
+        "overlap": 0,
+        "boundary": 1,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "3-022",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 1,
+        "overlap": 1,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-000",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-001",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-002",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 3,
+        "stable": 3,
+        "overlap": 3,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-003",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-004",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 2,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-005",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 5,
+        "stable": 5,
+        "overlap": 5,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-006",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-007",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-008",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 3,
+        "stable": 3,
+        "overlap": 3,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-009",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-010",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-011",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-012",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 4,
+        "stable": 4,
+        "overlap": 4,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-013",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-014",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 1,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-015",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-016",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-017",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 4,
+        "stable": 2,
+        "overlap": 2,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-018",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 3,
+        "stable": 3,
+        "overlap": 3,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-019",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 5,
+        "stable": 5,
+        "overlap": 5,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "key": "4-020",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    }
+  ]
+}

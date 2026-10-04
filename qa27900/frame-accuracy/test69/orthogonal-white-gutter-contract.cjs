@@ -39,7 +39,7 @@ for(const mutate of [
 ]){const p=clone(base);mutate(p);assert.equal(PanelOrthogonalWhiteGutters.validPanel(p),false);tampered++;}
 
 const reader=fs.readFileSync(path.resolve(__dirname,'../../../js/reader.js'),'utf8'),geometry=fs.readFileSync(path.resolve(__dirname,'../../../js/panels-geometry.js'),'utf8'),panels=fs.readFileSync(path.resolve(__dirname,'../../../js/panels.js'),'utf8');
-assert(reader.includes('[21,22,23,24,25,26].includes(panel._structuralGridProof?.version)'));
+assert([21,22,23,24,25,26].every(v=>JSON.parse(reader.match(/(\[[\d,]+\])\.includes\(panel\._structuralGridProof\?\.version\)/)[1]).includes(v)));
 assert(geometry.includes('[21,22,23,24,25,26].includes(panel._structuralGridProof?.version)'));
 assert(panels.includes('PanelOrthogonalWhiteGutters.refinePanels(panels,log)'));
 console.log(JSON.stringify({passed:true,sourceOwners:source.length,proof26Owners:out.length,rows:out[0]._structuralGridProof.orthogonal.rowCount,tampered}));

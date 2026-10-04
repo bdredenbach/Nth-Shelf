@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.80 — HORIZONTAL TORN-PAPER TIER RECOVERY
+// NTH SHELF 2.79.82 — HORIZONTAL TORN-PAPER TIER RECOVERY
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.80";
+const CACHE_NAME = "nth-shelf-shell-2.79.82";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -81,6 +81,7 @@ const SHELL_FILES = [
   "./js/panels-narrow-ink-frames.js",
   "./js/panels-top-row-barrier.js",
   "./js/panels-horizontal-paper-strips.js",
+  "./js/panels-local-boundary-consensus.js",
   "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",

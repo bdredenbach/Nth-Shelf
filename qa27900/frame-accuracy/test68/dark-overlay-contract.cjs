@@ -37,5 +37,5 @@ for(const mutate of [
  p=>p._contours[0][0].x+=.01,
  p=>p.x+=.01
 ]){const p=clone(base);mutate(p);assert.equal(D.validPanel(p),false);tampered++;}
-const reader=fs.readFileSync(path.resolve(__dirname,'../../../js/reader.js'),'utf8'),geometry=fs.readFileSync(path.resolve(__dirname,'../../../js/panels-geometry.js'),'utf8');assert(reader.includes('[21,22,23,24,25,26].includes(panel._structuralGridProof?.version)'));assert(geometry.includes('[21,22,23,24,25,26].includes(panel._structuralGridProof?.version)'));
+const reader=fs.readFileSync(path.resolve(__dirname,'../../../js/reader.js'),'utf8'),geometry=fs.readFileSync(path.resolve(__dirname,'../../../js/panels-geometry.js'),'utf8');assert([21,22,23,24,25,26].every(v=>JSON.parse(reader.match(/(\[[\d,]+\])\.includes\(panel\._structuralGridProof\?\.version\)/)[1]).includes(v)));assert(geometry.includes('[21,22,23,24,25,26].includes(panel._structuralGridProof?.version)'));
 console.log(JSON.stringify({passed:true,owner:out.length,weakSide:out[0]._structuralGridProof.weakSide,tampered}));
