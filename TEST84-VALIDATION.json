@@ -1,0 +1,77 @@
+{
+  "version": "2.79.84",
+  "versionCode": 28012,
+  "package": "io.github.bdredenbach.nthshelf.frametest84",
+  "label": "Nth Shelf Test84",
+  "sourceBase": "dc88ab91832ac511d7198b8022f7cb93778930a7 / Test83",
+  "localValidation": "passed supplement/proof/reader/retained checks; integrated replay in progress",
+  "build": {
+    "status": "pending",
+    "phoneAcceptance": "pending"
+  },
+  "corpus": {
+    "pages": 91,
+    "localBaselineOwners": 180,
+    "localAfterOwners": 181,
+    "newLocalOwners": 1,
+    "previousOwnerDescriptorsPreserved": 180,
+    "rasterEnvironment": "@napi-rs/canvas; separate from physical Android and historical saved174"
+  },
+  "regression": {
+    "mode": "new supplement against frozen Test83 owners on cached original-page analysis rasters",
+    "pages": 230,
+    "baselineOwners": 852,
+    "afterOwners": 854,
+    "previousOwnerDescriptorsPreserved": 852,
+    "zeroPixelOverlap": true,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "before": 180,
+        "after": 181
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "before": 383,
+        "after": 384
+      },
+      {
+        "book": "manga32",
+        "pages": 41,
+        "before": 188,
+        "after": 188
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "before": 101,
+        "after": 101
+      }
+    ]
+  },
+  "newTargets": [
+    {
+      "book": "Rise of Apocalypse issue2",
+      "readerPage": "22/23",
+      "scene": "complete bottom panel"
+    },
+    {
+      "book": "Wolverine1000",
+      "sourceIndex": "018",
+      "readerPage": "19",
+      "scene": "complete narrow upper-left syringe scene"
+    }
+  ],
+  "integratedApocalypseReplay": {
+    "status": "pending"
+  },
+  "retainedTests": {
+    "local": "passed",
+    "suiteCount": 76,
+    "ci": "pending"
+  },
+  "goal": "360+ remains incomplete",
+  "phoneCount": "No updated phone count supplied; Test84 acceptance pending"
+}

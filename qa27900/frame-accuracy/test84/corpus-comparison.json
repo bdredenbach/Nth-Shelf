@@ -1,0 +1,2078 @@
+{
+  "mode": "supplement against frozen Test83 owners; native canvas 900px rasters",
+  "pages": 230,
+  "before": 852,
+  "after": 854,
+  "rows": [
+    {
+      "key": "1-000",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 15
+    },
+    {
+      "key": "1-001",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 0
+    },
+    {
+      "key": "1-002",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 842
+    },
+    {
+      "key": "1-003",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 10
+    },
+    {
+      "key": "1-004",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 150
+    },
+    {
+      "key": "1-005",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 106
+    },
+    {
+      "key": "1-006",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 947
+    },
+    {
+      "key": "1-007",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 114
+    },
+    {
+      "key": "1-008",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 126
+    },
+    {
+      "key": "1-009",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 109
+    },
+    {
+      "key": "1-010",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 704
+    },
+    {
+      "key": "1-011",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 574
+    },
+    {
+      "key": "1-012",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 694
+    },
+    {
+      "key": "1-013",
+      "book": "apocalypse",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1203
+    },
+    {
+      "key": "1-014",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 578
+    },
+    {
+      "key": "1-015",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 32
+    },
+    {
+      "key": "1-016",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 532
+    },
+    {
+      "key": "1-017",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 3
+    },
+    {
+      "key": "1-018",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 597
+    },
+    {
+      "key": "1-019",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 28
+    },
+    {
+      "key": "1-020",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 46
+    },
+    {
+      "key": "1-021",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 11
+    },
+    {
+      "key": "1-022",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 74
+    },
+    {
+      "key": "1-023",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 960
+    },
+    {
+      "key": "2-000",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 668
+    },
+    {
+      "key": "2-001",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 0
+    },
+    {
+      "key": "2-002",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 104
+    },
+    {
+      "key": "2-003",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 838
+    },
+    {
+      "key": "2-004",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 79
+    },
+    {
+      "key": "2-005",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 280
+    },
+    {
+      "key": "2-006",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 28
+    },
+    {
+      "key": "2-007",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 9
+    },
+    {
+      "key": "2-008",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 759
+    },
+    {
+      "key": "2-009",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 712
+    },
+    {
+      "key": "2-010",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 146
+    },
+    {
+      "key": "2-011",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 36
+    },
+    {
+      "key": "2-012",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 44
+    },
+    {
+      "key": "2-013",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 31
+    },
+    {
+      "key": "2-014",
+      "book": "apocalypse",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 42
+    },
+    {
+      "key": "2-015",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 35
+    },
+    {
+      "key": "2-016",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 112
+    },
+    {
+      "key": "2-017",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 997
+    },
+    {
+      "key": "2-018",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 47
+    },
+    {
+      "key": "2-019",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 46
+    },
+    {
+      "key": "2-020",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 559
+    },
+    {
+      "key": "2-021",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1422
+    },
+    {
+      "key": "2-022",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 185
+    },
+    {
+      "key": "3-000",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 19
+    },
+    {
+      "key": "3-001",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 0
+    },
+    {
+      "key": "3-002",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 591
+    },
+    {
+      "key": "3-003",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 6
+    },
+    {
+      "key": "3-004",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 972
+    },
+    {
+      "key": "3-005",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1051
+    },
+    {
+      "key": "3-006",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 842
+    },
+    {
+      "key": "3-007",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 92
+    },
+    {
+      "key": "3-008",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 180
+    },
+    {
+      "key": "3-009",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 724
+    },
+    {
+      "key": "3-010",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1302
+    },
+    {
+      "key": "3-011",
+      "book": "apocalypse",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 766
+    },
+    {
+      "key": "3-012",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1009
+    },
+    {
+      "key": "3-013",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 155
+    },
+    {
+      "key": "3-014",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1002
+    },
+    {
+      "key": "3-015",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1115
+    },
+    {
+      "key": "3-016",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 136
+    },
+    {
+      "key": "3-017",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 578
+    },
+    {
+      "key": "3-018",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 127
+    },
+    {
+      "key": "3-019",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 160
+    },
+    {
+      "key": "3-020",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 24
+    },
+    {
+      "key": "3-021",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 487
+    },
+    {
+      "key": "3-022",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 693
+    },
+    {
+      "key": "4-000",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 624
+    },
+    {
+      "key": "4-001",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 0
+    },
+    {
+      "key": "4-002",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 178
+    },
+    {
+      "key": "4-003",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 25
+    },
+    {
+      "key": "4-004",
+      "book": "apocalypse",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 241
+    },
+    {
+      "key": "4-005",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 185
+    },
+    {
+      "key": "4-006",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 99
+    },
+    {
+      "key": "4-007",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 652
+    },
+    {
+      "key": "4-008",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 112
+    },
+    {
+      "key": "4-009",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 7
+    },
+    {
+      "key": "4-010",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 108
+    },
+    {
+      "key": "4-011",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 632
+    },
+    {
+      "key": "4-012",
+      "book": "apocalypse",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 85
+    },
+    {
+      "key": "4-013",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 9
+    },
+    {
+      "key": "4-014",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 38
+    },
+    {
+      "key": "4-015",
+      "book": "apocalypse",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 7
+    },
+    {
+      "key": "4-016",
+      "book": "apocalypse",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 15
+    },
+    {
+      "key": "4-017",
+      "book": "apocalypse",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 938
+    },
+    {
+      "key": "4-018",
+      "book": "apocalypse",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 637
+    },
+    {
+      "key": "4-019",
+      "book": "apocalypse",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 991
+    },
+    {
+      "key": "4-020",
+      "book": "apocalypse",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 6
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-000.jpg",
+      "book": "wolverine",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 17
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-001.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 48
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-002.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 76
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-003.jpg",
+      "book": "wolverine",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 15
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-004.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 25
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-005.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 161
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-006.jpg",
+      "book": "wolverine",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 80
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-007.jpg",
+      "book": "wolverine",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 70
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-008.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 15
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-009.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 808
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-010.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 835
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-011.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 793
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-012.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1078
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-013.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 722
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-014.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 14
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-015.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 10
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-016.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 15
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-017.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 15
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-018.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 2095
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-019.jpg",
+      "book": "wolverine",
+      "before": 9,
+      "after": 9,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 183
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-020.jpg",
+      "book": "wolverine",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1771
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-021.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 16
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-022.jpg",
+      "book": "wolverine",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 488
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-023.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 215
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-024.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 11
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-025.jpg",
+      "book": "wolverine",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 106
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-026.jpg",
+      "book": "wolverine",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1932
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-027.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1280
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-028.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 18
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-029.jpg",
+      "book": "wolverine",
+      "before": 9,
+      "after": 9,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 72
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-030.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 16
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-031.jpg",
+      "book": "wolverine",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 20
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-032.jpg",
+      "book": "wolverine",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 29
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-033.jpg",
+      "book": "wolverine",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 1599
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-034.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 23
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-035.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 15
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-036.jpg",
+      "book": "wolverine",
+      "before": 9,
+      "after": 9,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 19
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-037.jpg",
+      "book": "wolverine",
+      "before": 1,
+      "after": 1,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 365
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-038.jpg",
+      "book": "wolverine",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 920
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-039.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 19
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-040.jpg",
+      "book": "wolverine",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 11
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-041.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 164
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-042.jpg",
+      "book": "wolverine",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 497
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-043.jpg",
+      "book": "wolverine",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 799
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-044.jpg",
+      "book": "wolverine",
+      "before": 10,
+      "after": 10,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 48
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-045.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 67
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-046.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 22
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-047.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 14
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-048.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 14
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-049.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 24
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-050.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 16
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-051.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 47
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-052.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 11
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-053.jpg",
+      "book": "wolverine",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 18
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-054.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 19
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-055.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 18
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-056.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 19
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-057.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 68
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-058.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 20
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-059.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 21
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-060.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 24
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-061.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 14
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-062.jpg",
+      "book": "wolverine",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 29
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-063.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 59
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-064.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 19
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-065.jpg",
+      "book": "wolverine",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 72
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-066.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 11
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-067.jpg",
+      "book": "wolverine",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 18
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-068.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 48
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-069.jpg",
+      "book": "wolverine",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 48
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-070.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 142
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-071.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 69
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-072.jpg",
+      "book": "wolverine",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 13
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-073.jpg",
+      "book": "wolverine",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 13
+    },
+    {
+      "key": "manga32/00000000_00320000.png",
+      "book": "manga32",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 160
+    },
+    {
+      "key": "manga32/00000000_00320001.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 34
+    },
+    {
+      "key": "manga32/00000000_00320002.png",
+      "book": "manga32",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 32
+    },
+    {
+      "key": "manga32/00000000_00320003.png",
+      "book": "manga32",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 44
+    },
+    {
+      "key": "manga32/00000000_00320004.png",
+      "book": "manga32",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 34
+    },
+    {
+      "key": "manga32/00000000_00320005.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 54
+    },
+    {
+      "key": "manga32/00000000_00320006.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 71
+    },
+    {
+      "key": "manga32/00000000_00320007.png",
+      "book": "manga32",
+      "before": 8,
+      "after": 8,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 49
+    },
+    {
+      "key": "manga32/00000000_00320008.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 37
+    },
+    {
+      "key": "manga32/00000000_00320009.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 33
+    },
+    {
+      "key": "manga32/00000000_00320010.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 24
+    },
+    {
+      "key": "manga32/00000000_00320011.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 22
+    },
+    {
+      "key": "manga32/00000000_00320012.png",
+      "book": "manga32",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 90
+    },
+    {
+      "key": "manga32/00000000_00320013.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 47
+    },
+    {
+      "key": "manga32/00000000_00320014.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 46
+    },
+    {
+      "key": "manga32/00000000_00320015.png",
+      "book": "manga32",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 51
+    },
+    {
+      "key": "manga32/00000000_00320016.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 31
+    },
+    {
+      "key": "manga32/00000000_00320017.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 38
+    },
+    {
+      "key": "manga32/00000000_00320018.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 54
+    },
+    {
+      "key": "manga32/00000000_00320019.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 48
+    },
+    {
+      "key": "manga32/00000000_00320020.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 29
+    },
+    {
+      "key": "manga32/00000000_00320021.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 41
+    },
+    {
+      "key": "manga32/00000000_00320022.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 66
+    },
+    {
+      "key": "manga32/00000000_00320023.png",
+      "book": "manga32",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 21
+    },
+    {
+      "key": "manga32/00000000_00320024.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 50
+    },
+    {
+      "key": "manga32/00000000_00320025.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 67
+    },
+    {
+      "key": "manga32/00000000_00320026.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 40
+    },
+    {
+      "key": "manga32/00000000_00320027.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 30
+    },
+    {
+      "key": "manga32/00000000_00320028.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 22
+    },
+    {
+      "key": "manga32/00000000_00320029.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 20
+    },
+    {
+      "key": "manga32/00000000_00320030.png",
+      "book": "manga32",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 29
+    },
+    {
+      "key": "manga32/00000000_00320031.png",
+      "book": "manga32",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 17
+    },
+    {
+      "key": "manga32/00000000_00320032.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 84
+    },
+    {
+      "key": "manga32/00000000_00320033.png",
+      "book": "manga32",
+      "before": 2,
+      "after": 2,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 16
+    },
+    {
+      "key": "manga32/00000000_00320034.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 21
+    },
+    {
+      "key": "manga32/00000000_00320035.png",
+      "book": "manga32",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 30
+    },
+    {
+      "key": "manga32/00000000_00320036.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 35
+    },
+    {
+      "key": "manga32/00000000_00320037.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 25
+    },
+    {
+      "key": "manga32/00000000_00320038.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 30
+    },
+    {
+      "key": "manga32/00000000_00320039.png",
+      "book": "manga32",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 87
+    },
+    {
+      "key": "manga32/00000000_00320040.png",
+      "book": "manga32",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 19
+    },
+    {
+      "key": "magneto/0001.jpg",
+      "book": "magneto",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 96
+    },
+    {
+      "key": "magneto/0002.jpg",
+      "book": "magneto",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 12
+    },
+    {
+      "key": "magneto/0003.jpg",
+      "book": "magneto",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 12
+    },
+    {
+      "key": "magneto/0004.jpg",
+      "book": "magneto",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 15
+    },
+    {
+      "key": "magneto/0005.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 13
+    },
+    {
+      "key": "magneto/0006.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 14
+    },
+    {
+      "key": "magneto/0007.jpg",
+      "book": "magneto",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 11
+    },
+    {
+      "key": "magneto/0008.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 61
+    },
+    {
+      "key": "magneto/0009.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 13
+    },
+    {
+      "key": "magneto/0010.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 16
+    },
+    {
+      "key": "magneto/0011.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 14
+    },
+    {
+      "key": "magneto/0012.jpg",
+      "book": "magneto",
+      "before": 3,
+      "after": 3,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 5
+    },
+    {
+      "key": "magneto/0013.jpg",
+      "book": "magneto",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 7
+    },
+    {
+      "key": "magneto/0014.jpg",
+      "book": "magneto",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 12
+    },
+    {
+      "key": "magneto/0015.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 14
+    },
+    {
+      "key": "magneto/0016.jpg",
+      "book": "magneto",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 10
+    },
+    {
+      "key": "magneto/0017.jpg",
+      "book": "magneto",
+      "before": 4,
+      "after": 4,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 12
+    },
+    {
+      "key": "magneto/0018.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 16
+    },
+    {
+      "key": "magneto/0019.jpg",
+      "book": "magneto",
+      "before": 6,
+      "after": 6,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 17
+    },
+    {
+      "key": "magneto/0020.jpg",
+      "book": "magneto",
+      "before": 7,
+      "after": 7,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 18
+    },
+    {
+      "key": "magneto/0021.jpg",
+      "book": "magneto",
+      "before": 5,
+      "after": 5,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 52
+    },
+    {
+      "key": "magneto/0022.jpg",
+      "book": "magneto",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 223
+    },
+    {
+      "key": "magneto/0023.jpg",
+      "book": "magneto",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 6
+    },
+    {
+      "key": "magneto/0024.jpg",
+      "book": "magneto",
+      "before": 0,
+      "after": 0,
+      "priorDescriptorsIdentical": true,
+      "zeroPixelOverlap": true,
+      "ms": 0
+    }
+  ]
+}

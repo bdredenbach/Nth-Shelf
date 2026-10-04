@@ -134,7 +134,7 @@ const PanelContextCells=(()=>{
   if(typeof PanelEdgeSpill!=='undefined'&&!PanelEdgeSpill._contextCells){for(const name of['analyzeImage','analyzeRGBA']){const old=PanelEdgeSpill[name];if(typeof old==='function')PanelEdgeSpill[name]=function(...args){return validPanel(args[name==='analyzeImage'?1:3])?null:old.apply(this,args);};}PanelEdgeSpill._contextCells=true;}
  }
  function install(detector){bind();if(!detector||detector._contextCells)return;const old=detector.detect;detector.detect=async function(url,log){const prior=await old.call(this,url,log);try{const img=new Image();img.src=url;await img.decode();const add=supplementImage(img,prior,log);return add.length?prior.concat(add):prior;}catch(e){log?.('context cells deferred: '+e.message);return prior;}};detector._contextCells=true;}
- return{analyzeRGBA,supplementImage,validPanel,install};
+ return{analyzeRGBA,supplementImage,validPanel,install,contentEvidence:{signature,signatureValid}};
 })();
 if(typeof PanelDetect!=='undefined')PanelContextCells.install(PanelDetect);
 if(typeof module!=='undefined')module.exports=PanelContextCells;

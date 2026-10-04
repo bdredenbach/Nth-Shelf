@@ -2,6 +2,14 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## Test84 — enclosed scenes with interior ink strokes
+
+Test84 recovers modest, independently enclosed scenes when a short stroke inside the artwork falsely triggers the divider veto. Two global seed radii and the original perimeter must agree. Boundary-reaching lines, long separators, paper corridors and independently enclosed insets still veto additions; existing ownership keeps priority.
+
+The230-page native-raster supplement comparison preserves all **852** prior descriptors and adds two pixel-disjoint frames: Apocalypse **180→181**, issue2 reader **22/23** complete bottom panel; Wolverine **383→384**, source018/reader19 complete narrow upper-left syringe scene. Manga and Magneto remain unchanged. Full-detector, source-transform and build results are in [validation](TEST84-VALIDATION.json). The **360+ goal remains incomplete**; phone acceptance is pending.
+
+Identity: **2.79.84 /28012**, package `io.github.bdredenbach.nthshelf.frametest84`, label **Nth Shelf Test84**. See [handoff](HANDOFF-2.79.84.md) and [contracts](qa27900/frame-accuracy/test84/README.md).
+
 ## Test83 — context-stable enclosed-cell recovery
 
 Test83 adds a conservative supplement that discovers complete cells in local page windows. Two independent seed radii and an expanded window must agree; the original page must prove the perimeter, and existing frames keep exclusive ownership. The reader preserves the new complete contour. Runtime detection contains no book or page lookups.

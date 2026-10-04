@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.83 — CONTEXT-STABLE ENCLOSED CELL RECOVERY
+// NTH SHELF 2.79.84 — ENCLOSED SCENES WITH INTERIOR INK STROKES
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.83";
+const CACHE_NAME = "nth-shelf-shell-2.79.84";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -83,6 +83,7 @@ const SHELL_FILES = [
   "./js/panels-horizontal-paper-strips.js",
   "./js/panels-local-boundary-consensus.js",
   "./js/panels-context-cells.js",
+  "./js/panels-interior-strokes.js",
   "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",
