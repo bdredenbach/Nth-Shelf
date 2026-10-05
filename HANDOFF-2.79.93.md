@@ -4,7 +4,7 @@
 
 ## Recovery and measured outcome
 
-The stalled session survived at `/workspace/scratch/5827b11a4a78/Nth-Shelf`, with local Test92 implementation commit `9f274a4` and blocked-publication checkpoint `b80ebbb`. Original artwork, replay maps and visual reports survived alongside it. Test93 tested implementation checkpoint is `ff024eedc5f6aab51b009a911a12e66976ff0036`. Latest remote checkpoint remains Test91 `7d7d5f3`; Test92 and Test93 have not been published or built. Do not infer an APK exists from the Test92 review's installation text.
+The stalled session survived at `/workspace/scratch/5827b11a4a78/Nth-Shelf`, with local Test92 implementation commit `9f274a4` and blocked-publication checkpoint `b80ebbb`. Original artwork, replay maps and visual reports survived alongside it. Test93 tested implementation checkpoint is `ff024eedc5f6aab51b009a911a12e66976ff0036`. Brad explicitly authorized publication and building in the recovered chat on 5 October 2026. Test92/Test93 are published at `3a3c28720453e902cc7fcb823b8c2733d1b3c41c`; its tree `29c3b1cdfcfbf6b0a1adb99f2a2df1be8041812c` exactly matches the local tested checkpoint. The APK is still pending. Do not infer an APK exists from the Test92 review's installation text.
 
 Test93 completes Apocalypse issue 1 reader **16/24**, selection **5** (walking away): its complete “We Sandstormers…” balloon now stays with the scene. Selection 4 loses the foreign balloon fragment while retaining its reclining figure and all artwork outside the body. Actual Reader canvases were reviewed against the original source.
 
@@ -36,6 +36,10 @@ Next source targets remain the SWAK face, issue 3 reader 6's damaged pair, reade
 
 Isolated identity prepared: `io.github.bdredenbach.nthshelf.frametest93`, label `Nth Shelf Test93`, version `2.79.93`, code `28021`. Workflow and exact 94-file web manifest are prepared. No Test93 APK exists.
 
-The prior handoff records: “Two push attempts were rejected by automatic approval review… review still requires direct user-authored authorization in this thread to publish to the branch.” No repeat publication attempt was made in this pass. The concrete tested code, review and continuation notes are complete; request explicit permission to push this checkpoint and trigger Android CI. After permission, push the local Test_Branch commits, download the CI APK, verify isolated identity/signature and all packaged files against the frozen manifest, then save and deliver it. Do not stop at merely starting CI.
+Publication is now explicitly authorized and complete. Plain git pushing lacked shell credentials, so the connected GitHub API published the exact tested tree in one fast-forward commit on `Test_Branch`. Android CI run `37370172377` is queued: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37370172377 . Finish this run, download the CI APK, verify isolated identity/signature and all 94 packaged web files against the frozen manifest, then save and deliver it. Do not request the same permission again. No APK is claimed until verification succeeds.
 
 Visual report: `Nth-Shelf-Test93-Frame-Review.html`. Its new review includes the original page, before/after walking-away crop, preserved preceding scene and retained Test92 comparisons. Its saved identity is recorded in TEST93-VALIDATION.json after upload.
+
+## Recovery-chat continuation
+
+See `docs/test93-continuation.md`. Internal-balloon variants restore additional text on issue 3 reader 6, but artwork remains absent because false selection 5 owns part of the same street scene. No additional complete frames are credited and no prototype runtime changes were retained.

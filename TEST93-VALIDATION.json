@@ -102,14 +102,17 @@
     "browserAndBackup": "Not run: Chromium executable absent; browser launch failed before tests."
   },
   "androidBuild": {
-    "status": "publication approval pending",
+    "status": "GitHub Actions queued",
     "apkCreated": false,
     "sourceCommit": "ff024eedc5f6aab51b009a911a12e66976ff0036",
-    "published": false,
-    "ciStarted": false,
-    "reason": "Previous automatic approval review rejected the push twice and required direct user-authored permission in this thread. This checkpoint remains local; no repeat push attempted.",
-    "nextAction": "After explicit permission, push Test_Branch, run Android CI, verify signature/isolated identity and 94 packaged web files, save and deliver APK.",
-    "sourceCommitBasis": "Local tested implementation checkpoint; CI build records the final pushed HEAD separately."
+    "published": true,
+    "ciStarted": true,
+    "reason": "User explicitly authorized publication and APK build in this chat on 5 October 2026; workflow awaits a GitHub-hosted runner.",
+    "nextAction": "Complete the existing CI run, download and verify the APK against the frozen 94-file manifest, then save and deliver it.",
+    "sourceCommitBasis": "Local tested implementation checkpoint; CI build records the final pushed HEAD separately.",
+    "publishedCommit": "3a3c28720453e902cc7fcb823b8c2733d1b3c41c",
+    "runId": 37370172377,
+    "runUrl": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37370172377"
   },
   "research": "Extended seed radii, smaller/vertical seams, alternate neutral paper thresholds and narrower chromatic rims yielded no additional complete-frame credit. Unsuccessful runtime paths were excluded.",
   "visualReview": {
