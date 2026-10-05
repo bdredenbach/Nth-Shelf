@@ -2,6 +2,8 @@
 
 This test explores two connected frames in one pop-out while continuing to recover individual frames.
 
+**Superseded coverage estimates:** The subsequent complete [Apocalypse audit](HANDOFF-APOCALYPSE-AUDIT.md) establishes 385 narrative frames, 133 complete singles and 10 complete connected pairs, covering 153 frames with 232 remaining. The historical raw-selection table below is not usable coverage. The SWAK selection still needs interior facial-mask repair. Brad has accepted complete adjacent two-frame scene continuations as the criterion going forward; see [project memory](PROJECT-MEMORY.md).
+
 ## Phone targets
 
 1. Rise of Apocalypse issue 2, reader **18/23**: the narrow **SWAK** strip should pop as one complete frame, including its lettering and speech balloon.

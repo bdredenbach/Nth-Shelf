@@ -1,10 +1,30 @@
 # Nth Shelf
 
+## Current acceptance rule and audited Apocalypse baseline — 5 October 2026
+
+Brad has accepted **one complete frame, or exactly two adjacent frames continuing the same immediate scene, in one pop-out** as the criterion going forward. Preserve all owned artwork, captions and speech balloons. Unrelated scenes, meaningful time/location jumps, three-or-more-frame composites and damaged crops do not qualify. A pair is one pop-out and two covered frames. Prefer separate complete frames when available; the new rule does not authorize merging already accepted owners or weakening regressions.
+
+The complete Test90 audit covers all **91 image pages** across four Rise of Apocalypse issues, excluding eight covers. The manual narrative-frame inventory contains **385 frames**. Freeform montage/vignette counts are review judgments, not publisher counts.
+
+| Issue | Narrative frames | Complete singles | Complete connected pairs | Frames covered | Frames left |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | 99 | 26 | 3 | 32 | 67 |
+| 2 | 97 | 34 | 5 | 44 | 53 |
+| 3 | 110 | 42 | 2 | 46 | 64 |
+| 4 | 79 | 31 | 0 | 31 | 48 |
+| Total | **385** | **133** | **10** | **153** | **232** |
+
+Singles alone leave **252**; allowing connected pairs leaves **232**, an improvement of **20 covered frames**. The remaining 232 consist of **199 frames without a qualifying selection** and **33 frames in damaged crops** (29 singles and two pairs). All **185 raw detector selections** reproduce in the fresh replay; raw selection count is not usable frame coverage. The earlier 360+ inventory and 186-covered estimate are superseded by this audit.
+
+Priorities: preserve interior artwork/dialogue mistaken for matte, split larger composites, recover irregular/colored gutters, and recover open/landscape scenes around accepted neighbors. Record new singles, pairs, repaired crops and remaining frames separately. Narrative continuity requires manual review; pixel geometry alone cannot establish it. Phone confirmation remains pending.
+
+Future chats should start with [project memory](PROJECT-MEMORY.md), [audit handoff](HANDOFF-APOCALYPSE-AUDIT.md), and the [91-page findings](docs/apocalypse-test90-audit.json). Private artwork remains outside git and CI.
+
 ## Test90 — individual frames and connected scenes
 
 **2.79.90** adds the complete **SWAK** strip on Apocalypse issue 2, reader **18/23**, and tests one pop-out containing the two neighboring lower-right scenes on issue 1, reader **13/24**. Their whole contour preserves the artwork that crosses between them. The same individual-frame improvement also recovers four Wolverine scenes.
 
-The full Apocalypse replay preserves all **183** earlier selections and reaches **185 pop-outs covering 186 frames** when the new pair counts as accepted. Against the provisional **360+** goal, the estimated remainder changes **177+ → 174+**; individual recovery alone would leave **176+**. The exact comic-wide total is not audited. All **82** retained/new suites pass; phone confirmation remains pending. See [current test](HANDOFF-2.79.90.md), [validation](TEST90-VALIDATION.json) and [contracts](qa27900/frame-accuracy/test90/README.md).
+The full Apocalypse replay preserves all **183** earlier selections and reaches **185 raw selections**. The subsequent audit above establishes usable coverage and finds that the SWAK selection loses interior facial artwork, so it still needs crop repair. All **82** retained/new suites pass; phone confirmation remains pending. See [test history](HANDOFF-2.79.90.md), [validation](TEST90-VALIDATION.json) and [contracts](qa27900/frame-accuracy/test90/README.md).
 
 A local-first comic reader and personal comic library for Android and the web.
 
