@@ -25,7 +25,7 @@ The version-47 proof keeps the original owners, exact matching source contours, 
 
 ## Publication, build and next target
 
-Publication/build authorization continues from the attached handoff. Isolated identity: `io.github.bdredenbach.nthshelf.frametest94`, label `Nth Shelf Test94`, version `2.79.94`, code `28022`. CI and APK verification are pending until recorded explicitly in `TEST94-VALIDATION.json`. Do not claim an APK before successful build/download verification.
+Publication/build authorization continues from the attached handoff. Isolated identity: `io.github.bdredenbach.nthshelf.frametest94`, label `Nth Shelf Test94`, version `2.79.94`, code `28022`. The exact tested source tree `ca43a4f3d361b1dc046d24c35654d385bc0ed4f9` is published at `f9a68b68b905d3783f40bea82bdd3273f8c53000`, matching local tested checkpoint `dbf202d`. All 90 suites pass. Android [run 37374620934](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37374620934) is queued. CI and APK verification remain pending. Do not claim an APK before successful build/download verification.
 
 Next phone check: issue 3 reader 6, tap center/edges of the street, its upper circular view, both balloons, and the formerly false middle fragment. Check the right scene and retained Test93 issue 1 reader 16 / Test92 issue 2 reader 12 and 16. Further source targets stay SWAK on issue 2 reader 18, lower pair on issue 3 reader 13, and narrow red-rim En inset on issue 4 reader 14. Keep one bounded target per recoverable pass.
 

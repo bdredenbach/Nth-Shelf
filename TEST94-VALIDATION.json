@@ -105,14 +105,19 @@
     "timingNote": "Local native-canvas full detector; not phone latency or performance acceptance."
   },
   "androidBuild": {
-    "status": "pending publication and CI",
+    "status": "GitHub Actions queued",
     "apkCreated": false,
-    "published": false,
-    "ciStarted": false,
+    "published": true,
+    "ciStarted": true,
     "applicationId": "io.github.bdredenbach.nthshelf.frametest94",
     "label": "Nth Shelf Test94",
     "versionName": "2.79.94",
-    "versionCode": 28022
+    "versionCode": 28022,
+    "publishedCommit": "f9a68b68b905d3783f40bea82bdd3273f8c53000",
+    "localTestedCommit": "dbf202d72762944b84c26b215cebe7d019fbd540",
+    "sourceTree": "ca43a4f3d361b1dc046d24c35654d385bc0ed4f9",
+    "runId": 37374620934,
+    "runUrl": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37374620934"
   },
   "phoneAcceptance": "pending"
 }
