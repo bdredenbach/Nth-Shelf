@@ -879,6 +879,30 @@ const Reader = {
    return typeof PanelGeometryOrthogonal!=='undefined'?PanelGeometryOrthogonal._provenContours(panel):null;
  },
 
+ displayPanelContours(panel, contours=this.panelContours(panel)) {
+   if(!contours||typeof PanelCropRepair==='undefined')return contours;
+   const owners=this.currentPanels;
+   if(!this._cropRepairCache||this._cropRepairOwners!==owners){this._cropRepairCache=new WeakMap();this._cropRepairOwners=owners;}
+   if(this._cropRepairCache.has(panel))return this._cropRepairCache.get(panel)?.contours||contours;
+   const proof=panel._structuralGridProof||panel._matteCellProof||panel._rimFrameProof||panel._curvedRimProof||panel._compositeFrameProof;
+   const w=proof?.analysisWidth,h=proof?.analysisHeight;
+   const foreign=(owners||[]).filter(p=>p!==panel&&p.x<panel.x+panel.w&&p.x+p.w>panel.x&&p.y<panel.y+panel.h&&p.y+p.h>panel.y).map(p=>{
+     const rings=this.panelContours(p);if(rings)return rings;
+     const polygon=this.panelPolygon(p);if(polygon)return [polygon];
+     return [[{x:p.x,y:p.y},{x:p.x+p.w,y:p.y},{x:p.x+p.w,y:p.y+p.h},{x:p.x,y:p.y+p.h}]];
+   });
+   let rgba=null;
+   const img=this.getPanelImageContext()?.img;
+   if(img&&Number.isInteger(w)&&Number.isInteger(h)&&w>=80&&h>=80&&w<=900&&h<=900){
+     const cached=this._cropRepairRaster;
+     if(cached?.img===img&&cached.w===w&&cached.h===h)rgba=cached.rgba;
+     else try{const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(img,0,0,w,h);rgba=g.getImageData(0,0,w,h).data;this._cropRepairRaster={img,w,h,rgba};}catch(_){/* Geometry-only repair remains available. */}
+   }
+   const repair=PanelCropRepair.repair(contours,w,h,foreign,rgba);
+   this._cropRepairCache.set(panel,repair);
+   return repair?.contours||contours;
+ },
+
  pointInContours(rings,x,y) {
    let inside=false;for(const ring of rings)if(this.pointInPolygon(ring,x,y))inside=!inside;
    return inside;
@@ -906,7 +930,7 @@ const Reader = {
      if (relX >= p.x && relX <= p.x + p.w && relY >= p.y && relY <= p.y + p.h) {
        const contours=this.panelContours(p);
        if(['composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame','matte-cell-frame'].includes(p._identitySource)&&!contours)continue;
-       if(contours&&!this.pointInContours(contours,relX,relY))continue;
+       if(contours&&!this.pointInContours(this.displayPanelContours(p,contours),relX,relY))continue;
        const polygon=this.panelPolygon(p);
        if(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(p._identitySource)&&!polygon)continue;
        if(polygon&&!this.pointInPolygon(polygon,relX,relY))continue;
@@ -2829,7 +2853,7 @@ async setMode(mode) {
      pageX = panel.x+u*panel.w; pageY = panel.y+v*panel.h;
      let inside = Number.isFinite(u) && Number.isFinite(v) && u >= 0 && u <= 1 && v >= 0 && v <= 1;
      // A clipped corner of a sloping frame is transparent, not a caption hit.
-     const contours=this.panelContours(panel);
+     const contours=meta.cropContours||this.panelContours(panel);
      if(inside&&contours)inside=this.pointInContours(contours,pageX,pageY);
      const outline=panel._outline;
      if(inside&&Array.isArray(outline)&&outline.length>=4)inside=this.pointInPolygon(outline,pageX,pageY);
@@ -3207,7 +3231,8 @@ async setMode(mode) {
    canvas.getContext("2d").imageSmoothingEnabled = true;
    canvas.getContext("2d").imageSmoothingQuality = "high";
    const context=canvas.getContext("2d");
-   const cropContours=contours||(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel._identitySource)&&outline?[outline]:null);
+   const cropContours=this.displayPanelContours(panel,contours)||(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel._identitySource)&&outline?[outline]:null);
+   if(contours)this.panelFocusMeta.cropContours=cropContours;
    const frameRect=[[frameGeom.x,frameGeom.y],[frameGeom.x+frameGeom.w,frameGeom.y],[frameGeom.x+frameGeom.w,frameGeom.y+frameGeom.h],[frameGeom.x,frameGeom.y+frameGeom.h]].map(([x,y])=>({x,y}));
    const baseContours=cropContours||(edgeSpill?(polygon?[polygon]:[frameRect]):null),drawBase=()=>context.drawImage(img,sx,sy,sw,sh,0,0,canvasW,canvasH);
    if(baseContours){context.save();context.beginPath();for(const ring of baseContours){ring.forEach((p,i)=>{const x=(p.x-geom.x)/geom.w*canvasW,y=(p.y-geom.y)/geom.h*canvasH;if(i)context.lineTo(x,y);else context.moveTo(x,y);});context.closePath();}context.clip(cropContours?'evenodd':'nonzero');drawBase();context.restore();overlay.style.boxShadow='none';canvas.style.filter='drop-shadow(0 5px 12px rgba(0,0,0,.42))';overlay.dataset.geometry=cropContours?'contours':'frame-plus-spill';}else drawBase();

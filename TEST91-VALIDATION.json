@@ -1,0 +1,120 @@
+{
+  "version": "2.79.91",
+  "versionCode": 28019,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest91",
+  "baselineCommit": "0d5b48b4c6104606c3593425b3dfee123d7cfd6d",
+  "changes": "Reader display/crop/tap mask repair only; detector code unchanged",
+  "cropReview": {
+    "basis": "Actual Reader canvas before/after compared with original source pages; conservative review. Android acceptance pending.",
+    "completeRepairedSingles": 12,
+    "completeRepairedPairs": 0,
+    "newDetectedFrames": 0,
+    "beforeCoveredFrames": 153,
+    "afterCoveredFrames": 165,
+    "beforeRemainingFrames": 232,
+    "afterRemainingFrames": 220,
+    "remainingDamagedFrames": 21,
+    "noQualifyingSelectionFrames": 199
+  },
+  "corpus": {
+    "pages": 312,
+    "owners": 1283,
+    "modifiedDisplayMasks": 851,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "owners": 185,
+        "modifiedDisplayMasks": 176,
+        "allOriginalPixelsRetained": true,
+        "noOtherDetectedOwnerPixelsAdded": true,
+        "allDetectorDescriptorsUnchanged": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "owners": 388,
+        "modifiedDisplayMasks": 77,
+        "allOriginalPixelsRetained": true,
+        "noOtherDetectedOwnerPixelsAdded": true,
+        "allDetectorDescriptorsUnchanged": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "owners": 101,
+        "modifiedDisplayMasks": 0,
+        "allOriginalPixelsRetained": true,
+        "noOtherDetectedOwnerPixelsAdded": true,
+        "allDetectorDescriptorsUnchanged": true
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "owners": 228,
+        "modifiedDisplayMasks": 220,
+        "allOriginalPixelsRetained": true,
+        "noOtherDetectedOwnerPixelsAdded": true,
+        "allDetectorDescriptorsUnchanged": true
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "owners": 193,
+        "modifiedDisplayMasks": 190,
+        "allOriginalPixelsRetained": true,
+        "noOtherDetectedOwnerPixelsAdded": true,
+        "allDetectorDescriptorsUnchanged": true
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "owners": 188,
+        "modifiedDisplayMasks": 188,
+        "allOriginalPixelsRetained": true,
+        "noOtherDetectedOwnerPixelsAdded": true,
+        "allDetectorDescriptorsUnchanged": true
+      }
+    ],
+    "maskPreparationMs": {
+      "median": 446,
+      "p95": 608,
+      "max": 6069,
+      "environment": "Native canvas, six concurrent corpus jobs; includes cold preparation, excludes detector and phone latency"
+    },
+    "limitations": [
+      "Pixel retention and detected-owner protection do not prove narrative acceptance or undetected-inset ownership.",
+      "Additional paper/gutter fringe can appear inside the original contour hull.",
+      "Phone acceptance and latency remain pending."
+    ]
+  },
+  "checks": {
+    "retainedAndNewSuites": 84,
+    "allPassed": true,
+    "syntheticCropRepairContract": true,
+    "actualReaderContract": true,
+    "privateSourceArtworkChecks": true,
+    "browserChecksLocal": "Not executed: installed Playwright has no Chromium executable",
+    "nativeArchiveChecksLocal": "Not executed: javac unavailable",
+    "requiredCiChecks": [
+      "retained suites",
+      "browser branding/interaction",
+      "backup round trip",
+      "native archive regression",
+      "Android compile",
+      "signature and identity",
+      "exact packaged web bytes"
+    ]
+  },
+  "androidBuild": {
+    "status": "pending",
+    "phoneAcceptance": "pending"
+  },
+  "limitations": [
+    "Pixel retention and detected-owner protection do not prove narrative acceptance or undetected-inset ownership.",
+    "Additional paper/gutter fringe can appear inside the original contour hull.",
+    "Phone acceptance and latency remain pending.",
+    "Wide boundary damage and speech outside original boxes remain in the recovery queue.",
+    "The broad fixtures were checked for pixel ownership, not newly semantically accepted across all manga/comic frames."
+  ]
+}

@@ -1,0 +1,1008 @@
+{
+  "basis": "Actual Reader canvas before/after compared with original source pages; conservative review. Android acceptance pending.",
+  "completeRepairedSingles": 12,
+  "completeRepairedPairs": 0,
+  "newDetectedFrames": 0,
+  "beforeCoveredFrames": 153,
+  "afterCoveredFrames": 165,
+  "beforeRemainingFrames": 232,
+  "afterRemainingFrames": 220,
+  "remainingDamagedFrames": 21,
+  "noQualifyingSelectionFrames": 199,
+  "decisions": [
+    {
+      "issue": 1,
+      "readerPage": 16,
+      "selection": 5,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "The walking-away frame loses the top of its owned \u201cWe Sandstormers\u2026\u201d balloon. Extend the crop to own the complete balloon crossing the upper gutter.",
+      "repair": {
+        "addedPixels": 1409,
+        "patches": 37,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 1957,
+            "ratio": 0.02547812162320501,
+            "enclosed": false,
+            "foreignPixels": 1185
+          }
+        ]
+      },
+      "comparisonFile": "i1-p16-s5.png"
+    },
+    {
+      "issue": 2,
+      "readerPage": 7,
+      "selection": 6,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "The lower-right En close-up loses its complete upper speech balloon; exterior matte removal reaches into owned dialogue.",
+      "repair": {
+        "addedPixels": 9862,
+        "patches": 22,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i2-p7-s6.png"
+    },
+    {
+      "issue": 2,
+      "readerPage": 18,
+      "selection": 1,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "The water/hand close-up has exterior-colored intrusions cutting the hand and background.",
+      "repair": {
+        "addedPixels": 2646,
+        "patches": 26,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i2-p18-s1.png"
+    },
+    {
+      "issue": 2,
+      "readerPage": 18,
+      "selection": 2,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "The SWAK frame loses parts of Baal\u2019s eyes, cheek and face to the exterior matte mask.",
+      "repair": {
+        "addedPixels": 1418,
+        "patches": 42,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i2-p18-s2.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 5,
+      "selection": 3,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "The narrow whip/En frame loses owned dialogue and part of En\u2019s white body/arm to the matte mask.",
+      "repair": {
+        "addedPixels": 3092,
+        "patches": 28,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 3,
+            "ratio": 7.823297780791196e-05,
+            "enclosed": false,
+            "foreignPixels": 3
+          },
+          {
+            "pixels": 52,
+            "ratio": 0.0013560382820038074,
+            "enclosed": false,
+            "foreignPixels": 52
+          },
+          {
+            "pixels": 36,
+            "ratio": 0.0009387957336949435,
+            "enclosed": false,
+            "foreignPixels": 36
+          },
+          {
+            "pixels": 8,
+            "ratio": 0.0002086212741544319,
+            "enclosed": false,
+            "foreignPixels": 8
+          },
+          {
+            "pixels": 115,
+            "ratio": 0.0029989308159699586,
+            "enclosed": true,
+            "foreignPixels": 115
+          },
+          {
+            "pixels": 101,
+            "ratio": 0.002633843586199703,
+            "enclosed": false,
+            "foreignPixels": 101
+          },
+          {
+            "pixels": 141,
+            "ratio": 0.003676949956971862,
+            "enclosed": true,
+            "foreignPixels": 141
+          },
+          {
+            "pixels": 35,
+            "ratio": 0.0009127180744256396,
+            "enclosed": true,
+            "foreignPixels": 35
+          },
+          {
+            "pixels": 25,
+            "ratio": 0.0006519414817325997,
+            "enclosed": true,
+            "foreignPixels": 25
+          },
+          {
+            "pixels": 25,
+            "ratio": 0.0006519414817325997,
+            "enclosed": true,
+            "foreignPixels": 25
+          },
+          {
+            "pixels": 604,
+            "ratio": 0.015750906198659608,
+            "enclosed": false,
+            "foreignPixels": 604
+          },
+          {
+            "pixels": 4,
+            "ratio": 0.00010431063707721596,
+            "enclosed": false,
+            "foreignPixels": 4
+          },
+          {
+            "pixels": 3,
+            "ratio": 7.823297780791196e-05,
+            "enclosed": false,
+            "foreignPixels": 3
+          },
+          {
+            "pixels": 3,
+            "ratio": 7.823297780791196e-05,
+            "enclosed": false,
+            "foreignPixels": 3
+          },
+          {
+            "pixels": 9,
+            "ratio": 0.00023469893342373588,
+            "enclosed": false,
+            "foreignPixels": 9
+          },
+          {
+            "pixels": 4,
+            "ratio": 0.00010431063707721596,
+            "enclosed": false,
+            "foreignPixels": 4
+          },
+          {
+            "pixels": 20,
+            "ratio": 0.0005215531853860798,
+            "enclosed": false,
+            "foreignPixels": 20
+          },
+          {
+            "pixels": 12,
+            "ratio": 0.0003129319112316478,
+            "enclosed": false,
+            "foreignPixels": 12
+          },
+          {
+            "pixels": 9,
+            "ratio": 0.00023469893342373588,
+            "enclosed": false,
+            "foreignPixels": 9
+          },
+          {
+            "pixels": 3,
+            "ratio": 7.823297780791196e-05,
+            "enclosed": false,
+            "foreignPixels": 3
+          },
+          {
+            "pixels": 4,
+            "ratio": 0.00010431063707721596,
+            "enclosed": false,
+            "foreignPixels": 4
+          },
+          {
+            "pixels": 5,
+            "ratio": 0.00013038829634651994,
+            "enclosed": false,
+            "foreignPixels": 5
+          },
+          {
+            "pixels": 11,
+            "ratio": 0.00028685425196234385,
+            "enclosed": false,
+            "foreignPixels": 11
+          }
+        ]
+      },
+      "comparisonFile": "i3-p5-s3.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 5,
+      "selection": 4,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "The upper middle striking/falling scene loses the \u201cUNK\u201d balloon and white interior background; restore its owned speech and continuous scene.",
+      "repair": {
+        "addedPixels": 12997,
+        "patches": 36,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 2405,
+            "ratio": 0.03162559503458433,
+            "enclosed": false,
+            "foreignPixels": 2370
+          },
+          {
+            "pixels": 819,
+            "ratio": 0.010769797227993583,
+            "enclosed": false,
+            "foreignPixels": 819
+          },
+          {
+            "pixels": 13,
+            "ratio": 0.0001709491623491045,
+            "enclosed": false,
+            "foreignPixels": 13
+          },
+          {
+            "pixels": 64,
+            "ratio": 0.0008415958761802067,
+            "enclosed": true,
+            "foreignPixels": 64
+          },
+          {
+            "pixels": 30,
+            "ratio": 0.0003944980669594719,
+            "enclosed": true,
+            "foreignPixels": 30
+          },
+          {
+            "pixels": 30,
+            "ratio": 0.0003944980669594719,
+            "enclosed": true,
+            "foreignPixels": 30
+          },
+          {
+            "pixels": 16,
+            "ratio": 0.00021039896904505168,
+            "enclosed": false,
+            "foreignPixels": 16
+          },
+          {
+            "pixels": 7,
+            "ratio": 9.20495489572101e-05,
+            "enclosed": false,
+            "foreignPixels": 7
+          },
+          {
+            "pixels": 30,
+            "ratio": 0.0003944980669594719,
+            "enclosed": false,
+            "foreignPixels": 30
+          },
+          {
+            "pixels": 3,
+            "ratio": 3.944980669594719e-05,
+            "enclosed": false,
+            "foreignPixels": 3
+          },
+          {
+            "pixels": 3,
+            "ratio": 3.944980669594719e-05,
+            "enclosed": false,
+            "foreignPixels": 3
+          },
+          {
+            "pixels": 6,
+            "ratio": 7.889961339189438e-05,
+            "enclosed": false,
+            "foreignPixels": 6
+          }
+        ]
+      },
+      "comparisonFile": "i3-p5-s4.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 6,
+      "selection": 1,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 24479,
+        "patches": 70,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i3-p6-s1.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 6,
+      "selection": 2,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 9154,
+        "patches": 43,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 7234,
+            "ratio": 0.09208482904350926,
+            "enclosed": false,
+            "foreignPixels": 1352
+          },
+          {
+            "pixels": 70,
+            "ratio": 0.0008910613813997301,
+            "enclosed": false,
+            "foreignPixels": 21
+          },
+          {
+            "pixels": 50,
+            "ratio": 0.0006364724152855215,
+            "enclosed": false,
+            "foreignPixels": 31
+          },
+          {
+            "pixels": 48,
+            "ratio": 0.0006110135186741006,
+            "enclosed": false,
+            "foreignPixels": 20
+          },
+          {
+            "pixels": 40,
+            "ratio": 0.0005091779322284173,
+            "enclosed": true,
+            "foreignPixels": 40
+          },
+          {
+            "pixels": 40,
+            "ratio": 0.0005091779322284173,
+            "enclosed": true,
+            "foreignPixels": 40
+          },
+          {
+            "pixels": 62,
+            "ratio": 0.0007892257949540467,
+            "enclosed": false,
+            "foreignPixels": 28
+          },
+          {
+            "pixels": 72,
+            "ratio": 0.000916520278011151,
+            "enclosed": true,
+            "foreignPixels": 6
+          },
+          {
+            "pixels": 1575,
+            "ratio": 0.020048881081493927,
+            "enclosed": false,
+            "foreignPixels": 294
+          }
+        ]
+      },
+      "comparisonFile": "i3-p6-s2.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 6,
+      "selection": 3,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 17340,
+        "patches": 88,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 4522,
+            "ratio": 0.047702434701886155,
+            "enclosed": false,
+            "foreignPixels": 374
+          }
+        ]
+      },
+      "comparisonFile": "i3-p6-s3.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 6,
+      "selection": 4,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 32907,
+        "patches": 23,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i3-p6-s4.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 11,
+      "selection": 1,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 13575,
+        "patches": 58,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 10234,
+            "ratio": 0.0851945889698231,
+            "enclosed": false,
+            "foreignPixels": 232
+          }
+        ]
+      },
+      "comparisonFile": "i3-p11-s1.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 11,
+      "selection": 2,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 8315,
+        "patches": 15,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 974,
+            "ratio": 0.05020618556701031,
+            "enclosed": false,
+            "foreignPixels": 82
+          }
+        ]
+      },
+      "comparisonFile": "i3-p11-s2.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 11,
+      "selection": 3,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 22448,
+        "patches": 18,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i3-p11-s3.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 11,
+      "selection": 4,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 4351,
+        "patches": 30,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i3-p11-s4.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 12,
+      "selection": 2,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 5664,
+        "patches": 37,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i3-p12-s2.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 12,
+      "selection": 3,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 12980,
+        "patches": 63,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i3-p12-s3.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 13,
+      "selection": 1,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 14968,
+        "patches": 40,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i3-p13-s1.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 13,
+      "selection": 2,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 4780,
+        "patches": 13,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 7176,
+            "ratio": 0.1579155847013776,
+            "enclosed": false,
+            "foreignPixels": 368
+          }
+        ]
+      },
+      "comparisonFile": "i3-p13-s2.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 13,
+      "selection": 3,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 9792,
+        "patches": 22,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i3-p13-s3.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 13,
+      "selection": 5,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 22418,
+        "patches": 36,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 318,
+            "ratio": 0.00234192037470726,
+            "enclosed": true,
+            "foreignPixels": 243
+          },
+          {
+            "pixels": 441,
+            "ratio": 0.0032477575007732757,
+            "enclosed": false,
+            "foreignPixels": 308
+          },
+          {
+            "pixels": 25,
+            "ratio": 0.00018411323700528773,
+            "enclosed": true,
+            "foreignPixels": 11
+          },
+          {
+            "pixels": 102,
+            "ratio": 0.0007511820069815739,
+            "enclosed": true,
+            "foreignPixels": 45
+          },
+          {
+            "pixels": 6,
+            "ratio": 4.4187176881269054e-05,
+            "enclosed": false,
+            "foreignPixels": 3
+          }
+        ]
+      },
+      "comparisonFile": "i3-p13-s5.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 13,
+      "selection": 6,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 7516,
+        "patches": 31,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 2669,
+            "ratio": 0.08590556503266922,
+            "enclosed": false,
+            "foreignPixels": 105
+          }
+        ]
+      },
+      "comparisonFile": "i3-p13-s6.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 15,
+      "selection": 2,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 12680,
+        "patches": 45,
+        "radius": 8,
+        "skipped": []
+      },
+      "comparisonFile": "i3-p15-s2.png"
+    },
+    {
+      "issue": 3,
+      "readerPage": 15,
+      "selection": 3,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 9878,
+        "patches": 41,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 3592,
+            "ratio": 0.04289364954264288,
+            "enclosed": false,
+            "foreignPixels": 184
+          }
+        ]
+      },
+      "comparisonFile": "i3-p15-s3.png"
+    },
+    {
+      "issue": 4,
+      "readerPage": 5,
+      "selection": 2,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 2782,
+        "patches": 46,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 19,
+            "ratio": 0.0002927174968032168,
+            "enclosed": false,
+            "foreignPixels": 19
+          },
+          {
+            "pixels": 2765,
+            "ratio": 0.04259809887688918,
+            "enclosed": false,
+            "foreignPixels": 2765
+          },
+          {
+            "pixels": 18,
+            "ratio": 0.00027731131276094223,
+            "enclosed": false,
+            "foreignPixels": 18
+          },
+          {
+            "pixels": 6,
+            "ratio": 9.243710425364742e-05,
+            "enclosed": false,
+            "foreignPixels": 6
+          },
+          {
+            "pixels": 7,
+            "ratio": 0.00010784328829592198,
+            "enclosed": false,
+            "foreignPixels": 7
+          },
+          {
+            "pixels": 3,
+            "ratio": 4.621855212682371e-05,
+            "enclosed": false,
+            "foreignPixels": 3
+          },
+          {
+            "pixels": 4,
+            "ratio": 6.162473616909827e-05,
+            "enclosed": false,
+            "foreignPixels": 4
+          },
+          {
+            "pixels": 35,
+            "ratio": 0.0005392164414796099,
+            "enclosed": false,
+            "foreignPixels": 35
+          },
+          {
+            "pixels": 635,
+            "ratio": 0.00978292686684435,
+            "enclosed": false,
+            "foreignPixels": 635
+          },
+          {
+            "pixels": 37,
+            "ratio": 0.0005700288095641591,
+            "enclosed": false,
+            "foreignPixels": 37
+          },
+          {
+            "pixels": 7,
+            "ratio": 0.00010784328829592198,
+            "enclosed": false,
+            "foreignPixels": 7
+          },
+          {
+            "pixels": 3273,
+            "ratio": 0.050424440370364663,
+            "enclosed": false,
+            "foreignPixels": 3273
+          },
+          {
+            "pixels": 384,
+            "ratio": 0.005915974672233435,
+            "enclosed": false,
+            "foreignPixels": 28
+          },
+          {
+            "pixels": 5640,
+            "ratio": 0.08689087799842857,
+            "enclosed": false,
+            "foreignPixels": 2268
+          },
+          {
+            "pixels": 23,
+            "ratio": 0.0003543422329723151,
+            "enclosed": false,
+            "foreignPixels": 23
+          },
+          {
+            "pixels": 35,
+            "ratio": 0.0005392164414796099,
+            "enclosed": true,
+            "foreignPixels": 35
+          }
+        ]
+      },
+      "comparisonFile": "i4-p5-s2.png"
+    },
+    {
+      "issue": 4,
+      "readerPage": 14,
+      "selection": 2,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "The narrow upper En inset loses much of its left face/body despite a complete rectangular red frame boundary.",
+      "repair": {
+        "addedPixels": 224,
+        "patches": 24,
+        "radius": 10,
+        "skipped": [
+          {
+            "pixels": 65,
+            "ratio": 0.003999753861300843,
+            "enclosed": true,
+            "foreignPixels": 65
+          },
+          {
+            "pixels": 35,
+            "ratio": 0.0021537136176235307,
+            "enclosed": true,
+            "foreignPixels": 35
+          },
+          {
+            "pixels": 52,
+            "ratio": 0.0031998030890406743,
+            "enclosed": true,
+            "foreignPixels": 52
+          }
+        ]
+      },
+      "comparisonFile": "i4-p14-s2.png"
+    },
+    {
+      "issue": 4,
+      "readerPage": 18,
+      "selection": 3,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 15731,
+        "patches": 39,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 11093,
+            "ratio": 0.10857288271623064,
+            "enclosed": false,
+            "foreignPixels": 3213
+          },
+          {
+            "pixels": 103,
+            "ratio": 0.0010081138483522723,
+            "enclosed": false,
+            "foreignPixels": 45
+          }
+        ]
+      },
+      "comparisonFile": "i4-p18-s3.png"
+    },
+    {
+      "issue": 4,
+      "readerPage": 18,
+      "selection": 4,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 19614,
+        "patches": 19,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 1324,
+            "ratio": 0.013690556204696563,
+            "enclosed": false,
+            "foreignPixels": 87
+          },
+          {
+            "pixels": 371,
+            "ratio": 0.0038362510211045506,
+            "enclosed": true,
+            "foreignPixels": 101
+          },
+          {
+            "pixels": 27,
+            "ratio": 0.0002791880797030266,
+            "enclosed": false,
+            "foreignPixels": 10
+          }
+        ]
+      },
+      "comparisonFile": "i4-p18-s4.png"
+    },
+    {
+      "issue": 4,
+      "readerPage": 19,
+      "selection": 2,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 14523,
+        "patches": 20,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 1534,
+            "ratio": 0.016259990248245745,
+            "enclosed": false,
+            "foreignPixels": 31
+          }
+        ]
+      },
+      "comparisonFile": "i4-p19-s2.png"
+    },
+    {
+      "issue": 4,
+      "readerPage": 19,
+      "selection": 3,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 20809,
+        "patches": 25,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 5134,
+            "ratio": 0.06581038814541353,
+            "enclosed": false,
+            "foreignPixels": 87
+          }
+        ]
+      },
+      "comparisonFile": "i4-p19-s3.png"
+    },
+    {
+      "issue": 4,
+      "readerPage": 20,
+      "selection": 1,
+      "status": "still-partial-conservative",
+      "creditedFrames": 0,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 6274,
+        "patches": 22,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 6183,
+            "ratio": 0.09789113707609005,
+            "enclosed": false,
+            "foreignPixels": 97
+          }
+        ]
+      },
+      "comparisonFile": "i4-p20-s1.png"
+    },
+    {
+      "issue": 4,
+      "readerPage": 20,
+      "selection": 2,
+      "status": "complete-local-review",
+      "creditedFrames": 1,
+      "baselineDefect": "Actual Reader crop removes owned speech/caption text or interior artwork because page-matte colors occur inside the frame. Interior/exterior mask ownership needs repair.",
+      "repair": {
+        "addedPixels": 10727,
+        "patches": 16,
+        "radius": 8,
+        "skipped": [
+          {
+            "pixels": 311,
+            "ratio": 0.0042782661329151365,
+            "enclosed": false,
+            "foreignPixels": 12
+          },
+          {
+            "pixels": 1827,
+            "ratio": 0.025133093970533614,
+            "enclosed": false,
+            "foreignPixels": 23
+          }
+        ]
+      },
+      "comparisonFile": "i4-p20-s2.png"
+    }
+  ]
+}
