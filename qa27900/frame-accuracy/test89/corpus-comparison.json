@@ -1,0 +1,91 @@
+{
+  "fullDetectorComparison": {
+    "environment": "@napi-rs/canvas; original source pixels; full actual Test88-to-Test89 replay",
+    "pages": 91,
+    "before": 182,
+    "after": 183,
+    "books": [
+      {
+        "book": "Apocalypse 1",
+        "pages": 24,
+        "before": 29,
+        "after": 30,
+        "allPriorDescriptorsIdentical": true,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 01 (of 04)-003.jpg",
+            "readerPage": 4,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "book": "Apocalypse 2",
+        "pages": 23,
+        "before": 44,
+        "after": 44,
+        "allPriorDescriptorsIdentical": true,
+        "additions": []
+      },
+      {
+        "book": "Apocalypse 3",
+        "pages": 23,
+        "before": 65,
+        "after": 65,
+        "allPriorDescriptorsIdentical": true,
+        "additions": []
+      },
+      {
+        "book": "Apocalypse 4",
+        "pages": 21,
+        "before": 44,
+        "after": 44,
+        "allPriorDescriptorsIdentical": true,
+        "additions": []
+      }
+    ]
+  },
+  "cachedSupplementComparison": {
+    "baseline": "Saved Test87 geometry; not a recreation of historical detector source",
+    "pages": 221,
+    "retainedOwners": 1094,
+    "newOwners": 0,
+    "books": [
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "cachedPriorOwners": 384,
+        "additions": 0,
+        "cachedDescriptorsUnchanged": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "cachedPriorOwners": 101,
+        "additions": 0,
+        "cachedDescriptorsUnchanged": true
+      },
+      {
+        "book": "boruto30",
+        "pages": 41,
+        "cachedPriorOwners": 228,
+        "additions": 0,
+        "cachedDescriptorsUnchanged": true
+      },
+      {
+        "book": "boruto31",
+        "pages": 41,
+        "cachedPriorOwners": 193,
+        "additions": 0,
+        "cachedDescriptorsUnchanged": true
+      },
+      {
+        "book": "boruto32",
+        "pages": 41,
+        "cachedPriorOwners": 188,
+        "additions": 0,
+        "cachedDescriptorsUnchanged": true
+      }
+    ]
+  }
+}

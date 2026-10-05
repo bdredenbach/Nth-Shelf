@@ -1,0 +1,230 @@
+{
+  "test": "Test89",
+  "versionName": "2.79.89",
+  "versionCode": 28017,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest89",
+  "sourceBase": "85e982f70cc7e1d8aaef1d6e79a27c3351b8b9b8",
+  "route": "neighbor-witnessed-page-edge-cell",
+  "proofVersion": 41,
+  "phoneTarget": {
+    "book": "Rise of Apocalypse issue 1",
+    "readerPage": "4/24",
+    "scene": "Complete tall far-right horse-and-rider scene, upper balloon and both yellow captions"
+  },
+  "fullDetectorComparison": {
+    "environment": "@napi-rs/canvas; original source pixels; full actual Test88-to-Test89 replay",
+    "pages": 91,
+    "before": 182,
+    "after": 183,
+    "books": [
+      {
+        "book": "Apocalypse 1",
+        "pages": 24,
+        "before": 29,
+        "after": 30,
+        "allPriorDescriptorsIdentical": true,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 01 (of 04)-003.jpg",
+            "readerPage": 4,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "book": "Apocalypse 2",
+        "pages": 23,
+        "before": 44,
+        "after": 44,
+        "allPriorDescriptorsIdentical": true,
+        "additions": []
+      },
+      {
+        "book": "Apocalypse 3",
+        "pages": 23,
+        "before": 65,
+        "after": 65,
+        "allPriorDescriptorsIdentical": true,
+        "additions": []
+      },
+      {
+        "book": "Apocalypse 4",
+        "pages": 21,
+        "before": 44,
+        "after": 44,
+        "allPriorDescriptorsIdentical": true,
+        "additions": []
+      }
+    ]
+  },
+  "cachedSupplementComparison": {
+    "baseline": "Saved Test87 geometry; not a recreation of historical detector source",
+    "pages": 221,
+    "retainedOwners": 1094,
+    "newOwners": 0,
+    "books": [
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "cachedPriorOwners": 384,
+        "additions": 0,
+        "cachedDescriptorsUnchanged": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "cachedPriorOwners": 101,
+        "additions": 0,
+        "cachedDescriptorsUnchanged": true
+      },
+      {
+        "book": "boruto30",
+        "pages": 41,
+        "cachedPriorOwners": 228,
+        "additions": 0,
+        "cachedDescriptorsUnchanged": true
+      },
+      {
+        "book": "boruto31",
+        "pages": 41,
+        "cachedPriorOwners": 193,
+        "additions": 0,
+        "cachedDescriptorsUnchanged": true
+      },
+      {
+        "book": "boruto32",
+        "pages": 41,
+        "cachedPriorOwners": 188,
+        "additions": 0,
+        "cachedDescriptorsUnchanged": true
+      }
+    ]
+  },
+  "sourceTransforms": [
+    {
+      "name": "original",
+      "width": 3975,
+      "height": 3056,
+      "count": 1,
+      "boxes": [
+        [
+          0.8111111111111111,
+          0.02745664739884393,
+          0.18888888888888888,
+          0.9725433526011561
+        ]
+      ],
+      "audit": {
+        "candidates": 4,
+        "stable": 4,
+        "overlap": 1,
+        "boundary": 2,
+        "divider": 0,
+        "accepted": 1
+      }
+    },
+    {
+      "name": "mirror",
+      "width": 3975,
+      "height": 3056,
+      "count": 1,
+      "boxes": [
+        [
+          0,
+          0.02745664739884393,
+          0.18888888888888888,
+          0.9725433526011561
+        ]
+      ],
+      "audit": {
+        "candidates": 4,
+        "stable": 4,
+        "overlap": 1,
+        "boundary": 2,
+        "divider": 0,
+        "accepted": 1
+      }
+    },
+    {
+      "name": "scale067",
+      "width": 2663,
+      "height": 2048,
+      "count": 0,
+      "boxes": [],
+      "audit": {
+        "candidates": 0,
+        "stable": 0,
+        "overlap": 0,
+        "boundary": 0,
+        "divider": 0,
+        "accepted": 0
+      }
+    },
+    {
+      "name": "scale125",
+      "width": 4969,
+      "height": 3820,
+      "count": 1,
+      "boxes": [
+        [
+          0.8111111111111111,
+          0.02745664739884393,
+          0.18888888888888888,
+          0.9725433526011561
+        ]
+      ],
+      "audit": {
+        "candidates": 4,
+        "stable": 4,
+        "overlap": 1,
+        "boundary": 2,
+        "divider": 0,
+        "accepted": 1
+      }
+    },
+    {
+      "name": "jpeg82",
+      "width": 3975,
+      "height": 3056,
+      "count": 1,
+      "boxes": [
+        [
+          0.8111111111111111,
+          0.02745664739884393,
+          0.18888888888888888,
+          0.9725433526011561
+        ]
+      ],
+      "audit": {
+        "candidates": 4,
+        "stable": 4,
+        "overlap": 1,
+        "boundary": 2,
+        "divider": 0,
+        "accepted": 1
+      }
+    }
+  ],
+  "checks": {
+    "retainedAndNewSuites": 80,
+    "allPassed": true,
+    "proofMutationsRejected": 28,
+    "actualReaderChecks": {
+      "adapter": "DOM adapter with actual Reader.findPanelAt and Reader.zoomToPanel",
+      "fivePositionHitChecks": 5,
+      "exactContourCrops": 1,
+      "legacySpillSkipped": true
+    }
+  },
+  "limitations": [
+    "General frame coverage and the 360+ Apocalypse goal remain incomplete.",
+    "0.67x pre-resampling removes the required candidate proof; the new route safely abstains.",
+    "Wolverine, Magneto and manga checks use cached geometry and the new supplement; they are not fresh full-detector before/after replays.",
+    "Physical Android gestures and device latency remain unverified for Test89."
+  ],
+  "androidBuild": {
+    "status": "pending",
+    "verifiedWebAssetCountExpected": 89,
+    "phoneAcceptance": "pending"
+  }
+}

@@ -2,6 +2,16 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## Test89 — neighbor-witnessed page-edge scenes
+
+Test89 recovers a tall scene whose outline meets one vertical and one horizontal page edge. Two independent seed contours must agree, the remaining perimeter needs source-paper/ink evidence, and an already validated neighboring frame supplies the boundary witness. Internal dividers, enclosed insets and existing ownership still veto additions. Runtime detection contains no book or page lookup.
+
+The current phone target is **Rise of Apocalypse #1, reader 4/24**: the complete tall horse-and-rider scene at the far right, including its upper speech balloon and both yellow captions. The rejected page-13 experiment joined two scenes and is not shipped. Test88's accepted gradient-gutter scene and all earlier detector routes remain packaged.
+
+All **80** retained/new suites pass. The full **91-page** Test88 → Test89 Apocalypse replay preserves all **182** earlier descriptors and adds the complete page-4 scene, reaching **183**. A separate **221-page** supplement comparison retains **1,094** cached Wolverine/Magneto/manga descriptors with no additions. The target survives mirroring, enlargement and JPEG82 recompression; a 0.67x pre-resample safely abstains when candidate proof is lost. General frame coverage remains incomplete.
+
+Identity: **2.79.89 / 28017**, isolated package `io.github.bdredenbach.nthshelf.frametest89`, label **Nth Shelf Test89**. Test89 phone acceptance is pending. See [handoff](HANDOFF-2.79.89.md), [validation](TEST89-VALIDATION.json), and [contracts](qa27900/frame-accuracy/test89/README.md).
+
 ## Test88 — closed frames in gradient gutters
 
 Test88 follows locally smooth exterior colors around thin frame borders, then requires stable complete contours, source-pixel side evidence, retained divider/inset checks and zero prior-owner overlap. It adds the complete upper-left tall scene on Rise of Apocalypse issue2 reader **17/23**, including all speech balloons. The actual published Test84 → Test88 detector target passes **0→1**; original, mirrored, reduced/enlarged and JPEG82 sources recover the frame.
