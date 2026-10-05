@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.95 — CLOSED DARK MATTE AND COMPLETE HAND ARTWORK
+// NTH SHELF 2.79.96 — COMPLETE SPEECH ACROSS RAGGED ROWS
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.95";
+const CACHE_NAME = "nth-shelf-shell-2.79.96";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -93,6 +93,7 @@ const SHELL_FILES = [
   "./js/panels-speech-ownership.js",
   "./js/panels-perimeter-consolidation.js",
   "./js/panels-dark-matte-completion.js",
+  "./js/panels-tail-speech.js",
   "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",

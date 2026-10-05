@@ -1,10 +1,18 @@
 # Nth Shelf
 
+## Test96 — complete ragged-row dialogue, 5 October 2026
+
+Apocalypse issue4 Reader5 selection2 now retains the entire speaker-owned balloon chain. Its neighboring strip keeps its own dialogue and all non-body artwork. This repairs one existing single frame: **190/384 complete locally**, **194 remaining**, **186 selections**. The **189-frame full phone sweep** remains the confirmed Test95 baseline; Test96 phone acceptance is pending. Fresh source-raster comparisons of all 312 saved maps change only these two owners, and full target detection plus actual Reader crop checks pass. See [handoff](HANDOFF-2.79.96.md) and [validation/build record](TEST96-VALIDATION.json).
+
+## Apocalypse phone sweep — confirmed 5 October 2026
+
+Brad confirmed **189 complete frames** in the full phone sweep, matching the fresh 91-page Test95 regression. Dual-frame pop-outs count two; larger groups count each complete original frame once. **186 selections**, **384 original frames**, **195 incomplete or unavailable**. See [fresh handoff](HANDOFF-APOCALYPSE-TEST95-REGRESSION.md) and [page findings](docs/apocalypse-test95-regression.json). Historical checkpoint counts below used earlier grouping rules. Phone timing remains unmeasured.
+
 ## Test95 — complete water-and-hand frame, 5 October 2026
 
 **2.79.95** completes Apocalypse issue 2 reader **18**, selection **1**, preserving its full wrist, palm, both balloons and background. Two source transition tests witness the closed dark-matte enclosure; all original pixels survive and other owners are unchanged. SWAK remains in the queue.
 
-Local complete coverage: **171 / 385**, leaving **214**; raw selections remain **186**. This repairs one existing single frame and adds no selection. Fresh source-raster supplements over 312 retained pages change only this owner; Wolverine, Magneto and three manga chapters retain identical descriptors. The changed target passes a full detector replay and actual Reader review. All 92 behavioral suites plus the cache/package check pass locally. Published source `bb4ea14` exactly matches the tested source tree. [Android CI](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37378324461) succeeded; the downloaded isolated Test95 APK is verified against its checksum, signature/identity record and all 96 packaged web files. [Validation/build status](TEST95-VALIDATION.json) and [handoff](HANDOFF-2.79.95.md) track publication, APK verification and pending phone acceptance.
+Available pop-out selections: **186** (same measure as the earlier 185, including incomplete crops). Complete narrative frames: **171 / 385**, leaving **214**; 151 singles plus ten complete pairs contribute 171 frames across 161 complete pop-outs. This repairs one existing single frame and adds no selection. Fresh source-raster supplements over 312 retained pages change only this owner; Wolverine, Magneto and three manga chapters retain identical descriptors. The changed target passes a full detector replay and actual Reader review. All 92 behavioral suites plus the cache/package check pass locally. Published source `bb4ea14` exactly matches the tested source tree. [Android CI](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37378324461) succeeded; the downloaded isolated Test95 APK is verified against its checksum, signature/identity record and all 96 packaged web files. [Validation/build status](TEST95-VALIDATION.json) and [handoff](HANDOFF-2.79.95.md) track publication and APK verification. Brad phone-confirmed the Test95 hand/water repair on 5 October 2026; phone timing remains unmeasured.
 
 ## Test94 — complete street artwork, 5 October 2026
 
@@ -34,9 +42,9 @@ Raw selections: **185 → 187**. Complete local coverage: **165 → 167 / 385**,
 
 The isolated Test91 APK is built and verified from commit `2478d49`: Android CI, browser interaction, backup, native archive, signature/identity and all 92 packaged web files pass. 84 retained/new suites pass. Fresh replays cover **312 pages / 1,283 selections** across Apocalypse, Wolverine, Magneto and three manga chapters. Pixel checks preserve original artwork, detector descriptors and all other detected owners; they do not prove semantic acceptance of every modified mask. See [Test91 handoff](HANDOFF-2.79.91.md), [crop decisions](qa27900/frame-accuracy/test91/crop-review.json), and [validation/build status](TEST91-VALIDATION.json).
 
-## Current acceptance rule and audited Apocalypse baseline — 5 October 2026
+## Historical grouping-quality rule and Test90 Apocalypse baseline — 5 October 2026
 
-Brad has accepted **one complete frame, or exactly two adjacent frames continuing the same immediate scene, in one pop-out** as the criterion going forward. Preserve all owned artwork, captions and speech balloons. Unrelated scenes, meaningful time/location jumps, three-or-more-frame composites and damaged crops do not qualify. A pair is one pop-out and two covered frames. Prefer separate complete frames when available; the new rule does not authorize merging already accepted owners or weakening regressions.
+The later per-frame counting rule supersedes this historical grouping restriction for reporting. Brad originally accepted **one complete frame, or exactly two adjacent frames continuing the same immediate scene, in one pop-out** as the criterion going forward. Preserve all owned artwork, captions and speech balloons. Unrelated scenes, meaningful time/location jumps, three-or-more-frame composites and damaged crops do not qualify. A pair is one pop-out and two covered frames. Prefer separate complete frames when available; the new rule does not authorize merging already accepted owners or weakening regressions.
 
 The complete Test90 audit covers all **91 image pages** across four Rise of Apocalypse issues, excluding eight covers. The manual narrative-frame inventory contains **385 frames**. Freeform montage/vignette counts are review judgments, not publisher counts.
 

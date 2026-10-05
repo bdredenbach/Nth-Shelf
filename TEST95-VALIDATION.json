@@ -111,7 +111,7 @@
     "label": "Nth Shelf Test95",
     "versionName": "2.79.95",
     "versionCode": 28023,
-    "phoneAcceptance": "pending",
+    "phoneAcceptance": "confirmed by Brad on 2026-10-05 for the Test95 hand/water repair",
     "publishedCommit": "bb4ea1427f3feb2930002372cc7ffd2964134986",
     "localTestedCommit": "99079d0",
     "sourceTree": "4733898a7491680a3286338351281ec150372b62",
@@ -232,7 +232,7 @@
     "libraryFileId": "libfile_98b6da7e1a688191923d922460a43b2c",
     "libraryFileVersion": 0
   },
-  "phoneAcceptance": "pending",
+  "phoneAcceptance": "Brad confirmed the hand/water repair and full Apocalypse sweep of 189 complete original frames on 5 October 2026; phone latency was not measured.",
   "visualReview": {
     "fileName": "Nth-Shelf-Test95-Frame-Review.html",
     "libraryFileId": "libfile_e4508563cbd08191b276eea160c9dd1f",
@@ -243,5 +243,32 @@
     "fileName": "Nth-Shelf-Test95-New-Chat-Handoff.txt",
     "libraryFileId": "libfile_622f19a1016081918b3cc365c0556dfa",
     "libraryVersion": 0
+  },
+  "phoneConfirmation": {
+    "date": "2026-10-05",
+    "target": "Apocalypse issue 2 reader 18 selection 1, hand/water frame",
+    "userStatement": "Phone confirmed \u2705",
+    "phoneTiming": "not measured",
+    "scope": "Test95 target; not a fresh phone audit of all 385 frames"
+  },
+  "countDefinitions": {
+    "availablePopOutSelections": 186,
+    "completeNarrativeFrames": 171,
+    "completeSingleFrames": 151,
+    "completeConnectedPairs": 10,
+    "completePopOutGroups": 161,
+    "remainingNarrativeFrames": 214,
+    "earlierTest90RawSelections": 185,
+    "note": "185 and 186 count available selections, including incomplete crops. 171 counts complete narrative frames, with each complete connected pair contributing two frames. These measures must not be compared as a decrease."
+  },
+  "freshApocalypseRegression": {
+    "pages": 91,
+    "rawSelections": 186,
+    "completeFrames": 189,
+    "originalFrames": 384,
+    "remaining": 195,
+    "phoneSweepConfirmed": true,
+    "phoneTimingMeasured": false,
+    "ledger": "docs/apocalypse-test95-regression.json"
   }
 }

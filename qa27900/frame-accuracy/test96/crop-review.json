@@ -1,0 +1,97 @@
+{
+  "basis": "Full original source versus actual Reader.zoomToPanel output and native display-mask comparison",
+  "beforeCompleteFrames": 189,
+  "afterCompleteFrames": 190,
+  "narrativeFrames": 384,
+  "remainingFrames": 194,
+  "rawSelections": 186,
+  "newlyDetectedSelections": 0,
+  "repairedCompleteFrames": 1,
+  "issueCounts": [
+    {
+      "issue": 1,
+      "complete": 36,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 54,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 62,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 38,
+      "total": 79
+    }
+  ],
+  "phoneBaseline": {
+    "version": "Test95",
+    "completeFrames": 189,
+    "status": "Brad confirmed full phone sweep, 5 October 2026"
+  },
+  "phoneTest96": "pending",
+  "target": {
+    "issue": 4,
+    "readerPage": 5,
+    "selection": 2,
+    "reason": "Retain complete I remember / underworld / You were not strong enough balloon chain. Single repaired original frame; six complete frames on this page."
+  },
+  "neighbor": {
+    "selection": 3,
+    "reason": "Remove foreign speech while retaining its own I wish you a short journey / Let Set take you / I take Egypt dialogue and all non-body artwork."
+  },
+  "discovery": {
+    "ownerRestoredPixels": 6035,
+    "donorTransferredPixels": 6027,
+    "priorUnionPreserved": true,
+    "nonBodyPixelsUnchanged": true
+  },
+  "nativeReaderComparison": [
+    {
+      "selection": 1,
+      "changed": 0,
+      "lostOutsideSpeech": 0,
+      "addedOutsideSpeech": 0
+    },
+    {
+      "selection": 2,
+      "changed": 6035,
+      "lostOutsideSpeech": 0,
+      "addedOutsideSpeech": 0
+    },
+    {
+      "selection": 3,
+      "changed": 6029,
+      "lostOutsideSpeech": 0,
+      "addedOutsideSpeech": 0
+    },
+    {
+      "selection": 4,
+      "changed": 0,
+      "lostOutsideSpeech": 0,
+      "addedOutsideSpeech": 0
+    },
+    {
+      "selection": 5,
+      "changed": 0,
+      "lostOutsideSpeech": 0,
+      "addedOutsideSpeech": 0
+    },
+    {
+      "selection": 6,
+      "changed": 0,
+      "lostOutsideSpeech": 0,
+      "addedOutsideSpeech": 0
+    }
+  ],
+  "limits": [
+    "Native canvas and local manual review; Test96 phone acceptance and latency unmeasured.",
+    "312-page comparison is fresh source-raster supplements over saved Test95 maps; only changed target received full detector rerun.",
+    "The 189 phone-confirmed frames are the accepted baseline, not a fresh 190-frame Android sweep."
+  ]
+}

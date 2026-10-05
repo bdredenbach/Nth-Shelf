@@ -6,8 +6,8 @@
 // after which interaction is a smallest-containing-polygon lookup.
 
 const PanelMapCore = {
-  MAP_VERSION: 'panel-map-exp-95',
-  PROOF_VERSION: 'frame-proof-2.79.95',
+  MAP_VERSION: 'panel-map-exp-96',
+  PROOF_VERSION: 'frame-proof-2.79.96',
 
   // Two conservative columns cover the common left/right comic layout while
   // the three row anchors select the same stable adaptive seed families used

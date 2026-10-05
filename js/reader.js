@@ -3328,3 +3328,5 @@ async setMode(mode) {
 function clamp(val, min, max) {
  return Math.min(Math.max(val, min), max);
 }
+
+if(typeof PanelTailSpeech!=='undefined')PanelTailSpeech.installReader(Reader);
