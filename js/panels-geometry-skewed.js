@@ -37,7 +37,12 @@ const PanelGeometrySkewed = {
     if(!Array.isArray(q)||q.length!==4||q.some(p=>!Number.isFinite(p?.x)||!Number.isFinite(p?.y))){
       return {owns:false,owner:'orthogonal',reason:'missing-proven-quad',confidence:0};
     }
-    const frameEvidence=panel?._frameEnvelope||panel?._partitionProof||{};
+    // The new matte-component quads are normalized by grid size, whereas
+    // legacy envelope/partition callers retain their existing coordinate scale.
+    const componentEvidence=!panel?._frameEnvelope&&!panel?._partitionProof&&
+      panel?._closedFrameProof?.gutterProof?.method==='exterior-dark-component'
+      ?panel._closedFrameProof:null;
+    const frameEvidence=panel?._frameEnvelope||panel?._partitionProof||componentEvidence||{};
     const analysisWidth=Number(frameEvidence.analysisWidth);
     const analysisHeight=Number(frameEvidence.analysisHeight);
     const hasPixelAspect=Number.isFinite(analysisWidth)&&analysisWidth>1&&
@@ -45,7 +50,7 @@ const PanelGeometrySkewed = {
     // Older callers without dimension evidence retain their diagnostic label;
     // rendering no longer depends on this label erasing an accepted polygon.
     const physicalQuad=hasPixelAspect
-      ?q.map(p=>({x:p.x*(analysisWidth-1),y:p.y*(analysisHeight-1)})):q;
+      ?q.map(p=>({x:p.x*(analysisWidth-(componentEvidence?0:1)),y:p.y*(analysisHeight-(componentEvidence?0:1))})):q;
     const angleAt=(prev,p,next)=>{
       const ax=prev.x-p.x,ay=prev.y-p.y,bx=next.x-p.x,by=next.y-p.y;
       const den=Math.hypot(ax,ay)*Math.hypot(bx,by);

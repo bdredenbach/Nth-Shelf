@@ -1,0 +1,15 @@
+# Test54 checkpoint — pages50–53 batch
+
+2026-09-26. User confirmed Test53/page49 worked, then explicitly submitted pages50–53 as a batch with screenshots209703–209711. Baseline7b781bed7654d539d97fe929da67ba82a1906901. Keep remaining-Wolverine-pages first; generalization across comics next. Existing authorization covers push/build/delivery.
+
+Source indices49–52. Baseline counts4/2/3/2 merge upper scenes. New counts7/6/6/4 include one independent inset each. Native exterior-paper flood components supply main-frame proposals. Four sustained dark rims with white exterior evidence validate each. Page51's lower right rim has an object touching its borderless neighbor; an aligned upper rail and three independent neighboring components support one borderless scene with full dialogue. The route requires exactly one inset inside a full-width scene. Page50's crossing speech balloon is filled with lettering holes retained and assigned to the eye inset; parent masks exclude inset pixels. Six already-correct lower owners across50/52/53 remain exact.
+
+One Sharp resize variant erased page53's legacy map entirely. Native recovery after three closed-frame discoveries reconstructs the new masks while retaining the matching bottom closed-frame anchor. Low/medium/high Skia and Sharp simulations all return expected counts and identical new masks across16 variants.
+
+Private fixtures: comic-wolverine-1000 and recovery-pages50-53. Do not commit artwork/screenshots. Numeric reports and QA scripts: qa27900/frame-accuracy/test54. Full74-page comparison changes only50–53, all other70 maps exact. Main/inset missing-border tests:88 erased rims reject; transparent/flat/proved-owner cases reject. Seventeen captured new proofs survive geometry routing;265 mutations reject. Final414 actual touch dispatches across default/high scaling pass;85,872 dense artwork samples are opaque, foreign insets excluded, caption retained and all23 rendered crops inspected. Complete retained syntax/regression gate passes.
+
+Identity2.79.54/code27982/frametest54. Next: finish validation, publish tested tree, build Test54 APK, verify artifact digest/package/signature/all68 assets, save/deliver. Phone acceptance pending. After batch acceptance continue at page54, then remaining pages through74, then generalize across comics.
+
+Published tested source e1104b9b77dbdf21ea640c8300f5e8c6a27d15ed, tree cc500fd0e55c1923312ccb349cdb33c9eae5bef3. Build Test54 APK workflow36271021947 is running. Resume that run and verify against this exact source before delivery.
+
+Build36271021947 succeeded; artifact10915682862. Archive digest verified, APK v2 signature and2.79.54/code27982/frametest54 identity verified; all68 packaged web assets match source e1104b9b77dbdf21ea640c8300f5e8c6a27d15ed exactly. APK3,283,690 bytes; SHA-256848d3f455cd1819dfc2e7c6efb193836a86df662c044d3e5fa936079fcd7a290. Nth-Shelf-2.79.54-Test54.apk is saved and ready for delivery. Next: user phone check of pages50–53 (7/6/6/4 selections including insets). Especially check page50 eye balloon and page51 borderless dialogue. Phone acceptance pending; then continue page54.

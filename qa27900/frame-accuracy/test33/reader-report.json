@@ -1,0 +1,1080 @@
+{
+  "browser": "144.0.7559.96",
+  "viewport": [
+    412,
+    915
+  ],
+  "deviceScaleFactor": 2.625,
+  "pageDeck": true,
+  "ownership": [
+    {
+      "index": 0,
+      "x": 72,
+      "y": 70,
+      "got": 0
+    },
+    {
+      "index": 0,
+      "x": 230,
+      "y": 70,
+      "got": 0
+    },
+    {
+      "index": 0,
+      "x": 380,
+      "y": 85,
+      "got": 0
+    },
+    {
+      "index": 0,
+      "x": 505,
+      "y": 56,
+      "got": 0
+    },
+    {
+      "index": 0,
+      "x": 475,
+      "y": 120,
+      "got": 0
+    },
+    {
+      "index": 0,
+      "x": 45,
+      "y": 115,
+      "got": 0
+    },
+    {
+      "index": 0,
+      "x": 300,
+      "y": 150,
+      "got": 0
+    },
+    {
+      "index": 1,
+      "x": 100,
+      "y": 188,
+      "got": 1
+    },
+    {
+      "index": 1,
+      "x": 205,
+      "y": 200,
+      "got": 1
+    },
+    {
+      "index": 1,
+      "x": 310,
+      "y": 209,
+      "got": 1
+    },
+    {
+      "index": 1,
+      "x": 430,
+      "y": 207,
+      "got": 1
+    },
+    {
+      "index": 1,
+      "x": 455,
+      "y": 192,
+      "got": 1
+    },
+    {
+      "index": 1,
+      "x": 550,
+      "y": 183,
+      "got": 1
+    },
+    {
+      "index": 1,
+      "x": 28,
+      "y": 220,
+      "got": 1
+    },
+    {
+      "index": 2,
+      "x": 50,
+      "y": 295,
+      "got": 2
+    },
+    {
+      "index": 2,
+      "x": 165,
+      "y": 298,
+      "got": 2
+    },
+    {
+      "index": 2,
+      "x": 198,
+      "y": 356,
+      "got": 2
+    },
+    {
+      "index": 2,
+      "x": 240,
+      "y": 363,
+      "got": 2
+    },
+    {
+      "index": 2,
+      "x": 264,
+      "y": 354,
+      "got": 2
+    },
+    {
+      "index": 2,
+      "x": 211,
+      "y": 373,
+      "got": 2
+    },
+    {
+      "index": 2,
+      "x": 351,
+      "y": 327,
+      "got": 2
+    },
+    {
+      "index": 2,
+      "x": 495,
+      "y": 285,
+      "got": 2
+    },
+    {
+      "index": 2,
+      "x": 550,
+      "y": 241,
+      "got": 2
+    },
+    {
+      "index": 2,
+      "x": 355,
+      "y": 368,
+      "got": 2
+    },
+    {
+      "index": 3,
+      "x": 55,
+      "y": 390,
+      "got": 3
+    },
+    {
+      "index": 3,
+      "x": 177,
+      "y": 430,
+      "got": 3
+    },
+    {
+      "index": 3,
+      "x": 310,
+      "y": 455,
+      "got": 3
+    },
+    {
+      "index": 3,
+      "x": 480,
+      "y": 415,
+      "got": 3
+    },
+    {
+      "index": 3,
+      "x": 540,
+      "y": 462,
+      "got": 3
+    },
+    {
+      "index": 3,
+      "x": 309,
+      "y": 633,
+      "got": 3
+    },
+    {
+      "index": 3,
+      "x": 316,
+      "y": 671,
+      "got": 3
+    },
+    {
+      "index": 3,
+      "x": 180,
+      "y": 600,
+      "got": 3
+    },
+    {
+      "index": 3,
+      "x": 350,
+      "y": 560,
+      "got": 3
+    },
+    {
+      "index": 4,
+      "x": 70,
+      "y": 527,
+      "got": 4
+    },
+    {
+      "index": 4,
+      "x": 128,
+      "y": 585,
+      "got": 4
+    },
+    {
+      "index": 4,
+      "x": 82,
+      "y": 701,
+      "got": 4
+    },
+    {
+      "index": 4,
+      "x": 72,
+      "y": 799,
+      "got": 4
+    },
+    {
+      "index": 4,
+      "x": 257,
+      "y": 710,
+      "got": 4
+    },
+    {
+      "index": 4,
+      "x": 258,
+      "y": 785,
+      "got": 4
+    },
+    {
+      "index": 4,
+      "x": 180,
+      "y": 855,
+      "got": 4
+    },
+    {
+      "index": 4,
+      "x": 240,
+      "y": 867,
+      "got": 4
+    },
+    {
+      "index": 5,
+      "x": 365,
+      "y": 657,
+      "got": 5
+    },
+    {
+      "index": 5,
+      "x": 370,
+      "y": 735,
+      "got": 5
+    },
+    {
+      "index": 5,
+      "x": 382,
+      "y": 845,
+      "got": 5
+    },
+    {
+      "index": 5,
+      "x": 335,
+      "y": 724,
+      "got": 5
+    },
+    {
+      "index": 5,
+      "x": 399,
+      "y": 714,
+      "got": 5
+    },
+    {
+      "index": 5,
+      "x": 401,
+      "y": 736,
+      "got": 5
+    },
+    {
+      "index": 6,
+      "x": 514,
+      "y": 555,
+      "got": 6
+    },
+    {
+      "index": 6,
+      "x": 490,
+      "y": 675,
+      "got": 6
+    },
+    {
+      "index": 6,
+      "x": 520,
+      "y": 755,
+      "got": 6
+    },
+    {
+      "index": 6,
+      "x": 436,
+      "y": 790,
+      "got": 6
+    },
+    {
+      "index": 6,
+      "x": 555,
+      "y": 784,
+      "got": 6
+    },
+    {
+      "index": 6,
+      "x": 532,
+      "y": 855,
+      "got": 6
+    },
+    {
+      "index": 6,
+      "x": 409,
+      "y": 783,
+      "got": 6
+    }
+  ],
+  "touches": [
+    {
+      "expected": 0,
+      "x": 72,
+      "y": 70,
+      "index": 0,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1947,
+        567
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 164298,
+        "opaque": 935317,
+        "pixels": 1103949
+      }
+    },
+    {
+      "expected": 0,
+      "x": 230,
+      "y": 70,
+      "index": 0,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1947,
+        567
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 164298,
+        "opaque": 935317,
+        "pixels": 1103949
+      }
+    },
+    {
+      "expected": 0,
+      "x": 380,
+      "y": 85,
+      "index": 0,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1947,
+        567
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 164298,
+        "opaque": 935317,
+        "pixels": 1103949
+      }
+    },
+    {
+      "expected": 0,
+      "x": 505,
+      "y": 56,
+      "index": 0,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1947,
+        567
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 164298,
+        "opaque": 935317,
+        "pixels": 1103949
+      }
+    },
+    {
+      "expected": 0,
+      "x": 475,
+      "y": 120,
+      "index": 0,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1947,
+        567
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 164298,
+        "opaque": 935317,
+        "pixels": 1103949
+      }
+    },
+    {
+      "expected": 1,
+      "x": 100,
+      "y": 188,
+      "index": 1,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1934,
+        414
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 250668,
+        "opaque": 546022,
+        "pixels": 800676
+      }
+    },
+    {
+      "expected": 1,
+      "x": 205,
+      "y": 200,
+      "index": 1,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1934,
+        414
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 250668,
+        "opaque": 546022,
+        "pixels": 800676
+      }
+    },
+    {
+      "expected": 1,
+      "x": 310,
+      "y": 209,
+      "index": 1,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1934,
+        414
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 250668,
+        "opaque": 546022,
+        "pixels": 800676
+      }
+    },
+    {
+      "expected": 1,
+      "x": 430,
+      "y": 207,
+      "index": 1,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1934,
+        414
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 250668,
+        "opaque": 546022,
+        "pixels": 800676
+      }
+    },
+    {
+      "expected": 1,
+      "x": 455,
+      "y": 192,
+      "index": 1,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1934,
+        414
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 250668,
+        "opaque": 546022,
+        "pixels": 800676
+      }
+    },
+    {
+      "expected": 2,
+      "x": 50,
+      "y": 295,
+      "index": 2,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1927,
+        628
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 469650,
+        "opaque": 736241,
+        "pixels": 1210156
+      }
+    },
+    {
+      "expected": 2,
+      "x": 165,
+      "y": 298,
+      "index": 2,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1927,
+        628
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 469650,
+        "opaque": 736241,
+        "pixels": 1210156
+      }
+    },
+    {
+      "expected": 2,
+      "x": 198,
+      "y": 356,
+      "index": 2,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1927,
+        628
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 469650,
+        "opaque": 736241,
+        "pixels": 1210156
+      }
+    },
+    {
+      "expected": 2,
+      "x": 240,
+      "y": 363,
+      "index": 2,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1927,
+        628
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 469650,
+        "opaque": 736241,
+        "pixels": 1210156
+      }
+    },
+    {
+      "expected": 2,
+      "x": 264,
+      "y": 354,
+      "index": 2,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1927,
+        628
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 469650,
+        "opaque": 736241,
+        "pixels": 1210156
+      }
+    },
+    {
+      "expected": 3,
+      "x": 55,
+      "y": 390,
+      "index": 3,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1930,
+        1144
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 932115,
+        "opaque": 1270678,
+        "pixels": 2207920
+      }
+    },
+    {
+      "expected": 3,
+      "x": 177,
+      "y": 430,
+      "index": 3,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1930,
+        1144
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 932115,
+        "opaque": 1270678,
+        "pixels": 2207920
+      }
+    },
+    {
+      "expected": 3,
+      "x": 310,
+      "y": 455,
+      "index": 3,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1930,
+        1144
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 932115,
+        "opaque": 1270678,
+        "pixels": 2207920
+      }
+    },
+    {
+      "expected": 3,
+      "x": 480,
+      "y": 415,
+      "index": 3,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1930,
+        1144
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 932115,
+        "opaque": 1270678,
+        "pixels": 2207920
+      }
+    },
+    {
+      "expected": 3,
+      "x": 540,
+      "y": 462,
+      "index": 3,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1930,
+        1144
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 932115,
+        "opaque": 1270678,
+        "pixels": 2207920
+      }
+    },
+    {
+      "expected": 4,
+      "x": 70,
+      "y": 527,
+      "index": 4,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1084,
+        1423
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 439659,
+        "opaque": 1098463,
+        "pixels": 1542532
+      }
+    },
+    {
+      "expected": 4,
+      "x": 128,
+      "y": 585,
+      "index": 4,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1084,
+        1423
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 439659,
+        "opaque": 1098463,
+        "pixels": 1542532
+      }
+    },
+    {
+      "expected": 4,
+      "x": 82,
+      "y": 701,
+      "index": 4,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1084,
+        1423
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 439659,
+        "opaque": 1098463,
+        "pixels": 1542532
+      }
+    },
+    {
+      "expected": 4,
+      "x": 72,
+      "y": 799,
+      "index": 4,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1084,
+        1423
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 439659,
+        "opaque": 1098463,
+        "pixels": 1542532
+      }
+    },
+    {
+      "expected": 4,
+      "x": 257,
+      "y": 710,
+      "index": 4,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        1084,
+        1423
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 439659,
+        "opaque": 1098463,
+        "pixels": 1542532
+      }
+    },
+    {
+      "expected": 5,
+      "x": 365,
+      "y": 657,
+      "index": 5,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        425,
+        1022
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 119362,
+        "opaque": 312053,
+        "pixels": 434350
+      }
+    },
+    {
+      "expected": 5,
+      "x": 370,
+      "y": 735,
+      "index": 5,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        425,
+        1022
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 119362,
+        "opaque": 312053,
+        "pixels": 434350
+      }
+    },
+    {
+      "expected": 5,
+      "x": 382,
+      "y": 845,
+      "index": 5,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        425,
+        1022
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 119362,
+        "opaque": 312053,
+        "pixels": 434350
+      }
+    },
+    {
+      "expected": 5,
+      "x": 335,
+      "y": 724,
+      "index": 5,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        425,
+        1022
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 119362,
+        "opaque": 312053,
+        "pixels": 434350
+      }
+    },
+    {
+      "expected": 5,
+      "x": 399,
+      "y": 714,
+      "index": 5,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        425,
+        1022
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 119362,
+        "opaque": 312053,
+        "pixels": 434350
+      }
+    },
+    {
+      "expected": 6,
+      "x": 514,
+      "y": 555,
+      "index": 6,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        635,
+        1328
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 268866,
+        "opaque": 570561,
+        "pixels": 843280
+      }
+    },
+    {
+      "expected": 6,
+      "x": 490,
+      "y": 675,
+      "index": 6,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        635,
+        1328
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 268866,
+        "opaque": 570561,
+        "pixels": 843280
+      }
+    },
+    {
+      "expected": 6,
+      "x": 520,
+      "y": 755,
+      "index": 6,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        635,
+        1328
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 268866,
+        "opaque": 570561,
+        "pixels": 843280
+      }
+    },
+    {
+      "expected": 6,
+      "x": 436,
+      "y": 790,
+      "index": 6,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        635,
+        1328
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 268866,
+        "opaque": 570561,
+        "pixels": 843280
+      }
+    },
+    {
+      "expected": 6,
+      "x": 555,
+      "y": 784,
+      "index": 6,
+      "source": "curved-rim-frame",
+      "focusValid": true,
+      "contoursEqual": true,
+      "geometry": "contours",
+      "canvasSize": [
+        635,
+        1328
+      ],
+      "pixelReference": {
+        "differences": 0,
+        "transparent": 268866,
+        "opaque": 570561,
+        "pixels": 843280
+      }
+    }
+  ],
+  "pageErrors": [],
+  "sourceSha256": {
+    "js/nth-page-deck.js": "289c11e91a1c224e53753324922426d33c924d809b537de0377149c1bd694887",
+    "js/page-mode.js": "5a4f375303d1fceb9e21eedd430d727e0736a9d940b8744e5116b2782375376c",
+    "js/vendor/jszip.min.js": "d14e71a95ef3290dec66a9cfdd8a37c2dd624f6f2b594c4512f607d4a56e19fc",
+    "js/db.js": "63ef5a91c36c8f3428cf2084d1900f8cd22dc14b554fc33a0bbf4e345e3a4973",
+    "js/library.js": "c19bec42bd7e1e3f7dd05725d291fb379d109c6ae7090592488136344871f546",
+    "js/panels-page-layout.js": "802c5477d389c99b89b15905a8ea1bfd840d24120e8c7bf8986c28df141ad91b",
+    "js/panels-gutter-frames.js": "3031c017b3a1bddc4d61b7fce5deec1f3360eac0d8337513b222cd305059edc6",
+    "js/panels-closed-frames.js": "e3e6e4e513775311e8fb72456dea732ede7a0ca9dc0e8c5a9c1133643d471f5a",
+    "js/panels-overlap-frames.js": "19348625b75bf2762a34b2f367b7fab74894fb157c3c9f55b3fff577bb174846",
+    "js/panels-partition.js": "4f713d730448bd0246a20868b5b615e1d65b79b77f713afbf8d175f4ddccfdd0",
+    "js/panels-occluded-frames.js": "0f0f35a3b0f3611c70107e54cdf5c89c97eb3aaa1d55ad9921e03c0271423bd2",
+    "js/panels-composite-frames.js": "30edac3e4d6b6036fa6376efac50fbbc21638ed2023f5d4b73be3dfae0f7e251",
+    "js/panels-abutting-frames.js": "2a097ce19bc1e33cb712f1a2b295e0a9ccc72ec184477cd6059d3182830f1ace",
+    "js/panels-rim-frames.js": "9eef6f6997eda3c29a8692e86c3c2e4098c75c627bbc48f090e686b894df5c4f",
+    "js/panels-terraced-frames.js": "303160f108db7ebdbebc2406724fa73c8cbb25da6445347830d24fda4acba64c",
+    "js/panels-local-islands.js": "5cb4c9493688f7448f4317fb3333f1ec4e46142493a97b95485c2fa9cd54f564",
+    "js/panels-framed-insets.js": "854eaefc21fde7bf324106818f77bf94b57f3eca7f176cf2e29647ed16a56c32",
+    "js/panels-inset-neighbors.js": "35fa223586967276ab3e5cdd5f3205dca5304ec0caaf59b32dadc8942b6fd942",
+    "js/panels-edge-cells.js": "cf5115e05c0f7bbf05698c9318750944b3dcca0233c4f08d7765340285c1b3b5",
+    "js/panels-corner-frames.js": "5d002e58edd093e3bb63b89660fe516b8312b4d79ad8d01d8b0a579d59924fda",
+    "js/panels-terminal-frames.js": "3663f8c71fecb7067c4eb044671e3086a0d55f637cbd5f8012f3e60ab7450956",
+    "js/panels-curved-rims.js": "8639043c91a824003f49ec661d7e502c91921952a9e750ce5bbaaed769d9123b",
+    "js/panels.js": "528b92b0554af05812f2212517baad6df20d8b56f5bcbd9b78ee2aaf9f49132d",
+    "js/panels-frame-wasm.js": "2ac3601eb89b7f9f590b282af50bfe0356681f2a75ef0d765cc53e7c623176b7",
+    "js/panels-frame-envelope.js": "f714e04868e9c68f08d190e78af19e0134914e0d4eef0be0d7134726c6642f32",
+    "js/panels-geometry-orthogonal.js": "c758232d959403305d80dabc95bb3a1e5629fb134bc87b8226937660b0d10a76",
+    "js/panels-geometry-skewed.js": "dd0c96553674192c6ef519615a7bcc2a5ca53281e608efe4d131ef58d8d6b826",
+    "js/panels-geometry.js": "4c0c090836cd8a1ba69e25671b9b6ef579dda535e64bac6f22e58d872950a2af",
+    "js/panel-map-core.js": "38b8143bf9a56fe80e2f9b60202face766f1ba2c0b186d9e5653771ff30c8465",
+    "js/panel-map.js": "7dbc7428ae6a93ec2cf3faae73dfa31f08edd8c2e9cae62b9f83851f2527bc72",
+    "js/bubbles.js": "756bcfdb8c4b4e41534d133f9be1756b585013c81d350c78f6d057eefa6c13ca",
+    "js/page-turn.js": "e8ed3dfe02353fc8dbf0d3351588f5d3f995816b1432bcceea427a48fa6f3e5c",
+    "js/reader.js": "d943bae00cc75823881ce6f2859e187d8e9067764ec068f15cbb7896eee058b6",
+    "js/native-shell.js": "683643dedaace258e50fb14fb35525392aaa5be4b12dc92df513808d9f9fadf3",
+    "js/stream-transfer.js": "2b9e099d83c64cdae7080d6707c6659cf5e7b71a6625acc8dd9b5c7914b1f48e",
+    "js/transfers.js": "f285bacdfae21d59c8fe21b6ba8a91c8342f84d2140b59139b6b4ff02aedddcd",
+    "js/feature-guide.js": "bd97372258655ee7a107296eae2c6e3559eb9f15caff45fb282cce2dc190e17c",
+    "js/app.js": "fcd43ae47adefe0c2b760fafcd9938e11da9c503563e10a6fd0b2544bb3a206f"
+  },
+  "storageBoundary": "in-memory DB/localStorage fixture; not a persistence or import test",
+  "network": "no navigation; inline local scripts and data image; requests aborted"
+}

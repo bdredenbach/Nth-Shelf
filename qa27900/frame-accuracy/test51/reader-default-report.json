@@ -1,0 +1,2887 @@
+{
+  "ownership": [
+    {
+      "name": "crash",
+      "expected": 0,
+      "x": 42,
+      "y": 39,
+      "got": 0
+    },
+    {
+      "name": "crash",
+      "expected": 0,
+      "x": 114,
+      "y": 38,
+      "got": 0
+    },
+    {
+      "name": "crash",
+      "expected": 0,
+      "x": 187,
+      "y": 38,
+      "got": 0
+    },
+    {
+      "name": "crash",
+      "expected": 0,
+      "x": 43,
+      "y": 163,
+      "got": 0
+    },
+    {
+      "name": "crash",
+      "expected": 0,
+      "x": 118,
+      "y": 160,
+      "got": 0
+    },
+    {
+      "name": "crash",
+      "expected": 0,
+      "x": 194,
+      "y": 158,
+      "got": 0
+    },
+    {
+      "name": "crash",
+      "expected": 0,
+      "x": 44,
+      "y": 287,
+      "got": 0
+    },
+    {
+      "name": "crash",
+      "expected": 0,
+      "x": 122,
+      "y": 282,
+      "got": 0
+    },
+    {
+      "name": "crash",
+      "expected": 0,
+      "x": 200,
+      "y": 278,
+      "got": 0
+    },
+    {
+      "name": "fall",
+      "expected": 1,
+      "x": 241,
+      "y": 50,
+      "got": 1
+    },
+    {
+      "name": "fall",
+      "expected": 1,
+      "x": 302,
+      "y": 49,
+      "got": 1
+    },
+    {
+      "name": "fall",
+      "expected": 1,
+      "x": 362,
+      "y": 47,
+      "got": 1
+    },
+    {
+      "name": "fall",
+      "expected": 1,
+      "x": 246,
+      "y": 162,
+      "got": 1
+    },
+    {
+      "name": "fall",
+      "expected": 1,
+      "x": 300,
+      "y": 159,
+      "got": 1
+    },
+    {
+      "name": "fall",
+      "expected": 1,
+      "x": 355,
+      "y": 156,
+      "got": 1
+    },
+    {
+      "name": "fall",
+      "expected": 1,
+      "x": 250,
+      "y": 273,
+      "got": 1
+    },
+    {
+      "name": "fall",
+      "expected": 1,
+      "x": 299,
+      "y": 269,
+      "got": 1
+    },
+    {
+      "name": "fall",
+      "expected": 1,
+      "x": 348,
+      "y": 266,
+      "got": 1
+    },
+    {
+      "name": "face",
+      "expected": 2,
+      "x": 410,
+      "y": 50,
+      "got": 2
+    },
+    {
+      "name": "face",
+      "expected": 2,
+      "x": 457,
+      "y": 50,
+      "got": 2
+    },
+    {
+      "name": "face",
+      "expected": 2,
+      "x": 504,
+      "y": 50,
+      "got": 2
+    },
+    {
+      "name": "face",
+      "expected": 2,
+      "x": 401,
+      "y": 152,
+      "got": 2
+    },
+    {
+      "name": "face",
+      "expected": 2,
+      "x": 439,
+      "y": 150,
+      "got": 2
+    },
+    {
+      "name": "face",
+      "expected": 2,
+      "x": 478,
+      "y": 149,
+      "got": 2
+    },
+    {
+      "name": "face",
+      "expected": 2,
+      "x": 391,
+      "y": 254,
+      "got": 2
+    },
+    {
+      "name": "face",
+      "expected": 2,
+      "x": 421,
+      "y": 251,
+      "got": 2
+    },
+    {
+      "name": "face",
+      "expected": 2,
+      "x": 452,
+      "y": 248,
+      "got": 2
+    },
+    {
+      "name": "snarl",
+      "expected": 3,
+      "x": 540,
+      "y": 50,
+      "got": 3
+    },
+    {
+      "name": "snarl",
+      "expected": 3,
+      "x": 550,
+      "y": 49,
+      "got": 3
+    },
+    {
+      "name": "snarl",
+      "expected": 3,
+      "x": 561,
+      "y": 48,
+      "got": 3
+    },
+    {
+      "name": "snarl",
+      "expected": 3,
+      "x": 514,
+      "y": 149,
+      "got": 3
+    },
+    {
+      "name": "snarl",
+      "expected": 3,
+      "x": 536,
+      "y": 147,
+      "got": 3
+    },
+    {
+      "name": "snarl",
+      "expected": 3,
+      "x": 558,
+      "y": 145,
+      "got": 3
+    },
+    {
+      "name": "snarl",
+      "expected": 3,
+      "x": 487,
+      "y": 249,
+      "got": 3
+    },
+    {
+      "name": "snarl",
+      "expected": 3,
+      "x": 522,
+      "y": 245,
+      "got": 3
+    },
+    {
+      "name": "snarl",
+      "expected": 3,
+      "x": 556,
+      "y": 242,
+      "got": 3
+    },
+    {
+      "name": "fire",
+      "expected": 4,
+      "x": 82,
+      "y": 349,
+      "got": 4
+    },
+    {
+      "name": "fire",
+      "expected": 4,
+      "x": 294,
+      "y": 326,
+      "got": 4
+    },
+    {
+      "name": "fire",
+      "expected": 4,
+      "x": 506,
+      "y": 302,
+      "got": 4
+    },
+    {
+      "name": "fire",
+      "expected": 4,
+      "x": 82,
+      "y": 388,
+      "got": 4
+    },
+    {
+      "name": "fire",
+      "expected": 4,
+      "x": 294,
+      "y": 354,
+      "got": 4
+    },
+    {
+      "name": "fire",
+      "expected": 4,
+      "x": 506,
+      "y": 320,
+      "got": 4
+    },
+    {
+      "name": "fire",
+      "expected": 4,
+      "x": 83,
+      "y": 427,
+      "got": 4
+    },
+    {
+      "name": "fire",
+      "expected": 4,
+      "x": 294,
+      "y": 383,
+      "got": 4
+    },
+    {
+      "name": "fire",
+      "expected": 4,
+      "x": 505,
+      "y": 338,
+      "got": 4
+    },
+    {
+      "name": "conversation",
+      "expected": 5,
+      "x": 85,
+      "y": 471,
+      "got": 5
+    },
+    {
+      "name": "conversation",
+      "expected": 5,
+      "x": 294,
+      "y": 426,
+      "got": 5
+    },
+    {
+      "name": "conversation",
+      "expected": 5,
+      "x": 502,
+      "y": 381,
+      "got": 5
+    },
+    {
+      "name": "conversation",
+      "expected": 5,
+      "x": 86,
+      "y": 499,
+      "got": 5
+    },
+    {
+      "name": "conversation",
+      "expected": 5,
+      "x": 294,
+      "y": 474,
+      "got": 5
+    },
+    {
+      "name": "conversation",
+      "expected": 5,
+      "x": 502,
+      "y": 449,
+      "got": 5
+    },
+    {
+      "name": "conversation",
+      "expected": 5,
+      "x": 86,
+      "y": 527,
+      "got": 5
+    },
+    {
+      "name": "conversation",
+      "expected": 5,
+      "x": 294,
+      "y": 522,
+      "got": 5
+    },
+    {
+      "name": "conversation",
+      "expected": 5,
+      "x": 501,
+      "y": 518,
+      "got": 5
+    },
+    {
+      "name": "body-bag",
+      "expected": 6,
+      "x": 38,
+      "y": 592,
+      "got": 6
+    },
+    {
+      "name": "body-bag",
+      "expected": 6,
+      "x": 78,
+      "y": 592,
+      "got": 6
+    },
+    {
+      "name": "body-bag",
+      "expected": 6,
+      "x": 117,
+      "y": 592,
+      "got": 6
+    },
+    {
+      "name": "body-bag",
+      "expected": 6,
+      "x": 38,
+      "y": 714,
+      "got": 6
+    },
+    {
+      "name": "body-bag",
+      "expected": 6,
+      "x": 78,
+      "y": 714,
+      "got": 6
+    },
+    {
+      "name": "body-bag",
+      "expected": 6,
+      "x": 117,
+      "y": 714,
+      "got": 6
+    },
+    {
+      "name": "body-bag",
+      "expected": 6,
+      "x": 38,
+      "y": 836,
+      "got": 6
+    },
+    {
+      "name": "body-bag",
+      "expected": 6,
+      "x": 78,
+      "y": 836,
+      "got": 6
+    },
+    {
+      "name": "body-bag",
+      "expected": 6,
+      "x": 117,
+      "y": 836,
+      "got": 6
+    },
+    {
+      "name": "guest-room",
+      "expected": 7,
+      "x": 157,
+      "y": 592,
+      "got": 7
+    },
+    {
+      "name": "guest-room",
+      "expected": 7,
+      "x": 206,
+      "y": 592,
+      "got": 7
+    },
+    {
+      "name": "guest-room",
+      "expected": 7,
+      "x": 256,
+      "y": 592,
+      "got": 7
+    },
+    {
+      "name": "guest-room",
+      "expected": 7,
+      "x": 157,
+      "y": 714,
+      "got": 7
+    },
+    {
+      "name": "guest-room",
+      "expected": 7,
+      "x": 206,
+      "y": 714,
+      "got": 7
+    },
+    {
+      "name": "guest-room",
+      "expected": 7,
+      "x": 256,
+      "y": 714,
+      "got": 7
+    },
+    {
+      "name": "guest-room",
+      "expected": 7,
+      "x": 157,
+      "y": 836,
+      "got": 7
+    },
+    {
+      "name": "guest-room",
+      "expected": 7,
+      "x": 206,
+      "y": 836,
+      "got": 7
+    },
+    {
+      "name": "guest-room",
+      "expected": 7,
+      "x": 256,
+      "y": 836,
+      "got": 7
+    },
+    {
+      "name": "ava",
+      "expected": 8,
+      "x": 300,
+      "y": 592,
+      "got": 8
+    },
+    {
+      "name": "ava",
+      "expected": 8,
+      "x": 338,
+      "y": 592,
+      "got": 8
+    },
+    {
+      "name": "ava",
+      "expected": 8,
+      "x": 376,
+      "y": 592,
+      "got": 8
+    },
+    {
+      "name": "ava",
+      "expected": 8,
+      "x": 300,
+      "y": 714,
+      "got": 8
+    },
+    {
+      "name": "ava",
+      "expected": 8,
+      "x": 338,
+      "y": 714,
+      "got": 8
+    },
+    {
+      "name": "ava",
+      "expected": 8,
+      "x": 376,
+      "y": 714,
+      "got": 8
+    },
+    {
+      "name": "ava",
+      "expected": 8,
+      "x": 300,
+      "y": 836,
+      "got": 8
+    },
+    {
+      "name": "ava",
+      "expected": 8,
+      "x": 338,
+      "y": 836,
+      "got": 8
+    },
+    {
+      "name": "ava",
+      "expected": 8,
+      "x": 376,
+      "y": 836,
+      "got": 8
+    },
+    {
+      "name": "departure",
+      "expected": 9,
+      "x": 420,
+      "y": 592,
+      "got": 9
+    },
+    {
+      "name": "departure",
+      "expected": 9,
+      "x": 480,
+      "y": 592,
+      "got": 9
+    },
+    {
+      "name": "departure",
+      "expected": 9,
+      "x": 540,
+      "y": 592,
+      "got": 9
+    },
+    {
+      "name": "departure",
+      "expected": 9,
+      "x": 420,
+      "y": 714,
+      "got": 9
+    },
+    {
+      "name": "departure",
+      "expected": 9,
+      "x": 480,
+      "y": 714,
+      "got": 9
+    },
+    {
+      "name": "departure",
+      "expected": 9,
+      "x": 540,
+      "y": 714,
+      "got": 9
+    },
+    {
+      "name": "departure",
+      "expected": 9,
+      "x": 420,
+      "y": 836,
+      "got": 9
+    },
+    {
+      "name": "departure",
+      "expected": 9,
+      "x": 480,
+      "y": 836,
+      "got": 9
+    },
+    {
+      "name": "departure",
+      "expected": 9,
+      "x": 540,
+      "y": 836,
+      "got": 9
+    }
+  ],
+  "touches": [
+    {
+      "name": "crash",
+      "x": 42,
+      "y": 39,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        727,
+        1117
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 1562,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "crash",
+      "x": 114,
+      "y": 38,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        727,
+        1117
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "crash",
+      "x": 187,
+      "y": 38,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        727,
+        1117
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "crash",
+      "x": 43,
+      "y": 163,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        727,
+        1117
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "crash",
+      "x": 118,
+      "y": 160,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        727,
+        1117
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "crash",
+      "x": 194,
+      "y": 158,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        727,
+        1117
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "crash",
+      "x": 44,
+      "y": 287,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        727,
+        1117
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "crash",
+      "x": 122,
+      "y": 282,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        727,
+        1117
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "crash",
+      "x": 200,
+      "y": 278,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        727,
+        1117
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fall",
+      "x": 241,
+      "y": 50,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        595,
+        1046
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 1041,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fall",
+      "x": 302,
+      "y": 49,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        595,
+        1046
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fall",
+      "x": 362,
+      "y": 47,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        595,
+        1046
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fall",
+      "x": 246,
+      "y": 162,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        595,
+        1046
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fall",
+      "x": 300,
+      "y": 159,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        595,
+        1046
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fall",
+      "x": 355,
+      "y": 156,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        595,
+        1046
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fall",
+      "x": 250,
+      "y": 273,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        595,
+        1046
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fall",
+      "x": 299,
+      "y": 269,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        595,
+        1046
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fall",
+      "x": 348,
+      "y": 266,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        595,
+        1046
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "face",
+      "x": 410,
+      "y": 50,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        557,
+        968
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 677,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "face",
+      "x": 457,
+      "y": 50,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        557,
+        968
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "face",
+      "x": 504,
+      "y": 50,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        557,
+        968
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "face",
+      "x": 401,
+      "y": 152,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        557,
+        968
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "face",
+      "x": 439,
+      "y": 150,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        557,
+        968
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "face",
+      "x": 478,
+      "y": 149,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        557,
+        968
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "face",
+      "x": 391,
+      "y": 254,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        557,
+        968
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "face",
+      "x": 421,
+      "y": 251,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        557,
+        968
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "face",
+      "x": 452,
+      "y": 248,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        557,
+        968
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "snarl",
+      "x": 540,
+      "y": 50,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        387,
+        930
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 371,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "snarl",
+      "x": 550,
+      "y": 49,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        387,
+        930
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "snarl",
+      "x": 561,
+      "y": 48,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        387,
+        930
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "snarl",
+      "x": 514,
+      "y": 149,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        387,
+        930
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "snarl",
+      "x": 536,
+      "y": 147,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        387,
+        930
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "snarl",
+      "x": 558,
+      "y": 145,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        387,
+        930
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "snarl",
+      "x": 487,
+      "y": 249,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        387,
+        930
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "snarl",
+      "x": 522,
+      "y": 245,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        387,
+        930
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "snarl",
+      "x": 556,
+      "y": 242,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        387,
+        930
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fire",
+      "x": 82,
+      "y": 349,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        649
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 1048,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fire",
+      "x": 294,
+      "y": 326,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        649
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fire",
+      "x": 506,
+      "y": 302,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        649
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fire",
+      "x": 82,
+      "y": 388,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        649
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fire",
+      "x": 294,
+      "y": 354,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        649
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fire",
+      "x": 506,
+      "y": 320,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        649
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fire",
+      "x": 83,
+      "y": 427,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        649
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fire",
+      "x": 294,
+      "y": 383,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        649
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fire",
+      "x": 505,
+      "y": 338,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        649
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "conversation",
+      "x": 85,
+      "y": 471,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        696
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 1710,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "conversation",
+      "x": 294,
+      "y": 426,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        696
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "conversation",
+      "x": 502,
+      "y": 381,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        696
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "conversation",
+      "x": 86,
+      "y": 499,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        696
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "conversation",
+      "x": 294,
+      "y": 474,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        696
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "conversation",
+      "x": 502,
+      "y": 449,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        696
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "conversation",
+      "x": 86,
+      "y": 527,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        696
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "conversation",
+      "x": 294,
+      "y": 522,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        696
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "conversation",
+      "x": 501,
+      "y": 518,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1896,
+        696
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "body-bag",
+      "x": 38,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        384,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 816,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "body-bag",
+      "x": 78,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        384,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "body-bag",
+      "x": 117,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        384,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "body-bag",
+      "x": 38,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        384,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "body-bag",
+      "x": 78,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        384,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "body-bag",
+      "x": 117,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        384,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "body-bag",
+      "x": 38,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        384,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "body-bag",
+      "x": 78,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        384,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "body-bag",
+      "x": 117,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        384,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "guest-room",
+      "x": 157,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        466,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 1071,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "guest-room",
+      "x": 206,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        466,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "guest-room",
+      "x": 256,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        466,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "guest-room",
+      "x": 157,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        466,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "guest-room",
+      "x": 206,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        466,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "guest-room",
+      "x": 256,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        466,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "guest-room",
+      "x": 157,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        466,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "guest-room",
+      "x": 206,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        466,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "guest-room",
+      "x": 256,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        466,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "ava",
+      "x": 300,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        377,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 765,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "ava",
+      "x": 338,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        377,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "ava",
+      "x": 376,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        377,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "ava",
+      "x": 300,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        377,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "ava",
+      "x": 338,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        377,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "ava",
+      "x": 376,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        377,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "ava",
+      "x": 300,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        377,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "ava",
+      "x": 338,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        377,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "ava",
+      "x": 376,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        377,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "departure",
+      "x": 420,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        581,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 1275,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "departure",
+      "x": 480,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        581,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "departure",
+      "x": 540,
+      "y": 592,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        581,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "departure",
+      "x": 420,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        581,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "departure",
+      "x": 480,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        581,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "departure",
+      "x": 540,
+      "y": 714,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        581,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "departure",
+      "x": 420,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        581,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "departure",
+      "x": 480,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        581,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "departure",
+      "x": 540,
+      "y": 836,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        581,
+        1107
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    }
+  ],
+  "errors": []
+}

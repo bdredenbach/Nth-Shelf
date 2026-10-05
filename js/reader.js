@@ -875,8 +875,18 @@ const Reader = {
    return null;
  },
 
+ panelContours(panel) {
+   return typeof PanelGeometryOrthogonal!=='undefined'?PanelGeometryOrthogonal._provenContours(panel):null;
+ },
+
+ pointInContours(rings,x,y) {
+   let inside=false;for(const ring of rings)if(this.pointInPolygon(ring,x,y))inside=!inside;
+   return inside;
+ },
+
  panelPolygon(panel) {
    const outline=typeof PanelGeometryOrthogonal!=='undefined'?PanelGeometryOrthogonal._provenOutline(panel):null;
+   if(['bleed-strip-frame','rim-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel?._identitySource))return outline;
    if(outline)return outline;
    return Array.isArray(panel?._quad)&&panel._quad.length===4?panel._quad:null;
  },
@@ -894,7 +904,11 @@ const Reader = {
    if (!this.panelZoomEnabled) return null;
    for (const p of this.currentPanels) {
      if (relX >= p.x && relX <= p.x + p.w && relY >= p.y && relY <= p.y + p.h) {
+       const contours=this.panelContours(p);
+       if(['composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame','matte-cell-frame'].includes(p._identitySource)&&!contours)continue;
+       if(contours&&!this.pointInContours(contours,relX,relY))continue;
        const polygon=this.panelPolygon(p);
+       if(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(p._identitySource)&&!polygon)continue;
        if(polygon&&!this.pointInPolygon(polygon,relX,relY))continue;
        return p;
      }
@@ -2815,6 +2829,8 @@ async setMode(mode) {
      pageX = panel.x+u*panel.w; pageY = panel.y+v*panel.h;
      let inside = Number.isFinite(u) && Number.isFinite(v) && u >= 0 && u <= 1 && v >= 0 && v <= 1;
      // A clipped corner of a sloping frame is transparent, not a caption hit.
+     const contours=this.panelContours(panel);
+     if(inside&&contours)inside=this.pointInContours(contours,pageX,pageY);
      const outline=panel._outline;
      if(inside&&Array.isArray(outline)&&outline.length>=4)inside=this.pointInPolygon(outline,pageX,pageY);
      const quad = panel._quad;
@@ -2827,6 +2843,11 @@ async setMode(mode) {
          if (sign && Math.sign(cross) !== sign) { inside = false; break; }
          sign = Math.sign(cross);
        }
+     }
+     const spillFrame = panel._edgeSpillFrame;
+     if (inside && spillFrame && !Array.isArray(outline) && !(Array.isArray(quad) && quad.length === 4)) {
+       inside = pageX >= spillFrame.x && pageX <= spillFrame.x + spillFrame.w &&
+         pageY >= spillFrame.y && pageY <= spillFrame.y + spillFrame.h;
      }
      if (!inside) {
        this.resetZoom({ animate: true });
@@ -3035,8 +3056,19 @@ async setMode(mode) {
    this.applyTransform();
  },
 
+ drawPanelEdgeSpill(context,img,geom,canvasW,canvasH,spill) {
+   if(!spill||!Array.isArray(spill.box)||spill.box.length!==4||!Array.isArray(spill.matte)||spill.matte.length!==3)return;
+   const b=spill.box,dx=(b[0]-geom.x)/geom.w*canvasW,dy=(b[1]-geom.y)/geom.h*canvasH,dw=(b[2]-b[0])/geom.w*canvasW,dh=(b[3]-b[1])/geom.h*canvasH;
+   if(![dx,dy,dw,dh].every(Number.isFinite)||dw<.5||dh<.5)return;const tmp=document.createElement("canvas");tmp.width=Math.max(1,Math.ceil(dw));tmp.height=Math.max(1,Math.ceil(dh));const t=tmp.getContext("2d",{willReadFrequently:true});if(!t)return;t.imageSmoothingEnabled=true;t.imageSmoothingQuality="high";
+   t.drawImage(img,b[0]*img.naturalWidth,b[1]*img.naturalHeight,(b[2]-b[0])*img.naturalWidth,(b[3]-b[1])*img.naturalHeight,0,0,tmp.width,tmp.height);const data=t.getImageData(0,0,tmp.width,tmp.height),a=data.data,matte=spill.matte,cut=Number.isFinite(spill.renderThreshold)?spill.renderThreshold:10;
+   for(let i=0;i<a.length;i+=4){const d=Math.max(Math.abs(a[i]-matte[0]),Math.abs(a[i+1]-matte[1]),Math.abs(a[i+2]-matte[2]));if(d<=cut)a[i+3]=0;else if(d<cut+8)a[i+3]=Math.round(a[i+3]*(d-cut)/8);}t.putImageData(data,0,0);context.drawImage(tmp,dx,dy,dw,dh);
+ },
+
  async zoomToPanel(panel, stageRect, imgRect) {
    if (this.focusMode) return;
+   const contours=this.panelContours(panel);
+   if(['composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame','matte-cell-frame'].includes(panel?._identitySource)&&!contours)return;
+   if(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel?._identitySource)&&!this.panelPolygon(panel))return;
    const token = ++this.panelOverlayToken;
    const ctx = this.getPanelImageContext();
    const img = ctx?.img;
@@ -3077,6 +3109,13 @@ async setMode(mode) {
      }
    }
 
+   const frameGeom={...geom};
+   // These complete contour proofs already account for their owned balloons
+   // and frame edges. A second margin heuristic could add a neighboring rail.
+   const completeContour=contours&&panel._identitySource==='structural-grid-frame'&&[21,22,23,24,25,26,34,35,36,40].includes(panel._structuralGridProof?.version);
+   const edgeSpill=(!completeContour&&typeof PanelEdgeSpill!=="undefined"&&PanelEdgeSpill.analyzeImage)?PanelEdgeSpill.analyzeImage(img,panel,this.debugMode?(msg)=>this.debugLog(`[edge-spill] ${msg}`):null):null;
+   if(edgeSpill?.spills?.length){let x0=geom.x,y0=geom.y,x1=geom.x+geom.w,y1=geom.y+geom.h;for(const s of edgeSpill.spills){x0=Math.min(x0,s.box[0]);y0=Math.min(y0,s.box[1]);x1=Math.max(x1,s.box[2]);y1=Math.max(y1,s.box[3]);}geom={x:x0,y:y0,w:x1-x0,h:y1-y0};clipPolygon=null;if(this.debugMode)this.debugLog(`[edge-spill] preserving ${edgeSpill.spills.length} owned margin component(s)`);}
+
    const sourceLeft = imgRect.left + geom.x * imgRect.width;
    const sourceTop = imgRect.top + geom.y * imgRect.height;
    const sourceW = Math.max(8, geom.w * imgRect.width);
@@ -3093,9 +3132,57 @@ async setMode(mode) {
    const sh = geom.h * img.naturalHeight;
 
    this.panelFocusMeta = {
-     panel: { ...geom, _quad: quad || undefined, _outline: outline || undefined, _overlapProof: outline?panel._overlapProof:undefined },
+     panel: { ...geom, _quad: quad || undefined, _outline: outline || undefined, _overlapProof: outline?panel._overlapProof:undefined, _occlusionProof: outline?panel._occlusionProof:undefined, _partitionProof: outline?panel._partitionProof:undefined, _matteOutlineProof: outline?panel._matteOutlineProof:undefined, _edgeSpillProof:edgeSpill||undefined, _edgeSpillFrame:edgeSpill?frameGeom:undefined },
      pageIndex: this.index
    };
+   if(panel._identitySource==='structural-grid-frame'&&panel._structuralGridProof)Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'structural-grid-frame',_geometryOwner:panel._geometryOwner,_geometryType:panel._geometryType,_structuralGridProof:panel._structuralGridProof
+   });
+   if(outline&&panel._identitySource==='terminal-rim-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'terminal-rim-frame',_terminalProof:panel._terminalProof
+   });
+   if(outline&&panel._identitySource==='corner-rim-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'corner-rim-frame',_cornerProof:panel._cornerProof
+   });
+   if(outline&&panel._identitySource==='sloping-edge-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'sloping-edge-frame',_edgeCellProof:panel._edgeCellProof
+   });
+   if(outline&&panel._identitySource==='bordered-inset-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'bordered-inset-frame',_insetRimProof:panel._insetRimProof
+   });
+   if(outline&&panel._identitySource==='matte-neighbor-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'matte-neighbor-frame',_neighborProof:panel._neighborProof
+   });
+   if(outline&&panel._identitySource==='local-island-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'local-island-frame',_islandProof:panel._islandProof
+   });
+   if(outline&&panel._identitySource==='terraced-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'terraced-frame',_terraceProof:panel._terraceProof
+   });
+   if(outline&&panel._identitySource==='bleed-strip-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'bleed-strip-frame',_bleedStripProof:panel._bleedStripProof
+   });
+   if(outline&&panel._identitySource==='abutment-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'abutment-frame',_abutmentProof:panel._abutmentProof
+   });
+   if(contours&&panel._identitySource==='matte-cell-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'matte-cell-frame',_geometryOwner:'matte-cell-contours',_geometryType:'edge-connected-matte-cell',_contours:contours,_matteCellProof:panel._matteCellProof
+   });
+   else if(contours&&panel._identitySource==='curved-rim-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'curved-rim-frame',_contours:contours,_curvedRimProof:panel._curvedRimProof
+   });
+   else if(contours&&panel._identitySource==='inset-neighbor-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'inset-neighbor-frame',_contours:contours,_insetNeighborProof:panel._insetNeighborProof
+   });
+   else if(contours&&panel._identitySource==='rim-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'rim-frame',_contours:contours,_rimFrameProof:panel._rimFrameProof
+   });
+   else if(contours&&panel._identitySource==='structural-grid-frame')Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'structural-grid-frame',_contours:contours,_structuralGridProof:panel._structuralGridProof
+   });
+   else if(contours)Object.assign(this.panelFocusMeta.panel,{
+     _identitySource:'composite-frame',_contours:contours,_compositeFrameProof:panel._compositeFrameProof
+   });
 
    const overlay = document.createElement("div");
    overlay.className = "panel-focus-overlay";
@@ -3119,7 +3206,12 @@ async setMode(mode) {
    canvas.style.height = "100%";
    canvas.getContext("2d").imageSmoothingEnabled = true;
    canvas.getContext("2d").imageSmoothingQuality = "high";
-   canvas.getContext("2d").drawImage(img, sx, sy, sw, sh, 0, 0, canvasW, canvasH);
+   const context=canvas.getContext("2d");
+   const cropContours=contours||(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel._identitySource)&&outline?[outline]:null);
+   const frameRect=[[frameGeom.x,frameGeom.y],[frameGeom.x+frameGeom.w,frameGeom.y],[frameGeom.x+frameGeom.w,frameGeom.y+frameGeom.h],[frameGeom.x,frameGeom.y+frameGeom.h]].map(([x,y])=>({x,y}));
+   const baseContours=cropContours||(edgeSpill?(polygon?[polygon]:[frameRect]):null),drawBase=()=>context.drawImage(img,sx,sy,sw,sh,0,0,canvasW,canvasH);
+   if(baseContours){context.save();context.beginPath();for(const ring of baseContours){ring.forEach((p,i)=>{const x=(p.x-geom.x)/geom.w*canvasW,y=(p.y-geom.y)/geom.h*canvasH;if(i)context.lineTo(x,y);else context.moveTo(x,y);});context.closePath();}context.clip(cropContours?'evenodd':'nonzero');drawBase();context.restore();overlay.style.boxShadow='none';canvas.style.filter='drop-shadow(0 5px 12px rgba(0,0,0,.42))';overlay.dataset.geometry=cropContours?'contours':'frame-plus-spill';}else drawBase();
+   if(edgeSpill?.spills?.length){for(const spill of edgeSpill.spills)this.drawPanelEdgeSpill(context,img,geom,canvasW,canvasH,spill);overlay.dataset.geometry='edge-spill';}
    overlay.appendChild(canvas);
 
    const pagePad = Math.max(8, Math.min(18, Math.round(Math.min(imgRect.width, imgRect.height) * 0.018)));

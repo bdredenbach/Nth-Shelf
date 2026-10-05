@@ -1,0 +1,923 @@
+{
+  "ownership": [
+    {
+      "name": "top-scene",
+      "expected": 0,
+      "x": 80,
+      "y": 140,
+      "got": 0
+    },
+    {
+      "name": "top-scene",
+      "expected": 0,
+      "x": 280,
+      "y": 100,
+      "got": 0
+    },
+    {
+      "name": "top-scene",
+      "expected": 0,
+      "x": 520,
+      "y": 70,
+      "got": 0
+    },
+    {
+      "name": "top-scene",
+      "expected": 0,
+      "x": 75,
+      "y": 280,
+      "got": 0
+    },
+    {
+      "name": "top-scene",
+      "expected": 0,
+      "x": 425,
+      "y": 160,
+      "got": 0
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 292,
+      "y": 396,
+      "got": 1
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 532,
+      "y": 500,
+      "got": 1
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 541,
+      "y": 514,
+      "got": 1
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 547,
+      "y": 470,
+      "got": 1
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 520,
+      "y": 455,
+      "got": 1
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 62,
+      "y": 409,
+      "got": 1
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 80,
+      "y": 468,
+      "got": 1
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 240,
+      "y": 477,
+      "got": 1
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 415,
+      "y": 300,
+      "got": 1
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 540,
+      "y": 190,
+      "got": 1
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 200,
+      "y": 350,
+      "got": 1
+    },
+    {
+      "name": "whole-slanted-scene",
+      "expected": 1,
+      "x": 350,
+      "y": 410,
+      "got": 1
+    },
+    {
+      "name": "bottom-left",
+      "expected": 2,
+      "x": 90,
+      "y": 650,
+      "got": 2
+    },
+    {
+      "name": "bottom-left",
+      "expected": 2,
+      "x": 40,
+      "y": 790,
+      "got": 2
+    },
+    {
+      "name": "bottom-left",
+      "expected": 2,
+      "x": 134,
+      "y": 825,
+      "got": 2
+    },
+    {
+      "name": "bottom-left",
+      "expected": 2,
+      "x": 140,
+      "y": 540,
+      "got": 2
+    },
+    {
+      "name": "bottom-left",
+      "expected": 2,
+      "x": 191,
+      "y": 580,
+      "got": 2
+    },
+    {
+      "name": "bottom-middle",
+      "expected": 3,
+      "x": 275,
+      "y": 680,
+      "got": 3
+    },
+    {
+      "name": "bottom-middle",
+      "expected": 3,
+      "x": 232,
+      "y": 556,
+      "got": 3
+    },
+    {
+      "name": "bottom-middle",
+      "expected": 3,
+      "x": 338,
+      "y": 808,
+      "got": 3
+    },
+    {
+      "name": "bottom-middle",
+      "expected": 3,
+      "x": 180,
+      "y": 854,
+      "got": 3
+    },
+    {
+      "name": "bottom-middle",
+      "expected": 3,
+      "x": 366,
+      "y": 860,
+      "got": 3
+    },
+    {
+      "name": "bottom-right",
+      "expected": 4,
+      "x": 483,
+      "y": 690,
+      "got": 4
+    },
+    {
+      "name": "bottom-right",
+      "expected": 4,
+      "x": 402,
+      "y": 565,
+      "got": 4
+    },
+    {
+      "name": "bottom-right",
+      "expected": 4,
+      "x": 548,
+      "y": 801,
+      "got": 4
+    },
+    {
+      "name": "bottom-right",
+      "expected": 4,
+      "x": 464,
+      "y": 865,
+      "got": 4
+    },
+    {
+      "name": "bottom-right",
+      "expected": 4,
+      "x": 529,
+      "y": 560,
+      "got": 4
+    }
+  ],
+  "touches": [
+    {
+      "name": "top-scene",
+      "x": 80,
+      "y": 140,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1934,
+        1199
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-scene",
+      "x": 280,
+      "y": 100,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1934,
+        1199
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-scene",
+      "x": 520,
+      "y": 70,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1934,
+        1199
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-scene",
+      "x": 75,
+      "y": 280,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1934,
+        1199
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-scene",
+      "x": 425,
+      "y": 160,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1934,
+        1199
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 292,
+      "y": 396,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 532,
+      "y": 500,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 541,
+      "y": 514,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 547,
+      "y": 470,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 520,
+      "y": 455,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 62,
+      "y": 409,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 80,
+      "y": 468,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 240,
+      "y": 477,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 415,
+      "y": 300,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 540,
+      "y": 190,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 200,
+      "y": 350,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-slanted-scene",
+      "x": 350,
+      "y": 410,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1927,
+        1314
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-left",
+      "x": 90,
+      "y": 650,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        690,
+        1355
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-left",
+      "x": 40,
+      "y": 790,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        690,
+        1355
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-left",
+      "x": 134,
+      "y": 825,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        690,
+        1355
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-left",
+      "x": 140,
+      "y": 540,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        690,
+        1355
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-left",
+      "x": 191,
+      "y": 580,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        690,
+        1355
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-middle",
+      "x": 275,
+      "y": 680,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        867,
+        1341
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-middle",
+      "x": 232,
+      "y": 556,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        867,
+        1341
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-middle",
+      "x": 338,
+      "y": 808,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        867,
+        1341
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-middle",
+      "x": 180,
+      "y": 854,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        867,
+        1341
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-middle",
+      "x": 366,
+      "y": 860,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        867,
+        1341
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-right",
+      "x": 483,
+      "y": 690,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        850,
+        1321
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-right",
+      "x": 402,
+      "y": 565,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        850,
+        1321
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-right",
+      "x": 548,
+      "y": 801,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        850,
+        1321
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-right",
+      "x": 464,
+      "y": 865,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        850,
+        1321
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-right",
+      "x": 529,
+      "y": 560,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        850,
+        1321
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    }
+  ],
+  "errors": []
+}

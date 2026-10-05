@@ -1,0 +1,174 @@
+[
+  {
+    "app": "baseline-test49",
+    "quality": "low",
+    "injectedDraws": 18,
+    "panelCount": 7,
+    "panelSha256": "13caf0e28bf225fa6ef834d4597f77d21cbfb9d486188fb85a38ddbb846c8748",
+    "logs": [
+      "source=1988x3056 downscaled=585x900",
+      "row-stddev min=0.0 max=104.6 flat-rows(<10)=57/900",
+      "row-split found 1 strip(s): [[18,861]]",
+      "raw panel count before collapse-check: 1",
+      "-> collapsed to 0 (<=1 panel found)",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "framed insets: 0 closed rings with independent gutter crossings",
+      "wide inset horizontal proposals []",
+      "wide traced insets: 0",
+      "matte cells: dark 7 proven cells"
+    ]
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "low",
+    "injectedDraws": 17,
+    "panelCount": 8,
+    "panelSha256": "6bdfc09583ce1a9120e0929974fa2530dd853d67263affcbf25404ba53938f52",
+    "logs": [
+      "source=1988x3056 downscaled=585x900",
+      "row-stddev min=0.0 max=104.6 flat-rows(<10)=57/900",
+      "row-split found 1 strip(s): [[18,861]]",
+      "raw panel count before collapse-check: 1",
+      "-> collapsed to 0 (<=1 panel found)",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "framed insets: 0 closed rings with independent gutter crossings",
+      "wide inset horizontal proposals []",
+      "wide traced insets: 0",
+      "matte cells: dark 7 proven cells",
+      "matte cells: dark 7 proven cells",
+      "pale rim network completed 8 whole cells; retained 1 exact identities",
+      "native-pixel rim completion: 8 cells"
+    ]
+  },
+  {
+    "app": "baseline-test49",
+    "quality": "medium",
+    "injectedDraws": 18,
+    "panelCount": 7,
+    "panelSha256": "4e10f56a0e5f1357290c9bcaa09115206a4d69543a30dcd0a045eb97e20e81a1",
+    "logs": [
+      "source=1988x3056 downscaled=585x900",
+      "row-stddev min=0.0 max=102.9 flat-rows(<10)=57/900",
+      "row-split found 1 strip(s): [[18,861]]",
+      "raw panel count before collapse-check: 1",
+      "-> collapsed to 0 (<=1 panel found)",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "framed insets: 0 closed rings with independent gutter crossings",
+      "wide inset horizontal proposals []",
+      "wide traced insets: 0",
+      "matte cells: dark 7 proven cells"
+    ]
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "medium",
+    "injectedDraws": 17,
+    "panelCount": 8,
+    "panelSha256": "6bdfc09583ce1a9120e0929974fa2530dd853d67263affcbf25404ba53938f52",
+    "logs": [
+      "source=1988x3056 downscaled=585x900",
+      "row-stddev min=0.0 max=102.9 flat-rows(<10)=57/900",
+      "row-split found 1 strip(s): [[18,861]]",
+      "raw panel count before collapse-check: 1",
+      "-> collapsed to 0 (<=1 panel found)",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "framed insets: 0 closed rings with independent gutter crossings",
+      "wide inset horizontal proposals []",
+      "wide traced insets: 0",
+      "matte cells: dark 7 proven cells",
+      "matte cells: dark 7 proven cells",
+      "pale rim network completed 8 whole cells; retained 1 exact identities",
+      "native-pixel rim completion: 8 cells"
+    ]
+  },
+  {
+    "app": "baseline-test49",
+    "quality": "high",
+    "injectedDraws": 18,
+    "panelCount": 7,
+    "panelSha256": "91f00ed270f75cc47cac108e5174af9258942f1e4f8d2b416ec4d169b9fba619",
+    "logs": [
+      "source=1988x3056 downscaled=585x900",
+      "row-stddev min=0.0 max=104.6 flat-rows(<10)=57/900",
+      "row-split found 1 strip(s): [[18,861]]",
+      "raw panel count before collapse-check: 1",
+      "-> collapsed to 0 (<=1 panel found)",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "framed insets: 0 closed rings with independent gutter crossings",
+      "wide inset horizontal proposals []",
+      "wide traced insets: 0",
+      "matte cells: dark 7 proven cells"
+    ]
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "high",
+    "injectedDraws": 17,
+    "panelCount": 8,
+    "panelSha256": "6bdfc09583ce1a9120e0929974fa2530dd853d67263affcbf25404ba53938f52",
+    "logs": [
+      "source=1988x3056 downscaled=585x900",
+      "row-stddev min=0.0 max=104.6 flat-rows(<10)=57/900",
+      "row-split found 1 strip(s): [[18,861]]",
+      "raw panel count before collapse-check: 1",
+      "-> collapsed to 0 (<=1 panel found)",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "framed insets: 0 closed rings with independent gutter crossings",
+      "wide inset horizontal proposals []",
+      "wide traced insets: 0",
+      "matte cells: dark 7 proven cells",
+      "matte cells: dark 7 proven cells",
+      "pale rim network completed 8 whole cells; retained 1 exact identities",
+      "native-pixel rim completion: 8 cells"
+    ]
+  },
+  {
+    "app": "baseline-test49",
+    "quality": "sharp",
+    "injectedDraws": 18,
+    "panelCount": 7,
+    "panelSha256": "b13456dabbff4818050a9881e0d6ae8846fc2d69237a426c2430f15ced0c9370",
+    "logs": [
+      "source=1988x3056 downscaled=585x900",
+      "row-stddev min=0.0 max=102.3 flat-rows(<10)=57/900",
+      "row-split found 1 strip(s): [[18,861]]",
+      "raw panel count before collapse-check: 1",
+      "-> collapsed to 0 (<=1 panel found)",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "framed insets: 0 closed rings with independent gutter crossings",
+      "wide inset horizontal proposals []",
+      "wide traced insets: 0",
+      "matte cells: dark 7 proven cells"
+    ]
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "sharp",
+    "injectedDraws": 17,
+    "panelCount": 8,
+    "panelSha256": "6bdfc09583ce1a9120e0929974fa2530dd853d67263affcbf25404ba53938f52",
+    "logs": [
+      "source=1988x3056 downscaled=585x900",
+      "row-stddev min=0.0 max=102.3 flat-rows(<10)=57/900",
+      "row-split found 1 strip(s): [[18,861]]",
+      "raw panel count before collapse-check: 1",
+      "-> collapsed to 0 (<=1 panel found)",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "closed frames: 0 strict, 0 shared-boundary, 0 exterior-gutter candidates",
+      "framed insets: 0 closed rings with independent gutter crossings",
+      "wide inset horizontal proposals []",
+      "wide traced insets: 0",
+      "matte cells: dark 7 proven cells",
+      "matte cells: dark 7 proven cells",
+      "pale rim network completed 8 whole cells; retained 1 exact identities",
+      "native-pixel rim completion: 8 cells"
+    ]
+  }
+]

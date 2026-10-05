@@ -1,0 +1,967 @@
+{
+  "version": "2.79.82",
+  "versionCode": 28010,
+  "package": "io.github.bdredenbach.nthshelf.frametest82",
+  "label": "Nth Shelf Test82",
+  "sourceBase": "Test80 / 5834f92487be7b23915b09983a5f98200c27fec9; user reports Test81 / 174",
+  "localValidation": "passed",
+  "build": {
+    "status": "success",
+    "runId": 37169931754,
+    "runUrl": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37169931754",
+    "sourceCommit": "f618da76cabd785aa8d036d61bdb740cd73c6fba",
+    "apkSha256": "3b14a19be22f732d76b9c8b5d9dd7220e32542b0825b5e523129f84f523fcc55",
+    "apkBytes": 3404922,
+    "verifiedWebAssetCount": 85,
+    "downloadedArtifactSha256Verified": true,
+    "downloadedAPKWebBytesVerified": true,
+    "signatureAndIdentity": "CI passed; downloaded APK hash matches the verified build record",
+    "phoneAcceptance": "accepted by user 2026-10-04; updated phone total not supplied"
+  },
+  "corpus": {
+    "pages": 91,
+    "savedCheckpoint": 174,
+    "localBaselineOwners": 175,
+    "localAfterOwners": 179,
+    "newLocalOwners": 4,
+    "previousOwnerDescriptorsPreserved": 175,
+    "unchangedLocalMaps": 87,
+    "rasterEnvironment": "@napi-rs/canvas; not Chromium or physical Android",
+    "savedVsLocalDiscrepancies": [
+      {
+        "key": "2-013",
+        "saved": 1,
+        "local": 2
+      },
+      {
+        "key": "2-015",
+        "saved": 4,
+        "local": 3
+      },
+      {
+        "key": "2-017",
+        "saved": 1,
+        "local": 0
+      },
+      {
+        "key": "3-003",
+        "saved": 4,
+        "local": 1
+      },
+      {
+        "key": "3-004",
+        "saved": 2,
+        "local": 5
+      },
+      {
+        "key": "3-014",
+        "saved": 4,
+        "local": 5
+      },
+      {
+        "key": "4-016",
+        "saved": 0,
+        "local": 2
+      },
+      {
+        "key": "4-020",
+        "saved": 1,
+        "local": 0
+      }
+    ]
+  },
+  "targets": [
+    {
+      "key": "1-006",
+      "issue": 1,
+      "imageIndex": 6,
+      "readerPage": 7,
+      "newRelativeToSavedCheckpoint": true
+    },
+    {
+      "key": "1-016",
+      "issue": 1,
+      "imageIndex": 16,
+      "readerPage": 17,
+      "newRelativeToSavedCheckpoint": true
+    },
+    {
+      "key": "2-017",
+      "issue": 2,
+      "imageIndex": 17,
+      "readerPage": 18,
+      "newRelativeToSavedCheckpoint": false
+    },
+    {
+      "key": "3-009",
+      "issue": 3,
+      "imageIndex": 9,
+      "readerPage": 10,
+      "newRelativeToSavedCheckpoint": true
+    }
+  ],
+  "variants": [
+    {
+      "key": "1-006",
+      "variant": "original",
+      "count": 1,
+      "allValid": true,
+      "ms": 938,
+      "boxes": [
+        [
+          0.37606837606837606,
+          0,
+          0.6239316239316239,
+          1
+        ]
+      ]
+    },
+    {
+      "key": "1-006",
+      "variant": "scale067",
+      "count": 1,
+      "allValid": true,
+      "ms": 854,
+      "boxes": [
+        [
+          0.37435897435897436,
+          0,
+          0.6256410256410256,
+          1
+        ]
+      ]
+    },
+    {
+      "key": "1-006",
+      "variant": "scale125",
+      "count": 1,
+      "allValid": true,
+      "ms": 838,
+      "boxes": [
+        [
+          0.37606837606837606,
+          0,
+          0.6239316239316239,
+          1
+        ]
+      ]
+    },
+    {
+      "key": "1-006",
+      "variant": "mirror",
+      "count": 1,
+      "allValid": true,
+      "ms": 745,
+      "boxes": [
+        [
+          0,
+          0,
+          0.6222222222222222,
+          1
+        ]
+      ]
+    },
+    {
+      "key": "1-006",
+      "variant": "jpeg82",
+      "count": 1,
+      "allValid": true,
+      "ms": 633,
+      "boxes": [
+        [
+          0.37606837606837606,
+          0,
+          0.6239316239316239,
+          1
+        ]
+      ]
+    },
+    {
+      "key": "1-016",
+      "variant": "original",
+      "count": 1,
+      "allValid": true,
+      "ms": 581,
+      "boxes": [
+        [
+          0,
+          0.0033333333333333335,
+          1,
+          0.5533333333333333
+        ]
+      ]
+    },
+    {
+      "key": "1-016",
+      "variant": "scale067",
+      "count": 1,
+      "allValid": true,
+      "ms": 584,
+      "boxes": [
+        [
+          0,
+          0.0033333333333333335,
+          1,
+          0.5533333333333333
+        ]
+      ]
+    },
+    {
+      "key": "1-016",
+      "variant": "scale125",
+      "count": 1,
+      "allValid": true,
+      "ms": 557,
+      "boxes": [
+        [
+          0,
+          0.0033333333333333335,
+          1,
+          0.5544444444444444
+        ]
+      ]
+    },
+    {
+      "key": "1-016",
+      "variant": "mirror",
+      "count": 1,
+      "allValid": true,
+      "ms": 577,
+      "boxes": [
+        [
+          0,
+          0.0033333333333333335,
+          1,
+          0.5533333333333333
+        ]
+      ]
+    },
+    {
+      "key": "1-016",
+      "variant": "jpeg82",
+      "count": 1,
+      "allValid": true,
+      "ms": 528,
+      "boxes": [
+        [
+          0,
+          0.0033333333333333335,
+          1,
+          0.5533333333333333
+        ]
+      ]
+    },
+    {
+      "key": "2-017",
+      "variant": "original",
+      "count": 1,
+      "allValid": true,
+      "ms": 971,
+      "boxes": [
+        [
+          0.652991452991453,
+          0.01888888888888889,
+          0.31965811965811963,
+          0.2777777777777778
+        ]
+      ]
+    },
+    {
+      "key": "2-017",
+      "variant": "scale067",
+      "count": 1,
+      "allValid": true,
+      "ms": 757,
+      "boxes": [
+        [
+          0.652991452991453,
+          0.01888888888888889,
+          0.31965811965811963,
+          0.2777777777777778
+        ]
+      ]
+    },
+    {
+      "key": "2-017",
+      "variant": "scale125",
+      "count": 1,
+      "allValid": true,
+      "ms": 822,
+      "boxes": [
+        [
+          0.652991452991453,
+          0.01888888888888889,
+          0.31965811965811963,
+          0.2777777777777778
+        ]
+      ]
+    },
+    {
+      "key": "2-017",
+      "variant": "mirror",
+      "count": 1,
+      "allValid": true,
+      "ms": 814,
+      "boxes": [
+        [
+          0.02735042735042735,
+          0.01888888888888889,
+          0.31965811965811963,
+          0.2777777777777778
+        ]
+      ]
+    },
+    {
+      "key": "2-017",
+      "variant": "jpeg82",
+      "count": 1,
+      "allValid": true,
+      "ms": 896,
+      "boxes": [
+        [
+          0.652991452991453,
+          0.01888888888888889,
+          0.31965811965811963,
+          0.2777777777777778
+        ]
+      ]
+    },
+    {
+      "key": "3-009",
+      "variant": "original",
+      "count": 1,
+      "allValid": true,
+      "ms": 576,
+      "boxes": [
+        [
+          0.3230769230769231,
+          0.20222222222222222,
+          0.676923076923077,
+          0.26
+        ]
+      ]
+    },
+    {
+      "key": "3-009",
+      "variant": "scale067",
+      "count": 0,
+      "allValid": true,
+      "ms": 422,
+      "boxes": []
+    },
+    {
+      "key": "3-009",
+      "variant": "scale125",
+      "count": 1,
+      "allValid": true,
+      "ms": 536,
+      "boxes": [
+        [
+          0.3230769230769231,
+          0.20222222222222222,
+          0.676923076923077,
+          0.26
+        ]
+      ]
+    },
+    {
+      "key": "3-009",
+      "variant": "mirror",
+      "count": 1,
+      "allValid": true,
+      "ms": 508,
+      "boxes": [
+        [
+          0,
+          0.20222222222222222,
+          0.676923076923077,
+          0.26
+        ]
+      ]
+    },
+    {
+      "key": "3-009",
+      "variant": "jpeg82",
+      "count": 0,
+      "allValid": true,
+      "ms": 351,
+      "boxes": []
+    }
+  ],
+  "contracts": {
+    "retainedRunner": "qa27900/frame-accuracy/test82/run-retained.sh",
+    "status": "passed; runner reached Test82 service-worker contract",
+    "capturedContours": 4,
+    "rejectedMutations": 76,
+    "syntheticOwners": 2,
+    "exactReaderContourCrops": 4,
+    "nativeCorpusCLI": "baseline + integrated comparison smoke test passed"
+  },
+  "originalArtworkValidation": {
+    "supplementAPI": "all 91 baseline maps; four additions; 87 unchanged; all old descriptors retained",
+    "integratedDetector": "all 91 pages passed through the real integrated detector; every original descriptor identical; all four added proofs valid",
+    "cropReview": "four overlays visually checked against source",
+    "chromiumArtworkReplay": "not run; local Chromium binary unavailable",
+    "physicalAndroid": "pending"
+  },
+  "coverageGoal": {
+    "target": "360+",
+    "status": "incomplete"
+  },
+  "assetCount": 85,
+  "integratedReplay": {
+    "pages": 91,
+    "baselineOwners": 175,
+    "afterOwners": 179,
+    "preservedOwners": 175,
+    "unchangedMaps": 87,
+    "perPage": [
+      {
+        "key": "1-000",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-001",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-002",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-003",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-004",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-005",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-006",
+        "before": 0,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-007",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-008",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-009",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-010",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-011",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-012",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-013",
+        "before": 4,
+        "after": 4,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-014",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-015",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-016",
+        "before": 0,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-017",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-018",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-019",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-020",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-021",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-022",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-023",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-000",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-001",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-002",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-003",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-004",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-005",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-006",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-007",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-008",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-009",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-010",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-011",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-012",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-013",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-014",
+        "before": 4,
+        "after": 4,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-015",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-016",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-017",
+        "before": 0,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-018",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-019",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-020",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-021",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-022",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-000",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-001",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-002",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-003",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-004",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-005",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-006",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-007",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-008",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-009",
+        "before": 0,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-010",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-011",
+        "before": 4,
+        "after": 4,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-012",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-013",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-014",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-015",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-016",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-017",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-018",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-019",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-020",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-021",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-022",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-000",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-001",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-002",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-003",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-004",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-005",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-006",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-007",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-008",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-009",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-010",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-011",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-012",
+        "before": 4,
+        "after": 4,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-013",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-014",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-015",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-016",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-017",
+        "before": 4,
+        "after": 4,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-018",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-019",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-020",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      }
+    ]
+  }
+}

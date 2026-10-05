@@ -1,0 +1,83 @@
+{
+  "negatives": [
+    {
+      "name": "missing-step",
+      "count": 0
+    },
+    {
+      "name": "missing-upper-horizontal",
+      "count": 0
+    },
+    {
+      "name": "missing-bottom-rim",
+      "count": 0
+    }
+  ],
+  "guards": [
+    {
+      "name": "no-anchors",
+      "rejected": true
+    },
+    {
+      "name": "missing-anchor",
+      "rejected": true
+    },
+    {
+      "name": "swapped-anchor-type",
+      "rejected": true
+    },
+    {
+      "name": "tampered-outline",
+      "rejected": true
+    },
+    {
+      "name": "weak-step",
+      "rejected": true
+    },
+    {
+      "name": "nonfinite-profile",
+      "rejected": true
+    }
+  ],
+  "resampling": [
+    {
+      "quality": "low",
+      "count": 6,
+      "sources": [
+        "sloping-edge-frame",
+        "corner-rim-frame",
+        "structural-grid-frame",
+        "structural-grid-frame",
+        "structural-grid-frame",
+        "structural-grid-frame"
+      ],
+      "newOutlines": 4
+    },
+    {
+      "quality": "medium",
+      "count": 6,
+      "sources": [
+        "sloping-edge-frame",
+        "corner-rim-frame",
+        "structural-grid-frame",
+        "structural-grid-frame",
+        "structural-grid-frame",
+        "structural-grid-frame"
+      ],
+      "newOutlines": 4
+    },
+    {
+      "quality": "high",
+      "count": 6,
+      "sources": [
+        "sloping-edge-frame",
+        "corner-rim-frame",
+        "structural-grid-frame",
+        "structural-grid-frame",
+        "structural-grid-frame",
+        "structural-grid-frame"
+      ],
+      "newOutlines": 4
+    }
+  ]
+}

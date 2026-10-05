@@ -1,0 +1,19 @@
+'use strict';
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+global.PanelMatteCells=require('../../../js/panels-matte-cells.js');
+global.PanelPaleCompletion=require('../../../js/panels-pale-completion.js');
+const D=require('../../../js/panels-structural-grid.js'),pages=require('./captured-geometry.json');
+const O=vm.runInNewContext(fs.readFileSync(require.resolve('../../../js/panels-geometry-orthogonal.js'),'utf8')+';PanelGeometryOrthogonal',{PanelStructuralGrid:D,clamp01:v=>Math.max(0,Math.min(1,v))});let proofs=0,mutations=0;
+for(const[page,panels]of Object.entries(pages)){
+ assert.equal(panels.length,{68:7,69:4,70:4,71:6,72:5,73:5}[page]);
+ for(const p of panels){
+  proofs++;assert(D.validPanel(p));assert.equal(JSON.stringify(O.refine(p)._contours),JSON.stringify(p._contours));
+  const edits=[p=>p._contours[0][0].x+=.01,p=>p.x+=.01,p=>p._structuralGridProof.pixelContours[0][0][0]++,p=>p._structuralGridProof.pixels--,p=>p._structuralGridProof.index=20,p=>p._structuralGridProof.variance=0,p=>p._structuralGridProof.count++,p=>p._structuralGridProof.mode='wrong',p=>p._structuralGridProof.method='wrong',p=>p._structuralGridProof.connected=false,p=>p._structuralGridProof.components[0].box[3]=0,p=>p._structuralGridProof.frames[0].box[2]=9999,p=>p._structuralGridProof.frames[1].order=p._structuralGridProof.frames[0].order];
+  for(let i=0;i<p._structuralGridProof.witnesses.length;i++)edits.push(p=>{const w=p._structuralGridProof.witnesses[i];if(w.matched!==undefined)w.matched=0;else w.white=0;});
+  for(let i=0;i<p._structuralGridProof.spills.length;i++)edits.push(p=>p._structuralGridProof.spills[i].pixels=0);
+  for(const mutate of edits){const bad=structuredClone(p);mutate(bad);assert.equal(D.validPanel(bad),false,`page${page} mutation ${mutate}`);assert.equal(O._provenContours(bad),null);mutations++;}
+ }
+}
+assert.deepEqual(PanelPaleCompletion.analyzeRGBA(null,585,900,[]),[]);
+for(const value of [0,128,255]){const data=new Uint8ClampedArray(585*900*4).fill(value);for(let i=3;i<data.length;i+=4)data[i]=255;assert.deepEqual(PanelPaleCompletion.analyzeRGBA(data,585,900,[]),[]);data.fill(0);assert.deepEqual(PanelPaleCompletion.analyzeRGBA(data,585,900,[]),[]);}
+console.log('PASS '+proofs+' captured proofs, geometry-router preservation, '+mutations+' corruption rejections and malformed/flat/transparent negatives');

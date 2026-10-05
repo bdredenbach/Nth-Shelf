@@ -1,0 +1,2418 @@
+{
+  "version": "2.79.65",
+  "code": 27993,
+  "sourceBase": "93365ad81336a752cea18d02fb90e7fe0dfa327d",
+  "sourceCommit": "9361e57465ddd212e9dce3265525fa530b0687bc",
+  "scope": "Repair omitted white speech/caption regions and recover one native-raster frame; general detector remains incomplete",
+  "pagesCompared": 312,
+  "unchangedPages": 302,
+  "earlierPagesUnchanged": 221,
+  "changedPages": [
+    {
+      "book": "apocalypse-2",
+      "page": 13,
+      "before": 5,
+      "after": 5,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 14,
+      "before": 0,
+      "after": 1,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 6,
+      "before": 5,
+      "after": 5,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 11,
+      "before": 5,
+      "after": 5,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 12,
+      "before": 4,
+      "after": 4,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 13,
+      "before": 6,
+      "after": 6,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 14,
+      "before": 5,
+      "after": 5,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 18,
+      "before": 4,
+      "after": 4,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 19,
+      "before": 3,
+      "after": 3,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 20,
+      "before": 5,
+      "after": 5,
+      "unchanged": false
+    }
+  ],
+  "whiteBodyRepairs": 36,
+  "repairedOwners": 20,
+  "restoredPixels": 161879,
+  "repairPages": [
+    {
+      "book": "apocalypse-2",
+      "page": 13,
+      "owners": 2,
+      "bodies": 6
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 14,
+      "owners": 0,
+      "bodies": 0
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 6,
+      "owners": 3,
+      "bodies": 5
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 11,
+      "owners": 3,
+      "bodies": 4
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 12,
+      "owners": 2,
+      "bodies": 4
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 13,
+      "owners": 4,
+      "bodies": 7
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 14,
+      "owners": 2,
+      "bodies": 4
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 18,
+      "owners": 2,
+      "bodies": 3
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 19,
+      "owners": 1,
+      "bodies": 1
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 20,
+      "owners": 1,
+      "bodies": 2
+    }
+  ],
+  "additionalOwners": 1,
+  "newFrame": "Apocalypse issue2 page14 top scene",
+  "detectedApocalypseOwners": 141,
+  "touches": 198,
+  "independentSceneCenterTaps": 21,
+  "restoredWhiteAndInkTaps": 72,
+  "denseSamples": 41142,
+  "contracts": {
+    "retainedGateExitCode": 0,
+    "proofs": 21,
+    "rejectedMutations": 389,
+    "syntheticSizes": 2,
+    "retainedLogSha256": "95da57fe4210559e8b6fe52946bb396aa994aaac764d5d882a023287cc0584cb"
+  },
+  "storyPagesWithNoDetectedFrames": {
+    "1": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      15,
+      17,
+      20,
+      22,
+      24
+    ],
+    "2": [
+      3,
+      5,
+      6,
+      10,
+      11,
+      15,
+      17,
+      18,
+      21,
+      22
+    ],
+    "3": [
+      4,
+      5,
+      8,
+      10,
+      17,
+      19,
+      22
+    ],
+    "4": [
+      7,
+      8,
+      10,
+      11,
+      12,
+      14,
+      16,
+      17,
+      21
+    ]
+  },
+  "allFramesCorrect": false,
+  "phoneAcceptance": "pending",
+  "semanticReview": "All21 affected owner pop-outs inspected. New top scene on issue2 page14 is individually bounded; lower composite is withheld. Repaired maps retain old merged scenes and ambiguous balloon omissions. Issue3 page6 still omits large white regions; issue3 page11 central dialogue chain remains missing; issue3 page13 retains cutouts and a lower merged group; issue4 page18 lower dialogue near the seam and issue4 page19 left balloon remain missing. No whole-page success claim for the repaired pages.",
+  "regression": [
+    {
+      "book": "apocalypse-1",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 3,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 3,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 4,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 4,
+      "before": 1,
+      "after": 1,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 5,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 5,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 6,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 6,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 7,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 7,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 8,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 8,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 9,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 9,
+      "before": 1,
+      "after": 1,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 11,
+      "before": 1,
+      "after": 1,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 11,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 12,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 12,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 13,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 14,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 13,
+      "before": 5,
+      "after": 5,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 15,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 16,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 14,
+      "before": 0,
+      "after": 1,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 15,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 16,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 18,
+      "before": 1,
+      "after": 1,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 19,
+      "before": 1,
+      "after": 1,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 20,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 18,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 21,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 19,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 22,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 20,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 23,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 21,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 24,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 22,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-2",
+      "page": 23,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 3,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 4,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 3,
+      "before": 1,
+      "after": 1,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 5,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 4,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 6,
+      "before": 5,
+      "after": 5,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 5,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 7,
+      "before": 1,
+      "after": 1,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 8,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 6,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 9,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 7,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 8,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 11,
+      "before": 5,
+      "after": 5,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 9,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 10,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 12,
+      "before": 4,
+      "after": 4,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 11,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 12,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 13,
+      "before": 6,
+      "after": 6,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 13,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 14,
+      "before": 5,
+      "after": 5,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 14,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 15,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 15,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 16,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 18,
+      "before": 4,
+      "after": 4,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 16,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 19,
+      "before": 3,
+      "after": 3,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 17,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 20,
+      "before": 5,
+      "after": 5,
+      "unchanged": false
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 18,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-4",
+      "page": 21,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 19,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 2,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 3,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 20,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 4,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 5,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 6,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 7,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 8,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 9,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 21,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 10,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 11,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 12,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 13,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 14,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 22,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 15,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 16,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 17,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 18,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 23,
+      "before": 1,
+      "after": 1,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 19,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 20,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 21,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 2,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 22,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 3,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 23,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 4,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 24,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 25,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 26,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 27,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 5,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 28,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 29,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 30,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 31,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 6,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 32,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 7,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 33,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 34,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 8,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 35,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 9,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 36,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 37,
+      "before": 8,
+      "after": 8,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 10,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 38,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 11,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 39,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 12,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 40,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter31",
+      "page": 41,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 13,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 14,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 15,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 16,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 17,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 18,
+      "before": 8,
+      "after": 8,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 19,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 20,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 21,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 22,
+      "before": 8,
+      "after": 8,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 23,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 24,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 25,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 26,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 27,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 28,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 2,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 29,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 30,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 31,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 32,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 33,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 3,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 34,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 35,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 36,
+      "before": 8,
+      "after": 8,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 37,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 38,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 39,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 4,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 40,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter30",
+      "page": 41,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 5,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 2,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 6,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 3,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 4,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 5,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 7,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 6,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 7,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 8,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 8,
+      "before": 8,
+      "after": 8,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 9,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 10,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 9,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 11,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 12,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 13,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 10,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 14,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 15,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 16,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 11,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 17,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 18,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 19,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 20,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 12,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 21,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 22,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 23,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 13,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 24,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 25,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 26,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 27,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 14,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 28,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 15,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 29,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 30,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 31,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 32,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 33,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 16,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 34,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 35,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 36,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 17,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 37,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 38,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 18,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 39,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 40,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "manga-chapter32",
+      "page": 41,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 19,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 20,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 1,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 21,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 2,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 22,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 3,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 23,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "magneto-testament-01",
+      "page": 24,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 4,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 5,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 6,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 7,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 8,
+      "before": 2,
+      "after": 2,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 9,
+      "before": 10,
+      "after": 10,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 10,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 11,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 12,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 13,
+      "before": 3,
+      "after": 3,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 14,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 15,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 16,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 17,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 18,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 19,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 20,
+      "before": 10,
+      "after": 10,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 21,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 22,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 23,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 24,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 25,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 26,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 27,
+      "before": 8,
+      "after": 8,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 28,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 29,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 30,
+      "before": 9,
+      "after": 9,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 31,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 32,
+      "before": 8,
+      "after": 8,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 33,
+      "before": 8,
+      "after": 8,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 34,
+      "before": 10,
+      "after": 10,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 35,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 36,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 37,
+      "before": 9,
+      "after": 9,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 38,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 39,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 40,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 41,
+      "before": 9,
+      "after": 9,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 42,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 43,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 44,
+      "before": 8,
+      "after": 8,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 45,
+      "before": 10,
+      "after": 10,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 46,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 47,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 48,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 49,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 50,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 51,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 52,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 53,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 54,
+      "before": 8,
+      "after": 8,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 55,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 56,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 57,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 58,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 59,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 60,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 61,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 62,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 63,
+      "before": 8,
+      "after": 8,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 64,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 65,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 66,
+      "before": 0,
+      "after": 0,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 67,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 68,
+      "before": 7,
+      "after": 7,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 69,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 70,
+      "before": 4,
+      "after": 4,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 71,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 72,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 73,
+      "before": 5,
+      "after": 5,
+      "unchanged": true
+    },
+    {
+      "book": "comic-wolverine-1000",
+      "page": 74,
+      "before": 6,
+      "after": 6,
+      "unchanged": true
+    }
+  ],
+  "build": {
+    "status": "verified",
+    "sourceCommit": "9361e57465ddd212e9dce3265525fa530b0687bc",
+    "runId": 36319350524,
+    "artifactId": 10932455328,
+    "archiveSha256": "705dca14f80de61da971a49474fbe39f6e13802e11f1ec0495e3c44845334d85",
+    "apkSha256": "cf14f22698da9d2b5912740a87845a0faeef9dbdcc802f3475b8edf0dbed0dde",
+    "apkBytes": 3326806,
+    "assetCount": 71,
+    "apkPath": "/workspace/scratch/9419335135cd/recovery-test65/Test65/Nth-Shelf-2.79.65-Test65.apk",
+    "signature": "CI apksigner v2 passed; artifact bytes checked locally",
+    "package": "io.github.bdredenbach.nthshelf.frametest65",
+    "version": "2.79.65",
+    "versionCode": 27993,
+    "libraryFileId": "libfile_6921928f9bcc81918dc76e4114654fe6",
+    "workflowConclusion": "success"
+  }
+}

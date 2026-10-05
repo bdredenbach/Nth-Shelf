@@ -1,0 +1,247 @@
+{
+  "touches": 33,
+  "oldTouches": 30,
+  "positiveAlphaChecks": 273,
+  "negativeAlphaChecks": 198,
+  "errors": [],
+  "dense": [
+    {
+      "frame": "1-018-lower-left",
+      "canvas": [
+        992,
+        774
+      ],
+      "distinctInteriorSamples": 24391,
+      "interiorFailures": 0,
+      "distinctExteriorSamples": 5242,
+      "exteriorFailures": 0
+    },
+    {
+      "frame": "3-008-bottom-wide",
+      "canvas": [
+        1957,
+        659
+      ],
+      "distinctInteriorSamples": 38747,
+      "interiorFailures": 0,
+      "distinctExteriorSamples": 11539,
+      "exteriorFailures": 0
+    },
+    {
+      "frame": "3-008-left-tall",
+      "canvas": [
+        788,
+        1413
+      ],
+      "distinctInteriorSamples": 38498,
+      "interiorFailures": 0,
+      "distinctExteriorSamples": 5028,
+      "exteriorFailures": 0
+    },
+    {
+      "frame": "3-008-lower-wide",
+      "canvas": [
+        1842,
+        581
+      ],
+      "distinctInteriorSamples": 29235,
+      "interiorFailures": 0,
+      "distinctExteriorSamples": 12056,
+      "exteriorFailures": 0
+    }
+  ],
+  "variants": [
+    {
+      "key": "3-008",
+      "variant": "0.67x",
+      "count": 6,
+      "added": 3,
+      "targets": [
+        {
+          "name": "left-tall",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "name": "lower-wide",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "name": "bottom-wide",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "key": "3-008",
+      "variant": "1.25x",
+      "count": 6,
+      "added": 3,
+      "targets": [
+        {
+          "name": "left-tall",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "name": "lower-wide",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "name": "bottom-wide",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "key": "3-008",
+      "variant": "mirror",
+      "count": 6,
+      "added": 3,
+      "targets": [
+        {
+          "name": "left-tall",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "name": "lower-wide",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "name": "bottom-wide",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "key": "1-018",
+      "variant": "0.67x",
+      "count": 2,
+      "added": 1,
+      "targets": [
+        {
+          "name": "lower-left",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "key": "1-018",
+      "variant": "1.25x",
+      "count": 2,
+      "added": 1,
+      "targets": [
+        {
+          "name": "lower-left",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "key": "1-018",
+      "variant": "mirror",
+      "count": 2,
+      "added": 1,
+      "targets": [
+        {
+          "name": "lower-left",
+          "found": true,
+          "exclusions": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      ]
+    }
+  ]
+}

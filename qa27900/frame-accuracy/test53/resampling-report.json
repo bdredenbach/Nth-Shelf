@@ -1,0 +1,50 @@
+[
+  {
+    "app": "baseline-test52",
+    "quality": "low",
+    "count": 2,
+    "injected": 8
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "low",
+    "count": 5,
+    "injected": 8
+  },
+  {
+    "app": "baseline-test52",
+    "quality": "medium",
+    "count": 2,
+    "injected": 8
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "medium",
+    "count": 5,
+    "injected": 8
+  },
+  {
+    "app": "baseline-test52",
+    "quality": "high",
+    "count": 2,
+    "injected": 8
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "high",
+    "count": 5,
+    "injected": 8
+  },
+  {
+    "app": "baseline-test52",
+    "quality": "sharp",
+    "count": 2,
+    "injected": 8
+  },
+  {
+    "app": "nth-shelf-current",
+    "quality": "sharp",
+    "count": 5,
+    "injected": 8
+  }
+]

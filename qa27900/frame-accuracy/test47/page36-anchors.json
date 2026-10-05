@@ -1,0 +1,8 @@
+{"source":"Independent interior points from the original page and user-marked six-owner screenshot. One-based page36, source index35. Points are QA only.","width":585,"height":900,"frames":[
+{"name":"top-left","owner":2,"points":[[140,140],[50,180],[270,140],[200,35],[180,285],[235,270]]},
+{"name":"top-right","owner":1,"points":[[435,125],[320,145],[545,135],[435,40],[435,215]]},
+{"name":"sheriff-inset","owner":3,"points":[[320,310],[252,285],[542,315],[400,248],[324,361]]},
+{"name":"whole-middle-scene","owner":4,"points":[[460,465],[75,415],[540,520],[420,310],[410,578],[184,389],[494,350],[410,376]]},
+{"name":"bottom-left-shower","owner":0,"points":[[90,700],[40,705],[148,705],[91,551],[91,875]]},
+{"name":"bottom-right-room","owner":5,"points":[[365,750],[183,730],[540,770],[330,605],[420,863],[183,560]]}
+]}

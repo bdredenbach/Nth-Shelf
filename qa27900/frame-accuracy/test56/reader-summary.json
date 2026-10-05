@@ -1,0 +1,112 @@
+[
+  {
+    "page": 59,
+    "raster": "normal",
+    "touches": 54,
+    "ownership": 54,
+    "denseSamples": 10090,
+    "allDenseOpaque": true,
+    "foreignTransparent": true,
+    "extensionsOpaque": true,
+    "errors": []
+  },
+  {
+    "page": 60,
+    "raster": "normal",
+    "touches": 54,
+    "ownership": 54,
+    "denseSamples": 9640,
+    "allDenseOpaque": true,
+    "foreignTransparent": true,
+    "extensionsOpaque": true,
+    "errors": []
+  },
+  {
+    "page": 61,
+    "raster": "normal",
+    "touches": 54,
+    "ownership": 54,
+    "denseSamples": 10777,
+    "allDenseOpaque": true,
+    "foreignTransparent": true,
+    "extensionsOpaque": true,
+    "errors": []
+  },
+  {
+    "page": 62,
+    "raster": "normal",
+    "touches": 45,
+    "ownership": 45,
+    "denseSamples": 10392,
+    "allDenseOpaque": true,
+    "foreignTransparent": true,
+    "extensionsOpaque": true,
+    "errors": []
+  },
+  {
+    "page": 63,
+    "raster": "normal",
+    "touches": 72,
+    "ownership": 72,
+    "denseSamples": 8968,
+    "allDenseOpaque": true,
+    "foreignTransparent": true,
+    "extensionsOpaque": true,
+    "errors": []
+  },
+  {
+    "page": 64,
+    "raster": "normal",
+    "touches": 54,
+    "ownership": 54,
+    "denseSamples": 9976,
+    "allDenseOpaque": true,
+    "foreignTransparent": true,
+    "extensionsOpaque": true,
+    "errors": []
+  },
+  {
+    "page": 65,
+    "raster": "normal",
+    "touches": 63,
+    "ownership": 63,
+    "denseSamples": 10065,
+    "allDenseOpaque": true,
+    "foreignTransparent": true,
+    "extensionsOpaque": true,
+    "errors": []
+  },
+  {
+    "page": 60,
+    "raster": "high",
+    "touches": 54,
+    "ownership": 54,
+    "denseSamples": 9640,
+    "allDenseOpaque": true,
+    "foreignTransparent": true,
+    "extensionsOpaque": true,
+    "errors": []
+  },
+  {
+    "page": 61,
+    "raster": "high",
+    "touches": 54,
+    "ownership": 54,
+    "denseSamples": 10777,
+    "allDenseOpaque": true,
+    "foreignTransparent": true,
+    "extensionsOpaque": true,
+    "errors": []
+  },
+  {
+    "page": 62,
+    "raster": "high",
+    "touches": 45,
+    "ownership": 45,
+    "denseSamples": 10392,
+    "allDenseOpaque": true,
+    "foreignTransparent": true,
+    "extensionsOpaque": true,
+    "errors": []
+  }
+]

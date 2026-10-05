@@ -1,0 +1,47 @@
+===frame-geometry-contract===
+Frame geometry contract passed: 18 physical-angle/crop cases, live and persisted rendering, tap containment and invalid-proof controls.
+===gutter-boundaries===
+Gutter boundaries: 10 profiles and a four-panel image passed.
+===internal-gutters===
+Internal gutter synthetic checks passed: nested H/V/H geometry and five artwork/fragment controls.
+===page-layout===
+page-layout: synthetic stacks, skewed rails, ownership vetoes, finite quads passed
+===closed-frames===
+closed-frames: drawn corners, measured tilt, missing sides, internal divisions and inset ownership passed
+closed-frames: established baseline and stack priority, empty-page routing and safe failure passed
+===exterior-gutter-frames===
+exterior gutters: connected dark frames, five-position ownership, neighbor separation, missing sides, dividers and inset vetoes passed
+closed-frames: drawn corners, measured tilt, missing sides, internal divisions and inset ownership passed
+neighbor frames: positive five-position ownership and five rejection/partition scenarios passed
+closed-frames: established baseline and stack priority, empty-page routing and safe failure passed
+===gradient-gutter-frames===
+gradient gutter: five interior positions, missing sides, palette mismatch, full/partial dividers and insets; legacy priority and overlap gates passed
+===open-regions===
+open regions: whole artwork/captions, mirror, empty/two-scene/crossing/inset negatives, neighbor proof and identity preservation passed
+===overlap-frames===
+Overlap frames passed: three synthetic visible outlines, four ownership probes, geometry preservation, nine missing-border/inset/caption negatives, invalid-polygon and proof guards.
+===neighbor-frames===
+neighbor frames: positive five-position ownership and five rejection/partition scenarios passed
+===panels-partition===
+page-partition: independently drawn connected leaves, two-axis tilt, insets, partial borders and malformed input passed
+dark partial recovery: intact siblings retained; interrupted/inset/uniform regions never become owners
+page-partition: established route priority and failure fallback passed
+===pilot-strips===
+pilot-strips: complete white-margin stacks, attached dark artwork, tilted rails, missing/divided/inset negatives passed
+===partition-queue===
+partition queue: dark-adjacent ink fits, distinct leaves, noisy thin interrupted dividers and partial-map abstention passed
+partition queue: full shared-edge anchors, unchanged unrelated rails, distance bounds, duplicate anchors and off-ink rejection passed
+===partition-completion===
+partition completion: exact old identity, disjoint additions, conflicting borders and composite veto passed
+===uniform-core-partition===
+synthetic old/new 2 4 [
+  [ 0.05, 0.03, 0.29523809523809524, 0.47 ],
+  [ 0.34523809523809523, 0.03, 0.6047619047619047, 0.47 ],
+  [ 0.05, 0.5, 0.8999999999999999, 0.2142857142857143 ],
+  [ 0.05, 0.7142857142857143, 0.8999999999999999, 0.25571428571428567 ]
+]
+Uniform ink-core supplement: independent layout, exact old boundaries, seven negative images and invalid-anchor gates passed.
+===bubble-selection===
+Bubble proof: 10 independent synthetic cases passed through detect + extract.
+===double-popout===
+Double pop-out: crop mapping, caption open/close, cancellation, request order, deferred navigation and outside taps passed

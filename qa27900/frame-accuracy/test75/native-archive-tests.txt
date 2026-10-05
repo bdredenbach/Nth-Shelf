@@ -1,0 +1,3 @@
+PASS: nested CBZ creation, cached whole archive copy, SHA-256 verification, nested page restore and exact retained source bytes
+PASS: restore bridge payloads: 1228993 short reads -> 601 batched replies, same 629145631 bytes
+PASS: 600 MiB archive write/read/verify with 32 MiB heap; cancellation and corruption rejection

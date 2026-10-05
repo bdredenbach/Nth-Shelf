@@ -1,0 +1,98 @@
+[
+  {
+    "page": 67,
+    "frames": 4,
+    "touches": 36,
+    "denseOpaqueSamples": 9716,
+    "crossingOpaqueChecks": 0,
+    "foreignTransparentChecks": 0,
+    "geometryPreserved": true,
+    "browserErrors": 0,
+    "renderInspected": true,
+    "mapSha256": "df9dec4140aa01d2e7a0012bc51285a2b21dacb85c9ac5e3d3a139c9846b275f"
+  },
+  {
+    "page": 68,
+    "frames": 7,
+    "touches": 61,
+    "denseOpaqueSamples": 9348,
+    "crossingOpaqueChecks": 9,
+    "foreignTransparentChecks": 16,
+    "geometryPreserved": true,
+    "browserErrors": 0,
+    "renderInspected": true,
+    "mapSha256": "103157545e18b0bb2e9c09303803ab0dfef73ddcc89e844d517a176490c866d6"
+  },
+  {
+    "page": 69,
+    "frames": 4,
+    "touches": 36,
+    "denseOpaqueSamples": 10770,
+    "crossingOpaqueChecks": 0,
+    "foreignTransparentChecks": 0,
+    "geometryPreserved": true,
+    "browserErrors": 0,
+    "renderInspected": true,
+    "mapSha256": "45cb9744fdf6a7af9f480d88fbbc3c3ee9b1ae3103df509b2f041ef2c21cd7af"
+  },
+  {
+    "page": 70,
+    "frames": 4,
+    "touches": 36,
+    "denseOpaqueSamples": 10019,
+    "crossingOpaqueChecks": 27,
+    "foreignTransparentChecks": 45,
+    "geometryPreserved": true,
+    "browserErrors": 0,
+    "renderInspected": true,
+    "mapSha256": "8346ac93eec99936e5ca847b410769507252f33dfb1b317d8973ca89060d9eaa"
+  },
+  {
+    "page": 71,
+    "frames": 6,
+    "touches": 54,
+    "denseOpaqueSamples": 5880,
+    "crossingOpaqueChecks": 63,
+    "foreignTransparentChecks": 54,
+    "geometryPreserved": true,
+    "browserErrors": 0,
+    "renderInspected": true,
+    "mapSha256": "a800f471ec459b53d3f8b5e897ca19fd3201d9459b8e70667894b99835d57e06"
+  },
+  {
+    "page": 72,
+    "frames": 5,
+    "touches": 47,
+    "denseOpaqueSamples": 8218,
+    "crossingOpaqueChecks": 33,
+    "foreignTransparentChecks": 18,
+    "geometryPreserved": true,
+    "browserErrors": 0,
+    "renderInspected": true,
+    "mapSha256": "0f5c65bbdff30785bf3837a829326c71c049a79f28c9259887db58d7d13f897a"
+  },
+  {
+    "page": 73,
+    "frames": 5,
+    "touches": 45,
+    "denseOpaqueSamples": 9424,
+    "crossingOpaqueChecks": 18,
+    "foreignTransparentChecks": 0,
+    "geometryPreserved": true,
+    "browserErrors": 0,
+    "renderInspected": true,
+    "mapSha256": "cc9a23380310f616618625e3b0e617ab2d2a907307527ebb9dffb0a1605a2f7a"
+  },
+  {
+    "page": 74,
+    "frames": 6,
+    "touches": 54,
+    "denseOpaqueSamples": 8996,
+    "crossingOpaqueChecks": 0,
+    "foreignTransparentChecks": 0,
+    "geometryPreserved": true,
+    "browserErrors": 0,
+    "renderInspected": true,
+    "mapSha256": "1f3012e45bf03ce8ed82f61cefa112f77231ecf546e095db52ded3478918edc4"
+  }
+]

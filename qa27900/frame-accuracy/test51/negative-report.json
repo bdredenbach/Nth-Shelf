@@ -1,0 +1,54 @@
+[
+  {
+    "name": "positive",
+    "count": 10,
+    "nativeCount": 10,
+    "logs": [
+      "mixed rims: complete 10-frame network"
+    ]
+  },
+  {
+    "name": "erased-top-divider",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": [
+      "mixed rims: vertical seams 2"
+    ]
+  },
+  {
+    "name": "erased-bottom-divider",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": [
+      "mixed rims: column rails 2"
+    ]
+  },
+  {
+    "name": "erased-sloping-divider",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": [
+      "mixed rims: horizontal seams 1 candidates 12"
+    ]
+  },
+  {
+    "name": "transparent",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": []
+  },
+  {
+    "name": "flat",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": [
+      "mixed rims: column rails 1"
+    ]
+  },
+  {
+    "name": "already-proved-owner",
+    "count": 0,
+    "nativeCount": 0,
+    "logs": []
+  }
+]

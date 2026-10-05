@@ -1,0 +1,2 @@
+const fs=require('fs'),assert=require('assert/strict'),{chromium}=require('playwright');
+(async()=>{const b=await chromium.launch({executablePath:process.env.CHROME_BIN,args:['--no-sandbox']});try{const p=await b.newPage();await p.goto(process.env.QA_ORIGIN+'/nth-shelf-current/');for(const n of [1,2]){const panels=await p.evaluate(n=>PanelDetect.detect('/manga-chapter30/page-'+String(n).padStart(2,'0')+'.png'),n);assert.equal(panels.length,0);console.log('PASS page '+n+': no internal frames');}}finally{await b.close();}})().catch(e=>{console.error(e);process.exitCode=1});

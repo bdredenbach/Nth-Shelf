@@ -344,19 +344,40 @@ window.LongboxPageMode = (() => {
       this._cornerTapCount = 0;
     }
 
+    static cornerZoneMetrics(width, height) {
+      const w=Math.max(1,Number(width)||1),h=Math.max(1,Number(height)||1);
+      const size=Math.min(96,w*.25,h*.25);
+      // Phone-video calibration: the useful paper grab is not the mathematically
+      // extreme corner. Move the forward hot zones about half a zone inward so
+      // the finger starts on visible comic paper and the furl has room to form.
+      const inset=Math.min(size*.5,Math.max(24,h*.045));
+      return {size,inset};
+    }
+
     cornerAt(clientX, clientY) {
       if (!this.book || !this._cornerTouchBook) return null;
       const rect = this._cornerTouchBook.getBoundingClientRect();
       const bounds = this.book.pageBounds();
       const x = clientX - rect.left, y = clientY - rect.top;
-      const size = Math.min(96, bounds.width * 0.25, bounds.height * 0.25);
+      const {size,inset}=this.constructor.cornerZoneMetrics(bounds.width,bounds.height);
       const outside = 24;
-      const nearLeft = x >= bounds.x - outside && x <= bounds.x + size;
-      const nearRight = x >= bounds.x + bounds.width - size && x <= bounds.x + bounds.width + outside;
-      const nearTop = y >= bounds.y - outside && y <= bounds.y + size;
-      const nearBottom = y >= bounds.y + bounds.height - size && y <= bounds.y + bounds.height + outside;
-      if (!(nearLeft || nearRight) || !(nearTop || nearBottom)) return null;
-      return {rect, bounds, x, y, side:nearRight ? "right" : "left", topCorner:nearTop};
+      // Forward page turns must begin *inside* the visible comic. The top zone
+      // is lowered and the bottom zone raised by the same calibrated inset.
+      const rightEdge=bounds.x+bounds.width;
+      const nearRight = x >= rightEdge-size && x <= rightEdge;
+      const rightTop = y >= bounds.y+inset && y <= bounds.y+inset+size;
+      const rightBottom = y >= bounds.y+bounds.height-inset-size && y <= bounds.y+bounds.height-inset;
+      if (nearRight && (rightTop || rightBottom)) {
+        return {rect,bounds,x,y,side:"right",topCorner:rightTop,zone:{size,inset}};
+      }
+      // Preserve the existing left-side reverse gesture unchanged.
+      const nearLeft = x >= bounds.x-outside && x <= bounds.x+size;
+      const leftTop = y >= bounds.y-outside && y <= bounds.y+size;
+      const leftBottom = y >= bounds.y+bounds.height-size && y <= bounds.y+bounds.height+outside;
+      if (nearLeft && (leftTop || leftBottom)) {
+        return {rect,bounds,x,y,side:"left",topCorner:leftTop,zone:{size,inset:0}};
+      }
+      return null;
     }
 
     _cornerInfo(e) {

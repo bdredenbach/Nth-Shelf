@@ -1,0 +1,13 @@
+'use strict';
+const assert=require('node:assert/strict'),path=require('node:path');
+global.window={};require(path.resolve(__dirname,'../../../js/page-mode.js'));const PageMode=window.LongboxPageMode;
+const metrics=PageMode.cornerZoneMetrics(684,1049);assert(metrics.size>80&&metrics.size<=96);assert(metrics.inset>=40&&metrics.inset<=50);
+const pm=new PageMode({});pm.book={pageBounds:()=>({x:0,y:100,width:684,height:1049})};pm._cornerTouchBook={getBoundingClientRect:()=>({left:0,top:0,width:684,height:1400})};
+const right=684,top=100,bottom=1149,midX=right-metrics.size/2;
+assert.equal(pm.cornerAt(midX,top+10),null,'extreme upper-right corner must no longer trigger');
+assert.equal(pm.cornerAt(midX,bottom-10),null,'extreme lower-right corner must no longer trigger');
+const upper=pm.cornerAt(midX,top+metrics.inset+metrics.size/2),lower=pm.cornerAt(midX,bottom-metrics.inset-metrics.size/2);
+assert(upper&&upper.side==='right'&&upper.topCorner===true);assert(lower&&lower.side==='right'&&lower.topCorner===false);
+assert.equal(pm.cornerAt(right+5,top+metrics.inset+20),null,'forward grab must start inside visible comic paper');
+const left=pm.cornerAt(5,top+10);assert(left&&left.side==='left'&&left.topCorner===true,'reverse left corner behavior remains unchanged');
+console.log(JSON.stringify({size:metrics.size,inset:metrics.inset,extremeCornersRejected:true,insetUpperAccepted:true,insetLowerAccepted:true,outsideRightRejected:true,leftReversePreserved:true}));

@@ -1,0 +1,136 @@
+{
+  "newFrameTouches": 16,
+  "inclusionAlphaChecks": 128,
+  "exclusionAlphaChecks": 80,
+  "distinctInteriorSamples": 326306,
+  "distinctExteriorSamples": 40592,
+  "alphaFailures": 0,
+  "browserErrors": 0,
+  "eightTapPNGIdenticalPerFrame": true,
+  "oldFrameTouchPairs": 8,
+  "oldFrameTouchCount": 16,
+  "oldFrameGeometryAndPNGIdentical": true,
+  "variants": [
+    {
+      "count": 2,
+      "targets": [
+        {
+          "name": "upper-pyramid",
+          "found": true,
+          "neg": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "name": "lower-throne",
+          "found": true,
+          "neg": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "name": "0.67x",
+      "size": [
+        1332,
+        2048
+      ]
+    },
+    {
+      "count": 2,
+      "targets": [
+        {
+          "name": "upper-pyramid",
+          "found": true,
+          "neg": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "name": "lower-throne",
+          "found": true,
+          "neg": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "name": "1.25x",
+      "size": [
+        2485,
+        3820
+      ]
+    },
+    {
+      "count": 2,
+      "targets": [
+        {
+          "name": "upper-pyramid",
+          "found": true,
+          "neg": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "name": "lower-throne",
+          "found": true,
+          "neg": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "name": "mirror",
+      "size": [
+        1988,
+        3056
+      ]
+    }
+  ],
+  "dense": [
+    {
+      "name": "upper-pyramid",
+      "distinctInterior": 84831,
+      "distinctExterior": 11587,
+      "interiorFailures": 0,
+      "exteriorFailures": 0,
+      "boundaryExclusionPixels": 3,
+      "sampleStridePixels": 4,
+      "width": 1988,
+      "height": 791
+    },
+    {
+      "name": "lower-throne",
+      "distinctInterior": 241475,
+      "distinctExterior": 29005,
+      "interiorFailures": 0,
+      "exteriorFailures": 0,
+      "boundaryExclusionPixels": 3,
+      "sampleStridePixels": 4,
+      "width": 1988,
+      "height": 2204
+    }
+  ],
+  "environment": "Native Chromium, actual Reader touchscreen selection and canvas rendering with offline minimal DOM; not physical Android or complete startup/backup UI."
+}

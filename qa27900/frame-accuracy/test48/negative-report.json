@@ -1,0 +1,41 @@
+{
+  "negatives": [
+    {
+      "name": "wide-open-rim",
+      "frames": 5,
+      "repaired": 0
+    },
+    {
+      "name": "missing-pale-arms",
+      "frames": 5,
+      "repaired": 0
+    }
+  ],
+  "seal": {
+    "method": "bounded-matte-neck",
+    "radius": 1,
+    "owner": 2,
+    "componentPixels": 41192,
+    "componentBox": [
+      19,
+      236,
+      575,
+      530
+    ],
+    "ownerFraction": 0.9999514468828898,
+    "neck": [
+      [
+        574,
+        266
+      ]
+    ],
+    "arms": [
+      [
+        3,
+        12
+      ]
+    ],
+    "beforePixels": 89074,
+    "addedPixels": 48829
+  }
+}

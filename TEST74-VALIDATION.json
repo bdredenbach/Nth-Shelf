@@ -1,0 +1,128 @@
+{
+  "version": "2.79.74",
+  "versionCode": 28002,
+  "package": "io.github.bdredenbach.nthshelf.frametest74",
+  "label": "Nth Shelf Test74",
+  "sourceBase": "5116dab1825b1006d3cd87cdc536a8e2476fbfa3",
+  "sourceCommit": null,
+  "build": {
+    "status": "pending"
+  },
+  "baseline": "Published CI Test73:154 selections, including issue1 image18; earlier local Test73 had153.",
+  "localValidation": "original targets and preserved maps passed; one transformed-image abstention remains",
+  "corpus": {
+    "pages": 91,
+    "unchangedMaps": 86,
+    "priorDescriptorsPreserved": 154,
+    "beforeOwners": 154,
+    "afterOwners": 159
+  },
+  "changes": [
+    {
+      "key": "1-003",
+      "before": 0,
+      "after": 1,
+      "unchanged": false,
+      "allPreviousDescriptorsAndOrderPreserved": true,
+      "location": "Top-wide sandstorm scene on the opening spread"
+    },
+    {
+      "key": "1-011",
+      "before": 0,
+      "after": 1,
+      "unchanged": false,
+      "allPreviousDescriptorsAndOrderPreserved": true,
+      "location": "Bottom-wide dialogue scene with three balloons"
+    },
+    {
+      "key": "2-014",
+      "before": 0,
+      "after": 1,
+      "unchanged": false,
+      "allPreviousDescriptorsAndOrderPreserved": true,
+      "location": "Top-wide scene with the official and workers; two balloons"
+    },
+    {
+      "key": "3-003",
+      "before": 0,
+      "after": 1,
+      "unchanged": false,
+      "allPreviousDescriptorsAndOrderPreserved": true,
+      "location": "Lower-middle wrapped-worker scene on the spread; two thought balloons"
+    },
+    {
+      "key": "3-022",
+      "before": 1,
+      "after": 2,
+      "unchanged": false,
+      "allPreviousDescriptorsAndOrderPreserved": true,
+      "location": "Upper-left sword and hand close-up; three balloons"
+    }
+  ],
+  "reader": {
+    "tapCount": 40,
+    "inclusionChecks": 320,
+    "exclusionChecks": 200,
+    "interior": 293792,
+    "exterior": 50473,
+    "failures": 0,
+    "legacyTouches": 18,
+    "legacyDistinctFrames": 6,
+    "browserErrors": 0
+  },
+  "variants": {
+    "tested": 15,
+    "passed": 14,
+    "abstained": 1,
+    "failedCase": {
+      "owners": 0,
+      "targetVersion": null,
+      "passed": false,
+      "key": "3-003",
+      "variant": "1.25x",
+      "size": [
+        4969,
+        3820
+      ]
+    },
+    "reason": "The two source-scale reconstructions disagree after 1.25x resampling, so the candidate is withheld. Original, downscaled and mirrored page pass."
+  },
+  "proof": {
+    "version": 30,
+    "method": "independent-paper-envelope-consensus",
+    "candidateRadii": [
+      4,
+      6,
+      8
+    ],
+    "priorOverlap": 0,
+    "paperThreshold": 232,
+    "boundaryRadius": 3,
+    "boundaryMetric": "chebyshev",
+    "minimumBoundaryWhiteSupport": 0.95,
+    "minimumBoundaryExteriorSupport": 0.8,
+    "maximumTouchedPageEdges": 2,
+    "maximumArea": 0.32,
+    "consensusMaximumDifferenceFraction": 0.002,
+    "consensusMaximumPageDifferenceFraction": 0.00035,
+    "consensusBoundaryBand": 3,
+    "output": "intersection contour",
+    "independentEmptyMapRecovery": true,
+    "pageBookTapLookup": false
+  },
+  "nodeTestCommands": 64,
+  "proofTamperRejections": 34,
+  "syntax": "passed",
+  "nativeArchiveTests": "passed",
+  "sourceWebManifestSha256": "48d44c7d5d36610af04132743973cc524f16d51e849817ab46d73c518905af43",
+  "webAssetCount": 79,
+  "historical312PageArtworkRerun": false,
+  "comicArtworkCommitted": false,
+  "phoneAcceptance": "pending",
+  "limitations": [
+    "Only the supplied91 Apocalypse original images were rerun; historical Wolverine/manga/Magneto artwork was unavailable. Saved contracts remain included.",
+    "The1.25x variant of issue3 image3 abstains; the five original target images pass.",
+    "This adds five complete panels, not five complete pages. Most remaining misses are unresolved.",
+    "Targeted Reader tests use native Chromium with a minimal offline DOM, not a physical Android phone."
+  ]
+}

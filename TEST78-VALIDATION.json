@@ -1,0 +1,105 @@
+{
+  "version": "2.79.78",
+  "versionCode": 28006,
+  "package": "io.github.bdredenbach.nthshelf.frametest78",
+  "label": "Nth Shelf Test78",
+  "sourceBase": "Test77 source checkpoint; Test76 last explicitly phone-confirmed checkpoint",
+  "sourceCommit": null,
+  "build": {
+    "status": "pending"
+  },
+  "localValidation": "passed",
+  "corpus": {
+    "pages": 91,
+    "test77Owners": 164,
+    "test78Owners": 166,
+    "priorDescriptorsPreserved": 164,
+    "test77ZeroOwnerPages": 39,
+    "recoveredPages": [
+      {
+        "key": "2-017",
+        "count": 1,
+        "proofVersion": 20,
+        "method": "independent-boundary-cell",
+        "recovery": "isolated-boundary"
+      },
+      {
+        "key": "4-020",
+        "count": 1,
+        "proofVersion": 20,
+        "method": "independent-boundary-cell",
+        "recovery": "isolated-boundary"
+      }
+    ],
+    "unrecoveredZeroOwnerPages": 37
+  },
+  "targets": [
+    {
+      "issue": 2,
+      "imageIndex": 17,
+      "readerPage": "18/23",
+      "before": 0,
+      "after": 1,
+      "scene": "isolated upper-right hand/scarab panel"
+    },
+    {
+      "issue": 4,
+      "imageIndex": 20,
+      "readerPage": "21/21",
+      "before": 0,
+      "after": 1,
+      "scene": "isolated upper-right close-up/caption panel"
+    }
+  ],
+  "variants": {
+    "2-017": {
+      "0.67x": {
+        "owners": 1,
+        "valid": true
+      },
+      "1.25x": {
+        "owners": 1,
+        "valid": true
+      },
+      "horizontalMirror": {
+        "owners": 1,
+        "valid": true
+      }
+    },
+    "4-020": {
+      "0.67x": {
+        "owners": 1,
+        "valid": true
+      },
+      "1.25x": {
+        "owners": 1,
+        "valid": true
+      },
+      "horizontalMirror": {
+        "owners": 1,
+        "valid": true
+      }
+    }
+  },
+  "proof": {
+    "version": 20,
+    "method": "independent-boundary-cell",
+    "recoveryMode": "isolated-boundary",
+    "thresholdsChanged": false,
+    "emptyMapOnly": true,
+    "requiresExactlyOne": true,
+    "revalidatesSerializedProof": true,
+    "existingOwnerPriority": true,
+    "pageIdentityLookup": false
+  },
+  "rejectedExperiment": {
+    "name": "color-tolerant whole-page gutter graph",
+    "reason": "previously empty issue-1 image 12 candidates were multi-panel composites",
+    "shipped": false
+  },
+  "retainedTest77Suite": "passed exit0",
+  "phoneAcceptance": "pending",
+  "historicalArtworkRerun": false,
+  "allPanelsDetected": false,
+  "comicArtworkCommitted": false
+}

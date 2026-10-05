@@ -259,6 +259,17 @@ window.NthPageDeck = class {
     return {flat:clip(-1),folded,flap:folded.map(reflect),matrix,reflect,mx,my,nx,ny};
   }
 
+  static cornerFurlY(height, progress, topCorner, requestedY) {
+    const h=Math.max(1,Number(height)||1);
+    const p=Math.max(0,Math.min(1,Number(progress)||0));
+    const raw=Math.max(0,Math.min(h,Number.isFinite(requestedY)?requestedY:(topCorner?0:h)));
+    // A real corner turn must leave the outer edge vertically as well as
+    // horizontally. 4p(1-p) keeps that lift zero when the sheet is flat,
+    // strongest around mid-turn, and zero again when the page lands.
+    const furl=h*.34*(4*p*(1-p));
+    return topCorner?Math.max(raw,furl):Math.min(raw,h-furl);
+  }
+
   renderMotion(motion, progress, pointerY) {
     motion.progress=Math.max(0,Math.min(1,progress));motion.fold=motion.progress;
     const {width,height}=motion.curl;
@@ -272,7 +283,12 @@ window.NthPageDeck = class {
     const box=motion.curl.pageBox;
     const w=box.width,h=box.height;
     const corner={x:w,y:motion.flat?h/2:(motion.topCorner?0:h)};
-    const requestedY=motion.flat?corner.y:(Number.isFinite(pointerY)?pointerY:corner.y+(motion.topCorner?1:-1)*h*.12*Math.sin(Math.PI*motion.progress));
+    const rawY=motion.flat?corner.y:(Number.isFinite(pointerY)?pointerY:corner.y);
+    // Preserve the user's vertical pull, but guarantee a visible inward corner
+    // arc even for an almost-horizontal drag. Bottom corners furl upward;
+    // top corners furl downward. This prevents the crease collapsing into the
+    // old vertical "turning from the middle" hinge.
+    const requestedY=motion.flat?corner.y:this.constructor.cornerFurlY(h,motion.progress,motion.topCorner,rawY);
     // Never fold outward across the grabbed edge. Outward pointers invert the
     // crease and can reflect almost the whole page into a detached-looking strip.
     // The same inward constraint applies to the vertically mirrored corners.

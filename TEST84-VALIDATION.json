@@ -1,0 +1,789 @@
+{
+  "version": "2.79.84",
+  "versionCode": 28012,
+  "package": "io.github.bdredenbach.nthshelf.frametest84",
+  "label": "Nth Shelf Test84",
+  "sourceBase": "dc88ab91832ac511d7198b8022f7cb93778930a7 / Test83",
+  "localValidation": "passed",
+  "build": {
+    "status": "success",
+    "runId": 37238616667,
+    "runUrl": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37238616667",
+    "sourceCommit": "ecccc9e2a5afe6d466b5954ac669a6408a0fcbda",
+    "phoneAcceptance": "pending",
+    "apkSha256": "46d1a6032627d595f302b2075e5d447be329b5e7687deb198490c7811808e34c",
+    "apkBytes": 3415477,
+    "verifiedWebAssetCount": 87,
+    "downloadedArtifactSha256": "56bffed71a9e5ce417df8477af6ff5e16cddfc1bb772d351a51e4bc169f371c5",
+    "downloadedArtifactSha256Verified": true,
+    "downloadedAPKWebBytesVerified": true,
+    "sourceArchiveCommitVerified": true,
+    "signatureAndIdentity": "CI passed; downloaded APK hash and all87 web files match verified build record",
+    "browserInteractionAndBackup": "passed",
+    "nativeStreamingArchive": "passed"
+  },
+  "corpus": {
+    "pages": 91,
+    "localBaselineOwners": 180,
+    "localAfterOwners": 181,
+    "newLocalOwners": 1,
+    "previousOwnerDescriptorsPreserved": 180,
+    "rasterEnvironment": "@napi-rs/canvas; separate from physical Android and historical saved174"
+  },
+  "regression": {
+    "mode": "new supplement against frozen Test83 owners on cached original-page analysis rasters",
+    "pages": 230,
+    "baselineOwners": 852,
+    "afterOwners": 854,
+    "previousOwnerDescriptorsPreserved": 852,
+    "zeroPixelOverlap": true,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "before": 180,
+        "after": 181
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "before": 383,
+        "after": 384
+      },
+      {
+        "book": "manga32",
+        "pages": 41,
+        "before": 188,
+        "after": 188
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "before": 101,
+        "after": 101
+      }
+    ]
+  },
+  "newTargets": [
+    {
+      "book": "Rise of Apocalypse issue2",
+      "readerPage": "22/23",
+      "scene": "complete bottom panel"
+    },
+    {
+      "book": "Wolverine1000",
+      "sourceIndex": "018",
+      "readerPage": "19",
+      "scene": "complete narrow upper-left syringe scene"
+    }
+  ],
+  "integratedApocalypseReplay": {
+    "status": "passed",
+    "pages": 91,
+    "before": 180,
+    "after": 181,
+    "previousOwnerDescriptorsPreserved": 180,
+    "unchangedLocalMaps": 90,
+    "results": [
+      {
+        "key": "1-000",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-001",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-002",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-003",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-004",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-005",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-006",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-007",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-008",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-009",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-010",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-011",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-012",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-013",
+        "before": 4,
+        "after": 4,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-014",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-015",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-016",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-017",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-018",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-019",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-020",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-021",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-022",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "1-023",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-000",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-001",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-002",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-003",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-004",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-005",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-006",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-007",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-008",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-009",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-010",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-011",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-012",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-013",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-014",
+        "before": 4,
+        "after": 4,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-015",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-016",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-017",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-018",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-019",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-020",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-021",
+        "before": 0,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "2-022",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-000",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-001",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-002",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-003",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-004",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-005",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-006",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-007",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-008",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-009",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-010",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-011",
+        "before": 4,
+        "after": 4,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-012",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-013",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-014",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-015",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-016",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-017",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-018",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-019",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-020",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-021",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "3-022",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-000",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-001",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-002",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-003",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-004",
+        "before": 6,
+        "after": 6,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-005",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-006",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-007",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-008",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-009",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-010",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-011",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-012",
+        "before": 4,
+        "after": 4,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-013",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-014",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-015",
+        "before": 1,
+        "after": 1,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-016",
+        "before": 2,
+        "after": 2,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-017",
+        "before": 4,
+        "after": 4,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-018",
+        "before": 3,
+        "after": 3,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-019",
+        "before": 5,
+        "after": 5,
+        "priorDescriptorsIdentical": true
+      },
+      {
+        "key": "4-020",
+        "before": 0,
+        "after": 0,
+        "priorDescriptorsIdentical": true
+      }
+    ]
+  },
+  "retainedTests": {
+    "local": "passed",
+    "suiteCount": 76,
+    "ci": "passed"
+  },
+  "goal": "360+ remains incomplete",
+  "phoneCount": "No updated phone count supplied; Test84 acceptance pending",
+  "transformedSourceVariants": [
+    {
+      "key": "2-021",
+      "variant": "original",
+      "count": 1,
+      "allValid": true,
+      "ms": 2343,
+      "boxes": [
+        [
+          0.02735042735042735,
+          0.6966666666666667,
+          0.9435897435897436,
+          0.2788888888888889
+        ]
+      ]
+    },
+    {
+      "key": "2-021",
+      "variant": "scale067",
+      "count": 0,
+      "allValid": true,
+      "ms": 12248,
+      "boxes": []
+    },
+    {
+      "key": "2-021",
+      "variant": "scale125",
+      "count": 1,
+      "allValid": true,
+      "ms": 15712,
+      "boxes": [
+        [
+          0.02735042735042735,
+          0.6966666666666667,
+          0.9435897435897436,
+          0.2788888888888889
+        ]
+      ]
+    },
+    {
+      "key": "2-021",
+      "variant": "mirror",
+      "count": 1,
+      "allValid": true,
+      "ms": 14153,
+      "boxes": [
+        [
+          0.02905982905982906,
+          0.6966666666666667,
+          0.9435897435897436,
+          0.2788888888888889
+        ]
+      ]
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-018.jpg",
+      "variant": "original",
+      "count": 1,
+      "allValid": true,
+      "ms": 1673,
+      "boxes": [
+        [
+          0.02905982905982906,
+          0.025555555555555557,
+          0.20683760683760682,
+          0.4766666666666667
+        ]
+      ]
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-018.jpg",
+      "variant": "scale067",
+      "count": 1,
+      "allValid": true,
+      "ms": 21788,
+      "boxes": [
+        [
+          0.02905982905982906,
+          0.025555555555555557,
+          0.20683760683760682,
+          0.4766666666666667
+        ]
+      ]
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-018.jpg",
+      "variant": "scale125",
+      "count": 1,
+      "allValid": true,
+      "ms": 23602,
+      "boxes": [
+        [
+          0.02905982905982906,
+          0.025555555555555557,
+          0.20683760683760682,
+          0.4766666666666667
+        ]
+      ]
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-018.jpg",
+      "variant": "mirror",
+      "count": 1,
+      "allValid": true,
+      "ms": 24320,
+      "boxes": [
+        [
+          0.764102564102564,
+          0.025555555555555557,
+          0.20683760683760682,
+          0.4766666666666667
+        ]
+      ]
+    },
+    {
+      "key": "2-021",
+      "variant": "jpeg82",
+      "count": 1,
+      "allValid": true,
+      "ms": 14737,
+      "boxes": [
+        [
+          0.02735042735042735,
+          0.6988888888888889,
+          0.9435897435897436,
+          0.27666666666666667
+        ]
+      ]
+    },
+    {
+      "key": "wolverine/Wolverine (2010-2012) 1000-018.jpg",
+      "variant": "jpeg82",
+      "count": 0,
+      "allValid": true,
+      "ms": 15979,
+      "boxes": []
+    }
+  ],
+  "integratedWolverineTarget": {
+    "key": "wolverine/Wolverine (2010-2012) 1000-018.jpg",
+    "before": 4,
+    "after": 5,
+    "priorDescriptorsIdentical": true,
+    "ms": 24827
+  },
+  "transformedSourceNotes": "Each transformed raster uses its corresponding retained Test83 detector owners. Apocalypse reduced-scale0.67x abstains; Wolverine JPEG quality82 abstains. All other tested original/scale/mirror/JPEG cases retain the complete new contour. No phone latency or updated phone frame-count claim."
+}

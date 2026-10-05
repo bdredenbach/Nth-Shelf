@@ -1,0 +1,13 @@
+{
+  "readerPage": 43,
+  "archiveIndex": 42,
+  "imageSha256": "b155ad69833884a89a172dd070a1c3b26195fa613249dfa5e02260c2fb572faa",
+  "note": "QA-only manual-safe ownership anchors; not read by the runtime detector.",
+  "panels": [
+    {"index": 0, "points": [[100,80],[300,100],[500,120],[100,200]]},
+    {"index": 1, "points": [[100,380],[300,380],[500,350],[200,430]]},
+    {"index": 2, "points": [[60,600],[80,700],[100,800],[160,650]]},
+    {"index": 3, "points": [[250,600],[280,700],[300,800],[200,650]]},
+    {"index": 4, "points": [[420,600],[500,600],[450,700],[520,800]]}
+  ]
+}

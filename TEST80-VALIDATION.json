@@ -1,0 +1,74 @@
+{
+  "version": "2.79.80",
+  "versionCode": 28008,
+  "package": "io.github.bdredenbach.nthshelf.frametest80",
+  "label": "Nth Shelf Test80",
+  "sourceBase": "user-locked Test79 / 169 owners",
+  "localValidation": "passed",
+  "build": { "status": "pending" },
+  "corpus": {
+    "pages": 91,
+    "test79Owners": 169,
+    "test80Owners": 174,
+    "newOwners": 5,
+    "oneOwnerPages": 11,
+    "separatorEligibleOneOwnerPages": ["2-013", "2-014", "4-002"],
+    "acceptedPages": ["2-014", "4-002"],
+    "withheldPages": ["2-013"],
+    "priorDescriptorsPreserved": 169
+  },
+  "targets": [
+    {
+      "issue": 2,
+      "imageIndex": 14,
+      "readerPage": "15/23",
+      "before": 1,
+      "after": 4,
+      "added": 3,
+      "retainedOwner": "upper tier"
+    },
+    {
+      "issue": 4,
+      "imageIndex": 2,
+      "readerPage": "3/21",
+      "before": 1,
+      "after": 3,
+      "added": 2,
+      "retainedOwner": "lower tier"
+    }
+  ],
+  "variants": {
+    "2-014": {
+      "original": {"added": 3, "valid": true},
+      "0.67x": {"added": 3, "valid": true},
+      "1.25x": {"added": 3, "valid": true},
+      "horizontalMirror": {"added": 3, "valid": true},
+      "jpeg82": {"added": 3, "valid": true}
+    },
+    "4-002": {
+      "original": {"added": 2, "valid": true},
+      "0.67x": {"added": 2, "valid": true},
+      "1.25x": {"added": 2, "valid": true},
+      "horizontalMirror": {"added": 2, "valid": true},
+      "jpeg82": {"added": 2, "valid": true}
+    }
+  },
+  "proof": {
+    "version": 1,
+    "method": "stable-horizontal-paper-strips",
+    "existingOwnerCountRequired": 1,
+    "separatorCount": [2, 3],
+    "barrierHalfWidths": [0, 1, 2],
+    "maximumBoxDrift": 3,
+    "minimumTierWidthFraction": 0.90,
+    "priorMatchMinimumOverlap": 0.72,
+    "existingOwnerPriority": true,
+    "pageIdentityLookup": false
+  },
+  "withheld": {
+    "2-013": "measured separators do not produce a complete stable tier set; route returns no additions"
+  },
+  "allPanelsDetected": false,
+  "comicArtworkCommitted": false,
+  "phoneAcceptance": "pending"
+}

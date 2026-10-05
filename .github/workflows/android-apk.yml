@@ -1,151 +1,174 @@
-name: Build Android APK
+name: Build Nth Shelf APK
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - Test_Branch
+    branches: [Android, Test_Branch]
     paths:
-      - ".github/workflows/android-apk.yml"
-      - "android/**"
-      - "index.html"
-      - "manifest.json"
-      - "manifest.webmanifest"
-      - "sw.js"
-      - "assets/**"
-      - "css/**"
-      - "icons/**"
-      - "js/**"
-      - "qa27900/brand-integration.cjs"
-      - "qa27900/stream-integration.cjs"
-      - "qa27900/auto-scroll.cjs"
-      - "qa27900/frame-geometry-contract.cjs"
-      - "qa27900/gutter-boundaries.cjs"
-      - "qa27900/internal-gutters.cjs"
-      - "qa27900/page-layout.cjs"
-      - "qa27900/closed-frames.cjs"
-      - "qa27900/exterior-gutter-frames.cjs"
-      - "qa27900/gradient-gutter-frames.cjs"
-      - "qa27900/open-regions.cjs"
-      - "qa27900/overlap-frames.cjs"
-      - "qa27900/neighbor-frames.cjs"
-      - "qa27900/panels-partition.cjs"
-      - "qa27900/pilot-strips.cjs"
-      - "qa27900/partition-queue.cjs"
-      - "qa27900/partition-completion.cjs"
-      - "qa27900/uniform-core-partition.cjs"
-      - "qa27900/bubble-selection.cjs"
-      - "qa27900/double-popout.cjs"
-      - "THIRD_PARTY_NOTICES.txt"
+      - '.github/workflows/android-apk.yml'
+      - 'android/**'
+      - 'js/**'
+      - 'css/**'
+      - 'assets/**'
+      - 'icons/**'
+      - 'qa27900/**'
+      - 'index.html'
+      - 'sw.js'
+      - 'manifest.json'
+      - 'manifest.webmanifest'
+      - 'THIRD_PARTY_NOTICES.txt'
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: nth-shelf-android-${{ github.ref }}
-  cancel-in-progress: true
+  group: nth-shelf-test88-apk-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  build-debug-apk:
+  build:
+    if: github.repository == 'bdredenbach/Nth-Shelf' && (github.ref == 'refs/heads/Android' || github.ref == 'refs/heads/Test_Branch')
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-
+    timeout-minutes: 35
     steps:
-      - name: Check out tested source
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
-      - name: Browser interaction and backup round-trip gate
-        env:
-          CHROME_BIN: /usr/bin/google-chrome
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax and retained frame regression tests
+        shell: bash
+        run: bash qa27900/frame-accuracy/test88/run-retained.sh
+
+      - name: Set up browser test dependencies
         run: |
           npm install --no-save --package-lock=false playwright@1.51.1
-          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/nth-http.log 2>&1 &
-          node qa27900/auto-scroll.cjs
-          node qa27900/frame-geometry-contract.cjs
-          node qa27900/gutter-boundaries.cjs
-          node qa27900/internal-gutters.cjs
-          node qa27900/page-layout.cjs
-          node qa27900/closed-frames.cjs
-          node qa27900/exterior-gutter-frames.cjs
-          node qa27900/gradient-gutter-frames.cjs
-          node qa27900/open-regions.cjs
-          node qa27900/overlap-frames.cjs
-          node qa27900/neighbor-frames.cjs
-          node qa27900/panels-partition.cjs
-          node qa27900/pilot-strips.cjs
-          node qa27900/partition-queue.cjs
-          node qa27900/partition-completion.cjs
-          node qa27900/uniform-core-partition.cjs
-          node qa27900/bubble-selection.cjs
-          node qa27900/double-popout.cjs
-          node qa27900/brand-integration.cjs
-          node qa27900/stream-integration.cjs
+          npx playwright install --with-deps chromium
 
-      - name: Preserve browser test screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: brand-browser-checks
-          path: /tmp/nth-shelf-*.png
-          if-no-files-found: ignore
-
-      - name: Set up Java 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "17"
-
-      - name: Native streaming archive regression (600 MiB, 32 MiB heap)
-        run: |
-          mkdir -p /tmp/nth-archive-tests
-          javac -d /tmp/nth-archive-tests android/app/src/main/java/io/github/bdredenbach/nthshelf/ArchiveIO.java android/archive-tests/ArchiveIOTest.java
-          java -ea -Xmx32m -cp /tmp/nth-archive-tests io.github.bdredenbach.nthshelf.ArchiveIOTest
-
-      - name: Set up Gradle 8.9
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "8.9"
-
-      - name: Build installable debug APK
-        run: gradle --no-daemon --stacktrace -p android :app:assembleDebug
-
-      - name: Verify package metadata and signature
+      - name: Browser interaction and backup round-trip checks
         shell: bash
         run: |
-          APK="android/app/build/outputs/apk/debug/app-debug.apk"
-          APKSIGNER="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner | sort -V | tail -n 1)"
-          AAPT="$(find "$ANDROID_HOME/build-tools" -type f -name aapt | sort -V | tail -n 1)"
-          test -x "$APKSIGNER"
-          test -x "$AAPT"
-          unzip -t "$APK"
-          "$APKSIGNER" verify --verbose --print-certs "$APK"
-          BADGING="$("$AAPT" dump badging "$APK")"
-          echo "$BADGING"
-          grep -F "package: name='io.github.bdredenbach.nthshelf'" <<<"$BADGING"
-          grep -F "versionCode='27928'" <<<"$BADGING"
-          grep -F "versionName='2.79.24-test1'" <<<"$BADGING"
+          set -euo pipefail
+          unset CHROME_BIN CODEX_PRIMARY_RUNTIME_NODE_MODULES
+          python3 -m http.server 8765 --bind 127.0.0.1 > dist/http-server.txt 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8765/ > /dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:8765/ > /dev/null
+          node qa27900/brand-integration.cjs 2>&1 | tee dist/branding-check.txt
+          node qa27900/stream-integration.cjs 2>&1 | tee dist/backup-check.txt
 
-      - name: Name release artifact
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk Nth-Shelf-V2.79.24-Test1.apk
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
 
-      - name: Upload workflow artifact
+      - name: Native streaming archive regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/nth-archive-tests"
+          javac -d "$RUNNER_TEMP/nth-archive-tests" android/app/src/main/java/io/github/bdredenbach/nthshelf/ArchiveIO.java android/archive-tests/ArchiveIOTest.java
+          java -ea -Xmx32m -cp "$RUNNER_TEMP/nth-archive-tests" io.github.bdredenbach.nthshelf.ArchiveIOTest | tee dist/native-check.txt
+
+      - uses: android-actions/setup-android@v3
+        with:
+          # Override v3's default: the obsolete 'tools' package is unavailable.
+          packages: 'platform-tools'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Install Android SDK 35
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+
+      - name: Build isolated Test88 APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          gradle --no-daemon --stacktrace -p android :app:assembleDebug 2>&1 | tee dist/gradle-build.txt
+
+      - name: Verify APK signature, identity and exact packaged web files
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK=android/app/build/outputs/apk/debug/app-debug.apk
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$APK" | tee dist/signature.txt
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" > dist/package.txt
+          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest88'" dist/package.txt
+          grep -F "versionCode='28016'" dist/package.txt
+          grep -F "versionName='2.79.88'" dist/package.txt
+          grep -F "application-label:'Nth Shelf Test88'" dist/package.txt
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess, zipfile
+          root = pathlib.Path('.')
+          apk = root / 'android/app/build/outputs/apk/debug/app-debug.apk'
+          singles = {'index.html', 'manifest.json', 'manifest.webmanifest', 'sw.js', 'THIRD_PARTY_NOTICES.txt'}
+          directories = {'assets', 'css', 'icons', 'js'}
+          tracked = subprocess.check_output(['git', 'ls-files', '-z']).decode().split('\0')
+          expected = {p for p in tracked if p and (p in singles or p.split('/', 1)[0] in directories)}
+          expected.discard('assets/nth-shelf-splash.webp')
+          with zipfile.ZipFile(apk) as z:
+              if z.testzip():
+                  raise SystemExit('APK ZIP integrity check failed')
+              prefix = 'assets/public/'
+              packaged = {n[len(prefix):] for n in z.namelist() if n.startswith(prefix) and not n.endswith('/')}
+              if packaged != expected:
+                  raise SystemExit('Web asset set mismatch: '+repr({'missing': sorted(expected-packaged), 'unexpected': sorted(packaged-expected)}))
+              hashes = {}
+              for rel in sorted(expected):
+                  source = (root / rel).read_bytes()
+                  if z.read(prefix+rel) != source:
+                      raise SystemExit('Packaged web file differs from source: '+rel)
+                  hashes[rel] = hashlib.sha256(source).hexdigest()
+              for required_detector in ['js/panels-ragged-gutters.js','js/panels-interrupted-gutters.js','js/panels-neighbor-completion.js','js/panels-shared-boundaries.js','js/panels-exterior-completion.js','js/panels-edge-guided-paper.js','js/panels-chromatic-shared-border.js','js/panels-narrow-ink-frames.js','js/panels-top-row-barrier.js','js/panels-horizontal-paper-strips.js','js/panels-local-boundary-consensus.js','js/panels-context-cells.js','js/panels-interior-strokes.js','js/panels-smooth-gutter-boundaries.js','js/panels-orthogonal-white-gutters.js','js/panels-paper-recovery.js','js/panels-colored-rims.js','js/panels-dark-overlay-insets.js','js/panels-curved-rims.js','js/panels-matte-cells.js','js/panels-edge-spill.js','js/panels-structural-grid.js','js/panels-pale-completion.js','js/panels-gutter-graph.js']:
+                  if required_detector not in hashes:
+                      raise SystemExit('Frame detector missing: '+required_detector)
+          frozen = json.loads((root / 'qa27900/frame-accuracy/test88/web-assets.json').read_text())
+          if hashes != frozen['sha256']:
+              raise SystemExit('APK web bytes differ from the local tested manifest')
+          subprocess.run(['git', 'diff', '--exit-code', 'HEAD', '--'], check=True)
+          digest = hashlib.sha256(apk.read_bytes()).hexdigest()
+          record = {
+              'versionName': '2.79.88', 'versionCode': 28016,
+              'applicationId': 'io.github.bdredenbach.nthshelf.frametest88',
+              'label': 'Nth Shelf Test88', 'sourceCommit': os.environ['GITHUB_SHA'],
+              'signing': 'CI debug key; not a Play Store production key',
+              'apkSha256': digest, 'apkBytes': apk.stat().st_size,
+              'verifiedWebAssetCount': len(hashes), 'webAssetSha256': hashes,
+              'phoneAcceptance': 'pending',
+              'comicArtworkTests': 'Saved results retained; comic artwork fixture is not uploaded or rerun by this workflow'
+          }
+          (root / 'dist/BUILD.json').write_text(json.dumps(record, indent=2)+'\n')
+          (root / 'dist/Nth-Shelf-2.79.88-Test88.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.88-Test88.apk\n')
+          (root / 'dist/INSTALL.txt').write_text('Install Nth-Shelf-2.79.88-Test88.apk as the separate Nth Shelf Test88 app. Adds independently enclosed frames surrounded by locally smooth gradient gutters while preserving existing owners. New phone target: Rise of Apocalypse issue 2 reader 17/23, complete upper-left tall scene including all speech balloons. Local raster counts and regression results are documented in TEST88-VALIDATION.json. General frame detection remains incomplete. Phone acceptance pending.\n')
+          print(json.dumps({'sourceCommit': record['sourceCommit'], 'verifiedWebAssetCount': len(hashes), 'apkSha256': digest}, indent=2))
+          PY
+          cp "$APK" dist/Nth-Shelf-2.79.88-Test88.apk
+          git archive --format=zip --output=dist/Nth-Shelf-2.79.88-Test88-Source.zip HEAD
+
+      - name: Upload verified APK, source and build record
         uses: actions/upload-artifact@v4
         with:
-          name: Nth-Shelf-V2.79.24-Test1
-          path: Nth-Shelf-V2.79.24-Test1.apk
+          name: Nth-Shelf-2.79.88-Test88
+          path: dist/
           if-no-files-found: error
           retention-days: 30
 
-      - name: Publish test APK prerelease
-        if: github.ref == 'refs/heads/Test_Branch'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: v2.79.24-test1-${{ github.run_number }}
-        run: >-
-          gh release create "$RELEASE_TAG"
-          Nth-Shelf-V2.79.24-Test1.apk
-          --repo "$GITHUB_REPOSITORY"
-          --target "$GITHUB_SHA"
-          --prerelease
-          --title "Nth Shelf 2.79.24 Test 1"
-          --notes "Installable debug APK built from commit $GITHUB_SHA on Test_Branch. This is a test build, not a Play Store signed release."
+      - name: Preserve failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test88-build-diagnostics
+          path: |
+            dist/*.txt
+            dist/*.json
+            /tmp/nth-shelf-*.png
+          if-no-files-found: ignore
+          retention-days: 14

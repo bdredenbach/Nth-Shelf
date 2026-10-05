@@ -1,0 +1,170 @@
+[
+  {
+    "page": 68,
+    "quality": "high",
+    "count": 7,
+    "injected": 2,
+    "mapSha256": "103157545e18b0bb2e9c09303803ab0dfef73ddcc89e844d517a176490c866d6"
+  },
+  {
+    "page": 68,
+    "quality": "low",
+    "count": 7,
+    "injected": 2,
+    "mapSha256": "103157545e18b0bb2e9c09303803ab0dfef73ddcc89e844d517a176490c866d6"
+  },
+  {
+    "page": 68,
+    "quality": "medium",
+    "count": 7,
+    "injected": 2,
+    "mapSha256": "103157545e18b0bb2e9c09303803ab0dfef73ddcc89e844d517a176490c866d6"
+  },
+  {
+    "page": 68,
+    "quality": "sharp",
+    "count": 7,
+    "injected": 2,
+    "mapSha256": "103157545e18b0bb2e9c09303803ab0dfef73ddcc89e844d517a176490c866d6"
+  },
+  {
+    "page": 69,
+    "quality": "high",
+    "count": 4,
+    "injected": 2,
+    "mapSha256": "45cb9744fdf6a7af9f480d88fbbc3c3ee9b1ae3103df509b2f041ef2c21cd7af"
+  },
+  {
+    "page": 69,
+    "quality": "low",
+    "count": 4,
+    "injected": 2,
+    "mapSha256": "45cb9744fdf6a7af9f480d88fbbc3c3ee9b1ae3103df509b2f041ef2c21cd7af"
+  },
+  {
+    "page": 69,
+    "quality": "medium",
+    "count": 4,
+    "injected": 2,
+    "mapSha256": "45cb9744fdf6a7af9f480d88fbbc3c3ee9b1ae3103df509b2f041ef2c21cd7af"
+  },
+  {
+    "page": 69,
+    "quality": "sharp",
+    "count": 4,
+    "injected": 2,
+    "mapSha256": "45cb9744fdf6a7af9f480d88fbbc3c3ee9b1ae3103df509b2f041ef2c21cd7af"
+  },
+  {
+    "page": 70,
+    "quality": "high",
+    "count": 4,
+    "injected": 2,
+    "mapSha256": "8346ac93eec99936e5ca847b410769507252f33dfb1b317d8973ca89060d9eaa"
+  },
+  {
+    "page": 70,
+    "quality": "low",
+    "count": 4,
+    "injected": 2,
+    "mapSha256": "8346ac93eec99936e5ca847b410769507252f33dfb1b317d8973ca89060d9eaa"
+  },
+  {
+    "page": 70,
+    "quality": "medium",
+    "count": 4,
+    "injected": 2,
+    "mapSha256": "8346ac93eec99936e5ca847b410769507252f33dfb1b317d8973ca89060d9eaa"
+  },
+  {
+    "page": 70,
+    "quality": "sharp",
+    "count": 4,
+    "injected": 2,
+    "mapSha256": "8346ac93eec99936e5ca847b410769507252f33dfb1b317d8973ca89060d9eaa"
+  },
+  {
+    "page": 71,
+    "quality": "high",
+    "count": 6,
+    "injected": 2,
+    "mapSha256": "a800f471ec459b53d3f8b5e897ca19fd3201d9459b8e70667894b99835d57e06"
+  },
+  {
+    "page": 71,
+    "quality": "low",
+    "count": 6,
+    "injected": 2,
+    "mapSha256": "a800f471ec459b53d3f8b5e897ca19fd3201d9459b8e70667894b99835d57e06"
+  },
+  {
+    "page": 71,
+    "quality": "medium",
+    "count": 6,
+    "injected": 2,
+    "mapSha256": "a800f471ec459b53d3f8b5e897ca19fd3201d9459b8e70667894b99835d57e06"
+  },
+  {
+    "page": 71,
+    "quality": "sharp",
+    "count": 6,
+    "injected": 2,
+    "mapSha256": "a800f471ec459b53d3f8b5e897ca19fd3201d9459b8e70667894b99835d57e06"
+  },
+  {
+    "page": 72,
+    "quality": "high",
+    "count": 5,
+    "injected": 2,
+    "mapSha256": "0f5c65bbdff30785bf3837a829326c71c049a79f28c9259887db58d7d13f897a"
+  },
+  {
+    "page": 72,
+    "quality": "low",
+    "count": 5,
+    "injected": 2,
+    "mapSha256": "0f5c65bbdff30785bf3837a829326c71c049a79f28c9259887db58d7d13f897a"
+  },
+  {
+    "page": 72,
+    "quality": "medium",
+    "count": 5,
+    "injected": 2,
+    "mapSha256": "0f5c65bbdff30785bf3837a829326c71c049a79f28c9259887db58d7d13f897a"
+  },
+  {
+    "page": 72,
+    "quality": "sharp",
+    "count": 5,
+    "injected": 2,
+    "mapSha256": "0f5c65bbdff30785bf3837a829326c71c049a79f28c9259887db58d7d13f897a"
+  },
+  {
+    "page": 73,
+    "quality": "high",
+    "count": 5,
+    "injected": 2,
+    "mapSha256": "cc9a23380310f616618625e3b0e617ab2d2a907307527ebb9dffb0a1605a2f7a"
+  },
+  {
+    "page": 73,
+    "quality": "low",
+    "count": 5,
+    "injected": 2,
+    "mapSha256": "cc9a23380310f616618625e3b0e617ab2d2a907307527ebb9dffb0a1605a2f7a"
+  },
+  {
+    "page": 73,
+    "quality": "medium",
+    "count": 5,
+    "injected": 2,
+    "mapSha256": "cc9a23380310f616618625e3b0e617ab2d2a907307527ebb9dffb0a1605a2f7a"
+  },
+  {
+    "page": 73,
+    "quality": "sharp",
+    "count": 5,
+    "injected": 2,
+    "mapSha256": "cc9a23380310f616618625e3b0e617ab2d2a907307527ebb9dffb0a1605a2f7a"
+  }
+]

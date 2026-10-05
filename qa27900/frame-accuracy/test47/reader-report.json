@@ -1,0 +1,953 @@
+{
+  "ownership": [
+    {
+      "name": "top-left",
+      "expected": 2,
+      "x": 140,
+      "y": 140,
+      "got": 2
+    },
+    {
+      "name": "top-left",
+      "expected": 2,
+      "x": 50,
+      "y": 180,
+      "got": 2
+    },
+    {
+      "name": "top-left",
+      "expected": 2,
+      "x": 270,
+      "y": 140,
+      "got": 2
+    },
+    {
+      "name": "top-left",
+      "expected": 2,
+      "x": 200,
+      "y": 35,
+      "got": 2
+    },
+    {
+      "name": "top-left",
+      "expected": 2,
+      "x": 180,
+      "y": 285,
+      "got": 2
+    },
+    {
+      "name": "top-left",
+      "expected": 2,
+      "x": 235,
+      "y": 270,
+      "got": 2
+    },
+    {
+      "name": "top-right",
+      "expected": 1,
+      "x": 435,
+      "y": 125,
+      "got": 1
+    },
+    {
+      "name": "top-right",
+      "expected": 1,
+      "x": 320,
+      "y": 145,
+      "got": 1
+    },
+    {
+      "name": "top-right",
+      "expected": 1,
+      "x": 545,
+      "y": 135,
+      "got": 1
+    },
+    {
+      "name": "top-right",
+      "expected": 1,
+      "x": 435,
+      "y": 40,
+      "got": 1
+    },
+    {
+      "name": "top-right",
+      "expected": 1,
+      "x": 435,
+      "y": 215,
+      "got": 1
+    },
+    {
+      "name": "sheriff-inset",
+      "expected": 3,
+      "x": 320,
+      "y": 310,
+      "got": 3
+    },
+    {
+      "name": "sheriff-inset",
+      "expected": 3,
+      "x": 252,
+      "y": 285,
+      "got": 3
+    },
+    {
+      "name": "sheriff-inset",
+      "expected": 3,
+      "x": 542,
+      "y": 315,
+      "got": 3
+    },
+    {
+      "name": "sheriff-inset",
+      "expected": 3,
+      "x": 400,
+      "y": 248,
+      "got": 3
+    },
+    {
+      "name": "sheriff-inset",
+      "expected": 3,
+      "x": 324,
+      "y": 361,
+      "got": 3
+    },
+    {
+      "name": "whole-middle-scene",
+      "expected": 4,
+      "x": 460,
+      "y": 465,
+      "got": 4
+    },
+    {
+      "name": "whole-middle-scene",
+      "expected": 4,
+      "x": 75,
+      "y": 415,
+      "got": 4
+    },
+    {
+      "name": "whole-middle-scene",
+      "expected": 4,
+      "x": 540,
+      "y": 520,
+      "got": 4
+    },
+    {
+      "name": "whole-middle-scene",
+      "expected": 4,
+      "x": 420,
+      "y": 310,
+      "got": 4
+    },
+    {
+      "name": "whole-middle-scene",
+      "expected": 4,
+      "x": 410,
+      "y": 578,
+      "got": 4
+    },
+    {
+      "name": "whole-middle-scene",
+      "expected": 4,
+      "x": 184,
+      "y": 389,
+      "got": 4
+    },
+    {
+      "name": "whole-middle-scene",
+      "expected": 4,
+      "x": 494,
+      "y": 350,
+      "got": 4
+    },
+    {
+      "name": "whole-middle-scene",
+      "expected": 4,
+      "x": 410,
+      "y": 376,
+      "got": 4
+    },
+    {
+      "name": "bottom-left-shower",
+      "expected": 0,
+      "x": 90,
+      "y": 700,
+      "got": 0
+    },
+    {
+      "name": "bottom-left-shower",
+      "expected": 0,
+      "x": 40,
+      "y": 705,
+      "got": 0
+    },
+    {
+      "name": "bottom-left-shower",
+      "expected": 0,
+      "x": 148,
+      "y": 705,
+      "got": 0
+    },
+    {
+      "name": "bottom-left-shower",
+      "expected": 0,
+      "x": 91,
+      "y": 551,
+      "got": 0
+    },
+    {
+      "name": "bottom-left-shower",
+      "expected": 0,
+      "x": 91,
+      "y": 875,
+      "got": 0
+    },
+    {
+      "name": "bottom-right-room",
+      "expected": 5,
+      "x": 365,
+      "y": 750,
+      "got": 5
+    },
+    {
+      "name": "bottom-right-room",
+      "expected": 5,
+      "x": 183,
+      "y": 730,
+      "got": 5
+    },
+    {
+      "name": "bottom-right-room",
+      "expected": 5,
+      "x": 540,
+      "y": 770,
+      "got": 5
+    },
+    {
+      "name": "bottom-right-room",
+      "expected": 5,
+      "x": 330,
+      "y": 605,
+      "got": 5
+    },
+    {
+      "name": "bottom-right-room",
+      "expected": 5,
+      "x": 420,
+      "y": 863,
+      "got": 5
+    },
+    {
+      "name": "bottom-right-room",
+      "expected": 5,
+      "x": 183,
+      "y": 560,
+      "got": 5
+    }
+  ],
+  "touches": [
+    {
+      "name": "top-left",
+      "x": 140,
+      "y": 140,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        914,
+        985
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-left",
+      "x": 50,
+      "y": 180,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        914,
+        985
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-left",
+      "x": 270,
+      "y": 140,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        914,
+        985
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-left",
+      "x": 200,
+      "y": 35,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        914,
+        985
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-left",
+      "x": 180,
+      "y": 285,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        914,
+        985
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-left",
+      "x": 235,
+      "y": 270,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        914,
+        985
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-right",
+      "x": 435,
+      "y": 125,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        935,
+        731
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-right",
+      "x": 320,
+      "y": 145,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        935,
+        731
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-right",
+      "x": 545,
+      "y": 135,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        935,
+        731
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-right",
+      "x": 435,
+      "y": 40,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        935,
+        731
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "top-right",
+      "x": 435,
+      "y": 215,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        935,
+        731
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "sheriff-inset",
+      "x": 320,
+      "y": 310,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1053,
+        489
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "sheriff-inset",
+      "x": 252,
+      "y": 285,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1053,
+        489
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "sheriff-inset",
+      "x": 542,
+      "y": 315,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1053,
+        489
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "sheriff-inset",
+      "x": 400,
+      "y": 248,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1053,
+        489
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "sheriff-inset",
+      "x": 324,
+      "y": 361,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1053,
+        489
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-middle-scene",
+      "x": 460,
+      "y": 465,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1852,
+        1243
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-middle-scene",
+      "x": 75,
+      "y": 415,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1852,
+        1243
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-middle-scene",
+      "x": 540,
+      "y": 520,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1852,
+        1243
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-middle-scene",
+      "x": 420,
+      "y": 310,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1852,
+        1243
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-middle-scene",
+      "x": 410,
+      "y": 578,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1852,
+        1243
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-middle-scene",
+      "x": 184,
+      "y": 389,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1852,
+        1243
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-middle-scene",
+      "x": 494,
+      "y": 350,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1852,
+        1243
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "whole-middle-scene",
+      "x": 410,
+      "y": 376,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1852,
+        1243
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-left-shower",
+      "x": 90,
+      "y": 700,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        462,
+        1297
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-left-shower",
+      "x": 40,
+      "y": 705,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        462,
+        1297
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-left-shower",
+      "x": 148,
+      "y": 705,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        462,
+        1297
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-left-shower",
+      "x": 91,
+      "y": 551,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        462,
+        1297
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-left-shower",
+      "x": 91,
+      "y": 875,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        462,
+        1297
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-right-room",
+      "x": 365,
+      "y": 750,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1325,
+        1165
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-right-room",
+      "x": 183,
+      "y": 730,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1325,
+        1165
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-right-room",
+      "x": 540,
+      "y": 770,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1325,
+        1165
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-right-room",
+      "x": 330,
+      "y": 605,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1325,
+        1165
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-right-room",
+      "x": 420,
+      "y": 863,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1325,
+        1165
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "name": "bottom-right-room",
+      "x": 183,
+      "y": 560,
+      "same": true,
+      "focusSame": true,
+      "geometry": "outline",
+      "size": [
+        1325,
+        1165
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ]
+    }
+  ],
+  "errors": []
+}

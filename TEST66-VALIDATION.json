@@ -1,0 +1,149 @@
+{
+  "version": "2.79.66",
+  "code": 27994,
+  "package": "io.github.bdredenbach.nthshelf.frametest66",
+  "sourceBase": "9361e57465ddd212e9dce3265525fa530b0687bc",
+  "sourceCommit": "186e9e9f29ed505e62746ff859219cf9fbeba7e7",
+  "sourceHash": "f1178cf4da1c21be8ee77721eee79e8f08db7934c489a0ee991077b239ce12ad",
+  "scope": "Four complete visible frames added on three partial Apocalypse pages; general detector remains incomplete",
+  "localValidation": "passed",
+  "build": {
+    "status": "success",
+    "runId": 36321640630,
+    "artifactId": 10932623179,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/36321640630",
+    "sourceCommit": "186e9e9f29ed505e62746ff859219cf9fbeba7e7",
+    "apkSha256": "96cc53f1e6542981a97e10d9d9a201e5645f89d06aca179833c7e28b61807a07",
+    "apkBytes": 3339970,
+    "archiveSha256": "067aaa115586041dc3d8d260379e9989dc2fffcbe891d43fc8f1485597885345",
+    "packagedWebAssets": 73,
+    "exactPackagedWebBytes": "passed",
+    "signature": "CI apksigner v2 passed; artifact bytes checked locally",
+    "package": "io.github.bdredenbach.nthshelf.frametest66",
+    "version": "2.79.66",
+    "versionCode": 27994,
+    "allCIGates": "passed"
+  },
+  "pagesCompared": 312,
+  "unchangedPages": 309,
+  "earlierPagesUnchanged": 221,
+  "changedPages": [
+    {
+      "book": "apocalypse-1",
+      "page": 9,
+      "before": 0,
+      "after": 1,
+      "unchanged": false,
+      "prefixPreserved": true,
+      "cached": true,
+      "elapsedMs": 4017
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 14,
+      "before": 3,
+      "after": 4,
+      "unchanged": false,
+      "prefixPreserved": true,
+      "cached": false,
+      "elapsedMs": 4575
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 5,
+      "before": 0,
+      "after": 2,
+      "unchanged": false,
+      "prefixPreserved": true,
+      "cached": true,
+      "elapsedMs": 5440
+    }
+  ],
+  "allExistingOwnersPreserved": true,
+  "apocalypseOwnersBefore": 141,
+  "apocalypseOwnersAfter": 145,
+  "retainedGates": "passed",
+  "newContracts": {
+    "continuousGamut": {
+      "fixtureOwners": 1,
+      "priorOwnersPreserved": 3,
+      "tamperRejections": 26,
+      "syntheticGradientSizes": 2,
+      "unrelatedHueRejected": true,
+      "geometryRouterRoundTrip": "passed"
+    },
+    "stablePaper": {
+      "fixtureOwners": 2,
+      "tamperRejections": 30,
+      "narrowNeckOwners": 2,
+      "broadArtNeckRejected": true
+    },
+    "chromaticRims": {
+      "fixtureOwners": 1,
+      "tamperRejections": 21,
+      "syntheticCases": 31,
+      "hueFamilies": 5,
+      "ambiguousOwnershipRejected": true,
+      "geometryRouterRoundTrip": "passed"
+    },
+    "readerContour": {
+      "completeContourCrops": 4,
+      "legacySpillOwnersPreserved": 3
+    }
+  },
+  "reader": {
+    "pages": 3,
+    "newOwners": 4,
+    "actualTaps": 46,
+    "manualPositivePoints": 26,
+    "manualExclusionPoints": 14,
+    "denseOpaquePixels": 5991,
+    "positiveAlphaChecksAcrossTaps": 530,
+    "foreignAlphaChecksAcrossTaps": 220,
+    "errors": 0,
+    "visualAcceptance": "All four final app screenshots independently reviewed and accepted"
+  },
+  "resize": {
+    "scales": [
+      0.67,
+      1.5
+    ],
+    "pageVariants": 6,
+    "ownerComparisons": 8,
+    "minimumIoU": 0.9866557175118046,
+    "allManualPositiveAndNegativeChecksPassed": true
+  },
+  "newFrameLocations": [
+    {
+      "book": "apocalypse-1",
+      "page": 9,
+      "frame": "upper-center red-bordered scene with top dialogue balloon"
+    },
+    {
+      "book": "apocalypse-1",
+      "page": 14,
+      "frame": "tall upper-left corridor scene with all three speech balloons"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 5,
+      "frame": "left of the two lower-left tall scenes with EN balloon"
+    },
+    {
+      "book": "apocalypse-3",
+      "page": 5,
+      "frame": "right of the two lower-left tall scenes with SABAH balloon"
+    }
+  ],
+  "pageNumbering": "Reader / manifest numbering including covers",
+  "phoneAcceptance": "pending",
+  "allFramesCorrect": false,
+  "knownLimitations": [
+    "All three changed pages remain partial.",
+    "Other missed and merged scenes and ambiguous overlaps remain unresolved.",
+    "Owner counts do not establish semantic accuracy for the whole corpus."
+  ],
+  "runtimePageIdentityLookups": false,
+  "comicArtworkCommitted": false,
+  "sourceTree": "e9e5528efc9644d7731780cd82b098e92666aa9c"
+}

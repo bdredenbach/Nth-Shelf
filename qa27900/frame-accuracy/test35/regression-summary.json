@@ -1,0 +1,40 @@
+{
+  "version": "2.79.35",
+  "route": "edge-connected matte / paper cells",
+  "pageSpecificRuntimeKeys": false,
+  "test34ExactPreservation": {
+    "42": {
+      "exact": true,
+      "sha256": "ed434e5df715989d0ee5b7673bc9f56060a510b26b4aed5e2ef9ad53cf5dc52e"
+    },
+    "43": {
+      "exact": true,
+      "sha256": "5ed96c4815496acf951f801c3d6d6d967dacfb198022506cfbebb4cd9713816e"
+    }
+  },
+  "newPageWideIdentities": {
+    "44": 7,
+    "58": 4,
+    "70": 4,
+    "71": 4
+  },
+  "remainingWithheld": {
+    "1": 0,
+    "26": 0,
+    "65": 0,
+    "66": 0
+  },
+  "effectiveFixtureTotal": {
+    "test34": 310,
+    "test35": 329
+  },
+  "page44Reader": {
+    "ownershipAnchors": 35,
+    "touchRenders": 7,
+    "pixelPositionsCompared": 6480484,
+    "pixelDifferences": 0,
+    "pageErrors": 0
+  },
+  "fullMonolithic74PageCaptureRerun": false,
+  "phoneAcceptance": "pending"
+}

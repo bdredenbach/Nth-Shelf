@@ -5,6 +5,8 @@
  */
 const PanelPartition = (() => {
   'use strict';
+  // Per-decoded-image evidence only; never persisted or used across pages.
+  const artworkEvidence=typeof WeakMap!=='undefined'?new WeakMap():null;
   function analyzeRGBA(rgba,w,h,log,options={}){
     if(!Number.isInteger(w)||!Number.isInteger(h)||w<100||h<160||w>900||h>900||!rgba||rgba.length!==w*h*4)return [];
     const g=new Float32Array(w*h);for(let i=0;i<g.length;i++)g[i]=.299*rgba[i*4]+.587*rgba[i*4+1]+.114*rgba[i*4+2];
@@ -72,11 +74,48 @@ const PanelPartition = (() => {
     if(!closed(root)||darkMargin&&(Math.min(root[1][0]-root[0][0],root[2][0]-root[3][0])<w*.75||Math.min(root[3][1]-root[0][1],root[2][1]-root[1][1])<h*.75))return [];
     function find(q,vertical){const qq=vertical?[q[0].slice().reverse(),q[3].slice().reverse(),q[2].slice().reverse(),q[1].slice().reverse()]:q,side=(a,b)=>{const slope=(b[0]-a[0])/(b[1]-a[1]);return [slope,a[0]-slope*a[1]];},[lm,lb]=side(qq[0],qq[3]),[rm,rb]=side(qq[1],qq[2]);
       const xmin=Math.min(...qq.map(p=>p[0])),xmax=Math.max(...qq.map(p=>p[0])),ymin=Math.min(...qq.map(p=>p[1])),ymax=Math.max(...qq.map(p=>p[1])),center=(xmin+xmax)/2,n=Math.ceil(xmax-xmin),bound=vertical?w:h;
-      if(ymax-ymin<70||xmax-xmin<70)return {best:null,uncertain:true};let best=null,uncertain=false,coreBest=null;
+      if(ymax-ymin<70||xmax-xmin<70)return {best:null,uncertain:true};let best=null,uncertain=false,coreBest=null;const weakCandidates=[];
       function endpoints(slope,offset){const left=(lb+lm*offset)/(1-lm*slope),right=(rb+rm*offset)/(1-rm*slope);return [[left,slope*left+offset],[right,slope*right+offset]];}
       function evidence(slope,offset,ends,weak=false){const [a,b]=ends;let sum=0,square=0,dark=0,ridge=0,thick=0,paired=0,first=0,last=0;const count=Math.max(20,Math.ceil(b[0]-a[0]));
         for(let t=0;t<=count;t++){const x=Math.round(a[0]+(b[0]-a[0])*t/count),y=Math.round(slope*x+offset);if(y<8||y>=bound-8||x<0||x>=(vertical?h:w))return null;const v=at(vertical,y,x);sum+=v;square+=v*v;dark+=v<70;if(t<12)first+=v<70;if(t>count-12)last+=v<70;thick+=at(vertical,y-1,x)<70&&at(vertical,y+1,x)<70;paired+=v<70&&(at(vertical,y-1,x)<70||at(vertical,y+1,x)<70);let before=0,after=0;for(let d=4;d<=8;d++){before+=at(vertical,y-d,x);after+=at(vertical,y+d,x);}ridge+=before/5-v>20&&after/5-v>20;}
         const total=count+1,mean=sum/total,std=Math.sqrt(Math.max(0,square/total-mean*mean));return {dark:dark/total,ridge:ridge/total,thick:thick/total,paired:paired/total,mean,std,attached:first>=11&&last>=11,oneAttached:first>=11||last>=11};
+      }
+      // A weak proposed divider may be a horizontal slice through clothing,
+      // not a rail. Only dismiss it when BOTH apparent contacts are broad ink
+      // masses, with no stable narrow band at either contact. Strong, thin,
+      // one-ended, light-interrupted and low-variance rails keep their veto.
+      // No geometry is supplied by this check: all four outside rails and the
+      // page partition, corner and inset checks still have to pass unchanged.
+      function broadArtworkContacts(c){
+        const {slope,offset,ends,m}=c;
+        if(darkMargin||inkCompletion||m.dark>=.85||m.ridge>=.50)return false;
+        const [a,b]=ends,span=Math.max(12,Math.min(24,(b[0]-a[0])*.12));
+        for(const start of [a[0]+4,b[0]-4-span]){
+          let narrow=0,broad=0,light=0,coreNarrow=0,total=0;
+          for(let t=Math.ceil(start);t<start+span;t++){
+            const p=Math.round(slope*t+offset);
+            if(p<18||p>=bound-18||t<0||t>=(vertical?h:w))return false;
+            const ink=at(vertical,p,t);total++;light+=ink>=70;
+            if(ink>=70)continue;
+            // The fixed <70 band and its stricter low-variance core are both
+            // inspected, so dark paint beside real black ink cannot hide it.
+            for(const core of [false,true]){
+              if(core&&ink>=22)continue;
+              const threshold=core?ink+8:70;
+              let lo=p,hi=p;
+              while(lo>p-12&&at(vertical,lo-1,t)<threshold)lo--;
+              while(hi<p+12&&at(vertical,hi+1,t)<threshold)hi++;
+              if(!core&&hi-lo>8)broad++;
+              if(hi-lo>8||lo<=p-12||hi>=p+12||Math.abs((lo+hi)/2-p)>2)continue;
+              let before=0,after=0;
+              for(let d=2;d<=4;d++){before+=at(vertical,lo-d,t);after+=at(vertical,hi+d,t);}
+              const band=Math.min(before/3-ink,after/3-ink)>20;
+              if(core)coreNarrow+=band;else narrow+=band;
+            }
+          }
+          if(!total||narrow/total>=.25||broad/total<.50||light/total>=.25||coreNarrow/total>=.50)return false;
+        }
+        return true;
       }
       // An opt-in supplement can use a continuous, low-variance ink core
       // when dark adjacent artwork hides some contrast. Both attachments,
@@ -85,7 +124,7 @@ const PanelPartition = (() => {
         m.mean<12&&m.std<3&&m.attached&&m.ridge>=.40;
       for(let si=-48;si<=48;si++){const slope=si*.0025;for(let pos=Math.ceil(ymin+8);pos<=Math.floor(ymax-8);pos++){const offset=pos-slope*center,ends=endpoints(slope,offset),[a,b]=ends;if(a[1]<=qq[0][1]+8||a[1]>=qq[3][1]-8||b[1]<=qq[1][1]+8||b[1]>=qq[2][1]-8)continue;const room=a[1]>qq[0][1]+(qq[3][1]-qq[0][1])*.1&&a[1]<qq[3][1]-(qq[3][1]-qq[0][1])*.1&&b[1]>qq[1][1]+(qq[2][1]-qq[1][1])*.1&&b[1]<qq[2][1]-(qq[2][1]-qq[1][1])*.1;
           let probes=0;for(let j=0;j<16;j++){const x=Math.round(a[0]+(b[0]-a[0])*j/15),y=Math.round(slope*x+offset);if(y>=8&&y<bound-8)probes+=at(vertical,y,x)<70;}if(probes<10)continue;
-          const m=evidence(slope,offset,ends);if(!m)continue;if(m.ridge>=.40&&(m.dark>=.60&&m.attached||m.dark>=.80&&m.oneAttached))uncertain=true;
+          const m=evidence(slope,offset,ends);if(!m)continue;if(m.ridge>=.40&&(m.dark>=.60&&m.attached||m.dark>=.80&&m.oneAttached)){uncertain=true;if(Array.isArray(options.artworkCompletion))weakCandidates.push({slope,offset,ends,m});}
           if(options.uniformCore===true&&inkCompletion&&room&&uniformCoreEvidence(m)){
             const score=m.ridge+m.thick*.25+(1-m.mean/30)*.15+(1-m.std/25)*.1;
             if(!coreBest||score>coreBest.score)coreBest={slope,offset,ends,score,evidence:m,vertical,uniformCore:true};
@@ -93,7 +132,7 @@ const PanelPartition = (() => {
           if(!room||m.dark<.97||m.mean>=30||m.std>=25||m.ridge<.55||m.thick<(darkMargin?.35:.70))continue;const score=m.ridge+m.thick*.25+(1-m.mean/30)*.15+(1-m.std/25)*.1;if(!best||score>best.score)best={slope,offset,ends,score,evidence:m,vertical};
         }}
       if(!best)best=coreBest;
-      if(!best)return {best:null,uncertain};
+      if(!best)return {best:null,uncertain,artworkOnly:uncertain&&weakCandidates.length>0&&weakCandidates.every(broadArtworkContacts),weakVetoCount:weakCandidates.length};
       // Keep the original fit first. Dark artwork can join the broad <70 run;
       // a second pass isolates the low-variance ink core, then repeats every
       // full-length separation and attachment proof on the fitted line.
@@ -142,8 +181,15 @@ const PanelPartition = (() => {
       }
       return {best:null,uncertain:true};
     }
-    const leaves=[],blocked=[],splits=[];let failed=false;
-    function walk(q,depth){if(failed)return;if(depth>7||leaves.length+splits.length>24||!closed(q)){failed=true;return;}const hcut=find(q,false),vcut=find(q,true),choices=[hcut.best,vcut.best].filter(Boolean);if(!choices.length){if(hcut.uncertain||vcut.uncertain){if(options.allowPartial===true)blocked.push(q);else failed=true;return;}leaves.push(q);return;}const c=choices.sort((a,b)=>b.score-a.score)[0],[a,b]=c.points;splits.push(c);if(c.vertical){walk([q[0],a,b,q[3]],depth+1);walk([a,q[1],q[2],b],depth+1);}else{walk([q[0],q[1],b,a],depth+1);walk([a,b,q[2],q[3]],depth+1);}}
+    const leaves=[],blocked=[],splits=[],artworkLeaves=[];let artworkVetoCount=0;let failed=false;
+    function walk(q,depth){if(failed)return;if(depth>7||leaves.length+splits.length>24||!closed(q)){failed=true;return;}const hcut=find(q,false),vcut=find(q,true),choices=[hcut.best,vcut.best].filter(Boolean);if(!choices.length){if(hcut.uncertain||vcut.uncertain){
+      if(options.allowPartial===true){
+        blocked.push(q);
+        if(Array.isArray(options.artworkCompletion)&&!darkMargin&&
+          (!hcut.uncertain||hcut.artworkOnly)&&(!vcut.uncertain||vcut.artworkOnly)){
+          artworkLeaves.push(q);artworkVetoCount+=(hcut.weakVetoCount||0)+(vcut.weakVetoCount||0);
+        }
+      }else failed=true;return;}leaves.push(q);return;}const c=choices.sort((a,b)=>b.score-a.score)[0],[a,b]=c.points;splits.push(c);if(c.vertical){walk([q[0],a,b,q[3]],depth+1);walk([a,q[1],q[2],b],depth+1);}else{walk([q[0],q[1],b,a],depth+1);walk([a,b,q[2],q[3]],depth+1);}}
     walk(root,0);
     // Partial recovery can prove two full-width siblings while a third region
     // remains unresolved. It still needs two attached separators and all the
@@ -173,7 +219,7 @@ const PanelPartition = (() => {
         if(matches.length!==1||anchored.has(matches[0]))return [];
         anchored.set(matches[0],q);
       }
-      const original=leaves.map(q=>q.map(p=>p.slice())),adjusted=[];
+      const original=leaves.concat(artworkLeaves).map(q=>q.map(p=>p.slice())),adjusted=[];
       function crossing(a,b,c,d){const ux=b[0]-a[0],uy=b[1]-a[1],vx=d[0]-c[0],vy=d[1]-c[1],den=ux*vy-uy*vx;if(Math.abs(den)<1e-8)return null;const t=((c[0]-a[0])*vy-(c[1]-a[1])*vx)/den;return [a[0]+t*ux,a[1]+t*uy];}
       for(let i=0;i<original.length;i++){
         if(anchored.has(i)){adjusted.push(anchored.get(i));continue;}
@@ -196,11 +242,92 @@ const PanelPartition = (() => {
         adjusted.push(fitted);
       }
       for(let i=0;i<leaves.length;i++)leaves[i]=adjusted[i];
+      for(let i=0;i<artworkLeaves.length;i++)artworkLeaves[i]=adjusted[leaves.length+i];
     }
     if(log)log(`page partition: ${leaves.length} closed leaves, ${splits.length} attached separators${blocked.length?`, ${blocked.length} unresolved regions`:""}`);
-    return leaves.map(q=>{const quad=q.map(p=>({x:p[0]/w,y:p[1]/h})),xs=quad.map(p=>p.x),ys=quad.map(p=>p.y);return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:quad,_identitySource:'page-partition',_geometryOwner:'orthogonal-frame',_geometryType:'connected-page-partition',_partitionProof:{version:1,connected:true,analysisWidth:w,analysisHeight:h,leafCount:leaves.length,separatorCount:splits.length,...(darkMargin?{outerMethod:inkCompletion?'dark-margin-low-contrast':'dark-margin-transition'}:{}),outerFits:edges,...(options.uniformCore?{uniformCoreRefinement:true,uniformCoreFits:splits.filter(c=>c.uniformCore).map(c=>({slope:c.slope,offset:c.offset,residual:c.residual,evidence:c.evidence}))}:{}),...(blocked.length?{complete:false,unresolvedLeafCount:blocked.length,unresolvedRegions:blocked.map(q=>q.map(p=>({x:p[0]/w,y:p[1]/h})))}:{})}};});
+    const serialize=q=>{const quad=q.map(p=>({x:p[0]/w,y:p[1]/h})),xs=quad.map(p=>p.x),ys=quad.map(p=>p.y);return {x:Math.min(...xs),y:Math.min(...ys),w:Math.max(...xs)-Math.min(...xs),h:Math.max(...ys)-Math.min(...ys),_quad:quad,_identitySource:'page-partition',_geometryOwner:'orthogonal-frame',_geometryType:'connected-page-partition',_partitionProof:{version:1,connected:true,analysisWidth:w,analysisHeight:h,leafCount:leaves.length,separatorCount:splits.length,...(darkMargin?{outerMethod:inkCompletion?'dark-margin-low-contrast':'dark-margin-transition'}:{}),outerFits:edges,...(options.uniformCore?{uniformCoreRefinement:true,uniformCoreFits:splits.filter(c=>c.uniformCore).map(c=>({slope:c.slope,offset:c.offset,residual:c.residual,evidence:c.evidence}))}:{}),...(blocked.length?{complete:false,unresolvedLeafCount:blocked.length,unresolvedRegions:blocked.map(q=>q.map(p=>({x:p[0]/w,y:p[1]/h})))} :{})}};};
+    if(Array.isArray(options.artworkCompletion)&&!darkMargin&&leaves.length>=4&&artworkLeaves.length){
+      for(const q of artworkLeaves){
+        const panel=serialize(q);
+        panel._partitionProof={...panel._partitionProof,artworkJunctionRefinement:true,
+          artworkJunctionMethod:'broad-ink-at-both-contacts',ignoredArtworkVetoes:artworkVetoCount};
+        options.artworkCompletion.push(panel);
+      }
+    }
+    return leaves.map(serialize);
   }
-  function analyzeImage(img,log,options){const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log,options);}
+  function analyzeImage(img,log,options){
+    const scale=Math.min(1,900/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement('canvas');
+    c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,w,h);
+    const additions=[],panels=analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log,
+      {...options,...(artworkEvidence?{artworkCompletion:additions}:{})});
+    if(artworkEvidence)artworkEvidence.set(img,{panels,additions,source:img.currentSrc||img.src,width:img.width,height:img.height});
+    return panels;
+  }
+  function supplementArtworkImage(img,anchors,log){
+    if(!artworkEvidence||!Array.isArray(anchors)||anchors.length<4||anchors.length>12||
+       anchors.some(p=>!['closed-frame','page-partition'].includes(p?._identitySource)))return [];
+    const evidence=artworkEvidence.get(img);if(!evidence?.additions.length||evidence.source!==(img.currentSrc||img.src)||
+       evidence.width!==img.width||evidence.height!==img.height)return [];
+    const additions=mergeArtworkSupplement(anchors,evidence.panels,evidence.additions);
+    if(additions.length&&log)log(`artwork junction supplement: ${additions.length} complete frames; prior identities preserved`);
+    return additions;
+  }
+  function mergeArtworkSupplement(anchors,established,candidates){
+    if(!Array.isArray(anchors)||anchors.length<4||anchors.length>12||
+       !Array.isArray(established)||!Array.isArray(candidates)||
+       anchors.some(p=>!['closed-frame','page-partition'].includes(p?._identitySource)))return [];
+    const proof=anchors.find(p=>p?._identitySource==='page-partition')?._partitionProof;
+    const regions=proof?.unresolvedRegions,w=proof?.analysisWidth,h=proof?.analysisHeight;
+    if(proof?.version!==1||proof.connected!==true||proof.outerMethod||!Array.isArray(regions)||
+       !regions.length||regions.length>3||!Number.isInteger(w)||!Number.isInteger(h)||w<100||h<160||w>900||h>900)return [];
+    function validQuad(q){
+      if(!Array.isArray(q)||q.length!==4||q.some(v=>!Number.isFinite(v?.x)||!Number.isFinite(v?.y)||v.x<0||v.x>1||v.y<0||v.y>1))return false;
+      let sign=0;
+      for(let i=0;i<4;i++){
+        const a=q[i],b=q[(i+1)%4],c=q[(i+2)%4],cross=(b.x-a.x)*(c.y-b.y)-(b.y-a.y)*(c.x-b.x);
+        if(Math.abs(cross)<1e-8||sign&&Math.sign(cross)!==sign)return false;
+        sign=Math.sign(cross);
+      }
+      return true;
+    }
+    const valid=p=>validQuad(p?._quad)&&['x','y','w','h'].every(k=>Number.isFinite(p[k]))&&p.w>0&&p.h>0;
+    const same=(a,b)=>valid(a)&&valid(b)&&a._quad.every((p,i)=>p.x===b._quad[i].x&&p.y===b._quad[i].y);
+    if(regions.some(q=>!validQuad(q))||anchors.some((p,i)=>!valid(p)||
+       anchors.slice(0,i).some(a=>same(a,p))||!established.some(c=>same(p,c))))return [];
+    const additions=candidates.filter(c=>!anchors.some(p=>same(p,c)));
+    if(!additions.length||additions.length>regions.length)return [];
+    const usedRegions=new Set();
+    for(const c of additions){
+      const cp=c?._partitionProof;
+      if(!valid(c)||c._identitySource!=='page-partition'||c._geometryType!=='connected-page-partition'||
+         cp?.version!==1||cp.connected!==true||cp.outerMethod||cp.analysisWidth!==w||cp.analysisHeight!==h||
+         cp.leafCount!==proof.leafCount||cp.separatorCount!==proof.separatorCount||
+         JSON.stringify(cp.unresolvedRegions)!==JSON.stringify(regions)||
+         cp.artworkJunctionRefinement!==true||cp.artworkJunctionMethod!=='broad-ink-at-both-contacts'||
+         !Number.isInteger(cp.ignoredArtworkVetoes)||cp.ignoredArtworkVetoes<1)return [];
+      const match=regions.findIndex(q=>q.every((p,i)=>Math.hypot((p.x-c._quad[i].x)*w,(p.y-c._quad[i].y)*h)<=3));
+      if(match<0||usedRegions.has(match))return [];
+      usedRegions.add(match);
+      const xs=c._quad.map(p=>p.x),ys=c._quad.map(p=>p.y);
+      if(Math.abs(c.x-Math.min(...xs))>1e-8||Math.abs(c.y-Math.min(...ys))>1e-8||
+         Math.abs(c.w-(Math.max(...xs)-Math.min(...xs)))>1e-8||
+         Math.abs(c.h-(Math.max(...ys)-Math.min(...ys)))>1e-8)return [];
+    }
+    // Convex separating-axis test. Shared rails may differ by up to two
+    // analysis pixels, but an addition must not cover a neighboring scene.
+    function interiorOverlap(a,b){
+      const aa=a._quad.map(p=>({x:p.x*w,y:p.y*h})),bb=b._quad.map(p=>({x:p.x*w,y:p.y*h}));
+      for(const q of [aa,bb])for(let i=0;i<4;i++){
+        const v=q[i],next=q[(i+1)%4],dx=next.x-v.x,dy=next.y-v.y,len=Math.hypot(dx,dy);
+        const project=p=>(p.x*-dy+p.y*dx)/len,A=aa.map(project),B=bb.map(project);
+        if(Math.min(Math.max(...A),Math.max(...B))-Math.max(Math.min(...A),Math.min(...B))<=2)return false;
+      }
+      return true;
+    }
+    if(additions.some((c,i)=>anchors.concat(additions.slice(0,i)).some(a=>interiorOverlap(a,c))))return [];
+    return additions;
+  }
   function supplementDarkImage(img,anchors,log){
     if(!Array.isArray(anchors)||anchors.length<2||anchors.some(p=>p?._identitySource!=='page-partition'||
        p._partitionProof?.outerMethod!=='dark-margin-low-contrast'||p._partitionProof.connected!==true))return [];
@@ -223,7 +350,7 @@ const PanelPartition = (() => {
        !unresolved.some(q=>c._quad.every(p=>inside(p,q)))))return [];
     return additions;
   }
-  return {analyzeRGBA,analyzeImage,supplementDarkImage,mergeDarkSupplement,
+  return {analyzeRGBA,analyzeImage,supplementArtworkImage,mergeArtworkSupplement,supplementDarkImage,mergeDarkSupplement,
     completeDarkImage:(img,log)=>analyzeImage(img,log,{inkCompletion:true,allowPartial:true})};
 })();
 if(typeof window!=='undefined')window.PanelPartition=PanelPartition;

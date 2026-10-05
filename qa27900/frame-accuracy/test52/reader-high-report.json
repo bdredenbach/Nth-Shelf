@@ -1,0 +1,1975 @@
+{
+  "ownership": [
+    {
+      "name": "bedroom",
+      "expected": 0,
+      "x": 76,
+      "y": 56,
+      "got": 0
+    },
+    {
+      "name": "bedroom",
+      "expected": 0,
+      "x": 292,
+      "y": 56,
+      "got": 0
+    },
+    {
+      "name": "bedroom",
+      "expected": 0,
+      "x": 509,
+      "y": 56,
+      "got": 0
+    },
+    {
+      "name": "bedroom",
+      "expected": 0,
+      "x": 76,
+      "y": 165,
+      "got": 0
+    },
+    {
+      "name": "bedroom",
+      "expected": 0,
+      "x": 292,
+      "y": 165,
+      "got": 0
+    },
+    {
+      "name": "bedroom",
+      "expected": 0,
+      "x": 509,
+      "y": 165,
+      "got": 0
+    },
+    {
+      "name": "bedroom",
+      "expected": 0,
+      "x": 76,
+      "y": 274,
+      "got": 0
+    },
+    {
+      "name": "bedroom",
+      "expected": 0,
+      "x": 292,
+      "y": 274,
+      "got": 0
+    },
+    {
+      "name": "bedroom",
+      "expected": 0,
+      "x": 509,
+      "y": 274,
+      "got": 0
+    },
+    {
+      "name": "classroom",
+      "expected": 1,
+      "x": 55,
+      "y": 346,
+      "got": 1
+    },
+    {
+      "name": "classroom",
+      "expected": 1,
+      "x": 162,
+      "y": 346,
+      "got": 1
+    },
+    {
+      "name": "classroom",
+      "expected": 1,
+      "x": 270,
+      "y": 346,
+      "got": 1
+    },
+    {
+      "name": "classroom",
+      "expected": 1,
+      "x": 55,
+      "y": 420,
+      "got": 1
+    },
+    {
+      "name": "classroom",
+      "expected": 1,
+      "x": 162,
+      "y": 420,
+      "got": 1
+    },
+    {
+      "name": "classroom",
+      "expected": 1,
+      "x": 270,
+      "y": 420,
+      "got": 1
+    },
+    {
+      "name": "classroom",
+      "expected": 1,
+      "x": 55,
+      "y": 494,
+      "got": 1
+    },
+    {
+      "name": "classroom",
+      "expected": 1,
+      "x": 162,
+      "y": 494,
+      "got": 1
+    },
+    {
+      "name": "classroom",
+      "expected": 1,
+      "x": 270,
+      "y": 494,
+      "got": 1
+    },
+    {
+      "name": "classroom-inset",
+      "expected": 2,
+      "x": 359,
+      "y": 368,
+      "got": 2
+    },
+    {
+      "name": "classroom-inset",
+      "expected": 2,
+      "x": 437,
+      "y": 368,
+      "got": 2
+    },
+    {
+      "name": "classroom-inset",
+      "expected": 2,
+      "x": 515,
+      "y": 368,
+      "got": 2
+    },
+    {
+      "name": "classroom-inset",
+      "expected": 2,
+      "x": 359,
+      "y": 420,
+      "got": 2
+    },
+    {
+      "name": "classroom-inset",
+      "expected": 2,
+      "x": 437,
+      "y": 420,
+      "got": 2
+    },
+    {
+      "name": "classroom-inset",
+      "expected": 2,
+      "x": 515,
+      "y": 420,
+      "got": 2
+    },
+    {
+      "name": "classroom-inset",
+      "expected": 2,
+      "x": 418,
+      "y": 500,
+      "got": 2
+    },
+    {
+      "name": "classroom-inset",
+      "expected": 2,
+      "x": 452,
+      "y": 513,
+      "got": 2
+    },
+    {
+      "name": "classroom-inset",
+      "expected": 2,
+      "x": 499,
+      "y": 521,
+      "got": 2
+    },
+    {
+      "name": "hallway",
+      "expected": 3,
+      "x": 75,
+      "y": 561,
+      "got": 3
+    },
+    {
+      "name": "hallway",
+      "expected": 3,
+      "x": 292,
+      "y": 561,
+      "got": 3
+    },
+    {
+      "name": "hallway",
+      "expected": 3,
+      "x": 509,
+      "y": 561,
+      "got": 3
+    },
+    {
+      "name": "hallway",
+      "expected": 3,
+      "x": 75,
+      "y": 627,
+      "got": 3
+    },
+    {
+      "name": "hallway",
+      "expected": 3,
+      "x": 292,
+      "y": 627,
+      "got": 3
+    },
+    {
+      "name": "hallway",
+      "expected": 3,
+      "x": 509,
+      "y": 627,
+      "got": 3
+    },
+    {
+      "name": "hallway",
+      "expected": 3,
+      "x": 75,
+      "y": 693,
+      "got": 3
+    },
+    {
+      "name": "hallway",
+      "expected": 3,
+      "x": 292,
+      "y": 693,
+      "got": 3
+    },
+    {
+      "name": "hallway",
+      "expected": 3,
+      "x": 509,
+      "y": 693,
+      "got": 3
+    },
+    {
+      "name": "fallen-book",
+      "expected": 4,
+      "x": 59,
+      "y": 752,
+      "got": 4
+    },
+    {
+      "name": "fallen-book",
+      "expected": 4,
+      "x": 191,
+      "y": 752,
+      "got": 4
+    },
+    {
+      "name": "fallen-book",
+      "expected": 4,
+      "x": 322,
+      "y": 752,
+      "got": 4
+    },
+    {
+      "name": "fallen-book",
+      "expected": 4,
+      "x": 59,
+      "y": 802,
+      "got": 4
+    },
+    {
+      "name": "fallen-book",
+      "expected": 4,
+      "x": 190,
+      "y": 802,
+      "got": 4
+    },
+    {
+      "name": "fallen-book",
+      "expected": 4,
+      "x": 322,
+      "y": 802,
+      "got": 4
+    },
+    {
+      "name": "fallen-book",
+      "expected": 4,
+      "x": 59,
+      "y": 852,
+      "got": 4
+    },
+    {
+      "name": "fallen-book",
+      "expected": 4,
+      "x": 190,
+      "y": 852,
+      "got": 4
+    },
+    {
+      "name": "fallen-book",
+      "expected": 4,
+      "x": 322,
+      "y": 852,
+      "got": 4
+    },
+    {
+      "name": "screen-inset",
+      "expected": 5,
+      "x": 388,
+      "y": 763,
+      "got": 5
+    },
+    {
+      "name": "screen-inset",
+      "expected": 5,
+      "x": 448,
+      "y": 763,
+      "got": 5
+    },
+    {
+      "name": "screen-inset",
+      "expected": 5,
+      "x": 508,
+      "y": 763,
+      "got": 5
+    },
+    {
+      "name": "screen-inset",
+      "expected": 5,
+      "x": 388,
+      "y": 802,
+      "got": 5
+    },
+    {
+      "name": "screen-inset",
+      "expected": 5,
+      "x": 448,
+      "y": 802,
+      "got": 5
+    },
+    {
+      "name": "screen-inset",
+      "expected": 5,
+      "x": 508,
+      "y": 802,
+      "got": 5
+    },
+    {
+      "name": "screen-inset",
+      "expected": 5,
+      "x": 388,
+      "y": 842,
+      "got": 5
+    },
+    {
+      "name": "screen-inset",
+      "expected": 5,
+      "x": 448,
+      "y": 842,
+      "got": 5
+    },
+    {
+      "name": "screen-inset",
+      "expected": 5,
+      "x": 508,
+      "y": 842,
+      "got": 5
+    }
+  ],
+  "touches": [
+    {
+      "name": "bedroom",
+      "x": 76,
+      "y": 56,
+      "same": true,
+      "focusSame": true,
+      "size": [
+        1855,
+        988
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 3698,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "bedroom",
+      "x": 292,
+      "y": 56,
+      "same": true,
+      "focusSame": true,
+      "size": [
+        1855,
+        988
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "bedroom",
+      "x": 509,
+      "y": 56,
+      "same": true,
+      "focusSame": true,
+      "size": [
+        1855,
+        988
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "bedroom",
+      "x": 76,
+      "y": 165,
+      "same": true,
+      "focusSame": true,
+      "size": [
+        1855,
+        988
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "bedroom",
+      "x": 292,
+      "y": 165,
+      "same": true,
+      "focusSame": true,
+      "size": [
+        1855,
+        988
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "bedroom",
+      "x": 509,
+      "y": 165,
+      "same": true,
+      "focusSame": true,
+      "size": [
+        1855,
+        988
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "bedroom",
+      "x": 76,
+      "y": 274,
+      "same": true,
+      "focusSame": true,
+      "size": [
+        1855,
+        988
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "bedroom",
+      "x": 292,
+      "y": 274,
+      "same": true,
+      "focusSame": true,
+      "size": [
+        1855,
+        988
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "bedroom",
+      "x": 509,
+      "y": 274,
+      "same": true,
+      "focusSame": true,
+      "size": [
+        1855,
+        988
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom",
+      "x": 55,
+      "y": 346,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1852,
+        699
+      ],
+      "foreignAlpha": [
+        0,
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 1260,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom",
+      "x": 162,
+      "y": 346,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1852,
+        699
+      ],
+      "foreignAlpha": [
+        0,
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom",
+      "x": 270,
+      "y": 346,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1852,
+        699
+      ],
+      "foreignAlpha": [
+        0,
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom",
+      "x": 55,
+      "y": 420,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1852,
+        699
+      ],
+      "foreignAlpha": [
+        0,
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom",
+      "x": 162,
+      "y": 420,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1852,
+        699
+      ],
+      "foreignAlpha": [
+        0,
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom",
+      "x": 270,
+      "y": 420,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1852,
+        699
+      ],
+      "foreignAlpha": [
+        0,
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom",
+      "x": 55,
+      "y": 494,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1852,
+        699
+      ],
+      "foreignAlpha": [
+        0,
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom",
+      "x": 162,
+      "y": 494,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1852,
+        699
+      ],
+      "foreignAlpha": [
+        0,
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom",
+      "x": 270,
+      "y": 494,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1852,
+        699
+      ],
+      "foreignAlpha": [
+        0,
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom-inset",
+      "x": 359,
+      "y": 368,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        856,
+        713
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 651,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom-inset",
+      "x": 437,
+      "y": 368,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        856,
+        713
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom-inset",
+      "x": 515,
+      "y": 368,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        856,
+        713
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom-inset",
+      "x": 359,
+      "y": 420,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        856,
+        713
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom-inset",
+      "x": 437,
+      "y": 420,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        856,
+        713
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom-inset",
+      "x": 515,
+      "y": 420,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        856,
+        713
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom-inset",
+      "x": 418,
+      "y": 500,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        856,
+        713
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom-inset",
+      "x": 452,
+      "y": 513,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        856,
+        713
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "classroom-inset",
+      "x": 499,
+      "y": 521,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        856,
+        713
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "hallway",
+      "x": 75,
+      "y": 561,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        652
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 2322,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "hallway",
+      "x": 292,
+      "y": 561,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        652
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "hallway",
+      "x": 509,
+      "y": 561,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        652
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "hallway",
+      "x": 75,
+      "y": 627,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        652
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "hallway",
+      "x": 292,
+      "y": 627,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        652
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "hallway",
+      "x": 509,
+      "y": 627,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        652
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "hallway",
+      "x": 75,
+      "y": 693,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        652
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "hallway",
+      "x": 292,
+      "y": 693,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        652
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "hallway",
+      "x": 509,
+      "y": 693,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        652
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fallen-book",
+      "x": 59,
+      "y": 752,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        513
+      ],
+      "foreignAlpha": [
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 1040,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fallen-book",
+      "x": 191,
+      "y": 752,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        513
+      ],
+      "foreignAlpha": [
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fallen-book",
+      "x": 322,
+      "y": 752,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        513
+      ],
+      "foreignAlpha": [
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fallen-book",
+      "x": 59,
+      "y": 802,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        513
+      ],
+      "foreignAlpha": [
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fallen-book",
+      "x": 190,
+      "y": 802,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        513
+      ],
+      "foreignAlpha": [
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fallen-book",
+      "x": 322,
+      "y": 802,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        513
+      ],
+      "foreignAlpha": [
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fallen-book",
+      "x": 59,
+      "y": 852,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        513
+      ],
+      "foreignAlpha": [
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fallen-book",
+      "x": 190,
+      "y": 852,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        513
+      ],
+      "foreignAlpha": [
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "fallen-book",
+      "x": 322,
+      "y": 852,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        1849,
+        513
+      ],
+      "foreignAlpha": [
+        0,
+        0
+      ],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "screen-inset",
+      "x": 388,
+      "y": 763,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        578,
+        394
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 384,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "screen-inset",
+      "x": 448,
+      "y": 763,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        578,
+        394
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "screen-inset",
+      "x": 508,
+      "y": 763,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        578,
+        394
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "screen-inset",
+      "x": 388,
+      "y": 802,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        578,
+        394
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "screen-inset",
+      "x": 448,
+      "y": 802,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        578,
+        394
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "screen-inset",
+      "x": 508,
+      "y": 802,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        578,
+        394
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "screen-inset",
+      "x": 388,
+      "y": 842,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        578,
+        394
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "screen-inset",
+      "x": 448,
+      "y": 842,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        578,
+        394
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    },
+    {
+      "name": "screen-inset",
+      "x": 508,
+      "y": 842,
+      "same": true,
+      "focusSame": true,
+      "geometry": "contours",
+      "size": [
+        578,
+        394
+      ],
+      "foreignAlpha": [],
+      "extraAlpha": [],
+      "opaque": [
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255,
+        255
+      ],
+      "denseSamples": 0,
+      "denseAllOpaque": true
+    }
+  ],
+  "exclusions": [
+    {
+      "owner": 1,
+      "foreignExcluded": true
+    },
+    {
+      "owner": 4,
+      "foreignExcluded": true
+    }
+  ],
+  "caption": [
+    2,
+    2,
+    2
+  ],
+  "errors": []
+}

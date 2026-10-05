@@ -1,0 +1,62 @@
+{
+  "version": "2.79.71",
+  "versionCode": 27999,
+  "package": "io.github.bdredenbach.nthshelf.frametest71",
+  "label": "Nth Shelf Test71",
+  "sourceBase": "864df8e05266c6d03422d0480fbe65c10f638871",
+  "detectorBaseline": "user-accepted Test70 source; now included in this cumulative publication",
+  "sourceCommit": "e4eb075d109f8a758ad4166f91c6c0680db176d3",
+  "sourceTree": "3826a9d628932a5fc6557ca7b1f8356e44fc1ae8",
+  "sourceWebManifestSha256": "1283d1943406963c2b29696d7a6bf7c93bf6f35fe9c3b97f3119bae6156b2803",
+  "build": {
+    "status": "success",
+    "runId": 36349568192,
+    "artifactId": 10940734838,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/36349568192",
+    "sourceCommit": "e4eb075d109f8a758ad4166f91c6c0680db176d3",
+    "sourceTree": "3826a9d628932a5fc6557ca7b1f8356e44fc1ae8",
+    "apkSha256": "a75be512e60f7b00be8fa4203289c09828e02a3bc1400e9ea95d88a8a4383431",
+    "apkBytes": 3358711,
+    "archiveSha256": "f61ace99d53c09a815595a38f3edafc56a35f7a8ef4a4b6c514511b4bde3ff44",
+    "archiveBytes": 8400300,
+    "sourceArchiveSha256": "17caa556246ff36e6dff3b3c56a7aa0f99b33b05c0b658ee93696e65f7eb1351",
+    "packagedWebAssets": 77,
+    "exactPackagedWebBytes": "passed",
+    "changedSourceFilesMatched": 36,
+    "noTransferFilesInFinalSource": true,
+    "signature": "CI apksigner v2 passed; exact downloaded artifact and APK digest rechecked locally",
+    "signing": "CI debug key; not a Play Store production key",
+    "allCIGates": "passed",
+    "freshGradleBuild": true,
+    "localShellRepack": false
+  },
+  "localValidation": "passed",
+  "scope": "One complete lower-middle dialogue frame added on Rise of Apocalypse #1 image index 17 (reader18/24). First accepted-neighbor paper-cell completion; not a universal mixed-boundary assembler.",
+  "corpus": {"pages":91,"exactlyUnchangedPages":90,"beforeOwners":149,"afterOwners":150,"priorDescriptorsPreserved":149},
+  "newTarget": {"issue":1,"imageIndex":17,"readerPage":18,"readerTotal":24,"beforeOwners":1,"afterOwners":2,"location":"lower-middle dialogue frame on double-page spread, right of the preserved lower-left frame"},
+  "proof": {"version":27,"method":"stable-paper-cell-with-accepted-neighbor","seedRadii":[4,6],"exactStableContours":true,"priorPixelOverlap":0,"sourceDescriptorsUnchanged":true,"acceptedNeighborRequired":true,"runtimePageIdentityLookup":false},
+  "reader": {
+    "touches":12,"positiveAlphaChecks":144,"exclusionChecks":84,
+    "denseInteriorPerTap":55079,"denseFailures":0,"priorOwnerTouches":5,
+    "browserErrors":[],"denseInteriorTotal":660948,
+    "method":"Native Chromium touchscreen input, actual Reader gesture/selection/geometry/canvas path, offline minimal DOM; not physical Android or full branding/backup UI. Full branding/backup browser gates also passed separately in CI."
+  },
+  "variants": [
+    {"name":"0.67x","size":[2663,2048],"count":2,"newCount":1,"positives":[true,true,true,true,true,true,true,true,true,true,true,true],"negatives":[true,true,true,true,true,true,true]},
+    {"name":"1.25x","size":[4969,3820],"count":2,"newCount":1,"positives":[true,true,true,true,true,true,true,true,true,true,true,true],"negatives":[true,true,true,true,true,true,true]},
+    {"name":"mirror","size":[3975,3056],"count":2,"newCount":1,"positives":[true,true,true,true,true,true,true,true,true,true,true,true],"negatives":[true,true,true,true,true,true,true]}
+  ],
+  "localNodeContracts":62,
+  "syntax":"passed",
+  "nativeArchiveRegression":"passed",
+  "fixtureArtworkCommitted":false,
+  "phoneAcceptance":"pending",
+  "test70PhoneAcceptance":"user-confirmed",
+  "fullHistorical312PageArtworkRerun":false,
+  "limitations":[
+    "Only the supplied 91-page Apocalypse archive was rerun as original artwork. The historical Wolverine/manga/Magneto artwork corpus is not available; saved regression contracts were retained.",
+    "Most remaining Apocalypse misses are unresolved.",
+    "This pass does not implement general black/white/diagonal boundary fusion or guarantee speed improvements.",
+    "Targeted native Chromium reader tests are not physical Android testing."
+  ]
+}
