@@ -4,7 +4,7 @@
 
 **2.79.91** restores interior artwork and dialogue that the Reader's matte mask cut away, with matching tap and bubble boundaries. Conservative source-page/Reader-crop review credits **12 repaired single frames**: Apocalypse usable coverage rises **153 → 165**, leaving **220 of 385 frames**. Detector selection count stays **185**; there are no newly detected frames or newly credited pairs in this checkpoint. The remaining 21 damaged frames and 199 frames without a qualifying selection stay in the queue. Phone acceptance is pending.
 
-84 retained/new suites pass. Fresh replays cover **312 pages / 1,283 selections** across Apocalypse, Wolverine, Magneto and three manga chapters. Pixel checks preserve original artwork, detector descriptors and all other detected owners; they do not prove semantic acceptance of every modified mask. See [Test91 handoff](HANDOFF-2.79.91.md), [crop decisions](qa27900/frame-accuracy/test91/crop-review.json), and [validation/build status](TEST91-VALIDATION.json).
+The isolated Test91 APK is built and verified from commit `2478d49`: Android CI, browser interaction, backup, native archive, signature/identity and all 92 packaged web files pass. 84 retained/new suites pass. Fresh replays cover **312 pages / 1,283 selections** across Apocalypse, Wolverine, Magneto and three manga chapters. Pixel checks preserve original artwork, detector descriptors and all other detected owners; they do not prove semantic acceptance of every modified mask. See [Test91 handoff](HANDOFF-2.79.91.md), [crop decisions](qa27900/frame-accuracy/test91/crop-review.json), and [validation/build status](TEST91-VALIDATION.json).
 
 ## Current acceptance rule and audited Apocalypse baseline — 5 October 2026
 

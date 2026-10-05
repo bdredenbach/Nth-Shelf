@@ -104,10 +104,21 @@
       "Android compile",
       "signature and identity",
       "exact packaged web bytes"
-    ]
+    ],
+    "ciAllPassed": true
   },
   "androidBuild": {
-    "status": "pending",
+    "status": "verified",
+    "sourceCommit": "2478d491580bce648bc481e4f132d0bf251ba0fa",
+    "runId": 37352164001,
+    "runUrl": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37352164001",
+    "artifactId": 11362882974,
+    "apkSha256": "66bdc9350c90a1dc2f51b626f079af29bc4ad4576afa7ab12646c66e4b637881",
+    "apkBytes": 3440366,
+    "verifiedWebAssetCount": 92,
+    "signatureScheme": "v2",
+    "signing": "CI Android debug key",
+    "independentDownloadedApkVerification": "SHA-256, ZIP integrity and exact bytes of all 92 packaged web assets match source commit and frozen manifest",
     "phoneAcceptance": "pending"
   },
   "limitations": [
