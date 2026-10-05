@@ -1,0 +1,52 @@
+{
+  "version": "2.79.96",
+  "phoneAcceptedBaseline": {
+    "version": "Test95",
+    "completeFrames": 189,
+    "date": "2026-10-05",
+    "confirmation": "Brad full Apocalypse phone sweep"
+  },
+  "localCompleteFrames": 190,
+  "originalFrames": 384,
+  "remaining": 194,
+  "rawSelections": 186,
+  "creditedGroups": 167,
+  "countingRule": "Every unique complete original frame once; dual=2; larger complete groups count all complete components. Clipped/duplicate fragments add zero.",
+  "change": {
+    "issue": 4,
+    "readerPage": 5,
+    "selection": 2,
+    "beforeComplete": false,
+    "afterComplete": true,
+    "pageCompleteFramesBefore": 5,
+    "pageCompleteFramesAfter": 6,
+    "reason": "Connected balloon chain assigned atomically by uniquely agreeing speech-tail tips at two opening scales."
+  },
+  "neighborSelection": 3,
+  "sourceAndReaderNonBodyPixelsUnchanged": true,
+  "otherDescriptorsUnchanged": true,
+  "phoneTest96Acceptance": "pending",
+  "queueBasis": "All remaining Test95 page observations and ideas continue, excluding the repaired issue4 Reader5 S2. See docs/apocalypse-test95-regression.json.",
+  "futureIdeas": [
+    "Enclosed balloon source bodies can preserve lower thought chains across white gutters when one tail owner is proven.",
+    "Compose atomic ownership changes over previously repaired Reader masks to avoid unrelated crop-closing changes.",
+    "Ambiguous speech ownership, open paper bodies, colored interiors and unsupported layouts need independent evidence before extension.",
+    "Issue3 Reader13 speech, SWAK issue2 Reader18 and missing ink-frame boundaries remain unresolved."
+  ],
+  "deferredProbeNotes": [
+    {
+      "issue": 3,
+      "readerPage": 13,
+      "observation": "Some clipped balloons have a stable speaker tail, but their parent owners do not meet the proven adjacent ragged-row contract. Another connected body has little overlap with either owner.",
+      "futureIdea": "Establish valid diagonal/irregular frame ownership and complete enclosure first, then test tail assignment for that owner family. Do not weaken the row gate globally.",
+      "result": "No accepted change; no frame credit."
+    },
+    {
+      "issue": 4,
+      "readerPage": 19,
+      "observation": "A lower balloon crosses two existing owners but overlaps each only slightly; the main larger balloon has too little retained owner area. Other tips vary with opening scale.",
+      "futureIdea": "Use independent enclosure and speaker evidence to justify recovery into matte, and distinguish disconnected thought beads from neighboring white artwork. Do not use nearest-owner or threshold-only assignment.",
+      "result": "No accepted change; no frame credit."
+    }
+  ]
+}
