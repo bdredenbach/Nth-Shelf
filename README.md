@@ -2,7 +2,7 @@
 
 ## Test97 — complete city-scene captions, 5 October 2026
 
-Apocalypse issue4 Reader20 selection1 now retains all opening captions and their lettering. Test96's phone-confirmed **190/384** baseline becomes **191/384 locally**, **193 remaining**, **186 selections**; Test97 phone acceptance is pending. This is one recovered complete frame in an existing pop-out. The Reader restores source-enclosed chromatic caption bodies and includes their extent without changing discovery proofs. The other four target-page canvases are byte-identical to Test96. See [handoff](HANDOFF-2.79.97.md), [per-frame delta](docs/apocalypse-test97-delta.json) and [validation/build record](TEST97-VALIDATION.json).
+Apocalypse issue4 Reader20 selection1 now retains all opening captions and their lettering. Test96's phone-confirmed **190/384** baseline becomes **191/384 locally**, **193 remaining**, **186 selections**; Test97 phone acceptance is pending. This is one recovered complete frame in an existing pop-out. The Reader restores source-enclosed chromatic caption bodies and includes their extent without changing discovery proofs. The other four target-page canvases are byte-identical to Test96. Published source `2f191f08` exactly matches the tested tree; Android run `37389515841` succeeded. The downloaded Test97 APK matches its checksum, identity/signature record and all97 frozen web files. See [handoff](HANDOFF-2.79.97.md), [per-frame delta](docs/apocalypse-test97-delta.json) and [validation/build record](TEST97-VALIDATION.json).
 
 ## Test96 — complete ragged-row dialogue, 5 October 2026
 
