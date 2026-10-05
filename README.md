@@ -1,5 +1,9 @@
 # Nth Shelf
 
+## Test97 — complete city-scene captions, 5 October 2026
+
+Apocalypse issue4 Reader20 selection1 now retains all opening captions and their lettering. Test96's phone-confirmed **190/384** baseline becomes **191/384 locally**, **193 remaining**, **186 selections**; Test97 phone acceptance is pending. This is one recovered complete frame in an existing pop-out. The Reader restores source-enclosed chromatic caption bodies and includes their extent without changing discovery proofs. The other four target-page canvases are byte-identical to Test96. See [handoff](HANDOFF-2.79.97.md), [per-frame delta](docs/apocalypse-test97-delta.json) and [validation/build record](TEST97-VALIDATION.json).
+
 ## Test96 — complete ragged-row dialogue, 5 October 2026
 
 Apocalypse issue4 Reader5 selection2 now retains the entire speaker-owned balloon chain. Its neighboring strip keeps its own dialogue and all non-body artwork. This repairs one existing single frame: **190/384 complete, phone-confirmed**, **194 remaining**, **186 selections**. The **189-frame full phone sweep** remains the confirmed Test95 baseline; Brad confirmed Test96 and the count of 190 on phone on 5 October 2026; phone timing remains unmeasured. Source `91e9dd0` is published; Android run `37385546862` succeeded. The downloaded isolated APK is verified against its checksum/identity/signature record and all 97 exact packaged web files. Fresh source-raster comparisons of all 312 saved maps change only these two owners, and full target detection plus actual Reader crop checks pass. See [handoff](HANDOFF-2.79.96.md) and [validation/build record](TEST96-VALIDATION.json).

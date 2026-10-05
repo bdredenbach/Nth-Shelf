@@ -3140,6 +3140,16 @@ async setMode(mode) {
    const edgeSpill=(!completeContour&&typeof PanelEdgeSpill!=="undefined"&&PanelEdgeSpill.analyzeImage)?PanelEdgeSpill.analyzeImage(img,panel,this.debugMode?(msg)=>this.debugLog(`[edge-spill] ${msg}`):null):null;
    if(edgeSpill?.spills?.length){let x0=geom.x,y0=geom.y,x1=geom.x+geom.w,y1=geom.y+geom.h;for(const s of edgeSpill.spills){x0=Math.min(x0,s.box[0]);y0=Math.min(y0,s.box[1]);x1=Math.max(x1,s.box[2]);y1=Math.max(y1,s.box[3]);}geom={x:x0,y:y0,w:x1-x0,h:y1-y0};clipPolygon=null;if(this.debugMode)this.debugLog(`[edge-spill] preserving ${edgeSpill.spills.length} owned margin component(s)`);}
 
+   // Reader repairs may recover a proven caption just outside the discovered
+   // box. Include display-mask bounds in the canvas while retaining its proof.
+   const cropContours=this.displayPanelContours(panel,contours)||(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel._identitySource)&&outline?[outline]:null);
+   let captionExpanded=false;
+   if(contours&&cropContours&&this._cropRepairCache?.get(panel)?.captionAddedPixels){let x0=geom.x,y0=geom.y,x1=geom.x+geom.w,y1=geom.y+geom.h;
+     for(const ring of cropContours)for(const p of ring){x0=Math.min(x0,p.x);y0=Math.min(y0,p.y);x1=Math.max(x1,p.x);y1=Math.max(y1,p.y);}
+     captionExpanded=x0<geom.x-1e-9||y0<geom.y-1e-9||x1>geom.x+geom.w+1e-9||y1>geom.y+geom.h+1e-9;
+     if(captionExpanded){geom={x:x0,y:y0,w:x1-x0,h:y1-y0};clipPolygon=null;}
+   }
+
    const sourceLeft = imgRect.left + geom.x * imgRect.width;
    const sourceTop = imgRect.top + geom.y * imgRect.height;
    const sourceW = Math.max(8, geom.w * imgRect.width);
@@ -3231,8 +3241,8 @@ async setMode(mode) {
    canvas.getContext("2d").imageSmoothingEnabled = true;
    canvas.getContext("2d").imageSmoothingQuality = "high";
    const context=canvas.getContext("2d");
-   const cropContours=this.displayPanelContours(panel,contours)||(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel._identitySource)&&outline?[outline]:null);
-   if(contours)this.panelFocusMeta.cropContours=cropContours;
+
+   if(contours){if(captionExpanded)Object.assign(this.panelFocusMeta.panel,{x:panel.x,y:panel.y,w:panel.w,h:panel.h});this.panelFocusMeta.cropContours=cropContours;}
    const frameRect=[[frameGeom.x,frameGeom.y],[frameGeom.x+frameGeom.w,frameGeom.y],[frameGeom.x+frameGeom.w,frameGeom.y+frameGeom.h],[frameGeom.x,frameGeom.y+frameGeom.h]].map(([x,y])=>({x,y}));
    const baseContours=cropContours||(edgeSpill?(polygon?[polygon]:[frameRect]):null),drawBase=()=>context.drawImage(img,sx,sy,sw,sh,0,0,canvasW,canvasH);
    if(baseContours){context.save();context.beginPath();for(const ring of baseContours){ring.forEach((p,i)=>{const x=(p.x-geom.x)/geom.w*canvasW,y=(p.y-geom.y)/geom.h*canvasH;if(i)context.lineTo(x,y);else context.moveTo(x,y);});context.closePath();}context.clip(cropContours?'evenodd':'nonzero');drawBase();context.restore();overlay.style.boxShadow='none';canvas.style.filter='drop-shadow(0 5px 12px rgba(0,0,0,.42))';overlay.dataset.geometry=cropContours?'contours':'frame-plus-spill';}else drawBase();

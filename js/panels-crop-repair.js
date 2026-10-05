@@ -11,6 +11,43 @@ const PanelCropRepair = (() => {
   function morph(src,w,h,r,grow){const tmp=new Uint8Array(src.length),out=new Uint8Array(src.length),n=2*r+1;for(let y=0;y<h;y++){let sum=0;for(let x=-r;x<w+r;x++){const add=x+r,del=x-r-1;if(add>=0&&add<w)sum+=src[y*w+add];if(del>=0&&del<w)sum-=src[y*w+del];if(x>=0&&x<w)tmp[y*w+x]=grow?+(sum>0):+(sum===n);}}for(let x=0;x<w;x++){let sum=0;for(let y=-r;y<h+r;y++){const add=y+r,del=y-r-1;if(add>=0&&add<h)sum+=tmp[add*w+x];if(del>=0&&del<h)sum-=tmp[del*w+x];if(y>=0&&y<h)out[y*w+x]=grow?+(sum>0):+(sum===n);}}return out;}
   function components(mask,w,h){const seen=new Uint8Array(mask.length),out=[];for(let seed=0;seed<mask.length;seed++)if(mask[seed]&&!seen[seed]){const q=[seed];seen[seed]=1;for(let at=0;at<q.length;at++){const i=q[at],x=i%w,y=i/w|0;for(const j of [x?i-1:-1,x+1<w?i+1:-1,y?i-w:-1,y+1<h?i+w:-1])if(j>=0&&mask[j]&&!seen[j]){seen[j]=1;q.push(j);}}out.push(q);}return out;}
   function fillClosed(mask,w,h){const exterior=new Uint8Array(mask.length),q=[];const add=i=>{if(!mask[i]&&!exterior[i]){exterior[i]=1;q.push(i);}};for(let x=0;x<w;x++){add(x);add((h-1)*w+x);}for(let y=0;y<h;y++){add(y*w);add(y*w+w-1);}for(let at=0;at<q.length;at++){const i=q[at],x=i%w,y=i/w|0;if(x)add(i-1);if(x+1<w)add(i+1);if(y)add(i-w);if(y+1<h)add(i+w);}return Uint8Array.from(mask,(v,i)=>+(v||!exterior[i]));}
+  // Closed chromatic caption bodies can contain matte-shaped missing letters.
+  // Two source palettes must agree after a one-pixel opening separates touching
+  // rims. This only restores a compact, ink-bearing body to its existing owner.
+  const captionCache=new WeakMap();
+  function captionBodies(rgba,w,h){
+    if(rgba?.length!==w*h*4)return [];
+    const saved=captionCache.get(rgba);if(saved&&saved.w===w&&saved.h===h)return saved.bodies;
+    for(let i=3;i<rgba.length;i+=4)if(rgba[i]!==255)return [];
+    const chromatic=(i,t)=>{const r=rgba[i*4],g=rgba[i*4+1],b=rgba[i*4+2];return +(r>170&&g>130&&b<180&&r-b>t&&g-b>t*.55&&Math.abs(r-g)<85);};
+    function candidates(t){
+      const color=Uint8Array.from({length:w*h},(_,i)=>chromatic(i,t));
+      const sealed=fillClosed(color,w,h),opened=morph(morph(sealed,w,h,1,false),w,h,1,true),out=[];
+      for(const q of components(opened,w,h)){
+        if(q.length<500||q.length>w*h*.04)continue;
+        let x0=w,y0=h,x1=0,y1=0;for(const i of q){const x=i%w,y=i/w|0;x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x+1);y1=Math.max(y1,y+1);}
+        const W=x1-x0,H=y1-y0;if(W/H<1.6||W/H>8||H<15||q.length/(W*H)<.90||x0<3||y0<3||x1>w-3||y1>h-3)continue;
+        const mask=new Uint8Array(w*h);for(const i of q)mask[i]=1;
+        let colored=0,dark=0,edges=0,supported=0;const ink=new Uint8Array(w*h);
+        for(const i of q){colored+=color[i];if(Math.max(rgba[i*4],rgba[i*4+1],rgba[i*4+2])<100){dark++;ink[i]=1;}
+          const x=i%w,y=i/w|0;if(!mask[i-1]||!mask[i+1]||!mask[i-w]||!mask[i+w]){edges++;let found=false;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)found ||= !!color[(y+dy)*w+x+dx];supported+=+found;}}
+        const letters=components(ink,w,h).filter(c=>c.length>=3&&c.length<q.length*.08).length;
+        if(colored/q.length<.60||dark/q.length<.05||dark/q.length>.35||supported/edges<.90||letters<8)continue;
+        out.push({indices:q,mask,box:[x0,y0,x1,y1]});
+      }return out;
+    }
+    const first=candidates(45),second=candidates(65),bodies=[];
+    for(const a of first){const matches=second.filter(b=>JSON.stringify(a.box)===JSON.stringify(b.box));if(matches.length!==1)continue;
+      const b=matches[0];let diff=0,union=0;for(let i=0;i<a.mask.length;i++){diff+=+(a.mask[i]!==b.mask[i]);union+=+(a.mask[i]||b.mask[i]);}
+      if(diff>union*.01)continue;
+      // Intersection retains only pixels enclosed at both source thresholds.
+      const agreed=Uint8Array.from(a.mask,(v,i)=>+(v&&b.mask[i])),near=morph(agreed,w,h,3,true),body=agreed.slice();
+      for(let i=0;i<body.length;i++)if(near[i]){const r=rgba[i*4],g=rgba[i*4+1],B=rgba[i*4+2];if(r>100&&g>80&&B<190&&r-B>20&&g-B>10&&Math.abs(r-g)<100)body[i]=1;}
+      const indices=[];const filled=fillClosed(body,w,h);for(let i=0;i<filled.length;i++)if(filled[i])indices.push(i);
+      bodies.push({core:a.indices.filter(i=>b.mask[i]),indices});
+    }
+    captionCache.set(rgba,{w,h,bodies});return bodies;
+  }
   function repair(rings,w,h,foreign=[],rgba=null){
     if(!Array.isArray(rings)||!rings.length||!Number.isInteger(w)||!Number.isInteger(h)||w<80||h<80||w>900||h>900||typeof PanelMatteCells==='undefined')return null;
     const original=raster(rings,w,h),result=original.slice(),blocked=new Uint8Array(w*h);
@@ -18,7 +55,7 @@ const PanelCropRepair = (() => {
     // Traced rings use positive outer / negative inner winding. Mixed external
     // callers are accepted only if nesting confirms the same relationship.
     const outer=rings.filter(q=>area(q)>0&&q.length>=4),radius=Math.max(2,Math.round(Math.min(w,h)*.014));
-    if(!outer.length)return null;let added=0,patches=0;const skipped=[];
+    if(!outer.length)return null;let added=0,patches=0,captionAddedPixels=0,captionPatches=0;const skipped=[];
     for(const ring of outer){
       const holes=rings.filter(q=>area(q)<0&&inside(ring,q[0].x,q[0].y));
       const base=raster([ring,...holes],w,h),envelope=raster([hull(ring)],w,h),basePixels=base.reduce((s,v)=>s+v,0);
@@ -70,9 +107,19 @@ const PanelCropRepair = (() => {
         for(const i of patch)if(!result[i]&&!blocked[i]){result[i]=1;added++;}patches++;
       }
     }
+    const ownerPixels=original.reduce((n,v)=>n+v,0);
+    for(const caption of captionBodies(rgba,w,h)){
+      // A source-colored collar touching another owner is not transferred.
+      // The independently enclosed core may still be restored in full.
+      const body=caption.indices.some(i=>blocked[i]&&!original[i])?caption.core:caption.indices;
+      const owned=body.reduce((n,i)=>n+original[i],0),foreignPixels=body.reduce((n,i)=>n+ +(blocked[i]&&!original[i]),0);
+      if(owned<body.length*.60||foreignPixels||body.length>ownerPixels*.35)continue;
+      let gain=0;for(const i of body)if(!result[i]){result[i]=1;added++;gain++;}
+      if(gain){patches++;captionPatches++;captionAddedPixels+=gain;}
+    }
     if(!added)return null;
     const traced=PanelMatteCells.tracePixelContours(result,w,h,1);if(!traced)return null;
-    return {contours:traced.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),addedPixels:added,patches,radius,analysisWidth:w,analysisHeight:h,skipped};
+    return {captionAddedPixels,captionPatches,contours:traced.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),addedPixels:added,patches,radius,analysisWidth:w,analysisHeight:h,skipped};
   }
   return {repair,raster,inside};
 })();

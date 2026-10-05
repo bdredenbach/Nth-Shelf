@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.96 — COMPLETE SPEECH ACROSS RAGGED ROWS
+// NTH SHELF 2.79.97 — SOURCE-ENCLOSED CAPTION REPAIR
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.96";
+const CACHE_NAME = "nth-shelf-shell-2.79.97";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",

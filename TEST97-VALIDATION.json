@@ -1,0 +1,113 @@
+{
+  "version": "2.79.97",
+  "versionCode": 28025,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest97",
+  "label": "Nth Shelf Test97",
+  "baseline": "Phone-confirmed Test96 190/384",
+  "cropReview": {
+    "version": "2.79.97",
+    "baseline": {
+      "version": "Test96",
+      "completeFrames": 190,
+      "phoneAccepted": true
+    },
+    "localCompleteFrames": 191,
+    "originalFrames": 384,
+    "remainingFrames": 193,
+    "rawSelections": 186,
+    "creditedGroups": 168,
+    "phoneTest97": "pending",
+    "countingRule": "Each unique complete original frame once; dual=2; larger crops count each complete original frame; clipped and duplicate frames add zero.",
+    "change": {
+      "issue": 4,
+      "readerPage": 20,
+      "selection": 1,
+      "beforeComplete": false,
+      "afterComplete": true,
+      "pageCompleteBefore": 4,
+      "pageCompleteAfter": 5,
+      "addedDisplayAnalysisPixels": 1941,
+      "removedDisplayAnalysisPixels": 0,
+      "description": "Complete opening city-scene captions, including the missing letters and left caption border."
+    },
+    "detectorDescriptors": "unchanged; Reader-only repair",
+    "neighborCanvases": "Four other target-page canvases byte-identical to Test96",
+    "queueBasis": "Retain docs/apocalypse-test95-regression.json, excluding repaired issue4 Reader5 S2 and issue4 Reader20 S1.",
+    "futureIdeas": [
+      "Apply enclosure and owner evidence to internal pale/lettering losses; do not globally fill white or yellow regions.",
+      "Issue3 Reader13 speech needs independent irregular/diagonal parent ownership before extending ragged-row speech transfer.",
+      "Issue4 Reader18 lower artwork and balloon ownership remain incomplete; geometric caption recovery alone does not solve these boundaries.",
+      "SWAK issue2 Reader18 and unavailable ink-frame scenes remain unchanged."
+    ]
+  },
+  "corpus": {
+    "status": "passed",
+    "scope": "Fresh native source-raster Reader display-mask comparison over every saved Test96 descriptor; discovery code unchanged. No full detector replay claimed.",
+    "pages": 312,
+    "selections": 1284,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "selections": 186,
+        "changes": [
+          {
+            "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-019.jpg",
+            "id": 1,
+            "added": 1941,
+            "lost": 0
+          }
+        ]
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "selections": 388,
+        "changes": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "selections": 101,
+        "changes": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "selections": 228,
+        "changes": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "selections": 193,
+        "changes": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "selections": 188,
+        "changes": []
+      }
+    ]
+  },
+  "localChecks": {
+    "status": "passed",
+    "behavioralSuiteCount": 96,
+    "sourceArtworkUploaded": false,
+    "phoneTiming": "unmeasured",
+    "cachePackageAndSyntax": "passed",
+    "nativeArchiveAndBrowserIntegration": "deferred to CI; local Java/browser unavailable",
+    "actualTargetReaderCrops": 5,
+    "allTargetSelectionsReachable": true,
+    "fourSiblingCanvasBytesIdentical": true
+  },
+  "publication": {
+    "status": "ready to publish tested tree",
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "not yet started"
+  },
+  "phoneAcceptance": "pending"
+}
