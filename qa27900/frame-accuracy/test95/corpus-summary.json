@@ -1,0 +1,56 @@
+{
+  "baseline": "Test94 complete final descriptors",
+  "basis": "Fresh source-raster dark-matte supplements over retained Test94 descriptors; changed target also full detector replay. Not a fresh full detector replay of all pages.",
+  "pages": 312,
+  "beforeSelections": 1284,
+  "afterSelections": 1284,
+  "books": [
+    {
+      "book": "apocalypse",
+      "pages": 91,
+      "selections": 186,
+      "changes": [
+        {
+          "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-017.jpg",
+          "before": 2,
+          "after": 2,
+          "owners": [
+            1
+          ],
+          "ms": 927
+        }
+      ]
+    },
+    {
+      "book": "wolverine",
+      "pages": 74,
+      "selections": 388,
+      "changes": []
+    },
+    {
+      "book": "magneto",
+      "pages": 24,
+      "selections": 101,
+      "changes": []
+    },
+    {
+      "book": "29_Chapter_30",
+      "pages": 41,
+      "selections": 228,
+      "changes": []
+    },
+    {
+      "book": "30_Chapter_31",
+      "pages": 41,
+      "selections": 193,
+      "changes": []
+    },
+    {
+      "book": "31_Chapter_32",
+      "pages": 41,
+      "selections": 188,
+      "changes": []
+    }
+  ],
+  "sourceArtworkInGitOrCI": false
+}

@@ -1,0 +1,115 @@
+{
+  "version": "2.79.95",
+  "versionCode": 28023,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest95",
+  "baseline": "Test94 published checkpoint 4bfd4500364ce53645d923bc66164eb7493e0b2d",
+  "cropReview": {
+    "basis": "Original full source versus actual Reader canvas; local manual review, phone acceptance pending",
+    "beforeCompleteFrames": 170,
+    "afterCompleteFrames": 171,
+    "completeSingles": 151,
+    "completePairs": 10,
+    "totalFrames": 385,
+    "remainingFrames": 214,
+    "framesWithoutQualifyingSelection": 197,
+    "damagedFrames": 17,
+    "rawSelections": 186,
+    "newlyDetectedFrames": 0,
+    "repairedSingles": 1,
+    "decisions": [
+      {
+        "issue": 2,
+        "readerPage": 18,
+        "selection": 1,
+        "frames": 1,
+        "reason": "The upper-right water-and-hand scene is source-enclosed; its complete wrist, palm, both balloons and background survive. All original pixels remain and no other owner changes."
+      }
+    ],
+    "swak": "Selection2 unchanged; full-frame recovery remains pending."
+  },
+  "corpus": {
+    "baseline": "Test94 complete final descriptors",
+    "basis": "Fresh source-raster dark-matte supplements over retained Test94 descriptors; changed target also full detector replay. Not a fresh full detector replay of all pages.",
+    "pages": 312,
+    "beforeSelections": 1284,
+    "afterSelections": 1284,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "selections": 186,
+        "changes": [
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-017.jpg",
+            "before": 2,
+            "after": 2,
+            "owners": [
+              1
+            ],
+            "ms": 927
+          }
+        ]
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "selections": 388,
+        "changes": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "selections": 101,
+        "changes": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "selections": 228,
+        "changes": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "selections": 193,
+        "changes": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "selections": 188,
+        "changes": []
+      }
+    ],
+    "sourceArtworkInGitOrCI": false
+  },
+  "checks": {
+    "retainedAndNewBehavioralSuites": 92,
+    "passed": true,
+    "corruptedProofsRejected": 21,
+    "restoredPixelTaps": 4266,
+    "restoredEdgeTaps": 943,
+    "repeatedReaderOverlays": 2,
+    "sourceArtworkRetained": true,
+    "nonSpeechNeighborUnchanged": true,
+    "sourceIndependentSyntheticPositive": true,
+    "inkInsetProtected": true,
+    "openNeighborRejected": true,
+    "actualDetectorMatchesReviewedTarget": true,
+    "actualTargetDetectorMs": 14980,
+    "timingNote": "Local native-canvas full detector; not phone latency or performance acceptance.",
+    "cacheAndPackageCheck": true
+  },
+  "androidBuild": {
+    "status": "prepared; not yet published or built",
+    "apkCreated": false,
+    "published": false,
+    "ciStarted": false,
+    "applicationId": "io.github.bdredenbach.nthshelf.frametest95",
+    "label": "Nth Shelf Test95",
+    "versionName": "2.79.95",
+    "versionCode": 28023,
+    "phoneAcceptance": "pending"
+  },
+  "phoneAcceptance": "pending"
+}

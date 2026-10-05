@@ -1,5 +1,11 @@
 # Nth Shelf
 
+## Test95 — complete water-and-hand frame, 5 October 2026
+
+**2.79.95** completes Apocalypse issue 2 reader **18**, selection **1**, preserving its full wrist, palm, both balloons and background. Two source transition tests witness the closed dark-matte enclosure; all original pixels survive and other owners are unchanged. SWAK remains in the queue.
+
+Local complete coverage: **171 / 385**, leaving **214**; raw selections remain **186**. This repairs one existing single frame and adds no selection. Fresh source-raster supplements over 312 retained pages change only this owner; Wolverine, Magneto and three manga chapters retain identical descriptors. The changed target passes a full detector replay and actual Reader review. All 92 behavioral suites plus the cache/package check pass locally. [Validation/build status](TEST95-VALIDATION.json) and [handoff](HANDOFF-2.79.95.md) track publication, APK verification and pending phone acceptance.
+
 ## Test94 — complete street artwork, 5 October 2026
 
 **2.79.94** repairs Apocalypse issue 3 reader **6**, selection **2**: the complete circular En view and connected street scene, including the wall/people artwork and both street balloons. False selection **5** is retired using source perimeter and artwork-continuity evidence. The right scene retains all non-speech artwork. Test93 speech, Test92 splits and Test91 crop repairs remain active.

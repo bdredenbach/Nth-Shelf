@@ -1,0 +1,24 @@
+{
+  "basis": "Original full source versus actual Reader canvas; local manual review, phone acceptance pending",
+  "beforeCompleteFrames": 170,
+  "afterCompleteFrames": 171,
+  "completeSingles": 151,
+  "completePairs": 10,
+  "totalFrames": 385,
+  "remainingFrames": 214,
+  "framesWithoutQualifyingSelection": 197,
+  "damagedFrames": 17,
+  "rawSelections": 186,
+  "newlyDetectedFrames": 0,
+  "repairedSingles": 1,
+  "decisions": [
+    {
+      "issue": 2,
+      "readerPage": 18,
+      "selection": 1,
+      "frames": 1,
+      "reason": "The upper-right water-and-hand scene is source-enclosed; its complete wrist, palm, both balloons and background survive. All original pixels remain and no other owner changes."
+    }
+  ],
+  "swak": "Selection2 unchanged; full-frame recovery remains pending."
+}
