@@ -518,6 +518,16 @@
     "Phone gestures, acceptance and latency remain pending."
   ],
   "androidBuild": {
-    "status": "pending"
+    "status": "success",
+    "sourceCommit": "25fb96b5ee35a7d62ca9d5fd44fdf584995075b0",
+    "workflowRun": 37330116000,
+    "workflowUrl": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37330116000",
+    "artifactId": 11353643221,
+    "artifactArchiveSha256": "2d8803129f07ff84600b84bf9eae71b60d027eb0222584e76089b89689449112",
+    "apkSha256": "50accfa875bb4cf81f420b04f96bcd637f5c8da0797e5678a0d2a37db65c61a1",
+    "apkBytes": 3436042,
+    "verifiedWebAssetCount": 91,
+    "verifiedSourceArchiveFiles": 721,
+    "phoneAcceptance": "pending"
   }
 }
