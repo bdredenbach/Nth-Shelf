@@ -1,0 +1,523 @@
+{
+  "test": "Test90",
+  "versionName": "2.79.90",
+  "versionCode": 28018,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest90",
+  "sourceBase": "dba181927ed1840ce84662a2958694762d90bbb3",
+  "routes": [
+    "closed-cell-with-discontinuous-lettering-gaps",
+    "stable-gutter-connected-pair"
+  ],
+  "proofVersions": [
+    42,
+    43
+  ],
+  "fullDetectorComparison": {
+    "environment": "@napi-rs/canvas; original pixels; current published Test89 baseline",
+    "pages": 91,
+    "beforeSelections": 183,
+    "afterSelections": 185,
+    "afterFramesCovered": 186,
+    "newSingleFrames": 1,
+    "newTwoFrameGroups": 1,
+    "newFramesCovered": 3,
+    "books": [
+      {
+        "book": "Apocalypse 1",
+        "pages": 24,
+        "beforeSelections": 30,
+        "afterSelections": 31,
+        "afterFramesCovered": 32,
+        "allPriorDescriptorsIdentical": true,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 01 (of 04)-012.jpg",
+            "readerPage": 13,
+            "frameCounts": [
+              2
+            ]
+          }
+        ]
+      },
+      {
+        "book": "Apocalypse 2",
+        "pages": 23,
+        "beforeSelections": 44,
+        "afterSelections": 45,
+        "afterFramesCovered": 45,
+        "allPriorDescriptorsIdentical": true,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 02 (of 04)-017.jpg",
+            "readerPage": 18,
+            "frameCounts": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "book": "Apocalypse 3",
+        "pages": 23,
+        "beforeSelections": 65,
+        "afterSelections": 65,
+        "afterFramesCovered": 65,
+        "allPriorDescriptorsIdentical": true,
+        "additions": []
+      },
+      {
+        "book": "Apocalypse 4",
+        "pages": 21,
+        "beforeSelections": 44,
+        "afterSelections": 44,
+        "afterFramesCovered": 44,
+        "allPriorDescriptorsIdentical": true,
+        "additions": []
+      }
+    ]
+  },
+  "otherCorpusComparison": {
+    "mode": "Saved Test87 geometry and new append-only supplements; not a historical source replay",
+    "pages": 221,
+    "retainedOwners": 1094,
+    "newSingleFrames": 4,
+    "newGroups": 0,
+    "books": [
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "cachedPriorOwners": 384,
+        "additions": 4,
+        "allCachedDescriptorsRetained": true,
+        "newGroups": 0
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "cachedPriorOwners": 101,
+        "additions": 0,
+        "allCachedDescriptorsRetained": true,
+        "newGroups": 0
+      },
+      {
+        "book": "boruto30",
+        "pages": 41,
+        "cachedPriorOwners": 228,
+        "additions": 0,
+        "allCachedDescriptorsRetained": true,
+        "newGroups": 0
+      },
+      {
+        "book": "boruto31",
+        "pages": 41,
+        "cachedPriorOwners": 193,
+        "additions": 0,
+        "allCachedDescriptorsRetained": true,
+        "newGroups": 0
+      },
+      {
+        "book": "boruto32",
+        "pages": 41,
+        "cachedPriorOwners": 188,
+        "additions": 0,
+        "allCachedDescriptorsRetained": true,
+        "newGroups": 0
+      }
+    ]
+  },
+  "wolverineCurrentDetectorTargets": {
+    "mode": "Actual Test89 source with new routes disabled versus full Test90",
+    "pages": 3,
+    "before": 6,
+    "after": 10,
+    "allPriorDescriptorsIdentical": true,
+    "newFrames": 4,
+    "readerPages": [
+      27,
+      34,
+      39
+    ]
+  },
+  "remainingEstimate": {
+    "basis": "Provisional 360+ Apocalypse goal; not a manually audited total",
+    "nominalMinimumTotal": 360,
+    "beforeAt360": 177,
+    "singleOnlyAt360": 176,
+    "withGroupsAt360": 174,
+    "extraFramesRecoveredByAcceptingGroups": 2,
+    "exactRemainingKnown": false
+  },
+  "auditedTargetPages": [
+    {
+      "issue": 1,
+      "readerPage": 13,
+      "manualFrameCount": 6,
+      "beforeFramesCovered": 0,
+      "afterFramesCovered": 2,
+      "remainingBefore": 6,
+      "remainingAfter": 4
+    },
+    {
+      "issue": 2,
+      "readerPage": 18,
+      "manualFrameCount": 5,
+      "beforeFramesCovered": 1,
+      "afterFramesCovered": 2,
+      "remainingBefore": 4,
+      "remainingAfter": 3
+    }
+  ],
+  "sourceTransforms": {
+    "apocalypseSingle": [
+      {
+        "name": "original",
+        "width": 1988,
+        "height": 3056,
+        "count": 1,
+        "framesCovered": 1,
+        "boxes": [
+          [
+            0.3384615384615385,
+            0.2966666666666667,
+            0.5538461538461539,
+            0.13111111111111112
+          ]
+        ],
+        "audit": {
+          "single": {
+            "sources": 2,
+            "stable": 1,
+            "interiorStrokes": 1,
+            "insets": 0,
+            "accepted": 1
+          },
+          "pair": {
+            "candidates": 1,
+            "stable": 1,
+            "overlap": 1,
+            "boundary": 0,
+            "content": 0,
+            "divider": 0,
+            "inset": 0,
+            "accepted": 0
+          }
+        }
+      },
+      {
+        "name": "mirror",
+        "width": 1988,
+        "height": 3056,
+        "count": 1,
+        "framesCovered": 1,
+        "boxes": [
+          [
+            0.1076923076923077,
+            0.2966666666666667,
+            0.5538461538461539,
+            0.13111111111111112
+          ]
+        ],
+        "audit": {
+          "single": {
+            "sources": 2,
+            "stable": 1,
+            "interiorStrokes": 1,
+            "insets": 0,
+            "accepted": 1
+          },
+          "pair": {
+            "candidates": 1,
+            "stable": 1,
+            "overlap": 1,
+            "boundary": 0,
+            "content": 0,
+            "divider": 0,
+            "inset": 0,
+            "accepted": 0
+          }
+        }
+      },
+      {
+        "name": "scale067",
+        "width": 1332,
+        "height": 2048,
+        "count": 1,
+        "framesCovered": 1,
+        "boxes": [
+          [
+            0.3384615384615385,
+            0.2966666666666667,
+            0.5538461538461539,
+            0.1322222222222222
+          ]
+        ],
+        "audit": {
+          "single": {
+            "sources": 3,
+            "stable": 1,
+            "interiorStrokes": 1,
+            "insets": 0,
+            "accepted": 1
+          },
+          "pair": {
+            "candidates": 1,
+            "stable": 1,
+            "overlap": 1,
+            "boundary": 0,
+            "content": 0,
+            "divider": 0,
+            "inset": 0,
+            "accepted": 0
+          }
+        }
+      },
+      {
+        "name": "scale125",
+        "width": 2485,
+        "height": 3820,
+        "count": 1,
+        "framesCovered": 1,
+        "boxes": [
+          [
+            0.3384615384615385,
+            0.2966666666666667,
+            0.5538461538461539,
+            0.13111111111111112
+          ]
+        ],
+        "audit": {
+          "single": {
+            "sources": 2,
+            "stable": 1,
+            "interiorStrokes": 1,
+            "insets": 0,
+            "accepted": 1
+          },
+          "pair": {
+            "candidates": 1,
+            "stable": 1,
+            "overlap": 1,
+            "boundary": 0,
+            "content": 0,
+            "divider": 0,
+            "inset": 0,
+            "accepted": 0
+          }
+        }
+      },
+      {
+        "name": "jpeg82",
+        "width": 1988,
+        "height": 3056,
+        "count": 0,
+        "framesCovered": 0,
+        "boxes": [],
+        "audit": {
+          "single": {
+            "sources": 2,
+            "stable": 1,
+            "interiorStrokes": 0,
+            "insets": 0,
+            "accepted": 0
+          },
+          "pair": {
+            "candidates": 0,
+            "stable": 0,
+            "overlap": 0,
+            "boundary": 0,
+            "content": 0,
+            "divider": 0,
+            "inset": 0,
+            "accepted": 0
+          }
+        }
+      }
+    ],
+    "apocalypsePair": [
+      {
+        "name": "original",
+        "width": 1988,
+        "height": 3056,
+        "count": 1,
+        "framesCovered": 2,
+        "boxes": [
+          [
+            0.4170940170940171,
+            0.5044444444444445,
+            0.582905982905983,
+            0.48444444444444446
+          ]
+        ],
+        "audit": {
+          "single": {
+            "sources": 2,
+            "stable": 2,
+            "interiorStrokes": 0,
+            "insets": 0,
+            "accepted": 0
+          },
+          "pair": {
+            "candidates": 1,
+            "stable": 1,
+            "overlap": 0,
+            "boundary": 0,
+            "content": 0,
+            "divider": 0,
+            "inset": 0,
+            "accepted": 1
+          }
+        }
+      },
+      {
+        "name": "mirror",
+        "width": 1988,
+        "height": 3056,
+        "count": 1,
+        "framesCovered": 2,
+        "boxes": [
+          [
+            0,
+            0.5044444444444445,
+            0.582905982905983,
+            0.48444444444444446
+          ]
+        ],
+        "audit": {
+          "single": {
+            "sources": 2,
+            "stable": 2,
+            "interiorStrokes": 0,
+            "insets": 0,
+            "accepted": 0
+          },
+          "pair": {
+            "candidates": 1,
+            "stable": 1,
+            "overlap": 0,
+            "boundary": 0,
+            "content": 0,
+            "divider": 0,
+            "inset": 0,
+            "accepted": 1
+          }
+        }
+      },
+      {
+        "name": "scale067",
+        "width": 1332,
+        "height": 2048,
+        "count": 0,
+        "framesCovered": 0,
+        "boxes": [],
+        "audit": {
+          "single": {
+            "sources": 2,
+            "stable": 1,
+            "interiorStrokes": 0,
+            "insets": 0,
+            "accepted": 0
+          },
+          "pair": {
+            "candidates": 1,
+            "stable": 1,
+            "overlap": 1,
+            "boundary": 0,
+            "content": 0,
+            "divider": 0,
+            "inset": 0,
+            "accepted": 0
+          }
+        }
+      },
+      {
+        "name": "scale125",
+        "width": 2485,
+        "height": 3820,
+        "count": 1,
+        "framesCovered": 2,
+        "boxes": [
+          [
+            0.4170940170940171,
+            0.5044444444444445,
+            0.582905982905983,
+            0.48444444444444446
+          ]
+        ],
+        "audit": {
+          "single": {
+            "sources": 2,
+            "stable": 2,
+            "interiorStrokes": 0,
+            "insets": 0,
+            "accepted": 0
+          },
+          "pair": {
+            "candidates": 1,
+            "stable": 1,
+            "overlap": 0,
+            "boundary": 0,
+            "content": 0,
+            "divider": 0,
+            "inset": 0,
+            "accepted": 1
+          }
+        }
+      },
+      {
+        "name": "jpeg82",
+        "width": 1988,
+        "height": 3056,
+        "count": 1,
+        "framesCovered": 2,
+        "boxes": [
+          [
+            0.4170940170940171,
+            0.5044444444444445,
+            0.582905982905983,
+            0.48444444444444446
+          ]
+        ],
+        "audit": {
+          "single": {
+            "sources": 2,
+            "stable": 2,
+            "interiorStrokes": 0,
+            "insets": 0,
+            "accepted": 0
+          },
+          "pair": {
+            "candidates": 1,
+            "stable": 1,
+            "overlap": 0,
+            "boundary": 0,
+            "content": 0,
+            "divider": 0,
+            "inset": 0,
+            "accepted": 1
+          }
+        }
+      }
+    ]
+  },
+  "checks": {
+    "retainedAndNewSuites": 82,
+    "allPassed": true,
+    "newProofMutationsRejected": 32,
+    "syntheticPairAndThreeFrameNegative": true,
+    "actualReaderAdapter": {
+      "contours": 2,
+      "hitPositions": 10,
+      "legacySpillSkipped": true
+    }
+  },
+  "limitations": [
+    "The 360+ figure is a working target, not an exact manual inventory. Corpus-wide remaining counts are estimates.",
+    "Two-frame adjacency is supported geometrically; narrative continuity is for user review.",
+    "The Apocalypse single abstains after JPEG82 recompression; the pair abstains after 0.67x pre-resampling.",
+    "The 221-page comparison uses cached prior geometry; only the three new Wolverine pages have a fresh full-detector before/after replay.",
+    "Phone gestures, acceptance and latency remain pending."
+  ],
+  "androidBuild": {
+    "status": "pending"
+  }
+}

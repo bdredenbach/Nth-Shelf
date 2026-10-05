@@ -1,5 +1,11 @@
 # Nth Shelf
 
+## Test90 — individual frames and connected scenes
+
+**2.79.90** adds the complete **SWAK** strip on Apocalypse issue 2, reader **18/23**, and tests one pop-out containing the two neighboring lower-right scenes on issue 1, reader **13/24**. Their whole contour preserves the artwork that crosses between them. The same individual-frame improvement also recovers four Wolverine scenes.
+
+The full Apocalypse replay preserves all **183** earlier selections and reaches **185 pop-outs covering 186 frames** when the new pair counts as accepted. Against the provisional **360+** goal, the estimated remainder changes **177+ → 174+**; individual recovery alone would leave **176+**. The exact comic-wide total is not audited. All **82** retained/new suites pass; phone confirmation remains pending. See [current test](HANDOFF-2.79.90.md), [validation](TEST90-VALIDATION.json) and [contracts](qa27900/frame-accuracy/test90/README.md).
+
 A local-first comic reader and personal comic library for Android and the web.
 
 ## Test89 — neighbor-witnessed page-edge scenes

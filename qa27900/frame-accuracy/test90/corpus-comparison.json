@@ -1,0 +1,128 @@
+{
+  "apocalypse": {
+    "environment": "@napi-rs/canvas; original pixels; current published Test89 baseline",
+    "pages": 91,
+    "beforeSelections": 183,
+    "afterSelections": 185,
+    "afterFramesCovered": 186,
+    "newSingleFrames": 1,
+    "newTwoFrameGroups": 1,
+    "newFramesCovered": 3,
+    "books": [
+      {
+        "book": "Apocalypse 1",
+        "pages": 24,
+        "beforeSelections": 30,
+        "afterSelections": 31,
+        "afterFramesCovered": 32,
+        "allPriorDescriptorsIdentical": true,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 01 (of 04)-012.jpg",
+            "readerPage": 13,
+            "frameCounts": [
+              2
+            ]
+          }
+        ]
+      },
+      {
+        "book": "Apocalypse 2",
+        "pages": 23,
+        "beforeSelections": 44,
+        "afterSelections": 45,
+        "afterFramesCovered": 45,
+        "allPriorDescriptorsIdentical": true,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 02 (of 04)-017.jpg",
+            "readerPage": 18,
+            "frameCounts": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "book": "Apocalypse 3",
+        "pages": 23,
+        "beforeSelections": 65,
+        "afterSelections": 65,
+        "afterFramesCovered": 65,
+        "allPriorDescriptorsIdentical": true,
+        "additions": []
+      },
+      {
+        "book": "Apocalypse 4",
+        "pages": 21,
+        "beforeSelections": 44,
+        "afterSelections": 44,
+        "afterFramesCovered": 44,
+        "allPriorDescriptorsIdentical": true,
+        "additions": []
+      }
+    ]
+  },
+  "other": {
+    "mode": "Saved Test87 geometry and new append-only supplements; not a historical source replay",
+    "pages": 221,
+    "retainedOwners": 1094,
+    "newSingleFrames": 4,
+    "newGroups": 0,
+    "books": [
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "cachedPriorOwners": 384,
+        "additions": 4,
+        "allCachedDescriptorsRetained": true,
+        "newGroups": 0
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "cachedPriorOwners": 101,
+        "additions": 0,
+        "allCachedDescriptorsRetained": true,
+        "newGroups": 0
+      },
+      {
+        "book": "boruto30",
+        "pages": 41,
+        "cachedPriorOwners": 228,
+        "additions": 0,
+        "allCachedDescriptorsRetained": true,
+        "newGroups": 0
+      },
+      {
+        "book": "boruto31",
+        "pages": 41,
+        "cachedPriorOwners": 193,
+        "additions": 0,
+        "allCachedDescriptorsRetained": true,
+        "newGroups": 0
+      },
+      {
+        "book": "boruto32",
+        "pages": 41,
+        "cachedPriorOwners": 188,
+        "additions": 0,
+        "allCachedDescriptorsRetained": true,
+        "newGroups": 0
+      }
+    ]
+  },
+  "wolverineFreshTargets": {
+    "mode": "Actual Test89 source with new routes disabled versus full Test90",
+    "pages": 3,
+    "before": 6,
+    "after": 10,
+    "allPriorDescriptorsIdentical": true,
+    "newFrames": 4,
+    "readerPages": [
+      27,
+      34,
+      39
+    ]
+  }
+}
