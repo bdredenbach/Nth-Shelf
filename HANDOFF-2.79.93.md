@@ -4,7 +4,7 @@
 
 ## Recovery and measured outcome
 
-The stalled session survived at `/workspace/scratch/5827b11a4a78/Nth-Shelf`, with local Test92 implementation commit `9f274a4` and blocked-publication checkpoint `b80ebbb`. Original artwork, replay maps and visual reports survived alongside it. Test93 tested implementation checkpoint is `ff024eedc5f6aab51b009a911a12e66976ff0036`. Brad explicitly authorized publication and building in the recovered chat on 5 October 2026. Test92/Test93 are published at `3a3c28720453e902cc7fcb823b8c2733d1b3c41c`; its tree `29c3b1cdfcfbf6b0a1adb99f2a2df1be8041812c` exactly matches the local tested checkpoint. The APK is still pending. Do not infer an APK exists from the Test92 review's installation text.
+The stalled session survived at `/workspace/scratch/5827b11a4a78/Nth-Shelf`, with local Test92 implementation commit `9f274a4` and blocked-publication checkpoint `b80ebbb`. Original artwork, replay maps and visual reports survived alongside it. Test93 tested implementation checkpoint is `ff024eedc5f6aab51b009a911a12e66976ff0036`. Brad explicitly authorized publication and building in the recovered chat on 5 October 2026. Test92/Test93 are published at `3a3c28720453e902cc7fcb823b8c2733d1b3c41c`; its tree `29c3b1cdfcfbf6b0a1adb99f2a2df1be8041812c` exactly matches the local tested checkpoint. The Test93 APK has been built and its downloaded bytes verified. Do not infer an APK exists from the Test92 review's installation text.
 
 Test93 completes Apocalypse issue 1 reader **16/24**, selection **5** (walking away): its complete “We Sandstormers…” balloon now stays with the scene. Selection 4 loses the foreign balloon fragment while retaining its reclining figure and all artwork outside the body. Actual Reader canvases were reviewed against the original source.
 
@@ -22,7 +22,7 @@ The version-46 proof retains the exact parent descriptors and the participating 
 - Actual Reader checks verify both pop-outs, proof preservation, cached display masks and **2,273 transferred speech-pixel taps**.
 - Fresh source-raster supplement comparisons over retained Test92 maps cover **312 pages / 1,285 selections**. Only the two Apocalypse owners above change. Wolverine 388, Magneto 101 and manga 228/193/188 retain identical descriptors. This is not a fresh full-pipeline replay of every page.
 - A full existing detector rerun reproduces the changed target exactly (6 selections; local native-canvas 12,356 ms). This is not a phone latency result or speed acceptance.
-- Local browser/backup checks did not start: Playwright could not find Chromium. Android CI, native checks, packaged-file verification and phone acceptance remain pending.
+- Local browser/backup checks initially could not start without Chromium; the subsequent successful CI run passes both browser/backup and native archive tests, including 600 MiB streaming under a 32 MiB heap. CI verifies the APK signature and identity; downloaded archive/APK hashes and all 94 packaged web files were independently checked. Phone acceptance and timing remain pending.
 
 Run `bash qa27900/frame-accuracy/test93/run-retained.sh`. See `TEST93-VALIDATION.json`, `qa27900/frame-accuracy/test93/corpus-summary.json` and `crop-review.json`. Geometry-only fixtures contain no comic pixels.
 
@@ -34,12 +34,14 @@ Next source targets remain the SWAK face, issue 3 reader 6's damaged pair, reade
 
 ## Publication/build gate
 
-Isolated identity prepared: `io.github.bdredenbach.nthshelf.frametest93`, label `Nth Shelf Test93`, version `2.79.93`, code `28021`. Workflow and exact 94-file web manifest are prepared. No Test93 APK exists.
+Isolated identity prepared: `io.github.bdredenbach.nthshelf.frametest93`, label `Nth Shelf Test93`, version `2.79.93`, code `28021`. Workflow and exact 94-file web manifest passed. `Nth-Shelf-2.79.93-Test93.apk` is built and verified (3,449,392 bytes).
 
-Publication is now explicitly authorized and complete. Plain git pushing lacked shell credentials, so the connected GitHub API published the exact tested tree in one fast-forward commit on `Test_Branch`. Android CI run `37370172377` is queued: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37370172377 . Finish this run, download the CI APK, verify isolated identity/signature and all 94 packaged web files against the frozen manifest, then save and deliver it. Do not request the same permission again. No APK is claimed until verification succeeds.
+Publication is now explicitly authorized and complete. Plain git pushing lacked shell credentials, so the connected GitHub API published the exact tested tree in one fast-forward commit on `Test_Branch`. Android CI run `37370172377` succeeded: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37370172377 . The artifact ZIP and APK were downloaded, checked for ZIP integrity and verified by SHA-256. The isolated identity/signature record and all 94 packaged web files match the frozen tested source. APK SHA-256: `e75aa758d7f8c8d38b2c69e92c48f19675b79756311a44cfec82f8d4c1f544f0`. This is a CI debug-signed test APK; phone acceptance remains pending. Do not request the same publication/build permission again.
 
 Visual report: `Nth-Shelf-Test93-Frame-Review.html`. Its new review includes the original page, before/after walking-away crop, preserved preceding scene and retained Test92 comparisons. Its saved identity is recorded in TEST93-VALIDATION.json after upload.
 
 ## Recovery-chat continuation
 
 See `docs/test93-continuation.md`. Internal-balloon variants restore additional text on issue 3 reader 6, but artwork remains absent because false selection 5 owns part of the same street scene. No additional complete frames are credited and no prototype runtime changes were retained.
+
+Saved APK identity: `libfile_77c16cebd15481918c5150b824a466c6`, filename `Nth-Shelf-2.79.93-Test93.apk`. The visual review retains `libfile_0f32dc0dd8a481919e0b7bb2a45920f3` and was updated in place to include successful build status and unaccepted continuation findings.

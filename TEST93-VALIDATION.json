@@ -99,25 +99,42 @@
     "actualDetectorMatchesReviewedTarget": true,
     "actualTargetDetectorMs": 12356,
     "timingNote": "Local native-canvas complete existing detector; not phone latency or performance acceptance.",
-    "browserAndBackup": "Not run: Chromium executable absent; browser launch failed before tests."
+    "browserAndBackup": "Passed in GitHub Actions: browser interaction/branding and complete backup/restore round-trip.",
+    "nativeArchive": "Passed: nested CBZ creation and restore, source hash verification, 600 MiB archive under 32 MiB heap, cancellation and corruption rejection."
   },
   "androidBuild": {
-    "status": "GitHub Actions queued",
-    "apkCreated": false,
+    "status": "built and downloaded APK verified",
+    "apkCreated": true,
     "sourceCommit": "ff024eedc5f6aab51b009a911a12e66976ff0036",
     "published": true,
     "ciStarted": true,
-    "reason": "User explicitly authorized publication and APK build in this chat on 5 October 2026; workflow awaits a GitHub-hosted runner.",
-    "nextAction": "Complete the existing CI run, download and verify the APK against the frozen 94-file manifest, then save and deliver it.",
+    "reason": "Explicit user authorization; successful CI run and local verification of the downloaded artifact.",
+    "nextAction": "Phone acceptance: issue 1 reader16 selection5 and its preceding scene, plus retained issue 2 reader12/16 split scenes.",
     "sourceCommitBasis": "Local tested implementation checkpoint; CI build records the final pushed HEAD separately.",
     "publishedCommit": "3a3c28720453e902cc7fcb823b8c2733d1b3c41c",
     "runId": 37370172377,
-    "runUrl": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37370172377"
+    "runUrl": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37370172377",
+    "artifactId": 11371106684,
+    "ciConclusion": "success",
+    "builtSourceCommit": "3a3c28720453e902cc7fcb823b8c2733d1b3c41c",
+    "fileName": "Nth-Shelf-2.79.93-Test93.apk",
+    "apkSha256": "e75aa758d7f8c8d38b2c69e92c48f19675b79756311a44cfec82f8d4c1f544f0",
+    "apkBytes": 3449392,
+    "verifiedWebAssetCount": 94,
+    "signing": "CI debug key; not a Play Store production key",
+    "signatureScheme": "APK Signature Scheme v2 verified by apksigner in CI; downloaded APK hash matches build record.",
+    "signerCertificateSha256": "cea4be88d62fd8d0d8bde6d005e2f3ed7eeced0061f8e3d6ed8b1781e0b1c474",
+    "artifactSha256": "f3d8d34f9de5468e2fa51e5bf5be586a720d3616f8281b932540a9dbb764c6a6",
+    "downloadedArtifactIntegrityVerified": true,
+    "libraryFileId": "libfile_77c16cebd15481918c5150b824a466c6",
+    "saved": true,
+    "libraryFileVersion": 0
   },
   "research": "Extended seed radii, smaller/vertical seams, alternate neutral paper thresholds and narrower chromatic rims yielded no additional complete-frame credit. Unsuccessful runtime paths were excluded.",
   "visualReview": {
     "fileName": "Nth-Shelf-Test93-Frame-Review.html",
     "libraryFileId": "libfile_0f32dc0dd8a481919e0b7bb2a45920f3",
-    "bytes": 6096144
+    "bytes": 6096965,
+    "libraryVersion": 1
   }
 }

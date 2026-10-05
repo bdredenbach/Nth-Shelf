@@ -6,7 +6,7 @@
 
 All **88** retained/new behavioral suites pass. Fresh source-raster supplement comparisons over the retained maps cover **312 pages / 1,285 selections**; only the two reviewed Apocalypse owners change. The changed target also passes a full detector rerun. Broader experimental routes earned no further complete-frame credit and were excluded. See [Test93 handoff](HANDOFF-2.79.93.md) and [validation](TEST93-VALIDATION.json).
 
-**Test92 and Test93 are published.** Brad explicitly authorized the push and APK build on 5 October 2026. Published checkpoint `3a3c287` matches the tested local source tree exactly; [Android CI](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37370172377) is queued. The APK and phone acceptance remain pending. See [continuation findings](docs/test93-continuation.md).
+**Test92 and Test93 are published.** Brad explicitly authorized the push and APK build on 5 October 2026. Published checkpoint `3a3c287` matches the tested local source tree exactly; [Android CI](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37370172377) passed, including browser/backup and native checks. The downloaded `Nth-Shelf-2.79.93-Test93.apk` is verified: separate Test93 identity, signature record, checksum and all 94 packaged web files. Phone acceptance remains pending. See [continuation findings](docs/test93-continuation.md).
 
 ## Test92 — independent scenes and intact captions, 5 October 2026
 

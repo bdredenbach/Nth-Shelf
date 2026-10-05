@@ -1,6 +1,6 @@
 # Test93 recovery continuation — 5 October 2026
 
-Test92/Test93 source is published with explicit user authorization at `3a3c287`. Its source tree is identical to the saved tested local checkpoint. Android workflow run `37370172377` was started automatically by the branch update and is awaiting a runner.
+Test92/Test93 source is published with explicit user authorization at `3a3c287`. Its source tree is identical to the saved tested local checkpoint. Android workflow run `37370172377` passed. The downloaded APK passed isolated-identity/signature-record, checksum and all 94 packaged-web-file checks. Browser/backup and native archive checks also passed. Phone acceptance remains pending.
 
 ## Internal speech findings
 
