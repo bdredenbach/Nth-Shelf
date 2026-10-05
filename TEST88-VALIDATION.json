@@ -222,7 +222,7 @@
   "limitations": [
     "The saved Test87 source commit was never pushed and is unavailable. Test88 builds on exact published Test84 source; its total must not be presented as the saved Test87 total.",
     "General frame detection and the 360+ Apocalypse goal remain incomplete.",
-    "Android CI build, signature and exact packaged web bytes are verified. Physical phone acceptance is pending.",
+    "Android CI build, signature and exact packaged web bytes are verified. The user confirmed Test88 works on phone on 2026-10-05.",
     "Serialized proof validation checks stored geometry/evidence consistency; it does not re-read source artwork."
   ],
   "fullApocalypseDetectorComparison": {
@@ -825,7 +825,7 @@
       "manifest.webmanifest": "bc7f31be1945a696ad5ea89171aa8a35d3c86001590cd9c010dc860557f9bcce",
       "sw.js": "54917e3d83fc12c3bf63e941a0e39ba9dfcf258459caa58bc37ed2c7dd97b99e"
     },
-    "phoneAcceptance": "pending",
+    "phoneAcceptance": "User confirmed Test88 works on phone on 2026-10-05.",
     "comicArtworkTests": "Saved results retained; comic artwork fixture is not uploaded or rerun by this workflow",
     "workflowRun": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37313676835",
     "workflowConclusion": "success",
@@ -835,5 +835,12 @@
     "downloadedApkDigestVerified": true,
     "all88WebFilesIndependentlyMatched": true,
     "sourceArchiveBytesIndependentlyMatched": true
+  },
+  "phoneAcceptance": {
+    "status": "accepted",
+    "date": "2026-10-05",
+    "source": "User report after installing Test88",
+    "report": "Great, this works!",
+    "scope": "Test88 upgrade; no updated full-corpus phone count supplied"
   }
 }
