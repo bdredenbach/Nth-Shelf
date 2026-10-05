@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.84 — ENCLOSED SCENES WITH INTERIOR INK STROKES
+// NTH SHELF 2.79.88 — CLOSED LOCAL GRADIENT GUTTER BOUNDARIES
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.84";
+const CACHE_NAME = "nth-shelf-shell-2.79.88";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -84,6 +84,7 @@ const SHELL_FILES = [
   "./js/panels-local-boundary-consensus.js",
   "./js/panels-context-cells.js",
   "./js/panels-interior-strokes.js",
+  "./js/panels-smooth-gutter-boundaries.js",
   "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",

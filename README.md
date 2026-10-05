@@ -2,6 +2,12 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## Test88 — closed frames in gradient gutters
+
+Test88 follows locally smooth exterior colors around thin frame borders, then requires stable complete contours, source-pixel side evidence, retained divider/inset checks and zero prior-owner overlap. It adds the complete upper-left tall scene on Rise of Apocalypse issue2 reader **17/23**, including all speech balloons. The actual published Test84 → Test88 detector target passes **0→1**; original, mirrored, reduced/enlarged and JPEG82 sources recover the frame.
+
+All **78** retained/new suites pass. A separate 312-page comparison preserves all **1,278** saved Test87 descriptors and adds one frame; the unpublished Test87 implementation is unavailable, so this APK builds on exact published Test84 source. CI verifies all **88** packaged web files. General frame detection, the **360+ goal**, CI build verification and phone acceptance remain pending at source commit creation. Identity: **2.79.88 / 28016**, isolated package `io.github.bdredenbach.nthshelf.frametest88`, label **Nth Shelf Test88**. See [handoff](HANDOFF-2.79.88.md), [validation](TEST88-VALIDATION.json) and [contracts](qa27900/frame-accuracy/test88/README.md).
+
 ## Test84 — enclosed scenes with interior ink strokes
 
 Test84 recovers modest, independently enclosed scenes when a short stroke inside the artwork falsely triggers the divider veto. Two global seed radii and the original perimeter must agree. Boundary-reaching lines, long separators, paper corridors and independently enclosed insets still veto additions; existing ownership keeps priority.

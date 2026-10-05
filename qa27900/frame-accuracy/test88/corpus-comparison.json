@@ -1,0 +1,72 @@
+{
+  "baseline": "Saved unpublished Test87 descriptors, not the current repository implementation",
+  "pages": 312,
+  "before": 1278,
+  "after": 1279,
+  "priorDescriptorsUnchanged": true,
+  "books": [
+    {
+      "book": "issue1",
+      "pages": 24,
+      "before": 30,
+      "added": 0,
+      "priorDescriptorsUnchanged": true
+    },
+    {
+      "book": "issue2",
+      "pages": 23,
+      "before": 45,
+      "added": 1,
+      "priorDescriptorsUnchanged": true
+    },
+    {
+      "book": "issue3",
+      "pages": 23,
+      "before": 65,
+      "added": 0,
+      "priorDescriptorsUnchanged": true
+    },
+    {
+      "book": "issue4",
+      "pages": 21,
+      "before": 44,
+      "added": 0,
+      "priorDescriptorsUnchanged": true
+    },
+    {
+      "book": "wolverine",
+      "pages": 74,
+      "before": 384,
+      "added": 0,
+      "priorDescriptorsUnchanged": true
+    },
+    {
+      "book": "magneto",
+      "pages": 24,
+      "before": 101,
+      "added": 0,
+      "priorDescriptorsUnchanged": true
+    },
+    {
+      "book": "boruto30",
+      "pages": 41,
+      "before": 228,
+      "added": 0,
+      "priorDescriptorsUnchanged": true
+    },
+    {
+      "book": "boruto31",
+      "pages": 41,
+      "before": 193,
+      "added": 0,
+      "priorDescriptorsUnchanged": true
+    },
+    {
+      "book": "boruto32",
+      "pages": 41,
+      "before": 188,
+      "added": 0,
+      "priorDescriptorsUnchanged": true
+    }
+  ]
+}

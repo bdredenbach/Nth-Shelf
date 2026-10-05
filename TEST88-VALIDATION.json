@@ -1,0 +1,228 @@
+{
+  "test": "Test88",
+  "versionName": "2.79.88",
+  "versionCode": 28016,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest88",
+  "sourceBase": "d18cda03272d80d49fdab1620c3910625840c071 / published Test84",
+  "hypothesis": "Thin frame boundaries surrounded by locally smooth gradient color, including blue-to-dark-blue or blue-to-light-blue",
+  "method": "closed-local-gradient-gutter-boundary",
+  "proofVersion": 40,
+  "cachedSupplementComparison": {
+    "baseline": "Saved unpublished Test87 descriptors, not the current repository implementation",
+    "pages": 312,
+    "before": 1278,
+    "after": 1279,
+    "priorDescriptorsUnchanged": true,
+    "books": [
+      {
+        "book": "issue1",
+        "pages": 24,
+        "before": 30,
+        "added": 0,
+        "priorDescriptorsUnchanged": true
+      },
+      {
+        "book": "issue2",
+        "pages": 23,
+        "before": 45,
+        "added": 1,
+        "priorDescriptorsUnchanged": true
+      },
+      {
+        "book": "issue3",
+        "pages": 23,
+        "before": 65,
+        "added": 0,
+        "priorDescriptorsUnchanged": true
+      },
+      {
+        "book": "issue4",
+        "pages": 21,
+        "before": 44,
+        "added": 0,
+        "priorDescriptorsUnchanged": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "before": 384,
+        "added": 0,
+        "priorDescriptorsUnchanged": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "before": 101,
+        "added": 0,
+        "priorDescriptorsUnchanged": true
+      },
+      {
+        "book": "boruto30",
+        "pages": 41,
+        "before": 228,
+        "added": 0,
+        "priorDescriptorsUnchanged": true
+      },
+      {
+        "book": "boruto31",
+        "pages": 41,
+        "before": 193,
+        "added": 0,
+        "priorDescriptorsUnchanged": true
+      },
+      {
+        "book": "boruto32",
+        "pages": 41,
+        "before": 188,
+        "added": 0,
+        "priorDescriptorsUnchanged": true
+      }
+    ]
+  },
+  "fullDetectorTarget": {
+    "baseline": "Published Test84 implementation with only Test88 disabled",
+    "book": "Rise of Apocalypse issue 2",
+    "readerPage": 17,
+    "readerPageCount": 23,
+    "sourceFile": "Rise of Apocalypse 02 (of 04)-016.jpg",
+    "before": 0,
+    "after": 1,
+    "scene": "Complete upper-left tall scene including every speech balloon",
+    "visuallyReviewed": true
+  },
+  "sourceTransforms": [
+    {
+      "name": "original",
+      "width": 1988,
+      "height": 3056,
+      "count": 1,
+      "boxes": [
+        [
+          0.020512820512820513,
+          0.017777777777777778,
+          0.40512820512820513,
+          0.5711111111111111
+        ]
+      ],
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 0,
+        "boundary": 0,
+        "content": 0,
+        "divider": 0,
+        "inset": 0,
+        "accepted": 1
+      }
+    },
+    {
+      "name": "mirror",
+      "width": 1988,
+      "height": 3056,
+      "count": 1,
+      "boxes": [
+        [
+          0.5743589743589743,
+          0.017777777777777778,
+          0.40512820512820513,
+          0.5711111111111111
+        ]
+      ],
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 0,
+        "boundary": 0,
+        "content": 0,
+        "divider": 0,
+        "inset": 0,
+        "accepted": 1
+      }
+    },
+    {
+      "name": "scale067",
+      "width": 1332,
+      "height": 2048,
+      "count": 1,
+      "boxes": [
+        [
+          0.020512820512820513,
+          0.017777777777777778,
+          0.40512820512820513,
+          0.5711111111111111
+        ]
+      ],
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 0,
+        "boundary": 0,
+        "content": 0,
+        "divider": 0,
+        "inset": 0,
+        "accepted": 1
+      }
+    },
+    {
+      "name": "scale125",
+      "width": 2485,
+      "height": 3820,
+      "count": 1,
+      "boxes": [
+        [
+          0.020512820512820513,
+          0.017777777777777778,
+          0.40512820512820513,
+          0.5711111111111111
+        ]
+      ],
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 0,
+        "boundary": 0,
+        "content": 0,
+        "divider": 0,
+        "inset": 0,
+        "accepted": 1
+      }
+    },
+    {
+      "name": "jpeg82",
+      "width": 1988,
+      "height": 3056,
+      "count": 1,
+      "boxes": [
+        [
+          0.020512820512820513,
+          0.017777777777777778,
+          0.40512820512820513,
+          0.5711111111111111
+        ]
+      ],
+      "audit": {
+        "candidates": 1,
+        "stable": 1,
+        "overlap": 0,
+        "boundary": 0,
+        "content": 0,
+        "divider": 0,
+        "inset": 0,
+        "accepted": 1
+      }
+    }
+  ],
+  "retainedChecks": {
+    "suites": 78,
+    "passed": true,
+    "readerExactContour": true,
+    "legacySpillSkipped": true,
+    "cacheInvalidation": true
+  },
+  "limitations": [
+    "The saved Test87 source commit was never pushed and is unavailable. Test88 builds on exact published Test84 source; its total must not be presented as the saved Test87 total.",
+    "General frame detection and the 360+ Apocalypse goal remain incomplete.",
+    "Android CI build and physical phone acceptance are pending at source commit creation.",
+    "Serialized proof validation checks stored geometry/evidence consistency; it does not re-read source artwork."
+  ]
+}

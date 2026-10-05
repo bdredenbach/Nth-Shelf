@@ -1,0 +1,9 @@
+# Test88 / 2.79.88
+
+Builds on exact published Test84 source at d18cda03272d80d49fdab1620c3910625840c071. The subsequent Test87 source commit was never pushed and is unavailable; saved Test87 contours remain usable as a separate retention comparison. Do not label the shipped Test88 APK as containing the missing Test87 implementation.
+
+The user's thin-border / gradient-gutter hypothesis yields one verified new frame: Rise of Apocalypse issue2 reader17/23, the complete upper-left tall scene, including all speech balloons. `js/panels-smooth-gutter-boundaries.js` discovers a quiet exterior through neighboring RGB differences, checks independent thresholds 12/14, verifies four-side source contrast, texture/color, retained divider and inset vetoes, and preserves exclusive ownership. Proof40/reader integration preserves the exact outer contour. Cache identities advance to Test88.
+
+All 78 retained/new suites pass locally. The 312-page original-raster supplement comparison preserves 1,278 saved Test87 descriptors and adds one frame (Apocalypse184→185 in that saved-map comparison only). The actual published Test84 → Test88 full-detector target passes 0→1. Mirroring, 0.67x and 1.25x resampling and JPEG82 recompression preserve the addition. General frame detection and the 360+ Apocalypse goal remain incomplete.
+
+Identity: version2.79.88 / code28016, isolated package `io.github.bdredenbach.nthshelf.frametest88`, label **Nth Shelf Test88**. The build workflow runs retained/browser/native archive checks and verifies all 88 packaged web files against the tested SHA256 manifest. CI build/signature verification and physical phone acceptance are pending at this source commit. Install target: Apocalypse issue2 reader17/23 upper-left tall scene; compare with the last shipped Test84 APK. See TEST88-VALIDATION.json and qa27900/frame-accuracy/test88/README.md.
