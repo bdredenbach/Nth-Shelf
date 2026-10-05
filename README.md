@@ -10,7 +10,7 @@ The current phone target is **Rise of Apocalypse #1, reader 4/24**: the complete
 
 All **80** retained/new suites pass. The full **91-page** Test88 → Test89 Apocalypse replay preserves all **182** earlier descriptors and adds the complete page-4 scene, reaching **183**. A separate **221-page** supplement comparison retains **1,094** cached Wolverine/Magneto/manga descriptors with no additions. The target survives mirroring, enlargement and JPEG82 recompression; a 0.67x pre-resample safely abstains when candidate proof is lost. General frame coverage remains incomplete.
 
-Identity: **2.79.89 / 28017**, isolated package `io.github.bdredenbach.nthshelf.frametest89`, label **Nth Shelf Test89**. Test89 phone acceptance is pending. See [handoff](HANDOFF-2.79.89.md), [validation](TEST89-VALIDATION.json), and [contracts](qa27900/frame-accuracy/test89/README.md).
+Identity: **2.79.89 / 28017**, isolated package `io.github.bdredenbach.nthshelf.frametest89`, label **Nth Shelf Test89**. Android CI, signature, identity and all **89** packaged reader files pass; downloaded APK/source bytes are independently verified. Test89 phone acceptance is pending. See [handoff](HANDOFF-2.79.89.md), [validation](TEST89-VALIDATION.json), and [contracts](qa27900/frame-accuracy/test89/README.md).
 
 ## Test88 — closed frames in gradient gutters
 

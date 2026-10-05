@@ -223,8 +223,17 @@
     "Physical Android gestures and device latency remain unverified for Test89."
   ],
   "androidBuild": {
-    "status": "pending",
-    "verifiedWebAssetCountExpected": 89,
+    "status": "success",
+    "workflowRun": 37323210649,
+    "workflowUrl": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37323210649",
+    "sourceCommit": "cf0fdc89aa40eeb3e1d93f3f0bdc9e860f3e92ac",
+    "apkSha256": "d9ea98b8d96c6c1e9dd805cd0559fd4c02d0388d9a69c734ed3bf7ea02e03faa",
+    "apkBytes": 3424498,
+    "artifactSha256": "c01a8c91a92c551b4fc577fd16a13794224b5be1353812dfa485bc1fad61b195",
+    "sourceZipSha256": "3b016f4c180cd149f242d207ff05e2152155e477791ca0e956022c183a75f9dd",
+    "downloadedApkAndSourceBytesVerified": true,
+    "signatureIdentityAndPackageChecks": "CI passed; downloaded APK hash matches verified record",
+    "verifiedWebAssetCount": 89,
     "phoneAcceptance": "pending"
   }
 }
