@@ -1,0 +1,41 @@
+{
+  "basis": "Original sources and actual Reader canvases; local review, phone pending",
+  "beforeCompleteFrames": 165,
+  "afterCompleteFrames": 167,
+  "remainingFrames": 218,
+  "newlyCoveredFrames": 2,
+  "retainedFramesNowSeparateSingles": 2,
+  "beforeRawSelections": 185,
+  "afterRawSelections": 187,
+  "completeSingles": 149,
+  "completePairs": 9,
+  "decisions": [
+    {
+      "issue": 2,
+      "readerPage": 12,
+      "baselineSelection": 3,
+      "newSelections": [
+        3,
+        4
+      ],
+      "newlyCoveredFrames": 2,
+      "reason": "Rejected time-transition merge becomes two independent complete scene crops. Captions kept whole; source has four frames."
+    },
+    {
+      "issue": 2,
+      "readerPage": 16,
+      "baselineSelection": 2,
+      "newSelections": [
+        2,
+        3
+      ],
+      "newlyCoveredFrames": 0,
+      "reason": "Previously credited same-scene pair now two independent complete singles. Preserve walking legs, speech and answering En."
+    }
+  ],
+  "limitations": [
+    "Narrow caption-border and paper fringe may remain around the crops. Neighbor fragments alone do not invalidate complete owned frames under the frozen audit convention.",
+    "Other damaged crops and colored/open missing scenes remain unresolved.",
+    "Rule handles horizontal paper seams only; phone behavior and latency are pending."
+  ]
+}

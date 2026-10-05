@@ -1,0 +1,67 @@
+{
+  "baseline": "Test91 / 7d7d5f3",
+  "pages": 312,
+  "beforeSelections": 1283,
+  "afterSelections": 1285,
+  "books": [
+    {
+      "book": "apocalypse",
+      "pages": 91,
+      "beforeSelections": 185,
+      "afterSelections": 187,
+      "splitParents": 2,
+      "unchangedDescriptorsExceptReplacedParents": true,
+      "parentsRetainedVerbatimInChildProofs": true
+    },
+    {
+      "book": "wolverine",
+      "pages": 74,
+      "beforeSelections": 388,
+      "afterSelections": 388,
+      "splitParents": 0,
+      "unchangedDescriptorsExceptReplacedParents": true,
+      "parentsRetainedVerbatimInChildProofs": true
+    },
+    {
+      "book": "magneto",
+      "pages": 24,
+      "beforeSelections": 101,
+      "afterSelections": 101,
+      "splitParents": 0,
+      "unchangedDescriptorsExceptReplacedParents": true,
+      "parentsRetainedVerbatimInChildProofs": true
+    },
+    {
+      "book": "29_Chapter_30",
+      "pages": 41,
+      "beforeSelections": 228,
+      "afterSelections": 228,
+      "splitParents": 0,
+      "unchangedDescriptorsExceptReplacedParents": true,
+      "parentsRetainedVerbatimInChildProofs": true
+    },
+    {
+      "book": "30_Chapter_31",
+      "pages": 41,
+      "beforeSelections": 193,
+      "afterSelections": 193,
+      "splitParents": 0,
+      "unchangedDescriptorsExceptReplacedParents": true,
+      "parentsRetainedVerbatimInChildProofs": true
+    },
+    {
+      "book": "31_Chapter_32",
+      "pages": 41,
+      "beforeSelections": 188,
+      "afterSelections": 188,
+      "splitParents": 0,
+      "unchangedDescriptorsExceptReplacedParents": true,
+      "parentsRetainedVerbatimInChildProofs": true
+    }
+  ],
+  "originalPixelChecks": {
+    "freshApocalypsePages": 91,
+    "passed": true,
+    "unchangedCorporaRetainTest91CropValidation": true
+  }
+}

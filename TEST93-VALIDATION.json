@@ -1,0 +1,120 @@
+{
+  "version": "2.79.93",
+  "versionCode": 28021,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest93",
+  "baseline": "Test92 local source 9f274a4; latest published Test91 source 7d7d5f3",
+  "cropReview": {
+    "basis": "Source page plus actual Reader canvas; local review, phone pending",
+    "beforeCompleteFrames": 167,
+    "afterCompleteFrames": 168,
+    "completeSingles": 150,
+    "completePairs": 9,
+    "totalFrames": 385,
+    "remainingFrames": 217,
+    "framesWithoutQualifyingSelection": 197,
+    "damagedFrames": 20,
+    "beforeRawSelections": 187,
+    "afterRawSelections": 187,
+    "newlyDetectedFrames": 0,
+    "repairedSingleFrames": 1,
+    "decisions": [
+      {
+        "issue": 1,
+        "readerPage": 16,
+        "selection": 5,
+        "reason": "Complete source-enclosed We Sandstormers balloon is assigned to the walking-away scene; source artwork outside the transferred body is unchanged.",
+        "companionSelection": 4,
+        "companionChange": "Remove foreign speech fragment without removing owned reclining figure artwork."
+      }
+    ],
+    "retainedTest92Gains": "Issue 2 reader 12 adds two complete frames; reader 16 separates a previously accepted pair without extra coverage credit."
+  },
+  "corpus": {
+    "baseline": "Test92 local source 9f274a4",
+    "pages": 312,
+    "selections": 1285,
+    "basis": "Fresh source-raster supplement replays over retained Test92 descriptors; complete detector rerun on the changed target",
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "selections": 187,
+        "changedOwners": [
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-015.jpg",
+            "selection": 4
+          },
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-015.jpg",
+            "selection": 5
+          }
+        ],
+        "allOtherDescriptorsIdentical": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "selections": 388,
+        "changedOwners": [],
+        "allOtherDescriptorsIdentical": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "selections": 101,
+        "changedOwners": [],
+        "allOtherDescriptorsIdentical": true
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "selections": 228,
+        "changedOwners": [],
+        "allOtherDescriptorsIdentical": true
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "selections": 193,
+        "changedOwners": [],
+        "allOtherDescriptorsIdentical": true
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "selections": 188,
+        "changedOwners": [],
+        "allOtherDescriptorsIdentical": true
+      }
+    ],
+    "sourceArtworkInGitOrCI": false
+  },
+  "checks": {
+    "retainedAndNewBehavioralSuites": 88,
+    "passed": true,
+    "corruptedSpeechProofsRejected": 20,
+    "transferredSpeechPixelsTappable": 2273,
+    "originalUnionPreserved": true,
+    "nonSpeechArtworkUnchanged": true,
+    "actualDetectorMatchesReviewedTarget": true,
+    "actualTargetDetectorMs": 12356,
+    "timingNote": "Local native-canvas complete existing detector; not phone latency or performance acceptance.",
+    "browserAndBackup": "Not run: Chromium executable absent; browser launch failed before tests."
+  },
+  "androidBuild": {
+    "status": "publication approval pending",
+    "apkCreated": false,
+    "sourceCommit": "ff024eedc5f6aab51b009a911a12e66976ff0036",
+    "published": false,
+    "ciStarted": false,
+    "reason": "Previous automatic approval review rejected the push twice and required direct user-authored permission in this thread. This checkpoint remains local; no repeat push attempted.",
+    "nextAction": "After explicit permission, push Test_Branch, run Android CI, verify signature/isolated identity and 94 packaged web files, save and deliver APK.",
+    "sourceCommitBasis": "Local tested implementation checkpoint; CI build records the final pushed HEAD separately."
+  },
+  "research": "Extended seed radii, smaller/vertical seams, alternate neutral paper thresholds and narrower chromatic rims yielded no additional complete-frame credit. Unsuccessful runtime paths were excluded.",
+  "visualReview": {
+    "fileName": "Nth-Shelf-Test93-Frame-Review.html",
+    "libraryFileId": "libfile_0f32dc0dd8a481919e0b7bb2a45920f3",
+    "bytes": 6096144
+  }
+}

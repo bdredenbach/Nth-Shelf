@@ -1,0 +1,139 @@
+{
+  "version": "2.79.92",
+  "versionCode": 28020,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest92",
+  "baselineCommit": "7d7d5f3d2a109ab04496031635516c3ee8696e6e",
+  "changes": "Source-supported horizontal gutter split with atomic caption ownership; Test91 display repair retained",
+  "cropReview": {
+    "basis": "Original sources and actual Reader canvases; local review, phone pending",
+    "beforeCompleteFrames": 165,
+    "afterCompleteFrames": 167,
+    "remainingFrames": 218,
+    "newlyCoveredFrames": 2,
+    "retainedFramesNowSeparateSingles": 2,
+    "beforeRawSelections": 185,
+    "afterRawSelections": 187,
+    "completeSingles": 149,
+    "completePairs": 9,
+    "decisions": [
+      {
+        "issue": 2,
+        "readerPage": 12,
+        "baselineSelection": 3,
+        "newSelections": [
+          3,
+          4
+        ],
+        "newlyCoveredFrames": 2,
+        "reason": "Rejected time-transition merge becomes two independent complete scene crops. Captions kept whole; source has four frames."
+      },
+      {
+        "issue": 2,
+        "readerPage": 16,
+        "baselineSelection": 2,
+        "newSelections": [
+          2,
+          3
+        ],
+        "newlyCoveredFrames": 0,
+        "reason": "Previously credited same-scene pair now two independent complete singles. Preserve walking legs, speech and answering En."
+      }
+    ],
+    "limitations": [
+      "Narrow caption-border and paper fringe may remain around the crops. Neighbor fragments alone do not invalidate complete owned frames under the frozen audit convention.",
+      "Other damaged crops and colored/open missing scenes remain unresolved.",
+      "Rule handles horizontal paper seams only; phone behavior and latency are pending."
+    ]
+  },
+  "corpus": {
+    "baseline": "Test91 / 7d7d5f3",
+    "pages": 312,
+    "beforeSelections": 1283,
+    "afterSelections": 1285,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "beforeSelections": 185,
+        "afterSelections": 187,
+        "splitParents": 2,
+        "unchangedDescriptorsExceptReplacedParents": true,
+        "parentsRetainedVerbatimInChildProofs": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "beforeSelections": 388,
+        "afterSelections": 388,
+        "splitParents": 0,
+        "unchangedDescriptorsExceptReplacedParents": true,
+        "parentsRetainedVerbatimInChildProofs": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "beforeSelections": 101,
+        "afterSelections": 101,
+        "splitParents": 0,
+        "unchangedDescriptorsExceptReplacedParents": true,
+        "parentsRetainedVerbatimInChildProofs": true
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "beforeSelections": 228,
+        "afterSelections": 228,
+        "splitParents": 0,
+        "unchangedDescriptorsExceptReplacedParents": true,
+        "parentsRetainedVerbatimInChildProofs": true
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "beforeSelections": 193,
+        "afterSelections": 193,
+        "splitParents": 0,
+        "unchangedDescriptorsExceptReplacedParents": true,
+        "parentsRetainedVerbatimInChildProofs": true
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "beforeSelections": 188,
+        "afterSelections": 188,
+        "splitParents": 0,
+        "unchangedDescriptorsExceptReplacedParents": true,
+        "parentsRetainedVerbatimInChildProofs": true
+      }
+    ],
+    "originalPixelChecks": {
+      "freshApocalypsePages": 91,
+      "passed": true,
+      "unchangedCorporaRetainTest91CropValidation": true
+    }
+  },
+  "checks": {
+    "retainedAndNewSuites": 86,
+    "retained84PassedLocally": true,
+    "newContractsPassedLocally": true,
+    "freshApocalypseOriginalPixelsRetained": true,
+    "freshApocalypseNoOtherOwnerPixelsAdded": true,
+    "browserChecks": "CI pending",
+    "nativeArchiveChecks": "CI pending",
+    "actualDetectorMatchesReviewedTargets": true,
+    "actualDetectorLocalMs": [
+      10940,
+      8268
+    ],
+    "timingNote": "Native-canvas full existing detector pipeline plus new split; not phone latency and not performance acceptance."
+  },
+  "androidBuild": {
+    "status": "blocked-before-CI",
+    "testedSourceCommit": "9f274a4cbc4bf270ebfe155d4c207a2bc5fbf8b5",
+    "phoneAcceptance": "pending",
+    "apkCreated": false,
+    "push": "Rejected twice by automatic approval review; remote Test_Branch remains 7d7d5f3. Owner/login and standing authorization were verified before second attempt. Review requires direct user-authored authorization here to publish code and proofs.",
+    "localBuild": "Gradle, javac and Android SDK are unavailable.",
+    "nextAction": "After direct user approval, push Test_Branch, wait for Build Test92 APK, verify downloaded APK against the frozen 93-file web manifest, then save and deliver it."
+  }
+}

@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.91 — BOUNDED CROP MASK AND SPEECH REPAIR
+// NTH SHELF 2.79.93 — SOURCE GUTTERS AND COMPLETE CROSSING SPEECH
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.91";
+const CACHE_NAME = "nth-shelf-shell-2.79.93";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -89,6 +89,8 @@ const SHELL_FILES = [
   "./js/panels-lettering-cells.js",
   "./js/panels-connected-pairs.js",
   "./js/panels-crop-repair.js",
+  "./js/panels-gutter-split.js",
+  "./js/panels-speech-ownership.js",
   "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",

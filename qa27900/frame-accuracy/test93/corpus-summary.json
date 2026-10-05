@@ -1,0 +1,60 @@
+{
+  "baseline": "Test92 local source 9f274a4",
+  "pages": 312,
+  "selections": 1285,
+  "basis": "Fresh source-raster supplement replays over retained Test92 descriptors; complete detector rerun on the changed target",
+  "books": [
+    {
+      "book": "apocalypse",
+      "pages": 91,
+      "selections": 187,
+      "changedOwners": [
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-015.jpg",
+          "selection": 4
+        },
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-015.jpg",
+          "selection": 5
+        }
+      ],
+      "allOtherDescriptorsIdentical": true
+    },
+    {
+      "book": "wolverine",
+      "pages": 74,
+      "selections": 388,
+      "changedOwners": [],
+      "allOtherDescriptorsIdentical": true
+    },
+    {
+      "book": "magneto",
+      "pages": 24,
+      "selections": 101,
+      "changedOwners": [],
+      "allOtherDescriptorsIdentical": true
+    },
+    {
+      "book": "29_Chapter_30",
+      "pages": 41,
+      "selections": 228,
+      "changedOwners": [],
+      "allOtherDescriptorsIdentical": true
+    },
+    {
+      "book": "30_Chapter_31",
+      "pages": 41,
+      "selections": 193,
+      "changedOwners": [],
+      "allOtherDescriptorsIdentical": true
+    },
+    {
+      "book": "31_Chapter_32",
+      "pages": 41,
+      "selections": 188,
+      "changedOwners": [],
+      "allOtherDescriptorsIdentical": true
+    }
+  ],
+  "sourceArtworkInGitOrCI": false
+}

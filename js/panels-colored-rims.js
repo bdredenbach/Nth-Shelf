@@ -122,6 +122,6 @@ const PanelColoredRims=(()=>{
   const pts=rings.flat(),xs=pts.map(a=>a[0]),ys=pts.map(a=>a[1]),b=[Math.min(...xs)/w,Math.min(...ys)/h,(Math.max(...xs)-Math.min(...xs))/w,(Math.max(...ys)-Math.min(...ys))/h];return ['x','y','w','h'].every((key,k)=>finite(p[key])&&Math.abs(p[key]-b[k])<1e-10);
  }catch(_){return false;}}
  function completeImage(img,baseline,log){if(!Array.isArray(baseline)||baseline.length||typeof PanelMatteCells==='undefined')return[];const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!W||!H||W*H>24000000)return[];let c;try{c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return[];g.drawImage(img,0,0);const s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s),rgba=PanelMatteCells.sampleBilinearRGBA(g.getImageData(0,0,W,H).data,W,H,w,h),prior=analyzeRGBA(rgba,w,h,log);if(prior.length)return prior;const ps=Math.min(1,480/Math.max(w,h)),pw=Math.round(w*ps),ph=Math.round(h*ps),pairedRGBA=ps<1?PanelMatteCells.sampleBilinearRGBA(rgba,w,h,pw,ph):rgba;return analyzePairedRGBA(pairedRGBA,pw,ph,log);}finally{if(c){c.width=1;c.height=1;}}}
- return {analyzeRGBA,analyzePairedRGBA,completeImage,validPanel};
+ return {analyzeRGBA,analyzePairedRGBA,completeImage,validPanel,whiteBodies};
 })();
 if(typeof module!=='undefined')module.exports=PanelColoredRims;

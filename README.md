@@ -1,5 +1,21 @@
 # Nth Shelf
 
+## Test93 — complete crossing speech, 5 October 2026
+
+**2.79.93**, prepared locally, keeps the complete “We Sandstormers…” balloon with Apocalypse issue 1 reader **16/24**'s walking-away scene. Its preceding scene retains its artwork. Test92's recovered gutter splits remain included. Local usable coverage is **168 / 385**, leaving **217**; raw selections stay **187**. This checkpoint repairs one single frame and adds no selection.
+
+All **88** retained/new behavioral suites pass. Fresh source-raster supplement comparisons over the retained maps cover **312 pages / 1,285 selections**; only the two reviewed Apocalypse owners change. The changed target also passes a full detector rerun. Broader experimental routes earned no further complete-frame credit and were excluded. See [Test93 handoff](HANDOFF-2.79.93.md) and [validation](TEST93-VALIDATION.json).
+
+**Publication and APK build are pending.** The previous automatic approval review rejected publishing Test92 and requires explicit push authorization here. Test93's code, isolated build identity and exact packaged-file manifest are ready locally; no Test92/Test93 APK exists. Phone acceptance remains pending.
+
+## Test92 — independent scenes and intact captions, 5 October 2026
+
+**2.79.92** separates two lower scenes on Apocalypse issue 2 reader 12 that previously popped together across a time transition. Their captions remain whole. The same reusable source-gutter rule separates the already credited walking-legs/En pair on reader 16 into individual pop-outs.
+
+Raw selections: **185 → 187**. Complete local coverage: **165 → 167 / 385**, leaving **218** (197 without a qualifying selection and 21 damaged frames). Only reader 12 contributes new coverage; reader 16 preserves its existing two-frame credit. Phone acceptance is pending. Test92 is committed locally; the push and APK build are currently blocked by approval review. The prior Test91 crop repair remains unchanged.
+
+312-page comparisons retain Wolverine, Magneto and all three manga chapters without selection changes. All original pixels survive the two split parents, captions are assigned atomically, and fresh Apocalypse crop checks add no other detected owner's pixels. See [Test92 handoff](HANDOFF-2.79.92.md), [review](qa27900/frame-accuracy/test92/crop-review.json), and [validation/build status](TEST92-VALIDATION.json).
+
 ## Test91 — bounded crop repair, 5 October 2026
 
 **2.79.91** restores interior artwork and dialogue that the Reader's matte mask cut away, with matching tap and bubble boundaries. Conservative source-page/Reader-crop review credits **12 repaired single frames**: Apocalypse usable coverage rises **153 → 165**, leaving **220 of 385 frames**. Detector selection count stays **185**; there are no newly detected frames or newly credited pairs in this checkpoint. The remaining 21 damaged frames and 199 frames without a qualifying selection stay in the queue. Phone acceptance is pending.

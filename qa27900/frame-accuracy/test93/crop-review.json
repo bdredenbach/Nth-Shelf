@@ -1,0 +1,26 @@
+{
+  "basis": "Source page plus actual Reader canvas; local review, phone pending",
+  "beforeCompleteFrames": 167,
+  "afterCompleteFrames": 168,
+  "completeSingles": 150,
+  "completePairs": 9,
+  "totalFrames": 385,
+  "remainingFrames": 217,
+  "framesWithoutQualifyingSelection": 197,
+  "damagedFrames": 20,
+  "beforeRawSelections": 187,
+  "afterRawSelections": 187,
+  "newlyDetectedFrames": 0,
+  "repairedSingleFrames": 1,
+  "decisions": [
+    {
+      "issue": 1,
+      "readerPage": 16,
+      "selection": 5,
+      "reason": "Complete source-enclosed We Sandstormers balloon is assigned to the walking-away scene; source artwork outside the transferred body is unchanged.",
+      "companionSelection": 4,
+      "companionChange": "Remove foreign speech fragment without removing owned reclining figure artwork."
+    }
+  ],
+  "retainedTest92Gains": "Issue 2 reader 12 adds two complete frames; reader 16 separates a previously accepted pair without extra coverage credit."
+}

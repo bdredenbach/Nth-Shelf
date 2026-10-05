@@ -1,4 +1,4 @@
-name: Build Test91 APK
+name: Build Test93 APK
 
 on:
   push:
@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: nth-shelf-test91-apk
+  group: nth-shelf-test93-apk
   cancel-in-progress: false
 
 jobs:
@@ -41,7 +41,7 @@ jobs:
 
       - name: Syntax and retained frame regression tests
         shell: bash
-        run: bash qa27900/frame-accuracy/test91/run-retained.sh
+        run: bash qa27900/frame-accuracy/test93/run-retained.sh
 
       - name: Set up browser test dependencies
         run: |
@@ -88,7 +88,7 @@ jobs:
       - name: Install Android SDK 35
         run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
 
-      - name: Build isolated Test91 APK
+      - name: Build isolated Test93 APK
         shell: bash
         run: |
           set -euo pipefail
@@ -101,10 +101,10 @@ jobs:
           APK=android/app/build/outputs/apk/debug/app-debug.apk
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$APK" | tee dist/signature.txt
           "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" > dist/package.txt
-          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest91'" dist/package.txt
-          grep -F "versionCode='28019'" dist/package.txt
-          grep -F "versionName='2.79.91'" dist/package.txt
-          grep -F "application-label:'Nth Shelf Test91'" dist/package.txt
+          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest93'" dist/package.txt
+          grep -F "versionCode='28021'" dist/package.txt
+          grep -F "versionName='2.79.93'" dist/package.txt
+          grep -F "application-label:'Nth Shelf Test93'" dist/package.txt
           python3 - <<'PY'
           import hashlib, json, os, pathlib, subprocess, zipfile
           root = pathlib.Path('.')
@@ -130,15 +130,15 @@ jobs:
               for required_detector in ['js/panels-lettering-cells.js','js/panels-connected-pairs.js','js/panels-ragged-gutters.js','js/panels-interrupted-gutters.js','js/panels-neighbor-completion.js','js/panels-shared-boundaries.js','js/panels-exterior-completion.js','js/panels-edge-guided-paper.js','js/panels-chromatic-shared-border.js','js/panels-narrow-ink-frames.js','js/panels-top-row-barrier.js','js/panels-horizontal-paper-strips.js','js/panels-local-boundary-consensus.js','js/panels-context-cells.js','js/panels-interior-strokes.js','js/panels-smooth-gutter-boundaries.js','js/panels-neighbor-edge-cells.js','js/panels-orthogonal-white-gutters.js','js/panels-paper-recovery.js','js/panels-colored-rims.js','js/panels-dark-overlay-insets.js','js/panels-curved-rims.js','js/panels-matte-cells.js','js/panels-edge-spill.js','js/panels-structural-grid.js','js/panels-pale-completion.js','js/panels-gutter-graph.js']:
                   if required_detector not in hashes:
                       raise SystemExit('Frame detector missing: '+required_detector)
-          frozen = json.loads((root / 'qa27900/frame-accuracy/test91/web-assets.json').read_text())
+          frozen = json.loads((root / 'qa27900/frame-accuracy/test93/web-assets.json').read_text())
           if hashes != frozen['sha256']:
               raise SystemExit('APK web bytes differ from the local tested manifest')
           subprocess.run(['git', 'diff', '--exit-code', 'HEAD', '--'], check=True)
           digest = hashlib.sha256(apk.read_bytes()).hexdigest()
           record = {
-              'versionName': '2.79.91', 'versionCode': 28019,
-              'applicationId': 'io.github.bdredenbach.nthshelf.frametest91',
-              'label': 'Nth Shelf Test91', 'sourceCommit': os.environ['GITHUB_SHA'],
+              'versionName': '2.79.93', 'versionCode': 28021,
+              'applicationId': 'io.github.bdredenbach.nthshelf.frametest93',
+              'label': 'Nth Shelf Test93', 'sourceCommit': os.environ['GITHUB_SHA'],
               'signing': 'CI debug key; not a Play Store production key',
               'apkSha256': digest, 'apkBytes': apk.stat().st_size,
               'verifiedWebAssetCount': len(hashes), 'webAssetSha256': hashes,
@@ -146,17 +146,17 @@ jobs:
               'comicArtworkTests': 'Saved results retained; comic artwork fixture is not uploaded or rerun by this workflow'
           }
           (root / 'dist/BUILD.json').write_text(json.dumps(record, indent=2)+'\n')
-          (root / 'dist/Nth-Shelf-2.79.91-Test91.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.91-Test91.apk\n')
-          (root / 'dist/INSTALL.txt').write_text('Install Nth-Shelf-2.79.91-Test91.apk as the separate Nth Shelf Test91 app. Targets: Apocalypse issue 3 reader6, 11, 12, 13 and issue4 reader18/20: compare repaired artwork and dialogue against the original pages. Reader crop repair retains source descriptors and restores bounded interior artwork and speech. General coverage remains incomplete; phone confirmation pending.\n')
+          (root / 'dist/Nth-Shelf-2.79.93-Test93.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.93-Test93.apk\n')
+          (root / 'dist/INSTALL.txt').write_text('Install Nth-Shelf-2.79.93-Test93.apk as the separate Nth Shelf Test93 app. Targets: Apocalypse issue 1 reader16 selection5: the full We Sandstormers balloon should stay with the walking-away scene. Selection4 should retain its reclining figure without the foreign balloon fragment. Retained issue2 reader12 and reader16 scenes should pop separately with captions intact. Test91 crop repairs are retained. General coverage remains incomplete; phone confirmation pending.\n')
           print(json.dumps({'sourceCommit': record['sourceCommit'], 'verifiedWebAssetCount': len(hashes), 'apkSha256': digest}, indent=2))
           PY
-          cp "$APK" dist/Nth-Shelf-2.79.91-Test91.apk
-          git archive --format=zip --output=dist/Nth-Shelf-2.79.91-Test91-Source.zip HEAD
+          cp "$APK" dist/Nth-Shelf-2.79.93-Test93.apk
+          git archive --format=zip --output=dist/Nth-Shelf-2.79.93-Test93-Source.zip HEAD
 
       - name: Upload verified APK, source and build record
         uses: actions/upload-artifact@v4
         with:
-          name: Nth-Shelf-2.79.91-Test91
+          name: Nth-Shelf-2.79.93-Test93
           path: dist/
           if-no-files-found: error
           retention-days: 30
@@ -165,7 +165,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Test91-build-diagnostics
+          name: Test93-build-diagnostics
           path: |
             dist/*.txt
             dist/*.json
