@@ -1,5 +1,11 @@
 # Nth Shelf
 
+## Test94 — complete street artwork, 5 October 2026
+
+**2.79.94** repairs Apocalypse issue 3 reader **6**, selection **2**: the complete circular En view and connected street scene, including the wall/people artwork and both street balloons. False selection **5** is retired using source perimeter and artwork-continuity evidence. The right scene retains all non-speech artwork. Test93 speech, Test92 splits and Test91 crop repairs remain active.
+
+Local complete coverage is **170 / 385**, leaving **215**; raw selections decrease **187 → 186**. This is one repaired connected pair, zero newly detected frames, and one removed false selection. The 312-page fresh-source supplement comparison changes only this page; Wolverine, Magneto and three manga chapters retain identical descriptors. The changed page passes a full detector rerun and real Reader crop review. Final tests, build and phone status are recorded in [validation](TEST94-VALIDATION.json) and [handoff](HANDOFF-2.79.94.md). Phone acceptance remains pending.
+
 ## Test93 — complete crossing speech, 5 October 2026
 
 **2.79.93**, prepared locally, keeps the complete “We Sandstormers…” balloon with Apocalypse issue 1 reader **16/24**'s walking-away scene. Its preceding scene retains its artwork. Test92's recovered gutter splits remain included. Local usable coverage is **168 / 385**, leaving **217**; raw selections stay **187**. This checkpoint repairs one single frame and adds no selection.
@@ -12,7 +18,7 @@ All **88** retained/new behavioral suites pass. Fresh source-raster supplement c
 
 **2.79.92** separates two lower scenes on Apocalypse issue 2 reader 12 that previously popped together across a time transition. Their captions remain whole. The same reusable source-gutter rule separates the already credited walking-legs/En pair on reader 16 into individual pop-outs.
 
-Raw selections: **185 → 187**. Complete local coverage: **165 → 167 / 385**, leaving **218** (197 without a qualifying selection and 21 damaged frames). Only reader 12 contributes new coverage; reader 16 preserves its existing two-frame credit. Phone acceptance is pending. Test92 is committed locally; the push and APK build are currently blocked by approval review. The prior Test91 crop repair remains unchanged.
+Raw selections: **185 → 187**. Complete local coverage: **165 → 167 / 385**, leaving **218** (197 without a qualifying selection and 21 damaged frames). Only reader 12 contributes new coverage; reader 16 preserves its existing two-frame credit. Phone acceptance is pending. Test92 was recovered and published together with Test93; the verified Test93 APK retains these splits. The prior Test91 crop repair remains unchanged.
 
 312-page comparisons retain Wolverine, Magneto and all three manga chapters without selection changes. All original pixels survive the two split parents, captions are assigned atomically, and fresh Apocalypse crop checks add no other detected owner's pixels. See [Test92 handoff](HANDOFF-2.79.92.md), [review](qa27900/frame-accuracy/test92/crop-review.json), and [validation/build status](TEST92-VALIDATION.json).
 

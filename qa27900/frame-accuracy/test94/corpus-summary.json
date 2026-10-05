@@ -1,0 +1,58 @@
+{
+  "baseline": "Test93 final source-raster supplements, published runtime 3a3c287",
+  "basis": "Fresh source-raster perimeter supplement over retained final Test93 descriptors; full detector rerun on the changed target. Not a fresh full detector replay of all 312 pages.",
+  "pages": 312,
+  "beforeSelections": 1285,
+  "afterSelections": 1284,
+  "books": [
+    {
+      "book": "apocalypse",
+      "pages": 91,
+      "selections": 186,
+      "changes": [
+        {
+          "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-005.jpg",
+          "before": 5,
+          "after": 4,
+          "owners": [
+            2,
+            3,
+            5
+          ],
+          "ms": 1939
+        }
+      ]
+    },
+    {
+      "book": "wolverine",
+      "pages": 74,
+      "selections": 388,
+      "changes": []
+    },
+    {
+      "book": "magneto",
+      "pages": 24,
+      "selections": 101,
+      "changes": []
+    },
+    {
+      "book": "29_Chapter_30",
+      "pages": 41,
+      "selections": 228,
+      "changes": []
+    },
+    {
+      "book": "30_Chapter_31",
+      "pages": 41,
+      "selections": 193,
+      "changes": []
+    },
+    {
+      "book": "31_Chapter_32",
+      "pages": 41,
+      "selections": 188,
+      "changes": []
+    }
+  ],
+  "sourceArtworkInGitOrCI": false
+}

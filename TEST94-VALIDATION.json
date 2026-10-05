@@ -1,0 +1,118 @@
+{
+  "version": "2.79.94",
+  "versionCode": 28022,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest94",
+  "baseline": "Test93 published source checkpoint 2867ecc, runtime 3a3c287",
+  "cropReview": {
+    "basis": "Original full source page versus actual Reader canvases, local manual review; phone acceptance pending",
+    "beforeCompleteFrames": 168,
+    "afterCompleteFrames": 170,
+    "completeSingles": 150,
+    "completePairs": 10,
+    "totalFrames": 385,
+    "remainingFrames": 215,
+    "framesWithoutQualifyingSelection": 197,
+    "damagedFrames": 18,
+    "beforeRawSelections": 187,
+    "afterRawSelections": 186,
+    "newlyDetectedFrames": 0,
+    "repairedConnectedPairs": 1,
+    "retiredFalseSelections": 1,
+    "decisions": [
+      {
+        "issue": 3,
+        "readerPage": 6,
+        "selection": 2,
+        "frames": 2,
+        "reason": "Complete circular En view and immediately continuous central street scene retain all artwork, HE IS A GIFT and QUICK--FETCH WATER speech. Source-enclosed outer perimeter reunites wall/people held by false selection5.",
+        "retiredSelection": 5,
+        "neighborSelection": 3,
+        "neighborChange": "35 analysis pixels of foreign QUICK--FETCH WATER body are removed; all non-speech artwork retained."
+      }
+    ]
+  },
+  "corpus": {
+    "baseline": "Test93 final source-raster supplements, published runtime 3a3c287",
+    "basis": "Fresh source-raster perimeter supplement over retained final Test93 descriptors; full detector rerun on the changed target. Not a fresh full detector replay of all 312 pages.",
+    "pages": 312,
+    "beforeSelections": 1285,
+    "afterSelections": 1284,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "selections": 186,
+        "changes": [
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-005.jpg",
+            "before": 5,
+            "after": 4,
+            "owners": [
+              2,
+              3,
+              5
+            ],
+            "ms": 1939
+          }
+        ]
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "selections": 388,
+        "changes": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "selections": 101,
+        "changes": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "selections": 228,
+        "changes": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "selections": 193,
+        "changes": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "selections": 188,
+        "changes": []
+      }
+    ],
+    "sourceArtworkInGitOrCI": false
+  },
+  "checks": {
+    "retainedAndNewBehavioralSuites": 90,
+    "passed": true,
+    "corruptedProofsRejected": 38,
+    "restoredPixelTaps": 35231,
+    "restoredEdgeTaps": 775,
+    "repeatedReaderOverlays": 4,
+    "sourceArtworkRetained": true,
+    "nonSpeechNeighborUnchanged": true,
+    "sourceIndependentSyntheticPositive": true,
+    "realInsetOutsideDescriptorProtected": true,
+    "actualDetectorMatchesReviewedTarget": true,
+    "actualTargetDetectorMs": 14929,
+    "timingNote": "Local native-canvas full detector; not phone latency or performance acceptance."
+  },
+  "androidBuild": {
+    "status": "pending publication and CI",
+    "apkCreated": false,
+    "published": false,
+    "ciStarted": false,
+    "applicationId": "io.github.bdredenbach.nthshelf.frametest94",
+    "label": "Nth Shelf Test94",
+    "versionName": "2.79.94",
+    "versionCode": 28022
+  },
+  "phoneAcceptance": "pending"
+}

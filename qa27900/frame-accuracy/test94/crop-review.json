@@ -1,0 +1,28 @@
+{
+  "basis": "Original full source page versus actual Reader canvases, local manual review; phone acceptance pending",
+  "beforeCompleteFrames": 168,
+  "afterCompleteFrames": 170,
+  "completeSingles": 150,
+  "completePairs": 10,
+  "totalFrames": 385,
+  "remainingFrames": 215,
+  "framesWithoutQualifyingSelection": 197,
+  "damagedFrames": 18,
+  "beforeRawSelections": 187,
+  "afterRawSelections": 186,
+  "newlyDetectedFrames": 0,
+  "repairedConnectedPairs": 1,
+  "retiredFalseSelections": 1,
+  "decisions": [
+    {
+      "issue": 3,
+      "readerPage": 6,
+      "selection": 2,
+      "frames": 2,
+      "reason": "Complete circular En view and immediately continuous central street scene retain all artwork, HE IS A GIFT and QUICK--FETCH WATER speech. Source-enclosed outer perimeter reunites wall/people held by false selection5.",
+      "retiredSelection": 5,
+      "neighborSelection": 3,
+      "neighborChange": "35 analysis pixels of foreign QUICK--FETCH WATER body are removed; all non-speech artwork retained."
+    }
+  ]
+}
