@@ -25,8 +25,12 @@ The version-47 proof keeps the original owners, exact matching source contours, 
 
 ## Publication, build and next target
 
-Publication/build authorization continues from the attached handoff. Isolated identity: `io.github.bdredenbach.nthshelf.frametest94`, label `Nth Shelf Test94`, version `2.79.94`, code `28022`. The exact tested source tree `ca43a4f3d361b1dc046d24c35654d385bc0ed4f9` is published at `f9a68b68b905d3783f40bea82bdd3273f8c53000`, matching local tested checkpoint `dbf202d`. All 90 suites pass. Android [run 37374620934](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37374620934) is queued. CI and APK verification remain pending. Do not claim an APK before successful build/download verification.
+Publication/build authorization continues from the attached handoff. Isolated identity: `io.github.bdredenbach.nthshelf.frametest94`, label `Nth Shelf Test94`, version `2.79.94`, code `28022`. The exact tested source tree `ca43a4f3d361b1dc046d24c35654d385bc0ed4f9` is published at `f9a68b68b905d3783f40bea82bdd3273f8c53000`, matching local tested checkpoint `dbf202d`. All 90 suites pass. Android [run 37374620934](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37374620934) succeeded: all 90 suites, browser/backup, native streaming archive, build, signature/identity and exact asset checks pass. The downloaded artifact ZIP passes integrity and SHA-256 verification. `Nth-Shelf-2.79.94-Test94.apk` is verified against all 95 frozen packaged web files, CI identity/signature record and checksum. APK bytes: **3,456,184**; SHA-256: `a11048f8c14d92106ecdc776770c62ca8836c4772f982908c169de5f2f0d9cee`. This is a CI debug-signed isolated test build; phone acceptance remains pending.
 
 Next phone check: issue 3 reader 6, tap center/edges of the street, its upper circular view, both balloons, and the formerly false middle fragment. Check the right scene and retained Test93 issue 1 reader 16 / Test92 issue 2 reader 12 and 16. Further source targets stay SWAK on issue 2 reader 18, lower pair on issue 3 reader 13, and narrow red-rim En inset on issue 4 reader 14. Keep one bounded target per recoverable pass.
 
 Private recovery paths for this pass: `/workspace/scratch/36070fbf99e6/Nth-Shelf`, `research/` alongside it, source fixtures symlinked to the surviving earlier workspace. These are recovery hints, not durable fixture guarantees.
+
+## Saved deliverables
+
+Verified APK: `libfile_34b788e846708191b2b14c8a8505abb0`. Frame review: `libfile_a09ba00897b48191aef8d33579c8bb2f` (updated in place, version 1). Recovery handoff: `libfile_fc41faad5434819187ed9649f5f14ada` (updated in place, version 1). Both describe the successful build and verification.
