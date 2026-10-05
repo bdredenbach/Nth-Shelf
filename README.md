@@ -21,26 +21,4 @@ The current upgrade improves recognition of thin-bordered panels surrounded by s
 - **Earlier selections stay intact:** established frame boundaries and ownership remain unchanged in the verified comparison.
 - **The same contour throughout:** the reader uses the validated outline when displaying the panel pop-out.
 
-## A frame we can now read
-
-In **Rise of Apocalypse, issue 2, reader page 17/23**, the complete upper-left tall scene now pops out with its speech balloons included. This upgrade has been confirmed working by the user on Android.
-
-## Checked across the collection
-
-| Check | Result |
-| --- | --- |
-| Full 91-page Apocalypse comparison | 181 → 182 detected frames; every earlier frame descriptor preserved |
-| Retained and new regression suites | All 78 passed |
-| New scene after mirroring, resizing and JPEG recompression | Recovered |
-| Android build, signature and package checks | Passed |
-| Packaged reader files | All 88 matched the verified source |
-
 Panel coverage continues to grow. This upgrade adds a confirmed complete scene; detection across every layout remains a work in progress.
-
-## Try the current Android build
-
-Import your own comic and open it in the reader, then use a panel pop-out to bring a detected scene into focus.
-
-The current installable debug build is **Nth Shelf Test88**, version **2.79.88**. It installs separately from the stable Nth Shelf app.
-
-[Android build and installation details](android/README.md) · [Build downloads](https://github.com/bdredenbach/Nth-Shelf/actions/workflows/android-apk.yml?query=branch%3AAndroid)
