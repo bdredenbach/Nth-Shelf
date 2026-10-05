@@ -2,11 +2,11 @@
 
 5 October 2026. Repository `bdredenbach/Nth-Shelf`, branch `Test_Branch`.
 
-Brad confirmed the full Apocalypse phone sweep at **189 unique complete original frames**; carry that accepted Test95 baseline into future chats. Dual-frame crops count two, larger crops count each complete original frame once, clipped/duplicate frames count zero. There are **384 original frames**, after correcting the duplicated hand/wrist fragment on issue3 Reader13. Historical 171 used a stricter grouping rule; 185 was an earlier raw-selection count.
+Brad confirmed the Test96 recovery and the count of **190 unique complete original frames** on phone on 5 October 2026. Current accepted coverage: **190 / 384**, with **194 remaining**. The earlier full Test95 phone sweep confirmed 189; Test96 adds one complete frame. Dual-frame crops count two, larger crops count each complete original frame once, clipped/duplicate frames count zero. There are **384 original frames**, after correcting the duplicated hand/wrist fragment on issue3 Reader13. Historical 171 used a stricter grouping rule; 185 was an earlier raw-selection count.
 
 ## Bounded gain
 
-Apocalypse issue4 Reader **5**, selection **2** now retains the complete “I remember…” speech chain, including the underworld and “You were not strong enough” balloons. Selection3 loses only foreign speech and keeps its own dialogue and artwork. Native Reader composition preserves every pixel outside the transferred body; other four selections are identical. This adds **one complete frame**, repairs an existing selection and adds no detector selection. Local **190/384**, **194 remaining**, **186 selections**, **167 credited groups**. Issue totals: **36/99**, **54/97**, **62/109**, **38/79**. Test96 phone confirmation is pending; phone timing is unmeasured.
+Apocalypse issue4 Reader **5**, selection **2** now retains the complete “I remember…” speech chain, including the underworld and “You were not strong enough” balloons. Selection3 loses only foreign speech and keeps its own dialogue and artwork. Native Reader composition preserves every pixel outside the transferred body; other four selections are identical. This adds **one complete frame**, repairs an existing selection and adds no detector selection. Confirmed **190/384**, **194 remaining**, **186 selections**, **167 credited groups**. Issue totals: **36/99**, **54/97**, **62/109**, **38/79**. Brad phone-confirmed the Test96 recovery and count of 190 on 5 October 2026; phone timing remains unmeasured.
 
 ## Source-driven rule
 
@@ -30,8 +30,7 @@ Issue3 Reader13: some clipped balloons have a stable tail, but the parents are o
 
 ## Verified Android build
 
-[Android run 37385546862](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37385546862) succeeded. The downloaded APK matches CI checksum and identity/signature record; all **97** packaged web files match the frozen local tested source bytes. Identity: io.github.bdredenbach.nthshelf.frametest96, label Nth Shelf Test96, version2.79.96, code28024. APK **3,465,934 bytes**, SHA-256 **b6555c4c097b1e9055242571ab128509749f01f788319c007ff9dfbffbc90984**. APK v2 signed with one CI debug signer. Test96 phone acceptance is pending; the full189 Test95 phone baseline is accepted.
-
+[Android run 37385546862](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37385546862) succeeded. The downloaded APK matches CI checksum and identity/signature record; all **97** packaged web files match the frozen local tested source bytes. Identity: io.github.bdredenbach.nthshelf.frametest96, label Nth Shelf Test96, version2.79.96, code28024. APK **3,465,934 bytes**, SHA-256 **b6555c4c097b1e9055242571ab128509749f01f788319c007ff9dfbffbc90984**. APK v2 signed with one CI debug signer. Test96 phone acceptance and the count of 190 are confirmed by Brad on 5 October 2026; the earlier full Test95 sweep confirmed 189. Phone timing remains unmeasured.
 ## Saved deliverables
 
 Nth-Shelf-2.79.96-Test96.apk: libfile_5b3a27cb14088191b9970f0cacbaa291

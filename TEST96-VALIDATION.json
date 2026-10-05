@@ -40,7 +40,7 @@
       "completeFrames": 189,
       "status": "Brad confirmed full phone sweep, 5 October 2026"
     },
-    "phoneTest96": "pending",
+    "phoneTest96": "confirmed by Brad, 5 October 2026",
     "target": {
       "issue": 4,
       "readerPage": 5,
@@ -96,9 +96,9 @@
       }
     ],
     "limits": [
-      "Native canvas and local manual review; Test96 phone acceptance and latency unmeasured.",
+      "Native canvas and local manual review; Test96 phone acceptance/count confirmed by Brad; latency unmeasured.",
       "312-page comparison is fresh source-raster supplements over saved Test95 maps; only changed target received full detector rerun.",
-      "The 189 phone-confirmed frames are the accepted baseline, not a fresh 190-frame Android sweep."
+      "The189 full phone sweep is the accepted baseline; Brad subsequently confirmed the Test96 addition and count190. No separate exhaustive190-frame sweep was reported."
     ]
   },
   "corpus": {
@@ -197,7 +197,7 @@
       "97 exact packaged web files"
     ]
   },
-  "phoneAcceptance": "pending",
+  "phoneAcceptance": "confirmed",
   "phoneTiming": "unmeasured",
   "savedDeliverables": {
     "status": "saved",
@@ -219,10 +219,20 @@
       {
         "local_path": "/workspace/scratch/f515f9782ac9/test96/deliverables/Nth-Shelf-Test96-New-Chat-Handoff.txt",
         "library_file_id": "libfile_7e8793b5bd84819198d823246511f16e",
-        "file_id": "file_00000000927081fdaa5342804eb3a50e",
+        "file_id": "file_00000000372c81f587a1f42e9bcf1865",
         "file_name": "Nth-Shelf-Test96-New-Chat-Handoff.txt",
-        "current_version_number": 0
+        "current_version_number": 1
       }
     ]
+  },
+  "phoneConfirmation": {
+    "date": "2026-10-05",
+    "confirmedBy": "Brad",
+    "completeFrames": 190,
+    "narrativeFrames": 384,
+    "remainingFrames": 194,
+    "basis": "Brad confirmed the Test96 result and requested a handoff confirming the count. Earlier full Test95 phone sweep confirmed189.",
+    "quote": "Okay that works for me too. Can you create the handoff again with confirmation of count",
+    "timing": "unmeasured"
   }
 }
