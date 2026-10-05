@@ -22,10 +22,14 @@ Fresh source-raster supplements over final Test94 descriptors cover **312 pages 
 
 ## Publication, build and phone check
 
-User publication/build authorization persists. Isolated identity: `io.github.bdredenbach.nthshelf.frametest95`, label `Nth Shelf Test95`, version `2.79.95`, code `28023`. Live publication/build and verification status is in `TEST95-VALIDATION.json`. Do not describe a build as successful until the downloaded APK is verified.
+User publication/build authorization persists. Isolated identity: `io.github.bdredenbach.nthshelf.frametest95`, label `Nth Shelf Test95`, version `2.79.95`, code `28023`. Published source `bb4ea14` exactly matches tested tree `4733898a7491680a3286338351281ec150372b62`. [Android run 37378324461](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37378324461) succeeded. All 92 behavioral suites, cache/package checks, browser/backup, native archive, build, signature/identity and packaging checks pass. The downloaded APK is verified against its checksum, CI signature/identity record, and all 96 frozen web files. APK bytes: **3,460,506**; SHA-256: `7155f748e9187cca0bc390923baf140d89fe835e4c42707cb6346206b27d7f69`. Live publication/build and verification status is in `TEST95-VALIDATION.json`. Do not describe a build as successful until the downloaded APK is verified.
 
 Phone target: issue 2 reader 18 upper-right hand/water frame, center/edges, wrist, fingers, both balloons and background. SWAK stays unchanged. Retained controls: Test94 issue 3 reader 6 street/portrait pair, Test93 issue 1 reader 16, and Test92 issue 2 readers 12/16.
 
 Further work: SWAK issue 2 reader 18, issue 3 reader 13 lower pair, issue 4 reader 14 narrow red-rim En inset. One bounded target per pass.
 
 Private recovery: repository `/workspace/scratch/36070fbf99e6/Nth-Shelf`; this pass's research `/workspace/scratch/dfc1ab24edfe/research`; fixtures symlink `/workspace/scratch/dfc1ab24edfe/fixtures` points to `/workspace/scratch/5827b11a4a78/fixtures`. Recovery hints, not durable guarantees.
+
+## Saved deliverables
+
+Verified APK: `libfile_98b6da7e1a688191923d922460a43b2c`. Frame review: `libfile_e4508563cbd08191b276eea160c9dd1f`. Recovery handoff: `libfile_622f19a1016081918b3cc365c0556dfa`. All saved at version 0 after successful APK verification. Phone acceptance remains pending.
