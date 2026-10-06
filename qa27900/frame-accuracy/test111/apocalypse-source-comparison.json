@@ -1,0 +1,149 @@
+{
+  "book": "apocalypse",
+  "pages": 91,
+  "originalSelections": 209,
+  "finalSelections": 220,
+  "additions": [
+    {
+      "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-002.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          31,
+          28,
+          553,
+          179
+        ]
+      ],
+      "attachments": [
+        false
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-023.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          0,
+          30,
+          256,
+          329
+        ]
+      ],
+      "attachments": [
+        false
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-017.jpg",
+      "count": 2,
+      "boxes": [
+        [
+          31,
+          12,
+          199,
+          258
+        ],
+        [
+          177,
+          0,
+          380,
+          204
+        ]
+      ],
+      "attachments": [
+        false,
+        false
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-020.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          204,
+          0,
+          585,
+          417
+        ]
+      ],
+      "attachments": [
+        false
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-004.jpg",
+      "count": 2,
+      "boxes": [
+        [
+          9,
+          352,
+          585,
+          494
+        ],
+        [
+          274,
+          493,
+          585,
+          900
+        ]
+      ],
+      "attachments": [
+        false,
+        false
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-000.jpg",
+      "count": 2,
+      "boxes": [
+        [
+          0,
+          560,
+          306,
+          893
+        ],
+        [
+          303,
+          548,
+          554,
+          801
+        ]
+      ],
+      "attachments": [
+        false,
+        false
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-007.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          392,
+          669,
+          486,
+          867
+        ]
+      ],
+      "attachments": [
+        false
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-011.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          266,
+          0,
+          585,
+          514
+        ]
+      ],
+      "attachments": [
+        false
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "book": "apocalypse",
+  "pages": 91,
+  "originalSelections": 209,
+  "finalSelections": 220,
+  "changes": [
+    {
+      "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-002.jpg",
+      "id": 1,
+      "added": 0,
+      "lost": 6980,
+      "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+    },
+    {
+      "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-004.jpg",
+      "id": 2,
+      "added": 0,
+      "lost": 226,
+      "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+    },
+    {
+      "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-004.jpg",
+      "id": 4,
+      "added": 0,
+      "lost": 61,
+      "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+    }
+  ],
+  "sourceDescriptorsUnchanged": true,
+  "preservationOutsideProvenNewSourceAndSpeech": true
+}

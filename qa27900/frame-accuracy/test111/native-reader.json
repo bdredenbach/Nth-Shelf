@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "earlierNativeCanvases": 10,
+  "byteIdenticalPriorCanvases": 7,
+  "correctedForeignFragments": [
+    {
+      "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-002.jpg",
+      "selection": 1,
+      "removedForeignPixels": 6980,
+      "oldSourcePixelsWithinValidatedCaptionOrOrnament": 6980
+    },
+    {
+      "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-004.jpg",
+      "selection": 2,
+      "removedForeignPixels": 226,
+      "oldSourcePixelsWithinValidatedCaptionOrOrnament": 0
+    },
+    {
+      "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-004.jpg",
+      "selection": 4,
+      "removedForeignPixels": 61,
+      "oldSourcePixelsWithinValidatedCaptionOrOrnament": 0
+    }
+  ],
+  "allPriorArtworkOutsideProvenNewSourceAndSpeechPreserved": true,
+  "finalNativeCanvases": 19,
+  "newSelectionsReachable": 9,
+  "newDisplayedOverlapPixels": 0
+}

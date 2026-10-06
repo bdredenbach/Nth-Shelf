@@ -1,0 +1,23 @@
+{
+  "book": "wolverine",
+  "pages": 74,
+  "originalSelections": 388,
+  "finalSelections": 389,
+  "additions": [
+    {
+      "key": "Wolverine (2010-2012) 1000-042.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          23,
+          306,
+          307,
+          497
+        ]
+      ],
+      "attachments": [
+        false
+      ]
+    }
+  ]
+}
