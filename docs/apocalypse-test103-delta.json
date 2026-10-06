@@ -1,0 +1,64 @@
+{
+  "version": "2.79.103",
+  "baseline": {
+    "version": "Test102",
+    "completeFrames": 196,
+    "phoneAccepted": true,
+    "date": "2026-10-06"
+  },
+  "localCompleteFrames": 198,
+  "originalFrames": 384,
+  "remainingFrames": 186,
+  "rawSelections": 188,
+  "creditedGroups": 174,
+  "phoneTest103": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 38,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 55,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 65,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 40,
+      "total": 79
+    }
+  ],
+  "countingRule": "Each unique complete original frame once; larger crops count each fully complete original frame; clipped and duplicate fragments add zero.",
+  "changes": [
+    {
+      "issue": 1,
+      "readerPage": 18,
+      "selection": 3,
+      "frames": 1,
+      "description": "Complete wide punch scene, lettering and two captions. Neighboring scene fragments add zero."
+    },
+    {
+      "issue": 1,
+      "readerPage": 18,
+      "selection": 4,
+      "frames": 1,
+      "description": "Complete standing-silhouette scene at left, including all three balloons. Adjacent En portrait remains clipped at the forehead and adds zero."
+    }
+  ],
+  "pageCompleteBefore": 2,
+  "pageCompleteAfter": 4,
+  "originalSelectionsUnchanged": true,
+  "discovery": "Append two independently source-backed landscape cells; preserve earlier owners and selection order.",
+  "futureIdeas": [
+    "Issue1 Reader18 En portrait remains incomplete; no credit for it.",
+    "Issue1 Reader18 upper cavern and two narrow dialogue strips remain unselected.",
+    "Issue4 Reader18 S3 foreground still needs ownership review.",
+    "Missing ink-frame scenes remain queued."
+  ]
+}

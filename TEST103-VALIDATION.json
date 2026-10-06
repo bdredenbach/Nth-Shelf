@@ -1,0 +1,303 @@
+{
+  "version": "2.79.103",
+  "versionCode": 28031,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest103",
+  "label": "Nth Shelf Test103",
+  "baseline": "Phone-confirmed Test102196/384,188 remaining",
+  "cropReview": {
+    "version": "2.79.103",
+    "baseline": {
+      "version": "Test102",
+      "completeFrames": 196,
+      "phoneAccepted": true,
+      "date": "2026-10-06"
+    },
+    "localCompleteFrames": 198,
+    "originalFrames": 384,
+    "remainingFrames": 186,
+    "rawSelections": 188,
+    "creditedGroups": 174,
+    "phoneTest103": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 38,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 55,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 65,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 40,
+        "total": 79
+      }
+    ],
+    "countingRule": "Each unique complete original frame once; larger crops count each fully complete original frame; clipped and duplicate fragments add zero.",
+    "changes": [
+      {
+        "issue": 1,
+        "readerPage": 18,
+        "selection": 3,
+        "frames": 1,
+        "description": "Complete wide punch scene, lettering and two captions. Neighboring scene fragments add zero."
+      },
+      {
+        "issue": 1,
+        "readerPage": 18,
+        "selection": 4,
+        "frames": 1,
+        "description": "Complete standing-silhouette scene at left, including all three balloons. Adjacent En portrait remains clipped at the forehead and adds zero."
+      }
+    ],
+    "pageCompleteBefore": 2,
+    "pageCompleteAfter": 4,
+    "originalSelectionsUnchanged": true,
+    "discovery": "Append two independently source-backed landscape cells; preserve earlier owners and selection order.",
+    "futureIdeas": [
+      "Issue1 Reader18 En portrait remains incomplete; no credit for it.",
+      "Issue1 Reader18 upper cavern and two narrow dialogue strips remain unselected.",
+      "Issue4 Reader18 S3 foreground still needs ownership review.",
+      "Missing ink-frame scenes remain queued."
+    ]
+  },
+  "corpus": {
+    "status": "passed",
+    "scope": "Fresh before/after Reader display masks from the same original rasters and image context; baseline Test102 modules compared with final Test103 modules on all 312 retained discovery maps. The final source supplement runs on every eligible landscape image; only one page gains two selections. Changed target also receives a fresh full detector replay. No full corpus rerun of the older underlying detector is claimed.",
+    "pages": 312,
+    "originalSelections": 1284,
+    "finalSelections": 1286,
+    "originalDisplayMasksChanged": 0,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 186,
+        "finalSelections": 188,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-017.jpg",
+            "count": 2,
+            "boxes": [
+              [
+                4,
+                258,
+                884,
+                473
+              ],
+              [
+                462,
+                464,
+                900,
+                692
+              ]
+            ]
+          }
+        ],
+        "changes": []
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 388,
+        "finalSelections": 388,
+        "additions": [],
+        "changes": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": [],
+        "changes": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": [],
+        "changes": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": [],
+        "changes": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": [],
+        "changes": []
+      }
+    ]
+  },
+  "localChecks": {
+    "status": "passed",
+    "behavioralSuites": 107,
+    "cachePackageAndSyntax": "passed",
+    "retainedCompletion": {
+      "passed": true,
+      "behavioralSuites": 107,
+      "cachePackageContract": true,
+      "syntax": true,
+      "finalReaderSuiteSeen": true
+    },
+    "actualNativeReaderCanvases": {
+      "passed": true,
+      "originalNativeCanvasesUnchanged": 20,
+      "finalNativeCanvases": 22,
+      "originalControls": [
+        {
+          "file": "i1-p18-s1.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i1-p18-s2.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i3-p13-s1.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i3-p13-s2.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i3-p13-s3.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i3-p13-s4.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i3-p13-s5.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i3-p13-s6.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i4-p18-s1.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i4-p18-s2.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i4-p18-s3.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i4-p18-s4.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i2-p18-s1.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i2-p18-s2.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i4-p05-s1.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i4-p05-s2.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i4-p05-s3.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i4-p05-s4.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i4-p05-s5.png",
+          "reachable": true,
+          "byteIdentical": true
+        },
+        {
+          "file": "i4-p05-s6.png",
+          "reachable": true,
+          "byteIdentical": true
+        }
+      ],
+      "newSelections": [
+        {
+          "file": "i1-p18-s3.png",
+          "reachable": true,
+          "tapGridHits": 43,
+          "width": 3000,
+          "height": 732
+        },
+        {
+          "file": "i1-p18-s4.png",
+          "reachable": true,
+          "tapGridHits": 48,
+          "width": 1935,
+          "height": 1007
+        }
+      ],
+      "review": "Wide punch scene and standing-silhouette scene manually compared with full original source; adjacent En portrait incomplete and worth zero."
+    },
+    "freshTargetDetector": {
+      "passed": true,
+      "sourceBytes": 3929156,
+      "selectionCount": 4,
+      "originalDescriptorsPreserved": true,
+      "appendedSelections": 2
+    },
+    "sourceArtworkUploaded": false,
+    "browserIntegration": "pending CI",
+    "nativeArchive": "pending CI",
+    "phoneTiming": "unmeasured"
+  },
+  "publication": {
+    "status": "pending",
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "phoneAcceptance": "pending"
+}
