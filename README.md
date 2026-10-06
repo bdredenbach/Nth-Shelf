@@ -2,7 +2,7 @@
 
 ## Test98 — complete explosion speech balloon, 5 October 2026
 
-Apocalypse issue4 Reader18 selection4 now retains its complete opening explosion balloon, including the long zigzag tail. The accepted Test97 baseline is **191/384**, **193 remaining**; Test98 is **192/384 locally**, **192 remaining**, **186 selections**, pending phone confirmation. Source enclosure, two tail openings and two body-collar witnesses restore the whole speech body to one proven neighboring row. Discovery is unchanged. S1/S2 canvases are identical; S3 loses only its546-pixel foreign speech fragment and remains incomplete. See [handoff](HANDOFF-2.79.98.md), [frame delta](docs/apocalypse-test98-delta.json) and [validation](TEST98-VALIDATION.json).
+Apocalypse issue4 Reader18 selection4 now retains its complete opening explosion balloon, including the long zigzag tail. The accepted Test97 baseline is **191/384**, **193 remaining**; Test98 is **192/384 locally**, **192 remaining**, **186 selections**, pending phone confirmation. Source enclosure, two tail openings and two body-collar witnesses restore the whole speech body to one proven neighboring row. Discovery is unchanged. S1/S2 canvases are identical; S3 loses only its546-pixel foreign speech fragment and remains incomplete. All98 behavioral suites and312-page native Reader checks passed. Published source7bd0d1f2 exactly matches the tested tree; Android run37393752703 succeeded. The downloaded APK matches its checksum, isolated identity, signing record and all98 frozen web files. See [handoff](HANDOFF-2.79.98.md), [frame delta](docs/apocalypse-test98-delta.json) and [validation](TEST98-VALIDATION.json).
 
 ## Test97 — complete city-scene captions, 5 October 2026
 
