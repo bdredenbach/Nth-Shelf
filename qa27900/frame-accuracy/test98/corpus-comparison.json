@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "scope": "Fresh native source-raster Reader mask comparison of all saved Test97 descriptors; discovery code unchanged, no full detector replay claimed.",
+  "pages": 312,
+  "selections": 1284,
+  "books": [
+    {
+      "book": "apocalypse",
+      "pages": 91,
+      "selections": 186,
+      "changes": [
+        {
+          "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-017.jpg",
+          "id": 3,
+          "added": 0,
+          "lost": 546
+        },
+        {
+          "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-017.jpg",
+          "id": 4,
+          "added": 4319,
+          "lost": 0
+        }
+      ]
+    },
+    {
+      "book": "wolverine",
+      "pages": 74,
+      "selections": 388,
+      "changes": []
+    },
+    {
+      "book": "magneto",
+      "pages": 24,
+      "selections": 101,
+      "changes": []
+    },
+    {
+      "book": "29_Chapter_30",
+      "pages": 41,
+      "selections": 228,
+      "changes": []
+    },
+    {
+      "book": "30_Chapter_31",
+      "pages": 41,
+      "selections": 193,
+      "changes": []
+    },
+    {
+      "book": "31_Chapter_32",
+      "pages": 41,
+      "selections": 188,
+      "changes": []
+    }
+  ]
+}

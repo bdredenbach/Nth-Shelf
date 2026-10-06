@@ -1,8 +1,12 @@
 # Nth Shelf
 
+## Test98 — complete explosion speech balloon, 5 October 2026
+
+Apocalypse issue4 Reader18 selection4 now retains its complete opening explosion balloon, including the long zigzag tail. The accepted Test97 baseline is **191/384**, **193 remaining**; Test98 is **192/384 locally**, **192 remaining**, **186 selections**, pending phone confirmation. Source enclosure, two tail openings and two body-collar witnesses restore the whole speech body to one proven neighboring row. Discovery is unchanged. S1/S2 canvases are identical; S3 loses only its546-pixel foreign speech fragment and remains incomplete. See [handoff](HANDOFF-2.79.98.md), [frame delta](docs/apocalypse-test98-delta.json) and [validation](TEST98-VALIDATION.json).
+
 ## Test97 — complete city-scene captions, 5 October 2026
 
-Apocalypse issue4 Reader20 selection1 now retains all opening captions and their lettering. Test96's phone-confirmed **190/384** baseline becomes **191/384 locally**, **193 remaining**, **186 selections**; Test97 phone acceptance is pending. This is one recovered complete frame in an existing pop-out. The Reader restores source-enclosed chromatic caption bodies and includes their extent without changing discovery proofs. The other four target-page canvases are byte-identical to Test96. Published source `2f191f08` exactly matches the tested tree; Android run `37389515841` succeeded. The downloaded Test97 APK matches its checksum, identity/signature record and all97 frozen web files. See [handoff](HANDOFF-2.79.97.md), [per-frame delta](docs/apocalypse-test97-delta.json) and [validation/build record](TEST97-VALIDATION.json).
+Apocalypse issue4 Reader20 selection1 now retains all opening captions and their lettering. Test96's phone-confirmed **190/384** baseline becomes **191/384 locally**, **193 remaining**, **186 selections**; Brad phone-confirmed Test97 at **191/384**, **193 remaining**, on 5 October 2026. This is one recovered complete frame in an existing pop-out. The Reader restores source-enclosed chromatic caption bodies and includes their extent without changing discovery proofs. The other four target-page canvases are byte-identical to Test96. Published source `2f191f08` exactly matches the tested tree; Android run `37389515841` succeeded. The downloaded Test97 APK matches its checksum, identity/signature record and all97 frozen web files. See [handoff](HANDOFF-2.79.97.md), [per-frame delta](docs/apocalypse-test97-delta.json) and [validation/build record](TEST97-VALIDATION.json).
 
 ## Test96 — complete ragged-row dialogue, 5 October 2026
 

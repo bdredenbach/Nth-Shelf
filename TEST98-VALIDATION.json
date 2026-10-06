@@ -1,0 +1,141 @@
+{
+  "version": "2.79.98",
+  "versionCode": 28026,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest98",
+  "label": "Nth Shelf Test98",
+  "baseline": "Phone-confirmed Test97 191/384,193 remaining",
+  "cropReview": {
+    "version": "2.79.98",
+    "baseline": {
+      "version": "Test97",
+      "completeFrames": 191,
+      "phoneAccepted": true
+    },
+    "localCompleteFrames": 192,
+    "originalFrames": 384,
+    "remainingFrames": 192,
+    "rawSelections": 186,
+    "creditedGroups": 169,
+    "phoneTest98": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 36,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 54,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 62,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 40,
+        "total": 79
+      }
+    ],
+    "countingRule": "Each unique complete original frame once; clipped and duplicate frames add zero. Dual crops count2, larger crops count all complete original frames.",
+    "change": {
+      "issue": 4,
+      "readerPage": 18,
+      "selection": 4,
+      "beforeComplete": false,
+      "afterComplete": true,
+      "pageCompleteBefore": 2,
+      "pageCompleteAfter": 3,
+      "addedDisplayAnalysisPixels": 4319,
+      "removedDisplayAnalysisPixels": 0,
+      "foreignBalloonRemovedFromSelection3": 546,
+      "description": "The bottom explosion scene retains its whole opening AN EXPLOSION speech balloon and lettering."
+    },
+    "detectorDescriptors": "unchanged; Reader-only source enclosure and long-tail/collar ownership repair",
+    "neighborCanvases": "S1 and S2 byte-identical; S3 loses only546 pixels inside the foreign balloon; all artwork outside the enclosed balloon remains unchanged. S3 is still incomplete and earns no new credit.",
+    "queueBasis": "Test95 audit, excluding issue4 Reader5 S2, Reader20 S1 and Reader18 S4.",
+    "futureIdeas": [
+      "Issue3 Reader13 needs independent irregular speech ownership.",
+      "Issue4 Reader18 S3 still loses owned lower artwork.",
+      "SWAK and missing ink-frame scenes remain incomplete."
+    ]
+  },
+  "corpus": {
+    "status": "passed",
+    "scope": "Fresh native source-raster Reader mask comparison of all saved Test97 descriptors; discovery code unchanged, no full detector replay claimed.",
+    "pages": 312,
+    "selections": 1284,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "selections": 186,
+        "changes": [
+          {
+            "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-017.jpg",
+            "id": 3,
+            "added": 0,
+            "lost": 546
+          },
+          {
+            "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-017.jpg",
+            "id": 4,
+            "added": 4319,
+            "lost": 0
+          }
+        ]
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "selections": 388,
+        "changes": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "selections": 101,
+        "changes": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "selections": 228,
+        "changes": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "selections": 193,
+        "changes": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "selections": 188,
+        "changes": []
+      }
+    ]
+  },
+  "localChecks": {
+    "status": "passed",
+    "behavioralSuiteCount": 98,
+    "cachePackageAndSyntax": "passed",
+    "actualTargetReaderCrops": 4,
+    "allTargetSelectionsReachable": true,
+    "twoSiblingCanvasesByteIdentical": true,
+    "artworkOutsideSpeechBodyUnchanged": true,
+    "sourceArtworkUploaded": false,
+    "phoneTiming": "unmeasured"
+  },
+  "publication": {
+    "status": "pending",
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "phoneAcceptance": "pending"
+}

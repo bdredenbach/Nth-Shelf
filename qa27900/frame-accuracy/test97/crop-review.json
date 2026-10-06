@@ -10,7 +10,7 @@
   "remainingFrames": 193,
   "rawSelections": 186,
   "creditedGroups": 168,
-  "phoneTest97": "pending",
+  "phoneTest97": "accepted",
   "countingRule": "Each unique complete original frame once; dual=2; larger crops count each complete original frame; clipped and duplicate frames add zero.",
   "change": {
     "issue": 4,
@@ -32,5 +32,6 @@
     "Issue3 Reader13 speech needs independent irregular/diagonal parent ownership before extending ragged-row speech transfer.",
     "Issue4 Reader18 lower artwork and balloon ownership remain incomplete; geometric caption recovery alone does not solve these boundaries.",
     "SWAK issue2 Reader18 and unavailable ink-frame scenes remain unchanged."
-  ]
+  ],
+  "phoneConfirmedDate": "2026-10-05"
 }

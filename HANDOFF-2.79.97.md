@@ -2,9 +2,9 @@
 
 5 October 2026. Repository `bdredenbach/Nth-Shelf`, branch `Test_Branch`.
 
-Brad's phone-confirmed baseline is **190/384 complete original frames** in Test96. Test97 locally repairs **one further complete frame**, yielding **191/384**, **193 remaining**, **186 selections**, **168 credited groups**. Issue totals: **36/99**, **54/97**, **62/109**, **39/79**. Test97 phone acceptance is pending; phone timing is unmeasured. Count each unique complete original frame once: dual crops count two, larger crops count all complete original frames, clipped/duplicate fragments count zero.
+Brad phone-confirmed Test97 on 5 October 2026: **191/384 complete original frames**, **193 remaining**. This is the accepted baseline for the next pass. Test97 repairs one further complete frame from the Test96 baseline of 190/384. Retained local totals: **186 selections**, **168 credited groups**. Issue totals: **36/99**, **54/97**, **62/109**, **39/79**. Phone timing is unmeasured. Count each unique complete original frame once: dual crops count two, larger crops count all complete original frames, clipped/duplicate fragments count zero.
 
-## Target for phone testing
+## Phone-confirmed repair
 
 Apocalypse issue4 Reader **20**, selection **1**: the opening city scene beginning “Fifty years later…”. All three captions should remain intact, especially the left of “The sands encroach…” and the formerly erased diagonal lettering in the third caption. This page now has five complete frames locally. The other four actual Reader canvases are byte-identical to Test96; all five selections are reachable. This repairs a previously available incomplete selection; it creates no new detector selection.
 
@@ -26,4 +26,4 @@ Final local validation: all **96 behavioral suites**, cache/package and syntax c
 
 Published source `2f191f08b3fbb7ae5c890f67a6f08da3b06be2b0` exactly matches tested local tree `f9a86cec78a95855f73c8b2bb01b2275eb213439` (local commit59e4d3a). Android run37389515841: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37389515841. Build/package verification status is tracked in TEST97-VALIDATION.json.
 
-Verified Android build: run37389515841 succeeded. Downloaded APK matches its artifact digest, CI checksum, package/identity/signature record and all **97** frozen packaged web files. App io.github.bdredenbach.nthshelf.frametest97, label Nth Shelf Test97, version2.79.97, code28025. APK **3,467,670 bytes**, SHA-256 **79dcad97119722b48ed15c80b5f33045af0200118481eac0ed886d17e7748857**; APK v2 with one CI debug signer. Browser/backup, native archive, all96 behavioral suites and package checks passed. Test97 phone acceptance is pending; the phone-confirmed baseline remains190.
+Verified Android build: run37389515841 succeeded. Downloaded APK matches its artifact digest, CI checksum, package/identity/signature record and all **97** frozen packaged web files. App io.github.bdredenbach.nthshelf.frametest97, label Nth Shelf Test97, version2.79.97, code28025. APK **3,467,670 bytes**, SHA-256 **79dcad97119722b48ed15c80b5f33045af0200118481eac0ed886d17e7748857**; APK v2 with one CI debug signer. Browser/backup, native archive, all96 behavioral suites and package checks passed. Brad has phone-confirmed Test97 at **191/384 complete original frames, 193 remaining**. Use 191 as the accepted baseline; future local gains still require phone confirmation.

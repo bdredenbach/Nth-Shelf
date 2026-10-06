@@ -1,0 +1,58 @@
+{
+  "version": "2.79.98",
+  "baseline": {
+    "version": "Test97",
+    "completeFrames": 191,
+    "phoneAccepted": true
+  },
+  "localCompleteFrames": 192,
+  "originalFrames": 384,
+  "remainingFrames": 192,
+  "rawSelections": 186,
+  "creditedGroups": 169,
+  "phoneTest98": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 36,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 54,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 62,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 40,
+      "total": 79
+    }
+  ],
+  "countingRule": "Each unique complete original frame once; clipped and duplicate frames add zero. Dual crops count2, larger crops count all complete original frames.",
+  "change": {
+    "issue": 4,
+    "readerPage": 18,
+    "selection": 4,
+    "beforeComplete": false,
+    "afterComplete": true,
+    "pageCompleteBefore": 2,
+    "pageCompleteAfter": 3,
+    "addedDisplayAnalysisPixels": 4319,
+    "removedDisplayAnalysisPixels": 0,
+    "foreignBalloonRemovedFromSelection3": 546,
+    "description": "The bottom explosion scene retains its whole opening AN EXPLOSION speech balloon and lettering."
+  },
+  "detectorDescriptors": "unchanged; Reader-only source enclosure and long-tail/collar ownership repair",
+  "neighborCanvases": "S1 and S2 byte-identical; S3 loses only546 pixels inside the foreign balloon; all artwork outside the enclosed balloon remains unchanged. S3 is still incomplete and earns no new credit.",
+  "queueBasis": "Test95 audit, excluding issue4 Reader5 S2, Reader20 S1 and Reader18 S4.",
+  "futureIdeas": [
+    "Issue3 Reader13 needs independent irregular speech ownership.",
+    "Issue4 Reader18 S3 still loses owned lower artwork.",
+    "SWAK and missing ink-frame scenes remain incomplete."
+  ]
+}

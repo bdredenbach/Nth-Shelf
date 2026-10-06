@@ -1,0 +1,16 @@
+'use strict';
+const fs=require('fs'),path=require('path'),zlib=require('zlib'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'../../..'),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]),api=new Function('document','Image','window',scripts.map(p=>fs.readFileSync(root+'/'+p,'utf8')).join('\n')+';return{PanelLongTailSpeech,PanelCropRepair,PanelGeometryOrthogonal};')({},class{},{}),D=api.PanelLongTailSpeech;
+const fixture=JSON.parse(zlib.gunzipSync(Buffer.from(fs.readFileSync(__dirname+'/geometry.json.gz.b64','utf8'),'base64'))),{w,h,panels,body,owner}=fixture,mask=api.PanelCropRepair.raster(body,w,h),snapshot=JSON.stringify(panels);
+function source(){const rgba=new Uint8ClampedArray(w*h*4);for(let i=0;i<mask.length;i++){const x=i%w,y=i/w|0;let interior=!!mask[i];if(interior)for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(!mask[(y+dy)*w+x+dx])interior=false;const letters=x%9<3&&y%10<5;rgba.set(mask[i]?(interior&&!letters?[255,255,255,255]:[0,0,0,255]):[118,96,66,255],i*4);}return rgba;}
+const rgba=source(),bodies=D.analyzeRGBA(rgba,w,h,panels);assert.equal(bodies.length,1,'Synthetic enclosed long-tail speech was not recovered');const b=bodies[0];assert.equal(b.owner,owner,'Balloon assigned to the wrong scene');assert.equal(b.members.length,2);assert(b.pixels>5000);assert(b.letters>=8);assert.deepEqual(b.tails[0].tips,b.tails[1].tips);
+const transparent=rgba.slice();transparent[3]=0;assert.deepEqual(D.analyzeRGBA(transparent,w,h,panels),[]);
+assert.deepEqual(D.analyzeRGBA(rgba,w,h,[{}]),[]);assert.deepEqual(D.analyzeRGBA(rgba,w,h,[{},{}]),[]);assert.deepEqual(D.analyzeRGBA(rgba,w,undefined,panels),[]);assert.deepEqual(D.analyzeRGBA(new Uint8Array(12),w,h,panels),[]);
+const unoutlined=rgba.slice(),colored=rgba.slice(),blank=rgba.slice();for(let i=0;i<mask.length;i++)if(mask[i]){unoutlined.set([255,255,255,255],i*4);colored.set([225,140,35,255],i*4);const x=i%w,y=i/w|0;let inside=true;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(!mask[(y+dy)*w+x+dx])inside=false;blank.set(inside?[255,255,255,255]:[0,0,0,255],i*4);}
+assert.deepEqual(D.analyzeRGBA(unoutlined,w,h,panels),[],'Unoutlined pale artwork transferred');assert.deepEqual(D.analyzeRGBA(colored,w,h,panels),[],'Colored artwork transferred');assert.deepEqual(D.analyzeRGBA(blank,w,h,panels),[],'Unlettered pale artwork transferred');
+const absent=panels.filter((p,k)=>k!==owner);assert.deepEqual(D.analyzeRGBA(rgba,w,h,absent),[],'Body transferred without its owner');
+const corrupted=JSON.parse(snapshot);corrupted[owner].x+=.01;assert.deepEqual(D.analyzeRGBA(rgba,w,h,corrupted),[],'Unproven parent accepted');
+assert.deepEqual(D.analyzeRGBA(rgba,w,h,[...panels,panels[owner]]),[],'Ambiguous duplicated owner accepted');assert.deepEqual(D.analyzeRGBA(rgba,w,h,null),[]);
+assert.equal(JSON.stringify(panels),snapshot,'Saved detector descriptors mutated');
+module.exports={api,fixture,source,bodies};
+if(require.main===module)console.log(JSON.stringify({passed:true,syntheticPositive:true,correctOwner:true,missingOwnerNegative:true,unoutlinedNegative:true,coloredNegative:true,unletteredNegative:true,transparencyNegative:true,invalidParentNegative:true,descriptorsUnchanged:true}));
