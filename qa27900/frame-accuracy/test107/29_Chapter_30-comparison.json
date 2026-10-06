@@ -1,0 +1,9 @@
+{
+  "book": "29_Chapter_30",
+  "pages": 41,
+  "originalSelections": 228,
+  "finalSelections": 228,
+  "additions": [],
+  "changes": [],
+  "scope": "Source scan from the pre-narrowing rule; exact final source candidate subset certified by final validator. Final change only excludes achromatic colored candidates; no crop function changed. All earlier display masks were compared on original rasters."
+}

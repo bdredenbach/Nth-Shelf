@@ -1,0 +1,11 @@
+{
+  "rejected": [
+    {
+      "book": "wolverine",
+      "key": "Wolverine (2010-2012) 1000-022.jpg",
+      "id": 2,
+      "reason": "Final chromatic source gate: achromatic dark matte stays with earlier detectors"
+    }
+  ],
+  "scope": "Pre-narrowing original-raster source/mask comparison retained; final rule is a strict rejection-only palette gate. Final source subset certified against final validator. Final native Reader and full target detector replays use the final module; fresh final Wolverine supplementation rejects dark gutter."
+}

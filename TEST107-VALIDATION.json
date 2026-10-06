@@ -1,0 +1,267 @@
+{
+  "version": "2.79.107",
+  "versionCode": 28035,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest107",
+  "label": "Nth Shelf Test107",
+  "baseline": "Phone-confirmed Test106:207/384,177 remaining",
+  "cropReview": {
+    "version": "2.79.107",
+    "baseline": {
+      "version": "Test106",
+      "completeFrames": 207,
+      "phoneAccepted": true,
+      "date": "2026-10-06"
+    },
+    "localCompleteFrames": 217,
+    "originalFrames": 384,
+    "remainingFrames": 167,
+    "rawSelections": 198,
+    "creditedGroups": 184,
+    "phoneTest107": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 53,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 59,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 65,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 40,
+        "total": 79
+      }
+    ],
+    "countingRule": "Each unique complete original once, including originals inside groups; fragments and duplicates add zero. Group usability is separate.",
+    "changes": [
+      {
+        "issue": 1,
+        "readerPage": 3,
+        "selection": 1,
+        "frames": 3,
+        "description": "Complete campfire, narrow direction strip and bottom sandstorm. Detached eye/cartouche fragment earns zero."
+      },
+      {
+        "issue": 1,
+        "readerPage": 4,
+        "selection": 3,
+        "frames": 1,
+        "description": "Complete central mounted-warrior scene, all three captions and original irregular artwork. Credits add zero."
+      },
+      {
+        "issue": 1,
+        "readerPage": 11,
+        "selection": 2,
+        "frames": 4,
+        "description": "Complete middle-left warrior scene, mocking-face inset, tall right Baal portrait and bottom attack, including all dialogue."
+      },
+      {
+        "issue": 1,
+        "readerPage": 19,
+        "selection": 3,
+        "frames": 2,
+        "description": "Complete upper face-cut attack and middle temple scene including all dialogue and three caption bodies."
+      }
+    ],
+    "originalSelectionsUnchanged": true,
+    "cadence": "Brad requested ten complete original frames this session to test chat continuity.",
+    "futureIdeas": [
+      "Issue1 Reader3 eye/cartouche remains incomplete: lower-right caption detached, zero credit.",
+      "Issue1 Reader13 narrow attacker portrait remains incomplete.",
+      "Issue2 Reader10 tall Nephri silhouette remains incomplete.",
+      "Issue1 Reader18 right dialogue strip and clipped En portrait remain queued.",
+      "Issue4 Reader18 S3 foreground ownership remains queued."
+    ]
+  },
+  "corpus": {
+    "status": "passed",
+    "scope": "312 retained Test106 maps on original source rasters. All1292 earlier Reader display masks match in the pre-narrowing comparison; final gate only rejects one achromatic candidate, without changing crop behavior. Exact final candidate subset certified by final validator. Four changed pages receive fresh final full detector and native Reader replay. No final full-corpus underlying-detector rerun is claimed.",
+    "pages": 312,
+    "originalSelections": 1292,
+    "finalSelections": 1296,
+    "originalDisplayMasksChanged": 0,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 194,
+        "finalSelections": 198,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-002.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                174,
+                585,
+                878
+              ]
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-003.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                152,
+                740,
+                692
+              ]
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-010.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                22,
+                585,
+                900
+              ]
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-018.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                21,
+                0,
+                570,
+                654
+              ]
+            ]
+          }
+        ],
+        "changes": [],
+        "scope": "Source scan from the pre-narrowing rule; exact final source candidate subset certified by final validator. Final change only excludes achromatic colored candidates; no crop function changed. All earlier display masks were compared on original rasters."
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 388,
+        "finalSelections": 388,
+        "additions": [],
+        "changes": [],
+        "scope": "Source scan from the pre-narrowing rule; exact final source candidate subset certified by final validator. Final change only excludes achromatic colored candidates; no crop function changed. All earlier display masks were compared on original rasters."
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": [],
+        "changes": [],
+        "scope": "Source scan from the pre-narrowing rule; exact final source candidate subset certified by final validator. Final change only excludes achromatic colored candidates; no crop function changed. All earlier display masks were compared on original rasters."
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": [],
+        "changes": [],
+        "scope": "Source scan from the pre-narrowing rule; exact final source candidate subset certified by final validator. Final change only excludes achromatic colored candidates; no crop function changed. All earlier display masks were compared on original rasters."
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": [],
+        "changes": [],
+        "scope": "Source scan from the pre-narrowing rule; exact final source candidate subset certified by final validator. Final change only excludes achromatic colored candidates; no crop function changed. All earlier display masks were compared on original rasters."
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": [],
+        "changes": [],
+        "scope": "Source scan from the pre-narrowing rule; exact final source candidate subset certified by final validator. Final change only excludes achromatic colored candidates; no crop function changed. All earlier display masks were compared on original rasters."
+      }
+    ],
+    "sourceNarrowing": [
+      {
+        "book": "wolverine",
+        "key": "Wolverine (2010-2012) 1000-022.jpg",
+        "id": 2,
+        "reason": "Final chromatic source gate: achromatic dark matte stays with earlier detectors"
+      }
+    ]
+  },
+  "localChecks": {
+    "status": "passed",
+    "behavioralSuites": 115,
+    "cachePackageAndSyntax": "passed",
+    "retainedCompletion": {
+      "passed": true,
+      "behavioralSuites": 115,
+      "cachePackageContract": true,
+      "syntax": true,
+      "finalReaderSuiteSeen": true,
+      "runtimeModuleSha256": "13c4062a1f1ebb2cc4f1f0f11b169823e651408c4d6494ab23196126375cf2d3"
+    },
+    "actualNativeReader": {
+      "passed": true,
+      "earlierNativeCanvasesUnchanged": 5,
+      "finalNativeCanvases": 9,
+      "newSelectionsReachable": 4,
+      "newDisplayedOverlapPixels": 0
+    },
+    "freshTargetDetector": {
+      "passed": true,
+      "targets": [
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-002.jpg",
+          "sourceBytes": 1865261,
+          "selectionCount": 1,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-003.jpg",
+          "sourceBytes": 3629082,
+          "selectionCount": 3,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-010.jpg",
+          "sourceBytes": 2375100,
+          "selectionCount": 2,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-018.jpg",
+          "sourceBytes": 1893010,
+          "selectionCount": 3,
+          "originalDescriptorsPreserved": true
+        }
+      ]
+    },
+    "freshAchromaticSourceRejection": true,
+    "sourceArtworkUploaded": false,
+    "browserIntegration": "pending CI",
+    "nativeArchive": "pending CI",
+    "phoneTiming": "unmeasured"
+  },
+  "publication": {
+    "status": "pending",
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "phoneAcceptance": "pending"
+}

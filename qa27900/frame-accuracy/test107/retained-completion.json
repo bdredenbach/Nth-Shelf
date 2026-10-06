@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "behavioralSuites": 115,
+  "cachePackageContract": true,
+  "syntax": true,
+  "finalReaderSuiteSeen": true,
+  "runtimeModuleSha256": "13c4062a1f1ebb2cc4f1f0f11b169823e651408c4d6494ab23196126375cf2d3"
+}

@@ -1,0 +1,58 @@
+{
+  "book": "apocalypse",
+  "pages": 91,
+  "originalSelections": 194,
+  "finalSelections": 198,
+  "additions": [
+    {
+      "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-002.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          0,
+          174,
+          585,
+          878
+        ]
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-003.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          0,
+          152,
+          740,
+          692
+        ]
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-010.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          0,
+          22,
+          585,
+          900
+        ]
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-018.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          21,
+          0,
+          570,
+          654
+        ]
+      ]
+    }
+  ],
+  "changes": [],
+  "scope": "Source scan from the pre-narrowing rule; exact final source candidate subset certified by final validator. Final change only excludes achromatic colored candidates; no crop function changed. All earlier display masks were compared on original rasters."
+}

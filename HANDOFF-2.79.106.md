@@ -2,7 +2,7 @@
 
 6 October 2026. Repository bdredenbach/Nth-Shelf, branch Test_Branch.
 
-Brad phone-confirmed Test105 at **202/384, 182 remaining**. Test106 completes five more originals locally: **207/384, 177 remaining**, 194 selections, 180 credited groups. Issue totals:43/99,59/97,65/109,40/79. Test106 phone acceptance is pending; phone timing is unmeasured.
+Brad phone-confirmed Test105 at **202/384, 182 remaining**. Test106 completes five more originals locally: **207/384, 177 remaining**, 194 selections, 180 credited groups. Issue totals:43/99,59/97,65/109,40/79. Brad phone-confirmed Test106 on 6 October 2026; phone timing is unmeasured.
 
 Phone targets (Reader page numbers include the covers):
 - Apocalypse issue1, Reader13, new selection3: complete top horizontal attack, sword/arms, RAAEEE lettering and full dialogue. Original selections1/2 preserved. Partial narrow attacker portrait adds zero. Page now5/6 complete originals.
@@ -21,4 +21,4 @@ Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine 
 
 Scratch checkpoint:/workspace/scratch/7e6b6457ff98/Nth-Shelf-Test106;checks:/workspace/scratch/7e6b6457ff98/test106/final;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read TEST106-VALIDATION.json for exact checks, identities and saved-file IDs.
 
-APK: Nth-Shelf-2.79.106-Test106.apk, 3497116 bytes. SHA-256:25211673e76e6363987c99e35754e269a78fee88eccc572bf8e864f80f4e92ff. Downloaded checksum, compiled isolated identity(io.github.bdredenbach.nthshelf.frametest106,version code28034), actual v2 signer certificate/CI record and all105 frozen web assets match tested source. Test106 phone confirmation is pending;phone timing unmeasured.
+APK: Nth-Shelf-2.79.106-Test106.apk, 3497116 bytes. SHA-256:25211673e76e6363987c99e35754e269a78fee88eccc572bf8e864f80f4e92ff. Downloaded checksum, compiled isolated identity(io.github.bdredenbach.nthshelf.frametest106,version code28034), actual v2 signer certificate/CI record and all105 frozen web assets match tested source. Test106 phone-confirmed by Brad on 6 October 2026; phone timing unmeasured.
