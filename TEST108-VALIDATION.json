@@ -231,11 +231,53 @@
     "phoneTiming": "unmeasured"
   },
   "publication": {
-    "status": "pending",
-    "branch": "Test_Branch"
+    "status": "published",
+    "branch": "Test_Branch",
+    "sourceCommit": "26d5c7975aab146e9840759e0ceeddb2fdbdc6b6",
+    "testedLocalCommit": "3e05da5789dedd04d4bf2f89082cea3ead642226",
+    "testedTree": "f16965b0e81ee620c9679a908cc7d1ba692197c3",
+    "publishedTreeMatchesTestedTree": true
   },
   "androidBuild": {
-    "status": "pending"
+    "status": "running",
+    "runId": 37504895502,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37504895502",
+    "sourceCommit": "26d5c7975aab146e9840759e0ceeddb2fdbdc6b6"
   },
-  "phoneAcceptance": "pending"
+  "phoneAcceptance": "pending",
+  "savedDeliverables": [
+    {
+      "local_path": "/workspace/scratch/23ca29e5ae64/test108/deliverables/Nth-Shelf-Test108-Frame-Review.html",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000ed6081f8ab7b17c436a9b77f",
+      "library_file_id": "libfile_224ac7d477d881918344530483041b6f",
+      "file_name": "Nth-Shelf-Test108-Frame-Review.html",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test108-Frame-Review.html",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/23ca29e5ae64/test108/deliverables/Nth-Shelf-2.79.108-Test108.apk",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_000000009fa48230b193a2d945b69d0a",
+      "library_file_id": "libfile_2fc4e0c81cb081918bdaea21cb50d166",
+      "file_name": "Nth-Shelf-2.79.108-Test108.apk",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-2.79.108-Test108.apk",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/23ca29e5ae64/test108/deliverables/Nth-Shelf-Test108-New-Chat-Handoff.txt",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000844482309295825b8320a3b0",
+      "library_file_id": "libfile_49d2345e2b1c8191bff109b8141b9f6b",
+      "file_name": "Nth-Shelf-Test108-New-Chat-Handoff.txt",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test108-New-Chat-Handoff.txt",
+      "current_version_number": 0
+    }
+  ]
 }
