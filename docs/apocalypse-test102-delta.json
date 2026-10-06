@@ -1,0 +1,55 @@
+{
+  "version": "2.79.102",
+  "baseline": {
+    "version": "Test101",
+    "completeFrames": 195,
+    "phoneAccepted": true
+  },
+  "localCompleteFrames": 196,
+  "originalFrames": 384,
+  "remainingFrames": 188,
+  "rawSelections": 186,
+  "creditedGroups": 172,
+  "phoneTest102": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 36,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 55,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 65,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 40,
+      "total": 79
+    }
+  ],
+  "countingRule": "Each unique complete original frame once; clipped and duplicate fragments count zero.",
+  "change": {
+    "issue": 2,
+    "readerPage": 18,
+    "selection": 2,
+    "beforeCompleteFrames": 0,
+    "afterCompleteFrames": 1,
+    "pageCompleteBefore": 1,
+    "pageCompleteAfter": 2,
+    "addedDisplayAnalysisPixels": 7697,
+    "removedDisplayAnalysisPixels": 0,
+    "description": "The existing SWAK reaction crop gains its complete right background, head/neck edge and shoulder. The neighboring water/hand selection remains unchanged."
+  },
+  "detectorDescriptors": "unchanged; Reader-only lateral completion",
+  "futureIdeas": [
+    "Issue4 Reader18 S3 requires clearer ownership review; no credit in this pass.",
+    "Missing ink-frame scenes remain queued.",
+    "Issue3 Reader13 S6 remains a duplicate fragment, worth zero."
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "version": "2.79.102",
+  "versionCode": 28030,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest102",
+  "label": "Nth Shelf Test102",
+  "baseline": "Phone-confirmed Test101195/384,189 remaining",
+  "cropReview": {
+    "version": "2.79.102",
+    "baseline": {
+      "version": "Test101",
+      "completeFrames": 195,
+      "phoneAccepted": true
+    },
+    "localCompleteFrames": 196,
+    "originalFrames": 384,
+    "remainingFrames": 188,
+    "rawSelections": 186,
+    "creditedGroups": 172,
+    "phoneTest102": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 36,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 55,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 65,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 40,
+        "total": 79
+      }
+    ],
+    "countingRule": "Each unique complete original frame once; clipped and duplicate fragments count zero.",
+    "change": {
+      "issue": 2,
+      "readerPage": 18,
+      "selection": 2,
+      "beforeCompleteFrames": 0,
+      "afterCompleteFrames": 1,
+      "pageCompleteBefore": 1,
+      "pageCompleteAfter": 2,
+      "addedDisplayAnalysisPixels": 7697,
+      "removedDisplayAnalysisPixels": 0,
+      "description": "The existing SWAK reaction crop gains its complete right background, head/neck edge and shoulder. The neighboring water/hand selection remains unchanged."
+    },
+    "detectorDescriptors": "unchanged; Reader-only lateral completion",
+    "futureIdeas": [
+      "Issue4 Reader18 S3 requires clearer ownership review; no credit in this pass.",
+      "Missing ink-frame scenes remain queued.",
+      "Issue3 Reader13 S6 remains a duplicate fragment, worth zero."
+    ]
+  },
+  "corpus": {
+    "status": "passed",
+    "scope": "Final native source-raster Reader masks against frozen Test101 masks computed from the same original sources in the completed full baseline pass, using retained discovery descriptors. All six final comparison jobs completed. Discovery is unchanged; no full corpus detector replay is claimed. The changed target has a fresh full detector replay.",
+    "pages": 312,
+    "selections": 1284,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "selections": 186,
+        "changes": [
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-017.jpg",
+            "id": 2,
+            "added": 7697,
+            "lost": 0
+          }
+        ]
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "selections": 388,
+        "changes": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "selections": 101,
+        "changes": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "selections": 228,
+        "changes": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "selections": 193,
+        "changes": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "selections": 188,
+        "changes": []
+      }
+    ]
+  },
+  "localChecks": {
+    "status": "passed",
+    "behavioralSuites": 105,
+    "cachePackageAndSyntax": "passed",
+    "retainedCompletion": {
+      "passed": true,
+      "behavioralSuites": 105,
+      "cachePackageContract": true,
+      "syntax": true,
+      "finalReaderTapSuiteSeen": true
+    },
+    "actualNativeReaderCanvases": {
+      "passed": true,
+      "targetSelections": 12,
+      "unchangedCanvasCount": 11,
+      "checks": [
+        {
+          "file": "i3-p13-s1.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i3-p13-s2.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i3-p13-s3.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i3-p13-s4.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i3-p13-s5.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i3-p13-s6.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i4-p18-s1.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i4-p18-s2.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i4-p18-s3.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i4-p18-s4.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i2-p18-s1.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i2-p18-s2.png",
+          "reachable": true,
+          "byteIdentical": false,
+          "expectedChange": true
+        }
+      ]
+    },
+    "nativeTargetMask": {
+      "passed": true,
+      "addedPixels": 7697,
+      "removedPixels": 0,
+      "foreignDisplayOverlapPixels": 0,
+      "outsideRepairUnchanged": true,
+      "allExistingDisplayPixelsRetained": true,
+      "sourceThresholds": [
+        60,
+        65
+      ],
+      "sourceCompartmentPixels": 4142
+    },
+    "freshTargetDetector": {
+      "passed": true,
+      "sourceBytes": 1926863,
+      "selectionCount": 2,
+      "detectorDescriptorsUnchanged": true
+    },
+    "sourceArtworkUploaded": false,
+    "browserIntegration": "pending CI",
+    "nativeArchive": "pending CI",
+    "phoneTiming": "unmeasured"
+  },
+  "publication": {
+    "status": "pending",
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "phoneAcceptance": "pending",
+  "savedDeliverables": {
+    "status": "pending"
+  }
+}

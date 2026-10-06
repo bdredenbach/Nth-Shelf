@@ -3144,7 +3144,7 @@ async setMode(mode) {
    // box. Include display-mask bounds in the canvas while retaining its proof.
    const cropContours=this.displayPanelContours(panel,contours)||(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel._identitySource)&&outline?[outline]:null);
    let captionExpanded=false;
-   if(contours&&cropContours&&(this._cropRepairCache?.get(panel)?.captionAddedPixels||this._longTailSpeechDisplay?.cache.get(panel)?.extended||this._columnSpeechDisplay?.cache.get(panel)?.extended)){let x0=geom.x,y0=geom.y,x1=geom.x+geom.w,y1=geom.y+geom.h;
+   if(contours&&cropContours&&(this._cropRepairCache?.get(panel)?.captionAddedPixels||this._longTailSpeechDisplay?.cache.get(panel)?.extended||this._columnSpeechDisplay?.cache.get(panel)?.extended || this._lateralCellDisplay?.cache.get(panel)?.extended)){let x0=geom.x,y0=geom.y,x1=geom.x+geom.w,y1=geom.y+geom.h;
      for(const ring of cropContours)for(const p of ring){x0=Math.min(x0,p.x);y0=Math.min(y0,p.y);x1=Math.max(x1,p.x);y1=Math.max(y1,p.y);}
      captionExpanded=x0<geom.x-1e-9||y0<geom.y-1e-9||x1>geom.x+geom.w+1e-9||y1>geom.y+geom.h+1e-9;
      if(captionExpanded){geom={x:x0,y:y0,w:x1-x0,h:y1-y0};clipPolygon=null;}
@@ -3346,3 +3346,5 @@ if(typeof PanelLongTailSpeech!=='undefined')PanelLongTailSpeech.installReader(Re
 if(typeof PanelColumnSpeech!=='undefined')PanelColumnSpeech.installReader(Reader);
 
 if(typeof PanelSplitCellCompletion!=='undefined')PanelSplitCellCompletion.installReader(Reader);
+
+if(typeof PanelLateralCellCompletion!=="undefined")PanelLateralCellCompletion.installReader(Reader);

@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.101 — SOURCE-ENCLOSED LONG COLUMN SPEECH
+// NTH SHELF 2.79.102 — SOURCE-ENCLOSED LONG COLUMN SPEECH
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.101";
+const CACHE_NAME = "nth-shelf-shell-2.79.102";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -97,6 +97,7 @@ const SHELL_FILES = [
   "./js/panels-long-tail-speech.js",
   "./js/panels-column-speech.js",
   "./js/panels-split-cell-completion.js",
+  "./js/panels-lateral-cell-completion.js",
   "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",

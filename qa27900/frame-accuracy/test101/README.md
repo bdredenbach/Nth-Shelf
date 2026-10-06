@@ -6,4 +6,4 @@ Reader-only completion requires validated original paper split siblings, one lar
 
 Tests use geometric descriptors and synthetic independently generated color texture. No comic raster is uploaded. Negatives cover separate/open source cells, disagreeing thresholds, transparent/neutral art, absent/ambiguous/invalid/non-split owners and malformed inputs. Reader checks complete the cell, preserve outside pixels/siblings/discovery, repeat overlays and verify restored taps.
 
-Brad accepted Test100 at194/384. Source and actual Reader review locally credit one additional unique original frame:195/384,189 remaining. Phone timing is unmeasured; Test101 phone acceptance is pending. See TEST101-VALIDATION.json for recorded local, corpus, publication and build outcomes.
+Brad accepted Test100 at194/384. Source and actual Reader review locally credit one additional unique original frame:195/384,189 remaining. Phone timing is unmeasured; Brad phone-confirmed Test101 at195/384 on6 October2026. See TEST101-VALIDATION.json for recorded local, corpus, publication and build outcomes.
