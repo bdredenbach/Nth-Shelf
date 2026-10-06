@@ -141,7 +141,7 @@
       "cachePackageContract": true,
       "syntax": true,
       "finalReaderSuiteSeen": true,
-      "harness": "Passed retained prefix through Test79 plus individually captured remaining suites; original shell runner stopped advancing after passed prefix."
+      "harness": "Complete retained shell regression log confirms all suites passed; separately captured remaining suites also passed."
     },
     "actualNativeReader": {
       "passed": true,
@@ -189,16 +189,95 @@
       "appendedSelections": 1
     },
     "sourceArtworkUploaded": false,
-    "browserIntegration": "pending CI",
-    "nativeArchive": "pending CI",
-    "phoneTiming": "unmeasured"
+    "browserIntegration": "passed CI",
+    "nativeArchive": "passed CI",
+    "phoneTiming": "unmeasured",
+    "fullShellCompletion": {
+      "passed": true,
+      "finalSuiteSeen": true,
+      "source": "dist/regression-checks.txt",
+      "individuallyCapturedRemainingSuites": 44
+    }
   },
   "publication": {
-    "status": "pending",
-    "branch": "Test_Branch"
+    "status": "published",
+    "branch": "Test_Branch",
+    "sourceCommit": "98490a7b3b46674749e61ff7cadf1db9bf3cc2ee",
+    "testedLocalCommit": "4f786f238cb289dd24cdaa078f2ded64986f0649",
+    "testedTree": "b7f558742b069533c79387f5ce6026886e8a0fcf",
+    "publishedTreeMatchesTestedTree": true
   },
   "androidBuild": {
-    "status": "pending"
+    "status": "success",
+    "runId": 37487129419,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37487129419",
+    "sourceCommit": "98490a7b3b46674749e61ff7cadf1db9bf3cc2ee",
+    "artifactId": 11423294501,
+    "apkFile": "Nth-Shelf-2.79.105-Test105.apk",
+    "apkSha256": "e88f7bedf1c32fca46f4521fa09d679124e90a06a87986e931e270182d705120",
+    "apkBytes": 3493256,
+    "verifiedWebAssetCount": 104,
+    "downloadVerification": {
+      "passed": true,
+      "apkSha256": "e88f7bedf1c32fca46f4521fa09d679124e90a06a87986e931e270182d705120",
+      "apkBytes": 3493256,
+      "sourceCommit": "98490a7b3b46674749e61ff7cadf1db9bf3cc2ee",
+      "verifiedPackagedWebFiles": 104,
+      "actualCompiledManifest": {
+        "package": "io.github.bdredenbach.nthshelf.frametest105",
+        "versionName": "2.79.105",
+        "versionCode": 28033
+      },
+      "actualLabel": "Nth Shelf Test105",
+      "actualSignerCertificateSha256": "fe288e3fcf6f109f2ec45694b2987d747bf86ad3a254e0bbcf4562456396d59c",
+      "actualSignerCertificateMatchesCiRecord": true,
+      "signingScheme": "APK v2, one CI debug signer",
+      "ciSignatureVerificationPassed": true,
+      "allPackagedBytesMatchTestedSource": true
+    }
   },
-  "phoneAcceptance": "pending"
+  "phoneAcceptance": "pending",
+  "ciChecks": {
+    "status": "passed",
+    "behavioralSuites": 111,
+    "cachePackageAndSyntax": "passed",
+    "browserInteractionAndBackup": "passed",
+    "nativeStreamingArchive": "passed",
+    "signatureIdentityAndFrozenWebAssets": "passed"
+  },
+  "savedDeliverables": [
+    {
+      "local_path": "/workspace/scratch/9de482359b6f/test105/deliverables/Nth-Shelf-Test105-Frame-Review.html",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_0000000002a881fdb809ddc309709898",
+      "library_file_id": "libfile_63768e10c4f481919b4cbab230d6eb44",
+      "file_name": "Nth-Shelf-Test105-Frame-Review.html",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test105-Frame-Review.html",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/9de482359b6f/test105/deliverables/Nth-Shelf-2.79.105-Test105.apk",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000991c81fdb5c363b9725063d9",
+      "library_file_id": "libfile_bb3bf0e2d2408191b76c6e7906edee64",
+      "file_name": "Nth-Shelf-2.79.105-Test105.apk",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-2.79.105-Test105.apk",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/9de482359b6f/test105/deliverables/Nth-Shelf-Test105-New-Chat-Handoff.txt",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000995081fd9e82acb19cd7779f",
+      "library_file_id": "libfile_282919ec648c8191bd548bb7ae941dee",
+      "file_name": "Nth-Shelf-Test105-New-Chat-Handoff.txt",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test105-New-Chat-Handoff.txt",
+      "current_version_number": 0
+    }
+  ]
 }
