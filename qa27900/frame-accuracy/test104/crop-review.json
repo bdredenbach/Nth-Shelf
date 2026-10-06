@@ -1,0 +1,55 @@
+{
+  "version": "2.79.104",
+  "baseline": {
+    "version": "Test103",
+    "completeFrames": 198,
+    "phoneAccepted": true,
+    "date": "2026-10-06"
+  },
+  "localCompleteFrames": 200,
+  "originalFrames": 384,
+  "remainingFrames": 184,
+  "rawSelections": 189,
+  "creditedGroups": 175,
+  "phoneTest104": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 40,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 55,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 65,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 40,
+      "total": 79
+    }
+  ],
+  "countingRule": "Each unique complete original once; complete originals inside larger crops count individually, fragments and duplicates add zero.",
+  "changes": [
+    {
+      "issue": 1,
+      "readerPage": 18,
+      "selection": 5,
+      "frames": 2,
+      "description": "Complete upper cavern and full left dialogue strip in one new source-backed group. Right dialogue strip incomplete, zero credit."
+    }
+  ],
+  "pageCompleteBefore": 4,
+  "pageCompleteAfter": 6,
+  "originalSelectionsUnchanged": true,
+  "futureIdeas": [
+    "Issue1 Reader18 right dialogue strip remains incomplete.",
+    "Issue1 Reader18 En portrait remains clipped, zero credit.",
+    "Issue4 Reader18 S3 foreground needs ownership review."
+  ]
+}

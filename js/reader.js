@@ -3348,3 +3348,5 @@ if(typeof PanelColumnSpeech!=='undefined')PanelColumnSpeech.installReader(Reader
 if(typeof PanelSplitCellCompletion!=='undefined')PanelSplitCellCompletion.installReader(Reader);
 
 if(typeof PanelLateralCellCompletion!=="undefined")PanelLateralCellCompletion.installReader(Reader);
+
+if(typeof PanelLandscapeUpperGroups!=="undefined")PanelLandscapeUpperGroups.installReader(Reader);

@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "behavioralSuites": 109,
+  "cachePackageContract": true,
+  "syntax": true,
+  "finalReaderSuiteSeen": true
+}

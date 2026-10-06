@@ -2,7 +2,7 @@
 
 6 October 2026. Repository bdredenbach/Nth-Shelf, branch Test_Branch.
 
-Brad phone-confirmed Test102 at 196/384, 188 remaining. Test103 locally completes two more unique original frames: **198/384, 186 remaining**, 188 selections, 174 credited groups. Issue totals: 38/99, 55/97, 65/109, 40/79. Test103 phone acceptance is pending; timing is unmeasured.
+Brad phone-confirmed Test102 at 196/384, 188 remaining. Test103 locally completes two more unique original frames: **198/384, 186 remaining**, 188 selections, 174 credited groups. Issue totals: 38/99, 55/97, 65/109, 40/79. Test103 phone acceptance is confirmed by Brad on 6 October 2026; timing is unmeasured.
 
 Phone targets: **Apocalypse issue 1, Reader page 18** (landscape; Reader page numbers include the covers). Selection 3 is the full wide punch scene, sound-effect lettering and both captions. Selection 4 contains the complete standing-silhouette scene at left, including all three balloons: “Echoes of himself,” “Herein there lies an artifact,” and “An incredible object…”. Selection 4 also contains an incomplete En portrait: its forehead is clipped, earns zero credit, and remains queued. Selections 1 and 2 stay intact. Page coverage advances from 2/8 to 4/8. Install the separate **Nth Shelf Test103** app to review these two targets.
 
@@ -14,7 +14,7 @@ Local validation: 107 behavioral suites plus cache/package/syntax passed. Fresh 
 
 CI validation: 107 behavioral suites, cache/package/syntax, browser interaction/backup round trips and native streaming archive regression passed. Published source **83ca47163f8f029b3e81a43057227a47d5837237** exactly matches tested tree **86e2c1bc1b0a9e4766968cd9addff5c8d842bafb**. Android run **37474402314** succeeded: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37474402314. Artifact ID: 11418143195.
 
-APK: Nth-Shelf-2.79.103-Test103.apk, 3485147 bytes. SHA-256: 70cc80de9ea6daedd4a7a5b36977a483740b594f71378c82ad03bc52e47c8565. The downloaded APK's checksum, compiled isolated identity (io.github.bdredenbach.nthshelf.frametest103, version code 28031), actual v2 signer certificate/CI record and all 102 packaged web files match. Test103 phone acceptance remains pending; timing is unmeasured.
+APK: Nth-Shelf-2.79.103-Test103.apk, 3485147 bytes. SHA-256: 70cc80de9ea6daedd4a7a5b36977a483740b594f71378c82ad03bc52e47c8565. The downloaded APK's checksum, compiled isolated identity (io.github.bdredenbach.nthshelf.frametest103, version code 28031), actual v2 signer certificate/CI record and all 102 packaged web files match. Test103 phone acceptance was confirmed by Brad on 6 October 2026; timing is unmeasured.
 
 Read TEST103-VALIDATION.json for exact source/build identities and saved-file IDs. Private Apocalypse archive: libfile_06c168de85c08191ba461ab9ef2cdba5. Controls: Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit: libfile_d4c4ca46cd08819192cd7f9617d6f115; notes: libfile_58fed3b235688191ac7e4fec84517824.
 
