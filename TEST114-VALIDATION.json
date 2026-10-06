@@ -1,0 +1,303 @@
+{
+  "version": "2.79.114",
+  "versionCode": 28042,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest114",
+  "label": "Nth Shelf Test114",
+  "cropReview": {
+    "version": "2.79.114",
+    "baseline": {
+      "version": "Test113",
+      "completeFrames": 273,
+      "phoneAcceptance": "User requested continuation; no separate numeric device report",
+      "lastExplicitNumericPhoneBaseline": 264
+    },
+    "localCompleteFrames": 282,
+    "originalFrames": 384,
+    "remainingFrames": 102,
+    "rawSelections": 227,
+    "newCompleteOriginals": 9,
+    "newRuntimeSelectionsInApocalypse": 2,
+    "phoneTest114": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 63,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 77,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 90,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 52,
+        "total": 79
+      }
+    ],
+    "changes": [
+      {
+        "issue": 2,
+        "readerPage": 9,
+        "selection": 2,
+        "frames": 4,
+        "type": "new broad group; one duplicate counts zero",
+        "description": "Full upper-left arrival, upper-middle Pharaoh on horseback, upper-right confrontation and lower-right Nephri portrait. The already complete lower-left dialogue scene stays intact and counts zero."
+      },
+      {
+        "issue": 4,
+        "readerPage": 7,
+        "selection": 1,
+        "frames": 4,
+        "type": "new four-original broad group",
+        "description": "Three tall upper serpent scenes and the full lower escape/attack scene, including all speech, captions, motion lettering and protruding arms."
+      },
+      {
+        "issue": 4,
+        "readerPage": 19,
+        "selection": 3,
+        "frames": 1,
+        "type": "Reader-only completion of existing bottom frame",
+        "description": "Full bottom farewell scene and every balloon, including the formerly missing left balloon and upper portions of the linked right balloons. Independent short tails assign both enclosed bodies to the bottom row. Source descriptors stay identical; the middle row loses only incorrectly included bottom-row speech pixels."
+      }
+    ],
+    "countingRule": "Each unique complete original once, including complete originals in larger crops. Clipped originals, duplicate frames, title decorations and page numbers add zero. Group usability and individual segmentation remain separate."
+  },
+  "phoneAcceptance": "pending",
+  "newContracts": {
+    "passed": true,
+    "source": {
+      "newOwners": 2,
+      "rejectedCorruptions": 32
+    },
+    "syntheticSpeechBodies": 2,
+    "reader": {
+      "passed": true,
+      "oldTaps": 47,
+      "newTaps": 93,
+      "overlays": 6,
+      "retainedSourceAndGroupTaps": true,
+      "speechOnlyChanges": true,
+      "expandedSpeechCanvas": true
+    }
+  },
+  "retainedChecks": {
+    "status": "running"
+  },
+  "finalSupplementaryReplays": {
+    "status": "passed",
+    "pages": 312,
+    "priorSourceDescriptors": 1324,
+    "sourceComparisons": [
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": []
+      },
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 225,
+        "finalSelections": 227,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-008.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                0,
+                585,
+                900
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-006.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                10,
+                585,
+                900
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          }
+        ]
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": []
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 389,
+        "finalSelections": 389,
+        "additions": []
+      }
+    ],
+    "displayComparisons": [
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 225,
+        "finalSelections": 227,
+        "changes": [
+          {
+            "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-018.jpg",
+            "id": 2,
+            "added": 0,
+            "lost": 443,
+            "changesOnlyIndependentlyEnclosedSpeech": true
+          },
+          {
+            "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-018.jpg",
+            "id": 3,
+            "added": 9735,
+            "lost": 0,
+            "changesOnlyIndependentlyEnclosedSpeech": true
+          }
+        ],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 389,
+        "finalSelections": 389,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      }
+    ],
+    "priorSourceDescriptorsRetained": true,
+    "controlDisplaysUnchanged": true,
+    "speechChangesOnly": true,
+    "scope": "New supplementary detector on312 original rasters with all retained descriptors, full old-versus-new Reader comparisons on312 pages, three full changed-page detector replays. The full older detector was not rerun over the entire corpus."
+  },
+  "freshDetector": {
+    "passed": true,
+    "targets": [
+      {
+        "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-008.jpg",
+        "sourceBytes": 1995761,
+        "selectionCount": 2,
+        "originalDescriptorsPreserved": true
+      },
+      {
+        "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-006.jpg",
+        "sourceBytes": 2296972,
+        "selectionCount": 1,
+        "originalDescriptorsPreserved": true
+      },
+      {
+        "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-018.jpg",
+        "sourceBytes": 2023325,
+        "selectionCount": 3,
+        "originalDescriptorsPreserved": true
+      }
+    ]
+  },
+  "nativeReaderInvariants": {
+    "passed": true,
+    "nativeCanvases": 3,
+    "results": [
+      {
+        "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-008.jpg",
+        "selection": 2,
+        "reachable": true,
+        "width": 1952,
+        "height": 3000,
+        "nativeSourceEnvelopeIdentical": true,
+        "allRecoveredSpeechPixelsPresent": false
+      },
+      {
+        "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-006.jpg",
+        "selection": 1,
+        "reachable": true,
+        "width": 1974,
+        "height": 3000,
+        "nativeSourceEnvelopeIdentical": true,
+        "allRecoveredSpeechPixelsPresent": false
+      },
+      {
+        "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-018.jpg",
+        "selection": 3,
+        "reachable": true,
+        "width": 1944,
+        "height": 757,
+        "nativeSourceEnvelopeIdentical": false,
+        "allRecoveredSpeechPixelsPresent": true
+      }
+    ]
+  }
+}

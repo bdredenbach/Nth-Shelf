@@ -1,0 +1,6 @@
+Nth Shelf Test114 / 2.79.114
+Separate Android package io.github.bdredenbach.nthshelf.frametest114.
+Install Nth-Shelf-2.79.114-Test114.apk.
+Local282/384,102 remaining; phone acceptance pending.
+Check issue2 Reader9 S2(+4), issue4 Reader7 S1(+4), issue4 Reader19 S3(+1). Reader page numbers include covers.
+The first two are broad groups. Existing originals count once; grouping usability is separate.
