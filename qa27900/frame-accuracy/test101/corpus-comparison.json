@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "scope": "Fresh native source-raster Reader masks against exact Test100 runtime using retained discovery descriptors. Discovery is unchanged; no full corpus detector replay is claimed. The target also has a fresh full detector replay. All six final comparison jobs completed.",
+  "pages": 312,
+  "selections": 1284,
+  "books": [
+    {
+      "book": "apocalypse",
+      "pages": 91,
+      "selections": 186,
+      "changes": [
+        {
+          "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-012.jpg",
+          "id": 5,
+          "added": 42803,
+          "lost": 0
+        }
+      ]
+    },
+    {
+      "book": "wolverine",
+      "pages": 74,
+      "selections": 388,
+      "changes": []
+    },
+    {
+      "book": "magneto",
+      "pages": 24,
+      "selections": 101,
+      "changes": []
+    },
+    {
+      "book": "29_Chapter_30",
+      "pages": 41,
+      "selections": 228,
+      "changes": []
+    },
+    {
+      "book": "30_Chapter_31",
+      "pages": 41,
+      "selections": 193,
+      "changes": []
+    },
+    {
+      "book": "31_Chapter_32",
+      "pages": 41,
+      "selections": 188,
+      "changes": []
+    }
+  ]
+}

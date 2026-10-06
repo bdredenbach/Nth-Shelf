@@ -13,16 +13,16 @@ android {
         applicationId = "io.github.bdredenbach.nthshelf"
         minSdk = 24
         targetSdk = 35
-        versionCode = 28028
-        versionName = "2.79.100"
+        versionCode = 28029
+        versionName = "2.79.101"
         manifestPlaceholders["appLabel"] = "Nth Shelf"
     }
 
     buildTypes {
         // Isolated test install: leave stable Nth Shelf and Frame Test32/Test33/Test34 data alone.
         getByName("debug") {
-            applicationIdSuffix = ".frametest100"
-            manifestPlaceholders["appLabel"] = "Nth Shelf Test100"
+            applicationIdSuffix = ".frametest101"
+            manifestPlaceholders["appLabel"] = "Nth Shelf Test101"
         }
         release {
             isMinifyEnabled = false

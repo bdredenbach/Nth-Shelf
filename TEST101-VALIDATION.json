@@ -1,0 +1,221 @@
+{
+  "version": "2.79.101",
+  "versionCode": 28029,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest101",
+  "label": "Nth Shelf Test101",
+  "baseline": "Phone-confirmed Test100194/384,190 remaining",
+  "cropReview": {
+    "version": "2.79.101",
+    "baseline": {
+      "version": "Test100",
+      "completeFrames": 194,
+      "phoneAccepted": true
+    },
+    "localCompleteFrames": 195,
+    "originalFrames": 384,
+    "remainingFrames": 189,
+    "rawSelections": 186,
+    "creditedGroups": 171,
+    "phoneTest101": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 36,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 54,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 65,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 40,
+        "total": 79
+      }
+    ],
+    "countingRule": "Each unique complete original frame once; clipped/duplicate fragments count zero; larger crops count each fully complete original frame.",
+    "change": {
+      "issue": 3,
+      "readerPage": 13,
+      "selection": 5,
+      "beforeCompleteFrames": 1,
+      "afterCompleteFrames": 2,
+      "pageCompleteBefore": 5,
+      "pageCompleteAfter": 6,
+      "addedDisplayAnalysisPixels": 42803,
+      "removedDisplayAnalysisPixels": 0,
+      "description": "Existing larger pop-out completes the continuous hand/wrist/face action row and retains the complete lower chamber. Selection6 remains a duplicate fragment with zero additional credit."
+    },
+    "detectorDescriptors": "unchanged; Reader-only bounded composite completion",
+    "neighborCanvases": "S1/S2/S3/S4/S6 and all four issue4 Reader18 canvases must match Test100 byte for byte.",
+    "futureIdeas": [
+      "Issue4 Reader18 S3 foreground remains incomplete.",
+      "SWAK remains incomplete.",
+      "Missing ink-frame scenes remain incomplete.",
+      "False S6 remains a duplicate fragment; no new credit for it."
+    ]
+  },
+  "corpus": {
+    "status": "passed",
+    "scope": "Fresh native source-raster Reader masks against exact Test100 runtime using retained discovery descriptors. Discovery is unchanged; no full corpus detector replay is claimed. The target also has a fresh full detector replay. All six final comparison jobs completed.",
+    "pages": 312,
+    "selections": 1284,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "selections": 186,
+        "changes": [
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-012.jpg",
+            "id": 5,
+            "added": 42803,
+            "lost": 0
+          }
+        ]
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "selections": 388,
+        "changes": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "selections": 101,
+        "changes": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "selections": 228,
+        "changes": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "selections": 193,
+        "changes": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "selections": 188,
+        "changes": []
+      }
+    ]
+  },
+  "localChecks": {
+    "status": "passed",
+    "behavioralSuites": 103,
+    "cachePackageAndSyntax": "passed",
+    "retainedCompletion": {
+      "passed": true,
+      "behavioralSuites": 103,
+      "cachePackageContract": true,
+      "syntax": true,
+      "finalReaderTapSuiteSeen": true,
+      "log": "retained-verified.log"
+    },
+    "actualNativeReaderCanvases": {
+      "passed": true,
+      "targetSelections": 10,
+      "unchangedCanvasCount": 9,
+      "checks": [
+        {
+          "file": "i3-p13-s1.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i3-p13-s2.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i3-p13-s3.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i3-p13-s4.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i3-p13-s5.png",
+          "reachable": true,
+          "byteIdentical": false,
+          "expectedChange": true
+        },
+        {
+          "file": "i3-p13-s6.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i4-p18-s1.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i4-p18-s2.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i4-p18-s3.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        },
+        {
+          "file": "i4-p18-s4.png",
+          "reachable": true,
+          "byteIdentical": true,
+          "expectedChange": false
+        }
+      ]
+    },
+    "nativeTargetMask": {
+      "passed": true,
+      "cellPixels": 188909,
+      "addedPixels": 42803,
+      "removedPixels": 0,
+      "allSourceCellPixelsPresent": true,
+      "outsideSourceCellUnchanged": true,
+      "allOldDisplayPixelsRetained": true
+    },
+    "freshTargetDetector": {
+      "passed": true,
+      "selectionCount": 6,
+      "sourceBytes": 1723892,
+      "detectorDescriptorsUnchanged": true
+    },
+    "sourceArtworkUploaded": false,
+    "browserIntegration": "required in CI; no local browser pass claimed",
+    "phoneTiming": "unmeasured"
+  },
+  "publication": {
+    "status": "pending",
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "phoneAcceptance": "pending"
+}

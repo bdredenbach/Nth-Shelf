@@ -1,0 +1,57 @@
+{
+  "version": "2.79.101",
+  "baseline": {
+    "version": "Test100",
+    "completeFrames": 194,
+    "phoneAccepted": true
+  },
+  "localCompleteFrames": 195,
+  "originalFrames": 384,
+  "remainingFrames": 189,
+  "rawSelections": 186,
+  "creditedGroups": 171,
+  "phoneTest101": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 36,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 54,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 65,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 40,
+      "total": 79
+    }
+  ],
+  "countingRule": "Each unique complete original frame once; clipped/duplicate fragments count zero; larger crops count each fully complete original frame.",
+  "change": {
+    "issue": 3,
+    "readerPage": 13,
+    "selection": 5,
+    "beforeCompleteFrames": 1,
+    "afterCompleteFrames": 2,
+    "pageCompleteBefore": 5,
+    "pageCompleteAfter": 6,
+    "addedDisplayAnalysisPixels": 42803,
+    "removedDisplayAnalysisPixels": 0,
+    "description": "Existing larger pop-out completes the continuous hand/wrist/face action row and retains the complete lower chamber. Selection6 remains a duplicate fragment with zero additional credit."
+  },
+  "detectorDescriptors": "unchanged; Reader-only bounded composite completion",
+  "neighborCanvases": "S1/S2/S3/S4/S6 and all four issue4 Reader18 canvases must match Test100 byte for byte.",
+  "futureIdeas": [
+    "Issue4 Reader18 S3 foreground remains incomplete.",
+    "SWAK remains incomplete.",
+    "Missing ink-frame scenes remain incomplete.",
+    "False S6 remains a duplicate fragment; no new credit for it."
+  ]
+}

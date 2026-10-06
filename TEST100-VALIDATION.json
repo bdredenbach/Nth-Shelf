@@ -16,7 +16,7 @@
     "remainingFrames": 190,
     "rawSelections": 186,
     "creditedGroups": 171,
-    "phoneTest100": "pending",
+    "phoneTest100": "confirmed",
     "issueTotals": [
       {
         "issue": 1,
@@ -183,7 +183,7 @@
     ],
     "artifactId": 11386298258
   },
-  "phoneAcceptance": "pending",
+  "phoneAcceptance": "confirmed",
   "savedDeliverables": {
     "status": "saved",
     "files": [
@@ -209,5 +209,11 @@
         "current_version_number": 0
       }
     ]
+  },
+  "phoneConfirmation": {
+    "date": "2026-10-06",
+    "completeFrames": 194,
+    "remainingFrames": 190,
+    "source": "Brad: 194/384 complete locally,190 remaining.Phone confirmed."
   }
 }

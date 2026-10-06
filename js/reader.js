@@ -3344,3 +3344,5 @@ if(typeof PanelTailSpeech!=='undefined')PanelTailSpeech.installReader(Reader);
 if(typeof PanelLongTailSpeech!=='undefined')PanelLongTailSpeech.installReader(Reader);
 
 if(typeof PanelColumnSpeech!=='undefined')PanelColumnSpeech.installReader(Reader);
+
+if(typeof PanelSplitCellCompletion!=='undefined')PanelSplitCellCompletion.installReader(Reader);

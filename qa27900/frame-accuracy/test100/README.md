@@ -6,4 +6,4 @@ The retained short-tail route is unchanged. A separate substantial-tail route re
 
 Negative controls cover short tails, open/unoutlined/colored/unlettered/translucent source, malformed dimensions, absent/invalid/duplicate owners and non-column parents. Reader checks preserve all pixels outside speech, unrelated owner contours and discovery descriptors, repeat overlays, restored extent and selection reachability.
 
-Brad phone-confirmed Test99 at193/384. Full source and actual Reader review locally credit one additional original frame:194/384,190 remaining. Test100 phone acceptance and timing are pending. Check TEST100-VALIDATION.json for actual corpus, retained-suite, publication and build outcomes.
+Brad phone-confirmed Test99 at193/384. Full source and actual Reader review locally credit one additional original frame:194/384,190 remaining. Brad phone-confirmed Test100 at194/384 on6 October2026. Phone timing is unmeasured. Check TEST100-VALIDATION.json for actual corpus, retained-suite, publication and build outcomes.
