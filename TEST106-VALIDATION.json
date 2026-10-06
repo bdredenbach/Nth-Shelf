@@ -1,0 +1,228 @@
+{
+  "version": "2.79.106",
+  "versionCode": 28034,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest106",
+  "label": "Nth Shelf Test106",
+  "baseline": "Phone-confirmed Test105:202/384,182 remaining",
+  "cropReview": {
+    "version": "2.79.106",
+    "baseline": {
+      "version": "Test105",
+      "completeFrames": 202,
+      "phoneAccepted": true,
+      "date": "2026-10-06"
+    },
+    "localCompleteFrames": 207,
+    "originalFrames": 384,
+    "remainingFrames": 177,
+    "rawSelections": 194,
+    "creditedGroups": 180,
+    "phoneTest106": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 43,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 59,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 65,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 40,
+        "total": 79
+      }
+    ],
+    "countingRule": "Each unique complete original once, including originals inside groups; fragments and duplicates add zero.",
+    "changes": [
+      {
+        "issue": 1,
+        "readerPage": 13,
+        "selection": 3,
+        "frames": 1,
+        "description": "Complete top horizontal attack. Narrow upper-left attacker is a fragment, zero credit."
+      },
+      {
+        "issue": 2,
+        "readerPage": 10,
+        "selection": 1,
+        "frames": 2,
+        "description": "Complete upper-right Pharaoh/Nephri conversation and middle-right Pharaoh smile. Tall left Nephri silhouette is incomplete, zero credit."
+      },
+      {
+        "issue": 2,
+        "readerPage": 10,
+        "selection": 2,
+        "frames": 1,
+        "description": "Complete Logos protest with all five balloons and original jagged artwork boundary."
+      },
+      {
+        "issue": 2,
+        "readerPage": 10,
+        "selection": 3,
+        "frames": 1,
+        "description": "Complete bottom Logos close-up, hand, staff and all three balloon bodies."
+      }
+    ],
+    "originalSelectionsUnchanged": true,
+    "futureIdeas": [
+      "Issue1 Reader13 narrow attacker portrait remains incomplete, zero credit.",
+      "Issue2 Reader10 tall Nephri silhouette remains incomplete, zero credit.",
+      "Issue1 Reader18 right dialogue strip and clipped En portrait remain queued.",
+      "Issue4 Reader18 S3 foreground ownership review remains queued."
+    ],
+    "cadence": "Brad requests five complete frames this pass, superseding the two-frame cadence."
+  },
+  "corpus": {
+    "status": "passed",
+    "scope": "312 retained Test105 discovery maps against the same original source rasters and Test105 modules. Source supplement adds four selections; all1288 earlier final Reader display masks match. Older underlying detection is not rerun on every page; both changed pages receive fresh full detector replay.",
+    "pages": 312,
+    "originalSelections": 1288,
+    "finalSelections": 1292,
+    "originalDisplayMasksChanged": 0,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 190,
+        "finalSelections": 194,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-012.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                19,
+                0,
+                562,
+                184
+              ]
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-009.jpg",
+            "count": 3,
+            "boxes": [
+              [
+                36,
+                20,
+                585,
+                483
+              ],
+              [
+                10,
+                433,
+                568,
+                682
+              ],
+              [
+                0,
+                677,
+                568,
+                896
+              ]
+            ]
+          }
+        ],
+        "changes": []
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 388,
+        "finalSelections": 388,
+        "additions": [],
+        "changes": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": [],
+        "changes": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": [],
+        "changes": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": [],
+        "changes": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": [],
+        "changes": []
+      }
+    ]
+  },
+  "localChecks": {
+    "status": "passed",
+    "behavioralSuites": 113,
+    "cachePackageAndSyntax": "passed",
+    "retainedCompletion": {
+      "passed": true,
+      "behavioralSuites": 113,
+      "cachePackageContract": true,
+      "syntax": true,
+      "finalReaderSuiteSeen": true
+    },
+    "actualNativeReader": {
+      "passed": true,
+      "earlierNativeCanvasesUnchanged": 25,
+      "finalNativeCanvases": 29,
+      "newSelectionsReachable": 4,
+      "newDisplayedOverlapPixels": 0
+    },
+    "freshTargetDetector": {
+      "passed": true,
+      "targets": [
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-012.jpg",
+          "sourceBytes": 2094848,
+          "selectionCount": 3,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-009.jpg",
+          "sourceBytes": 1707785,
+          "selectionCount": 3,
+          "originalDescriptorsPreserved": true
+        }
+      ],
+      "runtimeModuleSha256": "6a3ed0edae8a14b858dd9f12e3562df4d55479b3576bf1f2c7f816a12c00953d",
+      "note": "Successful two-target replay captured from the final module in test106/fresh-detector.cjs. A redundant concurrent replay was resource-killed; no additional replay is claimed."
+    },
+    "sourceArtworkUploaded": false,
+    "browserIntegration": "pending CI",
+    "nativeArchive": "pending CI",
+    "phoneTiming": "unmeasured"
+  },
+  "publication": {
+    "status": "pending",
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "phoneAcceptance": "pending"
+}

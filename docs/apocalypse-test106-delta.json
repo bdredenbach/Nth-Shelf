@@ -1,0 +1,76 @@
+{
+  "version": "2.79.106",
+  "baseline": {
+    "version": "Test105",
+    "completeFrames": 202,
+    "phoneAccepted": true,
+    "date": "2026-10-06"
+  },
+  "localCompleteFrames": 207,
+  "originalFrames": 384,
+  "remainingFrames": 177,
+  "rawSelections": 194,
+  "creditedGroups": 180,
+  "phoneTest106": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 43,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 59,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 65,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 40,
+      "total": 79
+    }
+  ],
+  "countingRule": "Each unique complete original once, including originals inside groups; fragments and duplicates add zero.",
+  "changes": [
+    {
+      "issue": 1,
+      "readerPage": 13,
+      "selection": 3,
+      "frames": 1,
+      "description": "Complete top horizontal attack. Narrow upper-left attacker is a fragment, zero credit."
+    },
+    {
+      "issue": 2,
+      "readerPage": 10,
+      "selection": 1,
+      "frames": 2,
+      "description": "Complete upper-right Pharaoh/Nephri conversation and middle-right Pharaoh smile. Tall left Nephri silhouette is incomplete, zero credit."
+    },
+    {
+      "issue": 2,
+      "readerPage": 10,
+      "selection": 2,
+      "frames": 1,
+      "description": "Complete Logos protest with all five balloons and original jagged artwork boundary."
+    },
+    {
+      "issue": 2,
+      "readerPage": 10,
+      "selection": 3,
+      "frames": 1,
+      "description": "Complete bottom Logos close-up, hand, staff and all three balloon bodies."
+    }
+  ],
+  "originalSelectionsUnchanged": true,
+  "futureIdeas": [
+    "Issue1 Reader13 narrow attacker portrait remains incomplete, zero credit.",
+    "Issue2 Reader10 tall Nephri silhouette remains incomplete, zero credit.",
+    "Issue1 Reader18 right dialogue strip and clipped En portrait remain queued.",
+    "Issue4 Reader18 S3 foreground ownership review remains queued."
+  ],
+  "cadence": "Brad requests five complete frames this pass, superseding the two-frame cadence."
+}

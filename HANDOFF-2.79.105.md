@@ -2,7 +2,7 @@
 
 6 October 2026. Repository bdredenbach/Nth-Shelf, branch Test_Branch.
 
-Brad phone-confirmed Test104 at **200/384, 184 remaining** on 6 October 2026. Test105 locally completes two more unique original frames: **202/384, 182 remaining**, 190 selections, 176 credited groups. Issue totals:42/99,55/97,65/109,40/79. Test105 phone acceptance is pending; timing is unmeasured.
+Brad phone-confirmed Test104 at **200/384, 184 remaining** on 6 October 2026. Test105 locally completes two more unique original frames: **202/384, 182 remaining**, 190 selections, 176 credited groups. Issue totals:42/99,55/97,65/109,40/79. Brad phone-confirmed Test105 on 6 October 2026; timing is unmeasured.
 
 Phone target: **Apocalypse issue1, Reader page13**, new **selection2**. One new group contains two complete originals: central sword-fight and lower-left attack. Check the full central dialogue, fighters, crossing foreground shoulder and sword; the lower-left attack must keep both balloon bodies, fighters, weapons and SHAK lettering. Tap either scene to open this group. The upper-left attacker portrait is only a fragment and adds zero. The top horizontal attack remains missing. Original selection1 preserves the complete bottom-right pair. Page coverage advances2/6 to4/6. Install separate **Nth Shelf Test105**.
 
@@ -16,4 +16,4 @@ Source archive IDs: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolveri
 
 Scratch checkpoint:/workspace/scratch/9de482359b6f/Nth-Shelf-Test105;checks/corpus:/workspace/scratch/9de482359b6f/test105;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read TEST105-VALIDATION.json for identities and saved-file IDs.
 
-APK: Nth-Shelf-2.79.105-Test105.apk,3493256 bytes. SHA-256: e88f7bedf1c32fca46f4521fa09d679124e90a06a87986e931e270182d705120. Downloaded checksum, compiled isolated identity(io.github.bdredenbach.nthshelf.frametest105,version code 28033), actual v2 signer certificate/CI record and all 104 frozen web assets match tested source. Test105 phone confirmation is pending; phone timing is unmeasured.
+APK: Nth-Shelf-2.79.105-Test105.apk,3493256 bytes. SHA-256: e88f7bedf1c32fca46f4521fa09d679124e90a06a87986e931e270182d705120. Downloaded checksum, compiled isolated identity(io.github.bdredenbach.nthshelf.frametest105,version code 28033), actual v2 signer certificate/CI record and all 104 frozen web assets match tested source. Test105 phone-confirmed by Brad on 6 October 2026; phone timing is unmeasured.
