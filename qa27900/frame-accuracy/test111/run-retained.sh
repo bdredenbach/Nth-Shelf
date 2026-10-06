@@ -131,11 +131,13 @@ node qa27900/frame-accuracy/test109/speech-body-contract.cjs </dev/null 2>&1 | t
 node qa27900/frame-accuracy/test110/neutral-contract.cjs </dev/null 2>&1 | tee -a dist/regression-checks.txt
 node qa27900/frame-accuracy/test110/reader-neutral-contract.cjs </dev/null 2>&1 | tee -a dist/regression-checks.txt
 
+
+
+node qa27900/frame-accuracy/test111/source-contract.cjs </dev/null 2>&1 | tee -a dist/regression-checks.txt
+node qa27900/frame-accuracy/test111/reader-contract.cjs </dev/null 2>&1 | tee -a dist/regression-checks.txt
+
 python3 - <<'CHECK'
 import json
 from pathlib import Path
 Path("dist/retained-completion.json").write_text(json.dumps({"passed":True,"behavioralSuites":124,"cachePackageAndSyntax":"passed"})+"\n")
 CHECK
-
-node qa27900/frame-accuracy/test111/source-contract.cjs </dev/null 2>&1 | tee -a dist/regression-checks.txt
-node qa27900/frame-accuracy/test111/reader-contract.cjs </dev/null 2>&1 | tee -a dist/regression-checks.txt

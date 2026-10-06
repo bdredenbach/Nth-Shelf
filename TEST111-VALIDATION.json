@@ -1,0 +1,519 @@
+{
+  "version": "2.79.111",
+  "versionCode": 28039,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest111",
+  "label": "Nth Shelf Test111",
+  "cropReview": {
+    "version": "2.79.111",
+    "baseline": {
+      "version": "Test110",
+      "completeFrames": 246,
+      "phoneAccepted": "user supplied continuation baseline"
+    },
+    "localCompleteFrames": 255,
+    "originalFrames": 384,
+    "remainingFrames": 129,
+    "rawSelections": 220,
+    "priorCreditedGroups": 196,
+    "newCompleteOriginals": 9,
+    "newRuntimeSelectionsInApocalypse": 11,
+    "incidentalUncreditedCoverSelections": 2,
+    "phoneTest111": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 63,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 69,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 80,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 43,
+        "total": 79
+      }
+    ],
+    "changes": [
+      {
+        "issue": 1,
+        "readerPage": 3,
+        "selection": 2,
+        "frames": 1,
+        "type": "new recovery with ownership repair",
+        "description": "Complete eye/cartouche, full lower curled ornament and all three gray captions, including the detached APOCALYPSE caption. The neighboring camp retains all of its own artwork; its foreign ornament is reassigned."
+      },
+      {
+        "issue": 1,
+        "readerPage": 24,
+        "selection": 1,
+        "frames": 1,
+        "type": "new recovery",
+        "description": "Complete Baal/Logos conversation, including the yellow narration and all speech."
+      },
+      {
+        "issue": 2,
+        "readerPage": 18,
+        "selection": 3,
+        "frames": 1,
+        "type": "new recovery",
+        "description": "Complete cave silhouette dialogue with all four speech bodies."
+      },
+      {
+        "issue": 2,
+        "readerPage": 18,
+        "selection": 4,
+        "frames": 1,
+        "type": "new recovery",
+        "description": "Complete scarab-and-pointing-hand scene; the full fist, red clothing and speech body remain."
+      },
+      {
+        "issue": 2,
+        "readerPage": 21,
+        "selection": 1,
+        "frames": 1,
+        "type": "new recovery",
+        "description": "Complete large Logos portrait/dialogue with all connected speech bodies."
+      },
+      {
+        "issue": 3,
+        "readerPage": 5,
+        "selection": 6,
+        "frames": 1,
+        "type": "new recovery",
+        "description": "Complete horizontal falling-at-Osiris scene and all three yellow narration boxes. The small adjoining halo/head fragment adds zero."
+      },
+      {
+        "issue": 3,
+        "readerPage": 5,
+        "selection": 7,
+        "frames": 1,
+        "type": "new recovery, partly incomplete group",
+        "description": "Complete narrow Nur portrait (NUR balloon and fallen figure). The adjoining standing goddess loses her upper head/halo and remains incomplete: zero additional credit. This is one complete original inside a partly incomplete group."
+      },
+      {
+        "issue": 4,
+        "readerPage": 8,
+        "selection": 1,
+        "frames": 1,
+        "type": "new recovery",
+        "description": "Complete lower-right narrow Nur face, including the hair, eyes, mouth and chin."
+      },
+      {
+        "issue": 4,
+        "readerPage": 12,
+        "selection": 3,
+        "frames": 1,
+        "type": "new recovery",
+        "description": "Complete large transformation scene with the Pharaoh above and smiling En below. The neighboring inset and lower Nur scene keep their own crops."
+      }
+    ],
+    "countingRule": "Each unique complete original once. Partial originals, foreign fragments, duplicates, cover fragments and the incomplete goddess add zero; group usability remains separate.",
+    "futureIdeas": [
+      "Issue1 Reader7 upper eye/sword strip",
+      "Issue1 Reader13 narrow attacker portrait",
+      "Issue2 Reader10 tall Nephri silhouette",
+      "Issue1 Reader18 right dialogue strip and clipped En portrait",
+      "Issue3 Reader5 standing goddess upper head/halo",
+      "Issue4 Reader18 Test110 audit acceptance remains pending if not covered by user baseline"
+    ]
+  },
+  "localChecks": {
+    "behavioralSuites": 124,
+    "cachePackageAndSyntax": "passed",
+    "actualNativeReader": {
+      "passed": true,
+      "earlierNativeCanvases": 10,
+      "byteIdenticalPriorCanvases": 7,
+      "correctedForeignFragments": [
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-002.jpg",
+          "selection": 1,
+          "removedForeignPixels": 6980,
+          "oldSourcePixelsWithinValidatedCaptionOrOrnament": 6980
+        },
+        {
+          "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-004.jpg",
+          "selection": 2,
+          "removedForeignPixels": 226,
+          "oldSourcePixelsWithinValidatedCaptionOrOrnament": 0
+        },
+        {
+          "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-004.jpg",
+          "selection": 4,
+          "removedForeignPixels": 61,
+          "oldSourcePixelsWithinValidatedCaptionOrOrnament": 0
+        }
+      ],
+      "allPriorArtworkOutsideProvenNewSourceAndSpeechPreserved": true,
+      "finalNativeCanvases": 19,
+      "newSelectionsReachable": 9,
+      "newDisplayedOverlapPixels": 0
+    },
+    "freshTargetDetector": {
+      "passed": true,
+      "targets": [
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-002.jpg",
+          "sourceBytes": 1865261,
+          "selectionCount": 2,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-023.jpg",
+          "sourceBytes": 1953317,
+          "selectionCount": 1,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-017.jpg",
+          "sourceBytes": 1926863,
+          "selectionCount": 4,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-020.jpg",
+          "sourceBytes": 2150261,
+          "selectionCount": 1,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-004.jpg",
+          "sourceBytes": 2284863,
+          "selectionCount": 7,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-007.jpg",
+          "sourceBytes": 2959998,
+          "selectionCount": 1,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-011.jpg",
+          "sourceBytes": 2216354,
+          "selectionCount": 3,
+          "originalDescriptorsPreserved": true
+        }
+      ]
+    },
+    "sourceArtworkUploaded": false,
+    "phoneTiming": "unmeasured",
+    "status": "passed",
+    "retainedCompletion": {
+      "passed": true,
+      "behavioralSuites": 124,
+      "cachePackageAndSyntax": "passed"
+    }
+  },
+  "corpus": {
+    "pages": 312,
+    "originalSelections": 1307,
+    "finalSelections": 1319,
+    "sourceComparisons": [
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": []
+      },
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 209,
+        "finalSelections": 220,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-002.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                31,
+                28,
+                553,
+                179
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-023.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                30,
+                256,
+                329
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-017.jpg",
+            "count": 2,
+            "boxes": [
+              [
+                31,
+                12,
+                199,
+                258
+              ],
+              [
+                177,
+                0,
+                380,
+                204
+              ]
+            ],
+            "attachments": [
+              false,
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-020.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                204,
+                0,
+                585,
+                417
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-004.jpg",
+            "count": 2,
+            "boxes": [
+              [
+                9,
+                352,
+                585,
+                494
+              ],
+              [
+                274,
+                493,
+                585,
+                900
+              ]
+            ],
+            "attachments": [
+              false,
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-000.jpg",
+            "count": 2,
+            "boxes": [
+              [
+                0,
+                560,
+                306,
+                893
+              ],
+              [
+                303,
+                548,
+                554,
+                801
+              ]
+            ],
+            "attachments": [
+              false,
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-007.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                392,
+                669,
+                486,
+                867
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-011.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                266,
+                0,
+                585,
+                514
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          }
+        ]
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": []
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 388,
+        "finalSelections": 389,
+        "additions": [
+          {
+            "key": "Wolverine (2010-2012) 1000-042.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                23,
+                306,
+                307,
+                497
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          }
+        ]
+      }
+    ],
+    "displayComparisons": [
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 209,
+        "finalSelections": 220,
+        "changes": [
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-002.jpg",
+            "id": 1,
+            "added": 0,
+            "lost": 6980,
+            "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-004.jpg",
+            "id": 2,
+            "added": 0,
+            "lost": 226,
+            "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-004.jpg",
+            "id": 4,
+            "added": 0,
+            "lost": 61,
+            "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+          }
+        ],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 388,
+        "finalSelections": 389,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      }
+    ],
+    "olderFullCorpusDetectorRerun": false,
+    "scope": "Final supplementary discovery on original rasters with all prior source descriptors retained. Earlier-versus-final Reader masks; seven changed-page fresh detector replays. The complete older detector was not replayed across all312 pages.",
+    "status": "passed",
+    "priorSourceDescriptorsRetained": true,
+    "priorOwnArtworkPreservedOutsideReviewedForeignOwnershipCorrections": true
+  },
+  "publication": {
+    "sourceCommit": "30adc110e6efe4506fab7156f6fd1e332dc1bf6d",
+    "testedTree": "09e45c15877ecf800ee7b28a28baf3d527575445",
+    "publishedTreeMatchesLocalTree": true,
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "in progress",
+    "runId": 37522692617,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37522692617",
+    "sourceCommit": "30adc110e6efe4506fab7156f6fd1e332dc1bf6d"
+  },
+  "phoneAcceptance": "pending"
+}
