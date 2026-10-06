@@ -1,0 +1,22 @@
+'use strict';
+const fs=require('fs'),path=require('path'),zlib=require('zlib'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'../../..'),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]),code=scripts.map(p=>fs.readFileSync(root+'/'+p,'utf8')).join('\n'),names=[...new Set([...code.matchAll(/(?:const|class) (Panel\w+)\s*[={]/g)].map(m=>m[1]))],api=new Function('document','Image','window',code+';return{'+names.join(',')+'};')({},class{},{});
+const fixture=JSON.parse(zlib.inflateSync(Buffer.from(fs.readFileSync(__dirname+'/geometry.json.gz.b64','utf8'),'base64'))),{w,h,rows}=fixture,D=api.PanelNeutralMatteGroups,copy=v=>JSON.parse(JSON.stringify(v));let newOwners=0,corruptions=0;
+for(const {panels,priorCount,w,h}of rows){const snapshot=JSON.stringify(panels);for(const p of panels.slice(priorCount)){assert(D.validPanel(p));assert(api.PanelStructuralGrid.validPanel(p));assert(api.PanelGeometryOrthogonal._provenContours(p));assert(D.validPanel(copy(p)));newOwners++;
+for(const edit of[q=>q.x+=.01,q=>q._structuralGridProof.boundary.samples[0]++,q=>q._structuralGridProof.difference++,q=>q._structuralGridProof.first._structuralGridProof.seedRadius=8,q=>q._contours[0][0].x+=.01,q=>q._structuralGridProof.boundary.exterior[q._structuralGridProof.boundary.exterior.findIndex(v=>v>0)]=0,q=>q._structuralGridProof.originalOwnerOverlap=1,q=>q._structuralGridProof.analysisWidth+=3,q=>q._structuralGridProof.first._structuralGridProof.palette.paper=!q._structuralGridProof.first._structuralGridProof.palette.paper,q=>q._structuralGridProof.exclusions=[p],q=>q._structuralGridProof.box[0]++,q=>q._quad=[]]){const bad=copy(p);edit(bad);assert.equal(D.validPanel(bad),false,'Altered evidence accepted');corruptions++;}}
+const masks=panels.map(p=>api.PanelLocalBoundaryConsensus.raster(p,w,h));for(let k=priorCount;k<panels.length;k++)for(let j=0;j<k;j++)assert(!masks[k].some((v,i)=>v&&masks[j][i]),'Exclusive source ownership violated');assert.equal(JSON.stringify(panels),snapshot);}
+const white=new Uint8ClampedArray(w*h*4).fill(255);assert.deepEqual(D.analyzeRGBA(white,w,h,[]),[]);assert.deepEqual(D.analyzeRGBA(white,900,585,[]),[]);assert.deepEqual(D.analyzeRGBA(white,w,h,null),[]);assert.deepEqual(D.analyzeRGBA(new Uint8Array(4),w,h,[]),[]);const t=white.slice();t[3]=0;assert.deepEqual(D.analyzeRGBA(t,w,h,[]),[]);assert.deepEqual(D.analyzeRGBA(white,w,h,[{x:0,y:0,w:1,h:1}]),[]);
+{
+ const w=585,h=900,R=new Uint8ClampedArray(w*h*4).fill(255),mask=new Uint8Array(w*h);
+ for(let y=0;y<450;y++)for(let x=0;x<w;x++)if(y<390+60*Math.sin(Math.PI*x/w))mask[y*w+x]=1;
+ for(let y=540;y<680;y++)for(let x=20;x<280;x++)mask[y*w+x]=1;
+ for(let y=540;y<680;y++)for(let x=305;x<565;x++)mask[y*w+x]=1;
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=y*w+x;if(!mask[i])continue;let edge=false;for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++)if(x+dx<0||x+dx>=w||y+dy<0||y+dy>=h||!mask[(y+dy)*w+x+dx])edge=true;R.set(edge?[12,12,12,255]:[70+x%170,45+y%170,90+(x+y)%140,255],4*i);}
+ for(let i=0;i<w*h;i++)if(!mask[i])R.set([126,138,138,255],4*i);
+ const got=D.analyzeRGBA(R,w,h,[]);assert.equal(got.length,1);assert.equal(D.analyzeRGBA(R,w,h,got).length,0);
+ const noInk=R.slice();for(let i=0;i<w*h;i++)if(noInk[i*4]===12&&noInk[i*4+1]===12&&noInk[i*4+2]===12)noInk.set([170,170,170,255],i*4);assert.equal(D.analyzeRGBA(noInk,w,h,[]).length,0);
+ for(const color of [[255,255,255],[6,6,6],[6,66,114]]){const bad=R.slice();for(let i=0;i<w*h;i++)if(!mask[i])bad.set([...color,255],4*i);assert.equal(D.analyzeRGBA(bad,w,h,[]).length,0);}
+ const exposed=R.slice();for(let i=0;i<w*h;i++)if(mask[i]&&i%w<8)exposed.set([126,138,138,255],4*i);assert.equal(D.analyzeRGBA(exposed,w,h,[]).length,0);
+
+}
+assert.equal(newOwners,3);module.exports={api,fixture};if(require.main===module)console.log(JSON.stringify({passed:true,newOwners,corruptions,proofRoundTrips:true,exclusiveMasks:true,transparentAndBlankAndUnprovenNegatives:true,priorOwnerPreserved:true,sourceIndependentPositiveAndMissingInkNegative:true}));

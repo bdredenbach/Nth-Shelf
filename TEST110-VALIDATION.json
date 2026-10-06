@@ -1,0 +1,300 @@
+{
+  "version": "2.79.110",
+  "versionCode": 28038,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest110",
+  "label": "Nth Shelf Test110",
+  "baseline": "Test109237/384 locally; phone pending. Last explicit phone accepted Test108227/384.",
+  "cropReview": {
+    "version": "2.79.110",
+    "baseline": {
+      "version": "Test109",
+      "completeFrames": 237,
+      "phoneAccepted": false,
+      "lastPhoneAcceptedVersion": "Test108",
+      "lastPhoneAcceptedCompleteFrames": 227
+    },
+    "localCompleteFrames": 246,
+    "originalFrames": 384,
+    "remainingFrames": 138,
+    "rawSelections": 209,
+    "creditedGroups": 196,
+    "phoneTest110": "pending",
+    "newlyRecoveredFrames": 8,
+    "auditCorrectionFrames": 1,
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 61,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 66,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 78,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 41,
+        "total": 79
+      }
+    ],
+    "countingRule": "Each unique complete original once, including originals inside groups. Fragments and duplicates add zero. Group usability remains separate.",
+    "changes": [
+      {
+        "issue": 2,
+        "readerPage": 22,
+        "selection": 2,
+        "frames": 4,
+        "type": "new recovery",
+        "description": "Complete tall left Logos portrait, upper-right En anger, middle En threatening Logos and the narrow metallic-profile conversation strip. All owned balloons and the full sword tip are retained."
+      },
+      {
+        "issue": 3,
+        "readerPage": 10,
+        "selection": 2,
+        "frames": 2,
+        "type": "new recovery",
+        "description": "Complete tall left Pharaoh/weapon scene and upper-right Fantastic Four view, including the entire lower MANKIND balloon."
+      },
+      {
+        "issue": 3,
+        "readerPage": 10,
+        "selection": 3,
+        "frames": 2,
+        "type": "new recovery",
+        "description": "Complete narrow horizontal weapon-blast/SFX strip and the large lower Pharaoh/Thing action scene, with flame edges and all three speech bodies."
+      },
+      {
+        "issue": 4,
+        "readerPage": 18,
+        "selection": 3,
+        "frames": 1,
+        "type": "audit correction, no runtime change",
+        "description": "The queued Fantastic Four foreground scene is complete in the retained Test109 Reader crop: Reed\u2019s lower blue arm, Thing\u2019s hands, Sue\u2019s clothing, Torch\u2019s arms/feet and all owned text are present. Its small foreign explosion fragment adds zero. The selection is byte-identical; this is a previously uncredited original, not newly restored pixels."
+      }
+    ],
+    "auditCorrection": {
+      "source": "Fresh full-resolution original and actual native Reader canvas comparison on 6 October 2026",
+      "priorQueue": "Test95/Test109 issue4 Reader18 S3 foreground ownership review",
+      "runtimeChange": false,
+      "noDuplicateCredit": true,
+      "phoneAcceptance": "pending"
+    },
+    "futureIdeas": [
+      "Issue1 Reader3 eye/cartouche and detached caption remain incomplete.",
+      "Issue1 Reader7 upper eye/sword strip remains incomplete.",
+      "Issue1 Reader13 narrow attacker portrait remains incomplete.",
+      "Issue2 Reader10 tall Nephri silhouette remains incomplete.",
+      "Issue1 Reader18 right dialogue strip and clipped En portrait remain incomplete."
+    ],
+    "cadence": "Nine complete original credits per run, superseding ten. This run credits eight recoveries and one audited existing frame."
+  },
+  "localChecks": {
+    "status": "passed",
+    "behavioralSuites": 122,
+    "cachePackageAndSyntax": "passed",
+    "retainedCompletion": {
+      "passed": true,
+      "behavioralSuites": 122,
+      "cachePackageAndSyntax": "passed",
+      "neutralSourceAndReaderContracts": "passed",
+      "runtimeModuleSha256": "382805746343e226f60fa07f6b73d355f4e1b84cce79379c484c84c6800353f0"
+    },
+    "actualNativeReader": {
+      "passed": true,
+      "earlierNativeCanvases": 6,
+      "byteIdenticalPriorCanvases": 6,
+      "correctedForeignFragments": [],
+      "allPriorArtworkOutsideProvenNewSourceAndSpeechPreserved": true,
+      "finalNativeCanvases": 9,
+      "newSelectionsReachable": 3,
+      "newDisplayedOverlapPixels": 0
+    },
+    "freshTargetDetector": {
+      "passed": true,
+      "targets": [
+        {
+          "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-021.jpg",
+          "sourceBytes": 2060919,
+          "selectionCount": 2,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-009.jpg",
+          "sourceBytes": 2718780,
+          "selectionCount": 3,
+          "originalDescriptorsPreserved": true
+        }
+      ]
+    },
+    "auditCorrection": {
+      "source": "Fresh full-resolution original and actual native Reader canvas comparison on 6 October 2026",
+      "priorQueue": "Test95/Test109 issue4 Reader18 S3 foreground ownership review",
+      "runtimeChange": false,
+      "noDuplicateCredit": true,
+      "phoneAcceptance": "pending"
+    },
+    "sourceArtworkUploaded": false,
+    "browserIntegration": "pending CI",
+    "nativeArchive": "pending CI",
+    "phoneTiming": "unmeasured"
+  },
+  "corpus": {
+    "status": "passed",
+    "scope": "312 retained Test109 maps supplemented on original source rasters; all1304 earlier descriptors and fresh earlier Reader masks are unchanged. Exactly3 new Apocalypse selections yield1307. Wolverine, Magneto and three manga chapters retain all masks. Both changed pages reproduce full detector discovery. No full-corpus rerun of the older underlying detector is claimed.",
+    "pages": 312,
+    "originalSelections": 1304,
+    "finalSelections": 1307,
+    "originalDisplayMasksChanged": 0,
+    "sourceComparisons": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 206,
+        "finalSelections": 209,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-021.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                3,
+                6,
+                571,
+                632
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-009.jpg",
+            "count": 2,
+            "boxes": [
+              [
+                0,
+                0,
+                585,
+                412
+              ],
+              [
+                0,
+                400,
+                585,
+                900
+              ]
+            ],
+            "attachments": [
+              false,
+              false
+            ]
+          }
+        ]
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 388,
+        "finalSelections": 388,
+        "additions": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": []
+      }
+    ],
+    "displayComparisons": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 206,
+        "finalSelections": 209,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 388,
+        "finalSelections": 388,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      }
+    ]
+  },
+  "publication": {
+    "status": "pending"
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "phoneAcceptance": "pending"
+}

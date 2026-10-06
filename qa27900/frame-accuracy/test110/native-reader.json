@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "earlierNativeCanvases": 6,
+  "byteIdenticalPriorCanvases": 6,
+  "correctedForeignFragments": [],
+  "allPriorArtworkOutsideProvenNewSourceAndSpeechPreserved": true,
+  "finalNativeCanvases": 9,
+  "newSelectionsReachable": 3,
+  "newDisplayedOverlapPixels": 0
+}

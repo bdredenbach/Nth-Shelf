@@ -1,0 +1,90 @@
+{
+  "version": "2.79.110",
+  "baseline": {
+    "version": "Test109",
+    "completeFrames": 237,
+    "phoneAccepted": false,
+    "lastPhoneAcceptedVersion": "Test108",
+    "lastPhoneAcceptedCompleteFrames": 227
+  },
+  "localCompleteFrames": 246,
+  "originalFrames": 384,
+  "remainingFrames": 138,
+  "rawSelections": 209,
+  "creditedGroups": 196,
+  "phoneTest110": "pending",
+  "newlyRecoveredFrames": 8,
+  "auditCorrectionFrames": 1,
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 61,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 66,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 78,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 41,
+      "total": 79
+    }
+  ],
+  "countingRule": "Each unique complete original once, including originals inside groups. Fragments and duplicates add zero. Group usability remains separate.",
+  "changes": [
+    {
+      "issue": 2,
+      "readerPage": 22,
+      "selection": 2,
+      "frames": 4,
+      "type": "new recovery",
+      "description": "Complete tall left Logos portrait, upper-right En anger, middle En threatening Logos and the narrow metallic-profile conversation strip. All owned balloons and the full sword tip are retained."
+    },
+    {
+      "issue": 3,
+      "readerPage": 10,
+      "selection": 2,
+      "frames": 2,
+      "type": "new recovery",
+      "description": "Complete tall left Pharaoh/weapon scene and upper-right Fantastic Four view, including the entire lower MANKIND balloon."
+    },
+    {
+      "issue": 3,
+      "readerPage": 10,
+      "selection": 3,
+      "frames": 2,
+      "type": "new recovery",
+      "description": "Complete narrow horizontal weapon-blast/SFX strip and the large lower Pharaoh/Thing action scene, with flame edges and all three speech bodies."
+    },
+    {
+      "issue": 4,
+      "readerPage": 18,
+      "selection": 3,
+      "frames": 1,
+      "type": "audit correction, no runtime change",
+      "description": "The queued Fantastic Four foreground scene is complete in the retained Test109 Reader crop: Reed\u2019s lower blue arm, Thing\u2019s hands, Sue\u2019s clothing, Torch\u2019s arms/feet and all owned text are present. Its small foreign explosion fragment adds zero. The selection is byte-identical; this is a previously uncredited original, not newly restored pixels."
+    }
+  ],
+  "auditCorrection": {
+    "source": "Fresh full-resolution original and actual native Reader canvas comparison on 6 October 2026",
+    "priorQueue": "Test95/Test109 issue4 Reader18 S3 foreground ownership review",
+    "runtimeChange": false,
+    "noDuplicateCredit": true,
+    "phoneAcceptance": "pending"
+  },
+  "futureIdeas": [
+    "Issue1 Reader3 eye/cartouche and detached caption remain incomplete.",
+    "Issue1 Reader7 upper eye/sword strip remains incomplete.",
+    "Issue1 Reader13 narrow attacker portrait remains incomplete.",
+    "Issue2 Reader10 tall Nephri silhouette remains incomplete.",
+    "Issue1 Reader18 right dialogue strip and clipped En portrait remain incomplete."
+  ],
+  "cadence": "Nine complete original credits per run, superseding ten. This run credits eight recoveries and one audited existing frame."
+}
