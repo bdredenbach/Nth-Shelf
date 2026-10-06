@@ -140,8 +140,8 @@
       "phoneAcceptance": "pending"
     },
     "sourceArtworkUploaded": false,
-    "browserIntegration": "pending CI",
-    "nativeArchive": "pending CI",
+    "browserIntegration": "passed CI",
+    "nativeArchive": "passed CI",
     "phoneTiming": "unmeasured"
   },
   "corpus": {
@@ -299,10 +299,61 @@
     "publishedTreeMatchesTestedTree": true
   },
   "androidBuild": {
-    "status": "running",
+    "status": "success",
     "runId": 37517552313,
     "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37517552313",
-    "sourceCommit": "643fe6b220d20629a2f19a8c81dd0a5ba5d2a088"
+    "sourceCommit": "643fe6b220d20629a2f19a8c81dd0a5ba5d2a088",
+    "artifactId": 11437523404,
+    "apkFile": "Nth-Shelf-2.79.110-Test110.apk",
+    "apkSha256": "296f6d02dff59bb08e237fb16014943f5fbad0011e6f5fec786e12805c477ff5",
+    "apkBytes": 3516326,
+    "verifiedWebAssetCount": 109,
+    "downloadVerification": {
+      "passed": true,
+      "apkSha256": "296f6d02dff59bb08e237fb16014943f5fbad0011e6f5fec786e12805c477ff5",
+      "apkBytes": 3516326,
+      "sourceCommit": "643fe6b220d20629a2f19a8c81dd0a5ba5d2a088",
+      "verifiedPackagedWebFiles": 109,
+      "actualCompiledManifest": {
+        "package": "io.github.bdredenbach.nthshelf.frametest110",
+        "versionName": "2.79.110",
+        "versionCode": 28038
+      },
+      "actualLabel": "Nth Shelf Test110",
+      "actualSignerCertificateSha256": "fccdd8ec10bf68acd29540050560650a9b93ef28d7a084c9bc19800df188c88b",
+      "actualSignerCertificateMatchesCiRecord": true,
+      "signingScheme": "APK v2, one CI debug signer",
+      "ciSignatureVerificationPassed": true,
+      "allPackagedBytesMatchTestedSource": true
+    }
   },
-  "phoneAcceptance": "pending"
+  "phoneAcceptance": "pending",
+  "ciChecks": {
+    "status": "passed",
+    "behavioralSuites": 122,
+    "cachePackageAndSyntax": "passed",
+    "browserInteractionAndBackup": "passed",
+    "nativeStreamingArchive": "passed",
+    "signatureIdentityAndFrozenWebAssets": "passed"
+  },
+  "savedDeliverables": [
+    {
+      "file_name": "Nth-Shelf-Test110-Frame-Review.html",
+      "library_file_id": "libfile_19b418ad15cc8191bd436bcad8495bdd",
+      "file_id": "file_00000000c45881f5af0a781d98f8b23f",
+      "local_path": "/workspace/scratch/e3d5bbf239b9/test110/deliverables/Nth-Shelf-Test110-Frame-Review.html"
+    },
+    {
+      "file_name": "Nth-Shelf-2.79.110-Test110.apk",
+      "library_file_id": "libfile_971af4494ce88191ba848a079c0e4810",
+      "file_id": "file_0000000043ec81f594b1aa03f43e023b",
+      "local_path": "/workspace/scratch/e3d5bbf239b9/test110/deliverables/Nth-Shelf-2.79.110-Test110.apk"
+    },
+    {
+      "file_name": "Nth-Shelf-Test110-New-Chat-Handoff.txt",
+      "library_file_id": "libfile_bcbb954934a48191a0e9e7bc78aa88cc",
+      "file_id": "file_00000000ca3c81f5905a061f6e452f07",
+      "local_path": "/workspace/scratch/e3d5bbf239b9/test110/deliverables/Nth-Shelf-Test110-New-Chat-Handoff.txt"
+    }
+  ]
 }
