@@ -1,0 +1,64 @@
+{
+  "version": "2.79.113",
+  "baseline": {
+    "version": "Test112",
+    "completeFrames": 264,
+    "phoneAccepted": true,
+    "date": "2026-10-06"
+  },
+  "localCompleteFrames": 273,
+  "originalFrames": 384,
+  "remainingFrames": 111,
+  "rawSelections": 225,
+  "newCompleteOriginals": 9,
+  "newRuntimeSelectionsInApocalypse": 2,
+  "phoneTest113": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 63,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 73,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 90,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 47,
+      "total": 79
+    }
+  ],
+  "changes": [
+    {
+      "issue": 3,
+      "readerPage": 8,
+      "selection": 1,
+      "frames": 5,
+      "type": "new five-original group",
+      "description": "Three upper Pharaoh face/hands/throne originals, the full Fantastic Four court arrival and the bottom Logos portrait. All original artwork, captions and dialogue remain."
+    },
+    {
+      "issue": 4,
+      "readerPage": 11,
+      "selection": 1,
+      "frames": 4,
+      "type": "new four-original group",
+      "description": "Upper-left En among bodies, upper-right fallen Logos, tall lower-left En thoughts and the complete lower attack scene with both speech balloons, motion marks, hands, blades, blood and protruding foreground skull."
+    }
+  ],
+  "countingRule": "Each unique complete original once, including complete originals in larger crops. Clipped originals, duplicates, printed page numbers and title lettering add zero. Group usability remains separate.",
+  "futureIdeas": [
+    "Issue1 Reader7 eye/sword strip",
+    "Issue1 Reader13 narrow attacker portrait",
+    "Issue2 Reader10 tall Nephri silhouette",
+    "Issue1 Reader18 right dialogue strip and clipped En portrait",
+    "Issue3 Reader5 goddess head/halo"
+  ]
+}

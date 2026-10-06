@@ -22,3 +22,5 @@ Validation completed: all 127 retained behavioral suites, cache/package/syntax c
 Published APK source: 246e7957618afee7203df292ef917e0383caf29a; tree 32e51ccd1704db802df9a9d37f609c90aef800d3 on Test_Branch. Android run 37528757317 passed retained, browser interaction/backup, native archive, signature and packaging checks. Downloaded APK verified: 3535304 bytes; SHA-256 eb33dacf108495dde6d6eb5f989be0effaa78040d666a2d0753a619912fa08b7; compiled identity Nth Shelf Test112 / 2.79.112 / versionCode 28040 / io.github.bdredenbach.nthshelf.frametest112. All 112 web files match the tested source byte for byte. CI APK v2 signer certificate matches the downloaded APK.
 
 Count only the nine reviewed originals. Test112 phone acceptance, group usability and phone timing remain pending; do not claim 264/384 as phone-confirmed until Brad confirms. Test111 remains the phone-confirmed 255/384 baseline.
+
+Update 6 October 2026: Brad confirmed Test112 at264/384,120 remaining in the Test113 continuation. Phone timing is still unmeasured. Continue with HANDOFF-2.79.113.md.

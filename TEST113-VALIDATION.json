@@ -1,0 +1,268 @@
+{
+  "version": "2.79.113",
+  "versionCode": 28041,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest113",
+  "label": "Nth Shelf Test113",
+  "cropReview": {
+    "version": "2.79.113",
+    "baseline": {
+      "version": "Test112",
+      "completeFrames": 264,
+      "phoneAccepted": true,
+      "date": "2026-10-06"
+    },
+    "localCompleteFrames": 273,
+    "originalFrames": 384,
+    "remainingFrames": 111,
+    "rawSelections": 225,
+    "newCompleteOriginals": 9,
+    "newRuntimeSelectionsInApocalypse": 2,
+    "phoneTest113": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 63,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 73,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 90,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 47,
+        "total": 79
+      }
+    ],
+    "changes": [
+      {
+        "issue": 3,
+        "readerPage": 8,
+        "selection": 1,
+        "frames": 5,
+        "type": "new five-original group",
+        "description": "Three upper Pharaoh face/hands/throne originals, the full Fantastic Four court arrival and the bottom Logos portrait. All original artwork, captions and dialogue remain."
+      },
+      {
+        "issue": 4,
+        "readerPage": 11,
+        "selection": 1,
+        "frames": 4,
+        "type": "new four-original group",
+        "description": "Upper-left En among bodies, upper-right fallen Logos, tall lower-left En thoughts and the complete lower attack scene with both speech balloons, motion marks, hands, blades, blood and protruding foreground skull."
+      }
+    ],
+    "countingRule": "Each unique complete original once, including complete originals in larger crops. Clipped originals, duplicates, printed page numbers and title lettering add zero. Group usability remains separate.",
+    "futureIdeas": [
+      "Issue1 Reader7 eye/sword strip",
+      "Issue1 Reader13 narrow attacker portrait",
+      "Issue2 Reader10 tall Nephri silhouette",
+      "Issue1 Reader18 right dialogue strip and clipped En portrait",
+      "Issue3 Reader5 goddess head/halo"
+    ]
+  },
+  "phoneAcceptance": "pending",
+  "retainedChecks": {
+    "status": "running",
+    "requiredBehavioralSuites": 129
+  },
+  "nativeReaderInvariants": {
+    "passed": true,
+    "nativeCanvases": 2,
+    "newSelectionsReachable": 2,
+    "newDisplayedOverlapPixels": 0,
+    "results": [
+      {
+        "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-007.jpg",
+        "selection": 1,
+        "reachable": true,
+        "nativeSourcePixelsIdentical": true,
+        "width": 1988,
+        "height": 2934,
+        "box": [
+          0,
+          29,
+          585,
+          893
+        ]
+      },
+      {
+        "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-010.jpg",
+        "selection": 1,
+        "reachable": true,
+        "nativeSourcePixelsIdentical": true,
+        "width": 1915,
+        "height": 3000,
+        "box": [
+          19,
+          13,
+          585,
+          900
+        ]
+      }
+    ]
+  },
+  "freshDetector": {
+    "passed": true,
+    "targets": [
+      {
+        "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-007.jpg",
+        "sourceBytes": 2533280,
+        "selectionCount": 1,
+        "originalDescriptorsPreserved": true
+      },
+      {
+        "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-010.jpg",
+        "sourceBytes": 2011808,
+        "selectionCount": 1,
+        "originalDescriptorsPreserved": true
+      }
+    ]
+  },
+  "finalSupplementaryReplays": {
+    "pages": 312,
+    "priorSourceDescriptors": 1322,
+    "sourceComparisons": [
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": []
+      },
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 223,
+        "finalSelections": 225,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-007.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                29,
+                585,
+                893
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 004 (1997) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 04 (of 04)-010.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                19,
+                13,
+                585,
+                900
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          }
+        ]
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": []
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 389,
+        "finalSelections": 389,
+        "additions": []
+      }
+    ],
+    "displayComparisons": [
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 223,
+        "finalSelections": 225,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 389,
+        "finalSelections": 389,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      }
+    ],
+    "olderFullCorpusDetectorRerun": false,
+    "scope": "New supplementary detector on all312 original rasters using all retained prior descriptors; full earlier-versus-final Reader display comparison on all312 pages; two full changed-page fresh detector replays. The complete older detector was not rerun over the entire corpus.",
+    "status": "passed",
+    "priorSourceDescriptorsRetained": true,
+    "priorDisplayMasksUnchanged": true
+  }
+}

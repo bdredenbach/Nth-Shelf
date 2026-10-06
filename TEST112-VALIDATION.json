@@ -17,7 +17,7 @@
     "rawSelections": 223,
     "newCompleteOriginals": 9,
     "newRuntimeSelectionsInApocalypse": 3,
-    "phoneTest112": "pending",
+    "phoneTest112": "confirmed",
     "issueTotals": [
       {
         "issue": 1,
@@ -352,7 +352,15 @@
     },
     "nonRuntimeMetadataNote": "Final handoff and validation records are published after the APK source commit. Packaged runtime bytes exactly match the tested source commit."
   },
-  "phoneAcceptance": "pending",
+  "phoneAcceptance": {
+    "status": "confirmed",
+    "by": "Brad",
+    "date": "2026-10-06",
+    "completeFrames": 264,
+    "originalFrames": 384,
+    "remainingFrames": 120,
+    "timingMeasured": false
+  },
   "savedFiles": {
     "apk": "libfile_59b281767ecc8191aa0c980c0fa24242",
     "frameReview": "libfile_4d35bdffdad08191bc97295d687cbe90",
