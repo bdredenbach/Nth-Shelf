@@ -1,0 +1,58 @@
+{
+  "version": "2.79.100",
+  "baseline": {
+    "version": "Test99",
+    "completeFrames": 193,
+    "phoneAccepted": true
+  },
+  "localCompleteFrames": 194,
+  "originalFrames": 384,
+  "remainingFrames": 190,
+  "rawSelections": 186,
+  "creditedGroups": 171,
+  "phoneTest100": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 36,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 54,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 64,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 40,
+      "total": 79
+    }
+  ],
+  "countingRule": "Each unique complete original frame once; clipped/duplicate fragments count zero; dual crops count two; larger crops count every complete original frame.",
+  "change": {
+    "issue": 3,
+    "readerPage": 13,
+    "selection": 2,
+    "beforeComplete": false,
+    "afterComplete": true,
+    "pageCompleteBefore": 4,
+    "pageCompleteAfter": 5,
+    "addedDisplayAnalysisPixels": 3825,
+    "removedDisplayAnalysisPixels": 0,
+    "foreignSpeechRemovedFromSelection3": 3870,
+    "description": "Complete centre pharaoh panel retains the entire DO NOT GRASP balloon and its zigzag tail."
+  },
+  "detectorDescriptors": "unchanged; Reader-only substantial-tail ownership across adjacent proven columns",
+  "neighborCanvases": "S1/S4/S5/S6 and all four issue4 Reader18 canvases are byte-identical to Test99. S3 loses only foreign speech; all artwork outside the independently enclosed body is unchanged.",
+  "queueBasis": "Test95 audit excluding issue4 Reader5 S2, Reader20 S1, Reader18 S4 and issue3 Reader13 S1/S2.",
+  "futureIdeas": [
+    "Issue3 Reader13 continuous hand/wrist action row and false S6 fragment still need enclosure/identity repair.",
+    "Issue4 Reader18 S3 foreground remains incomplete.",
+    "SWAK and missing ink-frame scenes remain incomplete."
+  ]
+}
