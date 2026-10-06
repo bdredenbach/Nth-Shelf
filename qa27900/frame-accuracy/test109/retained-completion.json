@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "behavioralSuites": 120,
+  "cachePackageAndSyntax": "passed",
+  "frontierAndSpeechBodyContracts": "passed",
+  "runtimeModuleSha256": "60a6f58dc7a719b09ed0a5165651a437414202623c99327831016ba951fcaf08"
+}

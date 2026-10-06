@@ -1,0 +1,68 @@
+{
+  "book": "apocalypse",
+  "pages": 91,
+  "originalSelections": 202,
+  "finalSelections": 206,
+  "additions": [
+    {
+      "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-006.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          7,
+          165,
+          243,
+          900
+        ]
+      ],
+      "attachments": [
+        false
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-006.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          0,
+          0,
+          585,
+          900
+        ]
+      ],
+      "attachments": [
+        true
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-017.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          0,
+          0,
+          585,
+          454
+        ]
+      ],
+      "attachments": [
+        false
+      ]
+    },
+    {
+      "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-021.jpg",
+      "count": 1,
+      "boxes": [
+        [
+          0,
+          0,
+          570,
+          436
+        ]
+      ],
+      "attachments": [
+        false
+      ]
+    }
+  ]
+}

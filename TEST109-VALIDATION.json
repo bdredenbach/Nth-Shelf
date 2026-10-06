@@ -84,14 +84,209 @@
     ]
   },
   "corpus": {
-    "status": "running",
-    "scope": "312 certified Test108 source maps, supplemented on original rasters; final Reader masks checked against the earlier Reader. No full-corpus rerun of the older underlying detector is claimed."
+    "status": "passed",
+    "scope": "312 certified Test108 maps supplemented on original source rasters with final Test109 recovery. All1300 earlier source descriptors match. Reader comparison on all312 original rasters preserves1297 earlier displayed masks; only3 earlier displays lose foreign fragments within new proven source/enclosed speech. Exactly4 new Apocalypse selections yield1304 across the corpus. Wolverine,Magneto and three manga chapters retain all source and displayed masks. Four changed pages also reproduce final discovery through fresh full detector replay. No full-corpus rerun of the older underlying detector is claimed.",
+    "pages": 312,
+    "originalSelections": 1300,
+    "finalSelections": 1304,
+    "originalDisplayMasksChanged": 3,
+    "displayMaskChangesAreForeignFragmentsOnly": true,
+    "sourceComparisons": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 202,
+        "finalSelections": 206,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-006.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                7,
+                165,
+                243,
+                900
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-006.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                0,
+                585,
+                900
+              ]
+            ],
+            "attachments": [
+              true
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-017.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                0,
+                585,
+                454
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-021.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                0,
+                570,
+                436
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          }
+        ]
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 388,
+        "finalSelections": 388,
+        "additions": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": []
+      }
+    ],
+    "displayComparisons": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 202,
+        "finalSelections": 206,
+        "changes": [
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-006.jpg",
+            "id": 1,
+            "added": 0,
+            "lost": 455,
+            "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-006.jpg",
+            "id": 2,
+            "added": 0,
+            "lost": 89,
+            "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-017.jpg",
+            "id": 1,
+            "added": 0,
+            "lost": 2089,
+            "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+          }
+        ],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 388,
+        "finalSelections": 388,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      }
+    ]
   },
   "localChecks": {
-    "status": "running",
-    "behavioralSuites": "120 retained suites running",
-    "sourceIndependentFrontierContract": "passed",
-    "nativeReader": {
+    "status": "passed",
+    "behavioralSuites": 120,
+    "cachePackageAndSyntax": "passed",
+    "retainedCompletion": {
+      "passed": true,
+      "behavioralSuites": 120,
+      "cachePackageAndSyntax": "passed",
+      "frontierAndSpeechBodyContracts": "passed",
+      "runtimeModuleSha256": "60a6f58dc7a719b09ed0a5165651a437414202623c99327831016ba951fcaf08"
+    },
+    "actualNativeReader": {
       "passed": true,
       "earlierNativeCanvases": 5,
       "byteIdenticalPriorCanvases": 2,
@@ -121,17 +316,103 @@
       "newDisplayedOverlapPixels": 0
     },
     "freshTargetDetector": {
-      "status": "running"
+      "passed": true,
+      "targets": [
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-006.jpg",
+          "sourceBytes": 1975698,
+          "selectionCount": 2,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-006.jpg",
+          "sourceBytes": 2428676,
+          "selectionCount": 3,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-017.jpg",
+          "sourceBytes": 1830290,
+          "selectionCount": 3,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-021.jpg",
+          "sourceBytes": 2006582,
+          "selectionCount": 1,
+          "originalDescriptorsPreserved": true
+        }
+      ]
     },
-    "phoneTiming": "unmeasured",
-    "sourceArtworkUploaded": false
+    "sourceArtworkUploaded": false,
+    "browserIntegration": "passed CI",
+    "nativeArchive": "passed CI",
+    "phoneTiming": "unmeasured"
   },
   "publication": {
-    "status": "pending",
-    "branch": "Test_Branch"
+    "status": "published",
+    "branch": "Test_Branch",
+    "sourceCommit": "16bdde1c5d537d5bd09c819e66cd5cb3593bbfb8",
+    "testedLocalCommit": "5735fe87fdbb2d7acfe58ae039574aefb3f9747d",
+    "testedTree": "3b7dd8cad5a4c29be6db799a6b05d8c73cf1e37a",
+    "publishedTreeMatchesTestedTree": true
   },
   "androidBuild": {
-    "status": "pending"
+    "status": "success",
+    "runId": 37510051452,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37510051452",
+    "sourceCommit": "16bdde1c5d537d5bd09c819e66cd5cb3593bbfb8",
+    "artifactId": 11435337539,
+    "apkFile": "Nth-Shelf-2.79.109-Test109.apk",
+    "apkSha256": "c4e2bf04a6f9b4d17905e1a35aed41bc52aa6b7af3ac04ecafafd1476714ab6b",
+    "apkBytes": 3511065,
+    "verifiedWebAssetCount": 108,
+    "downloadVerification": {
+      "passed": true,
+      "apkSha256": "c4e2bf04a6f9b4d17905e1a35aed41bc52aa6b7af3ac04ecafafd1476714ab6b",
+      "apkBytes": 3511065,
+      "sourceCommit": "16bdde1c5d537d5bd09c819e66cd5cb3593bbfb8",
+      "verifiedPackagedWebFiles": 108,
+      "actualCompiledManifest": {
+        "package": "io.github.bdredenbach.nthshelf.frametest109",
+        "versionName": "2.79.109",
+        "versionCode": 28037
+      },
+      "actualLabel": "Nth Shelf Test109",
+      "actualSignerCertificateSha256": "9be092d647360beb5de18a1fa834b64cb61af2fa431ddc09d73e2d76fa79afbb",
+      "actualSignerCertificateMatchesCiRecord": true,
+      "signingScheme": "APK v2, one CI debug signer",
+      "ciSignatureVerificationPassed": true,
+      "allPackagedBytesMatchTestedSource": true
+    }
   },
-  "phoneAcceptance": "pending"
+  "phoneAcceptance": "pending",
+  "ciChecks": {
+    "status": "passed",
+    "behavioralSuites": 120,
+    "cachePackageAndSyntax": "passed",
+    "browserInteractionAndBackup": "passed",
+    "nativeStreamingArchive": "passed",
+    "signatureIdentityAndFrozenWebAssets": "passed"
+  },
+  "savedDeliverables": [
+    {
+      "file_name": "Nth-Shelf-Test109-Frame-Review.html",
+      "library_file_id": "libfile_9dace4a9a7ac8191a5cdd59e94933abc",
+      "file_id": "file_00000000046c8230afa60873b12d2032",
+      "local_path": "/workspace/scratch/1dea0fea137c/test109/deliverables/Nth-Shelf-Test109-Frame-Review.html"
+    },
+    {
+      "file_name": "Nth-Shelf-2.79.109-Test109.apk",
+      "library_file_id": "libfile_39e0decbc6808191a7ff24633d62b172",
+      "file_id": "file_00000000999481fda9207f561ef08603",
+      "local_path": "/workspace/scratch/1dea0fea137c/test109/deliverables/Nth-Shelf-2.79.109-Test109.apk"
+    },
+    {
+      "file_name": "Nth-Shelf-Test109-New-Chat-Handoff.txt",
+      "library_file_id": "libfile_609296d120f08191ba8aa9ab6e757b43",
+      "file_id": "file_000000002bd081fda9c54b3a98265351",
+      "local_path": "/workspace/scratch/1dea0fea137c/test109/deliverables/Nth-Shelf-Test109-New-Chat-Handoff.txt"
+    }
+  ]
 }
