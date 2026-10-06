@@ -1,5 +1,7 @@
 # Nth Shelf
 
+Test114 build verified: all132 retained checks,312 source/Reader comparisons, three fresh detector runs, three native crops, browser/backup/native archive and Android CI pass. Correct isolated package, APK v2 CI signature record and all115 frozen web bytes verified after download. Source af2ea6b7089eb600a569a1662e3ab94c5b8d2ec5; APK SHA2561caec8db0500344cd0dcc622410fb5dc4bb134ac77e6b74d613e4f6f5d11067e. Review and handoff are saved; see TEST114-VALIDATION.json. Phone acceptance, grouping usability and timing pending.
+
 ## Test114 — nine more complete originals
 
 Test114 locally reaches282/384,102 remaining from the273 working baseline. Issue2 Reader9 S2(+4), issue4 Reader7 S1(+4), issue4 Reader19 S3(+1). Two broad groups and one speech completion; duplicate originals count zero. Group usability and phone acceptance remain pending. [Handoff](HANDOFF-2.79.114.md), [delta](docs/apocalypse-test114-delta.json), [validation](TEST114-VALIDATION.json).
