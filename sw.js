@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.111 — PAPER CONTINUATION GROUP
+// NTH SHELF 2.79.112 — PAPER CONTINUATION GROUP
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.111";
+const CACHE_NAME = "nth-shelf-shell-2.79.112";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -108,6 +108,7 @@ const SHELL_FILES = [
   "./js/panels-neutral-matte-groups.js",
   "./js/panels-compact-dark-cells.js",
   "./js/panels-short-paper-cells.js",
+  "./js/panels-gradient-residual-groups.js",
   "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",

@@ -1,0 +1,72 @@
+{
+  "version": "2.79.112",
+  "baseline": {
+    "version": "Test111",
+    "completeFrames": 255,
+    "phoneAccepted": true,
+    "date": "2026-10-06"
+  },
+  "localCompleteFrames": 264,
+  "originalFrames": 384,
+  "remainingFrames": 120,
+  "rawSelections": 223,
+  "newCompleteOriginals": 9,
+  "newRuntimeSelectionsInApocalypse": 3,
+  "phoneTest112": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 63,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 73,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 85,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 43,
+      "total": 79
+    }
+  ],
+  "changes": [
+    {
+      "issue": 2,
+      "readerPage": 17,
+      "selection": 2,
+      "frames": 4,
+      "type": "new recovery, four-original group",
+      "description": "Complete tall hand-on-inscriptions scene, tall right prophecy conversation, lower-left En profile and lower-right En holding the relic. All owned speech remains. Existing upper-left cave frame stays separate."
+    },
+    {
+      "issue": 3,
+      "readerPage": 22,
+      "selection": 2,
+      "frames": 3,
+      "type": "new recovery with speech ownership repair",
+      "description": "Complete lower-left Pharaoh/cavern offer with the full DO NOT MOURN chain, narrow lower-center En mouth/boot action and underlying En attacking Pharaoh with the full NEVER balloon. The earlier upper scene loses only foreign lower-scene speech."
+    },
+    {
+      "issue": 3,
+      "readerPage": 23,
+      "selection": 4,
+      "frames": 2,
+      "type": "new recovery, two-original group",
+      "description": "Complete upper-right energy blast and middle-left weapon close-up, with the BRANNNGGG sound effect and all speech. The three earlier selections keep their own artwork; decorative NEXT/title fragments add zero."
+    }
+  ],
+  "countingRule": "Each unique complete original once, including complete originals in larger crops. Duplicates, clipped originals and decorative lettering add zero. Group usability remains separate.",
+  "futureIdeas": [
+    "Issue1 Reader7 eye/sword strip",
+    "Issue1 Reader13 narrow attacker portrait",
+    "Issue2 Reader10 tall Nephri silhouette",
+    "Issue1 Reader18 right dialogue strip and clipped En portrait",
+    "Issue3 Reader5 goddess head/halo"
+  ]
+}

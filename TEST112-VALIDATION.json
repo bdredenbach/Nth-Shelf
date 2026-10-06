@@ -1,0 +1,233 @@
+{
+  "version": "2.79.112",
+  "versionCode": 28040,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest112",
+  "label": "Nth Shelf Test112",
+  "cropReview": {
+    "version": "2.79.112",
+    "baseline": {
+      "version": "Test111",
+      "completeFrames": 255,
+      "phoneAccepted": true,
+      "date": "2026-10-06"
+    },
+    "localCompleteFrames": 264,
+    "originalFrames": 384,
+    "remainingFrames": 120,
+    "rawSelections": 223,
+    "newCompleteOriginals": 9,
+    "newRuntimeSelectionsInApocalypse": 3,
+    "phoneTest112": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 63,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 73,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 85,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 43,
+        "total": 79
+      }
+    ],
+    "changes": [
+      {
+        "issue": 2,
+        "readerPage": 17,
+        "selection": 2,
+        "frames": 4,
+        "type": "new recovery, four-original group",
+        "description": "Complete tall hand-on-inscriptions scene, tall right prophecy conversation, lower-left En profile and lower-right En holding the relic. All owned speech remains. Existing upper-left cave frame stays separate."
+      },
+      {
+        "issue": 3,
+        "readerPage": 22,
+        "selection": 2,
+        "frames": 3,
+        "type": "new recovery with speech ownership repair",
+        "description": "Complete lower-left Pharaoh/cavern offer with the full DO NOT MOURN chain, narrow lower-center En mouth/boot action and underlying En attacking Pharaoh with the full NEVER balloon. The earlier upper scene loses only foreign lower-scene speech."
+      },
+      {
+        "issue": 3,
+        "readerPage": 23,
+        "selection": 4,
+        "frames": 2,
+        "type": "new recovery, two-original group",
+        "description": "Complete upper-right energy blast and middle-left weapon close-up, with the BRANNNGGG sound effect and all speech. The three earlier selections keep their own artwork; decorative NEXT/title fragments add zero."
+      }
+    ],
+    "countingRule": "Each unique complete original once, including complete originals in larger crops. Duplicates, clipped originals and decorative lettering add zero. Group usability remains separate.",
+    "futureIdeas": [
+      "Issue1 Reader7 eye/sword strip",
+      "Issue1 Reader13 narrow attacker portrait",
+      "Issue2 Reader10 tall Nephri silhouette",
+      "Issue1 Reader18 right dialogue strip and clipped En portrait",
+      "Issue3 Reader5 goddess head/halo"
+    ]
+  },
+  "retainedChecks": {
+    "status": "running",
+    "behavioralSuites": 127
+  },
+  "nativeReaderInvariants": {
+    "passed": true,
+    "earlierNativeCanvases": 5,
+    "byteIdenticalPriorCanvases": 2,
+    "correctedForeignFragments": [
+      {
+        "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-021.jpg",
+        "selection": 1,
+        "removedForeignPixels": 4326,
+        "oldSourcePixelsWithinValidatedCaptionOrOrnament": 4326
+      },
+      {
+        "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-022.jpg",
+        "selection": 1,
+        "removedForeignPixels": 3895,
+        "oldSourcePixelsWithinValidatedCaptionOrOrnament": 0
+      },
+      {
+        "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-022.jpg",
+        "selection": 2,
+        "removedForeignPixels": 520,
+        "oldSourcePixelsWithinValidatedCaptionOrOrnament": 0
+      }
+    ],
+    "allPriorArtworkOutsideProvenNewSourceAndSpeechPreserved": true,
+    "finalNativeCanvases": 8,
+    "newSelectionsReachable": 3,
+    "newDisplayedOverlapPixels": 0
+  },
+  "freshDetector": {
+    "passed": true,
+    "targets": [
+      {
+        "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-016.jpg",
+        "sourceBytes": 1854054,
+        "selectionCount": 2,
+        "originalDescriptorsPreserved": true
+      },
+      {
+        "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-021.jpg",
+        "sourceBytes": 2006582,
+        "selectionCount": 2,
+        "originalDescriptorsPreserved": true
+      },
+      {
+        "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-022.jpg",
+        "sourceBytes": 1989833,
+        "selectionCount": 4,
+        "originalDescriptorsPreserved": true
+      }
+    ]
+  },
+  "finalSupplementaryReplays": {
+    "pages": 312,
+    "sourceComparisons": [
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": []
+      },
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 220,
+        "finalSelections": 223,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-016.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                10,
+                13,
+                585,
+                900
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-021.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                422,
+                585,
+                900
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-022.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                18,
+                0,
+                576,
+                449
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          }
+        ]
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": []
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 389,
+        "finalSelections": 389,
+        "additions": []
+      }
+    ],
+    "displayComparisons": "running",
+    "olderFullCorpusDetectorRerun": false,
+    "scope": "New supplementary detector on original rasters using all retained prior source descriptors; earlier-versus-final Reader display masks across 312 pages; three full changed-page fresh detector replays. The complete older detector was not replayed across all 312 pages."
+  },
+  "publication": "pending",
+  "androidBuild": "pending",
+  "phoneAcceptance": "pending"
+}
