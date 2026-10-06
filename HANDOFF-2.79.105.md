@@ -1,0 +1,17 @@
+# Test105 / 2.79.105 — two fight originals
+
+6 October 2026. Repository bdredenbach/Nth-Shelf, branch Test_Branch.
+
+Brad phone-confirmed Test104 at **200/384, 184 remaining** on 6 October 2026. Test105 locally completes two more unique original frames: **202/384, 182 remaining**, 190 selections, 176 credited groups. Issue totals:42/99,55/97,65/109,40/79. Test105 phone acceptance is pending; timing is unmeasured.
+
+Phone target: **Apocalypse issue1, Reader page13**, new **selection2**. One new group contains two complete originals: central sword-fight and lower-left attack. Check the full central dialogue, fighters, crossing foreground shoulder and sword; the lower-left attack must keep both balloon bodies, fighters, weapons and SHAK lettering. Tap either scene to open this group. The upper-left attacker portrait is only a fragment and adds zero. The top horizontal attack remains missing. Original selection1 preserves the complete bottom-right pair. Page coverage advances2/6 to4/6. Install separate **Nth Shelf Test105**.
+
+Generic append-only paper continuation route: independent erosion radii4/6 agree within0.2%; broad source contour has exterior paper/ink support on every side and no earlier source-owner overlap. Internal scene boundaries remain visible. Reader evaluates earlier masks in their original context and subtracts their displayed pixels from the appended group. Proof52 differs from prior proof51. No title/page/text/image/fingerprint lookup. Private source artwork stays outside git/CI.
+
+Continue **two complete original frames per handoff**. Count each unique complete original once, including originals inside larger groups; fragments and duplicates add zero. Group usability is separate from coverage. Preserve accepted owners. Issue1 Reader13 top horizontal attack and complete upper-left portrait remain queued; issue1 Reader18 right dialogue strip and clipped En portrait remain queued; issue4 Reader18 S3 foreground needs ownership review. Publication and isolated APK authorization persist.
+
+Local validation:111 behavioral suites plus cache/package/syntax passed. All312 retained Test104 discovery maps are compared against the same original rasters and Test104 modules:1,287 earlier displayed masks unchanged; exactly one new group yields1,288 selections. All91 Apocalypse and221 control pages receive final Reader comparisons. Twenty-four earlier native Reader canvases remain byte-identical; all25 control/new selections are reachable, and the new crop has zero earlier displayed-owner overlap. Fresh full detection reproduces the changed two-selection page. Wolverine, Magneto and all three manga chapters are unchanged. No complete-corpus rerun of the older underlying detector is claimed. Android build/verification is pending.
+
+Source archive IDs: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit:libfile_d4c4ca46cd08819192cd7f9617d6f115;notes:libfile_58fed3b235688191ac7e4fec84517824.
+
+Scratch checkpoint:/workspace/scratch/9de482359b6f/Nth-Shelf-Test105;checks/corpus:/workspace/scratch/9de482359b6f/test105;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read TEST105-VALIDATION.json for identities and saved-file IDs.

@@ -1,0 +1,56 @@
+{
+  "version": "2.79.105",
+  "baseline": {
+    "version": "Test104",
+    "completeFrames": 200,
+    "phoneAccepted": true,
+    "date": "2026-10-06"
+  },
+  "localCompleteFrames": 202,
+  "originalFrames": 384,
+  "remainingFrames": 182,
+  "rawSelections": 190,
+  "creditedGroups": 176,
+  "phoneTest105": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 42,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 55,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 65,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 40,
+      "total": 79
+    }
+  ],
+  "countingRule": "Each unique complete original once, including originals inside groups; fragments and duplicates add zero.",
+  "changes": [
+    {
+      "issue": 1,
+      "readerPage": 13,
+      "selection": 2,
+      "frames": 2,
+      "description": "Complete central sword-fight and lower-left attack in one new source-backed group. Partial upper-left attacker portrait adds zero."
+    }
+  ],
+  "pageCompleteBefore": 2,
+  "pageCompleteAfter": 4,
+  "originalSelectionsUnchanged": true,
+  "futureIdeas": [
+    "Issue1 Reader13 top horizontal attack remains missing.",
+    "Issue1 Reader13 upper-left portrait is incomplete; do not count its fragment.",
+    "Issue1 Reader18 right dialogue strip and clipped En portrait remain queued.",
+    "Issue4 Reader18 S3 foreground ownership review remains queued."
+  ]
+}

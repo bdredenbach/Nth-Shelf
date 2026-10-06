@@ -3350,3 +3350,5 @@ if(typeof PanelSplitCellCompletion!=='undefined')PanelSplitCellCompletion.instal
 if(typeof PanelLateralCellCompletion!=="undefined")PanelLateralCellCompletion.installReader(Reader);
 
 if(typeof PanelLandscapeUpperGroups!=="undefined")PanelLandscapeUpperGroups.installReader(Reader);
+
+if(typeof PanelPaperContinuationGroups!=="undefined")PanelPaperContinuationGroups.installReader(Reader);

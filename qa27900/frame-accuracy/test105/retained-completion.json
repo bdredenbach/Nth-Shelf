@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "behavioralSuites": 111,
+  "cachePackageContract": true,
+  "syntax": true,
+  "finalReaderSuiteSeen": true,
+  "harness": "Passed retained prefix through Test79 plus individually captured remaining suites; original shell runner stopped advancing after passed prefix."
+}
