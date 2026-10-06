@@ -2,7 +2,7 @@
 
 ## Test113 — nine more complete originals, 6 October 2026
 
-Brad phone-confirmed Test112 at264/384. Test113 recovers nine complete originals in two broad page-spanning groups: issue3 Reader8 S1(+5) and issue4 Reader11 S1(+4), yielding273/384 locally,111 remaining,225 selections. Generic source enclosure evidence on previously unselected pages retains all internal borders, white speech and peripheral artwork. Groups are larger than individual panels; grouping usability is separate from original coverage. Test113 phone acceptance and timing remain pending. [Handoff](HANDOFF-2.79.113.md), [frame delta](docs/apocalypse-test113-delta.json), [validation](TEST113-VALIDATION.json).
+Brad phone-confirmed Test112 at264/384. Test113 recovers nine complete originals in two broad page-spanning groups: issue3 Reader8 S1(+5) and issue4 Reader11 S1(+4), yielding273/384 locally,111 remaining,225 selections. Generic source enclosure evidence on previously unselected pages retains all internal borders, white speech and peripheral artwork. Groups are larger than individual panels; grouping usability is separate from original coverage. Test113 phone acceptance and timing remain pending. [Handoff](HANDOFF-2.79.113.md), [frame delta](docs/apocalypse-test113-delta.json), [validation](TEST113-VALIDATION.json). All129 retained suites and312 original-source/Reader comparisons pass; all1,322 earlier descriptors and masks are unchanged. Both new groups reproduce through full detector replay and native Reader crops, with zero new displayed overlap. Android run37533421774 succeeded; the downloaded APK identity, actual v2 signer and all113 packaged web files match source7e56c9afe52f475d18a01444e3ae84087322b330.
 
 ## Test110 — nine additional frame credits,6 October2026
 

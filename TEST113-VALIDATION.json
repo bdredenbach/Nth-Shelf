@@ -69,8 +69,9 @@
   },
   "phoneAcceptance": "pending",
   "retainedChecks": {
-    "status": "running",
-    "requiredBehavioralSuites": 129
+    "passed": true,
+    "behavioralSuites": 129,
+    "cachePackageAndSyntax": "passed"
   },
   "nativeReaderInvariants": {
     "passed": true,
@@ -260,9 +261,58 @@
       }
     ],
     "olderFullCorpusDetectorRerun": false,
-    "scope": "New supplementary detector on all312 original rasters using all retained prior descriptors; full earlier-versus-final Reader display comparison on all312 pages; two full changed-page fresh detector replays. The complete older detector was not rerun over the entire corpus.",
+    "scope": "New supplementary detector on all312 original rasters using all retained prior descriptors; full earlier-versus-final Reader display comparisons on all312 pages; two full changed-page fresh detector replays. The complete older detector was not rerun over the entire corpus.",
     "status": "passed",
     "priorSourceDescriptorsRetained": true,
     "priorDisplayMasksUnchanged": true
+  },
+  "publication": {
+    "sourceCommit": "7e56c9afe52f475d18a01444e3ae84087322b330",
+    "testedTree": "34e2b14c5fad19afc3170d923041f9d57c91cca6",
+    "publishedTreeMatchesLocalTree": true,
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "success",
+    "runId": 37533421774,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37533421774",
+    "sourceCommit": "7e56c9afe52f475d18a01444e3ae84087322b330",
+    "artifactId": 11445089649,
+    "artifactName": "Nth-Shelf-2.79.113-Test113",
+    "artifactSha256": "e08727100f30bdcecddf57361725b1e999689f736b64d39cbb90842184abc2b9",
+    "downloadVerification": {
+      "passed": true,
+      "apkSha256": "99fdd2b3da73999c875970c45a904c7973108dc978aa7727bf8bfa776babd990",
+      "apkBytes": 3539199,
+      "sourceCommit": "7e56c9afe52f475d18a01444e3ae84087322b330",
+      "verifiedPackagedWebFiles": 113,
+      "actualCompiledManifest": {
+        "package": "io.github.bdredenbach.nthshelf.frametest113",
+        "versionName": "2.79.113",
+        "versionCode": 28041
+      },
+      "actualLabel": "Nth Shelf Test113",
+      "actualSignerCertificateSha256": "a38c7187da28ee1ce0dd98dfa380ef97dbe874c0a8287534f395ffe1c003b510",
+      "actualSignerCertificateMatchesCiRecord": true,
+      "signingScheme": "APK v2, one CI debug signer",
+      "ciSignatureVerificationPassed": true,
+      "allPackagedBytesMatchTestedSource": true
+    },
+    "ciChecks": {
+      "retained": {
+        "passed": true,
+        "behavioralSuites": 129,
+        "cachePackageAndSyntax": "passed"
+      },
+      "browserInteractionsAndBackupRoundTrip": "passed",
+      "nativeStreamingArchive": "passed",
+      "signatureIdentityAndPackagedWebFiles": "passed"
+    },
+    "nonRuntimeMetadataNote": "Final handoff and validation records are published after the APK source commit. Packaged runtime bytes exactly match the tested source commit."
+  },
+  "savedFiles": {
+    "frameReview": "libfile_f1fe60ebabf48191996d3d03a1893f7f",
+    "newChatHandoff": "libfile_cdfbc71814048191820512457bf2f8a2",
+    "apk": "libfile_1b1ba1fcce4081918f4f363e028e360c"
   }
 }
