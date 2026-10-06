@@ -291,10 +291,18 @@
     ]
   },
   "publication": {
-    "status": "pending"
+    "status": "published",
+    "branch": "Test_Branch",
+    "sourceCommit": "643fe6b220d20629a2f19a8c81dd0a5ba5d2a088",
+    "testedLocalCommit": "380bf31b1eabdc11d5f3ded2f672c2efee866cf5",
+    "testedTree": "3bc5a4bcbe3f76b6ca0755caa4647ce798367b49",
+    "publishedTreeMatchesTestedTree": true
   },
   "androidBuild": {
-    "status": "pending"
+    "status": "running",
+    "runId": 37517552313,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37517552313",
+    "sourceCommit": "643fe6b220d20629a2f19a8c81dd0a5ba5d2a088"
   },
   "phoneAcceptance": "pending"
 }
