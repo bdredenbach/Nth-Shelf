@@ -1,0 +1,144 @@
+{
+  "version": "2.79.99",
+  "versionCode": 28027,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest99",
+  "label": "Nth Shelf Test99",
+  "baseline": "Phone-confirmed Test98 192/384, 192 remaining",
+  "cropReview": {
+    "version": "2.79.99",
+    "baseline": {
+      "version": "Test98",
+      "completeFrames": 192,
+      "phoneAccepted": true
+    },
+    "localCompleteFrames": 193,
+    "originalFrames": 384,
+    "remainingFrames": 191,
+    "rawSelections": 186,
+    "creditedGroups": 170,
+    "phoneTest99": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 36,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 54,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 63,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 40,
+        "total": 79
+      }
+    ],
+    "countingRule": "Each unique complete original frame once; clipped and duplicate fragments count zero. Dual crops count two; larger crops count each complete original frame.",
+    "change": {
+      "issue": 3,
+      "readerPage": 13,
+      "selection": 1,
+      "beforeComplete": false,
+      "afterComplete": true,
+      "pageCompleteBefore": 3,
+      "pageCompleteAfter": 4,
+      "addedDisplayAnalysisPixels": 4582,
+      "removedDisplayAnalysisPixels": 0,
+      "foreignSpeechRemovedFromSelection2": 917,
+      "description": "The upper-left En portrait keeps the whole enclosed flirting / Osiris balloon chain and lettering."
+    },
+    "detectorDescriptors": "unchanged; Reader-only enclosed short-tail ownership between neighboring proven columns",
+    "neighborCanvases": "Eight actual canvases on the two checked pages are byte-identical to Test98. S2 loses only foreign balloon pixels and remains incomplete. Artwork outside the transferred balloon is unchanged.",
+    "queueBasis": "Test95 audit, excluding issue4 Reader5 S2, Reader20 S1, Reader18 S4 and issue3 Reader13 S1.",
+    "futureIdeas": [
+      "Issue3 Reader13 S2 jagged speech has a larger tail fraction and needs independent ownership evidence; do not loosen the short-tail gate globally.",
+      "Issue3 Reader13 action-row artwork and its false S6 fragment still need enclosure/identity repair.",
+      "Issue4 Reader18 S3 foreground artwork remains incomplete.",
+      "SWAK and missing ink-frame scenes remain incomplete."
+    ]
+  },
+  "corpus": {
+    "status": "passed",
+    "scope": "Fresh native source-raster Reader display masks compared against Test98 for all saved descriptors; discovery code unchanged, no full detector replay claimed.",
+    "pages": 312,
+    "selections": 1284,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "selections": 186,
+        "changes": [
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-012.jpg",
+            "id": 1,
+            "added": 4582,
+            "lost": 0
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-012.jpg",
+            "id": 2,
+            "added": 0,
+            "lost": 917
+          }
+        ]
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "selections": 388,
+        "changes": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "selections": 101,
+        "changes": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "selections": 228,
+        "changes": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "selections": 193,
+        "changes": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "selections": 188,
+        "changes": []
+      }
+    ]
+  },
+  "localChecks": {
+    "status": "passed",
+    "actualTargetReaderCrops": 10,
+    "allTargetSelectionsReachable": true,
+    "eightTargetCanvasesByteIdentical": true,
+    "artworkOutsideSpeechBodyUnchanged": true,
+    "sourceArtworkUploaded": false,
+    "phoneTiming": "unmeasured",
+    "behavioralSuiteCount": 99,
+    "cachePackageAndSyntax": "passed",
+    "retainedScriptExitCode": 0,
+    "totalContractsIncludingCache": 100
+  },
+  "publication": {
+    "status": "pending",
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "phoneAcceptance": "pending"
+}
