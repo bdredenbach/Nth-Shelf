@@ -17,7 +17,7 @@
     "remainingFrames": 157,
     "rawSelections": 202,
     "creditedGroups": 188,
-    "phoneTest108": "pending",
+    "phoneTest108": "confirmed",
     "issueTotals": [
       {
         "issue": 1,
@@ -244,7 +244,7 @@
     "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37504895502",
     "sourceCommit": "26d5c7975aab146e9840759e0ceeddb2fdbdc6b6"
   },
-  "phoneAcceptance": "pending",
+  "phoneAcceptance": "confirmed by Brad on 2026-10-06:227/384,157 remaining",
   "savedDeliverables": [
     {
       "local_path": "/workspace/scratch/23ca29e5ae64/test108/deliverables/Nth-Shelf-Test108-Frame-Review.html",
