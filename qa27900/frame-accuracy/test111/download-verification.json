@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "apkSha256": "cecfe2389183a916716e4c397fb6279772d573f88a0261e23671d74f7f6c0284",
+  "apkBytes": 3528251,
+  "sourceCommit": "30adc110e6efe4506fab7156f6fd1e332dc1bf6d",
+  "verifiedPackagedWebFiles": 111,
+  "actualCompiledManifest": {
+    "package": "io.github.bdredenbach.nthshelf.frametest111",
+    "versionName": "2.79.111",
+    "versionCode": 28039
+  },
+  "actualLabel": "Nth Shelf Test111",
+  "actualSignerCertificateSha256": "888bb1047306e0530138de65adaea66c8e55f7a251c6c8ca16863fd86d336529",
+  "actualSignerCertificateMatchesCiRecord": true,
+  "signingScheme": "APK v2, one CI debug signer",
+  "ciSignatureVerificationPassed": true,
+  "allPackagedBytesMatchTestedSource": true
+}

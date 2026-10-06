@@ -147,7 +147,7 @@ jobs:
           }
           (root / 'dist/BUILD.json').write_text(json.dumps(record, indent=2)+'\n')
           (root / 'dist/Nth-Shelf-2.79.111-Test111.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.111-Test111.apk\n')
-          (root / 'dist/INSTALL.txt').write_text('Install separate Nth Shelf Test111. Issue2 Reader22 S2: four complete originals. Issue3 Reader10 S2: two originals, including the full MANKIND balloon; S3: narrow SFX and lower action, two originals. Issue4 Reader18 S3: one unchanged audit correction; compare lower foreground. Eight new recoveries plus one audit credit yield locally246/384,138 remaining. Test109/Test111 phone pending; last explicit phone acceptance Test108227/384. Reader numbers include covers.\n')
+          (root / 'dist/INSTALL.txt').write_text('Install separate Nth Shelf Test111. Review issue1 Reader3 S2 and Reader24 S1; issue2 Reader18 S3/S4 and Reader21 S1; issue3 Reader5 S6/S7; issue4 Reader8 S1 and Reader12 S3. Nine complete original recoveries yield locally255/384,129 remaining. Issue3 Reader5 S7 credits only the complete Nur portrait; adjoining goddess head/halo remains clipped and adds zero. Reader numbers include covers. Test111 phone acceptance and timing pending.\n')
           print(json.dumps({'sourceCommit': record['sourceCommit'], 'verifiedWebAssetCount': len(hashes), 'apkSha256': digest}, indent=2))
           PY
           cp "$APK" dist/Nth-Shelf-2.79.111-Test111.apk

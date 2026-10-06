@@ -1,0 +1,15 @@
+Actual browser scroll travel: [{"mode":"scroll","multiplier":0.33,"seconds":1.1001000000000931,"distance":13},{"mode":"scroll","multiplier":0.4,"seconds":1.1002999999999301,"distance":16},{"mode":"scroll","multiplier":0.5,"seconds":1.1002000000000698,"distance":20},{"mode":"manga","multiplier":0.33,"seconds":1.1002000000000698,"distance":14},{"mode":"manga","multiplier":0.4,"seconds":1.1001999999999534,"distance":17},{"mode":"manga","multiplier":0.5,"seconds":1.1000999999999768,"distance":21},{"mode":"webcomic","multiplier":0.33,"seconds":1.1000999999999768,"distance":13},{"mode":"webcomic","multiplier":0.4,"seconds":1.1000999999999768,"distance":16},{"mode":"webcomic","multiplier":0.5,"seconds":1.1001999999999534,"distance":20}]
+{
+  "pageDeck": "next/previous passed",
+  "pinch": "single and two-page passed",
+  "nativeFullscreen": "entry and exit requested",
+  "guides": "first use and shelf passed",
+  "restoredComics": 2,
+  "verifiedPages": 8,
+  "collectionFiles": [
+    "001-Issue 0.cbz",
+    "002-Issue 1.cbz"
+  ],
+  "invalidRestore": "rejected before commit",
+  "errors": []
+}

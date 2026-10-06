@@ -510,10 +510,47 @@
     "branch": "Test_Branch"
   },
   "androidBuild": {
-    "status": "in progress",
+    "status": "success",
     "runId": 37522692617,
     "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37522692617",
-    "sourceCommit": "30adc110e6efe4506fab7156f6fd1e332dc1bf6d"
+    "sourceCommit": "30adc110e6efe4506fab7156f6fd1e332dc1bf6d",
+    "artifactId": 11441144500,
+    "artifactName": "Nth-Shelf-2.79.111-Test111",
+    "artifactSha256": "86df2d390ecd65028f5f83d991490301fc38c4118e916f9fac13a9603b04fd5c",
+    "downloadVerification": {
+      "passed": true,
+      "apkSha256": "cecfe2389183a916716e4c397fb6279772d573f88a0261e23671d74f7f6c0284",
+      "apkBytes": 3528251,
+      "sourceCommit": "30adc110e6efe4506fab7156f6fd1e332dc1bf6d",
+      "verifiedPackagedWebFiles": 111,
+      "actualCompiledManifest": {
+        "package": "io.github.bdredenbach.nthshelf.frametest111",
+        "versionName": "2.79.111",
+        "versionCode": 28039
+      },
+      "actualLabel": "Nth Shelf Test111",
+      "actualSignerCertificateSha256": "888bb1047306e0530138de65adaea66c8e55f7a251c6c8ca16863fd86d336529",
+      "actualSignerCertificateMatchesCiRecord": true,
+      "signingScheme": "APK v2, one CI debug signer",
+      "ciSignatureVerificationPassed": true,
+      "allPackagedBytesMatchTestedSource": true
+    },
+    "ciChecks": {
+      "retained": {
+        "passed": true,
+        "behavioralSuites": 124,
+        "cachePackageAndSyntax": "passed"
+      },
+      "browserInteractionsAndBackupRoundTrip": "passed",
+      "nativeStreamingArchive": "passed",
+      "signatureIdentityAndPackagedWebFiles": "passed"
+    },
+    "nonRuntimeMetadataNote": "Post-source metadata corrects the source-contract output label, moves completion reporting after the final two suites, and updates INSTALL instructions. Runtime web bytes remain exactly those built from sourceCommit. Original CI INSTALL instructions reflect earlier Test110 targets; use the current handoff and frame review."
   },
-  "phoneAcceptance": "pending"
+  "phoneAcceptance": "pending",
+  "savedFiles": {
+    "apk": "libfile_bc5cf74b9e1c8191b3cbf1e2bcd53ed9",
+    "frameReview": "libfile_e3ea27390d8881919a55040a843d6337",
+    "newChatHandoff": "libfile_d64462c45ad0819181ddb1ddaa0e99de"
+  }
 }

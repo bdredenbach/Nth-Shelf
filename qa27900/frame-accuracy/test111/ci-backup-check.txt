@@ -1,0 +1,1 @@
+{"backup":"whole original CBZ + rebuilt CBZ","binary":"two bounded in-flight chunks, exact bytes","warm":"zero page/source bytes cross bridge","restore":"v3 and legacy v2, metadata + page byte parity","failure":"rollback","cancel":"rollback","interrupted":"startup cleanup"}
