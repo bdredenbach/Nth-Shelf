@@ -76,8 +76,9 @@
     ]
   },
   "retainedChecks": {
-    "status": "running",
-    "behavioralSuites": 127
+    "passed": true,
+    "behavioralSuites": 127,
+    "cachePackageAndSyntax": "passed"
   },
   "nativeReaderInvariants": {
     "passed": true,
@@ -223,11 +224,138 @@
         "additions": []
       }
     ],
-    "displayComparisons": "running",
+    "displayComparisons": [
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 220,
+        "finalSelections": 223,
+        "changes": [
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-021.jpg",
+            "id": 1,
+            "added": 0,
+            "lost": 4326,
+            "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-022.jpg",
+            "id": 1,
+            "added": 0,
+            "lost": 3895,
+            "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-022.jpg",
+            "id": 2,
+            "added": 0,
+            "lost": 520,
+            "lossesOnlyProvenNewSourceOrEnclosedSpeech": true
+          }
+        ],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 389,
+        "finalSelections": 389,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      }
+    ],
     "olderFullCorpusDetectorRerun": false,
-    "scope": "New supplementary detector on original rasters using all retained prior source descriptors; earlier-versus-final Reader display masks across 312 pages; three full changed-page fresh detector replays. The complete older detector was not replayed across all 312 pages."
+    "scope": "New supplementary detector on original rasters using all retained prior source descriptors; earlier-versus-final Reader display masks across 312 pages; three full changed-page fresh detector replays. The complete older detector was not replayed across all 312 pages.",
+    "status": "passed",
+    "priorSourceDescriptorsRetained": true,
+    "priorOwnArtworkPreservedOutsideReviewedForeignOwnershipCorrections": true
   },
-  "publication": "pending",
-  "androidBuild": "pending",
-  "phoneAcceptance": "pending"
+  "publication": {
+    "sourceCommit": "246e7957618afee7203df292ef917e0383caf29a",
+    "testedTree": "32e51ccd1704db802df9a9d37f609c90aef800d3",
+    "publishedTreeMatchesLocalTree": true,
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "success",
+    "runId": 37528757317,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37528757317",
+    "sourceCommit": "246e7957618afee7203df292ef917e0383caf29a",
+    "artifactId": 11444176173,
+    "artifactName": "Nth-Shelf-2.79.112-Test112",
+    "artifactSha256": "38b59544426dc81738862d885d253370761b96208351424d06a37a71d806f0d1",
+    "downloadVerification": {
+      "passed": true,
+      "apkSha256": "eb33dacf108495dde6d6eb5f989be0effaa78040d666a2d0753a619912fa08b7",
+      "apkBytes": 3535304,
+      "sourceCommit": "246e7957618afee7203df292ef917e0383caf29a",
+      "verifiedPackagedWebFiles": 112,
+      "actualCompiledManifest": {
+        "package": "io.github.bdredenbach.nthshelf.frametest112",
+        "versionName": "2.79.112",
+        "versionCode": 28040
+      },
+      "actualLabel": "Nth Shelf Test112",
+      "actualSignerCertificateSha256": "6a0b32c6bfe1901b40516a85134f6108525e4960c93a74c746ce42384472a11a",
+      "actualSignerCertificateMatchesCiRecord": true,
+      "signingScheme": "APK v2, one CI debug signer",
+      "ciSignatureVerificationPassed": true,
+      "allPackagedBytesMatchTestedSource": true
+    },
+    "ciChecks": {
+      "retained": {
+        "passed": true,
+        "behavioralSuites": 127,
+        "cachePackageAndSyntax": "passed"
+      },
+      "browserInteractionsAndBackupRoundTrip": "passed",
+      "nativeStreamingArchive": "passed",
+      "signatureIdentityAndPackagedWebFiles": "passed"
+    },
+    "nonRuntimeMetadataNote": "Final handoff and validation records are published after the APK source commit. Packaged runtime bytes exactly match the tested source commit."
+  },
+  "phoneAcceptance": "pending",
+  "savedFiles": {
+    "apk": "libfile_59b281767ecc8191aa0c980c0fa24242",
+    "frameReview": "libfile_4d35bdffdad08191bc97295d687cbe90",
+    "newChatHandoff": "libfile_2a1947494e3c81918f725b1e410eadd5"
+  }
 }
