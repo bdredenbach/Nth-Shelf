@@ -1,0 +1,241 @@
+{
+  "version": "2.79.108",
+  "versionCode": 28036,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest108",
+  "label": "Nth Shelf Test108",
+  "baseline": "Phone-confirmed Test107:217/384,167 remaining",
+  "cropReview": {
+    "version": "2.79.108",
+    "baseline": {
+      "version": "Test107",
+      "completeFrames": 217,
+      "phoneAccepted": true,
+      "date": "2026-10-06"
+    },
+    "localCompleteFrames": 227,
+    "originalFrames": 384,
+    "remainingFrames": 157,
+    "rawSelections": 202,
+    "creditedGroups": 188,
+    "phoneTest108": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 60,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 62,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 65,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 40,
+        "total": 79
+      }
+    ],
+    "countingRule": "Each unique complete original once, including originals inside groups; fragments and duplicates add zero. Group usability is separate.",
+    "changes": [
+      {
+        "issue": 1,
+        "readerPage": 14,
+        "selection": 5,
+        "frames": 2,
+        "description": "Complete lower-left En and fallen Baal, plus the narrow father-conversation inset; caption and all inset balloons intact."
+      },
+      {
+        "issue": 1,
+        "readerPage": 14,
+        "selection": 6,
+        "frames": 1,
+        "description": "Complete tall lower-right Baal/totem scene, including all speech. Adjacent source owners remain exclusive."
+      },
+      {
+        "issue": 1,
+        "readerPage": 17,
+        "selection": 2,
+        "frames": 4,
+        "description": "Complete middle cavalry strip and lower Baal/cave scene with cavern and clawing-stone insets. Clipped speech fragment from earlier upper owner earns zero."
+      },
+      {
+        "issue": 2,
+        "readerPage": 4,
+        "selection": 2,
+        "frames": 3,
+        "description": "Complete middle dead-warriors strip, Ozymandias rising and underlying Ozymandias scene with all captions/balloons. Printed title, credits and copyright add zero."
+      }
+    ],
+    "originalSelectionsUnchanged": true,
+    "cadence": "Brad requested another ten complete original frames after phone-confirming217/384.",
+    "futureIdeas": [
+      "Issue1 Reader3 eye/cartouche remains incomplete: lower-right caption detached, zero credit.",
+      "Issue1 Reader13 narrow attacker portrait remains incomplete.",
+      "Issue2 Reader10 tall Nephri silhouette remains incomplete.",
+      "Issue1 Reader18 right dialogue strip and clipped En portrait remain queued.",
+      "Issue4 Reader18 S3 foreground ownership remains queued."
+    ]
+  },
+  "corpus": {
+    "status": "passed",
+    "scope": "312 certified Test107 maps evaluated on original source rasters with final Test108 supplementation and Reader comparisons. All1296 earlier displayed masks match; exactly four new Apocalypse selections. One Wolverine intermediate-map residue was replaced with the certified Test107 input and its final source/Reader row rechecked; all other baseline rows are identical to certified maps. Three changed pages also receive fresh full detector replay. No full-corpus rerun of the older underlying detector is claimed.",
+    "pages": 312,
+    "originalSelections": 1296,
+    "finalSelections": 1300,
+    "originalDisplayMasksChanged": 0,
+    "books": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 198,
+        "finalSelections": 202,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-013.jpg",
+            "count": 2,
+            "boxes": [
+              [
+                0,
+                460,
+                367,
+                900
+              ],
+              [
+                366,
+                450,
+                585,
+                900
+              ]
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-016.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                498,
+                585,
+                900
+              ]
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-003.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                176,
+                585,
+                900
+              ]
+            ]
+          }
+        ],
+        "changes": []
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 388,
+        "finalSelections": 388,
+        "additions": [],
+        "changes": [],
+        "scope": "All 74 certified Test107 maps on original rasters: 73 certified inputs identical to intermediate maps; one previously rejected achromatic candidate removed from baseline and its corrected source/display row independently replayed."
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": [],
+        "changes": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": [],
+        "changes": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": [],
+        "changes": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": [],
+        "changes": []
+      }
+    ]
+  },
+  "localChecks": {
+    "status": "passed",
+    "behavioralSuites": 117,
+    "cachePackageAndSyntax": "passed",
+    "retainedCompletion": {
+      "passed": true,
+      "behavioralSuites": 117,
+      "cachePackageContract": true,
+      "syntax": true,
+      "finalReaderSuiteSeen": true,
+      "runtimeModuleSha256": "60d45f27d92367dc63fef617d76eeb276ab4cf0fe5e9d95d7eafac58fe063a8e"
+    },
+    "actualNativeReader": {
+      "passed": true,
+      "earlierNativeCanvasesUnchanged": 6,
+      "finalNativeCanvases": 10,
+      "newSelectionsReachable": 4,
+      "newDisplayedOverlapPixels": 0
+    },
+    "freshTargetDetector": {
+      "passed": true,
+      "targets": [
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-013.jpg",
+          "sourceBytes": 1733953,
+          "selectionCount": 6,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-016.jpg",
+          "sourceBytes": 1964910,
+          "selectionCount": 2,
+          "originalDescriptorsPreserved": true
+        },
+        {
+          "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-003.jpg",
+          "sourceBytes": 2096333,
+          "selectionCount": 2,
+          "originalDescriptorsPreserved": true
+        }
+      ]
+    },
+    "sourceArtworkUploaded": false,
+    "browserIntegration": "pending CI",
+    "nativeArchive": "pending CI",
+    "phoneTiming": "unmeasured"
+  },
+  "publication": {
+    "status": "pending",
+    "branch": "Test_Branch"
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "phoneAcceptance": "pending"
+}

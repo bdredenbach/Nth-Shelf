@@ -3356,3 +3356,5 @@ if(typeof PanelPaperContinuationGroups!=="undefined")PanelPaperContinuationGroup
 if(typeof PanelWidePaperRows!=="undefined")PanelWidePaperRows.installReader(Reader);
 
 if(typeof PanelPaperEdgeGroups!=="undefined")PanelPaperEdgeGroups.installReader(Reader);
+
+if(typeof PanelTrailingEdgeGroups!=="undefined")PanelTrailingEdgeGroups.installReader(Reader);

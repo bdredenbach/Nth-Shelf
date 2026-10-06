@@ -1,0 +1,77 @@
+{
+  "version": "2.79.108",
+  "baseline": {
+    "version": "Test107",
+    "completeFrames": 217,
+    "phoneAccepted": true,
+    "date": "2026-10-06"
+  },
+  "localCompleteFrames": 227,
+  "originalFrames": 384,
+  "remainingFrames": 157,
+  "rawSelections": 202,
+  "creditedGroups": 188,
+  "phoneTest108": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 60,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 62,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 65,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 40,
+      "total": 79
+    }
+  ],
+  "countingRule": "Each unique complete original once, including originals inside groups; fragments and duplicates add zero. Group usability is separate.",
+  "changes": [
+    {
+      "issue": 1,
+      "readerPage": 14,
+      "selection": 5,
+      "frames": 2,
+      "description": "Complete lower-left En and fallen Baal, plus the narrow father-conversation inset; caption and all inset balloons intact."
+    },
+    {
+      "issue": 1,
+      "readerPage": 14,
+      "selection": 6,
+      "frames": 1,
+      "description": "Complete tall lower-right Baal/totem scene, including all speech. Adjacent source owners remain exclusive."
+    },
+    {
+      "issue": 1,
+      "readerPage": 17,
+      "selection": 2,
+      "frames": 4,
+      "description": "Complete middle cavalry strip and lower Baal/cave scene with cavern and clawing-stone insets. Clipped speech fragment from earlier upper owner earns zero."
+    },
+    {
+      "issue": 2,
+      "readerPage": 4,
+      "selection": 2,
+      "frames": 3,
+      "description": "Complete middle dead-warriors strip, Ozymandias rising and underlying Ozymandias scene with all captions/balloons. Printed title, credits and copyright add zero."
+    }
+  ],
+  "originalSelectionsUnchanged": true,
+  "cadence": "Brad requested another ten complete original frames after phone-confirming217/384.",
+  "futureIdeas": [
+    "Issue1 Reader3 eye/cartouche remains incomplete: lower-right caption detached, zero credit.",
+    "Issue1 Reader13 narrow attacker portrait remains incomplete.",
+    "Issue2 Reader10 tall Nephri silhouette remains incomplete.",
+    "Issue1 Reader18 right dialogue strip and clipped En portrait remain queued.",
+    "Issue4 Reader18 S3 foreground ownership remains queued."
+  ]
+}
