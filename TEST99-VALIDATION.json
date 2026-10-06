@@ -131,14 +131,78 @@
     "behavioralSuiteCount": 99,
     "cachePackageAndSyntax": "passed",
     "retainedScriptExitCode": 0,
-    "totalContractsIncludingCache": 100
+    "totalContractsIncludingCache": 100,
+    "nativeArchiveAndBrowserIntegration": "passed in CI"
   },
   "publication": {
-    "status": "pending",
-    "branch": "Test_Branch"
+    "status": "published",
+    "branch": "Test_Branch",
+    "sourceCommit": "bf588874bd17f05a85c2e50303d8987538c85cdb",
+    "testedLocalCommit": "661e644221bb7d832152b293e1486831d44b42dd",
+    "testedTree": "54607ae1993c908f7b7c60467d19023a8bb07e79",
+    "exactTreeMatch": true
   },
   "androidBuild": {
-    "status": "pending"
+    "status": "success",
+    "runId": 37396911201,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37396911201",
+    "jobId": 112054948344,
+    "artifactId": 11384350187,
+    "downloadVerification": {
+      "passed": true,
+      "apkSha256": "009bf4e02591b5b0813a2e500a418accacae2589d15def23c33b6881c1cd4b72",
+      "apkBytes": 3474649,
+      "sourceCommit": "bf588874bd17f05a85c2e50303d8987538c85cdb",
+      "verifiedPackagedWebFiles": 99,
+      "actualCompiledManifest": {
+        "package": "io.github.bdredenbach.nthshelf.frametest99",
+        "versionName": "2.79.99",
+        "versionCode": 28027
+      },
+      "actualLabel": "Nth Shelf Test99",
+      "actualSignerCertificateSha256": "adc103910013450f9fa08e8b31da2d356824da809d1ba02405a9b7ad47d9ad16",
+      "actualSignerCertificateMatchesCiRecord": true,
+      "signingScheme": "APK v2, one CI debug signer",
+      "ciSignatureVerificationPassed": true,
+      "allPackagedBytesMatchTestedSource": true,
+      "artifactId": 11384350187,
+      "artifactSha256": "7f132c2a1cb39204a5dfdd668d26808acaefa254eda773dc037a14cd54d4c0ff",
+      "downloadedApkMatchesCiChecksum": true
+    },
+    "checks": [
+      "99 behavioral suites plus cache/package and syntax checks",
+      "Browser interaction and backup round trip",
+      "Native streaming archive regression",
+      "Android compilation",
+      "APK signature and isolated compiled identity",
+      "99 exact packaged web files"
+    ]
   },
-  "phoneAcceptance": "pending"
+  "phoneAcceptance": "pending",
+  "savedDeliverables": {
+    "status": "saved",
+    "files": [
+      {
+        "local_path": "/workspace/scratch/c32b118d688a/test99/deliverables/Nth-Shelf-Test99-Frame-Review.html",
+        "library_file_id": "libfile_817a1ec118f88191a32664f94304e3e1",
+        "file_id": "file_00000000014c81f591c2467a0f39a854",
+        "file_name": "Nth-Shelf-Test99-Frame-Review.html",
+        "current_version_number": 0
+      },
+      {
+        "local_path": "/workspace/scratch/c32b118d688a/test99/deliverables/Nth-Shelf-2.79.99-Test99.apk",
+        "library_file_id": "libfile_8fab830b29d48191862661fffd2aa351",
+        "file_id": "file_00000000157481f5b18940251205cd57",
+        "file_name": "Nth-Shelf-2.79.99-Test99.apk",
+        "current_version_number": 0
+      },
+      {
+        "local_path": "/workspace/scratch/c32b118d688a/test99/deliverables/Nth-Shelf-Test99-New-Chat-Handoff.txt",
+        "library_file_id": "libfile_240d2827c72c8191ac1678a69a1ebefa",
+        "file_id": "file_00000000a31481f5b139accff24d37ec",
+        "file_name": "Nth-Shelf-Test99-New-Chat-Handoff.txt",
+        "current_version_number": 0
+      }
+    ]
+  }
 }
