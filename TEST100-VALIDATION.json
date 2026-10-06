@@ -134,16 +134,80 @@
     "sourceArtworkUploadedToGitOrCi": false,
     "browserIntegration": {
       "local": "Launch unavailable: no installed Chromium executable",
-      "ci": "required before APK verification"
+      "ci": "passed"
     },
-    "corpusExecution": "Independent source comparisons; the initial sequential runner was stopped after its first four books completed, and the final two manga chapters run separately."
+    "corpusExecution": "Independent source comparisons; the initial sequential runner was stopped after its first four books completed, and the final two manga chapters run separately.",
+    "nativeArchiveAndBrowserIntegration": "passed in CI"
   },
   "publication": {
-    "status": "pending",
-    "branch": "Test_Branch"
+    "status": "published",
+    "branch": "Test_Branch",
+    "sourceCommit": "177ed19bed8378de6c5f8d775110a27253368466",
+    "testedLocalCommit": "aa813af9aae133d8be56c445d4eead84462d6c65",
+    "testedTree": "90427bc460bf4d5f532dad3bb86acc90e27f5c91",
+    "exactTreeMatch": true
   },
   "androidBuild": {
-    "status": "pending"
+    "status": "success",
+    "runId": 37403679715,
+    "url": "https://github.com/bdredenbach/Nth-Shelf/actions/runs/37403679715",
+    "jobId": 112076334381,
+    "downloadVerification": {
+      "passed": true,
+      "apkSha256": "2fba0be2ba4f5c74e0082f07e9a6c72a785e3cad7317541a724f65e6444291b7",
+      "apkBytes": 3475021,
+      "sourceCommit": "177ed19bed8378de6c5f8d775110a27253368466",
+      "verifiedPackagedWebFiles": 99,
+      "actualCompiledManifest": {
+        "package": "io.github.bdredenbach.nthshelf.frametest100",
+        "versionName": "2.79.100",
+        "versionCode": 28028
+      },
+      "actualLabel": "Nth Shelf Test100",
+      "actualSignerCertificateSha256": "300c3b469334a0b151bd09cdccbb47972a4fd77e6904f9b11fcf74e1a2f84357",
+      "actualSignerCertificateMatchesCiRecord": true,
+      "signingScheme": "APK v2, one CI debug signer",
+      "ciSignatureVerificationPassed": true,
+      "allPackagedBytesMatchTestedSource": true,
+      "artifactId": 11386298258,
+      "artifactSha256": "9b093816a0154429dad6af309c431c6acec416491fa9e7c93ba03df3a3259370",
+      "downloadedApkMatchesCiChecksum": true
+    },
+    "checks": [
+      "101 behavioral suites plus cache/package and syntax",
+      "Browser interaction and backup round trip",
+      "Native streaming archive regression",
+      "Android compilation",
+      "APK signature and isolated compiled identity",
+      "99 exact packaged web files"
+    ],
+    "artifactId": 11386298258
   },
-  "phoneAcceptance": "pending"
+  "phoneAcceptance": "pending",
+  "savedDeliverables": {
+    "status": "saved",
+    "files": [
+      {
+        "local_path": "/workspace/scratch/94949de4a9ed/test100/deliverables/Nth-Shelf-Test100-Frame-Review.html",
+        "library_file_id": "libfile_529ddd371e888191a16f8610a170a8a4",
+        "file_id": "file_00000000d73481f4a5b287abee91bf7d",
+        "file_name": "Nth-Shelf-Test100-Frame-Review.html",
+        "current_version_number": 0
+      },
+      {
+        "local_path": "/workspace/scratch/94949de4a9ed/test100/deliverables/Nth-Shelf-2.79.100-Test100.apk",
+        "library_file_id": "libfile_a7bb591fb6dc8191a8c2e6a903a154a9",
+        "file_id": "file_00000000915c820eb7bcfd6f7c0aae3b",
+        "file_name": "Nth-Shelf-2.79.100-Test100.apk",
+        "current_version_number": 0
+      },
+      {
+        "local_path": "/workspace/scratch/94949de4a9ed/test100/deliverables/Nth-Shelf-Test100-New-Chat-Handoff.txt",
+        "library_file_id": "libfile_e801e29fa7dc8191a4f14f63642281a9",
+        "file_id": "file_000000007b14822f85fc4828d0a66983",
+        "file_name": "Nth-Shelf-Test100-New-Chat-Handoff.txt",
+        "current_version_number": 0
+      }
+    ]
+  }
 }
