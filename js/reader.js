@@ -3372,3 +3372,5 @@ if(typeof PanelGradientResidualGroups!=="undefined")PanelGradientResidualGroups.
 
 if(typeof PanelColorEnclosureGroups!=="undefined")PanelColorEnclosureGroups.installReader(Reader);
 if(typeof PanelShortRowSpeech!=="undefined")PanelShortRowSpeech.installReader(Reader);
+
+if(typeof PanelDialogueRowGroups!=="undefined")PanelDialogueRowGroups.installReader(Reader);

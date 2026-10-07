@@ -1,0 +1,319 @@
+{
+  "version": "2.79.115",
+  "versionCode": 28043,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest115",
+  "label": "Nth Shelf Test115",
+  "cropReview": {
+    "version": "2.79.115",
+    "baseline": {
+      "version": "Test114",
+      "completeFrames": 282,
+      "userNumericConfirmation": "282/384, 102 remaining, supplied in this request",
+      "groupUsabilityAndTiming": "unmeasured"
+    },
+    "localCompleteFrames": 291,
+    "originalFrames": 384,
+    "remainingFrames": 93,
+    "rawSelections": 230,
+    "newCompleteOriginals": 9,
+    "newRuntimeSelectionsInApocalypse": 3,
+    "phoneTest115": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 63,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 84,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 92,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 52,
+        "total": 79
+      }
+    ],
+    "changes": [
+      {
+        "issue": 2,
+        "readerPage": 6,
+        "selection": 1,
+        "frames": 3,
+        "type": "new three-original broad group",
+        "description": "Complete large Baal/En cave conversation, tall right En profile and lower cave departure, including all speech and thought balloons."
+      },
+      {
+        "issue": 2,
+        "readerPage": 11,
+        "selection": 1,
+        "frames": 4,
+        "type": "new four-original broad group",
+        "description": "Complete main descent/pointing scene, upper-right cave inset, middle throwing/KRAKK strip and lower machine chamber. All speech, captions, staff/arm and sound-effect lettering remain."
+      },
+      {
+        "issue": 3,
+        "readerPage": 11,
+        "selection": 6,
+        "frames": 2,
+        "type": "new four-original dialogue group; two duplicates count zero",
+        "description": "Complete upper Fantastic Four/Pharaoh court and middle-left Pharaoh/Sue conversation. The shared opening balloon chain and the whole QUEEN balloon survive. The two neighboring middle-row Logos originals are retained as context and add zero; all five earlier selections keep their earlier crops and tap priority."
+      }
+    ],
+    "countingRule": "Each unique complete original once, including originals in larger crops. Clipped originals, duplicate frames, title decorations and page numbers add zero. Group usability and individual segmentation remain separate."
+  },
+  "phoneAcceptance": "pending",
+  "newContracts": {
+    "source": {
+      "passed": true,
+      "newOwners": 3,
+      "corruptions": 46,
+      "proofRoundTrips": true,
+      "measuredSourceOverlap": true,
+      "transparentAndBlankAndUnprovenNegatives": true,
+      "priorOwnerPreserved": true,
+      "serializedSourceProofsAndBoundaryCorruption": true
+    },
+    "reader": {
+      "passed": true,
+      "oldTaps": 243,
+      "newTaps": 3153,
+      "byGroup": [
+        1521,
+        1521,
+        111
+      ],
+      "overlays": 6,
+      "earlierSelectionsAndTapPriorityPreserved": true,
+      "completeGroupContoursDisplayed": true
+    },
+    "cache": {
+      "passed": true,
+      "cache": "nth-shelf-shell-2.79.115",
+      "shellFiles": 117,
+      "horizontalPaperStrips": true,
+      "package": "frametest115"
+    }
+  },
+  "retainedChecks": {
+    "passed": true,
+    "behavioralSuites": 134,
+    "cachePackageAndSyntax": "passed"
+  },
+  "freshDetector": {
+    "passed": true,
+    "targets": [
+      {
+        "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-005.jpg",
+        "sourceBytes": 1820749,
+        "selectionCount": 1,
+        "originalDescriptorsPreserved": true
+      },
+      {
+        "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-010.jpg",
+        "sourceBytes": 2093094,
+        "selectionCount": 1,
+        "originalDescriptorsPreserved": true
+      },
+      {
+        "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-010.jpg",
+        "sourceBytes": 2398536,
+        "selectionCount": 6,
+        "originalDescriptorsPreserved": true
+      }
+    ]
+  },
+  "nativeReaderInvariants": {
+    "passed": true,
+    "nativeCanvases": 3,
+    "oldCanvasesByteIdentical": 5,
+    "results": [
+      {
+        "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-005.jpg",
+        "selection": 1,
+        "reachable": true,
+        "width": 1988,
+        "height": 2971,
+        "nativeSourceEnvelopeIdentical": true
+      },
+      {
+        "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-010.jpg",
+        "selection": 1,
+        "reachable": true,
+        "width": 1952,
+        "height": 3000,
+        "nativeSourceEnvelopeIdentical": true
+      },
+      {
+        "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-010.jpg",
+        "selection": 6,
+        "reachable": true,
+        "width": 1934,
+        "height": 1613,
+        "nativeSourceEnvelopeIdentical": true
+      }
+    ]
+  },
+  "finalSupplementaryReplays": {
+    "status": "passed",
+    "pages": 312,
+    "priorSourceDescriptors": 1326,
+    "sourceComparisons": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 227,
+        "finalSelections": 230,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-005.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                25,
+                585,
+                900
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-010.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                0,
+                585,
+                900
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-010.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                14,
+                13,
+                583,
+                488
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          }
+        ]
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 389,
+        "finalSelections": 389,
+        "additions": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": []
+      }
+    ],
+    "displayComparisons": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 227,
+        "finalSelections": 230,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 389,
+        "finalSelections": 389,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      }
+    ],
+    "scope": "New supplementary source detectors on312 original rasters with every retained descriptor; complete old-versus-new Reader display comparisons on312 pages. The full older detector is freshly replayed on the three changed pages, not on the entire corpus.",
+    "priorSourceDescriptorsRetained": true,
+    "allEarlierReaderDisplaysUnchanged": true,
+    "controlDisplaysUnchanged": true
+  },
+  "localRetainedExecution": "Retained first segment throughTest83 passed; resumed withTest115 cache/identity check and remaining suites. The Test114 cache assertion rejects the new version as expected; no older behavioral suite was skipped. CI runs the completeTest115 runner."
+}

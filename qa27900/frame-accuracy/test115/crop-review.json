@@ -1,0 +1,65 @@
+{
+  "version": "2.79.115",
+  "baseline": {
+    "version": "Test114",
+    "completeFrames": 282,
+    "userNumericConfirmation": "282/384, 102 remaining, supplied in this request",
+    "groupUsabilityAndTiming": "unmeasured"
+  },
+  "localCompleteFrames": 291,
+  "originalFrames": 384,
+  "remainingFrames": 93,
+  "rawSelections": 230,
+  "newCompleteOriginals": 9,
+  "newRuntimeSelectionsInApocalypse": 3,
+  "phoneTest115": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 63,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 84,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 92,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 52,
+      "total": 79
+    }
+  ],
+  "changes": [
+    {
+      "issue": 2,
+      "readerPage": 6,
+      "selection": 1,
+      "frames": 3,
+      "type": "new three-original broad group",
+      "description": "Complete large Baal/En cave conversation, tall right En profile and lower cave departure, including all speech and thought balloons."
+    },
+    {
+      "issue": 2,
+      "readerPage": 11,
+      "selection": 1,
+      "frames": 4,
+      "type": "new four-original broad group",
+      "description": "Complete main descent/pointing scene, upper-right cave inset, middle throwing/KRAKK strip and lower machine chamber. All speech, captions, staff/arm and sound-effect lettering remain."
+    },
+    {
+      "issue": 3,
+      "readerPage": 11,
+      "selection": 6,
+      "frames": 2,
+      "type": "new four-original dialogue group; two duplicates count zero",
+      "description": "Complete upper Fantastic Four/Pharaoh court and middle-left Pharaoh/Sue conversation. The shared opening balloon chain and the whole QUEEN balloon survive. The two neighboring middle-row Logos originals are retained as context and add zero; all five earlier selections keep their earlier crops and tap priority."
+    }
+  ],
+  "countingRule": "Each unique complete original once, including originals in larger crops. Clipped originals, duplicate frames, title decorations and page numbers add zero. Group usability and individual segmentation remain separate."
+}

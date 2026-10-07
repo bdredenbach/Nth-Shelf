@@ -1,5 +1,7 @@
 # Nth Shelf
 
+Current continuation: [Test115](HANDOFF-2.79.115.md). Brad supplied282/384 for Test114; Test115 locally reaches291/384,93 remaining. Three new groups: issue2 Reader6(+3), Reader11(+4), issue3 Reader11 S6(+2; two duplicates add zero).230 selections. Earlier descriptors and Reader crops stay unchanged; source overlap is intentional. Read TEST115-VALIDATION.json for actual validation and APK identities. Phone acceptance, group usability and timing pending.
+
 Test114 build verified: all132 retained checks,312 source/Reader comparisons, three fresh detector runs, three native crops, browser/backup/native archive and Android CI pass. Correct isolated package, APK v2 CI signature record and all115 frozen web bytes verified after download. Source af2ea6b7089eb600a569a1662e3ab94c5b8d2ec5; APK SHA2561caec8db0500344cd0dcc622410fb5dc4bb134ac77e6b74d613e4f6f5d11067e. Review and handoff are saved; see TEST114-VALIDATION.json. Phone acceptance, grouping usability and timing pending.
 
 ## Test114 — nine more complete originals
