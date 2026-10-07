@@ -1,0 +1,195 @@
+{
+  "version": "2.79.117",
+  "versionCode": 28045,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest117",
+  "label": "Nth Shelf Test117",
+  "cropReview": {
+    "version": "2.79.117",
+    "baseline": {
+      "version": "Test116",
+      "completeFrames": 300,
+      "confirmation": "local validated count; numeric phone confirmation not supplied"
+    },
+    "localCompleteFrames": 309,
+    "originalFrames": 384,
+    "remainingFrames": 75,
+    "rawSelections": 235,
+    "newCompleteOriginals": 9,
+    "newRuntimeSelectionsInApocalypse": 2,
+    "phoneTest117": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 69,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 91,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 97,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 52,
+        "total": 79
+      }
+    ],
+    "changes": [
+      {
+        "issue": 1,
+        "readerPage": 15,
+        "selection": 1,
+        "frames": 3,
+        "type": "new three-original group",
+        "description": "Complete broad camp/Pharaoh conversation and both narrow right-side portrait/conversation views. All lettering, lower figures and source edges remain."
+      },
+      {
+        "issue": 2,
+        "readerPage": 5,
+        "selection": 1,
+        "frames": 6,
+        "type": "new six-original group",
+        "description": "Three upper cave/hand views, central cave scene, tall En silhouette and lower Baal/Son/No scene. All yellow captions, balloons, fingers and source boundaries remain."
+      }
+    ],
+    "countingRule": "Each unique complete original once. Clipped originals, duplicates, decoration, covers and credits add zero. Group usability and individual segmentation are separate."
+  },
+  "phoneAcceptance": "pending",
+  "newContracts": {
+    "source": {
+      "passed": true,
+      "newOwners": 2,
+      "corruptions": 38,
+      "proofRoundTrips": true,
+      "measuredSourceOverlap": true,
+      "transparentAndBlankAndUnprovenNegatives": true,
+      "priorOwnerPreserved": true,
+      "serializedSourceProofsAndBoundaryCorruption": true
+    },
+    "reader": {
+      "passed": true,
+      "oldTaps": 0,
+      "newTaps": 3042,
+      "byGroup": [
+        1521,
+        1521
+      ],
+      "overlays": 4,
+      "earlierSelectionsAndTapPriorityPreserved": true,
+      "completeGroupContoursDisplayed": true
+    },
+    "cache": {
+      "passed": true,
+      "shellFiles": 119,
+      "cache": "nth-shelf-shell-2.79.117",
+      "package": "frametest117"
+    }
+  },
+  "retainedChecks": {
+    "passed": true,
+    "behavioralSuites": 138,
+    "cachePackageAndSyntax": "passed"
+  },
+  "freshFullBaseline": {
+    "passed": true,
+    "pages": 312,
+    "sourceDescriptors": 1332,
+    "baseline": "verified Test116 source replayed freshly on all restored original rasters"
+  },
+  "finalSupplementaryReplays": {
+    "passed": true,
+    "pages": 312,
+    "priorSourceDescriptors": 1332,
+    "allEarlierSourceDescriptorsUnchanged": true,
+    "allEarlierReaderDisplaysUnchanged": true,
+    "comparisons": [
+      {
+        "passed": true,
+        "book": "apocalypse",
+        "pages": 91,
+        "earlierDescriptors": 233,
+        "newGroups": 2,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "wolverine",
+        "pages": 74,
+        "earlierDescriptors": 389,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "magneto",
+        "pages": 24,
+        "earlierDescriptors": 101,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "earlierDescriptors": 228,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "earlierDescriptors": 193,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "earlierDescriptors": 188,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      }
+    ],
+    "scope": "New supplementary detector replayed on312 original rasters with fresh Test116 descriptors; complete old-versus-new Reader displays compared on312 pages. Full Test117 detector independently replayed on both changed pages."
+  },
+  "nativeReaderInvariants": {
+    "passed": true,
+    "nativeCanvases": 2,
+    "repeatedOverlays": 4,
+    "results": [
+      {
+        "issue": 1,
+        "page": 15,
+        "credit": 3,
+        "reachable": true,
+        "nativeSourceEnvelopeIdentical": true,
+        "repeatedOverlays": 2,
+        "W": 1988,
+        "H": 3056
+      },
+      {
+        "issue": 2,
+        "page": 5,
+        "credit": 6,
+        "reachable": true,
+        "nativeSourceEnvelopeIdentical": true,
+        "repeatedOverlays": 2,
+        "W": 1988,
+        "H": 3056
+      }
+    ]
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "downloadedApkVerification": {
+    "status": "pending"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "version": "2.79.117",
+  "baseline": {
+    "version": "Test116",
+    "completeFrames": 300,
+    "confirmation": "local validated count; numeric phone confirmation not supplied"
+  },
+  "localCompleteFrames": 309,
+  "originalFrames": 384,
+  "remainingFrames": 75,
+  "rawSelections": 235,
+  "newCompleteOriginals": 9,
+  "newRuntimeSelectionsInApocalypse": 2,
+  "phoneTest117": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 69,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 91,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 97,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 52,
+      "total": 79
+    }
+  ],
+  "changes": [
+    {
+      "issue": 1,
+      "readerPage": 15,
+      "selection": 1,
+      "frames": 3,
+      "type": "new three-original group",
+      "description": "Complete broad camp/Pharaoh conversation and both narrow right-side portrait/conversation views. All lettering, lower figures and source edges remain."
+    },
+    {
+      "issue": 2,
+      "readerPage": 5,
+      "selection": 1,
+      "frames": 6,
+      "type": "new six-original group",
+      "description": "Three upper cave/hand views, central cave scene, tall En silhouette and lower Baal/Son/No scene. All yellow captions, balloons, fingers and source boundaries remain."
+    }
+  ],
+  "countingRule": "Each unique complete original once. Clipped originals, duplicates, decoration, covers and credits add zero. Group usability and individual segmentation are separate."
+}

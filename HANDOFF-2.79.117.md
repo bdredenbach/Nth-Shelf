@@ -1,0 +1,19 @@
+# Test117 / 2.79.117 — nine complete original recoveries
+
+7 October 2026. bdredenbach/Nth-Shelf, Test_Branch only. Continue from Test116’s locally validated 300/384; numeric phone acceptance was not supplied. Test117 reaches 309/384 locally, 75 remaining. Phone acceptance, group usability and timing remain pending.
+
+Install separate Nth Shelf Test117. Reader page numbers include covers:
+- Issue 1 Reader 15 S1: +3 — broad camp/Pharaoh conversation and two narrow right-side portraits/conversation views. Complete balloons, lower figures and source edges.
+- Issue 2 Reader 5 S1: +6 — three upper cave/hand views, central cave scene, tall En silhouette, lower Baal/Son/No scene. Complete yellow caption chain, balloons and protruding fingers.
+
+Two new empty-page source-envelope groups retain all interior art, lettering and original gutters. No prior source descriptor, display mask or tap priority changes are authorized. Every unique complete original counts once; clipped originals, duplicates, decorations, covers and credits add zero. Individual segmentation, grouping usability and timing remain separate from frame coverage. 235 Apocalypse selections. Issue totals 69/99, 91/97, 97/109, 52/79; denominator 384.
+
+Generic proof66: independently recomputed 14/16 gradient exterior maps, one dense broad stable enclosure, measured color-channel boundaries at25/18 with per-side and aggregate support, bounded peripheral source islands and full opaque envelope interiors. Requires no prior selection; existing maps stay unchanged. Proof recomputation retains maps, masks, boundary sample counts, content evidence and novelty. Reader uses the full measured group contour; edge spill and geometry refinement recognize the proof. No book/page/title/text/fingerprint lookup; no comic artwork in git/CI.
+
+Remaining queue: issue1 Reader7 eye/sword strip; Reader13 narrow attacker portrait; Reader18 right dialogue strip and clipped En; issue3 Reader5 goddess head/halo. Other remaining Test116 audit pages remain queued, excluding the two new Test117 pages. Do not double-count earlier originals.
+
+Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f.
+
+Scratch repository /workspace/scratch/37406b7d348a/Nth-Shelf-Test117; checks /workspace/scratch/37406b7d348a/test117; fixtures /workspace/scratch/37406b7d348a/fixtures/images. Automated workspace maintenance removed prior scratch. Verified Test116 GitHub artifact 11455533890 restored the source; archive SHA256 5429c8648b61ed99c12a16fcf063748ef14a912334a66b6d04ab038decc78190. Baseline was freshly replayed on the restored original archives. If scratch disappears, restore from published repository/build and authorized archives. Read TEST117-VALIDATION.json for actual completed checks and build identities. Nine-original cadence, isolated Test_Branch publication and APK authorization persist. A continuation request does not imply numeric phone acceptance.
+
+Local validation complete: all138 retained behavioral suites and cache/package/syntax checks pass. The restored Test116 baseline was fully replayed on312 original rasters, producing1,332 retained descriptors. All312 supplementary source comparisons and complete old-versus-new Reader display comparisons pass. Every earlier source descriptor and display remains unchanged; all five control books retain identical selections/displays. Exactly two new Apocalypse groups add nine unique complete originals. Full changed-page detector replays pass. Both native group canvases match equivalent original source-envelope renders byte-for-byte; four repeated overlays and3,042 new group taps pass. Android build and downloaded APK verification pending.
