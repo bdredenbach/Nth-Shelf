@@ -243,6 +243,88 @@
     "cachePackageAndSyntax": "passed"
   },
   "androidBuild": {
-    "status": "pending"
-  }
+    "status": "verified",
+    "ci": {
+      "runId": 37678442458,
+      "jobId": 112987911979,
+      "workflow": "Build Test121 APK",
+      "branch": "Test_Branch",
+      "sourceCommit": "33bd53bf312a418ea6d8fa82b947941f47ef540f",
+      "conclusion": "success",
+      "artifactId": 11507884876,
+      "artifactName": "Nth-Shelf-2.79.121-Test121",
+      "artifactBytes": 13751847,
+      "artifactDigest": "sha256:ce9a74fa69d9c70d981c6594fb64f05aae6c7df32c4b75343e10d11605dd841d"
+    },
+    "downloadedApkVerification": {
+      "passed": true,
+      "apkSha256": "872a0de1d3130a012e3b9744d0b1307d5f64c56e5802c486566015748d7239b7",
+      "apkBytes": 3585711,
+      "compiledIdentity": {
+        "versionCode": 28049,
+        "versionName": "2.79.121",
+        "compileSdkVersion": 35,
+        "compileSdkVersionCodename": "15",
+        "package": "io.github.bdredenbach.nthshelf.frametest121",
+        "platformBuildVersionCode": 35,
+        "platformBuildVersionName": 15
+      },
+      "compiledApplicationLabel": "Nth Shelf Test121",
+      "verifiedWebFiles": 123,
+      "v2SignatureVerified": true,
+      "v2ChunkedContentDigestVerified": true,
+      "signerCertificateMatchesCI": true,
+      "signerCertificateSha256": "003b69dde874dc646b609f68885a2979089751a0dbda54d55251161b2e75ba4f",
+      "sourceCommit": "33bd53bf312a418ea6d8fa82b947941f47ef540f",
+      "sourceTree": "9cdf6424da5a8e5002ab714671f2a6f4f4fe1b12",
+      "verifiedSourceArchiveFiles": 1225,
+      "sourceArchiveMatchesFrozenGitTree": true
+    },
+    "ciRetainedRecordVerified": true,
+    "browserInteractionAndBackup": "passed",
+    "nativeStreamingArchive": "passed",
+    "artifactZipDigestVerified": true
+  },
+  "savedDeliverables": [
+    {
+      "name": "Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "libraryFileId": "libfile_b40550a56110819197ad1ffa78ce2e9c",
+      "fileId": "file_00000000adac82308a02600f7cdfcaeb",
+      "version": 3,
+      "sha256": "351f9054504abd9f8b2ce2021530f516ff04bca3443038e02d97c1657508cd57",
+      "bytes": 10530
+    },
+    {
+      "name": "Nth-Shelf-2.79.121-Test121.apk",
+      "libraryFileId": "libfile_1a48477c639c81918a66c6f40f9f5698",
+      "fileId": "file_000000000cc88210a5afde627131b8c6",
+      "version": 0,
+      "sha256": "872a0de1d3130a012e3b9744d0b1307d5f64c56e5802c486566015748d7239b7",
+      "bytes": 3585711
+    },
+    {
+      "name": "Nth-Shelf-Test121-Frame-Review.html",
+      "libraryFileId": "libfile_73f446672dec81918751f86806a2f669",
+      "fileId": "file_00000000b5848230831b6c5e2b5eef8d",
+      "version": 0,
+      "sha256": "8cbf211f52a4eb90169f54231f57b78aec0e3c20691199348cfff3fa24d6587a",
+      "bytes": 2098417
+    },
+    {
+      "name": "Nth-Shelf-Test121-Two-Frame-Regression.json",
+      "libraryFileId": "libfile_fa931f09c1348191a3467b8728ae1c89",
+      "fileId": "file_000000005d8c81f592bfbc889591483f",
+      "version": 0,
+      "sha256": "fb69f565b60696f955b6f10facf79775230546333aab243c0c2988240e60b227",
+      "bytes": 93569
+    },
+    {
+      "name": "Nth-Shelf-Test121-Replay-Checkpoint.zip",
+      "libraryFileId": "libfile_8efe0d00ab688191bd4f58d1f8e1ef22",
+      "fileId": "file_0000000097948210929192e221685aba",
+      "version": 0,
+      "sha256": "4258b6e82225268ce222c05a1fb9b778c1fd2b2812ef10ce8958baaf2287ee07",
+      "bytes": 15363167
+    }
+  ]
 }
