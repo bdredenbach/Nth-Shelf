@@ -410,10 +410,10 @@
       "filename": "Nth-Shelf-Test119-Frame-Review.html",
       "local_path": "/workspace/scratch/37406b7d348a/test119/deliverables/Nth-Shelf-Test119-Frame-Review.html",
       "library_file_id": "libfile_7a7d8c288c948191b8ae79e09eede222",
-      "file_id": "file_000000006378820dbef6d3c742724152",
-      "version": null,
-      "bytes": 27680673,
-      "sha256": "3b53bcaff9a31e4748e1d8f8ccf64926a258e039083be154b2ee725dcd7f5888",
+      "file_id": "file_000000008fe881f8ac7bc2ac1b32946d",
+      "version": 2,
+      "bytes": 37906488,
+      "sha256": "feb18ef13070f6e4e4de2b37d58b9513cfb54a6bdc71605f8018c34a4c6e1ee5",
       "saved": true
     },
     {
@@ -446,5 +446,109 @@
       "sha256": "f8c7887923ec850817d7a073c7c361e7efcbff6c1f19b1b68a9bd8408c304361",
       "saved": true
     }
-  ]
+  ],
+  "reviewPresentationCorrection": {
+    "passed": true,
+    "actualUnmodifiedReader": true,
+    "exactFocusCss": true,
+    "viewports": 2,
+    "overlays": 4,
+    "onOffControls": true,
+    "failedTapStaysOff": true,
+    "earlierS1TapPriority": true,
+    "browserScreenshots": false,
+    "renderedPreviews": "Native canvas composites of actual Reader canvas, emitted final transform and exact dim color; no browser screenshot claim.",
+    "results": [
+      {
+        "viewport": "desktop",
+        "readerPage": 6,
+        "selection": 1,
+        "popOut": true,
+        "dimActive": true,
+        "canvas": [
+          1952,
+          3000
+        ],
+        "finalTransform": "translate3d(8px, 8px, 0) scale(1)",
+        "bounds": {
+          "left": 66.39914921465967,
+          "top": 45.849999999999966,
+          "width": 443.20170157068065,
+          "height": 681.3000000000001
+        },
+        "centerWithinReaderPadding": true
+      },
+      {
+        "viewport": "desktop",
+        "readerPage": 24,
+        "selection": 2,
+        "popOut": true,
+        "dimActive": true,
+        "canvas": [
+          1952,
+          3000
+        ],
+        "finalTransform": "translate3d(8px, 8px, 0) scale(1)",
+        "bounds": {
+          "left": 66.39914921465967,
+          "top": 45.849999999999966,
+          "width": 443.20170157068065,
+          "height": 681.3000000000001
+        },
+        "centerWithinReaderPadding": true
+      },
+      {
+        "viewport": "phone",
+        "readerPage": 6,
+        "selection": 1,
+        "popOut": true,
+        "dimActive": true,
+        "canvas": [
+          1952,
+          3000
+        ],
+        "finalTransform": "translate3d(8px, 8px, 0) scale(1)",
+        "bounds": {
+          "left": 42.43992146596858,
+          "top": 30.299999999999983,
+          "width": 261.12015706806284,
+          "height": 401.40000000000003
+        },
+        "centerWithinReaderPadding": true
+      },
+      {
+        "viewport": "phone",
+        "readerPage": 24,
+        "selection": 2,
+        "popOut": true,
+        "dimActive": true,
+        "canvas": [
+          1952,
+          3000
+        ],
+        "finalTransform": "translate3d(8px, 8px, 0) scale(1)",
+        "bounds": {
+          "left": 42.43992146596858,
+          "top": 30.299999999999983,
+          "width": 261.12015706806284,
+          "height": 401.40000000000003
+        },
+        "centerWithinReaderPadding": true
+      }
+    ],
+    "reason": "Original HTML showed extracted canvas only, omitting dimmed page and final overlay placement. Updated HTML runs unchanged Test119 Reader and exact focus CSS, with actual routing and TRUE/FALSE/OFF states.",
+    "phoneAcceptance": "pending",
+    "apkUnchanged": true,
+    "savedReview": {
+      "filename": "Nth-Shelf-Test119-Frame-Review.html",
+      "local_path": "/workspace/scratch/37406b7d348a/test119/deliverables/Nth-Shelf-Test119-Frame-Review.html",
+      "library_file_id": "libfile_7a7d8c288c948191b8ae79e09eede222",
+      "file_id": "file_000000008fe881f8ac7bc2ac1b32946d",
+      "version": 2,
+      "bytes": 37906488,
+      "sha256": "feb18ef13070f6e4e4de2b37d58b9513cfb54a6bdc71605f8018c34a4c6e1ee5",
+      "saved": true
+    },
+    "visibleFallbackCaptures": 2
+  }
 }
