@@ -1,0 +1,326 @@
+{
+  "version": "2.79.116",
+  "versionCode": 28044,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest116",
+  "label": "Nth Shelf Test116",
+  "cropReview": {
+    "version": "2.79.116",
+    "baseline": {
+      "version": "Test115",
+      "completeFrames": 291,
+      "confirmation": "local validated count; no separate numeric phone confirmation supplied"
+    },
+    "localCompleteFrames": 300,
+    "originalFrames": 384,
+    "remainingFrames": 84,
+    "rawSelections": 233,
+    "newCompleteOriginals": 9,
+    "newRuntimeSelectionsInApocalypse": 3,
+    "phoneTest116": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 66,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 85,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 97,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 52,
+        "total": 79
+      }
+    ],
+    "changes": [
+      {
+        "issue": 1,
+        "readerPage": 12,
+        "selection": 3,
+        "frames": 3,
+        "type": "new five-original group; two duplicates count zero",
+        "description": "Complete middle-left WHUFF impact, tall upper-right SHAKK strike and narrow FIRST BLOOD strip. The top claw strip and lower court reaction were already complete and add zero."
+      },
+      {
+        "issue": 2,
+        "readerPage": 10,
+        "selection": 4,
+        "frames": 1,
+        "type": "new five-original group; four duplicates count zero",
+        "description": "Complete tall Nephri silhouette from head through the trailing dress, including the whole MY LORD balloon. Four right-side originals were already complete and add zero."
+      },
+      {
+        "issue": 3,
+        "readerPage": 19,
+        "selection": 1,
+        "frames": 5,
+        "type": "new five-original group",
+        "description": "Complete tall left conversation, central eye strip, lower-left kneeling scene, lower-middle Logos conversation and tall right Pharaoh figure. Every balloon and source edge remains. The sphinx and halo are decorative context and add zero."
+      }
+    ],
+    "countingRule": "Each unique complete original once, including originals in larger crops. Clipped originals, duplicates, decorations and page numbers add zero. Group usability and individual segmentation remain separate."
+  },
+  "phoneAcceptance": "pending",
+  "newContracts": {
+    "source": {
+      "passed": true,
+      "newOwners": 3,
+      "corruptions": 57,
+      "proofRoundTrips": true,
+      "measuredSourceOverlap": true,
+      "transparentAndBlankAndUnprovenNegatives": true,
+      "priorOwnerPreserved": true,
+      "serializedSourceProofsAndBoundaryCorruption": true
+    },
+    "reader": {
+      "passed": true,
+      "oldTaps": 237,
+      "newTaps": 2812,
+      "byGroup": [
+        988,
+        303,
+        1521
+      ],
+      "overlays": 6,
+      "earlierSelectionsAndTapPriorityPreserved": true,
+      "completeGroupContoursDisplayed": true
+    },
+    "cache": {
+      "passed": true,
+      "cache": "nth-shelf-shell-2.79.116",
+      "shellFiles": 118,
+      "horizontalPaperStrips": true,
+      "package": "frametest116"
+    }
+  },
+  "retainedChecks": {
+    "passed": true,
+    "behavioralSuites": 136,
+    "cachePackageAndSyntax": "passed"
+  },
+  "freshDetector": {
+    "passed": true,
+    "targets": [
+      {
+        "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-011.jpg",
+        "sourceBytes": 2087466,
+        "selectionCount": 3,
+        "originalDescriptorsPreserved": true
+      },
+      {
+        "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-009.jpg",
+        "sourceBytes": 1707785,
+        "selectionCount": 4,
+        "originalDescriptorsPreserved": true
+      },
+      {
+        "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-018.jpg",
+        "sourceBytes": 2259983,
+        "selectionCount": 1,
+        "originalDescriptorsPreserved": true
+      }
+    ]
+  },
+  "nativeReaderInvariants": {
+    "passed": true,
+    "nativeCanvases": 3,
+    "oldCanvasesByteIdentical": 5,
+    "results": [
+      {
+        "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-011.jpg",
+        "selection": 3,
+        "reachable": true,
+        "width": 1911,
+        "height": 3000,
+        "nativeSourceEnvelopeIdentical": true
+      },
+      {
+        "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-009.jpg",
+        "selection": 4,
+        "reachable": true,
+        "width": 1988,
+        "height": 2981,
+        "nativeSourceEnvelopeIdentical": true
+      },
+      {
+        "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-018.jpg",
+        "selection": 1,
+        "reachable": true,
+        "width": 1952,
+        "height": 3000,
+        "nativeSourceEnvelopeIdentical": true
+      }
+    ]
+  },
+  "finalSupplementaryReplays": {
+    "status": "passed",
+    "pages": 312,
+    "priorSourceDescriptors": 1329,
+    "sourceComparisons": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 230,
+        "finalSelections": 233,
+        "additions": [
+          {
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-011.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                0,
+                573,
+                900
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 002 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 02 (of 04)-009.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                19,
+                585,
+                897
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          },
+          {
+            "key": "Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 003 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 03 (of 04)-018.jpg",
+            "count": 1,
+            "boxes": [
+              [
+                0,
+                0,
+                585,
+                900
+              ]
+            ],
+            "attachments": [
+              false
+            ]
+          }
+        ]
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 389,
+        "finalSelections": 389,
+        "additions": []
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "additions": []
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "additions": []
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "additions": []
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "additions": []
+      }
+    ],
+    "displayComparisons": [
+      {
+        "book": "apocalypse",
+        "pages": 91,
+        "originalSelections": 230,
+        "finalSelections": 233,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "wolverine",
+        "pages": 74,
+        "originalSelections": 389,
+        "finalSelections": 389,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "magneto",
+        "pages": 24,
+        "originalSelections": 101,
+        "finalSelections": 101,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "originalSelections": 228,
+        "finalSelections": 228,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "originalSelections": 193,
+        "finalSelections": 193,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      },
+      {
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "originalSelections": 188,
+        "finalSelections": 188,
+        "changes": [],
+        "sourceDescriptorsUnchanged": true,
+        "preservationOutsideProvenNewSourceAndSpeech": true
+      }
+    ],
+    "scope": "New supplementary source detector on312 original rasters with all retained descriptors; complete old-versus-new Reader display comparisons on312 pages. Full older detector freshly replayed on the three changed pages, not on the entire corpus.",
+    "priorSourceDescriptorsRetained": true,
+    "allEarlierReaderDisplaysUnchanged": true,
+    "controlDisplaysUnchanged": true
+  },
+  "realImageTapProbe": {
+    "page": "issue2 Reader10",
+    "selection": 4,
+    "normalizedSource": [
+      0.1,
+      0.066
+    ],
+    "actualReaderPassed": true
+  }
+}

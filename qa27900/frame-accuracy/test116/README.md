@@ -1,0 +1,1 @@
+Test116 geometry-only serialized source proofs, round-trip/corruption, prior display/tap priority and repeated native overlay contracts. Artwork stays outside git/CI. Full private source replay and illustrated native review recorded in TEST116-VALIDATION.json. Run run-retained.sh from repo root.

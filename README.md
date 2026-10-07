@@ -1,5 +1,7 @@
 # Nth Shelf
 
+Current continuation: [Test116](HANDOFF-2.79.116.md), locally300/384,84 remaining from Test115 local291. Nine new complete originals in three groups: issue1 Reader12 S3(+3), issue2 Reader10 S4(+1), issue3 Reader19 S1(+5).233 selections. Earlier source/display/tap priority remains intact. Six duplicate originals and sphinx/halo decoration add zero. See TEST116-VALIDATION.json. Phone acceptance, group usability and timing pending.
+
 Test115 APK verified: all134 retained checks,312 source/Reader comparisons, three fresh detector runs, three byte-identical native group envelopes and five unchanged earlier canvases. CI browser/backup and native archive pass. Source109ce5fd3cefd23f2feb868400db16f0f152503b; downloaded APK SHA25669ffbf1ceedf1f244f7a9218ec654eb4da08b00eb45c950f99ebcd28149df6f4. Actual isolated identity, v2 signer against CI record and all117 frozen packaged web files verified. Review and handoff saved; see TEST115-VALIDATION.json. Phone acceptance, grouping usability and timing pending.
 
 Current continuation: [Test115](HANDOFF-2.79.115.md). Brad supplied282/384 for Test114; Test115 locally reaches291/384,93 remaining. Three new groups: issue2 Reader6(+3), Reader11(+4), issue3 Reader11 S6(+2; two duplicates add zero).230 selections. Earlier descriptors and Reader crops stay unchanged; source overlap is intentional. Read TEST115-VALIDATION.json for actual validation and APK identities. Phone acceptance, group usability and timing pending.

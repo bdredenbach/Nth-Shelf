@@ -1,6 +1,6 @@
-Nth Shelf Test115 / 2.79.115
-Separate Android package io.github.bdredenbach.nthshelf.frametest115.
-Install Nth-Shelf-2.79.115-Test115.apk.
-Locally291/384,93 remaining; phone acceptance pending.
-Check issue2 Reader6 S1(+3), issue2 Reader11 S1(+4), issue3 Reader11 S6(+2). Reader numbers include covers.
-Three groups preserve internal borders. Two duplicate middle-row originals in the third group add zero. Earlier selections and tap priority remain intact. Group usability and timing remain separate.
+Nth Shelf Test116 /2.79.116
+Separate package io.github.bdredenbach.nthshelf.frametest116 /28044.
+Install Nth-Shelf-2.79.116-Test116.apk.
+Locally300/384,84 remaining. Reader page numbers include covers.
+Issue1 Reader12 S3(+3), issue2 Reader10 S4(+1), issue3 Reader19 S1(+5).
+Six duplicates and decorative sphinx/halo add zero. Earlier selections retain source, display and tap priority. Phone acceptance, group usability and timing pending.

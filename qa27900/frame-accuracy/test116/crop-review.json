@@ -1,0 +1,64 @@
+{
+  "version": "2.79.116",
+  "baseline": {
+    "version": "Test115",
+    "completeFrames": 291,
+    "confirmation": "local validated count; no separate numeric phone confirmation supplied"
+  },
+  "localCompleteFrames": 300,
+  "originalFrames": 384,
+  "remainingFrames": 84,
+  "rawSelections": 233,
+  "newCompleteOriginals": 9,
+  "newRuntimeSelectionsInApocalypse": 3,
+  "phoneTest116": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 66,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 85,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 97,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 52,
+      "total": 79
+    }
+  ],
+  "changes": [
+    {
+      "issue": 1,
+      "readerPage": 12,
+      "selection": 3,
+      "frames": 3,
+      "type": "new five-original group; two duplicates count zero",
+      "description": "Complete middle-left WHUFF impact, tall upper-right SHAKK strike and narrow FIRST BLOOD strip. The top claw strip and lower court reaction were already complete and add zero."
+    },
+    {
+      "issue": 2,
+      "readerPage": 10,
+      "selection": 4,
+      "frames": 1,
+      "type": "new five-original group; four duplicates count zero",
+      "description": "Complete tall Nephri silhouette from head through the trailing dress, including the whole MY LORD balloon. Four right-side originals were already complete and add zero."
+    },
+    {
+      "issue": 3,
+      "readerPage": 19,
+      "selection": 1,
+      "frames": 5,
+      "type": "new five-original group",
+      "description": "Complete tall left conversation, central eye strip, lower-left kneeling scene, lower-middle Logos conversation and tall right Pharaoh figure. Every balloon and source edge remains. The sphinx and halo are decorative context and add zero."
+    }
+  ],
+  "countingRule": "Each unique complete original once, including originals in larger crops. Clipped originals, duplicates, decorations and page numbers add zero. Group usability and individual segmentation remain separate."
+}

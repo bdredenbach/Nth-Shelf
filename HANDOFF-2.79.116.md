@@ -1,0 +1,20 @@
+# Test116 / 2.79.116 — nine complete original recoveries
+
+7 October 2026. bdredenbach/Nth-Shelf, Test_Branch only. Continue from Test115's locally validated291/384; separate numeric Test115 phone confirmation was not supplied. Test116 reaches300/384 locally,84 remaining. Phone acceptance, group usability and timing remain pending.
+
+Install separate Nth Shelf Test116. Reader page numbers include covers:
+- Issue1 Reader12 S3: +3 — WHUFF impact, tall SHAKK strike and FIRST BLOOD strip. Two earlier complete originals are context and add zero.
+- Issue2 Reader10 S4: +1 — tall Nephri figure, complete trailing dress and MY LORD balloon. Four earlier complete right-side originals are duplicates and add zero. Reach S4 by tapping the small MY LORD balloon at upper left; normalized source(0.10,0.066) was verified with the real Reader.
+- Issue3 Reader19 S1: +5 — tall left conversation, eye strip, lower-left kneeling scene, lower-middle Logos conversation and tall right Pharaoh figure. Sphinx/halo decoration adds zero.
+
+Three source-envelope groups retain all interior art, lettering and original gutters. All earlier source descriptors, display masks and tap priority must remain unchanged. Groups overlap earlier selections intentionally. Individual segmentation, grouping usability and timing are separate from original-frame coverage.233 Apocalypse selections. Issue totals66/99,85/97,97/109,52/79.384 denominator.
+
+Generic proof65 uses independent gradient exterior maps at12/14, a stable broad dominant enclosure, measured color-channel boundaries at25/18 with side and aggregate evidence, bounded peripheral source islands and full opaque envelope interiors. Three geometry-based modes: a sparse empty map; a dense substantial unowned remainder with2–4 proven owners; or three proven wide paper rows spanning the page whose fragment crops need a complete shared continuation. Proof recomputation retains exclusions, overlap, mode, masks, boundary counts and source content evidence. Reader uses the original prior owner list for prior displays and gives the new group its full measured contour. No book/page/title/text/fingerprint lookup; no comic artwork in git/CI.
+
+Remaining queue: issue1 Reader7 eye/sword strip; Reader13 narrow attacker portrait; Reader18 right dialogue strip and clipped En; issue3 Reader5 goddess head/halo. Do not double-count earlier originals.
+
+Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f.
+
+Scratch repository /workspace/scratch/37406b7d348a/Nth-Shelf-Test116; checks /workspace/scratch/37406b7d348a/test116; original fixtures /workspace/scratch/37406b7d348a/fixtures. Restore from published repository and authorized archives if scratch disappears. Read TEST116-VALIDATION.json for actual completed checks and build identities. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Test115 had local291/384; do not claim numeric phone acceptance from a continuation request.
+
+Local validation complete: all136 retained behavioral suites and cache/package/syntax checks pass. All312 source comparisons and complete old-versus-new Reader comparisons pass. All1,329 earlier source descriptors and every earlier Reader display mask remain unchanged. Five control books retain identical selections and displays. Exactly three new Apocalypse groups add nine unique complete originals. Three full changed-page detector replays pass. All three native group canvases match their exact original source envelopes byte-for-byte; all five earlier native canvases are byte-identical. Reader contract retains237 earlier taps, proves2,812 new group taps and six repeated overlays. Android build and downloaded APK verification pending.
