@@ -25,5 +25,19 @@
     "currentSelections": 53
   },
   "nextOriginal": "P05-F2",
-  "phoneAcceptance": "Pending for new Test122 night camp."
+  "phoneAcceptance": "Pending for new Test122 night camp.",
+  "sourceCommit": "d26b9fd8a75f9de97740b4b4078139a50f3f8b5e",
+  "sourceTree": "58311bc8ab9f5ae15bef7f13cb0d2c7be781bc3e",
+  "verifiedBuild": {
+    "runId": 37690609792,
+    "jobId": 113029510102,
+    "conclusion": "success",
+    "sourceCommit": "d26b9fd8a75f9de97740b4b4078139a50f3f8b5e",
+    "artifactId": 11514090922,
+    "artifactName": "Nth-Shelf-2.79.122-Test122",
+    "artifactDigest": "sha256:58c6916d3002588bcb42ea435e0c12761137e7f570031faeb9774abbcd2cccea",
+    "artifactBytes": 13794658,
+    "completedAt": "2026-10-07T21:51:58Z"
+  },
+  "apkSha256": "94a29b16d30d2829ead4aa875b9d0c4ed60853863910bafc5da1e07e218bf01f"
 }

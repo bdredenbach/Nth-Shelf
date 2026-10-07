@@ -27,10 +27,9 @@
     "currentSelections": 53
   },
   "retainedChecks": {
-    "status": "Full final local retained suite running at source publication",
-    "expectedBehavioralSuites": 149,
-    "finalTargetSourceAndReaderContracts": "passed",
-    "previousVerifiedBaselineSuites": 147
+    "passed": true,
+    "behavioralSuites": 149,
+    "cachePackageAndSyntax": "passed"
   },
   "nativeReaderReplay": {
     "passed": true,
@@ -122,12 +121,93 @@
     "exactSelections": 1
   },
   "androidBuild": {
-    "status": "pending"
+    "status": "verified",
+    "ci": {
+      "runId": 37690609792,
+      "jobId": 113029510102,
+      "conclusion": "success",
+      "sourceCommit": "d26b9fd8a75f9de97740b4b4078139a50f3f8b5e",
+      "artifactId": 11514090922,
+      "artifactName": "Nth-Shelf-2.79.122-Test122",
+      "artifactDigest": "sha256:58c6916d3002588bcb42ea435e0c12761137e7f570031faeb9774abbcd2cccea",
+      "artifactBytes": 13794658,
+      "completedAt": "2026-10-07T21:51:58Z"
+    },
+    "downloadedApkVerification": {
+      "passed": true,
+      "apkSha256": "94a29b16d30d2829ead4aa875b9d0c4ed60853863910bafc5da1e07e218bf01f",
+      "apkBytes": 3590495,
+      "compiledIdentity": {
+        "versionCode": 28050,
+        "versionName": "2.79.122",
+        "compileSdkVersion": 35,
+        "compileSdkVersionCodename": "15",
+        "package": "io.github.bdredenbach.nthshelf.frametest122",
+        "platformBuildVersionCode": 35,
+        "platformBuildVersionName": 15
+      },
+      "compiledApplicationLabel": "Nth Shelf Test122",
+      "verifiedWebFiles": 124,
+      "v2SignatureVerified": true,
+      "v2ChunkedContentDigestVerified": true,
+      "signerCertificateMatchesCI": true,
+      "signerCertificateSha256": "69bfbfb40f589700bccb9f1054ee2b18bae87ad1240d7e90946874baff13ef0f",
+      "sourceCommit": "d26b9fd8a75f9de97740b4b4078139a50f3f8b5e",
+      "sourceTree": "58311bc8ab9f5ae15bef7f13cb0d2c7be781bc3e",
+      "verifiedSourceArchiveFiles": 1236,
+      "sourceArchiveMatchesFrozenGitTree": true
+    },
+    "ciRetainedRecordVerified": true,
+    "browserInteractionAndBackup": "passed",
+    "nativeStreamingArchive": "passed",
+    "artifactZipDigestVerified": true
   },
   "userAcceptance": {
     "Test121": "User confirmed direction/sandstorm pair worked; requested continuing.",
     "Test122": "New night camp phone acceptance pending.",
     "automaticReader": "Planned, not implemented."
   },
-  "frozenRuntimeFiles": 124
+  "frozenRuntimeFiles": 124,
+  "savedDeliverables": [
+    {
+      "name": "Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "libraryFileId": "libfile_b40550a56110819197ad1ffa78ce2e9c",
+      "fileId": "file_00000000beb081f594cace5edff6d4c5",
+      "version": 4,
+      "sha256": "8dc1167d0dea3c3aec80fa198fa31247102cad5cab8562ba4fe52a9746f87120",
+      "bytes": 10163
+    },
+    {
+      "name": "Nth-Shelf-2.79.122-Test122.apk",
+      "libraryFileId": "libfile_1a41ccc8d6248191be6f376c680cc371",
+      "fileId": "file_00000000941481f59a22a761c1d0eb1f",
+      "version": 0,
+      "sha256": "94a29b16d30d2829ead4aa875b9d0c4ed60853863910bafc5da1e07e218bf01f",
+      "bytes": 3590495
+    },
+    {
+      "name": "Nth-Shelf-Test122-Frame-Review.html",
+      "libraryFileId": "libfile_33d8281d055081919e8accf19b6ef456",
+      "fileId": "file_0000000096c0820d8d0ed6ff6b8490ad",
+      "version": 0,
+      "sha256": "23004e9ab11507949784f1fc00330dba21ffa090df0cf2406e0c7ee90acee01c",
+      "bytes": 1648584
+    },
+    {
+      "name": "Nth-Shelf-Test122-Single-Frame-Regression.json",
+      "libraryFileId": "libfile_4b47a9f5fc5c8191a477f832e8cf0379",
+      "fileId": "file_00000000925081f883426833cedc3244",
+      "version": 0,
+      "sha256": "2924471c4a1f3a8440ab8045fef0b05d2b105463cb1cc68d456458b6c0238104",
+      "bytes": 95555
+    },
+    {
+      "name": "Nth-Shelf-Test122-Replay-Checkpoint.zip",
+      "libraryFileId": "libfile_f384214e12708191918de6afa04a63ae",
+      "fileId": "file_00000000520482308a47aef1612eb86c",
+      "version": 0,
+      "sha256": "94fb54bd7d770ad5d8077072975c2f2821f640f9882c905c15387d20a3765b49",
+      "bytes": 11020550
+    }
+  ]
 }
