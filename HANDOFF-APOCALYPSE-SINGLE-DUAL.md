@@ -1,3 +1,7 @@
+Test122 recovers ONE original, Reader5 S1/P05-F1 night camp. Current focused count30 singles+5 pairs=40/99 originals;59 remain,35 qualifying steps/53 selections. Test121 direction/sandstorm pair user-confirmed: "Yes that worked 💪🏻 Let's continue". Test122 phone acceptance pending. Next Reader5 P05-F2 horsemen conversation, one original by default or at most a justified immediate pair. Finish comic1 before comic2. Automatic playback/timer remain planned.
+
+Current checkpoint: HANDOFF-2.79.122.md and TEST122-VALIDATION.json.
+
 Test121 update: user confirmed Test120 campfire worked and requested two originals this checkpoint. Reader3 F3/F4 is a justified consecutive direction/sandstorm continuation with bridging speech; one new pair covers two originals. Local29 singles+5 pairs=39/99,60 remaining; all51 earlier native crops and33 qualifying steps retained. Reader3 complete locally. New pair phone review pending. Next Reader5 P05-F1. Current facts in HANDOFF-2.79.121.md/TEST121-VALIDATION.json.
 
 # Current single/dual-frame rules —7 October2026

@@ -3385,3 +3385,5 @@ if(typeof PanelHighContrastEnclosures!=="undefined")PanelHighContrastEnclosures.
 if(typeof PanelFocusedPaperCell!=="undefined")PanelFocusedPaperCell.installReader(Reader);
 
 if(typeof PanelFocusedPaperContinuation!=='undefined')PanelFocusedPaperContinuation.installReader(Reader);
+
+if(typeof PanelSaturatedFrontierCell!=='undefined')PanelSaturatedFrontierCell.installReader(Reader);

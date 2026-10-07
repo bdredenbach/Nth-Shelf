@@ -1,0 +1,29 @@
+{
+  "test": "Test122",
+  "target": {
+    "readerPage": 5,
+    "selection": 1,
+    "original": "P05-F1",
+    "label": "Night camp",
+    "verdict": "single",
+    "sceneContinuity": "Separate complete frame; upper conversation can be read separately. One original recovered."
+  },
+  "previous": {
+    "singles": 29,
+    "pairs": 5,
+    "originals": 39,
+    "remaining": 60
+  },
+  "current": {
+    "singles": 30,
+    "pairs": 5,
+    "qualifyingSteps": 35,
+    "uniqueOriginals": 40,
+    "totalOriginals": 99,
+    "remainingOriginals": 59,
+    "rejectedSelections": 18,
+    "currentSelections": 53
+  },
+  "nextOriginal": "P05-F2",
+  "phoneAcceptance": "Pending for new Test122 night camp."
+}

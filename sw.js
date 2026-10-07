@@ -1,9 +1,10 @@
-// NTH SHELF 2.79.121 — FOCUSED PAPER CONTINUATION
+// NTH SHELF 2.79.122 — SATURATED FRONTIER CELL
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.121";
+const CACHE_NAME = "nth-shelf-shell-2.79.122";
 const SHELL_FILES = [
+  "./js/panels-saturated-frontier-cell.js",
   "./",
   "./THIRD_PARTY_NOTICES.txt",
   "./assets/DejaVu-LICENSE.txt",
