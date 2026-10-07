@@ -1,0 +1,3134 @@
+{
+  "schemaVersion": 1,
+  "createdDate": "2026-10-07",
+  "comic": "Rise of Apocalypse #1 (1996)",
+  "baseline": {
+    "repository": "bdredenbach/Nth-Shelf",
+    "branch": "Test_Branch",
+    "runtimeCommit": "78e6bdf38acd98e9165674943cc68d51672c6350",
+    "sourceTree": "975364f59adb9193e8e14d4a5c7119d3765ab151",
+    "build": "Test119 / 2.79.119 / versionCode 28047",
+    "artifactId": "11496240701",
+    "artifactZipSha256": "f3fc4971d1c31450a005257984ba031cacd8592046b6ebba8b80242120cc5146",
+    "replayCheckpointLibraryId": "libfile_b32ae41c228881918a0cbc3a2a7a6c8d",
+    "originalArchiveLibraryId": "libfile_06c168de85c08191ba461ab9ef2cdba5"
+  },
+  "rules": {
+    "default": "One complete original frame with all owned artwork and speech.",
+    "pair": "Maximum two adjacent consecutive frames with immediate action/dialogue or continuous composition requiring their joint presentation. Page-level scene continuity alone is insufficient.",
+    "quality": "Substantial partial neighbors or truncated neighboring text fail focused extraction. Incidental gutter traces/shared foreground and decorative credits add no original frames.",
+    "fallback": "Unresolved frames stay in normal-page mode; future automatic reading pauses for manual reading.",
+    "counting": "Count selection steps separately from unique original frames. Rejected groups and overlaps add no qualifying coverage.",
+    "futureTiming": "Start adjustable reading pause after animation settles.",
+    "runtimeConstraint": "Review labels, pages, hashes, text and comic identities must never become runtime lookup logic."
+  },
+  "method": {
+    "inventory": "Visual review of all 24 source images, including 22 story pages and 99 originals; same denominator as historic audit.",
+    "detectionBaseline": "Stored Test119 descriptors from hash-verified replay checkpoint; no fresh full-detector run or detector change.",
+    "readerReplay": "Fresh native-canvas execution of unchanged Reader createPanelOverlay/zoomToPanel, real hit testing and final animation/dim state for all 51 selections.",
+    "proofDisplay": "560 x 860 native composite using actual Reader final geometry and 0.95 dim opacity. Not browser or phone screenshots.",
+    "integrity": "13 checkpoint payload hashes and 121 runtime-source hashes verified; 24 source image hashes match the offline inventory.",
+    "semanticReview": "Human-readable visual judgment from source/actual crops; not an automated semantic continuity detector.",
+    "phoneAcceptance": "Pending. Passing extraction audit is not proof of phone readability or automatic playback acceptance.",
+    "priorCounts": "Test119 83/99 artwork-preservation count permitted broader groups; 36/99 here uses stricter focus rules, not a measured runtime loss. Historic Test90 also tolerated neighbor speech fragments that now fail."
+  },
+  "summary": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 51,
+    "validSingleSelections": 28,
+    "validDualSelections": 4,
+    "qualifyingSelections": 32,
+    "qualifyingUniqueOriginalFrames": 36,
+    "remainingUniqueOriginalFrames": 63,
+    "rejectedSelections": 19,
+    "rejectedOversized": 10,
+    "rejectedMixedNeighbor": 6,
+    "rejectedDamaged": 3,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      4,
+      8,
+      16,
+      19,
+      21
+    ]
+  },
+  "pages": [
+    {
+      "readerPage": 1,
+      "file": "Rise of Apocalypse 01 (of 04)-000.jpg",
+      "sourceSha256": "c2e96bf85cf8ebb9d22e5ffbbe625e8f710b57df862852e8c792046dcbb42a18",
+      "sourceSize": [
+        1989,
+        3056
+      ],
+      "originalFrames": 0,
+      "selections": [],
+      "frames": [],
+      "remainingFrames": [],
+      "counts": {
+        "originalFrames": 0,
+        "validSingles": 0,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 0,
+        "remainingOriginalFrames": 0,
+        "rejectedSelections": 0
+      },
+      "excluded": "Front cover"
+    },
+    {
+      "readerPage": 2,
+      "file": "Rise of Apocalypse 01 (of 04)-001.jpg",
+      "sourceSha256": "34450450b0c31775a70bda0306b4654115d7861f096c226889f3b0c28f124d56",
+      "sourceSize": [
+        3975,
+        3056
+      ],
+      "originalFrames": 0,
+      "selections": [],
+      "frames": [],
+      "remainingFrames": [],
+      "counts": {
+        "originalFrames": 0,
+        "validSingles": 0,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 0,
+        "remainingOriginalFrames": 0,
+        "rejectedSelections": 0
+      },
+      "excluded": "Alternate cover"
+    },
+    {
+      "readerPage": 3,
+      "file": "Rise of Apocalypse 01 (of 04)-002.jpg",
+      "sourceSha256": "324057703b9126645b3c9a8735050d657ccb7ae4136d9412bf9d3c8b00472431",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 4,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "paper-edge-group",
+          "proofVersion": 54,
+          "box": [
+            0,
+            0.19333333333333333,
+            1,
+            0.7822222222222223
+          ],
+          "canvas": [
+            1988,
+            2390
+          ],
+          "crop": "p03-s1.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.5844444444444444
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, -64.90498546836577px, 0) scale(1)",
+          "verdict": "oversized",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            2,
+            3,
+            4
+          ],
+          "reason": "Three distinct frames in one pop-out; split into singles or a justified adjacent pair.",
+          "coveredOriginalFrames": []
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "short-paper-cell",
+          "proofVersion": 59,
+          "box": [
+            0.05299145299145299,
+            0.03111111111111111,
+            0.8923076923076924,
+            0.16777777777777778
+          ],
+          "canvas": [
+            1818,
+            659
+          ],
+          "crop": "p03-s2.png",
+          "tapPoint": {
+            "x": 0.49914529914529915,
+            "y": 0.11499999999999999
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-17.495726495726494px, 273.073152267708px, 0) scale(1.0540934579439252)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            1
+          ],
+          "reason": "Complete introduction and all three owned captions.",
+          "coveredOriginalFrames": [
+            1
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "id": "P03-F1",
+          "readingOrder": 1,
+          "label": "Eye-shaped introduction",
+          "qualifyingSelection": 2,
+          "needsFix": false
+        },
+        {
+          "id": "P03-F2",
+          "readingOrder": 2,
+          "label": "Campfire scene",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P03-F3",
+          "readingOrder": 3,
+          "label": "Narrow direction strip",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P03-F4",
+          "readingOrder": 4,
+          "label": "Sandstorm scene",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P03-F2",
+        "P03-F3",
+        "P03-F4"
+      ],
+      "counts": {
+        "originalFrames": 4,
+        "validSingles": 1,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 1,
+        "remainingOriginalFrames": 3,
+        "rejectedSelections": 1
+      }
+    },
+    {
+      "readerPage": 4,
+      "file": "Rise of Apocalypse 01 (of 04)-003.jpg",
+      "sourceSha256": "411c75470f5884c70beccfdcbf4b129df2f9a10c20a448e4eccb9a507be7f9fc",
+      "sourceSize": [
+        3975,
+        3056
+      ],
+      "originalFrames": 3,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "exterior-completed-paper-cell",
+          "proofVersion": 30,
+          "box": [
+            0.15222222222222223,
+            0.02745664739884393,
+            0.6655555555555556,
+            0.19219653179190752
+          ],
+          "canvas": [
+            2646,
+            587
+          ],
+          "crop": "p04-s1.png",
+          "tapPoint": {
+            "x": 0.485,
+            "y": 0.12355491329479769
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-53.59111111111113px, 131.14344733133038px, 0) scale(1.3671585976627714)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            1
+          ],
+          "reason": "Complete upper attack strip.",
+          "coveredOriginalFrames": [
+            1
+          ]
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "neighbor-edge-matte-cell",
+          "proofVersion": 41,
+          "box": [
+            0.8111111111111111,
+            0.02745664739884393,
+            0.18888888888888888,
+            0.9725433526011561
+          ],
+          "canvas": [
+            751,
+            2972
+          ],
+          "crop": "p04-s2.png",
+          "tapPoint": {
+            "x": 0.9055555555555556,
+            "y": 0.513728323699422
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-202.77777777777777px, -2.554404333442392px, 0) scale(1)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            3
+          ],
+          "reason": "Complete right vertical chariot scene.",
+          "coveredOriginalFrames": [
+            3
+          ]
+        },
+        {
+          "id": 3,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "paper-edge-group",
+          "proofVersion": 54,
+          "box": [
+            0,
+            0.21965317919075145,
+            0.8222222222222222,
+            0.7803468208092486
+          ],
+          "canvas": [
+            3000,
+            2189
+          ],
+          "crop": "p04-s3.png",
+          "tapPoint": {
+            "x": 0.4111111111111111,
+            "y": 0.6098265895953757
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(22.52000000000001px, -58.21479136023356px, 0) scale(1.1066594594594594)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            2
+          ],
+          "reason": "Complete central mounted-warrior frame. Retained title/credits/legal decoration adds zero narrative frames; optional cleanup.",
+          "coveredOriginalFrames": [
+            2
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "id": "P04-F1",
+          "readingOrder": 1,
+          "label": "Upper attack strip",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        },
+        {
+          "id": "P04-F2",
+          "readingOrder": 2,
+          "label": "Central mounted warrior/title scene",
+          "qualifyingSelection": 3,
+          "needsFix": false
+        },
+        {
+          "id": "P04-F3",
+          "readingOrder": 3,
+          "label": "Right chariot/dead-warrior strip",
+          "qualifyingSelection": 2,
+          "needsFix": false
+        }
+      ],
+      "remainingFrames": [],
+      "counts": {
+        "originalFrames": 3,
+        "validSingles": 3,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 3,
+        "remainingOriginalFrames": 0,
+        "rejectedSelections": 0
+      }
+    },
+    {
+      "readerPage": 5,
+      "file": "Rise of Apocalypse 01 (of 04)-004.jpg",
+      "sourceSha256": "641c1f109faa7a7ff239f498ec3874be20576aa3fe6692e114003ddddd895956",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 4,
+      "selections": [],
+      "frames": [
+        {
+          "id": "P05-F1",
+          "readingOrder": 1,
+          "label": "Night camp",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P05-F2",
+          "readingOrder": 2,
+          "label": "Horsemen conversation",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P05-F3",
+          "readingOrder": 3,
+          "label": "Round Baal portrait",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P05-F4",
+          "readingOrder": 4,
+          "label": "Lower mounted group",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P05-F1",
+        "P05-F2",
+        "P05-F3",
+        "P05-F4"
+      ],
+      "counts": {
+        "originalFrames": 4,
+        "validSingles": 0,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 0,
+        "remainingOriginalFrames": 4,
+        "rejectedSelections": 0
+      }
+    },
+    {
+      "readerPage": 6,
+      "file": "Rise of Apocalypse 01 (of 04)-005.jpg",
+      "sourceSha256": "c08b1d3b07ae97872721fc23aa2028ba024e575eb645a8d9962506a8548e77e0",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 7,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "high-contrast-enclosure-envelope",
+          "proofVersion": 68,
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "canvas": [
+            1952,
+            3000
+          ],
+          "crop": "p06-s1.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, 9px, 0) scale(1)",
+          "verdict": "oversized",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "reason": "Whole-page envelope contains seven original frames; page-level continuity cannot justify this reading step.",
+          "coveredOriginalFrames": []
+        }
+      ],
+      "frames": [
+        {
+          "id": "P06-F1",
+          "readingOrder": 1,
+          "label": "Upper-left narrow figure",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P06-F2",
+          "readingOrder": 2,
+          "label": "Baby discovery",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P06-F3",
+          "readingOrder": 3,
+          "label": "Baby-face close-up",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P06-F4",
+          "readingOrder": 4,
+          "label": "Middle crowd",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P06-F5",
+          "readingOrder": 5,
+          "label": "Baal portrait inset",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P06-F6",
+          "readingOrder": 6,
+          "label": "Sacrifice discussion",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P06-F7",
+          "readingOrder": 7,
+          "label": "Baal with baby",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P06-F1",
+        "P06-F2",
+        "P06-F3",
+        "P06-F4",
+        "P06-F5",
+        "P06-F6",
+        "P06-F7"
+      ],
+      "counts": {
+        "originalFrames": 7,
+        "validSingles": 0,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 0,
+        "remainingOriginalFrames": 7,
+        "rejectedSelections": 1
+      }
+    },
+    {
+      "readerPage": 7,
+      "file": "Rise of Apocalypse 01 (of 04)-006.jpg",
+      "sourceSha256": "50eb5a30225c88f7697ddf462031565e686cab98c8f5835c21c5408f47f32bd4",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 3,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "local-boundary-matte-cell",
+          "proofVersion": 34,
+          "box": [
+            0.37606837606837606,
+            0,
+            0.6239316239316239,
+            1
+          ],
+          "canvas": [
+            1217,
+            3000
+          ],
+          "crop": "p07-s1.png",
+          "tapPoint": {
+            "x": 0.688034188034188,
+            "y": 0.5
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-94.01709401709402px, 9px, 0) scale(1)",
+          "verdict": "mixed",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            1,
+            3
+          ],
+          "reason": "Complete Baal/lightning scene includes a substantial partial upper eye/sword frame and its dialogue.",
+          "coveredOriginalFrames": []
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "stable-frontier-cell",
+          "proofVersion": 56,
+          "box": [
+            0.011965811965811967,
+            0.18333333333333332,
+            0.40341880341880343,
+            0.8166666666666667
+          ],
+          "canvas": [
+            802,
+            2496
+          ],
+          "crop": "p07-s2.png",
+          "tapPoint": {
+            "x": 0.2136752136752137,
+            "y": 0.5916666666666667
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(130.64987124236188px, -109.39378940308512px, 0) scale(1.1240648359867507)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            2
+          ],
+          "reason": "Complete slash portrait, owned exclamation, sound effects and blood protrusions.",
+          "coveredOriginalFrames": [
+            2
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "id": "P07-F1",
+          "readingOrder": 1,
+          "label": "Upper eye/sword strip",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P07-F2",
+          "readingOrder": 2,
+          "label": "Left slash portrait",
+          "qualifyingSelection": 2,
+          "needsFix": false
+        },
+        {
+          "id": "P07-F3",
+          "readingOrder": 3,
+          "label": "Baal/lightning/baby scene",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P07-F1",
+        "P07-F3"
+      ],
+      "counts": {
+        "originalFrames": 3,
+        "validSingles": 1,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 1,
+        "remainingOriginalFrames": 2,
+        "rejectedSelections": 1
+      }
+    },
+    {
+      "readerPage": 8,
+      "file": "Rise of Apocalypse 01 (of 04)-007.jpg",
+      "sourceSha256": "58ca5e06d4194a0cb118e914951d18e3a39f06cb733c53a25e863de9ca8b9fe4",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 2,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "gradient-separated-paper-cell",
+          "proofVersion": 31,
+          "box": [
+            0,
+            0.008888888888888889,
+            1,
+            0.2588888888888889
+          ],
+          "canvas": [
+            1988,
+            791
+          ],
+          "crop": "p08-s1.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.13833333333333334
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, 277.98122065727694px, 0) scale(1)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            1
+          ],
+          "reason": "Complete city/palace frame; architectural lion head is decoration within the frame.",
+          "coveredOriginalFrames": [
+            1
+          ]
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "gradient-separated-paper-cell",
+          "proofVersion": 31,
+          "box": [
+            0,
+            0.24222222222222223,
+            1,
+            0.7211111111111111
+          ],
+          "canvas": [
+            1988,
+            2204
+          ],
+          "crop": "p08-s2.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.6027777777777779
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, -78.99619941873465px, 0) scale(1)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            2
+          ],
+          "reason": "Complete throne conversation.",
+          "coveredOriginalFrames": [
+            2
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "id": "P08-F1",
+          "readingOrder": 1,
+          "label": "City/palace overview",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        },
+        {
+          "id": "P08-F2",
+          "readingOrder": 2,
+          "label": "Throne conversation",
+          "qualifyingSelection": 2,
+          "needsFix": false
+        }
+      ],
+      "remainingFrames": [],
+      "counts": {
+        "originalFrames": 2,
+        "validSingles": 2,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 2,
+        "remainingOriginalFrames": 0,
+        "rejectedSelections": 0
+      }
+    },
+    {
+      "readerPage": 9,
+      "file": "Rise of Apocalypse 01 (of 04)-008.jpg",
+      "sourceSha256": "9c32ed6303d8e33242be95fb4b0d1a8bd4dbd113b85014673688c4e27771e39f",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 4,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "chromatic-rim-cell",
+          "proofVersion": 23,
+          "box": [
+            0.27521367521367524,
+            0.057777777777777775,
+            0.5145299145299145,
+            0.35888888888888887
+          ],
+          "canvas": [
+            1023,
+            1097
+          ],
+          "crop": "p09-s1.png",
+          "tapPoint": {
+            "x": 0.5324786324786325,
+            "y": 0.23722222222222222
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-114.14683760683761px, 96.99507198376676px, 0) scale(1.7611415282392027)",
+          "verdict": "mixed",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            2,
+            4
+          ],
+          "reason": "Court frame retains cut-off dialogue from the lower court frame at its bottom edge; clean ownership/boundary.",
+          "coveredOriginalFrames": []
+        }
+      ],
+      "frames": [
+        {
+          "id": "P09-F1",
+          "readingOrder": 1,
+          "label": "Upper-left general portrait",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P09-F2",
+          "readingOrder": 2,
+          "label": "Upper-middle court",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P09-F3",
+          "readingOrder": 3,
+          "label": "Upper-right Pharaoh portrait",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P09-F4",
+          "readingOrder": 4,
+          "label": "Lower court",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P09-F1",
+        "P09-F2",
+        "P09-F3",
+        "P09-F4"
+      ],
+      "counts": {
+        "originalFrames": 4,
+        "validSingles": 0,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 0,
+        "remainingOriginalFrames": 4,
+        "rejectedSelections": 1
+      }
+    },
+    {
+      "readerPage": 10,
+      "file": "Rise of Apocalypse 01 (of 04)-009.jpg",
+      "sourceSha256": "afddeae9f59672095d4cd26d3512cf65e121aa928b1e678f01b1db7aea20e336",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 2,
+      "selections": [],
+      "frames": [
+        {
+          "id": "P10-F1",
+          "readingOrder": 1,
+          "label": "Gold-rimmed training inset",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P10-F2",
+          "readingOrder": 2,
+          "label": "Underlying tribal challenge",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P10-F1",
+        "P10-F2"
+      ],
+      "counts": {
+        "originalFrames": 2,
+        "validSingles": 0,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 0,
+        "remainingOriginalFrames": 2,
+        "rejectedSelections": 0
+      }
+    },
+    {
+      "readerPage": 11,
+      "file": "Rise of Apocalypse 01 (of 04)-010.jpg",
+      "sourceSha256": "a1587c081bb2bfd22e22004fdedb4316a6044182dc05158623ac4fe72413f9b3",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 5,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "independent-boundary-cell",
+          "proofVersion": 20,
+          "box": [
+            0.044444444444444446,
+            0,
+            0.652991452991453,
+            0.19777777777777777
+          ],
+          "canvas": [
+            1298,
+            604
+          ],
+          "crop": "p11-s1.png",
+          "tapPoint": {
+            "x": 0.37094017094017095,
+            "y": 0.09888888888888889
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(1.2377777777777865px, 278.8302696177062px, 0) scale(1.3877057591623037)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            1
+          ],
+          "reason": "Complete upper frame with owned caption/balloon protrusions.",
+          "coveredOriginalFrames": [
+            1
+          ]
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "paper-edge-group",
+          "proofVersion": 54,
+          "box": [
+            0,
+            0.024444444444444446,
+            1,
+            0.9755555555555555
+          ],
+          "canvas": [
+            1988,
+            2981
+          ],
+          "crop": "p11-s2.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.5122222222222222
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, -9.394142633579207px, 0) scale(1)",
+          "verdict": "oversized",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "reason": "Four original frames in a single group.",
+          "coveredOriginalFrames": []
+        }
+      ],
+      "frames": [
+        {
+          "id": "P11-F1",
+          "readingOrder": 1,
+          "label": "Upper En/tribe scene",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        },
+        {
+          "id": "P11-F2",
+          "readingOrder": 2,
+          "label": "Distant warrior",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P11-F3",
+          "readingOrder": 3,
+          "label": "Mocking-face inset",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P11-F4",
+          "readingOrder": 4,
+          "label": "Tall Baal scene",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P11-F5",
+          "readingOrder": 5,
+          "label": "Bottom attack",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P11-F2",
+        "P11-F3",
+        "P11-F4",
+        "P11-F5"
+      ],
+      "counts": {
+        "originalFrames": 5,
+        "validSingles": 1,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 1,
+        "remainingOriginalFrames": 4,
+        "rejectedSelections": 1
+      }
+    },
+    {
+      "readerPage": 12,
+      "file": "Rise of Apocalypse 01 (of 04)-011.jpg",
+      "sourceSha256": "f24144128cf36685e0522c3682c5107dd9598782fa0574b2f7445088785851f8",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 5,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "exterior-completed-paper-cell",
+          "proofVersion": 30,
+          "box": [
+            0,
+            0.6822222222222222,
+            0.9726495726495726,
+            0.31777777777777777
+          ],
+          "canvas": [
+            1934,
+            971
+          ],
+          "crop": "p12-s1.png",
+          "tapPoint": {
+            "x": 0.4863247863247863,
+            "y": 0.841111111111111
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, -262.18198077353px, 0) scale(1)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            5
+          ],
+          "reason": "Complete bottom court reaction.",
+          "coveredOriginalFrames": [
+            5
+          ]
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "narrow-ink-inset",
+          "proofVersion": 33,
+          "box": [
+            0.05128205128205128,
+            0.03333333333333333,
+            0.4700854700854701,
+            0.13555555555555557
+          ],
+          "canvas": [
+            935,
+            414
+          ],
+          "crop": "p12-s2.png",
+          "tapPoint": {
+            "x": 0.2863247863247863,
+            "y": 0.10111111111111112
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-2.1810256410256272px, 258.2649506152064px, 0) scale(1.9276494545454546)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            1
+          ],
+          "reason": "Complete top claw strip.",
+          "coveredOriginalFrames": [
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "continuation-enclosure-envelope",
+          "proofVersion": 65,
+          "box": [
+            0,
+            0,
+            0.9794871794871794,
+            1
+          ],
+          "canvas": [
+            1911,
+            3000
+          ],
+          "crop": "p12-s3.png",
+          "tapPoint": {
+            "x": 0.4897435897435897,
+            "y": 0.5
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, 9px, 0) scale(1)",
+          "verdict": "oversized",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "reason": "Whole-page group contains five frames, including the two separately accepted singles; adds no qualifying coverage.",
+          "coveredOriginalFrames": []
+        }
+      ],
+      "frames": [
+        {
+          "id": "P12-F1",
+          "readingOrder": 1,
+          "label": "Top claw strip",
+          "qualifyingSelection": 2,
+          "needsFix": false
+        },
+        {
+          "id": "P12-F2",
+          "readingOrder": 2,
+          "label": "Left sand deflection",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P12-F3",
+          "readingOrder": 3,
+          "label": "Tall right attack",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P12-F4",
+          "readingOrder": 4,
+          "label": "First-blood crowd strip",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P12-F5",
+          "readingOrder": 5,
+          "label": "Bottom court reaction",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        }
+      ],
+      "remainingFrames": [
+        "P12-F2",
+        "P12-F3",
+        "P12-F4"
+      ],
+      "counts": {
+        "originalFrames": 5,
+        "validSingles": 2,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 2,
+        "remainingOriginalFrames": 3,
+        "rejectedSelections": 1
+      }
+    },
+    {
+      "readerPage": 13,
+      "file": "Rise of Apocalypse 01 (of 04)-012.jpg",
+      "sourceSha256": "45c249b6d80cfc7f066b94ab966a16541a90d0f5ff471a63e3def6de69937af5",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 6,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "connected-pair-cell",
+          "proofVersion": 43,
+          "box": [
+            0.4170940170940171,
+            0.5044444444444445,
+            0.582905982905983,
+            0.48444444444444446
+          ],
+          "canvas": [
+            1159,
+            1480
+          ],
+          "crop": "p13-s1.png",
+          "tapPoint": {
+            "x": 0.7085470085470086,
+            "y": 0.7466666666666667
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-185.08700854700854px, -292.83524800546513px, 0) scale(1.554556011730205)",
+          "verdict": "dual",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            5,
+            6
+          ],
+          "reason": "Immediate shock/reaction and fight finish. Shared fallen-body foreground crosses the gutter; both owned dialogues are complete.",
+          "coveredOriginalFrames": [
+            5,
+            6
+          ]
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "paper-continuation-group",
+          "proofVersion": 52,
+          "box": [
+            0,
+            0.20444444444444446,
+            0.9606837606837607,
+            0.7666666666666667
+          ],
+          "canvas": [
+            1910,
+            2343
+          ],
+          "crop": "p13-s2.png",
+          "tapPoint": {
+            "x": 0.06404558404558405,
+            "y": 0.23
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9.000000000000028px, -68.48408998872631px, 0) scale(1.0034519572953735)",
+          "verdict": "mixed",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            1,
+            3,
+            4
+          ],
+          "reason": "Two complete fight frames retain a substantial clipped portion of the upper-left attacker frame.",
+          "coveredOriginalFrames": []
+        },
+        {
+          "id": 3,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "wide-paper-row",
+          "proofVersion": 53,
+          "box": [
+            0.03247863247863248,
+            0,
+            0.9282051282051282,
+            0.20444444444444446
+          ],
+          "canvas": [
+            1845,
+            625
+          ],
+          "crop": "p13-s3.png",
+          "tapPoint": {
+            "x": 0.4965811965811966,
+            "y": 0.10222222222222223
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-7.2393162393162385px, 302.70673618136067px, 0) scale(1.038563535911602)",
+          "verdict": "mixed",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            1,
+            2
+          ],
+          "reason": "Upper attack strip retains a clipped upper-left portrait/caption; meaningful partial neighbor fails focus isolation.",
+          "coveredOriginalFrames": []
+        }
+      ],
+      "frames": [
+        {
+          "id": "P13-F1",
+          "readingOrder": 1,
+          "label": "Narrow upper-left attacker",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P13-F2",
+          "readingOrder": 2,
+          "label": "Upper attack strip",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P13-F3",
+          "readingOrder": 3,
+          "label": "Central fight",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P13-F4",
+          "readingOrder": 4,
+          "label": "Lower-left blade action",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P13-F5",
+          "readingOrder": 5,
+          "label": "Lower-middle shock portrait",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        },
+        {
+          "id": "P13-F6",
+          "readingOrder": 6,
+          "label": "Lower-right finish",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        }
+      ],
+      "remainingFrames": [
+        "P13-F1",
+        "P13-F2",
+        "P13-F3",
+        "P13-F4"
+      ],
+      "counts": {
+        "originalFrames": 6,
+        "validSingles": 0,
+        "validPairs": 1,
+        "qualifyingOriginalFrames": 2,
+        "remainingOriginalFrames": 4,
+        "rejectedSelections": 2
+      }
+    },
+    {
+      "readerPage": 14,
+      "file": "Rise of Apocalypse 01 (of 04)-013.jpg",
+      "sourceSha256": "2431e9d6eaa7a53190ffc35f72d263043f0515b3cf374e06d231785fabb6bbd8",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 7,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "independent-exterior-cell",
+          "proofVersion": 19,
+          "box": [
+            0.2717948717948718,
+            0.03333333333333333,
+            0.6871794871794872,
+            0.17777777777777778
+          ],
+          "canvas": [
+            1366,
+            543
+          ],
+          "crop": "p14-s1.png",
+          "tapPoint": {
+            "x": 0.6153846153846154,
+            "y": 0.12222222222222223
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-112.43743589743588px, 268.5928394246073px, 0) scale(1.318665671641791)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            2
+          ],
+          "reason": "Complete pointing Pharaoh frame.",
+          "coveredOriginalFrames": [
+            2
+          ]
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "independent-exterior-cell",
+          "proofVersion": 19,
+          "box": [
+            0.2717948717948718,
+            0.22444444444444445,
+            0.26153846153846155,
+            0.27111111111111114
+          ],
+          "canvas": [
+            520,
+            829
+          ],
+          "crop": "p14-s2.png",
+          "tapPoint": {
+            "x": 0.4025641025641026,
+            "y": 0.36
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-107.29072287181248px, -140.992269170579px, 0) scale(3.386014977255171)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            3
+          ],
+          "reason": "Complete woman/throne frame.",
+          "coveredOriginalFrames": [
+            3
+          ]
+        },
+        {
+          "id": 3,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "independent-exterior-cell",
+          "proofVersion": 19,
+          "box": [
+            0.5504273504273505,
+            0.22444444444444445,
+            0.40854700854700854,
+            0.27111111111111114
+          ],
+          "canvas": [
+            812,
+            829
+          ],
+          "crop": "p14-s3.png",
+          "tapPoint": {
+            "x": 0.7547008547008547,
+            "y": 0.36
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-251.75367521367525px, -19.297974498782565px, 0) scale(2.2180066945606693)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            4
+          ],
+          "reason": "Complete Nephri portrait.",
+          "coveredOriginalFrames": [
+            4
+          ]
+        },
+        {
+          "id": 4,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "continuous-gamut-cell",
+          "proofVersion": 21,
+          "box": [
+            0.039316239316239315,
+            0.027777777777777776,
+            0.2170940170940171,
+            0.46555555555555556
+          ],
+          "canvas": [
+            432,
+            1423
+          ],
+          "crop": "p14-s4.png",
+          "tapPoint": {
+            "x": 0.14786324786324787,
+            "y": 0.26055555555555554
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(123.32493715686184px, 10.168025933378061px, 0) scale(1.9718082445113645)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            1
+          ],
+          "reason": "Complete tall Pharaoh strip.",
+          "coveredOriginalFrames": [
+            1
+          ]
+        },
+        {
+          "id": 5,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "trailing-edge-group",
+          "proofVersion": 55,
+          "box": [
+            0,
+            0.5111111111111111,
+            0.6273504273504273,
+            0.4888888888888889
+          ],
+          "canvas": [
+            1247,
+            1494
+          ],
+          "crop": "p14-s5.png",
+          "tapPoint": {
+            "x": 0.31367521367521367,
+            "y": 0.7555555555555555
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(23.460000000000008px, -279.9226271586527px, 0) scale(1.4444239782016348)",
+          "verdict": "damaged",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            5,
+            6
+          ],
+          "reason": "Two-frame conversation omits the entire yellow desert caption belonging to the En/fallen-Baal frame.",
+          "coveredOriginalFrames": []
+        },
+        {
+          "id": 6,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "trailing-edge-group",
+          "proofVersion": 55,
+          "box": [
+            0.6256410256410256,
+            0.5,
+            0.37435897435897436,
+            0.5
+          ],
+          "canvas": [
+            744,
+            1528
+          ],
+          "crop": "p14-s6.png",
+          "tapPoint": {
+            "x": 0.8128205128205128,
+            "y": 0.75
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-234.6487144583165px, -352.7874849094567px, 0) scale(1.835972565445026)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            7
+          ],
+          "reason": "Complete Baal/totem frame with all owned balloons and foreground shoulder.",
+          "coveredOriginalFrames": [
+            7
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "id": "P14-F1",
+          "readingOrder": 1,
+          "label": "Tall upper-left Pharaoh strip",
+          "qualifyingSelection": 4,
+          "needsFix": false
+        },
+        {
+          "id": "P14-F2",
+          "readingOrder": 2,
+          "label": "Upper pointing Pharaoh",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        },
+        {
+          "id": "P14-F3",
+          "readingOrder": 3,
+          "label": "Woman/throne scene",
+          "qualifyingSelection": 2,
+          "needsFix": false
+        },
+        {
+          "id": "P14-F4",
+          "readingOrder": 4,
+          "label": "Nephri portrait",
+          "qualifyingSelection": 3,
+          "needsFix": false
+        },
+        {
+          "id": "P14-F5",
+          "readingOrder": 5,
+          "label": "En with fallen Baal",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P14-F6",
+          "readingOrder": 6,
+          "label": "Narrow lower conversation",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P14-F7",
+          "readingOrder": 7,
+          "label": "Baal/totem scene",
+          "qualifyingSelection": 6,
+          "needsFix": false
+        }
+      ],
+      "remainingFrames": [
+        "P14-F5",
+        "P14-F6"
+      ],
+      "counts": {
+        "originalFrames": 7,
+        "validSingles": 5,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 5,
+        "remainingOriginalFrames": 2,
+        "rejectedSelections": 1
+      }
+    },
+    {
+      "readerPage": 15,
+      "file": "Rise of Apocalypse 01 (of 04)-014.jpg",
+      "sourceSha256": "cf82c9cc95c9c64001fcddcc958fd80226687fdc30fff92770dbdcf653781abe",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 3,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "firm-enclosure-envelope",
+          "proofVersion": 66,
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "canvas": [
+            1952,
+            3000
+          ],
+          "crop": "p15-s1.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, 9px, 0) scale(1)",
+          "verdict": "oversized",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            1,
+            2,
+            3
+          ],
+          "reason": "Whole-page group contains three frames.",
+          "coveredOriginalFrames": []
+        }
+      ],
+      "frames": [
+        {
+          "id": "P15-F1",
+          "readingOrder": 1,
+          "label": "Main camp/Pharaoh dialogue",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P15-F2",
+          "readingOrder": 2,
+          "label": "Tall right stone-rimmed conversation",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P15-F3",
+          "readingOrder": 3,
+          "label": "Bottom-right departure",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P15-F1",
+        "P15-F2",
+        "P15-F3"
+      ],
+      "counts": {
+        "originalFrames": 3,
+        "validSingles": 0,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 0,
+        "remainingOriginalFrames": 3,
+        "rejectedSelections": 1
+      }
+    },
+    {
+      "readerPage": 16,
+      "file": "Rise of Apocalypse 01 (of 04)-015.jpg",
+      "sourceSha256": "c39c11f791e34b64d416bfe4aefb163aa0a8b739c71403ad5f0eb7a65c1dc014",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 6,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "ragged-gutter-cells",
+          "proofVersion": 18,
+          "box": [
+            0.02905982905982906,
+            0,
+            0.35384615384615387,
+            0.6366666666666667
+          ],
+          "canvas": [
+            703,
+            1946
+          ],
+          "crop": "p16-s1.png",
+          "tapPoint": {
+            "x": 0.205982905982906,
+            "y": 0.31833333333333336
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(107.92064224041692px, 31.518350100603584px, 0) scale(1.4418632712919053)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            1
+          ],
+          "reason": "Complete statue/Baal frame.",
+          "coveredOriginalFrames": [
+            1
+          ]
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "ragged-gutter-cells",
+          "proofVersion": 18,
+          "box": [
+            0.37606837606837606,
+            0.03222222222222222,
+            0.5794871794871795,
+            0.1711111111111111
+          ],
+          "canvas": [
+            1152,
+            523
+          ],
+          "crop": "p16-s2.png",
+          "tapPoint": {
+            "x": 0.6658119658119659,
+            "y": 0.11777777777777777
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-164.574188034188px, 256.71030911526185px, 0) scale(1.5637274336283185)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            2
+          ],
+          "reason": "Complete resting-feet frame.",
+          "coveredOriginalFrames": [
+            2
+          ]
+        },
+        {
+          "id": 3,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "ragged-gutter-cells",
+          "proofVersion": 18,
+          "box": [
+            0.37948717948717947,
+            0.17666666666666667,
+            0.5777777777777777,
+            0.26222222222222225
+          ],
+          "canvas": [
+            1149,
+            801
+          ],
+          "crop": "p16-s3.png",
+          "tapPoint": {
+            "x": 0.6683760683760683,
+            "y": 0.3077777777777778
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-166.28358974358972px, 90.46921983181139px, 0) scale(1.568353846153846)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            3
+          ],
+          "reason": "Complete cave-explanation frame.",
+          "coveredOriginalFrames": [
+            3
+          ]
+        },
+        {
+          "id": 4,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "atomic-speech-owner",
+          "proofVersion": 46,
+          "box": [
+            0.38290598290598293,
+            0.44222222222222224,
+            0.5743589743589743,
+            0.18888888888888888
+          ],
+          "canvas": [
+            1142,
+            577
+          ],
+          "crop": "p16-s4.png",
+          "tapPoint": {
+            "x": 0.6700854700854701,
+            "y": 0.5366666666666666
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-167.99299145299145px, -70.11752986170995px, 0) scale(1.5776892857142857)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            4
+          ],
+          "reason": "Complete lying figure; foreign balloon removed without loss of owned content.",
+          "coveredOriginalFrames": [
+            4
+          ]
+        },
+        {
+          "id": 5,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "atomic-speech-owner",
+          "proofVersion": 46,
+          "box": [
+            0.035897435897435895,
+            0.6133333333333333,
+            0.9213675213675213,
+            0.18777777777777777
+          ],
+          "canvas": [
+            1832,
+            574
+          ],
+          "crop": "p16-s5.png",
+          "tapPoint": {
+            "x": 0.49658119658119654,
+            "y": 0.7072222222222222
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-8.948717948717942px, -162.61251392087843px, 0) scale(1.0462708719851577)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            5
+          ],
+          "reason": "Complete walking-away frame with its full owned balloon restored.",
+          "coveredOriginalFrames": [
+            5
+          ]
+        },
+        {
+          "id": 6,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "ragged-gutter-cells",
+          "proofVersion": 18,
+          "box": [
+            0.035897435897435895,
+            0.8066666666666666,
+            0.9213675213675213,
+            0.15888888888888889
+          ],
+          "canvas": [
+            1832,
+            486
+          ],
+          "crop": "p16-s6.png",
+          "tapPoint": {
+            "x": 0.49658119658119654,
+            "y": 0.8861111111111111
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-8.948717948717942px, -299.5948945372916px, 0) scale(1.0462708719851577)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            6
+          ],
+          "reason": "Complete bottom-feet frame.",
+          "coveredOriginalFrames": [
+            6
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "id": "P16-F1",
+          "readingOrder": 1,
+          "label": "Tall statue/Baal scene",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        },
+        {
+          "id": "P16-F2",
+          "readingOrder": 2,
+          "label": "Upper-right resting feet",
+          "qualifyingSelection": 2,
+          "needsFix": false
+        },
+        {
+          "id": "P16-F3",
+          "readingOrder": 3,
+          "label": "Cave explanation",
+          "qualifyingSelection": 3,
+          "needsFix": false
+        },
+        {
+          "id": "P16-F4",
+          "readingOrder": 4,
+          "label": "En lying down",
+          "qualifyingSelection": 4,
+          "needsFix": false
+        },
+        {
+          "id": "P16-F5",
+          "readingOrder": 5,
+          "label": "Walking away",
+          "qualifyingSelection": 5,
+          "needsFix": false
+        },
+        {
+          "id": "P16-F6",
+          "readingOrder": 6,
+          "label": "Bottom feet",
+          "qualifyingSelection": 6,
+          "needsFix": false
+        }
+      ],
+      "remainingFrames": [],
+      "counts": {
+        "originalFrames": 6,
+        "validSingles": 6,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 6,
+        "remainingOriginalFrames": 0,
+        "rejectedSelections": 0
+      }
+    },
+    {
+      "readerPage": 17,
+      "file": "Rise of Apocalypse 01 (of 04)-016.jpg",
+      "sourceSha256": "3e8b05a66720870336672d4a1e14050b97b65f5a45d6edc462252c2e49b698d9",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 5,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "local-boundary-matte-cell",
+          "proofVersion": 34,
+          "box": [
+            0,
+            0.0033333333333333335,
+            1,
+            0.5533333333333333
+          ],
+          "canvas": [
+            1988,
+            1691
+          ],
+          "crop": "p17-s1.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.28
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, 169.09456740442653px, 0) scale(1)",
+          "verdict": "damaged",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            1
+          ],
+          "reason": "Upper army pop-out cuts the red command balloon at its bottom. Whether assigned to this frame or its neighbor, truncated lettering fails ownership/boundary checks.",
+          "coveredOriginalFrames": []
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "trailing-edge-group",
+          "proofVersion": 55,
+          "box": [
+            0,
+            0.5533333333333333,
+            1,
+            0.44666666666666666
+          ],
+          "canvas": [
+            1988,
+            1365
+          ],
+          "crop": "p17-s2.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.7766666666666666
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, -212.6492287055667px, 0) scale(1)",
+          "verdict": "oversized",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "reason": "Group combines four frames.",
+          "coveredOriginalFrames": []
+        }
+      ],
+      "frames": [
+        {
+          "id": "P17-F1",
+          "readingOrder": 1,
+          "label": "Upper Pharaoh army",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P17-F2",
+          "readingOrder": 2,
+          "label": "Cavalry strip",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P17-F3",
+          "readingOrder": 3,
+          "label": "Underlying Baal/cave scene",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P17-F4",
+          "readingOrder": 4,
+          "label": "Cavern inset",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P17-F5",
+          "readingOrder": 5,
+          "label": "Right En clawing stone",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P17-F1",
+        "P17-F2",
+        "P17-F3",
+        "P17-F4",
+        "P17-F5"
+      ],
+      "counts": {
+        "originalFrames": 5,
+        "validSingles": 0,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 0,
+        "remainingOriginalFrames": 5,
+        "rejectedSelections": 2
+      }
+    },
+    {
+      "readerPage": 18,
+      "file": "Rise of Apocalypse 01 (of 04)-017.jpg",
+      "sourceSha256": "d526d96026b627b00b48121034a52e12242c03fa1255dbeefbfcca5fddd57225",
+      "sourceSize": [
+        3975,
+        3056
+      ],
+      "originalFrames": 8,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "independent-exterior-cell",
+          "proofVersion": 19,
+          "box": [
+            0.0077777777777777776,
+            0.6864161849710982,
+            0.21333333333333335,
+            0.2861271676300578
+          ],
+          "canvas": [
+            848,
+            874
+          ],
+          "crop": "p18-s1.png",
+          "tapPoint": {
+            "x": 0.11444444444444445,
+            "y": 0.8294797687861272
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(78.19055969820369px, -244.8080328643618px, 0) scale(3.1485103389920144)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            5
+          ],
+          "reason": "Complete lower-left Baal/En frame.",
+          "coveredOriginalFrames": [
+            5
+          ]
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "neighbor-completed-paper-cell",
+          "proofVersion": 27,
+          "box": [
+            0.22,
+            0.684971098265896,
+            0.27111111111111114,
+            0.2846820809248555
+          ],
+          "canvas": [
+            1078,
+            870
+          ],
+          "crop": "p18-s2.png",
+          "tapPoint": {
+            "x": 0.35555555555555557,
+            "y": 0.8273121387283238
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-74.48227791509052px, -244.25253789944378px, 0) scale(3.164492624976745)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            6
+          ],
+          "reason": "Complete lower-middle strangers frame.",
+          "coveredOriginalFrames": [
+            6
+          ]
+        },
+        {
+          "id": 3,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "landscape-paper-cell",
+          "proofVersion": 50,
+          "box": [
+            0.0044444444444444444,
+            0.37283236994219654,
+            0.9777777777777777,
+            0.3106936416184971
+          ],
+          "canvas": [
+            3000,
+            732
+          ],
+          "crop": "p18-s3.png",
+          "tapPoint": {
+            "x": 0.4933333333333333,
+            "y": 0.528179190751445
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(5.777777777777779px, -10.832151815901398px, 0) scale(1)",
+          "verdict": "mixed",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            3,
+            4,
+            8
+          ],
+          "reason": "Punch frame retains truncated dialogue/background from the strip above and part of the right portrait below.",
+          "coveredOriginalFrames": []
+        },
+        {
+          "id": 4,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "landscape-paper-cell",
+          "proofVersion": 50,
+          "box": [
+            0.5133333333333333,
+            0.6705202312138728,
+            0.4866666666666667,
+            0.32947976878612717
+          ],
+          "canvas": [
+            1935,
+            1007
+          ],
+          "crop": "p18-s4.png",
+          "tapPoint": {
+            "x": 0.7566666666666666,
+            "y": 0.8352601156069364
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-234.1466666666666px, -183.94973780522116px, 0) scale(1.869698630136986)",
+          "verdict": "damaged",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            7,
+            8
+          ],
+          "reason": "Bottom pair includes a clipped forehead/top of the right En portrait; complete speech alone does not make complete artwork.",
+          "coveredOriginalFrames": []
+        },
+        {
+          "id": 5,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "landscape-upper-paper-group",
+          "proofVersion": 51,
+          "box": [
+            0,
+            0.02745664739884393,
+            1,
+            0.41040462427745666
+          ],
+          "canvas": [
+            3000,
+            946
+          ],
+          "crop": "p18-s5.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.23265895953757226
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(8px, 102.76656850983386px, 0) scale(1)",
+          "verdict": "oversized",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            1,
+            2,
+            3
+          ],
+          "reason": "Upper group includes three frames, with the right strip incomplete.",
+          "coveredOriginalFrames": []
+        }
+      ],
+      "frames": [
+        {
+          "id": "P18-F1",
+          "readingOrder": 1,
+          "label": "Top cavern/monster head",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P18-F2",
+          "readingOrder": 2,
+          "label": "Second-row Baal strip",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P18-F3",
+          "readingOrder": 3,
+          "label": "Second-row En strip",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P18-F4",
+          "readingOrder": 4,
+          "label": "Wide punch",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P18-F5",
+          "readingOrder": 5,
+          "label": "Lower-left Baal over En",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        },
+        {
+          "id": "P18-F6",
+          "readingOrder": 6,
+          "label": "Lower-middle strangers",
+          "qualifyingSelection": 2,
+          "needsFix": false
+        },
+        {
+          "id": "P18-F7",
+          "readingOrder": 7,
+          "label": "Bottom standing silhouettes",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P18-F8",
+          "readingOrder": 8,
+          "label": "Right En portrait",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P18-F1",
+        "P18-F2",
+        "P18-F3",
+        "P18-F4",
+        "P18-F7",
+        "P18-F8"
+      ],
+      "counts": {
+        "originalFrames": 8,
+        "validSingles": 2,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 2,
+        "remainingOriginalFrames": 6,
+        "rejectedSelections": 3
+      }
+    },
+    {
+      "readerPage": 19,
+      "file": "Rise of Apocalypse 01 (of 04)-018.jpg",
+      "sourceSha256": "0f14a8546e61bcd0f3b14d2ec205e754e29038621318cd4835f47ccffa4ad498",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 4,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "independent-boundary-cell",
+          "proofVersion": 20,
+          "box": [
+            0.4495726495726496,
+            0.7166666666666667,
+            0.5247863247863248,
+            0.26555555555555554
+          ],
+          "canvas": [
+            1043,
+            812
+          ],
+          "crop": "p19-s1.png",
+          "tapPoint": {
+            "x": 0.711965811965812,
+            "y": 0.8494444444444444
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-201.32632478632476px, -342.7523464085272px, 0) scale(1.7267218241042346)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            4
+          ],
+          "reason": "Complete Logos/Pharaoh frame.",
+          "coveredOriginalFrames": [
+            4
+          ]
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "shared-boundary-paper-cell",
+          "proofVersion": 29,
+          "box": [
+            0.013675213675213675,
+            0.73,
+            0.49914529914529915,
+            0.25333333333333335
+          ],
+          "canvas": [
+            992,
+            774
+          ],
+          "crop": "p19-s2.png",
+          "tapPoint": {
+            "x": 0.26324786324786326,
+            "y": 0.8566666666666667
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(16.622393162393173px, -353.52571726247885px, 0) scale(1.8154232876712328)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            3
+          ],
+          "reason": "Complete exterior camp frame.",
+          "coveredOriginalFrames": [
+            3
+          ]
+        },
+        {
+          "id": 3,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "paper-edge-group",
+          "proofVersion": 54,
+          "box": [
+            0.035897435897435895,
+            0,
+            0.9384615384615385,
+            0.7266666666666667
+          ],
+          "canvas": [
+            1866,
+            2221
+          ],
+          "crop": "p19-s3.png",
+          "tapPoint": {
+            "x": 0.5051282051282051,
+            "y": 0.36333333333333334
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-8.948717948717942px, 97.44399951622302px, 0) scale(1.0272131147540984)",
+          "verdict": "dual",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            1,
+            2
+          ],
+          "reason": "Immediate face question/gesture leads into cavern reveal; shared foreground/sleeve bridges the composition. All owned captions and balloons are complete.",
+          "coveredOriginalFrames": [
+            1,
+            2
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "id": "P19-F1",
+          "readingOrder": 1,
+          "label": "Upper-left En face question",
+          "qualifyingSelection": 3,
+          "needsFix": false
+        },
+        {
+          "id": "P19-F2",
+          "readingOrder": 2,
+          "label": "Central cavern/relic reveal",
+          "qualifyingSelection": 3,
+          "needsFix": false
+        },
+        {
+          "id": "P19-F3",
+          "readingOrder": 3,
+          "label": "Bottom-left exterior camp",
+          "qualifyingSelection": 2,
+          "needsFix": false
+        },
+        {
+          "id": "P19-F4",
+          "readingOrder": 4,
+          "label": "Bottom-right Logos/Pharaoh",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        }
+      ],
+      "remainingFrames": [],
+      "counts": {
+        "originalFrames": 4,
+        "validSingles": 2,
+        "validPairs": 1,
+        "qualifyingOriginalFrames": 4,
+        "remainingOriginalFrames": 0,
+        "rejectedSelections": 0
+      }
+    },
+    {
+      "readerPage": 20,
+      "file": "Rise of Apocalypse 01 (of 04)-019.jpg",
+      "sourceSha256": "4fea6b20064ab8d0a82fc24b9b7454d68fe6e5b26531ac73e92422ca9883fe60",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 5,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "strong-continuation-envelope",
+          "proofVersion": 67,
+          "box": [
+            0,
+            0,
+            1,
+            0.9844444444444445
+          ],
+          "canvas": [
+            1983,
+            3000
+          ],
+          "crop": "p20-s1.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.4922222222222222
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, 9px, 0) scale(1)",
+          "verdict": "oversized",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "reason": "Whole-page envelope contains five distinct frames.",
+          "coveredOriginalFrames": []
+        }
+      ],
+      "frames": [
+        {
+          "id": "P20-F1",
+          "readingOrder": 1,
+          "label": "Upper slain-warrior reaction",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P20-F2",
+          "readingOrder": 2,
+          "label": "Narrow left standing figure",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P20-F3",
+          "readingOrder": 3,
+          "label": "Central ambush",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P20-F4",
+          "readingOrder": 4,
+          "label": "Bottom En portrait",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P20-F5",
+          "readingOrder": 5,
+          "label": "Bottom Pharaoh carving",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P20-F1",
+        "P20-F2",
+        "P20-F3",
+        "P20-F4",
+        "P20-F5"
+      ],
+      "counts": {
+        "originalFrames": 5,
+        "validSingles": 0,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 0,
+        "remainingOriginalFrames": 5,
+        "rejectedSelections": 1
+      }
+    },
+    {
+      "readerPage": 21,
+      "file": "Rise of Apocalypse 01 (of 04)-020.jpg",
+      "sourceSha256": "c26d02a6c56aaceee344def0b930fc1decc5317c79dbe30ef6df95b9cd6b3972",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 5,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "matte-cell-frame",
+          "geometryType": "edge-connected-matte-cell",
+          "box": [
+            0.03076923076923077,
+            0.021111111111111112,
+            0.358974358974359,
+            0.41888888888888887
+          ],
+          "canvas": [
+            714,
+            1280
+          ],
+          "crop": "p21-s1.png",
+          "tapPoint": {
+            "x": 0.21025641025641026,
+            "y": 0.23055555555555554
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(37.94417529919633px, 15.292103733512207px, 0) scale(2.191479189523241)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            1
+          ],
+          "reason": "Complete relic-wall frame.",
+          "coveredOriginalFrames": [
+            1
+          ]
+        },
+        {
+          "id": 2,
+          "identitySource": "matte-cell-frame",
+          "geometryType": "edge-connected-matte-cell",
+          "box": [
+            0.38632478632478634,
+            0.022222222222222223,
+            0.5846153846153846,
+            0.4222222222222222
+          ],
+          "canvas": [
+            1162,
+            1290
+          ],
+          "crop": "p21-s2.png",
+          "tapPoint": {
+            "x": 0.6786324786324787,
+            "y": 0.23333333333333334
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-169.70239316239315px, 115.71704896042924px, 0) scale(1.5500105263157895)",
+          "verdict": "dual",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            2,
+            3
+          ],
+          "reason": "Consecutive question/response with shared foreground figure across the gutter; no scene or time jump.",
+          "coveredOriginalFrames": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": 3,
+          "identitySource": "matte-cell-frame",
+          "geometryType": "edge-connected-matte-cell",
+          "box": [
+            0,
+            0.43444444444444447,
+            1,
+            0.5388888888888889
+          ],
+          "canvas": [
+            1988,
+            1647
+          ],
+          "crop": "p21-s3.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.7038888888888889
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, -156.7113793874357px, 0) scale(1)",
+          "verdict": "dual",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            4,
+            5
+          ],
+          "reason": "Immediate exterior attack and command/reaction continue the same action, with dialogue bridging the gutter. Both complete frames retained.",
+          "coveredOriginalFrames": [
+            4,
+            5
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "id": "P21-F1",
+          "readingOrder": 1,
+          "label": "Upper-left relic wall",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        },
+        {
+          "id": "P21-F2",
+          "readingOrder": 2,
+          "label": "Narrow upper-middle Baal",
+          "qualifyingSelection": 2,
+          "needsFix": false
+        },
+        {
+          "id": "P21-F3",
+          "readingOrder": 3,
+          "label": "Upper-right En response",
+          "qualifyingSelection": 2,
+          "needsFix": false
+        },
+        {
+          "id": "P21-F4",
+          "readingOrder": 4,
+          "label": "Middle exterior battle",
+          "qualifyingSelection": 3,
+          "needsFix": false
+        },
+        {
+          "id": "P21-F5",
+          "readingOrder": 5,
+          "label": "Bottom exterior battle",
+          "qualifyingSelection": 3,
+          "needsFix": false
+        }
+      ],
+      "remainingFrames": [],
+      "counts": {
+        "originalFrames": 5,
+        "validSingles": 1,
+        "validPairs": 2,
+        "qualifyingOriginalFrames": 5,
+        "remainingOriginalFrames": 0,
+        "rejectedSelections": 0
+      }
+    },
+    {
+      "readerPage": 22,
+      "file": "Rise of Apocalypse 01 (of 04)-021.jpg",
+      "sourceSha256": "adc7e2f79135ceefd175599432c5540d995b51cf789ff7bb319a5d7002b71ddd",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 3,
+      "selections": [],
+      "frames": [
+        {
+          "id": "P22-F1",
+          "readingOrder": 1,
+          "label": "Upper-left warning",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P22-F2",
+          "readingOrder": 2,
+          "label": "Upper-right En/Baal",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P22-F3",
+          "readingOrder": 3,
+          "label": "Lower En/relic foreground",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P22-F1",
+        "P22-F2",
+        "P22-F3"
+      ],
+      "counts": {
+        "originalFrames": 3,
+        "validSingles": 0,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 0,
+        "remainingOriginalFrames": 3,
+        "rejectedSelections": 0
+      }
+    },
+    {
+      "readerPage": 23,
+      "file": "Rise of Apocalypse 01 (of 04)-022.jpg",
+      "sourceSha256": "7540cee1c8610fe5b661cf8fcd848ca843688a8f96927632c4acefa47455ae5b",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 5,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "ragged-gutter-cells",
+          "proofVersion": 18,
+          "box": [
+            0,
+            0,
+            1,
+            0.4411111111111111
+          ],
+          "canvas": [
+            1988,
+            1348
+          ],
+          "crop": "p23-s1.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.22055555555555556
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, 214.78426112228925px, 0) scale(1)",
+          "verdict": "mixed",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            1,
+            3
+          ],
+          "reason": "Upper battle frame retains a cut-off balloon from the round general-reaction inset below.",
+          "coveredOriginalFrames": []
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "ragged-gutter-cells",
+          "proofVersion": 18,
+          "box": [
+            0,
+            0.43333333333333335,
+            1,
+            0.35333333333333333
+          ],
+          "canvas": [
+            1988,
+            1080
+          ],
+          "crop": "p23-s2.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.61
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, -84.54728370221324px, 0) scale(1)",
+          "verdict": "oversized",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            2,
+            3,
+            4
+          ],
+          "reason": "Middle group contains three original frames, including above-ground and below-ground reactions.",
+          "coveredOriginalFrames": []
+        },
+        {
+          "id": 3,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "ragged-gutter-cells",
+          "proofVersion": 18,
+          "box": [
+            0.03076923076923077,
+            0.7777777777777778,
+            0.9333333333333333,
+            0.18
+          ],
+          "canvas": [
+            1855,
+            550
+          ],
+          "crop": "p23-s3.png",
+          "tapPoint": {
+            "x": 0.49743589743589745,
+            "y": 0.8677777777777778
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(-6.384615384615387px, -284.95118648398335px, 0) scale(1.032857142857143)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            5
+          ],
+          "reason": "Complete bottom cave frame.",
+          "coveredOriginalFrames": [
+            5
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "id": "P23-F1",
+          "readingOrder": 1,
+          "label": "Upper exterior battle",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P23-F2",
+          "readingOrder": 2,
+          "label": "Middle exterior collapse",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P23-F3",
+          "readingOrder": 3,
+          "label": "Round general reaction",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P23-F4",
+          "readingOrder": 4,
+          "label": "Round En/monster reaction",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P23-F5",
+          "readingOrder": 5,
+          "label": "Bottom cave",
+          "qualifyingSelection": 3,
+          "needsFix": false
+        }
+      ],
+      "remainingFrames": [
+        "P23-F1",
+        "P23-F2",
+        "P23-F3",
+        "P23-F4"
+      ],
+      "counts": {
+        "originalFrames": 5,
+        "validSingles": 1,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 1,
+        "remainingOriginalFrames": 4,
+        "rejectedSelections": 2
+      }
+    },
+    {
+      "readerPage": 24,
+      "file": "Rise of Apocalypse 01 (of 04)-023.jpg",
+      "sourceSha256": "630f55e661c37eda0f93910ce9b41109172a428c46422850037b4e5dbdc4eac8",
+      "sourceSize": [
+        1988,
+        3056
+      ],
+      "originalFrames": 3,
+      "selections": [
+        {
+          "id": 1,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "compact-dark-cell",
+          "proofVersion": 58,
+          "box": [
+            0,
+            0.03333333333333333,
+            0.4376068376068376,
+            0.3322222222222222
+          ],
+          "canvas": [
+            870,
+            1015
+          ],
+          "crop": "p24-s1.png",
+          "tapPoint": {
+            "x": 0.2188034188034188,
+            "y": 0.19944444444444442
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(23.460000000000008px, 94.30675640300132px, 0) scale(2.0707171875)",
+          "verdict": "single",
+          "passesExtractionRules": true,
+          "observedOriginalFrames": [
+            1
+          ],
+          "reason": "Complete Baal/Logos arrival and owned dialogue/caption.",
+          "coveredOriginalFrames": [
+            1
+          ]
+        },
+        {
+          "id": 2,
+          "identitySource": "structural-grid-frame",
+          "geometryType": "high-contrast-enclosure-envelope",
+          "proofVersion": 68,
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "canvas": [
+            1952,
+            3000
+          ],
+          "crop": "p24-s2.png",
+          "tapPoint": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "reachable": true,
+          "actualReaderOverlay": true,
+          "dimActive": true,
+          "finalTransform": "translate3d(9px, 9px, 0) scale(1)",
+          "verdict": "oversized",
+          "passesExtractionRules": false,
+          "observedOriginalFrames": [
+            1,
+            2,
+            3
+          ],
+          "reason": "Whole-page group contains three originals, including the already accepted first frame; preview decoration adds zero.",
+          "coveredOriginalFrames": []
+        }
+      ],
+      "frames": [
+        {
+          "id": "P24-F1",
+          "readingOrder": 1,
+          "label": "Upper-left Baal/Logos arrival",
+          "qualifyingSelection": 1,
+          "needsFix": false
+        },
+        {
+          "id": "P24-F2",
+          "readingOrder": 2,
+          "label": "Upper-right throne",
+          "qualifyingSelection": null,
+          "needsFix": true
+        },
+        {
+          "id": "P24-F3",
+          "readingOrder": 3,
+          "label": "Lower Pharaoh conversation",
+          "qualifyingSelection": null,
+          "needsFix": true
+        }
+      ],
+      "remainingFrames": [
+        "P24-F2",
+        "P24-F3"
+      ],
+      "counts": {
+        "originalFrames": 3,
+        "validSingles": 1,
+        "validPairs": 0,
+        "qualifyingOriginalFrames": 1,
+        "remainingOriginalFrames": 2,
+        "rejectedSelections": 1
+      }
+    }
+  ],
+  "nextWork": {
+    "comic": "Rise of Apocalypse #1",
+    "firstPage": 3,
+    "firstRemainingFrames": [
+      "P03-F2",
+      "P03-F3",
+      "P03-F4"
+    ],
+    "scope": "Fix comic #1 before starting comic #2. Start with the three-frame P03-S1 group. Prefer single frames; allow a justified adjacent pair only.",
+    "implementationStatus": "Audit only; no runtime changes or new APK."
+  }
+}

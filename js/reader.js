@@ -3382,3 +3382,4 @@ if(typeof PanelFirmEnclosureGroups!=="undefined")PanelFirmEnclosureGroups.instal
 if(typeof PanelStrongContinuationGroups!=="undefined")PanelStrongContinuationGroups.installReader(Reader);
 
 if(typeof PanelHighContrastEnclosures!=="undefined")PanelHighContrastEnclosures.installReader(Reader);
+if(typeof PanelFocusedPaperCell!=="undefined")PanelFocusedPaperCell.installReader(Reader);
