@@ -3383,3 +3383,5 @@ if(typeof PanelStrongContinuationGroups!=="undefined")PanelStrongContinuationGro
 
 if(typeof PanelHighContrastEnclosures!=="undefined")PanelHighContrastEnclosures.installReader(Reader);
 if(typeof PanelFocusedPaperCell!=="undefined")PanelFocusedPaperCell.installReader(Reader);
+
+if(typeof PanelFocusedPaperContinuation!=='undefined')PanelFocusedPaperContinuation.installReader(Reader);

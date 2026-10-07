@@ -1,3 +1,5 @@
+Test121 update: user confirmed Test120 campfire worked and requested two originals this checkpoint. Reader3 F3/F4 is a justified consecutive direction/sandstorm continuation with bridging speech; one new pair covers two originals. Local29 singles+5 pairs=39/99,60 remaining; all51 earlier native crops and33 qualifying steps retained. Reader3 complete locally. New pair phone review pending. Next Reader5 P05-F1. Current facts in HANDOFF-2.79.121.md/TEST121-VALIDATION.json.
+
 # Current single/dual-frame rules —7 October2026
 
 Brad requests ONE complete frame per checkpoint, or at most TWO when immediate continuity requires joint presentation. Finish comic #1 before #2. Older nine-original batches and page-level scene-group success are superseded.

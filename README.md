@@ -1,3 +1,5 @@
+Current test: [Test121 single/dual checkpoint](HANDOFF-2.79.121.md). Two originals recovered as one immediate direction/sandstorm continuity pair on Rise of Apocalypse #1 Reader3. Local focus39/99,60 remaining; all prior qualifying pop-outs retained. Test120 campfire user-confirmed; Test121 pair phone review pending. Read TEST121-VALIDATION.json for build/verification facts.
+
 Current continuation: Test120 /2.79.120 — Brad requests ONE frame at a time, or at most TWO with immediate continuity, comic by comic. New strict focus baseline for Apocalypse#1:36/99,63 remaining; Test120 campfire P03-F2/Reader3 S1 yields37/99,62 remaining (29 singles +4 pairs). All32 previously qualifying steps and50 other native issue1 crops stay intact. Whole-page groups with3+ frames, meaningful partial neighbors and clipped lettering fail. Old83/99 and327/384 remain historical artwork-preservation counts, not focused reading readiness. Nine-original cadence is superseded. Read HANDOFF-2.79.120.md and TEST120-VALIDATION.json for exact local/build/phone state. Phone acceptance and automatic reading remain pending.
 
 # Nth Shelf

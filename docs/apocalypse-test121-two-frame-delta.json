@@ -1,0 +1,28 @@
+{
+  "comic": "Rise of Apocalypse #1",
+  "validSingles": 29,
+  "validPairs": 5,
+  "uniqueOriginalsCovered": 39,
+  "originalFrames": 99,
+  "remaining": 60,
+  "currentSelections": 52,
+  "qualifyingSteps": 34,
+  "rejectedSelections": 18,
+  "changedTarget": {
+    "readerPage": 3,
+    "selection": 3,
+    "frames": [
+      "P03-F3",
+      "P03-F4"
+    ],
+    "label": "Direction strip \u2192 sandstorm reveal",
+    "old": "Both unresolved in normal-page reading after the Test120 campfire extraction.",
+    "new": "One complete two-original continuity pair: full raised arm/pointing hand, all three balloons and sandstorm lettering. Campfire dog/sound effects excluded.",
+    "continuity": "Consecutive adjacent direction/reveal; LOOK TO THE EAST leads directly to SANDSTORM; speech bridges the shared boundary. One pair is one step/two originals.",
+    "next": [
+      "P05-F1",
+      "P05-F2"
+    ],
+    "nextScope": "Start Reader5 night camp; keep one original by default and pair only with justified immediate continuity."
+  }
+}

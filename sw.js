@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.120 — FOCUSED PAPER CELL
+// NTH SHELF 2.79.121 — FOCUSED PAPER CONTINUATION
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.120";
+const CACHE_NAME = "nth-shelf-shell-2.79.121";
 const SHELL_FILES = [
   "./",
   "./THIRD_PARTY_NOTICES.txt",
@@ -119,6 +119,7 @@ const SHELL_FILES = [
   "./js/panels-strong-continuation-groups.js",
   "./js/panels-high-contrast-enclosures.js",
   "./js/panels-focused-paper-cell.js",
+  "./js/panels-focused-paper-continuation.js",
   "./js/panels-orthogonal-white-gutters.js",
   "./js/panels-paper-recovery.js",
   "./js/panels-colored-rims.js",
