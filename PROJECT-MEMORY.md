@@ -1,3 +1,5 @@
+Current continuation: [Test118](HANDOFF-2.79.118.md), locally318/384,66 remaining from Test117 local309. Three groups: issue1 Reader20 S1(+5), issue3 Reader6 S5(+1), issue3 Reader17 S1(+3).238 Apocalypse selections. Earlier source/display/tap priority retained. See TEST118-VALIDATION.json for completed gates and build. Phone acceptance, group usability and timing pending.
+
 # Nth Shelf project memory
 
 Test117 APK verified:138 retained checks,312 fresh baseline/source/Reader comparisons and two byte-identical native source envelopes. Source1c58b18823435ff2e7661de7c99d26bfae8477e4; downloaded APK SHA256aad7a97946f702db8a88faf391e46f1a50bc6af2f73d9d369c45be4fea2bc30c. Actual isolated identity, v2 signer against CI record and all119 frozen packaged web files verified. See TEST117-VALIDATION.json. Phone acceptance, grouping usability and timing pending.

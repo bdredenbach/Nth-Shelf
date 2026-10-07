@@ -1,0 +1,79 @@
+{
+  "version": "2.79.118",
+  "baseline": {
+    "version": "Test117",
+    "completeFrames": 309,
+    "confirmation": "local validated count; numeric phone confirmation not supplied"
+  },
+  "localCompleteFrames": 318,
+  "originalFrames": 384,
+  "remainingFrames": 66,
+  "rawSelections": 238,
+  "newCompleteOriginals": 9,
+  "newRuntimeSelectionsInApocalypse": 3,
+  "phoneTest118": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 74,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 91,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 101,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 52,
+      "total": 79
+    }
+  ],
+  "changes": [
+    {
+      "issue": 1,
+      "readerPage": 20,
+      "selection": 1,
+      "frames": 5,
+      "type": "new five-original source group",
+      "description": "Upper slain-warrior reaction, narrow left standing figure, large central ambush, bottom-left En portrait and bottom-right Pharaoh carving. Complete captions, balloons and protruding figures remain.",
+      "tap": "Tap any artwork on this page.",
+      "tapPoint": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "issue": 3,
+      "readerPage": 6,
+      "selection": 5,
+      "frames": 1,
+      "type": "new continuation group completing one earlier partial original",
+      "description": "The tall left floating-En scene now retains its upper floating figure, thought balloons and complete lower dialogue chain. Four originals already counted elsewhere in this group add zero. Earlier S1\u2013S4 keep their original displays and tap priority.",
+      "tap": "Tap the pale floating figure below the upper transformation frame, in the upper part of the left column.",
+      "tapPoint": {
+        "x": 0.2,
+        "y": 0.27
+      }
+    },
+    {
+      "issue": 3,
+      "readerPage": 17,
+      "selection": 1,
+      "frames": 3,
+      "type": "new three-original source group",
+      "description": "Tall upper-left wrapped En, upper-right distorted creature/vision and the large lower Pharaoh confrontation. Complete figures and conversation balloons remain.",
+      "tap": "Tap any artwork on this page.",
+      "tapPoint": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "countingRule": "Each unique complete original once. Clipped originals, duplicate context, decoration, covers and credits add zero. Group usability and individual segmentation are separate."
+}

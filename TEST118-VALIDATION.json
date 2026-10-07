@@ -1,0 +1,266 @@
+{
+  "version": "2.79.118",
+  "versionCode": 28046,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest118",
+  "label": "Nth Shelf Test118",
+  "cropReview": {
+    "version": "2.79.118",
+    "baseline": {
+      "version": "Test117",
+      "completeFrames": 309,
+      "confirmation": "local validated count; numeric phone confirmation not supplied"
+    },
+    "localCompleteFrames": 318,
+    "originalFrames": 384,
+    "remainingFrames": 66,
+    "rawSelections": 238,
+    "newCompleteOriginals": 9,
+    "newRuntimeSelectionsInApocalypse": 3,
+    "phoneTest118": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 74,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 91,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 101,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 52,
+        "total": 79
+      }
+    ],
+    "changes": [
+      {
+        "issue": 1,
+        "readerPage": 20,
+        "selection": 1,
+        "frames": 5,
+        "type": "new five-original source group",
+        "description": "Upper slain-warrior reaction, narrow left standing figure, large central ambush, bottom-left En portrait and bottom-right Pharaoh carving. Complete captions, balloons and protruding figures remain.",
+        "tap": "Tap any artwork on this page.",
+        "tapPoint": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      },
+      {
+        "issue": 3,
+        "readerPage": 6,
+        "selection": 5,
+        "frames": 1,
+        "type": "new continuation group completing one earlier partial original",
+        "description": "The tall left floating-En scene now retains its upper floating figure, thought balloons and complete lower dialogue chain. Four originals already counted elsewhere in this group add zero. Earlier S1\u2013S4 keep their original displays and tap priority.",
+        "tap": "Tap the pale floating figure below the upper transformation frame, in the upper part of the left column.",
+        "tapPoint": {
+          "x": 0.2,
+          "y": 0.27
+        }
+      },
+      {
+        "issue": 3,
+        "readerPage": 17,
+        "selection": 1,
+        "frames": 3,
+        "type": "new three-original source group",
+        "description": "Tall upper-left wrapped En, upper-right distorted creature/vision and the large lower Pharaoh confrontation. Complete figures and conversation balloons remain.",
+        "tap": "Tap any artwork on this page.",
+        "tapPoint": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    ],
+    "countingRule": "Each unique complete original once. Clipped originals, duplicate context, decoration, covers and credits add zero. Group usability and individual segmentation are separate."
+  },
+  "phoneAcceptance": "pending",
+  "newContracts": {
+    "source": {
+      "passed": true,
+      "newOwners": 3,
+      "corruptions": 60,
+      "proofRoundTrips": true,
+      "measuredSourceOverlap": true,
+      "transparentAndBlankAndUnprovenNegatives": true,
+      "priorOwnerPreserved": true,
+      "serializedSourceProofsAndBoundaryCorruption": true
+    },
+    "reader": {
+      "passed": true,
+      "oldTaps": 185,
+      "newTaps": 3196,
+      "byGroup": [
+        1521,
+        154,
+        1521
+      ],
+      "overlays": 6,
+      "earlierSelectionsAndTapPriorityPreserved": true,
+      "completeGroupContoursDisplayed": true
+    },
+    "cache": {
+      "passed": true,
+      "shellFiles": 120,
+      "cache": "nth-shelf-shell-2.79.118",
+      "package": "frametest118"
+    }
+  },
+  "retainedChecks": {
+    "passed": true,
+    "behavioralSuites": 141,
+    "cachePackageAndSyntax": "passed"
+  },
+  "verifiedGoldenBaseline": {
+    "passed": true,
+    "checkpointFiles": 13,
+    "runtimeFiles": 119,
+    "pages": 312,
+    "descriptors": 1334,
+    "sourceCommit": "1c58b18823435ff2e7661de7c99d26bfae8477e4"
+  },
+  "finalSupplementaryReplays": {
+    "passed": true,
+    "pages": 312,
+    "priorSourceDescriptors": 1334,
+    "allEarlierSourceDescriptorsUnchanged": true,
+    "allEarlierReaderDisplaysUnchanged": true,
+    "comparisons": [
+      {
+        "passed": true,
+        "book": "apocalypse",
+        "pages": 91,
+        "earlierDescriptors": 235,
+        "newGroups": 3,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "wolverine",
+        "pages": 74,
+        "earlierDescriptors": 389,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "magneto",
+        "pages": 24,
+        "earlierDescriptors": 101,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "earlierDescriptors": 228,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "earlierDescriptors": 193,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "earlierDescriptors": 188,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      }
+    ],
+    "scope": "New supplementary detector replayed on312 original rasters against verified final Test117 descriptors; complete old-versus-new native-source Reader displays compared on312 pages. Full Test118 detector independently replayed on all three changed pages."
+  },
+  "nativeReaderInvariants": {
+    "passed": true,
+    "nativeCanvases": 3,
+    "repeatedOverlays": 6,
+    "results": [
+      {
+        "issue": 1,
+        "page": 20,
+        "credit": 5,
+        "priorCount": 0,
+        "reachable": true,
+        "nativeSourceEnvelopeIdentical": true,
+        "repeatedOverlays": 2,
+        "W": 1988,
+        "H": 3056
+      },
+      {
+        "issue": 3,
+        "page": 6,
+        "credit": 1,
+        "priorCount": 4,
+        "reachable": true,
+        "nativeSourceEnvelopeIdentical": true,
+        "repeatedOverlays": 2,
+        "W": 1988,
+        "H": 3056
+      },
+      {
+        "issue": 3,
+        "page": 17,
+        "credit": 3,
+        "priorCount": 0,
+        "reachable": true,
+        "nativeSourceEnvelopeIdentical": true,
+        "repeatedOverlays": 2,
+        "W": 1988,
+        "H": 3056
+      }
+    ],
+    "actualNativeTapHints": [
+      {
+        "issue": 1,
+        "readerPage": 20,
+        "selection": 1,
+        "tapPoint": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "actualNativeReaderReachable": true
+      },
+      {
+        "issue": 3,
+        "readerPage": 6,
+        "selection": 5,
+        "tapPoint": {
+          "x": 0.2,
+          "y": 0.27
+        },
+        "actualNativeReaderReachable": true
+      },
+      {
+        "issue": 3,
+        "readerPage": 17,
+        "selection": 1,
+        "tapPoint": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "actualNativeReaderReachable": true
+      }
+    ]
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "downloadedApkVerification": {
+    "status": "pending"
+  }
+}

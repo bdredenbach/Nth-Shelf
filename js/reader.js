@@ -3378,3 +3378,5 @@ if(typeof PanelDialogueRowGroups!=="undefined")PanelDialogueRowGroups.installRea
 if(typeof PanelContinuationEnclosureGroups!=="undefined")PanelContinuationEnclosureGroups.installReader(Reader);
 
 if(typeof PanelFirmEnclosureGroups!=="undefined")PanelFirmEnclosureGroups.installReader(Reader);
+
+if(typeof PanelStrongContinuationGroups!=="undefined")PanelStrongContinuationGroups.installReader(Reader);
