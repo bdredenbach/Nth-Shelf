@@ -258,9 +258,132 @@
     ]
   },
   "androidBuild": {
-    "status": "pending"
+    "run_id": 37635395646,
+    "job_id": 112840143051,
+    "status": "completed",
+    "conclusion": "success",
+    "completed": [
+      "Set up job",
+      "Run actions/checkout@v4",
+      "Run actions/setup-node@v4",
+      "Syntax and retained frame regression tests",
+      "Set up browser test dependencies",
+      "Browser interaction and backup round-trip checks",
+      "Run actions/setup-java@v4",
+      "Native streaming archive regression",
+      "Run android-actions/setup-android@v3",
+      "Run gradle/actions/setup-gradle@v4",
+      "Install Android SDK 35",
+      "Build isolated Test118 APK",
+      "Verify APK signature, identity and exact packaged web files",
+      "Upload verified APK, source and build record",
+      "Post Run gradle/actions/setup-gradle@v4",
+      "Post Run actions/setup-java@v4",
+      "Post Run actions/setup-node@v4",
+      "Post Run actions/checkout@v4",
+      "Complete job"
+    ],
+    "sourceCommit": "925066e545201835b1354408f061f87e3d5341a3",
+    "sourceTree": "19d73841aece0f702345d48f741352db9586b0fa",
+    "artifact_id": 11490266492,
+    "artifactDigest": "sha256:28961c118427d2d21c872611a0097f823f24e68d17702d18e742689d4cf1fb0c"
   },
   "downloadedApkVerification": {
-    "status": "pending"
-  }
+    "passed": true,
+    "apkSha256": "1e04128706367893cf1f8d3e688d3e72470c7ab92e14922aaa0257648deee811",
+    "apkBytes": 3571468,
+    "sourceCommit": "925066e545201835b1354408f061f87e3d5341a3",
+    "verifiedPackagedWebFiles": 120,
+    "actualCompiledManifest": {
+      "package": "io.github.bdredenbach.nthshelf.frametest118",
+      "versionName": "2.79.118",
+      "versionCode": 28046
+    },
+    "actualLabel": "Nth Shelf Test118",
+    "actualSignerCertificateSha256": "17335ab18e5b74c413b11bcf1fdb1bf68bef105858169db4e3a1649f26a7fcb5",
+    "actualSignerCertificateMatchesCiRecord": true,
+    "signingScheme": "APK v2, one CI debug signer",
+    "ciSignatureVerificationPassed": true,
+    "allPackagedBytesMatchTestedSource": true
+  },
+  "publication": {
+    "baseCommit": "957a1306d47fd732fd25ed88fd369bf349c4c4a6",
+    "sourceCommit": "925066e545201835b1354408f061f87e3d5341a3",
+    "sourceTree": "19d73841aece0f702345d48f741352db9586b0fa",
+    "files": 26,
+    "characters": 926747
+  },
+  "ciRetainedChecks": {
+    "passed": true,
+    "behavioralSuites": 141,
+    "cachePackageAndSyntax": "passed"
+  },
+  "ciBrowserBackupAndNativeArchive": {
+    "passed": true,
+    "branding": "Actual browser scroll travel: [{\"mode\":\"scroll\",\"multiplier\":0.33,\"seconds\":1.1000999999999768,\"distance\":13},{\"mode\":\"scroll\",\"multiplier\":0.4,\"seconds\":1.1001000000000931,\"distance\":16},{\"mode\":\"scroll\",\"multiplier\":0.5,\"seconds\":1.1000999999999768,\"distance\":20},{\"mode\":\"manga\",\"multiplier\":0.33,\"seconds\":1.1000999999999768,\"distance\":14},{\"mode\":\"manga\",\"multiplier\":0.4,\"seconds\":1.1000999999999768,\"distance\":17},{\"mode\":\"manga\",\"multiplier\":0.5,\"seconds\":1.1000999999999768,\"distance\":21},{\"mode\":\"webcomic\",\"multiplier\":0.33,\"seconds\":1.1001999999999534,\"distance\":13},{\"mode\":\"webcomic\",\"multiplier\":0.4,\"seconds\":1.1000999999999768,\"distance\":16},{\"mode\":\"webcomic\",\"multiplier\":0.5,\"seconds\":1.1001000000000931,\"distance\":20}]\n{\n  \"pageDeck\": \"next/previous passed\",\n  \"pinch\": \"single and two-page passed\",\n  \"nativeFullscreen\": \"entry and exit requested\",\n  \"guides\": \"first use and shelf passed\",\n  \"restoredComics\": 2,\n  \"verifiedPages\": 8,\n  \"collectionFiles\": [\n    \"001-Issue 0.cbz\",\n    \"002-Issue 1.cbz\"\n  ],\n  \"invalidRestore\": \"rejected before commit\",\n  \"errors\": []\n}",
+    "backup": "{\"backup\":\"whole original CBZ + rebuilt CBZ\",\"binary\":\"two bounded in-flight chunks, exact bytes\",\"warm\":\"zero page/source bytes cross bridge\",\"restore\":\"v3 and legacy v2, metadata + page byte parity\",\"failure\":\"rollback\",\"cancel\":\"rollback\",\"interrupted\":\"startup cleanup\"}",
+    "nativeArchive": "PASS: nested CBZ creation, cached whole archive copy, SHA-256 verification, nested page restore and exact retained source bytes\nPASS: restore bridge payloads: 1228993 short reads -> 601 batched replies, same 629145631 bytes\nPASS: 600 MiB archive write/read/verify with 32 MiB heap; cancellation and corruption rejection"
+  },
+  "illustratedReviewVerification": {
+    "passed": true,
+    "embeddedOriginalAndReaderImages": 6,
+    "reviewCards": 3,
+    "nativeVerifiedTapMarkers": 3,
+    "visualSourcesAndNativeCropsInspected": true,
+    "responsiveLayoutDefined": true
+  },
+  "finalMetadataCommitNote": "Metadata-only documentation follows the tested APK source commit; runtime and frozen web assets remain identical.",
+  "deliverablesSaved": {
+    "apk": true,
+    "illustratedReview": true,
+    "newChatHandoff": true,
+    "replayCheckpoint": true,
+    "localIdentityMetadataApplied": true
+  },
+  "savedFiles": [
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/test118/deliverables/Nth-Shelf-Test118-Frame-Review.html",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_0000000010d4820d9fbca5b35833a5e9",
+      "library_file_id": "libfile_52d3fac51c70819197f90ad931b58594",
+      "file_name": "Nth-Shelf-Test118-Frame-Review.html",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test118-Frame-Review.html",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/test118/deliverables/Nth-Shelf-Test118-New-Chat-Handoff.txt",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000439c81f58422854d7fdb45a4",
+      "library_file_id": "libfile_6040dcb08d5481918574c897c37d97c0",
+      "file_name": "Nth-Shelf-Test118-New-Chat-Handoff.txt",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test118-New-Chat-Handoff.txt",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/test118/deliverables/Nth-Shelf-2.79.118-Test118.apk",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000fce4820d91763398947d6889",
+      "library_file_id": "libfile_b6493912d3988191bd875a83b7854bf0",
+      "file_name": "Nth-Shelf-2.79.118-Test118.apk",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-2.79.118-Test118.apk",
+      "current_version_number": 0
+    },
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/test118/deliverables/Nth-Shelf-Test118-Replay-Checkpoint.zip",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000e4e481f5ad4bd3fd661884b2",
+      "library_file_id": "libfile_3f8427802a008191911ee1f86a3ce6fe",
+      "file_name": "Nth-Shelf-Test118-Replay-Checkpoint.zip",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test118-Replay-Checkpoint.zip",
+      "current_version_number": 0
+    }
+  ]
 }

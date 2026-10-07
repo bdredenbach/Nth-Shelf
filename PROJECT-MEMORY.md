@@ -1,3 +1,7 @@
+Test118 APK, illustrated review, new-chat handoff and312-page/1,337-selection replay checkpoint saved successfully. The checkpoint contains no artwork and must only be used offline after source/runtime/hash verification. All deliverables remain tied to tested source925066e545201835b1354408f061f87e3d5341a3.
+
+Test118 verified APK: local318/384,66 remaining; source 925066e545201835b1354408f061f87e3d5341a3; CI run37635395646; artifact11490266492; SHA2561e04128706367893cf1f8d3e688d3e72470c7ab92e14922aaa0257648deee811.141 retained behavioral gates,312 source/Reader comparisons, three native envelopes, compiled package/signature and120 frozen web assets verified. Phone acceptance/group usability/timing pending.
+
 Current continuation: [Test118](HANDOFF-2.79.118.md), locally318/384,66 remaining from Test117 local309. Three groups: issue1 Reader20 S1(+5), issue3 Reader6 S5(+1), issue3 Reader17 S1(+3).238 Apocalypse selections. Earlier source/display/tap priority retained. See TEST118-VALIDATION.json for completed gates and build. Phone acceptance, group usability and timing pending.
 
 # Nth Shelf project memory
