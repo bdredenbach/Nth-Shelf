@@ -19,5 +19,18 @@
       "P03-F4"
     ],
     "nextScope": "One frame, or these two together only if their immediate continuity and full ownership pass review."
-  }
+  },
+  "sourceCommit": "1632dc37e0082830c3c27cd0b8f9f32afd94929b",
+  "sourceTree": "eab94cf3f347a22bd281f0edc46e4a7a363062c3",
+  "verifiedBuild": {
+    "runId": 37669217951,
+    "workflow": "Build Test120 APK",
+    "sourceCommit": "1632dc37e0082830c3c27cd0b8f9f32afd94929b",
+    "conclusion": "success",
+    "artifactId": 11504817264,
+    "artifactName": "Nth-Shelf-2.79.120-Test120",
+    "artifactBytes": 13581442,
+    "artifactDigest": "sha256:f6e5b6c70c9b031ffa28d37d321963d56cfc974f1578227aba45cf149fd383e1"
+  },
+  "apkSha256": "273a47f132cf2f7a8233e966db2037dfe3becfddf3b18f212f4bbfdd647140dc"
 }
