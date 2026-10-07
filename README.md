@@ -1,5 +1,7 @@
 # Nth Shelf
 
+Test116 APK verified:136 retained checks,312 source/Reader comparisons, three fresh detector runs, three byte-identical native source envelopes and five unchanged earlier canvases. CI browser/backup and native archive pass. Source4c091e45c1e40f43a69805ddb4c5ae0bd6441efc; downloaded APK SHA2563e6ef43e8fb344ad439689fade6caa1e4fbe4c89d360fa94d36422a48fd6d959. Actual isolated identity, v2 signer against CI record and all118 frozen packaged web files verified. See TEST116-VALIDATION.json. Phone acceptance, grouping usability and timing pending.
+
 Current continuation: [Test116](HANDOFF-2.79.116.md), locally300/384,84 remaining from Test115 local291. Nine new complete originals in three groups: issue1 Reader12 S3(+3), issue2 Reader10 S4(+1), issue3 Reader19 S1(+5).233 selections. Earlier source/display/tap priority remains intact. Six duplicate originals and sphinx/halo decoration add zero. See TEST116-VALIDATION.json. Phone acceptance, group usability and timing pending.
 
 Test115 APK verified: all134 retained checks,312 source/Reader comparisons, three fresh detector runs, three byte-identical native group envelopes and five unchanged earlier canvases. CI browser/backup and native archive pass. Source109ce5fd3cefd23f2feb868400db16f0f152503b; downloaded APK SHA25669ffbf1ceedf1f244f7a9218ec654eb4da08b00eb45c950f99ebcd28149df6f4. Actual isolated identity, v2 signer against CI record and all117 frozen packaged web files verified. Review and handoff saved; see TEST115-VALIDATION.json. Phone acceptance, grouping usability and timing pending.
