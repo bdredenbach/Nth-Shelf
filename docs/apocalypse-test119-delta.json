@@ -1,0 +1,66 @@
+{
+  "version": "2.79.119",
+  "baseline": {
+    "version": "Test118",
+    "completeFrames": 318,
+    "confirmation": "local validated count; numeric phone confirmation not supplied"
+  },
+  "localCompleteFrames": 327,
+  "originalFrames": 384,
+  "remainingFrames": 57,
+  "rawSelections": 240,
+  "newCompleteOriginals": 9,
+  "newRuntimeSelectionsInApocalypse": 2,
+  "phoneTest119": "pending",
+  "issueTotals": [
+    {
+      "issue": 1,
+      "complete": 83,
+      "total": 99
+    },
+    {
+      "issue": 2,
+      "complete": 91,
+      "total": 97
+    },
+    {
+      "issue": 3,
+      "complete": 101,
+      "total": 109
+    },
+    {
+      "issue": 4,
+      "complete": 52,
+      "total": 79
+    }
+  ],
+  "changes": [
+    {
+      "issue": 1,
+      "readerPage": 6,
+      "selection": 1,
+      "frames": 7,
+      "type": "new seven-original source group",
+      "description": "Upper-left narrow figure, upper-center baby discovery, upper-right baby-face close-up, middle crowd, middle-right Baal portrait inset, lower sacrifice discussion, and bottom Baal with baby. All balloons, protruding hands, figures and original gutters remain.",
+      "tap": "Tap any artwork on this page.",
+      "tapPoint": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "issue": 1,
+      "readerPage": 24,
+      "selection": 2,
+      "frames": 2,
+      "type": "new source group completing two missing originals",
+      "description": "Complete upper-right throne view and large lower throne conversation. The earlier upper-left Baal/Logos scene adds zero to the new count; S1 retains its original display and tap priority. The NEXT preview pillar is decorative lettering and adds zero.",
+      "tap": "Tap the upper-right throne view or the large lower conversation to open S2.",
+      "tapPoint": {
+        "x": 0.75,
+        "y": 0.25
+      }
+    }
+  ],
+  "countingRule": "Count each unique complete original once. Clipped originals, duplicate context, decoration, covers and credits add zero. Group usability and individual segmentation are separate."
+}

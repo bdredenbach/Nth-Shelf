@@ -3380,3 +3380,5 @@ if(typeof PanelContinuationEnclosureGroups!=="undefined")PanelContinuationEnclos
 if(typeof PanelFirmEnclosureGroups!=="undefined")PanelFirmEnclosureGroups.installReader(Reader);
 
 if(typeof PanelStrongContinuationGroups!=="undefined")PanelStrongContinuationGroups.installReader(Reader);
+
+if(typeof PanelHighContrastEnclosures!=="undefined")PanelHighContrastEnclosures.installReader(Reader);

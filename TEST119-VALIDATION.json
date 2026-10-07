@@ -1,0 +1,231 @@
+{
+  "version": "2.79.119",
+  "versionCode": 28047,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest119",
+  "label": "Nth Shelf Test119",
+  "cropReview": {
+    "version": "2.79.119",
+    "baseline": {
+      "version": "Test118",
+      "completeFrames": 318,
+      "confirmation": "local validated count; numeric phone confirmation not supplied"
+    },
+    "localCompleteFrames": 327,
+    "originalFrames": 384,
+    "remainingFrames": 57,
+    "rawSelections": 240,
+    "newCompleteOriginals": 9,
+    "newRuntimeSelectionsInApocalypse": 2,
+    "phoneTest119": "pending",
+    "issueTotals": [
+      {
+        "issue": 1,
+        "complete": 83,
+        "total": 99
+      },
+      {
+        "issue": 2,
+        "complete": 91,
+        "total": 97
+      },
+      {
+        "issue": 3,
+        "complete": 101,
+        "total": 109
+      },
+      {
+        "issue": 4,
+        "complete": 52,
+        "total": 79
+      }
+    ],
+    "changes": [
+      {
+        "issue": 1,
+        "readerPage": 6,
+        "selection": 1,
+        "frames": 7,
+        "type": "new seven-original source group",
+        "description": "Upper-left narrow figure, upper-center baby discovery, upper-right baby-face close-up, middle crowd, middle-right Baal portrait inset, lower sacrifice discussion, and bottom Baal with baby. All balloons, protruding hands, figures and original gutters remain.",
+        "tap": "Tap any artwork on this page.",
+        "tapPoint": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      },
+      {
+        "issue": 1,
+        "readerPage": 24,
+        "selection": 2,
+        "frames": 2,
+        "type": "new source group completing two missing originals",
+        "description": "Complete upper-right throne view and large lower throne conversation. The earlier upper-left Baal/Logos scene adds zero to the new count; S1 retains its original display and tap priority. The NEXT preview pillar is decorative lettering and adds zero.",
+        "tap": "Tap the upper-right throne view or the large lower conversation to open S2.",
+        "tapPoint": {
+          "x": 0.75,
+          "y": 0.25
+        }
+      }
+    ],
+    "countingRule": "Count each unique complete original once. Clipped originals, duplicate context, decoration, covers and credits add zero. Group usability and individual segmentation are separate."
+  },
+  "phoneAcceptance": "pending",
+  "newContracts": {
+    "source": {
+      "passed": true,
+      "newOwners": 2,
+      "corruptions": 40,
+      "proofRoundTrips": true,
+      "measuredSourceOverlap": true,
+      "transparentAndBlankAndUnprovenNegatives": true,
+      "priorOwnerPreserved": true,
+      "serializedSourceProofsAndBoundaryCorruption": true
+    },
+    "reader": {
+      "passed": true,
+      "oldTaps": 39,
+      "newTaps": 2878,
+      "byGroup": [
+        1521,
+        1357
+      ],
+      "overlays": 4,
+      "earlierSelectionsAndTapPriorityPreserved": true,
+      "completeGroupContoursDisplayed": true
+    },
+    "cache": {
+      "passed": true,
+      "shellFiles": 121,
+      "cache": "nth-shelf-shell-2.79.119",
+      "package": "frametest119"
+    }
+  },
+  "retainedChecks": {
+    "passed": true,
+    "behavioralSuites": 143,
+    "cachePackageAndSyntax": "passed"
+  },
+  "verifiedGoldenBaseline": {
+    "passed": true,
+    "checkpointFiles": 13,
+    "runtimeFiles": 120,
+    "pages": 312,
+    "descriptors": 1337,
+    "sourceCommit": "925066e545201835b1354408f061f87e3d5341a3"
+  },
+  "finalSupplementaryReplays": {
+    "passed": true,
+    "pages": 312,
+    "priorSourceDescriptors": 1337,
+    "allEarlierSourceDescriptorsUnchanged": true,
+    "allEarlierReaderDisplaysUnchanged": true,
+    "comparisons": [
+      {
+        "passed": true,
+        "book": "apocalypse",
+        "pages": 91,
+        "earlierDescriptors": 238,
+        "newGroups": 2,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "wolverine",
+        "pages": 74,
+        "earlierDescriptors": 389,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "magneto",
+        "pages": 24,
+        "earlierDescriptors": 101,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "29_Chapter_30",
+        "pages": 41,
+        "earlierDescriptors": 228,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "30_Chapter_31",
+        "pages": 41,
+        "earlierDescriptors": 193,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      },
+      {
+        "passed": true,
+        "book": "31_Chapter_32",
+        "pages": 41,
+        "earlierDescriptors": 188,
+        "newGroups": 0,
+        "allEarlierReaderDisplaysUnchanged": true
+      }
+    ],
+    "scope": "New supplementary detector replayed on312 original rasters against verified final Test118 descriptors; complete old-versus-new native-source Reader displays compared on312 pages. Full Test119 detector independently replayed on both changed pages."
+  },
+  "nativeReaderInvariants": {
+    "passed": true,
+    "nativeCanvases": 2,
+    "repeatedOverlays": 4,
+    "results": [
+      {
+        "issue": 1,
+        "page": 6,
+        "credit": 7,
+        "priorCount": 0,
+        "reachable": true,
+        "nativeSourceEnvelopeIdentical": true,
+        "repeatedOverlays": 2,
+        "W": 1988,
+        "H": 3056
+      },
+      {
+        "issue": 1,
+        "page": 24,
+        "credit": 2,
+        "priorCount": 1,
+        "reachable": true,
+        "nativeSourceEnvelopeIdentical": true,
+        "repeatedOverlays": 2,
+        "W": 1988,
+        "H": 3056
+      }
+    ],
+    "actualNativeTapHints": [
+      {
+        "issue": 1,
+        "readerPage": 6,
+        "selection": 1,
+        "tapPoint": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "actualNativeReaderReachable": true
+      },
+      {
+        "issue": 1,
+        "readerPage": 24,
+        "selection": 2,
+        "tapPoint": {
+          "x": 0.75,
+          "y": 0.25
+        },
+        "actualNativeReaderReachable": true
+      }
+    ]
+  },
+  "androidBuild": {
+    "status": "pending"
+  },
+  "downloadedApkVerification": {
+    "status": "pending"
+  }
+}
