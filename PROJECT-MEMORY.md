@@ -1,5 +1,7 @@
 # Nth Shelf project memory
 
+Test117 APK verified:138 retained checks,312 fresh baseline/source/Reader comparisons and two byte-identical native source envelopes. Source1c58b18823435ff2e7661de7c99d26bfae8477e4; downloaded APK SHA256aad7a97946f702db8a88faf391e46f1a50bc6af2f73d9d369c45be4fea2bc30c. Actual isolated identity, v2 signer against CI record and all119 frozen packaged web files verified. See TEST117-VALIDATION.json. Phone acceptance, grouping usability and timing pending.
+
 Current continuation: [Test117](HANDOFF-2.79.117.md), locally309/384,75 remaining from Test116 local300. Two new empty-page groups: issue1 Reader15 S1(+3), issue2 Reader5 S1(+6). 235 selections. Earlier source/display/tap priority remains intact. See TEST117-VALIDATION.json for actual completed gates and build. Phone acceptance, group usability and timing pending.
 
 Test116 APK verified:136 retained checks,312 source/Reader comparisons, three fresh detector runs, three byte-identical native source envelopes and five unchanged earlier canvases. CI browser/backup and native archive pass. Source4c091e45c1e40f43a69805ddb4c5ae0bd6441efc; downloaded APK SHA2563e6ef43e8fb344ad439689fade6caa1e4fbe4c89d360fa94d36422a48fd6d959. Actual isolated identity, v2 signer against CI record and all118 frozen packaged web files verified. See TEST116-VALIDATION.json. Phone acceptance, grouping usability and timing pending.
