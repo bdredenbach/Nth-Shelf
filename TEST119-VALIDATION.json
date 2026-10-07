@@ -223,9 +223,228 @@
     ]
   },
   "androidBuild": {
-    "status": "pending"
+    "run_id": 37647741445,
+    "job_id": 112882810093,
+    "conclusion": "success",
+    "sourceCommit": "78e6bdf38acd98e9165674943cc68d51672c6350",
+    "sourceTree": "975364f59adb9193e8e14d4a5c7119d3765ab151",
+    "artifact_id": 11496240701,
+    "artifactDigest": "sha256:f3fc4971d1c31450a005257984ba031cacd8592046b6ebba8b80242120cc5146",
+    "artifactBytes": 13474172,
+    "completedSteps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Syntax and retained frame regression tests",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Set up browser test dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Browser interaction and backup round-trip checks",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6
+      },
+      {
+        "name": "Run actions/setup-java@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Native streaming archive regression",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8
+      },
+      {
+        "name": "Run android-actions/setup-android@v3",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9
+      },
+      {
+        "name": "Run gradle/actions/setup-gradle@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10
+      },
+      {
+        "name": "Install Android SDK 35",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11
+      },
+      {
+        "name": "Build isolated Test119 APK",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12
+      },
+      {
+        "name": "Verify APK signature, identity and exact packaged web files",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13
+      },
+      {
+        "name": "Upload verified APK, source and build record",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14
+      },
+      {
+        "name": "Preserve failure diagnostics",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 15
+      },
+      {
+        "name": "Post Run gradle/actions/setup-gradle@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 27
+      },
+      {
+        "name": "Post Run actions/setup-java@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 28
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 29
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 30
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 31
+      }
+    ]
   },
   "downloadedApkVerification": {
-    "status": "pending"
-  }
+    "passed": true,
+    "apkSha256": "6e76f3f70fd213c37e386f4fd945e191102015f65919d08b7b9d5392b7d6fcec",
+    "apkBytes": 3576393,
+    "sourceCommit": "78e6bdf38acd98e9165674943cc68d51672c6350",
+    "verifiedPackagedWebFiles": 121,
+    "actualCompiledManifest": {
+      "package": "io.github.bdredenbach.nthshelf.frametest119",
+      "versionName": "2.79.119",
+      "versionCode": 28047
+    },
+    "actualLabel": "Nth Shelf Test119",
+    "actualSignerCertificateSha256": "8d452b9009133fb1cfe9ea8f5ec3e4ae2c16f045d04114195d1ec8280dc258fa",
+    "actualSignerCertificateMatchesCiRecord": true,
+    "signingScheme": "APK v2, one CI debug signer",
+    "ciSignatureVerificationPassed": true,
+    "allPackagedBytesMatchTestedSource": true
+  },
+  "publication": {
+    "baseCommit": "176382b226615cc6f5325705e8078a657cde3166",
+    "sourceCommit": "78e6bdf38acd98e9165674943cc68d51672c6350",
+    "sourceTree": "975364f59adb9193e8e14d4a5c7119d3765ab151",
+    "files": 26,
+    "characters": 499486
+  },
+  "ciRetainedChecks": {
+    "passed": true,
+    "behavioralSuites": 143,
+    "cachePackageAndSyntax": "passed"
+  },
+  "ciBrowserBackupAndNativeArchive": {
+    "passed": true,
+    "branding": "Actual browser scroll travel: [{\"mode\":\"scroll\",\"multiplier\":0.33,\"seconds\":1.1001999999999534,\"distance\":14},{\"mode\":\"scroll\",\"multiplier\":0.4,\"seconds\":1.1002000000000116,\"distance\":16},{\"mode\":\"scroll\",\"multiplier\":0.5,\"seconds\":1.1,\"distance\":20},{\"mode\":\"manga\",\"multiplier\":0.33,\"seconds\":1.1002000000000116,\"distance\":14},{\"mode\":\"manga\",\"multiplier\":0.4,\"seconds\":1.100100000000035,\"distance\":17},{\"mode\":\"manga\",\"multiplier\":0.5,\"seconds\":1.1001999999999534,\"distance\":21},{\"mode\":\"webcomic\",\"multiplier\":0.33,\"seconds\":1.1002000000000116,\"distance\":13},{\"mode\":\"webcomic\",\"multiplier\":0.4,\"seconds\":1.1000999999999768,\"distance\":16},{\"mode\":\"webcomic\",\"multiplier\":0.5,\"seconds\":1.1002000000000116,\"distance\":20}]\n{\n  \"pageDeck\": \"next/previous passed\",\n  \"pinch\": \"single and two-page passed\",\n  \"nativeFullscreen\": \"entry and exit requested\",\n  \"guides\": \"first use and shelf passed\",\n  \"restoredComics\": 2,\n  \"verifiedPages\": 8,\n  \"collectionFiles\": [\n    \"001-Issue 0.cbz\",\n    \"002-Issue 1.cbz\"\n  ],\n  \"invalidRestore\": \"rejected before commit\",\n  \"errors\": []\n}",
+    "backup": "{\"backup\":\"whole original CBZ + rebuilt CBZ\",\"binary\":\"two bounded in-flight chunks, exact bytes\",\"warm\":\"zero page/source bytes cross bridge\",\"restore\":\"v3 and legacy v2, metadata + page byte parity\",\"failure\":\"rollback\",\"cancel\":\"rollback\",\"interrupted\":\"startup cleanup\"}",
+    "nativeArchive": "PASS: nested CBZ creation, cached whole archive copy, SHA-256 verification, nested page restore and exact retained source bytes\nPASS: restore bridge payloads: 1228993 short reads -> 601 batched replies, same 629145631 bytes\nPASS: 600 MiB archive write/read/verify with 32 MiB heap; cancellation and corruption rejection"
+  },
+  "illustratedReviewVerification": {
+    "passed": true,
+    "embeddedOriginalAndReaderImages": 4,
+    "reviewCards": 2,
+    "nativeVerifiedTapMarkers": 2,
+    "visualSourcesAndNativeCropsInspected": true,
+    "responsiveLayoutDefined": true
+  },
+  "finalMetadataCommitNote": "Metadata-only documentation follows the tested APK source commit; runtime and frozen web assets remain identical.",
+  "deliverablesSaved": {
+    "review": true,
+    "handoff": true,
+    "apk": true,
+    "checkpoint": true
+  },
+  "savedFiles": [
+    {
+      "filename": "Nth-Shelf-Test119-Frame-Review.html",
+      "local_path": "/workspace/scratch/37406b7d348a/test119/deliverables/Nth-Shelf-Test119-Frame-Review.html",
+      "library_file_id": "libfile_7a7d8c288c948191b8ae79e09eede222",
+      "file_id": "file_000000006378820dbef6d3c742724152",
+      "version": null,
+      "bytes": 27680673,
+      "sha256": "3b53bcaff9a31e4748e1d8f8ccf64926a258e039083be154b2ee725dcd7f5888",
+      "saved": true
+    },
+    {
+      "filename": "Nth-Shelf-Test119-New-Chat-Handoff.txt",
+      "local_path": "/workspace/scratch/37406b7d348a/test119/deliverables/Nth-Shelf-Test119-New-Chat-Handoff.txt",
+      "library_file_id": "libfile_e5c16f27a4f08191ab945f975c7656b9",
+      "file_id": "file_000000000ab48210becad98a5f53e71f",
+      "version": null,
+      "bytes": 5973,
+      "sha256": "4b584a61f6564197725129ef87657af2f29b6d7f8b6b7c3a28da33256d6d6581",
+      "saved": true
+    },
+    {
+      "filename": "Nth-Shelf-2.79.119-Test119.apk",
+      "local_path": "/workspace/scratch/37406b7d348a/test119/deliverables/Nth-Shelf-2.79.119-Test119.apk",
+      "library_file_id": "libfile_e8cc33d986a88191a4846b64717b25a0",
+      "file_id": "file_00000000c7d081f6b68b994dea1c980f",
+      "version": null,
+      "bytes": 3576393,
+      "sha256": "6e76f3f70fd213c37e386f4fd945e191102015f65919d08b7b9d5392b7d6fcec",
+      "saved": true
+    },
+    {
+      "filename": "Nth-Shelf-Test119-Replay-Checkpoint.zip",
+      "local_path": "/workspace/scratch/37406b7d348a/test119/deliverables/Nth-Shelf-Test119-Replay-Checkpoint.zip",
+      "library_file_id": "libfile_b32ae41c228881918a0cbc3a2a7a6c8d",
+      "file_id": "file_00000000aacc820cabc488933a25ab5e",
+      "version": null,
+      "bytes": 4710938,
+      "sha256": "f8c7887923ec850817d7a073c7c361e7efcbff6c1f19b1b68a9bd8408c304361",
+      "saved": true
+    }
+  ]
 }
