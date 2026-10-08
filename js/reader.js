@@ -3387,3 +3387,4 @@ if(typeof PanelFocusedPaperCell!=="undefined")PanelFocusedPaperCell.installReade
 if(typeof PanelFocusedPaperContinuation!=='undefined')PanelFocusedPaperContinuation.installReader(Reader);
 
 if(typeof PanelSaturatedFrontierCell!=='undefined')PanelSaturatedFrontierCell.installReader(Reader);
+if(typeof PanelSaturatedRailCell!=='undefined')PanelSaturatedRailCell.installReader(Reader);

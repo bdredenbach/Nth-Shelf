@@ -1,0 +1,147 @@
+{
+  "test": "Test123",
+  "version": "2.79.123",
+  "versionCode": 28051,
+  "applicationId": "io.github.bdredenbach.nthshelf.frametest123",
+  "target": {
+    "comic": "Rise of Apocalypse #1",
+    "readerPage": 5,
+    "selection": 2,
+    "originalFrame": "P05-F2",
+    "description": "One complete horsemen conversation original; all six owned balloons and source artwork. Prior night camp and lower Hold/portrait/mounted scene excluded. Upper two originals remain independently readable, kept as singles."
+  },
+  "baseline": {
+    "metadataCommit": "30008b327f6379bf7be76e990f14952a4dd6184c",
+    "metadataTree": "5e172fc3169dd85d2a7277886295772860e036ad",
+    "runtimeCommit": "d26b9fd8a75f9de97740b4b4078139a50f3f8b5e",
+    "runtimeTree": "58311bc8ab9f5ae15bef7f13cb0d2c7be781bc3e"
+  },
+  "focusedCounts": {
+    "singles": 31,
+    "pairs": 5,
+    "uniqueOriginalFrames": 41,
+    "originalFrames": 99,
+    "remaining": 58,
+    "qualifyingSteps": 36,
+    "currentSelections": 54,
+    "rejectedSelections": 18,
+    "historicBroadCounts": "83/99 and327/384 are artwork preservation, not focused readiness."
+  },
+  "retainedChecks": {
+    "passed": true,
+    "behavioralSuites": 151,
+    "cachePackageAndSyntax": "passed"
+  },
+  "nativeReaderReplay": {
+    "passed": true,
+    "priorCanvasesByteIdentical": 53,
+    "earlierQualifyingStepsPreserved": 35,
+    "pages": 24,
+    "currentSelections": 54,
+    "target": {
+      "id": 2,
+      "identitySource": "structural-grid-frame",
+      "geometryType": "saturated-rail-cell",
+      "proofVersion": 72,
+      "box": [
+        0.035866780529461996,
+        0.3188888888888889,
+        0.9410760034158838,
+        0.24444444444444444
+      ],
+      "canvas": [
+        1871,
+        747
+      ],
+      "crop": "p05-s2.png",
+      "tapPoint": {
+        "x": 0.5064047822374039,
+        "y": 0.4411111111111111
+      },
+      "reachable": true,
+      "actualReaderOverlay": true,
+      "dimActive": true,
+      "finalTransform": "translate3d(-8.933390264730996px, 42.974335466316745px, 0) scale(1.0243593466424683)"
+    },
+    "scope": "Actual native Reader canvas/display/tap/dim/final geometry; composites are not browser/phone screenshots."
+  },
+  "storedCorpusReplay": {
+    "passed": true,
+    "eligibleOriginalsReplayed": 1,
+    "checks": [
+      {
+        "book": "final-29_Chapter_30.json",
+        "pages": 41,
+        "priorDescriptors": 228,
+        "currentDescriptors": 228,
+        "changes": []
+      },
+      {
+        "book": "final-30_Chapter_31.json",
+        "pages": 41,
+        "priorDescriptors": 193,
+        "currentDescriptors": 193,
+        "changes": []
+      },
+      {
+        "book": "final-31_Chapter_32.json",
+        "pages": 41,
+        "priorDescriptors": 188,
+        "currentDescriptors": 188,
+        "changes": []
+      },
+      {
+        "book": "final-apocalypse.json",
+        "pages": 91,
+        "priorDescriptors": 242,
+        "currentDescriptors": 243,
+        "changes": [
+          {
+            "readerPage": 5,
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-004.jpg"
+          }
+        ]
+      },
+      {
+        "book": "final-magneto.json",
+        "pages": 24,
+        "priorDescriptors": 101,
+        "currentDescriptors": 101,
+        "changes": []
+      },
+      {
+        "book": "final-wolverine.json",
+        "pages": 74,
+        "priorDescriptors": 389,
+        "currentDescriptors": 389,
+        "changes": []
+      }
+    ],
+    "scope": "New rail refinement compared across all312 stored Test122 maps/1341 descriptors; all eligible parents replayed on original source. No full-corpus old-detector replay claimed."
+  },
+  "freshChangedPageDetector": {
+    "passed": true,
+    "readerPage": 5,
+    "exactSelections": 2
+  },
+  "androidBuild": {
+    "status": "awaiting CI"
+  },
+  "userAcceptance": {
+    "Test121": "Direction/sandstorm pair user-confirmed.",
+    "Test122": "Night camp phone acceptance still pending; user asked to continue without explicit phone verdict.",
+    "Test123": "New horsemen conversation phone acceptance pending.",
+    "automaticReader": "Planned, not implemented."
+  },
+  "frozenRuntimeFiles": 125,
+  "localRetainedReceipt": {
+    "exitCode": 0,
+    "completedBehavioralSuites": 151,
+    "retainedCompletion": {
+      "passed": true,
+      "behavioralSuites": 151,
+      "cachePackageAndSyntax": "passed"
+    },
+    "logSha256": "c1a69e7d2bf69a7eaa18e88be6a7401c8798f009e591da90af74bce60047ddee"
+  }
+}
