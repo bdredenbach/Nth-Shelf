@@ -3392,3 +3392,4 @@ if(typeof PanelSaturatedRailCell!=='undefined')PanelSaturatedRailCell.installRea
 if(typeof PanelSaturatedRoundInset!=='undefined')PanelSaturatedRoundInset.installReader(Reader);
 
 if(typeof PanelSaturatedTerminalCell!=='undefined')PanelSaturatedTerminalCell.installReader(Reader);
+if(typeof PanelDetachedCaptions!=='undefined')PanelDetachedCaptions.installReader(Reader);

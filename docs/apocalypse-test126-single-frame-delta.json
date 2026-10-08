@@ -1,0 +1,43 @@
+{
+  "checkpoint": 1,
+  "bulkTaskInProgress": true,
+  "changedSelection": {
+    "readerPage": 14,
+    "selection": 5,
+    "frames": [
+      "P14-F5",
+      "P14-F6"
+    ],
+    "verdict": "shared-composition pair",
+    "change": "Restore complete detached source caption"
+  },
+  "sourceDiscoveryUnchanged": true,
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 56,
+    "validSingleSelections": 33,
+    "validDualSelections": 6,
+    "qualifyingSelections": 39,
+    "qualifyingUniqueOriginalFrames": 45,
+    "remainingUniqueOriginalFrames": 54,
+    "rejectedSelections": 17,
+    "rejectedOversized": 9,
+    "rejectedMixedNeighbor": 6,
+    "rejectedDamaged": 2,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      8,
+      14,
+      16,
+      19,
+      21
+    ]
+  }
+}

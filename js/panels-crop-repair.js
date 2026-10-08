@@ -14,10 +14,10 @@ const PanelCropRepair = (() => {
   // Closed chromatic caption bodies can contain matte-shaped missing letters.
   // Two source palettes must agree after a one-pixel opening separates touching
   // rims. This only restores a compact, ink-bearing body to its existing owner.
-  const captionCache=new WeakMap();
-  function captionBodies(rgba,w,h){
+  const captionCache=new WeakMap(),detachedCaptionCache=new WeakMap();
+  function captionBodies(rgba,w,h,detached=false){
     if(rgba?.length!==w*h*4)return [];
-    const saved=captionCache.get(rgba);if(saved&&saved.w===w&&saved.h===h)return saved.bodies;
+    const memo=detached?detachedCaptionCache:captionCache,saved=memo.get(rgba);if(saved&&saved.w===w&&saved.h===h)return saved.bodies;
     for(let i=3;i<rgba.length;i+=4)if(rgba[i]!==255)return [];
     const chromatic=(i,t)=>{const r=rgba[i*4],g=rgba[i*4+1],b=rgba[i*4+2];return +(r>170&&g>130&&b<180&&r-b>t&&g-b>t*.55&&Math.abs(r-g)<85);};
     function candidates(t){
@@ -32,12 +32,12 @@ const PanelCropRepair = (() => {
         for(const i of q){colored+=color[i];if(Math.max(rgba[i*4],rgba[i*4+1],rgba[i*4+2])<100){dark++;ink[i]=1;}
           const x=i%w,y=i/w|0;if(!mask[i-1]||!mask[i+1]||!mask[i-w]||!mask[i+w]){edges++;let found=false;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)found ||= !!color[(y+dy)*w+x+dx];supported+=+found;}}
         const letters=components(ink,w,h).filter(c=>c.length>=3&&c.length<q.length*.08).length;
-        if(colored/q.length<.60||dark/q.length<.05||dark/q.length>.35||supported/edges<.90||letters<8)continue;
+        if(colored/q.length<(detached?.45:.60)||dark/q.length<.05||dark/q.length>.35||supported/edges<.90||letters<8)continue;
         out.push({indices:q,mask,box:[x0,y0,x1,y1]});
       }return out;
     }
     const first=candidates(45),second=candidates(65),bodies=[];
-    for(const a of first){const matches=second.filter(b=>JSON.stringify(a.box)===JSON.stringify(b.box));if(matches.length!==1)continue;
+    for(const a of first){const matches=second.filter(b=>a.box.every((v,k)=>Math.abs(v-b.box[k])<=(detached?1:0)));if(matches.length!==1)continue;
       const b=matches[0];let diff=0,union=0;for(let i=0;i<a.mask.length;i++){diff+=+(a.mask[i]!==b.mask[i]);union+=+(a.mask[i]||b.mask[i]);}
       if(diff>union*.01)continue;
       // Intersection retains only pixels enclosed at both source thresholds.
@@ -46,7 +46,7 @@ const PanelCropRepair = (() => {
       const indices=[];const filled=fillClosed(body,w,h);for(let i=0;i<filled.length;i++)if(filled[i])indices.push(i);
       bodies.push({core:a.indices.filter(i=>b.mask[i]),indices});
     }
-    captionCache.set(rgba,{w,h,bodies});return bodies;
+    memo.set(rgba,{w,h,bodies});return bodies;
   }
   function repair(rings,w,h,foreign=[],rgba=null){
     if(!Array.isArray(rings)||!rings.length||!Number.isInteger(w)||!Number.isInteger(h)||w<80||h<80||w>900||h>900||typeof PanelMatteCells==='undefined')return null;
@@ -121,5 +121,5 @@ const PanelCropRepair = (() => {
     const traced=PanelMatteCells.tracePixelContours(result,w,h,1);if(!traced)return null;
     return {captionAddedPixels,captionPatches,contours:traced.map(q=>q.map(([x,y])=>({x:x/w,y:y/h}))),addedPixels:added,patches,radius,analysisWidth:w,analysisHeight:h,skipped};
   }
-  return {repair,raster,inside};
+  return {repair,raster,inside,captionBodies};
 })();
