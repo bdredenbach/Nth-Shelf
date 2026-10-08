@@ -125,7 +125,177 @@
     "exactSelections": 2
   },
   "androidBuild": {
-    "status": "awaiting CI"
+    "status": "verified",
+    "publication": {
+      "commit": "f9ba6fcf9eddb1712d5c2cfd3917e667438bc723",
+      "tree": "f6a4a70c4ca40d6806c2e00976a8fb0e0008b4a0",
+      "parent": "30008b327f6379bf7be76e990f14952a4dd6184c",
+      "branch": "Test_Branch",
+      "files": 18
+    },
+    "ci": {
+      "runId": 37718507510,
+      "jobId": 113120490222,
+      "artifactId": 11525067934,
+      "artifactName": "Nth-Shelf-2.79.123-Test123",
+      "artifactDigest": "sha256:b4137826c731223b0ac6f910befbe73217f615db98b1813a2cce7f175280e9d4",
+      "artifactBytes": 13853696,
+      "conclusion": "success",
+      "sourceCommit": "f9ba6fcf9eddb1712d5c2cfd3917e667438bc723",
+      "startedAt": "2026-10-08T02:34:11Z",
+      "completedAt": "2026-10-08T02:46:33Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Syntax and retained frame regression tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Set up browser test dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Browser interaction and backup round-trip checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Native streaming archive regression",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Run android-actions/setup-android@v3",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Install Android SDK 35",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Build isolated Test123 APK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Verify APK signature, identity and exact packaged web files",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Upload verified APK, source and build record",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Preserve failure diagnostics",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 15
+        },
+        {
+          "name": "Post Run gradle/actions/setup-gradle@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27
+        },
+        {
+          "name": "Post Run actions/setup-java@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 28
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 29
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 30
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31
+        }
+      ]
+    },
+    "actualApk": {
+      "passed": true,
+      "apkSha256": "4c274a79b0c7b1d5b18020d9dcc1142e0a54ddc190fce4bc2c9edf957fd96749",
+      "apkBytes": 3595443,
+      "compiledIdentity": {
+        "versionCode": 28051,
+        "versionName": "2.79.123",
+        "compileSdkVersion": 35,
+        "compileSdkVersionCodename": "15",
+        "package": "io.github.bdredenbach.nthshelf.frametest123",
+        "platformBuildVersionCode": 35,
+        "platformBuildVersionName": 15
+      },
+      "compiledApplicationLabel": "Nth Shelf Test123",
+      "verifiedWebFiles": 125,
+      "v2SignatureVerified": true,
+      "v2ChunkedContentDigestVerified": true,
+      "signerCertificateMatchesCI": true,
+      "signerCertificateSha256": "e246b36aaa8edf37f1ca5c51536fd99b7af56ce2b3699d832f358c6bcbef2a9a",
+      "sourceCommit": "f9ba6fcf9eddb1712d5c2cfd3917e667438bc723",
+      "sourceTree": "f6a4a70c4ca40d6806c2e00976a8fb0e0008b4a0",
+      "verifiedSourceArchiveFiles": 1247,
+      "sourceArchiveMatchesFrozenGitTree": true
+    },
+    "ciRetainedChecks": {
+      "passed": true,
+      "behavioralSuites": 151,
+      "cachePackageAndSyntax": "passed"
+    }
   },
   "userAcceptance": {
     "Test121": "Direction/sandstorm pair user-confirmed.",
@@ -143,5 +313,72 @@
       "cachePackageAndSyntax": "passed"
     },
     "logSha256": "c1a69e7d2bf69a7eaa18e88be6a7401c8798f009e591da90af74bce60047ddee"
-  }
+  },
+  "savedDeliverables": [
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/test123/deliverables/Nth-Shelf-Test123-Single-Frame-Regression.json",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000612881f5bf20562fdf50c735",
+      "library_file_id": "libfile_ea1c53b44d3c8191bc7001748be91a8e",
+      "file_name": "Nth-Shelf-Test123-Single-Frame-Regression.json",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test123-Single-Frame-Regression.json",
+      "current_version_number": 0,
+      "bytes": 100214,
+      "sha256": "b021564b5db5f7d856481963aa09b4d3b5a51d0da4cb4a079fb79f39a82dd300"
+    },
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/test123/deliverables/Nth-Shelf-2.79.123-Test123.apk",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000e66081f58d19f6cc998c81e6",
+      "library_file_id": "libfile_f9aad502d0288191b39f38b2dd2ce30b",
+      "file_name": "Nth-Shelf-2.79.123-Test123.apk",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-2.79.123-Test123.apk",
+      "current_version_number": 0,
+      "bytes": 3595443,
+      "sha256": "4c274a79b0c7b1d5b18020d9dcc1142e0a54ddc190fce4bc2c9edf957fd96749"
+    },
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/test123/deliverables/Nth-Shelf-Test123-Frame-Review.html",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_000000006f2081f5bbb205f1f302600e",
+      "library_file_id": "libfile_2d27c62cdcec8191acaab7a9b39884c4",
+      "file_name": "Nth-Shelf-Test123-Frame-Review.html",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test123-Frame-Review.html",
+      "current_version_number": 0,
+      "bytes": 1548961,
+      "sha256": "868766d47249e275127595509409debebac38d0dee2b44022df266f724712b33"
+    },
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/apocalypse01-regression/deliverables/Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "purpose": "replace_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000bd5c81f5a376779ddde6ec6e",
+      "library_file_id": "libfile_b40550a56110819197ad1ffa78ce2e9c",
+      "file_name": "Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "current_version_number": 5,
+      "bytes": 9939,
+      "sha256": "c13e6d0dece679b76a82a0380176a93b4603c04db634c3b7e6acc738b992fe34"
+    },
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/test123/deliverables/Nth-Shelf-Test123-Replay-Checkpoint.zip",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000d19481f5a4be3ed2b4af63ff",
+      "library_file_id": "libfile_7c7d98beb4bc8191ab0b9e85f7889ef7",
+      "file_name": "Nth-Shelf-Test123-Replay-Checkpoint.zip",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test123-Replay-Checkpoint.zip",
+      "current_version_number": 0,
+      "bytes": 11139886,
+      "sha256": "b23c9131343f7519aa407519bdd5313d7dd3da3ea3fea2a2e61a1b424126859f"
+    }
+  ]
 }
