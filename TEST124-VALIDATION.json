@@ -1,0 +1,153 @@
+{
+  "build": "Test124 /2.79.124 /versionCode28052",
+  "parentCommit": "2232c9e933bed658cd5e2e3ba2eb88ba3a613b6b",
+  "parentTree": "7bcb5ad4043cf6556cd462b6d0d22b948f8841d3",
+  "branch": "Test_Branch",
+  "delta": "ONE complete round Baal portrait original with Hold balloon and tail, Reader5 S3/P05-F3. Lower mounted scene excluded. Default independent single; broad same-scene continuity does not merge originals.",
+  "focus": {
+    "validSingles": 32,
+    "validContinuityPairs": 5,
+    "uniqueOriginalFrames": 42,
+    "totalOriginalFrames": 99,
+    "remaining": 57,
+    "qualifyingSteps": 37,
+    "currentSelections": 55,
+    "rejectedSelections": 18,
+    "rejectedBreakdown": {
+      "oversized": 9,
+      "mixedNeighbor": 6,
+      "damaged": 3
+    }
+  },
+  "sourceMethod": {
+    "version": 73,
+    "method": "stable-chromatic-round-inset",
+    "independentArcFits": 2,
+    "independentInkCollars": [
+      2,
+      3
+    ],
+    "rimSupport": [
+      0.9902777777777778,
+      0.9875
+    ],
+    "differencePixels": 1452,
+    "differenceFraction": 0.013606589637626156,
+    "ownedBalloonCount": 1,
+    "balloonLetters": 5,
+    "earlierOwnerSharedInkPixelsExcluded": 21,
+    "earlierOwnerExcludedPixelsAllInk": true,
+    "sourceAnchorReplay": true,
+    "runtimeUsesBookPageTextHashOrStoredCrop": false
+  },
+  "corpusReplay": {
+    "passed": true,
+    "eligibleOriginalsReplayed": 1,
+    "checks": [
+      {
+        "book": "final-29_Chapter_30.json",
+        "pages": 41,
+        "priorDescriptors": 228,
+        "currentDescriptors": 228,
+        "changes": []
+      },
+      {
+        "book": "final-30_Chapter_31.json",
+        "pages": 41,
+        "priorDescriptors": 193,
+        "currentDescriptors": 193,
+        "changes": []
+      },
+      {
+        "book": "final-31_Chapter_32.json",
+        "pages": 41,
+        "priorDescriptors": 188,
+        "currentDescriptors": 188,
+        "changes": []
+      },
+      {
+        "book": "final-apocalypse.json",
+        "pages": 91,
+        "priorDescriptors": 243,
+        "currentDescriptors": 244,
+        "changes": [
+          {
+            "readerPage": 5,
+            "key": "Rise of Apocalypse 001 (1996) (Digital) (Shadowcat-Empire)/Rise of Apocalypse 01 (of 04)-004.jpg"
+          }
+        ]
+      },
+      {
+        "book": "final-magneto.json",
+        "pages": 24,
+        "priorDescriptors": 101,
+        "currentDescriptors": 101,
+        "changes": []
+      },
+      {
+        "book": "final-wolverine.json",
+        "pages": 74,
+        "priorDescriptors": 389,
+        "currentDescriptors": 389,
+        "changes": []
+      }
+    ],
+    "scope": "New round-inset refinement compared across all312 stored Test123 maps/1342 descriptors; all eligible parents replayed on original source. No full-corpus old-detector replay claimed."
+  },
+  "nativeReaderReplay": {
+    "passed": true,
+    "priorCanvasesByteIdentical": 54,
+    "earlierQualifyingStepsPreserved": 36,
+    "pages": 24,
+    "currentSelections": 55,
+    "target": {
+      "id": 3,
+      "identitySource": "structural-grid-frame",
+      "geometryType": "chromatic-round-inset",
+      "proofVersion": 73,
+      "box": [
+        0.0444064901793339,
+        0.5516666666666666,
+        0.35354397950469685,
+        0.205
+      ],
+      "canvas": [
+        703,
+        626
+      ],
+      "crop": "p05-s3.png",
+      "tapPoint": {
+        "x": 0.22117847993168233,
+        "y": 0.6541666666666667
+      },
+      "reachable": true,
+      "actualReaderOverlay": true,
+      "dimActive": true,
+      "finalTransform": "translate3d(1.2567549103330293px, -241.6376209469376px, 0) scale(2.5630757487922704)"
+    },
+    "scope": "Actual native Reader canvas/display/tap/dim/final geometry; composites are not browser/phone screenshots."
+  },
+  "freshChangedPageReplay": {
+    "passed": true,
+    "exactSelections": 3
+  },
+  "frozenRuntimeFiles": 126,
+  "retainedChecks": {
+    "passed": true,
+    "behavioralSuites": 152,
+    "retainedSuites": 153,
+    "cachePackageSuites": 1,
+    "cachePackageAndSyntax": "passed"
+  },
+  "androidBuild": {
+    "status": "awaiting CI"
+  },
+  "userAcceptance": {
+    "Test121": "User-confirmed direction/sandstorm pair.",
+    "Test122": "Night camp phone acceptance still not explicitly confirmed.",
+    "Test123": "User confirmed the harder conversation frame worked: Yes you got a harder frame.",
+    "Test124": "New round portrait phone acceptance pending.",
+    "automaticReaderAndTimingSlider": "Planned, not implemented."
+  },
+  "nextCheckpoint": "Reader5 P05-F4 lower mounted group; finish comic1 before comic2."
+}
