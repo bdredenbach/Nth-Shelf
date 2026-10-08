@@ -1,13 +1,14 @@
-// NTH SHELF 2.79.126 — SATURATED FRONTIER CELL
+// NTH SHELF 2.79.127 — SATURATED FRONTIER CELL
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.126";
+const CACHE_NAME = "nth-shelf-shell-2.79.127";
 const SHELL_FILES = [
   "./js/panels-saturated-frontier-cell.js",
   "./js/panels-saturated-round-inset.js",
   "./js/panels-saturated-terminal-cell.js",
   "./js/panels-detached-captions.js",
+  "./js/panels-atomic-boundary-speech.js",
   "./js/panels-saturated-rail-cell.js",
   "./",
   "./THIRD_PARTY_NOTICES.txt",
