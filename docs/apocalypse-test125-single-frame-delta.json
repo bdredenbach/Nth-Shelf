@@ -52,5 +52,78 @@
     "built": false,
     "ciBuildRequested": false,
     "reason": "User requested the same one-frame cadence without an APK build. APK workflow is manual-only; source and metadata commits use skip-ci."
-  }
+  },
+  "publication": {
+    "commit": "c1782b7ad36f1dfefa742eeebd5e234b47bcbb37",
+    "tree": "0646464eba35c17d3977d3b83b72ed7c1be2faaa",
+    "parent": "0b33c920a71d54512b1c9644a32f9937de1ff336",
+    "repository": "bdredenbach/Nth-Shelf",
+    "branch": "Test_Branch",
+    "apkBuilt": false,
+    "ciBuildRequested": false,
+    "androidWorkflowRunsForSource": 0,
+    "automaticPagesWorkflow": [
+      {
+        "id": 37845125153,
+        "event": "dynamic",
+        "name": "pages build and deployment",
+        "path": "dynamic/pages/pages-build-deployment",
+        "headSha": "c1782b7ad36f1dfefa742eeebd5e234b47bcbb37"
+      }
+    ]
+  },
+  "savedDeliverables": [
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/test125/deliverables/Nth-Shelf-Test125-Single-Frame-Regression.json",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_0000000060c481f5a8c18678150b5c54",
+      "library_file_id": "libfile_d59e765f2f2081918fcabe49b8bcbc88",
+      "file_name": "Nth-Shelf-Test125-Single-Frame-Regression.json",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test125-Single-Frame-Regression.json",
+      "current_version_number": 0,
+      "sha256": "d56cd813c8356007c4f830e75897eaf745d993a05ab956f592c039af0f10eec9",
+      "bytes": 115759
+    },
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/test125/deliverables/Nth-Shelf-Test125-Frame-Review.html",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_000000006ccc81f5abbeaa416028bc75",
+      "library_file_id": "libfile_e39bc1802064819194eade26162c02f4",
+      "file_name": "Nth-Shelf-Test125-Frame-Review.html",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test125-Frame-Review.html",
+      "current_version_number": 0,
+      "sha256": "93e357e499d32823a5fcb43f5a98bc26344dbfe8261af14ed8ad7695640a0846",
+      "bytes": 1890573
+    },
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/apocalypse01-regression/deliverables/Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "purpose": "replace_library_file",
+      "status": "succeeded",
+      "file_id": "file_000000005444820caff2ae38ad4d4e0b",
+      "library_file_id": "libfile_b40550a56110819197ad1ffa78ce2e9c",
+      "file_name": "Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "current_version_number": 7,
+      "sha256": "4430dfccdb653e0c8cf20b9edb20fb91800180ee872fb3a7d1d5c6ce93dda176",
+      "bytes": 10763
+    },
+    {
+      "local_path": "/workspace/scratch/37406b7d348a/test125/deliverables/Nth-Shelf-Test125-Replay-Checkpoint.zip",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_0000000065a4820c9b41891185343b2e",
+      "library_file_id": "libfile_354f90d325ac8191beb6560ed494910c",
+      "file_name": "Nth-Shelf-Test125-Replay-Checkpoint.zip",
+      "local_metadata_applied": true,
+      "path": "/Nth-Shelf-Test125-Replay-Checkpoint.zip",
+      "current_version_number": 0,
+      "sha256": "90552b46063cd829cad3062cf6374e44803641979515682ee9e6979a519ec5ec",
+      "bytes": 11824153
+    }
+  ]
 }
