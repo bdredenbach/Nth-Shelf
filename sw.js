@@ -1,9 +1,10 @@
-// NTH SHELF 2.79.127 — SATURATED FRONTIER CELL
+// NTH SHELF 2.79.128 — ORNATE TRAINING INSET
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.127";
+const CACHE_NAME = "nth-shelf-shell-2.79.128";
 const SHELL_FILES = [
+  "./js/panels-ornate-inset.js",
   "./js/panels-saturated-frontier-cell.js",
   "./js/panels-saturated-round-inset.js",
   "./js/panels-saturated-terminal-cell.js",
