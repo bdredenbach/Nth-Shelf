@@ -3390,3 +3390,5 @@ if(typeof PanelSaturatedFrontierCell!=='undefined')PanelSaturatedFrontierCell.in
 if(typeof PanelSaturatedRailCell!=='undefined')PanelSaturatedRailCell.installReader(Reader);
 
 if(typeof PanelSaturatedRoundInset!=='undefined')PanelSaturatedRoundInset.installReader(Reader);
+
+if(typeof PanelSaturatedTerminalCell!=='undefined')PanelSaturatedTerminalCell.installReader(Reader);

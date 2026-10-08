@@ -1,0 +1,56 @@
+{
+  "test": "Test125",
+  "checkpointType": "source-only",
+  "focusedDelta": {
+    "comic": "Rise of Apocalypse #1",
+    "readerPage": 5,
+    "selection": 4,
+    "originals": [
+      "P05-F4"
+    ],
+    "addedSingles": 1,
+    "addedPairs": 0,
+    "validSingles": 33,
+    "validPairs": 5,
+    "coveredOriginals": 43,
+    "totalOriginals": 99,
+    "remainingOriginals": 56,
+    "qualifyingSteps": 38,
+    "actualSelections": 56,
+    "rejectedSelections": 18,
+    "page5CompleteLocally": true,
+    "nextOriginal": "Reader6 P06-F1 Upper-left narrow figure"
+  },
+  "sourceMethod": {
+    "module": "js/panels-saturated-terminal-cell.js",
+    "proofVersion": 74,
+    "method": "stable-saturated-terminal-cell",
+    "sourceCertifiedOwnersReplayed": 3,
+    "independentRailWitnessRuns": [
+      2,
+      3
+    ],
+    "railMaskDifferencePixels": 4,
+    "selectedSourcePixels": 842775,
+    "overlapPixels": 0,
+    "variance": 4042.1137808974318,
+    "bottomArtworkSupport": 0.9759939273175823,
+    "dialogueWhitePixels": 21246,
+    "dialogueLetterComponents": 126,
+    "internalDivider": false,
+    "identityTextHashStoredCropLookup": false,
+    "earlierInsetAndHoldExcluded": true
+  },
+  "userAcceptance": {
+    "Test123Conversation": "confirmed by user",
+    "Test122NightCamp": "no explicit phone verdict",
+    "Test124RoundPortrait": "pending phone verdict",
+    "Test125LowerMounted": "native local review only; no APK built and no phone acceptance",
+    "automaticPlaybackAndTimingSlider": "planned, not implemented"
+  },
+  "apk": {
+    "built": false,
+    "ciBuildRequested": false,
+    "reason": "User requested the same one-frame cadence without an APK build. APK workflow is manual-only; source and metadata commits use skip-ci."
+  }
+}

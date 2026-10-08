@@ -1,28 +1,13 @@
-name: Build Test124 APK
+name: Build Test125 APK (manual only)
 
 on:
-  push:
-    branches: [Test_Branch]
-    paths:
-      - '.github/workflows/android-apk.yml'
-      - 'android/**'
-      - 'js/**'
-      - 'css/**'
-      - 'assets/**'
-      - 'icons/**'
-      - 'qa27900/**'
-      - 'index.html'
-      - 'sw.js'
-      - 'manifest.json'
-      - 'manifest.webmanifest'
-      - 'THIRD_PARTY_NOTICES.txt'
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: nth-shelf-test124-apk
+  group: nth-shelf-test125-apk
   cancel-in-progress: false
 
 jobs:
@@ -41,7 +26,7 @@ jobs:
 
       - name: Syntax and retained frame regression tests
         shell: bash
-        run: bash qa27900/frame-accuracy/test124/run-retained.sh
+        run: bash qa27900/frame-accuracy/test125/run-retained.sh
 
       - name: Set up browser test dependencies
         run: |
@@ -88,7 +73,7 @@ jobs:
       - name: Install Android SDK 35
         run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
 
-      - name: Build isolated Test124 APK
+      - name: Build isolated Test125 APK
         shell: bash
         run: |
           set -euo pipefail
@@ -101,10 +86,10 @@ jobs:
           APK=android/app/build/outputs/apk/debug/app-debug.apk
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$APK" | tee dist/signature.txt
           "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" > dist/package.txt
-          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest124'" dist/package.txt
-          grep -F "versionCode='28052'" dist/package.txt
-          grep -F "versionName='2.79.124'" dist/package.txt
-          grep -F "application-label:'Nth Shelf Test124'" dist/package.txt
+          grep -F "package: name='io.github.bdredenbach.nthshelf.frametest125'" dist/package.txt
+          grep -F "versionCode='28053'" dist/package.txt
+          grep -F "versionName='2.79.125'" dist/package.txt
+          grep -F "application-label:'Nth Shelf Test125'" dist/package.txt
           python3 - <<'PY'
           import hashlib, json, os, pathlib, subprocess, zipfile
           root = pathlib.Path('.')
@@ -127,18 +112,18 @@ jobs:
                   if z.read(prefix+rel) != source:
                       raise SystemExit('Packaged web file differs from source: '+rel)
                   hashes[rel] = hashlib.sha256(source).hexdigest()
-              for required_detector in ['js/panels-saturated-round-inset.js','js/panels-saturated-rail-cell.js','js/panels-saturated-frontier-cell.js','js/panels-focused-paper-continuation.js','js/panels-focused-paper-cell.js','js/panels-high-contrast-enclosures.js','js/panels-strong-continuation-groups.js','js/panels-firm-enclosure-groups.js','js/panels-continuation-enclosure-groups.js','js/panels-contrast-enclosure-groups.js','js/panels-dialogue-row-groups.js','js/panels-color-enclosure-groups.js','js/panels-short-row-speech.js','js/panels-empty-enclosure-groups.js','js/panels-gradient-residual-groups.js','js/panels-neutral-matte-groups.js','js/panels-stable-frontier-cells.js','js/panels-trailing-edge-groups.js','js/panels-paper-edge-groups.js','js/panels-wide-paper-rows.js','js/panels-paper-continuation-groups.js','js/panels-landscape-upper-groups.js','js/panels-landscape-cells.js','js/panels-lateral-cell-completion.js','js/panels-split-cell-completion.js','js/panels-column-speech.js','js/panels-long-tail-speech.js','js/panels-tail-speech.js','js/panels-dark-matte-completion.js','js/panels-perimeter-consolidation.js','js/panels-lettering-cells.js','js/panels-connected-pairs.js','js/panels-ragged-gutters.js','js/panels-interrupted-gutters.js','js/panels-neighbor-completion.js','js/panels-shared-boundaries.js','js/panels-exterior-completion.js','js/panels-edge-guided-paper.js','js/panels-chromatic-shared-border.js','js/panels-narrow-ink-frames.js','js/panels-top-row-barrier.js','js/panels-horizontal-paper-strips.js','js/panels-local-boundary-consensus.js','js/panels-context-cells.js','js/panels-interior-strokes.js','js/panels-smooth-gutter-boundaries.js','js/panels-neighbor-edge-cells.js','js/panels-orthogonal-white-gutters.js','js/panels-paper-recovery.js','js/panels-colored-rims.js','js/panels-dark-overlay-insets.js','js/panels-curved-rims.js','js/panels-matte-cells.js','js/panels-edge-spill.js','js/panels-structural-grid.js','js/panels-pale-completion.js','js/panels-gutter-graph.js']:
+              for required_detector in ['js/panels-saturated-terminal-cell.js','js/panels-saturated-round-inset.js','js/panels-saturated-rail-cell.js','js/panels-saturated-frontier-cell.js','js/panels-focused-paper-continuation.js','js/panels-focused-paper-cell.js','js/panels-high-contrast-enclosures.js','js/panels-strong-continuation-groups.js','js/panels-firm-enclosure-groups.js','js/panels-continuation-enclosure-groups.js','js/panels-contrast-enclosure-groups.js','js/panels-dialogue-row-groups.js','js/panels-color-enclosure-groups.js','js/panels-short-row-speech.js','js/panels-empty-enclosure-groups.js','js/panels-gradient-residual-groups.js','js/panels-neutral-matte-groups.js','js/panels-stable-frontier-cells.js','js/panels-trailing-edge-groups.js','js/panels-paper-edge-groups.js','js/panels-wide-paper-rows.js','js/panels-paper-continuation-groups.js','js/panels-landscape-upper-groups.js','js/panels-landscape-cells.js','js/panels-lateral-cell-completion.js','js/panels-split-cell-completion.js','js/panels-column-speech.js','js/panels-long-tail-speech.js','js/panels-tail-speech.js','js/panels-dark-matte-completion.js','js/panels-perimeter-consolidation.js','js/panels-lettering-cells.js','js/panels-connected-pairs.js','js/panels-ragged-gutters.js','js/panels-interrupted-gutters.js','js/panels-neighbor-completion.js','js/panels-shared-boundaries.js','js/panels-exterior-completion.js','js/panels-edge-guided-paper.js','js/panels-chromatic-shared-border.js','js/panels-narrow-ink-frames.js','js/panels-top-row-barrier.js','js/panels-horizontal-paper-strips.js','js/panels-local-boundary-consensus.js','js/panels-context-cells.js','js/panels-interior-strokes.js','js/panels-smooth-gutter-boundaries.js','js/panels-neighbor-edge-cells.js','js/panels-orthogonal-white-gutters.js','js/panels-paper-recovery.js','js/panels-colored-rims.js','js/panels-dark-overlay-insets.js','js/panels-curved-rims.js','js/panels-matte-cells.js','js/panels-edge-spill.js','js/panels-structural-grid.js','js/panels-pale-completion.js','js/panels-gutter-graph.js']:
                   if required_detector not in hashes:
                       raise SystemExit('Frame detector missing: '+required_detector)
-          frozen = json.loads((root / 'qa27900/frame-accuracy/test124/web-assets.json').read_text())
+          frozen = json.loads((root / 'qa27900/frame-accuracy/test125/web-assets.json').read_text())
           if hashes != frozen['sha256']:
               raise SystemExit('APK web bytes differ from the local tested manifest')
           subprocess.run(['git', 'diff', '--exit-code', 'HEAD', '--'], check=True)
           digest = hashlib.sha256(apk.read_bytes()).hexdigest()
           record = {
-              'versionName': '2.79.124', 'versionCode': 28052,
-              'applicationId': 'io.github.bdredenbach.nthshelf.frametest124',
-              'label': 'Nth Shelf Test124', 'sourceCommit': os.environ['GITHUB_SHA'],
+              'versionName': '2.79.125', 'versionCode': 28053,
+              'applicationId': 'io.github.bdredenbach.nthshelf.frametest125',
+              'label': 'Nth Shelf Test125', 'sourceCommit': os.environ['GITHUB_SHA'],
               'signing': 'CI debug key; not a Play Store production key',
               'apkSha256': digest, 'apkBytes': apk.stat().st_size,
               'verifiedWebAssetCount': len(hashes), 'webAssetSha256': hashes,
@@ -146,17 +131,17 @@ jobs:
               'comicArtworkTests': 'Saved results retained; comic artwork fixture is not uploaded or rerun by this workflow'
           }
           (root / 'dist/BUILD.json').write_text(json.dumps(record, indent=2)+'\n')
-          (root / 'dist/Nth-Shelf-2.79.124-Test124.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.124-Test124.apk\n')
-          (root / 'dist/INSTALL.txt').write_text('Install separate Nth Shelf Test124. Rise of Apocalypse #1 Reader5 S3: one round Baal portrait with its complete Hold balloon and tail. Tap the round portrait; it centers over the darkened page. Check both earlier page5 frames. Focus42/99,57 remaining,32 singles and5 continuity pairs. Reader numbers include covers. Test123 conversation user-confirmed; new Test124 portrait phone acceptance pending.\n')
+          (root / 'dist/Nth-Shelf-2.79.125-Test125.apk.sha256').write_text(digest+'  Nth-Shelf-2.79.125-Test125.apk\n')
+          (root / 'dist/INSTALL.txt').write_text('Install separate Nth Shelf Test125. Rise of Apocalypse #1 Reader5 S4: one lower mounted group with both complete owned balloons. Tap the lower mounted group; it centers over the darkened page. Check all three earlier page5 frames. Focus43/99,56 remaining,33 singles and5 continuity pairs. Reader numbers include covers. Test123 conversation user-confirmed; new Test125 lower mounted group phone acceptance pending.\n')
           print(json.dumps({'sourceCommit': record['sourceCommit'], 'verifiedWebAssetCount': len(hashes), 'apkSha256': digest}, indent=2))
           PY
-          cp "$APK" dist/Nth-Shelf-2.79.124-Test124.apk
-          git archive --format=zip --output=dist/Nth-Shelf-2.79.124-Test124-Source.zip HEAD
+          cp "$APK" dist/Nth-Shelf-2.79.125-Test125.apk
+          git archive --format=zip --output=dist/Nth-Shelf-2.79.125-Test125-Source.zip HEAD
 
       - name: Upload verified APK, source and build record
         uses: actions/upload-artifact@v4
         with:
-          name: Nth-Shelf-2.79.124-Test124
+          name: Nth-Shelf-2.79.125-Test125
           path: dist/
           if-no-files-found: error
           retention-days: 30
@@ -165,7 +150,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Test124-build-diagnostics
+          name: Test125-build-diagnostics
           path: |
             dist/*.txt
             dist/*.json
