@@ -338,5 +338,44 @@
       "js/panels-gutter-graph.js": "e29e6c726e1659534b0bd427a3d084f9c76bc6e9e5733ee88dbd01436b720cc6"
     }
   },
-  "browserAndPhone": "Not verified; native Reader canvas evidence only."
+  "browserAndPhone": "Not verified; native Reader canvas evidence only.",
+  "publication": {
+    "commit": "7ec2d8c7f54d434c72411ca01386c823bd4a3ea4",
+    "tree": "5f6674927c190b809d2d628dd27d72e8f0c20ade",
+    "parent": "3eeaa1eecd7061b727bb0131fd9ae3195330782b",
+    "branch": "Test_Branch",
+    "apkBuilt": false,
+    "bulkTask": "in_progress",
+    "remainingOriginalFrames": 52
+  },
+  "savedFiles": [
+    {
+      "file_name": "Nth-Shelf-Test128-Frame-Review.html",
+      "library_file_id": "libfile_4749b53236048191a2e18ca468479550",
+      "file_id": "file_0000000012f881f5942ca081213dbf68",
+      "current_version_number": 0,
+      "local_metadata_applied": true
+    },
+    {
+      "file_name": "Nth-Shelf-Test128-Single-Frame-Regression.json",
+      "library_file_id": "libfile_d989e25eddc081918529f2674911d92a",
+      "file_id": "file_00000000fce081f5b3327d9858fefcd8",
+      "current_version_number": 0,
+      "local_metadata_applied": true
+    },
+    {
+      "file_name": "Nth-Shelf-Test128-Replay-Checkpoint.zip",
+      "library_file_id": "libfile_b18fbca9c2bc81918c8339d5b199feb6",
+      "file_id": "file_00000000120481f58a5201310500d16b",
+      "current_version_number": 0,
+      "local_metadata_applied": true
+    },
+    {
+      "file_name": "Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "library_file_id": "libfile_b40550a56110819197ad1ffa78ce2e9c",
+      "file_id": "file_00000000213881f5b7b92e72487cc206",
+      "current_version_number": 10,
+      "local_metadata_applied": true
+    }
+  ]
 }
