@@ -3440,4 +3440,7 @@ if(typeof PanelPaperResidualStrips!=='undefined')PanelPaperResidualStrips.instal
 
 
 if(typeof PanelRoundSpeechInset!=='undefined')PanelRoundSpeechInset.installReader(Reader);
+
+
+if(typeof PanelChromaticDialoguePair!=='undefined')PanelChromaticDialoguePair.installReader(Reader);
 if(typeof PanelPageEdgeRailCell!=='undefined')PanelPageEdgeRailCell.installReader(Reader);

@@ -1,0 +1,201 @@
+{
+  "test": "Test144: complete adjacent dialogue pair",
+  "version": "2.79.144",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "completedNewOriginalFrames": 29,
+    "remainingOriginalFrames": 27,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 68,
+    "validSingleSelections": 52,
+    "validDualSelections": 10,
+    "qualifyingSelections": 62,
+    "qualifyingUniqueOriginalFrames": 72,
+    "remainingUniqueOriginalFrames": 27,
+    "rejectedSelections": 6,
+    "rejectedOversized": 4,
+    "rejectedMixedNeighbor": 2,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      14,
+      16,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 197,
+    "behavioralSuites": 196,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 123,
+    "execution": "Complete retained command list ran on frozen source, with isolated workers and longest tests scheduled first. No suite skipped.",
+    "finalSummarySha256": "692bf3b0fdce2e37c2d37cceb14ab12eec56632612bc0ce0d35a9f3e29a4f079"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 68,
+    "changedSelections": [
+      [
+        11,
+        2
+      ]
+    ],
+    "addedSelections": [],
+    "unchangedPNGs": 67,
+    "previousAcceptedCropsProtected": 61,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "The previous rejected broad region is replaced in the same selection slot by one complete dialogue pair. Both originals share immediate dialogue and a connected speech chain. All 61 earlier accepted crops and metadata remain exact. The upper scene remains unchanged; the tall portrait and lower attack are still pending."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "analysisSize": [
+      585,
+      900
+    ],
+    "completeAdjacentOriginals": 2,
+    "acceptedF1MaskPixelsCompared": 526500,
+    "acceptedF1MaskUnchanged": true,
+    "newPairPixelTaps": 107109,
+    "acceptedF1SampleTaps": 159,
+    "rejectedParentRemainderSamples": 1664,
+    "overlapPixels": 0,
+    "wholeOwnedSpeechPixelTaps": 17082,
+    "speechWitnesses": [
+      {
+        "box": [
+          293,
+          182,
+          405,
+          233
+        ],
+        "pixels": 4856,
+        "letters": 152
+      },
+      {
+        "box": [
+          42,
+          230,
+          159,
+          391
+        ],
+        "pixels": 10396,
+        "letters": 307
+      },
+      {
+        "box": [
+          343,
+          350,
+          407,
+          396
+        ],
+        "pixels": 1830,
+        "letters": 35
+      },
+      {
+        "box": [
+          293,
+          182,
+          405,
+          233
+        ],
+        "pixels": 4851,
+        "letters": 152
+      },
+      {
+        "box": [
+          42,
+          230,
+          159,
+          391
+        ],
+        "pixels": 10379,
+        "letters": 305
+      },
+      {
+        "box": [
+          343,
+          350,
+          407,
+          396
+        ],
+        "pixels": 1828,
+        "letters": 35
+      }
+    ],
+    "foregroundCapExcludedPixels": 619,
+    "tamperCases": 12,
+    "invalidContexts": 5,
+    "offMapRejected": true,
+    "sourceMismatchRejected": true,
+    "missingSourceRejected": true,
+    "nonopaqueRejected": true,
+    "dimensionMismatchRejected": true,
+    "originalDescriptorsUnchanged": true,
+    "reviewedNativePngsUnchanged": true,
+    "nativePngSha256": {
+      "p11-s2.png": "f61d2b38e0b33da3f9b90c949b03c57a6618285ab29b0a0a00eec45714495a11"
+    },
+    "earlierAcceptedCropsAndMetadataExact": 61,
+    "allEarlierPngsExact": 67,
+    "finalLifecycleRuntime": "f64614edc999cf62cf25a6152b24000f4c25a48361ea9f88e17ad19333a6f3cc",
+    "privateHarnessCorrection": "Await asynchronous zoom wrappers when asserting rejected zoom results."
+  },
+  "generatedContracts": {
+    "transformedPositiveScenes": 5,
+    "negativeSourceControls": 8,
+    "proofTamperRejections": 16,
+    "sourceDimensionContextControls": 3,
+    "actualGeneratedReaderCanvases": 35,
+    "generatedFallbackTaps": 5400,
+    "cachedDescriptorAndSequenceMutations": 7,
+    "sourceLifecycleCases": 20,
+    "warmSourcePixelRereads": 0,
+    "originalComicPixelsEmbedded": false
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1356,
+    "sourceEligibleMaps": 1,
+    "discoveryReview": "Across 312 stored maps and 1,356 descriptors, only Reader11 is eligible. Fresh complete Reader11 detection matches the replacement map. No full 312-source sweep is claimed."
+  },
+  "freshDetector": {
+    "readerPages": [
+      11
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 146,
+    "manifest": "qa27900/frame-accuracy/test144/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented"
+}

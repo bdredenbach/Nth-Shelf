@@ -1,3 +1,5 @@
+Current source checkpoint: Test144, complete adjacent dialogue pair. 72/99 original frames covered; 27 remain. See HANDOFF-2.79.144.md. Source only; no new APK.
+
 Current source checkpoint: Test143, complete reaction inset and collapse scene. 70/99 original frames covered; 29 remain. See HANDOFF-2.79.143.md. Source only; no new APK.
 
 Current source checkpoint: Test142, complete second-row dialogue singles. 68/99 original frames covered; 31 remain. See HANDOFF-2.79.142.md. Source only; no new APK.
