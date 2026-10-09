@@ -1,0 +1,105 @@
+{
+  "test": "Test132 source-witnessed foreground cap",
+  "version": "2.79.132",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "completedNewOriginalFrames": 11,
+    "remainingOriginalFrames": 45,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 58,
+    "validSingleSelections": 38,
+    "validDualSelections": 8,
+    "qualifyingSelections": 46,
+    "qualifyingUniqueOriginalFrames": 54,
+    "remainingUniqueOriginalFrames": 45,
+    "rejectedSelections": 12,
+    "rejectedOversized": 8,
+    "rejectedMixedNeighbor": 4,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      8,
+      10,
+      14,
+      16,
+      19,
+      21,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 166,
+    "behavioralSuites": 165,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 111,
+    "execution": "Complete final retained command list ran with four isolated workers on frozen final source. Prior failed allocation-guard attempt is retained privately; both failures pass after correction.",
+    "finalSummarySha256": "cb79da11ae2ae54b6f54824f3ed9cac4d121868e6f9052953b2e40f2963de10f"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 58,
+    "changedSelections": [
+      [
+        18,
+        3
+      ],
+      [
+        18,
+        4
+      ]
+    ],
+    "unchangedPNGs": 56,
+    "all45EarlierAcceptedNativeCropsByteIdentical": true
+  },
+  "readerOwnership": {
+    "passed": true,
+    "wholeCapTaps": 1592,
+    "outsideCapOwnershipPixelsUnchanged": 3106040,
+    "atomicAssignments": 3184,
+    "serializedMap": true,
+    "initialTap": true,
+    "sourceChangeRejected": true,
+    "sourceRestore": true,
+    "canvasExpansionVerified": true
+  },
+  "generatedContracts": {
+    "capCases": 14,
+    "readerCanvases": 3,
+    "originalComicPixelsEmbedded": false
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1346,
+    "discoveryUnchanged": true,
+    "sourceEligibleMaps": 1
+  },
+  "freshDetector": {
+    "readerPage": 18,
+    "descriptors": 5,
+    "unchanged": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 134,
+    "manifest": "qa27900/frame-accuracy/test132/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented"
+}
