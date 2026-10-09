@@ -1,0 +1,39 @@
+{
+  "version": "2.79.131",
+  "runtimeCommit": "145bd5c92f2c59aaad2881cb4c570518be882208",
+  "testedTree": "d3ff76a46e969e5f97c6cbb1053082e8be3557ce",
+  "bulkTaskStatus": "in_progress",
+  "completedOfOriginal56": 9,
+  "remainingOriginalFrames": 47,
+  "qualifyingOriginalFrames": 52,
+  "retainedSuitesPassed": 164,
+  "apkBuilt": false,
+  "workflowDispatched": false,
+  "canonicalHandoffVersion": 13,
+  "artifacts": [
+    {
+      "name": "Nth-Shelf-Test131-Frame-Review.html",
+      "library_file_id": "libfile_c417b0f0a7848191947b45282f2c1eaa",
+      "bytes": 12853781,
+      "sha256": "f11511a59b8addb6983a812c8f06aba9fac2f4c8cfd7d22c3cf0d248605ae746"
+    },
+    {
+      "name": "Nth-Shelf-Test131-Single-Frame-Regression.json",
+      "library_file_id": "libfile_09e6af9215c08191bd1c809bd9b2c163",
+      "bytes": 147858,
+      "sha256": "50d12de5ad3a129838f44cca7009eb3dd5619b8812adef45f02fb5267a7c1efc"
+    },
+    {
+      "name": "Nth-Shelf-Test131-Replay-Checkpoint.zip",
+      "library_file_id": "libfile_1ffc54a84bbc81918e5225bf4deee5f6",
+      "bytes": 11504255,
+      "sha256": "8f57f41b227eb038f319602a0df2d4b100539abaed4869f307c1e58720ffbc09"
+    },
+    {
+      "name": "Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "library_file_id": "libfile_b40550a56110819197ad1ffa78ce2e9c",
+      "bytes": 10224,
+      "sha256": "84f94f8dd1bc0a24edb5f3c6723525ecee548a27e8975b76ee6a2f8edf2230bd"
+    }
+  ]
+}
