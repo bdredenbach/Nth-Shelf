@@ -3428,4 +3428,7 @@ if(typeof PanelChromaticOcclusionCell!=='undefined')PanelChromaticOcclusionCell.
 
 
 if(typeof PanelChromaticTaperCell!=='undefined')PanelChromaticTaperCell.installReader(Reader);
+
+
+if(typeof PanelChromaticCompositionRemainder!=='undefined')PanelChromaticCompositionRemainder.installReader(Reader);
 if(typeof PanelPageEdgeRailCell!=='undefined')PanelPageEdgeRailCell.installReader(Reader);

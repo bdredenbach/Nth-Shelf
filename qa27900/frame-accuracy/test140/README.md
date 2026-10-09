@@ -1,0 +1,7 @@
+# Test140: complete lower court composition with whole crossing dialogue
+
+Three source-authenticated upper enclosures establish the prior ownership. Opposite margins certify a smooth row-varying backdrop above a source-derived horizon. Independent background-relative thresholds recover bounded attached foreground and whole paper bodies; strong interior separators, disconnected caps and ambiguous ownership reject multi-scene results. Conservative integer margins preserve scaled border exclusion. Persisted witnesses reconstruct geometry, and current image/owner replay gates display, taps and zoom. Earlier owner contexts and asynchronous navigation remain intact.
+
+chromatic-composition-remainder-contract.cjs covers 14 independent generated source cases, including mirror, translation, scale, palette and attached protrusion; missing backdrop, incomplete ancestry, detached or ambiguous caps, interior dividers and empty art reject. Thirteen proof tamper cases, source substitution, 351,338 exclusive generated taps, whole dialogue, all prior-child zooms, invalid-child quarantine, unavailable viewport, base fallback and concurrent navigation restoration pass. No original comic pixels. run-retained.sh runs all 181 suites plus syntax.
+
+47 singles + 8 immediate-continuity pairs cover 63/99 originals. 55 qualifying steps; 36 originals remain. The authorized 56-original bulk task has repaired 20 and remains in progress. No APK or phone pass.

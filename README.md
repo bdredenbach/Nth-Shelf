@@ -1,3 +1,5 @@
+Current source checkpoint: Test140, complete lower court composition with whole crossing dialogue. 63/99 original frames covered; 36 remain. See HANDOFF-2.79.140.md. Source only; no new APK.
+
 Current source checkpoint: Test139, complete left court portrait at its oblique foreground boundary. 62/99 original frames covered; 37 remain. See HANDOFF-2.79.139.md. Source only; no new APK.
 
 Current source checkpoint: Test138, complete right court portrait with projecting crown. 61/99 original frames covered; 38 remain. See HANDOFF-2.79.138.md. Source only; no new APK.

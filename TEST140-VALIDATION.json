@@ -1,0 +1,119 @@
+{
+  "test": "Test140: complete lower court composition with whole crossing dialogue",
+  "version": "2.79.140",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "completedNewOriginalFrames": 20,
+    "remainingOriginalFrames": 36,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 63,
+    "validSingleSelections": 47,
+    "validDualSelections": 8,
+    "qualifyingSelections": 55,
+    "qualifyingUniqueOriginalFrames": 63,
+    "remainingUniqueOriginalFrames": 36,
+    "rejectedSelections": 8,
+    "rejectedOversized": 6,
+    "rejectedMixedNeighbor": 2,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      14,
+      16,
+      19,
+      21,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 181,
+    "behavioralSuites": 180,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 119,
+    "execution": "Complete retained command list ran on frozen source, with isolated workers and longest tests scheduled first. No suite skipped.",
+    "finalSummarySha256": "eab7a4ad21ebbde28f9f14a5515fa93dff1b7db4c5e3e04f0e5b4980a1569b58"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 63,
+    "changedSelections": [],
+    "addedSelections": [
+      [
+        9,
+        4
+      ]
+    ],
+    "unchangedPNGs": 62,
+    "previousAcceptedCropsProtected": 54,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "Reader9 S4 retains the complete lower court scene, whole owned dialogue above the source horizon, foreground figure and floor. All 54 earlier accepted crops and metadata and all 62 previous PNGs remain byte-identical. Reader9 now has four complete original singles."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "pixels": 296820,
+    "overlap": 0,
+    "misses": 0,
+    "bodyPixels": 58526,
+    "bodyMissing": 0,
+    "capPixels": 1425,
+    "capMissing": 0,
+    "allThreeAcceptedMasksExact": true,
+    "allSavedDescriptorsIdentical": true,
+    "sourceReplay": true,
+    "persistence": true,
+    "currentNativeCropMatchesReviewedFinalImage": true,
+    "completeNewSingles": 1,
+    "readerPage9Complete": true,
+    "phoneAcceptance": "pending"
+  },
+  "generatedContracts": {
+    "transformedPositiveAndNegativeScenes": 14,
+    "proofTamperRejections": 13,
+    "exclusiveGeneratedPixelTaps": 351338,
+    "wholeDialogueAndNestedPriorZoomControls": true,
+    "sourceBindingTrustedPriorAndReaderFallbackControls": true,
+    "absentFamilyThrowingViewportAndConcurrentNavigationControls": true,
+    "originalComicPixelsEmbedded": false
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1350,
+    "sourceEligibleMaps": 1,
+    "discoveryReview": "Across 312 stored maps and 1,350 descriptors, only Reader9 is eligible. Fresh full Reader9 detection preserves the three earlier court descriptors exactly and appends one source-replayed lower composition. No fresh full 312-page detector sweep is claimed."
+  },
+  "freshDetector": {
+    "readerPages": [
+      9
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 142,
+    "manifest": "qa27900/frame-accuracy/test140/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented"
+}
