@@ -1,3 +1,5 @@
+Current source checkpoint: Test136, complete round general reaction and atomic lettering. 58/99 original frames covered; 41 remain. See HANDOFF-2.79.136.md. Source only; no new APK.
+
 Current source checkpoint: Test135, complete upper cavern paper cell. 57/99 original frames covered; 42 remain. See HANDOFF-2.79.135.md. Source only; no new APK.
 
 Current source checkpoint: Test134, complete page-edge rail cell. 56/99 original frames covered; 43 remain. See HANDOFF-2.79.134.md. Source only; no new APK.

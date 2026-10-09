@@ -3418,3 +3418,5 @@ if(typeof PanelGutterCaptionBoundary!=='undefined')PanelGutterCaptionBoundary.in
 if(typeof PanelPageEdgeRailCell!=='undefined')PanelPageEdgeRailCell.installReader(Reader);
 
 if(typeof PanelUpperPaperSeparation!=='undefined')PanelUpperPaperSeparation.installReader(Reader);
+
+if(typeof PanelRoundAtomicInset!=='undefined')PanelRoundAtomicInset.installReader(Reader);
