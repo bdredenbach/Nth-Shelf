@@ -18,8 +18,9 @@ function loadSourceApi(sourceRoot, modulePath) {
   const index = fs.readFileSync(path.join(sourceRoot, 'index.html'), 'utf8');
   const scripts = [...index.matchAll(/src="(js\/panels[^"]*\.js)"/g)].map(match => path.resolve(sourceRoot, match[1]));
   assert.ok(scripts.length, 'source index contains real panel dependencies');
-  const code = scripts.map(file => fs.readFileSync(file, 'utf8')).join('\n') +
-    (scripts.includes(path.resolve(modulePath)) ? '' : '\n' + fs.readFileSync(modulePath, 'utf8'));
+  const files=scripts.map(file=>path.basename(file)==='panels-round-atomic-inset.js'?path.resolve(modulePath):file);
+  if(!scripts.some(file=>path.basename(file)==='panels-round-atomic-inset.js'))files.push(path.resolve(modulePath));
+  const code=files.map(file=>fs.readFileSync(file,'utf8')).join('\n');
   // Real source helpers, isolated evaluation, no private image/checkpoint
   // harness and no runtime edits. These tests never need a source canvas.
   return new Function('document', 'Image', 'window', 'module', code +
@@ -450,7 +451,7 @@ async function runContract(api, options = {}) {
         pointInContours(){childHitTests++;return true;},
         getPanelImageContext(){return{img};}};
       api.installReader(reader);
-      const cached={owners,img,key:img.src,items:owners.slice(),previous:prior,children:[child],verified:true};
+      const cached={owners,img,source:[img,undefined,img.src,undefined,undefined,img.width,img.height,undefined,0,false],sourceReady:true,childSig:JSON.stringify([child]),priorSig:JSON.stringify(prior),items:owners.slice(),previous:prior,children:[child],verified:true};
       reader._roundAtomicDisplay=cached;
       assert.equal(reader.displayPanelContours(child,child._contours),child._contours,
         'unchanged seeded verified state starts usable');

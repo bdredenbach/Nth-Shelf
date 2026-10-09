@@ -74,7 +74,7 @@ function resolveSource(options = {}) {
   const candidate = requested;
   const paths = scripts.map(file => file === indexed ? candidate : file);
   if (!indexed && !paths.includes(candidate)) paths.push(candidate);
-  assert.equal(paths.filter(file => path.basename(file) === 'panels-page-edge-rail-cell.js').length, 1,
+  assert.equal(paths.filter(file => file === candidate).length, 1,
     'Load the page-edge module exactly once, before Reader.');
   return {
     root, candidate, paths,
@@ -83,6 +83,16 @@ function resolveSource(options = {}) {
     readerCode: fs.readFileSync(path.join(root, 'js/reader.js'), 'utf8'),
     candidateSha256: hash(fs.readFileSync(candidate))
   };
+}
+
+function orderedReaderCode(code) {
+  const family=['PanelPageEdgeRailCell','PanelCappedRimCell','PanelFooterGutterPair'];
+  const hooks=[...code.matchAll(/\b(\w+)\.installReader\(Reader\)/g)].map(m=>m[1]);
+  for(const name of family)assert(hooks.filter(n=>n===name).length<=1,'Each composed guard is installed at most once.');
+  for(let k=1;k<family.length;k++)if(hooks.includes(family[k]))assert(hooks.includes(family[k-1])&&hooks.indexOf(family[k-1])<hooks.indexOf(family[k]),'A composed guard follows its authenticated ancestor.');
+  // An override replaces a module at its indexed position. Existing Reader
+  // hooks retain that exact installed order; only an absent ancestor appends.
+  return hooks.includes(family[0])?code:code+'\nPanelPageEdgeRailCell.installReader(Reader);';
 }
 
 function setup(source) {
@@ -95,12 +105,7 @@ function setup(source) {
     document: { createElement(tag) { if(tag==='canvas')counters.canvases++; return element(tag); } },
     requestAnimationFrame(fn) { raf.push(fn); return raf.length; }
   });
-  // An explicit private replacement also models its companion install-order
-  // patch. An integrated checkout must already install the quarantine last.
-  if(!source.candidateOverridesIndex)assert.equal([...source.readerCode.matchAll(/\b(\w+)\.installReader\(Reader\)/g)].at(-1)?.[1],'PanelPageEdgeRailCell','Install the page-edge quarantine after all other Reader repairs.');
-  const readerCode=source.candidateOverridesIndex?source.readerCode.replace(/if\(typeof PanelPageEdgeRailCell!==?'undefined'\)PanelPageEdgeRailCell\.installReader\(Reader\);/g,''):source.readerCode;
-  vm.runInContext(source.moduleCode + '\n' + readerCode +
-    '\nPanelPageEdgeRailCell.installReader(Reader);', sandbox);
+  vm.runInContext(source.moduleCode+'\n'+orderedReaderCode(source.readerCode),sandbox);
   const api = vm.runInContext('({ Reader, PanelMatteCells, PanelHighContrastEnclosures, PanelPageEdgeRailCell })', sandbox);
   return { ...api, counters, sandbox, flushFrames() {
     let count = 0;
@@ -301,7 +306,7 @@ async function run(options = {}) {
     discoveryAndSourceUnmodified:true,noBroadEnvelopeOwner:true,browserOrPhoneTest:false};
 }
 
-module.exports = { run, resolveSource, setup, configureReader, sourceImage, element, ownershipMask, hash, cv, fixtures };
+module.exports = { run, resolveSource, orderedReaderCode, setup, configureReader, sourceImage, element, ownershipMask, hash, cv, fixtures };
 if (require.main === module) {
   const alive = setInterval(() => {},1000);
   run().then(result => console.log(JSON.stringify(result,null,2))).catch(error => {

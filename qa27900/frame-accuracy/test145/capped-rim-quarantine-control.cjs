@@ -1,0 +1,6 @@
+'use strict';
+// A malformed off-map child must not enter the real Reader's old rectangular
+// fallback. This lightweight control requires only generated pixels.
+const assert=require('node:assert/strict'),{context,cv}=require('./harness.cjs');
+const alive=setInterval(()=>{},1000);
+(async()=>{const H=context(),r=H.get('Reader'),M=H.get('PanelCappedRimCell'),c=cv.createCanvas(800,1200),g=c.getContext('2d');g.fillStyle='#865e91';g.fillRect(0,0,800,1200);const img=await cv.loadImage(c.toBuffer('image/png'));r.currentPanels=[];r.panelZoomEnabled=true;r.mode='single';r.els={stage:H.el(),viewport:H.el()};r.getPanelImageContext=()=>({img});const p={x:.1,y:.1,w:.3,h:.3,_identitySource:'structural-grid-frame',_geometryOwner:'structural-grid-contours',_geometryType:M.TYPE};assert.equal(JSON.stringify(r.displayPanelContours(p)),'[]','Malformed off-map family display is quarantined.');await r.zoomToPanel(p,{left:0,top:0,width:560,height:860},{left:30,top:30,width:500,height:750});assert.equal(r.els.panelOverlay,undefined,'Malformed off-map family never renders a fallback rectangle.');console.log(JSON.stringify({passed:true,generatedPixels:true,realReader:true,malformedOffMapDisplayAndZoomBlocked:true}));})().catch(e=>{console.error(e);process.exitCode=1}).finally(()=>clearInterval(alive));

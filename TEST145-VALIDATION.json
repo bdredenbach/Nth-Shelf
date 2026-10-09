@@ -1,0 +1,148 @@
+{
+  "test": "Test145: complete capped-rim baby-hand cell",
+  "version": "2.79.145",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "completedNewOriginalFrames": 30,
+    "remainingOriginalFrames": 26,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 69,
+    "validSingleSelections": 53,
+    "validDualSelections": 10,
+    "qualifyingSelections": 63,
+    "qualifyingUniqueOriginalFrames": 73,
+    "remainingUniqueOriginalFrames": 26,
+    "rejectedSelections": 6,
+    "rejectedOversized": 4,
+    "rejectedMixedNeighbor": 2,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      14,
+      16,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 208,
+    "behavioralSuites": 207,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 124,
+    "execution": "Complete retained command list ran on frozen source, with isolated workers and longest tests scheduled first. No suite skipped.",
+    "finalSummarySha256": "c9ede0b89e1ac0ef2573dce57533d765df6287b8692065e87e6976bb6c200354"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 69,
+    "changedSelections": [],
+    "addedSelections": [
+      [
+        6,
+        2
+      ]
+    ],
+    "unchangedPNGs": 68,
+    "previousAcceptedCropsProtected": 62,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "One complete single appends after the unchanged upper-left owner. All 62 earlier accepted crops and metadata and all 68 previous PNGs remain exact. Reader6 still has five originals remaining. The earlier round atomic inset also receives Reader-only source lifecycle hardening; its discovery, geometry and all five Reader23 native crops remain unchanged."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "sourceRoot": "/workspace/scratch/0cf2c9e42b6e/nth-resume/source",
+    "candidateSha256": "67b790313e3ad9e700b9c3523efec25e3bfb9189876926c27c9a22507ee93757",
+    "nativeSource": true,
+    "actualReaderOverlay": true,
+    "dimSurroundingSource": true,
+    "priorCropSha256": "8cbedabad88af890303d7e9a3c55ba4a2de1c1c5941e22c574247020c873a97b",
+    "mixedPriorCropSha256": "8cbedabad88af890303d7e9a3c55ba4a2de1c1c5941e22c574247020c873a97b",
+    "childCropSha256": "9880a0ba84e34d20ada401ff388116fbeb1c3c5f590d5746e63dbabf7809e9fa",
+    "priorExact": true,
+    "sourceOwnedPixelTaps": 220902,
+    "acceptedPriorPixelTaps": 141598,
+    "outsideSamples": 32936,
+    "cachedTapSourceReads": 0,
+    "malformedChildIsolated": true,
+    "offMapDisplayZoomBlocked": true,
+    "missingPriorQuarantined": true,
+    "inPlaceGeometryInvalidates": true,
+    "cropSize": [
+      628,
+      1148
+    ],
+    "earlierAcceptedCropsAndMetadataExact": 62,
+    "allEarlierPngsExact": 68,
+    "reviewedNativePngsUnchanged": true,
+    "sourceLifecycleReader80": "bef7b87283ece0c5a0f860e0051117be5a416a359432b591fcbd8d1aed1d4ae9",
+    "reader80DiscoveryAndGeometryUnchanged": true,
+    "reader80AllFivePriorPage23PNGsExact": true,
+    "reader80EarlierOwnerLifecycleDelegated": true
+  },
+  "generatedContracts": {
+    "transformedPositiveScenes": 5,
+    "negativeSourceControls": 6,
+    "proofTamperRejections": 13,
+    "readerCorruptions": 9,
+    "unavailableSourceCases": 6,
+    "malformedSourceCases": 9,
+    "cachedTapChecks": 10000,
+    "warmSourcePixelRereads": 0,
+    "disabledGuardNegativeControls": true,
+    "orderedLoaderContracts": 2,
+    "roundSpeechBothInsetHostRegression": true,
+    "originalComicPixelsEmbedded": false,
+    "atomicReaderGeneratedCanvases": 35,
+    "atomicReaderMalformedContexts": 11,
+    "atomicSourceLifecycleCases": 26,
+    "atomicLifecycleNativeCanvases": 14,
+    "atomicWarmSourceRereads": 0,
+    "atomicOldRuntimeNegativeControl": true,
+    "atomicRetainedChecks": 210
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1356,
+    "sourceEligibleMaps": 1,
+    "discoveryReview": "Across 312 stored maps and 1,356 descriptors, only Reader6 is eligible for the new source-rim family. Fresh full Reader6 and Reader23 detection match their expected maps. The proof80 correction changes only its Reader guard; no full 312-source sweep is claimed."
+  },
+  "freshDetector": {
+    "readerPages": [
+      6,
+      23
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 147,
+    "manifest": "qa27900/frame-accuracy/test145/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented"
+}

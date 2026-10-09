@@ -1,0 +1,1 @@
+'use strict';const{load}=require('./load.cjs'),{scene}=require('./round-atomic-fixtures.cjs'),{anchoredFixture}=require('./anchored-scene-fixtures.cjs');function fixture(options={}){const q=anchoredFixture(scene(options));q.prior=load().ragged.analyzeRGBA(q.rgba,q.w,q.h);return q;}module.exports={fixture};

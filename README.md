@@ -1,3 +1,5 @@
+Current source checkpoint: Test145, complete capped-rim baby-hand cell. 73/99 original frames covered; 26 remain. See HANDOFF-2.79.145.md. Source only; no new APK.
+
 Current source checkpoint: Test144, complete adjacent dialogue pair. 72/99 original frames covered; 27 remain. See HANDOFF-2.79.144.md. Source only; no new APK.
 
 Current source checkpoint: Test143, complete reaction inset and collapse scene. 70/99 original frames covered; 29 remain. See HANDOFF-2.79.143.md. Source only; no new APK.

@@ -3444,3 +3444,5 @@ if(typeof PanelRoundSpeechInset!=='undefined')PanelRoundSpeechInset.installReade
 
 if(typeof PanelChromaticDialoguePair!=='undefined')PanelChromaticDialoguePair.installReader(Reader);
 if(typeof PanelPageEdgeRailCell!=='undefined')PanelPageEdgeRailCell.installReader(Reader);
+
+if(typeof PanelCappedRimCell!=='undefined')PanelCappedRimCell.installReader(Reader);

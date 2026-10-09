@@ -1,0 +1,17 @@
+'use strict';
+// Independent construction labels. All artwork is generated, and no source
+// page, private coordinate, proof or crop is read by these public fixtures.
+const base=require('./edge-rail-fixtures.cjs');let cv;try{cv=require('@napi-rs/canvas');}catch(_){cv=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/@napi-rs/canvas');}
+function fixture(o={}){const scale=o.scale||2,matte=o.matte||'#36bacd',b=base.makeProductionFixture({scale,matte}),w=b.w,h=b.h,c=cv.createCanvas(w,h),g=c.getContext('2d'),labels=cv.createCanvas(w,h),q=labels.getContext('2d');g.drawImage(b.canvas,0,0);g.save();g.scale(scale,scale);q.scale(scale,scale);g.fillStyle='#674978';g.fillRect(243,12,15,545);g.fillStyle=matte;g.fillRect(426,0,214,460);const dx=o.dx||0,dy=o.dy||0;g.translate(dx,dy);q.translate(dx,dy);const polygon=(ctx,points,fill,stroke='#1e1c22')=>{ctx.beginPath();ctx.moveTo(...points[0]);points.slice(1).forEach(p=>ctx.lineTo(...p));ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.lineWidth=3;ctx.strokeStyle=stroke;ctx.stroke();}};
+ const seam=[[470,45],[472,111],[469,164],[473,211],[468,271],[472,337],[476,399]],rim=[...seam,[618,403],[613,366],[618,304],[614,239],[617,153],[618,50],[572,52],[529,44]];
+ polygon(g,[[433,136],[474,127],[472,410],[470,900],[435,900]],'#b49774');polygon(g,rim,'#806856');polygon(q,rim,'white','white');
+ g.save();g.beginPath();g.moveTo(...rim[0]);rim.slice(1).forEach(p=>g.lineTo(...p));g.closePath();g.clip();g.strokeStyle='#1d2127';g.lineWidth=4;g.fillStyle='#bc7570';g.beginPath();g.ellipse(548,167,41,69,-.18,0,Math.PI*2);g.fill();g.stroke();polygon(g,[[524,205],[569,208],[609,341],[494,361]],'#404d72');g.strokeStyle='#d5ddd8';g.lineWidth=16;g.beginPath();g.moveTo(504,344);g.lineTo(589,231);g.stroke();g.restore();
+ const balloon=(ctx,color)=>{ctx.fillStyle=color;ctx.strokeStyle=color==='white'?'white':'#1e1c22';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(553,325,48,28,0,0,Math.PI*2);ctx.fill();ctx.stroke();polygon(ctx,[[517,305],[508,282],[532,301]],color,ctx.strokeStyle);};balloon(g,'#faf9ec');balloon(q,'white');g.fillStyle='#1e1c22';g.font='bold 12px sans-serif';g.fillText('A WHOLE',523,321);g.fillText('BALLOON',523,337);
+ if(o.foreign!==false){g.fillStyle='#ffffef';g.strokeStyle='#1e1c22';g.lineWidth=2;g.beginPath();g.ellipse(o.negative==='ambiguous-balloon'?472:459,209,o.negative==='ambiguous-balloon'?35:17,27,0,0,Math.PI*2);g.fill();g.stroke();g.fillStyle='#161a1d';g.font='bold 6px sans-serif';g.fillText('NEARBY',447,211);}
+ if(o.negative==='missing-rim'){g.fillStyle='#806856';g.fillRect(463,242,22,42);}
+ if(o.negative==='open-bottom'){g.fillStyle='#806856';g.fillRect(475,393,150,200);}
+ if(o.negative==='stacked-cells'){g.fillStyle=matte;g.fillRect(469,249,154,12);g.strokeStyle='#16191d';g.lineWidth=3;g.strokeRect(469,249,154,12);}
+ if(o.negative==='detached-shape'){g.fillStyle=matte;g.fillRect(427,119,43,285);}
+ if(o.negative==='no-upper-step'){g.fillStyle='#806856';g.fillRect(432,35,49,104);}
+ g.restore();let rgba=g.getImageData(0,0,w,h).data,truth=q.getImageData(0,0,w,h).data,mask=Uint8Array.from({length:w*h},(_,i)=>+(truth[4*i+3]>128));if(o.mirror){const C=cv.createCanvas(w,h),G=C.getContext('2d');G.translate(w,0);G.scale(-1,1);G.drawImage(c,0,0);const flip=m=>{const out=new Uint8Array(m.length);for(let y=0;y<h;y++)for(let x=0;x<w;x++)out[y*w+x]=m[y*w+w-1-x];return out;};mask=flip(mask);return{c:C,rgba:G.getImageData(0,0,w,h).data,w,h,mask,o};}return{c,rgba,w,h,mask,o};}
+module.exports={fixture};
