@@ -1,3 +1,5 @@
+Current source checkpoint: Test134, complete page-edge rail cell. 56/99 original frames covered; 43 remain. See HANDOFF-2.79.134.md. Source only; no new APK.
+
 Current source checkpoint: Test133, complete source-witnessed caption-gutter ownership.55/99 original frames covered;44 remain. See HANDOFF-2.79.133.md. Source only; no new APK.
 
 Current source checkpoint: [Test132](HANDOFF-2.79.132.md). Reader18's complete lower dialogue pair restores the full forehead.38 singles+8 pairs=54/99 originals;45 remain. All166 retained suites and58 native overlays pass, with all45 earlier accepted crops unchanged. Source-only: no APK, Gradle or workflow dispatch. Phone confirmation and automatic frame playback remain pending. [Validation](TEST132-VALIDATION.json).

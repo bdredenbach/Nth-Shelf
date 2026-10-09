@@ -3408,3 +3408,5 @@ if(typeof PanelGutterTailSpeech!=='undefined')PanelGutterTailSpeech.installReade
 if(typeof PanelGutterInkCap!=='undefined')PanelGutterInkCap.installReader(Reader);
 
 if(typeof PanelGutterCaptionBoundary!=='undefined')PanelGutterCaptionBoundary.installReader(Reader);
+
+if(typeof PanelPageEdgeRailCell!=='undefined')PanelPageEdgeRailCell.installReader(Reader);
