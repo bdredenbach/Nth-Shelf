@@ -1,0 +1,100 @@
+{
+  "test": "Test131 indivisible speech across source-traced paper cells",
+  "version": "2.79.131",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "completedNewOriginalFrames": 9,
+    "remainingOriginalFrames": 47,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 58,
+    "validSingleSelections": 38,
+    "validDualSelections": 7,
+    "qualifyingSelections": 45,
+    "qualifyingUniqueOriginalFrames": 52,
+    "remainingUniqueOriginalFrames": 47,
+    "rejectedSelections": 13,
+    "rejectedOversized": 8,
+    "rejectedMixedNeighbor": 4,
+    "rejectedDamaged": 1,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      8,
+      10,
+      14,
+      16,
+      19,
+      21,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "behavioralSuites": 163,
+    "retainedSuites": 164,
+    "cachePackageSuites": 1,
+    "cachePackageAndSyntax": "passed",
+    "syntaxPassed": true,
+    "execution": "Unchanged runtime: prefix completed; cache checker invocation corrected from Test130 to Test131, then remainder resumed and completed successfully. Original failed invocation retained in log.",
+    "logSha256": "f51fa7058841b56226a27e87781a886a5f5c2b3395423c4582d83e444adb4075"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 58,
+    "changedSelections": [
+      [
+        23,
+        1
+      ],
+      [
+        23,
+        2
+      ]
+    ],
+    "changedMetadata": [],
+    "unchangedPNGs": 56,
+    "all44EarlierAcceptedNativeCropsByteIdentical": true
+  },
+  "readerTapChecks": {
+    "passed": true,
+    "sourceReplayedExactly": true,
+    "bodyPixels": 1066,
+    "tailWitnesses": 2,
+    "letters": 23,
+    "sourceOwner": 2,
+    "foreignSelection": 1,
+    "allBodyTaps": 1066,
+    "allNonBodyMasksUnchanged": 1577368,
+    "earlierAcceptedCaveByteIdentical": true,
+    "discoveryDescriptorsUnchanged": true
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1346,
+    "discoveryUnchanged": true
+  },
+  "eligibleSourceReplays": {
+    "eligiblePages": 4,
+    "changedPages": 1,
+    "otherEligiblePagesUnchanged": 3
+  },
+  "phoneAcceptance": "pending",
+  "frozenCachedWebAssets": {
+    "physicalFiles": 133,
+    "manifest": "qa27900/frame-accuracy/test131/web-assets.json"
+  }
+}

@@ -1,13 +1,14 @@
-// NTH SHELF 2.79.130 — EXCLUDED SPEECH OWNERSHIP
+// NTH SHELF 2.79.131 — EXCLUDED SPEECH OWNERSHIP
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.130";
+const CACHE_NAME = "nth-shelf-shell-2.79.131";
 const SHELL_FILES = [
   "./js/panels-ornate-inset.js",
   "./js/panels-ornate-ownership.js",
   "./js/panels-enclosure-remainder.js",
   "./js/panels-excluded-speech.js",
+  "./js/panels-gutter-tail-speech.js",
   "./js/panels-saturated-frontier-cell.js",
   "./js/panels-saturated-round-inset.js",
   "./js/panels-saturated-terminal-cell.js",

@@ -3403,3 +3403,4 @@ if(typeof PanelOrnateOwnership!=='undefined')PanelOrnateOwnership.installReader(
 if(typeof PanelEnclosureRemainder!=='undefined')PanelEnclosureRemainder.installReader(Reader);
 
 if(typeof PanelExcludedSpeech!=='undefined')PanelExcludedSpeech.installReader(Reader);
+if(typeof PanelGutterTailSpeech!=='undefined')PanelGutterTailSpeech.installReader(Reader);
