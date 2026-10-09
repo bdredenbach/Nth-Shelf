@@ -1,0 +1,7 @@
+# Test149: complete lower attack original
+
+Source color frontiers and an independently witnessed upper boundary distinguish a complete open lower original from its accepted neighbors. Two threshold witnesses preserve whole speech and both foreground crossings, while unexplained foreground rejects admission. Persisted source observations rebuild the exact complete contour. Current image replay and complete earlier-owner context certify display, taps and zoom; lifecycle changes invalidate cached source trust and remain invalid inside a scoped zoom until it exits. All accepted owners retain their original context and native canvases.
+
+Five transformed positives, six source negatives and 16 generated proof corruptions verify complete open-source frontiers and foreground ownership. Reader checks compare 35 actual generated canvases and 5,400 taps, seven cache mutations, nested accepted delegation and visible child zoom. All 25 lifecycle cases and focused sticky-pin controls pass. Old runtime and non-sticky source-aware negative controls fail as expected. Private source evidence verifies whole speech, the raised foreground arm and right page-edge artwork. No original comic pixels. run-retained.sh runs all 226 suites plus syntax.
+
+53 singles + 14 immediate-continuity pairs cover 81/105 originals. 67 qualifying steps; 24 originals remain. The whole-comic task has repaired 38 further originals from the corrected 62-original worklist and remains in progress. No APK or phone pass.

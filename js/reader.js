@@ -3452,3 +3452,5 @@ if(typeof PanelRoundedCrowdReader!=='undefined')PanelRoundedCrowdReader.installR
 if(typeof PanelSharedSeamReader!=='undefined')PanelSharedSeamReader.installReader(Reader);
 
 if(typeof PanelChromaticSidePortrait!=='undefined')PanelChromaticSidePortrait.installReader(Reader);
+
+if(typeof PanelChromaticOpenScene!=='undefined')PanelChromaticOpenScene.installReader(Reader);
