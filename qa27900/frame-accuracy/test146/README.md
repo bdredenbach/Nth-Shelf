@@ -1,0 +1,7 @@
+# Test146: complete rounded crowd strip
+
+Paper-backed lower ink runs, a parallel upper seam and independently supported side rims identify a complete rounded strip. Two source classifications must agree on the complete contour. Whole interiors retain artwork and lettering. Authenticated accepted-owner ancestry prevents overlap, while the earlier broad envelope supplies context without receiving new frame credit. Display, taps and zoom replay the exact child against its current source and owners. Both image URLs, intrinsic and rendered dimensions, readiness and load/error generation bind the cached source; warm interactions do not reread pixels.
+
+Generated geometry controls cover 18 transformed positives,14 source negatives,33 persisted-proof corruptions and six bad replays. Actual Reader controls verify 29 generated canvases, nine bad contexts, eight unavailable or off-map cases, earlier-owner preservation and absent-family behavior. All 26 lifecycle controls pass, including 14 exact native recovery canvases and zero warm source rereads. The old Reader fails the same-canvas resize/clear negative control. Indexed loaders preserve dependency order. No original comic pixels. run-retained.sh runs all 212 suites plus syntax.
+
+54 singles + 10 immediate-continuity pairs cover 74/99 originals. 64 qualifying steps; 25 originals remain. The authorized 56-original bulk task has repaired 31 and remains in progress. No APK or phone pass.

@@ -1,0 +1,147 @@
+{
+  "test": "Test146: complete rounded crowd strip",
+  "version": "2.79.146",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "completedNewOriginalFrames": 31,
+    "remainingOriginalFrames": 25,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 70,
+    "validSingleSelections": 54,
+    "validDualSelections": 10,
+    "qualifyingSelections": 64,
+    "qualifyingUniqueOriginalFrames": 74,
+    "remainingUniqueOriginalFrames": 25,
+    "rejectedSelections": 6,
+    "rejectedOversized": 4,
+    "rejectedMixedNeighbor": 2,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      14,
+      16,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 212,
+    "behavioralSuites": 211,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 126,
+    "execution": "Complete retained command list ran on frozen source, with isolated workers and longest tests scheduled first. No suite skipped.",
+    "finalSummarySha256": "cd8287c2f31a1a55695808adc26abd7ad0aff6a17a414fd6a6063eb3b5258409"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 70,
+    "changedSelections": [],
+    "addedSelections": [
+      [
+        12,
+        4
+      ]
+    ],
+    "unchangedPNGs": 69,
+    "previousAcceptedCropsProtected": 63,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "The full rounded crowd strip appends as one single. All 63 earlier accepted crops and metadata and all 69 previous PNGs remain exact. Reader 12 has two original attack frames remaining."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "actualSource": true,
+    "actualReaderNativeCanvases": 4,
+    "allPriorCanvasesExact": true,
+    "wholeStripPixelTaps": 50049,
+    "analysisSize": [
+      585,
+      900
+    ],
+    "tapGrid": "source analysis pixel centers",
+    "acceptedPriorSampledPixelTaps": 846,
+    "acceptedMaskPixels": 161674,
+    "outsideSamples": 314,
+    "atomicOwnerOverlap": 0,
+    "sourceWarmTapCanvasCreations": 0,
+    "featureTaps": 7,
+    "offMapAndMutatedChildBlocked": true,
+    "ownerListIdentityAndBytesUnchanged": true,
+    "priorNativeHashes": [
+      "c527fa57c7768f04aad686e6387e1c171c7f7c388db0bc233aaab8f291721dcb",
+      "33732e50baf9ccafe794ed228af5d87d133eef1be2f3b67bd538cd990cecd4ae",
+      "3095c520f375da8df554889133421db7909188ee4baaca2da291d73d15a7e27e"
+    ],
+    "childNativeHash": "2178641f8648292757801b225779c4fb4854115c335d70f4a1cb626d2ea58f5d",
+    "runtimeSha256": "3dde551e097bc0ca1d854010b19629360dbb6dfab51c36a87891b650a6a0bdc1",
+    "readerSha256": "a06023b8ef0eb609db4be560608052807c063bd2b6f98ed696a179a44a0ef6a2",
+    "seconds": 1062.7,
+    "nativeSource": true,
+    "actualReaderOverlay": true,
+    "dimSurroundingSource": true,
+    "earlierAcceptedCropsAndMetadataExact": 63,
+    "allEarlierPngsExact": 69,
+    "reviewedNativePngsUnchanged": true,
+    "availableAncestryEligibleSourcesTested": 13,
+    "eligibleSourcesUnavailable": 12
+  },
+  "generatedContracts": {
+    "transformedPositiveScenes": 18,
+    "negativeSourceControls": 14,
+    "proofTamperRejections": 33,
+    "badSourceReplays": 6,
+    "actualGeneratedReaderCanvases": 29,
+    "readerCorruptions": 9,
+    "unavailableSourceCases": 8,
+    "sourceLifecycleCases": 26,
+    "exactLifecycleNativeCanvases": 14,
+    "warmSourcePixelRereads": 0,
+    "oldReaderNegativeControl": true,
+    "orderedLoaderContract": true,
+    "originalComicPixelsEmbedded": false
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1357,
+    "sourceEligibleMaps": 25,
+    "discoveryReview": "Across 312 stored maps and 1,357 descriptors, 25 maps meet ancestry eligibility. All 13 available original sources were checked; only Reader12 adds a new strip. The other 12 eligible source images are unavailable and explicitly untested. Reader22 is no longer eligible after its accepted warning/relic repair. Fresh full Reader12 detection matches the expected map; this is not a full 312-source sweep."
+  },
+  "freshDetector": {
+    "readerPages": [
+      12
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 149,
+    "manifest": "qa27900/frame-accuracy/test146/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented"
+}

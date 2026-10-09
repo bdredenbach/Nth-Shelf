@@ -1,0 +1,3 @@
+'use strict';const path=require('node:path');let cv;try{cv=require('@napi-rs/canvas')}catch(_){cv=require(path.join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES,'@napi-rs/canvas'))}
+function acceptedFixture(){const w=560,h=840,c=cv.createCanvas(w,h),g=c.getContext('2d'),a=new Uint8ClampedArray(w*h*4);for(let i=0;i<w*h;i++)a.set([250,250,250,255],4*i);for(const[x0,y0,x1,y1]of[[0,25,520,265],[20,320,540,565]])for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){const v=60+((x*7+y*13)%150);a.set([v,Math.min(230,v+15),Math.max(25,v-15),255],4*(y*w+x));}g.putImageData(new cv.ImageData(a,w,h),0,0);return{w,h,rgba:a,canvas:c};}
+module.exports={acceptedFixture};

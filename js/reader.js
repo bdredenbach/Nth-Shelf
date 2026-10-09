@@ -3446,3 +3446,5 @@ if(typeof PanelChromaticDialoguePair!=='undefined')PanelChromaticDialoguePair.in
 if(typeof PanelPageEdgeRailCell!=='undefined')PanelPageEdgeRailCell.installReader(Reader);
 
 if(typeof PanelCappedRimCell!=='undefined')PanelCappedRimCell.installReader(Reader);
+
+if(typeof PanelRoundedCrowdReader!=='undefined')PanelRoundedCrowdReader.installReader(Reader);
