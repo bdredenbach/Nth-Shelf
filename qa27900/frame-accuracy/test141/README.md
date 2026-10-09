@@ -1,0 +1,7 @@
+# Test141: shared upper warning pair and complete lower relic scene
+
+Two adjacent closed upper rims and one whole pale component across their shared gap are independently certified under two source thresholds. Accounted-for rim interruptions and independently traced side boundaries retain the complete shared composition. One continuous lower foreground reaching three page edges forms a separate original after the upper pair is excluded. Additional closed insets and full-span lower dividers reject. Persisted source evidence reconstructs both masks and shared-body geometry, while current-image and exact-owner replay gates actual Reader display, taps and zoom. Invalid, incomplete, off-map or stale children have no rectangular fallback.
+
+shared-rim-contract.cjs covers 15 shifted, mirrored and palette-varied positives, 20 negative sources, 38 proof corruptions and exact JSON replay. reader-shared-rim-contract.cjs covers 27 actual generated Reader canvases, complete pixel replay, active dimming, 10 unavailable/unmapped/malformed cases and six invalid-child contexts retaining three independently generated accepted owners. Empty prior maps are required. No original comic pixels. run-retained.sh runs all 183 suites plus syntax.
+
+48 singles + 9 immediate-continuity pairs cover 66/99 originals. 57 qualifying steps; 33 originals remain. The authorized 56-original bulk task has repaired 23 and remains in progress. No APK or phone pass.

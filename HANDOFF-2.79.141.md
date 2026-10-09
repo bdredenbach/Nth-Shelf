@@ -1,0 +1,11 @@
+# Test141: shared upper warning pair and complete lower relic scene
+
+Two adjacent closed upper rims and one whole pale component across their shared gap are independently certified under two source thresholds. Accounted-for rim interruptions and independently traced side boundaries retain the complete shared composition. One continuous lower foreground reaching three page edges forms a separate original after the upper pair is excluded. Additional closed insets and full-span lower dividers reject. Persisted source evidence reconstructs both masks and shared-body geometry, while current-image and exact-owner replay gates actual Reader display, taps and zoom. Invalid, incomplete, off-map or stale children have no rectangular fallback.
+
+48 singles + 9 immediate-continuity pairs cover 66/99 originals. 57 qualifying steps; 33 originals remain. The authorized 56-original bulk task has repaired 23 and remains in progress. Default one complete original; at most two adjacent consecutive originals with immediate continuity. Finish comic1 before comic2.
+
+All 183 retained suites and 120 JavaScript syntax checks pass. All 24 verified originals and 65 native overlays replayed in isolated six-page batches. All 55 earlier accepted crops and 63/65 total PNGs are byte-identical. One shared source-boundary repair yields Reader22 S1 as a complete immediate-continuity upper pair and S2 as one complete lower relic original. The round reflection stays part of the lower object. All 55 earlier accepted crops and metadata and all 63 previous PNGs remain byte-identical. Reader22 is fully covered.
+
+Across 312 stored maps and 1,351 descriptors, 23 empty maps are eligible. All 11 available Apocalypse sources among those were checked in the private candidate audit; only Reader22 adds two children. Twelve other source originals are unavailable and explicitly untested. Fresh full Reader22 detection matches the expected two source-replayed selections. No full 312-source detector sweep is claimed.
+
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST141-VALIDATION.json and the private replay checkpoint.

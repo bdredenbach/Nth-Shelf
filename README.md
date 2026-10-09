@@ -1,3 +1,5 @@
+Current source checkpoint: Test141, shared upper warning pair and complete lower relic scene. 66/99 original frames covered; 33 remain. See HANDOFF-2.79.141.md. Source only; no new APK.
+
 Current source checkpoint: Test140, complete lower court composition with whole crossing dialogue. 63/99 original frames covered; 36 remain. See HANDOFF-2.79.140.md. Source only; no new APK.
 
 Current source checkpoint: Test139, complete left court portrait at its oblique foreground boundary. 62/99 original frames covered; 37 remain. See HANDOFF-2.79.139.md. Source only; no new APK.

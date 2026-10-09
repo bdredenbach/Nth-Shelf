@@ -1,0 +1,133 @@
+{
+  "test": "Test141: shared upper warning pair and complete lower relic scene",
+  "version": "2.79.141",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "completedNewOriginalFrames": 23,
+    "remainingOriginalFrames": 33,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 65,
+    "validSingleSelections": 48,
+    "validDualSelections": 9,
+    "qualifyingSelections": 57,
+    "qualifyingUniqueOriginalFrames": 66,
+    "remainingUniqueOriginalFrames": 33,
+    "rejectedSelections": 8,
+    "rejectedOversized": 6,
+    "rejectedMixedNeighbor": 2,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      14,
+      16,
+      19,
+      21,
+      22,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 183,
+    "behavioralSuites": 182,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 120,
+    "execution": "Complete retained command list ran on frozen source, with isolated workers and longest tests scheduled first. No suite skipped.",
+    "finalSummarySha256": "e330a823d5d27f9e1b36e0f4a8b6b098cb0ea9933c3fcb6a960a8c16dd721540"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 65,
+    "changedSelections": [],
+    "addedSelections": [
+      [
+        22,
+        1
+      ],
+      [
+        22,
+        2
+      ]
+    ],
+    "unchangedPNGs": 63,
+    "previousAcceptedCropsProtected": 55,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "One shared source-boundary repair yields Reader22 S1 as a complete immediate-continuity upper pair and S2 as one complete lower relic original. The round reflection stays part of the lower object. All 55 earlier accepted crops and metadata and all 63 previous PNGs remain byte-identical. Reader22 is fully covered."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "sourceMaskPixels": [
+      135429,
+      391071
+    ],
+    "nativePixelCenterTaps": 526500,
+    "unownedTapSamples": 0,
+    "overlap": 0,
+    "misses": 0,
+    "criticalFeatureTaps": 9,
+    "persistedProofReplay": true,
+    "currentSourceReplay": true,
+    "allEarlierMapsIdentical": true,
+    "oneSharedBoundaryRepair": true,
+    "completeNewPair": 1,
+    "completeNewSingle": 1,
+    "reflectionIsAnObject": true,
+    "reviewedNativePngsUnchanged": true,
+    "nativePngSha256": [
+      "f9e205b551d5028aea6ec1274b93828f726e5baa3d9f12cb671993bd5aa8a728",
+      "1de987cc999d0c23ac4b6d1340325547ddb5fe227895b71e9c556c285fd10123"
+    ]
+  },
+  "generatedContracts": {
+    "transformedPositiveScenes": 15,
+    "negativeSourceControls": 20,
+    "proofTamperRejections": 38,
+    "actualGeneratedReaderCanvases": 27,
+    "unavailableOrUnmappedCases": 10,
+    "corruptChildContextsPreservingThreeAcceptedOwners": 6,
+    "minimumConstructionMaskRecall": 0.99714,
+    "minimumConstructionMaskIoU": 0.99705,
+    "absentFamilyAndThrowingViewportControls": true,
+    "originalComicPixelsEmbedded": false
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1351,
+    "sourceEligibleMaps": 23,
+    "discoveryReview": "Across 312 stored maps and 1,351 descriptors, 23 empty maps are eligible. All 11 available Apocalypse sources among those were checked in the private candidate audit; only Reader22 adds two children. Twelve other source originals are unavailable and explicitly untested. Fresh full Reader22 detection matches the expected two source-replayed selections. No full 312-source detector sweep is claimed."
+  },
+  "freshDetector": {
+    "readerPages": [
+      22
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 143,
+    "manifest": "qa27900/frame-accuracy/test141/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented"
+}
