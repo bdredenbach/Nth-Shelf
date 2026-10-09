@@ -1,0 +1,116 @@
+{
+  "test": "Test138: complete right court portrait with projecting crown",
+  "version": "2.79.138",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "completedNewOriginalFrames": 18,
+    "remainingOriginalFrames": 38,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 61,
+    "validSingleSelections": 45,
+    "validDualSelections": 8,
+    "qualifyingSelections": 53,
+    "qualifyingUniqueOriginalFrames": 61,
+    "remainingUniqueOriginalFrames": 38,
+    "rejectedSelections": 8,
+    "rejectedOversized": 6,
+    "rejectedMixedNeighbor": 2,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      10,
+      14,
+      16,
+      19,
+      21,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 179,
+    "behavioralSuites": 178,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 117,
+    "execution": "Complete retained command list ran on frozen source, with isolated workers and longest tests scheduled first. No suite skipped.",
+    "finalSummarySha256": "110186e344b3bcb9b0d816a07f1188979f843f3af4bac1efd58f32e8b048380e"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 61,
+    "changedSelections": [],
+    "addedSelections": [
+      [
+        9,
+        2
+      ]
+    ],
+    "unchangedPNGs": 60,
+    "previousAcceptedCropsProtected": 52,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "Reader9 S2 is the complete right portrait with its projecting crown and whole speech. Source-supported silhouette closure preserves the visible lower hand and rim while excluding neighboring speech. All 52 earlier accepted crops and metadata and all 60 previous PNGs remain byte-identical."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "pixels": 45399,
+    "overlap": 0,
+    "misses": 0,
+    "caps": 2281,
+    "capMissing": 0,
+    "bodyPixels": 9632,
+    "bodyMissing": 0,
+    "acceptedCentralMaskExact": true,
+    "allSavedDescriptorsIdentical": true,
+    "sourceReplay": true,
+    "persistence": true,
+    "currentNativeCropMatchesReviewedFinalImage": true,
+    "completeNewSingles": 1,
+    "phoneAcceptance": "pending"
+  },
+  "generatedContracts": {
+    "transformedPositiveAndNegativeScenes": 11,
+    "proofTamperRejections": 13,
+    "exclusiveGeneratedPixelTaps": 78107,
+    "sourceBindingTrustedPriorAndReaderFallbackControls": true,
+    "absentFamilyAndThrowingViewportControls": true,
+    "originalComicPixelsEmbedded": false
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1348,
+    "sourceEligibleMaps": 1,
+    "discoveryReview": "Across 312 stored maps and 1,348 descriptors, only Reader9 is eligible. Fresh full Reader9 detection preserves the earlier central descriptor exactly and appends the one source-replayed portrait. No fresh full 312-page detector sweep is claimed."
+  },
+  "freshDetector": {
+    "readerPages": [
+      9
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 140,
+    "manifest": "qa27900/frame-accuracy/test138/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented"
+}

@@ -3422,4 +3422,7 @@ if(typeof PanelUpperPaperSeparation!=='undefined')PanelUpperPaperSeparation.inst
 if(typeof PanelRoundAtomicInset!=='undefined')PanelRoundAtomicInset.installReader(Reader);
 
 if(typeof PanelChromaticInsetClosure!=='undefined')PanelChromaticInsetClosure.installReader(Reader);
+
+
+if(typeof PanelChromaticOcclusionCell!=='undefined')PanelChromaticOcclusionCell.installReader(Reader);
 if(typeof PanelPageEdgeRailCell!=='undefined')PanelPageEdgeRailCell.installReader(Reader);

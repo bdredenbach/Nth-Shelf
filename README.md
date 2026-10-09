@@ -1,3 +1,5 @@
+Current source checkpoint: Test138, complete right court portrait with projecting crown. 61/99 original frames covered; 38 remain. See HANDOFF-2.79.138.md. Source only; no new APK.
+
 Current source checkpoint: Test137, separate complete eye-sword inset and lightning scene. 60/99 original frames covered; 39 remain. See HANDOFF-2.79.137.md. Source only; no new APK.
 
 Current source checkpoint: Test136, complete round general reaction and atomic lettering. 58/99 original frames covered; 41 remain. See HANDOFF-2.79.136.md. Source only; no new APK.
