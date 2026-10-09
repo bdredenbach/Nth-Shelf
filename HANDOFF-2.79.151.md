@@ -1,0 +1,11 @@
+# Test151: complete stone-rimmed departure original
+
+Two independent source-color thresholds identify the same bounded enclosure. Four dark-collar paths reconstruct its full articulated rim. Interior separators, ambiguous speech ownership and inconsistent paths reject the candidate. Exact current-source replay and authenticated broad ancestry certify the replacement. The broad owner is retained only as hidden ancestry and cannot remain selectable. Current Reader display, tap and zoom bind exact owner identity/order, both source URLs, natural/render dimensions, readiness and same-image load/error generation. The absent-family path returns before viewport access. Prior owners retain their original context through nested delegation; stale asynchronous navigation cannot overwrite current state.
+
+56 singles + 15 immediate-continuity pairs cover 86/105 originals. 71 qualifying steps; 19 originals remain. The whole-comic task has repaired 43 further originals from the corrected 62-original worklist and remains in progress. Default one complete original; at most two adjacent consecutive originals with immediate continuity. Finish comic1 before comic2.
+
+All 230 retained suites and 132 JavaScript syntax checks pass. All 24 verified originals and 74 native overlays replayed in isolated six-page batches. All 70 earlier accepted crops and 73/74 total PNGs are byte-identical. Complete departure original inside its articulated stone rim, with all dialogue, departing figure and remaining mounted foreground. All 70 earlier accepted crops and interaction metadata stay exact. The rejected broad Reader 15 S1 changes; all 73 other previous PNGs remain exact.
+
+All 312 stored maps and 1362 prior descriptors are screened. Two source envelopes are eligible: Reader 15 replaces its rejected broad group; the available second-issue source remains unchanged. Fresh Reader 15 detection must equal the expected map. Runtime source has no book/page/title/text/hash/private-audit lookup.
+
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST151-VALIDATION.json and the private replay checkpoint.

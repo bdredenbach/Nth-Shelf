@@ -1,0 +1,209 @@
+{
+  "test": "Test151: complete stone-rimmed departure original",
+  "version": "2.79.151",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "correctedWorklistOriginalFrames": 62,
+    "inventoryDiscrepancyAddedOriginalFrames": 6,
+    "completedNewOriginalFrames": 43,
+    "remainingOriginalFrames": 19,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 105,
+    "currentPopOutSelections": 74,
+    "validSingleSelections": 56,
+    "validDualSelections": 15,
+    "qualifyingSelections": 71,
+    "qualifyingUniqueOriginalFrames": 86,
+    "remainingUniqueOriginalFrames": 19,
+    "rejectedSelections": 3,
+    "rejectedOversized": 2,
+    "rejectedMixedNeighbor": 1,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 230,
+    "behavioralSuites": 229,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 132,
+    "execution": "Every retained command ran exactly once on frozen source. Longest eligible suites were scheduled within measured host-memory headroom and conservative per-suite reservations. No suite or assertion skipped.",
+    "finalSummarySha256": "b8247628e493a2281a6c247bd0bac02c31c12e0be5c3ef045d500d9db7d09c83",
+    "memoryAwareScheduling": true,
+    "maximumParallelSuites": 4,
+    "suiteMemoryBudgetMiB": 4608,
+    "hostReserveMiB": 1536,
+    "peakSingleSuiteRssKiB": 3229008
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 74,
+    "changedSelections": [
+      [
+        15,
+        1
+      ]
+    ],
+    "addedSelections": [],
+    "unchangedPNGs": 73,
+    "previousAcceptedCropsProtected": 70,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "Complete departure original inside its articulated stone rim, with all dialogue, departing figure and remaining mounted foreground. All 70 earlier accepted crops and interaction metadata stay exact. The rejected broad Reader 15 S1 changes; all 73 other previous PNGs remain exact."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "actualFinalIntegratedReader": true,
+    "sourceReplay": true,
+    "persistence": true,
+    "proofVersion": 96,
+    "analysisSize": [
+      585,
+      900
+    ],
+    "actualNativeCanvases": 1,
+    "allEarlierNativeCanvasesExact": true,
+    "nativeCropSha256": [
+      "935cd7cb21c043b681e049f20ffaa390b4a0597723e42715d7f5534e70129115"
+    ],
+    "pixels": [
+      41527
+    ],
+    "taps": [
+      41527
+    ],
+    "misses": [
+      0
+    ],
+    "overlap": 0,
+    "wholeSpeechCoreAudit": "all source proof speech runs",
+    "outsideSamples": 2302,
+    "warmCanvasCreations": 0,
+    "completeEnvelopeOwnedOnce": false,
+    "sourceSha256": "cf82c9cc95c9c64001fcddcc958fd80226687fdc30fff92770dbdcf653781abe",
+    "runtimeSha256": "9b55ac7450a64e800937035527edea6e154feff71a792686af52bc359096166e",
+    "seconds": 7.912,
+    "wholeSpeechCorePixels": 3798,
+    "privateSourceReportSha256": "80c254f5f6fa625317d70efa4667dfba94bd77867c6d7b11a4fadf9891eeef31",
+    "sourceCoordinateWitnessesPublished": false,
+    "earlierAcceptedCropsAndMetadataExact": 70,
+    "allEarlierUnchangedPngs": 73,
+    "actualReaderOverlay": true,
+    "dimSurroundingSource": true
+  },
+  "generatedContracts": {
+    "generatedPositiveScenes": 5,
+    "sourceNegativeControls": 4,
+    "proofTamperRejections": 15,
+    "generatedSourceMaskTaps": 102585,
+    "actualNativeCanvasEquality": true,
+    "ownerCacheAndLifecycleControls": true,
+    "warmSourcePixelRereads": 0,
+    "originalComicPixelsEmbedded": false,
+    "scopedSourceOwnerFaults": 25,
+    "partialFreezeControls": 5,
+    "warmValidFingerprintSerializations": 0,
+    "privateCanonicalEvidence": true,
+    "callerGraphPreservation": true
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1362,
+    "sourceEligibleMaps": 2,
+    "discoveryReview": "All 312 stored maps and 1362 prior descriptors are screened. Two source envelopes are eligible: Reader 15 replaces its rejected broad group; the available second-issue source remains unchanged. Fresh Reader 15 detection must equal the expected map. Runtime source has no book/page/title/text/hash/private-audit lookup."
+  },
+  "freshDetector": {
+    "readerPages": [
+      15
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 155,
+    "manifest": "qa27900/frame-accuracy/test151/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented",
+  "runtimeLimitations": [
+    "Native extraction and source-replay correctness do not establish browser or Android responsiveness. Cold Reader 20 replay has been slow in cloud verification; normal restored-page selection and phone timing remain unverified. The unpublished Reader 20 completion candidate is undergoing a separate restored-page performance correction before its acceptance."
+  ],
+  "inventoryAudit": {
+    "historicalTotal": 99,
+    "interimTotal": 100,
+    "verifiedTotal": 105,
+    "missedOriginals": 7,
+    "removedOvercounts": 1,
+    "previouslyAcceptedGroupsReclassifiedAsPairs": 4,
+    "previouslyCoveredOriginalsWithdrawn": 1,
+    "newlyRepairedPixelsFromInventoryAudit": 0,
+    "netCoverageChangeFromReclassification": 3,
+    "historicalTest146Coverage": 74,
+    "correctedTest146Coverage": 77,
+    "newTest147OriginalsRepaired": 2,
+    "test147Coverage": 79,
+    "test147Remaining": 26,
+    "correctedStartingCoverage": 43,
+    "correctedWorklistOriginals": 62,
+    "historicalRequestedWorklist": 56,
+    "startingCoverageExplanation": "At Test125, recognizing the already retained Reader3 dog adds one baseline original while withdrawing Reader8 city/feline acceptance removes one. The starting43 coverage therefore stays43. Reader17, Reader9 and Reader22 became accepted during the bulk task; their newly recognized retained insets add three historical completed-original credits, not new Test147 repairs.",
+    "reclassifiedPairs": [
+      [
+        3,
+        1
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        17,
+        1
+      ],
+      [
+        22,
+        2
+      ]
+    ],
+    "withdrawnGroup": [
+      8,
+      1
+    ],
+    "nativePixelsAndInteractionMetadataUnchanged": true,
+    "privateAuditSha256": "2682804de9266295ebf714e033317e22f7aae66b016b1f0aa8b4dddfa0d44875",
+    "appliedAtCheckpoint": 147,
+    "thisCheckpointHasNewInventoryCorrection": false
+  },
+  "newlyRepairedOriginalFramesThisCheckpoint": 1
+}

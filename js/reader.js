@@ -3456,3 +3456,5 @@ if(typeof PanelChromaticSidePortrait!=='undefined')PanelChromaticSidePortrait.in
 if(typeof PanelChromaticOpenScene!=='undefined')PanelChromaticOpenScene.installReader(Reader);
 
 if(typeof PanelInkCornerPartition!=='undefined')PanelInkCornerPartition.installReader(Reader);
+
+if(typeof PanelArticulatedRimCell!=='undefined')PanelArticulatedRimCell.installReader(Reader);
