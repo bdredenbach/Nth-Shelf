@@ -3639,3 +3639,5 @@ if(typeof PanelInkCornerPartition!=='undefined')PanelInkCornerPartition.installR
 if(typeof PanelArticulatedRimCell!=='undefined')PanelArticulatedRimCell.installReader(Reader);
 
 if(typeof PanelGradientInsetReader!=='undefined')PanelGradientInsetReader.installReader(Reader);
+
+if(typeof PanelConnectedBoundaryReader!=='undefined')PanelConnectedBoundaryReader.installReader(Reader);

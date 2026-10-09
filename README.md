@@ -1,3 +1,5 @@
+Current source checkpoint: Test153, complete procession and Baal action pair. 90/105 original frames covered; 15 remain. See HANDOFF-2.79.153.md. Source only; no new APK.
+
 Current source checkpoint: Test152, preserve authenticated taps and complete lower inset action pair. 88/105 original frames covered; 17 remain. See HANDOFF-2.79.152.md. Source only; no new APK.
 
 Current source checkpoint: Test151, complete stone-rimmed departure original. 86/105 original frames covered; 19 remain. See HANDOFF-2.79.151.md. Source only; no new APK.

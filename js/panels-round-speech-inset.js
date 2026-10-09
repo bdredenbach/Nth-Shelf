@@ -44,7 +44,87 @@ function claims(p){return p?._structuralGridProof?.version===VERSION||p?._struct
 function eligible(prior){try{if(!Array.isArray(prior))return false;if(!prior.length)return true;const base=prior.filter(p=>p?._structuralGridProof?.version===18),atomic=prior.filter(p=>p?._structuralGridProof?.version===80);return base.length>=3&&base.length<=24&&atomic.length===1&&prior.length===base.length+1&&same(prior,base.concat(atomic))&&PanelRoundAtomicInset.eligible(base)&&atomic.every(PanelRoundAtomicInset.validPanel)&&same(atomic[0]._structuralGridProof.anchors,base);}catch(_){return false;}}
 function sourceOwners(a,w,h,prior){if(!eligible(prior))return false;if(!prior.length)return true;const base=prior.filter(p=>p._structuralGridProof.version===18),atomic=prior.filter(p=>p._structuralGridProof.version===80),pw=base[0]._structuralGridProof.analysisWidth,ph=base[0]._structuralGridProof.analysisHeight;return same(PanelRaggedGutters.analyzeRGBA(PanelMatteCells.sampleBilinearRGBA(a,w,h,pw,ph),pw,ph),base)&&PanelRoundAtomicInset.replayRGBA(a,w,h,atomic,base);}
 function validPanel(p){try{const v=p?._structuralGridProof,hit=v&&cache.get(v);if(hit&&hit.contours===p._contours)return same(hit.box,[p.x,p.y,p.w,p.h])&&p._identitySource==='structural-grid-frame'&&p._geometryOwner==='structural-grid-contours'&&p._geometryType==='native-round-pointing-speech'&&!p._outline&&!p._quad;const W=v?.analysisWidth,H=v?.analysisHeight;if(v?.version!==VERSION||v.method!==METHOD||!dims(W,H)||!eligible(v.anchors)||!Array.isArray(v.proposal?.circle)||v.proposal.circle.length!==3||v.proposal.circle.some(n=>!Number.isFinite(n))||!Number.isFinite(v.proposal.vote)||v.proposal.vote<=0)return false;const[x,y,r]=v.proposal.circle,ss=v.proposal.sampleSize,sc=v.proposal.sampleCircle;if(!Array.isArray(ss)||ss.length!==2||!dims(...ss)||ss.some(v=>v>900)||!Array.isArray(sc)||sc.length!==3||!same([x,y,r],[sc[0]*W/ss[0],sc[1]*H/ss[1],sc[2]*H/ss[1]]))return false;const box=[Math.max(0,Math.floor(x-r*1.6)),Math.max(0,Math.floor(y-r*2.4)),Math.min(W,Math.ceil(x+r*1.6)),Math.min(H,Math.ceil(y+r*1.5))];if(!same(v.source?.box,box))return false;const w=box[2]-box[0],h=box[3]-box[1];if(!dims(w,h))return false;const D={w,h,min:decodeBytes(v.source.min,w*h),max:decodeBytes(v.source.max,w*h)};if(!D.min||!D.max||D.min.some((n,i)=>n>D.max[i])||!same(populations(D),v.source.populations))return false;const c=measure(D,{...v.proposal,circle:[x-box[0],y-box[1],r]},W,H);if(!c||!same(summary(c),v.measurement)||!same(construct(v,c),p))return false;freeze(v);freeze(p._contours);cache.set(v,{contours:p._contours,box:[p.x,p.y,p.w,p.h]});return true;}catch(_){return false;}}
-function analyzeRGBA(a,w,h,prior=[],log){if(!data(a,w,h)||!sourceOwners(a,w,h,prior))return[];const q=discoverRGBA(a,w,h,log);if(q.length!==1)return[];const c=q[0],v={version:VERSION,method:METHOD,analysisWidth:w,analysisHeight:h,anchors:JSON.parse(JSON.stringify(prior)),proposal:c.globalProposal,source:{box:c.source.box,min:encodeBytes(c.source.min),max:encodeBytes(c.source.max),populations:populations(c.source)},measurement:summary(c)},p=construct(v,c);return validPanel(p)?[p]:[];}
+
+// Reuse only a completed discovery and retain at most 8 MiB of evidence.
+// The shared witness retains at most 32 MiB of pixels across both families.
+// Oversize/unsupported inputs follow the original uncached computation.
+let nativeDiscovery = null;
+// Bound the additional parsed graph as well as its serialized backing.
+// These are storage/cardinality limits, not a claim about V8 object overhead.
+function boundedDiscoveryGraph(value) {
+ let nodes=0,slots=0,stringBytes=0,undefinedValues=0,units=0;
+ const seen=new Set(),stack=[value],MAX_UNITS=4*1024*1024;
+ function stringUnits(text) {
+  let n=2;
+  for(let i=0;i<text.length;i++) {
+   const c=text.charCodeAt(i);
+   if(c===34||c===92||c===8||c===9||c===10||c===12||c===13)n+=2;
+   else if(c<32)n+=6;
+   else if(c>=0xd800&&c<=0xdbff){const d=text.charCodeAt(i+1);if(d>=0xdc00&&d<=0xdfff){n+=2;i++;}else n+=6;}
+   else if(c>=0xdc00&&c<=0xdfff)n+=6;
+   else n++;
+  }
+  return n;
+ }
+ while(stack.length) {
+  const item=stack.pop();
+  if(item===undefined){if(++undefinedValues>4096)return false;units+='{"_nthAbsentValue":true}'.length;}
+  else if(item===null)units+=4;
+  else if(typeof item==='number'){if(!Number.isFinite(item)||Object.is(item,-0))return false;units+=String(item).length;}
+  else if(typeof item==='boolean')units+=item?4:5;
+  else if(typeof item==='string'){stringBytes+=item.length*2;if(stringBytes>8*1024*1024)return false;units+=stringUnits(item);}
+  else if(typeof item==='object') {
+   if(seen.has(item)||++nodes>8192)return false;
+   seen.add(item);const keys=Object.keys(item),array=Array.isArray(item);slots+=keys.length;
+   if(slots>262144)return false;
+   if(array&&(keys.length!==item.length||keys.some((key,i)=>key!==String(i))))return false;
+   units+=2+Math.max(0,keys.length-1)+(array?0:keys.length);
+   for(const key of keys){stack.push(item[key]);if(!array)stack.push(key);}
+  } else return false;
+  if(units>MAX_UNITS)return false;
+ }
+ return true;
+}
+// Discovery creates this data internally; preserve present-but-undefined
+// fields when copying its private JSON representation back into fresh data.
+function restoreDiscoveryEvidence(value) {
+ if (value && typeof value === 'object') {
+  if (!Array.isArray(value) && Object.keys(value).length === 1 && value._nthAbsentValue === true) return undefined;
+  for (const key of Object.keys(value)) value[key] = restoreDiscoveryEvidence(value[key]);
+ }
+ return value;
+}
+function discoveryEvidence(a, w, h, log) {
+ const witness = typeof PanelRasterWitness === 'undefined' ? null : PanelRasterWitness;
+ const token = witness?.token(a, w, h), old = nativeDiscovery;
+ try {
+  if (token && old?.token === token)
+    return { evidence: restoreDiscoveryEvidence(JSON.parse(old.evidence)), pending: old, witness, token };
+  const evidence = discoverRGBA(a, w, h, log).map(c => ({proposal:c.globalProposal,source:{box:c.source.box,min:encodeBytes(c.source.min),max:encodeBytes(c.source.max),populations:populations(c.source)},measurement:summary(c)}));
+  let pending = null;
+  if (token && evidence.length && witness.matches(a, w, h, token) && boundedDiscoveryGraph(evidence)) {
+   const text = JSON.stringify(evidence, (key, value) => value === undefined ? { _nthAbsentValue: true } : value);
+   if (text.length * 2 <= 8 * 1024 * 1024) pending = { token, evidence: text };
+  }
+  return { evidence, pending, witness, token };
+ } catch (error) { witness?.discard(token); throw error; }
+}
+function finishDiscovery(discovered, accepted) {
+ if (accepted && discovered.pending && discovered.witness.commit(discovered.token))
+  nativeDiscovery = discovered.pending;
+ else discovered.witness?.discard(discovered.token);
+}
+function analyzeRGBA(a,w,h,prior=[],log) {
+ if (!data(a,w,h)||!sourceOwners(a,w,h,prior)) return [];
+ const discovered=discoveryEvidence(a,w,h,log),q=discovered.evidence;
+ try {
+  if (q.length!==1) return [];
+  const e=q[0],v={version:VERSION,method:METHOD,analysisWidth:w,analysisHeight:h,anchors:JSON.parse(JSON.stringify(prior)),...e},c={final:e.measurement.final,rings:e.measurement.rings},p=construct(v,c);
+  if (!validPanel(p)) return [];
+  finishDiscovery(discovered,true);
+  return [p];
+ } finally { discovered.witness?.discard(discovered.token); }
+}
 function replayRGBA(a,w,h,panels,prior=[]){return Array.isArray(panels)&&panels.length===1&&panels.every(validPanel)&&same(analyzeRGBA(a,w,h,prior),panels);}
 function supplementImage(img,prior,log){if(!img||!eligible(prior))return[];const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!dims(W,H))return[];let c;try{c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return[];g.drawImage(img,0,0);return analyzeRGBA(g.getImageData(0,0,W,H).data,W,H,prior,log);}catch(_){return[];}finally{if(c)c.width=c.height=1;}}
 const areaRing=q=>q.reduce((s,a,i)=>{const b=q[(i+1)%q.length];return s+a[0]*b[1]-b[0]*a[1];},0)/2;
