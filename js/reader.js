@@ -3437,4 +3437,7 @@ if(typeof PanelSharedRimPair!=='undefined')PanelSharedRimPair.installReader(Read
 
 
 if(typeof PanelPaperResidualStrips!=='undefined')PanelPaperResidualStrips.installReader(Reader);
+
+
+if(typeof PanelRoundSpeechInset!=='undefined')PanelRoundSpeechInset.installReader(Reader);
 if(typeof PanelPageEdgeRailCell!=='undefined')PanelPageEdgeRailCell.installReader(Reader);

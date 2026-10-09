@@ -1,0 +1,178 @@
+{
+  "test": "Test143: complete reaction inset and collapse scene",
+  "version": "2.79.143",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "completedNewOriginalFrames": 27,
+    "remainingOriginalFrames": 29,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 68,
+    "validSingleSelections": 52,
+    "validDualSelections": 9,
+    "qualifyingSelections": 61,
+    "qualifyingUniqueOriginalFrames": 70,
+    "remainingUniqueOriginalFrames": 29,
+    "rejectedSelections": 7,
+    "rejectedOversized": 5,
+    "rejectedMixedNeighbor": 2,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      14,
+      16,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 193,
+    "behavioralSuites": 192,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 122,
+    "execution": "Complete retained command list ran on frozen source, with isolated workers and longest tests scheduled first. No suite skipped.",
+    "finalSummarySha256": "12936d585403e4f7d851c6e135aa954537aedb03ab2c2a00839bc86f4f269a6a"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 68,
+    "changedSelections": [
+      [
+        23,
+        2
+      ]
+    ],
+    "addedSelections": [
+      [
+        23,
+        5
+      ]
+    ],
+    "unchangedPNGs": 66,
+    "previousAcceptedCropsProtected": 59,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "One source boundary repair certifies the round reaction and subtracts both complete inset owners from the middle scene. This yields two newly qualifying singles. All 59 previously accepted crops and metadata remain exact; only the previously rejected middle crop changes and the new round selection appends. Reader23 is fully covered. The new inset has zero ownership overlap. Previously accepted owner overlaps remain unchanged, while 246,526 old host/general-inset overlap pixels are removed."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "analysisSize": [
+      1988,
+      3056
+    ],
+    "sourceMaskPixels": [
+      2612536,
+      1531872,
+      978081,
+      250026,
+      240093
+    ],
+    "sourcePixelsCompared": 6075328,
+    "acceptedMaskPixelsCompared": 18225984,
+    "newChildOverlap": 0,
+    "retainedPriorOverlapPixels": 3563,
+    "retainedPairwiseOverlaps": {
+      "0:1": 63,
+      "0:2": 0,
+      "0:3": 3500,
+      "0:4": 0,
+      "1:2": 0,
+      "1:3": 0,
+      "1:4": 0,
+      "2:3": 0,
+      "2:4": 0,
+      "3:4": 0
+    },
+    "removedHostAtomicOverlapPixels": 246526,
+    "hostDifferenceErrors": 0,
+    "wholeSpeechAndTailFilledPixels": 17020,
+    "speechPixelTapSamples": 66,
+    "representativeActualReaderTaps": 816,
+    "criticalFeatureTaps": 8,
+    "exhaustiveNativeTapSweep": false,
+    "stratifiedTapSweepMilliseconds": 14573,
+    "persistedProofReplay": true,
+    "currentSourceReplay": true,
+    "allEarlierMapDescriptorsIdentical": true,
+    "acceptedOwnersPreserved": 3,
+    "oneSharedBoundaryRepair": true,
+    "completeNewSingles": 2,
+    "reviewedNativePngsUnchanged": true,
+    "nativePngSha256": {
+      "p23-s2.png": "182174c12af5d6e50e1e820d8921067714e66444e3fbbd83893db30b461bfd06",
+      "p23-s5.png": "6cfd5ff4e02a1d46b5b179401b96226a650b38416c864f78f7bb69d66173cb1f"
+    },
+    "earlierAcceptedCropsAndMetadataExact": 59,
+    "allEarlierPngsExact": 66,
+    "correctedSharedRimLifecycleRuntime": "db94be93aed5630eee2fd5dc97be7d90b5583b324199e9b97c1ed7eafc988239",
+    "roundSpeechLifecycleRuntime": "6aaaf17ce1f6daaada14d8331fa0d12979d2958db69354b5b26b4cb2a12f380a",
+    "privateHarnessCorrections": [
+      "Browser btoa and atob are supplied for persisted proof replay.",
+      "Host reference subtracts both authenticated inset masks. Retained earlier overlap and tap precedence are unchanged.",
+      "Selection identity is compared by persisted index across independently parsed maps."
+    ]
+  },
+  "generatedContracts": {
+    "transformedPositiveScenes": 15,
+    "negativeSourceControls": 20,
+    "proofTamperRejections": 20,
+    "actualGeneratedReaderCanvases": 39,
+    "malformedChildContexts": 6,
+    "unavailableOrOffMapCases": 8,
+    "sourceGeneratedEarlierOwners": true,
+    "exactSerializedPixelReplay": true,
+    "minimumConstructionMaskRecall": 0.99802,
+    "minimumConstructionMaskIoU": 0.99658,
+    "maximumExteriorLeakFraction": 5.71e-05,
+    "originalComicPixelsEmbedded": false,
+    "sharedRimSourceLifecycleCases": 26,
+    "sharedRimLifecycleReaderCanvases": 28,
+    "sharedRimWarmSourceRereads": 0,
+    "roundSpeechSourceLifecycleCases": 26,
+    "roundSpeechLifecycleReaderCanvases": 14,
+    "roundSpeechWarmSourceRereads": 0
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1355,
+    "sourceEligibleMaps": 23,
+    "discoveryReview": "Across 312 stored maps and 1,355 descriptors, 23 maps are eligible. The candidate audit checked all 12 then-available Apocalypse sources, including a negative Reader22 reflection, and only Reader23 added one child. Reader22 is no longer eligible after Test141; the other 11 available source outcomes remain applicable. Twelve other source originals were unavailable and explicitly untested. Fresh full Reader23 detection matches the five-selection map; no full 312-source sweep is claimed."
+  },
+  "freshDetector": {
+    "readerPages": [
+      23
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 145,
+    "manifest": "qa27900/frame-accuracy/test143/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented"
+}
