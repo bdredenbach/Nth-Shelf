@@ -1,0 +1,28 @@
+'use strict';const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');let cv;try{cv=require('@napi-rs/canvas');}catch(_){cv=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/@napi-rs/canvas');}
+const root=path.resolve(process.env.NTH_SHELF_SOURCE||path.join(__dirname,'../../..')),moduleFile=process.env.NTH_CAPTION_MODULE||path.join(root,'js/panels-gutter-caption-boundary.js'),ctx=vm.createContext({console});for(const file of['panels-colored-rims.js','panels-empty-enclosure-groups.js'])vm.runInContext(fs.readFileSync(path.join(root,'js',file),'utf8'),ctx);vm.runInContext(fs.readFileSync(moduleFile,'utf8'),ctx);const M=vm.runInContext('PanelGutterCaptionBoundary',ctx);
+function fixture({dx=0,dy=0,mirror=false,palette=0,noGutter=false,noRim=false,noLetters=false,openCaption=false,third=false,unowned=false,oval=false}={}){
+ const w=600,h=480,c=cv.createCanvas(w,h),g=c.getContext('2d'),row=235+dy,cx=435+dx,cy=row-11,W=52,H=25,N=w*h,lower=new Uint8Array(N),upper=new Uint8Array(N),other=new Uint8Array(N);g.fillStyle='#fff';g.fillRect(0,0,w,h);g.fillStyle=palette?'#ccdbbc':'#40979a';g.fillRect(5,25,w-10,row-36);g.fillStyle=palette?'#cf83a0':'#ecab84';g.fillRect(5,row+3,w-10,140);g.strokeStyle='#222';g.lineWidth=2;g.strokeRect(5,row+3,w-10,140);
+ if(noGutter){g.fillStyle='#246a9a';g.fillRect(0,row-13,w,25);}
+ if(!noRim){g.fillStyle=palette?'#972730':'#55449b';g.fillRect(cx-4,cy-4,W,H);g.strokeStyle='#222';g.strokeRect(cx-4,cy-4,W,H);}
+ g.fillStyle='#fff';g.strokeStyle='#222';if(oval){g.beginPath();g.ellipse(cx+W/2,cy+H/2,W/2,H/2,0,0,Math.PI*2);g.fill();g.stroke();}else{g.fillRect(cx,cy,W,H);g.strokeRect(cx,cy,W,H);}
+ if(!noLetters){g.fillStyle='#111';for(let y=cy+4;y<cy+H-4;y+=6)for(let x=cx+4;x<cx+W-4;x+=5)g.fillRect(x,y,2,3);}
+ if(openCaption){g.fillStyle=palette?'#ccdbbc':'#40979a';g.fillRect(cx+18,cy-5,12,8);}
+ for(let y=25;y<row-9;y++)for(let x=5;x<w-5;x++)upper[y*w+x]=1;
+ for(let y=row+2;y<row+145;y++)for(let x=4;x<w-4;x++)lower[y*w+x]=1;
+ // A broad source owner with one spurious appendage touching the caption.
+ for(let y=row-41;y<row+2;y++)for(let x=cx-35;x<cx+W+4;x++){lower[y*w+x]=1;upper[y*w+x]=0;}
+ if(third)for(let y=row-35;y<row-25;y++)for(let x=cx-30;x<cx-15;x++)other[y*w+x]=1;if(unowned)upper.fill(0);
+ let a=g.getImageData(0,0,w,h).data;if(mirror){const b=new Uint8ClampedArray(a.length);for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=y*w+x,j=y*w+w-x-1;b.set(a.slice(i*4,i*4+4),j*4);}a=b;for(const m of[lower,upper,other])for(let y=0;y<h;y++)m.subarray(y*w,(y+1)*w).reverse();}return{a,w,h,lower,upper,other};
+}
+let n=0;function test(name,opts,want){const q=fixture(opts),r=M.discoverRGBA(q.a,q.w,q.h,q.lower,q.upper,[q.other]);assert.equal(r.length,want,name);if(want){const changed=new Set(r[0].indices);assert(r[0].captions.every(b=>b.indices.every(i=>!changed.has(i))),'caption remains indivisible');}n++;return q;}
+test('baseline generated',{},1);test('shifted left',{dx:-170},1);test('shifted down',{dy:45},1);test('mirrored',{mirror:true},1);test('alternate palette',{palette:1},1);test('missing gutter',{noGutter:true},0);test('missing chromatic rim',{noRim:true},0);test('empty rectangle',{noLetters:true},0);test('broken caption',{openCaption:true},0);test('overlapping third owner',{third:true},0);test('unowned upper region',{unowned:true},0);test('oval speech is not caption',{oval:true},0);const q=fixture();q.a[3]=0;assert.equal(M.discoverRGBA(q.a,q.w,q.h,q.lower,q.upper).length,0);n++;
+
+// Source-less Reader contexts must retain their established masks and taps.
+const code=fs.readFileSync(moduleFile,'utf8');let unavailableSourceCases=0;
+for(const document of [undefined,{}, {createElement(){throw new Error('Canvas creation unavailable');}}, {createElement(){return {getContext(){throw new Error('Canvas source unavailable');}};}}]){
+ const owners=[{kind:'prior',_contours:[[{x:0,y:0},{x:1,y:0},{x:1,y:1}]]},{kind:'landscape',w:1,_contours:[[{x:0,y:.4},{x:1,y:.4},{x:1,y:.7}]],_structuralGridProof:{analysisWidth:600,analysisHeight:480,internalDivider:false}},{kind:'upper',w:1,_contours:[[{x:0,y:0},{x:1,y:0},{x:1,y:.4}]],_structuralGridProof:{analysisWidth:600,analysisHeight:480}}];
+ const context=vm.createContext({module:{exports:{}},PanelLandscapeCells:{validPanel:p=>p?.kind==='landscape',analyzeRGBA(){throw new Error('Unexpected source replay');}},PanelLandscapeUpperGroups:{validPanel:p=>p?.kind==='upper',analyzeRGBA(){throw new Error('Unexpected source replay');}},PanelGeometryOrthogonal:{_provenContours:()=>true},...(document===undefined?{}:{document})});vm.runInContext(code,context);const unavailable=context.module.exports;
+ let priorCalls=0;const fallback={prior:true},image={width:600,height:480},reader={currentPanels:owners,panelZoomEnabled:true,panelContours:p=>p._contours,getPanelImageContext:()=>({img:image}),displayPanelContours(p,c){priorCalls++;return c;},findPanelAt(){return fallback;}};
+ unavailable.installReader(reader);for(const p of owners){assert.equal(reader.displayPanelContours(p),p._contours);assert.equal(reader.displayPanelContours(p),p._contours);}assert.equal(priorCalls,owners.length);assert.equal(reader._gutterCaptionBoundary.repairs.length,0);assert(owners.every(p=>!reader._gutterCaptionBoundary.extended.has(p)));assert.equal(reader.findPanelAt(.5,.5),fallback);assert.equal(reader.currentPanels,owners);unavailableSourceCases++;n++;
+}
+console.log(JSON.stringify({passed:true,tests:n,positiveScenes:5,rejections:8,unavailableSourceCases,sourceIndependent:true,shifted:true,mirrored:true,paletteChanged:true,originalPixels:false,unavailableSourcePreservesMasksAndTaps:true}));

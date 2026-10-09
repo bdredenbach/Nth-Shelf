@@ -1,3 +1,5 @@
+Current source checkpoint: Test133, complete source-witnessed caption-gutter ownership.55/99 original frames covered;44 remain. See HANDOFF-2.79.133.md. Source only; no new APK.
+
 Current source checkpoint: [Test132](HANDOFF-2.79.132.md). Reader18's complete lower dialogue pair restores the full forehead.38 singles+8 pairs=54/99 originals;45 remain. All166 retained suites and58 native overlays pass, with all45 earlier accepted crops unchanged. Source-only: no APK, Gradle or workflow dispatch. Phone confirmation and automatic frame playback remain pending. [Validation](TEST132-VALIDATION.json).
 
 Test122 recovers ONE original, Reader5 S1/P05-F1 night camp. Current focused count30 singles+5 pairs=40/99 originals;59 remain,35 qualifying steps/53 selections. Test121 direction/sandstorm pair user-confirmed: "Yes that worked 💪🏻 Let's continue". Test122 phone acceptance pending. Next Reader5 P05-F2 horsemen conversation, one original by default or at most a justified immediate pair. Finish comic1 before comic2. Automatic playback/timer remain planned.

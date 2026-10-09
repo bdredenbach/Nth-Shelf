@@ -1,0 +1,9 @@
+# Test133: complete punch and caption-gutter ownership
+
+Reader18 S3 now contains one complete wide-punch original and both complete captions. Two source-witnessed paper paths separate the upper-strip leak; a stable lettered rectangular caption retains its entire chromatic rim and long supported dark border. Transferred upper-neighbor pixels belong exclusively to their independently source-replayed upper owner. Discovery descriptors remain unchanged. The upper S5 group still contains three originals and is rejected.
+
+39 singles +8 immediate-continuity pairs cover55/99 originals.47 qualifying steps;44 originals remain. The authorized56-original bulk task has repaired12 and remains in progress. Default one complete original; at most two adjacent consecutive originals with immediate continuity. Finish comic1 before comic2.
+
+All168 retained suites and112 JavaScript syntax checks passed on final source. Generated tests include17 positive/negative/fallback cases and3 actual Reader canvas checks. All24 verified originals/58 native overlays replayed in isolated six-page batches. All46 previously accepted crops and56/58 total PNGs are byte-identical. All3,091 transferred-pixel taps select the upper owner;4,593 caption pixels and3,107,818 non-transfer ownership pixels remain unchanged. Source/proof mismatches, missing canvas and unavailable source fail closed. Across312 stored maps/1346 descriptors, only Reader18 is source-eligible; fresh full Reader18 detection retains all five descriptors. No fresh312-page detector sweep claimed.
+
+No APK, Gradle or Android workflow dispatch. Version133 configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST133-VALIDATION.json and the private replay checkpoint.
