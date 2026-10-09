@@ -1,0 +1,207 @@
+{
+  "test": "Test148: complete chromatic side portrait",
+  "version": "2.79.148",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "correctedWorklistOriginalFrames": 62,
+    "inventoryDiscrepancyAddedOriginalFrames": 6,
+    "completedNewOriginalFrames": 37,
+    "remainingOriginalFrames": 25,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 105,
+    "currentPopOutSelections": 72,
+    "validSingleSelections": 52,
+    "validDualSelections": 14,
+    "qualifyingSelections": 66,
+    "qualifyingUniqueOriginalFrames": 80,
+    "remainingUniqueOriginalFrames": 25,
+    "rejectedSelections": 6,
+    "rejectedOversized": 3,
+    "rejectedMixedNeighbor": 3,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      12,
+      14,
+      16,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 222,
+    "behavioralSuites": 221,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 129,
+    "execution": "Complete retained command list ran on frozen source. Externally terminated processes were rerun sequentially on the exact unchanged source and test code. Every required suite passed; no suite skipped. Initial attempts and retry receipts are retained in the private replay.",
+    "finalSummarySha256": "07bc896c8badca3960db8daf484eb9b306eaf9129021a54e467809b6a42a7eda",
+    "interruptedProcessesRetried": 1,
+    "retryReceiptSha256": "944a515bfa4614fd4a229a7b16f44f8333a84303b7b16eb2fb73bbc16bc0c04b",
+    "initialSummarySha256": "0c7235b3631c9ced6e59134356fe8e5d8d28998b1eca640d614e55cbd05aa38e",
+    "interruptionCause": "Unconfirmed; signal termination without assertion output."
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 72,
+    "changedSelections": [],
+    "addedSelections": [
+      [
+        11,
+        3
+      ]
+    ],
+    "unchangedPNGs": 71,
+    "previousAcceptedCropsProtected": 65,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "The whole side portrait appends at S3. All 65 earlier accepted crops and metadata and all 71 previous PNGs remain exact. The complete thought body and dotted tail stay with the portrait. Reader 11 has only its lower attack original remaining."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "actualFinalIntegratedReader": true,
+    "analysisSize": [
+      585,
+      900
+    ],
+    "completeOriginal": "P11-F4",
+    "actualNativeCanvases": 3,
+    "nativeCropSha256": [
+      "9ee7608ca78c99b17d98d4b5b5b928508910944fca65d51b8e907ecdd328b759",
+      "f61d2b38e0b33da3f9b90c949b03c57a6618285ab29b0a0a00eec45714495a11",
+      "27aa4756d0aad3764dce815061b2e6620e14d25837f38bc0b0aa5d838be49833"
+    ],
+    "allEarlierNativeCanvasesExact": true,
+    "acceptedOwners": 2,
+    "acceptedMaskPixelsCompared": 1053000,
+    "acceptedMasksUnchanged": true,
+    "newChildPixelTaps": 70889,
+    "acceptedSampleTaps": 1451,
+    "outsideOwnerSamples": 2580,
+    "overlapPixels": 0,
+    "wholeSpeechAndThoughtTailPixels": 8178,
+    "dualEnvelopeDifference": 38,
+    "tamperCases": 13,
+    "invalidContexts": 3,
+    "offMapRejected": true,
+    "sourceMismatchRejected": true,
+    "missingSourceRejected": true,
+    "nonopaqueRejected": true,
+    "dimensionMismatchRejected": true,
+    "originalDescriptorsUnchanged": true,
+    "warmCanvasCreations": 0,
+    "sourceSha256": "a1587c081bb2bfd22e22004fdedb4316a6044182dc05158623ac4fe72413f9b3",
+    "runtimeSha256": "89d0f30bc3eafce266b8fb35bb4e8cf8c338a257f8e7a820bd1ed2d4ef57e2d9",
+    "seconds": 59.267,
+    "speechWitnessesCount": 2,
+    "thoughtTailWitnessesCount": 4,
+    "privateSourceReportSha256": "144e4acc176f439dccf75b363f67f65108596ef06c399554e7ebe7f12ad85742",
+    "sourceCoordinateWitnessesPublished": false,
+    "earlierAcceptedCropsAndMetadataExact": 65,
+    "allEarlierUnchangedPngs": 71,
+    "actualReaderOverlay": true,
+    "dimSurroundingSource": true
+  },
+  "generatedContracts": {
+    "transformedPositiveScenes": 5,
+    "negativeSourceControls": 6,
+    "generatedProofTamperRejections": 14,
+    "privateProofTamperRejections": 13,
+    "actualGeneratedReaderCanvases": 35,
+    "generatedTapChecks": 5400,
+    "cacheMutationControls": 7,
+    "sourceLifecycleCases": 25,
+    "warmSourcePixelRereads": 0,
+    "oldRuntimeNegativeControl": true,
+    "nonStickyPinNegativeControl": true,
+    "originalComicPixelsEmbedded": false
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1359,
+    "sourceEligibleMaps": 1,
+    "discoveryReview": "Across 312 stored maps and 1,359 descriptors, only the Reader 11 accepted upper-cell/dialogue-pair ancestry is eligible. Fresh full Reader 11 detection matches the expected three-selection map."
+  },
+  "freshDetector": {
+    "readerPages": [
+      11
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 152,
+    "manifest": "qa27900/frame-accuracy/test148/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented",
+  "inventoryAudit": {
+    "historicalTotal": 99,
+    "interimTotal": 100,
+    "verifiedTotal": 105,
+    "missedOriginals": 7,
+    "removedOvercounts": 1,
+    "previouslyAcceptedGroupsReclassifiedAsPairs": 4,
+    "previouslyCoveredOriginalsWithdrawn": 1,
+    "newlyRepairedPixelsFromInventoryAudit": 0,
+    "netCoverageChangeFromReclassification": 3,
+    "historicalTest146Coverage": 74,
+    "correctedTest146Coverage": 77,
+    "newTest147OriginalsRepaired": 2,
+    "test147Coverage": 79,
+    "test147Remaining": 26,
+    "correctedStartingCoverage": 43,
+    "correctedWorklistOriginals": 62,
+    "historicalRequestedWorklist": 56,
+    "startingCoverageExplanation": "At Test125, recognizing the already retained Reader3 dog adds one baseline original while withdrawing Reader8 city/feline acceptance removes one. The starting43 coverage therefore stays43. Reader17, Reader9 and Reader22 became accepted during the bulk task; their newly recognized retained insets add three historical completed-original credits, not new Test147 repairs.",
+    "reclassifiedPairs": [
+      [
+        3,
+        1
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        17,
+        1
+      ],
+      [
+        22,
+        2
+      ]
+    ],
+    "withdrawnGroup": [
+      8,
+      1
+    ],
+    "nativePixelsAndInteractionMetadataUnchanged": true,
+    "privateAuditSha256": "2682804de9266295ebf714e033317e22f7aae66b016b1f0aa8b4dddfa0d44875",
+    "appliedAtCheckpoint": 147,
+    "thisCheckpointHasNewInventoryCorrection": false
+  },
+  "newlyRepairedOriginalFramesThisCheckpoint": 1
+}

@@ -3450,3 +3450,5 @@ if(typeof PanelCappedRimCell!=='undefined')PanelCappedRimCell.installReader(Read
 if(typeof PanelRoundedCrowdReader!=='undefined')PanelRoundedCrowdReader.installReader(Reader);
 
 if(typeof PanelSharedSeamReader!=='undefined')PanelSharedSeamReader.installReader(Reader);
+
+if(typeof PanelChromaticSidePortrait!=='undefined')PanelChromaticSidePortrait.installReader(Reader);
