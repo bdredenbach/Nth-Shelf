@@ -1,0 +1,234 @@
+{
+  "test": "Test147: complete shared-seam attack singles",
+  "version": "2.79.147",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "correctedWorklistOriginalFrames": 62,
+    "inventoryDiscrepancyAddedOriginalFrames": 6,
+    "completedNewOriginalFrames": 36,
+    "remainingOriginalFrames": 26,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 105,
+    "currentPopOutSelections": 71,
+    "validSingleSelections": 51,
+    "validDualSelections": 14,
+    "qualifyingSelections": 65,
+    "qualifyingUniqueOriginalFrames": 79,
+    "remainingUniqueOriginalFrames": 26,
+    "rejectedSelections": 6,
+    "rejectedOversized": 3,
+    "rejectedMixedNeighbor": 3,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      12,
+      14,
+      16,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 218,
+    "behavioralSuites": 217,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 128,
+    "execution": "Complete retained command list ran on frozen source, with isolated workers and longest tests scheduled first. No suite skipped.",
+    "finalSummarySha256": "36652854e6a0acc2697ff7ea9b9a88a3336976d9a7f4ec61a2cffaebc282d067"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 71,
+    "changedSelections": [
+      [
+        12,
+        3
+      ]
+    ],
+    "addedSelections": [
+      [
+        12,
+        5
+      ]
+    ],
+    "unchangedPNGs": 69,
+    "previousAcceptedCropsProtected": 64,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "The shared source seam separates two complete attack originals. The left deflection replaces the rejected broad selection at S3; the tall right attack appends at S5. The earlier rounded crowd strip stays at S4. All 64 earlier accepted crops and metadata remain exact, as do 69 previous PNGs; only the rejected broad S3 changes. Reader 12 is complete. The completed whole-comic inventory review corrects99 to105 originals: seven missed insets minus one overcount. Four unchanged accepted crops are relabeled as immediate-continuity pairs; the unchanged Reader8 city/feline group is rejected for insufficient continuity and both originals require separation. All64 prior accepted crop bytes and actual native interaction metadata stay exact. These classification changes add a net three historical coverage credits, distinct from the two newly repaired Reader12 originals. Current coverage is79/105 with26 remaining."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "sourceRuntime": "Test147 final integrated source",
+    "sourceSha256": "f24144128cf36685e0522c3682c5107dd9598782fa0574b2f7445088785851f8",
+    "exactSourceReplay": true,
+    "exactSerializedNativeCanvasReplay": true,
+    "selectableCount": 5,
+    "proofSequence": [
+      30,
+      33,
+      91,
+      90,
+      91
+    ],
+    "acceptedSelectionsUnchanged": [
+      1,
+      2,
+      4
+    ],
+    "source65Retired": true,
+    "noRetiredRectangleOrTap": true,
+    "malformedReplacementPreservesAcceptedCanvases": true,
+    "nativeCropMaskChecks": [
+      {
+        "selection": 3,
+        "outsideOpaquePixels": 0,
+        "insidePixels": 1150455,
+        "paintedInside": 1150455
+      },
+      {
+        "selection": 5,
+        "outsideOpaquePixels": 0,
+        "insidePixels": 1573486,
+        "paintedInside": 1573486
+      }
+    ],
+    "analysisPixelsCompared": 526500,
+    "ownedAnalysisPixels": 447685,
+    "mutualAndAcceptedOverlap": 0,
+    "stratifiedActualReaderTaps": 2673,
+    "retiredFallbacksRemoved": 259,
+    "inheritedAcceptedTapPadding": 86,
+    "baselineActualReaderCompared": true,
+    "warmTapCanvasCreations": 0,
+    "cropSha256": [
+      "c527fa57c7768f04aad686e6387e1c171c7f7c388db0bc233aaab8f291721dcb",
+      "33732e50baf9ccafe794ed228af5d87d133eef1be2f3b67bd538cd990cecd4ae",
+      "9210f9ac7716b1c7507b09b64fd04924700f8ee2e359d60ffe43b5b811e02e38",
+      "2178641f8648292757801b225779c4fb4854115c335d70f4a1cb626d2ea58f5d",
+      "90603d99b1415c4ac45c52b518df99e3b9aa7d1768a25fa1a146f9c55b327697"
+    ],
+    "nativeOwnershipTapsCount": 16,
+    "privateSourceReportSha256": "febf6e779adab98dd81101c26a1c02c9a9d57859623f08b206f59b59c45088a3",
+    "sourceCoordinateWitnessesPublished": false,
+    "earlierAcceptedCropsAndMetadataExact": 64,
+    "allEarlierUnchangedPngs": 69,
+    "actualReaderOverlay": true,
+    "dimSurroundingSource": true,
+    "candidateSha256": "d662c6785fa13880e05f1e1578c63edf60ebc6447f19c30c15ee79d013f5d2d1",
+    "readerSha256": "e1a6b94e48af6d32b8539a310fd9fc26179860c8efe08a749c9f433d84093ab6",
+    "unrelatedInteractionsWithoutProofSerialization": 1200,
+    "previousReaderFailsCostControl": true
+  },
+  "generatedContracts": {
+    "transformedPositiveScenes": 9,
+    "negativeSourceControls": 12,
+    "proofTamperRejections": 42,
+    "badSourceReplays": 8,
+    "certifiedRetirementFamilies": 3,
+    "orphanSourceNegatives": 2,
+    "retirementCertificateCorruptions": 14,
+    "invalidIntegrationControls": 5,
+    "actualGeneratedReaderCanvases": 89,
+    "generatedReaderFamilies": 3,
+    "readerCorruptions": 10,
+    "unavailableSourceCases": 8,
+    "nestedAcceptedDelegations": 18,
+    "sourceLifecycleCases": 37,
+    "exactLifecycleNativeCanvases": 34,
+    "warmSourcePixelRereads": 0,
+    "oldReaderNegativeControl": true,
+    "orderedLoaderContract": true,
+    "originalComicPixelsEmbedded": false,
+    "unrelatedPageInteractions": 1200,
+    "unrelatedProofSerializations": 0,
+    "previousReaderCostNegativeControl": true
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1358,
+    "sourceEligibleMaps": 1,
+    "discoveryReview": "The current 312-map corpus has 1,358 descriptors before this repair. Only the Reader 12 ancestry is eligible. Fresh full Reader 12 detection must match the expected five-selection map. Source-certified retirement removes the broad envelope from selectable owners and retains it only as authenticated ancestry."
+  },
+  "freshDetector": {
+    "readerPages": [
+      12
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 151,
+    "manifest": "qa27900/frame-accuracy/test147/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented",
+  "inventoryAudit": {
+    "historicalTotal": 99,
+    "interimTotal": 100,
+    "verifiedTotal": 105,
+    "missedOriginals": 7,
+    "removedOvercounts": 1,
+    "previouslyAcceptedGroupsReclassifiedAsPairs": 4,
+    "previouslyCoveredOriginalsWithdrawn": 1,
+    "newlyRepairedPixelsFromInventoryAudit": 0,
+    "netCoverageChangeFromReclassification": 3,
+    "historicalTest146Coverage": 74,
+    "correctedTest146Coverage": 77,
+    "newTest147OriginalsRepaired": 2,
+    "test147Coverage": 79,
+    "test147Remaining": 26,
+    "correctedStartingCoverage": 43,
+    "correctedWorklistOriginals": 62,
+    "historicalRequestedWorklist": 56,
+    "startingCoverageExplanation": "At Test125, recognizing the already retained Reader3 dog adds one baseline original while withdrawing Reader8 city/feline acceptance removes one. The starting43 coverage therefore stays43. Reader17, Reader9 and Reader22 became accepted during the bulk task; their newly recognized retained insets add three historical completed-original credits, not new Test147 repairs.",
+    "reclassifiedPairs": [
+      [
+        3,
+        1
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        17,
+        1
+      ],
+      [
+        22,
+        2
+      ]
+    ],
+    "withdrawnGroup": [
+      8,
+      1
+    ],
+    "nativePixelsAndInteractionMetadataUnchanged": true,
+    "privateAuditSha256": "2682804de9266295ebf714e033317e22f7aae66b016b1f0aa8b4dddfa0d44875"
+  },
+  "newlyRepairedOriginalFramesThisCheckpoint": 2
+}

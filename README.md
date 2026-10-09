@@ -1,3 +1,5 @@
+Current source checkpoint: Test147, complete shared-seam attack singles. 79/105 original frames covered; 26 remain. See HANDOFF-2.79.147.md. Source only; no new APK.
+
 Current source checkpoint: Test146, complete rounded crowd strip. 74/99 original frames covered; 25 remain. See HANDOFF-2.79.146.md. Source only; no new APK.
 
 Current source checkpoint: Test145, complete capped-rim baby-hand cell. 73/99 original frames covered; 26 remain. See HANDOFF-2.79.145.md. Source only; no new APK.
