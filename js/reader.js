@@ -9,6 +9,162 @@ const BUBBLE_ZOOM_KEY = "longbox_bubble_zoom_enabled";
 const BUBBLE_ALT_ZOOM_KEY = "longbox_bubble_alt_zoom_enabled";
 const HOLD_MS = 500; // long-press duration to trigger bubble zoom
 
+// Keep an admitted on-map owner bound to its source while geometry is awaited.
+// The geometry router still runs; only a result with unchanged data may recover
+// the original identity. A copied proof never creates a selection on its own.
+// Keep an admitted on-map owner bound to its source while geometry is awaited.
+// The geometry router still runs; only a result with unchanged data may recover
+// the original identity. A copied proof never creates a selection on its own.
+const PanelTapSelection = (() => {
+  const sessions = new WeakMap(), immutable = new WeakSet();
+  const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  function equal(a, b) {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) if (a[i] !== b[i] || own(a, i) !== own(b, i)) return false;
+    return true;
+  }
+  function frozen(value, seen = new Set()) {
+    if (!value || typeof value !== 'object') return typeof value !== 'function';
+    if (immutable.has(value)) return true;
+    if (!Object.isFrozen(value) || seen.has(value)) return false;
+    seen.add(value);
+    for (const key of Reflect.ownKeys(value)) {
+      const d = Object.getOwnPropertyDescriptor(value, key);
+      if (!d || !own(d, 'value') || !frozen(d.value, seen)) return false;
+    }
+    seen.delete(value); immutable.add(value); return true;
+  }
+  function graph(value) {
+    const rows = [], seen = new Set();
+    function visit(v) {
+      if (typeof v === 'function') throw Error('Selection evidence must be data');
+      if (!v || typeof v !== 'object' || frozen(v) || seen.has(v)) return;
+      seen.add(v);
+      const keys = Reflect.ownKeys(v), values = [], enumerable = [];
+      for (const key of keys) {
+        const d = Object.getOwnPropertyDescriptor(v, key);
+        if (!d || !own(d, 'value')) throw Error('Selection evidence cannot contain accessors');
+        values.push(d.value); enumerable.push(d.enumerable);
+      }
+      rows.push({ value: v, prototype: Object.getPrototypeOf(v), keys, values, enumerable });
+      values.forEach(visit);
+    }
+    visit(value); return rows;
+  }
+  function unchanged(rows) {
+    return rows.every(q => Object.getPrototypeOf(q.value) === q.prototype &&
+      equal(q.keys, Reflect.ownKeys(q.value)) && q.keys.every((key, i) => {
+        const d = Object.getOwnPropertyDescriptor(q.value, key);
+        return d && own(d, 'value') && d.value === q.values[i] && d.enumerable === q.enumerable[i];
+      }));
+  }
+  function source(img) {
+    const a = [img.src, img.currentSrc, img.naturalWidth, img.naturalHeight, img.width, img.height, img.complete];
+    return a[6] !== false && a[2] > 0 && a[3] > 0 ? a : null;
+  }
+  function current(s) {
+    if (!s || s.invalid) return false;
+    try {
+      const r = s.reader, img = r.getPanelImageContext?.()?.img, state = img && source(img);
+      if (r.currentPanels !== s.owners || !equal(s.items, s.owners) ||
+          r.comic !== s.comic || r.index !== s.index || r.mode !== s.mode ||
+          r._panelLoadToken !== s.loadToken || r.panelOverlayToken !== s.overlayToken ||
+          r.scale > 1.02 || img !== s.img || !state || !equal(state, s.source) || !unchanged(s.graph)) s.invalid = true;
+    } catch (_) { s.invalid = true; }
+    return !s.invalid;
+  }
+  function observe(r) {
+    let record = sessions.get(r);
+    if (!record) { record = { active: null, wrappers: new Map() }; sessions.set(r, record); }
+    for (const name of ['displayPanelContours', 'findPanelAt', 'zoomToPanel']) {
+      if (record.wrappers.get(name) === r[name] || typeof r[name] !== 'function') continue;
+      const old = r[name], wrapped = function(...args) {
+        current(record.active);
+        try { return old.apply(this, args); } finally { current(record.active); }
+      };
+      record.wrappers.set(name, wrapped); r[name] = wrapped;
+    }
+    return record;
+  }
+  function finish(s) {
+    if (!s) return;
+    if (s.record.active === s) s.record.active = null;
+    if (s.listening) {
+      try { s.img.removeEventListener('load', s.invalidate); } catch (_) {}
+      try { s.img.removeEventListener('error', s.invalidate); } catch (_) {}
+    }
+  }
+  function cancel(r) {
+    const s = sessions.get(r)?.active;
+    if (s) { s.invalid = true; finish(s); }
+  }
+  function begin(r, panel) {
+    const record = observe(r);
+    cancel(r);
+    let s;
+    try {
+      const owners = r.currentPanels;
+      if (!Array.isArray(owners) || !owners.includes(panel)) return null;
+      const contours = r.panelContours(panel), display = contours && r.displayPanelContours(panel, contours);
+      if (!Array.isArray(display) || !display.length) return null;
+      const img = r.getPanelImageContext?.()?.img, state = img && source(img);
+      if (!state) return null;
+      const keys = Reflect.ownKeys(panel), fields = keys.map(k => Object.getOwnPropertyDescriptor(panel, k));
+      if (fields.some(d => !d || !own(d, 'value'))) return null;
+      s = { reader: r, record, panel, owners, items: owners.slice(), comic: r.comic, index: r.index,
+        mode: r.mode, loadToken: r._panelLoadToken, overlayToken: r.panelOverlayToken, img, source: state,
+        graph: graph(owners), display, keys, fields, invalid: false };
+      s.invalidate = () => { s.invalid = true; };
+      if (typeof img.addEventListener === 'function' && typeof img.removeEventListener === 'function') {
+        s.listening = true; img.addEventListener('load', s.invalidate); img.addEventListener('error', s.invalidate);
+      }
+      record.active = s;
+      if (!current(s)) { finish(s); return null; }
+      return s;
+    } catch (_) { finish(s); return null; }
+  }
+  function hold(s, source) {
+    if (!current(s)) return false;
+    s.held = true; s.holdSource = source; return true;
+  }
+  function sameContours(a, b) {
+    if (a === b) return true;
+    if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+      if (!Array.isArray(a[i]) || !Array.isArray(b[i]) || a[i].length !== b[i].length) return false;
+      for (let j = 0; j < a[i].length; j++) {
+        const p = a[i][j], q = b[i][j];
+        if (!p || !q || !Number.isFinite(p.x) || !Number.isFinite(p.y) || p.x !== q.x || p.y !== q.y) return false;
+      }
+    }
+    return true;
+  }
+  function resolve(s, shaped) {
+    if (!s) return shaped;
+    if (!current(s)) return null;
+    try {
+      const display = s.reader.displayPanelContours(s.panel, s.reader.panelContours(s.panel));
+      if (!current(s) || !display?.length) return null;
+      if (display !== s.display && (!s.held || !sameContours(display, s.display))) return s.held ? null : shaped;
+      const extra = Reflect.ownKeys(shaped).filter(k => !s.keys.includes(k));
+      // The generic held structural route copies contours and labels its
+      // temporary result orthogonal. Those labels must not erase an already
+      // proved contour identity when every geometric value is unchanged.
+      const genericHold = s.held && s.holdSource === 'STRUCTURAL-GRID' && shaped._geometryOwner === 'orthogonal-authority' && shaped._geometryType === 'orthogonal';
+      const identical = extra.every(k => k === '_tap' || k === '_baselinePanelCount') &&
+        s.keys.every((k, i) => {
+          const d = Object.getOwnPropertyDescriptor(shaped, k);
+          if (!d || !own(d, 'value') || d.enumerable !== s.fields[i].enumerable) return false;
+          return d.value === s.fields[i].value ||
+            s.held && k === '_contours' && sameContours(d.value, s.fields[i].value) ||
+            genericHold && (k === '_geometryOwner' || k === '_geometryType');
+        });
+      return identical ? s.panel : shaped;
+    } catch (_) { return null; }
+  }
+  return { begin, current, resolve, finish, cancel, hold };
+})();
+
 const Reader = {
  comic: null,
  pageUrls: [],       // object URLs, lazily filled
@@ -483,10 +639,20 @@ const Reader = {
 
  async renderPaged() {
     if (this.mode === "single" && this.useTurnJSPageMode && this.turnPageMode) {
+      const detectionBeforeRender = this._panelDetection;
       const ok = await this.turnPageMode.render(this.els.viewport);
       if (ok) {
         this.prefetch();
-        this.loadPanelsForCurrentPage();
+        // A page-deck turn can start the current page's fresh detection while
+        // render is pending. Keep that new load instead of immediately
+        // launching a duplicate whose result would supersede the first one.
+        const detectionAfterRender = this._panelDetection;
+        const startedCurrentLoad = detectionAfterRender &&
+          detectionAfterRender !== detectionBeforeRender &&
+          detectionAfterRender.token === this._panelLoadToken &&
+          detectionAfterRender.comicId === this.comic?.id &&
+          detectionAfterRender.pageIndex === this.index;
+        if (!startedCurrentLoad) this.loadPanelsForCurrentPage();
         this.updateSliderLabel();
         this.updateBookmarkFlag();
         return;
@@ -2628,6 +2794,7 @@ async setMode(mode) {
 
  async handleSingleTap(pos) {
    if (this.mode !== "single" || this.scale > 1.02) return;
+   PanelTapSelection.cancel(this);
 
    // An early tap must not race the page-wide identity pass and escape into
    // the old tap-dependent search while its correct frame list is loading.
@@ -2673,10 +2840,19 @@ async setMode(mode) {
      if (this.debugMode) this.debugLog("[V2.79.05] PANEL MAP MISS/INCOMPLETE -> V2.79.04 ROUTE");
    }
 
+   const selection = panel ? PanelTapSelection.begin(this, panel) : null;
+   try {
    const url = await this.getPageUrl(pageIndex);
+   if (selection && !PanelTapSelection.current(selection)) return;
    const refineGeometry = async (seed, identitySource) => {
      if (!seed) return null;
-     const seeded = {
+     // Preserve a source-admitted held contour owner when the geometry
+     // policy has already validated it. Tap bookkeeping is not proof data.
+     const policy = selection && seed === panel && PanelTapSelection.current(selection) &&
+       typeof PanelGeometry !== 'undefined' && typeof PanelGeometry._seedPolicy === 'function'
+       ? PanelGeometry._seedPolicy(panel) : null;
+     const seeded = policy?.mode === 'hold' &&
+       PanelTapSelection.hold(selection, policy.source) ? panel : {
        ...seed,
        _tap: { x: relXImg, y: relYImg },
        _identitySource: identitySource || seed._identitySource || 'unknown',
@@ -2692,7 +2868,9 @@ async setMode(mode) {
    if (panel) {
      if (this.debugMode) this.debugLog(`[V105] PASS 1 HIT (${panel._identitySource || 'V73'} identity) -> GEOMETRY ROUTER`);
      const shaped = await refineGeometry(panel, panel._identitySource || 'v73');
-     if (this.comic?.id === comicId && this.index === pageIndex && shaped) this.zoomToPanel(shaped, stageRect, imgRect);
+     const target = shaped && PanelTapSelection.resolve(selection, shaped);
+     PanelTapSelection.finish(selection);
+     if (this.comic?.id === comicId && this.index === pageIndex && target) this.zoomToPanel(target, stageRect, imgRect);
      return;
    }
 
@@ -2773,6 +2951,7 @@ async setMode(mode) {
    }
 
    this.toggleChrome();
+   } finally { PanelTapSelection.finish(selection); }
  },
 
  async handleDeferredPanelDoubleTap(pos) {
@@ -3458,3 +3637,5 @@ if(typeof PanelChromaticOpenScene!=='undefined')PanelChromaticOpenScene.installR
 if(typeof PanelInkCornerPartition!=='undefined')PanelInkCornerPartition.installReader(Reader);
 
 if(typeof PanelArticulatedRimCell!=='undefined')PanelArticulatedRimCell.installReader(Reader);
+
+if(typeof PanelGradientInsetReader!=='undefined')PanelGradientInsetReader.installReader(Reader);

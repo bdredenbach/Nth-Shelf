@@ -571,8 +571,24 @@ const PanelMatteCells = (() => {
     const b=bounds(rings.flat());return ['x','y','w','h'].every(k=>Number.isFinite(panel[k]))&&Math.max(Math.abs(panel.x-b[0]/w),Math.abs(panel.y-b[1]/h),Math.abs(panel.w-(b[2]-b[0])/w),Math.abs(panel.h-(b[3]-b[1])/h))<1e-10;
     }catch(_){return false;}}
   function analyzeImage(img,log){
-    if(!img||!Number.isFinite(img.width)||!Number.isFinite(img.height)||img.width<1||img.height<1)return [];
-    try{const s=Math.min(1,900/Math.max(img.width,img.height)),w=Math.round(img.width*s),h=Math.round(img.height*s),c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});if(!ctx)return [];ctx.drawImage(img,0,0,w,h);return analyzeRGBA(ctx.getImageData(0,0,w,h).data,w,h,log);}catch(e){log?.('matte cell route deferred: '+e.message);return [];}
+    const W=img?.naturalWidth||img?.width,H=img?.naturalHeight||img?.height;
+    if(!Number.isInteger(W)||!Number.isInteger(H)||W<1||H<1)return [];
+    let canvas;
+    try{
+      const s=Math.min(1,900/Math.max(W,H)),w=Math.round(W*s),h=Math.round(H*s);
+      canvas=document.createElement('canvas');
+      // Browser Image downsampling may select a different filter from Canvas
+      // downsampling. Decode at native size and use the established explicit
+      // sampler so source-derived contours do not depend on that choice.
+      // Keep the existing bounded route above the native allocation budget.
+      const native=W*H<=24000000;
+      canvas.width=native?W:w;canvas.height=native?H:h;
+      const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)return [];
+      if(native)ctx.drawImage(img,0,0);else ctx.drawImage(img,0,0,w,h);
+      const rgba=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+      return analyzeRGBA(native?sampleBilinearRGBA(rgba,W,H,w,h):rgba,w,h,log);
+    }catch(e){log?.('matte cell route deferred: '+e.message);return [];}
+    finally{if(canvas){canvas.width=1;canvas.height=1;}}
   }
   return {repairWhiteBodiesRGBA,completeMatteImage,recoverNativeCellsRGBA,refinePanels,tracePixelContours:trace,analyzeImage,analyzeRGBA,validPanel,completeRimNetworkImage,completeRimNetworkRGBA,completeNativeRimNetworkImage,sampleBilinearRGBA};
 })();

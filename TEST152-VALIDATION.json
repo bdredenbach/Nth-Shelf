@@ -1,0 +1,376 @@
+{
+  "test": "Test152: preserve authenticated taps and complete lower inset action pair",
+  "version": "2.79.152",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "correctedWorklistOriginalFrames": 62,
+    "inventoryDiscrepancyAddedOriginalFrames": 6,
+    "completedNewOriginalFrames": 45,
+    "remainingOriginalFrames": 17,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 105,
+    "currentPopOutSelections": 74,
+    "validSingleSelections": 56,
+    "validDualSelections": 16,
+    "qualifyingSelections": 72,
+    "qualifyingUniqueOriginalFrames": 88,
+    "remainingUniqueOriginalFrames": 17,
+    "rejectedSelections": 2,
+    "rejectedOversized": 1,
+    "rejectedMixedNeighbor": 1,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 240,
+    "behavioralSuites": 239,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 134,
+    "execution": "Every retained command ran exactly once on frozen source. Longest eligible suites were scheduled within measured host-memory headroom and conservative per-suite reservations. No suite or assertion skipped.",
+    "finalSummarySha256": "3b53a2f302ea026e295eb74661d43616e3a9ee7455bf249cb3b0bd3032ccde24",
+    "memoryAwareScheduling": true,
+    "maximumParallelSuites": 4,
+    "suiteMemoryBudgetMiB": 4608,
+    "hostReserveMiB": 1536,
+    "peakSingleSuiteRssKiB": 3267896
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 74,
+    "changedSelections": [
+      [
+        17,
+        2
+      ]
+    ],
+    "addedSelections": [],
+    "unchangedPNGs": 73,
+    "previousAcceptedCropsProtected": 71,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "visualReview": "The two complete lower inset originals form one immediate action pair through the continuous crossing sound-effect graphic. Both speech bodies and the crossing outline remain intact. The external caption and adjacent Baal artwork stay excluded, with the two reviewed dark antialiased boundary samples preserved exactly. Existing rejected Reader 17 S2 is replaced; accepted S1, every other unchanged PNG and their native interaction metadata must remain exact. This repair covers F5/F6, while accepted S1 continues covering F1/F2 and F3/F4 remain pending until the separate104 integration. All 71 earlier accepted crops and native metadata, and all 73 unaffected prior PNGs, must remain exact. The three retained matte crops also remain byte-identical after deterministic sampling. Their bounds, tap points, dimensions and focus transforms remain exact; eleven source-derived proof statistics are refreshed explicitly, so complete proof-metadata byte identity is not claimed.",
+    "allPreviousAcceptedInteractionMetadataIdentical": true,
+    "completeProofMetadataByteIdentity": false
+  },
+  "readerOwnership": {
+    "passed": true,
+    "checkpoint": 152,
+    "previousCheckpoint": 151,
+    "proofVersion": 99,
+    "actualFinalIntegratedReader": true,
+    "indexedSourceUnmodified": true,
+    "candidateOverridesUsed": false,
+    "sourceSha256": "3e8b05a66720870336672d4a1e14050b97b65f5a45d6edc462252c2e49b698d9",
+    "currentMapSha256": "7628bd0cc603ad29ab90c3294f9c4affa07fa22b9c7364c2c0f94271a9aff46b",
+    "previousMapSha256": "a67e1fe33c23400027b58b84e9d2ca571f96f70cdeecdbcdf107d81b130fcbba",
+    "sourceReplay": true,
+    "persistedSourceReplays": [
+      99
+    ],
+    "originalSourceSize": [
+      1988,
+      3056
+    ],
+    "analysisSize": [
+      585,
+      900
+    ],
+    "previousVersions": [
+      34,
+      55
+    ],
+    "versions": [
+      34,
+      99
+    ],
+    "retiredSelectableProofVersions": [
+      55
+    ],
+    "acceptedDescriptorIndicesExact": [
+      0
+    ],
+    "unrelatedPagesExact": false,
+    "unrelatedGeometryAndContoursExact": true,
+    "explicitlyRefreshedProofStatistics": 11,
+    "actualNativeCanvases": 2,
+    "allReviewedPNGsExact": true,
+    "allEarlierAcceptedNativeCanvasesExact": true,
+    "actualNativeInteractionMetadataExact": true,
+    "nativeCropSha256": [
+      "ee604ab1ccbc9d8c9fc62234e4eb68fc99edd60e29d80f43b0756847c2778d0f",
+      "18e2b41f355d37b477b946d17add05e23ff7f1d688fb3139363b7ff9a122c47e"
+    ],
+    "completeNativeCaptionEvidenceExact": true,
+    "documentedPartialAlphaWitnesses": 2,
+    "nativeAlpha": [
+      {
+        "opaqueOutside": 0,
+        "missingInterior": 0,
+        "transparent": 160137,
+        "painted": 935463
+      }
+    ],
+    "sourceMaskPixels": [
+      272783,
+      80843
+    ],
+    "allOwnedSourcePixelsTapped": true,
+    "taps": [
+      272783,
+      80843
+    ],
+    "misses": [
+      0,
+      0
+    ],
+    "overlap": 0,
+    "outsideSamples": 824,
+    "wholeInsetBodyPixels": 5117,
+    "crossingCoreVisits": 4944,
+    "crossingFringePixels": 387,
+    "wholeCommandPixels": 0,
+    "sourceCaptionPixels": 2321,
+    "canonicalCaptionTransfers": 10,
+    "rockWitnessPixels": 285,
+    "nativeCaption": {
+      "pixels": 26541,
+      "sourceTaps": 26541,
+      "insetOpaque": 0,
+      "insetPartial": 2,
+      "maxInsetAlpha": 162,
+      "captionOwnerAtThisStage": "unselected; reserved for104"
+    },
+    "warmSourceRereads": 0,
+    "warmCanvasCreations": 0,
+    "warmSerializedCharacters": 29273024,
+    "warmLargestString": 44,
+    "warmSerializationCalls": 665296,
+    "warmEvidenceSerializationCalls": 0,
+    "warmGeometrySerializationOnly": true,
+    "peakRssKiB": 1045224,
+    "seconds": 36.783,
+    "nativeRecordsCount": 2,
+    "sourceFilesCount": 3,
+    "privateSourceReportSha256": "81af7fadafcf56592e91bb3d3b4a00509b5beac966e1def367013486257c802e",
+    "sourceCoordinateWitnessesPublished": false,
+    "allEarlierUnchangedPngs": 73,
+    "actualReaderOverlay": true,
+    "dimSurroundingSource": true,
+    "earlierAcceptedCropsAndInteractionMetadataExact": 71,
+    "completeProofMetadataByteIdentity": false,
+    "derivedProofStatisticsRefresh": "Separately verified in the checkpoint evidence refresh receipt."
+  },
+  "generatedContracts": {
+    "independentPositiveScenes": 6,
+    "sourceNegativeControls": 7,
+    "publicContracts": 7,
+    "fullLifecycleAndProvenance": true,
+    "actualNativeCanvasEquality": true,
+    "acceptedCallerGraphPreservation": true,
+    "warmSourcePixelRereads": 0,
+    "originalComicPixelsEmbedded": false,
+    "proofTamperRejections": 26,
+    "sourceTamperRejections": 3,
+    "actualReaderInvalidContexts": 14,
+    "lifecycleControls": 41,
+    "actualTapRouting": {
+      "boundaryControls": 39,
+      "actualGeneratedSourceNativeOpenCloseRepeat": true,
+      "offMapCloneRejectionPreserved": true
+    },
+    "pageDeckDetection": {
+      "controls": 12,
+      "duplicateLoadRegressionReproducedOnPreviousSource": true
+    },
+    "additionalSharedContracts": 3,
+    "sourceSampling": {
+      "independentGeneratedScenes": 3,
+      "rendererFilterProfiles": 2,
+      "sourcePixelsPreserved": true,
+      "unavailableSourcesFailClosed": 2,
+      "oversizedLegacyRouteBounded": true,
+      "oldSourceFailsIndependentFilterContract": true
+    }
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1362,
+    "sourceEligibleMaps": 1,
+    "discoveryReview": "All 312 stored maps and 1362 prior descriptors are screened. Screen every retained stored map and descriptor using the current parent inventory. Only the source-authenticated Reader 17 ancestry may qualify. Fresh whole-page detection must equal the expected map and replace the rejected broad proof 55 owner with proof 99 while preserving accepted proof 34. Runtime source contains no original artwork, private map coordinates, native hashes, or book/page/title/text lookup. Fresh detection of all24 original pages is required. The deterministic sampler preserves every contour and bound;23 full detector graphs remain exact and only11 derived statistics change in the remaining three-owner graph."
+  },
+  "freshDetector": {
+    "readerPages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 157,
+    "manifest": "qa27900/frame-accuracy/test152/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented",
+  "runtimeLimitations": [
+    "The current Reader deliberately bypasses the IndexedDB panel-identity cache and installs fresh detector output. All72 accepted selections passed actual cloud-browser input and navigation, but cold latency remains material and phone responsiveness is unverified.",
+    "In the final cloud Chrome154 fixture, accepted-page detector calls ranged from8.233 to45.536s. Actual first-handler calls ranged from2.8ms to32.014s; observed repeats ranged from2.6ms to5.761s. Later selections and repeats inherit earlier input and extra post-open source validation, so these observations do not establish normal first-use or phone readiness.",
+    "Reader23 measured45.536s fresh detection and32.014s for the first actual S1 tap. Original151 produced two overlapping detections (70.238s and95.869s) and a36.506s first tap that still failed exact-owner/contour acceptance. Test152 uses one detector and preserves the correct owner/contours. This is an observational fixture comparison, not a controlled speedup benchmark.",
+    "The new Reader17 inset pair was selected first on its fresh page, before the retained upper owner: detector16.153s, first actual S2 handler3.021s with two source reads, repeat5.3ms with no source read. No previous selection was displayed on that page; later repeat and navigation timings remain separately recorded.",
+    "Unpublished candidates retain substantial ordinary fresh-entry costs in Node source harnesses:Reader6 proof105 measured638.4s detection plus201.0s first actual tap;Reader20 proof106 measured112.79s detection plus102.56s first actual tap. Their geometry passes do not establish usable opening speed. Narrow repeated-validation/source-replay optimizations and real-browser cold measurements remain required."
+  ],
+  "performanceReadiness": {
+    "status": "requires_optimization_and_phone_validation",
+    "userRequirement": "Frames must open faster before automatic frame mode.",
+    "normalFirstUseMustBeMeasured": true,
+    "warmTimingsDoNotEstablishReadiness": true,
+    "coldDetectionAndFirstTapStillMaterial": true,
+    "automaticModeReady": false,
+    "doesNotProhibitExplicitlyRequestedDiagnosticApk": true
+  },
+  "actualInputAcceptance": {
+    "passed": true,
+    "checkpoint": 152,
+    "actualBrowserInput": true,
+    "actualMouseEventRoute": true,
+    "freshDetectionMatched": true,
+    "acceptedSelections": 72,
+    "openingRepeatAndNavigationAllPassed": true,
+    "authoritativeDisplayContoursPreserved": true,
+    "canonicalOwnerDispatchGeometryPreserved": true,
+    "authoritativeDisplayGeometryPreserved": true,
+    "allIndexedSourceHashesVerified": true,
+    "allOriginalSourceHashesVerified": true,
+    "privateBrowserImagesVerified": 216,
+    "privateReportSha256": "e7f5a7c92ab3586b50893b01ee0d6b1bd515cf5f5a2b2365eea16df1a1afc3a5",
+    "phoneAcceptance": "pending",
+    "fixtureSubstitutions": [
+      "Comic metadata and exact original JPEG blobs seeded through real LongboxDB.",
+      "Private service-worker registration isolation. Actual PanelMap.prepare, fingerprint, persistent map read, worker creation, detection, Reader entry, source navigation, and input routing remain active.",
+      "Observer wrappers and test controls select the audit target, arm observation and invoke ordinary Reader.goTo for navigation; they do not assign currentPanels, change detector results, or call zoomToPanel."
+    ],
+    "freshDetectionComparison": {
+      "meaning": "Exact parsed geometry and ownership; any derived-scalar portability difference is separately documented and checked with no numeric tolerance.",
+      "documentedScalarPortabilityEvidenceFiles": 1,
+      "privateEvidenceSha256": [
+        "2f323cbaeace9a832acfe0089c30bed730e0a764d2d0ac6094a6427139dc515d"
+      ],
+      "runtimeExceptionsAdded": false
+    }
+  },
+  "proofEvidenceRefresh": {
+    "passed": true,
+    "reason": "Native decoded source pixels are byte-identical. Browser Image scaling changed contours; established explicit bilinear sampling produces identical analysis bytes across runtimes and preserves the reviewed geometry. Its actual color statistics replace renderer-dependent historical statistics.",
+    "all24FreshPagesCompared": true,
+    "allGeometryAndContoursExact": true,
+    "retainedNativeCropsByteIdentical": true,
+    "retainedNativeInteractionMetadataIdentical": true,
+    "completeProofMetadataByteIdentity": false,
+    "unchangedFullDetectorGraphs": 23,
+    "ownersWithRefreshedDerivedStatistics": 3,
+    "refreshedDerivedStatistics": 11,
+    "crossRuntimeDecodedPixelsIdentical": true,
+    "crossRuntimeAnalysisPixelsIdentical": true,
+    "privateEvidenceSha256": "4630a6a91cef594b36f4c07c2e44374da9d5d6aa01660934e32f640e6389d66e"
+  },
+  "inventoryAudit": {
+    "historicalTotal": 99,
+    "interimTotal": 100,
+    "verifiedTotal": 105,
+    "missedOriginals": 7,
+    "removedOvercounts": 1,
+    "previouslyAcceptedGroupsReclassifiedAsPairs": 4,
+    "previouslyCoveredOriginalsWithdrawn": 1,
+    "newlyRepairedPixelsFromInventoryAudit": 0,
+    "netCoverageChangeFromReclassification": 3,
+    "historicalTest146Coverage": 74,
+    "correctedTest146Coverage": 77,
+    "newTest147OriginalsRepaired": 2,
+    "test147Coverage": 79,
+    "test147Remaining": 26,
+    "correctedStartingCoverage": 43,
+    "correctedWorklistOriginals": 62,
+    "historicalRequestedWorklist": 56,
+    "startingCoverageExplanation": "At Test125, recognizing the already retained Reader3 dog adds one baseline original while withdrawing Reader8 city/feline acceptance removes one. The starting43 coverage therefore stays43. Reader17, Reader9 and Reader22 became accepted during the bulk task; their newly recognized retained insets add three historical completed-original credits, not new Test147 repairs.",
+    "reclassifiedPairs": [
+      [
+        3,
+        1
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        17,
+        1
+      ],
+      [
+        22,
+        2
+      ]
+    ],
+    "withdrawnGroup": [
+      8,
+      1
+    ],
+    "nativePixelsAndInteractionMetadataUnchanged": true,
+    "privateAuditSha256": "2682804de9266295ebf714e033317e22f7aae66b016b1f0aa8b4dddfa0d44875",
+    "appliedAtCheckpoint": 147,
+    "thisCheckpointHasNewInventoryCorrection": false
+  },
+  "newlyRepairedOriginalFramesThisCheckpoint": 2
+}

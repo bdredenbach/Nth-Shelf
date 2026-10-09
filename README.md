@@ -1,3 +1,5 @@
+Current source checkpoint: Test152, preserve authenticated taps and complete lower inset action pair. 88/105 original frames covered; 17 remain. See HANDOFF-2.79.152.md. Source only; no new APK.
+
 Current source checkpoint: Test151, complete stone-rimmed departure original. 86/105 original frames covered; 19 remain. See HANDOFF-2.79.151.md. Source only; no new APK.
 
 Current source checkpoint: Test150, complete corner portrait and linked action scenes. 85/105 original frames covered; 20 remain. See HANDOFF-2.79.150.md. Source only; no new APK.
