@@ -305,5 +305,38 @@
     }
   },
   "correction": "Test128 clipped a lower-left gold ornament tip and attached rim; Test129 deliberately corrects that inset crop.",
-  "browserAndPhone": "Not verified; native Reader canvas evidence only."
+  "browserAndPhone": "Not verified; native Reader canvas evidence only.",
+  "publication": {
+    "commit": "d94c57d7efc82b698f37c40152ff782aae174dd7",
+    "tree": "077157542d8878be03ec1a524518983f1f58e429",
+    "parent": "ba2da3c1de30b5df56d6af5d2fb06afed2af1239",
+    "branch": "Test_Branch",
+    "apkBuilt": false
+  },
+  "savedArtifacts": [
+    {
+      "name": "Nth-Shelf-Test129-Frame-Review.html",
+      "libraryId": "libfile_2e1773bba9d881918eab2614dd892f5e",
+      "version": 0,
+      "sha256": "d7bc6d7304d60c951c5ce58c1a25c2f37b6276ff91475ccefe9f15ec5f026f78"
+    },
+    {
+      "name": "Nth-Shelf-Test129-Single-Frame-Regression.json",
+      "libraryId": "libfile_bf93e000e7808191963e9e7c89059413",
+      "version": 0,
+      "sha256": "1b78ffba3db5451197da8627d73887f1a7de977a90d83de46a30a5f45b1b7704"
+    },
+    {
+      "name": "Nth-Shelf-Test129-Replay-Checkpoint.zip",
+      "libraryId": "libfile_773576ee886881918c955e64cc88c1a6",
+      "version": 0,
+      "sha256": "e59aae24d9857a34cf18efe87dc113380125610c06b696e03ddc49d12a3e0159"
+    },
+    {
+      "name": "Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "libraryId": "libfile_b40550a56110819197ad1ffa78ce2e9c",
+      "version": 11,
+      "sha256": "7a25af84ac8624bddfdba4d8eccb26df5c62c3195c0caaf0a172e072f045b34e"
+    }
+  ]
 }

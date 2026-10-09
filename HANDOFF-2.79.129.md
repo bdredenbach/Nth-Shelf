@@ -7,3 +7,5 @@ Reader10 now has a complete ornate training inset and a separate surrounding tri
 Publish to bdredenbach/Nth-Shelf Test_Branch only. No APK, Gradle or Android workflow. Test129/future28057/frametest129 are configuration only. Latest delivered APK remains Test124. Native acceptance is distinct from phone readability; automatic playback and timing slider remain planned.
 
 Continue all49 remaining originals in comic1. Default one complete original; at most two adjacent consecutive originals only for immediate continuity or shared composition. Finish comic1 before comic2. Canonical handoff: libfile_b40550a56110819197ad1ffa78ce2e9c. See TEST129-VALIDATION.json for checks and publication receipts.
+
+Published runtime source d94c57d7efc82b698f37c40152ff782aae174dd7; tested tree077157542d8878be03ec1a524518983f1f58e429.160 retained suites and syntax passed. Saved review libfile_2e1773bba9d881918eab2614dd892f5e, audit libfile_bf93e000e7808191963e9e7c89059413, replay libfile_773576ee886881918c955e64cc88c1a6; canonical handoff version11. Bulk task remains IN PROGRESS.
