@@ -1,10 +1,12 @@
-// NTH SHELF 2.79.128 — ORNATE TRAINING INSET
+// NTH SHELF 2.79.129 — ORNATE SOURCE OWNERSHIP
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.128";
+const CACHE_NAME = "nth-shelf-shell-2.79.129";
 const SHELL_FILES = [
   "./js/panels-ornate-inset.js",
+  "./js/panels-ornate-ownership.js",
+  "./js/panels-enclosure-remainder.js",
   "./js/panels-saturated-frontier-cell.js",
   "./js/panels-saturated-round-inset.js",
   "./js/panels-saturated-terminal-cell.js",
