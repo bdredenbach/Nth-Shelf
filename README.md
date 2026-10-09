@@ -1,3 +1,5 @@
+Current source checkpoint: Test150, complete corner portrait and linked action scenes. 85/105 original frames covered; 20 remain. See HANDOFF-2.79.150.md. Source only; no new APK.
+
 Current source checkpoint: Test149, complete lower attack original. 81/105 original frames covered; 24 remain. See HANDOFF-2.79.149.md. Source only; no new APK.
 
 Current source checkpoint: Test148, complete chromatic side portrait. 80/105 original frames covered; 25 remain. See HANDOFF-2.79.148.md. Source only; no new APK.

@@ -1,0 +1,226 @@
+{
+  "test": "Test150: complete corner portrait and linked action scenes",
+  "version": "2.79.150",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "correctedWorklistOriginalFrames": 62,
+    "inventoryDiscrepancyAddedOriginalFrames": 6,
+    "completedNewOriginalFrames": 42,
+    "remainingOriginalFrames": 20,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 105,
+    "currentPopOutSelections": 74,
+    "validSingleSelections": 55,
+    "validDualSelections": 15,
+    "qualifyingSelections": 70,
+    "qualifyingUniqueOriginalFrames": 85,
+    "remainingUniqueOriginalFrames": 20,
+    "rejectedSelections": 4,
+    "rejectedOversized": 3,
+    "rejectedMixedNeighbor": 1,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 229,
+    "behavioralSuites": 228,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 131,
+    "execution": "Every retained command ran exactly once on frozen source. Longest eligible suites were scheduled within measured host-memory headroom and conservative per-suite reservations. No suite or assertion skipped.",
+    "finalSummarySha256": "b5763526fe885eea636e1a09cb6e8210f04ead772e501826c5d83d5dff596fb8",
+    "memoryAwareScheduling": true,
+    "maximumParallelSuites": 4,
+    "suiteMemoryBudgetMiB": 4608,
+    "hostReserveMiB": 1536,
+    "peakSingleSuiteRssKiB": 3295640
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 74,
+    "changedSelections": [
+      [
+        13,
+        2
+      ],
+      [
+        13,
+        3
+      ]
+    ],
+    "addedSelections": [
+      [
+        13,
+        4
+      ]
+    ],
+    "unchangedPNGs": 71,
+    "previousAcceptedCropsProtected": 67,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "The corner portrait and horizontal attack are two complete singles. The adjacent central duel and lower-left strike form one immediate action pair connected by the shared foreground arm and sword. All 67 earlier accepted crops and metadata remain exact. All 71 earlier unaffected PNGs remain exact; only rejected Reader 13 S2/S3 change, with new S4 appended. All six Reader 13 originals are covered."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "actualFinalIntegratedReader": true,
+    "sourceReplay": true,
+    "persistence": true,
+    "acceptedDescriptorIdentical": true,
+    "analysisSize": [
+      585,
+      900
+    ],
+    "actualNativeCanvases": 4,
+    "allEarlierNativeCanvasesExact": true,
+    "nativeCropSha256": [
+      "2f9dccd91c8a5e4a5c1c6d845f58fcb9d2e3bfe548c938a0757346c85de18609",
+      "f7365ad72a375e909ce0ae063cde7d0ee3e9ebc88a8c2e98eb0d5405f10d2c08",
+      "a1679316d5f6b5c247d41ebe29f4cbbba7dc98c96b14af1f6be06c3bb318a6da",
+      "7c8d1f9153ec7e5a5b82bd6206d44ed456e54eb602fd1c1f0a5f04bdafcbe12e"
+    ],
+    "pixels": [
+      34848,
+      64277,
+      223967
+    ],
+    "misses": [
+      0,
+      0,
+      0
+    ],
+    "overlap": 0,
+    "bodyPixels": 30503,
+    "bodyMissing": 0,
+    "acceptedSamples": 669,
+    "outsideSamples": 301,
+    "malformedFamilyPreservesAcceptedCanvas": true,
+    "offMapChildRejected": true,
+    "missingSourceRejected": true,
+    "retiredSelectableProofVersions": [
+      52,
+      53
+    ],
+    "warmCanvasCreations": 0,
+    "sourceSha256": "45c249b6d80cfc7f066b94ab966a16541a90d0f5ff471a63e3def6de69937af5",
+    "runtimeSha256": "f5a2f29dc5a001ab106db4163ea6ecef773d9c7aa0569acbbb279b0fb0b2ece5",
+    "seconds": 668.515,
+    "privateSourceReportSha256": "de2966a2297d5488083e60acb1f71926f7c2f59ce9b905cb67ccd5800bf66a4f",
+    "sourceCoordinateWitnessesPublished": false,
+    "earlierAcceptedCropsAndMetadataExact": 67,
+    "allEarlierUnchangedPngs": 71,
+    "actualReaderOverlay": true,
+    "dimSurroundingSource": true
+  },
+  "generatedContracts": {
+    "generatedCases": 11,
+    "transformedPositiveScenes": 5,
+    "negativeSourceControls": 6,
+    "proofTamperRejections": 16,
+    "exclusiveGeneratedPixelTaps": 335180,
+    "retainedGeneratedWholeBodyPixels": 15775,
+    "originalComicPixelsEmbedded": false,
+    "readerLifecycleControls": 42,
+    "oldLifecycleNegativeControls": 5,
+    "acceptedOwnershipControls": 13,
+    "heldOwnershipNegativeControls": 4,
+    "acceptedCallerGraphPreserved": true,
+    "mutableWarmSerializationBytes": 0
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1361,
+    "sourceEligibleMaps": 1,
+    "discoveryReview": "Across 312 stored maps and 1,361 descriptors, only Reader 13 qualifies for the complete43/52/53 ancestry. Fresh full Reader 13 detection matches the expected four selections."
+  },
+  "freshDetector": {
+    "readerPages": [
+      13
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 154,
+    "manifest": "qa27900/frame-accuracy/test150/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented",
+  "inventoryAudit": {
+    "historicalTotal": 99,
+    "interimTotal": 100,
+    "verifiedTotal": 105,
+    "missedOriginals": 7,
+    "removedOvercounts": 1,
+    "previouslyAcceptedGroupsReclassifiedAsPairs": 4,
+    "previouslyCoveredOriginalsWithdrawn": 1,
+    "newlyRepairedPixelsFromInventoryAudit": 0,
+    "netCoverageChangeFromReclassification": 3,
+    "historicalTest146Coverage": 74,
+    "correctedTest146Coverage": 77,
+    "newTest147OriginalsRepaired": 2,
+    "test147Coverage": 79,
+    "test147Remaining": 26,
+    "correctedStartingCoverage": 43,
+    "correctedWorklistOriginals": 62,
+    "historicalRequestedWorklist": 56,
+    "startingCoverageExplanation": "At Test125, recognizing the already retained Reader3 dog adds one baseline original while withdrawing Reader8 city/feline acceptance removes one. The starting43 coverage therefore stays43. Reader17, Reader9 and Reader22 became accepted during the bulk task; their newly recognized retained insets add three historical completed-original credits, not new Test147 repairs.",
+    "reclassifiedPairs": [
+      [
+        3,
+        1
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        17,
+        1
+      ],
+      [
+        22,
+        2
+      ]
+    ],
+    "withdrawnGroup": [
+      8,
+      1
+    ],
+    "nativePixelsAndInteractionMetadataUnchanged": true,
+    "privateAuditSha256": "2682804de9266295ebf714e033317e22f7aae66b016b1f0aa8b4dddfa0d44875",
+    "appliedAtCheckpoint": 147,
+    "thisCheckpointHasNewInventoryCorrection": false
+  },
+  "newlyRepairedOriginalFramesThisCheckpoint": 4
+}
