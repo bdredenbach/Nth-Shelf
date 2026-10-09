@@ -3415,8 +3415,11 @@ if(typeof PanelGutterInkCap!=='undefined')PanelGutterInkCap.installReader(Reader
 
 if(typeof PanelGutterCaptionBoundary!=='undefined')PanelGutterCaptionBoundary.installReader(Reader);
 
-if(typeof PanelPageEdgeRailCell!=='undefined')PanelPageEdgeRailCell.installReader(Reader);
+
 
 if(typeof PanelUpperPaperSeparation!=='undefined')PanelUpperPaperSeparation.installReader(Reader);
 
 if(typeof PanelRoundAtomicInset!=='undefined')PanelRoundAtomicInset.installReader(Reader);
+
+if(typeof PanelChromaticInsetClosure!=='undefined')PanelChromaticInsetClosure.installReader(Reader);
+if(typeof PanelPageEdgeRailCell!=='undefined')PanelPageEdgeRailCell.installReader(Reader);

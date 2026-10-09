@@ -1,0 +1,140 @@
+{
+  "test": "Test137: separate complete eye-sword inset and lightning scene",
+  "version": "2.79.137",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "completedNewOriginalFrames": 17,
+    "remainingOriginalFrames": 39,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 60,
+    "validSingleSelections": 44,
+    "validDualSelections": 8,
+    "qualifyingSelections": 52,
+    "qualifyingUniqueOriginalFrames": 60,
+    "remainingUniqueOriginalFrames": 39,
+    "rejectedSelections": 8,
+    "rejectedOversized": 6,
+    "rejectedMixedNeighbor": 2,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      10,
+      14,
+      16,
+      19,
+      21,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 178,
+    "behavioralSuites": 177,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 116,
+    "execution": "Complete retained command list ran on frozen source, with isolated workers and longest tests scheduled first. No suite skipped.",
+    "finalSummarySha256": "65fc292732e783fdaf74114a5176a8d73126eedf7c820b943fe917bfe3118d99"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 60,
+    "changedSelections": [
+      [
+        7,
+        1
+      ]
+    ],
+    "addedSelections": [
+      [
+        7,
+        3
+      ]
+    ],
+    "unchangedPNGs": 58,
+    "previousAcceptedCropsProtected": 50,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "One shared source-boundary repair produces two complete singles: Reader7 S3 upper eye/sword and S1 Baal/lightning/baby. The full upper speech and sound effect remain; the right foreground weapon head, hand and long diagonal shaft are complete. Every right-scene pixel below the upper inset is unchanged. All 50 earlier accepted crops and metadata remain exact, including the left slash portrait and Reader6 page-edge cell."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "oneSharedBoundaryRepair": true,
+    "completeNewSingles": 2,
+    "nativeSourceMaskOverlapPixels": 0,
+    "newInsetPixelCenterTaps": 51140,
+    "otherOwnedPixelTapSamples": 24239,
+    "criticalSpeechSfxAndWeaponFeatureTaps": 12,
+    "freshSourceWitnessReplay": true,
+    "privateProofTamperRejections": 14,
+    "currentNativeCropsMatchReviewedFinalImages": true,
+    "lowerRightForegroundRgbaUnchanged": true,
+    "existingPageEdgeGeometryAndProofUnchanged": true,
+    "existingPageEdgeCoverageCredit": 0,
+    "restoredProofCache": {
+      "fullyReplaysBeforeCaching": true,
+      "proofAndContoursDeepFrozen": true,
+      "generatedWarmChecks": 2000,
+      "generatedTamperRejections": 16,
+      "sourceProbeTaps": 10,
+      "beforeMilliseconds": 4501,
+      "afterMilliseconds": 17,
+      "sourceReadsDuringWarmTaps": 0,
+      "performanceScope": "loaded cloud workspace; no phone timing claimed",
+      "all60NativePngAndMetadataUnchanged": true
+    },
+    "phoneAcceptance": "pending"
+  },
+  "generatedContracts": {
+    "insetPositiveScenes": 6,
+    "insetNegativeScenes": 7,
+    "insetTamperRejections": 14,
+    "actualGeneratedInsetReaderCanvases": 22,
+    "insetUnavailableSourceCases": 4,
+    "pageEdgeMalformedCases": 9,
+    "pageEdgeUnavailableSourceCases": 6,
+    "pageEdgeGeneratedRetainedPixelTaps": 138217,
+    "pageEdgeGeneratedOutsideSamples": 56313,
+    "ownerMutationSourceLoadAndInterruptedZoomControls": true,
+    "originalComicPixelsEmbedded": false,
+    "restoredProofCacheChecks": 2000,
+    "restoredProofCacheTamperRejections": 16
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1347,
+    "sourceEligibleMaps": 1,
+    "discoveryReview": "Across 312 stored maps and 1,347 descriptors, only Reader7 is eligible for the new inset rule. Fresh full Reader7 detection preserves both prior descriptors and appends exactly one source-replayed child. Fresh full Reader6 detection and its accepted proof remain unchanged. No fresh full 312-page detector sweep is claimed."
+  },
+  "freshDetector": {
+    "readerPages": [
+      6,
+      7
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 139,
+    "manifest": "qa27900/frame-accuracy/test137/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented"
+}

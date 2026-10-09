@@ -1,3 +1,5 @@
+Current source checkpoint: Test137, separate complete eye-sword inset and lightning scene. 60/99 original frames covered; 39 remain. See HANDOFF-2.79.137.md. Source only; no new APK.
+
 Current source checkpoint: Test136, complete round general reaction and atomic lettering. 58/99 original frames covered; 41 remain. See HANDOFF-2.79.136.md. Source only; no new APK.
 
 Current source checkpoint: Test135, complete upper cavern paper cell. 57/99 original frames covered; 42 remain. See HANDOFF-2.79.135.md. Source only; no new APK.
