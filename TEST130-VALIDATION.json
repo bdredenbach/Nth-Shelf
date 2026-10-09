@@ -239,5 +239,38 @@
       "js/panels-gutter-graph.js": "e29e6c726e1659534b0bd427a3d084f9c76bc6e9e5733ee88dbd01436b720cc6"
     }
   },
-  "browserAndPhone": "Not verified; native Reader canvas evidence only."
+  "browserAndPhone": "Not verified; native Reader canvas evidence only.",
+  "publication": {
+    "commit": "f06ab403bfaf36b3d177eaafbf5f7c001d75ce27",
+    "tree": "c636fcaac26c9750f0482576ea0875d73ed7ac09",
+    "parent": "87e7fe55281edc35839f35ba3651b024ac7bdca1",
+    "branch": "Test_Branch",
+    "apkBuilt": false
+  },
+  "savedArtifacts": [
+    {
+      "name": "Nth-Shelf-Test130-Frame-Review.html",
+      "libraryId": "libfile_713a0e9c1ca081919f3b568c02386a11",
+      "version": 0,
+      "sha256": "da9118d711e9ec489bbbf070f1db685d14f40d17c73596f93796900c9d880500"
+    },
+    {
+      "name": "Nth-Shelf-Test130-Single-Frame-Regression.json",
+      "libraryId": "libfile_19fc89360fac81918fe6a6bdf905e8c4",
+      "version": 0,
+      "sha256": "2686869b9ae6776d7ed287872876d5d244d25406f539c1b1baa558a2a04ac737"
+    },
+    {
+      "name": "Nth-Shelf-Test130-Replay-Checkpoint.zip",
+      "libraryId": "libfile_97adf787439881919a76b859f0fa669c",
+      "version": 0,
+      "sha256": "f9f69d34c919ec6f74ce72ad4e6645e299bf4e120798ba2a1aa83c43cfeca7b9"
+    },
+    {
+      "name": "Nth-Shelf-Single-Dual-Frame-Rules-Handoff.txt",
+      "libraryId": "libfile_b40550a56110819197ad1ffa78ce2e9c",
+      "version": 12,
+      "sha256": "8472d6604bdcf6d0667cdb78b0dc811c56afe5d7caf1dfeea8afb3923799028a"
+    }
+  ]
 }
