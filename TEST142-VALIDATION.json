@@ -1,0 +1,142 @@
+{
+  "test": "Test142: complete second-row dialogue singles",
+  "version": "2.79.142",
+  "bulkTask": {
+    "requestedOriginalFrames": 56,
+    "completedNewOriginalFrames": 25,
+    "remainingOriginalFrames": 31,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 99,
+    "currentPopOutSelections": 67,
+    "validSingleSelections": 50,
+    "validDualSelections": 9,
+    "qualifyingSelections": 59,
+    "qualifyingUniqueOriginalFrames": 68,
+    "remainingUniqueOriginalFrames": 31,
+    "rejectedSelections": 8,
+    "rejectedOversized": 6,
+    "rejectedMixedNeighbor": 2,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      14,
+      16,
+      18,
+      19,
+      21,
+      22,
+      24
+    ]
+  },
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 187,
+    "behavioralSuites": 186,
+    "cachePackageSuites": 1,
+    "syntaxPassed": true,
+    "syntaxFiles": 121,
+    "execution": "Complete retained command list ran on frozen source, with isolated workers and longest tests scheduled first. No suite skipped.",
+    "finalSummarySha256": "d969edadbbf8b87d1d436373553007e30708057f0c459c47b0e20a88f71c828f"
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 67,
+    "changedSelections": [],
+    "addedSelections": [
+      [
+        18,
+        6
+      ],
+      [
+        18,
+        7
+      ]
+    ],
+    "unchangedPNGs": 65,
+    "previousAcceptedCropsProtected": 57,
+    "allPreviousAcceptedCropsByteIdentical": true,
+    "allPreviousAcceptedMetadataIdentical": true,
+    "visualReview": "One coupled paper-seam and speech-ownership repair reconstructs two separate complete second-row originals. Both are independently selectable. All 57 earlier accepted crops and metadata and all 65 previous PNGs remain byte-identical. Reader18 is fully covered."
+  },
+  "readerOwnership": {
+    "passed": true,
+    "sourceMaskPixels": [
+      27669,
+      34680
+    ],
+    "nativePixelCenterTaps": 62349,
+    "acceptedOwnerTapSamples": 120,
+    "unownedTapSamples": 620,
+    "wholeSpeechAndTailPixels": 25101,
+    "acceptedMaskPixelsCompared": 3114000,
+    "overlap": 0,
+    "misses": 0,
+    "persistedProofReplay": true,
+    "currentSourceReplay": true,
+    "allEarlierMapsIdentical": true,
+    "oneCoupledPartitionRepair": true,
+    "completeNewSingles": 2,
+    "reviewedNativePngsUnchanged": true,
+    "nativePngSha256": [
+      "4754b3011f4c2b58247862476bda5779334f8377f83a24a768a4e176ada8298b",
+      "2642567f500a13ad989edbb823be83dd86061ce5a8ae110a898d425e99e5057d"
+    ],
+    "earlierAcceptedCropsAndMetadataExact": 57,
+    "allEarlierPngsExact": 65,
+    "correctedSourceLifecycleRuntime": "293da2491311a12706a6ab6c0e2fd324b46077d0ac83dd6f25b1345ea8c5f0e1"
+  },
+  "generatedContracts": {
+    "transformedPositiveScenes": 12,
+    "negativeSourceControls": 30,
+    "boundedInheritedSupportControls": 2,
+    "contractedSpeechRimControls": 1,
+    "actualGeneratedReaderCanvases": 35,
+    "invalidOrMissingSourceZooms": 8,
+    "malformedChildContexts": 6,
+    "generatedGridTaps": 5400,
+    "cachedDescriptorAndOwnerSequenceMutations": 7,
+    "nestedAcceptedOwnerDelegation": true,
+    "originalRuntimeFailsCacheNegativeControls": true,
+    "originalComicPixelsEmbedded": false,
+    "sourceLifecycleCases": 20,
+    "warmSourceRereads": 0,
+    "sameImageSourceChangeNegativeControl": true
+  },
+  "corpusComparison": {
+    "maps": 312,
+    "descriptors": 1353,
+    "sourceEligibleMaps": 1,
+    "discoveryReview": "Across 312 stored maps and 1,353 descriptors, only Reader18 is source-eligible. Fresh full Reader18 detection matches the expected seven selections. All other stored maps are unchanged; no full 312-source detector sweep is claimed."
+  },
+  "freshDetector": {
+    "readerPages": [
+      18
+    ],
+    "matchesExpectedSourceMaps": true
+  },
+  "frozenCachedWebAssets": {
+    "physicalFiles": 144,
+    "manifest": "qa27900/frame-accuracy/test142/web-assets.json"
+  },
+  "phoneAcceptance": "pending",
+  "automaticPlayback": "not implemented"
+}

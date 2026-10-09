@@ -1,0 +1,11 @@
+# Test142: complete second-row dialogue singles
+
+A source-derived paper seam separates two residual strips beneath an already certified upper composition. Complete speech enclosures and tails are assigned by their connected source geometry, with bounded inherited edge support and contracted speech-rim ownership. The coupled partition yields two complete singles. Existing accepted masks are excluded exactly. Persisted classified evidence is replayed, and live image, owner sequence, proof identity and contour bounds are checked before actual Reader display, taps or zoom. Scoped accepted-owner delegation preserves the cache while older wrappers narrow their own context; invalid or stale children have no rectangular fallback. The Reader cache observes both source URLs, intrinsic/render dimensions, readiness and load/error generation, including same-object reloads; any change requires fresh source replay.
+
+50 singles + 9 immediate-continuity pairs cover 68/99 originals. 59 qualifying steps; 31 originals remain. The authorized 56-original bulk task has repaired 25 and remains in progress. Default one complete original; at most two adjacent consecutive originals with immediate continuity. Finish comic1 before comic2.
+
+All 187 retained suites and 121 JavaScript syntax checks pass. All 24 verified originals and 67 native overlays replayed in isolated six-page batches. All 57 earlier accepted crops and 65/67 total PNGs are byte-identical. One coupled paper-seam and speech-ownership repair reconstructs two separate complete second-row originals. Both are independently selectable. All 57 earlier accepted crops and metadata and all 65 previous PNGs remain byte-identical. Reader18 is fully covered.
+
+Across 312 stored maps and 1,353 descriptors, only Reader18 is source-eligible. Fresh full Reader18 detection matches the expected seven selections. All other stored maps are unchanged; no full 312-source detector sweep is claimed.
+
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST142-VALIDATION.json and the private replay checkpoint.
