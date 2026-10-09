@@ -3150,6 +3150,12 @@ async setMode(mode) {
      if(captionExpanded){geom={x:x0,y:y0,w:x1-x0,h:y1-y0};clipPolygon=null;}
    }
 
+   // A source-replayed upper cell can shrink a previously broad group.
+   const upperState=this._upperPaperSeparation;
+   const upperBounds=upperState?.owners===this.currentPanels&&upperState.img===img
+     ?upperState.bounds.get(panel):null;
+   if(upperBounds)geom={...upperBounds};
+
    const sourceLeft = imgRect.left + geom.x * imgRect.width;
    const sourceTop = imgRect.top + geom.y * imgRect.height;
    const sourceW = Math.max(8, geom.w * imgRect.width);
@@ -3410,3 +3416,5 @@ if(typeof PanelGutterInkCap!=='undefined')PanelGutterInkCap.installReader(Reader
 if(typeof PanelGutterCaptionBoundary!=='undefined')PanelGutterCaptionBoundary.installReader(Reader);
 
 if(typeof PanelPageEdgeRailCell!=='undefined')PanelPageEdgeRailCell.installReader(Reader);
+
+if(typeof PanelUpperPaperSeparation!=='undefined')PanelUpperPaperSeparation.installReader(Reader);

@@ -1,3 +1,5 @@
+Current source checkpoint: Test135, complete upper cavern paper cell. 57/99 original frames covered; 42 remain. See HANDOFF-2.79.135.md. Source only; no new APK.
+
 Current source checkpoint: Test134, complete page-edge rail cell. 56/99 original frames covered; 43 remain. See HANDOFF-2.79.134.md. Source only; no new APK.
 
 Current source checkpoint: Test133, complete source-witnessed caption-gutter ownership.55/99 original frames covered;44 remain. See HANDOFF-2.79.133.md. Source only; no new APK.
