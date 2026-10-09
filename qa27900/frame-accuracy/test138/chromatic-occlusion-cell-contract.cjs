@@ -3,9 +3,10 @@ const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),asse
 let cv;try{cv=require('@napi-rs/canvas');}catch(_){cv=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/@napi-rs/canvas');}
 const root=path.resolve(process.env.NTH_SHELF_SOURCE||path.join(__dirname,'../../..'));
 const moduleFile=process.env.NTH_CHROMATIC_OCCLUSION_MODULE||path.join(root,'js/panels-chromatic-occlusion-cell.js');
-const scriptFiles=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]).filter(p=>!p.endsWith('/panels-chromatic-occlusion-cell.js'));
+const scriptFiles=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]);
+if(!scriptFiles.includes('js/panels-chromatic-occlusion-cell.js'))scriptFiles.push('js/panels-chromatic-occlusion-cell.js');
 const ctx=vm.createContext({console,window:{},document:{createElement:()=>cv.createCanvas(1,1)},Image:cv.Image,setTimeout,clearTimeout});
-vm.runInContext(scriptFiles.map(p=>fs.readFileSync(path.join(root,p),'utf8')).join('\n')+'\n'+fs.readFileSync(moduleFile,'utf8'),ctx);
+vm.runInContext(scriptFiles.map(p=>fs.readFileSync(p==='js/panels-chromatic-occlusion-cell.js'?moduleFile:path.join(root,p),'utf8')).join('\n'),ctx);
 const M=vm.runInContext('PanelChromaticOcclusionCell',ctx),R=vm.runInContext('PanelColoredRims',ctx),C=vm.runInContext('PanelCropRepair',ctx),clone=x=>JSON.parse(JSON.stringify(x));
 function fixture(options={}){const c=cv.createCanvas(700,900),g=c.getContext('2d');g.fillStyle='#5e2643';g.fillRect(0,0,700,900);function body(x,y,w,h){g.fillStyle='#111111';g.fillRect(x-3,y-3,w+6,h+6);g.fillStyle='#de4747';g.fillRect(x,y,w,h);g.fillStyle='#242424';g.fillRect(x+7,y+7,w-14,h-14);for(let j=y+10;j<y+h-10;j+=9){g.fillStyle=(j%27===1)?'#d4c589':'#647475';g.fillRect(x+12,j,w-24,4);}}
  body(130,130,360,355);body(535,65,130,570);g.fillStyle='#5e2643';g.fillRect(587,60,25,16);g.beginPath();g.moveTo(588,80);g.lineTo(587,35);g.lineTo(596,26);g.lineTo(605,33);g.lineTo(611,80);g.closePath();g.fillStyle='#e5c276';g.fill();g.lineWidth=3;g.strokeStyle='#151515';g.stroke();

@@ -1,0 +1,7 @@
+# Test139: complete left court portrait at its oblique foreground boundary
+
+A source-replayed chromatic enclosure and complete occluded portrait authenticate earlier ownership. Independent source thresholds trace a continuous ink collar between two tall chromatic rails, with source palette support above the oblique edge. Whole paper bodies follow collar ownership; ambiguous bodies and neighboring owners are excluded. Persisted witnesses reconstruct geometry, and current source and owner replay gates display, taps and zoom. Earlier child zooms retain their original owner context across asynchronous work without overwriting newer navigation.
+
+chromatic-taper-cell-contract.cjs covers 11 generated scale, palette, mirror, translation, foreign-dialogue and negative scenes; 13 certificate tamper cases; 89,789 exclusive generated tap centers; source substitution; nested prior-child display and zoom preservation; invalid child quarantine; unavailable source or owner; disabled taps; absent-family viewport fallback; and concurrent navigation restoration. Retained court QA loaders preserve indexed dependency order when substituting candidate modules. The earlier failed loader run is diagnostic only; the full clean aggregate reruns on the corrected test harness. No original comic pixels. run-retained.sh runs all 180 suites plus syntax.
+
+46 singles + 8 immediate-continuity pairs cover 62/99 originals. 54 qualifying steps; 37 originals remain. The authorized 56-original bulk task has repaired 19 and remains in progress. No APK or phone pass.

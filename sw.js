@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.138 — COMPLETE NATIVE ROUND ATOMIC INSET
+// NTH SHELF 2.79.139 — COMPLETE NATIVE ROUND ATOMIC INSET
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.138";
+const CACHE_NAME = "nth-shelf-shell-2.79.139";
 const SHELL_FILES = [
   "./js/panels-ornate-inset.js",
   "./js/panels-ornate-ownership.js",
@@ -68,6 +68,7 @@ const SHELL_FILES = [
   "./js/panels.js",
   "./js/panels-chromatic-inset-closure.js",
   "./js/panels-chromatic-occlusion-cell.js",
+  "./js/panels-chromatic-taper-cell.js",
   "./js/reader.js",
   "./js/stream-transfer.js",
   "./js/transfers.js",
