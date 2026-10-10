@@ -3643,3 +3643,5 @@ if(typeof PanelGradientInsetReader!=='undefined')PanelGradientInsetReader.instal
 if(typeof PanelConnectedBoundaryReader!=='undefined')PanelConnectedBoundaryReader.installReader(Reader);
 
 if(typeof PanelArticulatedUpperCell!=='undefined')PanelArticulatedUpperCell.installReader(Reader);
+
+if(typeof PanelArticulatedExteriorCell!=='undefined')PanelArticulatedExteriorCell.installReader(Reader);
