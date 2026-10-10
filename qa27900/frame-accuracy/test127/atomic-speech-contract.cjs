@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('node:assert/strict'),cv=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/@napi-rs/canvas');
-const root=path.resolve(__dirname,'../../..'),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]),ctx=vm.createContext({console,window:{},document:{}});
+const root=path.resolve(__dirname,'../../..'),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(m=>m[1]),ctx=vm.createContext({console,window:{},document:{}});
 vm.runInContext(scripts.map(p=>fs.readFileSync(root+'/'+p,'utf8')).join('\n'),ctx);
 // Isolate speech evidence from the separately tested discovery validators.
 vm.runInContext("PanelLocalBoundaryConsensus.validPanel=p=>p.kind==='upper';PanelTrailingEdgeGroups.validPanel=p=>p.kind==='lower';",ctx);

@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('node:assert/strict'),cv=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/@napi-rs/canvas');
-const root=path.resolve(__dirname,'../../..'),ctx=vm.createContext({console,window:{},document:{createElement:()=>cv.createCanvas(1,1)}}),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]);
+const root=path.resolve(__dirname,'../../..'),ctx=vm.createContext({console,window:{},document:{createElement:()=>cv.createCanvas(1,1)}}),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(m=>m[1]);
 vm.runInContext(scripts.map(p=>fs.readFileSync(root+'/'+p,'utf8')).join('\n')+';globalThis.R=PanelRaggedGutters;globalThis.D=PanelGutterTailSpeech;globalThis.G=PanelCropRepair;',ctx);
 function source(color,dx=0,variant='tail'){
  const w=585,h=900,c=cv.createCanvas(w,h),g=c.getContext('2d');g.fillStyle='white';g.fillRect(0,0,w,h);

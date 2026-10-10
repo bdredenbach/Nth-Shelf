@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),zlib=require('node:zlib');
 const path=require('node:path'),root=path.resolve(__dirname,'../../..');
-const scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]);
+const scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(m=>m[1]);
 const api=new Function('document','Image','window',scripts.map(p=>fs.readFileSync(path.join(root,p),'utf8')).join('\n')+'\nreturn{PanelStructuralGrid,PanelNeighborEdgeCells};')({},class{},{});
 const S=api.PanelStructuralGrid,D=api.PanelNeighborEdgeCells;
 const O=vm.runInNewContext(fs.readFileSync(require.resolve('../../../js/panels-geometry-orthogonal.js'),'utf8')+';PanelGeometryOrthogonal',{PanelStructuralGrid:S,clamp01:v=>Math.max(0,Math.min(1,v))});

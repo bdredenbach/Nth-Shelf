@@ -9,7 +9,7 @@ let cv;try{cv=require('@napi-rs/canvas');}catch(e){
 const [inputDir,outputFile,baselineFile]=process.argv.slice(2);
 if(!inputDir||!outputFile){console.error('Usage: node native-corpus.cjs EXTRACTED_IMAGE_DIRECTORY OUTPUT.json [BASELINE.json]');process.exit(2);}
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const scripts=[...html.matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]);
+const scripts=[...html.matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(m=>m[1]);
 const source=scripts.filter(p=>baselineFile||!p.endsWith('/panels-interior-strokes.js')).map(p=>fs.readFileSync(path.join(root,p),'utf8')).join('\n');
 const names=[...new Set([...source.matchAll(/(?:const|class) (Panel\w+)\s*[={]/g)].map(m=>m[1]))];
 const modules=new Function('document','Image','ImageData','window',source+'\nreturn{'+names.join(',')+'};')({createElement:()=>cv.createCanvas(1,1)},cv.Image,cv.ImageData,{});

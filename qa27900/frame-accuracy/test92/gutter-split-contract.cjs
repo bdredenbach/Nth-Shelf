@@ -1,6 +1,6 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('fs'),path=require('path'),zlib=require('zlib');
-const root=path.resolve(__dirname,'../../..'),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]);
+const root=path.resolve(__dirname,'../../..'),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(m=>m[1]);
 const api=new Function('document','Image','window',scripts.map(p=>fs.readFileSync(root+'/'+p,'utf8')).join('\n')+';return{PanelGutterSplit,PanelGeometryOrthogonal,PanelCropRepair,PanelGeometry,PanelEdgeSpill};')({},class{},{}),D=api.PanelGutterSplit;
 const fixtures=JSON.parse(zlib.gunzipSync(Buffer.from(fs.readFileSync(__dirname+'/geometry.json.gz.b64','utf8'),'base64'))),clone=p=>JSON.parse(JSON.stringify(p));let rejected=0;
 for(const p of fixtures){assert(D.validPanel(p));assert(api.PanelGeometryOrthogonal._provenContours(p));for(const mutate of[p=>p.x+=.001,p=>p._contours[0][0].x+=.002,p=>p._structuralGridProof.leaf=2,p=>p._structuralGridProof.seam.ys.pop(),p=>p._structuralGridProof.seam.flanks=0,p=>p._structuralGridProof.pixels++,p=>p._structuralGridProof.parent.x+=.002,p=>p._geometryType='unknown',p=>p._quad=[]]){const bad=clone(p);mutate(bad);assert(!D.validPanel(bad));rejected++;}}

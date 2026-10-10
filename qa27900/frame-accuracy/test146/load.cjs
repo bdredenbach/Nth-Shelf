@@ -1,6 +1,6 @@
 'use strict';const fs=require('node:fs'),path=require('node:path');let cv;try{cv=require('@napi-rs/canvas')}catch(_){cv=require(path.join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES,'@napi-rs/canvas'))}
 const root=path.resolve(process.env.NTH_SHELF_SOURCE||path.join(__dirname,'../../..')),candidate=path.resolve(process.env.NTH_SHELF_CANDIDATE||path.join(root,'js/panels-rounded-crowd-strip.js')),bridge=path.resolve(process.env.NTH_SHELF_BRIDGE||path.join(root,'js/panels-rounded-crowd-reader.js'));
-const scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]);
+const scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(m=>m[1]);
 const overrides=new Map([['js/panels-rounded-crowd-strip.js',candidate],['js/panels-rounded-crowd-reader.js',bridge]]),sourceFiles=scripts.map(p=>overrides.get(p)||path.join(root,p));
 for(const[p,file]of overrides)if(!scripts.includes(p))sourceFiles.push(file);
 function load(){return new Function('document','Image','window',sourceFiles.map(p=>fs.readFileSync(p,'utf8')).join('\n')+';return {api:PanelRoundedCrowdStrip,matte:PanelMatteCells,grid:PanelStructuralGrid,detector:PanelDetect,exterior:PanelExteriorCompletion,narrow:PanelNarrowInkFrames,continuation:PanelContinuationEnclosureGroups,raster:PanelLocalBoundaryConsensus.raster};')({createElement:()=>cv.createCanvas(1,1)},cv.Image,{});}

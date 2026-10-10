@@ -2,6 +2,9 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const file=process.env.NTH_READER_SOURCE||path.resolve(__dirname,'../../../js/reader.js');
 const code=fs.readFileSync(file,'utf8');
+// Keep the extracted methods in the actual Reader helpers' lexical scope.
+const readerStart=code.indexOf('\nconst Reader = {');assert(readerStart>=0);
+const readerPrelude=code.slice(0,readerStart);
 function method(name){const start=code.indexOf(` async ${name}(`);assert(start>=0);const end=code.indexOf('\n },',start);assert(end>start);return code.slice(start,end+4);}
 const methods=method('renderPaged')+'\n'+method('loadPanelsForCurrentPage');
 function deferred(){let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b});return{promise,resolve,reject};}
@@ -9,7 +12,7 @@ function setup(){
  const calls=[],tasks=[],wait=deferred(),elements=[];
  const Detector={detect:async(url)=>{calls.push(url);await wait.promise;return[{source:url}];}};
  const doc={createElement:tag=>({tag})};
- const r=new Function('PanelDetect','document',`return {${methods}}`)(Detector,doc);
+ const r=new Function('PanelDetect','document',`${readerPrelude}\nreturn {${methods}}`)(Detector,doc);
  Object.assign(r,{mode:'single',useTurnJSPageMode:true,comic:{id:'alpha'},index:3,_panelLoadToken:0,currentPanels:[],els:{viewport:{style:{},appendChild:e=>elements.push(e)},stage:{}},source:'fresh-a',debugMode:false,getPageUrl:async function(){return this.source},preparePanelMaps(){},prefetch(){this.prefetches=(this.prefetches||0)+1},updateSliderLabel(){this.labels=(this.labels||0)+1},updateBookmarkFlag(){this.bookmarks=(this.bookmarks||0)+1},preflightPageImage:async function(){return this.source},debugLog(){}});
  r.turnPageMode={render:async()=>true};
  const start=()=>{const p=r.loadPanelsForCurrentPage();tasks.push(p);return p;};

@@ -1,5 +1,5 @@
 'use strict';const fs=require('fs'),path=require('path'),assert=require('node:assert/strict'),cv=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES?path.join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES,'@napi-rs/canvas'):'@napi-rs/canvas');
-const root=path.resolve(__dirname,'../../..'),html=fs.readFileSync(path.join(root,'index.html'),'utf8'),scripts=[...html.matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]);const source=scripts.map(n=>fs.readFileSync(path.join(root,n),'utf8')).join('\n');
+const root=path.resolve(__dirname,'../../..'),html=fs.readFileSync(path.join(root,'index.html'),'utf8'),scripts=[...html.matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(m=>m[1]);const source=scripts.map(n=>fs.readFileSync(path.join(root,n),'utf8')).join('\n');
 const api=new Function('document','Image','ImageData','window',source+'\nreturn{PanelDetect,PanelNeighborEdgeCells,PanelMatteCells,PanelGeometry,PanelLocalBoundaryConsensus};')({createElement:()=>cv.createCanvas(1,1)},cv.Image,cv.ImageData,{});
 const [dir,baseline,out,startText,endText]=process.argv.slice(2),old=JSON.parse(fs.readFileSync(baseline)),files=fs.readdirSync(dir).filter(n=>/\.(jpg|jpeg|png)$/i.test(n)).sort();assert.equal(files.length,old.length);
 const keepAlive=setInterval(()=>{},1000);

@@ -165,6 +165,97 @@ const PanelTapSelection = (() => {
   return { begin, current, resolve, finish, cancel, hold };
 })();
 
+// Every single tap, including an off-map fallback, belongs to one live input.
+// This guard checks source/lifecycle state and shallow ordered map identities;
+// the canonical owner's existing proof validation stays in PanelTapSelection.
+const PanelTapRequest = (() => {
+  const active = new WeakMap();
+  const source = img => img && [img.src, img.currentSrc, img.naturalWidth,
+    img.naturalHeight, img.width, img.height, img.complete];
+  const own = (o, i) => Object.prototype.hasOwnProperty.call(o, i);
+  function bindOwners(s, owners = s.reader.currentPanels) {
+    s.owners = owners;
+    s.items = Array.isArray(s.owners) ? s.owners.slice() : null;
+  }
+  function sameOwners(s) {
+    if (s.reader.currentPanels !== s.owners) return false;
+    if (!s.items) return true;
+    if (s.owners.length !== s.items.length) return false;
+    for (let i = 0; i < s.items.length; i++) {
+      if (s.owners[i] !== s.items[i] || own(s.owners, i) !== own(s.items, i)) return false;
+    }
+    return true;
+  }
+  function finish(s) {
+    if (!s) return;
+    if (active.get(s.reader) === s) active.delete(s.reader);
+    if (s.listening) {
+      s.listening = false;
+      try { s.img.removeEventListener('load', s.invalidate); } catch (_) {}
+      try { s.img.removeEventListener('error', s.invalidate); } catch (_) {}
+    }
+  }
+  function cancel(r) {
+    const s = active.get(r);
+    if (s) { s.invalid = true; finish(s); }
+  }
+  function begin(r) {
+    cancel(r);
+    const s = { reader: r, comic: r.comic, index: r.index, mode: r.mode,
+      loadToken: r._panelLoadToken, overlayToken: r.panelOverlayToken,
+      owners: r.currentPanels, detection: r._panelDetection, invalid: false };
+    active.set(r, s);
+    s.invalidate = () => { s.invalid = true; finish(s); };
+    try {
+      bindOwners(s);
+      s.img = r.getPanelImageContext?.()?.img;
+      s.source = source(s.img);
+      if (typeof s.img?.addEventListener === 'function' && typeof s.img?.removeEventListener === 'function') {
+        s.listening = true;
+        s.img.addEventListener('load', s.invalidate);
+        s.img.addEventListener('error', s.invalidate);
+      }
+    } catch (_) { s.invalidate(); }
+    return s;
+  }
+  function current(s, awaitingDetection = false) {
+    if (!s || s.invalid || active.get(s.reader) !== s) return false;
+    try {
+      const r = s.reader, img = r.getPanelImageContext?.()?.img, state = source(img);
+      if (r.comic !== s.comic || r.index !== s.index || r.mode !== s.mode ||
+          r._panelLoadToken !== s.loadToken || r.panelOverlayToken !== s.overlayToken ||
+          r.scale > 1.02 || (!awaitingDetection && !sameOwners(s)) ||
+          img !== s.img || state?.length !== s.source?.length ||
+          state?.some((value, i) => value !== s.source[i])) s.invalidate();
+    } catch (_) { s.invalidate(); }
+    return !s.invalid;
+  }
+  function acceptDetection(s, pending, panels) {
+    if (!current(s, true)) return false;
+    const r = s.reader;
+    if (r._panelDetection !== pending || pending.token !== r._panelLoadToken ||
+        (r.currentPanels === s.owners && !sameOwners(s)) ||
+        (Array.isArray(panels) && r.currentPanels !== s.owners && r.currentPanels !== panels)) { s.invalidate(); return false; }
+    // The awaited identity pass intentionally publishes a new owner array.
+    // Bind it before lookup; later owner-map replacements cancel this input.
+    bindOwners(s);
+    return true;
+  }
+  function beforeDetectionPublish(r, pending, panels) {
+    const s = active.get(r);
+    if (!s) return;
+    // Check the pre-detection map before the loader intentionally replaces it.
+    // An unrelated replacement must not be hidden by that expected commit.
+    if (s.detection !== pending) cancel(r);
+    else if (current(s)) {
+      // Snapshot the exact ordered owners at this synchronous publication.
+      // A later promise callback must not edit the result before tap admission.
+      bindOwners(s, panels);
+    }
+  }
+  return { begin, current, acceptDetection, beforeDetectionPublish, finish, cancel };
+})();
+
 const Reader = {
  comic: null,
  pageUrls: [],       // object URLs, lazily filled
@@ -371,6 +462,7 @@ const Reader = {
  },
 
  async open(comicId, startPage = null) {
+   PanelTapRequest.cancel(this);
    this.comic = await LongboxDB.getComic(comicId);
    if (!this.comic) return;
    if (typeof PanelMap !== "undefined" && PanelMap.beginIssue) PanelMap.beginIssue(comicId);
@@ -512,6 +604,7 @@ const Reader = {
  },
 
  close() {
+   PanelTapRequest.cancel(this);
    window.NthShelfNative?.setImmersive(false);
    this._nativeFullscreen = false;
    this.turnPageMode?.destroy();
@@ -987,6 +1080,7 @@ const Reader = {
  },
 
  async loadPanelsForCurrentPage() {
+   PanelTapRequest.cancel(this);
    // V73: deliberately bypass the IndexedDB panel cache for this experiment.
    // Older panel rectangles must not influence the test.
    this.currentPanels = [];
@@ -1005,10 +1099,11 @@ const Reader = {
      const url = await this.getPageUrl(pageIndex);
      return url ? PanelDetect.detect(url, logger) : [];
    })();
-   this._panelDetection = { comicId, pageIndex, token, promise };
+   const detection = this._panelDetection = { comicId, pageIndex, token, promise };
    const panels = await promise;
 
    if (token !== this._panelLoadToken || this.comic?.id !== comicId || this.index !== pageIndex || this.mode !== "single") return;
+   PanelTapRequest.beforeDetectionPublish(this, detection, panels);
    this.currentPanels = panels;
    if (logger) logger(`currentPanels set: ${panels.length} fresh page identities (${panels[0]?._identitySource || 'stable-gutter'})`);
  },
@@ -1135,6 +1230,7 @@ const Reader = {
  },
 
  removePanelOverlay(animate = false) {
+   PanelTapRequest.cancel(this);
    this._bubbleRequestToken++;
    this.panelOverlayToken++;
    const overlay = this.els.panelOverlay;
@@ -1801,6 +1897,7 @@ const Reader = {
   },
 
 async setMode(mode) {
+   PanelTapRequest.cancel(this);
 
   this.stopAutoScroll();
    if (mode === this.mode) return;
@@ -1905,6 +2002,7 @@ async setMode(mode) {
  },
 
  goTo(i, opts = {}) {
+   PanelTapRequest.cancel(this);
    i = Math.max(0, Math.min(this.comic.pageCount - 1, i));
    if (this.mode === "single" && this.useTurnJSPageMode && this.turnPageMode?.book) {
      if (i === this.index && !opts.fromSlider) return;
@@ -1927,6 +2025,7 @@ async setMode(mode) {
    }
  },
   clearPanelFocusForNavigation() {
+    PanelTapRequest.cancel(this);
     if (this.focusMode === "panel" || this.panelOverlayActive) {
       this.resetZoom({ animate: false });
     }
@@ -2220,6 +2319,7 @@ async setMode(mode) {
    const dist = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
    const mid = (a, b) => ({ x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 });
    const cancelPendingTouch = () => {
+     PanelTapRequest.cancel(this);
      clearTimeout(holdTimer); clearTimeout(continuousHoldTimer); clearTimeout(pendingTapTimer);
      holdTimer=null; continuousHoldTimer=null; pendingTapTimer=null;
      panStart=null; continuousTapStart=null; twoPageGestureStart=null;
@@ -2353,6 +2453,7 @@ async setMode(mode) {
    };
 
    stage.addEventListener("touchstart", (e) => {
+     PanelTapRequest.cancel(this);
      if (this.mode === "two-page") {
        if (e.touches.length === 1) {
          const t = e.touches[0];
@@ -2747,6 +2848,7 @@ async setMode(mode) {
    });
 
    stage.addEventListener("wheel", (e) => {
+     PanelTapRequest.cancel(this);
      if (this.mode === "scroll" || this.mode === "webcomic" || this.mode === "manga") return;
      e.preventDefault();
      const delta = -e.deltaY * 0.0018;
@@ -2757,6 +2859,7 @@ async setMode(mode) {
 
    let mouseDown = false, mouseMoved = false, mStart = null;
    stage.addEventListener("mousedown", (e) => {
+     PanelTapRequest.cancel(this);
      if (this.mode === "scroll") return;
      mouseDown = true; mouseMoved = false;
      mStart = { x: e.clientX, y: e.clientY, tx: this.tx, ty: this.ty };
@@ -2793,14 +2896,20 @@ async setMode(mode) {
  },
 
  async handleSingleTap(pos) {
-   if (this.mode !== "single" || this.scale > 1.02) return;
+   PanelTapRequest.cancel(this);
    PanelTapSelection.cancel(this);
+   if (this.mode !== "single" || this.scale > 1.02) return;
+   const request = PanelTapRequest.begin(this);
+   let selection = null;
+   try {
+   if (!PanelTapRequest.current(request)) return;
 
    // An early tap must not race the page-wide identity pass and escape into
    // the old tap-dependent search while its correct frame list is loading.
    const pending = this._panelDetection;
    if (pending && pending.comicId === this.comic?.id && pending.pageIndex === this.index) {
-     await pending.promise;
+     const panels = await pending.promise;
+     if (!PanelTapRequest.acceptDetection(request, pending, panels)) return;
      if (pending.token !== this._panelLoadToken || this.comic?.id !== pending.comicId ||
          this.index !== pending.pageIndex || this.mode !== "single" || this.scale > 1.02) return;
    }
@@ -2840,10 +2949,9 @@ async setMode(mode) {
      if (this.debugMode) this.debugLog("[V2.79.05] PANEL MAP MISS/INCOMPLETE -> V2.79.04 ROUTE");
    }
 
-   const selection = panel ? PanelTapSelection.begin(this, panel) : null;
-   try {
+   selection = panel ? PanelTapSelection.begin(this, panel) : null;
    const url = await this.getPageUrl(pageIndex);
-   if (selection && !PanelTapSelection.current(selection)) return;
+   if (!PanelTapRequest.current(request) || (selection && !PanelTapSelection.current(selection))) return;
    const refineGeometry = async (seed, identitySource) => {
      if (!seed) return null;
      // Preserve a source-admitted held contour owner when the geometry
@@ -2859,7 +2967,8 @@ async setMode(mode) {
        _baselinePanelCount: Array.isArray(this.currentPanels) ? this.currentPanels.length : 0
      };
      if (!url || typeof PanelGeometry === 'undefined' || !PanelGeometry.refine) return seeded;
-     return (await PanelGeometry.refine(url, seeded, geometryLogger)) || seeded;
+     const shaped = await PanelGeometry.refine(url, seeded, geometryLogger);
+     return PanelTapRequest.current(request) ? shaped || seeded : null;
    };
 
    // PASS 1: V73 baseline identifies the panel. Geometry is now a separate
@@ -2868,6 +2977,7 @@ async setMode(mode) {
    if (panel) {
      if (this.debugMode) this.debugLog(`[V105] PASS 1 HIT (${panel._identitySource || 'V73'} identity) -> GEOMETRY ROUTER`);
      const shaped = await refineGeometry(panel, panel._identitySource || 'v73');
+     if (!PanelTapRequest.current(request)) return;
      const target = shaped && PanelTapSelection.resolve(selection, shaped);
      PanelTapSelection.finish(selection);
      if (this.comic?.id === comicId && this.index === pageIndex && target) this.zoomToPanel(target, stageRect, imgRect);
@@ -2888,6 +2998,7 @@ async setMode(mode) {
        _geometryOnlyRescue: true
      };
      const quick = await PanelGeometry.refineAdaptiveOnly(url, quickSeed, geometryLogger);
+     if (!PanelTapRequest.current(request)) return;
      if (this.comic?.id === comicId && this.index === pageIndex && quick) {
        if (this.debugMode) this.debugLog("[V2.79.03] QUICK PROVEN-FRAME HIT -> ZOOM");
        this.zoomToPanel(quick, stageRect, imgRect);
@@ -2904,9 +3015,11 @@ async setMode(mode) {
        ? (msg) => this.debugLog(`[V100 hybrid p${pageIndex}] ${msg}`)
        : null;
      const hybrid = await PanelDetect.detectTapHybrid(url, relXImg, relYImg, hybridLogger);
+     if (!PanelTapRequest.current(request)) return;
      if (this.comic?.id === comicId && this.index === pageIndex && hybrid) {
        if (this.debugMode) this.debugLog("[V105] PASS 2A HIT (V100 identity) -> GEOMETRY ROUTER");
        const shaped = await refineGeometry(hybrid, 'v100');
+       if (!PanelTapRequest.current(request)) return;
        if (this.comic?.id === comicId && this.index === pageIndex && shaped) this.zoomToPanel(shaped, stageRect, imgRect);
        return;
      }
@@ -2919,9 +3032,11 @@ async setMode(mode) {
        ? (msg) => this.debugLog(`[V92 fallback p${pageIndex}] ${msg}`)
        : null;
      const fallback = await PanelDetect.detectTapLocalFallback(url, relXImg, relYImg, logger);
+     if (!PanelTapRequest.current(request)) return;
      if (this.comic?.id === comicId && this.index === pageIndex && fallback) {
        if (this.debugMode) this.debugLog(`[V105] LEGACY IDENTITY sides=${fallback._gutterSides || 0} -> GEOMETRY ROUTER`);
        const shaped = await refineGeometry(fallback, 'v99');
+       if (!PanelTapRequest.current(request)) return;
        if (this.comic?.id === comicId && this.index === pageIndex && shaped) this.zoomToPanel(shaped, stageRect, imgRect);
        return;
      }
@@ -2937,6 +3052,7 @@ async setMode(mode) {
        { x: 0.011, y: 0.013, w: 0.954, h: 0.957, _geometryOnlyRescue: true },
        'geometry-rescue'
      );
+     if (!PanelTapRequest.current(request)) return;
      const provenQuad = rescue?._geometryType === 'tap-neighborhood-frame' &&
        Array.isArray(rescue?._quad) && rescue._quad.length === 4;
      const provenOrthogonalFrame = rescue?._geometryOwner === 'orthogonal-frame';
@@ -2950,11 +3066,18 @@ async setMode(mode) {
      if (this.debugMode) this.debugLog("[V106] CLOSED-FRAME RESCUE MISS");
    }
 
-   this.toggleChrome();
-   } finally { PanelTapSelection.finish(selection); }
+   if (PanelTapRequest.current(request)) this.toggleChrome();
+   } catch (error) {
+     // A canceled request may still reject after its input has been retired.
+     if (PanelTapRequest.current(request)) throw error;
+   } finally {
+     PanelTapSelection.finish(selection);
+     PanelTapRequest.finish(request);
+   }
  },
 
  async handleDeferredPanelDoubleTap(pos) {
+   PanelTapRequest.cancel(this);
    const pending = this._deferredPanelTap;
    if (!pending) return false;
 
@@ -2996,6 +3119,7 @@ async setMode(mode) {
  },
 
  async handleDoubleTap(pos) {
+   PanelTapRequest.cancel(this);
    if (this.mode !== "single") return;
    if (this.bubbleOverlayActive) {
      this._deferredPanelTap = null;
@@ -3315,7 +3439,7 @@ async setMode(mode) {
    const frameGeom={...geom};
    // These complete contour proofs already account for their owned balloons
    // and frame edges. A second margin heuristic could add a neighboring rail.
-   const completeContour=contours&&panel._identitySource==='structural-grid-frame'&&[21,22,23,24,25,26,34,35,36,40,41,42,43,44,46,75,76,77,78].includes(panel._structuralGridProof?.version);
+   const completeContour=contours&&((panel._identitySource==='structural-grid-frame'&&[21,22,23,24,25,26,34,35,36,40,41,42,43,44,46,75,76,77,78].includes(panel._structuralGridProof?.version))||(typeof PanelTerminalNativeReader!=='undefined'&&PanelTerminalNativeReader.completeSourceContour(this,panel)));
    const edgeSpill=(!completeContour&&typeof PanelEdgeSpill!=="undefined"&&PanelEdgeSpill.analyzeImage)?PanelEdgeSpill.analyzeImage(img,panel,this.debugMode?(msg)=>this.debugLog(`[edge-spill] ${msg}`):null):null;
    if(edgeSpill?.spills?.length){let x0=geom.x,y0=geom.y,x1=geom.x+geom.w,y1=geom.y+geom.h;for(const s of edgeSpill.spills){x0=Math.min(x0,s.box[0]);y0=Math.min(y0,s.box[1]);x1=Math.max(x1,s.box[2]);y1=Math.max(y1,s.box[3]);}geom={x:x0,y:y0,w:x1-x0,h:y1-y0};clipPolygon=null;if(this.debugMode)this.debugLog(`[edge-spill] preserving ${edgeSpill.spills.length} owned margin component(s)`);}
 

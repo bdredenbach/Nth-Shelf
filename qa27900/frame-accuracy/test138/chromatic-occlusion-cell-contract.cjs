@@ -3,7 +3,7 @@ const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),asse
 let cv;try{cv=require('@napi-rs/canvas');}catch(_){cv=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/@napi-rs/canvas');}
 const root=path.resolve(process.env.NTH_SHELF_SOURCE||path.join(__dirname,'../../..'));
 const moduleFile=process.env.NTH_CHROMATIC_OCCLUSION_MODULE||path.join(root,'js/panels-chromatic-occlusion-cell.js');
-const scriptFiles=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]);
+const scriptFiles=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(m=>m[1]);
 if(!scriptFiles.includes('js/panels-chromatic-occlusion-cell.js'))scriptFiles.push('js/panels-chromatic-occlusion-cell.js');
 const ctx=vm.createContext({console,window:{},document:{createElement:()=>cv.createCanvas(1,1)},Image:cv.Image,setTimeout,clearTimeout});
 vm.runInContext(scriptFiles.map(p=>fs.readFileSync(p==='js/panels-chromatic-occlusion-cell.js'?moduleFile:path.join(root,p),'utf8')).join('\n'),ctx);

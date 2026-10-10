@@ -3,7 +3,7 @@ const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),asse
 let cv;try{cv=require('@napi-rs/canvas');}catch(_){cv=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/@napi-rs/canvas');}
 const root=path.resolve(process.env.NTH_SHELF_SOURCE||path.join(__dirname,'../../..'));
 const module82=process.env.NTH_CHROMATIC_OCCLUSION_MODULE||path.join(root,'js/panels-chromatic-occlusion-cell.js'),module85=process.env.NTH_CHROMATIC_TAPER_MODULE||path.join(root,'js/panels-chromatic-taper-cell.js'),module89=process.env.NTH_CHROMATIC_COMPOSITION_MODULE||path.join(root,'js/panels-chromatic-composition-remainder.js');
-const names=['panels-chromatic-occlusion-cell.js','panels-chromatic-taper-cell.js','panels-chromatic-composition-remainder.js'],scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]);
+const names=['panels-chromatic-occlusion-cell.js','panels-chromatic-taper-cell.js','panels-chromatic-composition-remainder.js'],scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(m=>m[1]);
 const ctx=vm.createContext({console,window:{},document:{createElement:()=>cv.createCanvas(1,1)},Image:cv.Image,setTimeout,clearTimeout});
 const overrides=new Map(names.map((name,i)=>[name,[module82,module85,module89][i]]));
 const loaded=new Set(),code=scripts.map(p=>{const name=path.basename(p);loaded.add(name);return fs.readFileSync(overrides.get(name)||path.join(root,p),'utf8');});

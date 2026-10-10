@@ -16,7 +16,7 @@ const plain = value => JSON.parse(JSON.stringify(value));
 
 function loadSourceApi(sourceRoot, modulePath) {
   const index = fs.readFileSync(path.join(sourceRoot, 'index.html'), 'utf8');
-  const scripts = [...index.matchAll(/src="(js\/panels[^"]*\.js)"/g)].map(match => path.resolve(sourceRoot, match[1]));
+  const scripts = [...index.matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^"]*\.js)"/g)].map(match => path.resolve(sourceRoot, match[1]));
   assert.ok(scripts.length, 'source index contains real panel dependencies');
   const files=scripts.map(file=>path.basename(file)==='panels-round-atomic-inset.js'?path.resolve(modulePath):file);
   if(!scripts.some(file=>path.basename(file)==='panels-round-atomic-inset.js'))files.push(path.resolve(modulePath));

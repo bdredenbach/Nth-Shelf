@@ -18,7 +18,7 @@ function load({ observeDiscovery = false, observeBudget = false } = {}) {
   const calls = {};
   const budgets = {};
   const scripts = [...fs.readFileSync(path.join(root, 'index.html'), 'utf8')
-    .matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(match => match[1]);
+    .matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(match => match[1]);
   const code = scripts.map(file => {
     let source = fs.readFileSync(path.join(root, file), 'utf8');
     if (observeDiscovery && /panels-round-(atomic|speech)-inset\.js$/.test(file)) {

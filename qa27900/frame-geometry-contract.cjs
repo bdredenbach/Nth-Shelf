@@ -1,8 +1,8 @@
 'use strict';
 
 // Geometry-stage regression, independent of comic artwork and native canvas.
-// The four-rail detector is represented by already-proven fixtures here; this
-// verifies that routing, persistence and rendering do not distort its answer.
+// The four-rail detector is an explicit synthetic evidence fixture here.
+// This tests installed routing, persistence and rendering, not detector acceptance.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -167,7 +167,8 @@ async function renderedQuad(frame) {
   const rect = { left: 0, top: 0, width: 600, height: 900 };
   reader.mode = 'single'; reader.scale = 1; reader.index = 15;
   reader.comic = { id: 'qa-comic' }; reader._panelLoadToken = 1;
-  reader.getPanelImageContext = () => ({ img: {}, rect });
+  const tapSourceImage = {};
+  reader.getPanelImageContext = () => ({ img: tapSourceImage, rect });
   reader.els.stage.getBoundingClientRect = () => rect;
   reader.getPageUrl = async () => 'qa-page';
   const crops = [];
@@ -186,5 +187,16 @@ async function renderedQuad(frame) {
   const stale = reader.handleSingleTap({ x: 240, y: 450 });
   reader.index = 16; finish(); await stale;
   assert.equal(crops.length, 1, 'a pending tap cannot focus a different page');
-  console.log(`Frame geometry contract passed: ${physicalCases} physical-angle/crop cases, live and persisted rendering, tap containment and invalid-proof controls.`);
+  // An explicit source replacement is the negative counterpart to the stable
+  // displayed image above. Release and await the actual pending tap guard.
+  reader.index = 15;
+  reader._panelDetection.promise = new Promise(resolve => { finish = resolve; });
+  const replacedSource = reader.handleSingleTap({ x: 240, y: 450 });
+  await Promise.resolve();
+  const replacementImage = {};
+  reader.getPanelImageContext = () => ({ img: replacementImage, rect });
+  finish(); await replacedSource;
+  assert.equal(crops.length, 1, 'a pending tap cannot focus a replaced source image');
+  assert.equal(physicalCases, 18, 'all physical angle cases retained');
+  console.log(`Frame geometry contract passed: ${physicalCases} physical-angle/crop cases, live and persisted rendering, tap containment, source-image replacement and invalid-proof controls.`);
 })().catch(error => { console.error(error); process.exitCode = 1; });

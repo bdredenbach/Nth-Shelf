@@ -66,7 +66,7 @@ function element(tag = 'div') {
 function resolveSource(options = {}) {
   const root = path.resolve(options.sourceRoot || process.env.NTH_SHELF_SOURCE || path.join(__dirname, '../../..'));
   const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  const scripts = [...index.matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(match => path.resolve(root, match[1]));
+  const scripts = [...index.matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(match => path.resolve(root, match[1]));
   assert(scripts.length > 0, 'The selected source must provide real panel modules.');
   const requested = path.resolve(options.candidatePath || process.env.NTH_RAIL_CANDIDATE ||
     path.join(root, 'js/panels-page-edge-rail-cell.js'));

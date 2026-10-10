@@ -24,7 +24,7 @@ function loadCanvas() {
 function loadSourceApi(sourceRoot, candidatePath) {
   const canvas = loadCanvas();
   const index = fs.readFileSync(path.join(sourceRoot, 'index.html'), 'utf8');
-  const scripts = [...index.matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(match => match[1]);
+  const scripts = [...index.matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(match => match[1]);
   assert(scripts.length > 0, 'Source index must contain the panel modules.');
   const paths = scripts.map(script => path.resolve(sourceRoot, script));
   const candidateSource = fs.readFileSync(candidatePath, 'utf8');

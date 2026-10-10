@@ -2,7 +2,7 @@
 // Private source artwork and previously replayed descriptors are supplied locally.
 const fs=require('fs'),path=require('path'),assert=require('node:assert/strict');
 const cv=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES?path.join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES,'@napi-rs/canvas'):'@napi-rs/canvas');
-const root=path.resolve(__dirname,'../../..'),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]);
+const root=path.resolve(__dirname,'../../..'),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(m=>m[1]);
 const api=new Function('document','Image','ImageData','window',scripts.map(p=>fs.readFileSync(root+'/'+p,'utf8')).join('\n')+';return{PanelCropRepair,PanelGeometryOrthogonal};')({createElement:()=>cv.createCanvas(1,1)},cv.Image,cv.ImageData,{});
 const [dir,baseline,out]=process.argv.slice(2);if(!out)throw Error('Usage: native-crop-corpus.cjs SOURCE_DIRECTORY BASELINE_JSON OUTPUT_JSON');
 const rows=JSON.parse(fs.readFileSync(baseline)),results=fs.existsSync(out)?JSON.parse(fs.readFileSync(out)):[],done=new Set(results.map(r=>r.key));

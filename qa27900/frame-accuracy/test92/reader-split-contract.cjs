@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm'),zlib=require('zlib'),assert=require('node:assert/strict');
-const root=path.resolve(__dirname,'../../..'),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/panels[^\"]*\.js)"/g)].map(m=>m[1]);
+const root=path.resolve(__dirname,'../../..'),scripts=[...fs.readFileSync(root+'/index.html','utf8').matchAll(/src="(js\/(?!terminal-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(m=>m[1]);
 const api=new Function('document','Image','window',scripts.map(p=>fs.readFileSync(root+'/'+p,'utf8')).join('\n')+';return{PanelCropRepair,PanelMatteCells,PanelGeometryOrthogonal};')({},class{},{});
 const fixtures=JSON.parse(zlib.gunzipSync(Buffer.from(fs.readFileSync(__dirname+'/geometry.json.gz.b64','utf8'),'base64'))),snapshot=JSON.stringify(fixtures);
 function element(){const e={style:{setProperty(){}},dataset:{},classList:{add(){},remove(){}},setAttribute(){},appendChild(c){c.parentNode=this;(this.children||=[]).push(c);}};e.getContext=()=>({drawImage(){},save(){},restore(){},beginPath(){},moveTo(){},lineTo(){},closePath(){},clip(){},getImageData(x,y,w,h){return{data:new Uint8ClampedArray(w*h*4).fill(255)};}});return e;}
