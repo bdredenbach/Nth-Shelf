@@ -1,0 +1,4590 @@
+{
+  "test": "Test156: source-issued articulated opening reuse",
+  "version": "2.79.156",
+  "changeType": "Speed-only; no geometry or frame-count change",
+  "bulkTask": {
+    "correctedWorklistOriginalFrames": 62,
+    "completedNewOriginalFrames": 49,
+    "remainingOriginalFrames": 13,
+    "status": "in_progress"
+  },
+  "apk": {
+    "built": false,
+    "workflowDispatched": false,
+    "gradleInvoked": false
+  },
+  "counts": {
+    "imagePages": 24,
+    "storyPages": 22,
+    "excludedCovers": 2,
+    "originalFrames": 105,
+    "currentPopOutSelections": 77,
+    "validSingleSelections": 58,
+    "validDualSelections": 17,
+    "qualifyingSelections": 75,
+    "qualifyingUniqueOriginalFrames": 92,
+    "remainingUniqueOriginalFrames": 13,
+    "rejectedSelections": 2,
+    "rejectedOversized": 1,
+    "rejectedMixedNeighbor": 1,
+    "rejectedDamaged": 0,
+    "duplicateQualifyingSelections": 0,
+    "genuineSinglePanelSplashPages": 0,
+    "fullyCoveredStoryPages": [
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24
+    ]
+  },
+  "newlyRepairedOriginalFramesThisCheckpoint": [],
+  "retainedChecks": {
+    "passed": true,
+    "retainedSuites": 255,
+    "behavioralSuites": 254,
+    "cachePackageSuites": 1,
+    "syntaxFiles": 138,
+    "durableReceiptVerification": {
+      "passed": true,
+      "bindingSha256": "f90b1e7bbd1af15367a1a12592573981175495d6d8d092cda6932fe6130edcab",
+      "summarySha256": "3fb065350138d816df6f5b07a302b96c93262ca3280fb829cac0ce7111b96d59",
+      "originalCommandIndexes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254
+      ],
+      "fullCommandCount": 255,
+      "completedCommands": 255,
+      "attemptsRecorded": 255,
+      "incompleteAttemptsRecorded": 0,
+      "unknownOutcomeAttempts": 0,
+      "allCommandsExecutedExactlyOnce": true,
+      "maximumScheduledReservations": 2,
+      "supervisorLimits": [
+        {
+          "supervisorId": 1791620551072018812,
+          "maxJobs": 2,
+          "memoryBudgetMiB": 4096,
+          "hostReserveMiB": 3072
+        },
+        {
+          "supervisorId": 1791631288346737145,
+          "maxJobs": 1,
+          "memoryBudgetMiB": 4096,
+          "hostReserveMiB": 1536
+        }
+      ]
+    },
+    "scheduling": {
+      "memoryAware": true,
+      "maxJobs": 1,
+      "memoryBudgetMiB": 4096,
+      "hostReserveMiB": 1536,
+      "maxParallel": 2,
+      "maxScheduledReservations": 2,
+      "parallelismQualification": "Maximum scheduled outstanding reservations; not measured simultaneous Node processes.",
+      "supervisorLimits": [
+        {
+          "supervisorId": 1791620551072018812,
+          "maxJobs": 2,
+          "memoryBudgetMiB": 4096,
+          "hostReserveMiB": 3072
+        },
+        {
+          "supervisorId": 1791631288346737145,
+          "maxJobs": 1,
+          "memoryBudgetMiB": 4096,
+          "hostReserveMiB": 1536
+        }
+      ],
+      "allCommandsExecutedExactlyOnce": true,
+      "durableSourceBoundReceipts": true,
+      "attemptsRecorded": 255,
+      "attemptSpecsWritten": 255,
+      "completedCommands": 255,
+      "incompleteAttemptsRecorded": 0,
+      "incompleteAttempts": [],
+      "completedReceiptsRecovered": 254,
+      "launchesThisSupervisor": [
+        {
+          "sequence": 255,
+          "index": 197,
+          "command": [
+            "node",
+            "qa27900/frame-accuracy/test145/capped-rim-contract.cjs"
+          ],
+          "attempt": 1,
+          "bindingSha256": "f90b1e7bbd1af15367a1a12592573981175495d6d8d092cda6932fe6130edcab",
+          "supervisorId": 1791631288346737145,
+          "limits": {
+            "maxJobs": 1,
+            "memoryBudgetMiB": 4096,
+            "hostReserveMiB": 1536
+          },
+          "reservationMiB": 4064,
+          "reservedMiB": 4064,
+          "memAvailableMiB": 5907,
+          "concurrent": 1,
+          "seconds": 0.002
+        }
+      ]
+    },
+    "elapsedQualification": "Current supervisor elapsed only; interrupted attempts and prior completed receipts remain individually recorded.",
+    "fullScopedGuardMatrix": {
+      "faults": [
+        "changed src",
+        "changed currentSrc",
+        "changed naturalWidth",
+        "changed naturalHeight",
+        "changed width",
+        "changed height",
+        "changed complete",
+        "load generation",
+        "error generation",
+        "throwing src",
+        "throwing currentSrc",
+        "throwing naturalWidth",
+        "throwing naturalHeight",
+        "throwing width",
+        "throwing height",
+        "throwing complete",
+        "missing image",
+        "image identity",
+        "throwing viewport",
+        "original owner replacement",
+        "original owner hole",
+        "original owner append",
+        "original owner order",
+        "new owner array",
+        "new navigation",
+        "new overlay"
+      ],
+      "warmSourceReads": 0,
+      "warmValidFingerprintSerializations": 0,
+      "stickyAsync": true,
+      "emptyOwnerSync": true,
+      "heldAncestorAcrossAwait": true,
+      "newNavigationPreserved": true,
+      "foreignProofUnread": true
+    }
+  },
+  "nativeReader": {
+    "passed": true,
+    "pages": 24,
+    "selections": 77,
+    "priorPngsExact": 77,
+    "priorMetadataExact": 77,
+    "priorQualifyingSelectionsExact": 75,
+    "newOriginals": 0
+  },
+  "readerOwnership": {
+    "passed": true,
+    "actualFinalIntegratedReader": true,
+    "sourceReplay": true,
+    "proofVersion": 103,
+    "analysisSize": [
+      585,
+      900
+    ],
+    "pixels": [
+      41527,
+      95498,
+      389475
+    ],
+    "taps": [
+      41527,
+      95498,
+      389475
+    ],
+    "overlap": 0,
+    "missing": 0,
+    "completeEnvelopeOwnedOnce": true,
+    "outsideSamples": 404,
+    "warmCanvasCreations": 0,
+    "sourceSha256": "cf82c9cc95c9c64001fcddcc958fd80226687fdc30fff92770dbdcf653781abe",
+    "runtimeSha256": "e931e8f24aeca4681c0e58f83375e938203d1aa6ef9843bda4fb20ea4c8f1a93",
+    "seconds": 44.375143147
+  },
+  "corpusComparison": {
+    "passed": true,
+    "maps": 312,
+    "descriptors": 1365,
+    "families": [
+      100,
+      103
+    ],
+    "comparisons": 624,
+    "eligibility": [
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 0,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 0,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 1,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 1,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 2,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 2,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 3,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 3,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 4,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 4,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 5,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 5,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 6,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 6,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 7,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 7,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 8,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 8,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 9,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 9,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 10,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 10,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 11,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 11,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 12,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 12,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 13,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 13,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 14,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 14,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 15,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 15,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 16,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 16,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 17,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 17,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 18,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 18,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 19,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 19,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 20,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 20,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 21,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 21,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 22,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 22,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 23,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 23,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 24,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 24,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 25,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 25,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 26,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 26,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 27,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 27,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 28,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 28,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 29,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 29,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 30,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 30,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 31,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 31,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 32,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 32,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 33,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 33,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 34,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 34,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 35,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 35,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 36,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 36,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 37,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 37,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 38,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 38,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 39,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 39,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 40,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-29_Chapter_30.json",
+        "index": 40,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 0,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 0,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 1,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 1,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 2,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 2,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 3,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 3,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 4,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 4,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 5,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 5,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 6,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 6,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 7,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 7,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 8,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 8,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 9,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 9,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 10,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 10,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 11,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 11,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 12,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 12,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 13,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 13,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 14,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 14,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 15,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 15,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 16,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 16,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 17,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 17,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 18,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 18,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 19,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 19,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 20,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 20,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 21,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 21,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 22,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 22,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 23,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 23,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 24,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 24,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 25,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 25,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 26,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 26,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 27,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 27,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 28,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 28,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 29,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 29,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 30,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 30,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 31,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 31,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 32,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 32,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 33,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 33,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 34,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 34,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 35,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 35,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 36,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 36,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 37,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 37,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 38,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 38,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 39,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 39,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 40,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "index": 40,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 0,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 0,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 1,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 1,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 2,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 2,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 3,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 3,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 4,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 4,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 5,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 5,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 6,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 6,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 7,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 7,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 8,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 8,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 9,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 9,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 10,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 10,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 11,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 11,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 12,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 12,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 13,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 13,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 14,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 14,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 15,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 15,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 16,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 16,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 17,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 17,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 18,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 18,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 19,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 19,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 20,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 20,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 21,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 21,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 22,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 22,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 23,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 23,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 24,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 24,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 25,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 25,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 26,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 26,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 27,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 27,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 28,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 28,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 29,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 29,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 30,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 30,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 31,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 31,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 32,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 32,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 33,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 33,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 34,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 34,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 35,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 35,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 36,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 36,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 37,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 37,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 38,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 38,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 39,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 39,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 40,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "index": 40,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 0,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 0,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 1,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 1,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 2,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 2,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 3,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 3,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 4,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 4,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 5,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 5,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 6,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 6,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 7,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 7,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 8,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 8,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 9,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 9,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 10,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 10,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 11,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 11,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 12,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 12,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 13,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 13,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 14,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 14,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 15,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 15,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 16,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 16,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 17,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 17,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 18,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 18,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 19,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 19,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 20,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 20,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 21,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 21,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 22,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 22,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 23,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 23,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 24,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 24,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 25,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 25,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 26,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 26,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 27,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 27,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 28,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 28,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 29,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 29,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 30,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 30,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 31,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 31,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 32,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 32,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 33,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 33,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 34,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 34,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 35,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 35,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 36,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 36,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 37,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 37,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 38,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 38,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 39,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 39,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 40,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 40,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 41,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 41,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 42,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 42,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 43,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 43,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 44,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 44,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 45,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 45,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 46,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 46,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 47,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 47,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 48,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 48,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 49,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 49,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 50,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 50,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 51,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 51,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 52,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 52,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 53,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 53,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 54,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 54,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 55,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 55,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 56,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 56,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 57,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 57,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 58,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 58,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 59,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 59,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 60,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 60,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 61,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 61,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 62,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 62,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 63,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 63,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 64,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 64,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 65,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 65,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 66,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 66,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 67,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 67,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 68,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 68,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 69,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 69,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 70,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 70,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 71,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 71,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 72,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 72,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 73,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 73,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 74,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 74,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 75,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 75,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 76,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 76,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 77,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 77,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 78,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 78,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 79,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 79,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 80,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 80,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 81,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 81,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 82,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 82,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 83,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 83,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 84,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 84,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 85,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 85,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 86,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 86,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 87,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 87,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 88,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 88,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 89,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 89,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 90,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-apocalypse.json",
+        "index": 90,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 0,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 0,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 1,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 1,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 2,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 2,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 3,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 3,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 4,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 4,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 5,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 5,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 6,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 6,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 7,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 7,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 8,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 8,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 9,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 9,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 10,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 10,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 11,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 11,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 12,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 12,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 13,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 13,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 14,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 14,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 15,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 15,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 16,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 16,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 17,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 17,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 18,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 18,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 19,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 19,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 20,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 20,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 21,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 21,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 22,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 22,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 23,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-magneto.json",
+        "index": 23,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 0,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 0,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 1,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 1,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 2,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 2,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 3,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 3,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 4,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 4,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 5,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 5,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 6,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 6,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 7,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 7,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 8,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 8,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 9,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 9,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 10,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 10,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 11,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 11,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 12,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 12,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 13,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 13,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 14,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 14,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 15,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 15,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 16,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 16,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 17,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 17,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 18,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 18,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 19,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 19,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 20,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 20,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 21,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 21,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 22,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 22,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 23,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 23,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 24,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 24,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 25,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 25,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 26,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 26,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 27,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 27,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 28,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 28,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 29,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 29,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 30,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 30,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 31,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 31,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 32,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 32,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 33,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 33,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 34,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 34,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 35,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 35,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 36,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 36,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 37,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 37,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 38,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 38,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 39,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 39,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 40,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 40,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 41,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 41,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 42,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 42,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 43,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 43,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 44,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 44,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 45,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 45,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 46,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 46,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 47,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 47,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 48,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 48,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 49,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 49,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 50,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 50,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 51,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 51,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 52,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 52,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 53,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 53,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 54,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 54,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 55,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 55,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 56,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 56,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 57,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 57,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 58,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 58,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 59,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 59,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 60,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 60,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 61,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 61,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 62,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 62,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 63,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 63,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 64,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 64,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 65,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 65,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 66,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 66,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 67,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 67,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 68,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 68,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 69,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 69,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 70,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 70,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 71,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 71,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 72,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 72,
+        "family": 103,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 73,
+        "family": 100,
+        "eligible": false
+      },
+      {
+        "file": "final-wolverine.json",
+        "index": 73,
+        "family": 103,
+        "eligible": false
+      }
+    ],
+    "corpus": [
+      {
+        "file": "final-29_Chapter_30.json",
+        "sha256": "3ebba5774f82966914a1903e2cf59c2c389599ea00a73240a55fb0137681709d",
+        "maps": 41
+      },
+      {
+        "file": "final-30_Chapter_31.json",
+        "sha256": "a69b389f391398884298eb633d88600d84a4c958ecf64600d5e2f657e6b0301c",
+        "maps": 41
+      },
+      {
+        "file": "final-31_Chapter_32.json",
+        "sha256": "2b8c246c6f1605233ec98b06331c410595f3fcf805e70afbaa6d251fc6ecaf00",
+        "maps": 41
+      },
+      {
+        "file": "final-apocalypse.json",
+        "sha256": "4e87059011799cd9402169ea2c303f3e4707e49ecf875b23fcb0d0aa2850fcda",
+        "maps": 91
+      },
+      {
+        "file": "final-magneto.json",
+        "sha256": "218185f6b41d471c58d9f3fcf7d5ecb0f4ceaf4f053daabdc0ae5b2f63b26b38",
+        "maps": 24
+      },
+      {
+        "file": "final-wolverine.json",
+        "sha256": "5cdde7e2fd0b179e973c2dbab62e8e50074580a8fdc2ab86e16fdec841dc8edd",
+        "maps": 74
+      }
+    ],
+    "completeOwnerGraphsUnchanged": true,
+    "privateSourceAssociationNotInferredFromEligibility": true,
+    "runtimeSha256": {
+      "panels-articulated-upper-cell.js": "f54808116fdb750c7cb06a921c65b5c5975eb2c8ed23f27c4c0ce2fec5b9d611",
+      "panels-articulated-exterior-cell.js": "e931e8f24aeca4681c0e58f83375e938203d1aa6ef9843bda4fb20ea4c8f1a93"
+    },
+    "sourceFreezeSha256": "37ddaa5130ae2156f42bf26ce0ff560aa31ab2cf2c19f1bd207c07629a0d38ec"
+  },
+  "freshDetector": {
+    "passed": true,
+    "actualSourcePages": 24,
+    "completeOrderedGraphsExact": true,
+    "executionRealm": "same-runtime Function; helper and source hashes retained"
+  },
+  "actualInputAcceptance": {
+    "passed": true,
+    "qualifyingOwners": 75,
+    "trustedOpenCloseCycles": 225,
+    "firstCampBeforePriorDisplay": true,
+    "priorBrowserOutputComparisons": 225,
+    "receiptSha256": "224e708396c454dde98ee3316b165f893551c0e35ac6ef7cf597cc7e2c18f785",
+    "timingEvidenceSha256": "5537ca94363e3a17a593c38ac1cfce0ebd072e0989537f1b8eaeb6ad15e97803",
+    "uninterruptedDocument": false,
+    "documentComponents": [
+      {
+        "kind": "prefix1",
+        "acceptedOwners": 19,
+        "trustedOpens": 57,
+        "trustedCloses": 57,
+        "receiptSha256": "527ea73dfc9f9c704488b2e9c3aa7ccfb682b807a552954c30ef0f9bb830d3fb"
+      },
+      {
+        "kind": "prefix2",
+        "acceptedOwners": 19,
+        "trustedOpens": 57,
+        "trustedCloses": 57,
+        "receiptSha256": "7282e2b4125d26046435a02ce7df84944cbd952c8b6b4e6d256608ffc7221682"
+      },
+      {
+        "kind": "remaining",
+        "acceptedOwners": 37,
+        "trustedOpens": 111,
+        "trustedCloses": 111,
+        "receiptSha256": "dee58e18363293ec474b09c5994ace5f03f9632ee47778606266850f338a4267"
+      }
+    ],
+    "interruptedReader9BatchCredited": false,
+    "excludedBatchesCredited": false,
+    "qualification": "Complete correctness sweep under concurrent shared-host test load; use the separate foreground comparison for before/after observations. Close protocol and pending-handler observation differ by recorded component; the pre-existing arbitrary-center delayed-reopen defect is not fixed by 156."
+  },
+  "pendingRuntimeDefects": [
+    {
+      "id": "stale-unowned-fallback-after-close",
+      "reproducedOnBaseline155": true,
+      "fixedBy156": false,
+      "trigger": "Native double-click close over a source area with no canonical/map owner",
+      "behavior": "Async fallback can reopen another crop after resetZoom has closed the overlay",
+      "baselineLateZoomAfterDoubleclickMs": [
+        19240.10000000149,
+        34184.199999999255
+      ],
+      "evidenceSha256": "d3acb5f995105dac1ca2a82c8175d5428b6362e3a7e130a0a7ae97149b803b34",
+      "mustFixBeforeApkTesting": true
+    }
+  ],
+  "foregroundComparison": {
+    "passed": true,
+    "order": [
+      "A155",
+      "B156",
+      "B156",
+      "A155"
+    ],
+    "freshDocuments": 4,
+    "observationsPerVariant": 2,
+    "actualOpenCloseCycles": 12,
+    "measuredSelection": {
+      "readerPage": 15,
+      "selectionId": 3,
+      "label": "camp",
+      "proofVersion": 103
+    },
+    "source": "Cloud Chromium browser with native foreground observations; no phone timing",
+    "metricsInMilliseconds": [
+      {
+        "cycle": "first",
+        "metric": "requestToReady",
+        "A": {
+          "count": 2,
+          "raw": [
+            23222.099999999627,
+            24932
+          ],
+          "median": 24077.049999999814,
+          "min": 23222.099999999627,
+          "max": 24932
+        },
+        "B": {
+          "count": 2,
+          "raw": [
+            23996.400000000373,
+            25466.400000000373
+          ],
+          "median": 24731.400000000373,
+          "min": 23996.400000000373,
+          "max": 25466.400000000373
+        },
+        "ratioAoverB": 0.9735417323725891
+      },
+      {
+        "cycle": "first",
+        "metric": "handlerPromiseSettlement",
+        "A": {
+          "count": 2,
+          "raw": [
+            48583.90000000037,
+            13213.099999999627
+          ],
+          "median": 30898.5,
+          "min": 13213.099999999627,
+          "max": 48583.90000000037
+        },
+        "B": {
+          "count": 2,
+          "raw": [
+            1853.5,
+            1542.2000000011176
+          ],
+          "median": 1697.8500000005588,
+          "min": 1542.2000000011176,
+          "max": 1853.5
+        },
+        "ratioAoverB": 18.198604116965473
+      },
+      {
+        "cycle": "first",
+        "metric": "inputToAnimationFinish",
+        "A": {
+          "count": 2,
+          "raw": [
+            49462,
+            13941
+          ],
+          "median": 31701.5,
+          "min": 13941,
+          "max": 49462
+        },
+        "B": {
+          "count": 2,
+          "raw": [
+            2585.300000000745,
+            2259.4000000003725
+          ],
+          "median": 2422.350000000559,
+          "min": 2259.4000000003725,
+          "max": 2585.300000000745
+        },
+        "ratioAoverB": 13.087084855612396
+      },
+      {
+        "cycle": "repeat",
+        "metric": "requestToReady",
+        "A": {
+          "count": 0,
+          "raw": [
+            null,
+            null
+          ],
+          "unmeasured": true
+        },
+        "B": {
+          "count": 0,
+          "raw": [
+            null,
+            null
+          ],
+          "unmeasured": true
+        },
+        "ratioAoverB": null
+      },
+      {
+        "cycle": "repeat",
+        "metric": "handlerPromiseSettlement",
+        "A": {
+          "count": 2,
+          "raw": [
+            39.79999999888241,
+            36.29999999888241
+          ],
+          "median": 38.04999999888241,
+          "min": 36.29999999888241,
+          "max": 39.79999999888241
+        },
+        "B": {
+          "count": 2,
+          "raw": [
+            45.69999999925494,
+            46.40000000037253
+          ],
+          "median": 46.049999999813735,
+          "min": 45.69999999925494,
+          "max": 46.40000000037253
+        },
+        "ratioAoverB": 0.8262757871669124
+      },
+      {
+        "cycle": "repeat",
+        "metric": "inputToAnimationFinish",
+        "A": {
+          "count": 2,
+          "raw": [
+            814.1000000014901,
+            765.6999999992549
+          ],
+          "median": 789.9000000003725,
+          "min": 765.6999999992549,
+          "max": 814.1000000014901
+        },
+        "B": {
+          "count": 2,
+          "raw": [
+            774.4000000003725,
+            762.9000000003725
+          ],
+          "median": 768.6500000003725,
+          "min": 762.9000000003725,
+          "max": 774.4000000003725
+        },
+        "ratioAoverB": 1.0276458726338251
+      },
+      {
+        "cycle": "return",
+        "metric": "requestToReady",
+        "A": {
+          "count": 2,
+          "raw": [
+            22291.800000000745,
+            24632.5
+          ],
+          "median": 23462.150000000373,
+          "min": 22291.800000000745,
+          "max": 24632.5
+        },
+        "B": {
+          "count": 2,
+          "raw": [
+            22138,
+            26697.699999999255
+          ],
+          "median": 24417.849999999627,
+          "min": 22138,
+          "max": 26697.699999999255
+        },
+        "ratioAoverB": 0.9608605999299992
+      },
+      {
+        "cycle": "return",
+        "metric": "handlerPromiseSettlement",
+        "A": {
+          "count": 2,
+          "raw": [
+            12572.599999999627,
+            13007.799999998882
+          ],
+          "median": 12790.199999999255,
+          "min": 12572.599999999627,
+          "max": 13007.799999998882
+        },
+        "B": {
+          "count": 2,
+          "raw": [
+            1675.4000000003725,
+            1490.199999999255
+          ],
+          "median": 1582.7999999998137,
+          "min": 1490.199999999255,
+          "max": 1675.4000000003725
+        },
+        "ratioAoverB": 8.080742987111929
+      },
+      {
+        "cycle": "return",
+        "metric": "inputToAnimationFinish",
+        "A": {
+          "count": 2,
+          "raw": [
+            13301.099999999627,
+            13724.099999999627
+          ],
+          "median": 13512.599999999627,
+          "min": 13301.099999999627,
+          "max": 13724.099999999627
+        },
+        "B": {
+          "count": 2,
+          "raw": [
+            2413.5999999996275,
+            2217.5
+          ],
+          "median": 2315.5499999998137,
+          "min": 2217.5,
+          "max": 2413.5999999996275
+        },
+        "ratioAoverB": 5.835589816674533
+      }
+    ],
+    "receiptSha256": "cfbd4f4912b0f4dbd88cdff11422672fa77f53cf385cf1320a99a6668a3a9c29",
+    "outliersPreserved": [
+      "First A155 handler48.584 seconds, including48.353 seconds in hit lookup.",
+      "First B156 document loading11.760 seconds and seeding10.042 seconds."
+    ],
+    "qualification": "Two observations per variant on a shared host. No statistically established improvement, cold-process/cache, phone, automatic-mode, CBZ import, transport, or corpus claim."
+  },
+  "sourceAcceptanceBinding": "37ddaa5130ae2156f42bf26ce0ff560aa31ab2cf2c19f1bd207c07629a0d38ec",
+  "frozenCachedWebAssets": 161,
+  "phoneAcceptance": "Pending",
+  "automaticPlayback": "Not implemented or accepted",
+  "runtimeLimitations": [
+    "Fresh Reader page loading still requires detection; measured request-to-ready23\u201327 seconds.",
+    "The comparison first input occurs after identities are ready. Earlier input can also wait for detection.",
+    "Ordinary Reader reload bypasses stored IndexedDB panel identities and detects a fresh owner graph.",
+    "Restored/copied identities are guard controls with full source replay, not the normal reload path.",
+    "First155 handler and first156 document/seeding outliers are retained; two observations per variant do not establish statistical, phone, cold-process, comic-import or corpus-wide performance.",
+    "Browser animation-finish events are measured; compositor presentation time is not established.",
+    "A native center double-click over no source owner can reopen a stale rescue crop after closing. Exact155 reproduction reopened at19.240 seconds and reissued at34.184 seconds. A 420-ms closed-state snapshot does not certify absence of pending fallback work. This defect must be fixed before APK testing;156 does not change Reader.js.",
+    "Source-issued reuse is restricted to exact immutable roots, ordered owners and retained native pixels; source/owner changes and missing associations fall back to complete validation."
+  ],
+  "performanceReadiness": "Four foreground trials demonstrate first/return opening improvements on this host. Fresh page detection still takes approximately 23\u201327 seconds. Both recorded outliers and the limited two-observation-per-variant scope remain. A pre-existing delayed-reopen race remains outside the scoped source-point close protocol. No phone, APK-testing or automatic-mode readiness is claimed."
+}
