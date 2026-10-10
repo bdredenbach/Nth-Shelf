@@ -8,9 +8,43 @@ const PanelCropRepair = (() => {
   function hull(q){const pts=[...q].sort((a,b)=>a.x-b.x||a.y-b.y),cross=(a,b,c)=>(b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x),lo=[],hi=[];for(const p of pts){while(lo.length>1&&cross(lo.at(-2),lo.at(-1),p)<=0)lo.pop();lo.push(p);}for(const p of pts.reverse()){while(hi.length>1&&cross(hi.at(-2),hi.at(-1),p)<=0)hi.pop();hi.push(p);}return lo.slice(0,-1).concat(hi.slice(0,-1));}
   function raster(rings,w,h){const out=new Uint8Array(w*h);for(let y=0;y<h;y++){const v=(y+.5)/h,xs=[];for(const q of rings)for(let j=0;j<q.length;j++){const a=q[j],b=q[(j+1)%q.length];if((a.y>v)!==(b.y>v))xs.push((a.x+(v-a.y)*(b.x-a.x)/(b.y-a.y))*w);}xs.sort((a,b)=>a-b);for(let k=0;k+1<xs.length;k+=2)for(let x=Math.max(0,Math.ceil(xs[k]-.5));x<Math.min(w,xs[k+1]-.5);x++)out[y*w+x]=1;}return out;}
   // Square closing, using running window counts rather than radius-squared work.
-  function morph(src,w,h,r,grow){const tmp=new Uint8Array(src.length),out=new Uint8Array(src.length),n=2*r+1;for(let y=0;y<h;y++){let sum=0;for(let x=-r;x<w+r;x++){const add=x+r,del=x-r-1;if(add>=0&&add<w)sum+=src[y*w+add];if(del>=0&&del<w)sum-=src[y*w+del];if(x>=0&&x<w)tmp[y*w+x]=grow?+(sum>0):+(sum===n);}}for(let x=0;x<w;x++){let sum=0;for(let y=-r;y<h+r;y++){const add=y+r,del=y-r-1;if(add>=0&&add<h)sum+=tmp[add*w+x];if(del>=0&&del<h)sum-=tmp[del*w+x];if(y>=0&&y<h)out[y*w+x]=grow?+(sum>0):+(sum===n);}}return out;}
+  function morph(src,w,h,r,grow){
+    const tmp=new Uint8Array(src.length),out=new Uint8Array(src.length),n=2*r+1;
+    for(let y=0;y<h;y++){
+      let sum=0;
+      for(let x=-r;x<w+r;x++){
+        const add=x+r,del=x-r-1;
+        if(add>=0&&add<w)sum+=src[y*w+add];
+        if(del>=0&&del<w)sum-=src[y*w+del];
+        if(x>=0&&x<w)tmp[y*w+x]=grow?+(sum>0):+(sum===n);
+      }
+    }
+    // Keep each vertical window count while traversing contiguous pixel rows.
+    const sums=new Int32Array(w);
+    for(let y=-r;y<h;y++){
+      const add=y+r,del=y-r-1;
+      if(add<h){const row=add*w;for(let x=0;x<w;x++)sums[x]+=tmp[row+x];}
+      if(del>=0){const row=del*w;for(let x=0;x<w;x++)sums[x]-=tmp[row+x];}
+      if(y>=0){const row=y*w;for(let x=0;x<w;x++)out[row+x]=grow?+(sums[x]>0):+(sums[x]===n);}
+    }
+    return out;
+  }
   function components(mask,w,h){const seen=new Uint8Array(mask.length),out=[];for(let seed=0;seed<mask.length;seed++)if(mask[seed]&&!seen[seed]){const q=[seed];seen[seed]=1;for(let at=0;at<q.length;at++){const i=q[at],x=i%w,y=i/w|0;for(const j of [x?i-1:-1,x+1<w?i+1:-1,y?i-w:-1,y+1<h?i+w:-1])if(j>=0&&mask[j]&&!seen[j]){seen[j]=1;q.push(j);}}out.push(q);}return out;}
-  function fillClosed(mask,w,h){const exterior=new Uint8Array(mask.length),q=[];const add=i=>{if(!mask[i]&&!exterior[i]){exterior[i]=1;q.push(i);}};for(let x=0;x<w;x++){add(x);add((h-1)*w+x);}for(let y=0;y<h;y++){add(y*w);add(y*w+w-1);}for(let at=0;at<q.length;at++){const i=q[at],x=i%w,y=i/w|0;if(x)add(i-1);if(x+1<w)add(i+1);if(y)add(i-w);if(y+1<h)add(i+w);}return Uint8Array.from(mask,(v,i)=>+(v||!exterior[i]));}
+  function fillClosed(mask,w,h){
+    const exterior=new Uint8Array(mask.length),queue=new Uint32Array(mask.length);
+    let end=0;
+    // Mark before enqueueing: each pixel occupies at most one queue entry.
+    const add=i=>{if(!mask[i]&&!exterior[i]){exterior[i]=1;queue[end++]=i;}};
+    for(let x=0;x<w;x++){add(x);add((h-1)*w+x);}
+    for(let y=0;y<h;y++){add(y*w);add(y*w+w-1);}
+    for(let at=0;at<end;at++){
+      const i=queue[at],x=i%w,y=i/w|0;
+      if(x)add(i-1);if(x+1<w)add(i+1);if(y)add(i-w);if(y+1<h)add(i+w);
+    }
+    const out=new Uint8Array(mask.length);
+    for(let i=0;i<out.length;i++)out[i]=+(mask[i]||!exterior[i]);
+    return out;
+  }
   // Closed chromatic caption bodies can contain matte-shaped missing letters.
   // Two source palettes must agree after a one-pixel opening separates touching
   // rims. This only restores a compact, ink-bearing body to its existing owner.

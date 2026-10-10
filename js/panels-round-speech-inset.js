@@ -114,7 +114,7 @@ function finishDiscovery(discovered, accepted) {
   nativeDiscovery = discovered.pending;
  else discovered.witness?.discard(discovered.token);
 }
-function analyzeRGBA(a,w,h,prior=[],log) {
+function analyzeSourceRGBA(a,w,h,prior=[],log,completed) {
  if (!data(a,w,h)||!sourceOwners(a,w,h,prior)) return [];
  const discovered=discoveryEvidence(a,w,h,log),q=discovered.evidence;
  try {
@@ -122,10 +122,11 @@ function analyzeRGBA(a,w,h,prior=[],log) {
   const e=q[0],v={version:VERSION,method:METHOD,analysisWidth:w,analysisHeight:h,anchors:JSON.parse(JSON.stringify(prior)),...e},c={final:e.measurement.final,rings:e.measurement.rings},p=construct(v,c);
   if (!validPanel(p)) return [];
   finishDiscovery(discovered,true);
-  return [p];
+  const panels=[p];completed?.(panels);return panels;
  } finally { discovered.witness?.discard(discovered.token); }
 }
-function replayRGBA(a,w,h,panels,prior=[]){return Array.isArray(panels)&&panels.length===1&&panels.every(validPanel)&&same(analyzeRGBA(a,w,h,prior),panels);}
+function analyzeRGBA(a,w,h,prior=[],log){return analyzeSourceRGBA(a,w,h,prior,log);}
+function replayRGBA(a,w,h,panels,prior=[]){return Array.isArray(panels)&&panels.length===1&&panels.every(validPanel)&&(sourceIdentity.replay(a,w,h,panels,prior)||same(analyzeRGBA(a,w,h,prior),panels));}
 function supplementImage(img,prior,log){if(!img||!eligible(prior))return[];const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!dims(W,H))return[];let c;try{c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return[];g.drawImage(img,0,0);return analyzeRGBA(g.getImageData(0,0,W,H).data,W,H,prior,log);}catch(_){return[];}finally{if(c)c.width=c.height=1;}}
 const areaRing=q=>q.reduce((s,a,i)=>{const b=q[(i+1)%q.length];return s+a[0]*b[1]-b[0]*a[1];},0)/2;
   function traceNative(labels,w,h,id){
@@ -148,9 +149,59 @@ const areaRing=q=>q.reduce((s,a,i)=>{const b=q[(i+1)%q.length];return s+a[0]*b[1
     }return rings.sort((a,b)=>Math.abs(areaRing(b))-Math.abs(areaRing(a)));
   }
 
+
+// Only the actual detector path invokes issuedSupplementImage. Public source
+// helpers and restored/equal objects cannot register ownership identities.
+const sourceIdentity=PanelRoundSourceIdentity.create(PanelRasterWitness,VERSION),issuedLoads=new WeakMap();
+function issuedSourceState(img) {
+ if(!img)return null;
+ try {
+  let load=issuedLoads.get(img);
+  if(!load){load={generation:0,failed:false};issuedLoads.set(img,load);
+   if(typeof img.addEventListener==='function'){
+    img.addEventListener('load',()=>{load.generation++;load.failed=false});
+    img.addEventListener('error',()=>{load.generation++;load.failed=true});
+   }
+  }
+  const w=typeof img.naturalWidth==='number'?img.naturalWidth:img.width,h=typeof img.naturalHeight==='number'?img.naturalHeight:img.height;
+  if(img.complete===false||load.failed||!dims(w,h))return null;
+  return [img,img.currentSrc,img.src,img.naturalWidth,img.naturalHeight,img.width,img.height,img.complete,load.generation,load.failed,w,h];
+ }catch(_){return null}
+}
+function withIssuedCapture(img,run) {
+ let canvas;
+ try {
+  const before=issuedSourceState(img);if(!before)return null;
+  const w=before[10],h=before[11];canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+  const context=canvas.getContext('2d',{willReadFrequently:true});if(!context)return null;
+  context.drawImage(img,0,0);
+  // These bytes remain private to this source computation. All downsampling
+  // starts here; no later image recapture can justify its completed result.
+  const pixels=context.getImageData(0,0,w,h).data;
+  const stable=()=>{const after=issuedSourceState(img);return !!after&&before.every((v,i)=>v===after[i]);};
+  if(!stable())return null;
+  return run(pixels,w,h,stable);
+ }catch(_){return null}
+ finally{if(canvas)canvas.width=canvas.height=1}
+}
+function issuedSupplementImage(img,prior,log) {
+ if(!eligible(prior))return[];
+ const plan=sourceIdentity.begin(prior);
+ const result=withIssuedCapture(img,(a,w,h,stable)=>analyzeSourceRGBA(a,w,h,prior,log,
+  panels=>sourceIdentity.finish(plan,a,w,h,panels,stable)));
+ return result===null?supplementImage(img,prior,log):result;
+}
+function sourceMatchesImage(img,panels,prior) {
+ if(sourceIdentity.hasOutput(panels)) {
+  const matched=withIssuedCapture(img,(a,w,h,stable)=>sourceIdentity.replay(a,w,h,panels,prior)&&stable());
+  if(matched)return true;
+ }
+ return same(supplementImage(img,prior),panels);
+}
+
 function installReader(r){if(!r||r._roundSpeechReader)return;const display=r.displayPanelContours,find=r.findPanelAt,zoom=r.zoomToPanel,loads=new WeakMap();
  const sourceState=img=>{if(!img)return{stamp:[null],ready:false};try{let load=loads.get(img);if(!load){load={generation:0,failed:false};loads.set(img,load);if(typeof img.addEventListener==='function'){img.addEventListener('load',()=>{load.generation++;load.failed=false;});img.addEventListener('error',()=>{load.generation++;load.failed=true;});}}const stamp=[img,img.currentSrc,img.src,img.naturalWidth,img.naturalHeight,img.width,img.height,img.complete,load.generation,load.failed],W=typeof img.naturalWidth==='number'?img.naturalWidth:img.width,H=typeof img.naturalHeight==='number'?img.naturalHeight:img.height;return{stamp,ready:img.complete!==false&&!load.failed&&W>0&&H>0&&W*H<=24000000};}catch(_){return{stamp:[img,null],ready:false};}};
- function state(reader){const owners=reader.currentPanels,children=Array.isArray(owners)?owners.filter(claims):[];if(!children.length)return null;let img;try{img=reader.getPanelImageContext?.()?.img}catch(_){}const previous=owners.filter(p=>!claims(p));const source=sourceState(img);let childSig=null,priorSig=null;try{childSig=JSON.stringify(children);priorSig=JSON.stringify(previous);}catch(_){}let s=reader._roundSpeechDisplay;if(s&&s.owners===owners&&s.img===img&&s.source.length===source.stamp.length&&s.source.every((v,i)=>v===source.stamp[i])&&s.items.length===owners.length&&s.items.every((p,i)=>p===owners[i])&&childSig!==null&&priorSig!==null&&s.childSig===childSig&&s.priorSig===priorSig)return s;s=reader._roundSpeechDisplay={owners,img,source:source.stamp,sourceReady:source.ready,childSig,priorSig,items:owners.slice(),previous,children,verified:false,host:null,hostCache:null};if(!source.ready||children.length!==1||!children.every(validPanel)||!eligible(previous)||!children.every(p=>same(p._structuralGridProof.anchors,previous)))return s;try{s.verified=same(supplementImage(img,previous),children);}catch(_){}if(!s.verified)return s;const atomic=previous.filter(p=>p?._structuralGridProof?.version===80);s.atomic=atomic[0]||null;if(atomic.length!==1)return s;
+ function state(reader){const owners=reader.currentPanels,children=Array.isArray(owners)?owners.filter(claims):[];if(!children.length)return null;let img;try{img=reader.getPanelImageContext?.()?.img}catch(_){}const previous=owners.filter(p=>!claims(p));const source=sourceState(img);let childSig=null,priorSig=null;try{childSig=JSON.stringify(children);priorSig=JSON.stringify(previous);}catch(_){}let s=reader._roundSpeechDisplay;if(s&&s.owners===owners&&s.img===img&&s.source.length===source.stamp.length&&s.source.every((v,i)=>v===source.stamp[i])&&s.items.length===owners.length&&s.items.every((p,i)=>p===owners[i])&&childSig!==null&&priorSig!==null&&s.childSig===childSig&&s.priorSig===priorSig)return s;s=reader._roundSpeechDisplay={owners,img,source:source.stamp,sourceReady:source.ready,childSig,priorSig,items:owners.slice(),previous,children,verified:false,host:null,hostCache:null};if(!source.ready||children.length!==1||!children.every(validPanel)||!eligible(previous)||!children.every(p=>same(p._structuralGridProof.anchors,previous)))return s;try{s.verified=sourceMatchesImage(img,children,previous);}catch(_){}if(!s.verified)return s;const atomic=previous.filter(p=>p?._structuralGridProof?.version===80);s.atomic=atomic[0]||null;if(atomic.length!==1)return s;
  const w=children[0]._structuralGridProof.analysisWidth,h=children[0]._structuralGridProof.analysisHeight,cut=[children[0],atomic[0]].map(p=>PanelCropRepair.raster(p._contours,w,h)),sizes=cut.map(m=>sum(m)),hosts=[];for(const p of previous){if(p?._structuralGridProof?.version!==18)continue;const rings=PanelGeometryOrthogonal._provenContours(p);if(!rings)continue;const m=PanelCropRepair.raster(rings,w,h),hits=cut.map(q=>q.reduce((n,v,i)=>n+(v&&m[i]),0));if(hits[0]>sizes[0]*.90&&hits[1]>sizes[1]*.85)hosts.push(p);}if(hosts.length===1){s.host=hosts[0];s.cut=cut[0].map((v,i)=>+(v||cut[1][i]));s.w=w;s.h=h;}return s;
  }
  function previousDisplay(reader,s,p,c){const owners=reader.currentPanels;reader.currentPanels=s.previous;try{return display.call(reader,p,c);}finally{reader.currentPanels=owners;}}
@@ -159,7 +210,7 @@ function installReader(r){if(!r||r._roundSpeechReader)return;const display=r.dis
  r.zoomToPanel=async function(p,...args){const s=state(this);if(claims(p)&&(!s?.verified||!s.children.includes(p)))return;if(s&&!claims(p)&&(!s.verified||p===s.atomic)){const owners=this.currentPanels;this.currentPanels=s.previous;try{return await zoom.call(this,p,...args);}finally{if(this.currentPanels===s.previous)this.currentPanels=owners;}}return zoom.call(this,p,...args);};r._roundSpeechReader=true;
 }
 
-function install(d){if(typeof PanelStructuralGrid!=='undefined'&&!PanelStructuralGrid._roundSpeech){const old=PanelStructuralGrid.validPanel;PanelStructuralGrid.validPanel=p=>p?._structuralGridProof?.version===VERSION?validPanel(p):old(p);PanelStructuralGrid._roundSpeech=true;}if(typeof PanelEdgeSpill!=='undefined'&&!PanelEdgeSpill._roundSpeech){for(const name of['analyzeImage','analyzeRGBA']){const old=PanelEdgeSpill[name];PanelEdgeSpill[name]=function(...a){return validPanel(a[name==='analyzeImage'?1:3])?null:old.apply(this,a);};}PanelEdgeSpill._roundSpeech=true;}if(typeof PanelGeometry!=='undefined'&&!PanelGeometry._roundSpeech){const old=PanelGeometry.refine;PanelGeometry.refine=async function(url,p,log){return validPanel(p)?{...p}:old.call(this,url,p,log)};PanelGeometry._roundSpeech=true;}if(!d||d._roundSpeech)return;const old=d.detect;d.detect=async function(url,log){const prior=await old.call(this,url,log);if(!eligible(prior))return prior;try{const img=new Image();img.src=url;await img.decode();return prior.concat(supplementImage(img,prior,log));}catch(_){return prior;}};d._roundSpeech=true;}
+function install(d){if(typeof PanelStructuralGrid!=='undefined'&&!PanelStructuralGrid._roundSpeech){const old=PanelStructuralGrid.validPanel;PanelStructuralGrid.validPanel=p=>p?._structuralGridProof?.version===VERSION?validPanel(p):old(p);PanelStructuralGrid._roundSpeech=true;}if(typeof PanelEdgeSpill!=='undefined'&&!PanelEdgeSpill._roundSpeech){for(const name of['analyzeImage','analyzeRGBA']){const old=PanelEdgeSpill[name];PanelEdgeSpill[name]=function(...a){return validPanel(a[name==='analyzeImage'?1:3])?null:old.apply(this,a);};}PanelEdgeSpill._roundSpeech=true;}if(typeof PanelGeometry!=='undefined'&&!PanelGeometry._roundSpeech){const old=PanelGeometry.refine;PanelGeometry.refine=async function(url,p,log){return validPanel(p)?{...p}:old.call(this,url,p,log)};PanelGeometry._roundSpeech=true;}if(!d||d._roundSpeech)return;const old=d.detect;d.detect=async function(url,log){const prior=await old.call(this,url,log);if(!eligible(prior))return prior;try{const img=new Image();img.src=url;await img.decode();return prior.concat(issuedSupplementImage(img,prior,log));}catch(_){return prior;}};d._roundSpeech=true;}
 return{VERSION,METHOD,claims,eligible,sourceOwners,discoverRGBA,analyzeRGBA,replayRGBA,supplementImage,validPanel,installReader,install,_debug:{proposals,frontier,solveFrontier,data,cc,fill,polygonMask,sample,extent,runs,unruns,tail,measure,region,encodeBytes,decodeBytes,summary,construct}};
 })();
 if(typeof PanelDetect!=='undefined')PanelRoundSpeechInset.install(PanelDetect);

@@ -3641,3 +3641,5 @@ if(typeof PanelArticulatedRimCell!=='undefined')PanelArticulatedRimCell.installR
 if(typeof PanelGradientInsetReader!=='undefined')PanelGradientInsetReader.installReader(Reader);
 
 if(typeof PanelConnectedBoundaryReader!=='undefined')PanelConnectedBoundaryReader.installReader(Reader);
+
+if(typeof PanelArticulatedUpperCell!=='undefined')PanelArticulatedUpperCell.installReader(Reader);

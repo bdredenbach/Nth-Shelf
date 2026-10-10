@@ -59,6 +59,176 @@ const PanelRasterWitness = (() => {
  return Object.freeze({ token, matches, matchesRetained, commit, discard });
 })();
 
+// Private per-family source identities. The factory retains no source data.
+const PanelRoundSourceIdentity=(()=>{
+function createIdentityProtocol(provider, version) {
+  const ROOT_KEYS = ['x','y','w','h','_identitySource','_geometryOwner',
+    '_geometryType','_contours','_structuralGridProof'];
+  let records = new WeakMap();
+  function immutable(value, memo, active, budget, depth=0) {
+    if (value === null || value === undefined || typeof value === 'boolean') return true;
+    if (typeof value === 'number') return Number.isFinite(value);
+    if (typeof value === 'string') return (budget.strings += value.length*2) <= 8*1024*1024;
+    if (typeof value !== 'object' || depth > 64 || active.has(value)) return false;
+    if (memo.has(value)) return true;
+    if (!Object.isFrozen(value)) return false;
+    const array=Array.isArray(value), proto=Object.getPrototypeOf(value);
+    if (array ? proto!==Array.prototype : proto!==Object.prototype && proto!==null) return false;
+    const keys=Reflect.ownKeys(value);
+    if (++budget.nodes>65536 || (budget.slots+=keys.length)>524288) return false;
+    if (array) {
+      const length=Object.getOwnPropertyDescriptor(value,'length');
+      if (!length || !('value' in length) || keys.length!==length.value+1 || keys[keys.length-1]!=='length') return false;
+      for(let i=0;i<length.value;i++) if(keys[i]!==String(i)) return false;
+    }
+    active.add(value);
+    for (const key of keys) {
+      const descriptor=Object.getOwnPropertyDescriptor(value,key);
+      if (typeof key!=='string' || (budget.strings+=key.length*2)>8*1024*1024 || !descriptor || !('value' in descriptor) ||
+          !immutable(descriptor.value,memo,active,budget,depth+1)) return false;
+    }
+    active.delete(value); memo.add(value); return true;
+  }
+  function captureData(value,snapshot,memo,active,budget,depth=0) {
+    if(value===null || value===undefined || typeof value==='boolean') return true;
+    if(typeof value==='number') return Number.isFinite(value);
+    if(typeof value==='string') return (budget.strings+=value.length*2)<=8*1024*1024;
+    if(typeof value!=='object' || depth>64 || active.has(value)) return false;
+    if(memo.has(value)) return true;
+    const array=Array.isArray(value),prototype=Object.getPrototypeOf(value);
+    if(array ? prototype!==Array.prototype : prototype!==Object.prototype && prototype!==null) return false;
+    const keys=Reflect.ownKeys(value),values=[],enumerable=[];
+    if(++budget.nodes>65536 || (budget.slots+=keys.length)>524288) return false;
+    if(array) {
+      const length=Object.getOwnPropertyDescriptor(value,'length');
+      if(!length || !('value' in length) || keys.length!==length.value+1 || keys[keys.length-1]!=='length') return false;
+      for(let i=0;i<length.value;i++) if(keys[i]!==String(i)) return false;
+    }
+    active.add(value);
+    for(const key of keys) {
+      const descriptor=Object.getOwnPropertyDescriptor(value,key);
+      if(typeof key!=='string' || (budget.strings+=key.length*2)>8*1024*1024 ||
+          !descriptor || !('value' in descriptor) ||
+          !captureData(descriptor.value,snapshot,memo,active,budget,depth+1)) return false;
+      values.push(descriptor.value); enumerable.push(descriptor.enumerable);
+    }
+    active.delete(value); memo.add(value);
+    snapshot.push({root:value,prototype,keys,values,enumerable});
+    return true;
+  }
+  function sameData(snapshot) {
+    for(const s of snapshot) {
+      if(Object.getPrototypeOf(s.root)!==s.prototype) return false;
+      const keys=Reflect.ownKeys(s.root);
+      if(keys.length!==s.keys.length) return false;
+      for(let i=0;i<keys.length;i++) {
+        const d=Object.getOwnPropertyDescriptor(s.root,keys[i]);
+        if(keys[i]!==s.keys[i] || !d || !('value' in d) ||
+            !Object.is(d.value,s.values[i]) || d.enumerable!==s.enumerable[i]) return false;
+      }
+    }
+    return true;
+  }
+  function bind(root,memo,budget,mutableSnapshot=null) {
+    if (!root || typeof root!=='object' || Object.getPrototypeOf(root)!==Object.prototype) return null;
+    const keys=Reflect.ownKeys(root),values=[];
+    if(keys.length!==ROOT_KEYS.length) return null;
+    for(let i=0;i<keys.length;i++) {
+      if(keys[i]!==ROOT_KEYS[i]) return null;
+      const descriptor=Object.getOwnPropertyDescriptor(root,keys[i]);
+      if(!descriptor || !('value' in descriptor) || !descriptor.enumerable ||
+        !(mutableSnapshot ? captureData(descriptor.value,mutableSnapshot,memo,new WeakSet(),budget) :
+          immutable(descriptor.value,memo,new WeakSet(),budget))) return null;
+      values.push(descriptor.value);
+    }
+    return {root,values};
+  }
+  function sameBinding(binding) {
+    if(!binding || Object.getPrototypeOf(binding.root)!==Object.prototype) return false;
+    const keys=Reflect.ownKeys(binding.root);
+    if(keys.length!==ROOT_KEYS.length) return false;
+    for(let i=0;i<keys.length;i++) {
+      const d=Object.getOwnPropertyDescriptor(binding.root,keys[i]);
+      if(keys[i]!==ROOT_KEYS[i] || !d || !('value' in d) || !d.enumerable || !Object.is(d.value,binding.values[i])) return false;
+    }
+    return true;
+  }
+  function list(array,limit) {
+    if(!Array.isArray(array) || Object.getPrototypeOf(array)!==Array.prototype) return null;
+    const length=Object.getOwnPropertyDescriptor(array,'length');
+    if(!length || !('value' in length) || length.value>limit) return null;
+    const keys=Reflect.ownKeys(array), values=[];
+    if(keys.length!==length.value+1 || keys[keys.length-1]!=='length') return null;
+    for(let i=0;i<length.value;i++) {
+      const d=Object.getOwnPropertyDescriptor(array,String(i));
+      if(keys[i]!==String(i) || !d || !('value' in d) || !d.enumerable) return null;
+      values.push(d.value);
+    }
+    return {array,values};
+  }
+  function sameList(snapshot) {
+    const current=snapshot && list(snapshot.array,snapshot.values.length);
+    if(!current || current.values.length!==snapshot.values.length) return false;
+    for(let i=0;i<current.values.length;i++) if(current.values[i]!==snapshot.values[i]) return false;
+    return true;
+  }
+  function begin(prior) {
+    try {
+      const parents=list(prior,25), memo=new WeakSet(), budget={nodes:0,slots:0,strings:0};
+      if(!parents) return null;
+      const bindings=[],snapshot=[];
+      for(const p of parents.values) { const b=bind(p,memo,budget,snapshot); if(!b) return null; bindings.push(b); }
+      return {parents,bindings,snapshot};
+    } catch (_) { return null; }
+  }
+  function finish(plan,a,w,h,output,sourceStable=()=>true) {
+    let token=null;
+    try {
+      if(!plan) return false;
+      const children=list(output,32), bindings=[],parents=[],memo=new WeakSet(),budget={nodes:0,slots:0,strings:0};
+      if(!children || !children.values.length) return false;
+      for(const p of children.values) {
+        const b=bind(p,memo,budget);
+        if(!b || b.values[8]?.version!==version) return false;
+        bindings.push(b);
+      }
+      for(const p of plan.parents.values) { const b=bind(p,memo,budget); if(!b) return false; parents.push(b); }
+      const stable=()=>sourceStable() && sameList(plan.parents) && sameList(children) &&
+        plan.bindings.every(sameBinding) && bindings.every(sameBinding) && sameData(plan.snapshot);
+      if(!stable()) return false;
+      // This is the original private capture used by the complete analysis,
+      // never an image recaptured after that computation.
+      token=provider.token(a,w,h);
+      if(!token || !provider.matches(a,w,h,token) || !stable() ||
+          !provider.commit(token) || !provider.matchesRetained(a,w,h,token) || !stable()) return false;
+      const group={token,w,h,parents,children:bindings};
+      const next=new WeakMap();
+      for(const b of bindings) next.set(b.root,group);
+      records=next;
+      return true;
+    } catch (_) { return false; }
+    finally { if(token) provider.discard(token); }
+  }
+  function replay(a,w,h,output,prior) {
+    try {
+      const children=list(output,32), parents=list(prior,25);
+      if(!children || !parents || !children.values.length) return false;
+      const group=records.get(children.values[0]);
+      if(!group || group.w!==w || group.h!==h ||
+          group.children.length!==children.values.length || group.parents.length!==parents.values.length) return false;
+      for(let i=0;i<children.values.length;i++) if(group.children[i].root!==children.values[i]) return false;
+      for(let i=0;i<parents.values.length;i++) if(group.parents[i].root!==parents.values[i]) return false;
+      const stable=()=>sameList(children) && sameList(parents) &&
+        group.parents.every(sameBinding) && group.children.every(sameBinding);
+      return stable() && provider.matchesRetained(a,w,h,group.token) && stable();
+    } catch (_) { return false; }
+  }
+  function hasOutput(output) { try { const children=list(output,32); return !!children?.values.length && records.has(children.values[0]); } catch (_) { return false; } }
+  return {begin,finish,replay,hasOutput};
+}
+return Object.freeze({create:createIdentityProtocol});
+})();
+
 /* Private portable proof80 research: source-rim enclosure plus atomic lettering.
  * A Hough vote proposes a search region only. Native ink-frontier paths and
  * stable whole foreground components own pixels. Stored descriptors are never
@@ -182,26 +352,79 @@ function finishDiscovery(discovered, accepted) {
   nativeDiscovery = discovered.pending;
  else discovered.witness?.discard(discovered.token);
 }
-function analyzeRGBA(a,w,h,prior=[],log) {
+function analyzeSourceRGBA(a,w,h,prior=[],log,completed) {
  if (!Array.isArray(prior)||!data(a,w,h)||!sourceOwners(a,w,h,prior)) return [];
  const discovered=discoveryEvidence(a,w,h,log);
  try {
   const panels=discovered.evidence.map(proof=>construct({version:VERSION,method:METHOD,analysisWidth:w,analysisHeight:h,anchors:prior,...proof})).filter(validPanel);
-  finishDiscovery(discovered,panels.length>0&&panels.length===discovered.evidence.length);
+  const complete=panels.length>0&&panels.length===discovered.evidence.length;
+  finishDiscovery(discovered,complete);
+  if(complete)completed?.(panels);
   return panels;
  } finally { discovered.witness?.discard(discovered.token); }
 }
-function replayRGBA(a,w,h,panels,prior=[]){if(!Array.isArray(panels)||panels.some(p=>!validPanel(p)))return false;return same(analyzeRGBA(a,w,h,prior),panels);}
+function analyzeRGBA(a,w,h,prior=[],log){return analyzeSourceRGBA(a,w,h,prior,log);}
+function replayRGBA(a,w,h,panels,prior=[]){if(!Array.isArray(panels)||panels.some(p=>!validPanel(p)))return false;return sourceIdentity.replay(a,w,h,panels,prior)||same(analyzeRGBA(a,w,h,prior),panels);}
 function supplementImage(img,prior,log){if(!eligible(prior))return[];const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!dims(W,H))return[];const c=document.createElement('canvas');try{c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(img,0,0);return analyzeRGBA(g.getImageData(0,0,W,H).data,W,H,prior,log);}catch(_){return[];}finally{c.width=c.height=1;}}
+
+// Only the actual detector path invokes issuedSupplementImage. Public source
+// helpers and restored/equal objects cannot register ownership identities.
+const sourceIdentity=PanelRoundSourceIdentity.create(PanelRasterWitness,VERSION),issuedLoads=new WeakMap();
+function issuedSourceState(img) {
+ if(!img)return null;
+ try {
+  let load=issuedLoads.get(img);
+  if(!load){load={generation:0,failed:false};issuedLoads.set(img,load);
+   if(typeof img.addEventListener==='function'){
+    img.addEventListener('load',()=>{load.generation++;load.failed=false});
+    img.addEventListener('error',()=>{load.generation++;load.failed=true});
+   }
+  }
+  const w=typeof img.naturalWidth==='number'?img.naturalWidth:img.width,h=typeof img.naturalHeight==='number'?img.naturalHeight:img.height;
+  if(img.complete===false||load.failed||!dims(w,h))return null;
+  return [img,img.currentSrc,img.src,img.naturalWidth,img.naturalHeight,img.width,img.height,img.complete,load.generation,load.failed,w,h];
+ }catch(_){return null}
+}
+function withIssuedCapture(img,run) {
+ let canvas;
+ try {
+  const before=issuedSourceState(img);if(!before)return null;
+  const w=before[10],h=before[11];canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+  const context=canvas.getContext('2d',{willReadFrequently:true});if(!context)return null;
+  context.drawImage(img,0,0);
+  // These bytes remain private to this source computation. All downsampling
+  // starts here; no later image recapture can justify its completed result.
+  const pixels=context.getImageData(0,0,w,h).data;
+  const stable=()=>{const after=issuedSourceState(img);return !!after&&before.every((v,i)=>v===after[i]);};
+  if(!stable())return null;
+  return run(pixels,w,h,stable);
+ }catch(_){return null}
+ finally{if(canvas)canvas.width=canvas.height=1}
+}
+function issuedSupplementImage(img,prior,log) {
+ if(!eligible(prior))return[];
+ const plan=sourceIdentity.begin(prior);
+ const result=withIssuedCapture(img,(a,w,h,stable)=>analyzeSourceRGBA(a,w,h,prior,log,
+  panels=>sourceIdentity.finish(plan,a,w,h,panels,stable)));
+ return result===null?supplementImage(img,prior,log):result;
+}
+function sourceMatchesImage(img,panels,prior) {
+ if(sourceIdentity.hasOutput(panels)) {
+  const matched=withIssuedCapture(img,(a,w,h,stable)=>sourceIdentity.replay(a,w,h,panels,prior)&&stable());
+  if(matched)return true;
+ }
+ return same(supplementImage(img,prior),panels);
+}
+
 function installReader(r){if(!r||r._roundAtomicReader)return;const originalDisplay=r.displayPanelContours,originalFind=r.findPanelAt,originalZoom=r.zoomToPanel,loads=new WeakMap();
  const claims=p=>p?._structuralGridProof?.version===VERSION||p?._structuralGridProof?.method===METHOD||p?._geometryType==='native-round-atomic-inset';
  const sourceState=img=>{if(!img)return{stamp:[null],ready:false};try{let load=loads.get(img);if(!load){load={generation:0,failed:false};loads.set(img,load);if(typeof img.addEventListener==='function'){img.addEventListener('load',()=>{load.generation++;load.failed=false;});img.addEventListener('error',()=>{load.generation++;load.failed=true;});}}const stamp=[img,img.currentSrc,img.src,img.naturalWidth,img.naturalHeight,img.width,img.height,img.complete,load.generation,load.failed],W=typeof img.naturalWidth==='number'?img.naturalWidth:img.width,H=typeof img.naturalHeight==='number'?img.naturalHeight:img.height;return{stamp,ready:img.complete!==false&&!load.failed&&W>0&&H>0&&W*H<=24000000};}catch(_){return{stamp:[img,null],ready:false};}};
- function state(reader){const owners=reader.currentPanels,children=Array.isArray(owners)?owners.filter(claims):[];if(!children.length)return null;let img;try{img=reader.getPanelImageContext?.()?.img;}catch(_){}const source=sourceState(img),previous=owners.filter(p=>!claims(p));let childSig=null,priorSig=null;try{childSig=JSON.stringify(children);priorSig=JSON.stringify(previous);}catch(_){}let s=reader._roundAtomicDisplay;if(s&&s.owners===owners&&s.img===img&&Array.isArray(s.source)&&s.source.length===source.stamp.length&&s.source.every((v,k)=>v===source.stamp[k])&&s.items?.length===owners.length&&s.items.every((p,i)=>p===owners[i])&&childSig!==null&&priorSig!==null&&s.childSig===childSig&&s.priorSig===priorSig)return s;s=reader._roundAtomicDisplay={owners,img,source:source.stamp,sourceReady:source.ready,childSig,priorSig,items:owners.slice(),previous,children,verified:false};if(source.ready&&children.every(validPanel)&&eligible(previous)&&children.every(p=>same(p._structuralGridProof.anchors,previous))){try{s.verified=same(supplementImage(img,previous),children);}catch(_){}}return s;}
+ function state(reader){const owners=reader.currentPanels,children=Array.isArray(owners)?owners.filter(claims):[];if(!children.length)return null;let img;try{img=reader.getPanelImageContext?.()?.img;}catch(_){}const source=sourceState(img),previous=owners.filter(p=>!claims(p));let childSig=null,priorSig=null;try{childSig=JSON.stringify(children);priorSig=JSON.stringify(previous);}catch(_){}let s=reader._roundAtomicDisplay;if(s&&s.owners===owners&&s.img===img&&Array.isArray(s.source)&&s.source.length===source.stamp.length&&s.source.every((v,k)=>v===source.stamp[k])&&s.items?.length===owners.length&&s.items.every((p,i)=>p===owners[i])&&childSig!==null&&priorSig!==null&&s.childSig===childSig&&s.priorSig===priorSig)return s;s=reader._roundAtomicDisplay={owners,img,source:source.stamp,sourceReady:source.ready,childSig,priorSig,items:owners.slice(),previous,children,verified:false};if(source.ready&&children.every(validPanel)&&eligible(previous)&&children.every(p=>same(p._structuralGridProof.anchors,previous))){try{s.verified=sourceMatchesImage(img,children,previous);}catch(_){}}return s;}
  r.displayPanelContours=function(p,c=this.panelContours(p)){const s=state(this);if(claims(p))return s?.verified&&s.children.includes(p)?p._contours:null;if(!s)return originalDisplay.call(this,p,c);const owners=this.currentPanels;this.currentPanels=s.previous;try{return originalDisplay.call(this,p,c);}finally{this.currentPanels=owners;}};
  r.findPanelAt=function(x,y){const s=state(this);if(!s)return originalFind.call(this,x,y);if(s.verified&&this.panelZoomEnabled)for(const p of s.children)if(this.pointInContours(p._contours,x,y))return p;const owners=this.currentPanels;this.currentPanels=s.previous;try{return originalFind.call(this,x,y);}finally{this.currentPanels=owners;}};
  r.zoomToPanel=async function(p,...args){if(claims(p)){const s=state(this);if(!s?.verified||!s.children.includes(p))return;}return originalZoom.call(this,p,...args);};r._roundAtomicReader=true;
 }
-function install(d){if(typeof PanelStructuralGrid!=='undefined'&&!PanelStructuralGrid._roundAtomic){const old=PanelStructuralGrid.validPanel;PanelStructuralGrid.validPanel=p=>p?._structuralGridProof?.version===VERSION?validPanel(p):old(p);PanelStructuralGrid._roundAtomic=true;}if(typeof PanelEdgeSpill!=='undefined'&&!PanelEdgeSpill._roundAtomic){for(const name of['analyzeImage','analyzeRGBA']){const old=PanelEdgeSpill[name];PanelEdgeSpill[name]=function(...a){return validPanel(a[name==='analyzeImage'?1:3])?null:old.apply(this,a);};}PanelEdgeSpill._roundAtomic=true;}if(!d||d._roundAtomic)return;const old=d.detect;d.detect=async function(url,log){const prior=await old.call(this,url,log);if(!eligible(prior))return prior;try{const img=new Image();img.src=url;await img.decode();return prior.concat(supplementImage(img,prior,log));}catch(_){return prior;}};d._roundAtomic=true;}
+function install(d){if(typeof PanelStructuralGrid!=='undefined'&&!PanelStructuralGrid._roundAtomic){const old=PanelStructuralGrid.validPanel;PanelStructuralGrid.validPanel=p=>p?._structuralGridProof?.version===VERSION?validPanel(p):old(p);PanelStructuralGrid._roundAtomic=true;}if(typeof PanelEdgeSpill!=='undefined'&&!PanelEdgeSpill._roundAtomic){for(const name of['analyzeImage','analyzeRGBA']){const old=PanelEdgeSpill[name];PanelEdgeSpill[name]=function(...a){return validPanel(a[name==='analyzeImage'?1:3])?null:old.apply(this,a);};}PanelEdgeSpill._roundAtomic=true;}if(!d||d._roundAtomic)return;const old=d.detect;d.detect=async function(url,log){const prior=await old.call(this,url,log);if(!eligible(prior))return prior;try{const img=new Image();img.src=url;await img.decode();return prior.concat(issuedSupplementImage(img,prior,log));}catch(_){return prior;}};d._roundAtomic=true;}
 return{VERSION,eligible,discoverRGBA,analyzeRGBA,validPanel,replayRGBA,supplementImage,installReader,install,_debug:{proposals,frontier,solveFrontier,data,cc,fill,polygonMask,sample,extent,runs,unruns}};
 })();
 if(typeof PanelDetect!=='undefined')PanelRoundAtomicInset.install(PanelDetect);
