@@ -1,3 +1,7 @@
+# Final batch Test164: Upper corpse
+
+Brad authorized the remaining five in one batch then APK. Local coverage101/105; phone pending. See HANDOFF-2.79.164.md and TEST164-VALIDATION.json.
+
 11 October2026: Test163 approved. User authorized all five remaining Reader20 originals in one batch, then APK build for phone regression. Accepted100/105, five remaining,66 singles+17 pairs=83 selections/outputs. Per-frame pause superseded for this batch; retain each frame patch/handoff/animated preview. No phone acceptance or cold performance pass claimed.
 
 Current checkpoint: Test163 /2.79.163 REVIEW PENDING. Brad approved Test162:99/105 originals, six remaining;65 singles+17 pairs=82 qualifying selections/outputs. Reader6 S6/F6 Baal with baby now crops and pops. Approval would reach100/105, five remaining and complete page6. Next Reader20 F1 upper corpse, then four other originals; rejected broad host stays retired. Five accepted page6 and three retained page8 PNGs exact. Prepared estimates687ms new target,714/755/809/818/682ms retained. Cold38.0s detection+10.2s preparation and phone timing unfinished. One fresh target plus24 cached-family checks; not a fresh24 ancestor rerun. Read HANDOFF-2.79.163.md and TEST163-VALIDATION.json. Source Test_Branch only; no APK/Gradle/Android workflow until issue1 works, then Brad phone regression, another comic, automatic mode. Pause for positive review before another original.
