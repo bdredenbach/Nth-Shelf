@@ -1,14 +1,16 @@
-// NTH SHELF 2.79.159 — COMPLETE NATIVE ROUND ATOMIC INSET
+// NTH SHELF 2.79.160 — SOURCE SHARED UPPER MATTE CELL
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.159";
+const CACHE_NAME = "nth-shelf-shell-2.79.160";
 const SHELL_FILES = [
   "./js/panels-curved-host-partition.js",
   "./js/panels-curved-host-native.js",
   "./js/panels-curved-host-native-partition.js",
   "./js/panels-curved-host-reader.js",
   "./js/panels-curved-host-native-bootstrap.js",
+  "./js/panels-shared-top-cell.js",
+  "./js/panels-shared-top-cell-bootstrap.js",
   "./js/panels-occluded-terminal-cells.js",
   "./js/panels-terminal-native-reader.js",
   "./js/terminal-evidence-codec.js",

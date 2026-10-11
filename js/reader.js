@@ -1106,6 +1106,7 @@ const Reader = {
    PanelTapRequest.beforeDetectionPublish(this, detection, panels);
    this.currentPanels = panels;
    this._prepareCurvedHostPanels?.();
+   this._prepareSharedTopPanels?.();
    if (logger) logger(`currentPanels set: ${panels.length} fresh page identities (${panels[0]?._identitySource || 'stable-gutter'})`);
  },
 

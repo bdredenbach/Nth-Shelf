@@ -1,0 +1,81 @@
+{
+  "checkpoint": "Test160 /2.79.160",
+  "status": "baby-discovery preview pending Brad review",
+  "baseCommit": "644d8d29b384259bf5a88304209810f1033e8cb5",
+  "acceptedOriginals": 96,
+  "totalOriginals": 105,
+  "remainingAcceptedBaseline": 9,
+  "newReviewCandidate": {
+    "readerPage": 6,
+    "selection": 3,
+    "frame": "F2 baby discovery"
+  },
+  "ifApproved": {
+    "originals": 97,
+    "remaining": 8,
+    "singles": 63,
+    "pairs": 17,
+    "qualifyingSelections": 80,
+    "renderedOutputs": 80
+  },
+  "executed": {
+    "freshPageGraphs": 24,
+    "exactUnchangedOutputs": 23,
+    "changedGraph": "Reader6: append one independent child; first two descriptors exact",
+    "comparisonQualification": "Observe ancestor outputs immediately before installing the new family in the same fresh pipeline; not independently executed historical fresh graphs.",
+    "nativeTargetCrops": 3,
+    "priorPage6NativePngsByteExact": 2,
+    "nativeRetainedPage8Crops": 3,
+    "approvedCityAndFelinePngsByteExact": 2,
+    "page8ThroneByteComparison": "Not executed: restored baseline PNG absent",
+    "generatedGeometryControls": 7,
+    "installedSourceRejectionControls": 7,
+    "actualLoadPreparationControls": 5,
+    "navigationControlsPerArm": 55,
+    "indexedScriptsSyntax": 149,
+    "shellVersionAndIndexOrderContract": true,
+    "diffCheck": true
+  },
+  "timing": {
+    "realm": "Native canvas/minimal DOM; add animation duration, not measured compositor",
+    "freshDetectionMs": 35559.214352,
+    "preparationMs": 9608.64239,
+    "readyEstimates": [
+      {
+        "selection": 3,
+        "findMs": 0.5897289999993518,
+        "handlerMs": 5.300770000001648,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 685.890499000001
+      },
+      {
+        "selection": 1,
+        "findMs": 1.6876740000006976,
+        "handlerMs": 11.699484000004304,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 693.387158000005
+      },
+      {
+        "selection": 2,
+        "findMs": 0.8684789999970235,
+        "handlerMs": 23.458166999997047,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 704.3266459999941
+      }
+    ],
+    "targetOpenedFirst": true,
+    "coldPerformanceResolved": false,
+    "phoneTimingVerified": false
+  },
+  "previews": "Replay actual Reader crops and captured 680ms transform; not browser/phone recordings",
+  "notExecuted": [
+    "full 263-command retained rerun",
+    "all-owner actual-browser audit",
+    "phone regression",
+    "APK build",
+    "Gradle invocation",
+    "Android workflow dispatch",
+    "automatic frame crop mode"
+  ],
+  "resumeGate": "Wait for positive visual review before crediting this original or starting another new frame"
+}
