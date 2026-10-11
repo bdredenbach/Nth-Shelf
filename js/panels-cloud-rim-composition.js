@@ -2,7 +2,7 @@
  * closed cells and gutter/ink walks choose geometry, never book identity. */
 const PanelCloudRimComposition=(()=>{
 'use strict';
-const VERSION=165,LIMIT=2,C=PanelCappedRimCell,Q=PanelCropRepair,T=PanelMatteCells;
+const VERSION=166,LIMIT=3,C=PanelCappedRimCell,Q=PanelCropRepair,T=PanelMatteCells;
 function eligible(p){return Array.isArray(p)&&p.length===3&&p[0]?._structuralGridProof?.version===67&&p[1]?._structuralGridProof?.version===98&&p[2]?._structuralGridProof?.version===98&&p[1]._structuralGridProof.index===0&&p[2]._structuralGridProof.index===1;}
 function extrema(mask,w,h){return C.extent(mask,w,h);}
 function region(b,w,h){const[x,y,X,Y]=b.box,W=X-x,H=Y-y,m=new Uint8Array(W*H);for(const i of b.indices)m[((i/w|0)-y)*W+i%w-x]=1;const f=C.grow(C.fill(m,W,H),W,H,2);return f.map((v,j)=>v?1:0);}
