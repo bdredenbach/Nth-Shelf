@@ -1,0 +1,297 @@
+{
+  "checkpoint": "Test167 /2.79.167",
+  "status": "Final five-original batch authorized by Brad; local Reader verified, phone regression pending",
+  "acceptedVisualBaseline": 100,
+  "locallyCoveredOriginals": 104,
+  "totalOriginals": 105,
+  "remainingLocalOriginals": 1,
+  "qualifyingSelections": 87,
+  "singles": 70,
+  "pairs": 17,
+  "newOriginal": {
+    "readerPage": 20,
+    "name": "Red warrior and sword inset",
+    "selection": 6
+  },
+  "page20Owners": 6,
+  "freshDetectionMs": 16650.720165000002,
+  "readerRows": [
+    {
+      "selection": 6,
+      "proofVersion": 167,
+      "tap": {
+        "x": 0.36346153846153845,
+        "y": 0.45666666666666667
+      },
+      "canvas": [
+        451,
+        1019
+      ],
+      "findMs": 0.9129930000017339,
+      "handlerMs": 8.449345000000903,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 689.3623380000026,
+      "overlayStyle": {
+        "left": "155px",
+        "top": "268.59154929577466px",
+        "width": "113.46153846153845px",
+        "height": "256.20389000670684px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(-31.234203886427707px, -191.37903420523133px, 0) scale(2.7539588481675397)",
+        "opacity": "1",
+        "--panel-dx": "-31.234203886427707px",
+        "--panel-dy": "-191.37903420523133px",
+        "--panel-scale": "2.7539588481675397"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 1,
+      "proofVersion": 167,
+      "tap": {
+        "x": 0.5,
+        "y": 0.15875
+      },
+      "canvas": [
+        1988,
+        970
+      ],
+      "findMs": 0.23278299999947194,
+      "handlerMs": 1.336736999997811,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 681.5695199999973,
+      "overlayStyle": {
+        "left": "30.00000000000003px",
+        "top": "45.69416498993968px",
+        "width": "499.99999999999994px",
+        "height": "244.0342052313883px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(9px, 262.28873239436615px, 0) scale(1)",
+        "opacity": "1",
+        "--panel-dx": "9px",
+        "--panel-dy": "262.28873239436615px",
+        "--panel-scale": "1"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 2,
+      "proofVersion": 98,
+      "tap": {
+        "x": 0.2923076923076923,
+        "y": 0.8955555555555555
+      },
+      "canvas": [
+        1034,
+        504
+      ],
+      "findMs": 0.8933340000003227,
+      "handlerMs": 1.7472209999978077,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 682.6405549999981,
+      "overlayStyle": {
+        "left": "46.096579476861194px",
+        "top": "670.6941649899397px",
+        "width": "260.0603621730382px",
+        "height": "126.76056338028168px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(7.363420523138842px, -351.1159831717579px, 0) scale(1.742210909090909)",
+        "opacity": "1",
+        "--panel-dx": "7.363420523138842px",
+        "--panel-dy": "-351.1159831717579px",
+        "--panel-scale": "1.742210909090909"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 3,
+      "proofVersion": 98,
+      "tap": {
+        "x": 0.6982905982905983,
+        "y": 0.9105555555555556
+      },
+      "canvas": [
+        1076,
+        451
+      ],
+      "findMs": 0.35147800000049756,
+      "handlerMs": 1.0342320000017935,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 681.3857100000023,
+      "overlayStyle": {
+        "left": "245.2917505030181px",
+        "top": "688.5513078470824px",
+        "width": "270.62374245472836px",
+        "height": "113.43058350100601px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(-191.83175050301807px, -353.5044119363017px, 0) scale(1.6742063940520444)",
+        "opacity": "1",
+        "--panel-dx": "-191.83175050301807px",
+        "--panel-dy": "-353.5044119363017px",
+        "--panel-scale": "1.6742063940520444"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 4,
+      "proofVersion": 167,
+      "tap": {
+        "x": 0.16153846153846155,
+        "y": 0.10041666666666665
+      },
+      "canvas": [
+        530,
+        568
+      ],
+      "findMs": 0.11462899999969522,
+      "handlerMs": 0.5843800000002375,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 680.6990089999999,
+      "overlayStyle": {
+        "left": "44.10256410256413px",
+        "top": "51.45875251509058px",
+        "width": "133.33333333333331px",
+        "height": "142.8336686787391px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(9.357435897435906px, 135.85970271629776px, 0) scale(3.3981)",
+        "opacity": "1",
+        "--panel-dx": "9.357435897435906px",
+        "--panel-dy": "135.85970271629776px",
+        "--panel-scale": "3.3981"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 5,
+      "proofVersion": 167,
+      "tap": {
+        "x": 0.15064102564102563,
+        "y": 0.46
+      },
+      "canvas": [
+        466,
+        1233
+      ],
+      "findMs": 0.12228999999933876,
+      "handlerMs": 0.7045370000014373,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 680.8268270000008,
+      "overlayStyle": {
+        "left": "46.66666666666669px",
+        "top": "244.25217974513754px",
+        "width": "117.30769230769229px",
+        "height": "310.0067069081153px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(99.83723532139763px, -167.03966465459422px, 0) scale(2.2759990480723467)",
+        "opacity": "1",
+        "--panel-dx": "99.83723532139763px",
+        "--panel-dy": "-167.03966465459422px",
+        "--panel-scale": "2.2759990480723467"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    }
+  ],
+  "preparedTapEstimateUnder1Second": true,
+  "coldPerformanceResolved": false,
+  "globalOneSecondRequirementResolved": false,
+  "phoneTimingVerified": false,
+  "previewQualification": "Actual native Reader crop and captured animation-style replay; no browser compositor/phone timing claim",
+  "privateSourceGeometry": true,
+  "sourceOnlyCheckpoint": true
+}

@@ -1,3 +1,7 @@
+# Final batch Test167: Red warrior and sword inset
+
+Brad authorized the remaining five in one batch then APK. Local coverage104/105; phone pending. See HANDOFF-2.79.167.md and TEST167-VALIDATION.json.
+
 # Final batch Test166: Narrow standing figure
 
 Brad authorized the remaining five in one batch then APK. Local coverage103/105; phone pending. See HANDOFF-2.79.166.md and TEST166-VALIDATION.json.
