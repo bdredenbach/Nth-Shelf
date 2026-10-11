@@ -1,0 +1,46 @@
+'use strict';
+const fs=require('node:fs'),assert=require('node:assert/strict'),{load,cv,sha}=require('./load.cjs'),{fixture}=require('../test156/generated-articulated-fixture.cjs');
+const clone=v=>JSON.parse(JSON.stringify(v));
+async function main(){
+ const variant='candidate';assert.equal(process.argv.length,2,'This focused contract accepts no case selector');assert(require('node:v8').getHeapStatistics().heap_size_limit<=512*1024*1024);
+ for(const k of Object.keys(process.env))assert(!/NTH_.*(?:ONLY|CASES|FILTER)/.test(k),'Unexpected inherited filter '+k);
+ const rt=load(variant),{P,F,C,calls,reads,provider}=rt,q=fixture(cv),bytes=q.canvas.toBuffer('image/png'),rows=[];
+ assert.equal(sha(q.a),'4a8ac8932998bc1f9c1e886dab27193bba54f40aaca5bd4aaeff4866efe267be');
+ const progress=(event,name)=>console.error(JSON.stringify({utc:new Date().toISOString(),event,name}));
+ async function image(bytes){const img=new cv.Image();img.src=bytes;await img.decode();return img;}
+ const img=await image(bytes);progress('start','genuine source setup');const ancestor=F.analyzeRGBA(q.a,q.w,q.h,[]),publicOwners=P.analyzeRGBA(q.a,q.w,q.h,ancestor);assert.equal(publicOwners.length,1);assert.equal(publicOwners[0]._structuralGridProof.version,96);const expected=JSON.stringify(publicOwners),rings=JSON.stringify(publicOwners[0]._contours),expectedSha=sha(expected);progress('complete','genuine source setup');
+ function reader(owners,source=img,zoom=()=>{}){const r={currentPanels:owners,panelZoomEnabled:true,panelOverlayToken:0,_panelLoadToken:1,index:0,comic:{id:'generated-rim-issuance'},image:source,getPanelImageContext(){return{img:this.image};},panelContours:p=>p?._contours,pointInContours:(rings,x,y)=>(rings||[]).reduce((n,ring)=>n^+C.inside(ring,x,y),0),displayPanelContours:(p,c)=>c,findPanelAt:()=>null,zoomToPanel:zoom};P.installReader(r);return r;}
+ const mask=C.raster(publicOwners[0]._contours,q.w,q.h),i=mask.findIndex(Boolean),point=[(i%q.w+.5)/q.w,((i/q.w|0)+.5)/q.h];assert(i>=0);
+ function replayCount(){return calls['96.sourceReplay']||0;}
+ function admit(name,owners,{issued=false,source=img,accepted=true}={}){progress('start',name);const before=replayCount(),pixels=reads.pixels,r=reader(owners,source),child=owners[0],original=JSON.stringify(owners),roots=owners.slice(),found=r.findPanelAt(...point),count=replayCount()-before;
+  assert.equal(count,issued&&variant==='candidate'?0:1,name+' exact replay count');assert(reads.pixels>pixels,name+' native raster read retained');assert.equal(!!found,accepted,name+' acceptance');
+  if(accepted){assert.equal(found,child);assert.equal(JSON.stringify(r.displayPanelContours(child)),rings);assert.equal(JSON.stringify(owners),expected);const warm={...calls},warmReads={...reads};for(let n=0;n<3;n++)assert.equal(r.findPanelAt(...point),child);assert.deepEqual(calls,warm);assert.deepEqual(reads,warmReads);}
+  assert.equal(JSON.stringify(owners),original);roots.forEach((p,i)=>assert.equal(owners[i],p));rows.push({name,passed:true,replays:count,accepted,graphSha256:sha(original)});progress('complete',name);return r;
+ }
+ admit('public analyzeRGBA cannot issue',publicOwners);
+ const publicImage=P.replaceImage(img,ancestor);assert.equal(JSON.stringify(publicImage),expected);admit('public replaceImage cannot issue',publicImage);
+ assert.equal(Object.isFrozen(ancestor[0]),false,'Actual66 root stays mutable');const ancestorDescriptors=Object.getOwnPropertyDescriptors(ancestor[0]);const detector={detect:async()=>ancestor},issuanceProfile=[];P.install(detector);async function issued(){progress('start','installed genuine detection');const before={...rt.profile},start=performance.now(),owners=await detector.detect(bytes);assert.deepEqual(Object.getOwnPropertyDescriptors(ancestor[0]),ancestorDescriptors,'Issuance cannot freeze or mutate the66 root');issuanceProfile.push({detectorMs:performance.now()-start,rootValidationCalls:rt.profile.rootValidationCalls-before.rootValidationCalls,rootValidationMs:rt.profile.rootValidationMs-before.rootValidationMs});assert.equal(JSON.stringify(owners),expected);progress('complete','installed genuine detection');return owners;}
+ const owners=await issued();admit('installed detector root skips only96 replay',owners,{issued:true});
+ admit('parsed restored root falls back',clone(owners));admit('equal shallow root replacement falls back',[{...owners[0]}]);
+ for(const wrong of [[...owners,...owners],[ancestor[0],owners[0]],[owners[0],ancestor[0]]]){const r=reader(wrong),before=replayCount();assert.equal(r.findPanelAt(...point),null);assert.equal(replayCount(),before);rows.push({name:'changed owner count or order rejected '+wrong.map(p=>p._structuralGridProof.version).join(','),passed:true,replays:0});}
+ const changed=cv.createCanvas(q.w,q.h);changed.getContext('2d').fillStyle='#ffffff';changed.getContext('2d').fillRect(0,0,q.w,q.h);const other=await image(changed.toBuffer('image/png'));admit('same-size changed native raster rejects old child',owners,{source:other,accepted:false});
+ admit('original source exact witness still eligible',owners,{issued:true});
+ const newer=await issued();assert.notEqual(newer[0],owners[0]);admit('superseded detector generation falls back',owners);admit('latest detector generation remains eligible',newer,{issued:true});
+ const savedSampler=rt.matte.sampleBilinearRGBA;rt.matte.sampleBilinearRGBA=function(...args){return savedSampler(...args);};try{admit('sampler replaced after issuance falls back',newer);}finally{rt.matte.sampleBilinearRGBA=savedSampler;}
+ rt.setWitness(undefined);try{admit('absent witness provider falls back',newer);}finally{rt.setWitness(provider);}
+ rt.setWitness(Object.freeze({...provider}));try{admit('changed provider identity falls back',newer);}finally{rt.setWitness(provider);}
+ // Genuine issued roots are exercised through the unchanged pending scope guard.
+ for(const fault of ['source','owner-array','owner-root','navigation','overlay']){
+  let resolve;const gate=new Promise(r=>resolve=r),r=reader(newer,img,()=>gate);assert.equal(r.findPanelAt(...point),newer[0]);const before=replayCount(),pending=r.zoomToPanel(newer[0]);assert(pending&&typeof pending.then==='function');const saved={owners:r.currentPanels,image:r.image,index:r.index,overlay:r.panelOverlayToken};
+  if(fault==='source')r.image=other;if(fault==='owner-array')r.currentPanels=r.currentPanels.slice();if(fault==='owner-root')r.currentPanels=[clone(newer[0])];if(fault==='navigation')r.index++;if(fault==='overlay')r.panelOverlayToken++;
+  assert.deepEqual(r.displayPanelContours(newer[0]),[],fault+' invalidates pending trust');r.currentPanels=saved.owners;r.image=saved.image;r.index=saved.index;r.panelOverlayToken=saved.overlay;assert.deepEqual(r.displayPanelContours(newer[0]),[],fault+' cannot renew within pending work');resolve();await pending;assert.equal(replayCount(),before,fault+' pending fault does not replay or renew');rows.push({name:'pending '+fault+' remains invalid until settlement',passed:true});
+ }
+ const token=provider.token(new Uint8ClampedArray([7,8,9,255]),1,1);assert(token&&provider.commit(token));admit('shared provider eviction falls back',newer);
+ rt.setWitness(undefined);let absentOwners;try{absentOwners=await issued();}finally{rt.setWitness(provider);}admit('absent provider during detection cannot issue',absentOwners);
+ const nativeSample=rt.matte.sampleBilinearRGBA;rt.matte.sampleBilinearRGBA=function(...args){return nativeSample(...args);};let replacedSamplerOwners;try{replacedSamplerOwners=await issued();}finally{rt.matte.sampleBilinearRGBA=nativeSample;}admit('replaced sampling method cannot issue',replacedSamplerOwners);
+ for(const fault of ['root-replacement','root-descriptor']){const original=ancestor[0],descriptor=Object.getOwnPropertyDescriptor(original,'x');let changed=false,changedOwners;reads.captureHook=()=>{reads.captureHook=null;changed=true;if(fault==='root-replacement')ancestor[0]=clone(original);else Object.defineProperty(original,'x',{...descriptor,writable:!descriptor.writable});};try{changedOwners=await detector.detect(bytes);}finally{reads.captureHook=null;ancestor[0]=original;Object.defineProperty(original,'x',descriptor);}assert(changed);assert.equal(JSON.stringify(changedOwners),expected);assert.equal(Object.isFrozen(original),false);admit('parent '+fault+' during capture cannot issue',changedOwners);}
+ // Alter capture bytes after normal sampling, retaining the real source analysis.
+ const oldAncestor=F.analyzeRGBA;F.analyzeRGBA=function(...args){const out=oldAncestor(...args);reads.lastPixels[0]^=1;return out;};let mutationOwners;try{mutationOwners=await issued();}finally{F.analyzeRGBA=oldAncestor;}admit('native bytes changed during geometry cannot issue',mutationOwners);
+ assert.equal(rows.length,26);console.log(JSON.stringify({passed:true,variant,generatedOnly:true,geometryDoubles:false,sourceHarnessOnly:true,browserTimingClaim:false,sourceSha256:sha(q.a),expectedGraphSha256:expectedSha,records:rows,sourceHashes:rt.sourceHashes,issuanceProfile,observationChanges:['Internal96 analyze/replay call counters','Private root validation spans preserve arguments/results','Witness binding made mutable only in harness to inject absent/replaced provider faults'],resourceUsage:process.resourceUsage()},null,2));
+}
+main().catch(e=>{console.error(e.stack);process.exitCode=1;});

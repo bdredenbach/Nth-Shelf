@@ -70,17 +70,112 @@ const PanelArticulatedRimCell=(()=>{
  }
  function sourceReplay(p,a,w,h,prior=p?._structuralGridProof?.prior){return validPanel(p)&&same(analyzeRGBA(a,w,h,prior),[p]);}
  function imageRaster(img,w,h){let c;try{if(!sourceReady(img))return null;const W=img?.naturalWidth||img?.width,H=img?.naturalHeight||img?.height;if(!W||!H||W*H>24000000)return null;c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return null;g.drawImage(img,0,0);return PanelMatteCells.sampleBilinearRGBA(g.getImageData(0,0,W,H).data,W,H,w,h);}catch(_){return null;}finally{if(c)c.width=c.height=1;}}
+ // Only the installed detector can issue a96 root after full source analysis.
+ // Deep immutable validation is necessary but not sufficient: replay also
+ // requires this private exact-root record and the retained full-raster token.
+ // At most one completed generation is retained, without copied proof graphs.
+ const issuedSampler=PanelMatteCells.sampleBilinearRGBA;
+ const issuedWitness=typeof PanelRasterWitness==='undefined'?null:PanelRasterWitness;
+ function witnessReady(){return !!issuedWitness&&typeof PanelRasterWitness!=='undefined'&&PanelRasterWitness===issuedWitness;}
+ const issuedSource=(()=>{
+  const keys=['x','y','w','h','_identitySource','_geometryOwner','_geometryType','_contours','_structuralGridProof'];
+  let records=new WeakMap();
+  function immutable(value,memo,active,budget,depth=0){
+   if(value===null||value===undefined||typeof value==='boolean')return true;
+   if(typeof value==='number')return Number.isFinite(value);
+   if(typeof value==='string')return(budget.strings+=value.length*2)<=8*1024*1024;
+   if(typeof value!=='object'||depth>64||active.has(value))return false;
+   if(memo.has(value))return true;
+   if(!Object.isFrozen(value))return false;
+   const array=Array.isArray(value),proto=Object.getPrototypeOf(value);
+   if(array?proto!==Array.prototype:proto!==Object.prototype&&proto!==null)return false;
+   const names=Reflect.ownKeys(value);
+   if(++budget.nodes>65536||(budget.slots+=names.length)>524288)return false;
+   if(array){const length=Object.getOwnPropertyDescriptor(value,'length');if(!length||!('value'in length)||names.length!==length.value+1||names.at(-1)!=='length')return false;for(let i=0;i<length.value;i++)if(names[i]!==String(i))return false;}
+   active.add(value);
+   for(const key of names){const d=Object.getOwnPropertyDescriptor(value,key);if(typeof key!=='string'||(budget.strings+=key.length*2)>8*1024*1024||!d||!('value'in d)||!immutable(d.value,memo,active,budget,depth+1))return false;}
+   active.delete(value);memo.add(value);return true;
+  }
+  function root(value,memo,budget,frozen=true){
+   if(!value||typeof value!=='object'||frozen&&!Object.isFrozen(value)||Object.getPrototypeOf(value)!==Object.prototype)return null;
+   const names=Reflect.ownKeys(value),values=[],attributes=[];
+   if(names.length!==keys.length)return null;
+   for(let i=0;i<keys.length;i++){const d=Object.getOwnPropertyDescriptor(value,keys[i]);if(names[i]!==keys[i]||!d||!('value'in d)||!d.enumerable||!immutable(d.value,memo,new WeakSet(),budget))return null;values.push(d.value);attributes.push([d.enumerable,d.configurable,d.writable]);}
+   return{value,values,attributes,frozen};
+  }
+  function sameRoot(binding){
+   if(!binding||binding.frozen&&!Object.isFrozen(binding.value)||Object.getPrototypeOf(binding.value)!==Object.prototype)return false;
+   const names=Reflect.ownKeys(binding.value);if(names.length!==keys.length)return false;
+   for(let i=0;i<keys.length;i++){const d=Object.getOwnPropertyDescriptor(binding.value,keys[i]);if(names[i]!==keys[i]||!d||!('value'in d)||!d.enumerable||!Object.is(d.value,binding.values[i])||d.enumerable!==binding.attributes[i][0]||d.configurable!==binding.attributes[i][1]||d.writable!==binding.attributes[i][2])return false;}
+   return true;
+  }
+  function single(values){
+   if(!Array.isArray(values)||Object.getPrototypeOf(values)!==Array.prototype)return null;
+   const names=Reflect.ownKeys(values),n=Object.getOwnPropertyDescriptor(values,'length'),d=Object.getOwnPropertyDescriptor(values,'0');
+   return names.length===2&&names[0]==='0'&&names[1]==='length'&&n?.value===1&&d&&('value'in d)&&d.enumerable?d.value:null;
+  }
+  function begin(prior){try{const parent=single(prior),memo=new WeakSet(),budget={nodes:0,slots:0,strings:0},binding=root(parent,memo,budget,false);return binding?{prior,binding,memo,budget}:null;}catch(_){return null;}}
+  function finish(plan,pixels,W,H,token,children,stable){
+   try{
+    if(!plan||!token)return false;
+    const child=single(children),binding=root(child,plan.memo,plan.budget);
+    if(!binding||binding.values[8]?.version!==VERSION||plan.binding.values[8]?.version!==66)return false;
+    const exact=()=>witnessReady()&&stable()&&single(plan.prior)===plan.binding.value&&single(children)===child&&sameRoot(plan.binding)&&sameRoot(binding);
+    if(!exact()||!PanelRasterWitness.matches(pixels,W,H,token)||!exact()||!PanelRasterWitness.commit(token)||!PanelRasterWitness.matchesRetained(pixels,W,H,token)||!exact())return false;
+    const next=new WeakMap();next.set(child,{child:binding,token,W,H});records=next;return true;
+   }catch(_){return false;}
+  }
+  function replay(pixels,W,H,children){try{const child=single(children),record=child&&records.get(child);if(!record||record.child.value!==child||record.W!==W||record.H!==H)return false;const exact=()=>witnessReady()&&PanelMatteCells.sampleBilinearRGBA===issuedSampler&&single(children)===child&&sameRoot(record.child);return exact()&&PanelRasterWitness.matchesRetained(pixels,W,H,record.token)&&exact();}catch(_){return false;}}
+  return{begin,finish,replay};
+ })();
+ function withNativeCapture(img,run){
+  let canvas;
+  try{
+   const before=sourceState(img);if(!before||!sourceReady(img))return null;
+   const W=img.naturalWidth||img.width,H=img.naturalHeight||img.height;if(!Number.isSafeInteger(W)||!Number.isSafeInteger(H)||W<=0||H<=0||W*H>24000000)return null;
+   const stable=()=>{const after=sourceState(img);return !!after&&sourceReady(img)&&before.every((v,i)=>v===after[i]);};
+   canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
+   const g=canvas.getContext('2d',{willReadFrequently:true});if(!g)return null;g.drawImage(img,0,0);
+   const pixels=g.getImageData(0,0,W,H).data;if(!stable())return null;
+   const result=run(pixels,W,H,stable);return stable()?result:null;
+  }catch(_){return null;}
+  finally{if(canvas)canvas.width=canvas.height=1;}
+ }
+ // Only install() invokes this. Public analyzers/replayers/replaceImage do
+ // not register roots. The token precedes sampling and checks the very same
+ // private native bytes again after complete96 ->66 source analysis.
+ function issuedReplaceImage(img,prior){
+  if(!eligible(prior))return[];
+  const plan=witnessReady()&&PanelMatteCells.sampleBilinearRGBA===issuedSampler?issuedSource.begin(prior):null,v=prior[0]._structuralGridProof;
+  return withNativeCapture(img,(pixels,W,H,stable)=>{
+   let token=null;
+   try{
+    if(plan)try{token=PanelRasterWitness.token(pixels,W,H);}catch(_){token=null;}
+    const a=PanelMatteCells.sampleBilinearRGBA(pixels,W,H,v.analysisWidth,v.analysisHeight),out=analyzeRGBA(a,v.analysisWidth,v.analysisHeight,prior);
+    if(!stable())return[];
+    if(out.length)issuedSource.finish(plan,pixels,W,H,token,out,()=>stable()&&PanelMatteCells.sampleBilinearRGBA===issuedSampler);
+    return out;
+   }finally{if(token)try{PanelRasterWitness.discard(token);}catch(_){}}
+  })||[];
+ }
+ function readerSourceRaster(img,w,h,children){
+  return withNativeCapture(img,(pixels,W,H,stable)=>{
+   const issued=issuedSource.replay(pixels,W,H,children)&&stable();
+   return{issued,analysis:issued?null:PanelMatteCells.sampleBilinearRGBA(pixels,W,H,w,h),stable};
+  });
+ }
+
  function replaceImage(img,prior){if(!eligible(prior))return null;const w=prior[0]._structuralGridProof.analysisWidth,h=prior[0]._structuralGridProof.analysisHeight,a=imageRaster(img,w,h),out=a?analyzeRGBA(a,w,h,prior):[];return out.length?out:null;}
  function marked(p){return p?._structuralGridProof?.version===VERSION||p?._structuralGridProof?.method===METHOD||p?._geometryType===TYPE;}
  function installReader(r){if(!r||r._articulatedRimReader)return;const old=r.displayPanelContours,find=r.findPanelAt,zoom=r.zoomToPanel;
   function snapshot(owners){try{return JSON.stringify(owners);}catch(_){return null;}}
   function equalContext(state,reader){try{const img=reader.getPanelImageContext?.()?.img,source=sourceState(img);return state.img===img&&state.items.length===state.owners.length&&state.items.every((p,i)=>p===state.owners[i])&&source&&state.source.every((v,i)=>v===source[i]);}catch(_){return false;}}
-  function context(reader){readerScopeGuard.check(reader);const owners=reader.currentPanels;if(!Array.isArray(owners)||!owners.some(marked))return null;if(readerScopeGuard.blocked(reader,'_articulatedRimState'))return{owners,prior:owners.filter(p=>!marked(p)),previous:new Map(),valid:false};let img;try{img=reader.getPanelImageContext?.()?.img;}catch(_){img=null;}const source=sourceState(img);let state=reader._articulatedRimState;if(state&&state.owners===owners&&state.img===img&&state.items.length===owners.length&&state.items.every((p,i)=>p===owners[i])&&state.source&&source&&state.source.every((v,i)=>v===source[i])){if(state.valid&&sameInput(state.input,owners))return state;const key=snapshot(owners);if(!state.valid&&key!==null&&state.key===key&&sameInput(state.input,owners))return state;}state={owners,img,items:owners.slice(),source,input:inputIdentity(owners),key:snapshot(owners),prior:owners.filter(p=>!marked(p)),valid:false,child:null,display:null};reader._articulatedRimState=state;if(!state.input||owners.length!==1||!img||!source||!sourceReady(img)||!validPanel(owners[0]))return state;const child=owners[0],v=child._structuralGridProof,a=imageRaster(img,v.analysisWidth,v.analysisHeight);state.input=inputIdentity(owners);if(!state.input)return state;state.canonical=privateEvidence(child);if(!a||!sourceReplay(state.canonical,a,v.analysisWidth,v.analysisHeight)||!sameInput(state.input,owners))return state;state.child=child;state.display=immutableInput(child)?child._contours:state.canonical._contours;if(reader.currentPanels!==owners||!equalContext(state,reader))return state;state.valid=true;return state;}
+  function context(reader){readerScopeGuard.check(reader);const owners=reader.currentPanels;if(!Array.isArray(owners)||!owners.some(marked))return null;if(readerScopeGuard.blocked(reader,'_articulatedRimState'))return{owners,prior:owners.filter(p=>!marked(p)),previous:new Map(),valid:false};let img;try{img=reader.getPanelImageContext?.()?.img;}catch(_){img=null;}const source=sourceState(img);let state=reader._articulatedRimState;if(state&&state.owners===owners&&state.img===img&&state.items.length===owners.length&&state.items.every((p,i)=>p===owners[i])&&state.source&&source&&state.source.every((v,i)=>v===source[i])){if(state.valid&&sameInput(state.input,owners))return state;const key=snapshot(owners);if(!state.valid&&key!==null&&state.key===key&&sameInput(state.input,owners))return state;}state={owners,img,items:owners.slice(),source,input:inputIdentity(owners),key:snapshot(owners),prior:owners.filter(p=>!marked(p)),valid:false,child:null,display:null};reader._articulatedRimState=state;if(!state.input||owners.length!==1||!img||!source||!sourceReady(img)||!validPanel(owners[0]))return state;const child=owners[0],v=child._structuralGridProof,captured=readerSourceRaster(img,v.analysisWidth,v.analysisHeight,owners),a=captured?.analysis,issued=captured?.issued===true;state.input=inputIdentity(owners);if(!state.input||!captured)return state;state.canonical=privateEvidence(child);if(!issued&&(!a||!sourceReplay(state.canonical,a,v.analysisWidth,v.analysisHeight))||!sameInput(state.input,owners)||!captured.stable())return state;state.child=child;state.display=immutableInput(child)?child._contours:state.canonical._contours;if(reader.currentPanels!==owners||!equalContext(state,reader))return state;state.valid=true;return state;}
   r.displayPanelContours=function(p,c=this.panelContours(p)){const pinned=readerScopeGuard.display(this,'_articulatedRimState',p);if(pinned)return pinned.display;const state=context(this);if(marked(p))return state?.valid&&state.child===p?state.display:null;return state?readerScopeGuard.under(this,state.prior,()=>old.call(this,p,c)):old.call(this,p,c);};
   if(typeof find==='function')r.findPanelAt=function(x,y){const state=context(this);if(!state){const hit=find.call(this,x,y);return marked(hit)?null:hit;}if(!this.panelZoomEnabled)return null;if(state.valid)return this.pointInContours(state.display,x,y)?state.child:null;return readerScopeGuard.under(this,state.prior,()=>{const hit=find.call(this,x,y);return marked(hit)?null:hit;});};
   if(typeof zoom==='function')r.zoomToPanel=function(p,...args){const pinned=readerScopeGuard.display(this,'_articulatedRimState',p);if(pinned&&!pinned.display.length)return;const state=context(this);if(marked(p)){if(!state?.valid||state.child!==p)return;return readerScopeGuard.run(this,'_articulatedRimState',state,()=>zoom.call(this,p,...args));}if(!state)return zoom.call(this,p,...args);return readerScopeGuard.under(this,state.prior,()=>zoom.call(this,p,...args));};r._articulatedRimReader=true;
  }
- function install(d){if(!PanelStructuralGrid._articulatedRim){const old=PanelStructuralGrid.validPanel;PanelStructuralGrid.validPanel=p=>p?._structuralGridProof?.version===VERSION?validPanel(p):old(p);PanelStructuralGrid._articulatedRim=true;}if(typeof PanelGeometry!=='undefined'&&!PanelGeometry._articulatedRim){const old=PanelGeometry.refine;PanelGeometry.refine=async function(url,p,log){return validPanel(p)?{...p}:old.call(this,url,p,log);};PanelGeometry._articulatedRim=true;}if(typeof PanelEdgeSpill!=='undefined'&&!PanelEdgeSpill._articulatedRim){for(const name of ['analyzeImage','analyzeRGBA']){const old=PanelEdgeSpill[name];if(typeof old==='function')PanelEdgeSpill[name]=function(...args){return validPanel(args[name==='analyzeImage'?1:3])?null:old.apply(this,args);};}PanelEdgeSpill._articulatedRim=true;}if(!d||d._articulatedRim)return;const old=d.detect;d.detect=async function(url,log){const prior=await old.call(this,url,log);if(!eligible(prior))return prior;try{const img=new Image();img.src=url;await img.decode();return replaceImage(img,prior)||prior;}catch(e){log?.('articulated rim deferred: '+e.message);return prior;}};d._articulatedRim=true;}
+ function install(d){if(!PanelStructuralGrid._articulatedRim){const old=PanelStructuralGrid.validPanel;PanelStructuralGrid.validPanel=p=>p?._structuralGridProof?.version===VERSION?validPanel(p):old(p);PanelStructuralGrid._articulatedRim=true;}if(typeof PanelGeometry!=='undefined'&&!PanelGeometry._articulatedRim){const old=PanelGeometry.refine;PanelGeometry.refine=async function(url,p,log){return validPanel(p)?{...p}:old.call(this,url,p,log);};PanelGeometry._articulatedRim=true;}if(typeof PanelEdgeSpill!=='undefined'&&!PanelEdgeSpill._articulatedRim){for(const name of ['analyzeImage','analyzeRGBA']){const old=PanelEdgeSpill[name];if(typeof old==='function')PanelEdgeSpill[name]=function(...args){return validPanel(args[name==='analyzeImage'?1:3])?null:old.apply(this,args);};}PanelEdgeSpill._articulatedRim=true;}if(!d||d._articulatedRim)return;const old=d.detect;d.detect=async function(url,log){const prior=await old.call(this,url,log);if(!eligible(prior))return prior;try{const img=new Image();img.src=url;await img.decode();const out=issuedReplaceImage(img,prior);return out.length?out:prior;}catch(e){log?.('articulated rim deferred: '+e.message);return prior;}};d._articulatedRim=true;}
  return{VERSION,eligible,validPanel,analyzeRGBA,sourceReplay,replaceImage,install,installReader,fields,palette,candidates,path,measure,pathMask,support,separators,separatorsValid,speech,guide,sourceState,sourceReady,readerScopeGuard};
 })();
 if(typeof PanelDetect!=='undefined')PanelArticulatedRimCell.install(PanelDetect);
