@@ -274,11 +274,20 @@ async function doubleClickWitness() {
     ['fill sparse slot with undefined', panels => { panels[1] = undefined; }],
   ];
   for (const canonical of [false, true]) {
-    for (const [label, mutate] of publicationChanges) await check('detection publication: ' + (canonical ? 'canonical ' : 'ownerless ') + label + ' rejects before lookup', async () => {
+    for (const [label, mutate] of publicationChanges) await check('detection publication: ' + (canonical ? 'canonical ' : 'ownerless ') + label + ' rejects before tap lookup', async () => {
       const f = fixture('detection');
       const published = [f.panel, , { ...f.panel, other: true }];
-      let lookedUp = 0, observed = false;
-      f.reader.findPanelAt = () => { lookedUp++; return canonical ? f.reader.currentPanels.find(Boolean) || null : null; };
+      let lookedUp = 0, warmLookups = 0, preparing = false, observed = false;
+      const prepare = f.reader._preparePanelInteractions;
+      f.reader._preparePanelInteractions = function() {
+        preparing = true;
+        try { return prepare.call(this); } finally { preparing = false; }
+      };
+      f.reader.findPanelAt = () => {
+        if (preparing) { assert.equal(observed, false, 'warm lookup precedes publication mutation'); warmLookups++; }
+        else lookedUp++;
+        return canonical ? f.reader.currentPanels.find(Boolean) || null : null;
+      };
       f.context.PanelGeometry.refine = async (url, seed) => ({ ...seed });
       f.reader._panelDetection.promise.then(panels => {
         assert.equal(f.reader.currentPanels, panels, 'actual loader publication precedes this mutation');
@@ -286,7 +295,7 @@ async function doubleClickWitness() {
       });
       const pending = f.tap(); await f.ready.promise;
       f.gate.resolve(published); await pending;
-      assert.equal(observed, true); assert.equal(lookedUp, 0);
+      assert.equal(observed, true); assert.equal(warmLookups, 2, 'both populated sparse slots warm before mutation'); assert.equal(lookedUp, 0);
       assert.equal(f.attempts.length, 0); assert.equal(f.listeners(), 0);
     });
     await check('detection publication: unchanged sparse ' + (canonical ? 'canonical' : 'ownerless') + ' map remains valid', async () => {

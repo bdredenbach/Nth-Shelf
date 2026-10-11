@@ -1124,7 +1124,7 @@ const Reader = {
    // Some predecessor routers authenticate a narrower owner context on a hit.
    // Warm that path before the first user interaction, without opening a crop.
    for (const panel of owners) {
-     const x=panel.x+panel.w/2, y=panel.y+panel.h/2;
+     const x=panel?.x+panel?.w/2, y=panel?.y+panel?.h/2;
      if (Number.isFinite(x) && Number.isFinite(y)) {
        try { this.findPanelAt(x,y); } catch (_) { }
      }

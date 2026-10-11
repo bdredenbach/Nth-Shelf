@@ -162,6 +162,12 @@ function installReader(r){
   // The final surrounding scene excludes the exact authenticated native terminal
   // views, including their caption protrusion. Earlier compartments are above it.
   for(const p of children)if(p._structuralGridProof.index===4){const mask=Q.raster(p._contours,raw.w,raw.h);for(const contours of previous.values()){const occupied=Q.raster(contours,raw.w,raw.h);for(let i=0;i<mask.length;i++)if(occupied[i])mask[i]=0;}const rings=T.tracePixelContours(mask,raw.w,raw.h,1);if(!rings?.length)return state;state.displays.set(p,G.canonical(rings.map(r=>r.map(([x,y])=>({x:x/raw.w,y:y/raw.h})))));}
+  // Serialized owners have now replayed geometry, predecessors and live pixels.
+  // Freeze authenticated descriptors, retaining a mutable ordered owner array so
+  // replacement/reordering still invalidates admission without rescanning proofs.
+  for(const p of owners)freeze(p);
+  state.input=G.identity(owners);if(!state.input)return state;
+  children.forEach(p=>accepted.add(p));
   state.valid=true;return state;
  }
  r._prepareSharedTopPanels=function(){return this.currentPanels?.some(claims)?context(this)?.valid===true:prepare?.call(this);};

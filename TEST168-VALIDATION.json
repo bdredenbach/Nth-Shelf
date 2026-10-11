@@ -353,11 +353,14 @@
     "package": "io.github.bdredenbach.nthshelf.frametest168",
     "label": "Nth Shelf Test168",
     "verifiedWebAssets": 184,
-    "apkSha256": "2bdfb8924524b9a0d69c01d3bcc929e9e03c47c6e92ddc9d3e840e4ec4ba949b",
-    "apkBytes": 3991054,
+    "apkSha256": "230264154a0a34e09ac7430cf2c271c12568c3af0bed8c9e9c933234fb9ce527",
+    "apkBytes": 4034615,
     "signing": "Local debug key; isolated test install",
     "phoneAcceptance": "pending",
-    "browserBrandAndBackup": "Blocked locally: Chromium cannot create a profile socket in this environment"
+    "browserBrandAndBackup": "Blocked locally: Chromium cannot create a profile socket in this environment",
+    "sparsePanelPreparation": "Fixed; full installed Reader stale-publication contract and preparation/navigation checks passed",
+    "persistedPopPreparation": "All7 native crops byte exact; estimates680.7\u2013692.9ms;13 source/replay controls pass",
+    "webManifestSha256": "40512c2fb5472d6cf71790bb30310988fd86901402ce329029df15f0c69d3f3f"
   },
   "fullIssueFreshPages": 24,
   "unchangedDescriptorGraphs": 23,
@@ -392,5 +395,331 @@
       "selection": 7,
       "name": "Central ambush"
     }
-  ]
+  ],
+  "persistedReaderRows": [
+    {
+      "selection": 7,
+      "proofVersion": 168,
+      "tap": {
+        "x": 0.5,
+        "y": 0.5408333333333333
+      },
+      "canvas": [
+        1988,
+        1818
+      ],
+      "searchMs": 0.4168229999995674,
+      "findMs": 0.09588100000109989,
+      "handlerMs": 7.8432470000007015,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 687.9391280000018,
+      "overlayStyle": {
+        "left": "30.00000000000003px",
+        "top": "232.7230046948357px",
+        "width": "499.99999999999994px",
+        "height": "457.3239436619718px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(9px, -31.3849765258216px, 0) scale(1)",
+        "opacity": "1",
+        "--panel-dx": "9px",
+        "--panel-dy": "-31.3849765258216px",
+        "--panel-scale": "1"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 1,
+      "proofVersion": 168,
+      "tap": {
+        "x": 0.5,
+        "y": 0.15875
+      },
+      "canvas": [
+        1988,
+        970
+      ],
+      "searchMs": 0.2061829999947804,
+      "findMs": 0.03242799999861745,
+      "handlerMs": 1.4829220000028727,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 681.5153500000015,
+      "overlayStyle": {
+        "left": "30.00000000000003px",
+        "top": "45.69416498993968px",
+        "width": "499.99999999999994px",
+        "height": "244.0342052313883px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(9px, 262.28873239436615px, 0) scale(1)",
+        "opacity": "1",
+        "--panel-dx": "9px",
+        "--panel-dy": "262.28873239436615px",
+        "--panel-scale": "1"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 2,
+      "proofVersion": 98,
+      "tap": {
+        "x": 0.2923076923076923,
+        "y": 0.8955555555555555
+      },
+      "canvas": [
+        1034,
+        504
+      ],
+      "searchMs": 0.569867999998678,
+      "findMs": 0.2778780000007828,
+      "handlerMs": 12.585893000003125,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 692.8637710000039,
+      "overlayStyle": {
+        "left": "46.096579476861194px",
+        "top": "670.6941649899397px",
+        "width": "260.0603621730382px",
+        "height": "126.76056338028168px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(7.363420523138842px, -351.1159831717579px, 0) scale(1.742210909090909)",
+        "opacity": "1",
+        "--panel-dx": "7.363420523138842px",
+        "--panel-dy": "-351.1159831717579px",
+        "--panel-scale": "1.742210909090909"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 3,
+      "proofVersion": 98,
+      "tap": {
+        "x": 0.6982905982905983,
+        "y": 0.9105555555555556
+      },
+      "canvas": [
+        1076,
+        451
+      ],
+      "searchMs": 0.5189830000017537,
+      "findMs": 0.24459999999817228,
+      "handlerMs": 6.504287000003387,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 686.7488870000016,
+      "overlayStyle": {
+        "left": "245.2917505030181px",
+        "top": "688.5513078470824px",
+        "width": "270.62374245472836px",
+        "height": "113.43058350100601px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(-191.83175050301807px, -353.5044119363017px, 0) scale(1.6742063940520444)",
+        "opacity": "1",
+        "--panel-dx": "-191.83175050301807px",
+        "--panel-dy": "-353.5044119363017px",
+        "--panel-scale": "1.6742063940520444"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 4,
+      "proofVersion": 168,
+      "tap": {
+        "x": 0.16153846153846155,
+        "y": 0.10041666666666665
+      },
+      "canvas": [
+        530,
+        568
+      ],
+      "searchMs": 0.2209450000009383,
+      "findMs": 0.062472000005072914,
+      "handlerMs": 0.9797309999994468,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 681.0422030000045,
+      "overlayStyle": {
+        "left": "44.10256410256413px",
+        "top": "51.45875251509058px",
+        "width": "133.33333333333331px",
+        "height": "142.8336686787391px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(9.357435897435906px, 135.85970271629776px, 0) scale(3.3981)",
+        "opacity": "1",
+        "--panel-dx": "9.357435897435906px",
+        "--panel-dy": "135.85970271629776px",
+        "--panel-scale": "3.3981"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 5,
+      "proofVersion": 168,
+      "tap": {
+        "x": 0.15064102564102563,
+        "y": 0.46
+      },
+      "canvas": [
+        466,
+        1233
+      ],
+      "searchMs": 0.18171799999981886,
+      "findMs": 0.11883400000078836,
+      "handlerMs": 1.1508329999996931,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 681.2696670000005,
+      "overlayStyle": {
+        "left": "46.66666666666669px",
+        "top": "244.25217974513754px",
+        "width": "117.30769230769229px",
+        "height": "310.0067069081153px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(99.83723532139763px, -167.03966465459422px, 0) scale(2.2759990480723467)",
+        "opacity": "1",
+        "--panel-dx": "99.83723532139763px",
+        "--panel-dy": "-167.03966465459422px",
+        "--panel-scale": "2.2759990480723467"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 6,
+      "proofVersion": 168,
+      "tap": {
+        "x": 0.36346153846153845,
+        "y": 0.45666666666666667
+      },
+      "canvas": [
+        451,
+        1019
+      ],
+      "searchMs": 0.15095300000393763,
+      "findMs": 0.047829999995883554,
+      "handlerMs": 0.666479999999865,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 680.7143099999957,
+      "overlayStyle": {
+        "left": "155px",
+        "top": "268.59154929577466px",
+        "width": "113.46153846153845px",
+        "height": "256.20389000670684px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(-31.234203886427707px, -191.37903420523133px, 0) scale(2.7539588481675397)",
+        "opacity": "1",
+        "--panel-dx": "-31.234203886427707px",
+        "--panel-dy": "-191.37903420523133px",
+        "--panel-scale": "2.7539588481675397"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    }
+  ],
+  "persistedPreparedTapEstimateUnder1Second": true,
+  "finalSparseMapPublicationControls": "passed"
 }
