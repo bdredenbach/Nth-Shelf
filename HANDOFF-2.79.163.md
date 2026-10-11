@@ -1,3 +1,7 @@
+# Test163 approved; final batch authorized
+
+Brad approved Baal with baby on11 October2026 and explicitly authorized the five remaining originals in one batch, then the APK build. Accepted100/105, five remaining;66 singles+17 pairs=83 selections/outputs. Per-frame pause superseded for this batch. Preserve patches, handoffs and animated previews. Original receipt below.
+
 # Test163: Baal with baby pop-out — visual review pending
 
 Resume from Test163 /2.79.163 on `Test_Branch`. Parent is published Test162 approval commit `2dd7be605cf81e62fec166dc592c6cd05b593dd6`. Brad approved the sacrifice-discussion crop on 11 October 2026: “Yess looks great. We can continue.”

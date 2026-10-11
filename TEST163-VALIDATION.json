@@ -1,14 +1,14 @@
 {
   "checkpoint": "Test163 /2.79.163",
-  "status": "Baal with baby ready; visual review pending",
+  "status": "Baal with baby visually approved by Brad; five-original batch authorized",
   "baseCommit": "2dd7be605cf81e62fec166dc592c6cd05b593dd6",
-  "acceptedOriginals": 99,
+  "acceptedOriginals": 100,
   "totalOriginals": 105,
-  "remainingAcceptedBaseline": 6,
-  "acceptedSingles": 65,
+  "remainingAcceptedBaseline": 5,
+  "acceptedSingles": 66,
   "acceptedPairs": 17,
-  "qualifyingSelections": 82,
-  "renderedOutputs": 82,
+  "qualifyingSelections": 83,
+  "renderedOutputs": 83,
   "newReviewCandidate": {
     "readerPage": 6,
     "selection": 6,
@@ -118,5 +118,10 @@
     "Android workflow dispatch",
     "automatic frame crop mode"
   ],
-  "resumeGate": "Pause for positive review of Test163 before crediting this original or starting Reader20 F1"
+  "resumeGate": "User explicitly authorized finishing five remaining originals in one batch, then APK regression build",
+  "userReview": {
+    "date": "2026-10-11",
+    "quote": "Wow the detectors working great. Okay, let\u2019s have you finish off the rest now in one swoop for this round. Then we can continue on with the apk build.",
+    "approved": true
+  }
 }
