@@ -1,0 +1,207 @@
+{
+  "checkpoint": "Test165 /2.79.165",
+  "status": "Final five-original batch authorized by Brad; local Reader verified, phone regression pending",
+  "acceptedVisualBaseline": 100,
+  "locallyCoveredOriginals": 102,
+  "totalOriginals": 105,
+  "remainingLocalOriginals": 3,
+  "qualifyingSelections": 85,
+  "singles": 68,
+  "pairs": 17,
+  "newOriginal": {
+    "readerPage": 20,
+    "name": "Circular general reaction",
+    "selection": 4
+  },
+  "page20Owners": 4,
+  "freshDetectionMs": 16517.472804,
+  "readerRows": [
+    {
+      "selection": 4,
+      "proofVersion": 165,
+      "tap": {
+        "x": 0.16153846153846155,
+        "y": 0.10041666666666665
+      },
+      "canvas": [
+        530,
+        568
+      ],
+      "findMs": 1.0831749999997555,
+      "handlerMs": 7.226989000002504,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 688.3101640000023,
+      "overlayStyle": {
+        "left": "44.10256410256413px",
+        "top": "51.45875251509058px",
+        "width": "133.33333333333331px",
+        "height": "142.8336686787391px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(9.357435897435906px, 135.85970271629776px, 0) scale(3.3981)",
+        "opacity": "1",
+        "--panel-dx": "9.357435897435906px",
+        "--panel-dy": "135.85970271629776px",
+        "--panel-scale": "3.3981"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 1,
+      "proofVersion": 165,
+      "tap": {
+        "x": 0.5,
+        "y": 0.15875
+      },
+      "canvas": [
+        1988,
+        970
+      ],
+      "findMs": 0.15363600000273436,
+      "handlerMs": 1.3044300000001385,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 681.4580660000029,
+      "overlayStyle": {
+        "left": "30.00000000000003px",
+        "top": "45.69416498993968px",
+        "width": "499.99999999999994px",
+        "height": "244.0342052313883px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(9px, 262.28873239436615px, 0) scale(1)",
+        "opacity": "1",
+        "--panel-dx": "9px",
+        "--panel-dy": "262.28873239436615px",
+        "--panel-scale": "1"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 2,
+      "proofVersion": 98,
+      "tap": {
+        "x": 0.2923076923076923,
+        "y": 0.8955555555555555
+      },
+      "canvas": [
+        1034,
+        504
+      ],
+      "findMs": 0.5300399999978254,
+      "handlerMs": 1.5824790000006033,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 682.1125189999984,
+      "overlayStyle": {
+        "left": "46.096579476861194px",
+        "top": "670.6941649899397px",
+        "width": "260.0603621730382px",
+        "height": "126.76056338028168px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(7.363420523138842px, -351.1159831717579px, 0) scale(1.742210909090909)",
+        "opacity": "1",
+        "--panel-dx": "7.363420523138842px",
+        "--panel-dy": "-351.1159831717579px",
+        "--panel-scale": "1.742210909090909"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    },
+    {
+      "selection": 3,
+      "proofVersion": 98,
+      "tap": {
+        "x": 0.6982905982905983,
+        "y": 0.9105555555555556
+      },
+      "canvas": [
+        1076,
+        451
+      ],
+      "findMs": 0.26178499999878113,
+      "handlerMs": 1.0760040000022855,
+      "animationMs": 680,
+      "estimatedTapToFinishMs": 681.3377890000011,
+      "overlayStyle": {
+        "left": "245.2917505030181px",
+        "top": "688.5513078470824px",
+        "width": "270.62374245472836px",
+        "height": "113.43058350100601px",
+        "boxShadow": "0 18px 44px rgba(0,0,0,.58)",
+        "transition": "none",
+        "transform": "translate3d(-191.83175050301807px, -353.5044119363017px, 0) scale(1.6742063940520444)",
+        "opacity": "1",
+        "--panel-dx": "-191.83175050301807px",
+        "--panel-dy": "-353.5044119363017px",
+        "--panel-scale": "1.6742063940520444"
+      },
+      "imageRect": {
+        "left": 30.00000000000003,
+        "top": 45.69416498993968,
+        "width": 499.99999999999994,
+        "height": 768.6116700201206,
+        "right": 530,
+        "bottom": 814.3058350100603
+      },
+      "stageRect": {
+        "left": 0,
+        "top": 0,
+        "width": 560,
+        "height": 860,
+        "right": 560,
+        "bottom": 860
+      }
+    }
+  ],
+  "preparedTapEstimateUnder1Second": true,
+  "coldPerformanceResolved": false,
+  "globalOneSecondRequirementResolved": false,
+  "phoneTimingVerified": false,
+  "previewQualification": "Actual native Reader crop and captured animation-style replay; no browser compositor/phone timing claim",
+  "privateSourceGeometry": true,
+  "sourceOnlyCheckpoint": true
+}
