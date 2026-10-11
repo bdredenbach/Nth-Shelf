@@ -1,10 +1,10 @@
 {
   "checkpoint": "Test159 / 2.79.159",
-  "status": "review candidate; user approval pending",
+  "status": "both new crops approved by Brad in continuation",
   "baseCommit": "7a2146ef8645022c3a22dc1fcf7bbd964bb00f1b",
-  "acceptedOriginals": 94,
+  "acceptedOriginals": 96,
   "totalOriginals": 105,
-  "remainingAcceptedBaseline": 11,
+  "remainingAcceptedBaseline": 9,
   "newReviewCandidates": [
     {
       "readerPage": 8,
@@ -107,5 +107,13 @@
     "automatic frame crop mode"
   ],
   "previews": "Animation replays from actual Reader crop canvases and its 680ms transform; not browser/phone recordings",
-  "resumeGate": "Pause for positive review of both displayed independent crops before crediting or moving to another frame"
+  "resumeGate": "Pause for positive review of both displayed independent crops before crediting or moving to another frame",
+  "userReview": {
+    "approved": [
+      "Reader8 city/palace S1",
+      "Reader8 feline inset S3"
+    ],
+    "date": "2026-10-11",
+    "instruction": "Okay let us keep moving"
+  }
 }

@@ -1,3 +1,5 @@
+Brad approved both city/palace S1 and feline inset S3 previews in the 11 October continuation. Accepted coverage is now96/105 originals, nine remaining (62 singles,17 pairs,79 qualifying selections and79 rendered outputs). The review-pending text below records the original checkpoint; its approval gate is now satisfied. Continue the nine-frame queue, showing each new pop-out before proceeding.
+
 # Test159: city and rounded inset pop-outs — review pending
 
 Resume from Test159 / 2.79.159 on `Test_Branch`. Base is published Test158 commit `7a2146ef8645022c3a22dc1fcf7bbd964bb00f1b`. This checkpoint recovers the unfinished city successor, validates it and moves first-use source admission into page preparation. Read `TEST159-VALIDATION.json` and the Test159 QA README.
