@@ -17,7 +17,9 @@ const PanelArticulatedExteriorCell=(()=>{
  function seamsValid(q){return Array.isArray(q)&&q.length===18&&q.every((v,k)=>v?.axis===(k/9|0)&&v.slope===[-.2,-.15,-.1,-.05,0,.05,.1,.15,.2][k%9]&&Number.isInteger(v.lines)&&v.lines>=0&&['maxWhite','maxInk'].every(n=>Number.isFinite(v[n])&&v[n]>=0&&v[n]<.94));}
  function create(v,c){const w=v.analysisWidth,h=v.analysisHeight,[x,y,X,Y]=c.g.box;return{x:x/w,y:y/h,w:(X-x)/w,h:(Y-y)/h,_identitySource:'structural-grid-frame',_geometryOwner:'structural-grid-contours',_geometryType:TYPE,_contours:c.rings.map(r=>r.map(([x,y])=>({x:x/w,y:y/h}))),_structuralGridProof:v};}
  function validPanel(p){try{if(p&&Object.isFrozen(p)&&cache.has(p))return true;const v=p?._structuralGridProof,w=v?.analysisWidth,h=v?.analysisHeight;if(v?.version!==VERSION||v.method!==METHOD||!eligible(v.prior)||v.internalDivider!==false||!same(v.insetChecks,['dark-closures','narrow-ink','chromatic-rims'])||v.unownedInsets!==0||!checksValid(v.enclosures,w,h)||!seamsValid(v.seams)||!Number.isFinite(v.variance)||v.variance<500)return false;const c=residual(v.prior,w,h);if(!c||v.pixels!==c.g.pixels||v.ownedCorePixels!==c.ownedCores||!same(v.bodyOwnership,c.bodies)||!same(v.box,c.g.box)||!same(v.pixelContours,c.rings)||!same(create(v,c),p))return false;freeze(p);cache.set(p,true);return true;}catch(_){return false;}}
- function analyzeRGBA(a,w,h,prior){if(!eligible(prior))return[];const c=residual(prior,w,h),f=P.fields(a,w,h);if(!c||!f||!U.sourceReplay(prior[1],a,w,h,[prior[0]]))return[];const E=PanelLocalBoundaryConsensus.pixelEvidence,paper=E.paper(a,w,h,{paper:true});if(E.internalDivider(c.mask,a,paper,w,h))return[];const closures=enclosures(f,c,w,h),seamChecks=seams(f,c,w,h);if(!closures||!seamChecks)return[];const insets=[...PanelNarrowInkFrames.analyzeRGBA(a,w,h,[]),...PanelColoredRims.analyzeRGBA(a,w,h)];for(const p of insets){const mask=PanelLocalBoundaryConsensus.raster(p,w,h);let count=0,own=0;for(let i=0;i<mask.length;i++)if(mask[i]){count++;own+=c.occupied[i];}if(count&&own<count*.98)return[];}let sum=0,sq=0;for(let i=0;i<c.mask.length;i++)if(c.mask[i]){sum+=f.mean[i];sq+=f.mean[i]*f.mean[i];}const variance=sq/c.g.pixels-(sum/c.g.pixels)**2;if(variance<500)return[];const v={version:VERSION,method:METHOD,analysisWidth:w,analysisHeight:h,prior:JSON.parse(JSON.stringify(prior)),pixels:c.g.pixels,box:c.g.box,pixelContours:c.rings,bodyOwnership:c.bodies,ownedCorePixels:c.ownedCores,internalDivider:false,insetChecks:['dark-closures','narrow-ink','chromatic-rims'],unownedInsets:0,enclosures:closures,seams:seamChecks,variance},p=create(v,c);return validPanel(p)?[p]:[];}
+ function analyzeRGBA(a,w,h,prior){return analyzeCurrentRGBA(a,w,h,prior,false);}
+ // Only installed detection may use the private, already-validated predecessor.
+ function analyzeCurrentRGBA(a,w,h,prior,detectedPrior){if(!eligible(prior))return[];const c=residual(prior,w,h),f=P.fields(a,w,h);if(!c||!f||(!detectedPrior&&!U.sourceReplay(prior[1],a,w,h,[prior[0]])))return[];const E=PanelLocalBoundaryConsensus.pixelEvidence,paper=E.paper(a,w,h,{paper:true});if(E.internalDivider(c.mask,a,paper,w,h))return[];const closures=enclosures(f,c,w,h),seamChecks=seams(f,c,w,h);if(!closures||!seamChecks)return[];const insets=[...PanelNarrowInkFrames.analyzeRGBA(a,w,h,[]),...PanelColoredRims.analyzeRGBA(a,w,h)];for(const p of insets){const mask=PanelLocalBoundaryConsensus.raster(p,w,h);let count=0,own=0;for(let i=0;i<mask.length;i++)if(mask[i]){count++;own+=c.occupied[i];}if(count&&own<count*.98)return[];}let sum=0,sq=0;for(let i=0;i<c.mask.length;i++)if(c.mask[i]){sum+=f.mean[i];sq+=f.mean[i]*f.mean[i];}const variance=sq/c.g.pixels-(sum/c.g.pixels)**2;if(variance<500)return[];const v={version:VERSION,method:METHOD,analysisWidth:w,analysisHeight:h,prior:JSON.parse(JSON.stringify(prior)),pixels:c.g.pixels,box:c.g.box,pixelContours:c.rings,bodyOwnership:c.bodies,ownedCorePixels:c.ownedCores,internalDivider:false,insetChecks:['dark-closures','narrow-ink','chromatic-rims'],unownedInsets:0,enclosures:closures,seams:seamChecks,variance},p=create(v,c);return validPanel(p)?[p]:[];}
  function sourceReplay(p,a,w,h,prior=p?._structuralGridProof?.prior){return validPanel(p)&&same(analyzeRGBA(a,w,h,prior),[p]);}
  function imageRaster(img,w,h){let c;try{if(!P.sourceReady(img))return null;const W=img?.naturalWidth||img?.width,H=img?.naturalHeight||img?.height;if(!W||!H||W*H>24000000)return null;c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});if(!g)return null;g.drawImage(img,0,0);return PanelMatteCells.sampleBilinearRGBA(g.getImageData(0,0,W,H).data,W,H,w,h);}catch(_){return null;}finally{if(c)c.width=c.height=1;}}
  // This family admits only its exact immutable103 detector child and visible96/100
@@ -80,6 +82,8 @@ const PanelArticulatedExteriorCell=(()=>{
   function replay(pixels,W,H,children,prior){try{const child=single(children),record=child&&records.get(child);if(!record||record.child.value!==child||record.W!==W||record.H!==H)return false;const exact=()=>single(children)===child&&sameParents(prior,record.parents)&&sameRoot(record.child);return exact()&&PanelRasterWitness.matchesRetained(pixels,W,H,record.token)&&exact();}catch(_){return false;}}
   return{begin,finish,replay};
  })();
+
+ const detectedPredecessorReplay=U.matchesDetectedAnalysis;
  function withNativeCapture(img,run){
   let canvas;
   try{
@@ -95,7 +99,8 @@ const PanelArticulatedExteriorCell=(()=>{
  }
  // Only install() invokes this. Public analyzers/replayers/supplementImage do
  // not register roots. The token precedes sampling and checks the very same
- // private native bytes again after complete103 ->100 ->96 ->66 source analysis.
+ // private native bytes again after current analysis, with predecessor
+ // validation provided by exact private reuse or the complete public replay.
  function issuedSupplementImage(img,prior){
   if(!eligible(prior))return[];
   const plan=issuedSource.begin(prior),v=prior[1]._structuralGridProof;
@@ -103,7 +108,7 @@ const PanelArticulatedExteriorCell=(()=>{
    let token=null;
    try{
     if(plan)try{token=PanelRasterWitness.token(pixels,W,H);}catch(_){token=null;}
-    const a=PanelMatteCells.sampleBilinearRGBA(pixels,W,H,v.analysisWidth,v.analysisHeight),out=analyzeRGBA(a,v.analysisWidth,v.analysisHeight,prior);
+    const a=PanelMatteCells.sampleBilinearRGBA(pixels,W,H,v.analysisWidth,v.analysisHeight),reused=typeof detectedPredecessorReplay==='function'&&detectedPredecessorReplay(img,pixels,W,H,a,v.analysisWidth,v.analysisHeight,prior),out=analyzeCurrentRGBA(a,v.analysisWidth,v.analysisHeight,prior,reused);
     if(!stable())return[];
     if(out.length)issuedSource.finish(plan,pixels,W,H,token,out,stable);
     return out;

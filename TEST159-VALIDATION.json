@@ -1,0 +1,111 @@
+{
+  "checkpoint": "Test159 / 2.79.159",
+  "status": "review candidate; user approval pending",
+  "baseCommit": "7a2146ef8645022c3a22dc1fcf7bbd964bb00f1b",
+  "acceptedOriginals": 94,
+  "totalOriginals": 105,
+  "remainingAcceptedBaseline": 11,
+  "newReviewCandidates": [
+    {
+      "readerPage": 8,
+      "selection": 1,
+      "frame": "city/palace overview"
+    },
+    {
+      "readerPage": 8,
+      "selection": 3,
+      "frame": "rounded feline inset with its caption"
+    }
+  ],
+  "ifBothApproved": {
+    "originals": 96,
+    "remaining": 9,
+    "singles": 62,
+    "pairs": 17,
+    "qualifyingSelections": 79,
+    "renderedOutputs": 79
+  },
+  "executed": {
+    "freshPageGraphs": 24,
+    "unchangedGraphs": 23,
+    "changedGraph": "Reader8: independent city and inset; retained throne descriptor exact",
+    "page8ReaderCrops": 3,
+    "throne158NativePngByteExact": true,
+    "beforeAfterPreparationCropsByteExact": true,
+    "sharedSourceControls": 25,
+    "navigationControlsPerArm": 55,
+    "pagePreparationControls": 5,
+    "freshReuseJobs": 12,
+    "indexedScriptsSyntax": 147,
+    "shellVersionContract": true,
+    "diffCheck": true
+  },
+  "timing": {
+    "realm": "native canvas with minimal DOM; animation duration added, not timed compositor",
+    "firstCityBeforePreparationEstimateMs": 1585.3999660000009,
+    "sourceAdmissionMovedToPreparationMs": 700.199192,
+    "page8ReadyEstimates": [
+      {
+        "selection": 1,
+        "proofVersion": "research-native-curved-host-source-v1",
+        "part": 0,
+        "tap": {
+          "x": 0.4426559356136821,
+          "y": 0.13825261780104714
+        },
+        "canvas": [
+          1760,
+          791
+        ],
+        "findMs": 0.7255929999992077,
+        "handlerMs": 5.435951999999816,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 686.161544999999
+      },
+      {
+        "selection": 2,
+        "proofVersion": 31,
+        "tap": {
+          "x": 0.5,
+          "y": 0.6027777777777779
+        },
+        "canvas": [
+          1988,
+          2204
+        ],
+        "findMs": 2.266755999997258,
+        "handlerMs": 15.6762639999979,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 697.9430199999952
+      },
+      {
+        "selection": 3,
+        "proofVersion": "research-native-curved-host-source-v1",
+        "part": 1,
+        "tap": {
+          "x": 0.7804325955734406,
+          "y": 0.1456151832460733
+        },
+        "canvas": [
+          873,
+          730
+        ],
+        "findMs": 0.18081199999869568,
+        "handlerMs": 1.1214699999982258,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 681.3022819999969
+      }
+    ],
+    "freshPage8DetectionMs": 27310,
+    "phoneTimingVerified": false
+  },
+  "notExecuted": [
+    "full 263-command retained rerun",
+    "all-owner actual-browser audit",
+    "phone acceptance",
+    "APK build",
+    "automatic frame crop mode"
+  ],
+  "previews": "Animation replays from actual Reader crop canvases and its 680ms transform; not browser/phone recordings",
+  "resumeGate": "Pause for positive review of both displayed independent crops before crediting or moving to another frame"
+}

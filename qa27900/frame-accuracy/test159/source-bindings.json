@@ -1,0 +1,1494 @@
+{
+  "schema": "test159-complete-runtime-bindings-1",
+  "status": "Final candidate source binding; acceptance is a separate gate",
+  "indexedScripts": [
+    {
+      "path": "js/nth-page-deck.js",
+      "bytes": 22229,
+      "sha256": "d37b1d0f4785cfc1ccf5bb2ffcbee4dbbb5837b859f2f5e2310c911f8b473463"
+    },
+    {
+      "path": "js/page-mode.js",
+      "bytes": 23724,
+      "sha256": "21e105e11fc12cc7141e60589a5988681f6ad02d5dfc5c1fd9c6c0656511e173"
+    },
+    {
+      "path": "js/vendor/jszip.min.js",
+      "bytes": 97631,
+      "sha256": "d14e71a95ef3290dec66a9cfdd8a37c2dd624f6f2b594c4512f607d4a56e19fc"
+    },
+    {
+      "path": "js/db.js",
+      "bytes": 11197,
+      "sha256": "63ef5a91c36c8f3428cf2084d1900f8cd22dc14b554fc33a0bbf4e345e3a4973"
+    },
+    {
+      "path": "js/library.js",
+      "bytes": 65264,
+      "sha256": "c19bec42bd7e1e3f7dd05725d291fb379d109c6ae7090592488136344871f546"
+    },
+    {
+      "path": "js/panels-page-layout.js",
+      "bytes": 23900,
+      "sha256": "802c5477d389c99b89b15905a8ea1bfd840d24120e8c7bf8986c28df141ad91b"
+    },
+    {
+      "path": "js/panels-gutter-frames.js",
+      "bytes": 40941,
+      "sha256": "3031c017b3a1bddc4d61b7fce5deec1f3360eac0d8337513b222cd305059edc6"
+    },
+    {
+      "path": "js/panels-closed-frames.js",
+      "bytes": 31141,
+      "sha256": "e3e6e4e513775311e8fb72456dea732ede7a0ca9dc0e8c5a9c1133643d471f5a"
+    },
+    {
+      "path": "js/panels-overlap-frames.js",
+      "bytes": 10674,
+      "sha256": "19348625b75bf2762a34b2f367b7fab74894fb157c3c9f55b3fff577bb174846"
+    },
+    {
+      "path": "js/panels-partition.js",
+      "bytes": 30581,
+      "sha256": "4f713d730448bd0246a20868b5b615e1d65b79b77f713afbf8d175f4ddccfdd0"
+    },
+    {
+      "path": "js/panels-occluded-frames.js",
+      "bytes": 17378,
+      "sha256": "0f0f35a3b0f3611c70107e54cdf5c89c97eb3aaa1d55ad9921e03c0271423bd2"
+    },
+    {
+      "path": "js/panels-composite-frames.js",
+      "bytes": 27549,
+      "sha256": "30edac3e4d6b6036fa6376efac50fbbc21638ed2023f5d4b73be3dfae0f7e251"
+    },
+    {
+      "path": "js/panels-abutting-frames.js",
+      "bytes": 36213,
+      "sha256": "2a097ce19bc1e33cb712f1a2b295e0a9ccc72ec184477cd6059d3182830f1ace"
+    },
+    {
+      "path": "js/panels-rim-frames.js",
+      "bytes": 27339,
+      "sha256": "9eef6f6997eda3c29a8692e86c3c2e4098c75c627bbc48f090e686b894df5c4f"
+    },
+    {
+      "path": "js/panels-terraced-frames.js",
+      "bytes": 24378,
+      "sha256": "303160f108db7ebdbebc2406724fa73c8cbb25da6445347830d24fda4acba64c"
+    },
+    {
+      "path": "js/panels-local-islands.js",
+      "bytes": 32087,
+      "sha256": "5cb4c9493688f7448f4317fb3333f1ec4e46142493a97b95485c2fa9cd54f564"
+    },
+    {
+      "path": "js/panels-framed-insets.js",
+      "bytes": 62609,
+      "sha256": "d6d55fb3c9cb0249416cf6d6569cd62094312a834eb363d7ac5fcb4682b2f3fa"
+    },
+    {
+      "path": "js/panels-inset-neighbors.js",
+      "bytes": 189408,
+      "sha256": "35fa223586967276ab3e5cdd5f3205dca5304ec0caaf59b32dadc8942b6fd942"
+    },
+    {
+      "path": "js/panels-edge-cells.js",
+      "bytes": 15839,
+      "sha256": "cf5115e05c0f7bbf05698c9318750944b3dcca0233c4f08d7765340285c1b3b5"
+    },
+    {
+      "path": "js/panels-corner-frames.js",
+      "bytes": 15998,
+      "sha256": "5d002e58edd093e3bb63b89660fe516b8312b4d79ad8d01d8b0a579d59924fda"
+    },
+    {
+      "path": "js/panels-terminal-frames.js",
+      "bytes": 66136,
+      "sha256": "3663f8c71fecb7067c4eb044671e3086a0d55f637cbd5f8012f3e60ab7450956"
+    },
+    {
+      "path": "js/panels-curved-rims.js",
+      "bytes": 30750,
+      "sha256": "1e2efecc6e8c1e093e513d56578e7b3eacf027d4fbf8411c1ea719614c34aeef"
+    },
+    {
+      "path": "js/panels-matte-cells.js",
+      "bytes": 44421,
+      "sha256": "2de04ef37c49cc225dd32572ad8ca783c1674c91d7fba6bc2841dcb4175a9eae"
+    },
+    {
+      "path": "js/panels-ragged-gutters.js",
+      "bytes": 25930,
+      "sha256": "772f30fdfed968187d2fc5f6caf2b727ce54152dc7708cc06b52afbac0b5cc9a"
+    },
+    {
+      "path": "js/panels-orthogonal-white-gutters.js",
+      "bytes": 6327,
+      "sha256": "3f467dc9c9fcd37a19c66c62c91c8cccaa288be82c75c1eade9580695954f5a6"
+    },
+    {
+      "path": "js/panels-paper-recovery.js",
+      "bytes": 12125,
+      "sha256": "76ca21c564ff0ecc01478aee9278b2a1aa97a7f8780805a42bf95546e9fb2811"
+    },
+    {
+      "path": "js/panels-colored-rims.js",
+      "bytes": 20162,
+      "sha256": "ceb0dc978b6cfe224f4596ba2b8da83cbb929d6d14a68cff8b65ba9cca9a28a9"
+    },
+    {
+      "path": "js/panels-dark-overlay-insets.js",
+      "bytes": 9865,
+      "sha256": "b06d9b7584c15fabe98cf5bde00dd9f804ae8989779bd48a81bdc75c2b1a4c55"
+    },
+    {
+      "path": "js/panels-structural-grid.js",
+      "bytes": 147905,
+      "sha256": "63309b5ff6302b6ab658390bc0c25cf7a2dc37ef0a7a27a789c60cdd922b2319"
+    },
+    {
+      "path": "js/panels-pale-completion.js",
+      "bytes": 20892,
+      "sha256": "4b845501ae8dbdf8e575c4a8faf7973f9aad26e0fe44a0eaa3a2bfda045dd48c"
+    },
+    {
+      "path": "js/panels-gutter-graph.js",
+      "bytes": 19099,
+      "sha256": "e29e6c726e1659534b0bd427a3d084f9c76bc6e9e5733ee88dbd01436b720cc6"
+    },
+    {
+      "path": "js/panels-edge-spill.js",
+      "bytes": 7476,
+      "sha256": "f15f6a402ec07d86e5323d763a7681ae14c9854e80018b2e53ff9441f1a1e2c2"
+    },
+    {
+      "path": "js/panels.js",
+      "bytes": 99608,
+      "sha256": "5ea30c4ec1be214e5b43ca69629c4e5abeed573634b479c6c57941e64ae48f86"
+    },
+    {
+      "path": "js/panels-interrupted-gutters.js",
+      "bytes": 9000,
+      "sha256": "7f33e52f55713680093319cade27b53f493b444ee75f47db724e11ed91cb222a"
+    },
+    {
+      "path": "js/panels-frame-wasm.js",
+      "bytes": 3546,
+      "sha256": "2ac3601eb89b7f9f590b282af50bfe0356681f2a75ef0d765cc53e7c623176b7"
+    },
+    {
+      "path": "js/panels-frame-envelope.js",
+      "bytes": 65003,
+      "sha256": "f714e04868e9c68f08d190e78af19e0134914e0d4eef0be0d7134726c6642f32"
+    },
+    {
+      "path": "js/panels-geometry-orthogonal.js",
+      "bytes": 10872,
+      "sha256": "3478fc065fb0a311a98aa495bb14a93126fe3a1593bc245263df24e117cc6ec5"
+    },
+    {
+      "path": "js/panels-geometry-skewed.js",
+      "bytes": 15377,
+      "sha256": "dd0c96553674192c6ef519615a7bcc2a5ca53281e608efe4d131ef58d8d6b826"
+    },
+    {
+      "path": "js/panels-geometry.js",
+      "bytes": 16002,
+      "sha256": "a7b3bf99c137073263540f4bdd54d6f639c25f01d387f20ba9abe96e9d9e3651"
+    },
+    {
+      "path": "js/panels-neighbor-completion.js",
+      "bytes": 14313,
+      "sha256": "51ea3b2a87c8f407819b77560e279e0b8a26654fbb911f83fe2974d9171c4869"
+    },
+    {
+      "path": "js/panels-shared-boundaries.js",
+      "bytes": 15501,
+      "sha256": "9210b8cda6f2908ee9f18e8d5ae361e1bd7f5c22daf4562413a49c224fe77dcb"
+    },
+    {
+      "path": "js/panels-exterior-completion.js",
+      "bytes": 15016,
+      "sha256": "301da50e6dbbdceb9eb089645e26b9cf2f471bff0afa3a28a9d66dbae139d62e"
+    },
+    {
+      "path": "js/panels-edge-guided-paper.js",
+      "bytes": 20569,
+      "sha256": "de6ede70ae518b69274ed2c713baee8be565079771c76ba1e76ed287b3dcb04a"
+    },
+    {
+      "path": "js/panels-chromatic-shared-border.js",
+      "bytes": 18143,
+      "sha256": "c3530327b3db24e56b8ebdbab76e1ad93cc36c3272494a1dc59f91674793c0f3"
+    },
+    {
+      "path": "js/panels-narrow-ink-frames.js",
+      "bytes": 12509,
+      "sha256": "2a7445dd3fb27a19bd62fdcdcc3c6de1071c4857283e5640b0569839cc690677"
+    },
+    {
+      "path": "js/panels-top-row-barrier.js",
+      "bytes": 9214,
+      "sha256": "4063a0cc2adbd6d9f48b6b313762ade36c6f12524788d6e8c5c2d302c08c1bf2"
+    },
+    {
+      "path": "js/panels-horizontal-paper-strips.js",
+      "bytes": 5990,
+      "sha256": "0de94009e11da775208d543733f26a29de2901283d99204a5d3645bc6481ed2e"
+    },
+    {
+      "path": "js/panels-local-boundary-consensus.js",
+      "bytes": 16066,
+      "sha256": "ba90950e8319be4851fe97c58b870dfba3af9db944b59072845ae819fc251275"
+    },
+    {
+      "path": "js/panels-context-cells.js",
+      "bytes": 13715,
+      "sha256": "29c93103802ce90777454da803a022f4493bb24ca931d9b873093a0b51da068c"
+    },
+    {
+      "path": "js/panels-interior-strokes.js",
+      "bytes": 11023,
+      "sha256": "f7ccee4170881c9ed42c12670b908187c73c18da568dbe5fac863fe80d9fc28a"
+    },
+    {
+      "path": "js/panels-smooth-gutter-boundaries.js",
+      "bytes": 10747,
+      "sha256": "dbe3c05119bdab2439abd26b619f6dae128247b5b3725c23a11e683d456a598b"
+    },
+    {
+      "path": "js/panels-neighbor-edge-cells.js",
+      "bytes": 10643,
+      "sha256": "6d92642ce4d7b89e23cfccede39958e625ad97ef535a9f7cf0e35d8f20363ac2"
+    },
+    {
+      "path": "js/panels-lettering-cells.js",
+      "bytes": 14067,
+      "sha256": "f152957e7e1e1a7470be0bcd8e079b36d775c12d327c6441b84ebbc842394929"
+    },
+    {
+      "path": "js/panels-connected-pairs.js",
+      "bytes": 14935,
+      "sha256": "8e8c7ca928c9977971d487e1b813718fb4111d73060290d0a6267f1076f133e4"
+    },
+    {
+      "path": "js/panels-crop-repair.js",
+      "bytes": 12064,
+      "sha256": "e0605daee8f763801d49c01be73032bf9f90318b9de415ea8676e693eb27a628"
+    },
+    {
+      "path": "js/panels-gutter-split.js",
+      "bytes": 12264,
+      "sha256": "c6afb00e7ecd7a6887c65836267ee5c38a79dc815d724a8b3583e22221a9c768"
+    },
+    {
+      "path": "js/panels-speech-ownership.js",
+      "bytes": 10157,
+      "sha256": "1aecbe9b68c74f385751c1fc4315f22a808342bdd28db52abec214f10d5c7f5e"
+    },
+    {
+      "path": "js/panels-perimeter-consolidation.js",
+      "bytes": 17163,
+      "sha256": "1b985022f178b3d3b623b8a3da31c268fed2955ec8539744423a0f5b55bc3ae5"
+    },
+    {
+      "path": "js/panels-dark-matte-completion.js",
+      "bytes": 10319,
+      "sha256": "bc4d29b88900cd42e1eb0dc9b4cc5f67f925c7163bde8cde9e02954f552fd76d"
+    },
+    {
+      "path": "js/panels-tail-speech.js",
+      "bytes": 13009,
+      "sha256": "d02f6b982c45aa1fef7b40062c3b7c9626aeba38021015b48f9308b0e012880d"
+    },
+    {
+      "path": "js/panels-long-tail-speech.js",
+      "bytes": 7615,
+      "sha256": "14340bbec8571d9a483c297e3ee3e5b0cb37fac1e678ed7ffa80543d0c2f30e7"
+    },
+    {
+      "path": "js/panels-column-speech.js",
+      "bytes": 8834,
+      "sha256": "461bb24e3e51dbde51bed6a9bc72135677e53f51bce72363007d079a558e840f"
+    },
+    {
+      "path": "js/panels-split-cell-completion.js",
+      "bytes": 6518,
+      "sha256": "a758be8abb1d335a9028208c9a6b2aa3a2e7975ca8180e5076afc5acb685e3e7"
+    },
+    {
+      "path": "js/panel-map-core.js",
+      "bytes": 9474,
+      "sha256": "85502b53c42b52af333482bdf0384964652a845b6a503571b4ace40661f67b93"
+    },
+    {
+      "path": "js/panel-map.js",
+      "bytes": 9043,
+      "sha256": "7dbc7428ae6a93ec2cf3faae73dfa31f08edd8c2e9cae62b9f83851f2527bc72"
+    },
+    {
+      "path": "js/bubbles.js",
+      "bytes": 25644,
+      "sha256": "756bcfdb8c4b4e41534d133f9be1756b585013c81d350c78f6d057eefa6c13ca"
+    },
+    {
+      "path": "js/page-turn.js",
+      "bytes": 12660,
+      "sha256": "e8ed3dfe02353fc8dbf0d3351588f5d3f995816b1432bcceea427a48fa6f3e5c"
+    },
+    {
+      "path": "js/panels-lateral-cell-completion.js",
+      "bytes": 7235,
+      "sha256": "0eb24ee22b0538605bc44b4210349c8a895699dd5575b6570729febc364efe79"
+    },
+    {
+      "path": "js/panels-landscape-cells.js",
+      "bytes": 8931,
+      "sha256": "6a9fe48ea820960fa8d28d2ca26141a38fbc424a58e7fa7827964c11cc29e434"
+    },
+    {
+      "path": "js/panels-landscape-upper-groups.js",
+      "bytes": 9945,
+      "sha256": "62bcf62fdf545f29d9611e514db5381ab15538e97507fc068bc807b800cec78b"
+    },
+    {
+      "path": "js/panels-paper-continuation-groups.js",
+      "bytes": 9424,
+      "sha256": "b3ef4b60c754037e35377841fe0f71291268d2030797e84ad881b8e3dbe16c11"
+    },
+    {
+      "path": "js/panels-wide-paper-rows.js",
+      "bytes": 9058,
+      "sha256": "6a3ed0edae8a14b858dd9f12e3562df4d55479b3576bf1f2c7f816a12c00953d"
+    },
+    {
+      "path": "js/panels-paper-edge-groups.js",
+      "bytes": 9745,
+      "sha256": "13c4062a1f1ebb2cc4f1f0f11b169823e651408c4d6494ab23196126375cf2d3"
+    },
+    {
+      "path": "js/panels-trailing-edge-groups.js",
+      "bytes": 9649,
+      "sha256": "60d45f27d92367dc63fef617d76eeb276ab4cf0fe5e9d95d7eafac58fe063a8e"
+    },
+    {
+      "path": "js/panels-stable-frontier-cells.js",
+      "bytes": 14834,
+      "sha256": "60a6f58dc7a719b09ed0a5165651a437414202623c99327831016ba951fcaf08"
+    },
+    {
+      "path": "js/panels-neutral-matte-groups.js",
+      "bytes": 12509,
+      "sha256": "382805746343e226f60fa07f6b73d355f4e1b84cce79379c484c84c6800353f0"
+    },
+    {
+      "path": "js/panels-compact-dark-cells.js",
+      "bytes": 12384,
+      "sha256": "3a26539a54762b7c5a33efb7348d6cba3627b41faea7ea5e720288b6f1ef3b2a"
+    },
+    {
+      "path": "js/panels-short-paper-cells.js",
+      "bytes": 16431,
+      "sha256": "ef8f05bf1bf428bd590b3bedfd046fb8d5b7a8adf55c1a0a8c288e5454381fb4"
+    },
+    {
+      "path": "js/panels-gradient-residual-groups.js",
+      "bytes": 17357,
+      "sha256": "e7e54171cb03172c900e186efa12ca67efd66f854507692767ed3401f2e860dd"
+    },
+    {
+      "path": "js/panels-empty-enclosure-groups.js",
+      "bytes": 8917,
+      "sha256": "898d2be4442ca8b9a490917583f6d536ab5fec088a4e35c834334dbf22a74401"
+    },
+    {
+      "path": "js/panels-color-enclosure-groups.js",
+      "bytes": 10939,
+      "sha256": "4396392900398485cc7b6bb08f9c1eabdccc39729aaf2e9047243cc4f7ff7b78"
+    },
+    {
+      "path": "js/panels-short-row-speech.js",
+      "bytes": 5503,
+      "sha256": "0a4ff799e9d06d4e0dd3e8a25aa9cc06df5e13baf02fd7946d98f3103e560494"
+    },
+    {
+      "path": "js/panels-contrast-enclosure-groups.js",
+      "bytes": 11524,
+      "sha256": "8f7718611787f65b3fef51682b1eef859ccf8c5a454f2ff56f180e7ff0563483"
+    },
+    {
+      "path": "js/panels-dialogue-row-groups.js",
+      "bytes": 11630,
+      "sha256": "ea3ab1debb4798e38f18e03b88338a26ac0a3ea0e6274fc0bebd450746b4d1fb"
+    },
+    {
+      "path": "js/panels-continuation-enclosure-groups.js",
+      "bytes": 12566,
+      "sha256": "33ba84120b92021591257ad1a781e0a40c28e31f65436c8c27392ad72e8068d5"
+    },
+    {
+      "path": "js/panels-firm-enclosure-groups.js",
+      "bytes": 11534,
+      "sha256": "23bc0896055e0c557373362f97b3aac7d2db56844a43b2263cb1631ba93a03ef"
+    },
+    {
+      "path": "js/panels-strong-continuation-groups.js",
+      "bytes": 11797,
+      "sha256": "19dd227a990a361d97fa2afd21a5a65de5b4f541f20e8c4a94cadb3d94ec10d6"
+    },
+    {
+      "path": "js/panels-high-contrast-enclosures.js",
+      "bytes": 11769,
+      "sha256": "975f4d5e69939214338a39eb4a672fcd49ca3417b82005c717683a968caa0064"
+    },
+    {
+      "path": "js/panels-focused-paper-cell.js",
+      "bytes": 12062,
+      "sha256": "99c27fb52fcedb99fd754d78af571011770eaa27f7efe88958cdba0ae4d26730"
+    },
+    {
+      "path": "js/panels-focused-paper-continuation.js",
+      "bytes": 10210,
+      "sha256": "49de4a07d19aac7565332f4bb3aad0bea8691147bf15eead1ea2c2657344ad5c"
+    },
+    {
+      "path": "js/panels-saturated-frontier-cell.js",
+      "bytes": 11076,
+      "sha256": "d33b6634dce48487a45a0f8da4753c8bf6a99c6f673b01f00b79e5b65050097c"
+    },
+    {
+      "path": "js/panels-saturated-rail-cell.js",
+      "bytes": 11079,
+      "sha256": "ef4785f1bb9b32585c357cf3e305842badaf6b6e8c2112a86d214abf10897cac"
+    },
+    {
+      "path": "js/panels-saturated-round-inset.js",
+      "bytes": 14359,
+      "sha256": "de0bbd98b971dce6b74471ee8d5beeba190081e5c9e6e6bdf55971af8ef2ab46"
+    },
+    {
+      "path": "js/panels-saturated-terminal-cell.js",
+      "bytes": 8428,
+      "sha256": "272cd961133b51ce74063472673cc010eef08d7d774b6e509f4d81174628b61c"
+    },
+    {
+      "path": "js/panels-detached-captions.js",
+      "bytes": 3208,
+      "sha256": "fb5957f1975b011f70de3c7b86259a98f7bb3c95ac18701425611dd1b4377590"
+    },
+    {
+      "path": "js/panels-atomic-boundary-speech.js",
+      "bytes": 7550,
+      "sha256": "a7b0bb426c3fa3bd3ded30390cbcb8e243541f4177e50cad4c4fd0fe59e222b5"
+    },
+    {
+      "path": "js/panels-ornate-inset.js",
+      "bytes": 14529,
+      "sha256": "3bf1609d0f61ead9b1e12eee2906d422776bb377593012b5b9b4b0de2494db99"
+    },
+    {
+      "path": "js/panels-ornate-ownership.js",
+      "bytes": 10483,
+      "sha256": "527d32e6da0c8a4b1e5d740ad125bfeeb7c8a1729c189ecb9062b6690fe29d85"
+    },
+    {
+      "path": "js/panels-enclosure-remainder.js",
+      "bytes": 7372,
+      "sha256": "4eaa7ddc780ac5e1966d5f2174e1574afb337b5d73f447d8f6402aca73334750"
+    },
+    {
+      "path": "js/panels-excluded-speech.js",
+      "bytes": 4150,
+      "sha256": "e5c2980799f8b853f42e36f6d58496e611c87ebc5fceadc7267cff66d728cbca"
+    },
+    {
+      "path": "js/panels-gutter-tail-speech.js",
+      "bytes": 5016,
+      "sha256": "68d131a8c513f5fea0fb28bc567922957c461fbc4cc1186fca4a1ccbbf41997e"
+    },
+    {
+      "path": "js/panels-gutter-ink-cap.js",
+      "bytes": 8878,
+      "sha256": "eb9dc59d3d7af7763dcd828b96200bf098d586f37dda6b937afae4a9b3539cf8"
+    },
+    {
+      "path": "js/panels-gutter-caption-boundary.js",
+      "bytes": 11405,
+      "sha256": "8d7cd6ffa4833b6d6a7fa04a95f00288523da3ffcdcb68b575edfd3404b35ffd"
+    },
+    {
+      "path": "js/panels-page-edge-rail-cell.js",
+      "bytes": 23223,
+      "sha256": "664dd02f81dd2f3108e54addf943d4b6bd3305ce8d471a4ace75acb9befe0432"
+    },
+    {
+      "path": "js/panels-upper-paper-separation.js",
+      "bytes": 12088,
+      "sha256": "55bbd86407488bb3a474aa8dec59bbbb05075ceb3e66395e5ea72e2cc96ed062"
+    },
+    {
+      "path": "js/panels-round-atomic-inset.js",
+      "bytes": 48408,
+      "sha256": "8c50de7e0a57f5f3bab37da42366fc700037d079d342bcdab6a211a2332591d5"
+    },
+    {
+      "path": "js/panels-chromatic-inset-closure.js",
+      "bytes": 19174,
+      "sha256": "d6fbe0b01f644fa2d02a2572857dc806839fca660f93f2702e6f746eae6f996c"
+    },
+    {
+      "path": "js/panels-chromatic-occlusion-cell.js",
+      "bytes": 22522,
+      "sha256": "995659275392890cd50c3e20b1dd119f9e07e814e5dee2cd6d7ebdb0f8b6addb"
+    },
+    {
+      "path": "js/panels-chromatic-taper-cell.js",
+      "bytes": 18834,
+      "sha256": "8f690f0f0f921d5df07bea17e1bf2d36c52d3235c4f3cadda06b3c9dcf932a54"
+    },
+    {
+      "path": "js/panels-chromatic-composition-remainder.js",
+      "bytes": 19943,
+      "sha256": "7538a83a981e6879721d6ee3b61d054be2eb558831e53f15ff589013e8cda996"
+    },
+    {
+      "path": "js/panels-shared-rim-pair.js",
+      "bytes": 18809,
+      "sha256": "db94be93aed5630eee2fd5dc97be7d90b5583b324199e9b97c1ed7eafc988239"
+    },
+    {
+      "path": "js/panels-paper-residual-strips.js",
+      "bytes": 14448,
+      "sha256": "293da2491311a12706a6ab6c0e2fd324b46077d0ac83dd6f25b1345ea8c5f0e1"
+    },
+    {
+      "path": "js/panels-round-speech-inset.js",
+      "bytes": 32386,
+      "sha256": "6061216bc9e3616410f7f490a704e8fda93b94e92cdcec3449bdc702c34d7167"
+    },
+    {
+      "path": "js/panels-chromatic-dialogue-pair.js",
+      "bytes": 21354,
+      "sha256": "f64614edc999cf62cf25a6152b24000f4c25a48361ea9f88e17ad19333a6f3cc"
+    },
+    {
+      "path": "js/panels-capped-rim-cell.js",
+      "bytes": 21176,
+      "sha256": "67b790313e3ad9e700b9c3523efec25e3bfb9189876926c27c9a22507ee93757"
+    },
+    {
+      "path": "js/panels-rounded-crowd-strip.js",
+      "bytes": 14855,
+      "sha256": "3dde551e097bc0ca1d854010b19629360dbb6dfab51c36a87891b650a6a0bdc1"
+    },
+    {
+      "path": "js/panels-rounded-crowd-reader.js",
+      "bytes": 3393,
+      "sha256": "a06023b8ef0eb609db4be560608052807c063bd2b6f98ed696a179a44a0ef6a2"
+    },
+    {
+      "path": "js/panels-shared-seam-children.js",
+      "bytes": 16957,
+      "sha256": "d662c6785fa13880e05f1e1578c63edf60ebc6447f19c30c15ee79d013f5d2d1"
+    },
+    {
+      "path": "js/panels-shared-seam-reader.js",
+      "bytes": 5776,
+      "sha256": "e1a6b94e48af6d32b8539a310fd9fc26179860c8efe08a749c9f433d84093ab6"
+    },
+    {
+      "path": "js/panels-chromatic-side-portrait.js",
+      "bytes": 18237,
+      "sha256": "89d0f30bc3eafce266b8fb35bb4e8cf8c338a257f8e7a820bd1ed2d4ef57e2d9"
+    },
+    {
+      "path": "js/panels-chromatic-open-scene.js",
+      "bytes": 19056,
+      "sha256": "9f58e4819805b814ac464dea901d37ab27f64b503cb6355bef59dda5530e1021"
+    },
+    {
+      "path": "js/panels-ink-corner-partition.js",
+      "bytes": 27124,
+      "sha256": "f5a2f29dc5a001ab106db4163ea6ecef773d9c7aa0569acbbb279b0fb0b2ece5"
+    },
+    {
+      "path": "js/panels-articulated-rim-cell.js",
+      "bytes": 36918,
+      "sha256": "63d4abb0d295e4bfac7c59df7deeb9ba4b43527f793edc0f2b9e17bfb664115d"
+    },
+    {
+      "path": "js/panels-gradient-inset-pair.js",
+      "bytes": 30113,
+      "sha256": "f900bc036e9897f4247c012bb54c2827f24fa075aaa958d166458b4541bc745d"
+    },
+    {
+      "path": "js/panels-gradient-inset-reader.js",
+      "bytes": 13137,
+      "sha256": "95bee4ed9635b555a42220cea3a41b0b710420d5ef65c70e7cad43ae1e7da5c2"
+    },
+    {
+      "path": "js/panels-connected-boundary-composition.js",
+      "bytes": 15094,
+      "sha256": "326ae16febc193e729678f8a9ae26be0e847b263373a75179b53753e6ca4fd13"
+    },
+    {
+      "path": "js/panels-connected-boundary-reader.js",
+      "bytes": 4235,
+      "sha256": "03a5127e24f53bef26e06da9f97f32d4faa67718ae05e2f9b3b4b261e2cca43c"
+    },
+    {
+      "path": "js/panels-articulated-upper-cell.js",
+      "bytes": 34340,
+      "sha256": "fa7406ec5aef765d524dd2c9f8e693a152119d8e5f744da4b40cada9bf70d5b0"
+    },
+    {
+      "path": "js/panels-articulated-exterior-cell.js",
+      "bytes": 24644,
+      "sha256": "754762a4e00fd8154f684190298b32c62df128599a057e1f751b0272babd051d"
+    },
+    {
+      "path": "js/terminal-evidence-codec.js",
+      "bytes": 3985,
+      "sha256": "67a76805081fd051ced02f0fce1fc9fcd74e1f78a183c3dcccf0392d6dc8ba06"
+    },
+    {
+      "path": "js/terminal-geometry-reconstructed.js",
+      "bytes": 4765,
+      "sha256": "0e5668ffc29111c2f4132de0384e3b6b9b3165842b55492df5eb7e734ffb663e"
+    },
+    {
+      "path": "js/panels-occluded-terminal-cells.js",
+      "bytes": 30064,
+      "sha256": "a5ae83e76789f4c5ca321d5d35db7ebb35909d01ea5cdbe612fb9a6d65c15458"
+    },
+    {
+      "path": "js/terminal-native-source-refinement.js",
+      "bytes": 61254,
+      "sha256": "0deb9f4b800a2d0e00c0a309b3584d27c84ff71b0d9ad7a756a82d477ae67b5f"
+    },
+    {
+      "path": "js/terminal-source-admission.js",
+      "bytes": 10283,
+      "sha256": "b1ba7ab2f9af36972f40cc52c0ca730d56def51b1b09d008876af8c6d2f0f524"
+    },
+    {
+      "path": "js/panels-terminal-native-reader.js",
+      "bytes": 3474,
+      "sha256": "9ed2eab1205a9e73faab91e2f966f5e013f7a73bd7edfa22877800964a987009"
+    },
+    {
+      "path": "js/reader.js",
+      "bytes": 150830,
+      "sha256": "44819118e93201866161ad6d9fe2a051c78e78b4c9732a43143bc42ebde73f5a"
+    },
+    {
+      "path": "js/terminal-native-bootstrap.js",
+      "bytes": 307,
+      "sha256": "a6ffb3e020ab095ca8c4b21f613521d6604424efaad5d228c16fa265afee1534"
+    },
+    {
+      "path": "js/panels-curved-host-partition.js",
+      "bytes": 16575,
+      "sha256": "f8f1bfd7cebee8b4535e484cdd3d317dd53286e9e7c31911a698c264d5764717"
+    },
+    {
+      "path": "js/panels-curved-host-native.js",
+      "bytes": 124029,
+      "sha256": "308af529d1c2c580df0b0f6ce344aa584a176bf3eee57e14e8451e02e8c7f712"
+    },
+    {
+      "path": "js/panels-curved-host-native-partition.js",
+      "bytes": 9632,
+      "sha256": "b0731afc35ae78386dd87253441f2a4fdd95eaf2989f798f065a0df5ddf49a64"
+    },
+    {
+      "path": "js/panels-curved-host-reader.js",
+      "bytes": 7647,
+      "sha256": "637e6d68da8b6c75c34f14651d401bb450ccf08305f106e02e41a73d4a653f4c"
+    },
+    {
+      "path": "js/panels-curved-host-native-bootstrap.js",
+      "bytes": 253,
+      "sha256": "6f59fc5ec1cce3cbe5fc4fa9d5fc901c7dbb79bd03b8d03f32f3daccc40b55ad"
+    },
+    {
+      "path": "js/native-shell.js",
+      "bytes": 2369,
+      "sha256": "683643dedaace258e50fb14fb35525392aaa5be4b12dc92df513808d9f9fadf3"
+    },
+    {
+      "path": "js/stream-transfer.js",
+      "bytes": 15233,
+      "sha256": "2b9e099d83c64cdae7080d6707c6659cf5e7b71a6625acc8dd9b5c7914b1f48e"
+    },
+    {
+      "path": "js/transfers.js",
+      "bytes": 11400,
+      "sha256": "f285bacdfae21d59c8fe21b6ba8a91c8342f84d2140b59139b6b4ff02aedddcd"
+    },
+    {
+      "path": "js/feature-guide.js",
+      "bytes": 16447,
+      "sha256": "c0d83fd7e0c6f596c69d374b7f1dbf094fb8476eecd1c35b186006c43dd603e1"
+    },
+    {
+      "path": "js/app.js",
+      "bytes": 4331,
+      "sha256": "fcd43ae47adefe0c2b760fafcd9938e11da9c503563e10a6fd0b2544bb3a206f"
+    }
+  ],
+  "files": [
+    {
+      "path": "android/app/build.gradle.kts",
+      "bytes": 2607,
+      "sha256": "f708df65f3059363e33a19f3c17276991181c0114f9d2ad2e5e2bb9326cfcadc"
+    },
+    {
+      "path": "index.html",
+      "bytes": 29354,
+      "sha256": "919dc6859b7289388d1422200ec34d1d4713f532dc7c64c2183edf10bd94a40f"
+    },
+    {
+      "path": "js/app.js",
+      "bytes": 4331,
+      "sha256": "fcd43ae47adefe0c2b760fafcd9938e11da9c503563e10a6fd0b2544bb3a206f"
+    },
+    {
+      "path": "js/bubbles.js",
+      "bytes": 25644,
+      "sha256": "756bcfdb8c4b4e41534d133f9be1756b585013c81d350c78f6d057eefa6c13ca"
+    },
+    {
+      "path": "js/db.js",
+      "bytes": 11197,
+      "sha256": "63ef5a91c36c8f3428cf2084d1900f8cd22dc14b554fc33a0bbf4e345e3a4973"
+    },
+    {
+      "path": "js/feature-guide.js",
+      "bytes": 16447,
+      "sha256": "c0d83fd7e0c6f596c69d374b7f1dbf094fb8476eecd1c35b186006c43dd603e1"
+    },
+    {
+      "path": "js/library.js",
+      "bytes": 65264,
+      "sha256": "c19bec42bd7e1e3f7dd05725d291fb379d109c6ae7090592488136344871f546"
+    },
+    {
+      "path": "js/native-shell.js",
+      "bytes": 2369,
+      "sha256": "683643dedaace258e50fb14fb35525392aaa5be4b12dc92df513808d9f9fadf3"
+    },
+    {
+      "path": "js/nth-page-deck.js",
+      "bytes": 22229,
+      "sha256": "d37b1d0f4785cfc1ccf5bb2ffcbee4dbbb5837b859f2f5e2310c911f8b473463"
+    },
+    {
+      "path": "js/page-mode.js",
+      "bytes": 23724,
+      "sha256": "21e105e11fc12cc7141e60589a5988681f6ad02d5dfc5c1fd9c6c0656511e173"
+    },
+    {
+      "path": "js/page-turn.js",
+      "bytes": 12660,
+      "sha256": "e8ed3dfe02353fc8dbf0d3351588f5d3f995816b1432bcceea427a48fa6f3e5c"
+    },
+    {
+      "path": "js/panel-map-core.js",
+      "bytes": 9474,
+      "sha256": "85502b53c42b52af333482bdf0384964652a845b6a503571b4ace40661f67b93"
+    },
+    {
+      "path": "js/panel-map.js",
+      "bytes": 9043,
+      "sha256": "7dbc7428ae6a93ec2cf3faae73dfa31f08edd8c2e9cae62b9f83851f2527bc72"
+    },
+    {
+      "path": "js/panels-abutting-frames.js",
+      "bytes": 36213,
+      "sha256": "2a097ce19bc1e33cb712f1a2b295e0a9ccc72ec184477cd6059d3182830f1ace"
+    },
+    {
+      "path": "js/panels-articulated-exterior-cell.js",
+      "bytes": 24644,
+      "sha256": "754762a4e00fd8154f684190298b32c62df128599a057e1f751b0272babd051d"
+    },
+    {
+      "path": "js/panels-articulated-rim-cell.js",
+      "bytes": 36918,
+      "sha256": "63d4abb0d295e4bfac7c59df7deeb9ba4b43527f793edc0f2b9e17bfb664115d"
+    },
+    {
+      "path": "js/panels-articulated-upper-cell.js",
+      "bytes": 34340,
+      "sha256": "fa7406ec5aef765d524dd2c9f8e693a152119d8e5f744da4b40cada9bf70d5b0"
+    },
+    {
+      "path": "js/panels-atomic-boundary-speech.js",
+      "bytes": 7550,
+      "sha256": "a7b0bb426c3fa3bd3ded30390cbcb8e243541f4177e50cad4c4fd0fe59e222b5"
+    },
+    {
+      "path": "js/panels-capped-rim-cell.js",
+      "bytes": 21176,
+      "sha256": "67b790313e3ad9e700b9c3523efec25e3bfb9189876926c27c9a22507ee93757"
+    },
+    {
+      "path": "js/panels-chromatic-composition-remainder.js",
+      "bytes": 19943,
+      "sha256": "7538a83a981e6879721d6ee3b61d054be2eb558831e53f15ff589013e8cda996"
+    },
+    {
+      "path": "js/panels-chromatic-dialogue-pair.js",
+      "bytes": 21354,
+      "sha256": "f64614edc999cf62cf25a6152b24000f4c25a48361ea9f88e17ad19333a6f3cc"
+    },
+    {
+      "path": "js/panels-chromatic-inset-closure.js",
+      "bytes": 19174,
+      "sha256": "d6fbe0b01f644fa2d02a2572857dc806839fca660f93f2702e6f746eae6f996c"
+    },
+    {
+      "path": "js/panels-chromatic-occlusion-cell.js",
+      "bytes": 22522,
+      "sha256": "995659275392890cd50c3e20b1dd119f9e07e814e5dee2cd6d7ebdb0f8b6addb"
+    },
+    {
+      "path": "js/panels-chromatic-open-scene.js",
+      "bytes": 19056,
+      "sha256": "9f58e4819805b814ac464dea901d37ab27f64b503cb6355bef59dda5530e1021"
+    },
+    {
+      "path": "js/panels-chromatic-shared-border.js",
+      "bytes": 18143,
+      "sha256": "c3530327b3db24e56b8ebdbab76e1ad93cc36c3272494a1dc59f91674793c0f3"
+    },
+    {
+      "path": "js/panels-chromatic-side-portrait.js",
+      "bytes": 18237,
+      "sha256": "89d0f30bc3eafce266b8fb35bb4e8cf8c338a257f8e7a820bd1ed2d4ef57e2d9"
+    },
+    {
+      "path": "js/panels-chromatic-taper-cell.js",
+      "bytes": 18834,
+      "sha256": "8f690f0f0f921d5df07bea17e1bf2d36c52d3235c4f3cadda06b3c9dcf932a54"
+    },
+    {
+      "path": "js/panels-closed-frames.js",
+      "bytes": 31141,
+      "sha256": "e3e6e4e513775311e8fb72456dea732ede7a0ca9dc0e8c5a9c1133643d471f5a"
+    },
+    {
+      "path": "js/panels-color-enclosure-groups.js",
+      "bytes": 10939,
+      "sha256": "4396392900398485cc7b6bb08f9c1eabdccc39729aaf2e9047243cc4f7ff7b78"
+    },
+    {
+      "path": "js/panels-colored-rims.js",
+      "bytes": 20162,
+      "sha256": "ceb0dc978b6cfe224f4596ba2b8da83cbb929d6d14a68cff8b65ba9cca9a28a9"
+    },
+    {
+      "path": "js/panels-column-speech.js",
+      "bytes": 8834,
+      "sha256": "461bb24e3e51dbde51bed6a9bc72135677e53f51bce72363007d079a558e840f"
+    },
+    {
+      "path": "js/panels-compact-dark-cells.js",
+      "bytes": 12384,
+      "sha256": "3a26539a54762b7c5a33efb7348d6cba3627b41faea7ea5e720288b6f1ef3b2a"
+    },
+    {
+      "path": "js/panels-composite-frames.js",
+      "bytes": 27549,
+      "sha256": "30edac3e4d6b6036fa6376efac50fbbc21638ed2023f5d4b73be3dfae0f7e251"
+    },
+    {
+      "path": "js/panels-connected-boundary-composition.js",
+      "bytes": 15094,
+      "sha256": "326ae16febc193e729678f8a9ae26be0e847b263373a75179b53753e6ca4fd13"
+    },
+    {
+      "path": "js/panels-connected-boundary-reader.js",
+      "bytes": 4235,
+      "sha256": "03a5127e24f53bef26e06da9f97f32d4faa67718ae05e2f9b3b4b261e2cca43c"
+    },
+    {
+      "path": "js/panels-connected-pairs.js",
+      "bytes": 14935,
+      "sha256": "8e8c7ca928c9977971d487e1b813718fb4111d73060290d0a6267f1076f133e4"
+    },
+    {
+      "path": "js/panels-context-cells.js",
+      "bytes": 13715,
+      "sha256": "29c93103802ce90777454da803a022f4493bb24ca931d9b873093a0b51da068c"
+    },
+    {
+      "path": "js/panels-continuation-enclosure-groups.js",
+      "bytes": 12566,
+      "sha256": "33ba84120b92021591257ad1a781e0a40c28e31f65436c8c27392ad72e8068d5"
+    },
+    {
+      "path": "js/panels-contrast-enclosure-groups.js",
+      "bytes": 11524,
+      "sha256": "8f7718611787f65b3fef51682b1eef859ccf8c5a454f2ff56f180e7ff0563483"
+    },
+    {
+      "path": "js/panels-corner-frames.js",
+      "bytes": 15998,
+      "sha256": "5d002e58edd093e3bb63b89660fe516b8312b4d79ad8d01d8b0a579d59924fda"
+    },
+    {
+      "path": "js/panels-crop-repair.js",
+      "bytes": 12064,
+      "sha256": "e0605daee8f763801d49c01be73032bf9f90318b9de415ea8676e693eb27a628"
+    },
+    {
+      "path": "js/panels-curved-host-native-bootstrap.js",
+      "bytes": 253,
+      "sha256": "6f59fc5ec1cce3cbe5fc4fa9d5fc901c7dbb79bd03b8d03f32f3daccc40b55ad"
+    },
+    {
+      "path": "js/panels-curved-host-native-partition.js",
+      "bytes": 9632,
+      "sha256": "b0731afc35ae78386dd87253441f2a4fdd95eaf2989f798f065a0df5ddf49a64"
+    },
+    {
+      "path": "js/panels-curved-host-native.js",
+      "bytes": 124029,
+      "sha256": "308af529d1c2c580df0b0f6ce344aa584a176bf3eee57e14e8451e02e8c7f712"
+    },
+    {
+      "path": "js/panels-curved-host-partition.js",
+      "bytes": 16575,
+      "sha256": "f8f1bfd7cebee8b4535e484cdd3d317dd53286e9e7c31911a698c264d5764717"
+    },
+    {
+      "path": "js/panels-curved-host-reader.js",
+      "bytes": 7647,
+      "sha256": "637e6d68da8b6c75c34f14651d401bb450ccf08305f106e02e41a73d4a653f4c"
+    },
+    {
+      "path": "js/panels-curved-rims.js",
+      "bytes": 30750,
+      "sha256": "1e2efecc6e8c1e093e513d56578e7b3eacf027d4fbf8411c1ea719614c34aeef"
+    },
+    {
+      "path": "js/panels-dark-matte-completion.js",
+      "bytes": 10319,
+      "sha256": "bc4d29b88900cd42e1eb0dc9b4cc5f67f925c7163bde8cde9e02954f552fd76d"
+    },
+    {
+      "path": "js/panels-dark-overlay-insets.js",
+      "bytes": 9865,
+      "sha256": "b06d9b7584c15fabe98cf5bde00dd9f804ae8989779bd48a81bdc75c2b1a4c55"
+    },
+    {
+      "path": "js/panels-detached-captions.js",
+      "bytes": 3208,
+      "sha256": "fb5957f1975b011f70de3c7b86259a98f7bb3c95ac18701425611dd1b4377590"
+    },
+    {
+      "path": "js/panels-dialogue-row-groups.js",
+      "bytes": 11630,
+      "sha256": "ea3ab1debb4798e38f18e03b88338a26ac0a3ea0e6274fc0bebd450746b4d1fb"
+    },
+    {
+      "path": "js/panels-edge-cells.js",
+      "bytes": 15839,
+      "sha256": "cf5115e05c0f7bbf05698c9318750944b3dcca0233c4f08d7765340285c1b3b5"
+    },
+    {
+      "path": "js/panels-edge-guided-paper.js",
+      "bytes": 20569,
+      "sha256": "de6ede70ae518b69274ed2c713baee8be565079771c76ba1e76ed287b3dcb04a"
+    },
+    {
+      "path": "js/panels-edge-spill.js",
+      "bytes": 7476,
+      "sha256": "f15f6a402ec07d86e5323d763a7681ae14c9854e80018b2e53ff9441f1a1e2c2"
+    },
+    {
+      "path": "js/panels-empty-enclosure-groups.js",
+      "bytes": 8917,
+      "sha256": "898d2be4442ca8b9a490917583f6d536ab5fec088a4e35c834334dbf22a74401"
+    },
+    {
+      "path": "js/panels-enclosure-remainder.js",
+      "bytes": 7372,
+      "sha256": "4eaa7ddc780ac5e1966d5f2174e1574afb337b5d73f447d8f6402aca73334750"
+    },
+    {
+      "path": "js/panels-excluded-speech.js",
+      "bytes": 4150,
+      "sha256": "e5c2980799f8b853f42e36f6d58496e611c87ebc5fceadc7267cff66d728cbca"
+    },
+    {
+      "path": "js/panels-exterior-completion.js",
+      "bytes": 15016,
+      "sha256": "301da50e6dbbdceb9eb089645e26b9cf2f471bff0afa3a28a9d66dbae139d62e"
+    },
+    {
+      "path": "js/panels-firm-enclosure-groups.js",
+      "bytes": 11534,
+      "sha256": "23bc0896055e0c557373362f97b3aac7d2db56844a43b2263cb1631ba93a03ef"
+    },
+    {
+      "path": "js/panels-focused-paper-cell.js",
+      "bytes": 12062,
+      "sha256": "99c27fb52fcedb99fd754d78af571011770eaa27f7efe88958cdba0ae4d26730"
+    },
+    {
+      "path": "js/panels-focused-paper-continuation.js",
+      "bytes": 10210,
+      "sha256": "49de4a07d19aac7565332f4bb3aad0bea8691147bf15eead1ea2c2657344ad5c"
+    },
+    {
+      "path": "js/panels-frame-envelope.js",
+      "bytes": 65003,
+      "sha256": "f714e04868e9c68f08d190e78af19e0134914e0d4eef0be0d7134726c6642f32"
+    },
+    {
+      "path": "js/panels-frame-wasm.js",
+      "bytes": 3546,
+      "sha256": "2ac3601eb89b7f9f590b282af50bfe0356681f2a75ef0d765cc53e7c623176b7"
+    },
+    {
+      "path": "js/panels-framed-insets.js",
+      "bytes": 62609,
+      "sha256": "d6d55fb3c9cb0249416cf6d6569cd62094312a834eb363d7ac5fcb4682b2f3fa"
+    },
+    {
+      "path": "js/panels-geometry-orthogonal.js",
+      "bytes": 10872,
+      "sha256": "3478fc065fb0a311a98aa495bb14a93126fe3a1593bc245263df24e117cc6ec5"
+    },
+    {
+      "path": "js/panels-geometry-skewed.js",
+      "bytes": 15377,
+      "sha256": "dd0c96553674192c6ef519615a7bcc2a5ca53281e608efe4d131ef58d8d6b826"
+    },
+    {
+      "path": "js/panels-geometry.js",
+      "bytes": 16002,
+      "sha256": "a7b3bf99c137073263540f4bdd54d6f639c25f01d387f20ba9abe96e9d9e3651"
+    },
+    {
+      "path": "js/panels-gradient-inset-pair.js",
+      "bytes": 30113,
+      "sha256": "f900bc036e9897f4247c012bb54c2827f24fa075aaa958d166458b4541bc745d"
+    },
+    {
+      "path": "js/panels-gradient-inset-reader.js",
+      "bytes": 13137,
+      "sha256": "95bee4ed9635b555a42220cea3a41b0b710420d5ef65c70e7cad43ae1e7da5c2"
+    },
+    {
+      "path": "js/panels-gradient-residual-groups.js",
+      "bytes": 17357,
+      "sha256": "e7e54171cb03172c900e186efa12ca67efd66f854507692767ed3401f2e860dd"
+    },
+    {
+      "path": "js/panels-gutter-caption-boundary.js",
+      "bytes": 11405,
+      "sha256": "8d7cd6ffa4833b6d6a7fa04a95f00288523da3ffcdcb68b575edfd3404b35ffd"
+    },
+    {
+      "path": "js/panels-gutter-frames.js",
+      "bytes": 40941,
+      "sha256": "3031c017b3a1bddc4d61b7fce5deec1f3360eac0d8337513b222cd305059edc6"
+    },
+    {
+      "path": "js/panels-gutter-graph.js",
+      "bytes": 19099,
+      "sha256": "e29e6c726e1659534b0bd427a3d084f9c76bc6e9e5733ee88dbd01436b720cc6"
+    },
+    {
+      "path": "js/panels-gutter-ink-cap.js",
+      "bytes": 8878,
+      "sha256": "eb9dc59d3d7af7763dcd828b96200bf098d586f37dda6b937afae4a9b3539cf8"
+    },
+    {
+      "path": "js/panels-gutter-split.js",
+      "bytes": 12264,
+      "sha256": "c6afb00e7ecd7a6887c65836267ee5c38a79dc815d724a8b3583e22221a9c768"
+    },
+    {
+      "path": "js/panels-gutter-tail-speech.js",
+      "bytes": 5016,
+      "sha256": "68d131a8c513f5fea0fb28bc567922957c461fbc4cc1186fca4a1ccbbf41997e"
+    },
+    {
+      "path": "js/panels-high-contrast-enclosures.js",
+      "bytes": 11769,
+      "sha256": "975f4d5e69939214338a39eb4a672fcd49ca3417b82005c717683a968caa0064"
+    },
+    {
+      "path": "js/panels-horizontal-paper-strips.js",
+      "bytes": 5990,
+      "sha256": "0de94009e11da775208d543733f26a29de2901283d99204a5d3645bc6481ed2e"
+    },
+    {
+      "path": "js/panels-ink-corner-partition.js",
+      "bytes": 27124,
+      "sha256": "f5a2f29dc5a001ab106db4163ea6ecef773d9c7aa0569acbbb279b0fb0b2ece5"
+    },
+    {
+      "path": "js/panels-inset-neighbors.js",
+      "bytes": 189408,
+      "sha256": "35fa223586967276ab3e5cdd5f3205dca5304ec0caaf59b32dadc8942b6fd942"
+    },
+    {
+      "path": "js/panels-interior-strokes.js",
+      "bytes": 11023,
+      "sha256": "f7ccee4170881c9ed42c12670b908187c73c18da568dbe5fac863fe80d9fc28a"
+    },
+    {
+      "path": "js/panels-interrupted-gutters.js",
+      "bytes": 9000,
+      "sha256": "7f33e52f55713680093319cade27b53f493b444ee75f47db724e11ed91cb222a"
+    },
+    {
+      "path": "js/panels-landscape-cells.js",
+      "bytes": 8931,
+      "sha256": "6a9fe48ea820960fa8d28d2ca26141a38fbc424a58e7fa7827964c11cc29e434"
+    },
+    {
+      "path": "js/panels-landscape-upper-groups.js",
+      "bytes": 9945,
+      "sha256": "62bcf62fdf545f29d9611e514db5381ab15538e97507fc068bc807b800cec78b"
+    },
+    {
+      "path": "js/panels-lateral-cell-completion.js",
+      "bytes": 7235,
+      "sha256": "0eb24ee22b0538605bc44b4210349c8a895699dd5575b6570729febc364efe79"
+    },
+    {
+      "path": "js/panels-lettering-cells.js",
+      "bytes": 14067,
+      "sha256": "f152957e7e1e1a7470be0bcd8e079b36d775c12d327c6441b84ebbc842394929"
+    },
+    {
+      "path": "js/panels-local-boundary-consensus.js",
+      "bytes": 16066,
+      "sha256": "ba90950e8319be4851fe97c58b870dfba3af9db944b59072845ae819fc251275"
+    },
+    {
+      "path": "js/panels-local-islands.js",
+      "bytes": 32087,
+      "sha256": "5cb4c9493688f7448f4317fb3333f1ec4e46142493a97b95485c2fa9cd54f564"
+    },
+    {
+      "path": "js/panels-long-tail-speech.js",
+      "bytes": 7615,
+      "sha256": "14340bbec8571d9a483c297e3ee3e5b0cb37fac1e678ed7ffa80543d0c2f30e7"
+    },
+    {
+      "path": "js/panels-matte-cells.js",
+      "bytes": 44421,
+      "sha256": "2de04ef37c49cc225dd32572ad8ca783c1674c91d7fba6bc2841dcb4175a9eae"
+    },
+    {
+      "path": "js/panels-narrow-ink-frames.js",
+      "bytes": 12509,
+      "sha256": "2a7445dd3fb27a19bd62fdcdcc3c6de1071c4857283e5640b0569839cc690677"
+    },
+    {
+      "path": "js/panels-neighbor-completion.js",
+      "bytes": 14313,
+      "sha256": "51ea3b2a87c8f407819b77560e279e0b8a26654fbb911f83fe2974d9171c4869"
+    },
+    {
+      "path": "js/panels-neighbor-edge-cells.js",
+      "bytes": 10643,
+      "sha256": "6d92642ce4d7b89e23cfccede39958e625ad97ef535a9f7cf0e35d8f20363ac2"
+    },
+    {
+      "path": "js/panels-neutral-matte-groups.js",
+      "bytes": 12509,
+      "sha256": "382805746343e226f60fa07f6b73d355f4e1b84cce79379c484c84c6800353f0"
+    },
+    {
+      "path": "js/panels-occluded-frames.js",
+      "bytes": 17378,
+      "sha256": "0f0f35a3b0f3611c70107e54cdf5c89c97eb3aaa1d55ad9921e03c0271423bd2"
+    },
+    {
+      "path": "js/panels-occluded-terminal-cells.js",
+      "bytes": 30064,
+      "sha256": "a5ae83e76789f4c5ca321d5d35db7ebb35909d01ea5cdbe612fb9a6d65c15458"
+    },
+    {
+      "path": "js/panels-ornate-inset.js",
+      "bytes": 14529,
+      "sha256": "3bf1609d0f61ead9b1e12eee2906d422776bb377593012b5b9b4b0de2494db99"
+    },
+    {
+      "path": "js/panels-ornate-ownership.js",
+      "bytes": 10483,
+      "sha256": "527d32e6da0c8a4b1e5d740ad125bfeeb7c8a1729c189ecb9062b6690fe29d85"
+    },
+    {
+      "path": "js/panels-orthogonal-white-gutters.js",
+      "bytes": 6327,
+      "sha256": "3f467dc9c9fcd37a19c66c62c91c8cccaa288be82c75c1eade9580695954f5a6"
+    },
+    {
+      "path": "js/panels-overlap-frames.js",
+      "bytes": 10674,
+      "sha256": "19348625b75bf2762a34b2f367b7fab74894fb157c3c9f55b3fff577bb174846"
+    },
+    {
+      "path": "js/panels-page-edge-rail-cell.js",
+      "bytes": 23223,
+      "sha256": "664dd02f81dd2f3108e54addf943d4b6bd3305ce8d471a4ace75acb9befe0432"
+    },
+    {
+      "path": "js/panels-page-layout.js",
+      "bytes": 23900,
+      "sha256": "802c5477d389c99b89b15905a8ea1bfd840d24120e8c7bf8986c28df141ad91b"
+    },
+    {
+      "path": "js/panels-pale-completion.js",
+      "bytes": 20892,
+      "sha256": "4b845501ae8dbdf8e575c4a8faf7973f9aad26e0fe44a0eaa3a2bfda045dd48c"
+    },
+    {
+      "path": "js/panels-paper-continuation-groups.js",
+      "bytes": 9424,
+      "sha256": "b3ef4b60c754037e35377841fe0f71291268d2030797e84ad881b8e3dbe16c11"
+    },
+    {
+      "path": "js/panels-paper-edge-groups.js",
+      "bytes": 9745,
+      "sha256": "13c4062a1f1ebb2cc4f1f0f11b169823e651408c4d6494ab23196126375cf2d3"
+    },
+    {
+      "path": "js/panels-paper-recovery.js",
+      "bytes": 12125,
+      "sha256": "76ca21c564ff0ecc01478aee9278b2a1aa97a7f8780805a42bf95546e9fb2811"
+    },
+    {
+      "path": "js/panels-paper-residual-strips.js",
+      "bytes": 14448,
+      "sha256": "293da2491311a12706a6ab6c0e2fd324b46077d0ac83dd6f25b1345ea8c5f0e1"
+    },
+    {
+      "path": "js/panels-partition.js",
+      "bytes": 30581,
+      "sha256": "4f713d730448bd0246a20868b5b615e1d65b79b77f713afbf8d175f4ddccfdd0"
+    },
+    {
+      "path": "js/panels-perimeter-consolidation.js",
+      "bytes": 17163,
+      "sha256": "1b985022f178b3d3b623b8a3da31c268fed2955ec8539744423a0f5b55bc3ae5"
+    },
+    {
+      "path": "js/panels-ragged-gutters.js",
+      "bytes": 25930,
+      "sha256": "772f30fdfed968187d2fc5f6caf2b727ce54152dc7708cc06b52afbac0b5cc9a"
+    },
+    {
+      "path": "js/panels-rim-frames.js",
+      "bytes": 27339,
+      "sha256": "9eef6f6997eda3c29a8692e86c3c2e4098c75c627bbc48f090e686b894df5c4f"
+    },
+    {
+      "path": "js/panels-round-atomic-inset.js",
+      "bytes": 48408,
+      "sha256": "8c50de7e0a57f5f3bab37da42366fc700037d079d342bcdab6a211a2332591d5"
+    },
+    {
+      "path": "js/panels-round-speech-inset.js",
+      "bytes": 32386,
+      "sha256": "6061216bc9e3616410f7f490a704e8fda93b94e92cdcec3449bdc702c34d7167"
+    },
+    {
+      "path": "js/panels-rounded-crowd-reader.js",
+      "bytes": 3393,
+      "sha256": "a06023b8ef0eb609db4be560608052807c063bd2b6f98ed696a179a44a0ef6a2"
+    },
+    {
+      "path": "js/panels-rounded-crowd-strip.js",
+      "bytes": 14855,
+      "sha256": "3dde551e097bc0ca1d854010b19629360dbb6dfab51c36a87891b650a6a0bdc1"
+    },
+    {
+      "path": "js/panels-saturated-frontier-cell.js",
+      "bytes": 11076,
+      "sha256": "d33b6634dce48487a45a0f8da4753c8bf6a99c6f673b01f00b79e5b65050097c"
+    },
+    {
+      "path": "js/panels-saturated-rail-cell.js",
+      "bytes": 11079,
+      "sha256": "ef4785f1bb9b32585c357cf3e305842badaf6b6e8c2112a86d214abf10897cac"
+    },
+    {
+      "path": "js/panels-saturated-round-inset.js",
+      "bytes": 14359,
+      "sha256": "de0bbd98b971dce6b74471ee8d5beeba190081e5c9e6e6bdf55971af8ef2ab46"
+    },
+    {
+      "path": "js/panels-saturated-terminal-cell.js",
+      "bytes": 8428,
+      "sha256": "272cd961133b51ce74063472673cc010eef08d7d774b6e509f4d81174628b61c"
+    },
+    {
+      "path": "js/panels-shared-boundaries.js",
+      "bytes": 15501,
+      "sha256": "9210b8cda6f2908ee9f18e8d5ae361e1bd7f5c22daf4562413a49c224fe77dcb"
+    },
+    {
+      "path": "js/panels-shared-rim-pair.js",
+      "bytes": 18809,
+      "sha256": "db94be93aed5630eee2fd5dc97be7d90b5583b324199e9b97c1ed7eafc988239"
+    },
+    {
+      "path": "js/panels-shared-seam-children.js",
+      "bytes": 16957,
+      "sha256": "d662c6785fa13880e05f1e1578c63edf60ebc6447f19c30c15ee79d013f5d2d1"
+    },
+    {
+      "path": "js/panels-shared-seam-reader.js",
+      "bytes": 5776,
+      "sha256": "e1a6b94e48af6d32b8539a310fd9fc26179860c8efe08a749c9f433d84093ab6"
+    },
+    {
+      "path": "js/panels-short-paper-cells.js",
+      "bytes": 16431,
+      "sha256": "ef8f05bf1bf428bd590b3bedfd046fb8d5b7a8adf55c1a0a8c288e5454381fb4"
+    },
+    {
+      "path": "js/panels-short-row-speech.js",
+      "bytes": 5503,
+      "sha256": "0a4ff799e9d06d4e0dd3e8a25aa9cc06df5e13baf02fd7946d98f3103e560494"
+    },
+    {
+      "path": "js/panels-smooth-gutter-boundaries.js",
+      "bytes": 10747,
+      "sha256": "dbe3c05119bdab2439abd26b619f6dae128247b5b3725c23a11e683d456a598b"
+    },
+    {
+      "path": "js/panels-speech-ownership.js",
+      "bytes": 10157,
+      "sha256": "1aecbe9b68c74f385751c1fc4315f22a808342bdd28db52abec214f10d5c7f5e"
+    },
+    {
+      "path": "js/panels-split-cell-completion.js",
+      "bytes": 6518,
+      "sha256": "a758be8abb1d335a9028208c9a6b2aa3a2e7975ca8180e5076afc5acb685e3e7"
+    },
+    {
+      "path": "js/panels-stable-frontier-cells.js",
+      "bytes": 14834,
+      "sha256": "60a6f58dc7a719b09ed0a5165651a437414202623c99327831016ba951fcaf08"
+    },
+    {
+      "path": "js/panels-strong-continuation-groups.js",
+      "bytes": 11797,
+      "sha256": "19dd227a990a361d97fa2afd21a5a65de5b4f541f20e8c4a94cadb3d94ec10d6"
+    },
+    {
+      "path": "js/panels-structural-grid.js",
+      "bytes": 147905,
+      "sha256": "63309b5ff6302b6ab658390bc0c25cf7a2dc37ef0a7a27a789c60cdd922b2319"
+    },
+    {
+      "path": "js/panels-tail-speech.js",
+      "bytes": 13009,
+      "sha256": "d02f6b982c45aa1fef7b40062c3b7c9626aeba38021015b48f9308b0e012880d"
+    },
+    {
+      "path": "js/panels-terminal-frames.js",
+      "bytes": 66136,
+      "sha256": "3663f8c71fecb7067c4eb044671e3086a0d55f637cbd5f8012f3e60ab7450956"
+    },
+    {
+      "path": "js/panels-terminal-native-reader.js",
+      "bytes": 3474,
+      "sha256": "9ed2eab1205a9e73faab91e2f966f5e013f7a73bd7edfa22877800964a987009"
+    },
+    {
+      "path": "js/panels-terraced-frames.js",
+      "bytes": 24378,
+      "sha256": "303160f108db7ebdbebc2406724fa73c8cbb25da6445347830d24fda4acba64c"
+    },
+    {
+      "path": "js/panels-top-row-barrier.js",
+      "bytes": 9214,
+      "sha256": "4063a0cc2adbd6d9f48b6b313762ade36c6f12524788d6e8c5c2d302c08c1bf2"
+    },
+    {
+      "path": "js/panels-trailing-edge-groups.js",
+      "bytes": 9649,
+      "sha256": "60d45f27d92367dc63fef617d76eeb276ab4cf0fe5e9d95d7eafac58fe063a8e"
+    },
+    {
+      "path": "js/panels-upper-paper-separation.js",
+      "bytes": 12088,
+      "sha256": "55bbd86407488bb3a474aa8dec59bbbb05075ceb3e66395e5ea72e2cc96ed062"
+    },
+    {
+      "path": "js/panels-wide-paper-rows.js",
+      "bytes": 9058,
+      "sha256": "6a3ed0edae8a14b858dd9f12e3562df4d55479b3576bf1f2c7f816a12c00953d"
+    },
+    {
+      "path": "js/panels.js",
+      "bytes": 99608,
+      "sha256": "5ea30c4ec1be214e5b43ca69629c4e5abeed573634b479c6c57941e64ae48f86"
+    },
+    {
+      "path": "js/reader.js",
+      "bytes": 150830,
+      "sha256": "44819118e93201866161ad6d9fe2a051c78e78b4c9732a43143bc42ebde73f5a"
+    },
+    {
+      "path": "js/stream-transfer.js",
+      "bytes": 15233,
+      "sha256": "2b9e099d83c64cdae7080d6707c6659cf5e7b71a6625acc8dd9b5c7914b1f48e"
+    },
+    {
+      "path": "js/terminal-evidence-codec.js",
+      "bytes": 3985,
+      "sha256": "67a76805081fd051ced02f0fce1fc9fcd74e1f78a183c3dcccf0392d6dc8ba06"
+    },
+    {
+      "path": "js/terminal-geometry-reconstructed.js",
+      "bytes": 4765,
+      "sha256": "0e5668ffc29111c2f4132de0384e3b6b9b3165842b55492df5eb7e734ffb663e"
+    },
+    {
+      "path": "js/terminal-native-bootstrap.js",
+      "bytes": 307,
+      "sha256": "a6ffb3e020ab095ca8c4b21f613521d6604424efaad5d228c16fa265afee1534"
+    },
+    {
+      "path": "js/terminal-native-source-refinement.js",
+      "bytes": 61254,
+      "sha256": "0deb9f4b800a2d0e00c0a309b3584d27c84ff71b0d9ad7a756a82d477ae67b5f"
+    },
+    {
+      "path": "js/terminal-source-admission.js",
+      "bytes": 10283,
+      "sha256": "b1ba7ab2f9af36972f40cc52c0ca730d56def51b1b09d008876af8c6d2f0f524"
+    },
+    {
+      "path": "js/transfers.js",
+      "bytes": 11400,
+      "sha256": "f285bacdfae21d59c8fe21b6ba8a91c8342f84d2140b59139b6b4ff02aedddcd"
+    },
+    {
+      "path": "js/vendor/jszip.min.js",
+      "bytes": 97631,
+      "sha256": "d14e71a95ef3290dec66a9cfdd8a37c2dd624f6f2b594c4512f607d4a56e19fc"
+    },
+    {
+      "path": "sw.js",
+      "bytes": 8118,
+      "sha256": "1673b1225a42087549ae0e3f1ba9a208fefba8665b84bb7693fbb9f64a145d75"
+    }
+  ],
+  "sourceDelta": "Exact city/navigation and disjoint fresh-reuse overlays plus Test159 release identity. Broader96 cleanup excluded."
+}

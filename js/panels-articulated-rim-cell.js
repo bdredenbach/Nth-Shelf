@@ -128,6 +128,32 @@ const PanelArticulatedRimCell=(()=>{
   function replay(pixels,W,H,children){try{const child=single(children),record=child&&records.get(child);if(!record||record.child.value!==child||record.W!==W||record.H!==H)return false;const exact=()=>witnessReady()&&PanelMatteCells.sampleBilinearRGBA===issuedSampler&&single(children)===child&&sameRoot(record.child);return exact()&&PanelRasterWitness.matchesRetained(pixels,W,H,record.token)&&exact();}catch(_){return false;}}
   return{begin,finish,replay};
  })();
+
+ // Fresh detection reuse is private, bounded and independent of public replay.
+ // Keep one analysis raster, not a predecessor proof-tree copy. The installed
+ // detector alone publishes a record after the existing native/root admission.
+ let detectionGeneration=0,detectedAnalysis=null;
+ function sameAnalysis(a,b){if(!(a instanceof Uint8ClampedArray)||!(a.buffer instanceof ArrayBuffer)||!b||a.length!==b.length)return false;for(let i=0;i<a.length;i++)if(a[i]!==b[i])return false;return true;}
+ function analysisSnapshot(a,w,h){if(!(Number.isInteger(w)&&Number.isInteger(h)&&w>0&&h>0&&w<=900&&h<=900&&a instanceof Uint8ClampedArray&&a.buffer instanceof ArrayBuffer&&a.length===w*h*4))return null;try{return new Uint8ClampedArray(a);}catch(_){return null;}}
+ function sameSourceState(a,b){return !!a&&!!b&&a.length===b.length&&a.every((v,i)=>Object.is(v,b[i]));}
+ function analysisProviderReady(){return typeof WeakRef==='function'&&witnessReady()&&PanelMatteCells.sampleBilinearRGBA===issuedSampler;}
+ function retainDetectedAnalysis(generation,img,W,H,a,w,h,snapshot,prior,out){
+  if(generation!==detectionGeneration||!snapshot||!sameAnalysis(a,snapshot)||!analysisProviderReady()||out.length!==1)return;
+  const source=sourceState(img);if(!source||!sourceReady(img))return;
+  detectedAnalysis={generation,sourceRef:new WeakRef(img),source,W,H,w,h,pixels:snapshot,priorRef:null,ownersRef:new WeakRef(out),items:[new WeakRef(out[0])]};
+ }
+ // This read-only query cannot issue a certificate. New arrays, copied roots,
+ // public analyzer results and retired generations continue through replay.
+ function matchesDetectedAnalysis(img,pixels,W,H,a,w,h,owners){
+  try{
+   const r=detectedAnalysis;
+   if(!r||r.generation!==detectionGeneration||owners!==r.ownersRef?.deref()||!Array.isArray(owners)||owners.length!==r.items.length||r.items.some((ref,i)=>owners[i]!==ref.deref())||r.W!==W||r.H!==H||r.w!==w||r.h!==h||!analysisProviderReady())return false;
+   const issuingImage=r.sourceRef.deref();if(!issuingImage)return false;
+   const current=sourceState(img),exact=()=>detectedAnalysis===r&&r.generation===detectionGeneration&&sameSourceState(r.source,sourceState(issuingImage))&&sourceReady(issuingImage)&&sameSourceState(current,sourceState(img))&&sourceReady(img)&&analysisProviderReady();
+   if(!current||current[0]!==r.source[0]||current[1]!==r.source[1]||!exact())return false;
+   return issuedSource.replay(pixels,W,H,owners)&&sameAnalysis(a,r.pixels)&&exact();
+  }catch(_){return false;}
+ }
  function withNativeCapture(img,run){
   let canvas;
   try{
@@ -144,16 +170,16 @@ const PanelArticulatedRimCell=(()=>{
  // Only install() invokes this. Public analyzers/replayers/replaceImage do
  // not register roots. The token precedes sampling and checks the very same
  // private native bytes again after complete96 ->66 source analysis.
- function issuedReplaceImage(img,prior){
+ function issuedReplaceImage(img,prior,generation){
   if(!eligible(prior))return[];
   const plan=witnessReady()&&PanelMatteCells.sampleBilinearRGBA===issuedSampler?issuedSource.begin(prior):null,v=prior[0]._structuralGridProof;
   return withNativeCapture(img,(pixels,W,H,stable)=>{
    let token=null;
    try{
     if(plan)try{token=PanelRasterWitness.token(pixels,W,H);}catch(_){token=null;}
-    const a=PanelMatteCells.sampleBilinearRGBA(pixels,W,H,v.analysisWidth,v.analysisHeight),out=analyzeRGBA(a,v.analysisWidth,v.analysisHeight,prior);
+    const a=PanelMatteCells.sampleBilinearRGBA(pixels,W,H,v.analysisWidth,v.analysisHeight),snapshot=generation===detectionGeneration&&analysisProviderReady()?analysisSnapshot(a,v.analysisWidth,v.analysisHeight):null,out=analyzeRGBA(a,v.analysisWidth,v.analysisHeight,prior);
     if(!stable())return[];
-    if(out.length)issuedSource.finish(plan,pixels,W,H,token,out,()=>stable()&&PanelMatteCells.sampleBilinearRGBA===issuedSampler);
+    if(out.length&&issuedSource.finish(plan,pixels,W,H,token,out,()=>stable()&&PanelMatteCells.sampleBilinearRGBA===issuedSampler))retainDetectedAnalysis(generation,img,W,H,a,v.analysisWidth,v.analysisHeight,snapshot,prior,out);
     return out;
    }finally{if(token)try{PanelRasterWitness.discard(token);}catch(_){}}
   })||[];
@@ -175,8 +201,8 @@ const PanelArticulatedRimCell=(()=>{
   if(typeof find==='function')r.findPanelAt=function(x,y){const state=context(this);if(!state){const hit=find.call(this,x,y);return marked(hit)?null:hit;}if(!this.panelZoomEnabled)return null;if(state.valid)return this.pointInContours(state.display,x,y)?state.child:null;return readerScopeGuard.under(this,state.prior,()=>{const hit=find.call(this,x,y);return marked(hit)?null:hit;});};
   if(typeof zoom==='function')r.zoomToPanel=function(p,...args){const pinned=readerScopeGuard.display(this,'_articulatedRimState',p);if(pinned&&!pinned.display.length)return;const state=context(this);if(marked(p)){if(!state?.valid||state.child!==p)return;return readerScopeGuard.run(this,'_articulatedRimState',state,()=>zoom.call(this,p,...args));}if(!state)return zoom.call(this,p,...args);return readerScopeGuard.under(this,state.prior,()=>zoom.call(this,p,...args));};r._articulatedRimReader=true;
  }
- function install(d){if(!PanelStructuralGrid._articulatedRim){const old=PanelStructuralGrid.validPanel;PanelStructuralGrid.validPanel=p=>p?._structuralGridProof?.version===VERSION?validPanel(p):old(p);PanelStructuralGrid._articulatedRim=true;}if(typeof PanelGeometry!=='undefined'&&!PanelGeometry._articulatedRim){const old=PanelGeometry.refine;PanelGeometry.refine=async function(url,p,log){return validPanel(p)?{...p}:old.call(this,url,p,log);};PanelGeometry._articulatedRim=true;}if(typeof PanelEdgeSpill!=='undefined'&&!PanelEdgeSpill._articulatedRim){for(const name of ['analyzeImage','analyzeRGBA']){const old=PanelEdgeSpill[name];if(typeof old==='function')PanelEdgeSpill[name]=function(...args){return validPanel(args[name==='analyzeImage'?1:3])?null:old.apply(this,args);};}PanelEdgeSpill._articulatedRim=true;}if(!d||d._articulatedRim)return;const old=d.detect;d.detect=async function(url,log){const prior=await old.call(this,url,log);if(!eligible(prior))return prior;try{const img=new Image();img.src=url;await img.decode();const out=issuedReplaceImage(img,prior);return out.length?out:prior;}catch(e){log?.('articulated rim deferred: '+e.message);return prior;}};d._articulatedRim=true;}
- return{VERSION,eligible,validPanel,analyzeRGBA,sourceReplay,replaceImage,install,installReader,fields,palette,candidates,path,measure,pathMask,support,separators,separatorsValid,speech,guide,sourceState,sourceReady,readerScopeGuard};
+ function install(d){if(!PanelStructuralGrid._articulatedRim){const old=PanelStructuralGrid.validPanel;PanelStructuralGrid.validPanel=p=>p?._structuralGridProof?.version===VERSION?validPanel(p):old(p);PanelStructuralGrid._articulatedRim=true;}if(typeof PanelGeometry!=='undefined'&&!PanelGeometry._articulatedRim){const old=PanelGeometry.refine;PanelGeometry.refine=async function(url,p,log){return validPanel(p)?{...p}:old.call(this,url,p,log);};PanelGeometry._articulatedRim=true;}if(typeof PanelEdgeSpill!=='undefined'&&!PanelEdgeSpill._articulatedRim){for(const name of ['analyzeImage','analyzeRGBA']){const old=PanelEdgeSpill[name];if(typeof old==='function')PanelEdgeSpill[name]=function(...args){return validPanel(args[name==='analyzeImage'?1:3])?null:old.apply(this,args);};}PanelEdgeSpill._articulatedRim=true;}if(!d||d._articulatedRim)return;const old=d.detect;d.detect=async function(url,log){const generation=++detectionGeneration;detectedAnalysis=null;const prior=await old.call(this,url,log);if(!eligible(prior))return prior;try{const img=new Image();img.src=url;await img.decode();const out=issuedReplaceImage(img,prior,generation);return out.length?out:prior;}catch(e){log?.('articulated rim deferred: '+e.message);return prior;}};d._articulatedRim=true;}
+ return{VERSION,eligible,validPanel,analyzeRGBA,sourceReplay,matchesDetectedAnalysis,replaceImage,install,installReader,fields,palette,candidates,path,measure,pathMask,support,separators,separatorsValid,speech,guide,sourceState,sourceReady,readerScopeGuard};
 })();
 if(typeof PanelDetect!=='undefined')PanelArticulatedRimCell.install(PanelDetect);
 if(typeof module!=='undefined')module.exports=PanelArticulatedRimCell;

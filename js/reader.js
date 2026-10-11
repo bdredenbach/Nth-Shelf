@@ -1105,6 +1105,7 @@ const Reader = {
    if (token !== this._panelLoadToken || this.comic?.id !== comicId || this.index !== pageIndex || this.mode !== "single") return;
    PanelTapRequest.beforeDetectionPublish(this, detection, panels);
    this.currentPanels = panels;
+   this._prepareCurvedHostPanels?.();
    if (logger) logger(`currentPanels set: ${panels.length} fresh page identities (${panels[0]?._identitySource || 'stable-gutter'})`);
  },
 
@@ -2004,13 +2005,13 @@ async setMode(mode) {
  goTo(i, opts = {}) {
    PanelTapRequest.cancel(this);
    i = Math.max(0, Math.min(this.comic.pageCount - 1, i));
+   if (i === this.index && !opts.fromSlider) return;
+   this.clearPanelFocusForNavigation();
    if (this.mode === "single" && this.useTurnJSPageMode && this.turnPageMode?.book) {
-     if (i === this.index && !opts.fromSlider) return;
      this.turnPageMode.goTo(i);
      return;
    }
 
-   if (i === this.index && !opts.fromSlider) return;
    this.index = i;
    if (this.mode === "scroll" || this.mode === "webcomic" || this.mode === "manga") {
      const target = this.els.stage.querySelector(`.scroll-page[data-index="${i}"]`);
