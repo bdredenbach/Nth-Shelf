@@ -66,7 +66,7 @@ function element(tag = 'div') {
 function resolveSource(options = {}) {
   const root = path.resolve(options.sourceRoot || process.env.NTH_SHELF_SOURCE || path.join(__dirname, '../../..'));
   const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  const scripts = [...index.matchAll(/src="(js\/(?!terminal-native-bootstrap\.js|panels-curved-host-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(match => path.resolve(root, match[1]));
+  const scripts = [...index.matchAll(/src="(js\/(?!terminal-native-bootstrap\.js|panels-curved-host-native-bootstrap\.js)(?:panels|terminal)[^\"]*\.js)"/g)].map(match => path.resolve(root, match[1])).filter(f=>!f.endsWith('-bootstrap.js'));
   assert(scripts.length > 0, 'The selected source must provide real panel modules.');
   const requested = path.resolve(options.candidatePath || process.env.NTH_RAIL_CANDIDATE ||
     path.join(root, 'js/panels-page-edge-rail-cell.js'));
@@ -87,7 +87,7 @@ function resolveSource(options = {}) {
 
 function orderedReaderCode(code) {
   const family=['PanelPageEdgeRailCell','PanelCappedRimCell','PanelFooterGutterPair'];
-  const hooks=[...code.matchAll(/\b(\w+)\.installReader\(Reader\)/g)].map(m=>m[1]);
+  const hooks=[...code.matchAll(/\b(\w+)\.installReader\(Reader\)/g)].map(m=>m[1]).filter(f=>!f.endsWith('-bootstrap.js'));
   for(const name of family)assert(hooks.filter(n=>n===name).length<=1,'Each composed guard is installed at most once.');
   for(let k=1;k<family.length;k++)if(hooks.includes(family[k]))assert(hooks.includes(family[k-1])&&hooks.indexOf(family[k-1])<hooks.indexOf(family[k]),'A composed guard follows its authenticated ancestor.');
   // An override replaces a module at its indexed position. Existing Reader

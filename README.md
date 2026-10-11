@@ -1,3 +1,5 @@
+Current regression build: Test168 /2.79.168, locally complete105/105 originals (88 selections). Separate Test168 APK built; phone acceptance pending. See [handoff](HANDOFF-2.79.168.md) and [validation receipt](TEST168-VALIDATION.json). Cold/overall one-second timing remains unfinished.
+
 Current source checkpoint: Test154, complete tall stone-rimmed conversation. 91/105 original frames covered; 14 remain. See HANDOFF-2.79.154.md. Source only; no new APK.
 
 Current source checkpoint: Test153, complete procession and Baal action pair. 90/105 original frames covered; 15 remain. See HANDOFF-2.79.153.md. Source only; no new APK.

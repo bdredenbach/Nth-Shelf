@@ -1,3 +1,11 @@
+# Test168 regression APK ready
+
+Final authorized five-frame batch locally complete105/105 (88 selections). APK2.79.168/code28096 built and verified against184 source assets. Phone review pending; cold/overall one-second target unfinished. See HANDOFF-2.79.168.md and TEST168-VALIDATION.json. Next: phone fixes, another comic, then automatic crop mode.
+
+# Final batch Test168: Central ambush
+
+Brad authorized the remaining five in one batch then APK. Local coverage105/105; phone pending. See HANDOFF-2.79.168.md and TEST168-VALIDATION.json.
+
 # Final batch Test167: Red warrior and sword inset
 
 Brad authorized the remaining five in one batch then APK. Local coverage104/105; phone pending. See HANDOFF-2.79.167.md and TEST167-VALIDATION.json.

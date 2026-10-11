@@ -1107,7 +1107,29 @@ const Reader = {
    this.currentPanels = panels;
    this._prepareCurvedHostPanels?.();
    this._prepareSharedTopPanels?.();
+   this._preparePanelInteractions();
    if (logger) logger(`currentPanels set: ${panels.length} fresh page identities (${panels[0]?._identitySource || 'stable-gutter'})`);
+ },
+
+ // Authenticate and warm each displayed owner before an early tap resumes.
+ // Source and owner generation checks still run in the family wrappers.
+ _preparePanelInteractions() {
+   const owners=this.currentPanels, comic=this.comic, index=this.index, token=this._panelLoadToken;
+   if (!Array.isArray(owners) || this.mode !== "single") return;
+   for (const panel of owners) {
+     try { this.displayPanelContours(panel, this.panelContours(panel)); }
+     catch (_) { /* Unavailable or rejected owners remain closed. */ }
+     if (this.currentPanels !== owners || this.comic !== comic || this.index !== index || this._panelLoadToken !== token || this.mode !== "single") return;
+   }
+   // Some predecessor routers authenticate a narrower owner context on a hit.
+   // Warm that path before the first user interaction, without opening a crop.
+   for (const panel of owners) {
+     const x=panel.x+panel.w/2, y=panel.y+panel.h/2;
+     if (Number.isFinite(x) && Number.isFinite(y)) {
+       try { this.findPanelAt(x,y); } catch (_) { }
+     }
+     if (this.currentPanels !== owners || this.comic !== comic || this.index !== index || this._panelLoadToken !== token || this.mode !== "single") return;
+   }
  },
 
  getPanelImageContext() {

@@ -58,14 +58,15 @@ const PanelChromaticOcclusionCell=(()=>{
  function installReader(r){
   if(!r||r._chromaticOcclusionReader)return;
   const old=r.displayPanelContours,find=r.findPanelAt,zoom=r.zoomToPanel;
+  const contexts=new WeakMap();
   function context(reader){
    const owners=reader.currentPanels,children=Array.isArray(owners)?owners.filter(marked):[];
    if(!children.length)return null;
    let img;try{img=reader.getPanelImageContext?.()?.img;}catch(_){img=null;}
-   let state=reader._chromaticOcclusionState;
-   const source=[img?.src,img?.currentSrc,img?.naturalWidth,img?.naturalHeight,img?.width,img?.height,img?.complete];
+   let cache=contexts.get(reader);if(!cache){cache=new WeakMap();contexts.set(reader,cache);}let state=cache.get(owners);if(state)reader._chromaticOcclusionState=state;
+   const source=[img?.src,img?.currentSrc,img?.naturalWidth,img?.naturalHeight,img?.width,img?.height,img?.complete,...(typeof PanelGradientInsetReader!=='undefined'?PanelGradientInsetReader.sourceState(img)||[]:[])];
    if(state&&state.owners===owners&&state.img===img&&state.items.length===owners.length&&state.items.every((p,i)=>p===owners[i])&&state.source.every((v,i)=>v===source[i]))return state;
-   state={owners,img,items:owners.slice(),source,child:null,anchor:null,prior:null,display:null,valid:false};reader._chromaticOcclusionState=state;
+   state={owners,img,items:owners.slice(),source,child:null,anchor:null,prior:null,display:null,valid:false};reader._chromaticOcclusionState=state;cache.set(owners,state);
    if(!img)return state;
    const prior=owners.filter(p=>!marked(p));if(!eligible(prior))return state;
    const w=prior[0]._structuralGridProof.analysisWidth,h=prior[0]._structuralGridProof.analysisHeight,a=readerRaster(img,w,h);

@@ -5,8 +5,8 @@ const code=fs.readFileSync(file,'utf8');
 // Keep the extracted methods in the actual Reader helpers' lexical scope.
 const readerStart=code.indexOf('\nconst Reader = {');assert(readerStart>=0);
 const readerPrelude=code.slice(0,readerStart);
-function method(name){const start=code.indexOf(` async ${name}(`);assert(start>=0);const end=code.indexOf('\n },',start);assert(end>start);return code.slice(start,end+4);}
-const methods=method('renderPaged')+'\n'+method('loadPanelsForCurrentPage');
+function method(name,asyncMethod=true){const start=code.indexOf(` ${asyncMethod?'async ':''}${name}(`);assert(start>=0);const end=code.indexOf('\n },',start);assert(end>start);return code.slice(start,end+4);}
+const methods=method('renderPaged')+'\n'+method('loadPanelsForCurrentPage')+'\n'+method('_preparePanelInteractions',false);
 function deferred(){let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b});return{promise,resolve,reject};}
 function setup(){
  const calls=[],tasks=[],wait=deferred(),elements=[];

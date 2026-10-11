@@ -2,7 +2,7 @@
  * closed cells and gutter/ink walks choose geometry, never book identity. */
 const PanelCloudRimComposition=(()=>{
 'use strict';
-const VERSION=167,LIMIT=4,C=PanelCappedRimCell,Q=PanelCropRepair,T=PanelMatteCells;
+const VERSION=168,LIMIT=5,C=PanelCappedRimCell,Q=PanelCropRepair,T=PanelMatteCells;
 function eligible(p){return Array.isArray(p)&&p.length===3&&p[0]?._structuralGridProof?.version===67&&p[1]?._structuralGridProof?.version===98&&p[2]?._structuralGridProof?.version===98&&p[1]._structuralGridProof.index===0&&p[2]._structuralGridProof.index===1;}
 function extrema(mask,w,h){return C.extent(mask,w,h);}
 function region(b,w,h){const[x,y,X,Y]=b.box,W=X-x,H=Y-y,m=new Uint8Array(W*H);for(const i of b.indices)m[((i/w|0)-y)*W+i%w-x]=1;const f=C.grow(C.fill(m,W,H),W,H,2);return f.map((v,j)=>v?1:0);}
@@ -81,7 +81,10 @@ function analyzeRGBA(a,w,h,prior){
  for(let i=0;i<N;i++){if(masks[1][i]){masks[0][i]=0;masks[2][i]=0;masks[3][i]=0;masks[4][i]=0;}else if(masks[2][i]){masks[0][i]=0;masks[3][i]=0;masks[4][i]=0;}else if(masks[3][i]){masks[0][i]=0;masks[4][i]=0;}else if(masks[0][i])masks[4][i]=0;}
  for(const c of bc.items){const[x,y,X,Y]=c.box;if(y<capGuide-h*.02||y>pEnd||x>portrait.box[2]+w*.16||c.pixels<N*.0005||bodies.some(b=>b.box.every((v,k)=>v===c.box[k])))continue;if((Y-y)/(X-x)>3||(X-x)/(Y-y)>4)for(let i=0;i<N;i++)if(bc.ids[i]===c.id)for(const m of masks)m[i]=0;}
  const occupied=prior.slice(1).map(p=>Q.raster(p._contours,w,h));for(const m of masks)for(let i=0;i<N;i++)if(occupied.some(o=>o[i]))m[i]=0;
- for(const m of masks){const parts=C.components(m,w,h),keep=new Set(parts.items.filter(c=>c.pixels>=12).map(c=>c.id));for(let i=0;i<N;i++)m[i]=+(m[i]&&keep.has(parts.ids[i]));}
+ // Surrounding paint does not own neutral gutter fragments around the insets.
+ const gutter=new Uint8Array(N);for(const c of bc.items){const[x,y,X,Y]=c.box;if(Y<capGuide-h*.02||y>pEnd||x>portrait.box[2]+w*.16||c.pixels<N*.0005||bodies.some(b=>b.box.every((v,k)=>v===c.box[k])))continue;if((Y-y)/(X-x)>2.5||(X-x)/(Y-y)>4)for(let i=0;i<N;i++)if(bc.ids[i]===c.id)gutter[i]=1;}
+ const fringe=C.grow(gutter,w,h,2);for(let i=0;i<N;i++)if(fringe[i]&&(i/w|0)>capGuide-h*.02&&(i/w|0)<pEnd+h*.02)masks[4][i]=0;
+ for(const m of masks){const parts=C.components(m,w,h),keep=new Set(parts.items.filter(c=>c.pixels>=(m===masks[4]?N*.00065:12)).map(c=>c.id));for(let i=0;i<N;i++)m[i]=+(m[i]&&keep.has(parts.ids[i]));}
  return{masks,diagnostics:{sky:skyCore.box,roundSeed:roundSeed.box,portrait:portrait.box,swordSeed:swordSeed.box,cap:[...floor],sword:{top,end,left:[...l.front],right:[...r.front]},captions:caps.map(c=>c.box),bodies:bodies.map(b=>b.box)}};
 }
 const METHOD='source-cloud-rim-compartments',TYPE='cloud-rim-compartment';
@@ -155,7 +158,7 @@ function installReader(r){
   if(!fast&&(!sourceParents(raw,prior)||encode(Sample(raw.a,raw.w,raw.h,bank.analysisWidth,bank.analysisHeight))!==bank.sourceRGBA))return state;
   const previous=new Map();G.under(reader,state.prior,()=>{for(let k=1;k<3;k++){const p=state.prior[k],contours=display.call(reader,p,reader.panelContours(p));if(!Array.isArray(contours)||!contours.length)return;previous.set(state.retained[k-1],G.canonical(contours));}});
   if(previous.size!==2||reader.currentPanels!==owners||!equal(source,P.sourceState(img))||!G.unchanged(state.input,owners))return state;
-  state.previous=previous;state.displays=new Map(children.map(p=>[p,p._contours]));
+  state.previous=previous;state.canonicals=new Map(children.map(p=>[p,G.immutable(p)?p:G.canonical(p)]));state.displays=new Map(children.map(p=>[p,state.canonicals.get(p)._contours]));
   // The final surrounding scene excludes the exact authenticated native terminal
   // views, including their caption protrusion. Earlier compartments are above it.
   for(const p of children)if(p._structuralGridProof.index===4){const mask=Q.raster(p._contours,raw.w,raw.h);for(const contours of previous.values()){const occupied=Q.raster(contours,raw.w,raw.h);for(let i=0;i<mask.length;i++)if(occupied[i])mask[i]=0;}const rings=T.tracePixelContours(mask,raw.w,raw.h,1);if(!rings?.length)return state;state.displays.set(p,G.canonical(rings.map(r=>r.map(([x,y])=>({x:x/raw.w,y:y/raw.h})))));}
@@ -165,7 +168,7 @@ function installReader(r){
  r.displayPanelContours=function(p,c=this.panelContours(p)){const pin=G.display(this,key,p);if(pin)return pin.display;const state=context(this);if(!state)return claims(p)?null:display.call(this,p,c);if(!state.valid)return null;return state.displays.get(p)||state.previous.get(p)||null;};
  r.findPanelAt=function(x,y){const state=context(this);if(!state)return find.call(this,x,y);if(!state.valid||!this.panelZoomEnabled)return null;for(const p of state.children)if(this.pointInContours(state.displays.get(p),x,y))return p;return G.under(this,state.prior,()=>{const p=find.call(this,x,y);return state.prior.slice(1).includes(p)?state.retained[state.prior.indexOf(p)-1]:null;});};
  r.zoomToPanel=function(p,...args){const pin=G.display(this,key,p);if(pin&&!pin.display.length)return;const state=context(this);if(!state)return claims(p)?undefined:zoom.call(this,p,...args);if(!state.valid)return;
-  if(state.children.includes(p)){const held={...state,child:p,canonical:p,display:state.displays.get(p)};return G.run(this,key,held,()=>G.under(this,[p],()=>zoom.call(this,p,...args)));}
+  if(state.children.includes(p)){const held={...state,child:p,canonical:state.canonicals.get(p),display:state.displays.get(p)};return G.run(this,key,held,()=>G.under(this,[p],()=>zoom.call(this,p,...args)));}
   if(state.retained.includes(p)){const k=state.retained.indexOf(p),previous=state.prior[k+1],held={...state,child:previous,canonical:G.immutable(previous)?previous:G.canonical(previous),display:state.previous.get(p)};return G.run(this,key,held,()=>G.under(this,state.prior,()=>zoom.call(this,previous,...args)));}
  };
  r._cloudRimCompositionReader=true;
