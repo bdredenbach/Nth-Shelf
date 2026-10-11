@@ -1,3 +1,5 @@
+Brad approved the Test160 baby-discovery animation on 11 October 2026 and requested continuation. Accepted coverage is now97/105 originals, eight remaining (63 singles,17 pairs,80 qualifying selections and80 rendered outputs). The visual gate below is satisfied. Continue Reader6 F4 with its own preview before another new frame.
+
 # Test160: baby-discovery pop-out — visual review pending
 
 Resume from Test160 / 2.79.160 on `Test_Branch`. Parent is the published Test159 approval commit `644d8d29b384259bf5a88304209810f1033e8cb5`. Brad approved both Test159 animations and requested continuation on 11 October 2026.

@@ -1,10 +1,10 @@
 {
   "checkpoint": "Test160 /2.79.160",
-  "status": "baby-discovery preview pending Brad review",
+  "status": "baby-discovery preview approved by Brad",
   "baseCommit": "644d8d29b384259bf5a88304209810f1033e8cb5",
-  "acceptedOriginals": 96,
+  "acceptedOriginals": 97,
   "totalOriginals": 105,
-  "remainingAcceptedBaseline": 9,
+  "remainingAcceptedBaseline": 8,
   "newReviewCandidate": {
     "readerPage": 6,
     "selection": 3,
@@ -77,5 +77,10 @@
     "Android workflow dispatch",
     "automatic frame crop mode"
   ],
-  "resumeGate": "Wait for positive visual review before crediting this original or starting another new frame"
+  "resumeGate": "Wait for positive visual review before crediting this original or starting another new frame",
+  "userReview": {
+    "approved": "Reader6 S3 / F2 baby discovery",
+    "date": "2026-10-11",
+    "instruction": "Looks good, let us continue"
+  }
 }
