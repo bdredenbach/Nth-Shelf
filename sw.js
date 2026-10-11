@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.162 — SOURCE MATTE RIM INSET
+// NTH SHELF 2.79.163 — SOURCE TERMINAL RESIDUAL SCENE
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.162";
+const CACHE_NAME = "nth-shelf-shell-2.79.163";
 const SHELL_FILES = [
   "./js/panels-curved-host-partition.js",
   "./js/panels-curved-host-native.js",
@@ -14,6 +14,8 @@ const SHELL_FILES = [
   "./js/panels-residual-matte-row.js",
   "./js/panels-residual-matte-row-bootstrap.js",
   "./js/panels-matte-rim-inset.js",
+  "./js/panels-terminal-residual-scene.js",
+  "./js/panels-terminal-residual-scene-bootstrap.js",
   "./js/panels-matte-rim-inset-bootstrap.js",
   "./js/panels-occluded-terminal-cells.js",
   "./js/panels-terminal-native-reader.js",

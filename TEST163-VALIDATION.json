@@ -1,0 +1,122 @@
+{
+  "checkpoint": "Test163 /2.79.163",
+  "status": "Baal with baby ready; visual review pending",
+  "baseCommit": "2dd7be605cf81e62fec166dc592c6cd05b593dd6",
+  "acceptedOriginals": 99,
+  "totalOriginals": 105,
+  "remainingAcceptedBaseline": 6,
+  "acceptedSingles": 65,
+  "acceptedPairs": 17,
+  "qualifyingSelections": 82,
+  "renderedOutputs": 82,
+  "newReviewCandidate": {
+    "readerPage": 6,
+    "selection": 6,
+    "frame": "F6 Baal with baby",
+    "originals": 1
+  },
+  "ifApproved": {
+    "originals": 100,
+    "remaining": 5,
+    "singles": 66,
+    "pairs": 17,
+    "qualifyingSelections": 83,
+    "renderedOutputs": 83
+  },
+  "executed": {
+    "freshTargetGraph": 1,
+    "targetOwners": 6,
+    "earlierTargetDescriptorsExact": 5,
+    "cachedFamilyGraphs": 24,
+    "exactReferenceDelegations": 23,
+    "serializedSourceReplayMatchesFreshTarget": true,
+    "comparisonQualification": "Immediate Test162 current graph cache: 23 Test161 fresh graphs plus Test162 fresh page6. Current family delegates 23 ineligible graphs exactly and replays the sole eligible serialized graph against current native source. Not a fresh 24-page ancestor rerun. Earlier runtime geometry unchanged.",
+    "nativePage6Crops": 6,
+    "acceptedPage6PngsByteExactToTest162": 5,
+    "nativeRetainedPage8Crops": 3,
+    "retainedPage8PngsByteExactToTest162": 3,
+    "generatedGeometryControls": 11,
+    "retainedTest162GeneratedControls": 9,
+    "installedSourceControls": 12,
+    "actualLoadPreparationCases": 5,
+    "navigationControlsPerArm": 55,
+    "indexedScriptsSyntax": 155,
+    "shellVersionAndIndexOrderContract": true,
+    "diffCheck": true
+  },
+  "geometryAgreement": {
+    "minimumComponentPixels": [
+      20,
+      40
+    ],
+    "pixels": 656922,
+    "differentPixels": 0,
+    "differenceRatio": 0.0,
+    "wholeBrightBodies": true
+  },
+  "timing": {
+    "realm": "Native canvas/minimal DOM; add animation duration, not measured compositor",
+    "freshDetectionMs": 37967.481725,
+    "preparationMs": 10223.783861000004,
+    "readyEstimates": [
+      {
+        "selection": 6,
+        "findMs": 0.7630209999988438,
+        "handlerMs": 6.665077999998175,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 687.428098999997
+      },
+      {
+        "selection": 1,
+        "findMs": 2.047957000002498,
+        "handlerMs": 32.449064999993425,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 714.4970219999959
+      },
+      {
+        "selection": 2,
+        "findMs": 1.0506139999997686,
+        "handlerMs": 74.20935599999939,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 755.2599699999992
+      },
+      {
+        "selection": 3,
+        "findMs": 0.3155250000054366,
+        "handlerMs": 128.445203999996,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 808.7607290000014
+      },
+      {
+        "selection": 4,
+        "findMs": 0.3209340000030352,
+        "handlerMs": 137.99343699999736,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 818.3143710000004
+      },
+      {
+        "selection": 5,
+        "findMs": 0.16001200000027893,
+        "handlerMs": 1.883178999996744,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 682.043190999997
+      }
+    ],
+    "targetOpenedFirst": true,
+    "coldPerformanceResolved": false,
+    "globalOneSecondRequirementResolved": false,
+    "phoneTimingVerified": false
+  },
+  "previews": "Actual Reader crop/style replay with CSS dim transition; not browser/phone recording. Existing scale policy retained.",
+  "notExecuted": [
+    "fresh full 24-page ancestor rerun",
+    "full 263-command retained rerun",
+    "all-owner actual-browser audit",
+    "phone regression",
+    "APK build",
+    "Gradle invocation",
+    "Android workflow dispatch",
+    "automatic frame crop mode"
+  ],
+  "resumeGate": "Pause for positive review of Test163 before crediting this original or starting Reader20 F1"
+}
