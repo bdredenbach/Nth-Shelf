@@ -1,0 +1,89 @@
+{
+  "checkpoint": "Test161 /2.79.161",
+  "status": "middle crowd preview pending Brad review",
+  "baseCommit": "5ac69a1a226507e7dd28466dbfac9d325fb6e93c",
+  "acceptedOriginals": 97,
+  "totalOriginals": 105,
+  "remainingAcceptedBaseline": 8,
+  "newReviewCandidate": {
+    "readerPage": 6,
+    "selection": 4,
+    "frame": "F4 continuous middle crowd/Baal foreground",
+    "originals": 1
+  },
+  "ifApproved": {
+    "originals": 98,
+    "remaining": 7,
+    "singles": 64,
+    "pairs": 17,
+    "qualifyingSelections": 81,
+    "renderedOutputs": 81
+  },
+  "executed": {
+    "freshPageGraphs": 24,
+    "exactUnchangedOutputs": 23,
+    "changedGraph": "Reader6: append one independent child; first three descriptors exact",
+    "comparisonQualification": "Observe ancestor output before installing this family in the same fresh pipeline; not separately executed historical fresh detector runs.",
+    "nativePage6Crops": 4,
+    "acceptedPage6PngsByteExact": 3,
+    "nativeRetainedPage8Crops": 3,
+    "retainedPage8PngsByteExactToTest160": 3,
+    "generatedGeometryControls": 8,
+    "installedSourceControls": 12,
+    "actualLoadPreparationCases": 5,
+    "navigationControlsPerArm": 55,
+    "indexedScriptsSyntax": 151,
+    "shellVersionAndIndexOrderContract": true,
+    "diffCheck": true
+  },
+  "timing": {
+    "realm": "Native canvas/minimal DOM; add animation duration, not measured compositor",
+    "freshDetectionMs": 37898.429991000005,
+    "preparationMs": 10212.868164,
+    "readyEstimates": [
+      {
+        "selection": 4,
+        "findMs": 1.0342690000034054,
+        "handlerMs": 6.850826000001689,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 687.8850950000051
+      },
+      {
+        "selection": 1,
+        "findMs": 2.064080999996804,
+        "handlerMs": 23.31429900000512,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 705.3783800000019
+      },
+      {
+        "selection": 2,
+        "findMs": 1.0680090000023483,
+        "handlerMs": 47.85923100000218,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 728.9272400000045
+      },
+      {
+        "selection": 3,
+        "findMs": 0.5442400000029011,
+        "handlerMs": 59.26657400000113,
+        "animationMs": 680,
+        "estimatedTapToFinishMs": 739.810814000004
+      }
+    ],
+    "targetOpenedFirst": true,
+    "coldPerformanceResolved": false,
+    "globalOneSecondRequirementResolved": false,
+    "phoneTimingVerified": false
+  },
+  "previews": "Replay actual Reader canvas and captured transform with CSS 340ms dim transition; not browser/phone recordings. Wide frame follows existing modest fit/recentering behavior.",
+  "notExecuted": [
+    "full 263-command retained rerun",
+    "all-owner actual-browser audit",
+    "phone regression",
+    "APK build",
+    "Gradle invocation",
+    "Android workflow dispatch",
+    "automatic frame crop mode"
+  ],
+  "resumeGate": "Wait for positive visual review before crediting this original or starting another new frame"
+}
