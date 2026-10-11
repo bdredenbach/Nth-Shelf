@@ -124,6 +124,10 @@ function issue(img,prior){
 function generationCurrent(q){return q===issued&&equal(q.owners,q.items)&&equal(q.prior,q.priorItems)&&G.unchanged(q.input,q.owners)&&G.unchanged(q.priorInput,q.prior);}
 // Read-only successor query. Only exact installed owners and current native
 // pixels can reuse this family’s private admission; public analyses cannot.
+function verifiedSource(img,owners){
+ const q=issued;if(q?.owners!==owners||!generationCurrent(q))return null;
+ const raw=native(img);return raw&&raw.w===q.w&&raw.h===q.h&&Witness.matchesRetained(raw.a,raw.w,raw.h,q.token)&&generationCurrent(q)?raw:null;
+}
 function install(d){
  if(!PanelStructuralGrid._residualMatteRow){const old=PanelStructuralGrid.validPanel;PanelStructuralGrid.validPanel=p=>claims(p)?validPanel(p):old(p);PanelStructuralGrid._residualMatteRow=true;}
  if(typeof PanelGeometry!=='undefined'&&!PanelGeometry._residualMatteRow){const old=PanelGeometry.refine;PanelGeometry.refine=async function(url,p,log){return claims(p)?validPanel(p)?{...p}:null:old.call(this,url,p,log);};PanelGeometry._residualMatteRow=true;}
@@ -171,6 +175,6 @@ function installReader(r){
  };
  r._residualMatteRowReader=true;
 }
-return{VERSION,METHOD,eligible,raster,analyzeRGBA,geometry,claims,validPanel,supplementImage,install,installReader};
+return{VERSION,METHOD,eligible,raster,analyzeRGBA,geometry,claims,validPanel,supplementImage,verifiedSource,install,installReader};
 })();
 if(typeof module!=='undefined')module.exports=PanelResidualMatteRow;
