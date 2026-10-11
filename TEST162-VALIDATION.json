@@ -1,14 +1,14 @@
 {
   "checkpoint": "Test162 /2.79.162",
-  "status": "sacrifice discussion preview pending Brad review",
+  "status": "sacrifice discussion visually approved by Brad",
   "baseCommit": "bf2bb3afa8b84396f558b903720e7186146862d7",
-  "acceptedOriginals": 98,
+  "acceptedOriginals": 99,
   "totalOriginals": 105,
-  "remainingAcceptedBaseline": 7,
-  "acceptedSingles": 64,
+  "remainingAcceptedBaseline": 6,
+  "acceptedSingles": 65,
   "acceptedPairs": 17,
-  "qualifyingSelections": 81,
-  "renderedOutputs": 81,
+  "qualifyingSelections": 82,
+  "renderedOutputs": 82,
   "newReviewCandidate": {
     "readerPage": 6,
     "selection": 5,
@@ -111,5 +111,10 @@
     "Android workflow dispatch",
     "automatic frame crop mode"
   ],
-  "resumeGate": "Wait for positive visual review before crediting this original or starting another new frame"
+  "resumeGate": "Test162 visual gate satisfied; next Reader6 F6 Baal with baby, then pause for its visual review",
+  "userReview": {
+    "date": "2026-10-11",
+    "quote": "Yess looks great. We can continue",
+    "approved": true
+  }
 }
