@@ -1,10 +1,10 @@
 {
   "checkpoint": "Test161 /2.79.161",
-  "status": "middle crowd preview pending Brad review",
+  "status": "middle crowd visually approved by Brad",
   "baseCommit": "5ac69a1a226507e7dd28466dbfac9d325fb6e93c",
-  "acceptedOriginals": 97,
+  "acceptedOriginals": 98,
   "totalOriginals": 105,
-  "remainingAcceptedBaseline": 8,
+  "remainingAcceptedBaseline": 7,
   "newReviewCandidate": {
     "readerPage": 6,
     "selection": 4,
@@ -85,5 +85,10 @@
     "Android workflow dispatch",
     "automatic frame crop mode"
   ],
-  "resumeGate": "Wait for positive visual review before crediting this original or starting another new frame"
+  "resumeGate": "Test161 gate satisfied; next Reader6 F5 sacrifice discussion, then pause for its visual review",
+  "userReview": {
+    "date": "2026-10-11",
+    "quote": "Looks really good. Let\u2019s roll on",
+    "approved": true
+  }
 }

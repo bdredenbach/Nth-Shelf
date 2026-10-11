@@ -1,3 +1,7 @@
+# Test161: middle crowd pop-out — approved
+
+Brad positively reviewed the animated crop on 11 October 2026: “Looks really good. Let’s roll on.” The visual gate below is satisfied. Accepted coverage is now **98/105 originals, seven remaining**, 64 singles, 17 pairs, 81 qualifying selections and 81 rendered outputs. Next: Reader6 F5 sacrifice discussion. The original pending-review receipt follows for historical context.
+
 # Test161: middle crowd pop-out — visual review pending
 
 Resume from Test161 /2.79.161 on `Test_Branch`. Parent is published Test160 approval commit `5ac69a1a226507e7dd28466dbfac9d325fb6e93c`. Brad approved the baby-discovery animation and requested continuation on 11 October 2026.
