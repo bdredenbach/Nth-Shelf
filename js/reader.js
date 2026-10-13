@@ -1161,10 +1161,12 @@ const Reader = {
  },
 
  panelContours(panel) {
+   if(panel?._identitySource==='source-layout-frame')return typeof PanelSourceLayout!=='undefined'&&PanelSourceLayout.validateImage(panel,this.getPanelImageContext()?.img)?panel._contours:null;
    return typeof PanelGeometryOrthogonal!=='undefined'?PanelGeometryOrthogonal._provenContours(panel):null;
  },
 
  displayPanelContours(panel, contours=this.panelContours(panel)) {
+   if(panel?._identitySource==='source-layout-frame')return contours;
    if(!contours||typeof PanelCropRepair==='undefined')return contours;
    const owners=this.currentPanels;
    if(!this._cropRepairCache||this._cropRepairOwners!==owners){this._cropRepairCache=new WeakMap();this._cropRepairOwners=owners;}
@@ -1214,7 +1216,7 @@ const Reader = {
    for (const p of this.currentPanels) {
      if (relX >= p.x && relX <= p.x + p.w && relY >= p.y && relY <= p.y + p.h) {
        const contours=this.panelContours(p);
-       if(['composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame','matte-cell-frame'].includes(p._identitySource)&&!contours)continue;
+       if(['source-layout-frame','composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame','matte-cell-frame'].includes(p._identitySource)&&!contours)continue;
        if(contours&&!this.pointInContours(this.displayPanelContours(p,contours),relX,relY))continue;
        const polygon=this.panelPolygon(p);
        if(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(p._identitySource)&&!polygon)continue;
@@ -3418,7 +3420,7 @@ async setMode(mode) {
  async zoomToPanel(panel, stageRect, imgRect) {
    if (this.focusMode) return;
    const contours=this.panelContours(panel);
-   if(['composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame','matte-cell-frame'].includes(panel?._identitySource)&&!contours)return;
+   if(['source-layout-frame','composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame','matte-cell-frame'].includes(panel?._identitySource)&&!contours)return;
    if(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel?._identitySource)&&!this.panelPolygon(panel))return;
    const token = ++this.panelOverlayToken;
    const ctx = this.getPanelImageContext();
@@ -3463,7 +3465,7 @@ async setMode(mode) {
    const frameGeom={...geom};
    // These complete contour proofs already account for their owned balloons
    // and frame edges. A second margin heuristic could add a neighboring rail.
-   const completeContour=contours&&((panel._identitySource==='structural-grid-frame'&&[21,22,23,24,25,26,34,35,36,40,41,42,43,44,46,75,76,77,78].includes(panel._structuralGridProof?.version))||(typeof PanelTerminalNativeReader!=='undefined'&&PanelTerminalNativeReader.completeSourceContour(this,panel)));
+   const completeContour=contours&&((panel._identitySource==='source-layout-frame')||(panel._identitySource==='structural-grid-frame'&&[21,22,23,24,25,26,34,35,36,40,41,42,43,44,46,75,76,77,78].includes(panel._structuralGridProof?.version))||(typeof PanelTerminalNativeReader!=='undefined'&&PanelTerminalNativeReader.completeSourceContour(this,panel)));
    const edgeSpill=(!completeContour&&typeof PanelEdgeSpill!=="undefined"&&PanelEdgeSpill.analyzeImage)?PanelEdgeSpill.analyzeImage(img,panel,this.debugMode?(msg)=>this.debugLog(`[edge-spill] ${msg}`):null):null;
    if(edgeSpill?.spills?.length){let x0=geom.x,y0=geom.y,x1=geom.x+geom.w,y1=geom.y+geom.h;for(const s of edgeSpill.spills){x0=Math.min(x0,s.box[0]);y0=Math.min(y0,s.box[1]);x1=Math.max(x1,s.box[2]);y1=Math.max(y1,s.box[3]);}geom={x:x0,y:y0,w:x1-x0,h:y1-y0};clipPolygon=null;if(this.debugMode)this.debugLog(`[edge-spill] preserving ${edgeSpill.spills.length} owned margin component(s)`);}
 

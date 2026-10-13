@@ -6,6 +6,7 @@
 
 const PanelGeometry = {
   _seedPolicy(panel) {
+    if(panel?._identitySource==='source-layout-frame'&&typeof PanelSourceLayout!=='undefined'&&PanelSourceLayout.validPanel(panel))return {mode:'hold',source:'SOURCE-LAYOUT',reason:'source-measured-complete-cell'};
     const w=Math.max(0,Number(panel?.w)||0);
     const h=Math.max(0,Number(panel?.h)||0);
     const area=w*h;
@@ -118,11 +119,13 @@ const PanelGeometry = {
     if (log) log('ROUTER V2.78.23 proven-frame-ownership start');
 
     const policy=this._seedPolicy(panel);
+    if(policy.source==='SOURCE-LAYOUT')return {...panel};
     if(policy.mode==='hold'){
       const held=(typeof PanelGeometryOrthogonal!=='undefined'&&PanelGeometryOrthogonal.refine)
         ? PanelGeometryOrthogonal.refine(panel,log)
         : {...panel};
       held._geometryOwner='orthogonal-authority';
+      if(policy.source==='SOURCE-LAYOUT'){held._geometryOwner=panel._geometryOwner;held._geometryType=panel._geometryType;return held;}
       if(policy.source==='STRUCTURAL-GRID'&&[21,22,23,24,25,26].includes(panel._structuralGridProof?.version)){
         held._geometryOwner=panel._geometryOwner;held._geometryType=panel._geometryType;
         return held;
@@ -212,6 +215,7 @@ const PanelGeometry = {
           const held=(typeof PanelGeometryOrthogonal!=='undefined'&&PanelGeometryOrthogonal.refine)
             ? PanelGeometryOrthogonal.refine(panel,log):{...panel};
           held._geometryOwner='orthogonal-authority';
+      if(policy.source==='SOURCE-LAYOUT'){held._geometryOwner=panel._geometryOwner;held._geometryType=panel._geometryType;return held;}
           held._frameOwnership=ownership;
           if(log)log(`ORTHOGONAL AUTHORITY HOLD source=${policy.source} frameRatio=${(envelopeArea/seedArea).toFixed(2)}`);
           if(log)log('ROUTER -> ORTHOGONAL AUTHORITY');

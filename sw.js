@@ -2,8 +2,10 @@
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.168";
+const CACHE_NAME = "nth-shelf-shell-2.79.168-source-layout-173";
 const SHELL_FILES = [
+  "./js/panels-source-layout.js",
+  "./js/panels-source-layout-bootstrap.js",
   "./js/panels-cloud-rim-composition.js",
   "./js/panels-cloud-rim-composition-bootstrap.js",
   "./js/panels-curved-host-partition.js",

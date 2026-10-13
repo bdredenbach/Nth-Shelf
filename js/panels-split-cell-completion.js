@@ -50,7 +50,10 @@ const PanelSplitCellCompletion=(()=>{
   // larger composite. No discovery descriptor or selection order changes.
   const find=reader.findPanelAt;reader.findPanelAt=function(x,y){
    const hit=find.call(this,x,y),entry=this._splitCellDisplay,display=hit&&entry?.cache.get(hit);
-   if(!hit||!entry||entry.owners!==this.currentPanels||entry.img!==this.getPanelImageContext()?.img||!display||this.pointInContours(display.before,x,y))return hit;
+   // Untouched display results include ordinary rectangles with no contour
+   // mask. Only a completed repair needs sibling arbitration; the delegated
+   // finder has already applied its own proof and geometry checks.
+   if(!hit||!entry||entry.owners!==this.currentPanels||entry.img!==this.getPanelImageContext()?.img||!display?.addedPixels||!Array.isArray(display.before)||this.pointInContours(display.before,x,y))return hit;
    const repair=entry.repairs.find(q=>entry.owners[q.owner]===hit),sibling=repair&&entry.owners[repair.fragment];
    if(sibling&&x>=sibling.x&&x<=sibling.x+sibling.w&&y>=sibling.y&&y<=sibling.y+sibling.h&&this.pointInContours(this.displayPanelContours(sibling),x,y))return sibling;
    return hit;
