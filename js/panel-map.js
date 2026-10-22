@@ -35,6 +35,7 @@ const PanelMap = {
 
   beginIssue(comicId){
     if(this._issueId===comicId)return;
+    if(typeof PanelFrameEnvelope!=='undefined')PanelFrameEnvelope.clearExactSearchCache?.();
     this._clearIssueMemory(comicId);
     this._issueId=comicId||null;
     this._generation++;
@@ -45,6 +46,7 @@ const PanelMap = {
 
   endIssue(comicId){
     if(comicId&&this._issueId!==comicId)return;
+    if(typeof PanelFrameEnvelope!=='undefined')PanelFrameEnvelope.clearExactSearchCache?.();
     this._clearIssueMemory(this._issueId);
     this._issueId=null;
     this._generation++;

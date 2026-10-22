@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-22",
+  "checkpoint": "exact recovered Test179 before new repair",
+  "accepted": false,
+  "published": false,
+  "packagedNewApk": false,
+  "apkSha256": "c396ba6955687787d7372af16eb3f925d20a04ab004b538edccd5937d658cf66",
+  "verifiedPackagedWebAssets": 186,
+  "verifiedEvidenceArchiveManifestEntries": 839,
+  "verifiedCodeArchiveManifestEntries": 16,
+  "historicalEvidenceValidation": {
+    "receipts": 71,
+    "taps": 281,
+    "allLoadedScriptHashesMatchRecoveredSource": true,
+    "freshRun": false
+  },
+  "freshControls": {
+    "apocalypse-gate-controls": {
+      "passed": true,
+      "count": 22
+    },
+    "scene-controls": {
+      "passed": true,
+      "count": 29
+    },
+    "navigation-controls": {
+      "passed": true,
+      "count": 110
+    },
+    "legacy-scene-controls": {
+      "passed": true,
+      "count": 30
+    },
+    "exact-search-controls": {
+      "passed": true,
+      "count": 31
+    }
+  },
+  "freshIssue3TitlePageReproduction": {
+    "fixedTargets": 5,
+    "noPopup": 4,
+    "popup": 1,
+    "readerExceptions": 0,
+    "lastCropStillUnqualified": true
+  },
+  "qualification": "Native canvas/minimal DOM only; no browser compositor, actual Worker/IndexedDB, phone or app restart qualification. Do not transfer these results to a subsequent changed candidate.",
+  "freshKnownRegression": {
+    "pages": 47,
+    "targets": 171,
+    "exactPngAndStyles": 171,
+    "readerExceptions": 0,
+    "receiptSummarySha256": "fb1c825ee34f67d73f416d3ffe364bc30f1ade515cbe22b606334c3a7123bb17",
+    "source": "immutable exact recovered179 APK web assets"
+  },
+  "subsequentIssue1ActualTapAudit": {
+    "targets": 88,
+    "exactToHistorical168": 85,
+    "differentFallbackCrop": 1,
+    "noPopup": 2,
+    "readerExceptions": 0,
+    "historical168ActualTapEquivalence": false,
+    "separateDirectOwnerCropsExact": 3
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "date": "2026-10-22",
+  "status": "Unreleased native-qualified caption candidate; not a Test180 APK",
+  "accepted": false,
+  "published": true,
+  "newApkBuilt": false,
+  "baseApkSha256": "c396ba6955687787d7372af16eb3f925d20a04ab004b538edccd5937d658cf66",
+  "productionChanges": {
+    "js/panels-detached-captions.js": {
+      "test179": "fb5957f1975b011f70de3c7b86259a98f7bb3c95ac18701425611dd1b4377590",
+      "candidate": "79b88cdd02cdb7f24938ff179821a1836ed8fc0b953cdfd5b28d4b239a8bc9bb"
+    },
+    "js/reader.js": {
+      "test179": "c6a458ecf8e460e69056b34b4ddc237a9df92e17e70b4a6769bd5e7a20af2493",
+      "candidate": "61886934684d00d380fb9d773bb1e2173dcd77109aa21b72cc949582e9c95e34"
+    }
+  },
+  "freshControls": {
+    "partialCaption": 52,
+    "exactSearch": 31,
+    "scene": 29,
+    "legacyScene": 30,
+    "navigation": 110,
+    "legacyDetachedCaptionPassed": true
+  },
+  "actualTapRegressions": {
+    "total": 369,
+    "known171ExactTo179": 171,
+    "issue3Outcomes": 110,
+    "issue3Unchanged": 109,
+    "intentionalChangedIds": [
+      "new-i03-p03-f01"
+    ],
+    "issue1OutcomesExactToFresh179": 88,
+    "readerExceptions": 0
+  },
+  "issue1Historical168": {
+    "actualTapExact": 85,
+    "differentFallbackCrop": 1,
+    "noPopup": 2,
+    "candidateInheritedAllThreeUnchanged": true,
+    "separateHistoricalOwnerCropsExact": 3,
+    "directOwnerChecksAreNotSuccessfulTaps": true,
+    "originalEntryGateHashExpectationUnchanged": true
+  },
+  "captionNativeOracle": {
+    "foregroundSamples": 48507,
+    "fullyRetained": 48507,
+    "previouslyMissing": 36489,
+    "previousOpaqueForegroundSamplesNowMissing": 0,
+    "otherCropBoundaryAlphaChanges": {
+      "previousPartiallyTransparentSamplesNowAbsent": 1,
+      "previouslyOpaqueSamplesNowPartial": 9
+    }
+  },
+  "performance": {
+    "caption": {
+      "runsPerVersion": 3,
+      "medians": {
+        "baseline179": {
+          "wallSeconds": 20.83229289100018,
+          "detectMs": 16769.794264999997,
+          "prepareMs": 956.7487619999993,
+          "backgroundMapMs": 213.04205199999706,
+          "maxRssMiB": 682.8984375,
+          "handlerMs": 54.56863700000031
+        },
+        "candidate": {
+          "wallSeconds": 22.48745794399929,
+          "detectMs": 18038.287593,
+          "prepareMs": 1287.3468539999994,
+          "backgroundMapMs": 203.05761899999925,
+          "maxRssMiB": 710.80078125,
+          "handlerMs": 47.00405700000192
+        }
+      },
+      "ratios": {
+        "wallSeconds": 1.0794518904692514,
+        "detectMs": 1.0756415557612093,
+        "prepareMs": 1.3455432660387392,
+        "backgroundMapMs": 0.9531339803279874,
+        "maxRssMiB": 1.0408587019940283,
+        "handlerMs": 0.8613749505966524
+      }
+    },
+    "heldout": {
+      "runsPerVersion": 2,
+      "medians": {
+        "baseline179": {
+          "wallSeconds": 20.923120182499588,
+          "detectMs": 16424.8225015,
+          "prepareMs": 1720.7520624999997,
+          "backgroundMapMs": 215.35385599999972,
+          "maxRssMiB": 709.556640625,
+          "handlerMs": 52.611838999999236
+        },
+        "candidate": {
+          "wallSeconds": 21.175003819500034,
+          "detectMs": 16616.4484195,
+          "prepareMs": 1740.499414,
+          "backgroundMapMs": 199.69751899999937,
+          "maxRssMiB": 706.34375,
+          "handlerMs": 64.4407695000009
+        }
+      },
+      "ratios": {
+        "wallSeconds": 1.012038531289952,
+        "detectMs": 1.0116668486361118,
+        "prepareMs": 1.0114760004827832,
+        "backgroundMapMs": 0.9272994814636597,
+        "maxRssMiB": 0.9954719744118383,
+        "handlerMs": 1.2248340055173101
+      }
+    },
+    "issue1-memory": {
+      "runsPerVersion": 1,
+      "medians": {
+        "baseline179": {
+          "wallSeconds": 32.84516885500034,
+          "detectMs": 26637.458718,
+          "prepareMs": 793.3070459999981,
+          "backgroundMapMs": 240.71821199999977,
+          "maxRssMiB": 1432.421875,
+          "handlerMs": 5.430347999998048
+        },
+        "candidate": {
+          "wallSeconds": 32.19989700299993,
+          "detectMs": 26246.834299000002,
+          "prepareMs": 758.0885820000003,
+          "backgroundMapMs": 227.31527300000016,
+          "maxRssMiB": 1430.71875,
+          "handlerMs": 3.185401999999158
+        }
+      },
+      "ratios": {
+        "wallSeconds": 0.9803541319927734,
+        "detectMs": 0.9853355223133189,
+        "prepareMs": 0.9556055071266847,
+        "backgroundMapMs": 0.9443210428964153,
+        "maxRssMiB": 0.9988110171802563,
+        "handlerMs": 0.5865926087978713
+      }
+    }
+  },
+  "limits": [
+    "Native Node/NAPI canvas and production Reader math, not browser compositor or phone",
+    "No speedup claimed; repaired-page preparation is slower",
+    "No actual Worker/IndexedDB, Android memory, restart or interaction qualification",
+    "Remaining issue3 landscape, speech and scene defects are unresolved",
+    "No comic identity, audit centers or source annotation rectangles in production repair"
+  ],
+  "publication": {
+    "branch": "candidate/test179-caption-repair-20261022",
+    "scope": "Source candidate only; no APK, promotion, or browser/phone acceptance"
+  }
+}

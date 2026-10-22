@@ -1,8 +1,8 @@
-// NTH SHELF 2.79.168 — SOURCE TERMINAL RESIDUAL SCENE
+// NTH SHELF 2.79.179 — SOURCE TERMINAL RESIDUAL SCENE
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.168-source-layout-173";
+const CACHE_NAME = "nth-shelf-shell-2.79.179-exact-search-179";
 const SHELL_FILES = [
   "./js/panels-source-layout.js",
   "./js/panels-source-layout-bootstrap.js",

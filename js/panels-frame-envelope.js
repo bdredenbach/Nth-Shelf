@@ -7,6 +7,7 @@
 
 const PanelFrameEnvelope = {
   _frameCache: new Map(),
+  _exactSearchPages: [],
   _analysisCache: typeof WeakMap!=='undefined'?new WeakMap():null,
 
   _cachedFrame(imgUrl,panel,log){
@@ -385,7 +386,79 @@ const PanelFrameEnvelope = {
     });
   },
 
+  // Reuse a completed exhaustive search only for the exact same input.
+  // Unlike the spatial frame cache, this never gives a one-seed result any
+  // authority over neighboring taps. Decode/read the current image first and
+  // compare every analysis luminance byte; URLs and sampled hashes are not
+  // evidence that pixels are unchanged. Bound retained data to two pages and
+  // eight exact inputs per page. All misses run the original search unchanged.
+  clearExactSearchCache(){this._exactSearchPages=[];},
+
+  _cloneSearchValue(value){
+    if(Array.isArray(value))return value.map(v=>this._cloneSearchValue(v));
+    if(value&&typeof value==='object')return Object.fromEntries(
+      Object.entries(value).map(([k,v])=>[k,this._cloneSearchValue(v)]));
+    return value;
+  },
+
+  _exactSearchKey(panel){
+    // Reject values JSON would silently omit/coerce. Such callers retain the
+    // uncached path. Key every enumerable input field, including seed flags,
+    // identity bounds, probe coordinates and the real tap.
+    try{
+      const seen=new Set();
+      const plain=value=>{
+        if(value===null||typeof value==='string'||typeof value==='boolean')return true;
+        if(typeof value==='number')return Number.isFinite(value)&&!Object.is(value,-0);
+        if(typeof value!=='object'||seen.has(value))return false;
+        const array=Array.isArray(value);
+        if(!array&&Object.getPrototypeOf(value)!==Object.prototype)return false;
+        seen.add(value);
+        const keys=Reflect.ownKeys(value);
+        if(array&&(keys.length!==value.length+1||
+          !Array.from({length:value.length},(_,i)=>Object.hasOwn(value,i)).every(Boolean)))return false;
+        for(const k of keys){
+          if(array&&k==='length')continue;
+          const d=Object.getOwnPropertyDescriptor(value,k);
+          if(typeof k!=='string'||!d.enumerable||!Object.hasOwn(d,'value')||!plain(d.value))return false;
+        }
+        seen.delete(value);return true;
+      };
+      if(!plain(panel))return null;
+      return JSON.stringify([panel,typeof PanelFrameWasm!=='undefined'&&PanelFrameWasm.ready===true]);
+    }catch(_){return null;}
+  },
+
   _detect(img, panel, log) {
+    const key=this._exactSearchKey(panel);
+    if(key===null)return this._detectUncached(img,panel,log);
+    const analysis=this._analysis(img);
+    const samePixels=(a,b)=>{
+      if(a.width!==b.width||a.height!==b.height||a.lum.length!==b.lum.length)return false;
+      for(let i=0;i<a.lum.length;i++)if(a.lum[i]!==b.lum[i])return false;
+      return true;
+    };
+    let page=this._exactSearchPages.find(p=>samePixels(p,analysis));
+    if(!page){
+      page={width:analysis.width,height:analysis.height,lum:analysis.lum.slice(),entries:new Map()};
+      this._exactSearchPages.push(page);
+      if(this._exactSearchPages.length>2)this._exactSearchPages.shift();
+    }
+    if(page.entries.has(key)){
+      if(log)log('EXACT FRAME SEARCH REPLAY: full luminance and identical tap/seed input');
+      return this._cloneSearchValue(page.entries.get(key));
+    }
+    const result=this._detectUncached(img,panel,log);
+    // Kernel availability can change on an execution error. Do not preserve
+    // results under the old execution mode if that happened during this search.
+    if(this._exactSearchKey(panel)===key){
+      page.entries.set(key,this._cloneSearchValue(result));
+      if(page.entries.size>8)page.entries.delete(page.entries.keys().next().value);
+    }
+    return result;
+  },
+
+  _detectUncached(img, panel, log) {
     const seedArea=Math.max(.001,panel.w*panel.h);
     // A wide, shallow comic panel is not suspicious merely because its width
     // exceeds half the page. Rescue is reserved for seeds that plausibly span
@@ -681,7 +754,7 @@ const PanelFrameEnvelope = {
     return chosen.result;
   },
 
-  _detectSingle(img, panel, log) {
+  _analysis(img) {
     const maxDim=900;
     const scale=Math.min(1,maxDim/Math.max(img.width,img.height));
     const w=Math.max(1,Math.round(img.width*scale));
@@ -715,6 +788,11 @@ const PanelFrameEnvelope = {
     const analysis={width:w,height:h,lum,smooth};
     try{img._nthFrameLumCache=analysis;}catch(_){/* host image may reject expandos */}
     try{this._analysisCache?.set(img,analysis);}catch(_){/* correctness unchanged */}
+    return analysis;
+  },
+
+  _detectSingle(img, panel, log) {
+    const {width:w,height:h,lum,smooth}=this._analysis(img);
     let wasmRailKernel=false;
     try{
       wasmRailKernel=typeof PanelFrameWasm!=='undefined'&&PanelFrameWasm.ready===true&&
