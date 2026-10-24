@@ -2,87 +2,69 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
-## Start here
+## Current status · 24 October 2026
 
-**Continue from the recovered [Test179 handoff](HANDOFF-2.79.179.md), not the old Test158 or source176 work queue.** The next detector work is Rise of Apocalypse issue 3: landscape title-page misses, complete speech/foreground ownership, and the expensive first or nearby tap. Preserve the 171 known Test178 outputs while repairing new targets.
+Continue from the recovered **Test179 source plus the reviewed candidate fixes**, not the old Test158 or source176 work queue. The source branch is `candidate/test179-caption-repair-20261022`. **Source173 remains the accepted detector baseline.** This branch is not an accepted release, a new APK, or phone-qualified software.
 
-The project has three separate notions of “latest”:
+The candidate contains three bounded runtime corrections:
 
-| Checkpoint | What it means |
+- [Caption preservation](qa27900/frame-accuracy/test180/README.md): restores the clipped narration on Apocalypse #3 page 3 without changing owner boxes or tap routing.
+- [WASM reattachment](qa27900/wasm-reattach/README.md): invalidates prior source-upload state after successful kernel replacement. No search or ownership policy changes.
+- [Retained-owner contour handoff](qa27900/retained-terminal-contours/README.md): restores two lost pop-outs on Apocalypse #1 page 20 by looking up retained contours in their authenticated prior context. It does not expand or trim their geometry.
+
+### Latest verified results
+
+A fresh native replay covers **369 fixed taps across 93 page entries / 92 original sources**: 171 retained outputs, 88 issue 1 taps, and 110 issue 3 outcomes.
+
+- **Two restored pop-outs; the other 367 outcomes unchanged** against the stronger pre-routing baseline. All 93 strict per-page gates pass; semantic fields also match except timing and diagnostic logs.
+- **365 opens and four inherited misses**, not 365 complete frames. The two recovered raw/display PNGs exactly reproduce archived Test168 outputs.
+- The recovered crops still have a **known inherited red edge sliver and uncertain boundary-contact remnants**. This is a verified functional routing repair, **not two complete clean-frame repairs**. Hidden artwork behind another scene's dialogue is not synthesized.
+- Ten public mocked dispatch checks, seventeen private real-source guard checks, and eight stale-state mutations with eight restored actual-tap checks cover the handoff. Mock tests alone do not establish source admission.
+- The caption and successful-reattachment fixes remain unchanged. Experimental speech, protrusion, balloon-rim, residue-trimming and speed-cache variants are not included.
+
+These are native harness results, not browser/compositor, actual Worker/IndexedDB, Android or phone-performance qualification. The fresh 369-tap run took about 43.3 minutes in aggregate with peak sampled process-tree memory about 1.35 GiB; this is test-run resource evidence, not a phone benchmark or claimed speedup.
+
+## Next steps
+
+1. Preserve this source and its independent raw/display receipts. Keep the functional page 20 recovery separate from the unresolved edge-quality problem; do not remove a guard or trim by color merely to make a crop look cleaner.
+2. Investigate complete scene ownership only where original-source evidence supports a genuinely distinct mechanism. Four remaining issue 3 page 4 missed taps represent three intended scenes, not four frames. Existing clipped, contaminated and ownership-review outcomes remain open work.
+3. Keep failed local contour/contact, fragment/source-cell and merged-ink experiments paused unless new discriminating evidence changes the hypothesis. [Research notes](RESEARCH-2026-10-22.md) and [chronology](RELEASE-HISTORY.md) explain prior limits; historical inventories are not a current all-Library census.
+4. For another runtime change, freeze independent controls and explicit intended differences, review complete native artwork/rim/dialogue and neighboring exclusions, then rerun the applicable 171/88/110 suite through the [strict evidence gate](qa27900/native-regression-gate/README.md). Opening a popup is not enough to qualify its scene.
+5. Qualify real browser and Android rendering, navigation/restart behavior, memory and cold/warm interactions separately before rollout. First and nearby taps remain expensive; the tested local rail memo was slower and rejected.
+
+## Run the public checks
+
+The focused handoff check uses Node and no private comic input:
+
+```sh
+node qa27900/retained-terminal-contours/test-dispatch.cjs
+node qa27900/wasm-reattach/test-reattach.cjs
+python3 -m unittest discover -s qa27900/native-regression-gate -p 'test_*.py'
+```
+
+Follow each linked QA directory for exact scope. Public synthetic controls do not replace the private original-source regression. The repository's APK workflow is manual and restricted to `Test_Branch`; a candidate-branch push does not automatically run it or produce an APK.
+
+## Source and build identity
+
+Detector source checkpoints and Android build numbers are different identities:
+
+| Checkpoint | Meaning |
 | --- | --- |
-| **Source173** | Accepted detector baseline. Its [handoff](HANDOFF-DETECTOR-SOURCE173.md) records native evidence, not complete browser or phone qualification. |
-| **Source176** | Last published detector candidate on `detector/source176-shared-lettering` before recovery. Explicitly **unaccepted** in its [handoff](HANDOFF-DETECTOR-SOURCE176.md); not the latest delivered work. |
-| **Test179 / 2.79.179** | Recovered, isolated candidate delivered after Test177 and Test178. Its original recorded state was **neither promoted nor pushed**; the recovered source plus caption repair is now checkpointed on the candidate branch below. Do not equate its higher number with acceptance. |
+| [Source173](HANDOFF-DETECTOR-SOURCE173.md) | Accepted detector baseline; its native evidence is not complete browser/phone qualification. |
+| [Source176](HANDOFF-DETECTOR-SOURCE176.md) | Older published, explicitly unaccepted candidate. Its lost-boat queue is superseded by later recovered work. |
+| [Test179](HANDOFF-2.79.179.md) | Recovered candidate delivered after Test177/178, originally neither promoted nor pushed. The current branch adds the bounded corrections listed above. |
+| [Test168](HANDOFF-2.79.168.md) | Earlier issue 1 reconstruction/regression reference, not the current continuation target. |
 
-Detector source checkpoints and Android build numbers are different identities. The historical [Test168 APK](HANDOFF-2.79.168.md) remains an important reconstruction/regression reference, not the current continuation target. A published branch alone does not contain every later delivered candidate.
+Test179's original APK was a **verified Test178-shell repack, not a Gradle rebuild**: package `io.github.bdredenbach.nthshelf.frametest179`, version `2.79.179`, code `28107`, label `Nth Shelf Test179`. APK SHA256: `c396ba6955687787d7372af16eb3f925d20a04ab004b538edccd5937d658cf66`. The [handoff](HANDOFF-2.79.179.md) retains original module hashes and packaging checks. Existing app/version labels are provenance, not a deployment-ready identity for these newer source fixes.
 
-## Current continuation: Test179
+Comic artwork, frozen audit coordinates, private receipts and signing material stay outside public Git and CI. No merge, release or APK is included in this source checkpoint.
 
-The [recovered notes](HANDOFF-2.79.179.md) are the technical starting point. Before editing, verify the working source against the recovered candidate; do not silently resume an older checkout.
+## Documentation and chronological history
 
-- **Known outputs preserved:** 171 fixed taps retain exact Test178 displayed PNG bytes and popup styles across Wolverine, Sub-Mariner and held-out Apocalypse issue 2 pages.
-- **Original Test179 issue audit:** Apocalypse issue 3 has 110 audited tap outcomes over 23 pages. Of these, 106 open; four produce no popup, 12 are incomplete, four contain neighboring content, and three need ownership review. These are tap outcomes, not distinct panel counts. Groups are not qualified individual pop-outs.
-- **Speed improvement is narrow:** median identical-repeat native handler time fell from 6.583 s to 0.324 s. The first tap remained about 6.4 s; nearby taps still require fresh search. These are not phone or animation-to-finish measurements.
-- **Recorded checks:** 281 fresh taps produced no Reader exceptions. The handoff records 31 new exact-search controls, 59 existing scene controls, 110 navigation controls and 22 issue 1 entry gates passing. The 22 gates are not a fresh 88-tap replay. These are historical receipts, not a claim that this checkout has just rerun them.
+- [Release history](RELEASE-HISTORY.md): oldest-to-newest checkpoint notes, recovery, research and subsequent candidate fixes. Historical “current,” “next” and coverage figures apply only to their dated checkpoints.
+- [History through Test71](README-through-Test71.md): preserved earlier documentation.
+- [Test179 handoff](HANDOFF-2.79.179.md): original recovered candidate, defect audit and qualification limits.
+- [Strong baseline recapture](qa27900/native-regression-gate/RECAPTURE-2026-10-24.md): independent 369-tap baseline pairs before the later routing repair. Its 363 opens / six misses are historical, not the latest result above.
+- [Project background](PROJECT-MEMORY.md): reconcile older instructions and counts against later evidence.
 
-### Unreleased caption repair · 22 October 2026
-
-This candidate branch contains a [native-qualified caption repair](qa27900/frame-accuracy/test180/README.md), not a new APK or accepted release. It restores the whole clipped narration caption on issue 3 Reader page 3 without changing detector owner boxes or tap routing.
-
-- All 171 known outputs and all 88 newly recovered issue 1 tap outcomes match frozen Test179. Of 110 issue 3 outcomes, only the intended caption crop changes; no Reader exceptions occur.
-- Issue 1 has three **inherited** differences from Test168: one fallback crop and two missing popups. Separate owner-selected checks reproduce those historical crops, but do not turn misses into successful taps.
-- The 52 new controls, 90 recovered controls, 110 navigation checks and legacy detached-caption tests pass. Native measurements and remaining qualification limits are in the repair notes.
-- Source173 remains accepted. Published for review on `candidate/test179-caption-repair-20261022`; no new APK or promotion is included. The unchanged Test179 app/version labels are provenance, not deployment-ready release identity.
-
-### Ownership research · 22 October 2026
-
-[Research findings and next design](RESEARCH-2026-10-22.md) now supersede the old immediate repair queue. Source-native cycles recover useful frame and neighboring-cell geometry, but independent controls and source-core replay show that ownership is still unresolved. No additional crop is qualified. The revised outstanding inventory is nine incomplete outputs, four contaminated outputs, four misses and three review cases; two earlier apparent defects were source-authentic artwork, not fixes.
-
-### Regression evidence hardening and recapture · 24 October 2026
-
-The [native evidence gate](qa27900/native-regression-gate/README.md) rejects stale cached passes, incomplete receipts, changed runtime assets, and mismatched raw/displayed PNGs, owner boxes or final styles. Its 40 synthetic test methods pass normally and with Python optimization.
-
-[Fresh paired recapture](qa27900/native-regression-gate/RECAPTURE-2026-10-24.md) now covers all 281 retained/new-issue taps plus the recovered 88 issue 1 taps: **369 outcomes across 93 page entries, with 186 independent native executions and all per-page preservation gates passing**. There are 363 opens and six inherited misses, not 369 complete frames. All 171 retained displayed outputs remain exact; only the intended caption changes among the 110 issue 3 outcomes. Issue 1 preserves its three known differences from older Test168.
-
-The old 281-row reference set still lacks raw-output/final-style evidence for its opened rows. It was not silently upgraded: the new first executions were independently frozen before second runs. An audit-only recursive-graph export was made compact after a resource-limit stop; actual Reader behavior is unchanged. Full scope, resource limits and remaining ownership failures are in the recapture notes. No new frame repair, APK, phone or release qualification is claimed.
-
-### Successful WASM reattachment correction · 24 October 2026
-
-The [minimal upload-state fix](qa27900/wasm-reattach/README.md) clears the prior source identity when a new WASM instance is attached. Previously, beginning with the same luminance array could leave the replacement memory empty. Twelve real-kernel lifecycle controls pass, followed by a fresh 369-tap candidate replay: all outputs are preserved, including 363 opens and six inherited misses. This fixes successful explicit reattachment, not a newly observed phone-startup failure or another missing frame.
-
-A separate local rail memo was rejected after four alternating timing pairs made the slow handler about 6% slower. No memo, search-policy change, APK or release is included. Source173 remains accepted; this remains candidate source for review.
-
-### Next bounded repair
-
-1. Preserve the qualified caption candidate. Later experimental protrusion, speech and balloon-rim changes remain unpromoted. Local contour, fragment/source-cell and merged-ink variants failed controls; do not restart them as though unexplored.
-2. Separate missing proposals, wrong selections, clipped content and contamination. Four page 4 no-popup tap outcomes represent three intended scenes; the adjacent incomplete rescue is separate. Two new taps show that an existing narrow standing-figure candidate already opens consistently, not that a frame was repaired.
-3. Investigate only a genuinely distinct source-supported mechanism. The colored-canopy audit found continuous lower-scene fabric but an unresolved shared black apex; existing occlusion modules already contain related cues. Do not repeat color/edge growth as a new fix. Require a complete ownership proposal and real negative controls before changing generation or acceptance.
-4. Recheck the retained 171 outputs, recovered 88 issue 1 taps and 110 issue 3 outcomes when a candidate warrants it. Use explicit provenance and raw/final rendering evidence for fresh qualification; keep historical evidence limits visible. Browser/compositor, Worker/IndexedDB and phone behavior remain separate requirements.
-5. The two-page latency profile identified the rail-enclosure search as the slow-tap hotspot; the tested invocation-local memo made it slower and was rejected. Further optimization needs measured avoidable work and exact preservation, not reduced seed coverage or broader cache authority. Qualify Android memory, cold/warm interaction and restart behavior before rollout.
-
-Do not revive the source176 “reconstruct the lost boat fix” task without checking later evidence: Test179's regression already includes the boat repair from later deliveries. Do not promote a candidate, publish source or build another APK merely because an old handoff recorded authorization for a previous checkpoint.
-
-## Build and evidence identity
-
-Test179 is a **verified Test178-shell repack, not a Gradle rebuild**:
-
-- Package: `io.github.bdredenbach.nthshelf.frametest179`
-- Version: `2.79.179`; version code: `28107`; label: `Nth Shelf Test179`
-- APK SHA256: `c396ba6955687787d7372af16eb3f925d20a04ab004b538edccd5937d658cf66`
-- Frame-envelope module SHA256: `42ec85329bd7125a24415c7a86a2b39a56959d94e60e4b254d91354e2eb70c79`
-- Source-layout module SHA256: `0ec2c0fde0ba8ae9d168060eaef9c5299eea16921b463790273abc097562ffd3`
-
-The recovered notes record all 186 packaged web assets exact, 42 native entries unchanged outside manifest/resources, and successful ZIP/alignment, v2 signature and identity checks. Those checks do not establish physical-device acceptance.
-
-Comic artwork, frozen audit centers, private receipts and signing material belong outside public Git and CI. Public synthetic controls are not substitutes for private source-image regressions. Browser/compositor, actual Worker/IndexedDB and Android qualification remain separate requirements.
-
-## Documentation and chronology
-
-- [Release history](RELEASE-HISTORY.md): chronological Test73–168 checkpoint notes, published source173/176, and the recovered Test179 continuation. Existing historical details and links are preserved; missing README entries are indexed to their handoffs.
-- [History through Test71](README-through-Test71.md): unchanged earlier documentation.
-- [Test179 handoff](HANDOFF-2.79.179.md): recovered candidate results, exact defect queue and qualification limits.
-- [Source173 baseline](HANDOFF-DETECTOR-SOURCE173.md) and [source176 publication](HANDOFF-DETECTOR-SOURCE176.md): provenance and historical acceptance boundaries.
-- [Test168 handoff](HANDOFF-2.79.168.md) and [validation](TEST168-VALIDATION.json): earlier full issue 1 regression APK and reconstruction reference.
-- [Project memory](PROJECT-MEMORY.md): longer project background; reconcile older instructions and counts with later checkpoint evidence.
-
-Historical “current,” “next,” “pending” and coverage figures in archived notes apply to the checkpoint where they were written. Compare like-for-like audits; do not combine detector selections, original-frame coverage, pairs/groups, native checks and phone acceptance into one success count.
+Do not combine taps, individual frames, pairs/groups, source checkpoints and phone acceptance into one success count. Archived authorization for an earlier checkpoint is not release approval for a later candidate.

@@ -143,7 +143,7 @@ function install(d){
  if(!d||d._cloudRimComposition)return;const old=d.detect;d.detect=async function(url,log){const prior=await old.call(this,url,log);if(!eligible(prior))return prior;try{const img=new Image();img.src=url;await img.decode();return issue(img,prior);}catch(e){log?.('Cloud rim composition deferred: '+e.message);return prior;}};d._cloudRimComposition=true;
 }
 function installReader(r){
- if(!r||r._cloudRimCompositionReader)return;const prepare=r._prepareSharedTopPanels,display=r.displayPanelContours,find=r.findPanelAt,zoom=r.zoomToPanel,key='_cloudRimCompositionState';
+ if(!r||r._cloudRimCompositionReader)return;const prepare=r._prepareSharedTopPanels,contours=r.panelContours,display=r.displayPanelContours,find=r.findPanelAt,zoom=r.zoomToPanel,key='_cloudRimCompositionState';
  function context(reader){
   G.check(reader);const owners=reader.currentPanels;if(!Array.isArray(owners)||!owners.some(claims))return null;if(G.blocked(reader,key))return{valid:false};
   let img;try{img=reader.getPanelImageContext?.()?.img;}catch(_){}const source=P.sourceState(img),before=reader[key];
@@ -170,6 +170,17 @@ function installReader(r){
   children.forEach(p=>accepted.add(p));
   state.valid=true;return state;
  }
+ // Retained owners still require their original source-admitted context.
+ // A contour lookup is not a display-mask shortcut or new geometry authority.
+ r.panelContours=function(p){
+  if(!PanelOccludedTerminalCells.claims(p))return contours.call(this,p);
+  const state=context(this);
+  if(!state)return contours.call(this,p);
+  if(!state.valid)return null;
+  const k=state.retained.indexOf(p);
+  if(k<0)return contours.call(this,p);
+  return G.under(this,state.prior,()=>contours.call(this,state.prior[k+1]));
+ };
  r._prepareSharedTopPanels=function(){return this.currentPanels?.some(claims)?context(this)?.valid===true:prepare?.call(this);};
  r.displayPanelContours=function(p,c=this.panelContours(p)){const pin=G.display(this,key,p);if(pin)return pin.display;const state=context(this);if(!state)return claims(p)?null:display.call(this,p,c);if(!state.valid)return null;return state.displays.get(p)||state.previous.get(p)||null;};
  r.findPanelAt=function(x,y){const state=context(this);if(!state)return find.call(this,x,y);if(!state.valid||!this.panelZoomEnabled)return null;for(const p of state.children)if(this.pointInContours(state.displays.get(p),x,y))return p;return G.under(this,state.prior,()=>{const p=find.call(this,x,y);return state.prior.slice(1).includes(p)?state.retained[state.prior.indexOf(p)-1]:null;});};

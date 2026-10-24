@@ -1,7 +1,5 @@
 # Nth Shelf release history
 
-The 22 October research phase ended with all 11 graph-only contact owners unresolved across 2,048 assignments. This is not a new repair. The next model needs independently calibrated appearance/scene context; see [research findings](RESEARCH-2026-10-22.md).
-
 Checkpoint history, ordered from oldest to newest. [Return to the current overview](README.md).
 
 ## Reading this archive
@@ -807,6 +805,8 @@ The unreleased [caption repair](qa27900/frame-accuracy/test180/README.md) comple
 
 ## 22 October 2026, later: source-cell ownership research
 
+The graph-only contact audit ended with all 11 owners unresolved across 2,048 assignments. This was not a new repair; see the research checkpoint for the evidence limits.
+
 [Research checkpoint](RESEARCH-2026-10-22.md). The qualified caption candidate remains unchanged. Independent printed-frame controls prevent promotion of an incomplete winding-only proposal. Exact native graph/face audits recover a closed neighboring source cell, but attached-stroke ownership remains unresolved. Recovered pre-growth components reproduce the upstream contamination with byte-identical detector output, so missing metadata is not the fix. No additional pop-out, APK, Git publication or acceptance is claimed. The next design needs independent source-cell ownership and explicit ambiguity, not broader clipping or majority labels.
 
 ## 22 October 2026: source candidate publication
@@ -833,3 +833,12 @@ The old receipts were not rewritten to invent missing raw/final fields. A separa
 [Fix and qualification](qa27900/wasm-reattach/README.md). Successful kernel attachment now invalidates source-specific upload state so beginning with the same luminance array uploads into replacement memory. A real-kernel reproduction observed zeroed replacement memory before the fix; twelve lifecycle controls verify exact pixels and rail-result parity afterward. No search thresholds, ownership rules or WASM binary change.
 
 A fresh candidate replay preserves all 369 fixed tap outcomes across 93 entries: 363 opens and six inherited misses, all strict gates passing. Extra semantic row fields also remain exact. No additional complete frame, speedup, phone acceptance, APK or release is claimed. A separate invocation-local rail memo failed its predeclared performance criterion, slowing the difficult handler in all four alternating pairs (median 5.98%); it is excluded. The accepted baseline remains Source173.
+
+
+## 24 October 2026, later: retained-owner contour routing recovery
+
+[Correction and qualification](qa27900/retained-terminal-contours/README.md). The composed map already delegated retained-owner hit-testing and zoom to its authenticated predecessor, but omitted the matching contour handoff. Source admission therefore returned no contour outside that context. The narrow correction delegates only exact retained terminal members of a valid composition; child/non-composition paths and geometry stay unchanged.
+
+A fresh 369-tap replay across 93 entries / 92 original sources passes all 93 strict gates: two previously missing Apocalypse #1 page 20 pop-outs recover, and the other 367 outcomes remain exact apart from timings/logs. There are now 365 opens and four inherited misses. Both recovered raw/display PNGs exactly match archived Test168 outputs. Ten mocked dispatch checks, seventeen real-source guard checks, and eight stale-state mutations with eight restored actual-tap checks support the routing change.
+
+Native review still finds an inherited red edge sliver and uncertain boundary-contact remnants. This is a functional recovery, not two complete clean-frame repairs. A separate side-contrast observation did not certify the contaminated span and was not integrated. The existing caption/WASM fixes remain unchanged; no experimental speech, geometry trim or rejected speed memo is included. Source is published only to the candidate branch with user approval; Source173 remains accepted. No main merge, APK, release, phone acceptance or speedup is claimed.
