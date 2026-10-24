@@ -60,3 +60,7 @@ Full-rim/tail preservation, foreign-ink ownership, native uncertain contact regi
 - Six independent mutations of the real replay receipt (incomplete, wrong source, raw hash, final style, source dimensions and runtime asset map) are rejected for the intended reasons. Original receipts and PNGs remain unchanged.
 - The existing native runner already emits the stronger fields for this smoke; no missing historical fields were synthesized. The public tests use generated PNG bytes and contain no comic art.
 - No runtime source, APK, accepted baseline or release status changes. Repository APK automation remains manual and restricted to its existing branch; a candidate-branch push does not imply CI ran.
+
+## Full retained recapture
+
+The subsequent [24 October paired recapture](RECAPTURE-2026-10-24.md) covers all 281 retained/new-issue outcomes plus 88 issue 1 outcomes. All 93 strict page gates pass, with six inherited misses retained rather than counted as repaired frames. The notes distinguish new stronger references from incomplete historical fields, describe the compact audit-export correction and give measurement limits. Private manifests and art are not included in Git.

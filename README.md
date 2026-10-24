@@ -38,11 +38,13 @@ This candidate branch contains a [native-qualified caption repair](qa27900/frame
 
 [Research findings and next design](RESEARCH-2026-10-22.md) now supersede the old immediate repair queue. Source-native cycles recover useful frame and neighboring-cell geometry, but independent controls and source-core replay show that ownership is still unresolved. No additional crop is qualified. The revised outstanding inventory is nine incomplete outputs, four contaminated outputs, four misses and three review cases; two earlier apparent defects were source-authentic artwork, not fixes.
 
-### Regression evidence hardening · 24 October 2026
+### Regression evidence hardening and recapture · 24 October 2026
 
-The [native evidence gate](qa27900/native-regression-gate/README.md) rejects stale cached passes, incomplete receipts, changed runtime assets, and mismatched raw/displayed PNGs, owner boxes or final styles. It is QA tooling, not another detector repair. Two independently executed seven-tap native runs match exactly: three opened outcomes and four inherited misses. The four missing taps represent three intended scenes, since two taps belong to the same continuous scene.
+The [native evidence gate](qa27900/native-regression-gate/README.md) rejects stale cached passes, incomplete receipts, changed runtime assets, and mismatched raw/displayed PNGs, owner boxes or final styles. Its 40 synthetic test methods pass normally and with Python optimization.
 
-The older 281-outcome reference set cannot satisfy the stronger contract as stored: all 277 opened rows lack raw-output/final-style evidence. This does not invalidate their narrower historical comparisons. Recover independent artifacts or freeze a separately labeled baseline replay; never invent missing fields or weaken the new gate. No new full-suite, phone or release qualification is claimed.
+[Fresh paired recapture](qa27900/native-regression-gate/RECAPTURE-2026-10-24.md) now covers all 281 retained/new-issue taps plus the recovered 88 issue 1 taps: **369 outcomes across 93 page entries, with 186 independent native executions and all per-page preservation gates passing**. There are 363 opens and six inherited misses, not 369 complete frames. All 171 retained displayed outputs remain exact; only the intended caption changes among the 110 issue 3 outcomes. Issue 1 preserves its three known differences from older Test168.
+
+The old 281-row reference set still lacks raw-output/final-style evidence for its opened rows. It was not silently upgraded: the new first executions were independently frozen before second runs. An audit-only recursive-graph export was made compact after a resource-limit stop; actual Reader behavior is unchanged. Full scope, resource limits and remaining ownership failures are in the recapture notes. No new frame repair, APK, phone or release qualification is claimed.
 
 ### Next bounded repair
 
