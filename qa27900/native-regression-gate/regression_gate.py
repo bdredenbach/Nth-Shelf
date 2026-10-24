@@ -152,8 +152,17 @@ def qualify(manifest, root):
                 require(isinstance(fields, list) and fields and len(set(fields)) == len(fields), ident + ': invalid change fields')
                 require(set(fields) <= set(OPEN_FIELDS) | {'popped'}, ident + ': forbidden change field')
                 _, evidence = checked(root, change['reference'], ident + ' change reference')
-                desired = indexed(loads(evidence), ident + ' change reference')[ident]
-                require(loads(evidence).get('sourceSha256') == digest(source), ident + ': change source mismatch')
+                approved = loads(evidence)
+                desired = indexed(approved, ident + ' change reference')[ident]
+                require(approved.get('sourceSha256') == digest(source), ident + ': change source mismatch')
+                require(type(approved.get('readerPage')) is int and approved['readerPage'] == reader_page,
+                        ident + ': change readerPage mismatch')
+                dimensions = approved.get('sourceDimensions')
+                require(isinstance(dimensions, list) and len(dimensions) == 2 and
+                        all(type(n) is int and n > 0 for n in dimensions) and
+                        dimensions == actual['sourceDimensions'], ident + ': change sourceDimensions mismatch')
+                require(desired.get('center') == target['center'], ident + ': change tap center mismatch')
+                check_row(desired, desired, ident + ' change reference')
                 for field in fields:
                     require(field in desired, ident + ': missing approved field ' + field)
                     expected[field] = desired[field]

@@ -85,6 +85,30 @@ class GateTests(unittest.TestCase):
         self.manifest['intentional_changes']={'probe':{'reason':'Approved owner correction','fields':['selectedBox'],'reference':record}}
         self.write_receipt();self.assertTrue(self.run_gate()['native_regression_qualified'])
         self.receipt['rows'][0]['afterAnimationStyle']={};self.reject()
+    def approved_change(self, mutate):
+        self.receipt['rows'][0]['selectedBox']=[.1,0,.9,1]
+        approved=copy.deepcopy(self.receipt);mutate(approved)
+        record=self.file('approved.json',json.dumps(approved).encode())
+        self.manifest['intentional_changes']={'probe':{'reason':'Approved owner correction','fields':['selectedBox'],'reference':record}}
+        self.reject()
+    def test_change_reference_wrong_click(self):
+        self.approved_change(lambda d:d['rows'][0].update(center={'x':0,'y':0}))
+    def test_change_reference_wrong_page(self):
+        self.approved_change(lambda d:d.update(readerPage=99))
+    def test_change_reference_boolean_page(self):
+        self.approved_change(lambda d:d.update(readerPage=True))
+    def test_change_reference_wrong_dimensions(self):
+        self.approved_change(lambda d:d.update(sourceDimensions=[100,200]))
+    def test_change_reference_boolean_dimensions(self):
+        self.approved_change(lambda d:d.update(sourceDimensions=[True,3]))
+    def test_change_reference_error(self):
+        self.approved_change(lambda d:d['rows'][0].update(error='failed approved tap'))
+    def test_change_reference_missing_required_field(self):
+        self.approved_change(lambda d:d['rows'][0].pop('rawCropSha256'))
+    def test_change_reference_missing_page(self):
+        self.approved_change(lambda d:d.pop('readerPage'))
+    def test_change_reference_missing_dimensions(self):
+        self.approved_change(lambda d:d.pop('sourceDimensions'))
     def test_unused_change_fails(self):self.manifest['intentional_changes']={'absent':{}};self.reject()
     def test_unreasoned_change_fails(self):self.manifest['intentional_changes']={'probe':{'fields':['selectedBox']}};self.reject()
     def test_no_error_allowance(self):
