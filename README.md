@@ -46,13 +46,19 @@ The [native evidence gate](qa27900/native-regression-gate/README.md) rejects sta
 
 The old 281-row reference set still lacks raw-output/final-style evidence for its opened rows. It was not silently upgraded: the new first executions were independently frozen before second runs. An audit-only recursive-graph export was made compact after a resource-limit stop; actual Reader behavior is unchanged. Full scope, resource limits and remaining ownership failures are in the recapture notes. No new frame repair, APK, phone or release qualification is claimed.
 
+### Successful WASM reattachment correction · 24 October 2026
+
+The [minimal upload-state fix](qa27900/wasm-reattach/README.md) clears the prior source identity when a new WASM instance is attached. Previously, beginning with the same luminance array could leave the replacement memory empty. Twelve real-kernel lifecycle controls pass, followed by a fresh 369-tap candidate replay: all outputs are preserved, including 363 opens and six inherited misses. This fixes successful explicit reattachment, not a newly observed phone-startup failure or another missing frame.
+
+A separate local rail memo was rejected after four alternating timing pairs made the slow handler about 6% slower. No memo, search-policy change, APK or release is included. Source173 remains accepted; this remains candidate source for review.
+
 ### Next bounded repair
 
 1. Preserve the qualified caption candidate. Later experimental protrusion, speech and balloon-rim changes remain unpromoted. Local contour, fragment/source-cell and merged-ink variants failed controls; do not restart them as though unexplored.
 2. Separate missing proposals, wrong selections, clipped content and contamination. Four page 4 no-popup tap outcomes represent three intended scenes; the adjacent incomplete rescue is separate. Two new taps show that an existing narrow standing-figure candidate already opens consistently, not that a frame was repaired.
-3. Investigate only a distinct source-supported mechanism. A matte-region partition interrupted by a colored foreground occluder is a possible lead, not an implemented or qualified fix. Require complete artwork, independently supported ownership and real negative controls before changing generation or acceptance.
+3. Investigate only a genuinely distinct source-supported mechanism. The colored-canopy audit found continuous lower-scene fabric but an unresolved shared black apex; existing occlusion modules already contain related cues. Do not repeat color/edge growth as a new fix. Require a complete ownership proposal and real negative controls before changing generation or acceptance.
 4. Recheck the retained 171 outputs, recovered 88 issue 1 taps and 110 issue 3 outcomes when a candidate warrants it. Use explicit provenance and raw/final rendering evidence for fresh qualification; keep historical evidence limits visible. Browser/compositor, Worker/IndexedDB and phone behavior remain separate requirements.
-5. Address first/nearby-tap latency without broadening exact-repeat cache authority to unproved neighboring taps. Qualify Android memory, cold/warm interaction and restart behavior before rollout.
+5. The two-page latency profile identified the rail-enclosure search as the slow-tap hotspot; the tested invocation-local memo made it slower and was rejected. Further optimization needs measured avoidable work and exact preservation, not reduced seed coverage or broader cache authority. Qualify Android memory, cold/warm interaction and restart behavior before rollout.
 
 Do not revive the source176 “reconstruct the lost boat fix” task without checking later evidence: Test179's regression already includes the boat repair from later deliveries. Do not promote a candidate, publish source or build another APK merely because an old handoff recorded authorization for a previous checkpoint.
 

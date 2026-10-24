@@ -826,3 +826,10 @@ The four issue 3 title-page misses correspond to three intended scenes. Two addi
 [Recapture notes](qa27900/native-regression-gate/RECAPTURE-2026-10-24.md). All 281 retained/new-issue taps and 88 recovered issue 1 taps were executed in independent baseline/replay pairs: 186 native executions, 93 strict page gates, 363 opens and six inherited misses. Runtime source remains the qualified caption candidate. The 171 retained displayed outputs and 109 of 110 issue 3 outcomes match historical179; only the intended caption differs. All 88 issue 1 rows match recovered fresh179, preserving the known fallback difference and two misses versus older Test168.
 
 The old receipts were not rewritten to invent missing raw/final fields. A separately frozen fresh baseline closes that evidence gap. An audit-only recursive owner-graph export hit its RSS limit; replacing that dump with existing compact metadata retained exact output parity and allowed the full issue 1 suite to finish at the unchanged cap. This improves test tooling, not Reader speed, scene completeness or Android acceptance. Private evidence remains outside Git. No app merge, APK or release is included.
+
+
+## 24 October 2026, later: WASM reattachment lifecycle correction
+
+[Fix and qualification](qa27900/wasm-reattach/README.md). Successful kernel attachment now invalidates source-specific upload state so beginning with the same luminance array uploads into replacement memory. A real-kernel reproduction observed zeroed replacement memory before the fix; twelve lifecycle controls verify exact pixels and rail-result parity afterward. No search thresholds, ownership rules or WASM binary change.
+
+A fresh candidate replay preserves all 369 fixed tap outcomes across 93 entries: 363 opens and six inherited misses, all strict gates passing. Extra semantic row fields also remain exact. No additional complete frame, speedup, phone acceptance, APK or release is claimed. A separate invocation-local rail memo failed its predeclared performance criterion, slowing the difficult handler in all four alternating pairs (median 5.98%); it is excluded. The accepted baseline remains Source173.

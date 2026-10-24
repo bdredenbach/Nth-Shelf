@@ -25,6 +25,12 @@ const PanelFrameWasm={
     if(!exports?.memory||typeof exports.evaluate!=='function')throw new Error('invalid rail-kernel exports');
     this._exports=exports;
     this._memory=exports.memory;
+    // Source identity belongs to the previous memory, not just the array.
+    // A fresh attachment must upload even the same luminance object again.
+    this._source=null;
+    this._sourceWidth=0;
+    this._sourceHeight=0;
+    this._outPtr=0;
     this._view=new DataView(this._memory.buffer);
     this.ready=true;
     this.error=null;
