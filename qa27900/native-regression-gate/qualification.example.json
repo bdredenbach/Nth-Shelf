@@ -1,0 +1,18 @@
+{
+  "schema": "native-regression-gate-v1",
+  "scope": "native-regression-only",
+  "expected_taps": 1,
+  "candidate": {
+    "js/example.js": {"path": "candidate/js/example.js", "sha256": "REPLACE_WITH_EXACT_CANDIDATE_SHA256"}
+  },
+  "runner": {"path": "harness/run-page.cjs", "sha256": "REPLACE_WITH_EXACT_RUNNER_SHA256"},
+  "support": [],
+  "pages": [{
+    "key": "independent-page",
+    "source": {"path": "inputs/source.png", "sha256": "REPLACE_WITH_SOURCE_SHA256"},
+    "input": {"path": "inputs/taps.json", "sha256": "REPLACE_WITH_INPUT_SHA256"},
+    "reference": {"path": "references/baseline.json", "sha256": "REPLACE_WITH_BASELINE_RECEIPT_SHA256"},
+    "actual": "outputs/independent-page/receipts.json"
+  }],
+  "intentional_changes": {}
+}

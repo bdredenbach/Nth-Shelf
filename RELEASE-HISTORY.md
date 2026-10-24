@@ -812,3 +812,10 @@ The unreleased [caption repair](qa27900/frame-accuracy/test180/README.md) comple
 ## 22 October 2026: source candidate publication
 
 Recovered Test179, the native-qualified caption repair, public synthetic controls and current documentation are checkpointed on `candidate/test179-caption-repair-20261022`. This source publication does not promote the candidate, build an APK, qualify another ownership repair, or establish browser/phone acceptance. Source173 remains the accepted baseline. Earlier statements about unpublished work describe their historical checkpoints.
+
+
+## 24 October 2026: regression evidence hardening and missing-scene audit
+
+Added a dependency-free, fail-closed native regression evidence gate and synthetic corruption tests. The gate binds current runtime assets, runner, source, tap inputs, independent reference and actual PNG artifacts; it does not reuse cached pass decisions. An independent seven-tap native replay matches its separately frozen baseline, with three opens and four inherited misses. This is test-tooling validation, not a new frame repair or full-suite qualification.
+
+The four issue 3 title-page misses correspond to three intended scenes. Two additional taps reach an already existing narrow standing-figure candidate; that is newly measured existing behavior, not recovered artwork. Other experimental speech, protrusion and balloon-rim branches remain unpromoted after incomplete or contaminated results. The stored historical 281-row references lack the stronger raw/final-style evidence for all 277 opened rows; their original narrower comparisons are not retroactively invalidated or upgraded. Source173 remains accepted; the caption source remains unchanged. No APK, merge, release or phone acceptance is included.

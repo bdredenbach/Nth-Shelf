@@ -38,12 +38,19 @@ This candidate branch contains a [native-qualified caption repair](qa27900/frame
 
 [Research findings and next design](RESEARCH-2026-10-22.md) now supersede the old immediate repair queue. Source-native cycles recover useful frame and neighboring-cell geometry, but independent controls and source-core replay show that ownership is still unresolved. No additional crop is qualified. The revised outstanding inventory is nine incomplete outputs, four contaminated outputs, four misses and three review cases; two earlier apparent defects were source-authentic artwork, not fixes.
 
+### Regression evidence hardening · 24 October 2026
+
+The [native evidence gate](qa27900/native-regression-gate/README.md) rejects stale cached passes, incomplete receipts, changed runtime assets, and mismatched raw/displayed PNGs, owner boxes or final styles. It is QA tooling, not another detector repair. Two independently executed seven-tap native runs match exactly: three opened outcomes and four inherited misses. The four missing taps represent three intended scenes, since two taps belong to the same continuous scene.
+
+The older 281-outcome reference set cannot satisfy the stronger contract as stored: all 277 opened rows lack raw-output/final-style evidence. This does not invalidate their narrower historical comparisons. Recover independent artifacts or freeze a separately labeled baseline replay; never invent missing fields or weaken the new gate. No new full-suite, phone or release qualification is claimed.
+
 ### Next bounded repair
 
-1. Evaluate a source-cell-first ownership model with independently calibrated appearance/scene context and new independent controls. The bounded graph-only audit left all 11 contact chains unknown. The existing contour and pre-growth component labels are already contaminated; they cannot certify their own repair. Preserve the qualified caption source and frozen failed experiments. The four page 4 title targets and the separate contaminated rescue crop remain unresolved, not newly repaired. Reader numbering includes both covers.
-2. Derive repairs from source pixels and independent ownership evidence. Preserve whole lettering, captions and foreground; do not use comic identity, frozen taps or audit rectangles as production geometry. The handoff lists the remaining speech/crop defects and ownership questions.
-3. Recheck all 171 known outputs byte-for-byte, rerun applicable source/Reader/navigation controls, and distinguish native rendering evidence from real browser/compositor and phone behavior.
-4. Address the costly first/nearby-tap fallback without broadening exact-repeat cache authority to unproved neighboring taps. Qualify Worker/IndexedDB behavior, Android rendering, app restart, memory and cold/warm interaction before rollout.
+1. Preserve the qualified caption candidate. Later experimental protrusion, speech and balloon-rim changes remain unpromoted. Local contour, fragment/source-cell and merged-ink variants failed controls; do not restart them as though unexplored.
+2. Separate missing proposals, wrong selections, clipped content and contamination. Four page 4 no-popup tap outcomes represent three intended scenes; the adjacent incomplete rescue is separate. Two new taps show that an existing narrow standing-figure candidate already opens consistently, not that a frame was repaired.
+3. Investigate only a distinct source-supported mechanism. A matte-region partition interrupted by a colored foreground occluder is a possible lead, not an implemented or qualified fix. Require complete artwork, independently supported ownership and real negative controls before changing generation or acceptance.
+4. Recheck the retained 171 outputs, recovered 88 issue 1 taps and 110 issue 3 outcomes when a candidate warrants it. Use explicit provenance and raw/final rendering evidence for fresh qualification; keep historical evidence limits visible. Browser/compositor, Worker/IndexedDB and phone behavior remain separate requirements.
+5. Address first/nearby-tap latency without broadening exact-repeat cache authority to unproved neighboring taps. Qualify Android memory, cold/warm interaction and restart behavior before rollout.
 
 Do not revive the source176 “reconstruct the lost boat fix” task without checking later evidence: Test179's regression already includes the boat repair from later deliveries. Do not promote a candidate, publish source or build another APK merely because an old handoff recorded authorization for a previous checkpoint.
 
