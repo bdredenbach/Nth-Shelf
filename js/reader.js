@@ -3092,6 +3092,30 @@ async setMode(mode) {
      if (this.debugMode) this.debugLog("[V106] CLOSED-FRAME RESCUE MISS");
    }
 
+   // Source-supported parent contours are a final-miss opportunity only.
+   // They never enter the owner/map banks or displace an accepted route above.
+   if (typeof PanelSupportedLandscape !== 'undefined' &&
+       typeof PanelSupportedLandscape.findMissCandidate === 'function') {
+     let supported = null;
+     try {
+       supported = await PanelSupportedLandscape.findMissCandidate(img, relXImg, relYImg);
+     } catch (error) {
+       if (this.debugMode) this.debugLog('[supported-landscape] source analysis rejected');
+     }
+     if (!PanelTapRequest.current(request)) return;
+     if (this.comic?.id === comicId && this.index === pageIndex &&
+         this.getPanelImageContext()?.img === img && supported &&
+         PanelSupportedLandscape.validateImage(supported, img)) {
+       const contours = this.panelContours(supported);
+       const displayed = contours && this.displayPanelContours(supported, contours);
+       if (displayed && this.pointInContours(displayed, relXImg, relYImg)) {
+         if (this.debugMode) this.debugLog('[supported-landscape] SOURCE-CONTOUR MISS RECOVERY -> ZOOM');
+         this.zoomToPanel(supported, stageRect, imgRect);
+         return;
+       }
+     }
+   }
+
    if (PanelTapRequest.current(request)) this.toggleChrome();
    } catch (error) {
      // A canceled request may still reject after its input has been retired.
@@ -3166,14 +3190,26 @@ async setMode(mode) {
    const stageRect = this.els.stage.getBoundingClientRect();
    const ctx = this.getPanelImageContext();
    const imgRect = ctx?.rect || stageRect;
+   const sourceFocusCurrent = () => {
+     const p = meta?.panel, img = this.getPanelImageContext()?.img;
+     if (typeof PanelHostBackgroundIslands !== 'undefined' && PanelHostBackgroundIslands.claims(p))
+       return PanelHostBackgroundIslands.validateImage(p, img);
+     if (typeof PanelSupportedLandscape !== 'undefined' && PanelSupportedLandscape.isClaim(p))
+       return PanelSupportedLandscape.validateImage(p, img);
+     return true;
+   };
    const current = () => token === this._bubbleRequestToken && this.mode === "single" &&
      this.comic?.id === comicId && this.index === pageIndex && this.focusMode === focus &&
-     (focus !== "panel" || (this.panelOverlayActive && this.els.panelOverlay === overlay && this.panelFocusMeta === meta));
+     (focus !== "panel" || (this.panelOverlayActive && this.els.panelOverlay === overlay && this.panelFocusMeta === meta && sourceFocusCurrent()));
    const logger = this.debugMode ? (msg) => this.debugLog(`[bubble-alt] ${msg}`) : null;
    let pageX, pageY;
    if (focus === "panel") {
      const bounds = overlay?.getBoundingClientRect();
      if (!this.panelOverlayActive || !meta || !bounds || bounds.width <= 1 || bounds.height <= 1) {
+       this.resetZoom({ animate: true });
+       return;
+     }
+     if (!sourceFocusCurrent()) {
        this.resetZoom({ animate: true });
        return;
      }
@@ -3426,6 +3462,13 @@ async setMode(mode) {
    const ctx = this.getPanelImageContext();
    const img = ctx?.img;
    if (!img || !img.naturalWidth || !img.naturalHeight) return;
+   const sourceContourClaim =
+     (typeof PanelHostBackgroundIslands !== 'undefined' && PanelHostBackgroundIslands.claims(panel)) ||
+     (typeof PanelSupportedLandscape !== 'undefined' && PanelSupportedLandscape.isClaim(panel));
+   const heldSourceContour = contours && sourceContourClaim && (
+     (typeof PanelHostBackgroundIslands !== 'undefined' && PanelHostBackgroundIslands.claims(panel) && PanelHostBackgroundIslands.validateImage(panel, img)) ||
+     (typeof PanelSupportedLandscape !== 'undefined' && PanelSupportedLandscape.isClaim(panel) && PanelSupportedLandscape.validateImage(panel, img)));
+   if (sourceContourClaim && !heldSourceContour) return;
    this._bubbleRequestToken++;
 
    // Live strict proofs supplement a partial background map. Non-frame V73,
@@ -3465,7 +3508,7 @@ async setMode(mode) {
    const frameGeom={...geom};
    // These complete contour proofs already account for their owned balloons
    // and frame edges. A second margin heuristic could add a neighboring rail.
-   const completeContour=contours&&((panel._identitySource==='source-layout-frame')||(panel._identitySource==='structural-grid-frame'&&[21,22,23,24,25,26,34,35,36,40,41,42,43,44,46,75,76,77,78].includes(panel._structuralGridProof?.version))||(typeof PanelTerminalNativeReader!=='undefined'&&PanelTerminalNativeReader.completeSourceContour(this,panel)));
+   const completeContour=heldSourceContour||(contours&&((panel._identitySource==='source-layout-frame')||(panel._identitySource==='structural-grid-frame'&&[21,22,23,24,25,26,34,35,36,40,41,42,43,44,46,75,76,77,78].includes(panel._structuralGridProof?.version))||(typeof PanelTerminalNativeReader!=='undefined'&&PanelTerminalNativeReader.completeSourceContour(this,panel))));
    const edgeSpill=(!completeContour&&typeof PanelEdgeSpill!=="undefined"&&PanelEdgeSpill.analyzeImage)?PanelEdgeSpill.analyzeImage(img,panel,this.debugMode?(msg)=>this.debugLog(`[edge-spill] ${msg}`):null):null;
    if(edgeSpill?.spills?.length){let x0=geom.x,y0=geom.y,x1=geom.x+geom.w,y1=geom.y+geom.h;for(const s of edgeSpill.spills){x0=Math.min(x0,s.box[0]);y0=Math.min(y0,s.box[1]);x1=Math.max(x1,s.box[2]);y1=Math.max(y1,s.box[3]);}geom={x:x0,y:y0,w:x1-x0,h:y1-y0};clipPolygon=null;if(this.debugMode)this.debugLog(`[edge-spill] preserving ${edgeSpill.spills.length} owned margin component(s)`);}
 
@@ -3552,6 +3595,10 @@ async setMode(mode) {
    else if(contours)Object.assign(this.panelFocusMeta.panel,{
      _identitySource:'composite-frame',_contours:contours,_compositeFrameProof:panel._compositeFrameProof
    });
+
+   // Keep the issued source owner, not a copied proof, for later focus actions.
+   // This holds the extraction mask; it does not certify scene completeness.
+   if (heldSourceContour) this.panelFocusMeta.panel = panel;
 
    const overlay = document.createElement("div");
    overlay.className = "panel-focus-overlay";

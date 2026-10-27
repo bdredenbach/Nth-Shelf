@@ -6,13 +6,13 @@
 
 `Test_Branch` is the single ongoing development branch. `Android` remains unchanged as the historical accepted Android branch. Branch consolidation preserves Git history; it is **not** acceptance of every historical candidate or a new APK release.
 
-The current runtime is the reviewed source at `9149b3a07beb30a81a6678f41ba2eb0a3e2b75cb`: recovered Test179 plus caption preservation, WASM reattachment invalidation, and retained-owner contour routing. Source173 remains the accepted detector baseline. Consolidation changes documentation and historical validation records, not runtime code.
+The current runtime extends reviewed `9149b3a07beb30a81a6678f41ba2eb0a3e2b75cb` (recovered Test179 plus caption preservation, WASM reattachment invalidation and retained-owner contour routing) with native-source inset recovery and a final-miss landscape route. Source173 remains the accepted detector baseline; internal proof versions are not new detector acceptance checkpoints. See [source-context qualification](docs/source-context-recovery-2026-10-27.md).
 
 ### Verified state and limits
 
-- Latest original-source native regression: 369 fixed taps across 93 entries / 92 sources; 365 opens and four inherited misses. Two page-20 pop-outs recover; 367 other outcomes remain unchanged. Opening is not complete-frame qualification.
-- Known edge contamination, clipped artwork/captions and scene ownership remain unresolved. Four Apocalypse #3 page-4 missed taps correspond to three scenes.
-- Public checks cover dispatch, kernel lifecycle and evidence validation. The full private-source regression was not repeated for this documentation consolidation.
+- Latest original-source native regression: 369 fixed taps across 93 entries / 92 sources; 367 opens and two remaining misses. Two additional targets open; all 365 prior open outputs remain raw/display byte-exact and semantically unchanged apart from timing/logs. All 93 strict gates pass. Opening is not complete-frame qualification.
+- Known edge contamination, clipped artwork/captions and scene ownership remain unresolved. Two remaining Apocalypse #3 page-4 missed taps correspond to one lower-left scene. New inset output omits pale interior; panorama groups that inset and retains neighboring hand/finger fragments.
+- New public checks: 27 inset, 14 landscape and 40 actual-method routing/lifecycle cases. The full private-source regression was repeated for this runtime change; earlier consolidation itself was documentation-only.
 - Browser/compositor, Worker/IndexedDB, Android rendering, memory and phone behavior require separate qualification. The preserved Test168 manual workflow has old identity/asset expectations and must be requalified before use with newer source.
 
 ### Latest research · 24–26 October 2026
@@ -29,7 +29,7 @@ These are isolated learned scene-ownership experiments, not integrated Reader im
 
 ### Next action and recovery
 
-The proposed retry keeps the exact base model, loss, parameters, seed, clicks, schedule and 600 updates, but explicitly revises the wall-clock allowance and adds periodic model/optimizer/RNG/step checkpoints. It requires a new start from the original base because the aborted run has no checkpoint. Retry approval remains pending; branch cleanup does not authorize training.
+The immediate priority is the remaining lower-left source scene, preserving the two newly verified recoveries and all prior accepted outputs. Grouped-source and display-fit research is not part of this qualified two-target checkpoint unless separately tested and recorded. The unstarted learned retry would retain the exact base, loss, parameters, seed, clicks, schedule and 600 updates with a revised wall-clock allowance and periodic model/optimizer/RNG/step checkpoints; the aborted run has no checkpoint. Do not silently resume or conflate model research with these geometric Reader fixes.
 
 Keep source/artwork, private original-comic coordinates, receipts and signing data outside public Git. Research reports, adapters and reproducibility packages are saved separately; they are not dependencies of this Reader checkout. Do not substitute old runtime counts for new test evidence or claim learned adapters fixed frames.
 

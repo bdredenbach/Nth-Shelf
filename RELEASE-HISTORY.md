@@ -853,3 +853,12 @@ The sequence of data expansion, stronger preservation weighting, same-scene agre
 Consolidated development history into `Test_Branch`, including the historical Android acceptance commits, while preserving the separate `Android` branch at its original SHA. The current test runtime and manual-only workflow are preserved from `9149b3a`; older Android push triggers are not restored. Test88 phone acceptance is retained as historical evidence, not applied to the newer candidate.
 
 Combined 139 handoff files into one indexed [HANDOFF.md](HANDOFF.md), with a current-state summary and clearly labeled historical bodies. Updated README and Android build caveats, redirected documentation links and recorded prior branch tips plus handoff hashes in the [preservation manifest](docs/branch-consolidation-2026-10-27.json). This is repository organization, not a new detector fix, release, APK or phone qualification.
+
+
+## 27 October 2026: source-context recovery of two additional targets
+
+[Qualification](docs/source-context-recovery-2026-10-27.md). A chromatic-host inset proposer preserves native connected-component topology lost by analysis downsampling; a separate source-supported landscape proposer runs only after all existing Reader routes miss. Neither uses page identities or tap-specific geometry. Source-held contour and focus guards reject malformed/stale ownership and avoid unrelated spill enlargement.
+
+Fresh native regression: 369 taps / 93 entries / 92 original sources, all strict gates passing; 367 opens and two remaining missed taps belonging to one lower-left scene. All 365 prior open raw/display outputs and non-timing/non-log receipt fields remain exact. Independent native review qualifies the inset and panorama as useful intended target openings, not clean complete scenes: pale interior is missing in the inset; panorama groups the inset and retains hand/finger contamination. New public tests: 27 inset, 14 landscape, 40 actual-method Reader routing/lifecycle checks.
+
+Only Test_Branch is updated. Android, earlier artifacts, source acceptance, APK identity and manual build workflow remain unchanged. No APK, browser/compositor or phone qualification, hidden-art synthesis, model integration or speedup is claimed. Later grouped lower-scene/display experiments require separate qualification.
