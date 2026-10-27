@@ -14,7 +14,7 @@ Neither route contains a book/page lookup. Existing descriptors stay unchanged. 
 
 The 360+ Apocalypse goal is a provisional target, not an exact inventory. Against 360, remaining coverage is 177 before, 176 with the new single alone, and 174 with the pair accepted. Exact remaining counts across the entire comic are not known. On the two manually reviewed target pages, ten missing frames become seven.
 
-The single survives original pixels, mirroring, 0.67x and 1.25x scaling, but abstains after JPEG82 recompression. The pair survives original pixels, mirroring, 1.25x and JPEG82, but abstains after 0.67x scaling. Phone confirmation and latency remain pending. Private comic artwork is not committed or uploaded to CI. See TEST90-VALIDATION.json.
+The single survives original pixels, mirroring, 0.67x and 1.25x scaling, but abstains after JPEG82 recompression. The pair survives original pixels, mirroring, 1.25x and JPEG82, but abstains after 0.67x scaling. Phone confirmation and latency remain pending. Private comic artwork is not committed or uploaded to CI. See ../../../docs/evidence/validation/TEST90-VALIDATION.json.
 
 ## Checks
 

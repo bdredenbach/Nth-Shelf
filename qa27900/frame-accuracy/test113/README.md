@@ -4,4 +4,4 @@ Two independent smooth exterior maps establish one dense broad source enclosure 
 
 The geometry fixture contains proof data, not source images. Corruption/round-trip checks cover both maps, shape, measurement dimensions, source bounds, satellites, exclusions and all four exterior sides. Blank, transparent, malformed, unproven and already-selected inputs fail closed. Reader checks cover98 tap hits and four repeated native-overlay constructions. Original-source corpus and visual complete-original review are local only; comic artwork is excluded from git/CI.
 
-See TEST113-VALIDATION.json for actual completed runtime, corpus, packaging and device acceptance status.
+See ../../../docs/evidence/validation/TEST113-VALIDATION.json for actual completed runtime, corpus, packaging and device acceptance status.

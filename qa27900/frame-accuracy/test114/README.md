@@ -1,1 +1,1 @@
-Test114: geometry-only proof round-trips, boundary corruption, measured group overlap, retained Reader selections, and synthetic short-tail speech. No comic artwork. Original-source corpus and native canvas checks run privately and are recorded in TEST114-VALIDATION.json.
+Test114: geometry-only proof round-trips, boundary corruption, measured group overlap, retained Reader selections, and synthetic short-tail speech. No comic artwork. Original-source corpus and native canvas checks run privately and are recorded in ../../../docs/evidence/validation/TEST114-VALIDATION.json.

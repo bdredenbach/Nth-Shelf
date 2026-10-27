@@ -8,7 +8,7 @@ Test71 adds one independently verified frame on **Rise of Apocalypse #1, reader1
 
 A new optional supplement accepts prior validated contour maps, including orthogonal-white-gutter proof26. Two seed scales must produce the exact same complete contour; measured enclosed white content explains sparse speech-heavy seeds. A separating exterior-paper corridor must connect the candidate to an already accepted neighbor, with zero pixel overlap and no strong unresolved internal divider. This is an image-derived first shared-neighbor recovery, not a universal mixed-boundary assembler.
 
-The checkpoint also publishes the user-accepted Test70 changes that were previously delivered locally only. Test71 identity is **2.79.71 /27999**, package `io.github.bdredenbach.nthshelf.frametest71`, label **Nth Shelf Test71**. See [validation](TEST71-VALIDATION.json), [contracts](qa27900/frame-accuracy/test71/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-71-md). Targeted mobile Chromium tests and all62 local Node contracts passed; physical Android acceptance remains pending. Fresh CI status is recorded in the validation file.
+The checkpoint also publishes the user-accepted Test70 changes that were previously delivered locally only. Test71 identity is **2.79.71 /27999**, package `io.github.bdredenbach.nthshelf.frametest71`, label **Nth Shelf Test71**. See [validation](docs/evidence/validation/TEST71-VALIDATION.json), [contracts](qa27900/frame-accuracy/test71/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-71-md). Targeted mobile Chromium tests and all62 local Node contracts passed; physical Android acceptance remains pending. Fresh CI status is recorded in the validation file.
 
 ## 2.79.70 — stable interrupted white-gutter recovery
 
@@ -18,7 +18,7 @@ On **Rise of Apocalypse #3, reader 7/23 (image index 6)**, the wide pointing-gua
 
 **Publication status:** source is prepared locally, not pushed; GitHub CI has not run. The separate local test APK reuses the verified Test69 native shell with the tested Test70 web assets and a local v2 signature. It is not a fresh Gradle compilation and requires phone installation/behavior confirmation. Local package: `io.github.bdredenbach.nthshelf.frameloc070`; future CI package: `io.github.bdredenbach.nthshelf.frametest70`. Version **2.79.70 / code 27998**.
 
-See [validation](TEST70-VALIDATION.json), [contracts and evidence](qa27900/frame-accuracy/test70/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-70-md). This adds one proven case, not general coverage of all interrupted gutters.
+See [validation](docs/evidence/validation/TEST70-VALIDATION.json), [contracts and evidence](qa27900/frame-accuracy/test70/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-70-md). This adds one proven case, not general coverage of all interrupted gutters.
 
 ## 2.79.69 — explicit orthogonal white-gutter proof
 
@@ -26,7 +26,7 @@ Test69 formalizes clean orthogonal white gutters as their own detector proof. It
 
 Across all 91 supplied Rise of Apocalypse pages, only issue 2 page 6 qualifies. Its six existing paper-cell selections are promoted to six proof-26 `orthogonal-white-gutter-cell` owners across two rows; the other 90 pages abstain. Synthetic tests reject misaligned rows and a cross-row art bridge.
 
-Current identity: **2.79.69 / code 27997**, package `io.github.bdredenbach.nthshelf.frametest69`, label **Nth Shelf Test69**. Cache/proof identifiers: `nth-shelf-shell-2.79.69`, `panel-map-exp-67`, `frame-proof-2.79.69`. See [validation](TEST69-VALIDATION.json), [contracts](qa27900/frame-accuracy/test69/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-69-md). Phone acceptance is pending.
+Current identity: **2.79.69 / code 27997**, package `io.github.bdredenbach.nthshelf.frametest69`, label **Nth Shelf Test69**. Cache/proof identifiers: `nth-shelf-shell-2.79.69`, `panel-map-exp-67`, `frame-proof-2.79.69`. See [validation](docs/evidence/validation/TEST69-VALIDATION.json), [contracts](qa27900/frame-accuracy/test69/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-69-md). Phone acceptance is pending.
 
 ## 2.79.68 — occluded dark overlay inset recovery
 
@@ -34,7 +34,7 @@ Test68 adds a conservative empty-map fallback for a large dark-framed inset whos
 
 Across all 91 supplied Rise of Apocalypse page images, the new proof abstains on 90 and adds exactly one selection on issue 4 page 15: the large upper black-framed inset. A complete-pipeline check confirms Test67 had no owner there and Test68 returns one proof-25 owner; issue 4 page 11 retains Test67's two blue-bordered proof-24 insets.
 
-Current identity: **2.79.68 / code 27996**, package `io.github.bdredenbach.nthshelf.frametest68`, label **Nth Shelf Test68**. Cache/proof identifiers: `nth-shelf-shell-2.79.68`, `panel-map-exp-66`, `frame-proof-2.79.68`. See [validation](TEST68-VALIDATION.json), [contracts](qa27900/frame-accuracy/test68/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-68-md). Phone acceptance is pending.
+Current identity: **2.79.68 / code 27996**, package `io.github.bdredenbach.nthshelf.frametest68`, label **Nth Shelf Test68**. Cache/proof identifiers: `nth-shelf-shell-2.79.68`, `panel-map-exp-66`, `frame-proof-2.79.68`. See [validation](docs/evidence/validation/TEST68-VALIDATION.json), [contracts](qa27900/frame-accuracy/test68/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-68-md). Phone acceptance is pending.
 
 ## 2.79.67 — paired chromatic Apocalypse insets
 
@@ -42,7 +42,7 @@ Test67 adds a conservative fallback for colored decorative frames whose four sid
 
 Across all 91 supplied Rise of Apocalypse page images, the new proof abstains on 90 and adds exactly two selections on issue 4 page 11: the tall upper-left blue-bordered inset and the wide lower-right blue-bordered portrait inset. Test66 returned no owners on that page. Existing Test66 detector contracts remain in the CI gate, and Test67 adds synthetic connected/split-rim, open-frame, flat-interior, proof-tamper, geometry, and reader-authority checks.
 
-Current identity: **2.79.67 / code 27995**, package `io.github.bdredenbach.nthshelf.frametest67`, label **Nth Shelf Test67**. Cache/proof identifiers: `nth-shelf-shell-2.79.67`, `panel-map-exp-65`, `frame-proof-2.79.67`. See [validation](TEST67-VALIDATION.json), [contracts](qa27900/frame-accuracy/test67/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-67-md). Phone acceptance is pending.
+Current identity: **2.79.67 / code 27995**, package `io.github.bdredenbach.nthshelf.frametest67`, label **Nth Shelf Test67**. Cache/proof identifiers: `nth-shelf-shell-2.79.67`, `panel-map-exp-65`, `frame-proof-2.79.67`. See [validation](docs/evidence/validation/TEST67-VALIDATION.json), [contracts](qa27900/frame-accuracy/test67/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-67-md). Phone acceptance is pending.
 
 ## 2.79.66 — independent Apocalypse frame recovery
 
@@ -58,7 +58,7 @@ Test66 adds four complete visible frames on three Rise of Apocalypse pages (read
 
 Validation passed across 312 page comparisons: only the three target pages changed, all prior owners were preserved, and all 221 earlier Wolverine, manga, and Magneto page maps stayed unchanged. The four additions passed 46 real reader taps, independent screenshot review, and 0.67×/1.5× resize checks.
 
-These pages remain partial. This is an accuracy experiment, not a claim that Apocalypse is fully detected. See [validation](TEST66-VALIDATION.json), [contracts](qa27900/frame-accuracy/test66/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-66-md).
+These pages remain partial. This is an accuracy experiment, not a claim that Apocalypse is fully detected. See [validation](docs/evidence/validation/TEST66-VALIDATION.json), [contracts](qa27900/frame-accuracy/test66/README.md), and [handoff](HANDOFF.md#archive-handoff-2-79-66-md).
 
 Current identity: **2.79.66 / code 27994**, package `io.github.bdredenbach.nthshelf.frametest66`, label **Nth Shelf Test66**. Cache/proof identifiers: `nth-shelf-shell-2.79.66`, `panel-map-exp-64`, `frame-proof-2.79.66`. This installs as a separate test app; phone acceptance is pending.
 

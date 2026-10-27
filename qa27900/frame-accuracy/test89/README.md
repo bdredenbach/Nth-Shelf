@@ -15,4 +15,4 @@ The reader retains proof 41's exact contour and skips legacy spill expansion. Ca
 - `native-corpus.cjs`: optional actual full-detector replay with source artwork supplied locally and exact prefix retention against a saved baseline.
 - `supplement-corpus.cjs`: optional supplemental replay against saved geometry. This checks additions and retained descriptors; it does not recreate unavailable historical detector source.
 
-Private comic artwork is not included in the repository or CI. Original-raster results and source-transform checks are recorded in TEST89-VALIDATION.json. Phone gestures and device latency require user testing.
+Private comic artwork is not included in the repository or CI. Original-raster results and source-transform checks are recorded in ../../../docs/evidence/validation/TEST89-VALIDATION.json. Phone gestures and device latency require user testing.

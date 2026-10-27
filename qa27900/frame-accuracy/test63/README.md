@@ -4,6 +4,6 @@ Eight new contours on seven previously empty Rise of Apocalypse pages. All seven
 
 The contract checks eight captured geometry descriptors, rejects 120 invalid variants, preserves contours through the geometry router, and draws arbitrary one-edge / two-edge rasters at two sizes. No artwork, page lookup, filename, image fingerprint, supplied tap, or saved frame coordinates participate in runtime detection. The geometry fixture is test-only.
 
-The private full-corpus browser comparison covers 312 pages: 91 Apocalypse images plus 221 earlier manga, Magneto and Wolverine images. `TEST63-VALIDATION.json` records the finished comparison, new-frame reader checks and known missing pages. A passing map comparison preserves the baseline; it does not certify that every frame in that baseline is correct. Phone acceptance remains pending.
+The private full-corpus browser comparison covers 312 pages: 91 Apocalypse images plus 221 earlier manga, Magneto and Wolverine images. `../../../docs/evidence/validation/TEST63-VALIDATION.json` records the finished comparison, new-frame reader checks and known missing pages. A passing map comparison preserves the baseline; it does not certify that every frame in that baseline is correct. Phone acceptance remains pending.
 
 A broader 65% seed threshold was rejected after visual inspection exposed a clipped speech-balloon chain. Alternative edge-palette trials were not shipped. Further work is needed for connected insets, overlapping foregrounds, missing balloon outlines and colored frame rails.

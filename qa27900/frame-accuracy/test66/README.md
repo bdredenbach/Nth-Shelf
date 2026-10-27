@@ -21,6 +21,6 @@ test-only and contain no comic artwork.
 
 The new contracts cover proof integrity, geometry routing, arbitrary synthetic
 pages, and abstention on uncertain boundaries. Full-corpus comparison and
-actual reader checks are recorded in `TEST66-VALIDATION.json` at repository root.
+actual reader checks are recorded in `../../../docs/evidence/validation/TEST66-VALIDATION.json` at repository root.
 A passing comparison preserves the baseline; it does not certify completeness
 or correctness of every pre-existing frame. Phone acceptance remains separate.

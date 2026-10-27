@@ -17,973 +17,1112 @@
       "git_blob_sha": "ddc6dae0521d2ef7f8ae83c8767e496b4606deab",
       "sha256": "b4e50661d83f87167d62b2de8158199b47fb6ef6ff86be5fc5c12c65ce5df9f8",
       "anchor": "archive-handoff-2-79-33-md",
-      "archive_body_sha256": "b4e50661d83f87167d62b2de8158199b47fb6ef6ff86be5fc5c12c65ce5df9f8"
+      "archive_body_sha256": "b4e50661d83f87167d62b2de8158199b47fb6ef6ff86be5fc5c12c65ce5df9f8",
+      "relocated_archive_body_sha256": "b4e50661d83f87167d62b2de8158199b47fb6ef6ff86be5fc5c12c65ce5df9f8"
     },
     {
       "original_path": "HANDOFF-2.79.34.md",
       "git_blob_sha": "398f405be3bf3abf61b2086bd03512ab8c8f171d",
       "sha256": "9ce8bd23ca8ae2e233e196f13a8a08bafeb7d905242365442db2de5135020419",
       "anchor": "archive-handoff-2-79-34-md",
-      "archive_body_sha256": "9ce8bd23ca8ae2e233e196f13a8a08bafeb7d905242365442db2de5135020419"
+      "archive_body_sha256": "9ce8bd23ca8ae2e233e196f13a8a08bafeb7d905242365442db2de5135020419",
+      "relocated_archive_body_sha256": "9ce8bd23ca8ae2e233e196f13a8a08bafeb7d905242365442db2de5135020419"
     },
     {
       "original_path": "HANDOFF-2.79.35.md",
       "git_blob_sha": "6e213f7b819cc7b4a7bec1d4b303ce1a88747abe",
       "sha256": "b832f190c5cbff03721744f23e7a7fa860f8cb10b9dcdaf3803c941aa6b8c678",
       "anchor": "archive-handoff-2-79-35-md",
-      "archive_body_sha256": "b832f190c5cbff03721744f23e7a7fa860f8cb10b9dcdaf3803c941aa6b8c678"
+      "archive_body_sha256": "b832f190c5cbff03721744f23e7a7fa860f8cb10b9dcdaf3803c941aa6b8c678",
+      "relocated_archive_body_sha256": "b832f190c5cbff03721744f23e7a7fa860f8cb10b9dcdaf3803c941aa6b8c678"
     },
     {
       "original_path": "HANDOFF-2.79.36.md",
       "git_blob_sha": "e1cf9304858ea0e0de207bd9b3500b9ec12792e0",
       "sha256": "c967ed731a6d846f274dcdf10c0ea6652a7cb754b0b556555eeb4972e35ca925",
       "anchor": "archive-handoff-2-79-36-md",
-      "archive_body_sha256": "c967ed731a6d846f274dcdf10c0ea6652a7cb754b0b556555eeb4972e35ca925"
+      "archive_body_sha256": "c967ed731a6d846f274dcdf10c0ea6652a7cb754b0b556555eeb4972e35ca925",
+      "relocated_archive_body_sha256": "c967ed731a6d846f274dcdf10c0ea6652a7cb754b0b556555eeb4972e35ca925"
     },
     {
       "original_path": "HANDOFF-2.79.37.md",
       "git_blob_sha": "a8c81cd8b60476fb562c3a0e522c77b2ec722c27",
       "sha256": "01bc30884e744739755d041438bc8a8a9e54a4150c82e4c809eacda58e5cfed0",
       "anchor": "archive-handoff-2-79-37-md",
-      "archive_body_sha256": "01bc30884e744739755d041438bc8a8a9e54a4150c82e4c809eacda58e5cfed0"
+      "archive_body_sha256": "01bc30884e744739755d041438bc8a8a9e54a4150c82e4c809eacda58e5cfed0",
+      "relocated_archive_body_sha256": "01bc30884e744739755d041438bc8a8a9e54a4150c82e4c809eacda58e5cfed0"
     },
     {
       "original_path": "HANDOFF-2.79.38.md",
       "git_blob_sha": "6aae83fb04794c02158e9e18983d49e3f98dfbba",
       "sha256": "c0ee9ebe317a3819839bb51fb75c9ff546720146c03859462bdd611e1c48933e",
       "anchor": "archive-handoff-2-79-38-md",
-      "archive_body_sha256": "c0ee9ebe317a3819839bb51fb75c9ff546720146c03859462bdd611e1c48933e"
+      "archive_body_sha256": "c0ee9ebe317a3819839bb51fb75c9ff546720146c03859462bdd611e1c48933e",
+      "relocated_archive_body_sha256": "c0ee9ebe317a3819839bb51fb75c9ff546720146c03859462bdd611e1c48933e"
     },
     {
       "original_path": "HANDOFF-2.79.39.md",
       "git_blob_sha": "030733e04aeb66c03c284364f364f3cc496f3fd3",
       "sha256": "e80c316018a49f5a6b3f189175bf5db445f76c57108a57e9efc86ef479153fa0",
       "anchor": "archive-handoff-2-79-39-md",
-      "archive_body_sha256": "e80c316018a49f5a6b3f189175bf5db445f76c57108a57e9efc86ef479153fa0"
+      "archive_body_sha256": "e80c316018a49f5a6b3f189175bf5db445f76c57108a57e9efc86ef479153fa0",
+      "relocated_archive_body_sha256": "e80c316018a49f5a6b3f189175bf5db445f76c57108a57e9efc86ef479153fa0"
     },
     {
       "original_path": "HANDOFF-2.79.40.md",
       "git_blob_sha": "13d6f19f1f75506123042f9bf820b89b5cb345e1",
       "sha256": "94cf7acd49304b929a09102604c3fe75b1ef9ca3cb6560984ef38aa4b92fc142",
       "anchor": "archive-handoff-2-79-40-md",
-      "archive_body_sha256": "94cf7acd49304b929a09102604c3fe75b1ef9ca3cb6560984ef38aa4b92fc142"
+      "archive_body_sha256": "94cf7acd49304b929a09102604c3fe75b1ef9ca3cb6560984ef38aa4b92fc142",
+      "relocated_archive_body_sha256": "94cf7acd49304b929a09102604c3fe75b1ef9ca3cb6560984ef38aa4b92fc142"
     },
     {
       "original_path": "HANDOFF-2.79.41.md",
       "git_blob_sha": "ffdf0c47cf58f30ffdf7888d27298caebcc2c489",
       "sha256": "fdbdf8587135838f00e3d64fa93923fe2a8f0c8cc018e457e30b5577ec119f74",
       "anchor": "archive-handoff-2-79-41-md",
-      "archive_body_sha256": "fdbdf8587135838f00e3d64fa93923fe2a8f0c8cc018e457e30b5577ec119f74"
+      "archive_body_sha256": "fdbdf8587135838f00e3d64fa93923fe2a8f0c8cc018e457e30b5577ec119f74",
+      "relocated_archive_body_sha256": "fdbdf8587135838f00e3d64fa93923fe2a8f0c8cc018e457e30b5577ec119f74"
     },
     {
       "original_path": "HANDOFF-2.79.42.md",
       "git_blob_sha": "e06fc65529b0b78539bcfe478af710145ecafdc0",
       "sha256": "1e66c6bef514fc1056ca483c453785343aa5d243ab2febcedf8adbe9f824c3f7",
       "anchor": "archive-handoff-2-79-42-md",
-      "archive_body_sha256": "1e66c6bef514fc1056ca483c453785343aa5d243ab2febcedf8adbe9f824c3f7"
+      "archive_body_sha256": "1e66c6bef514fc1056ca483c453785343aa5d243ab2febcedf8adbe9f824c3f7",
+      "relocated_archive_body_sha256": "1e66c6bef514fc1056ca483c453785343aa5d243ab2febcedf8adbe9f824c3f7"
     },
     {
       "original_path": "HANDOFF-2.79.43.md",
       "git_blob_sha": "3d4dcf0f0fb2110b9f65f50eac072d8935f69462",
       "sha256": "13983ce22e830f6ae0bdb96e93689636dd513f30d4c5cb5fbff1369a346011e9",
       "anchor": "archive-handoff-2-79-43-md",
-      "archive_body_sha256": "13983ce22e830f6ae0bdb96e93689636dd513f30d4c5cb5fbff1369a346011e9"
+      "archive_body_sha256": "13983ce22e830f6ae0bdb96e93689636dd513f30d4c5cb5fbff1369a346011e9",
+      "relocated_archive_body_sha256": "13983ce22e830f6ae0bdb96e93689636dd513f30d4c5cb5fbff1369a346011e9"
     },
     {
       "original_path": "HANDOFF-2.79.44.md",
       "git_blob_sha": "4a960ac415b1cdef134c7b0591dea9879eec1f0a",
       "sha256": "103c8ac58cc656a27e268a2dcf4976c98849a115153944b7b29d157a59fe98f9",
       "anchor": "archive-handoff-2-79-44-md",
-      "archive_body_sha256": "103c8ac58cc656a27e268a2dcf4976c98849a115153944b7b29d157a59fe98f9"
+      "archive_body_sha256": "103c8ac58cc656a27e268a2dcf4976c98849a115153944b7b29d157a59fe98f9",
+      "relocated_archive_body_sha256": "103c8ac58cc656a27e268a2dcf4976c98849a115153944b7b29d157a59fe98f9"
     },
     {
       "original_path": "HANDOFF-2.79.45.md",
       "git_blob_sha": "87254ce3b6871b123b50b75d339598b403c6d0df",
       "sha256": "07871aa0d0dde58c944e882ea580ca369e82bb6f9a06c2b43ec5b4989396ef32",
       "anchor": "archive-handoff-2-79-45-md",
-      "archive_body_sha256": "07871aa0d0dde58c944e882ea580ca369e82bb6f9a06c2b43ec5b4989396ef32"
+      "archive_body_sha256": "07871aa0d0dde58c944e882ea580ca369e82bb6f9a06c2b43ec5b4989396ef32",
+      "relocated_archive_body_sha256": "07871aa0d0dde58c944e882ea580ca369e82bb6f9a06c2b43ec5b4989396ef32"
     },
     {
       "original_path": "HANDOFF-2.79.46.md",
       "git_blob_sha": "c13f723fd60f160b0f95e8fa44116bd49671b9f8",
       "sha256": "2f69ad6eef1e8abda74c0fb0d9c90553423377b3cb1e0ec1c82436399b376468",
       "anchor": "archive-handoff-2-79-46-md",
-      "archive_body_sha256": "2f69ad6eef1e8abda74c0fb0d9c90553423377b3cb1e0ec1c82436399b376468"
+      "archive_body_sha256": "2f69ad6eef1e8abda74c0fb0d9c90553423377b3cb1e0ec1c82436399b376468",
+      "relocated_archive_body_sha256": "2f69ad6eef1e8abda74c0fb0d9c90553423377b3cb1e0ec1c82436399b376468"
     },
     {
       "original_path": "HANDOFF-2.79.47.md",
       "git_blob_sha": "3202984d1763262be4261f8426bd7ebc3d95a547",
       "sha256": "4f28a08379cfd2bfa48c54d8ba331998a19d7ed36f6b52fea838028dd8ae4215",
       "anchor": "archive-handoff-2-79-47-md",
-      "archive_body_sha256": "4f28a08379cfd2bfa48c54d8ba331998a19d7ed36f6b52fea838028dd8ae4215"
+      "archive_body_sha256": "4f28a08379cfd2bfa48c54d8ba331998a19d7ed36f6b52fea838028dd8ae4215",
+      "relocated_archive_body_sha256": "4f28a08379cfd2bfa48c54d8ba331998a19d7ed36f6b52fea838028dd8ae4215"
     },
     {
       "original_path": "HANDOFF-2.79.48.md",
       "git_blob_sha": "42d63588ce7e328c2a42fafa25d0d4bb0365e0aa",
       "sha256": "61094f70a78d650580eb4780d1167bc86aba163c96da88a3c5e99e3550777ae2",
       "anchor": "archive-handoff-2-79-48-md",
-      "archive_body_sha256": "61094f70a78d650580eb4780d1167bc86aba163c96da88a3c5e99e3550777ae2"
+      "archive_body_sha256": "61094f70a78d650580eb4780d1167bc86aba163c96da88a3c5e99e3550777ae2",
+      "relocated_archive_body_sha256": "61094f70a78d650580eb4780d1167bc86aba163c96da88a3c5e99e3550777ae2"
     },
     {
       "original_path": "HANDOFF-2.79.49.md",
       "git_blob_sha": "7b8119973326cb6f104c9715a18102f485756560",
       "sha256": "5925d5ec196ad718820d780126f32131d2ef1de1f70a891d970354de9996a1d6",
       "anchor": "archive-handoff-2-79-49-md",
-      "archive_body_sha256": "5925d5ec196ad718820d780126f32131d2ef1de1f70a891d970354de9996a1d6"
+      "archive_body_sha256": "5925d5ec196ad718820d780126f32131d2ef1de1f70a891d970354de9996a1d6",
+      "relocated_archive_body_sha256": "5925d5ec196ad718820d780126f32131d2ef1de1f70a891d970354de9996a1d6"
     },
     {
       "original_path": "HANDOFF-2.79.50.md",
       "git_blob_sha": "8ab9d5f3d096dd343f9d5ee621ddb319f19f6b9d",
       "sha256": "d598b36d05e870de08d3e23ac85fac634ed31598c5571315808ab82fb0608d30",
       "anchor": "archive-handoff-2-79-50-md",
-      "archive_body_sha256": "d598b36d05e870de08d3e23ac85fac634ed31598c5571315808ab82fb0608d30"
+      "archive_body_sha256": "d598b36d05e870de08d3e23ac85fac634ed31598c5571315808ab82fb0608d30",
+      "relocated_archive_body_sha256": "d598b36d05e870de08d3e23ac85fac634ed31598c5571315808ab82fb0608d30"
     },
     {
       "original_path": "HANDOFF-2.79.51.md",
       "git_blob_sha": "ea3ad652dff830fc4f9165c7a978292ee6aac62c",
       "sha256": "887a4d1383d79b44fda2780f7cf7a91e06dcb1991c929ef367dfb3880df9b7a8",
       "anchor": "archive-handoff-2-79-51-md",
-      "archive_body_sha256": "887a4d1383d79b44fda2780f7cf7a91e06dcb1991c929ef367dfb3880df9b7a8"
+      "archive_body_sha256": "887a4d1383d79b44fda2780f7cf7a91e06dcb1991c929ef367dfb3880df9b7a8",
+      "relocated_archive_body_sha256": "887a4d1383d79b44fda2780f7cf7a91e06dcb1991c929ef367dfb3880df9b7a8"
     },
     {
       "original_path": "HANDOFF-2.79.52.md",
       "git_blob_sha": "f3835462d9a149b345346bbae6b11d89d14abe3f",
       "sha256": "46a10249525873f43b70f57f29d7e1c482ea849ea171720806ea4afab0d1223d",
       "anchor": "archive-handoff-2-79-52-md",
-      "archive_body_sha256": "46a10249525873f43b70f57f29d7e1c482ea849ea171720806ea4afab0d1223d"
+      "archive_body_sha256": "46a10249525873f43b70f57f29d7e1c482ea849ea171720806ea4afab0d1223d",
+      "relocated_archive_body_sha256": "46a10249525873f43b70f57f29d7e1c482ea849ea171720806ea4afab0d1223d"
     },
     {
       "original_path": "HANDOFF-2.79.53.md",
       "git_blob_sha": "7e5bb0915d7b3b93ec6b4c088b018ca742f6e38d",
       "sha256": "5422f1c91d3afa0c3affe8583b883055b53ea20b424e9e29577072f287fe8b7b",
       "anchor": "archive-handoff-2-79-53-md",
-      "archive_body_sha256": "5422f1c91d3afa0c3affe8583b883055b53ea20b424e9e29577072f287fe8b7b"
+      "archive_body_sha256": "5422f1c91d3afa0c3affe8583b883055b53ea20b424e9e29577072f287fe8b7b",
+      "relocated_archive_body_sha256": "5422f1c91d3afa0c3affe8583b883055b53ea20b424e9e29577072f287fe8b7b"
     },
     {
       "original_path": "HANDOFF-2.79.54.md",
       "git_blob_sha": "ba090bcb595e5c375459345eb29e8d135d45394b",
       "sha256": "28e2fb15a1870c17cdb67e8598b2e6213aa147af3b8b0c6693c9febb888f4986",
       "anchor": "archive-handoff-2-79-54-md",
-      "archive_body_sha256": "28e2fb15a1870c17cdb67e8598b2e6213aa147af3b8b0c6693c9febb888f4986"
+      "archive_body_sha256": "28e2fb15a1870c17cdb67e8598b2e6213aa147af3b8b0c6693c9febb888f4986",
+      "relocated_archive_body_sha256": "28e2fb15a1870c17cdb67e8598b2e6213aa147af3b8b0c6693c9febb888f4986"
     },
     {
       "original_path": "HANDOFF-2.79.55.md",
       "git_blob_sha": "097a0f19f5736a4f25659d72e6e0d501b79b88d6",
       "sha256": "f248c131e0e941da41f7be7461f4bd963d68117694f958fffe514ed70f96a167",
       "anchor": "archive-handoff-2-79-55-md",
-      "archive_body_sha256": "f248c131e0e941da41f7be7461f4bd963d68117694f958fffe514ed70f96a167"
+      "archive_body_sha256": "f248c131e0e941da41f7be7461f4bd963d68117694f958fffe514ed70f96a167",
+      "relocated_archive_body_sha256": "f248c131e0e941da41f7be7461f4bd963d68117694f958fffe514ed70f96a167"
     },
     {
       "original_path": "HANDOFF-2.79.56.md",
       "git_blob_sha": "0ecbe6857ed013d9dab17e26ffcb79ab30d16f08",
       "sha256": "8a22da9991077d94adaa38a5d135b7a12a37b74c89a794202b5ae916fe79e779",
       "anchor": "archive-handoff-2-79-56-md",
-      "archive_body_sha256": "8a22da9991077d94adaa38a5d135b7a12a37b74c89a794202b5ae916fe79e779"
+      "archive_body_sha256": "8a22da9991077d94adaa38a5d135b7a12a37b74c89a794202b5ae916fe79e779",
+      "relocated_archive_body_sha256": "8a22da9991077d94adaa38a5d135b7a12a37b74c89a794202b5ae916fe79e779"
     },
     {
       "original_path": "HANDOFF-2.79.57.md",
       "git_blob_sha": "b7ced7989a73ff5a97387ec9b46d09572cf00239",
       "sha256": "578cd3524728fce98c072521ab83c0ec6c58680f7daf9f33f270686c4316a365",
       "anchor": "archive-handoff-2-79-57-md",
-      "archive_body_sha256": "578cd3524728fce98c072521ab83c0ec6c58680f7daf9f33f270686c4316a365"
+      "archive_body_sha256": "578cd3524728fce98c072521ab83c0ec6c58680f7daf9f33f270686c4316a365",
+      "relocated_archive_body_sha256": "578cd3524728fce98c072521ab83c0ec6c58680f7daf9f33f270686c4316a365"
     },
     {
       "original_path": "HANDOFF-2.79.58.md",
       "git_blob_sha": "0351215244b7e6126a6689cef19a5b4dc7bcb5b6",
       "sha256": "4035afc20829f15aea00f4f2eb346d0a1d4b6199cc1d409f87c1996940a7a230",
       "anchor": "archive-handoff-2-79-58-md",
-      "archive_body_sha256": "4035afc20829f15aea00f4f2eb346d0a1d4b6199cc1d409f87c1996940a7a230"
+      "archive_body_sha256": "4035afc20829f15aea00f4f2eb346d0a1d4b6199cc1d409f87c1996940a7a230",
+      "relocated_archive_body_sha256": "4035afc20829f15aea00f4f2eb346d0a1d4b6199cc1d409f87c1996940a7a230"
     },
     {
       "original_path": "HANDOFF-2.79.59.md",
       "git_blob_sha": "f2194c65f3877b559d4e8ab06fdb28dd72194e0c",
       "sha256": "d9f43a4667b0bd36d8435b90f8e7a70abb94d1cb5cb53c737ce23e727636a43f",
       "anchor": "archive-handoff-2-79-59-md",
-      "archive_body_sha256": "d9f43a4667b0bd36d8435b90f8e7a70abb94d1cb5cb53c737ce23e727636a43f"
+      "archive_body_sha256": "d9f43a4667b0bd36d8435b90f8e7a70abb94d1cb5cb53c737ce23e727636a43f",
+      "relocated_archive_body_sha256": "d9f43a4667b0bd36d8435b90f8e7a70abb94d1cb5cb53c737ce23e727636a43f"
     },
     {
       "original_path": "HANDOFF-2.79.60.md",
       "git_blob_sha": "5bb40ce3d03ea9d8d86af728ec45ee618d0335dd",
       "sha256": "197a7919735595c58d7c005567199dd0bdacaba29821f96928a13f68605d504c",
       "anchor": "archive-handoff-2-79-60-md",
-      "archive_body_sha256": "197a7919735595c58d7c005567199dd0bdacaba29821f96928a13f68605d504c"
+      "archive_body_sha256": "197a7919735595c58d7c005567199dd0bdacaba29821f96928a13f68605d504c",
+      "relocated_archive_body_sha256": "2f1348c889cd33bd3dc98b2bb31f7e17f595727a56899d97f21e1a430d681368"
     },
     {
       "original_path": "HANDOFF-2.79.61.md",
       "git_blob_sha": "8db3663ae5f966726e2ecf1fc60fbba9f8190126",
       "sha256": "ea7b9d2bdfc15172e945c14fe285cf6e21c594a8332f117231f7f0a3d3bee875",
       "anchor": "archive-handoff-2-79-61-md",
-      "archive_body_sha256": "ea7b9d2bdfc15172e945c14fe285cf6e21c594a8332f117231f7f0a3d3bee875"
+      "archive_body_sha256": "ea7b9d2bdfc15172e945c14fe285cf6e21c594a8332f117231f7f0a3d3bee875",
+      "relocated_archive_body_sha256": "da5d9ee0f8fb8e00f2bbc3fe80afc3632c2511d44d783ca87e2bac988405485f"
     },
     {
       "original_path": "HANDOFF-2.79.62.md",
       "git_blob_sha": "129aa6befba7e19d77af42fd6c4913558381e391",
       "sha256": "4bd6e1f1584acb702ad36eb48fe6294264ebc96e7b42dae8024e524aa4b4eabd",
       "anchor": "archive-handoff-2-79-62-md",
-      "archive_body_sha256": "4bd6e1f1584acb702ad36eb48fe6294264ebc96e7b42dae8024e524aa4b4eabd"
+      "archive_body_sha256": "4bd6e1f1584acb702ad36eb48fe6294264ebc96e7b42dae8024e524aa4b4eabd",
+      "relocated_archive_body_sha256": "935e42f5c8efc6d070c89a813a6c36777c73eb3b9475487fdd4a580ed212b0e3"
     },
     {
       "original_path": "HANDOFF-2.79.63.md",
       "git_blob_sha": "fc9dac1a0f9f7833d6e377dd1ccd3909b6bc7de0",
       "sha256": "08c45a879910830d83421d573da9a80d23855db06895d3d69a00b6756bfe6a17",
       "anchor": "archive-handoff-2-79-63-md",
-      "archive_body_sha256": "08c45a879910830d83421d573da9a80d23855db06895d3d69a00b6756bfe6a17"
+      "archive_body_sha256": "08c45a879910830d83421d573da9a80d23855db06895d3d69a00b6756bfe6a17",
+      "relocated_archive_body_sha256": "dd28f616d5b23ab951d02e294a24c287d5d6678e48663bb2aa7917d0fbbaf581"
     },
     {
       "original_path": "HANDOFF-2.79.64.md",
       "git_blob_sha": "87a93a67c0da2f3db7d69ba4484411cda45d1d13",
       "sha256": "92708122050c406b10694e3b01ce525f71850d5e606d5b4621819f709d13711b",
       "anchor": "archive-handoff-2-79-64-md",
-      "archive_body_sha256": "92708122050c406b10694e3b01ce525f71850d5e606d5b4621819f709d13711b"
+      "archive_body_sha256": "92708122050c406b10694e3b01ce525f71850d5e606d5b4621819f709d13711b",
+      "relocated_archive_body_sha256": "92708122050c406b10694e3b01ce525f71850d5e606d5b4621819f709d13711b"
     },
     {
       "original_path": "HANDOFF-2.79.65.md",
       "git_blob_sha": "c1dfaecd1e6e4602a2ef9f44ab9af1928d2d8634",
       "sha256": "94e770aa3669dd7c037d4752e5114a3663462fff3db50b240f4a49c88ba4217e",
       "anchor": "archive-handoff-2-79-65-md",
-      "archive_body_sha256": "94e770aa3669dd7c037d4752e5114a3663462fff3db50b240f4a49c88ba4217e"
+      "archive_body_sha256": "94e770aa3669dd7c037d4752e5114a3663462fff3db50b240f4a49c88ba4217e",
+      "relocated_archive_body_sha256": "94e770aa3669dd7c037d4752e5114a3663462fff3db50b240f4a49c88ba4217e"
     },
     {
       "original_path": "HANDOFF-2.79.66.md",
       "git_blob_sha": "e0601844cbaf5bc179bcb225333b9d40223b9925",
       "sha256": "8f1ad77ec0171fc740d16ad305ecbc0776c8a0bca913bf327e2046e01ae5489a",
       "anchor": "archive-handoff-2-79-66-md",
-      "archive_body_sha256": "8f1ad77ec0171fc740d16ad305ecbc0776c8a0bca913bf327e2046e01ae5489a"
+      "archive_body_sha256": "8f1ad77ec0171fc740d16ad305ecbc0776c8a0bca913bf327e2046e01ae5489a",
+      "relocated_archive_body_sha256": "fed0f1844042cd8d7d809811f750882dfc5a96ac23906b1e74f166f0f9c52a2d"
     },
     {
       "original_path": "HANDOFF-2.79.67.md",
       "git_blob_sha": "c8cf04c5347a211d187ce6b7c34f976e868ac8e8",
       "sha256": "b63b42e591bd5a5fa6cf0c78a3553e1fe87c870516ed909a06e02da1d6c51141",
       "anchor": "archive-handoff-2-79-67-md",
-      "archive_body_sha256": "b63b42e591bd5a5fa6cf0c78a3553e1fe87c870516ed909a06e02da1d6c51141"
+      "archive_body_sha256": "b63b42e591bd5a5fa6cf0c78a3553e1fe87c870516ed909a06e02da1d6c51141",
+      "relocated_archive_body_sha256": "b63b42e591bd5a5fa6cf0c78a3553e1fe87c870516ed909a06e02da1d6c51141"
     },
     {
       "original_path": "HANDOFF-2.79.68.md",
       "git_blob_sha": "057b8913e3afde6fcccfd66a03e50ee1c33dc03f",
       "sha256": "df3e96c164fd5f81749a26b4aea5cad96faaf975bebfa0d5af4dc62b8959d0dc",
       "anchor": "archive-handoff-2-79-68-md",
-      "archive_body_sha256": "df3e96c164fd5f81749a26b4aea5cad96faaf975bebfa0d5af4dc62b8959d0dc"
+      "archive_body_sha256": "df3e96c164fd5f81749a26b4aea5cad96faaf975bebfa0d5af4dc62b8959d0dc",
+      "relocated_archive_body_sha256": "df3e96c164fd5f81749a26b4aea5cad96faaf975bebfa0d5af4dc62b8959d0dc"
     },
     {
       "original_path": "HANDOFF-2.79.69.md",
       "git_blob_sha": "f9435db53dd6bba672f8c9f7b36f1c17e24839a2",
       "sha256": "3fbee490b5700320a007aa9ed6efb6908d27c04ed2e011de9ad2593e8897118d",
       "anchor": "archive-handoff-2-79-69-md",
-      "archive_body_sha256": "3fbee490b5700320a007aa9ed6efb6908d27c04ed2e011de9ad2593e8897118d"
+      "archive_body_sha256": "3fbee490b5700320a007aa9ed6efb6908d27c04ed2e011de9ad2593e8897118d",
+      "relocated_archive_body_sha256": "3fbee490b5700320a007aa9ed6efb6908d27c04ed2e011de9ad2593e8897118d"
     },
     {
       "original_path": "HANDOFF-2.79.70.md",
       "git_blob_sha": "7b982b89869f8fe3eb209d8063402eadee386899",
       "sha256": "e6c0dd7c5853b75ce4d78e23b0d5b0dd05dfe38f304e429d0592ef114c6f4a3e",
       "anchor": "archive-handoff-2-79-70-md",
-      "archive_body_sha256": "e6c0dd7c5853b75ce4d78e23b0d5b0dd05dfe38f304e429d0592ef114c6f4a3e"
+      "archive_body_sha256": "e6c0dd7c5853b75ce4d78e23b0d5b0dd05dfe38f304e429d0592ef114c6f4a3e",
+      "relocated_archive_body_sha256": "354ca57afad82e57e7d4ea2ae3a87a9a48a27e292af9d0a4b173d55adacf8d99"
     },
     {
       "original_path": "HANDOFF-2.79.71.md",
       "git_blob_sha": "9bbb54b8f74cf0a3c68f81d78f784cb20f26d8fb",
       "sha256": "0485f9f4974297696500690247ccc48f3d0739565e9a4b8a135f55a1a635869f",
       "anchor": "archive-handoff-2-79-71-md",
-      "archive_body_sha256": "0485f9f4974297696500690247ccc48f3d0739565e9a4b8a135f55a1a635869f"
+      "archive_body_sha256": "0485f9f4974297696500690247ccc48f3d0739565e9a4b8a135f55a1a635869f",
+      "relocated_archive_body_sha256": "0485f9f4974297696500690247ccc48f3d0739565e9a4b8a135f55a1a635869f"
     },
     {
       "original_path": "HANDOFF-2.79.73.md",
       "git_blob_sha": "07c63f1fc3db2603d194add9fd2cb7fdc14f523d",
       "sha256": "d1faf4e0574bd1729b9a644bef20aec95f47a5dd3c9c8953a33c2ab2816cc37d",
       "anchor": "archive-handoff-2-79-73-md",
-      "archive_body_sha256": "d1faf4e0574bd1729b9a644bef20aec95f47a5dd3c9c8953a33c2ab2816cc37d"
+      "archive_body_sha256": "d1faf4e0574bd1729b9a644bef20aec95f47a5dd3c9c8953a33c2ab2816cc37d",
+      "relocated_archive_body_sha256": "d1faf4e0574bd1729b9a644bef20aec95f47a5dd3c9c8953a33c2ab2816cc37d"
     },
     {
       "original_path": "HANDOFF-2.79.74.md",
       "git_blob_sha": "8a30459e8dd8c22cfac1a4ef9bbf4fab8660601d",
       "sha256": "5bb33ae2d77a8746b24064bdb63cad38ae11f05fed52406e5f681c682f7190d9",
       "anchor": "archive-handoff-2-79-74-md",
-      "archive_body_sha256": "5bb33ae2d77a8746b24064bdb63cad38ae11f05fed52406e5f681c682f7190d9"
+      "archive_body_sha256": "5bb33ae2d77a8746b24064bdb63cad38ae11f05fed52406e5f681c682f7190d9",
+      "relocated_archive_body_sha256": "7aace73a3b1ff5d42616d76921aae9f1180f98be3a56f82ed17289d946075205"
     },
     {
       "original_path": "HANDOFF-2.79.75.md",
       "git_blob_sha": "d561e0b7c7257cd119c176ac9d4116942f509414",
       "sha256": "6ec4d7cc5e41752fd5065d139b981887cbfc4819699681b971d236fd2d915afb",
       "anchor": "archive-handoff-2-79-75-md",
-      "archive_body_sha256": "6ec4d7cc5e41752fd5065d139b981887cbfc4819699681b971d236fd2d915afb"
+      "archive_body_sha256": "6ec4d7cc5e41752fd5065d139b981887cbfc4819699681b971d236fd2d915afb",
+      "relocated_archive_body_sha256": "677af4a2405b4b0ed388a18e84d40fd3eb5a91752939e2eb30284016b94fd25e"
     },
     {
       "original_path": "HANDOFF-2.79.76.md",
       "git_blob_sha": "6adc1825f80fe4d34a22b7327745d2157c87c7cf",
       "sha256": "c578f504334edbd646a17879715e74c99d84af764a3fd172baa50c558feacf5b",
       "anchor": "archive-handoff-2-79-76-md",
-      "archive_body_sha256": "c578f504334edbd646a17879715e74c99d84af764a3fd172baa50c558feacf5b"
+      "archive_body_sha256": "c578f504334edbd646a17879715e74c99d84af764a3fd172baa50c558feacf5b",
+      "relocated_archive_body_sha256": "c578f504334edbd646a17879715e74c99d84af764a3fd172baa50c558feacf5b"
     },
     {
       "original_path": "HANDOFF-2.79.77.md",
       "git_blob_sha": "1bac195dbd55d50c8bbb9187ec729d6de14cf088",
       "sha256": "b0e58f920e637383df998e8885929a10718ae14cfe5a6f26e444dd81f59205ea",
       "anchor": "archive-handoff-2-79-77-md",
-      "archive_body_sha256": "b0e58f920e637383df998e8885929a10718ae14cfe5a6f26e444dd81f59205ea"
+      "archive_body_sha256": "b0e58f920e637383df998e8885929a10718ae14cfe5a6f26e444dd81f59205ea",
+      "relocated_archive_body_sha256": "b0e58f920e637383df998e8885929a10718ae14cfe5a6f26e444dd81f59205ea"
     },
     {
       "original_path": "HANDOFF-2.79.78.md",
       "git_blob_sha": "022c5cc41f366824b47b8e24788c3cd1d12861e4",
       "sha256": "5cf3e43f31966ea38e9bf736cfd05fe4531b8b06e5776a956cfda49629012586",
       "anchor": "archive-handoff-2-79-78-md",
-      "archive_body_sha256": "5cf3e43f31966ea38e9bf736cfd05fe4531b8b06e5776a956cfda49629012586"
+      "archive_body_sha256": "5cf3e43f31966ea38e9bf736cfd05fe4531b8b06e5776a956cfda49629012586",
+      "relocated_archive_body_sha256": "5cf3e43f31966ea38e9bf736cfd05fe4531b8b06e5776a956cfda49629012586"
     },
     {
       "original_path": "HANDOFF-2.79.79.md",
       "git_blob_sha": "b5f9649778a0216465b5aeaab1e33dbb149b4350",
       "sha256": "000c564237b8fe89ed6f77c8675d5340f532bd11d61fc0b65492c3ca3f7bdee7",
       "anchor": "archive-handoff-2-79-79-md",
-      "archive_body_sha256": "000c564237b8fe89ed6f77c8675d5340f532bd11d61fc0b65492c3ca3f7bdee7"
+      "archive_body_sha256": "000c564237b8fe89ed6f77c8675d5340f532bd11d61fc0b65492c3ca3f7bdee7",
+      "relocated_archive_body_sha256": "000c564237b8fe89ed6f77c8675d5340f532bd11d61fc0b65492c3ca3f7bdee7"
     },
     {
       "original_path": "HANDOFF-2.79.80.md",
       "git_blob_sha": "548df449537eea815b01a3e7b2874e780737854a",
       "sha256": "904c067487d37ef67401e77a2ec95368dba2e2cdd15d03607e09c2f167a95a10",
       "anchor": "archive-handoff-2-79-80-md",
-      "archive_body_sha256": "904c067487d37ef67401e77a2ec95368dba2e2cdd15d03607e09c2f167a95a10"
+      "archive_body_sha256": "904c067487d37ef67401e77a2ec95368dba2e2cdd15d03607e09c2f167a95a10",
+      "relocated_archive_body_sha256": "904c067487d37ef67401e77a2ec95368dba2e2cdd15d03607e09c2f167a95a10"
     },
     {
       "original_path": "HANDOFF-2.79.82.md",
       "git_blob_sha": "b8c604326d9a33901de17c7e4e88bc6de27cd07f",
       "sha256": "2639ffda5d17c6979d5809457ef1f7c8e3abc6884abfb8b74a5bd04b86b1dfb2",
       "anchor": "archive-handoff-2-79-82-md",
-      "archive_body_sha256": "2639ffda5d17c6979d5809457ef1f7c8e3abc6884abfb8b74a5bd04b86b1dfb2"
+      "archive_body_sha256": "2639ffda5d17c6979d5809457ef1f7c8e3abc6884abfb8b74a5bd04b86b1dfb2",
+      "relocated_archive_body_sha256": "7e918f11a2ffbd420d92695400c8ac60459fe3cdc78416c6bebeb2bbce315e8f"
     },
     {
       "original_path": "HANDOFF-2.79.83.md",
       "git_blob_sha": "afa414c6e0e91d7f18f94f66242dfbba145bf7c8",
       "sha256": "b27162cc6e1003b778654aa599dfe8b672414370b1540674907e266d0b6e9501",
       "anchor": "archive-handoff-2-79-83-md",
-      "archive_body_sha256": "b27162cc6e1003b778654aa599dfe8b672414370b1540674907e266d0b6e9501"
+      "archive_body_sha256": "b27162cc6e1003b778654aa599dfe8b672414370b1540674907e266d0b6e9501",
+      "relocated_archive_body_sha256": "ff4fbed3d334294b8f95eab4b6d8350fd804e803a8d64e5989034603efb88562"
     },
     {
       "original_path": "HANDOFF-2.79.84.md",
       "git_blob_sha": "d4194d5b8c843ca6ab43195a83edabff018976a4",
       "sha256": "ac3bf01ccabab1d8c46c6fec32d5c62e736074c0fee62620472e047f84ff0d62",
       "anchor": "archive-handoff-2-79-84-md",
-      "archive_body_sha256": "ac3bf01ccabab1d8c46c6fec32d5c62e736074c0fee62620472e047f84ff0d62"
+      "archive_body_sha256": "ac3bf01ccabab1d8c46c6fec32d5c62e736074c0fee62620472e047f84ff0d62",
+      "relocated_archive_body_sha256": "a88871398c4d197062a6834c1bd60d2c4f27ab45c98b1d042120ac8a2ae3ae5d"
     },
     {
       "original_path": "HANDOFF-2.79.88.md",
       "git_blob_sha": "39411a304f5c9398bab436406abaa2e0567f5474",
       "sha256": "7a2bd068cfeec559a245318012064b23ed1570d08e6ac25439e0e1e9bb672343",
       "anchor": "archive-handoff-2-79-88-md",
-      "archive_body_sha256": "7a2bd068cfeec559a245318012064b23ed1570d08e6ac25439e0e1e9bb672343"
+      "archive_body_sha256": "7a2bd068cfeec559a245318012064b23ed1570d08e6ac25439e0e1e9bb672343",
+      "relocated_archive_body_sha256": "ad6cbfece79612e21a6222dbf3171d16f96df8c64bd1f20f506fa578e49be041"
     },
     {
       "original_path": "HANDOFF-2.79.89.md",
       "git_blob_sha": "077d43df274b27e5c94bf2efe69db723f0dac80d",
       "sha256": "905344f81eb9b93aeaaf29c0df2e092c1187a992b6bdf501cec8b60ca19f0d60",
       "anchor": "archive-handoff-2-79-89-md",
-      "archive_body_sha256": "905344f81eb9b93aeaaf29c0df2e092c1187a992b6bdf501cec8b60ca19f0d60"
+      "archive_body_sha256": "905344f81eb9b93aeaaf29c0df2e092c1187a992b6bdf501cec8b60ca19f0d60",
+      "relocated_archive_body_sha256": "8ad8e1ae3a49829cc4242b68c468cfbc404148dec8fae2f31781c04f2a75cc9e"
     },
     {
       "original_path": "HANDOFF-2.79.90.md",
       "git_blob_sha": "155f07b2c235efc29bb2c53b26068dbacb2a03eb",
       "sha256": "89547bd09d67a4129a07ba5e4fde42580d7007b0dd57ccd71fa7cfca43ea397a",
       "anchor": "archive-handoff-2-79-90-md",
-      "archive_body_sha256": "97c3e0381fe42424ff25453769ef1b3c344128917056df58eeee7c075ae5fe15"
+      "archive_body_sha256": "97c3e0381fe42424ff25453769ef1b3c344128917056df58eeee7c075ae5fe15",
+      "relocated_archive_body_sha256": "3563d09b936edfadf1217aa98f5805c1e18472eb6896321bdc1e1c256fa29234"
     },
     {
       "original_path": "HANDOFF-2.79.91.md",
       "git_blob_sha": "f730cf65e73c427473e4e610cd9200da8fe08f56",
       "sha256": "586b522d5dca9268ca0cef925c2d6c8f2bc2a3d35b3fee20ccc9576cb90c57eb",
       "anchor": "archive-handoff-2-79-91-md",
-      "archive_body_sha256": "7e8eab9532ed60b8a534ef1e6eb3fa590efe4faec77fbd08e60f8f95390ac279"
+      "archive_body_sha256": "7e8eab9532ed60b8a534ef1e6eb3fa590efe4faec77fbd08e60f8f95390ac279",
+      "relocated_archive_body_sha256": "2c31fa2f39b1138ff313921cfad7b0a1bf2e02c7b2ce605edd8c671980fe01a5"
     },
     {
       "original_path": "HANDOFF-2.79.92.md",
       "git_blob_sha": "9bffde841fc43768f997a1c5c9ea4cc15b52e584",
       "sha256": "e30c683c9d82cb9ed48bcbb2378d68586cec3303dbdfcace9bbfa2ee53ab6513",
       "anchor": "archive-handoff-2-79-92-md",
-      "archive_body_sha256": "e30c683c9d82cb9ed48bcbb2378d68586cec3303dbdfcace9bbfa2ee53ab6513"
+      "archive_body_sha256": "e30c683c9d82cb9ed48bcbb2378d68586cec3303dbdfcace9bbfa2ee53ab6513",
+      "relocated_archive_body_sha256": "56eaa09ca37096e4df91fca909b2786fccbae1b2be0f424efb30abdbb1e057d1"
     },
     {
       "original_path": "HANDOFF-2.79.93.md",
       "git_blob_sha": "7c664f0578411b2040aa23b437584c5a939e87ed",
       "sha256": "8271a3b4fd8026db6199c89835e8ed90da0d8d391268a8f3fc8d2520dbbc8a68",
       "anchor": "archive-handoff-2-79-93-md",
-      "archive_body_sha256": "8271a3b4fd8026db6199c89835e8ed90da0d8d391268a8f3fc8d2520dbbc8a68"
+      "archive_body_sha256": "8271a3b4fd8026db6199c89835e8ed90da0d8d391268a8f3fc8d2520dbbc8a68",
+      "relocated_archive_body_sha256": "473ef7db8c36b8966d583ec1c3689cd3ea3435ae2168dc846d708c0e10edc295"
     },
     {
       "original_path": "HANDOFF-2.79.94.md",
       "git_blob_sha": "19c64e2ca1e21300f54dc5cd4c9a360f0597e91b",
       "sha256": "6726b516d462930cb0d7c4552a583e1bf56f3a3cd6d4dea6343d86735071c2f4",
       "anchor": "archive-handoff-2-79-94-md",
-      "archive_body_sha256": "6726b516d462930cb0d7c4552a583e1bf56f3a3cd6d4dea6343d86735071c2f4"
+      "archive_body_sha256": "6726b516d462930cb0d7c4552a583e1bf56f3a3cd6d4dea6343d86735071c2f4",
+      "relocated_archive_body_sha256": "d9a13c6811d180549f6b8fbc1f1e933fbacf03eed85de852b38787eff17c462a"
     },
     {
       "original_path": "HANDOFF-2.79.95.md",
       "git_blob_sha": "a325d98e5cbf6dc33492cb4e90c5b2e39159e342",
       "sha256": "9f67c8e56aef62b13f28031a13aba73374b1294b007cc4148ee787e58ad77fa8",
       "anchor": "archive-handoff-2-79-95-md",
-      "archive_body_sha256": "9f67c8e56aef62b13f28031a13aba73374b1294b007cc4148ee787e58ad77fa8"
+      "archive_body_sha256": "9f67c8e56aef62b13f28031a13aba73374b1294b007cc4148ee787e58ad77fa8",
+      "relocated_archive_body_sha256": "50c4f1a49aab44d32615f9d2fa5c684cfb9ff6cfb9023192c549dbe873a6a7a9"
     },
     {
       "original_path": "HANDOFF-2.79.96.md",
       "git_blob_sha": "a22084f1d3d002579279b9f6047b4ac0356eec65",
       "sha256": "715bb0fdd71a80d35239eb9781b781175f759c6e87d0958dae261d6b3f0bcc33",
       "anchor": "archive-handoff-2-79-96-md",
-      "archive_body_sha256": "715bb0fdd71a80d35239eb9781b781175f759c6e87d0958dae261d6b3f0bcc33"
+      "archive_body_sha256": "715bb0fdd71a80d35239eb9781b781175f759c6e87d0958dae261d6b3f0bcc33",
+      "relocated_archive_body_sha256": "c91b22f842202db659427c2da0a4f318c0286fc9ae20449b2f3f87e10974f505"
     },
     {
       "original_path": "HANDOFF-2.79.97.md",
       "git_blob_sha": "de55870569f50b955acde7f55f1757ecf9f7b7d7",
       "sha256": "8e4d2adbb51765e8443b54d5441792cd55e08444848ce9d22cd50a6b60c1c6e6",
       "anchor": "archive-handoff-2-79-97-md",
-      "archive_body_sha256": "8e4d2adbb51765e8443b54d5441792cd55e08444848ce9d22cd50a6b60c1c6e6"
+      "archive_body_sha256": "8e4d2adbb51765e8443b54d5441792cd55e08444848ce9d22cd50a6b60c1c6e6",
+      "relocated_archive_body_sha256": "8ccf106c18fedc50017a8d4dace4f99e973c1653863a0f4cc82df8f56d299ef7"
     },
     {
       "original_path": "HANDOFF-2.79.98.md",
       "git_blob_sha": "1bd5b7fed97208b7e31d8dbccbe93123a1dc2575",
       "sha256": "6d0980123990d008205b72d32e37bdc1d853efe9da5fb1beec6681294c54312c",
       "anchor": "archive-handoff-2-79-98-md",
-      "archive_body_sha256": "6d0980123990d008205b72d32e37bdc1d853efe9da5fb1beec6681294c54312c"
+      "archive_body_sha256": "6d0980123990d008205b72d32e37bdc1d853efe9da5fb1beec6681294c54312c",
+      "relocated_archive_body_sha256": "e62b514c796d25a2278c3fffdd026df65ff5abc6a330fa43a34e4e5dce1a3f15"
     },
     {
       "original_path": "HANDOFF-2.79.99.md",
       "git_blob_sha": "541184b188c12d8f04849c9edf9255d457bd107e",
       "sha256": "7e45e0f5e2fd565da0f759d5d055172bb1aed11b1c96416785b97d098c8ec7bb",
       "anchor": "archive-handoff-2-79-99-md",
-      "archive_body_sha256": "7e45e0f5e2fd565da0f759d5d055172bb1aed11b1c96416785b97d098c8ec7bb"
+      "archive_body_sha256": "7e45e0f5e2fd565da0f759d5d055172bb1aed11b1c96416785b97d098c8ec7bb",
+      "relocated_archive_body_sha256": "59362ffdc54c4c2ed98ef6134dbe0f4c7a0e501449917b2f300c24373ada0a26"
     },
     {
       "original_path": "HANDOFF-2.79.100.md",
       "git_blob_sha": "1ab02384728ebd754ac4cadd9a584589e9671446",
       "sha256": "8c8770fadaefc62257cf066c5c5f89268ff40e325b24b8ec6b197ab8bb2012be",
       "anchor": "archive-handoff-2-79-100-md",
-      "archive_body_sha256": "8c8770fadaefc62257cf066c5c5f89268ff40e325b24b8ec6b197ab8bb2012be"
+      "archive_body_sha256": "8c8770fadaefc62257cf066c5c5f89268ff40e325b24b8ec6b197ab8bb2012be",
+      "relocated_archive_body_sha256": "099cf1598fa8c6cbd0755227c8e3c60ead004b984741bd642494edf22585c3b2"
     },
     {
       "original_path": "HANDOFF-2.79.101.md",
       "git_blob_sha": "f4f1f878bfc2db3c6dbdab952b2fdf55d9cf71bc",
       "sha256": "b3a7bd66c496c3d556f6aba08fe5a8450f488e865ea525edf00b0276666baac5",
       "anchor": "archive-handoff-2-79-101-md",
-      "archive_body_sha256": "b3a7bd66c496c3d556f6aba08fe5a8450f488e865ea525edf00b0276666baac5"
+      "archive_body_sha256": "b3a7bd66c496c3d556f6aba08fe5a8450f488e865ea525edf00b0276666baac5",
+      "relocated_archive_body_sha256": "f50a30517b975faeb40249ef10c905a7712dd1a5aff83283765fc98fa8530270"
     },
     {
       "original_path": "HANDOFF-2.79.102.md",
       "git_blob_sha": "77727b10ee039c0959ad4e7b5fbd1ebed5573dfc",
       "sha256": "154ae27ad1acde5eefabf7b57d9e06dab46e9ef06a961c90d47add030d677680",
       "anchor": "archive-handoff-2-79-102-md",
-      "archive_body_sha256": "154ae27ad1acde5eefabf7b57d9e06dab46e9ef06a961c90d47add030d677680"
+      "archive_body_sha256": "154ae27ad1acde5eefabf7b57d9e06dab46e9ef06a961c90d47add030d677680",
+      "relocated_archive_body_sha256": "826b4615fcb6ee18bb85143b9c1c7e5f70ec3796a761f9ab926428a4b9eb698b"
     },
     {
       "original_path": "HANDOFF-2.79.103.md",
       "git_blob_sha": "ed163caf71cdbb09d88b79afb62e830218b9399f",
       "sha256": "56abe500d4fe22b0623636c46bc220a2b8d51ff0cbf4eb1ec4ed371445520636",
       "anchor": "archive-handoff-2-79-103-md",
-      "archive_body_sha256": "56abe500d4fe22b0623636c46bc220a2b8d51ff0cbf4eb1ec4ed371445520636"
+      "archive_body_sha256": "56abe500d4fe22b0623636c46bc220a2b8d51ff0cbf4eb1ec4ed371445520636",
+      "relocated_archive_body_sha256": "5305cd415e7b9b47bf65776b2e16c8d43ee3f68a098b56027f580bed8daa6ec2"
     },
     {
       "original_path": "HANDOFF-2.79.104.md",
       "git_blob_sha": "9768c95625e9ed4084ebaf8067bc6dab424e6139",
       "sha256": "f016452934aaafbbf150f582eafc16e051d6b11d517c7eacd98728529d9887b0",
       "anchor": "archive-handoff-2-79-104-md",
-      "archive_body_sha256": "f016452934aaafbbf150f582eafc16e051d6b11d517c7eacd98728529d9887b0"
+      "archive_body_sha256": "f016452934aaafbbf150f582eafc16e051d6b11d517c7eacd98728529d9887b0",
+      "relocated_archive_body_sha256": "93f6708d4c118e048196741460195c42f8615d7624f903499c8b7391aa4db641"
     },
     {
       "original_path": "HANDOFF-2.79.105.md",
       "git_blob_sha": "e20dfafd6dcb6f3b9bdc7bab193993812e138896",
       "sha256": "13f5b4e5e7d90ae8ee1cd4ac7b1d5b77392ad9775ec35aacc823f2ac7dcdc6f6",
       "anchor": "archive-handoff-2-79-105-md",
-      "archive_body_sha256": "13f5b4e5e7d90ae8ee1cd4ac7b1d5b77392ad9775ec35aacc823f2ac7dcdc6f6"
+      "archive_body_sha256": "13f5b4e5e7d90ae8ee1cd4ac7b1d5b77392ad9775ec35aacc823f2ac7dcdc6f6",
+      "relocated_archive_body_sha256": "83f5ff188baae4ee5e71b226ee227c183d7308eecb6c7a1c0ed2d66ce33b25ea"
     },
     {
       "original_path": "HANDOFF-2.79.106.md",
       "git_blob_sha": "02ddf36fc6b3b40bbecdd50060d7bcd27cb8f572",
       "sha256": "b51df0d1bbec10d4ec59cb56cd7e05c413946e0a6df444aa7f16fb112592af62",
       "anchor": "archive-handoff-2-79-106-md",
-      "archive_body_sha256": "b51df0d1bbec10d4ec59cb56cd7e05c413946e0a6df444aa7f16fb112592af62"
+      "archive_body_sha256": "b51df0d1bbec10d4ec59cb56cd7e05c413946e0a6df444aa7f16fb112592af62",
+      "relocated_archive_body_sha256": "8e6a7c3cd341eec130a703b1b6c3d17ea1ae8d2f86717e56f35539426434f8e1"
     },
     {
       "original_path": "HANDOFF-2.79.107.md",
       "git_blob_sha": "ac8090d4f86baae024a8b823f2527a2da72cef08",
       "sha256": "f498aecc3186b343fca098ff029bfd9ac51d4142cb7b481b06ac2ecc0721710d",
       "anchor": "archive-handoff-2-79-107-md",
-      "archive_body_sha256": "f498aecc3186b343fca098ff029bfd9ac51d4142cb7b481b06ac2ecc0721710d"
+      "archive_body_sha256": "f498aecc3186b343fca098ff029bfd9ac51d4142cb7b481b06ac2ecc0721710d",
+      "relocated_archive_body_sha256": "2515a93ffdee0d2848b485c9f30b2671756d2fa990aee31f3546f22207bca916"
     },
     {
       "original_path": "HANDOFF-2.79.108.md",
       "git_blob_sha": "287face31a0b19a80359bb4331e69521f40564a2",
       "sha256": "9b2283b379c6132577e15e1034308b25e6d93864cfe708379fdf0d67e5ca4ad6",
       "anchor": "archive-handoff-2-79-108-md",
-      "archive_body_sha256": "9b2283b379c6132577e15e1034308b25e6d93864cfe708379fdf0d67e5ca4ad6"
+      "archive_body_sha256": "9b2283b379c6132577e15e1034308b25e6d93864cfe708379fdf0d67e5ca4ad6",
+      "relocated_archive_body_sha256": "dd1b75d28fd2f70a16e4285cc39a6df2c105065d3518026f6d152a6ced8da925"
     },
     {
       "original_path": "HANDOFF-2.79.109.md",
       "git_blob_sha": "ae0d122294b3c603b023f598fd59fa873c63d342",
       "sha256": "d6de8597067f49cc580af0aebd71eb4a154a51c2d65b7e2cd5d7f3612f701637",
       "anchor": "archive-handoff-2-79-109-md",
-      "archive_body_sha256": "d6de8597067f49cc580af0aebd71eb4a154a51c2d65b7e2cd5d7f3612f701637"
+      "archive_body_sha256": "d6de8597067f49cc580af0aebd71eb4a154a51c2d65b7e2cd5d7f3612f701637",
+      "relocated_archive_body_sha256": "7403694d2ee3198bc24e8ba25ea451683253074145ede214a3355d1c7c6c3de3"
     },
     {
       "original_path": "HANDOFF-2.79.110.md",
       "git_blob_sha": "840868f39d2ca50519fdcafa07066d1211740675",
       "sha256": "323fe31b2f5b2ad9dd3a206812c659dd7018dac54af9e4de3ff11155c923ad1d",
       "anchor": "archive-handoff-2-79-110-md",
-      "archive_body_sha256": "323fe31b2f5b2ad9dd3a206812c659dd7018dac54af9e4de3ff11155c923ad1d"
+      "archive_body_sha256": "323fe31b2f5b2ad9dd3a206812c659dd7018dac54af9e4de3ff11155c923ad1d",
+      "relocated_archive_body_sha256": "0d62da126ed74257ab64f2c46d6030c8d2ae6fc4d38f3f6b3850888cce201727"
     },
     {
       "original_path": "HANDOFF-2.79.111.md",
       "git_blob_sha": "80448bb77767864461517292ee422de200ed5503",
       "sha256": "5d13f868359487f4b7c408f3f2461ad8a10c89730ea98cbc6de0e9d48d412ceb",
       "anchor": "archive-handoff-2-79-111-md",
-      "archive_body_sha256": "5d13f868359487f4b7c408f3f2461ad8a10c89730ea98cbc6de0e9d48d412ceb"
+      "archive_body_sha256": "5d13f868359487f4b7c408f3f2461ad8a10c89730ea98cbc6de0e9d48d412ceb",
+      "relocated_archive_body_sha256": "0fdfb28701f265ab486052c5560ad66b71d369711cf503330c6d9b3c49b7bc4f"
     },
     {
       "original_path": "HANDOFF-2.79.112.md",
       "git_blob_sha": "e13a1cc90ac9ce8cf38142b86565e23391e56ced",
       "sha256": "c3def44f1562e179a58d0410ea355c8893111c3762f7a3682b4d9a9530d6c844",
       "anchor": "archive-handoff-2-79-112-md",
-      "archive_body_sha256": "c3def44f1562e179a58d0410ea355c8893111c3762f7a3682b4d9a9530d6c844"
+      "archive_body_sha256": "c3def44f1562e179a58d0410ea355c8893111c3762f7a3682b4d9a9530d6c844",
+      "relocated_archive_body_sha256": "fe06c1b188a380c694216c491f63edce003ae79c1cc383bb7fead7ebc3e3a5fe"
     },
     {
       "original_path": "HANDOFF-2.79.113.md",
       "git_blob_sha": "64fdf149a163ba72cb303897ef10f04ef34c502c",
       "sha256": "3739793ef0ec0b43b784fe7747629dc344bd7d6bfc769387906e11e89047d5d4",
       "anchor": "archive-handoff-2-79-113-md",
-      "archive_body_sha256": "3739793ef0ec0b43b784fe7747629dc344bd7d6bfc769387906e11e89047d5d4"
+      "archive_body_sha256": "3739793ef0ec0b43b784fe7747629dc344bd7d6bfc769387906e11e89047d5d4",
+      "relocated_archive_body_sha256": "9d31fd469de25493aed363007001e4a491215e288ddd9e4061ac35b7e76c2e3e"
     },
     {
       "original_path": "HANDOFF-2.79.114.md",
       "git_blob_sha": "2147b27e54e6566c3a3e05185b5e6957cf314fb4",
       "sha256": "6ed246d26d067ba198b5fdf258bc238311fb6256d2b69b5d9d745813e65fd9fc",
       "anchor": "archive-handoff-2-79-114-md",
-      "archive_body_sha256": "6ed246d26d067ba198b5fdf258bc238311fb6256d2b69b5d9d745813e65fd9fc"
+      "archive_body_sha256": "6ed246d26d067ba198b5fdf258bc238311fb6256d2b69b5d9d745813e65fd9fc",
+      "relocated_archive_body_sha256": "dc5cf4815415ae23ef9a27f6b8f595a44aa2ca465ed0b658c5ed46910fce278b"
     },
     {
       "original_path": "HANDOFF-2.79.115.md",
       "git_blob_sha": "1a936ebf0334cb536e1f391a3c3276a58f7ea980",
       "sha256": "19204100f86aa2bcd266cde5db58b36397b82a0ad71911d847f9c1bbe66550e4",
       "anchor": "archive-handoff-2-79-115-md",
-      "archive_body_sha256": "19204100f86aa2bcd266cde5db58b36397b82a0ad71911d847f9c1bbe66550e4"
+      "archive_body_sha256": "19204100f86aa2bcd266cde5db58b36397b82a0ad71911d847f9c1bbe66550e4",
+      "relocated_archive_body_sha256": "f3714a7202d21669dd7c2522fdf78c770558f694136d0d4d2319564dfe431333"
     },
     {
       "original_path": "HANDOFF-2.79.116.md",
       "git_blob_sha": "c88d8131974e8052d052e9a78265e3cd891a7a91",
       "sha256": "9d51d94c9612fe070726382a47a903c9c7db89eb49872408f481b7280c14f9c7",
       "anchor": "archive-handoff-2-79-116-md",
-      "archive_body_sha256": "9d51d94c9612fe070726382a47a903c9c7db89eb49872408f481b7280c14f9c7"
+      "archive_body_sha256": "9d51d94c9612fe070726382a47a903c9c7db89eb49872408f481b7280c14f9c7",
+      "relocated_archive_body_sha256": "de7480b0809e0e72ae3bba64034881450542183f141907c27ba3c57952dd1ce1"
     },
     {
       "original_path": "HANDOFF-2.79.117.md",
       "git_blob_sha": "9df4797c3aba86946a463f40bb44a1d0d4bad34d",
       "sha256": "de9c5fac0d2df9a24476e169efb0201b1248c2f344b516ee15b163c07fcb2676",
       "anchor": "archive-handoff-2-79-117-md",
-      "archive_body_sha256": "de9c5fac0d2df9a24476e169efb0201b1248c2f344b516ee15b163c07fcb2676"
+      "archive_body_sha256": "de9c5fac0d2df9a24476e169efb0201b1248c2f344b516ee15b163c07fcb2676",
+      "relocated_archive_body_sha256": "79b7e69bc9f553cba5ec538f794368c9ff92346cf041ce1f0e1e01d4c7da013b"
     },
     {
       "original_path": "HANDOFF-2.79.118.md",
       "git_blob_sha": "b9ba39173e07b33d9baee961a8b61348dbbce951",
       "sha256": "c70eeb344aea1fcdd08fc9853317d7811ea8bfb11ae2f50c4cccab1ffcb85cee",
       "anchor": "archive-handoff-2-79-118-md",
-      "archive_body_sha256": "c70eeb344aea1fcdd08fc9853317d7811ea8bfb11ae2f50c4cccab1ffcb85cee"
+      "archive_body_sha256": "c70eeb344aea1fcdd08fc9853317d7811ea8bfb11ae2f50c4cccab1ffcb85cee",
+      "relocated_archive_body_sha256": "fb950769c6a8a1b6f58592c8de74c1fdcec3fe6b48f8666dfdb37d19a6ec8e18"
     },
     {
       "original_path": "HANDOFF-2.79.119.md",
       "git_blob_sha": "73827511a6f96c0d4b63e4be98eb46c4c3b81077",
       "sha256": "9618f5ffc5d0f4eacbf8efde8f8a21522babc44a21c32610355bffef37030c02",
       "anchor": "archive-handoff-2-79-119-md",
-      "archive_body_sha256": "9618f5ffc5d0f4eacbf8efde8f8a21522babc44a21c32610355bffef37030c02"
+      "archive_body_sha256": "9618f5ffc5d0f4eacbf8efde8f8a21522babc44a21c32610355bffef37030c02",
+      "relocated_archive_body_sha256": "098a982e7b27ee5dfccf31703f4a3cccc9a6f631ca023e82f3ef77c2c6f6251f"
     },
     {
       "original_path": "HANDOFF-2.79.120.md",
       "git_blob_sha": "4de9198902a8e1420ec4d211f1a866591c39cd90",
       "sha256": "15ea181783fbf294c8dd2c16b403af91fbd098157d15edc037c368aef8c6df6c",
       "anchor": "archive-handoff-2-79-120-md",
-      "archive_body_sha256": "15ea181783fbf294c8dd2c16b403af91fbd098157d15edc037c368aef8c6df6c"
+      "archive_body_sha256": "15ea181783fbf294c8dd2c16b403af91fbd098157d15edc037c368aef8c6df6c",
+      "relocated_archive_body_sha256": "fa2acad3fdad7b159924fb0c5d21931c05909021da6d9328f00d5019866e7c74"
     },
     {
       "original_path": "HANDOFF-2.79.121.md",
       "git_blob_sha": "4237c648ba15c587cd6417b0d2624d4a5e5134e6",
       "sha256": "5fc135e3a9ffe8e7f709decabdb40e1a1c8a8b1837cfec2838f72e4799083ae6",
       "anchor": "archive-handoff-2-79-121-md",
-      "archive_body_sha256": "5fc135e3a9ffe8e7f709decabdb40e1a1c8a8b1837cfec2838f72e4799083ae6"
+      "archive_body_sha256": "5fc135e3a9ffe8e7f709decabdb40e1a1c8a8b1837cfec2838f72e4799083ae6",
+      "relocated_archive_body_sha256": "139acf4e9bafbe76899561b7e9c9e67a26789dba5189a25499465b70d7d1c050"
     },
     {
       "original_path": "HANDOFF-2.79.122.md",
       "git_blob_sha": "71d6ccd2c8cb6c3056d0f93df212217dfda6bc5d",
       "sha256": "d655ab238dce5967031d1d1f0087aa9a2255b01ee5b2bc164023881bd6c3d5a6",
       "anchor": "archive-handoff-2-79-122-md",
-      "archive_body_sha256": "d655ab238dce5967031d1d1f0087aa9a2255b01ee5b2bc164023881bd6c3d5a6"
+      "archive_body_sha256": "d655ab238dce5967031d1d1f0087aa9a2255b01ee5b2bc164023881bd6c3d5a6",
+      "relocated_archive_body_sha256": "fc3072e6fc62aea26181b4520fdf06b1e88874ca6465e373e9069ac0f691dd47"
     },
     {
       "original_path": "HANDOFF-2.79.123.md",
       "git_blob_sha": "3aa3c97662ed7e4dc8829398226afb1f16fd1a27",
       "sha256": "05abc7fdd3da1074863029a117841910a0fb60f90fe8c3acc2a7b794d0d06b93",
       "anchor": "archive-handoff-2-79-123-md",
-      "archive_body_sha256": "05abc7fdd3da1074863029a117841910a0fb60f90fe8c3acc2a7b794d0d06b93"
+      "archive_body_sha256": "05abc7fdd3da1074863029a117841910a0fb60f90fe8c3acc2a7b794d0d06b93",
+      "relocated_archive_body_sha256": "05abc7fdd3da1074863029a117841910a0fb60f90fe8c3acc2a7b794d0d06b93"
     },
     {
       "original_path": "HANDOFF-2.79.124.md",
       "git_blob_sha": "6bb5ef507e86790bcfbaff00c497291946d1f9ce",
       "sha256": "f0366e818b65ed68b5201af1186e57c8d66d0d6cccc64899bfd103172d7e84e9",
       "anchor": "archive-handoff-2-79-124-md",
-      "archive_body_sha256": "f0366e818b65ed68b5201af1186e57c8d66d0d6cccc64899bfd103172d7e84e9"
+      "archive_body_sha256": "f0366e818b65ed68b5201af1186e57c8d66d0d6cccc64899bfd103172d7e84e9",
+      "relocated_archive_body_sha256": "f0366e818b65ed68b5201af1186e57c8d66d0d6cccc64899bfd103172d7e84e9"
     },
     {
       "original_path": "HANDOFF-2.79.125.md",
       "git_blob_sha": "702bfa5f3614da258b17b1ff64a7be51a5446c06",
       "sha256": "c4f3613c5de9fb2779e7b96be9a444ee0ca60a7eca9fdaa7935da3c528f85ae3",
       "anchor": "archive-handoff-2-79-125-md",
-      "archive_body_sha256": "c4f3613c5de9fb2779e7b96be9a444ee0ca60a7eca9fdaa7935da3c528f85ae3"
+      "archive_body_sha256": "c4f3613c5de9fb2779e7b96be9a444ee0ca60a7eca9fdaa7935da3c528f85ae3",
+      "relocated_archive_body_sha256": "0f81db021e021fe8b1732891f8c38455b7ee286bd25af08bcaa68a16e2ff58db"
     },
     {
       "original_path": "HANDOFF-2.79.126.md",
       "git_blob_sha": "90ea0a5c6e041c3f5c84a4c35d2265c1e39df8bf",
       "sha256": "8a54be11507878a3507243a8e4344894af883c5676750573c063f95e929f3595",
       "anchor": "archive-handoff-2-79-126-md",
-      "archive_body_sha256": "8a54be11507878a3507243a8e4344894af883c5676750573c063f95e929f3595"
+      "archive_body_sha256": "8a54be11507878a3507243a8e4344894af883c5676750573c063f95e929f3595",
+      "relocated_archive_body_sha256": "8a54be11507878a3507243a8e4344894af883c5676750573c063f95e929f3595"
     },
     {
       "original_path": "HANDOFF-2.79.127.md",
       "git_blob_sha": "5658cb30599e235ffaeec15692e4df13cc6c3a3f",
       "sha256": "470f148e3c05438f29862e550adfbd79ad15ad850a6869c12e68524078834718",
       "anchor": "archive-handoff-2-79-127-md",
-      "archive_body_sha256": "470f148e3c05438f29862e550adfbd79ad15ad850a6869c12e68524078834718"
+      "archive_body_sha256": "470f148e3c05438f29862e550adfbd79ad15ad850a6869c12e68524078834718",
+      "relocated_archive_body_sha256": "ddf82fcdd935623a49153b6e7ec03232892d735b62a18a9c1e94a5eca766cfaa"
     },
     {
       "original_path": "HANDOFF-2.79.128.md",
       "git_blob_sha": "ae230302fda47a4fbc5f67647ff3118d469e61f2",
       "sha256": "57e7f650ffadf9fff2ada8fa91a790df5727a4efb930de79df29b4b18721a701",
       "anchor": "archive-handoff-2-79-128-md",
-      "archive_body_sha256": "57e7f650ffadf9fff2ada8fa91a790df5727a4efb930de79df29b4b18721a701"
+      "archive_body_sha256": "57e7f650ffadf9fff2ada8fa91a790df5727a4efb930de79df29b4b18721a701",
+      "relocated_archive_body_sha256": "650042541325eb0a33c49ab7e4929332604a549a9998a4e94b0aab598042d369"
     },
     {
       "original_path": "HANDOFF-2.79.129.md",
       "git_blob_sha": "57cd26091ad6e1a8ebb5781028139e40e8ea40b3",
       "sha256": "1e1fdbc7aeebe7f5c17cea4ceaf534851502752328fd130bb23e17d966b01641",
       "anchor": "archive-handoff-2-79-129-md",
-      "archive_body_sha256": "1e1fdbc7aeebe7f5c17cea4ceaf534851502752328fd130bb23e17d966b01641"
+      "archive_body_sha256": "1e1fdbc7aeebe7f5c17cea4ceaf534851502752328fd130bb23e17d966b01641",
+      "relocated_archive_body_sha256": "28d7403e11cec88775ea1fc5de698bd4a756e53a0ce0c01af1372118c62e0950"
     },
     {
       "original_path": "HANDOFF-2.79.130.md",
       "git_blob_sha": "c4569c5915e97ea3c211ac3b62695d1669f782f1",
       "sha256": "ce13a1a18be003682a863458fb16eef3f2e1d32b48239d29546f817c361b4dc4",
       "anchor": "archive-handoff-2-79-130-md",
-      "archive_body_sha256": "ce13a1a18be003682a863458fb16eef3f2e1d32b48239d29546f817c361b4dc4"
+      "archive_body_sha256": "ce13a1a18be003682a863458fb16eef3f2e1d32b48239d29546f817c361b4dc4",
+      "relocated_archive_body_sha256": "30d4dc9c63a865a85bcd5264bdb706549ddf25b9eae1d0cb610b682c6b1bd1d0"
     },
     {
       "original_path": "HANDOFF-2.79.131.md",
       "git_blob_sha": "a39e7e08afd59ed396e1458b29cb7826ede0002b",
       "sha256": "c8f5d5e4cf9ee3dcef208915c027a5d9563f99fe2d99c640526459472e51c53b",
       "anchor": "archive-handoff-2-79-131-md",
-      "archive_body_sha256": "c8f5d5e4cf9ee3dcef208915c027a5d9563f99fe2d99c640526459472e51c53b"
+      "archive_body_sha256": "c8f5d5e4cf9ee3dcef208915c027a5d9563f99fe2d99c640526459472e51c53b",
+      "relocated_archive_body_sha256": "93c030c3eecd9bb71ebde3c6a0d987fa9e823ea0c5f64b81040d467154648a91"
     },
     {
       "original_path": "HANDOFF-2.79.132.md",
       "git_blob_sha": "03ac996df685f9c9159e393b5fd54ebc4e744ecd",
       "sha256": "ff22a4ec68f2e15d4063ba64d04162fa582c37d1f7616620945cfe616b3ce93c",
       "anchor": "archive-handoff-2-79-132-md",
-      "archive_body_sha256": "ff22a4ec68f2e15d4063ba64d04162fa582c37d1f7616620945cfe616b3ce93c"
+      "archive_body_sha256": "ff22a4ec68f2e15d4063ba64d04162fa582c37d1f7616620945cfe616b3ce93c",
+      "relocated_archive_body_sha256": "add9c578dce7fcaa5489ed2a310fc8ee7375739089041ea73558dae02fc92406"
     },
     {
       "original_path": "HANDOFF-2.79.133.md",
       "git_blob_sha": "dc55aa17f1c3f38572f6db15361afa49f0767a3f",
       "sha256": "76ff75499470705852d899c774944ff5f32a4f981bc1b3b2f444ed4876835fe5",
       "anchor": "archive-handoff-2-79-133-md",
-      "archive_body_sha256": "76ff75499470705852d899c774944ff5f32a4f981bc1b3b2f444ed4876835fe5"
+      "archive_body_sha256": "76ff75499470705852d899c774944ff5f32a4f981bc1b3b2f444ed4876835fe5",
+      "relocated_archive_body_sha256": "1ce6fd2d13df7590d642330828489160fbf1d05e5654951c47d5b3ec9638656e"
     },
     {
       "original_path": "HANDOFF-2.79.134.md",
       "git_blob_sha": "3dea2f8278df2673583215e3e13c51998220d518",
       "sha256": "b55977d86afe3b20f4e90e5445bf438b09003ba2156236f11b154a1285c64f56",
       "anchor": "archive-handoff-2-79-134-md",
-      "archive_body_sha256": "b55977d86afe3b20f4e90e5445bf438b09003ba2156236f11b154a1285c64f56"
+      "archive_body_sha256": "b55977d86afe3b20f4e90e5445bf438b09003ba2156236f11b154a1285c64f56",
+      "relocated_archive_body_sha256": "ef1f7abb0ad214022bb1d94a149b01d83b866b6bb3bc0d6b737ceabf3e8ebacd"
     },
     {
       "original_path": "HANDOFF-2.79.135.md",
       "git_blob_sha": "a7dff5c65f4e1147c020ae9ad21f04a986b46357",
       "sha256": "d60ffe2a6d0fc0a0ec37293871e4973b53f5973eba777819c7ae7cc616bf2fce",
       "anchor": "archive-handoff-2-79-135-md",
-      "archive_body_sha256": "d60ffe2a6d0fc0a0ec37293871e4973b53f5973eba777819c7ae7cc616bf2fce"
+      "archive_body_sha256": "d60ffe2a6d0fc0a0ec37293871e4973b53f5973eba777819c7ae7cc616bf2fce",
+      "relocated_archive_body_sha256": "95de7703b16e2782449e9e62c11e5e7553154f25e47ce490aef85c81c8189c3a"
     },
     {
       "original_path": "HANDOFF-2.79.136.md",
       "git_blob_sha": "62e7c2da7a0001435a613ab06c71baaddaef0fd5",
       "sha256": "1788f5a72e6244a2989e5e602608b9cc495ada377887a103f8e15b203acddbe1",
       "anchor": "archive-handoff-2-79-136-md",
-      "archive_body_sha256": "1788f5a72e6244a2989e5e602608b9cc495ada377887a103f8e15b203acddbe1"
+      "archive_body_sha256": "1788f5a72e6244a2989e5e602608b9cc495ada377887a103f8e15b203acddbe1",
+      "relocated_archive_body_sha256": "af8d7c61a7b6a441b1b8782856f03c574564de13817185198db2021132a3e129"
     },
     {
       "original_path": "HANDOFF-2.79.137.md",
       "git_blob_sha": "9d2e11b3011fd3a9c6a0e342d3b4687c9a4f1667",
       "sha256": "fd4ac3f0a75ea20e9e3ae7cbe83dd0b38b086ba60d74a4dce52c495bf2a4c996",
       "anchor": "archive-handoff-2-79-137-md",
-      "archive_body_sha256": "fd4ac3f0a75ea20e9e3ae7cbe83dd0b38b086ba60d74a4dce52c495bf2a4c996"
+      "archive_body_sha256": "fd4ac3f0a75ea20e9e3ae7cbe83dd0b38b086ba60d74a4dce52c495bf2a4c996",
+      "relocated_archive_body_sha256": "8865bca8d38a8ca4eb7f52dd9477be02463d31ed44a3e5ff59e635bb5569aeb8"
     },
     {
       "original_path": "HANDOFF-2.79.138.md",
       "git_blob_sha": "7fd6f67958360c6a618663924cbf386e12ae2f32",
       "sha256": "a306be5051cc1f7d076eb2ed817456f8ad1b566339105f1e2b92db3147727243",
       "anchor": "archive-handoff-2-79-138-md",
-      "archive_body_sha256": "a306be5051cc1f7d076eb2ed817456f8ad1b566339105f1e2b92db3147727243"
+      "archive_body_sha256": "a306be5051cc1f7d076eb2ed817456f8ad1b566339105f1e2b92db3147727243",
+      "relocated_archive_body_sha256": "b66a3ec10cf814cfe406073a21cbf14a766a64865abbe00bb86ba2e786c7ba30"
     },
     {
       "original_path": "HANDOFF-2.79.139.md",
       "git_blob_sha": "eb35af78cccaa94f881d5ba0f9a7d2b9c9018e53",
       "sha256": "dba8d5cc1aa7fd71d777e0ec3fc1c004c529ebfb80c518d8deb3e14d234009d1",
       "anchor": "archive-handoff-2-79-139-md",
-      "archive_body_sha256": "dba8d5cc1aa7fd71d777e0ec3fc1c004c529ebfb80c518d8deb3e14d234009d1"
+      "archive_body_sha256": "dba8d5cc1aa7fd71d777e0ec3fc1c004c529ebfb80c518d8deb3e14d234009d1",
+      "relocated_archive_body_sha256": "811c2ccefc663853c6aa50fac6a41339e08ad07f4269c18f929ca1d67d20ddbb"
     },
     {
       "original_path": "HANDOFF-2.79.140.md",
       "git_blob_sha": "2cc0e7490bc359411cd8b16ded59b8fe87f898d6",
       "sha256": "cb53465fef63484cecad5e435e30a6056c7ccb9ca5e1326f1f0969f28d802046",
       "anchor": "archive-handoff-2-79-140-md",
-      "archive_body_sha256": "cb53465fef63484cecad5e435e30a6056c7ccb9ca5e1326f1f0969f28d802046"
+      "archive_body_sha256": "cb53465fef63484cecad5e435e30a6056c7ccb9ca5e1326f1f0969f28d802046",
+      "relocated_archive_body_sha256": "7095a7a8d6225edf601e6dc9fefdc44890d0db1799228a4af06d1c527ed6fe71"
     },
     {
       "original_path": "HANDOFF-2.79.141.md",
       "git_blob_sha": "87a2d7bfbb3bfdfd56e3460bd6a0107b37ef44eb",
       "sha256": "892fe6ddf29388ad6f532df38ae115d4cc7c8798997ddcfdd6541d00122d6add",
       "anchor": "archive-handoff-2-79-141-md",
-      "archive_body_sha256": "892fe6ddf29388ad6f532df38ae115d4cc7c8798997ddcfdd6541d00122d6add"
+      "archive_body_sha256": "892fe6ddf29388ad6f532df38ae115d4cc7c8798997ddcfdd6541d00122d6add",
+      "relocated_archive_body_sha256": "f0f0407195251a462581528cf0a54a54b062e476e0df47553cbe7054c95bf30b"
     },
     {
       "original_path": "HANDOFF-2.79.142.md",
       "git_blob_sha": "77ed9141beb6a7344d248b620849b6cde458d464",
       "sha256": "8a03538337f75b7b369d3cc8811ccb10a40a6cbceebdb081160452430a629c94",
       "anchor": "archive-handoff-2-79-142-md",
-      "archive_body_sha256": "8a03538337f75b7b369d3cc8811ccb10a40a6cbceebdb081160452430a629c94"
+      "archive_body_sha256": "8a03538337f75b7b369d3cc8811ccb10a40a6cbceebdb081160452430a629c94",
+      "relocated_archive_body_sha256": "8a1ab052fbd51e93926005109cd7c4f03793cbf0403f9df7a5a3a145fd4dbd29"
     },
     {
       "original_path": "HANDOFF-2.79.143.md",
       "git_blob_sha": "9bcbfd1d041b50712b88303d7c40b47393cc6675",
       "sha256": "08f53b9f3ec6f62abc6e5ddc195699861bc91f0071221b4fc5c8e5e5c2f870e2",
       "anchor": "archive-handoff-2-79-143-md",
-      "archive_body_sha256": "08f53b9f3ec6f62abc6e5ddc195699861bc91f0071221b4fc5c8e5e5c2f870e2"
+      "archive_body_sha256": "08f53b9f3ec6f62abc6e5ddc195699861bc91f0071221b4fc5c8e5e5c2f870e2",
+      "relocated_archive_body_sha256": "bd7499cd91af3982de6194bb88fedc9874b88fcf56ed32fa01ce0ac25b1487ce"
     },
     {
       "original_path": "HANDOFF-2.79.144.md",
       "git_blob_sha": "eb1132455dfa1af4c42618577ddab52cef530f44",
       "sha256": "53075a0e9194cbf83c3b6a7bd955b3dbee06fc416c8884bceb300fe620f7d4a4",
       "anchor": "archive-handoff-2-79-144-md",
-      "archive_body_sha256": "53075a0e9194cbf83c3b6a7bd955b3dbee06fc416c8884bceb300fe620f7d4a4"
+      "archive_body_sha256": "53075a0e9194cbf83c3b6a7bd955b3dbee06fc416c8884bceb300fe620f7d4a4",
+      "relocated_archive_body_sha256": "685b9fd58e2d7c15a5314f4fa2ac265197154bb32876a64f60a8caea0a7e0637"
     },
     {
       "original_path": "HANDOFF-2.79.145.md",
       "git_blob_sha": "55c7d885586eb536aed18341a802a1f1712181b9",
       "sha256": "de0f2f9f9de7f5f4b05873e5da56b707aa959aa4d98acf0f8a35ef942454209f",
       "anchor": "archive-handoff-2-79-145-md",
-      "archive_body_sha256": "de0f2f9f9de7f5f4b05873e5da56b707aa959aa4d98acf0f8a35ef942454209f"
+      "archive_body_sha256": "de0f2f9f9de7f5f4b05873e5da56b707aa959aa4d98acf0f8a35ef942454209f",
+      "relocated_archive_body_sha256": "5fee8cef1c2ce233dfe4117b9e098c4e52c874a3d44e90d132978df5974b58d8"
     },
     {
       "original_path": "HANDOFF-2.79.146.md",
       "git_blob_sha": "56e467103b5184c27deee02d3752505060b9cda6",
       "sha256": "dc615f660f7986895df291df1050b32de361bd13f903cb2adff7c250570e6a91",
       "anchor": "archive-handoff-2-79-146-md",
-      "archive_body_sha256": "dc615f660f7986895df291df1050b32de361bd13f903cb2adff7c250570e6a91"
+      "archive_body_sha256": "dc615f660f7986895df291df1050b32de361bd13f903cb2adff7c250570e6a91",
+      "relocated_archive_body_sha256": "8b3331fd4ceb3bd707a3de0f7faf43560f99c0bb7b68bf90590ac88c100815f6"
     },
     {
       "original_path": "HANDOFF-2.79.147.md",
       "git_blob_sha": "78472c37099ed72648112cc17d7c2f1c694f55e6",
       "sha256": "563b57be970bbdbdf3729123af78871b76873d1df55b0f700a828e5e8217582a",
       "anchor": "archive-handoff-2-79-147-md",
-      "archive_body_sha256": "563b57be970bbdbdf3729123af78871b76873d1df55b0f700a828e5e8217582a"
+      "archive_body_sha256": "563b57be970bbdbdf3729123af78871b76873d1df55b0f700a828e5e8217582a",
+      "relocated_archive_body_sha256": "57aec08ca7a978f3f418dec7f6bafb1c3948c0f78b8d95a0e1791f45671e686c"
     },
     {
       "original_path": "HANDOFF-2.79.148.md",
       "git_blob_sha": "8bf8b06480bc4aff4eda381b57cf0386b918a123",
       "sha256": "33a6fe8e8662b073dd55c00ee0826d68879416cdf7f55d442333707de668f183",
       "anchor": "archive-handoff-2-79-148-md",
-      "archive_body_sha256": "33a6fe8e8662b073dd55c00ee0826d68879416cdf7f55d442333707de668f183"
+      "archive_body_sha256": "33a6fe8e8662b073dd55c00ee0826d68879416cdf7f55d442333707de668f183",
+      "relocated_archive_body_sha256": "75b69f0ab8b8133cd1c189902d7800a17c23ab1be83b4f78a8d99108c0d5cd30"
     },
     {
       "original_path": "HANDOFF-2.79.149.md",
       "git_blob_sha": "42151229d95d5bbf4cb3a24ccc88dcd1df792ca3",
       "sha256": "4d49fe0910d8dfc4403567df2b16180593991cdaf76d9a5fe714f933669359f7",
       "anchor": "archive-handoff-2-79-149-md",
-      "archive_body_sha256": "4d49fe0910d8dfc4403567df2b16180593991cdaf76d9a5fe714f933669359f7"
+      "archive_body_sha256": "4d49fe0910d8dfc4403567df2b16180593991cdaf76d9a5fe714f933669359f7",
+      "relocated_archive_body_sha256": "f62f1de90e12d46f2b1814672396cf295d6064cb7f3c1747a76726a1785dec77"
     },
     {
       "original_path": "HANDOFF-2.79.150.md",
       "git_blob_sha": "976140f152c7b0fa48bc0fa7eb8f2c86796405fa",
       "sha256": "a15a83d0375379d5b1351ef94c5d70b44407de52ce2d3478486399e1792db7cc",
       "anchor": "archive-handoff-2-79-150-md",
-      "archive_body_sha256": "a15a83d0375379d5b1351ef94c5d70b44407de52ce2d3478486399e1792db7cc"
+      "archive_body_sha256": "a15a83d0375379d5b1351ef94c5d70b44407de52ce2d3478486399e1792db7cc",
+      "relocated_archive_body_sha256": "7090e9b4021acbedc838afb36a90918dd58f72f6f3a25acb570ed986bca6467f"
     },
     {
       "original_path": "HANDOFF-2.79.151.md",
       "git_blob_sha": "fa169c21e9c24487a274f33208c361868a87fccb",
       "sha256": "270fed69b71f1632ec9e54ad33bd4c358234750b92257a8f2063953c01f4ddbe",
       "anchor": "archive-handoff-2-79-151-md",
-      "archive_body_sha256": "270fed69b71f1632ec9e54ad33bd4c358234750b92257a8f2063953c01f4ddbe"
+      "archive_body_sha256": "270fed69b71f1632ec9e54ad33bd4c358234750b92257a8f2063953c01f4ddbe",
+      "relocated_archive_body_sha256": "3edfd89a54a14ca9f238dc2c984edf0ac0fe5022f102445e0c2a5d3460354581"
     },
     {
       "original_path": "HANDOFF-2.79.152.md",
       "git_blob_sha": "7aaf1aaa4c1e01722657a0b5ae54d74ec37751bb",
       "sha256": "7d701b8ce46a841aa59e7d58dc032f329522e6018c89910bbb60b15aa27d189b",
       "anchor": "archive-handoff-2-79-152-md",
-      "archive_body_sha256": "0f99f12c9a0938fe28128a96f481276348a9eb3bbba7f47cbe0656ff9116bb23"
+      "archive_body_sha256": "0f99f12c9a0938fe28128a96f481276348a9eb3bbba7f47cbe0656ff9116bb23",
+      "relocated_archive_body_sha256": "42d958d73dd528feed7187998bef6eaf490f73b220435aac04814d7bdc504afd"
     },
     {
       "original_path": "HANDOFF-2.79.153.md",
       "git_blob_sha": "f9c13fc573e5c372379e0857a80ef8d6e2adfd67",
       "sha256": "868ae0523f278a95b49f363fcb9c420f16d45140105fbd1ab562cb83a5f8e500",
       "anchor": "archive-handoff-2-79-153-md",
-      "archive_body_sha256": "374502d0951c2b3540aedeca4e4ccbb77149d4317ce8b807b658eb6d46791963"
+      "archive_body_sha256": "374502d0951c2b3540aedeca4e4ccbb77149d4317ce8b807b658eb6d46791963",
+      "relocated_archive_body_sha256": "f7b00186bb003e835abfe3a921fdb18a18475b2106365c921080cd25173eb39f"
     },
     {
       "original_path": "HANDOFF-2.79.154.md",
       "git_blob_sha": "239469f65a2ccae4daa7edbbc1730ed43612bc1f",
       "sha256": "503b4401ac8aa8761718a4a584a1efdf10f425d9e03bb0d93cc7bc6db6596f6b",
       "anchor": "archive-handoff-2-79-154-md",
-      "archive_body_sha256": "abc66c1ca36eaca31d1bdcc559df0a9ef236962bebaab5dcf90eb47831e3dcba"
+      "archive_body_sha256": "abc66c1ca36eaca31d1bdcc559df0a9ef236962bebaab5dcf90eb47831e3dcba",
+      "relocated_archive_body_sha256": "3fe78f5847cd519a0dd4f1bec6a7a6bd03983904edf8720ce7734064b1edc51d"
     },
     {
       "original_path": "HANDOFF-2.79.155.md",
       "git_blob_sha": "aef4748eb96721d4975d131a018b07330f01cce6",
       "sha256": "417f7b76c98082980af8d0cbc516abb1203aa9e6cb7315e082fa0eb67d83eab9",
       "anchor": "archive-handoff-2-79-155-md",
-      "archive_body_sha256": "417f7b76c98082980af8d0cbc516abb1203aa9e6cb7315e082fa0eb67d83eab9"
+      "archive_body_sha256": "417f7b76c98082980af8d0cbc516abb1203aa9e6cb7315e082fa0eb67d83eab9",
+      "relocated_archive_body_sha256": "6fbd5c966520d5c50cb3629f3c77d5a9c41d3b3004ee94e61ff4734d6c82ce13"
     },
     {
       "original_path": "HANDOFF-2.79.156.md",
       "git_blob_sha": "788c47fc22b9e4a6896b3dc075b604a271244364",
       "sha256": "1633769e4926eca5e7897c44daed0fe043876b0980f2d366522d79fdf9390dcf",
       "anchor": "archive-handoff-2-79-156-md",
-      "archive_body_sha256": "1633769e4926eca5e7897c44daed0fe043876b0980f2d366522d79fdf9390dcf"
+      "archive_body_sha256": "1633769e4926eca5e7897c44daed0fe043876b0980f2d366522d79fdf9390dcf",
+      "relocated_archive_body_sha256": "596ae97bade34d2df00339453b8ded32f5291371d76677332c74bf2debd09491"
     },
     {
       "original_path": "HANDOFF-2.79.157.md",
       "git_blob_sha": "fbebb2cf21f687468f19a168d9fbd11e207b2578",
       "sha256": "61118e58ff5df8c22dfe399cf3a7cc21db962f8b06a795f9aa21c5908274abfb",
       "anchor": "archive-handoff-2-79-157-md",
-      "archive_body_sha256": "61118e58ff5df8c22dfe399cf3a7cc21db962f8b06a795f9aa21c5908274abfb"
+      "archive_body_sha256": "61118e58ff5df8c22dfe399cf3a7cc21db962f8b06a795f9aa21c5908274abfb",
+      "relocated_archive_body_sha256": "8476e2767d0fbc2a9f212ec309f1c3fce76acde9724d00a62ef45297271d7afe"
     },
     {
       "original_path": "HANDOFF-2.79.158.md",
       "git_blob_sha": "47296a7cd42b746bfe16a06054457e175c5530a3",
       "sha256": "22076e7c3f35b412d0e6be3d491845176af3018ab9cbdb3588dce9eaf58c951b",
       "anchor": "archive-handoff-2-79-158-md",
-      "archive_body_sha256": "22076e7c3f35b412d0e6be3d491845176af3018ab9cbdb3588dce9eaf58c951b"
+      "archive_body_sha256": "22076e7c3f35b412d0e6be3d491845176af3018ab9cbdb3588dce9eaf58c951b",
+      "relocated_archive_body_sha256": "da823d58a00be5e3e09fe1c8f8abe8e91c83b8a9c8579dceaa2ed77a16902509"
     },
     {
       "original_path": "HANDOFF-2.79.159.md",
       "git_blob_sha": "ec37da445c5c8ebe088385b3a5a5b4116188448f",
       "sha256": "902b8f51b1d6ac9b084e72c3023132eeb13307d8985fabefbfb1d217fa6029f4",
       "anchor": "archive-handoff-2-79-159-md",
-      "archive_body_sha256": "902b8f51b1d6ac9b084e72c3023132eeb13307d8985fabefbfb1d217fa6029f4"
+      "archive_body_sha256": "902b8f51b1d6ac9b084e72c3023132eeb13307d8985fabefbfb1d217fa6029f4",
+      "relocated_archive_body_sha256": "f27578730f2f006f4b9172aa4984035035fc73abd3a53e16c4d9b4ba5f7a867a"
     },
     {
       "original_path": "HANDOFF-2.79.160.md",
       "git_blob_sha": "ea791703e97b6c7e057c91b5f141dcea0f7bb132",
       "sha256": "164c802134c71b50912ff0a67c7843a42f2921697c020c6a0a0f8c07f0fe5cd2",
       "anchor": "archive-handoff-2-79-160-md",
-      "archive_body_sha256": "164c802134c71b50912ff0a67c7843a42f2921697c020c6a0a0f8c07f0fe5cd2"
+      "archive_body_sha256": "164c802134c71b50912ff0a67c7843a42f2921697c020c6a0a0f8c07f0fe5cd2",
+      "relocated_archive_body_sha256": "164c802134c71b50912ff0a67c7843a42f2921697c020c6a0a0f8c07f0fe5cd2"
     },
     {
       "original_path": "HANDOFF-2.79.161.md",
       "git_blob_sha": "28062704529cc5be25fcf348e7a0ab7628c68cde",
       "sha256": "544f133bbd271ae80de8eae7d5619e9f6a3035aef96a10ec699b676405241f1b",
       "anchor": "archive-handoff-2-79-161-md",
-      "archive_body_sha256": "544f133bbd271ae80de8eae7d5619e9f6a3035aef96a10ec699b676405241f1b"
+      "archive_body_sha256": "544f133bbd271ae80de8eae7d5619e9f6a3035aef96a10ec699b676405241f1b",
+      "relocated_archive_body_sha256": "544f133bbd271ae80de8eae7d5619e9f6a3035aef96a10ec699b676405241f1b"
     },
     {
       "original_path": "HANDOFF-2.79.162.md",
       "git_blob_sha": "5ea1a78b4cfc4f7b2b63b2753adb58ac10ccef28",
       "sha256": "1124dea7d8ad319fc4a2ea3b100767712e098ea903e82792740e2b9e6275a6be",
       "anchor": "archive-handoff-2-79-162-md",
-      "archive_body_sha256": "1124dea7d8ad319fc4a2ea3b100767712e098ea903e82792740e2b9e6275a6be"
+      "archive_body_sha256": "1124dea7d8ad319fc4a2ea3b100767712e098ea903e82792740e2b9e6275a6be",
+      "relocated_archive_body_sha256": "1124dea7d8ad319fc4a2ea3b100767712e098ea903e82792740e2b9e6275a6be"
     },
     {
       "original_path": "HANDOFF-2.79.163.md",
       "git_blob_sha": "ab5c9cfc0ad50833b4112bc6699d4798e6aff4f3",
       "sha256": "9fe68d9e712f558ce3ec0a59b311c0f4c1eff3e6ab98fa19b2179950e8c1262c",
       "anchor": "archive-handoff-2-79-163-md",
-      "archive_body_sha256": "9fe68d9e712f558ce3ec0a59b311c0f4c1eff3e6ab98fa19b2179950e8c1262c"
+      "archive_body_sha256": "9fe68d9e712f558ce3ec0a59b311c0f4c1eff3e6ab98fa19b2179950e8c1262c",
+      "relocated_archive_body_sha256": "9fe68d9e712f558ce3ec0a59b311c0f4c1eff3e6ab98fa19b2179950e8c1262c"
     },
     {
       "original_path": "HANDOFF-2.79.164.md",
       "git_blob_sha": "b712eac46d7ebb801549f2c0f5adc00c04187b2d",
       "sha256": "4f8e33b3ef87d8991de6d840698cff16371d3701ed917db69d3369c9f269b746",
       "anchor": "archive-handoff-2-79-164-md",
-      "archive_body_sha256": "4f8e33b3ef87d8991de6d840698cff16371d3701ed917db69d3369c9f269b746"
+      "archive_body_sha256": "4f8e33b3ef87d8991de6d840698cff16371d3701ed917db69d3369c9f269b746",
+      "relocated_archive_body_sha256": "a5fd8b24f5fed419a965b986343ebf88b2d6f5a8fbb7c531a9687dc2da303add"
     },
     {
       "original_path": "HANDOFF-2.79.165.md",
       "git_blob_sha": "61c3c7177424d1c1a0f705e445ea310d09a44e74",
       "sha256": "d7d9d30d81aab4c802acf66441251acc228cef2410edcf7299731d4ba1396557",
       "anchor": "archive-handoff-2-79-165-md",
-      "archive_body_sha256": "d7d9d30d81aab4c802acf66441251acc228cef2410edcf7299731d4ba1396557"
+      "archive_body_sha256": "d7d9d30d81aab4c802acf66441251acc228cef2410edcf7299731d4ba1396557",
+      "relocated_archive_body_sha256": "04b0f69f8829a758e5c0e31a7fe9964dc8fb076d85bf0ba8d53cb874919f9f2f"
     },
     {
       "original_path": "HANDOFF-2.79.166.md",
       "git_blob_sha": "d0446149b691ad85d763dd1e116e8be48e6b3233",
       "sha256": "3aa1b89d66d3e18103ff6031b4332531302410b46a73eaedeb5f03b281d7a180",
       "anchor": "archive-handoff-2-79-166-md",
-      "archive_body_sha256": "3aa1b89d66d3e18103ff6031b4332531302410b46a73eaedeb5f03b281d7a180"
+      "archive_body_sha256": "3aa1b89d66d3e18103ff6031b4332531302410b46a73eaedeb5f03b281d7a180",
+      "relocated_archive_body_sha256": "db3f33cc8bfce086b62edd4ddc9ac8e7a030d7ec89a0ce5b7b91a3825ba1bf65"
     },
     {
       "original_path": "HANDOFF-2.79.167.md",
       "git_blob_sha": "09c70fa0e22481d34800dd1b441256398afc6953",
       "sha256": "8c607c334f2c93f0279d2f7b6aa91ec567e6acf014a5ca1d42d6978000f07190",
       "anchor": "archive-handoff-2-79-167-md",
-      "archive_body_sha256": "8c607c334f2c93f0279d2f7b6aa91ec567e6acf014a5ca1d42d6978000f07190"
+      "archive_body_sha256": "8c607c334f2c93f0279d2f7b6aa91ec567e6acf014a5ca1d42d6978000f07190",
+      "relocated_archive_body_sha256": "3d4da856b6cb2399a4e4a23105225a523d8ce5f12cb1cfc4be8364a9ab56d083"
     },
     {
       "original_path": "HANDOFF-2.79.168-DELIVERY.md",
       "git_blob_sha": "0bed554164aa9273f31c2eae1439fd7de296d243",
       "sha256": "3a82eb9331cc32456d6fc3419a805740d4ec9475d36e5156f9d59ce965c9715c",
       "anchor": "archive-handoff-2-79-168-delivery-md",
-      "archive_body_sha256": "3a82eb9331cc32456d6fc3419a805740d4ec9475d36e5156f9d59ce965c9715c"
+      "archive_body_sha256": "3a82eb9331cc32456d6fc3419a805740d4ec9475d36e5156f9d59ce965c9715c",
+      "relocated_archive_body_sha256": "3a82eb9331cc32456d6fc3419a805740d4ec9475d36e5156f9d59ce965c9715c"
     },
     {
       "original_path": "HANDOFF-2.79.168.md",
       "git_blob_sha": "8e1e22149b4285a7de4dd5aa7127ff882000e6af",
       "sha256": "b309500b037928974af88e2fc158a640328f9c85eac6880b699d115ec94c6101",
       "anchor": "archive-handoff-2-79-168-md",
-      "archive_body_sha256": "b309500b037928974af88e2fc158a640328f9c85eac6880b699d115ec94c6101"
+      "archive_body_sha256": "b309500b037928974af88e2fc158a640328f9c85eac6880b699d115ec94c6101",
+      "relocated_archive_body_sha256": "1e6dd774959d260a7200dfd313e4ee05f70f1fef740c398c340a5df7503345cc"
     },
     {
       "original_path": "HANDOFF-2.79.179.md",
       "git_blob_sha": "6ec814646fa7d9f876862fb82801d9882b57ba11",
       "sha256": "3c9d15b9a0ae5add383ecd115c080f78fb41d71591d0ad27cbb4f5b8d05a495c",
       "anchor": "archive-handoff-2-79-179-md",
-      "archive_body_sha256": "3c9d15b9a0ae5add383ecd115c080f78fb41d71591d0ad27cbb4f5b8d05a495c"
+      "archive_body_sha256": "3c9d15b9a0ae5add383ecd115c080f78fb41d71591d0ad27cbb4f5b8d05a495c",
+      "relocated_archive_body_sha256": "3c9d15b9a0ae5add383ecd115c080f78fb41d71591d0ad27cbb4f5b8d05a495c"
     },
     {
       "original_path": "HANDOFF-APOCALYPSE-AUDIT.md",
       "git_blob_sha": "ba5fc3762cda11367f5aa18bea239b116564a6a3",
       "sha256": "87991f303243f5424ba1328225d181c4b5d1da1c57ec4a43904023a61944e1dc",
       "anchor": "archive-handoff-apocalypse-audit-md",
-      "archive_body_sha256": "afafe499a2a33dffb5b5a0d308257e8bea4e568adfc8120439bc66292ec6f655"
+      "archive_body_sha256": "afafe499a2a33dffb5b5a0d308257e8bea4e568adfc8120439bc66292ec6f655",
+      "relocated_archive_body_sha256": "2fe14b9ac546dac840be0e5820a013e9e4e128c3609326c8d73050de6ffe8576"
     },
     {
       "original_path": "HANDOFF-APOCALYPSE-SINGLE-DUAL.md",
       "git_blob_sha": "3d67dab6cc019e3d3da6e44179ba72d4f6c7040b",
       "sha256": "d8779d55dc30a403a67d1bedc1317c235bea04b3867df7149f7fc884a7ac53a3",
       "anchor": "archive-handoff-apocalypse-single-dual-md",
-      "archive_body_sha256": "d8779d55dc30a403a67d1bedc1317c235bea04b3867df7149f7fc884a7ac53a3"
+      "archive_body_sha256": "d8779d55dc30a403a67d1bedc1317c235bea04b3867df7149f7fc884a7ac53a3",
+      "relocated_archive_body_sha256": "d0eb222312dbb3f12fa2e582a7cafe543f218eabcfb44c58ca9da35c8105c07b"
     },
     {
       "original_path": "HANDOFF-APOCALYPSE-TEST95-REGRESSION.md",
       "git_blob_sha": "d2c73a299960d6380efb8e13c95b3c71b6033e4f",
       "sha256": "0692f53048f0023d31c1d40ff4f36dc0cc1bf1716424c5620ec7a2a93c2623af",
       "anchor": "archive-handoff-apocalypse-test95-regression-md",
-      "archive_body_sha256": "0692f53048f0023d31c1d40ff4f36dc0cc1bf1716424c5620ec7a2a93c2623af"
+      "archive_body_sha256": "0692f53048f0023d31c1d40ff4f36dc0cc1bf1716424c5620ec7a2a93c2623af",
+      "relocated_archive_body_sha256": "0692f53048f0023d31c1d40ff4f36dc0cc1bf1716424c5620ec7a2a93c2623af"
     },
     {
       "original_path": "HANDOFF-DETECTOR-SOURCE173.md",
       "git_blob_sha": "da503da33ab819b7b41992a834cf95169db3aa35",
       "sha256": "fc3068b7490a36b946d4d5d63d0f68eeed3648f8e620979236c34312c1142e64",
       "anchor": "archive-handoff-detector-source173-md",
-      "archive_body_sha256": "fc3068b7490a36b946d4d5d63d0f68eeed3648f8e620979236c34312c1142e64"
+      "archive_body_sha256": "fc3068b7490a36b946d4d5d63d0f68eeed3648f8e620979236c34312c1142e64",
+      "relocated_archive_body_sha256": "fc3068b7490a36b946d4d5d63d0f68eeed3648f8e620979236c34312c1142e64"
     },
     {
       "original_path": "HANDOFF-DETECTOR-SOURCE176.md",
       "git_blob_sha": "f444519a1fe7d99028c62ca03cedfdf1e989c0a8",
       "sha256": "9c70bf349ae456c96e7f8e88f62a11d17463d9219570023976358e27dfe4f7ce",
       "anchor": "archive-handoff-detector-source176-md",
-      "archive_body_sha256": "9c70bf349ae456c96e7f8e88f62a11d17463d9219570023976358e27dfe4f7ce"
+      "archive_body_sha256": "9c70bf349ae456c96e7f8e88f62a11d17463d9219570023976358e27dfe4f7ce",
+      "relocated_archive_body_sha256": "9c70bf349ae456c96e7f8e88f62a11d17463d9219570023976358e27dfe4f7ce"
     },
     {
       "original_path": "HANDOFF-Test32.md",
       "git_blob_sha": "7bd0fa18655bc34a9cdae4661579554ecc55f70b",
       "sha256": "4aa5f9cf403da92c5aaa275bc195307b6504a4708708853a96763120a542ce65",
       "anchor": "archive-handoff-test32-md",
-      "archive_body_sha256": "4aa5f9cf403da92c5aaa275bc195307b6504a4708708853a96763120a542ce65"
+      "archive_body_sha256": "4aa5f9cf403da92c5aaa275bc195307b6504a4708708853a96763120a542ce65",
+      "relocated_archive_body_sha256": "4aa5f9cf403da92c5aaa275bc195307b6504a4708708853a96763120a542ce65"
     }
   ],
   "merge_decisions": [
@@ -993,5 +1132,758 @@
     "Rewrite current README and Android module guidance; retain unique historical Android prose in HANDOFF.md."
   ],
   "recovery": "All listed branch tips remain ancestors of consolidated Test_Branch (Android also retains its original ref). Recreate a removed branch at its recorded SHA if needed.",
-  "content_policy": "Original handoff bodies preserved with Markdown link destinations redirected and trailing whitespace normalized; original SHA256 and Git blob IDs retained for reproducible verification."
+  "content_policy": "Original handoff bodies preserved with Markdown link destinations redirected and trailing whitespace normalized; original SHA256 and Git blob IDs retained for reproducible verification.",
+  "validation_relocations": {
+    "date": "2026-10-27",
+    "description": "Historical JSON receipts moved byte-for-byte; no schemas or recorded evidence paths changed. Documentation references now resolve to their current locations.",
+    "records": [
+      {
+        "original_path": "TEST100-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST100-VALIDATION.json",
+        "sha256": "dc59fb571f4ffd9409fdec9b613d156119b63d20a249b7037e52af295958fd16",
+        "bytes": 7847,
+        "git_blob_sha": "0050df19aab49bf9c7db370804692715f3e43911"
+      },
+      {
+        "original_path": "TEST101-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST101-VALIDATION.json",
+        "sha256": "723f19097f4f096ebb33a51541aae8035a828d9b236717594dcb2a7f406402de",
+        "bytes": 8961,
+        "git_blob_sha": "97a70e83966df7db0d5aee952b2ac0ee3e337e4c"
+      },
+      {
+        "original_path": "TEST102-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST102-VALIDATION.json",
+        "sha256": "b6f36157ee3630429f639cf61bced07f2aadbab2b9d1126673dd031484894ed7",
+        "bytes": 9131,
+        "git_blob_sha": "026eeb6a5a0d7d5410a1a6cdf43ad32c9bad01a6"
+      },
+      {
+        "original_path": "TEST103-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST103-VALIDATION.json",
+        "sha256": "674c11aaafeece601bbfee1f131ffb2319919585ec65fd3e8e570d7c32cf4c27",
+        "bytes": 11442,
+        "git_blob_sha": "fb5e7af59753df71b6358a3368de074374423676"
+      },
+      {
+        "original_path": "TEST104-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST104-VALIDATION.json",
+        "sha256": "0c50e6bf01c7ce7ef1969e9f921ad7e3964918286220754587ab9ae993f1ae65",
+        "bytes": 78462,
+        "git_blob_sha": "ff509afad26805fc0d2812640481e0b7ad199692"
+      },
+      {
+        "original_path": "TEST105-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST105-VALIDATION.json",
+        "sha256": "9aed09dd00e1ebc7dcb311b1f3a1d2c93ee0426f04be84081763bb516ce0139f",
+        "bytes": 8820,
+        "git_blob_sha": "5bf74908010a2ef79903b6dde7c95b084774676a"
+      },
+      {
+        "original_path": "TEST106-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST106-VALIDATION.json",
+        "sha256": "ae70c486625317e065e936dea2f051a588c6123a450ed0c32f80dca96cce284e",
+        "bytes": 10123,
+        "git_blob_sha": "2b81694cb7d162ca64a0f31bc214a1337b7e9c4f"
+      },
+      {
+        "original_path": "TEST107-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST107-VALIDATION.json",
+        "sha256": "4ebfdd3a6b7a6f78d3db16b9005cdb4cf2b1769a963755b178c7e58e427cbf17",
+        "bytes": 13264,
+        "git_blob_sha": "03173710af05e9538e92077cf80907d2364f03de"
+      },
+      {
+        "original_path": "TEST108-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST108-VALIDATION.json",
+        "sha256": "dbe590cf7bb15a0c8c681318234e34051b51d29ca2c81ee3e25f16734b451715",
+        "bytes": 9960,
+        "git_blob_sha": "367a388c9071458f49f175cfde822a6b48e7b5d2"
+      },
+      {
+        "original_path": "TEST109-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST109-VALIDATION.json",
+        "sha256": "0abc908b3260d99d51d197352112d4c0beafae2ee579b3ab5113978abfa1e05b",
+        "bytes": 15384,
+        "git_blob_sha": "a23dab127e17a8299424539362a7dd39787d3e15"
+      },
+      {
+        "original_path": "TEST110-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST110-VALIDATION.json",
+        "sha256": "6f57e9e9fc76768646be7916558c32828ad75e15d86041fd7d832925935b4880",
+        "bytes": 12515,
+        "git_blob_sha": "a621391742febebf6d383a1519f9bacdb4739a87"
+      },
+      {
+        "original_path": "TEST111-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST111-VALIDATION.json",
+        "sha256": "15ad8e905667bec5737918051abf30bc42ee4c327d41fe812954b66b100c73cd",
+        "bytes": 18881,
+        "git_blob_sha": "4cfe0e46c718917da48e7d724e81aaee255171f7"
+      },
+      {
+        "original_path": "TEST112-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST112-VALIDATION.json",
+        "sha256": "05e84f91c52c5b3fd648e7f9ca40ae16713d496d4f9e2bfa622a959a79746477",
+        "bytes": 12777,
+        "git_blob_sha": "bb4d009ac0d5a1f3450545a54579abc5c31dc81d"
+      },
+      {
+        "original_path": "TEST113-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST113-VALIDATION.json",
+        "sha256": "0b4f7b7d289782f8433fd5f9b2fa9d8598d9623f241102e3357d7662ad02bbee",
+        "bytes": 10101,
+        "git_blob_sha": "71f7159a111c151f77e66cf16bb53505aa445064"
+      },
+      {
+        "original_path": "TEST114-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST114-VALIDATION.json",
+        "sha256": "ac0f56c7b6521d5ae791e09f1952834e32a3d66602c948dc94ee1fafcc46e4be",
+        "bytes": 13030,
+        "git_blob_sha": "ff48f394117d4811c55b959c07f3677442de950d"
+      },
+      {
+        "original_path": "TEST115-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST115-VALIDATION.json",
+        "sha256": "65f993cbbccdcdf713ce9e28ab08cd512e887257ba45f8ef6d8441ae95d00079",
+        "bytes": 15337,
+        "git_blob_sha": "bbdb238344f3c9150dbefd430953674736880e49"
+      },
+      {
+        "original_path": "TEST116-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST116-VALIDATION.json",
+        "sha256": "0ac36bdef2970306666447fb26fce3242d1b74b43cb8b93bee41b623d909c3d5",
+        "bytes": 13852,
+        "git_blob_sha": "eea98133947b81341127382d1211e49f96b57d5d"
+      },
+      {
+        "original_path": "TEST117-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST117-VALIDATION.json",
+        "sha256": "acd19f79dd792e2c14083df88d35be8ff0161bb6800b96d0138d1ab09f86743b",
+        "bytes": 11004,
+        "git_blob_sha": "37408e6847a8a914538a1c7441d1952323626f1a"
+      },
+      {
+        "original_path": "TEST118-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST118-VALIDATION.json",
+        "sha256": "5e745e860240b47865a12600f8030f74ea777a29412abb0c4720d5e6f9cd93ab",
+        "bytes": 14064,
+        "git_blob_sha": "35f9559d16c5e87db01206f3d5b7e7a3f0b4a1ef"
+      },
+      {
+        "original_path": "TEST119-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST119-VALIDATION.json",
+        "sha256": "b2e1c7e12df1a262cd629035103f5804cbe499ee0a78835ccbc774130cb47699",
+        "bytes": 18405,
+        "git_blob_sha": "133be471e0806f0830cedb40c61823453c2f0837"
+      },
+      {
+        "original_path": "TEST120-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST120-VALIDATION.json",
+        "sha256": "3f6ac3098e34cc9b651d7242bdf2d9c854edc111196df5b0be6dfedfe7d62fce",
+        "bytes": 19337,
+        "git_blob_sha": "0fef370f5a1605412549f1c2b64fb28ca4346e5e"
+      },
+      {
+        "original_path": "TEST121-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST121-VALIDATION.json",
+        "sha256": "c1e425e10ebbc5d6f2d453b6ac1fad74fd1827c08fe779f07d57c72d2b53fa27",
+        "bytes": 20146,
+        "git_blob_sha": "63e9e2142fdebc8515de15e3b2f0cf0856a4e625"
+      },
+      {
+        "original_path": "TEST122-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST122-VALIDATION.json",
+        "sha256": "7913d9a1b636178b3b3170674d2b70c3626c4f6ee94bac33e501c1f16e0a2fa1",
+        "bytes": 6871,
+        "git_blob_sha": "1112d48bf68f1378cf238217dbb4ad760d10f960"
+      },
+      {
+        "original_path": "TEST123-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST123-VALIDATION.json",
+        "sha256": "3bdd984e3dc88903029b9863f3a3c7be8416fd3dd1b58e8b356774e61a19243e",
+        "bytes": 12859,
+        "git_blob_sha": "af199410c755690ffa9d72733bda233df4565e84"
+      },
+      {
+        "original_path": "TEST124-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST124-VALIDATION.json",
+        "sha256": "748e5512d532e087db80b8a41102990baa57eca02b2ceb1c8917a695f5eb582d",
+        "bytes": 13205,
+        "git_blob_sha": "8b4343931269509b74631ec51cc0fc6c1832f804"
+      },
+      {
+        "original_path": "TEST125-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST125-VALIDATION.json",
+        "sha256": "da23d79109fe9bef359e79395ea7be51f7629cc3bfad593642fb0f41d79376f9",
+        "bytes": 21843,
+        "git_blob_sha": "c2662fe0b74cd61225be5c15fd95f4fe6dd43f10"
+      },
+      {
+        "original_path": "TEST126-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST126-VALIDATION.json",
+        "sha256": "4cae4b737a012435fa7c498eb2180504ece803737c25cb821d712b5955e25c5a",
+        "bytes": 17525,
+        "git_blob_sha": "53a68c534ae5735487af01597736829ef31a0552"
+      },
+      {
+        "original_path": "TEST127-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST127-VALIDATION.json",
+        "sha256": "6310ae863f9bf2a28132532ac032c646034981ec686f30267d82790d500fcf5c",
+        "bytes": 18512,
+        "git_blob_sha": "a9ef690324f0a930113df925facc721713fa5a2a"
+      },
+      {
+        "original_path": "TEST128-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST128-VALIDATION.json",
+        "sha256": "ab5e3886c753ad2920a26410ccda772d0854a4c7e17ea1baedf5591bb0270558",
+        "bytes": 21033,
+        "git_blob_sha": "53c5982003bd176f617d75ee120c558820dc331b"
+      },
+      {
+        "original_path": "TEST129-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST129-VALIDATION.json",
+        "sha256": "db63091d324304e8edd2f264ef9b668a6d73331830f6097b168a2e91e62604c6",
+        "bytes": 19795,
+        "git_blob_sha": "4020b2a9ba5b0da63638c0c92bced87d73b13232"
+      },
+      {
+        "original_path": "TEST130-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST130-VALIDATION.json",
+        "sha256": "1208e4af8745c8228f3eed012140d4b632e4b7566706c1bd6ce3fb1d28f6867a",
+        "bytes": 18102,
+        "git_blob_sha": "60fcedce5776073c1233fd477c335841bb2ace30"
+      },
+      {
+        "original_path": "TEST131-CHECKPOINT-RECEIPT.json",
+        "path": "docs/evidence/validation/TEST131-CHECKPOINT-RECEIPT.json",
+        "sha256": "4acc37bcd8d44f7b982a2bbadf81abaefd03754e47272806cae8d4f991eefd1e",
+        "bytes": 1412,
+        "git_blob_sha": "9b342eb7e3367c3a4f7a97520129fd8670bda4ca"
+      },
+      {
+        "original_path": "TEST131-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST131-VALIDATION.json",
+        "sha256": "d8ef8a0c5d29102473e273c372742a50aef6723de54c91b5aeeae132588885ad",
+        "bytes": 2508,
+        "git_blob_sha": "27553a27a5d655e2ad4247847657083843f193bb"
+      },
+      {
+        "original_path": "TEST132-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST132-VALIDATION.json",
+        "sha256": "5c1c09b346bb967ce63d554e7a63bb85bd40cb99ec51ac5275c9149c81d0b2d7",
+        "bytes": 2595,
+        "git_blob_sha": "487c17040020c0fcc6d325d35df304a59dcef704"
+      },
+      {
+        "original_path": "TEST133-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST133-VALIDATION.json",
+        "sha256": "fb38aa69cbfb436eff995688059614ae4376674e4e995a3039e80c469c70ce0e",
+        "bytes": 2857,
+        "git_blob_sha": "26764ee13513ce758295142383cf343ad5e4e44e"
+      },
+      {
+        "original_path": "TEST134-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST134-VALIDATION.json",
+        "sha256": "b87957c5e9a40c3f79021476ac02906e44eabdac87079020062ee0ea2e1a045f",
+        "bytes": 3437,
+        "git_blob_sha": "c23925d513c88875dc8be1ea92c022e31d05ae31"
+      },
+      {
+        "original_path": "TEST135-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST135-VALIDATION.json",
+        "sha256": "9376e5e4d7d5e405c208677571ca54fc337d84ccd3efc0e53c6bc0c4a7a802c7",
+        "bytes": 3434,
+        "git_blob_sha": "8241bf87559c68f76151493e5f1820982eb47bf7"
+      },
+      {
+        "original_path": "TEST136-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST136-VALIDATION.json",
+        "sha256": "74901ab5cdfa43f8a863034bfe2d2b5eb65336eb1cf4f0d8fcb06a33e618e25a",
+        "bytes": 4124,
+        "git_blob_sha": "1415d0af145b38dff9acae14d959e051cf9fc6b2"
+      },
+      {
+        "original_path": "TEST137-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST137-VALIDATION.json",
+        "sha256": "7e27398d3da60ec861e7658ad60a599cc898d9052d389613fa8628050db13a0b",
+        "bytes": 4645,
+        "git_blob_sha": "080ffd64b841a607d8c455671d6223248231cdcd"
+      },
+      {
+        "original_path": "TEST138-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST138-VALIDATION.json",
+        "sha256": "dad02034e887dbfa159facf16423b480a401de442fe8633f66b134e9bb7f5e90",
+        "bytes": 3524,
+        "git_blob_sha": "988d970aa51c011fde23404f825161c7fbbfd1dd"
+      },
+      {
+        "original_path": "TEST139-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST139-VALIDATION.json",
+        "sha256": "9653b183798716e57a2eaa051025c5720fce04467c6a2c352d3542d3c58f4802",
+        "bytes": 3466,
+        "git_blob_sha": "e608801f9e66ea7c03fb24b948d8a75eb9537f9b"
+      },
+      {
+        "original_path": "TEST140-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST140-VALIDATION.json",
+        "sha256": "812b7bb462733f63208cc26bfd3de6d4edd470936480c54fd1c775780fbfcd9c",
+        "bytes": 3645,
+        "git_blob_sha": "d2a4b9ab478ae6f86e82f81a447172fe9fed2dd0"
+      },
+      {
+        "original_path": "TEST141-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST141-VALIDATION.json",
+        "sha256": "8c43f5dc11d5c1aa1ad770189502017181298ea60ba0d1da173807e66946ed1d",
+        "bytes": 4162,
+        "git_blob_sha": "33c0d69abbc1ace825a44c36f1d0f4c7d03ad78a"
+      },
+      {
+        "original_path": "TEST142-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST142-VALIDATION.json",
+        "sha256": "fb36fa1cd00b2932428665f3b002612883a49a28aca9dfcaee54951978c8a706",
+        "bytes": 4314,
+        "git_blob_sha": "f8956edc773b110ffae9c21dbea1f7ff97cfa8a2"
+      },
+      {
+        "original_path": "TEST143-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST143-VALIDATION.json",
+        "sha256": "110e87a3756f81e8407585df839ef58bb9557b4bc31a4a5860227498fbc383b7",
+        "bytes": 6001,
+        "git_blob_sha": "9c05612321149e41b799f2107147e40e17791a5c"
+      },
+      {
+        "original_path": "TEST144-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST144-VALIDATION.json",
+        "sha256": "bcc8d9b9a50b951ec2d055018361a75227ddfd6ba3c945f680731c1be7a9853f",
+        "bytes": 5221,
+        "git_blob_sha": "e97693abd770f147e8d29708fe5fb9453463be4e"
+      },
+      {
+        "original_path": "TEST145-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST145-VALIDATION.json",
+        "sha256": "32790503a35cac5274c65747d328a58acd8e23ef47dfa4565148e34fefbf9461",
+        "bytes": 4920,
+        "git_blob_sha": "4c9e590f5f93c29bea78f014e220dbc5af543022"
+      },
+      {
+        "original_path": "TEST146-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST146-VALIDATION.json",
+        "sha256": "93bd14bb80f470630548b0c660f8aad49501920405487a5a7319b6f866f31c9f",
+        "bytes": 4737,
+        "git_blob_sha": "029978f6a0649daf389d96f291ac497df616b00b"
+      },
+      {
+        "original_path": "TEST147-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST147-VALIDATION.json",
+        "sha256": "ac4e2076ee6ef005794d8c7752ee8d13f8db2227156f53a9c9694a3071d13848",
+        "bytes": 8136,
+        "git_blob_sha": "660754a6b3950bebd882f08f28564b6639322266"
+      },
+      {
+        "original_path": "TEST148-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST148-VALIDATION.json",
+        "sha256": "c801efbcac94d9ce217abf47ed2a3dbed518f2818d1446f4311a1c89e217bde5",
+        "bytes": 6951,
+        "git_blob_sha": "ac1e6e520ac532cc14e04df147e0e3fe8ff17bd9"
+      },
+      {
+        "original_path": "TEST149-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST149-VALIDATION.json",
+        "sha256": "ecf9da7713e78def24817cb3960659946414cc0562bb1331175cd51a2fe684f3",
+        "bytes": 6629,
+        "git_blob_sha": "5b525e96f67113c067c5b86164b0f0ac0a4bc476"
+      },
+      {
+        "original_path": "TEST150-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST150-VALIDATION.json",
+        "sha256": "149c61dbd23ab962153189a97438c342fccbdea96628499e8bf6db50b43da5c3",
+        "bytes": 6963,
+        "git_blob_sha": "1fb964b065ffbfd63adc1ab8ee0d8fca7b73ca92"
+      },
+      {
+        "original_path": "TEST151-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST151-VALIDATION.json",
+        "sha256": "076350f38b73701216e20cda6b19ceb6028ff889fa516ee71d15fedba43c8bbb",
+        "bytes": 6906,
+        "git_blob_sha": "e3ace61b361848e28b84c1df85e9d0af33933931"
+      },
+      {
+        "original_path": "TEST152-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST152-VALIDATION.json",
+        "sha256": "65cb52a61fcc13958001f4ae0ab2b92aca2fc97d89b8825bae1aae54be81ee44",
+        "bytes": 15076,
+        "git_blob_sha": "6d50c1aa91029297fde0fa3ca261bfc85a9134e5"
+      },
+      {
+        "original_path": "TEST153-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST153-VALIDATION.json",
+        "sha256": "2341a4381e0b797c9028c24f354d8b12c2fe23d054e5ac7a6d2108fe4bacebd1",
+        "bytes": 16004,
+        "git_blob_sha": "3e315e3297cd3d490dc294e2155a9f7b583413f6"
+      },
+      {
+        "original_path": "TEST154-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST154-VALIDATION.json",
+        "sha256": "fa07545df33f869728342558c2b319961359274b32fb3479d55ec8f606bf117f",
+        "bytes": 17748,
+        "git_blob_sha": "a37915afcf14dacfdb1e9f6f883f5a7217fbc9b6"
+      },
+      {
+        "original_path": "TEST155-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST155-VALIDATION.json",
+        "sha256": "ee39603f5a19c9068e7b8839d14d9566a7ff6332cb019dfb7355e444f016a490",
+        "bytes": 13310,
+        "git_blob_sha": "84adce669efc0fd385f3d12748b784dc841b7086"
+      },
+      {
+        "original_path": "TEST156-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST156-VALIDATION.json",
+        "sha256": "1c91b59783d268d81a9fcf1cc76ce508ad1e99997886c165e1322f1ed6c455c0",
+        "bytes": 101511,
+        "git_blob_sha": "545d7b7f3d240ffb2b9c55d1308e972d9d38b48a"
+      },
+      {
+        "original_path": "TEST157-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST157-VALIDATION.json",
+        "sha256": "2d14bbdcc392d46180f9f88473706316cbf6dbf849b0b0668e009a22b5e78f05",
+        "bytes": 2178798,
+        "git_blob_sha": "6073d0c9f816edfef044208003ef5f42fa90039d"
+      },
+      {
+        "original_path": "TEST158-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST158-VALIDATION.json",
+        "sha256": "b029910d635c3f10610fbd5612d57263a6a746095c589f6be9701c9709521088",
+        "bytes": 7462,
+        "git_blob_sha": "d8e2484cb530a2ccee355420500d907c29c07212"
+      },
+      {
+        "original_path": "TEST159-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST159-VALIDATION.json",
+        "sha256": "2cba40720567e3375c1b80687fe1f09054aac994fcafb75ad2fb50658c11f10a",
+        "bytes": 3348,
+        "git_blob_sha": "8652d098a00292930c4fac25682ca590bff2bbc2"
+      },
+      {
+        "original_path": "TEST160-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST160-VALIDATION.json",
+        "sha256": "cfcef5f6eb6ce98e7d88ba94fa85567126409f181ac168969760c961924b771f",
+        "bytes": 2848,
+        "git_blob_sha": "fd624aff28ca3c03eb6ce85f3d92ffe651b84f1b"
+      },
+      {
+        "original_path": "TEST161-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST161-VALIDATION.json",
+        "sha256": "84a09feebf7c87360bc221b835139656265e40735cd1acb9058d3724ad771c04",
+        "bytes": 3108,
+        "git_blob_sha": "a948ff4363cbd42249b23cc92d61d9043999deb9"
+      },
+      {
+        "original_path": "TEST162-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST162-VALIDATION.json",
+        "sha256": "c87ffbd0cfb33c70649ae5168574ac20ff45cec755bc3a9ed839f5a1259a0568",
+        "bytes": 3905,
+        "git_blob_sha": "02a3ad1d015477ba4afa12773e74068de4d079ad"
+      },
+      {
+        "original_path": "TEST163-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST163-VALIDATION.json",
+        "sha256": "8cf27b9992b2b663c29780c1322d2896e962c490fb2b75c294fad4b0b5d4da79",
+        "bytes": 4193,
+        "git_blob_sha": "e1faae12fcbf5c4d12a4f2f8c799792dee400537"
+      },
+      {
+        "original_path": "TEST164-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST164-VALIDATION.json",
+        "sha256": "caa70fa86059db5165a86fb5a284185f3db5d80ef26da9aa784d190983c1dfc1",
+        "bytes": 4626,
+        "git_blob_sha": "617dbd56908ef055b7089c188c8b8d7784d754d3"
+      },
+      {
+        "original_path": "TEST165-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST165-VALIDATION.json",
+        "sha256": "11232e178515c10f3773389b60e7c815370006b2ad5a4bdcb3e8e933f1e5f232",
+        "bytes": 5904,
+        "git_blob_sha": "8fc0f8ab9c87765b738fc989901bfeeb0ecf8ae7"
+      },
+      {
+        "original_path": "TEST166-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST166-VALIDATION.json",
+        "sha256": "de31d238ec1ebf027d4fe64e5d0a5e1e66c37ee2447986e1e2763fd3bc572f65",
+        "bytes": 7180,
+        "git_blob_sha": "19259048fcf1905128d75991853a58b77ba97f1f"
+      },
+      {
+        "original_path": "TEST167-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST167-VALIDATION.json",
+        "sha256": "1b8c48618f9bdbda6285e5d4b2cff2bc4c3e91c23ba8f979ffa0efcc847d5963",
+        "bytes": 8469,
+        "git_blob_sha": "3cf7fbf0e5cb5bfed782d1b2b8e424645d7e6f2a"
+      },
+      {
+        "original_path": "TEST168-DELIVERY-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST168-DELIVERY-VALIDATION.json",
+        "sha256": "c48c093e1c5264ce447b8ff3a53bf026784864dcfd998dd0f31710d1192bffd7",
+        "bytes": 1477,
+        "git_blob_sha": "287008ba23a0711fd28961984da3fd12dab055a4"
+      },
+      {
+        "original_path": "TEST168-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST168-VALIDATION.json",
+        "sha256": "1ffdf2d29353565932381fbfe3555112ad1205ee6983bf5b6766a7d85ea8521a",
+        "bytes": 20815,
+        "git_blob_sha": "fc311dc403209500db55a58c698861deffa0836a"
+      },
+      {
+        "original_path": "TEST60-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST60-VALIDATION.json",
+        "sha256": "c4141e19db76ec471af336497815134d6aaba83ae7de64c4c7b6c1d54a00e195",
+        "bytes": 30467,
+        "git_blob_sha": "4a0952e63b6aa6669b6abff28f8223e2721f0990"
+      },
+      {
+        "original_path": "TEST61-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST61-VALIDATION.json",
+        "sha256": "0101a410e01fc3a5b0a1880755ef40a140bd838097903679c04186f75ba86f61",
+        "bytes": 81755,
+        "git_blob_sha": "2666175a36af368e6245a0a2fde5e85863b4d5f3"
+      },
+      {
+        "original_path": "TEST62-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST62-VALIDATION.json",
+        "sha256": "d5f6420774fff2015c3b23ffd0920f14fbe194b4cc1ac7c421dbf24509d30199",
+        "bytes": 131365,
+        "git_blob_sha": "50c54818285e43be68acd12a18c78acc66055247"
+      },
+      {
+        "original_path": "TEST63-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST63-VALIDATION.json",
+        "sha256": "2dfa4086fbb4543eec03c35da636d05a2ca48fd1448c1b4e2de0ea07dbf72b41",
+        "bytes": 126614,
+        "git_blob_sha": "c89c96407ed092a6abf346e8e8dcd1323372669c"
+      },
+      {
+        "original_path": "TEST64-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST64-VALIDATION.json",
+        "sha256": "d54d7a08b42fc978c540038cebb04da393954a6aa0f3f3c222a670b91f583507",
+        "bytes": 42744,
+        "git_blob_sha": "40cc9656a327e31dba2bc93af5b283252d7f3753"
+      },
+      {
+        "original_path": "TEST65-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST65-VALIDATION.json",
+        "sha256": "298ef3bd19e9786016590215bc0238aa7600beb456d24f351778db0aa0ec217c",
+        "bytes": 44191,
+        "git_blob_sha": "cf332bd18309d9d9ff29578ae82034ce2d1be222"
+      },
+      {
+        "original_path": "TEST66-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST66-VALIDATION.json",
+        "sha256": "076cda1b0322dc528900df7dbd42f28892616d8f228cbccdd266e27e7ef6a1ac",
+        "bytes": 4390,
+        "git_blob_sha": "58d1d6fabc9d3ce43134b42642103c21c84c1f75"
+      },
+      {
+        "original_path": "TEST67-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST67-VALIDATION.json",
+        "sha256": "9649c3e74622cf2c7da9db408d94564d8509968995fec49ae4c8c4c5206ea46c",
+        "bytes": 2991,
+        "git_blob_sha": "7f7eb7ec058a7860f69f53ae9596bdfdb99f206a"
+      },
+      {
+        "original_path": "TEST68-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST68-VALIDATION.json",
+        "sha256": "6c2c868581f1bc4ec4c23bbd16e646b228322ececd997fe4e6e50f7195a83b42",
+        "bytes": 3265,
+        "git_blob_sha": "00bdad67e376d3e7867d027dee511e74c025464e"
+      },
+      {
+        "original_path": "TEST69-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST69-VALIDATION.json",
+        "sha256": "863e3f3c6af7143bb84fba6d9ce1848180a1a3db829795923e1eecb4560884ed",
+        "bytes": 2591,
+        "git_blob_sha": "cd8b81fc0dcf63f29360dbc94d4a24876edb92dd"
+      },
+      {
+        "original_path": "TEST70-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST70-VALIDATION.json",
+        "sha256": "545fa92c17afae086371d5f7af3fb4bad3541bbeda9001eb07865a88207c4bbe",
+        "bytes": 12779,
+        "git_blob_sha": "6884488ff3ba89d3b35f27694fe3b19ea7f27f31"
+      },
+      {
+        "original_path": "TEST71-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST71-VALIDATION.json",
+        "sha256": "a6036f94d75b63f83563f808c8cdf9ce5cfcd6217abd4717e70fbdc64e9ec18c",
+        "bytes": 4106,
+        "git_blob_sha": "d085ddc83b4958b7f0c86b26f4d434b113440bab"
+      },
+      {
+        "original_path": "TEST73-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST73-VALIDATION.json",
+        "sha256": "f5e27a0338abe19f0aff35dc8717abe23149715841b54374dd411dbb7a3bb90c",
+        "bytes": 3676,
+        "git_blob_sha": "75919406d713e45c46a4f1838db00f9d8c62552b"
+      },
+      {
+        "original_path": "TEST74-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST74-VALIDATION.json",
+        "sha256": "914be66f5d34b55952cbada42b169e9b0488c0a3eb3444c90b23bfd74022fed7",
+        "bytes": 3932,
+        "git_blob_sha": "2918047b10bd01370a879c7d9d42ea5064bb55ee"
+      },
+      {
+        "original_path": "TEST75-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST75-VALIDATION.json",
+        "sha256": "a19079552b0e667adeb8becd7c6e3434a40dd3cfcfef983b2fc157d073c894c0",
+        "bytes": 5347,
+        "git_blob_sha": "a4b0ee5955cc0b551c643463bf3fc40a9ffbe702"
+      },
+      {
+        "original_path": "TEST76-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST76-VALIDATION.json",
+        "sha256": "bf3fcf5ae14a7a32d251f717af1c9ae07f0ff6ada852eb7a8f89cf3ac4010294",
+        "bytes": 1604,
+        "git_blob_sha": "bb24658ccb4ba198c66ea94651c1180d16fba0e9"
+      },
+      {
+        "original_path": "TEST77-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST77-VALIDATION.json",
+        "sha256": "57a2a2709f39e1bffbfa7c004402424d133ef040fc952701dc07f0b52bf57d20",
+        "bytes": 1908,
+        "git_blob_sha": "72031fe4a33fd2018369cb24bc8cf469e00818bd"
+      },
+      {
+        "original_path": "TEST78-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST78-VALIDATION.json",
+        "sha256": "f521af08f8e1b3c19ea3a1d4f2cddfd07370e69ea12fcf27f9cb9be0b1dbda79",
+        "bytes": 2469,
+        "git_blob_sha": "37180fabb68f402a65b898189ad865b8a96922a6"
+      },
+      {
+        "original_path": "TEST79-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST79-VALIDATION.json",
+        "sha256": "1309131e7583718553c17b55dc5035989a03acd9ae3a803991680c84de2d22b3",
+        "bytes": 1387,
+        "git_blob_sha": "0971ec72e96b1fdd5a8f132653cc7d7109dc447e"
+      },
+      {
+        "original_path": "TEST80-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST80-VALIDATION.json",
+        "sha256": "d32e6ac8ae59a595a041945bf99df0dc8a9d469575a3f4ac763a3dccd6a58114",
+        "bytes": 2044,
+        "git_blob_sha": "f5eb761a4a85eda12adae7f273a5891722088b48"
+      },
+      {
+        "original_path": "TEST82-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST82-VALIDATION.json",
+        "sha256": "a7a9dcbada72b34b0059b1433340b696e776c1bb058664df9d146080ca90768d",
+        "bytes": 19914,
+        "git_blob_sha": "07077b49ae754cc21f3ed6710605965e9635c725"
+      },
+      {
+        "original_path": "TEST83-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST83-VALIDATION.json",
+        "sha256": "f62ebf3e4de2b4f873113f430d7716069b0fe0d45f2fd5bd22de25853824b6a7",
+        "bytes": 15477,
+        "git_blob_sha": "6c9b994eb51bd729d108249819e90dc3a458bd38"
+      },
+      {
+        "original_path": "TEST84-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST84-VALIDATION.json",
+        "sha256": "58d8bc9db1dbb96e299cfd5c53b0224b222040e06c3a3fd50125683f8280ac8c",
+        "bytes": 17406,
+        "git_blob_sha": "da0e7242ebcbb9f526b40a4c87b3b79f9c7b557b"
+      },
+      {
+        "original_path": "TEST88-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST88-VALIDATION.json",
+        "sha256": "8ac4483bb24aed435b9e39ae4b7731fcd7efa87d50700a32d1aa90dde677675a",
+        "bytes": 28894,
+        "git_blob_sha": "b069fa495a04d4322bb127c68cf7be7bec4b6f7e"
+      },
+      {
+        "original_path": "TEST89-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST89-VALIDATION.json",
+        "sha256": "5e196986117e6e58f8d9bae8852367b97fc0c84c7d5ba9071e11e355355a906a",
+        "bytes": 6077,
+        "git_blob_sha": "625ef4db44e89170d2d267fb4f34b2f811058bf4"
+      },
+      {
+        "original_path": "TEST90-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST90-VALIDATION.json",
+        "sha256": "5a622e46730b95637b2655dd193f96497c2b3fdcabbbbcb11a576833d4e7daf9",
+        "bytes": 13002,
+        "git_blob_sha": "fc9fa82976ebae5e86aa146dd50a6c7b68ecc10f"
+      },
+      {
+        "original_path": "TEST91-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST91-VALIDATION.json",
+        "sha256": "93858dc89050dbbb7c89e565a5d3276e52c353a59bd851a70b63a6d1224b0403",
+        "bytes": 4711,
+        "git_blob_sha": "1d806fb050aeb780afe311407e6c74d8ff5f5420"
+      },
+      {
+        "original_path": "TEST92-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST92-VALIDATION.json",
+        "sha256": "989f4ff8798a93f821794884da3d52c5c3c4f37ce2150cfc1971264256fc052c",
+        "bytes": 4939,
+        "git_blob_sha": "0a6b0e0fe9f0d197762c7e28bc117b142b75d41c"
+      },
+      {
+        "original_path": "TEST93-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST93-VALIDATION.json",
+        "sha256": "6d600af047309f511d520628b12fb056ef85722d5e6f3705e6f98eb0830f0dde",
+        "bytes": 5776,
+        "git_blob_sha": "9ed5b15ec1a44c393b60aca8d2ca7a91373a9d42"
+      },
+      {
+        "original_path": "TEST94-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST94-VALIDATION.json",
+        "sha256": "4ed827d668eb8536e527708838a82102a07c852f7c3c85cda5d3e3d003f4af33",
+        "bytes": 15363,
+        "git_blob_sha": "8904aeec207ddfd248c1f9c8ea2ddb170e405395"
+      },
+      {
+        "original_path": "TEST95-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST95-VALIDATION.json",
+        "sha256": "87e2abd75c4b608ba31f98088746fac2604174e6ed6397e3f2f9d06223380945",
+        "bytes": 16454,
+        "git_blob_sha": "395f990dec696f177e101aad2475507fd35b7326"
+      },
+      {
+        "original_path": "TEST96-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST96-VALIDATION.json",
+        "sha256": "9206d1b9d9ba48d0acf7b0309e8888ffc155c5ef7d750f61dc05e6fe129cd45f",
+        "bytes": 7510,
+        "git_blob_sha": "36809b69119ee2769b29b6eea36197e191517eb6"
+      },
+      {
+        "original_path": "TEST97-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST97-VALIDATION.json",
+        "sha256": "bea1cadbeee2fe161e08cd9f1252d0207f78c1b0cbae511de9f45e9e1f1e805e",
+        "bytes": 6256,
+        "git_blob_sha": "9be4d0009f04838b685326e1dbcce20ef85c6de1"
+      },
+      {
+        "original_path": "TEST98-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST98-VALIDATION.json",
+        "sha256": "6117fa0e692ae45ba534c67ffe1d8fc2689430db8c6bfb25ca32ce6ff130cf9c",
+        "bytes": 6895,
+        "git_blob_sha": "38f63cb47e2419f538ae2578c27fa01a0a5e3652"
+      },
+      {
+        "original_path": "TEST99-VALIDATION.json",
+        "path": "docs/evidence/validation/TEST99-VALIDATION.json",
+        "sha256": "9e55092aac1bd8c83c8037ee1d05a0a16327bf38a1cf6ada332c4859257c116f",
+        "bytes": 7702,
+        "git_blob_sha": "75d2d63f6e8deed16141dd8bf69c50d0da620695"
+      }
+    ],
+    "paired_reference_redirects": {
+      "HANDOFF-2.79.121.md/TEST121-VALIDATION.json": "[HANDOFF-2.79.121.md](HANDOFF.md#archive-handoff-2-79-121-md) / [TEST121-VALIDATION.json](docs/evidence/validation/TEST121-VALIDATION.json)",
+      "HANDOFF-2.79.123.md/TEST123-VALIDATION.json": "[HANDOFF-2.79.123.md](HANDOFF.md#archive-handoff-2-79-123-md) / [TEST123-VALIDATION.json](docs/evidence/validation/TEST123-VALIDATION.json)",
+      "HANDOFF-2.79.125.md/TEST125-VALIDATION.json": "[HANDOFF-2.79.125.md](HANDOFF.md#archive-handoff-2-79-125-md) / [TEST125-VALIDATION.json](docs/evidence/validation/TEST125-VALIDATION.json)"
+    }
+  }
 }

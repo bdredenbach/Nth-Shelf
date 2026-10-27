@@ -6,4 +6,4 @@ Run `node qa27900/frame-accuracy/test131/speech-contract.cjs` for six generated 
 
 The private 24-page /58-overlay replay preserves all44 previously accepted crops byte-for-byte. Reader23 S1 now qualifies; S2 remains an oversized three-frame group. Coverage is38 singles+7 pairs=52/99 originals, with47 unresolved. Bulk work remains in progress. No APK build, workflow dispatch, phone acceptance or automatic playback implementation is claimed.
 
-`run-retained.sh` runs the retained suite set plus JavaScript syntax checks. `TEST131-VALIDATION.json` records the completed run and native evidence.
+`run-retained.sh` runs the retained suite set plus JavaScript syntax checks. `../../../docs/evidence/validation/TEST131-VALIDATION.json` records the completed run and native evidence.

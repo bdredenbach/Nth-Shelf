@@ -832,7 +832,7 @@ Confirmed corrections: Chapter32 pages3,20,34; Magneto pages10,12. Full-source v
 
 All65 pages passed mobile-browser detection and touch/render checks: Chapter32 188 frames/940 taps/235047 dense opaque samples; Magneto101 owners/505 taps/130371 dense opaque samples. Total289 owners,1445 taps,365418 dense samples, plus23 independently chosen scene-center taps on the five corrected pages. Insets remain transparent in the background owner. No page errors. Test harness page-edge anchor correction is private QA only. The initial overlay proof incorrectly depended on mutable geometry labels; final proof validation survives the full router round trip, with a regression contract for all five overlay owners.
 
-Final tested source2f9ec1addc675ad4031794a0554948c9a3bd5969/tree57ec2c7b8fc1904d7cd0c23fa49a652b0f7c30f0. Final build run36287062544 completed successfully; earlier run36286897227 is superseded and must not be delivered. Artifact10919814938, archive SHA-256 f85e3261ef467a8253923130925c4eca6da6fad97da836d896963cc1f1d5e971. APK Nth-Shelf-2.79.60-Test60.apk,3313519 bytes,SHA-256 bf4867b1846568c10d97fa04375d5f8d8d32b15ee87d1ecc63268070adff4ae7. ZIP integrity,v2 signature,package/version/label and all70 packaged web assets verified against tested source. Saved APK libfile_664cbe9eafbc8191ae3bd1d032d87e8c at local recovery-two-books/Test60/Nth-Shelf-2.79.60-Test60.apk. Save succeeded; local Library identity recovered after nested response parsing error. Phone acceptance is pending; all implementation, automated validation, build and delivery steps complete. See TEST60-VALIDATION.json for page-level counts and private-report/source hashes. Independent-book results improve coverage but do not establish reliable detection for every comic or manga. Phone acceptance remains pending.
+Final tested source2f9ec1addc675ad4031794a0554948c9a3bd5969/tree57ec2c7b8fc1904d7cd0c23fa49a652b0f7c30f0. Final build run36287062544 completed successfully; earlier run36286897227 is superseded and must not be delivered. Artifact10919814938, archive SHA-256 f85e3261ef467a8253923130925c4eca6da6fad97da836d896963cc1f1d5e971. APK Nth-Shelf-2.79.60-Test60.apk,3313519 bytes,SHA-256 bf4867b1846568c10d97fa04375d5f8d8d32b15ee87d1ecc63268070adff4ae7. ZIP integrity,v2 signature,package/version/label and all70 packaged web assets verified against tested source. Saved APK libfile_664cbe9eafbc8191ae3bd1d032d87e8c at local recovery-two-books/Test60/Nth-Shelf-2.79.60-Test60.apk. Save succeeded; local Library identity recovered after nested response parsing error. Phone acceptance is pending; all implementation, automated validation, build and delivery steps complete. See docs/evidence/validation/TEST60-VALIDATION.json for page-level counts and private-report/source hashes. Independent-book results improve coverage but do not establish reliable detection for every comic or manga. Phone acceptance remains pending.
 
 Version2.79.60/code27988/frametest60; shell cache2.79.60, map-exp58, proof2.79.60. Private work: recovery-two-books (baselines, final maps, reader reports, original-page overlays); manga-chapter32; magneto-testament-01. Start commit5cfda87eef9edea532d6c8446cc3c10138285d8c; baseline-test59 worktree is that commit.
 
@@ -854,7 +854,7 @@ The new general fallback identifies edge-connected paper/color fields, removes b
 
 Validation: all91 pages completed browser detection and reader execution;112 detected owners passed560 touch checks and183833 dense interior opacity samples. Thirty-three manually chosen scene centers on the seven corrected pages also passed. Generated checks prove selection/render consistency, not semantic completeness. All221 earlier maps (manga chapters30/31/32, Magneto Testament01, Wolverine1000) are unchanged. Retained gate passed; new contracts validate33 captured proofs, reject612 mutations, cover4 arbitrary layouts, and preserve contours through the full geometry router. The retained dense probe failure on issue4 page18 was a QA boundary-point error; excluding all explicit contour edges corrected it without an app change.
 
-Version2.79.61/code27989/package frametest61; shell cache2.79.61; map-exp59/proof2.79.61. Build and APK verification complete. Phone acceptance pending. TEST61-VALIDATION.json records page counts, report hashes and limitations. Artwork and original archives remain private.
+Version2.79.61/code27989/package frametest61; shell cache2.79.61; map-exp59/proof2.79.61. Build and APK verification complete. Phone acceptance pending. docs/evidence/validation/TEST61-VALIDATION.json records page counts, report hashes and limitations. Artwork and original archives remain private.
 
 Private workspace: recovery-apocalypse contains baseline/native rasters, experimental probes, final maps, full reader reports, edge-reader rechecks and independent manual probes. apocalypse-1 through apocalypse-4 contain source pages and manifests. baseline-test60 points to2285428759e7616e1fdf593e266db978fd58beeb. Resume remaining failures from the existing audit; do not restart extraction or claim all four books are fixed.
 
@@ -878,7 +878,7 @@ New frames, one-based archive/reader pages: issue1 page14 has3 and page18 has1; 
 
 All312 browser comparisons passed: five intended maps changed and307 stayed byte-for-byte identical, including all221 earlier manga/Magneto/Wolverine maps. The new13 owners passed78 taps (13 independent scene centers plus65 interior probes),20893 dense opacity checks and foreign-center transparency checks. Source screenshots and rendered pop-outs were inspected. The single-raster optimization separately matched the prior two-pass result on all91 Apocalypse pages. Retained gates passed; the new contract validates13 captured proofs, rejects195 mutations and checks two arbitrary partial-layout rasters. Generated probes verify selection/render consistency, not semantic completeness. Phone acceptance is pending.
 
-The batch remains unfinished:49 story pages still return no frames; four newly improved pages and other pre-existing maps remain incomplete. `TEST62-VALIDATION.json` lists all pages and remaining empty maps. Broad compactness relaxation, wider erosion and free curved-seam experiments produced cut faces, false splits or merged scenes and were rejected. Do not reapply them as blanket fixes or report successful page execution as successful detection.
+The batch remains unfinished:49 story pages still return no frames; four newly improved pages and other pre-existing maps remain incomplete. `docs/evidence/validation/TEST62-VALIDATION.json` lists all pages and remaining empty maps. Broad compactness relaxation, wider erosion and free curved-seam experiments produced cut faces, false splits or merged scenes and were rejected. Do not reapply them as blanket fixes or report successful page execution as successful detection.
 
 Version2.79.62/code27990/package `io.github.bdredenbach.nthshelf.frametest62`; shell cache2.79.62; map-exp60/proof2.79.62. Source commit `8cf8fda06cb8604ab9db7798b879c9eb5a90c8f7`, tree `095aa2325b972e03d0b1dcefaaf042177d3fdef5`. Build run36308340955. APK verification and saved artifact are recorded below when completed.
 
@@ -900,7 +900,7 @@ Continued from verified Test62 (source8cf8fda; final audit commit6af9c9e6). Work
 
 The last-resort ragged-gutter route now accepts an independently enclosed single scene or an unsplit scene touching one page edge. Acceptance still requires at least73% frame-envelope occupancy,68% seed-envelope occupancy, no inferred cut, no substantial unresolved gutter, at most48% page area and no conflicting accepted neighbor. It runs only after the established v18 and v19 routes fail. Existing maps retain exact priority. New proofv20 and the structural geometry router preserve the pixel contours through tap selection and rendering. No page/title/hash/filename lookup or saved coordinates enter runtime detection.
 
-Eight new frames across seven previously empty pages: issue1 p11(top-left) andp19(bottom-right); issue2 p9(top-left); issue3 p7(top-right),p18(two lower strips) andp23(lower-left action); issue4 p3(bottom strip). Every one of these seven maps remains partial. Apocalypse owners125→133.42 story pages still return no frames; `TEST63-VALIDATION.json` lists them. This is incremental coverage, not a finished general detector or a complete Apocalypse pass.
+Eight new frames across seven previously empty pages: issue1 p11(top-left) andp19(bottom-right); issue2 p9(top-left); issue3 p7(top-right),p18(two lower strips) andp23(lower-left action); issue4 p3(bottom strip). Every one of these seven maps remains partial. Apocalypse owners125→133.42 story pages still return no frames; `docs/evidence/validation/TEST63-VALIDATION.json` lists them. This is incremental coverage, not a finished general detector or a complete Apocalypse pass.
 
 312 integrated browser comparisons passed: exactlyseven new maps,305 maps unchanged, including all221 earlier manga/Magneto/Wolverine pages. Each new owner was tapped at one independently selected scene center and five generated interior points:48 taps total.15,751 dense interior opacity samples passed; existing foreign-center transparency checks passed. Source-mask overlays and all eight reader pop-outs were inspected. Retained contracts passed; the new contract accepts8 captured proofs, rejects120 mutations, preserves geometry-router output, and tests arbitrary one-edge acceptance and two-edge rejection at two raster sizes. These checks establish selection/render consistency and preservation; they do not certify semantic completeness. Phone acceptance pending.
 
@@ -1023,7 +1023,7 @@ targeted guard leaves all previous proof versions unchanged.
 Test identity: version `2.79.66`, code `27994`, package
 `io.github.bdredenbach.nthshelf.frametest66`, label `Nth Shelf Test66`, shell
 `nth-shelf-shell-2.79.66`, map `panel-map-exp-64`, proof `frame-proof-2.79.66`.
-Build and final validation are recorded in `TEST66-VALIDATION.json`.
+Build and final validation are recorded in `docs/evidence/validation/TEST66-VALIDATION.json`.
 
 Private reproduction workspace: `/workspace/scratch/8938e7fc41fe`. Current
 repository is `Nth-Shelf`; do not edit the old checkout. The original corpus
@@ -1262,7 +1262,7 @@ A separate local APK was made from the supplied, verified Test69 native shell, w
 
 It is locally signed with APK Signature Scheme v2, verified using an AOSP-format parser and cryptography. The same verifier independently accepts the known Test69 CI APK; a tampered new APK is rejected. ZIP CRCs, native manifest identity, DEX checksums, stored-entry alignment, and exact packaged web assets passed. There was no fresh native compilation, SDK apksigner invocation, emulator, or physical installation test. Phone installation and behavior acceptance remain pending. No private signing key is distributed.
 
-See TEST70-VALIDATION.json for exact APK hash, byte count, test records, and limitations. The first prototype's unrelated-neighbor cases were rejected, not shipped. The user-facing next test is the new pointing-guard/fire frame on 7/23, plus the previous upper-right frame for comparison. Broader interrupted gutters and speed remain future work.
+See docs/evidence/validation/TEST70-VALIDATION.json for exact APK hash, byte count, test records, and limitations. The first prototype's unrelated-neighbor cases were rejected, not shipped. The user-facing next test is the new pointing-guard/fire frame on 7/23, plus the previous upper-right frame for comparison. Broader interrupted gutters and speed remain future work.
 
 
 </details>
@@ -1546,7 +1546,7 @@ Version2.79.74, code28002, package
 Cache `nth-shelf-shell-2.79.74`, map `panel-map-exp-72`, proof
 `frame-proof-2.79.74`. All79 packaged web assets must match the tested bytes.
 Build status is pending until a real GitHub Actions/Gradle artifact is downloaded
-and verified. This is not a local repackaging plan. Update TEST74-VALIDATION.json
+and verified. This is not a local repackaging plan. Update docs/evidence/validation/TEST74-VALIDATION.json
 and this handoff after verification. Phone acceptance remains pending.
 
 Private working evidence: `/mnt/data/test74_workspace`, including original pages,
@@ -1575,7 +1575,7 @@ Test75 recovers the two full scenes on **Rise of Apocalypse #1, reader8/24,
 image index7**. The top is the pyramid/lion/captions scene; the lower is the
 throne-room scene. Crucially, the entire protruding statue head belongs to the
 lower scene, not a fragment in the upper scene. Baseline Test74 has zero owners
-on this page. Test75 has two. See TEST75-VALIDATION.json and the per-page corpus
+on this page. Test75 has two. See docs/evidence/validation/TEST75-VALIDATION.json and the per-page corpus
 comparison for the completed local results and build status.
 
 ## Algorithm
@@ -1906,7 +1906,7 @@ The first three local additions are stable under all tested scale/mirror/JPEG va
 
 The route requires independent seed consensus, supported boundaries, no unresolved internal divider, and no existing-owner pixel overlap. It uses artwork evidence rather than book/page fixtures. The reader preserves the full validated contour during cropping.
 
-See `TEST82-VALIDATION.json` and `qa27900/frame-accuracy/test82/README.md` for test scope. CI's downloaded `BUILD.json` binds the APK hash and all packaged web hashes to the source commit; the debug signing key identifies a test build.
+See `docs/evidence/validation/TEST82-VALIDATION.json` and `qa27900/frame-accuracy/test82/README.md` for test scope. CI's downloaded `BUILD.json` binds the APK hash and all packaged web hashes to the source commit; the debug signing key identifies a test build.
 
 
 </details>
@@ -1926,7 +1926,7 @@ Continue from accepted Test82 (`f887656a0b727937714e7f29c577798bedf3877e`). This
 
 ## Evidence and next test
 
-The supplement comparison covers 230 original pages and preserves all 851 prior frame descriptors. Its only addition is the issue 3 final-page scene. The full integrated Apocalypse replay also passed all 91 pages: all 179 prior descriptor remains unchanged, with one new frame and 180 total. The new target survives original-source, 1.25x, mirror and JPEG quality82 replays; the 0.67x replay abstains. All74 retained suites passed locally and in CI. CI browser interaction/backup checks, native archive tests, Android build, signature and exact APK asset checks passed. The downloaded artifact hash, APK hash and all 86 packaged web files were independently verified. See `TEST83-VALIDATION.json` for the build source commit and results.
+The supplement comparison covers 230 original pages and preserves all 851 prior frame descriptors. Its only addition is the issue 3 final-page scene. The full integrated Apocalypse replay also passed all 91 pages: all 179 prior descriptor remains unchanged, with one new frame and 180 total. The new target survives original-source, 1.25x, mirror and JPEG quality82 replays; the 0.67x replay abstains. All74 retained suites passed locally and in CI. CI browser interaction/backup checks, native archive tests, Android build, signature and exact APK asset checks passed. The downloaded artifact hash, APK hash and all 86 packaged web files were independently verified. See `docs/evidence/validation/TEST83-VALIDATION.json` for the build source commit and results.
 
 Install the isolated **Nth Shelf Test83** app and compare the lower-right frame on issue 3 reader 23/23 with Test82. Confirm the full speech balloons and scene remain inside the pop-out. Test83 phone acceptance is pending. Broad merged and overlapping scenes remain unresolved; the 360+ target is not complete. Keep existing ownership priority and original-pixel evidence while investigating the next general recovery family.
 
@@ -1948,7 +1948,7 @@ Continue from Test83 source/checkpoint `dc88ab91832ac511d7198b8022f7cb93778930a7
 
 ## Evidence and next test
 
-The 230-page cached original-raster supplement check passes: Apocalypse180→181, Wolverine383→384, manga188 unchanged, Magneto101 unchanged. Both additions have been visually reviewed. The unsafe merged scene on Apocalypse issue 1 reader 17 stays rejected. The full Apocalypse detector replay also passes all 91 pages, preserving all 180 prior owners and producing 181. The Wolverine target passes the full detector 4→5 with all four old owners intact. All 76 retained suites pass locally and in CI. Browser interaction/backup, native archive, Android build, signature and exact 87-file source-to-APK verification pass. Downloaded artifact/APK hashes and the source archive commit are independently verified. Apocalypse 0.67x and Wolverine JPEG82 variants abstain; the other tested transforms recover the new complete contours. See `TEST84-VALIDATION.json` for the build source commit and results.
+The 230-page cached original-raster supplement check passes: Apocalypse180→181, Wolverine383→384, manga188 unchanged, Magneto101 unchanged. Both additions have been visually reviewed. The unsafe merged scene on Apocalypse issue 1 reader 17 stays rejected. The full Apocalypse detector replay also passes all 91 pages, preserving all 180 prior owners and producing 181. The Wolverine target passes the full detector 4→5 with all four old owners intact. All 76 retained suites pass locally and in CI. Browser interaction/backup, native archive, Android build, signature and exact 87-file source-to-APK verification pass. Downloaded artifact/APK hashes and the source archive commit are independently verified. Apocalypse 0.67x and Wolverine JPEG82 variants abstain; the other tested transforms recover the new complete contours. See `docs/evidence/validation/TEST84-VALIDATION.json` for the build source commit and results.
 
 Identity: 2.79.84 / 28012, package `io.github.bdredenbach.nthshelf.frametest84`, isolated app **Nth Shelf Test84**. All87 web files are frozen for source-to-APK verification.
 
@@ -1970,7 +1970,7 @@ The user's thin-border / gradient-gutter hypothesis yields one verified new fram
 
 All 78 retained/new suites pass locally. The 312-page original-raster supplement comparison preserves 1,278 saved Test87 descriptors and adds one frame (Apocalypse184→185 in that saved-map comparison only). The actual published Test84 → Test88 full-detector target passes 0→1; the full 91-page Apocalypse replay passes 181→182 with every prior descriptor unchanged. Mirroring, 0.67x and 1.25x resampling and JPEG82 recompression preserve the addition. General frame detection and the 360+ Apocalypse goal remain incomplete.
 
-Identity: version2.79.88 / code28016, isolated package `io.github.bdredenbach.nthshelf.frametest88`, label **Nth Shelf Test88**. The build workflow runs retained/browser/native archive checks and verifies all 88 packaged web files against the tested SHA256 manifest. Android CI, browser/backup/native archive checks, build, signature, identity and all 88 exact packaged web files pass. Downloaded artifact/APK hashes and the source archive bytes are independently verified. Build source commit: 37724a19234d5524f169a4e57a11d448dc49c70c; workflow run 37313676835. User confirmed Test88 works on phone on 2026-10-05. No updated full-corpus phone count was supplied. Install target: Apocalypse issue2 reader17/23 upper-left tall scene; compare with the last shipped Test84 APK. See TEST88-VALIDATION.json and qa27900/frame-accuracy/test88/README.md.
+Identity: version2.79.88 / code28016, isolated package `io.github.bdredenbach.nthshelf.frametest88`, label **Nth Shelf Test88**. The build workflow runs retained/browser/native archive checks and verifies all 88 packaged web files against the tested SHA256 manifest. Android CI, browser/backup/native archive checks, build, signature, identity and all 88 exact packaged web files pass. Downloaded artifact/APK hashes and the source archive bytes are independently verified. Build source commit: 37724a19234d5524f169a4e57a11d448dc49c70c; workflow run 37313676835. User confirmed Test88 works on phone on 2026-10-05. No updated full-corpus phone count was supplied. Install target: Apocalypse issue2 reader17/23 upper-left tall scene; compare with the last shipped Test84 APK. See docs/evidence/validation/TEST88-VALIDATION.json and qa27900/frame-accuracy/test88/README.md.
 
 
 </details>
@@ -1992,7 +1992,7 @@ All 80 retained/new suites pass, including 28 proof-mutation negatives, a synthe
 
 Mirroring, 1.25x enlargement and JPEG82 recompression preserve the target. 0.67x pre-resampling removes candidate proof and safely abstains. Coverage remains incomplete; performance optimization is deferred until frame accuracy.
 
-Identity: 2.79.89 / code28017; debug package `io.github.bdredenbach.nthshelf.frametest89`; label **Nth Shelf Test89**. The workflow runs all retained/browser/native archive checks and checks all 89 exact packaged web files against the frozen manifest. Android CI passed, including browser/backup/native archive checks, build, signature, identity and all 89 exact packaged reader files. Downloaded artifact/APK hashes and source archive bytes verified against source commit cf0fdc89aa40eeb3e1d93f3f0bdc9e860f3e92ac; workflow run 37323210649. Physical phone acceptance is pending. See TEST89-VALIDATION.json.
+Identity: 2.79.89 / code28017; debug package `io.github.bdredenbach.nthshelf.frametest89`; label **Nth Shelf Test89**. The workflow runs all retained/browser/native archive checks and checks all 89 exact packaged web files against the frozen manifest. Android CI passed, including browser/backup/native archive checks, build, signature, identity and all 89 exact packaged reader files. Downloaded artifact/APK hashes and source archive bytes verified against source commit cf0fdc89aa40eeb3e1d93f3f0bdc9e860f3e92ac; workflow run 37323210649. Physical phone acceptance is pending. See docs/evidence/validation/TEST89-VALIDATION.json.
 
 
 </details>
@@ -2024,7 +2024,7 @@ This test explores two connected frames in one pop-out while continuing to recov
 
 The exact comic-wide frame total has not been audited; the earlier goal was 360+. Remaining numbers are estimates against that goal. The pair contributes two extra covered frames beyond the individual-frame result. On the two reviewed Apocalypse target pages, ten missing frames become seven.
 
-All 183 prior Apocalypse descriptors remain identical in the full 91-page replay. The separate 221-page cached comparison preserves 1,094 owners and gains four Wolverine singles. Fresh current-source replays of those three Wolverine pages confirm 6 → 10. All 82 behavioral suites pass. Source-transform abstentions and the pending phone/build state are recorded in TEST90-VALIDATION.json.
+All 183 prior Apocalypse descriptors remain identical in the full 91-page replay. The separate 221-page cached comparison preserves 1,094 owners and gains four Wolverine singles. Fresh current-source replays of those three Wolverine pages confirm 6 → 10. All 82 behavioral suites pass. Source-transform abstentions and the pending phone/build state are recorded in docs/evidence/validation/TEST90-VALIDATION.json.
 
 Continue on Test_Branch. Android remains the approved Test88 presentation branch. New rules use pixel evidence only; there are no book/page crop lookups. Comic artwork stays outside git and CI.
 
@@ -2064,11 +2064,11 @@ Local coverage is **145 complete singles + 10 complete pairs = 165 covered frame
 
 ## Validation and limitations
 
-84 retained/new behavioral suites pass: the retained 82, plus crop-repair and actual-Reader adapter contracts. A fresh detector replay covers 312 source pages / 1,283 selections: Apocalypse 185, Wolverine 388, Magneto 101 and the three manga chapters 228/193/188. Display-mask checks retain every original owned pixel, preserve descriptors and add no pixels from another detected owner. These checks do not prove narrative acceptance or protection of every undetected inset. See [corpus summary](qa27900/frame-accuracy/test91/corpus-summary.json) and [validation](TEST91-VALIDATION.json).
+84 retained/new behavioral suites pass: the retained 82, plus crop-repair and actual-Reader adapter contracts. A fresh detector replay covers 312 source pages / 1,283 selections: Apocalypse 185, Wolverine 388, Magneto 101 and the three manga chapters 228/193/188. Display-mask checks retain every original owned pixel, preserve descriptors and add no pixels from another detected owner. These checks do not prove narrative acceptance or protection of every undetected inset. See [corpus summary](qa27900/frame-accuracy/test91/corpus-summary.json) and [validation](docs/evidence/validation/TEST91-VALIDATION.json).
 
 Repairs can include a little paper/gutter fringe within the original contour hull. Wide boundary damage, balloons extending beyond the original bounding box, compact holes that may be real insets, and the two damaged pairs remain unresolved. Do not call every changed mask a successful frame. Local concurrent mask preparation had a 446 ms median, 608 ms p95 and a 6,069 ms maximum; these are not phone or detector latency measurements. Speed is not yet signed off.
 
-Android identity: isolated `io.github.bdredenbach.nthshelf.frametest91`, label `Nth Shelf Test91`, version `2.79.91`, code `28019`. The [Android CI run](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37352164001) passed all 84 retained/new suites, browser interaction, backup round trip, native archive regression, Android compilation, signature/identity and exact packaged web-file verification. The downloaded APK independently matches the frozen 92-file manifest and source commit `2478d491580bce648bc481e4f132d0bf251ba0fa`; SHA-256 `66bdc9350c90a1dc2f51b626f079af29bc4ad4576afa7ab12646c66e4b637881`, 3,440,366 bytes, signed with the CI Android debug key (v2). Build provenance is recorded in TEST91-VALIDATION.json. Phone acceptance remains pending. Stable app data is separate.
+Android identity: isolated `io.github.bdredenbach.nthshelf.frametest91`, label `Nth Shelf Test91`, version `2.79.91`, code `28019`. The [Android CI run](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37352164001) passed all 84 retained/new suites, browser interaction, backup round trip, native archive regression, Android compilation, signature/identity and exact packaged web-file verification. The downloaded APK independently matches the frozen 92-file manifest and source commit `2478d491580bce648bc481e4f132d0bf251ba0fa`; SHA-256 `66bdc9350c90a1dc2f51b626f079af29bc4ad4576afa7ab12646c66e4b637881`, 3,440,366 bytes, signed with the CI Android debug key (v2). Build provenance is recorded in docs/evidence/validation/TEST91-VALIDATION.json. Phone acceptance remains pending. Stable app data is separate.
 
 ## Next bounded checkpoint
 
@@ -2102,7 +2102,7 @@ No book/page/name/fingerprint lookup is used at runtime. The source artwork is n
 
 312-page comparisons preserve every unchanged descriptor, retaining replaced parents verbatim in the children: Apocalypse 187 selections; Wolverine 388; Magneto 101; manga chapters 228/193/188. Only two Apocalypse parents change. Fresh Apocalypse mask checks cover 91 pages / 187 selections and retain all original owned pixels while adding no other detected owner's pixels. Unchanged comparison corpora retain the Test91 crop checks. The new contracts cover captured proofs and corruption rejection, parent-pixel retention, disjoint siblings, atomic captions, a synthetic positive gutter, caption/artwork negatives, obscured-seam abstention, actual Reader taps/popups/cache and corrupted proofs.
 
-See [crop review](qa27900/frame-accuracy/test92/crop-review.json), [corpus summary](qa27900/frame-accuracy/test92/corpus-summary.json), and [validation](TEST92-VALIDATION.json). Run `bash qa27900/frame-accuracy/test92/run-retained.sh` for 86 retained/new suites.
+See [crop review](qa27900/frame-accuracy/test92/crop-review.json), [corpus summary](qa27900/frame-accuracy/test92/corpus-summary.json), and [validation](docs/evidence/validation/TEST92-VALIDATION.json). Run `bash qa27900/frame-accuracy/test92/run-retained.sh` for 86 retained/new suites.
 
 ## Phone targets and remaining work
 
@@ -2153,7 +2153,7 @@ The version-46 proof retains the exact parent descriptors and the participating 
 - A full existing detector rerun reproduces the changed target exactly (6 selections; local native-canvas 12,356 ms). This is not a phone latency result or speed acceptance.
 - Local browser/backup checks initially could not start without Chromium; the subsequent successful CI run passes both browser/backup and native archive tests, including 600 MiB streaming under a 32 MiB heap. CI verifies the APK signature and identity; downloaded archive/APK hashes and all 94 packaged web files were independently checked. Phone acceptance and timing remain pending.
 
-Run `bash qa27900/frame-accuracy/test93/run-retained.sh`. See `TEST93-VALIDATION.json`, `qa27900/frame-accuracy/test93/corpus-summary.json` and `crop-review.json`. Geometry-only fixtures contain no comic pixels.
+Run `bash qa27900/frame-accuracy/test93/run-retained.sh`. See `docs/evidence/validation/TEST93-VALIDATION.json`, `qa27900/frame-accuracy/test93/corpus-summary.json` and `crop-review.json`. Geometry-only fixtures contain no comic pixels.
 
 ## Broader attempts and continuation
 
@@ -2167,7 +2167,7 @@ Isolated identity prepared: `io.github.bdredenbach.nthshelf.frametest93`, label 
 
 Publication is now explicitly authorized and complete. Plain git pushing lacked shell credentials, so the connected GitHub API published the exact tested tree in one fast-forward commit on `Test_Branch`. Android CI run `37370172377` succeeded: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37370172377 . The artifact ZIP and APK were downloaded, checked for ZIP integrity and verified by SHA-256. The isolated identity/signature record and all 94 packaged web files match the frozen tested source. APK SHA-256: `e75aa758d7f8c8d38b2c69e92c48f19675b79756311a44cfec82f8d4c1f544f0`. This is a CI debug-signed test APK; phone acceptance remains pending. Do not request the same publication/build permission again.
 
-Visual report: `Nth-Shelf-Test93-Frame-Review.html`. Its new review includes the original page, before/after walking-away crop, preserved preceding scene and retained Test92 comparisons. Its saved identity is recorded in TEST93-VALIDATION.json after upload.
+Visual report: `Nth-Shelf-Test93-Frame-Review.html`. Its new review includes the original page, before/after walking-away crop, preserved preceding scene and retained Test92 comparisons. Its saved identity is recorded in docs/evidence/validation/TEST93-VALIDATION.json after upload.
 
 ## Recovery-chat continuation
 
@@ -2203,7 +2203,7 @@ The version-47 proof keeps the original owners, exact matching source contours, 
 
 ## Verification and limits
 
-- 90 retained/new behavioral suites, including a source-independent synthetic fragment positive, a real ink inset beyond a damaged descriptor, missing-boundary/transparency negatives and 38 corrupted proof rejections. Final versioned run status is in `TEST94-VALIDATION.json`.
+- 90 retained/new behavioral suites, including a source-independent synthetic fragment positive, a real ink inset beyond a damaged descriptor, missing-boundary/transparency negatives and 38 corrupted proof rejections. Final versioned run status is in `docs/evidence/validation/TEST94-VALIDATION.json`.
 - Reader checks cover **35,231 restored-pixel taps**, including **775 restored edge pixels**, serialized proofs, four repeated overlays and cached display masks. Real native-canvas Reader crops were inspected against the full source page.
 - Fresh source-raster perimeter supplement comparisons over final Test93 descriptors cover **312 pages / 1,285 original selections**. Only this Apocalypse page changes, leaving 1,284 selections. Wolverine 388, Magneto 101 and manga 228/193/188 descriptors remain identical. This is not a fresh full detector replay of all pages.
 - A full detector rerun on the changed target exactly reproduces four reviewed selections: **14,929 ms** locally with native canvas. This is not phone timing or a speed acceptance.
@@ -2252,7 +2252,7 @@ Fresh source-raster supplements over final Test94 descriptors cover **312 pages 
 
 ## Publication, build and phone check
 
-User publication/build authorization persists. Isolated identity: `io.github.bdredenbach.nthshelf.frametest95`, label `Nth Shelf Test95`, version `2.79.95`, code `28023`. Published source `bb4ea14` exactly matches tested tree `4733898a7491680a3286338351281ec150372b62`. [Android run 37378324461](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37378324461) succeeded. All 92 behavioral suites, cache/package checks, browser/backup, native archive, build, signature/identity and packaging checks pass. The downloaded APK is verified against its checksum, CI signature/identity record, and all 96 frozen web files. APK bytes: **3,460,506**; SHA-256: `7155f748e9187cca0bc390923baf140d89fe835e4c42707cb6346206b27d7f69`. Live publication/build and verification status is in `TEST95-VALIDATION.json`. Do not describe a build as successful until the downloaded APK is verified.
+User publication/build authorization persists. Isolated identity: `io.github.bdredenbach.nthshelf.frametest95`, label `Nth Shelf Test95`, version `2.79.95`, code `28023`. Published source `bb4ea14` exactly matches tested tree `4733898a7491680a3286338351281ec150372b62`. [Android run 37378324461](https://github.com/bdredenbach/Nth-Shelf/actions/runs/37378324461) succeeded. All 92 behavioral suites, cache/package checks, browser/backup, native archive, build, signature/identity and packaging checks pass. The downloaded APK is verified against its checksum, CI signature/identity record, and all 96 frozen web files. APK bytes: **3,460,506**; SHA-256: `7155f748e9187cca0bc390923baf140d89fe835e4c42707cb6346206b27d7f69`. Live publication/build and verification status is in `docs/evidence/validation/TEST95-VALIDATION.json`. Do not describe a build as successful until the downloaded APK is verified.
 
 Phone-confirmed target (5 October 2026): issue 2 reader 18 upper-right hand/water frame, center/edges, wrist, fingers, both balloons and background. SWAK stays unchanged. Retained controls: Test94 issue 3 reader 6 street/portrait pair, Test93 issue 1 reader 16, and Test92 issue 2 readers 12/16.
 
@@ -2298,13 +2298,13 @@ Reader composition applies that atomic transfer to each parent's already repaire
 
 ## Validation and continuation
 
-94 retained behavioral suites plus cache/package and syntax checks. Fresh source-raster supplements across 312 saved Test95 maps change only the two target owners; Wolverine, Magneto and three manga chapters keep identical descriptors. Full changed-target detection matches the reviewed map. All six actual Reader crops are reachable. See TEST96-VALIDATION.json for final publication, Android build, packaged-byte verification and saved deliverables.
+94 retained behavioral suites plus cache/package and syntax checks. Fresh source-raster supplements across 312 saved Test95 maps change only the two target owners; Wolverine, Magneto and three manga chapters keep identical descriptors. Full changed-target detection matches the reviewed map. All six actual Reader crops are reachable. See docs/evidence/validation/TEST96-VALIDATION.json for final publication, Android build, packaged-byte verification and saved deliverables.
 
 Private source artwork remains outside git/CI. User publication/build authorization persists for isolated tests. Continue one bounded primary recovery per pass, crosscheck the retained books and keep complete-frame credits separate from raw selections. The Test95 audit's remaining page observations and future ideas remain the recovery queue (`docs/apocalypse-test95-regression.json`). Next candidates include source-owned internal pale/lettering holes, incomplete issue3 Reader13 speech and missing ink-frame boundaries; require a complete source/Reader match before credit. SWAK remains incomplete and unchanged. Avoid accepting speculative threshold expansions that merge neighboring frames.
 
 ## Published checkpoint
 
-Source `91e9dd0eaf13ff9f2c5d500703849b1c1aa45307` has exactly the tested local tree `3b714e3bf7b7deee434303d063d90e015446f0f9` (local commit b7827af). Android run 37385546862 is tracked in TEST96-VALIDATION.json. Frozen web manifest: 97 files. Per-frame delta and future notes: docs/apocalypse-test96-delta.json. The source archive for recovery is libfile_06c168de85c08191ba461ab9ef2cdba5; saved full baseline review is libfile_d4c4ca46cd08819192cd7f9617d6f115 and baseline notes are libfile_58fed3b235688191ac7e4fec84517824. Scratch fixtures at /workspace/scratch/5827b11a4a78/fixtures and this pass at /workspace/scratch/f515f9782ac9/test96 are hints, not durable recovery guarantees.
+Source `91e9dd0eaf13ff9f2c5d500703849b1c1aa45307` has exactly the tested local tree `3b714e3bf7b7deee434303d063d90e015446f0f9` (local commit b7827af). Android run 37385546862 is tracked in docs/evidence/validation/TEST96-VALIDATION.json. Frozen web manifest: 97 files. Per-frame delta and future notes: docs/apocalypse-test96-delta.json. The source archive for recovery is libfile_06c168de85c08191ba461ab9ef2cdba5; saved full baseline review is libfile_d4c4ca46cd08819192cd7f9617d6f115 and baseline notes are libfile_58fed3b235688191ac7e4fec84517824. Scratch fixtures at /workspace/scratch/5827b11a4a78/fixtures and this pass at /workspace/scratch/f515f9782ac9/test96 are hints, not durable recovery guarantees.
 
 ## Deferred probe observations
 
@@ -2345,15 +2345,15 @@ Apocalypse issue4 Reader **20**, selection **1**: the opening city scene beginni
 
 ## Validation and continuation
 
-Fresh native source-raster Reader-mask comparisons are recorded in qa27900/frame-accuracy/test97/corpus-comparison.json. The changed city frame restores 1,941 analysis pixels and removes zero; its four sibling canvases are unchanged. Retained behavioral suites plus new independent caption and Reader extent contracts, cache/package checks and JavaScript syntax run through qa27900/frame-accuracy/test97/run-retained.sh. The tests include foreign-owner, nonopaque source, missing ink, neutral interior, open body and minority-owner negatives. See TEST97-VALIDATION.json for actual validation/publication/build outcomes.
+Fresh native source-raster Reader-mask comparisons are recorded in qa27900/frame-accuracy/test97/corpus-comparison.json. The changed city frame restores 1,941 analysis pixels and removes zero; its four sibling canvases are unchanged. Retained behavioral suites plus new independent caption and Reader extent contracts, cache/package checks and JavaScript syntax run through qa27900/frame-accuracy/test97/run-retained.sh. The tests include foreign-owner, nonopaque source, missing ink, neutral interior, open body and minority-owner negatives. See docs/evidence/validation/TEST97-VALIDATION.json for actual validation/publication/build outcomes.
 
 Continue one bounded primary recovery per pass. The Test95 audit remains the queue, excluding the repaired issue4 Reader5 S2 and Reader20 S1. Its hypotheses are not accepted gains. Next candidates include issue3 Reader13 irregular speech ownership, issue4 Reader18 lower artwork/balloon boundaries, and missing ink-frame scenes. SWAK remains incomplete. Require full source/actual Reader review before granting complete-frame credit. Keep local counts distinct from Brad's accepted phone count.
 
-The private source archive is libfile_06c168de85c08191ba461ab9ef2cdba5. The saved full Test95 baseline review is libfile_d4c4ca46cd08819192cd7f9617d6f115 and its notes are libfile_58fed3b235688191ac7e4fec84517824. Previous source and build are recorded in TEST96-VALIDATION.json. Scratch hints for this pass: /workspace/scratch/87e22d99ff34/test97 and source fixtures /workspace/scratch/5827b11a4a78/fixtures; these are not durable recovery guarantees.
+The private source archive is libfile_06c168de85c08191ba461ab9ef2cdba5. The saved full Test95 baseline review is libfile_d4c4ca46cd08819192cd7f9617d6f115 and its notes are libfile_58fed3b235688191ac7e4fec84517824. Previous source and build are recorded in docs/evidence/validation/TEST96-VALIDATION.json. Scratch hints for this pass: /workspace/scratch/87e22d99ff34/test97 and source fixtures /workspace/scratch/5827b11a4a78/fixtures; these are not durable recovery guarantees.
 
 Final local validation: all **96 behavioral suites**, cache/package and syntax checks pass. Across **312 pages / 1,284 retained selections**, only the target Reader mask changes (1,941 additions, zero removals); Wolverine, Magneto and all three manga chapters are identical. All five target crops are reachable. Android/browser/native/signature/package checks will run in CI.
 
-Published source `2f191f08b3fbb7ae5c890f67a6f08da3b06be2b0` exactly matches tested local tree `f9a86cec78a95855f73c8b2bb01b2275eb213439` (local commit59e4d3a). Android run37389515841: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37389515841. Build/package verification status is tracked in TEST97-VALIDATION.json.
+Published source `2f191f08b3fbb7ae5c890f67a6f08da3b06be2b0` exactly matches tested local tree `f9a86cec78a95855f73c8b2bb01b2275eb213439` (local commit59e4d3a). Android run37389515841: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37389515841. Build/package verification status is tracked in docs/evidence/validation/TEST97-VALIDATION.json.
 
 Verified Android build: run37389515841 succeeded. Downloaded APK matches its artifact digest, CI checksum, package/identity/signature record and all **97** frozen packaged web files. App io.github.bdredenbach.nthshelf.frametest97, label Nth Shelf Test97, version2.79.97, code28025. APK **3,467,670 bytes**, SHA-256 **79dcad97119722b48ed15c80b5f33045af0200118481eac0ed886d17e7748857**; APK v2 with one CI debug signer. Browser/backup, native archive, all96 behavioral suites and package checks passed. Brad has phone-confirmed Test97 at **191/384 complete original frames, 193 remaining**. Use 191 as the accepted baseline; future local gains still require phone confirmation.
 
@@ -2379,7 +2379,7 @@ Apocalypse issue4 Reader **18**, selection **4**, the bottom explosion scene. Th
 
 js/panels-long-tail-speech.js supplies Reader-only source-enclosed balloon ownership. Opaque neutral paper must be independently enclosed by ink and contain sufficient separate lettering. Two morphological openings must identify the same long-tail terminal pixels, within a bounded body size and tail fraction. Two surrounding body collars must agree on a strong owner among exactly two neighboring, proven wide matte-cell rows. The tip alone is not an owner witness: original masks can misassign it. Ambiguous, open, unlettered, colored, nonopaque, invalid or non-row parents defer. Only independently enclosed balloon pixels are transferred; all artwork outside the body and discovery descriptors survive. There are no title/page/text/image/content lookup rules in runtime code. Source artwork stays private and outside git/CI.
 
-Reader canvas bounds include newly restored display extent when needed. Source-mask repairs are cached per image/owners/analysis dimensions. Captured synthetic geometry and source-independent tests are in qa27900/frame-accuracy/test98. See TEST98-VALIDATION.json for actual check/publication/build outcomes.
+Reader canvas bounds include newly restored display extent when needed. Source-mask repairs are cached per image/owners/analysis dimensions. Captured synthetic geometry and source-independent tests are in qa27900/frame-accuracy/test98. See docs/evidence/validation/TEST98-VALIDATION.json for actual check/publication/build outcomes.
 
 ## Continue
 
@@ -2389,7 +2389,7 @@ Private source archive: libfile_06c168de85c08191ba461ab9ef2cdba5. Full Test95 re
 
 Final local validation: all98 behavioral suites plus syntax/cache/package checks pass. Fresh native source-raster Reader checks cover312 pages/1,284 selections. Only issue4 Reader18 S3/S4 change: S4 adds4,319 pixels and removes0; S3 removes546 foreign balloon pixels and adds0. All artwork outside the enclosed balloon remains unchanged. Wolverine, Magneto and all three manga chapters are identical. S1/S2 actual target canvases are byte-identical; all4 selections are reachable. Test98 remains192/384 locally and is now Brad phone-confirmed at192/384,192 remaining.
 
-Published source7bd0d1f2c247bce0a731b1b2b5bc5d6e6b3cff3f exactly matches tested local commitb076ab4df9122b0f0a6143a8c1961c35cb0534c8, tree1c4b3e38d334ed12800df1217be431154a0ccc49. Android run37393752703: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37393752703. Build verification and saved outcomes are recorded in TEST98-VALIDATION.json.
+Published source7bd0d1f2c247bce0a731b1b2b5bc5d6e6b3cff3f exactly matches tested local commitb076ab4df9122b0f0a6143a8c1961c35cb0534c8, tree1c4b3e38d334ed12800df1217be431154a0ccc49. Android run37393752703: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37393752703. Build verification and saved outcomes are recorded in docs/evidence/validation/TEST98-VALIDATION.json.
 
 Verified Android run37393752703 succeeded. Downloaded APK matches artifact digest, CI checksum, package identity, actual signer certificate/CI v2 signature record and all98 frozen packaged web files. App io.github.bdredenbach.nthshelf.frametest98; label Nth Shelf Test98; version2.79.98; code28026. APK3,471,163 bytes, SHA-25671bc3ee2d5af4be0e8da5299502d8fd35dae442de5c2ffb4cf2326c21194b7c4. Browser/backup, native archive, all98 suites and packaging checks passed. Test98 phone acceptance confirmed by Brad on5 October2026: accepted baseline192/384,192 remaining; local result192/384,192 remaining.
 
@@ -2415,7 +2415,7 @@ Apocalypse issue3 Reader **13**, selection **1**, upper-left bandaged En portrai
 
 js/panels-column-speech.js is Reader-only source-enclosed ownership between two proven adjacent matte columns. The opaque neutral paper body must be independently enclosed by source ink and contain separate lettering. A short tail must produce exactly the same terminal pixels at two opening scales. Those terminals and their two surrounding collars must strongly and exclusively witness one valid owner. Both original columns must have significant body/collar contact and compatible boundaries. Ambiguous, open, colored, unlettered, invalid, nonopaque or non-column cases defer. Only enclosed speech pixels transfer; all source artwork outside that body and all discovery descriptors survive. There are no title, page, text, image or content lookup rules in runtime code; source artwork stays private and outside git/CI.
 
-Reader canvas bounds expand to include restored display extent. Repairs cache per source image/owners/analysis dimensions. Source-independent geometry and synthetic source tests are in qa27900/frame-accuracy/test99. Read TEST99-VALIDATION.json for actual validation, publication and Android build status.
+Reader canvas bounds expand to include restored display extent. Repairs cache per source image/owners/analysis dimensions. Source-independent geometry and synthetic source tests are in qa27900/frame-accuracy/test99. Read docs/evidence/validation/TEST99-VALIDATION.json for actual validation, publication and Android build status.
 
 ## Continue
 
@@ -2457,7 +2457,7 @@ Private source archive:libfile_06c168de85c08191ba461ab9ef2cdba5. Full Test95 rev
 
 Local validation:101 behavioral suites plus cache/package and syntax pass. Fresh native source-raster Reader checks cover312 pages/1,284 selections. Only issue3 Reader13 S2/S3 change: S2 adds3,825 pixels and removes0; S3 removes3,870 foreign speech pixels and adds0. All artwork outside the enclosed body is unchanged. Eight unaffected native canvases are byte-identical, all ten target selections are reachable and the changed page freshly reproduces all six discovery descriptors. Wolverine, Magneto and three manga chapters match Test99.
 
-Read TEST100-VALIDATION.json for actual check, publication, APK verification and saved-file outcomes. Brad phone-confirmed the194/384 checkpoint on6 October2026. Phone timing remains unmeasured.
+Read docs/evidence/validation/TEST100-VALIDATION.json for actual check, publication, APK verification and saved-file outcomes. Brad phone-confirmed the194/384 checkpoint on6 October2026. Phone timing remains unmeasured.
 
 Published source 177ed19bed8378de6c5f8d775110a27253368466 exactly matches tested local commitaa813af9aae133d8be56c445d4eead84462d6c65, tree90427bc460bf4d5f532dad3bb86acc90e27f5c91. Android run37403679715 succeeded: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37403679715. Downloaded APK checksum, compiled isolated identity, actual v2 signer certificate/CI signature record and all99 frozen web files match. APK Nth-Shelf-2.79.100-Test100.apk,3475021 bytes,SHA-2562fba0be2ba4f5c74e0082f07e9a6c72a785e3cad7317541a724f65e6444291b7. Package io.github.bdredenbach.nthshelf.frametest100; label Nth Shelf Test100; version2.79.100; code28028. Browser/backup and native archive checks passed. Test100 locally194/384,190 remaining; accepted Test100 phone baseline194/384,190 remaining.
 
@@ -2489,7 +2489,7 @@ One bounded primary recovery per pass. Exclude repaired issue4 Reader5 S2, Reade
 
 Private source archive:libfile_06c168de85c08191ba461ab9ef2cdba5. Full Test95 review:libfile_d4c4ca46cd08819192cd7f9617d6f115; notes:libfile_58fed3b235688191ac7e4fec84517824. Scratch hints:/workspace/scratch/94949de4a9ed/Nth-Shelf-Test101,/workspace/scratch/94949de4a9ed/test101; fixtures:/workspace/scratch/94949de4a9ed/fixtures. These paths are not durable recovery guarantees.
 
-Read TEST101-VALIDATION.json for actual checks, publication, APK verification and saved-file outcomes.
+Read docs/evidence/validation/TEST101-VALIDATION.json for actual checks, publication, APK verification and saved-file outcomes.
 
 Final local validation:103 behavioral suites plus cache/package and syntax pass. Native source-raster Reader comparisons cover312 pages/1,284 selections against Test100. Only issue3 Reader13 S5 changes:42,803 added pixels,zero removed. All source-cell pixels are present; outside-cell pixels and every prior display pixel survive. Nine unaffected native canvases are byte-identical; all ten target selections remain reachable. The changed page freshly reproduces all six discovery descriptors. Wolverine, Magneto and all three manga chapters are unchanged. Phone timing is unmeasured.
 
@@ -2515,7 +2515,7 @@ The generic Reader-only rule requires a validated narrow dark-matte lettering ce
 
 Continue one bounded primary recovery per pass. SWAK is now locally repaired, pending phone confirmation. Missing ink-frame scenes remain queued. Issue4 Reader18 S3 needs clearer ownership review and receives no credit here. Count complete original frames once, including fully complete frames inside larger crops; fragments and duplicates add zero. User authorization persists for isolated publication and APK builds.
 
-Read TEST102-VALIDATION.json for completed checks, exact source/build identities and saved files. Private Apocalypse archive:libfile_06c168de85c08191ba461ab9ef2cdba5. Controls:Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420,libfile_a1089428d0d4819193de79fc4bd7f8bb,libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit:libfile_d4c4ca46cd08819192cd7f9617d6f115; notes libfile_58fed3b235688191ac7e4fec84517824.
+Read docs/evidence/validation/TEST102-VALIDATION.json for completed checks, exact source/build identities and saved files. Private Apocalypse archive:libfile_06c168de85c08191ba461ab9ef2cdba5. Controls:Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420,libfile_a1089428d0d4819193de79fc4bd7f8bb,libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit:libfile_d4c4ca46cd08819192cd7f9617d6f115; notes libfile_58fed3b235688191ac7e4fec84517824.
 
 Final validation:105 behavioral suites plus cache/package and syntax passed locally and in CI. Fresh native comparisons cover312 pages/1284 selections against frozen Test101 baseline masks, computed from the same original sources. Only SWAK S2 changes:+7697 pixels,zero removed,zero new foreign-display overlap.11 native canvases are byte-identical,all12 targets reachable; the changed page reproduces both discovery descriptors. Source 5d00cc0268e723fd32d30f22a604da697f6a0ae7 exactly matches tested tree 2c417569b8b722f80087f71d2b2df1c400c80e66. Android run 37467779710 succeeded: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37467779710. Downloaded APK identity,checksum,actual v2 certificate/CI signature record and all101 packaged web files match. APK bytes:3481423;SHA-256:a85f89bebaf76195a0f63997dc46aa72e365ad65651be1bd2f3a110d12355810. Test102 phone acceptance pending;timing unmeasured.
 
@@ -2550,7 +2550,7 @@ CI validation: 107 behavioral suites, cache/package/syntax, browser interaction/
 
 APK: Nth-Shelf-2.79.103-Test103.apk, 3485147 bytes. SHA-256: 70cc80de9ea6daedd4a7a5b36977a483740b594f71378c82ad03bc52e47c8565. The downloaded APK's checksum, compiled isolated identity (io.github.bdredenbach.nthshelf.frametest103, version code 28031), actual v2 signer certificate/CI record and all 102 packaged web files match. Test103 phone acceptance was confirmed by Brad on 6 October 2026; timing is unmeasured.
 
-Read TEST103-VALIDATION.json for exact source/build identities and saved-file IDs. Private Apocalypse archive: libfile_06c168de85c08191ba461ab9ef2cdba5. Controls: Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit: libfile_d4c4ca46cd08819192cd7f9617d6f115; notes: libfile_58fed3b235688191ac7e4fec84517824.
+Read docs/evidence/validation/TEST103-VALIDATION.json for exact source/build identities and saved-file IDs. Private Apocalypse archive: libfile_06c168de85c08191ba461ab9ef2cdba5. Controls: Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit: libfile_d4c4ca46cd08819192cd7f9617d6f115; notes: libfile_58fed3b235688191ac7e4fec84517824.
 
 Scratch hints: /workspace/scratch/154f87da09a8/Nth-Shelf-Test103; checks: /workspace/scratch/154f87da09a8/test103; fixtures: /workspace/scratch/94949de4a9ed/fixtures; retained discovery maps: /workspace/scratch/f515f9782ac9/test96/corpus. Scratch can disappear; recover from the archive IDs above and repository checkpoint.
 
@@ -2580,7 +2580,7 @@ APK: Nth-Shelf-2.79.104-Test104.apk, 3489274 bytes. SHA-256: 50febed5eb884b67abc
 
 Source archive IDs: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit: libfile_d4c4ca46cd08819192cd7f9617d6f115; notes: libfile_58fed3b235688191ac7e4fec84517824.
 
-Scratch checkpoint: /workspace/scratch/35acfbe72dfc/Nth-Shelf-Test104; checks/corpus: /workspace/scratch/35acfbe72dfc/test104; fixtures: /workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore from source archive IDs and the published repository checkpoint. Read TEST104-VALIDATION.json for exact source/build identities and saved-file IDs.
+Scratch checkpoint: /workspace/scratch/35acfbe72dfc/Nth-Shelf-Test104; checks/corpus: /workspace/scratch/35acfbe72dfc/test104; fixtures: /workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore from source archive IDs and the published repository checkpoint. Read docs/evidence/validation/TEST104-VALIDATION.json for exact source/build identities and saved-file IDs.
 
 
 </details>
@@ -2606,7 +2606,7 @@ Local validation:111 behavioral suites plus cache/package/syntax passed. All312 
 
 Source archive IDs: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit:libfile_d4c4ca46cd08819192cd7f9617d6f115;notes:libfile_58fed3b235688191ac7e4fec84517824.
 
-Scratch checkpoint:/workspace/scratch/9de482359b6f/Nth-Shelf-Test105;checks/corpus:/workspace/scratch/9de482359b6f/test105;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read TEST105-VALIDATION.json for identities and saved-file IDs.
+Scratch checkpoint:/workspace/scratch/9de482359b6f/Nth-Shelf-Test105;checks/corpus:/workspace/scratch/9de482359b6f/test105;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read docs/evidence/validation/TEST105-VALIDATION.json for identities and saved-file IDs.
 
 APK: Nth-Shelf-2.79.105-Test105.apk,3493256 bytes. SHA-256: e88f7bedf1c32fca46f4521fa09d679124e90a06a87986e931e270182d705120. Downloaded checksum, compiled isolated identity(io.github.bdredenbach.nthshelf.frametest105,version code 28033), actual v2 signer certificate/CI record and all 104 frozen web assets match tested source. Test105 phone-confirmed by Brad on 6 October 2026; phone timing is unmeasured.
 
@@ -2639,7 +2639,7 @@ Local validation:113 behavioral suites plus cache/package/syntax passed. Fresh f
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit:libfile_d4c4ca46cd08819192cd7f9617d6f115;notes:libfile_58fed3b235688191ac7e4fec84517824.
 
-Scratch checkpoint:/workspace/scratch/7e6b6457ff98/Nth-Shelf-Test106;checks:/workspace/scratch/7e6b6457ff98/test106/final;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read TEST106-VALIDATION.json for exact checks, identities and saved-file IDs.
+Scratch checkpoint:/workspace/scratch/7e6b6457ff98/Nth-Shelf-Test106;checks:/workspace/scratch/7e6b6457ff98/test106/final;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read docs/evidence/validation/TEST106-VALIDATION.json for exact checks, identities and saved-file IDs.
 
 APK: Nth-Shelf-2.79.106-Test106.apk, 3497116 bytes. SHA-256:25211673e76e6363987c99e35754e269a78fee88eccc572bf8e864f80f4e92ff. Downloaded checksum, compiled isolated identity(io.github.bdredenbach.nthshelf.frametest106,version code28034), actual v2 signer certificate/CI record and all105 frozen web assets match tested source. Test106 phone-confirmed by Brad on 6 October 2026; phone timing unmeasured.
 
@@ -2674,7 +2674,7 @@ Remaining queue: issue1 Reader3 eye/cartouche; issue1 Reader13 narrow attacker p
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit:libfile_d4c4ca46cd08819192cd7f9617d6f115;notes:libfile_58fed3b235688191ac7e4fec84517824.
 
-Scratch checkpoint:/workspace/scratch/13f13694b21d/Nth-Shelf-Test107;checks:/workspace/scratch/13f13694b21d/test107/final;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read TEST107-VALIDATION.json for exact checks, identities and saved-file IDs.
+Scratch checkpoint:/workspace/scratch/13f13694b21d/Nth-Shelf-Test107;checks:/workspace/scratch/13f13694b21d/test107/final;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read docs/evidence/validation/TEST107-VALIDATION.json for exact checks, identities and saved-file IDs.
 
 APK: Nth-Shelf-2.79.107-Test107.apk, 3501170 bytes. SHA-256:940c0f62ae3b71e8e5e56388118564f0538851c2be344b160386b9dc443cb669. Downloaded checksum, compiled isolated identity(io.github.bdredenbach.nthshelf.frametest107,version code28035), actual v2 signer certificate/CI record and all106 frozen web assets match tested source. Test107 phone confirmation pending; phone timing unmeasured.
 
@@ -2707,7 +2707,7 @@ Remaining queue: issue1 Reader3 eye/cartouche; issue1 Reader13 narrow attacker p
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420,libfile_a1089428d0d4819193de79fc4bd7f8bb,libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit libfile_d4c4ca46cd08819192cd7f9617d6f115; notes libfile_58fed3b235688191ac7e4fec84517824.
 
-Scratch checkpoint:/workspace/scratch/23ca29e5ae64/Nth-Shelf-Test108;checks:/workspace/scratch/23ca29e5ae64/test108;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read TEST108-VALIDATION.json for exact checks,identities and saved-file IDs.
+Scratch checkpoint:/workspace/scratch/23ca29e5ae64/Nth-Shelf-Test108;checks:/workspace/scratch/23ca29e5ae64/test108;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read docs/evidence/validation/TEST108-VALIDATION.json for exact checks,identities and saved-file IDs.
 
 APK: Nth-Shelf-2.79.108-Test108.apk, 3505231 bytes. SHA-256:a37f130e2a867459c30b99ab00c7f88d771a906ec8bddd59797abdad0e728c06. Downloaded checksum, compiled isolated identity(io.github.bdredenbach.nthshelf.frametest108,version code28036), actual v2 signer certificate/CI record and all107 frozen web assets match tested source. Test108 phone confirmation pending; phone timing unmeasured.
 
@@ -2741,7 +2741,7 @@ Remaining queue: issue1 Reader3 eye/cartouche and detached caption; issue1 Reade
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420,libfile_a1089428d0d4819193de79fc4bd7f8bb,libfile_c87d71d1abf48191b87e46bafaa84c7f. Full Test95 audit libfile_d4c4ca46cd08819192cd7f9617d6f115; notes libfile_58fed3b235688191ac7e4fec84517824.
 
-Scratch checkpoint:/workspace/scratch/1dea0fea137c/Nth-Shelf-Test109;checks:/workspace/scratch/1dea0fea137c/test109;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read TEST109-VALIDATION.json for actual checks,source identities and saved-file IDs.
+Scratch checkpoint:/workspace/scratch/1dea0fea137c/Nth-Shelf-Test109;checks:/workspace/scratch/1dea0fea137c/test109;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch can disappear; restore source archives and published repository. Read docs/evidence/validation/TEST109-VALIDATION.json for actual checks,source identities and saved-file IDs.
 
 APK: Nth-Shelf-2.79.109-Test109.apk, 3511065 bytes. SHA-256:c4e2bf04a6f9b4d17905e1a35aed41bc52aa6b7af3ac04ecafafd1476714ab6b. Downloaded checksum,compiled isolated identity(io.github.bdredenbach.nthshelf.frametest109,version code28037),actual v2 signer certificate/CI record and all108 frozen web assets match tested source. Test109 phone confirmation pending; phone timing unmeasured.
 
@@ -2775,7 +2775,7 @@ Remaining queue: issue1 Reader3 eye/cartouche and detached caption; issue1 Reade
 
 Source archives:Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5;Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e;Magneto libfile_11da0f85d7148191b1bef1abe6fe482d;manga libfile_be583424a66c8191bc6a8be6c6978420,libfile_a1089428d0d4819193de79fc4bd7f8bb,libfile_c87d71d1abf48191b87e46bafaa84c7f. Test95 audit libfile_d4c4ca46cd08819192cd7f9617d6f115;notes libfile_58fed3b235688191ac7e4fec84517824.
 
-Scratch:/workspace/scratch/e3d5bbf239b9/Nth-Shelf-Test110;checks:/workspace/scratch/e3d5bbf239b9/test110;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch may disappear; restore source archives and published repository. Read TEST110-VALIDATION.json for actual checks and saved-file identifiers. Chat timeout is client-observed; phone timing remains unmeasured locally.
+Scratch:/workspace/scratch/e3d5bbf239b9/Nth-Shelf-Test110;checks:/workspace/scratch/e3d5bbf239b9/test110;fixtures:/workspace/scratch/35acfbe72dfc/fixtures. Scratch may disappear; restore source archives and published repository. Read docs/evidence/validation/TEST110-VALIDATION.json for actual checks and saved-file identifiers. Chat timeout is client-observed; phone timing remains unmeasured locally.
 
 
 APK:Nth-Shelf-2.79.110-Test110.apk,3516326bytes. SHA-256:296f6d02dff59bb08e237fb16014943f5fbad0011e6f5fec786e12805c477ff5. Compiled io.github.bdredenbach.nthshelf.frametest110,versionCode28038; actual v2 signer matches the CI record. Test109/Test110 phone acceptance pending; phone timing and client chat timeout unmeasured locally.
@@ -2810,7 +2810,7 @@ Remaining queue: issue1 Reader7 eye/sword strip; Reader13 narrow attacker portra
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f.
 
-Scratch: /workspace/scratch/65750880f9b9/Nth-Shelf-Test111; checks /workspace/scratch/65750880f9b9/test111; original fixtures /workspace/scratch/35acfbe72dfc/fixtures. Restore from published repository and archives if scratch disappears. Read TEST111-VALIDATION.json for actual checks and build/source IDs. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Phone acceptance and timing remain device-only; client chat timeout is not locally measured.
+Scratch: /workspace/scratch/65750880f9b9/Nth-Shelf-Test111; checks /workspace/scratch/65750880f9b9/test111; original fixtures /workspace/scratch/35acfbe72dfc/fixtures. Restore from published repository and archives if scratch disappears. Read docs/evidence/validation/TEST111-VALIDATION.json for actual checks and build/source IDs. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Phone acceptance and timing remain device-only; client chat timeout is not locally measured.
 
 Validation complete:124 behavioral suites and cache/package/syntax passed locally.312 final source/Reader comparisons pass; all1307 prior descriptors retained,1319 total selections (11 Apocalypse additions, one Wolverine addition).19 native canvases reachable;7/10 earlier canvases byte-identical,three remove only reviewed foreign pieces;zero new displayed overlap. Seven changed-page full detector replays pass. Published source30adc110e6efe4506fab7156f6fd1e332dc1bf6d matches runtime tree09e45c15877ecf800ee7b28a28baf3d527575445. Android run37522692617 succeeded: https://github.com/bdredenbach/Nth-Shelf/actions/runs/37522692617. Artifact11441144500. CI124 retained suites, browser interactions/backup round trip and native streaming archive checks passed. Downloaded APK checksum, compiled identity, actual v2 signer certificate against the CI signature record and all111 frozen web files verified. APK SHA-256 cecfe2389183a916716e4c397fb6279772d573f88a0261e23671d74f7f6c0284. Isolated applicationId io.github.bdredenbach.nthshelf.frametest111, version2.79.111, code28039, label Nth Shelf Test111. Use the illustrated frame review/current handoff for targets; the original CI artifact INSTALL.txt retained earlier Test110 instructions. Phone acceptance and timing pending.
 
@@ -2839,7 +2839,7 @@ Remaining queue: issue1 Reader7 eye/sword strip; Reader13 narrow attacker portra
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f.
 
-Scratch: /workspace/scratch/a7a22cc4e704/Nth-Shelf-Test112; checks /workspace/scratch/a7a22cc4e704/test112; original fixtures /workspace/scratch/35acfbe72dfc/fixtures. Restore from published repository and archives if scratch disappears. Read TEST112-VALIDATION.json for actual completed checks and build/source IDs. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Phone acceptance and timing remain device-only.
+Scratch: /workspace/scratch/a7a22cc4e704/Nth-Shelf-Test112; checks /workspace/scratch/a7a22cc4e704/test112; original fixtures /workspace/scratch/35acfbe72dfc/fixtures. Restore from published repository and archives if scratch disappears. Read docs/evidence/validation/TEST112-VALIDATION.json for actual completed checks and build/source IDs. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Phone acceptance and timing remain device-only.
 
 Validation completed: all 127 retained behavioral suites, cache/package/syntax checks, all 312 original-raster source and Reader comparisons, three full changed-page detector replays and all eight native target crops pass. All 1,319 earlier source descriptors are unchanged. The five control books retain identical source selections and Reader displays. Exactly three Apocalypse groups add nine unique complete originals; three earlier crops lose only reviewed foreign pieces/speech, with their own artwork preserved outside these corrections. Zero new displayed overlap.
 
@@ -2873,7 +2873,7 @@ Remaining queue: issue1 Reader7 eye/sword strip; Reader13 narrow attacker portra
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f.
 
-Scratch: /workspace/scratch/bb3a92796614/Nth-Shelf-Test113; checks /workspace/scratch/bb3a92796614/test113; original fixtures /workspace/scratch/35acfbe72dfc/fixtures. Restore from published repository and archives if scratch disappears. Read TEST113-VALIDATION.json for actual completed checks and build/source IDs. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Phone acceptance and timing remain device-only.
+Scratch: /workspace/scratch/bb3a92796614/Nth-Shelf-Test113; checks /workspace/scratch/bb3a92796614/test113; original fixtures /workspace/scratch/35acfbe72dfc/fixtures. Restore from published repository and archives if scratch disappears. Read docs/evidence/validation/TEST113-VALIDATION.json for actual completed checks and build/source IDs. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Phone acceptance and timing remain device-only.
 
 Count only the nine reviewed originals. Do not claim Test113 as phone-confirmed until Brad confirms. Test112 remains the phone-confirmed 264/384 baseline.
 
@@ -2908,7 +2908,7 @@ Remaining queue: issue1 Reader7 eye/sword strip; Reader13 narrow attacker portra
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f.
 
-Scratch repository /workspace/scratch/bb3a92796614/Nth-Shelf-Test114; checks /workspace/scratch/bb3a92796614/test114; original fixtures /workspace/scratch/35acfbe72dfc/fixtures. Restore from published repo and source archives if scratch disappears. Read TEST114-VALIDATION.json for completed validation and source/build IDs. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Do not infer numeric phone confirmation from an enthusiastic continuation alone.
+Scratch repository /workspace/scratch/bb3a92796614/Nth-Shelf-Test114; checks /workspace/scratch/bb3a92796614/test114; original fixtures /workspace/scratch/35acfbe72dfc/fixtures. Restore from published repo and source archives if scratch disappears. Read docs/evidence/validation/TEST114-VALIDATION.json for completed validation and source/build IDs. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Do not infer numeric phone confirmation from an enthusiastic continuation alone.
 
 Validation completed: all132 retained behavioral suites and cache/package/syntax checks pass. All312 original-raster supplementary source and old-versus-new Reader comparisons pass. All1,324 earlier source descriptors stay identical. Five control books retain identical selections and display masks. Only issue4 Reader19 S2/S3 display masks change, exclusively inside two independently enclosed bottom-row speech bodies (443 pixels removed from S2;9,735 restored to S3). Two new broad groups are intentionally nonexclusive; earlier tap priority remains. Three full changed-page detector runs and three native canvases pass; two group crops match the original source envelope byte-for-byte. New Reader contract verifies47 retained taps,93 new group taps and six repeated overlays.
 
@@ -2941,7 +2941,7 @@ Remaining queue: issue1 Reader7 eye/sword strip; Reader13 narrow attacker portra
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f.
 
-Scratch repository /workspace/scratch/37406b7d348a/Nth-Shelf-Test115; checks /workspace/scratch/37406b7d348a/test115; original fixtures /workspace/scratch/37406b7d348a/fixtures. Restore from published repo and source archives if scratch disappears. Read TEST115-VALIDATION.json for actual completed checks and source/build identities. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Numeric Test114 confirmation does not measure grouping usability or timing.
+Scratch repository /workspace/scratch/37406b7d348a/Nth-Shelf-Test115; checks /workspace/scratch/37406b7d348a/test115; original fixtures /workspace/scratch/37406b7d348a/fixtures. Restore from published repo and source archives if scratch disappears. Read docs/evidence/validation/TEST115-VALIDATION.json for actual completed checks and source/build identities. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Numeric Test114 confirmation does not measure grouping usability or timing.
 
 Local validation complete: all134 retained behavioral suites and cache/package/syntax checks pass. All312 original-raster source comparisons and old-versus-new Reader comparisons pass. All1,326 earlier source descriptors and every earlier Reader display mask stay identical. Five control books retain identical selections and displays. Exactly three new Apocalypse groups add nine unique complete originals. Three full changed-page detector replays and three native group canvases pass; all three group crops match their original source envelope byte-for-byte. All five earlier native canvases on the dialogue page are byte-identical. Reader contract retains243 earlier taps, proves3,153 new group taps and six repeated overlays. Android build and downloaded APK verification pass.
 
@@ -2972,7 +2972,7 @@ Remaining queue: issue1 Reader7 eye/sword strip; Reader13 narrow attacker portra
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f.
 
-Scratch repository /workspace/scratch/37406b7d348a/Nth-Shelf-Test116; checks /workspace/scratch/37406b7d348a/test116; original fixtures /workspace/scratch/37406b7d348a/fixtures. Restore from published repository and authorized archives if scratch disappears. Read TEST116-VALIDATION.json for actual completed checks and build identities. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Test115 had local291/384; do not claim numeric phone acceptance from a continuation request.
+Scratch repository /workspace/scratch/37406b7d348a/Nth-Shelf-Test116; checks /workspace/scratch/37406b7d348a/test116; original fixtures /workspace/scratch/37406b7d348a/fixtures. Restore from published repository and authorized archives if scratch disappears. Read docs/evidence/validation/TEST116-VALIDATION.json for actual completed checks and build identities. Nine-original cadence and isolated Test_Branch publication/APK authorization persist. Test115 had local291/384; do not claim numeric phone acceptance from a continuation request.
 
 Local validation complete: all136 retained behavioral suites and cache/package/syntax checks pass. All312 source comparisons and complete old-versus-new Reader comparisons pass. All1,329 earlier source descriptors and every earlier Reader display mask remain unchanged. Five control books retain identical selections and displays. Exactly three new Apocalypse groups add nine unique complete originals. Three full changed-page detector replays pass. All three native group canvases match their exact original source envelopes byte-for-byte; all five earlier native canvases are byte-identical. Reader contract retains237 earlier taps, proves2,812 new group taps and six repeated overlays. Android build and downloaded APK verification pass.
 
@@ -3002,7 +3002,7 @@ Remaining queue: issue1 Reader7 eye/sword strip; Reader13 narrow attacker portra
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f.
 
-Scratch repository /workspace/scratch/37406b7d348a/Nth-Shelf-Test117; checks /workspace/scratch/37406b7d348a/test117; fixtures /workspace/scratch/37406b7d348a/fixtures/images. Automated workspace maintenance removed prior scratch. Verified Test116 GitHub artifact 11455533890 restored the source; archive SHA256 5429c8648b61ed99c12a16fcf063748ef14a912334a66b6d04ab038decc78190. Baseline was freshly replayed on the restored original archives. If scratch disappears, restore from published repository/build and authorized archives. Read TEST117-VALIDATION.json for actual completed checks and build identities. Nine-original cadence, isolated Test_Branch publication and APK authorization persist. A continuation request does not imply numeric phone acceptance.
+Scratch repository /workspace/scratch/37406b7d348a/Nth-Shelf-Test117; checks /workspace/scratch/37406b7d348a/test117; fixtures /workspace/scratch/37406b7d348a/fixtures/images. Automated workspace maintenance removed prior scratch. Verified Test116 GitHub artifact 11455533890 restored the source; archive SHA256 5429c8648b61ed99c12a16fcf063748ef14a912334a66b6d04ab038decc78190. Baseline was freshly replayed on the restored original archives. If scratch disappears, restore from published repository/build and authorized archives. Read docs/evidence/validation/TEST117-VALIDATION.json for actual completed checks and build identities. Nine-original cadence, isolated Test_Branch publication and APK authorization persist. A continuation request does not imply numeric phone acceptance.
 
 Local validation complete: all138 retained behavioral suites and cache/package/syntax checks pass. The restored Test116 baseline was fully replayed on312 original rasters, producing1,332 retained descriptors. All312 supplementary source comparisons and complete old-versus-new Reader display comparisons pass. Every earlier source descriptor and display remains unchanged; all five control books retain identical selections/displays. Exactly two new Apocalypse groups add nine unique complete originals. Full changed-page detector replays pass. Both native group canvases match equivalent original source-envelope renders byte-for-byte; four repeated overlays and3,042 new group taps pass. Android build and downloaded APK verification pass.
 
@@ -3035,7 +3035,7 @@ Remaining priority queue: issue1 Reader7 upper eye/sword strip; Reader13 narrow 
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f.
 
-Scratch source /workspace/scratch/37406b7d348a/Nth-Shelf-Test118; checks /workspace/scratch/37406b7d348a/test118; originals /workspace/scratch/37406b7d348a/fixtures/images. Verified Test117 replay checkpoint hashes and all119 frozen runtime assets before reusing its312-page/1,334-selection baseline. Independently replay changed pages and retained contracts. If scratch disappears, restore source from the published Test118 artifact and originals from authorized archives; reuse the verified Test118 checkpoint. Isolated Test_Branch publication/APK authorization and nine-original cadence persist. A continuation request does not imply numeric phone acceptance. Read TEST118-VALIDATION.json for actual completed checks and build identity.
+Scratch source /workspace/scratch/37406b7d348a/Nth-Shelf-Test118; checks /workspace/scratch/37406b7d348a/test118; originals /workspace/scratch/37406b7d348a/fixtures/images. Verified Test117 replay checkpoint hashes and all119 frozen runtime assets before reusing its312-page/1,334-selection baseline. Independently replay changed pages and retained contracts. If scratch disappears, restore source from the published Test118 artifact and originals from authorized archives; reuse the verified Test118 checkpoint. Isolated Test_Branch publication/APK authorization and nine-original cadence persist. A continuation request does not imply numeric phone acceptance. Read docs/evidence/validation/TEST118-VALIDATION.json for actual completed checks and build identity.
 
 Local validation complete: all141 retained behavioral suites and cache/package/syntax checks pass. Verified Test117 checkpoint and119 frozen runtime files establish the312-page/1,334-descriptor golden baseline. All312 new supplementary source comparisons and native-source old-versus-new Reader display comparisons pass; all earlier descriptors and displays are unchanged, and all five control books retain identical selections/displays. Exactly three new Apocalypse groups add nine unique complete originals. Full changed-page detector replays pass. All three actual native group canvases match equivalent original source-envelope renders byte-for-byte. Six repeated overlays, 185 retained-owner taps and 3196 new group taps pass. All three illustrated review tap hints are checked with native-source Reader contexts. Android build and downloaded APK verification pass.
 
@@ -3067,7 +3067,7 @@ Remaining priority queue: issue1 Reader7 upper eye/sword strip; Reader13 narrow 
 
 Source archives: Apocalypse libfile_06c168de85c08191ba461ab9ef2cdba5; Wolverine libfile_df4e3f2e95488191a8684aac7b8ff80e; Magneto libfile_11da0f85d7148191b1bef1abe6fe482d; manga libfile_be583424a66c8191bc6a8be6c6978420, libfile_a1089428d0d4819193de79fc4bd7f8bb, libfile_c87d71d1abf48191b87e46bafaa84c7f.
 
-Scratch source /workspace/scratch/37406b7d348a/Nth-Shelf-Test119; checks /workspace/scratch/37406b7d348a/test119; original rasters /workspace/scratch/37406b7d348a/fixtures/images. Verified Test118 replay checkpoint hashes and all120 frozen runtime assets before reusing its312-page/1,337-selection baseline. If scratch disappears, restore source from the published Test119 artifact and authorized archives; reuse the verified Test119 checkpoint. Independently replay changed pages and retained contracts. Isolated Test_Branch publication/APK authorization and nine-original cadence persist. A continuation request does not imply numeric phone acceptance. Read TEST119-VALIDATION.json for completed checks and build identity.
+Scratch source /workspace/scratch/37406b7d348a/Nth-Shelf-Test119; checks /workspace/scratch/37406b7d348a/test119; original rasters /workspace/scratch/37406b7d348a/fixtures/images. Verified Test118 replay checkpoint hashes and all120 frozen runtime assets before reusing its312-page/1,337-selection baseline. If scratch disappears, restore source from the published Test119 artifact and authorized archives; reuse the verified Test119 checkpoint. Independently replay changed pages and retained contracts. Isolated Test_Branch publication/APK authorization and nine-original cadence persist. A continuation request does not imply numeric phone acceptance. Read docs/evidence/validation/TEST119-VALIDATION.json for completed checks and build identity.
 
 Local validation complete: all143 retained behavioral suites and cache/package/syntax checks pass. Verified Test118 checkpoint and120 frozen runtime files establish the312-page/1,337-descriptor golden baseline. All312 new supplementary source comparisons and native-source old-versus-new Reader display comparisons pass; all earlier descriptors and displays are unchanged, and all five control books retain identical selections/displays. Exactly two new Apocalypse groups add nine unique complete originals. Full changed-page detector replays pass. Both actual native group canvases match equivalent original source-envelope renders byte-for-byte. Four repeated overlays, 39 retained-owner taps and 2878 new group taps pass. Both illustrated review tap hints are checked with native-source Reader contexts. Android build and downloaded APK verification pass.
 
@@ -3099,7 +3099,7 @@ The new Reader wrapper restores the original broad-neighbor context while render
 
 Source corpus: new refinement on verified stored Test119 maps for312 pages/1339 descriptors. Only issue1 Reader3 S1 changes; five control books and the other90 Apocalypse pages retain their descriptors. All eligible source parents replayed on originals. Full changed-page detector independently reproduces exactly2 descriptors. This is not a fresh rerun of the old detector on all312 pages. All24 issue1 pages/51 real native Reader crops replayed; source/dim/tap/overlay evidence retained privately. Phone acceptance pending.
 
-APK identity2.79.120 /28048 /io.github.bdredenbach.nthshelf.frametest120 /Nth Shelf Test120. Build status and actual source/artifact/checksum must be read from TEST120-VALIDATION.json; do not invent them. Verified build run 37669217951, artifact 11504817264, source 1632dc37e0082830c3c27cd0b8f9f32afd94929b, tree eab94cf3f347a22bd281f0edc46e4a7a363062c3. Downloaded APK SHA256 273a47f132cf2f7a8233e966db2037dfe3becfddf3b18f212f4bbfdd647140dc. Cryptographic v2 signature/content digest, compiled identity, all 122 frozen packaged web files and all 1,214 source-archive files verified. CI retained145, browser interaction/backup and native streaming archive checks passed. Phone acceptance remains pending.
+APK identity2.79.120 /28048 /io.github.bdredenbach.nthshelf.frametest120 /Nth Shelf Test120. Build status and actual source/artifact/checksum must be read from docs/evidence/validation/TEST120-VALIDATION.json; do not invent them. Verified build run 37669217951, artifact 11504817264, source 1632dc37e0082830c3c27cd0b8f9f32afd94929b, tree eab94cf3f347a22bd281f0edc46e4a7a363062c3. Downloaded APK SHA256 273a47f132cf2f7a8233e966db2037dfe3becfddf3b18f212f4bbfdd647140dc. Cryptographic v2 signature/content digest, compiled identity, all 122 frozen packaged web files and all 1,214 source-archive files verified. CI retained145, browser interaction/backup and native streaming archive checks passed. Phone acceptance remains pending.
 
 First next target: Reader3 direction strip P03-F3. Consider P03-F3/F4 as a two-frame continuation only if source ownership and immediate dialogue/action pass review. Work one step at a time. Older83/99 and327/384 were broad artwork preservation and must not replace the new37/99 focused count. Other18 rejected selections are still queued; global automatic reading and its adjustable timer are not implemented. Start future reading pause after animation settles; unresolved segmentation should pause for manual reading.
 
@@ -3131,9 +3131,9 @@ Generic proof70 replays the paper paths from certified focused-cell proof69. Ind
 
 New Reader wrapper delegates all earlier owners with exactly their previous owner context. It excludes complete earlier display masks from the new crop. All51 prior native issue1 PNGs are byte-identical, preserving all33 qualifying steps and taps, including the Test120 campfire and introduction ornament. All24 source pages/52 pop-outs/dark overlay states replayed. Native canvas composites are not browser/phone screenshots.
 
-New refinement compared on all312 verified stored Test120 maps/1339 prior descriptors. Only Reader3 appends one descriptor (1340 total); all other90 Apocalypse pages and five control books retain descriptors. All eligible source parents replayed on originals. Full changed-page detector status,147 retained/new behavioral gates, cache/package/syntax and real APK/CI facts must be read from TEST121-VALIDATION.json. Do not claim a fresh old-detector run on all312 originals.
+New refinement compared on all312 verified stored Test120 maps/1339 prior descriptors. Only Reader3 appends one descriptor (1340 total); all other90 Apocalypse pages and five control books retain descriptors. All eligible source parents replayed on originals. Full changed-page detector status,147 retained/new behavioral gates, cache/package/syntax and real APK/CI facts must be read from docs/evidence/validation/TEST121-VALIDATION.json. Do not claim a fresh old-detector run on all312 originals.
 
-APK identity2.79.121 /28049 /io.github.bdredenbach.nthshelf.frametest121 /Nth Shelf Test121. Verified build run 37678442458, artifact 11507884876, source 33bd53bf312a418ea6d8fa82b947941f47ef540f, tested tree 9cdf6424da5a8e5002ab714671f2a6f4f4fe1b12. Downloaded APK SHA256 872a0de1d3130a012e3b9744d0b1307d5f64c56e5802c486566015748d7239b7. Actual cryptographic v2 signature/content digest, compiled isolated identity, all123 frozen web files and all1225 source-archive files verified. CI147 retained suites, browser/backup and native archive checks passed. New pair phone acceptance remains pending. Read TEST121-VALIDATION.json for actual source/tree/run/artifact/checksum and completed gates.
+APK identity2.79.121 /28049 /io.github.bdredenbach.nthshelf.frametest121 /Nth Shelf Test121. Verified build run 37678442458, artifact 11507884876, source 33bd53bf312a418ea6d8fa82b947941f47ef540f, tested tree 9cdf6424da5a8e5002ab714671f2a6f4f4fe1b12. Downloaded APK SHA256 872a0de1d3130a012e3b9744d0b1307d5f64c56e5802c486566015748d7239b7. Actual cryptographic v2 signature/content digest, compiled isolated identity, all123 frozen web files and all1225 source-archive files verified. CI147 retained suites, browser/backup and native archive checks passed. New pair phone acceptance remains pending. Read docs/evidence/validation/TEST121-VALIDATION.json for actual source/tree/run/artifact/checksum and completed gates.
 
 Next: Reader5 night camp P05-F1. Reader3 is complete locally under the single/dual rules. Work on one original, or at most a justified consecutive pair, per checkpoint; this request authorized two originals in this checkpoint. Old83/99 and327/384 remain historical broad preservation. Future automatic playback/adjustable timing is not implemented; pause after animation settles and unresolved reading steps stay manual. Phone acceptance of the new pair remains pending.
 
@@ -3161,7 +3161,7 @@ Test122 recovers ONE original, Reader5 S1/P05-F1 night camp. Current focused cou
 
 Empty-map structural fallback uses a dominant saturated exterior hue derived from source edge pixels. Two independent eroded seeds agree on the upper cell. A finer1800-pixel analysis retains the thin moon outline; source-pixel enclosure completion keeps smoke, caption, moon and owned dialogue while excluding the lower conversation. The existing lower source owner blocks enclosure growth. No book/page/title/text/image identity, stored crop or review verdict chooses pixels. This proof establishes extraction; the private source review assigns exactly one original.
 
-Preserve all34 earlier qualifying steps and52 earlier native issue1 canvases/taps. Source-map regression covers312 stored Test121 maps/1340 prior descriptors, with source replay for all25 eligible empty maps, including12 restored control images. Only Reader5 appends one descriptor,1341 total. Full changed-page detector must reproduce one exact descriptor. Actual native Reader replay covers all24 issue1 pages/53 selections and dark focus/tap/final geometry; native composites are not browser or phone screenshots. Read TEST122-VALIDATION.json for completed gates and evidence.
+Preserve all34 earlier qualifying steps and52 earlier native issue1 canvases/taps. Source-map regression covers312 stored Test121 maps/1340 prior descriptors, with source replay for all25 eligible empty maps, including12 restored control images. Only Reader5 appends one descriptor,1341 total. Full changed-page detector must reproduce one exact descriptor. Actual native Reader replay covers all24 issue1 pages/53 selections and dark focus/tap/final geometry; native composites are not browser or phone screenshots. Read docs/evidence/validation/TEST122-VALIDATION.json for completed gates and evidence.
 
 APK identity2.79.122 /versionCode28050 /io.github.bdredenbach.nthshelf.frametest122 /Nth Shelf Test122. Verified build run 37690609792, artifact 11514090922, source d26b9fd8a75f9de97740b4b4078139a50f3f8b5e, tested tree 58311bc8ab9f5ae15bef7f13cb0d2c7be781bc3e. APK SHA256 94a29b16d30d2829ead4aa875b9d0c4ed60853863910bafc5da1e07e218bf01f. Compiled isolated identity, actual cryptographic v2 signature/content digest, CI signer,124 packaged web files and all1236 source archive files verified. CI149 retained suites plus browser/backup/native archive/build passed. New night camp phone acceptance pending. Required gates149 retained/new behavioral suites, cache/package/syntax, CI browser/backup/native archive/build; actual APK identity/signature,124 frozen web files and exact Source ZIP must be verified before delivery.
 
@@ -3259,9 +3259,9 @@ Rise of Apocalypse #1 Reader5 S4 / P05-F4 now extracts one complete lower mounte
 
 155 retained suites (154 behavioral +1 current cache/package configuration suite), syntax and127 frozen web-source hashes passed.312 stored maps/1343→1344 descriptors compared; all eligible parents(one original) replayed. Only Reader5 appends one selection. Full changed-page detector reproduces4 exact selections.24 issue1 source hashes and56 native selections verified. No full fresh312-original old-detector replay claimed. Native composites are not browser/phone screenshots. Browser integration/backup suites could not launch locally because Chromium is absent; no Android APK workflow was triggered. The existing GitHub Pages deployment triggered automatically on source push; APK verification is not claimed.
 
-Test123 user-confirmed. Test122 and Test124 explicit phone verdicts remain pending. Test125 has local native review only; no APK exists. Automatic playback/time slider remain planned. Next: Reader6 P06-F1 upper-left narrow figure, one original at a time. Finish comic1 before comic2. Keep comic artwork out of git/CI. See TEST125-VALIDATION.json for source checks and final publication/saved-file records.
+Test123 user-confirmed. Test122 and Test124 explicit phone verdicts remain pending. Test125 has local native review only; no APK exists. Automatic playback/time slider remain planned. Next: Reader6 P06-F1 upper-left narrow figure, one original at a time. Finish comic1 before comic2. Keep comic artwork out of git/CI. See docs/evidence/validation/TEST125-VALIDATION.json for source checks and final publication/saved-file records.
 
-Runtime source: c1782b7ad36f1dfefa742eeebd5e234b47bcbb37; tested tree0646464eba35c17d3977d3b83b72ed7c1be2faaa. Guarded Test_Branch publication verified. No Android APK workflow triggered. Saved rules handoff same identity nowversion7; audit, review and private replay checkpoint also saved. Exact IDs/versions/checksums in TEST125-VALIDATION.json. Later metadata changes only these records.
+Runtime source: c1782b7ad36f1dfefa742eeebd5e234b47bcbb37; tested tree0646464eba35c17d3977d3b83b72ed7c1be2faaa. Guarded Test_Branch publication verified. No Android APK workflow triggered. Saved rules handoff same identity nowversion7; audit, review and private replay checkpoint also saved. Exact IDs/versions/checksums in docs/evidence/validation/TEST125-VALIDATION.json. Later metadata changes only these records.
 
 
 </details>
@@ -3303,7 +3303,7 @@ Bulk56 task remains in progress:3 originals repaired,53 remain.34 singles+6 just
 
 No APK, Gradle or Android workflow. Source publication targets Test_Branch only. Native local review is distinct from phone acceptance. Automatic playback and its timing slider remain planned.
 
-Private replay checkpoint supplies current audit, source hashes, native replay records and validation receipts. Prior Test126 checkpoint:libfile_4a8ca90c2fb08191bc096c1ab3ed32e9. Canonical handoff:libfile_b40550a56110819197ad1ffa78ce2e9c. Read TEST127-VALIDATION.json for completed checks and publication.
+Private replay checkpoint supplies current audit, source hashes, native replay records and validation receipts. Prior Test126 checkpoint:libfile_4a8ca90c2fb08191bc096c1ab3ed32e9. Canonical handoff:libfile_b40550a56110819197ad1ffa78ce2e9c. Read docs/evidence/validation/TEST127-VALIDATION.json for completed checks and publication.
 
 
 </details>
@@ -3321,7 +3321,7 @@ Reader10 now provides one complete gold-rimmed training inset. Four long chromat
 
 Publish source to bdredenbach/Nth-Shelf Test_Branch only. No APK, Gradle or Android workflow. Test128/future28056/frametest128 are configuration only. Latest delivered APK Test124. Native acceptance is distinct from phone readability; automatic playback and timing slider remain planned.
 
-Continue the same authorized task on52 remaining originals in comic1. Default one complete original; at most two adjacent consecutive originals only for immediate continuity or shared composition. Finish comic1 before comic2. Canonical rules handoff remains libfile_b40550a56110819197ad1ffa78ce2e9c. See TEST128-VALIDATION.json for checks/publication receipts.
+Continue the same authorized task on52 remaining originals in comic1. Default one complete original; at most two adjacent consecutive originals only for immediate continuity or shared composition. Finish comic1 before comic2. Canonical rules handoff remains libfile_b40550a56110819197ad1ffa78ce2e9c. See docs/evidence/validation/TEST128-VALIDATION.json for checks/publication receipts.
 
 
 </details>
@@ -3339,7 +3339,7 @@ Reader10 now has a complete ornate training inset and a separate surrounding tri
 
 Publish to bdredenbach/Nth-Shelf Test_Branch only. No APK, Gradle or Android workflow. Test129/future28057/frametest129 are configuration only. Latest delivered APK remains Test124. Native acceptance is distinct from phone readability; automatic playback and timing slider remain planned.
 
-Continue all49 remaining originals in comic1. Default one complete original; at most two adjacent consecutive originals only for immediate continuity or shared composition. Finish comic1 before comic2. Canonical handoff: libfile_b40550a56110819197ad1ffa78ce2e9c. See TEST129-VALIDATION.json for checks and publication receipts.
+Continue all49 remaining originals in comic1. Default one complete original; at most two adjacent consecutive originals only for immediate continuity or shared composition. Finish comic1 before comic2. Canonical handoff: libfile_b40550a56110819197ad1ffa78ce2e9c. See docs/evidence/validation/TEST129-VALIDATION.json for checks and publication receipts.
 
 Published runtime source d94c57d7efc82b698f37c40152ff782aae174dd7; tested tree077157542d8878be03ec1a524518983f1f58e429.160 retained suites and syntax passed. Saved review libfile_2e1773bba9d881918eab2614dd892f5e, audit libfile_bf93e000e7808191963e9e7c89059413, replay libfile_773576ee886881918c955e64cc88c1a6; canonical handoff version11. Bulk task remains IN PROGRESS.
 
@@ -3359,7 +3359,7 @@ Saved-map serialization had duplicated the earlier inset anchor object on Reader
 
 37 singles+7 justified pairs=51/99 originals;48 remain.44 qualifying pop-outs /58 selections. Bulk56 task IN PROGRESS:8 repaired,48 remaining. All43 earlier accepted crops and57 of58 earlier PNGs+metadata unchanged; only rejected Reader9 S1 changes.312 stored maps /1346 descriptors remain unchanged. Native acceptance differs from phone readability. Automatic playback/timing slider remain planned.
 
-Publish source to bdredenbach/Nth-Shelf Test_Branch only. No APK, Gradle or Android workflow dispatch. Test130/future28058/frametest130 are configuration only; latest delivered APK Test124. Finish comic1 before comic2. Default complete single; max2 adjacent consecutive originals for immediate action/dialogue or shared composition. Canonical handoff libfile_b40550a56110819197ad1ffa78ce2e9c; see TEST130-VALIDATION.json for checks and saved receipts.
+Publish source to bdredenbach/Nth-Shelf Test_Branch only. No APK, Gradle or Android workflow dispatch. Test130/future28058/frametest130 are configuration only; latest delivered APK Test124. Finish comic1 before comic2. Default complete single; max2 adjacent consecutive originals for immediate action/dialogue or shared composition. Canonical handoff libfile_b40550a56110819197ad1ffa78ce2e9c; see docs/evidence/validation/TEST130-VALIDATION.json for checks and saved receipts.
 
 Published runtime f06ab403bfaf36b3d177eaafbf5f7c001d75ce27; tested treec636fcaac26c9750f0482576ea0875d73ed7ac09.163 retained suites+syntax passed. Saved review libfile_713a0e9c1ca081919f3b568c02386a11, audit libfile_19fc89360fac81918fe6a6bdf905e8c4, replay libfile_97adf787439881919a76b859f0fa669c; canonical handoff version12. Bulk task IN PROGRESS.
 
@@ -3379,7 +3379,7 @@ Reader23's upper battle pop-out previously contained a clipped balloon from a lo
 
 All164 retained suites and JavaScript syntax checks passed. The inherited cache checker invocation was corrected to Test131 and the remainder resumed on unchanged runtime. All24 verified source pages /58 actual native overlays replayed. All44 earlier accepted crops are byte-identical; only Reader23 S1/S2 change, and all58 geometry/tap/display metadata entries are unchanged.1,066 whole-body taps are exclusive;1,577,368 non-body ownership pixels are unchanged.312 maps /1346 descriptors unchanged. The other three eligible source pages are unchanged.
 
-No APK, Gradle or Android workflow dispatch. Test131 version configuration only; latest delivered APK Test124. Phone acceptance of this source checkpoint and automatic playback/timing remain pending. No original comic pixels or private review coordinates are committed. Read TEST131-VALIDATION.json and the private replay checkpoint for evidence and the exact47-frame queue.
+No APK, Gradle or Android workflow dispatch. Test131 version configuration only; latest delivered APK Test124. Phone acceptance of this source checkpoint and automatic playback/timing remain pending. No original comic pixels or private review coordinates are committed. Read docs/evidence/validation/TEST131-VALIDATION.json and the private replay checkpoint for evidence and the exact47-frame queue.
 
 
 </details>
@@ -3397,7 +3397,7 @@ Reader18 S4 now preserves the complete rounded forehead of the right En portrait
 
 All166 retained suites and111 JavaScript syntax checks passed on final source, including source-less/failed-canvas fallback controls. All24 verified originals/58 native overlays replayed. All45 earlier accepted crops and56/58 total PNGs are byte-identical. All1,592 cap taps select the lower owner;3,106,040 ownership pixels outside the cap remain unchanged. Saved-map rehydration, repeated cache, changed-source rejection and restored-source behavior pass. Across312 maps/1346 descriptors, only Reader18 is source-eligible. Its fresh full detector replay preserves all five descriptors. No fresh full312-page source replay is claimed.
 
-No APK, Gradle or workflow dispatch. Version132 configuration only; latest delivered APK Test124. Phone readability and automatic playback/timing remain pending. Original comic pixels stay out of Git/CI. Read TEST132-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or workflow dispatch. Version132 configuration only; latest delivered APK Test124. Phone readability and automatic playback/timing remain pending. Original comic pixels stay out of Git/CI. Read docs/evidence/validation/TEST132-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3415,7 +3415,7 @@ Reader18 S3 now contains one complete wide-punch original and both complete capt
 
 All168 retained suites and112 JavaScript syntax checks passed on final source. Generated tests include17 positive/negative/fallback cases and3 actual Reader canvas checks. All24 verified originals/58 native overlays replayed in isolated six-page batches. All46 previously accepted crops and56/58 total PNGs are byte-identical. All3,091 transferred-pixel taps select the upper owner;4,593 caption pixels and3,107,818 non-transfer ownership pixels remain unchanged. Source/proof mismatches, missing canvas and unavailable source fail closed. Across312 stored maps/1346 descriptors, only Reader18 is source-eligible; fresh full Reader18 detection retains all five descriptors. No fresh312-page detector sweep claimed.
 
-No APK, Gradle or Android workflow dispatch. Version133 configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST133-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version133 configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST133-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3435,7 +3435,7 @@ All 170 retained suites and 113 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,346 descriptors, only Reader6 is source-eligible. Its rejected proof68 whole-page envelope is replaced by one proof79 narrow cell; the other 1,345 descriptor records are unchanged. Fresh full Reader6 detection matches the independently source-replayed proof exactly. No full 312-page fresh detector sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST134-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST134-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3455,7 +3455,7 @@ All 172 retained suites and 114 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,346 descriptors, only Reader18 is source-eligible. All discovery descriptors remain unchanged, including the Test134 page-edge cell. Fresh full Reader18 detection matches all five saved descriptors. No fresh full 312-page detector sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST135-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST135-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3475,7 +3475,7 @@ All 173 retained suites and 115 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,346 descriptors, four maps are structurally source-eligible. All four available original images were tested: only comic1 Reader23 adds one child; the three later-issue images abstain. Fresh full Reader23 detection matches the four saved descriptors exactly, with its three original descriptors unchanged. No fresh full 312-page detector sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST136-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST136-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3495,7 +3495,7 @@ All 178 retained suites and 116 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,347 descriptors, only Reader7 is eligible for the new inset rule. Fresh full Reader7 detection preserves both prior descriptors and appends exactly one source-replayed child. Fresh full Reader6 detection and its accepted proof remain unchanged. No fresh full 312-page detector sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST137-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST137-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3515,7 +3515,7 @@ All 179 retained suites and 117 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,348 descriptors, only Reader9 is eligible. Fresh full Reader9 detection preserves the earlier central descriptor exactly and appends the one source-replayed portrait. No fresh full 312-page detector sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST138-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST138-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3535,7 +3535,7 @@ All 180 retained suites and 118 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,349 descriptors, only Reader9 is eligible. Fresh full Reader9 detection preserves the two earlier court descriptors exactly and appends one source-replayed left portrait. No fresh full 312-page detector sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST139-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST139-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3555,7 +3555,7 @@ All 181 retained suites and 119 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,350 descriptors, only Reader9 is eligible. Fresh full Reader9 detection preserves the three earlier court descriptors exactly and appends one source-replayed lower composition. No fresh full 312-page detector sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST140-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST140-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3575,7 +3575,7 @@ All 183 retained suites and 120 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,351 descriptors, 23 empty maps are eligible. All 11 available Apocalypse sources among those were checked in the private candidate audit; only Reader22 adds two children. Twelve other source originals are unavailable and explicitly untested. Fresh full Reader22 detection matches the expected two source-replayed selections. No full 312-source detector sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST141-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST141-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3595,7 +3595,7 @@ All 187 retained suites and 121 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,353 descriptors, only Reader18 is source-eligible. Fresh full Reader18 detection matches the expected seven selections. All other stored maps are unchanged; no full 312-source detector sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST142-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST142-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3615,7 +3615,7 @@ All 193 retained suites and 122 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,355 descriptors, 23 maps are eligible. The candidate audit checked all 12 then-available Apocalypse sources, including a negative Reader22 reflection, and only Reader23 added one child. Reader22 is no longer eligible after Test141; the other 11 available source outcomes remain applicable. Twelve other source originals were unavailable and explicitly untested. Fresh full Reader23 detection matches the five-selection map; no full 312-source sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST143-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST143-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3635,7 +3635,7 @@ All 197 retained suites and 123 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,356 descriptors, only Reader11 is eligible. Fresh complete Reader11 detection matches the replacement map. No full 312-source sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST144-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST144-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3655,7 +3655,7 @@ All 208 retained suites and 124 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,356 descriptors, only Reader6 is eligible for the new source-rim family. Fresh full Reader6 and Reader23 detection match their expected maps. The proof80 correction changes only its Reader guard; no full 312-source sweep is claimed.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST145-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST145-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3675,7 +3675,7 @@ All 212 retained suites and 126 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,357 descriptors, 25 maps meet ancestry eligibility. All 13 available original sources were checked; only Reader12 adds a new strip. The other 12 eligible source images are unavailable and explicitly untested. Reader22 is no longer eligible after its accepted warning/relic repair. Fresh full Reader12 detection matches the expected map; this is not a full 312-source sweep.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST146-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST146-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3695,7 +3695,7 @@ All 218 retained suites and 128 JavaScript syntax checks pass. All 24 verified o
 
 The current 312-map corpus has 1,358 descriptors before this repair. Only the Reader 12 ancestry is eligible. Fresh full Reader 12 detection must match the expected five-selection map. Source-certified retirement removes the broad envelope from selectable owners and retains it only as authenticated ancestry.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST147-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST147-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3715,7 +3715,7 @@ All 222 retained suites and 129 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,359 descriptors, only the Reader 11 accepted upper-cell/dialogue-pair ancestry is eligible. Fresh full Reader 11 detection matches the expected three-selection map.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST148-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST148-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3735,7 +3735,7 @@ All 226 retained suites and 130 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,360 descriptors, only the complete accepted Reader 11 ancestry is eligible. Fresh full Reader 11 detection matches the expected four-selection map.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST149-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST149-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3755,7 +3755,7 @@ All 229 retained suites and 131 JavaScript syntax checks pass. All 24 verified o
 
 Across 312 stored maps and 1,361 descriptors, only Reader 13 qualifies for the complete43/52/53 ancestry. Fresh full Reader 13 detection matches the expected four selections.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST150-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST150-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3775,7 +3775,7 @@ All 230 retained suites and 132 JavaScript syntax checks pass. All 24 verified o
 
 All 312 stored maps and 1362 prior descriptors are screened. Two source envelopes are eligible: Reader 15 replaces its rejected broad group; the available second-issue source remains unchanged. Fresh Reader 15 detection must equal the expected map. Runtime source has no book/page/title/text/hash/private-audit lookup.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST151-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST151-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3795,9 +3795,9 @@ All 240 retained suites and 134 JavaScript syntax checks pass. All 24 verified o
 
 All 72 accepted selections also passed actual fresh-page browser mouse input, overlay open/close/repeat and navigation against the final frozen source. Browser fixtures and source hashes are recorded privately; phone acceptance remains pending. All 312 stored maps and 1362 prior descriptors are screened. Screen every retained stored map and descriptor using the current parent inventory. Only the source-authenticated Reader 17 ancestry may qualify. Fresh whole-page detection must equal the expected map and replace the rejected broad proof 55 owner with proof 99 while preserving accepted proof 34. Runtime source contains no original artwork, private map coordinates, native hashes, or book/page/title/text lookup. Fresh detection of all24 original pages is required. The deterministic sampler preserves every contour and bound;23 full detector graphs remain exact and only11 derived statistics change in the remaining three-owner graph.
 
-Opening speed is a separate readiness requirement. Normal cold page loading and first taps remain materially slow; warm or repeat timings do not establish first-use or phone readiness. Improve and measure these paths before automatic frame mode. See the exact workflow, timings and limitations in TEST152-VALIDATION.json.
+Opening speed is a separate readiness requirement. Normal cold page loading and first taps remain materially slow; warm or repeat timings do not establish first-use or phone readiness. Improve and measure these paths before automatic frame mode. See the exact workflow, timings and limitations in docs/evidence/validation/TEST152-VALIDATION.json.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST152-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST152-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3817,9 +3817,9 @@ All 249 retained suites and 136 JavaScript syntax checks pass. All 24 verified o
 
 All 73 accepted selections also passed actual fresh-page browser mouse input, overlay open/close/repeat and navigation against the final frozen source. Browser fixtures and source hashes are recorded privately; phone acceptance remains pending. Screen every retained stored map and descriptor using the current parent inventory. Only the source-authenticated Reader17 family with revised99 already installed may qualify. Fresh whole-page detection must equal the expected map, preserve accepted34 and99 in their current positions, and append104. Runtime source contains no original artwork, private map coordinates, native hashes, or book/page/title/text lookup.
 
-Opening speed is a separate readiness requirement. Normal cold page loading and first taps remain materially slow; warm or repeat timings do not establish first-use or phone readiness. Improve and measure these paths before automatic frame mode. See the exact workflow, timings and limitations in TEST153-VALIDATION.json.
+Opening speed is a separate readiness requirement. Normal cold page loading and first taps remain materially slow; warm or repeat timings do not establish first-use or phone readiness. Improve and measure these paths before automatic frame mode. See the exact workflow, timings and limitations in docs/evidence/validation/TEST153-VALIDATION.json.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST153-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST153-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3839,9 +3839,9 @@ All 253 retained suites and 137 JavaScript syntax checks pass. All 24 verified o
 
 All 74 accepted selections also passed actual fresh-page browser mouse input, overlay open/close/repeat and navigation against the final frozen source. Browser fixtures and source hashes are recorded privately; phone acceptance remains pending. Only the source-authenticated Reader15 predecessor family may qualify. Fresh whole-page detection must equal the expected ordered map; preserve all prior owners and all other pages.
 
-Opening speed is a separate readiness requirement. Normal cold page loading and first taps remain materially slow; warm or repeat timings do not establish first-use or phone readiness. Improve and measure these paths before automatic frame mode. See the exact workflow, timings and limitations in TEST154-VALIDATION.json.
+Opening speed is a separate readiness requirement. Normal cold page loading and first taps remain materially slow; warm or repeat timings do not establish first-use or phone readiness. Improve and measure these paths before automatic frame mode. See the exact workflow, timings and limitations in docs/evidence/validation/TEST154-VALIDATION.json.
 
-No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See TEST154-VALIDATION.json and the private replay checkpoint.
+No APK, Gradle or Android workflow dispatch. Version configuration only; latest delivered APK Test124. Phone readability and automatic playback remain pending. Original comic pixels stay out of Git/CI. See docs/evidence/validation/TEST154-VALIDATION.json and the private replay checkpoint.
 
 
 </details>
@@ -3865,7 +3865,7 @@ First-use performance remains a material limitation. The new camp first handler 
 
 The recovered optional cooperative ragged optimization and private source-issued100 experiment are not installed. The final proof103 runtime matches the earlier unaccepted candidate hash; lost partial checks were not credited after workspace recovery. Current acceptance was rerun. No page/title/text/hash lookup selects pixels.
 
-No APK, Gradle, Android workflow dispatch or automatic mode. Original comic pixels remain outside Git/CI. See TEST155-VALIDATION.json and the private replay checkpoint. Reporting files were finalized after the frozen executable checks; the runtime and test inputs remain exact.
+No APK, Gradle, Android workflow dispatch or automatic mode. Original comic pixels remain outside Git/CI. See docs/evidence/validation/TEST155-VALIDATION.json and the private replay checkpoint. Reporting files were finalized after the frozen executable checks; the runtime and test inputs remain exact.
 
 
 </details>
@@ -3891,7 +3891,7 @@ A full-gate harness initially misclassified descendant-button blur as native for
 
 The sweep exposed a genuine pre-existing close race. A native double-click over a source area with no owner can close the overlay, then reopen a stale asynchronous rescue result. Exact frozen Test155 reproduced reopening after 19.240 seconds and another zoom after 34.184 seconds; the 35-second observation ended with no pending handlers and the unwanted overlay still open. Reader.js is unchanged in 156. A 420-ms closed-state snapshot alone does not establish absence of delayed fallback work. The comparable continuation restores source-point closes and observes their handlers settling. Earlier component receipts retain their original observation scope. This arbitrary-center defect remains unresolved and must be fixed before APK testing.
 
-Fresh loading and first opening still need further improvement before automatic mode. Phone regression acceptance is pending. No APK, Gradle, Android workflow dispatch or automatic-mode implementation. Original comic artwork and private maps remain outside Git/CI. No page, title, text, hash or audit lookup selects runtime pixels. See TEST156-VALIDATION.json and the private replay checkpoint. Reporting files were finalized after frozen executable checks; all executable and test inputs remain exact.
+Fresh loading and first opening still need further improvement before automatic mode. Phone regression acceptance is pending. No APK, Gradle, Android workflow dispatch or automatic-mode implementation. Original comic artwork and private maps remain outside Git/CI. No page, title, text, hash or audit lookup selects runtime pixels. See docs/evidence/validation/TEST156-VALIDATION.json and the private replay checkpoint. Reporting files were finalized after frozen executable checks; all executable and test inputs remain exact.
 
 
 </details>
@@ -3911,7 +3911,7 @@ All 261 retained command positions are covered: 260 successful commands from the
 
 The ordinary Reader20 portrait sample records fresh source readiness at 16.362 seconds and handler settlement of 119.1 ms first, 6.4 ms repeat and 85.7 ms after navigation. The configured 680 ms animation starts after synchronous handling. These are shared-host desktop Chromium observations, not phone or compositor timing and not statistical performance. Fresh loading remains materially slow. The usual page-loading path detects fresh owners rather than restoring persisted IndexedDB owner identities.
 
-Native review retains 2,737 divider memberships; 2,736 are opaque and one outer mixed source pixel remains alpha192. The bounded antialiasing qualification is not tolerance for visible interior clipping or neighboring art. Cross-runtime color evidence is reported separately in TEST157-VALIDATION.json: geometry and alpha, source-pixel fidelity, native draw replay and spatial alignment must be distinguished from RGB byte identity. No unavailable hidden compositing layer is claimed to have been reconstructed exactly.
+Native review retains 2,737 divider memberships; 2,736 are opaque and one outer mixed source pixel remains alpha192. The bounded antialiasing qualification is not tolerance for visible interior clipping or neighboring art. Cross-runtime color evidence is reported separately in docs/evidence/validation/TEST157-VALIDATION.json: geometry and alpha, source-pixel fidelity, native draw replay and spatial alignment must be distinguished from RGB byte identity. No unavailable hidden compositing layer is claimed to have been reconstructed exactly.
 
 Terminal detector/native code is reconstructed source, with historical proof98 Reader provenance recorded separately. Source-issued private validation reuse is guarded by current source and exact owner generation. The 103 historical VM selectors were corrected to load the newly installed terminal family while retaining their assertions, fixtures and order; native/fresh evidence carries only through verified identical production bytes. Both executed source freezes remain preserved in the private replay.
 
@@ -3939,7 +3939,7 @@ Fresh coverage comprises two explicitly carried successful independent pages and
 
 Native review retains the existing source-fidelity and antialiasing qualifications. The inherited divider evidence has2,737 memberships:2,736 opaque and one outer mixed source pixel at alpha192. This bounded outer-pixel qualification does not permit visible interior clipping or neighboring art. Cross-runtime RGB byte identity is distinct from geometry/alpha, native draw replay, spatial alignment and source-pixel fidelity. No unavailable hidden compositing layer is claimed to have been reconstructed exactly.
 
-The executed1681-file source freeze remains preserved. Only this handoff,TEST158-VALIDATION.json and the Test158 QA README are finalized in a separate publication successor; all production/test input bytes and modes remain exact to the executed freeze. Final gate identity: ac6179bf3daae3f749642471540f3c6a93723fd1a17b38fd3c80d90a460c9c2d. Git publication and durable replay restoration are checked separately after this source-acceptance report.
+The executed1681-file source freeze remains preserved. Only this handoff,docs/evidence/validation/TEST158-VALIDATION.json and the Test158 QA README are finalized in a separate publication successor; all production/test input bytes and modes remain exact to the executed freeze. Final gate identity: ac6179bf3daae3f749642471540f3c6a93723fd1a17b38fd3c80d90a460c9c2d. Git publication and durable replay restoration are checked separately after this source-acceptance report.
 
 Continue the11 unfinished originals and loading/opening improvements before automatic mode. Phone acceptance remains pending. No APK, Gradle invocation, Android workflow dispatch or automatic-mode implementation. Original comic artwork, private maps, native previews/crops and browser evidence stay outside Git/CI. No runtime page, title, text, hash or audit lookup selects pixels.
 
@@ -3957,7 +3957,7 @@ Brad approved both city/palace S1 and feline inset S3 previews in the 11 October
 
 # Test159: city and rounded inset pop-outs — review pending
 
-Resume from Test159 / 2.79.159 on `Test_Branch`. Base is published Test158 commit `7a2146ef8645022c3a22dc1fcf7bbd964bb00f1b`. This checkpoint recovers the unfinished city successor, validates it and moves first-use source admission into page preparation. Read `TEST159-VALIDATION.json` and the Test159 QA README.
+Resume from Test159 / 2.79.159 on `Test_Branch`. Base is published Test158 commit `7a2146ef8645022c3a22dc1fcf7bbd964bb00f1b`. This checkpoint recovers the unfinished city successor, validates it and moves first-use source admission into page preparation. Read `docs/evidence/validation/TEST159-VALIDATION.json` and the Test159 QA README.
 
 ## Current review gate
 
@@ -4205,7 +4205,7 @@ Fresh actual production detector and Reader produced3 reachable native canvases.
 
 This source-only checkpoint does not build an APK. Complete through Test168, verify all five plus retained crops, then build the isolated Test168 APK for Brad's phone regression. Next after phone corrections: another comic, then automatic crop mode.
 
-Per-original deliverables: Nth-Shelf-Test164.patch, Nth-Shelf-Test164-Handoff.md, Nth-Shelf-Test164-Pop.gif. Private source/maps/crops remain outside Git and CI. TEST164-VALIDATION.json records executed evidence; historical receipts remain historical. Current recovery package will contain the whole five-frame batch and scripts.
+Per-original deliverables: Nth-Shelf-Test164.patch, Nth-Shelf-Test164-Handoff.md, Nth-Shelf-Test164-Pop.gif. Private source/maps/crops remain outside Git and CI. docs/evidence/validation/TEST164-VALIDATION.json records executed evidence; historical receipts remain historical. Current recovery package will contain the whole five-frame batch and scripts.
 
 
 </details>
@@ -4227,7 +4227,7 @@ Fresh actual production detector and Reader produced4 reachable native canvases.
 
 This source-only checkpoint does not build an APK. Complete through Test168, verify all five plus retained crops, then build the isolated Test168 APK for Brad's phone regression. Next after phone corrections: another comic, then automatic crop mode.
 
-Per-original deliverables: Nth-Shelf-Test165.patch, Nth-Shelf-Test165-Handoff.md, Nth-Shelf-Test165-Pop.gif. Private source/maps/crops remain outside Git and CI. TEST165-VALIDATION.json records executed evidence; historical receipts remain historical. Current recovery package will contain the whole five-frame batch and scripts.
+Per-original deliverables: Nth-Shelf-Test165.patch, Nth-Shelf-Test165-Handoff.md, Nth-Shelf-Test165-Pop.gif. Private source/maps/crops remain outside Git and CI. docs/evidence/validation/TEST165-VALIDATION.json records executed evidence; historical receipts remain historical. Current recovery package will contain the whole five-frame batch and scripts.
 
 
 </details>
@@ -4249,7 +4249,7 @@ Fresh actual production detector and Reader produced5 reachable native canvases.
 
 This source-only checkpoint does not build an APK. Complete through Test168, verify all five plus retained crops, then build the isolated Test168 APK for Brad's phone regression. Next after phone corrections: another comic, then automatic crop mode.
 
-Per-original deliverables: Nth-Shelf-Test166.patch, Nth-Shelf-Test166-Handoff.md, Nth-Shelf-Test166-Pop.gif. Private source/maps/crops remain outside Git and CI. TEST166-VALIDATION.json records executed evidence; historical receipts remain historical. Current recovery package will contain the whole five-frame batch and scripts.
+Per-original deliverables: Nth-Shelf-Test166.patch, Nth-Shelf-Test166-Handoff.md, Nth-Shelf-Test166-Pop.gif. Private source/maps/crops remain outside Git and CI. docs/evidence/validation/TEST166-VALIDATION.json records executed evidence; historical receipts remain historical. Current recovery package will contain the whole five-frame batch and scripts.
 
 
 </details>
@@ -4271,7 +4271,7 @@ Fresh actual production detector and Reader produced6 reachable native canvases.
 
 This source-only checkpoint does not build an APK. Complete through Test168, verify all five plus retained crops, then build the isolated Test168 APK for Brad's phone regression. Next after phone corrections: another comic, then automatic crop mode.
 
-Per-original deliverables: Nth-Shelf-Test167.patch, Nth-Shelf-Test167-Handoff.md, Nth-Shelf-Test167-Pop.gif. Private source/maps/crops remain outside Git and CI. TEST167-VALIDATION.json records executed evidence; historical receipts remain historical. Current recovery package will contain the whole five-frame batch and scripts.
+Per-original deliverables: Nth-Shelf-Test167.patch, Nth-Shelf-Test167-Handoff.md, Nth-Shelf-Test167-Pop.gif. Private source/maps/crops remain outside Git and CI. docs/evidence/validation/TEST167-VALIDATION.json records executed evidence; historical receipts remain historical. Current recovery package will contain the whole five-frame batch and scripts.
 
 
 </details>
@@ -4321,7 +4321,7 @@ The separate Nth Shelf Test168 APK is built and verified: package io.github.bdre
 
 Install Test168 separately, import Rise of Apocalypse issue1, and review the whole issue, especially Reader20's seven selections. Brad will report page/frame numbers and screenshots for corrections. After phone regression/corrections, widen the detector with another comic; automatic frame crop mode comes afterward.
 
-Each completed original has a git patch, handoff and GIF. GIFs replay the actual native crop with captured Reader animation styles; they are not browser recordings. The five-frame recovery ZIP includes private maps, original-page crop evidence, verification logs, scripts, and commit mapping. Original art and private proof maps stay outside Git/CI. Source publication is Test_Branch only. The original four-issue archive can be restored from the previously saved source archive; recovery metadata records that identity. Current execution receipt is TEST168-VALIDATION.json. Historical checkpoint receipts remain historical.
+Each completed original has a git patch, handoff and GIF. GIFs replay the actual native crop with captured Reader animation styles; they are not browser recordings. The five-frame recovery ZIP includes private maps, original-page crop evidence, verification logs, scripts, and commit mapping. Original art and private proof maps stay outside Git/CI. Source publication is Test_Branch only. The original four-issue archive can be restored from the previously saved source archive; recovery metadata records that identity. Current execution receipt is docs/evidence/validation/TEST168-VALIDATION.json. Historical checkpoint receipts remain historical.
 
 
 </details>
@@ -4485,7 +4485,7 @@ Recovery notes and prospective pairs in the JSON are hypotheses, not verified im
 - Detailed visual report: `Nth-Shelf-Test90-Apocalypse-Audit.html`, Library identity `libfile_c555c384890881919c5dc9c806e89274`.
 - Full machine-readable audit with detector contours: `Nth-Shelf-Test90-Apocalypse-Audit.json`, Library identity `libfile_b49577b441e88191a27c7d703bd079e2`.
 - Source archive: `Rise of Apocalypse 001-004 (1996) (Digital) (Shadowcat-Empire)(3).zip`, Library identity `libfile_06c168de85c08191ba461ab9ef2cdba5`. Use the hash recorded in the audit when restoring private fixtures.
-- Test90 APK identity/build evidence: [versioned handoff](HANDOFF.md#archive-handoff-2-79-90-md), [validation](TEST90-VALIDATION.json); 82 retained suites pass at that checkpoint.
+- Test90 APK identity/build evidence: [versioned handoff](HANDOFF.md#archive-handoff-2-79-90-md), [validation](docs/evidence/validation/TEST90-VALIDATION.json); 82 retained suites pass at that checkpoint.
 
 Continue on `Test_Branch`. First implement a bounded pixel/contour ownership repair and review original targets. Preserve complete singles and pairs, avoid borrowing neighboring art or filling true inset holes, then rerun the broader comics/manga fixtures and retained tests. A later versioned handoff should add measured before/after counts and verified APK status while retaining this frozen baseline.
 
@@ -4499,9 +4499,9 @@ Continue on `Test_Branch`. First implement a bounded pixel/contour ownership rep
 
 Test122 recovers ONE original, Reader5 S1/P05-F1 night camp. Current focused count30 singles+5 pairs=40/99 originals;59 remain,35 qualifying steps/53 selections. Test121 direction/sandstorm pair user-confirmed: "Yes that worked 💪🏻 Let's continue". Test122 phone acceptance pending. Next Reader5 P05-F2 horsemen conversation, one original by default or at most a justified immediate pair. Finish comic1 before comic2. Automatic playback/timer remain planned.
 
-Current checkpoint: HANDOFF-2.79.122.md and TEST122-VALIDATION.json.
+Current checkpoint: HANDOFF-2.79.122.md and docs/evidence/validation/TEST122-VALIDATION.json.
 
-Test121 update: user confirmed Test120 campfire worked and requested two originals this checkpoint. Reader3 F3/F4 is a justified consecutive direction/sandstorm continuation with bridging speech; one new pair covers two originals. Local29 singles+5 pairs=39/99,60 remaining; all51 earlier native crops and33 qualifying steps retained. Reader3 complete locally. New pair phone review pending. Next Reader5 P05-F1. Current facts in HANDOFF-2.79.121.md/TEST121-VALIDATION.json.
+Test121 update: user confirmed Test120 campfire worked and requested two originals this checkpoint. Reader3 F3/F4 is a justified consecutive direction/sandstorm continuation with bridging speech; one new pair covers two originals. Local29 singles+5 pairs=39/99,60 remaining; all51 earlier native crops and33 qualifying steps retained. Reader3 complete locally. New pair phone review pending. Next Reader5 P05-F1. Current facts in [HANDOFF-2.79.121.md](HANDOFF.md#archive-handoff-2-79-121-md) / [TEST121-VALIDATION.json](docs/evidence/validation/TEST121-VALIDATION.json).
 
 # Current single/dual-frame rules —7 October2026
 
@@ -4517,7 +4517,7 @@ Count reading steps separately from unique originals. One accepted pair =one ste
 
 Test119 strict baseline:24 images/22 story pages/99 originals/51 pop-outs.28 singles+4 pairs cover36 originals,63 remaining.19 rejected:10 oversized,6 mixed-neighbor,3 damaged. docs/apocalypse-single-dual-baseline.json and private review libfile_de9bbc20358881919fad40048250a904 record exact inventory. Historic83/99 and327/384 were broader preservation. Test90 tolerated foreign speech fragments that now fail. Do not rewrite history as measured runtime loss.
 
-Test120: one new single, P03-F2/campfire Reader3 S1.29 singles+4 pairs=37/99,62 remaining. All32 earlier qualifying steps and50 other native issue1 canvases stay unchanged. Next P03-F3, or P03-F3/F4 only if immediate continuity and complete extraction pass review. Current build/phone state is in TEST120-VALIDATION.json/HANDOFF-2.79.120.md. Other18 failed selections remain queued; no universal extraction claim. Phone acceptance pending.
+Test120: one new single, P03-F2/campfire Reader3 S1.29 singles+4 pairs=37/99,62 remaining. All32 earlier qualifying steps and50 other native issue1 canvases stay unchanged. Next P03-F3, or P03-F3/F4 only if immediate continuity and complete extraction pass review. Current build/phone state is in docs/evidence/validation/TEST120-VALIDATION.json/HANDOFF-2.79.120.md. Other18 failed selections remain queued; no universal extraction claim. Phone acceptance pending.
 
 Persistent rules handoff libfile_b40550a56110819197ad1ffa78ce2e9c. Baseline JSON libfile_6e3a72b201188191b423f95684ae2b73, checkpoint libfile_748f678d26b08191bfb17bde57758930, full Test119 maps libfile_b32ae41c228881918a0cbc3a2a7a6c8d. Authorized originals libfile_06c168de85c08191ba461ab9ef2cdba5. Restore current source and verify all hashes before map reuse. Update the same rules handoff after every checkpoint. bdredenbach/Nth-Shelf Test_Branch only; publication/build authorization persists.
 

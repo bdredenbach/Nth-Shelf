@@ -18,6 +18,6 @@ The workflow is manual-only; a push does not build or release an app. No signing
 
 ## Historical Android acceptance
 
-Test88 (`2.79.88`, code `28016`, package `io.github.bdredenbach.nthshelf.frametest88`) was confirmed working on phone on 5 October 2026. The narrow scope and original validation remain in [TEST88-VALIDATION.json](../TEST88-VALIDATION.json). It is not a new full-corpus success count.
+Test88 (`2.79.88`, code `28016`, package `io.github.bdredenbach.nthshelf.frametest88`) was confirmed working on phone on 5 October 2026. The narrow scope and original validation remain in [../docs/evidence/validation/TEST88-VALIDATION.json](../docs/evidence/validation/TEST88-VALIDATION.json). It is not a new full-corpus success count.
 
 See [current project status](../README.md), [canonical handoff](../HANDOFF.md), and [chronology](../RELEASE-HISTORY.md). The consolidated handoff retains the original Android documentation as explicitly historical text.

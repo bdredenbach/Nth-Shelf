@@ -69,6 +69,7 @@ Comic artwork, frozen audit coordinates, private receipts and signing material s
 - [Release history](RELEASE-HISTORY.md): oldest-to-newest checkpoint notes, recovery, research and subsequent candidate fixes. Historical “current,” “next” and coverage figures apply only to their dated checkpoints.
 - [History through Test71](README-through-Test71.md): preserved earlier documentation.
 - [Consolidated handoff](HANDOFF.md): current continuation instructions followed by all 139 historical handoffs in one indexed file.
+- [Historical validation index](docs/evidence/validation/README.md): 106 original JSON receipts, moved unchanged out of the repository root.
 - [Branch preservation manifest](docs/branch-consolidation-2026-10-27.json): former branch tips, merge decisions and original handoff hashes for recovery.
 - [Strong baseline recapture](qa27900/native-regression-gate/RECAPTURE-2026-10-24.md): independent 369-tap baseline pairs before the later routing repair. Its 363 opens / six misses are historical, not the latest result above.
 - [Project background](PROJECT-MEMORY.md): reconcile older instructions and counts against later evidence.

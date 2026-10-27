@@ -12,4 +12,4 @@ First-use performance remains a material limitation. The new camp first handler 
 
 The recovered optional cooperative ragged optimization and private source-issued100 experiment are not installed. The final proof103 runtime matches the earlier unaccepted candidate hash; lost partial checks were not credited after workspace recovery. Current acceptance was rerun. No page/title/text/hash lookup selects pixels.
 
-No APK, Gradle, Android workflow dispatch or automatic mode. Original comic pixels remain outside Git/CI. See TEST155-VALIDATION.json and the private replay checkpoint. Reporting files were finalized after the frozen executable checks; the runtime and test inputs remain exact.
+No APK, Gradle, Android workflow dispatch or automatic mode. Original comic pixels remain outside Git/CI. See ../../../docs/evidence/validation/TEST155-VALIDATION.json and the private replay checkpoint. Reporting files were finalized after the frozen executable checks; the runtime and test inputs remain exact.

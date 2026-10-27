@@ -14,6 +14,6 @@ bash qa27900/frame-accuracy/test159/run-focused.sh
 
 These include 25 shared-source controls, 55 navigation controls for each arm, five actual-load preparation controls, twelve fresh-reuse controls and the shell/version contract. Canvas and Reader controls use native canvas plus a minimal DOM; they do not measure a browser compositor or a phone.
 
-The private review run compares all 24 fresh detector graphs with the preserved Test157/158 graph, allowing only the page-8 split, then renders all three page-8 selections through the current Reader. Artwork, original maps, native crops and animated previews are kept outside this repository. See `HANDOFF-2.79.159.md` and `TEST159-VALIDATION.json` for measured results and outstanding work.
+The private review run compares all 24 fresh detector graphs with the preserved Test157/158 graph, allowing only the page-8 split, then renders all three page-8 selections through the current Reader. Artwork, original maps, native crops and animated previews are kept outside this repository. See `HANDOFF-2.79.159.md` and `../../../docs/evidence/validation/TEST159-VALIDATION.json` for measured results and outstanding work.
 
 No full 263-command retained rerun, all-owner browser audit, or phone acceptance is claimed for this review checkpoint. `run-retained.sh` remains available for a later complete acceptance pass. No APK or automatic mode is included.
