@@ -1160,6 +1160,18 @@ const Reader = {
    return null;
  },
 
+ // Terminal source owners never wrap legacy grid/refine/Reader methods.
+ // Reserved claims are intercepted even when their version is malformed.
+ terminalSourceRoute(panel) {
+   if (typeof PanelTerminalAppearance !== 'undefined' && PanelTerminalAppearance.isClaim(panel)) return PanelTerminalAppearance;
+   if (typeof PanelTerminalContext !== 'undefined' && PanelTerminalContext.isClaim(panel)) return PanelTerminalContext;
+   return null;
+ },
+ terminalSourceContours(panel) {
+   const route = this.terminalSourceRoute(panel);
+   return route ? route.panelContours(panel, this.getPanelImageContext()?.img) : null;
+ },
+
  panelContours(panel) {
    if(panel?._identitySource==='source-layout-frame')return typeof PanelSourceLayout!=='undefined'&&PanelSourceLayout.validateImage(panel,this.getPanelImageContext()?.img)?panel._contours:null;
    return typeof PanelGeometryOrthogonal!=='undefined'?PanelGeometryOrthogonal._provenContours(panel):null;
@@ -1214,6 +1226,7 @@ const Reader = {
  findPanelAt(relX, relY) {
    if (!this.panelZoomEnabled) return null;
    for (const p of this.currentPanels) {
+     if (this.terminalSourceRoute(p)) continue; // final-miss admission only
      if (relX >= p.x && relX <= p.x + p.w && relY >= p.y && relY <= p.y + p.h) {
        const contours=this.panelContours(p);
        if(['source-layout-frame','composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame','matte-cell-frame'].includes(p._identitySource)&&!contours)continue;
@@ -1260,6 +1273,7 @@ const Reader = {
    this._bubbleRequestToken++;
    this.panelOverlayToken++;
    const overlay = this.els.panelOverlay;
+   overlay?._sourceViewportCleanup?.();
    if (!overlay) {
      this.panelFocusMeta = null;
      this.panelOverlayActive = false;
@@ -2979,7 +2993,7 @@ async setMode(mode) {
    const url = await this.getPageUrl(pageIndex);
    if (!PanelTapRequest.current(request) || (selection && !PanelTapSelection.current(selection))) return;
    const refineGeometry = async (seed, identitySource) => {
-     if (!seed) return null;
+     if (!seed || this.terminalSourceRoute(seed)) return null;
      // Preserve a source-admitted held contour owner when the geometry
      // policy has already validated it. Tap bookkeeping is not proof data.
      const policy = selection && seed === panel && PanelTapSelection.current(selection) &&
@@ -3094,22 +3108,34 @@ async setMode(mode) {
 
    // Source-supported parent contours are a final-miss opportunity only.
    // They never enter the owner/map banks or displace an accepted route above.
-   if (typeof PanelSupportedLandscape !== 'undefined' &&
-       typeof PanelSupportedLandscape.findMissCandidate === 'function') {
+   const sourceMissRoutes = [];
+   if (typeof PanelSupportedLandscape !== 'undefined') sourceMissRoutes.push(PanelSupportedLandscape);
+   if (typeof PanelTerminalAppearance !== 'undefined') sourceMissRoutes.push(PanelTerminalAppearance);
+   if (typeof PanelTerminalContext !== 'undefined') sourceMissRoutes.push(PanelTerminalContext);
+   for (const sourceRoute of sourceMissRoutes) {
+     // A source-level compact refinement supersedes its broader context group,
+     // including for taps outside the compact contour. Never enlarge a miss.
+     if (typeof PanelTerminalContext !== 'undefined' && sourceRoute === PanelTerminalContext &&
+         typeof PanelTerminalAppearance !== 'undefined' && typeof PanelTerminalAppearance.hasSourceCandidate === 'function') {
+       try { if (PanelTerminalAppearance.hasSourceCandidate(img)) continue; }
+       catch (_) { continue; }
+     }
+     if (typeof sourceRoute.findMissCandidate !== 'function') continue;
      let supported = null;
      try {
-       supported = await PanelSupportedLandscape.findMissCandidate(img, relXImg, relYImg);
+       supported = await sourceRoute.findMissCandidate(img, relXImg, relYImg);
      } catch (error) {
-       if (this.debugMode) this.debugLog('[supported-landscape] source analysis rejected');
+       if (this.debugMode) this.debugLog('[source-context] source analysis rejected');
      }
      if (!PanelTapRequest.current(request)) return;
      if (this.comic?.id === comicId && this.index === pageIndex &&
          this.getPanelImageContext()?.img === img && supported &&
-         PanelSupportedLandscape.validateImage(supported, img)) {
-       const contours = this.panelContours(supported);
-       const displayed = contours && this.displayPanelContours(supported, contours);
+         sourceRoute.validateImage(supported, img)) {
+       const terminalRoute = this.terminalSourceRoute(supported);
+       const contours = terminalRoute ? this.terminalSourceContours(supported) : this.panelContours(supported);
+       const displayed = terminalRoute ? contours : contours && this.displayPanelContours(supported, contours);
        if (displayed && this.pointInContours(displayed, relXImg, relYImg)) {
-         if (this.debugMode) this.debugLog('[supported-landscape] SOURCE-CONTOUR MISS RECOVERY -> ZOOM');
+         if (this.debugMode) this.debugLog('[source-context] SOURCE-CONTOUR MISS RECOVERY -> ZOOM');
          this.zoomToPanel(supported, stageRect, imgRect);
          return;
        }
@@ -3196,6 +3222,10 @@ async setMode(mode) {
        return PanelHostBackgroundIslands.validateImage(p, img);
      if (typeof PanelSupportedLandscape !== 'undefined' && PanelSupportedLandscape.isClaim(p))
        return PanelSupportedLandscape.validateImage(p, img);
+     if (typeof PanelTerminalContext !== 'undefined' && PanelTerminalContext.isClaim(p))
+       return PanelTerminalContext.validateImage(p, img);
+     if (typeof PanelTerminalAppearance !== 'undefined' && PanelTerminalAppearance.isClaim(p))
+       return PanelTerminalAppearance.validateImage(p, img);
      return true;
    };
    const current = () => token === this._bubbleRequestToken && this.mode === "single" &&
@@ -3218,7 +3248,7 @@ async setMode(mode) {
      pageX = panel.x+u*panel.w; pageY = panel.y+v*panel.h;
      let inside = Number.isFinite(u) && Number.isFinite(v) && u >= 0 && u <= 1 && v >= 0 && v <= 1;
      // A clipped corner of a sloping frame is transparent, not a caption hit.
-     const contours=meta.cropContours||this.panelContours(panel);
+     const contours=meta.cropContours||(this.terminalSourceRoute(panel)?this.terminalSourceContours(panel):this.panelContours(panel));
      if(inside&&contours)inside=this.pointInContours(contours,pageX,pageY);
      const outline=panel._outline;
      if(inside&&Array.isArray(outline)&&outline.length>=4)inside=this.pointInPolygon(outline,pageX,pageY);
@@ -3455,7 +3485,9 @@ async setMode(mode) {
 
  async zoomToPanel(panel, stageRect, imgRect) {
    if (this.focusMode) return;
-   const contours=this.panelContours(panel);
+   const terminalRoute=this.terminalSourceRoute(panel);
+   const contours=terminalRoute?this.terminalSourceContours(panel):this.panelContours(panel);
+   if(terminalRoute&&!contours)return;
    if(['source-layout-frame','composite-frame','rim-frame','inset-neighbor-frame','curved-rim-frame','matte-cell-frame'].includes(panel?._identitySource)&&!contours)return;
    if(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel?._identitySource)&&!this.panelPolygon(panel))return;
    const token = ++this.panelOverlayToken;
@@ -3464,17 +3496,21 @@ async setMode(mode) {
    if (!img || !img.naturalWidth || !img.naturalHeight) return;
    const sourceContourClaim =
      (typeof PanelHostBackgroundIslands !== 'undefined' && PanelHostBackgroundIslands.claims(panel)) ||
-     (typeof PanelSupportedLandscape !== 'undefined' && PanelSupportedLandscape.isClaim(panel));
+     (typeof PanelSupportedLandscape !== 'undefined' && PanelSupportedLandscape.isClaim(panel)) ||
+     (typeof PanelTerminalContext !== 'undefined' && PanelTerminalContext.isClaim(panel)) ||
+     (typeof PanelTerminalAppearance !== 'undefined' && PanelTerminalAppearance.isClaim(panel));
    const heldSourceContour = contours && sourceContourClaim && (
      (typeof PanelHostBackgroundIslands !== 'undefined' && PanelHostBackgroundIslands.claims(panel) && PanelHostBackgroundIslands.validateImage(panel, img)) ||
-     (typeof PanelSupportedLandscape !== 'undefined' && PanelSupportedLandscape.isClaim(panel) && PanelSupportedLandscape.validateImage(panel, img)));
+     (typeof PanelSupportedLandscape !== 'undefined' && PanelSupportedLandscape.isClaim(panel) && PanelSupportedLandscape.validateImage(panel, img)) ||
+     (typeof PanelTerminalContext !== 'undefined' && PanelTerminalContext.isClaim(panel) && PanelTerminalContext.validateImage(panel, img)) ||
+     (typeof PanelTerminalAppearance !== 'undefined' && PanelTerminalAppearance.isClaim(panel) && PanelTerminalAppearance.validateImage(panel, img)));
    if (sourceContourClaim && !heldSourceContour) return;
    this._bubbleRequestToken++;
 
    // Live strict proofs supplement a partial background map. Non-frame V73,
    // V100 and V99 rectangles are rejected by PanelMapCore and remain session
    // behavior only.
-   if (typeof PanelMap !== 'undefined' && PanelMap.remember) {
+   if (!terminalRoute && typeof PanelMap !== 'undefined' && PanelMap.remember) {
      PanelMap.remember(this.comic?.id, this.index, panel, {
        logger: this.debugMode ? (msg) => this.debugLog(`[V2.79.05 map] ${msg}`) : null
      });
@@ -3487,7 +3523,7 @@ async setMode(mode) {
    // V2.78.05 geometry router: skewed panels may carry a proven four-corner polygon.
    // Build the overlay from its bounding box, then clip the canvas to the
    // fitted frame. Legacy/V73/V92 rectangles continue unchanged.
-   const polygon=this.panelPolygon(panel);
+   const polygon=terminalRoute?null:this.panelPolygon(panel);
    const quad=panel._outline?null:polygon;
    const outline=panel._outline?polygon:null;
    let geom = { x: panel.x, y: panel.y, w: panel.w, h: panel.h };
@@ -3514,7 +3550,7 @@ async setMode(mode) {
 
    // Reader repairs may recover a proven caption just outside the discovered
    // box. Include display-mask bounds in the canvas while retaining its proof.
-   const cropContours=this.displayPanelContours(panel,contours)||(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel._identitySource)&&outline?[outline]:null);
+   const cropContours=(terminalRoute?contours:this.displayPanelContours(panel,contours))||(['abutment-frame','bleed-strip-frame','terraced-frame','local-island-frame','matte-neighbor-frame','bordered-inset-frame','sloping-edge-frame','corner-rim-frame','terminal-rim-frame'].includes(panel._identitySource)&&outline?[outline]:null);
    let captionExpanded=false;
    if(contours&&cropContours&&(this._cropRepairCache?.get(panel)?.captionAddedPixels||this._longTailSpeechDisplay?.cache.get(panel)?.extended||this._columnSpeechDisplay?.cache.get(panel)?.extended || this._lateralCellDisplay?.cache.get(panel)?.extended || this._shortPaperCellsDisplay?.extended?.has(panel) || this._gradientResidualDisplay?.extended?.has(panel) || this._shortRowSpeechDisplay?.extended?.has(panel) || this._atomicBoundarySpeech?.extended?.has(panel) || this._gutterInkCap?.extended?.has(panel) || this._gutterCaptionBoundary?.extended?.has(panel)||(typeof PanelDetachedCaptions!=='undefined'&&PanelDetachedCaptions.extendsDisplay(this,panel,img)))){let x0=geom.x,y0=geom.y,x1=geom.x+geom.w,y1=geom.y+geom.h;
      for(const ring of cropContours)for(const p of ring){x0=Math.min(x0,p.x);y0=Math.min(y0,p.y);x1=Math.max(x1,p.x);y1=Math.max(y1,p.y);}
@@ -3638,8 +3674,12 @@ async setMode(mode) {
    const areaRatio = geom.w * geom.h;
    const pageSpanning = geom.w >= 0.86 || geom.h >= 0.86 || areaRatio >= 0.68;
 
+   const sourceViewportFit = heldSourceContour && typeof PanelSourceGroupViewport !== 'undefined'
+     ? PanelSourceGroupViewport.layout(this, geom, stageRect, sourceW, sourceH) : null;
    let targetScale;
-   if (pageSpanning) {
+   if (sourceViewportFit) {
+     targetScale = sourceViewportFit.scale;
+   } else if (pageSpanning) {
      targetScale = clamp(Math.min(1.08, fitScale), 1, 1.08);
    } else {
      targetScale = clamp(Math.min(fitScale * 0.94, 4.5), 1.08, 4.5);
@@ -3647,12 +3687,12 @@ async setMode(mode) {
 
    const targetW = sourceW * targetScale;
    const targetH = sourceH * targetScale;
-   const pageLeft = imgRect.left + pagePad;
-   const pageTop = imgRect.top + pagePad;
-   const pageRight = imgRect.right - pagePad;
-   const pageBottom = imgRect.bottom - pagePad;
-   const targetCenterX = imgRect.left + imgRect.width / 2;
-   const targetCenterY = imgRect.top + imgRect.height / 2;
+   const pageLeft = sourceViewportFit?.left ?? (imgRect.left + pagePad);
+   const pageTop = sourceViewportFit?.top ?? (imgRect.top + pagePad);
+   const pageRight = sourceViewportFit?.right ?? (imgRect.right - pagePad);
+   const pageBottom = sourceViewportFit?.bottom ?? (imgRect.bottom - pagePad);
+   const targetCenterX = sourceViewportFit?.centerX ?? (imgRect.left + imgRect.width / 2);
+   const targetCenterY = sourceViewportFit?.centerY ?? (imgRect.top + imgRect.height / 2);
    const targetLeft = clamp(targetCenterX - targetW / 2, pageLeft, Math.max(pageLeft, pageRight - targetW));
    const targetTop = clamp(targetCenterY - targetH / 2, pageTop, Math.max(pageTop, pageBottom - targetH));
    const dx = targetLeft - sourceLeft;
@@ -3661,6 +3701,10 @@ async setMode(mode) {
    this.els.stage.appendChild(overlay);
    this.els.panelOverlay = overlay;
    this.panelOverlayActive = true;
+   if (sourceViewportFit) {
+     overlay.dataset.sourceViewportFit = 'true';
+     PanelSourceGroupViewport.bind(this, overlay, img, token);
+   }
    this.els.viewport.classList.add("panel-focus-page-dimmed");
 
    const startTransform = "translate3d(0,0,0) scale(1)";
@@ -3693,7 +3737,7 @@ async setMode(mode) {
        ],
        {
          duration: zoomInDuration,
-         easing: "cubic-bezier(0.12,1.24,0.24,1)",
+         easing: sourceViewportFit ? "cubic-bezier(0.2,0.8,0.2,1)" : "cubic-bezier(0.12,1.24,0.24,1)",
          fill: "forwards"
        }
      );

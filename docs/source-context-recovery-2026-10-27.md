@@ -1,38 +1,28 @@
-# Source-context frame recovery — 2026-10-27
+# Source-context frame recovery — 27 October 2026
 
-## Status
-Two previously missing target scenes now open through the actual Reader/native-source test path. Full 369-tap regression across 93 entries / 92 sources **passes**: 367 opens, two misses; all 365 previously open raw/display outputs and non-timing/non-log receipt fields remain exact. This is not a phone/device or APK validation claim.
+## Qualified outcome
+Independently audited split-harness native coverage: **93 entries, 92 original sources, 369 taps; 369 opens, zero fixed-suite misses**. Four formerly missed taps represent three intended scenes, not four frames. All 365 previous opens retain authenticated raw/display hashes and non-timing/non-log fields. Approved new outputs are hash/geometry-bound; a broad-group fallback cannot silently replace the compact scene.
 
-## Changes
+These are exposed development-source results, not complete-frame certification, unseen-comic accuracy or phone qualification. Authenticated historical hashes were compared with freshly read candidate PNG/alpha bytes; missing archived PNG objects were not reconstructed or claimed to have been inspected.
 
-### 171: chromatic-host inset
-A source-only detector nominates a wide illustrated island surrounded by a substantial pale, chromatic context. Fixed area, context, palette, dark-rim and upper/lower edge checks reject simple captions, credit boxes, unframed patches and tested floating-object controls. Existing accepted owners remain unchanged; additions require non-overlap.
+## Source methods
+- **171 native inset topology:** source-context nomination followed by exact native connected-component/enclosed-hole recovery, unique correspondence, crop-edge rejection, bounded area change and retained analysis support. No arbitrary gap filling or rectangular hit bypass.
+- **172 supported landscape:** pale gutters and source-supported boundary paths, with internal-divider rejection. Final-miss only, never a replacement for an existing detector/map owner.
+- **173 terminal context:** observed source separators and exterior silhouette with bounded paper-gap continuation. The broader group can include title/credits and is not certified as a clean scene.
+- **174 compact appearance:** fixed source-seeded RGB-histogram/edge graph cut separates that context. Seeds come from source layout, not taps, page IDs or stored masks. Antialiased sampling/native lifting match the fixed reference; cleanup retains every component connected to original story seeds. The iterative kernel has resource/operation/time guards, not an end-to-end decoding deadline. Disconnected unseeded captions and unseen semantic separation remain risks.
 
-Analysis-resolution sampling can disconnect a thin boundary present in the original image. For nominated islands only, the implementation therefore recovers the corresponding native-source connected component and fills completely enclosed holes. It does not close gaps or invent a rectangle. Recovery requires a unique match, no component touching the local crop boundary, bounding-box agreement, bounded area change and retention of the original analysis mask. Exact native pixel-edge contours drive both hit testing and rendering.
+The admitted compact source supersedes broader context even when a tap lies outside its contour. Group fallback is permitted only when compact analysis abstains. No hidden art is synthesized.
 
-### 172: source-supported landscape
-A separate source-only proposer uses pale gutter evidence and supported boundary paths to identify a broad landscape scene. Internal-divider and boundary-support checks constrain grouping. It runs **only after existing routes miss**: candidates never enter normal detector/map owner banks and cannot displace a previously accepted route.
+## Isolated admission and rejected predecessor
+An eager-hook terminal candidate passed the target page but failed full preservation when an older owner disappeared on another source. Later isolated controls reproduced that owner, leaving the cause intermittent and unresolved; those successful retries did not rehabilitate the failed candidate.
 
-Both approaches are deterministic geometric/image-context methods, not learned semantic scene segmentation. Development pages have been inspected; these results do not establish unseen-page generalization.
+The qualified variant is a distinct containment change: terminal modules are inert on load and do not wrap legacy detector/grid validation, geometry refinement or Reader contour methods. Explicit Reader source-held APIs admit only immutable issued objects matching the current source; reserved version, method or type claims fail closed. Generic owner-bank/refine routes exclude terminal claims. The underlying source geometry algorithm is unchanged. Strict replay restarted for this variant. After 30 qualified entries, optional post-detect proof serialization hit the unchanged 2 GiB RSS guard. Removing only that diagnostic serialization restored the original harness; the stopped page was run once, followed by the remaining 62 entries. The completed 30 + 1 + 62 coverage union preserves all runtime bytes, semantic gates and resource limits and is independently audited without duplicate/cherry-picked results. The failed attempt remains recorded; this is not one uninterrupted uniform-harness run. This is not a proven explanation or cure of the earlier intermittent failure.
 
-## Proof and lifecycle
-Source-bound proofs reject stale or altered geometry. Recognized claims fail closed if source validation or contours are unavailable; there is no rectangular fallback for these claims. Loading, failed image loads, same-URI reloads and mutable canvas sources are guarded.
+Reader verifies contour hit, current request/comic/page/image and source lifecycle; holds exact issued geometry without unrelated spill/crop repair; revalidates focus before cached crops and after asynchronous work. Even-odd rings retain holes and disconnected seeded components. A separate narrow/tall-group viewport helper preserves the full source mask, reserves measured controls and dismisses safely on resize/source changes. The approved compact scene uses normal fitting (2.815× in the fixed harness), not that helper.
 
-Reader holds the authenticated extraction contour rather than applying unrelated margin/spill enlargement. Focus metadata retains the issued owner. Focus interactions revalidate these source claims before using cached contours and after asynchronous work. This preserves the extraction mask, not a claim that every artwork pixel is complete.
+## Verification and limits
+Public checks: 27 inset / 14 landscape / 16 terminal context / 23 terminal appearance / 18 viewport / 112 actual-method Reader routing and lifecycle. Appearance controls include 4,096 exhaustive tiny directed-flow cases, sampler goldens, source mutation and resource failure. Module identity/inert-load and malformed reserved-claim controls cover the isolation change. Synthetic DOM/service mocks are not browser tests.
 
-## Public checks
-From the repository root:
+Independent native review confirms intended artwork and readable captions in all three new scenes. Lower-left profile, workers, monument and both captions survive; title/credits and the standing neighbor are excluded. Remaining defects: missing pale inset interior, panorama includes inset and hand/finger fragments, compact border flecks/irregular pale edges, plus inherited historical defects. Do not count the inset twice within the panorama or call 369 opens 369 perfect frames.
 
-```sh
-node qa27900/host-background-islands.cjs
-node qa27900/supported-landscape-contract.cjs
-node qa27900/supported-landscape-routing.cjs
-```
-
-These use public synthetic fixtures and contract/routing tests, not private comic artwork. They cover positive nomination, negative objects/text boxes, source/proof mutation, native correspondence and lifecycle/routing constraints.
-
-## Known limitations
-- The inset still omits an open pale interior region; some fine edge/artwork loss remains.
-- The broad landscape can retain an independently framed inset as part of its parent scene.
-- A small neighboring fingertip/edge fragment can remain in the broad extraction.
-- Newly opened targets are useful but not quality-perfect. Broad regression and native review passed for this bounded candidate, not phone/device qualification; no speed improvement is claimed.
+Qualified coverage resources, excluding preserved failed attempts: 43.8 aggregate native minutes; peak sampled process-tree RSS 1.49 GiB. No speedup or phone performance claim. Browser/compositor, Worker/IndexedDB, Android and broader coverage remain unqualified. Private artwork, taps and receipts stay outside public Git. Only Test_Branch changes; Android, prior artifacts, historical acceptance and manual APK workflow are preserved. No APK was requested or built.

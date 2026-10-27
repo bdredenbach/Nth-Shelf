@@ -6,14 +6,16 @@
 
 `Test_Branch` is the single ongoing development branch. `Android` remains unchanged as the historical accepted Android branch. Branch consolidation preserves Git history; it is **not** acceptance of every historical candidate or a new APK release.
 
-The current runtime extends reviewed `9149b3a07beb30a81a6678f41ba2eb0a3e2b75cb` (recovered Test179 plus caption preservation, WASM reattachment invalidation and retained-owner contour routing) with native-source inset recovery and a final-miss landscape route. Source173 remains the accepted detector baseline; internal proof versions are not new detector acceptance checkpoints. See [source-context qualification](docs/source-context-recovery-2026-10-27.md).
+The current runtime extends reviewed `9149b3a07beb30a81a6678f41ba2eb0a3e2b75cb` (recovered Test179 plus caption preservation, WASM reattachment invalidation and retained-owner contour routing) with native inset recovery, a final-miss landscape route and isolated terminal source-seeded separation. Source173 remains the accepted detector baseline; internal proof versions are not new detector acceptance checkpoints. See [source-context qualification](docs/source-context-recovery-2026-10-27.md).
 
 ### Verified state and limits
 
-- Latest original-source native regression: 369 fixed taps across 93 entries / 92 sources; 367 opens and two remaining misses. Two additional targets open; all 365 prior open outputs remain raw/display byte-exact and semantically unchanged apart from timing/logs. All 93 strict gates pass. Opening is not complete-frame qualification.
-- Known edge contamination, clipped artwork/captions and scene ownership remain unresolved. Two remaining Apocalypse #3 page-4 missed taps correspond to one lower-left scene. New inset output omits pale interior; panorama groups that inset and retains neighboring hand/finger fragments.
-- New public checks: 27 inset, 14 landscape and 40 actual-method routing/lifecycle cases. The full private-source regression was repeated for this runtime change; earlier consolidation itself was documentation-only.
-- Browser/compositor, Worker/IndexedDB, Android rendering, memory and phone behavior require separate qualification. The preserved Test168 manual workflow has old identity/asset expectations and must be requalified before use with newer source.
+- Independently audited split-harness native regression: 369 fixed taps / 93 entries / 92 sources; 369 opens and zero fixed-suite misses. All 365 prior opens retain authenticated raw/display hashes and non-timing/non-log fields. Four recovery taps represent three scenes; the two lower-left taps produce the same compact output.
+- Intended artwork and captions are native-reviewed, not quality-perfect. Inset pale interior is missing; panorama groups the inset and retains hand fragments; compact work-scene edges have small flecks. Existing quality defects remain.
+- Public checks: 27 inset, 14 landscape, 16 terminal-context, 23 terminal-appearance, 18 viewport, 112 actual-method Reader cases. Full original-source strict replay passed; all four new outputs are bound to approved native receipts.
+- The initial run stopped after 30 qualified entries at the unchanged 2 GiB RSS guard while serializing optional proof graphs. Recovery removed only that serialization, preserving runtime, cap and all semantic gates; the immutable 30 + 1 stopped-page recovery + 62 remaining entries were audited as one complete coverage union, not one uninterrupted run.
+- An earlier terminal candidate failed preservation on an unrelated prior owner and was held. Intermittent failure remains unexplained. The qualified architecture removes eager terminal global hooks and admits issued source owners explicitly in Reader; do not describe this as a proven root-cause fix.
+- Browser/compositor, Worker/IndexedDB, Android, phone memory/speed and broader generalization are not qualified. No APK or workflow dispatch. Source173 acceptance and the Android branch remain unchanged.
 
 ### Latest research · 24–26 October 2026
 
@@ -29,7 +31,7 @@ These are isolated learned scene-ownership experiments, not integrated Reader im
 
 ### Next action and recovery
 
-The immediate priority is the remaining lower-left source scene, preserving the two newly verified recoveries and all prior accepted outputs. Grouped-source and display-fit research is not part of this qualified two-target checkpoint unless separately tested and recorded. The unstarted learned retry would retain the exact base, loss, parameters, seed, clicks, schedule and 600 updates with a revised wall-clock allowance and periodic model/optimizer/RNG/step checkpoints; the aborted run has no checkpoint. Do not silently resume or conflate model research with these geometric Reader fixes.
+The fixed-suite missing targets now open. Preserve the exact native outputs and immutable source artifacts; next address documented quality defects, wider source coverage and real browser/device qualification. Do not revive the rejected eager-hook candidate or weaken source guards. The compact scene uses ordinary zoom; the separate narrow/tall-group viewport helper never changes source geometry. The unstarted learned retry would retain the exact base, loss, parameters, seed, clicks, schedule and 600 updates with a revised wall-clock allowance and periodic model/optimizer/RNG/step checkpoints; the aborted run has no checkpoint. Do not silently resume or conflate model research with these geometric Reader fixes.
 
 Keep source/artwork, private original-comic coordinates, receipts and signing data outside public Git. Research reports, adapters and reproducibility packages are saved separately; they are not dependencies of this Reader checkout. Do not substitute old runtime counts for new test evidence or claim learned adapters fixed frames.
 

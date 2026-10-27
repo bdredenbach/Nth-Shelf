@@ -11,19 +11,21 @@ The candidate contains the following bounded runtime corrections:
 - [Caption preservation](qa27900/frame-accuracy/test180/README.md): restores the clipped narration on Apocalypse #3 page 3 without changing owner boxes or tap routing.
 - [WASM reattachment](qa27900/wasm-reattach/README.md): invalidates prior source-upload state after successful kernel replacement. No search or ownership policy changes.
 - [Retained-owner contour handoff](qa27900/retained-terminal-contours/README.md): restores two lost pop-outs on Apocalypse #1 page 20 by looking up retained contours in their authenticated prior context. It does not expand or trim their geometry.
-- [Source-context recovery](docs/source-context-recovery-2026-10-27.md): native-source inset topology and a final-miss landscape route open two additional intended targets. Source proofs and focus lifecycle are held without arbitrary rectangular rescue.
+- [Source-context recovery](docs/source-context-recovery-2026-10-27.md): native inset topology, a final-miss landscape route and isolated source-seeded terminal separation open three intended scenes. Source proofs and focus lifecycle are held without arbitrary rectangular rescue.
 
 ### Latest verified results
 
-A fresh native replay covers **369 fixed taps across 93 page entries / 92 original sources**. All 93 strict per-page gates pass.
+A fully audited split-harness native replay covers **369 fixed taps across 93 entries / 92 original sources**: **369 opens, zero fixed-suite misses**. This is not 369 clean complete frames or unseen-comic qualification.
 
-- **367 opens and two remaining missed taps**, not 367 complete frames. The remaining taps correspond to one lower-left scene.
-- Two additional Apocalypse #3 page 4 targets open: the stone-pulling inset and broad sphinx/pyramid panorama. All **365 previously open outputs remain byte-exact** in raw/display PNGs and unchanged in non-timing/non-log receipt fields.
-- Independent native review confirms substantial intended artwork and readable captions. The inset still omits a pale interior region. The panorama groups the upper inset and retains identifiable neighboring hand/finger fragments. Do not double-count the inset within that group or call either output quality-perfect.
-- Prior page 20 recoveries, caption preservation and WASM reattachment remain unchanged, including their known edge-quality limitations.
-- New public checks cover 27 inset contracts, 14 landscape contracts and 40 actual-method Reader routing/lifecycle cases. Source-only sweeps and exposed development pages are not unseen-page generalization evidence.
+- Four previously missed Apocalypse #3 page 4 taps open **three intended scenes**. The two lower-left taps select the same compact work scene; do not double-count it.
+- All **365 previously open outputs retain exact authenticated raw/display PNG hashes and non-timing/non-log receipt fields**. Earlier caption, WASM and page-20 corrections remain unchanged.
+- Native review confirms substantial intended artwork and readable captions. The compact work scene retains its profile, workers, monument and both captions while excluding credits/title and the standing neighbor. Its approved output and the other three recovery rows are strictly bound by hashes and geometry.
+- Quality limits remain: missing pale inset interior, panorama grouping/neighboring hand fragments, small compact-edge flecks, and historical clipping/contamination. No hidden artwork is synthesized.
+- An earlier eager-hook terminal candidate failed preservation on another page and was not published. The qualified variant removes those global hooks and uses explicit source-held Reader admission. This is architectural containment, **not a proven root-cause diagnosis or guarantee against intermittent behavior**; successful isolated retries did not qualify the rejected candidate.
+- The first 30 entries completed with optional full-proof capture. The next page hit the unchanged 2 GiB RSS guard during that capture stage. Only this optional serialization was removed; its single recovery and the remaining 62 entries used the original harness, unchanged runtime, resource cap and semantic gates. Independent audit verifies the immutable 30 + 1 + 62 union without duplicate or selected retries. This is not one uninterrupted uniform-harness run.
+- Public checks cover 27 inset, 14 landscape, 16 terminal-context, 23 terminal-appearance, 18 viewport and 112 actual-method routing/lifecycle cases. New modules load without wrapping legacy validation/refine/contour functions.
 
-These are native harness results, not browser/compositor, actual Worker/IndexedDB, Android or phone-performance qualification. This run used about **43.4 aggregate minutes** with peak sampled process-tree memory **1.48 GiB**; these are test resources, not a phone benchmark or claimed speedup. No APK was built or workflow dispatched.
+Qualified coverage execution resources (excluding preserved failed attempts): **43.8 aggregate minutes**, peak sampled process-tree RSS **1.49 GiB**. These are not phone benchmarks. Browser/compositor, Worker/IndexedDB and Android qualification remain separate. No APK or manual build workflow was dispatched.
 
 ## Current research and next steps
 
@@ -32,7 +34,7 @@ The isolated learning pilots are not part of the runtime. More varied training t
 ### Runtime work
 
 1. Preserve this source and its independent raw/display receipts. Keep the functional page 20 recovery separate from the unresolved edge-quality problem; do not remove a guard or trim by color merely to make a crop look cleaner.
-2. Investigate complete scene ownership only where original-source evidence supports a genuinely distinct mechanism. Two remaining issue 3 page 4 missed taps represent one intended lower-left scene, not two frames. Existing clipped, contaminated and ownership-review outcomes remain open work.
+2. Investigate complete scene ownership only where original-source evidence supports a genuinely distinct mechanism. The formerly missed issue 3 page 4 taps now open three intended scenes in the fixed suite; broader source and device coverage remain unqualified. Existing clipped, contaminated and ownership-review outcomes remain open work.
 3. Keep failed local contour/contact, fragment/source-cell and merged-ink experiments paused unless new discriminating evidence changes the hypothesis. [Research notes](RESEARCH-2026-10-22.md) and [chronology](RELEASE-HISTORY.md) explain prior limits; historical inventories are not a current all-Library census.
 4. For another runtime change, freeze independent controls and explicit intended differences, review complete native artwork/rim/dialogue and neighboring exclusions, then rerun the applicable 171/88/110 suite through the [strict evidence gate](qa27900/native-regression-gate/README.md). Opening a popup is not enough to qualify its scene.
 5. Qualify real browser and Android rendering, navigation/restart behavior, memory and cold/warm interactions separately before rollout. First and nearby taps remain expensive; the tested local rail memo was slower and rejected.
@@ -46,6 +48,9 @@ node qa27900/retained-terminal-contours/test-dispatch.cjs
 node qa27900/wasm-reattach/test-reattach.cjs
 node qa27900/host-background-islands.cjs
 node qa27900/supported-landscape-contract.cjs
+node qa27900/terminal-context-contract.cjs
+node qa27900/terminal-appearance-contract.cjs
+node qa27900/source-group-viewport-contract.cjs
 node qa27900/supported-landscape-routing.cjs
 python3 -m unittest discover -s qa27900/native-regression-gate -p 'test_*.py'
 python3 scripts/verify-consolidated-handoff.py
