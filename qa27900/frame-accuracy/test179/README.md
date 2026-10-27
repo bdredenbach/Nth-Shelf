@@ -27,7 +27,7 @@ All 171 known outputs were then freshly replayed across 47 pages against the
 immutable recovered Test179 source: exact displayed PNG bytes and popup styles,
 with no Reader exceptions. Any new detector fix requires its own fresh replay.
 
-See [the Test179 handoff](../../../HANDOFF-2.79.179.md) for the historical full
+See [the Test179 handoff](../../../HANDOFF.md#archive-handoff-2-79-179-md) for the historical full
 audit, exact acceptance boundary and remaining defects. Keep private native
 art, receipts and signing material outside Git.
 

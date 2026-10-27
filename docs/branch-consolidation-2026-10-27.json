@@ -1,0 +1,997 @@
+{
+  "date": "2026-10-27",
+  "repository": "bdredenbach/Nth-Shelf",
+  "destination": "Test_Branch",
+  "preserved_branch": "Android",
+  "prior_branch_tips": {
+    "Android": "f55efa22e920f39839541ddf8d11e64910398255",
+    "Test_Branch": "b9ebeeb8b42aff052f5e51803466d552e3aae727",
+    "candidate/test179-caption-repair-20261022": "9149b3a07beb30a81a6678f41ba2eb0a3e2b75cb",
+    "detector/source176-shared-lettering": "f760ceecbad2f242e2b1e9adf993e6cc766f19d0"
+  },
+  "runtime_reference": "9149b3a07beb30a81a6678f41ba2eb0a3e2b75cb",
+  "handoff_count": 139,
+  "handoffs": [
+    {
+      "original_path": "HANDOFF-2.79.33.md",
+      "git_blob_sha": "ddc6dae0521d2ef7f8ae83c8767e496b4606deab",
+      "sha256": "b4e50661d83f87167d62b2de8158199b47fb6ef6ff86be5fc5c12c65ce5df9f8",
+      "anchor": "archive-handoff-2-79-33-md",
+      "archive_body_sha256": "b4e50661d83f87167d62b2de8158199b47fb6ef6ff86be5fc5c12c65ce5df9f8"
+    },
+    {
+      "original_path": "HANDOFF-2.79.34.md",
+      "git_blob_sha": "398f405be3bf3abf61b2086bd03512ab8c8f171d",
+      "sha256": "9ce8bd23ca8ae2e233e196f13a8a08bafeb7d905242365442db2de5135020419",
+      "anchor": "archive-handoff-2-79-34-md",
+      "archive_body_sha256": "9ce8bd23ca8ae2e233e196f13a8a08bafeb7d905242365442db2de5135020419"
+    },
+    {
+      "original_path": "HANDOFF-2.79.35.md",
+      "git_blob_sha": "6e213f7b819cc7b4a7bec1d4b303ce1a88747abe",
+      "sha256": "b832f190c5cbff03721744f23e7a7fa860f8cb10b9dcdaf3803c941aa6b8c678",
+      "anchor": "archive-handoff-2-79-35-md",
+      "archive_body_sha256": "b832f190c5cbff03721744f23e7a7fa860f8cb10b9dcdaf3803c941aa6b8c678"
+    },
+    {
+      "original_path": "HANDOFF-2.79.36.md",
+      "git_blob_sha": "e1cf9304858ea0e0de207bd9b3500b9ec12792e0",
+      "sha256": "c967ed731a6d846f274dcdf10c0ea6652a7cb754b0b556555eeb4972e35ca925",
+      "anchor": "archive-handoff-2-79-36-md",
+      "archive_body_sha256": "c967ed731a6d846f274dcdf10c0ea6652a7cb754b0b556555eeb4972e35ca925"
+    },
+    {
+      "original_path": "HANDOFF-2.79.37.md",
+      "git_blob_sha": "a8c81cd8b60476fb562c3a0e522c77b2ec722c27",
+      "sha256": "01bc30884e744739755d041438bc8a8a9e54a4150c82e4c809eacda58e5cfed0",
+      "anchor": "archive-handoff-2-79-37-md",
+      "archive_body_sha256": "01bc30884e744739755d041438bc8a8a9e54a4150c82e4c809eacda58e5cfed0"
+    },
+    {
+      "original_path": "HANDOFF-2.79.38.md",
+      "git_blob_sha": "6aae83fb04794c02158e9e18983d49e3f98dfbba",
+      "sha256": "c0ee9ebe317a3819839bb51fb75c9ff546720146c03859462bdd611e1c48933e",
+      "anchor": "archive-handoff-2-79-38-md",
+      "archive_body_sha256": "c0ee9ebe317a3819839bb51fb75c9ff546720146c03859462bdd611e1c48933e"
+    },
+    {
+      "original_path": "HANDOFF-2.79.39.md",
+      "git_blob_sha": "030733e04aeb66c03c284364f364f3cc496f3fd3",
+      "sha256": "e80c316018a49f5a6b3f189175bf5db445f76c57108a57e9efc86ef479153fa0",
+      "anchor": "archive-handoff-2-79-39-md",
+      "archive_body_sha256": "e80c316018a49f5a6b3f189175bf5db445f76c57108a57e9efc86ef479153fa0"
+    },
+    {
+      "original_path": "HANDOFF-2.79.40.md",
+      "git_blob_sha": "13d6f19f1f75506123042f9bf820b89b5cb345e1",
+      "sha256": "94cf7acd49304b929a09102604c3fe75b1ef9ca3cb6560984ef38aa4b92fc142",
+      "anchor": "archive-handoff-2-79-40-md",
+      "archive_body_sha256": "94cf7acd49304b929a09102604c3fe75b1ef9ca3cb6560984ef38aa4b92fc142"
+    },
+    {
+      "original_path": "HANDOFF-2.79.41.md",
+      "git_blob_sha": "ffdf0c47cf58f30ffdf7888d27298caebcc2c489",
+      "sha256": "fdbdf8587135838f00e3d64fa93923fe2a8f0c8cc018e457e30b5577ec119f74",
+      "anchor": "archive-handoff-2-79-41-md",
+      "archive_body_sha256": "fdbdf8587135838f00e3d64fa93923fe2a8f0c8cc018e457e30b5577ec119f74"
+    },
+    {
+      "original_path": "HANDOFF-2.79.42.md",
+      "git_blob_sha": "e06fc65529b0b78539bcfe478af710145ecafdc0",
+      "sha256": "1e66c6bef514fc1056ca483c453785343aa5d243ab2febcedf8adbe9f824c3f7",
+      "anchor": "archive-handoff-2-79-42-md",
+      "archive_body_sha256": "1e66c6bef514fc1056ca483c453785343aa5d243ab2febcedf8adbe9f824c3f7"
+    },
+    {
+      "original_path": "HANDOFF-2.79.43.md",
+      "git_blob_sha": "3d4dcf0f0fb2110b9f65f50eac072d8935f69462",
+      "sha256": "13983ce22e830f6ae0bdb96e93689636dd513f30d4c5cb5fbff1369a346011e9",
+      "anchor": "archive-handoff-2-79-43-md",
+      "archive_body_sha256": "13983ce22e830f6ae0bdb96e93689636dd513f30d4c5cb5fbff1369a346011e9"
+    },
+    {
+      "original_path": "HANDOFF-2.79.44.md",
+      "git_blob_sha": "4a960ac415b1cdef134c7b0591dea9879eec1f0a",
+      "sha256": "103c8ac58cc656a27e268a2dcf4976c98849a115153944b7b29d157a59fe98f9",
+      "anchor": "archive-handoff-2-79-44-md",
+      "archive_body_sha256": "103c8ac58cc656a27e268a2dcf4976c98849a115153944b7b29d157a59fe98f9"
+    },
+    {
+      "original_path": "HANDOFF-2.79.45.md",
+      "git_blob_sha": "87254ce3b6871b123b50b75d339598b403c6d0df",
+      "sha256": "07871aa0d0dde58c944e882ea580ca369e82bb6f9a06c2b43ec5b4989396ef32",
+      "anchor": "archive-handoff-2-79-45-md",
+      "archive_body_sha256": "07871aa0d0dde58c944e882ea580ca369e82bb6f9a06c2b43ec5b4989396ef32"
+    },
+    {
+      "original_path": "HANDOFF-2.79.46.md",
+      "git_blob_sha": "c13f723fd60f160b0f95e8fa44116bd49671b9f8",
+      "sha256": "2f69ad6eef1e8abda74c0fb0d9c90553423377b3cb1e0ec1c82436399b376468",
+      "anchor": "archive-handoff-2-79-46-md",
+      "archive_body_sha256": "2f69ad6eef1e8abda74c0fb0d9c90553423377b3cb1e0ec1c82436399b376468"
+    },
+    {
+      "original_path": "HANDOFF-2.79.47.md",
+      "git_blob_sha": "3202984d1763262be4261f8426bd7ebc3d95a547",
+      "sha256": "4f28a08379cfd2bfa48c54d8ba331998a19d7ed36f6b52fea838028dd8ae4215",
+      "anchor": "archive-handoff-2-79-47-md",
+      "archive_body_sha256": "4f28a08379cfd2bfa48c54d8ba331998a19d7ed36f6b52fea838028dd8ae4215"
+    },
+    {
+      "original_path": "HANDOFF-2.79.48.md",
+      "git_blob_sha": "42d63588ce7e328c2a42fafa25d0d4bb0365e0aa",
+      "sha256": "61094f70a78d650580eb4780d1167bc86aba163c96da88a3c5e99e3550777ae2",
+      "anchor": "archive-handoff-2-79-48-md",
+      "archive_body_sha256": "61094f70a78d650580eb4780d1167bc86aba163c96da88a3c5e99e3550777ae2"
+    },
+    {
+      "original_path": "HANDOFF-2.79.49.md",
+      "git_blob_sha": "7b8119973326cb6f104c9715a18102f485756560",
+      "sha256": "5925d5ec196ad718820d780126f32131d2ef1de1f70a891d970354de9996a1d6",
+      "anchor": "archive-handoff-2-79-49-md",
+      "archive_body_sha256": "5925d5ec196ad718820d780126f32131d2ef1de1f70a891d970354de9996a1d6"
+    },
+    {
+      "original_path": "HANDOFF-2.79.50.md",
+      "git_blob_sha": "8ab9d5f3d096dd343f9d5ee621ddb319f19f6b9d",
+      "sha256": "d598b36d05e870de08d3e23ac85fac634ed31598c5571315808ab82fb0608d30",
+      "anchor": "archive-handoff-2-79-50-md",
+      "archive_body_sha256": "d598b36d05e870de08d3e23ac85fac634ed31598c5571315808ab82fb0608d30"
+    },
+    {
+      "original_path": "HANDOFF-2.79.51.md",
+      "git_blob_sha": "ea3ad652dff830fc4f9165c7a978292ee6aac62c",
+      "sha256": "887a4d1383d79b44fda2780f7cf7a91e06dcb1991c929ef367dfb3880df9b7a8",
+      "anchor": "archive-handoff-2-79-51-md",
+      "archive_body_sha256": "887a4d1383d79b44fda2780f7cf7a91e06dcb1991c929ef367dfb3880df9b7a8"
+    },
+    {
+      "original_path": "HANDOFF-2.79.52.md",
+      "git_blob_sha": "f3835462d9a149b345346bbae6b11d89d14abe3f",
+      "sha256": "46a10249525873f43b70f57f29d7e1c482ea849ea171720806ea4afab0d1223d",
+      "anchor": "archive-handoff-2-79-52-md",
+      "archive_body_sha256": "46a10249525873f43b70f57f29d7e1c482ea849ea171720806ea4afab0d1223d"
+    },
+    {
+      "original_path": "HANDOFF-2.79.53.md",
+      "git_blob_sha": "7e5bb0915d7b3b93ec6b4c088b018ca742f6e38d",
+      "sha256": "5422f1c91d3afa0c3affe8583b883055b53ea20b424e9e29577072f287fe8b7b",
+      "anchor": "archive-handoff-2-79-53-md",
+      "archive_body_sha256": "5422f1c91d3afa0c3affe8583b883055b53ea20b424e9e29577072f287fe8b7b"
+    },
+    {
+      "original_path": "HANDOFF-2.79.54.md",
+      "git_blob_sha": "ba090bcb595e5c375459345eb29e8d135d45394b",
+      "sha256": "28e2fb15a1870c17cdb67e8598b2e6213aa147af3b8b0c6693c9febb888f4986",
+      "anchor": "archive-handoff-2-79-54-md",
+      "archive_body_sha256": "28e2fb15a1870c17cdb67e8598b2e6213aa147af3b8b0c6693c9febb888f4986"
+    },
+    {
+      "original_path": "HANDOFF-2.79.55.md",
+      "git_blob_sha": "097a0f19f5736a4f25659d72e6e0d501b79b88d6",
+      "sha256": "f248c131e0e941da41f7be7461f4bd963d68117694f958fffe514ed70f96a167",
+      "anchor": "archive-handoff-2-79-55-md",
+      "archive_body_sha256": "f248c131e0e941da41f7be7461f4bd963d68117694f958fffe514ed70f96a167"
+    },
+    {
+      "original_path": "HANDOFF-2.79.56.md",
+      "git_blob_sha": "0ecbe6857ed013d9dab17e26ffcb79ab30d16f08",
+      "sha256": "8a22da9991077d94adaa38a5d135b7a12a37b74c89a794202b5ae916fe79e779",
+      "anchor": "archive-handoff-2-79-56-md",
+      "archive_body_sha256": "8a22da9991077d94adaa38a5d135b7a12a37b74c89a794202b5ae916fe79e779"
+    },
+    {
+      "original_path": "HANDOFF-2.79.57.md",
+      "git_blob_sha": "b7ced7989a73ff5a97387ec9b46d09572cf00239",
+      "sha256": "578cd3524728fce98c072521ab83c0ec6c58680f7daf9f33f270686c4316a365",
+      "anchor": "archive-handoff-2-79-57-md",
+      "archive_body_sha256": "578cd3524728fce98c072521ab83c0ec6c58680f7daf9f33f270686c4316a365"
+    },
+    {
+      "original_path": "HANDOFF-2.79.58.md",
+      "git_blob_sha": "0351215244b7e6126a6689cef19a5b4dc7bcb5b6",
+      "sha256": "4035afc20829f15aea00f4f2eb346d0a1d4b6199cc1d409f87c1996940a7a230",
+      "anchor": "archive-handoff-2-79-58-md",
+      "archive_body_sha256": "4035afc20829f15aea00f4f2eb346d0a1d4b6199cc1d409f87c1996940a7a230"
+    },
+    {
+      "original_path": "HANDOFF-2.79.59.md",
+      "git_blob_sha": "f2194c65f3877b559d4e8ab06fdb28dd72194e0c",
+      "sha256": "d9f43a4667b0bd36d8435b90f8e7a70abb94d1cb5cb53c737ce23e727636a43f",
+      "anchor": "archive-handoff-2-79-59-md",
+      "archive_body_sha256": "d9f43a4667b0bd36d8435b90f8e7a70abb94d1cb5cb53c737ce23e727636a43f"
+    },
+    {
+      "original_path": "HANDOFF-2.79.60.md",
+      "git_blob_sha": "5bb40ce3d03ea9d8d86af728ec45ee618d0335dd",
+      "sha256": "197a7919735595c58d7c005567199dd0bdacaba29821f96928a13f68605d504c",
+      "anchor": "archive-handoff-2-79-60-md",
+      "archive_body_sha256": "197a7919735595c58d7c005567199dd0bdacaba29821f96928a13f68605d504c"
+    },
+    {
+      "original_path": "HANDOFF-2.79.61.md",
+      "git_blob_sha": "8db3663ae5f966726e2ecf1fc60fbba9f8190126",
+      "sha256": "ea7b9d2bdfc15172e945c14fe285cf6e21c594a8332f117231f7f0a3d3bee875",
+      "anchor": "archive-handoff-2-79-61-md",
+      "archive_body_sha256": "ea7b9d2bdfc15172e945c14fe285cf6e21c594a8332f117231f7f0a3d3bee875"
+    },
+    {
+      "original_path": "HANDOFF-2.79.62.md",
+      "git_blob_sha": "129aa6befba7e19d77af42fd6c4913558381e391",
+      "sha256": "4bd6e1f1584acb702ad36eb48fe6294264ebc96e7b42dae8024e524aa4b4eabd",
+      "anchor": "archive-handoff-2-79-62-md",
+      "archive_body_sha256": "4bd6e1f1584acb702ad36eb48fe6294264ebc96e7b42dae8024e524aa4b4eabd"
+    },
+    {
+      "original_path": "HANDOFF-2.79.63.md",
+      "git_blob_sha": "fc9dac1a0f9f7833d6e377dd1ccd3909b6bc7de0",
+      "sha256": "08c45a879910830d83421d573da9a80d23855db06895d3d69a00b6756bfe6a17",
+      "anchor": "archive-handoff-2-79-63-md",
+      "archive_body_sha256": "08c45a879910830d83421d573da9a80d23855db06895d3d69a00b6756bfe6a17"
+    },
+    {
+      "original_path": "HANDOFF-2.79.64.md",
+      "git_blob_sha": "87a93a67c0da2f3db7d69ba4484411cda45d1d13",
+      "sha256": "92708122050c406b10694e3b01ce525f71850d5e606d5b4621819f709d13711b",
+      "anchor": "archive-handoff-2-79-64-md",
+      "archive_body_sha256": "92708122050c406b10694e3b01ce525f71850d5e606d5b4621819f709d13711b"
+    },
+    {
+      "original_path": "HANDOFF-2.79.65.md",
+      "git_blob_sha": "c1dfaecd1e6e4602a2ef9f44ab9af1928d2d8634",
+      "sha256": "94e770aa3669dd7c037d4752e5114a3663462fff3db50b240f4a49c88ba4217e",
+      "anchor": "archive-handoff-2-79-65-md",
+      "archive_body_sha256": "94e770aa3669dd7c037d4752e5114a3663462fff3db50b240f4a49c88ba4217e"
+    },
+    {
+      "original_path": "HANDOFF-2.79.66.md",
+      "git_blob_sha": "e0601844cbaf5bc179bcb225333b9d40223b9925",
+      "sha256": "8f1ad77ec0171fc740d16ad305ecbc0776c8a0bca913bf327e2046e01ae5489a",
+      "anchor": "archive-handoff-2-79-66-md",
+      "archive_body_sha256": "8f1ad77ec0171fc740d16ad305ecbc0776c8a0bca913bf327e2046e01ae5489a"
+    },
+    {
+      "original_path": "HANDOFF-2.79.67.md",
+      "git_blob_sha": "c8cf04c5347a211d187ce6b7c34f976e868ac8e8",
+      "sha256": "b63b42e591bd5a5fa6cf0c78a3553e1fe87c870516ed909a06e02da1d6c51141",
+      "anchor": "archive-handoff-2-79-67-md",
+      "archive_body_sha256": "b63b42e591bd5a5fa6cf0c78a3553e1fe87c870516ed909a06e02da1d6c51141"
+    },
+    {
+      "original_path": "HANDOFF-2.79.68.md",
+      "git_blob_sha": "057b8913e3afde6fcccfd66a03e50ee1c33dc03f",
+      "sha256": "df3e96c164fd5f81749a26b4aea5cad96faaf975bebfa0d5af4dc62b8959d0dc",
+      "anchor": "archive-handoff-2-79-68-md",
+      "archive_body_sha256": "df3e96c164fd5f81749a26b4aea5cad96faaf975bebfa0d5af4dc62b8959d0dc"
+    },
+    {
+      "original_path": "HANDOFF-2.79.69.md",
+      "git_blob_sha": "f9435db53dd6bba672f8c9f7b36f1c17e24839a2",
+      "sha256": "3fbee490b5700320a007aa9ed6efb6908d27c04ed2e011de9ad2593e8897118d",
+      "anchor": "archive-handoff-2-79-69-md",
+      "archive_body_sha256": "3fbee490b5700320a007aa9ed6efb6908d27c04ed2e011de9ad2593e8897118d"
+    },
+    {
+      "original_path": "HANDOFF-2.79.70.md",
+      "git_blob_sha": "7b982b89869f8fe3eb209d8063402eadee386899",
+      "sha256": "e6c0dd7c5853b75ce4d78e23b0d5b0dd05dfe38f304e429d0592ef114c6f4a3e",
+      "anchor": "archive-handoff-2-79-70-md",
+      "archive_body_sha256": "e6c0dd7c5853b75ce4d78e23b0d5b0dd05dfe38f304e429d0592ef114c6f4a3e"
+    },
+    {
+      "original_path": "HANDOFF-2.79.71.md",
+      "git_blob_sha": "9bbb54b8f74cf0a3c68f81d78f784cb20f26d8fb",
+      "sha256": "0485f9f4974297696500690247ccc48f3d0739565e9a4b8a135f55a1a635869f",
+      "anchor": "archive-handoff-2-79-71-md",
+      "archive_body_sha256": "0485f9f4974297696500690247ccc48f3d0739565e9a4b8a135f55a1a635869f"
+    },
+    {
+      "original_path": "HANDOFF-2.79.73.md",
+      "git_blob_sha": "07c63f1fc3db2603d194add9fd2cb7fdc14f523d",
+      "sha256": "d1faf4e0574bd1729b9a644bef20aec95f47a5dd3c9c8953a33c2ab2816cc37d",
+      "anchor": "archive-handoff-2-79-73-md",
+      "archive_body_sha256": "d1faf4e0574bd1729b9a644bef20aec95f47a5dd3c9c8953a33c2ab2816cc37d"
+    },
+    {
+      "original_path": "HANDOFF-2.79.74.md",
+      "git_blob_sha": "8a30459e8dd8c22cfac1a4ef9bbf4fab8660601d",
+      "sha256": "5bb33ae2d77a8746b24064bdb63cad38ae11f05fed52406e5f681c682f7190d9",
+      "anchor": "archive-handoff-2-79-74-md",
+      "archive_body_sha256": "5bb33ae2d77a8746b24064bdb63cad38ae11f05fed52406e5f681c682f7190d9"
+    },
+    {
+      "original_path": "HANDOFF-2.79.75.md",
+      "git_blob_sha": "d561e0b7c7257cd119c176ac9d4116942f509414",
+      "sha256": "6ec4d7cc5e41752fd5065d139b981887cbfc4819699681b971d236fd2d915afb",
+      "anchor": "archive-handoff-2-79-75-md",
+      "archive_body_sha256": "6ec4d7cc5e41752fd5065d139b981887cbfc4819699681b971d236fd2d915afb"
+    },
+    {
+      "original_path": "HANDOFF-2.79.76.md",
+      "git_blob_sha": "6adc1825f80fe4d34a22b7327745d2157c87c7cf",
+      "sha256": "c578f504334edbd646a17879715e74c99d84af764a3fd172baa50c558feacf5b",
+      "anchor": "archive-handoff-2-79-76-md",
+      "archive_body_sha256": "c578f504334edbd646a17879715e74c99d84af764a3fd172baa50c558feacf5b"
+    },
+    {
+      "original_path": "HANDOFF-2.79.77.md",
+      "git_blob_sha": "1bac195dbd55d50c8bbb9187ec729d6de14cf088",
+      "sha256": "b0e58f920e637383df998e8885929a10718ae14cfe5a6f26e444dd81f59205ea",
+      "anchor": "archive-handoff-2-79-77-md",
+      "archive_body_sha256": "b0e58f920e637383df998e8885929a10718ae14cfe5a6f26e444dd81f59205ea"
+    },
+    {
+      "original_path": "HANDOFF-2.79.78.md",
+      "git_blob_sha": "022c5cc41f366824b47b8e24788c3cd1d12861e4",
+      "sha256": "5cf3e43f31966ea38e9bf736cfd05fe4531b8b06e5776a956cfda49629012586",
+      "anchor": "archive-handoff-2-79-78-md",
+      "archive_body_sha256": "5cf3e43f31966ea38e9bf736cfd05fe4531b8b06e5776a956cfda49629012586"
+    },
+    {
+      "original_path": "HANDOFF-2.79.79.md",
+      "git_blob_sha": "b5f9649778a0216465b5aeaab1e33dbb149b4350",
+      "sha256": "000c564237b8fe89ed6f77c8675d5340f532bd11d61fc0b65492c3ca3f7bdee7",
+      "anchor": "archive-handoff-2-79-79-md",
+      "archive_body_sha256": "000c564237b8fe89ed6f77c8675d5340f532bd11d61fc0b65492c3ca3f7bdee7"
+    },
+    {
+      "original_path": "HANDOFF-2.79.80.md",
+      "git_blob_sha": "548df449537eea815b01a3e7b2874e780737854a",
+      "sha256": "904c067487d37ef67401e77a2ec95368dba2e2cdd15d03607e09c2f167a95a10",
+      "anchor": "archive-handoff-2-79-80-md",
+      "archive_body_sha256": "904c067487d37ef67401e77a2ec95368dba2e2cdd15d03607e09c2f167a95a10"
+    },
+    {
+      "original_path": "HANDOFF-2.79.82.md",
+      "git_blob_sha": "b8c604326d9a33901de17c7e4e88bc6de27cd07f",
+      "sha256": "2639ffda5d17c6979d5809457ef1f7c8e3abc6884abfb8b74a5bd04b86b1dfb2",
+      "anchor": "archive-handoff-2-79-82-md",
+      "archive_body_sha256": "2639ffda5d17c6979d5809457ef1f7c8e3abc6884abfb8b74a5bd04b86b1dfb2"
+    },
+    {
+      "original_path": "HANDOFF-2.79.83.md",
+      "git_blob_sha": "afa414c6e0e91d7f18f94f66242dfbba145bf7c8",
+      "sha256": "b27162cc6e1003b778654aa599dfe8b672414370b1540674907e266d0b6e9501",
+      "anchor": "archive-handoff-2-79-83-md",
+      "archive_body_sha256": "b27162cc6e1003b778654aa599dfe8b672414370b1540674907e266d0b6e9501"
+    },
+    {
+      "original_path": "HANDOFF-2.79.84.md",
+      "git_blob_sha": "d4194d5b8c843ca6ab43195a83edabff018976a4",
+      "sha256": "ac3bf01ccabab1d8c46c6fec32d5c62e736074c0fee62620472e047f84ff0d62",
+      "anchor": "archive-handoff-2-79-84-md",
+      "archive_body_sha256": "ac3bf01ccabab1d8c46c6fec32d5c62e736074c0fee62620472e047f84ff0d62"
+    },
+    {
+      "original_path": "HANDOFF-2.79.88.md",
+      "git_blob_sha": "39411a304f5c9398bab436406abaa2e0567f5474",
+      "sha256": "7a2bd068cfeec559a245318012064b23ed1570d08e6ac25439e0e1e9bb672343",
+      "anchor": "archive-handoff-2-79-88-md",
+      "archive_body_sha256": "7a2bd068cfeec559a245318012064b23ed1570d08e6ac25439e0e1e9bb672343"
+    },
+    {
+      "original_path": "HANDOFF-2.79.89.md",
+      "git_blob_sha": "077d43df274b27e5c94bf2efe69db723f0dac80d",
+      "sha256": "905344f81eb9b93aeaaf29c0df2e092c1187a992b6bdf501cec8b60ca19f0d60",
+      "anchor": "archive-handoff-2-79-89-md",
+      "archive_body_sha256": "905344f81eb9b93aeaaf29c0df2e092c1187a992b6bdf501cec8b60ca19f0d60"
+    },
+    {
+      "original_path": "HANDOFF-2.79.90.md",
+      "git_blob_sha": "155f07b2c235efc29bb2c53b26068dbacb2a03eb",
+      "sha256": "89547bd09d67a4129a07ba5e4fde42580d7007b0dd57ccd71fa7cfca43ea397a",
+      "anchor": "archive-handoff-2-79-90-md",
+      "archive_body_sha256": "97c3e0381fe42424ff25453769ef1b3c344128917056df58eeee7c075ae5fe15"
+    },
+    {
+      "original_path": "HANDOFF-2.79.91.md",
+      "git_blob_sha": "f730cf65e73c427473e4e610cd9200da8fe08f56",
+      "sha256": "586b522d5dca9268ca0cef925c2d6c8f2bc2a3d35b3fee20ccc9576cb90c57eb",
+      "anchor": "archive-handoff-2-79-91-md",
+      "archive_body_sha256": "7e8eab9532ed60b8a534ef1e6eb3fa590efe4faec77fbd08e60f8f95390ac279"
+    },
+    {
+      "original_path": "HANDOFF-2.79.92.md",
+      "git_blob_sha": "9bffde841fc43768f997a1c5c9ea4cc15b52e584",
+      "sha256": "e30c683c9d82cb9ed48bcbb2378d68586cec3303dbdfcace9bbfa2ee53ab6513",
+      "anchor": "archive-handoff-2-79-92-md",
+      "archive_body_sha256": "e30c683c9d82cb9ed48bcbb2378d68586cec3303dbdfcace9bbfa2ee53ab6513"
+    },
+    {
+      "original_path": "HANDOFF-2.79.93.md",
+      "git_blob_sha": "7c664f0578411b2040aa23b437584c5a939e87ed",
+      "sha256": "8271a3b4fd8026db6199c89835e8ed90da0d8d391268a8f3fc8d2520dbbc8a68",
+      "anchor": "archive-handoff-2-79-93-md",
+      "archive_body_sha256": "8271a3b4fd8026db6199c89835e8ed90da0d8d391268a8f3fc8d2520dbbc8a68"
+    },
+    {
+      "original_path": "HANDOFF-2.79.94.md",
+      "git_blob_sha": "19c64e2ca1e21300f54dc5cd4c9a360f0597e91b",
+      "sha256": "6726b516d462930cb0d7c4552a583e1bf56f3a3cd6d4dea6343d86735071c2f4",
+      "anchor": "archive-handoff-2-79-94-md",
+      "archive_body_sha256": "6726b516d462930cb0d7c4552a583e1bf56f3a3cd6d4dea6343d86735071c2f4"
+    },
+    {
+      "original_path": "HANDOFF-2.79.95.md",
+      "git_blob_sha": "a325d98e5cbf6dc33492cb4e90c5b2e39159e342",
+      "sha256": "9f67c8e56aef62b13f28031a13aba73374b1294b007cc4148ee787e58ad77fa8",
+      "anchor": "archive-handoff-2-79-95-md",
+      "archive_body_sha256": "9f67c8e56aef62b13f28031a13aba73374b1294b007cc4148ee787e58ad77fa8"
+    },
+    {
+      "original_path": "HANDOFF-2.79.96.md",
+      "git_blob_sha": "a22084f1d3d002579279b9f6047b4ac0356eec65",
+      "sha256": "715bb0fdd71a80d35239eb9781b781175f759c6e87d0958dae261d6b3f0bcc33",
+      "anchor": "archive-handoff-2-79-96-md",
+      "archive_body_sha256": "715bb0fdd71a80d35239eb9781b781175f759c6e87d0958dae261d6b3f0bcc33"
+    },
+    {
+      "original_path": "HANDOFF-2.79.97.md",
+      "git_blob_sha": "de55870569f50b955acde7f55f1757ecf9f7b7d7",
+      "sha256": "8e4d2adbb51765e8443b54d5441792cd55e08444848ce9d22cd50a6b60c1c6e6",
+      "anchor": "archive-handoff-2-79-97-md",
+      "archive_body_sha256": "8e4d2adbb51765e8443b54d5441792cd55e08444848ce9d22cd50a6b60c1c6e6"
+    },
+    {
+      "original_path": "HANDOFF-2.79.98.md",
+      "git_blob_sha": "1bd5b7fed97208b7e31d8dbccbe93123a1dc2575",
+      "sha256": "6d0980123990d008205b72d32e37bdc1d853efe9da5fb1beec6681294c54312c",
+      "anchor": "archive-handoff-2-79-98-md",
+      "archive_body_sha256": "6d0980123990d008205b72d32e37bdc1d853efe9da5fb1beec6681294c54312c"
+    },
+    {
+      "original_path": "HANDOFF-2.79.99.md",
+      "git_blob_sha": "541184b188c12d8f04849c9edf9255d457bd107e",
+      "sha256": "7e45e0f5e2fd565da0f759d5d055172bb1aed11b1c96416785b97d098c8ec7bb",
+      "anchor": "archive-handoff-2-79-99-md",
+      "archive_body_sha256": "7e45e0f5e2fd565da0f759d5d055172bb1aed11b1c96416785b97d098c8ec7bb"
+    },
+    {
+      "original_path": "HANDOFF-2.79.100.md",
+      "git_blob_sha": "1ab02384728ebd754ac4cadd9a584589e9671446",
+      "sha256": "8c8770fadaefc62257cf066c5c5f89268ff40e325b24b8ec6b197ab8bb2012be",
+      "anchor": "archive-handoff-2-79-100-md",
+      "archive_body_sha256": "8c8770fadaefc62257cf066c5c5f89268ff40e325b24b8ec6b197ab8bb2012be"
+    },
+    {
+      "original_path": "HANDOFF-2.79.101.md",
+      "git_blob_sha": "f4f1f878bfc2db3c6dbdab952b2fdf55d9cf71bc",
+      "sha256": "b3a7bd66c496c3d556f6aba08fe5a8450f488e865ea525edf00b0276666baac5",
+      "anchor": "archive-handoff-2-79-101-md",
+      "archive_body_sha256": "b3a7bd66c496c3d556f6aba08fe5a8450f488e865ea525edf00b0276666baac5"
+    },
+    {
+      "original_path": "HANDOFF-2.79.102.md",
+      "git_blob_sha": "77727b10ee039c0959ad4e7b5fbd1ebed5573dfc",
+      "sha256": "154ae27ad1acde5eefabf7b57d9e06dab46e9ef06a961c90d47add030d677680",
+      "anchor": "archive-handoff-2-79-102-md",
+      "archive_body_sha256": "154ae27ad1acde5eefabf7b57d9e06dab46e9ef06a961c90d47add030d677680"
+    },
+    {
+      "original_path": "HANDOFF-2.79.103.md",
+      "git_blob_sha": "ed163caf71cdbb09d88b79afb62e830218b9399f",
+      "sha256": "56abe500d4fe22b0623636c46bc220a2b8d51ff0cbf4eb1ec4ed371445520636",
+      "anchor": "archive-handoff-2-79-103-md",
+      "archive_body_sha256": "56abe500d4fe22b0623636c46bc220a2b8d51ff0cbf4eb1ec4ed371445520636"
+    },
+    {
+      "original_path": "HANDOFF-2.79.104.md",
+      "git_blob_sha": "9768c95625e9ed4084ebaf8067bc6dab424e6139",
+      "sha256": "f016452934aaafbbf150f582eafc16e051d6b11d517c7eacd98728529d9887b0",
+      "anchor": "archive-handoff-2-79-104-md",
+      "archive_body_sha256": "f016452934aaafbbf150f582eafc16e051d6b11d517c7eacd98728529d9887b0"
+    },
+    {
+      "original_path": "HANDOFF-2.79.105.md",
+      "git_blob_sha": "e20dfafd6dcb6f3b9bdc7bab193993812e138896",
+      "sha256": "13f5b4e5e7d90ae8ee1cd4ac7b1d5b77392ad9775ec35aacc823f2ac7dcdc6f6",
+      "anchor": "archive-handoff-2-79-105-md",
+      "archive_body_sha256": "13f5b4e5e7d90ae8ee1cd4ac7b1d5b77392ad9775ec35aacc823f2ac7dcdc6f6"
+    },
+    {
+      "original_path": "HANDOFF-2.79.106.md",
+      "git_blob_sha": "02ddf36fc6b3b40bbecdd50060d7bcd27cb8f572",
+      "sha256": "b51df0d1bbec10d4ec59cb56cd7e05c413946e0a6df444aa7f16fb112592af62",
+      "anchor": "archive-handoff-2-79-106-md",
+      "archive_body_sha256": "b51df0d1bbec10d4ec59cb56cd7e05c413946e0a6df444aa7f16fb112592af62"
+    },
+    {
+      "original_path": "HANDOFF-2.79.107.md",
+      "git_blob_sha": "ac8090d4f86baae024a8b823f2527a2da72cef08",
+      "sha256": "f498aecc3186b343fca098ff029bfd9ac51d4142cb7b481b06ac2ecc0721710d",
+      "anchor": "archive-handoff-2-79-107-md",
+      "archive_body_sha256": "f498aecc3186b343fca098ff029bfd9ac51d4142cb7b481b06ac2ecc0721710d"
+    },
+    {
+      "original_path": "HANDOFF-2.79.108.md",
+      "git_blob_sha": "287face31a0b19a80359bb4331e69521f40564a2",
+      "sha256": "9b2283b379c6132577e15e1034308b25e6d93864cfe708379fdf0d67e5ca4ad6",
+      "anchor": "archive-handoff-2-79-108-md",
+      "archive_body_sha256": "9b2283b379c6132577e15e1034308b25e6d93864cfe708379fdf0d67e5ca4ad6"
+    },
+    {
+      "original_path": "HANDOFF-2.79.109.md",
+      "git_blob_sha": "ae0d122294b3c603b023f598fd59fa873c63d342",
+      "sha256": "d6de8597067f49cc580af0aebd71eb4a154a51c2d65b7e2cd5d7f3612f701637",
+      "anchor": "archive-handoff-2-79-109-md",
+      "archive_body_sha256": "d6de8597067f49cc580af0aebd71eb4a154a51c2d65b7e2cd5d7f3612f701637"
+    },
+    {
+      "original_path": "HANDOFF-2.79.110.md",
+      "git_blob_sha": "840868f39d2ca50519fdcafa07066d1211740675",
+      "sha256": "323fe31b2f5b2ad9dd3a206812c659dd7018dac54af9e4de3ff11155c923ad1d",
+      "anchor": "archive-handoff-2-79-110-md",
+      "archive_body_sha256": "323fe31b2f5b2ad9dd3a206812c659dd7018dac54af9e4de3ff11155c923ad1d"
+    },
+    {
+      "original_path": "HANDOFF-2.79.111.md",
+      "git_blob_sha": "80448bb77767864461517292ee422de200ed5503",
+      "sha256": "5d13f868359487f4b7c408f3f2461ad8a10c89730ea98cbc6de0e9d48d412ceb",
+      "anchor": "archive-handoff-2-79-111-md",
+      "archive_body_sha256": "5d13f868359487f4b7c408f3f2461ad8a10c89730ea98cbc6de0e9d48d412ceb"
+    },
+    {
+      "original_path": "HANDOFF-2.79.112.md",
+      "git_blob_sha": "e13a1cc90ac9ce8cf38142b86565e23391e56ced",
+      "sha256": "c3def44f1562e179a58d0410ea355c8893111c3762f7a3682b4d9a9530d6c844",
+      "anchor": "archive-handoff-2-79-112-md",
+      "archive_body_sha256": "c3def44f1562e179a58d0410ea355c8893111c3762f7a3682b4d9a9530d6c844"
+    },
+    {
+      "original_path": "HANDOFF-2.79.113.md",
+      "git_blob_sha": "64fdf149a163ba72cb303897ef10f04ef34c502c",
+      "sha256": "3739793ef0ec0b43b784fe7747629dc344bd7d6bfc769387906e11e89047d5d4",
+      "anchor": "archive-handoff-2-79-113-md",
+      "archive_body_sha256": "3739793ef0ec0b43b784fe7747629dc344bd7d6bfc769387906e11e89047d5d4"
+    },
+    {
+      "original_path": "HANDOFF-2.79.114.md",
+      "git_blob_sha": "2147b27e54e6566c3a3e05185b5e6957cf314fb4",
+      "sha256": "6ed246d26d067ba198b5fdf258bc238311fb6256d2b69b5d9d745813e65fd9fc",
+      "anchor": "archive-handoff-2-79-114-md",
+      "archive_body_sha256": "6ed246d26d067ba198b5fdf258bc238311fb6256d2b69b5d9d745813e65fd9fc"
+    },
+    {
+      "original_path": "HANDOFF-2.79.115.md",
+      "git_blob_sha": "1a936ebf0334cb536e1f391a3c3276a58f7ea980",
+      "sha256": "19204100f86aa2bcd266cde5db58b36397b82a0ad71911d847f9c1bbe66550e4",
+      "anchor": "archive-handoff-2-79-115-md",
+      "archive_body_sha256": "19204100f86aa2bcd266cde5db58b36397b82a0ad71911d847f9c1bbe66550e4"
+    },
+    {
+      "original_path": "HANDOFF-2.79.116.md",
+      "git_blob_sha": "c88d8131974e8052d052e9a78265e3cd891a7a91",
+      "sha256": "9d51d94c9612fe070726382a47a903c9c7db89eb49872408f481b7280c14f9c7",
+      "anchor": "archive-handoff-2-79-116-md",
+      "archive_body_sha256": "9d51d94c9612fe070726382a47a903c9c7db89eb49872408f481b7280c14f9c7"
+    },
+    {
+      "original_path": "HANDOFF-2.79.117.md",
+      "git_blob_sha": "9df4797c3aba86946a463f40bb44a1d0d4bad34d",
+      "sha256": "de9c5fac0d2df9a24476e169efb0201b1248c2f344b516ee15b163c07fcb2676",
+      "anchor": "archive-handoff-2-79-117-md",
+      "archive_body_sha256": "de9c5fac0d2df9a24476e169efb0201b1248c2f344b516ee15b163c07fcb2676"
+    },
+    {
+      "original_path": "HANDOFF-2.79.118.md",
+      "git_blob_sha": "b9ba39173e07b33d9baee961a8b61348dbbce951",
+      "sha256": "c70eeb344aea1fcdd08fc9853317d7811ea8bfb11ae2f50c4cccab1ffcb85cee",
+      "anchor": "archive-handoff-2-79-118-md",
+      "archive_body_sha256": "c70eeb344aea1fcdd08fc9853317d7811ea8bfb11ae2f50c4cccab1ffcb85cee"
+    },
+    {
+      "original_path": "HANDOFF-2.79.119.md",
+      "git_blob_sha": "73827511a6f96c0d4b63e4be98eb46c4c3b81077",
+      "sha256": "9618f5ffc5d0f4eacbf8efde8f8a21522babc44a21c32610355bffef37030c02",
+      "anchor": "archive-handoff-2-79-119-md",
+      "archive_body_sha256": "9618f5ffc5d0f4eacbf8efde8f8a21522babc44a21c32610355bffef37030c02"
+    },
+    {
+      "original_path": "HANDOFF-2.79.120.md",
+      "git_blob_sha": "4de9198902a8e1420ec4d211f1a866591c39cd90",
+      "sha256": "15ea181783fbf294c8dd2c16b403af91fbd098157d15edc037c368aef8c6df6c",
+      "anchor": "archive-handoff-2-79-120-md",
+      "archive_body_sha256": "15ea181783fbf294c8dd2c16b403af91fbd098157d15edc037c368aef8c6df6c"
+    },
+    {
+      "original_path": "HANDOFF-2.79.121.md",
+      "git_blob_sha": "4237c648ba15c587cd6417b0d2624d4a5e5134e6",
+      "sha256": "5fc135e3a9ffe8e7f709decabdb40e1a1c8a8b1837cfec2838f72e4799083ae6",
+      "anchor": "archive-handoff-2-79-121-md",
+      "archive_body_sha256": "5fc135e3a9ffe8e7f709decabdb40e1a1c8a8b1837cfec2838f72e4799083ae6"
+    },
+    {
+      "original_path": "HANDOFF-2.79.122.md",
+      "git_blob_sha": "71d6ccd2c8cb6c3056d0f93df212217dfda6bc5d",
+      "sha256": "d655ab238dce5967031d1d1f0087aa9a2255b01ee5b2bc164023881bd6c3d5a6",
+      "anchor": "archive-handoff-2-79-122-md",
+      "archive_body_sha256": "d655ab238dce5967031d1d1f0087aa9a2255b01ee5b2bc164023881bd6c3d5a6"
+    },
+    {
+      "original_path": "HANDOFF-2.79.123.md",
+      "git_blob_sha": "3aa3c97662ed7e4dc8829398226afb1f16fd1a27",
+      "sha256": "05abc7fdd3da1074863029a117841910a0fb60f90fe8c3acc2a7b794d0d06b93",
+      "anchor": "archive-handoff-2-79-123-md",
+      "archive_body_sha256": "05abc7fdd3da1074863029a117841910a0fb60f90fe8c3acc2a7b794d0d06b93"
+    },
+    {
+      "original_path": "HANDOFF-2.79.124.md",
+      "git_blob_sha": "6bb5ef507e86790bcfbaff00c497291946d1f9ce",
+      "sha256": "f0366e818b65ed68b5201af1186e57c8d66d0d6cccc64899bfd103172d7e84e9",
+      "anchor": "archive-handoff-2-79-124-md",
+      "archive_body_sha256": "f0366e818b65ed68b5201af1186e57c8d66d0d6cccc64899bfd103172d7e84e9"
+    },
+    {
+      "original_path": "HANDOFF-2.79.125.md",
+      "git_blob_sha": "702bfa5f3614da258b17b1ff64a7be51a5446c06",
+      "sha256": "c4f3613c5de9fb2779e7b96be9a444ee0ca60a7eca9fdaa7935da3c528f85ae3",
+      "anchor": "archive-handoff-2-79-125-md",
+      "archive_body_sha256": "c4f3613c5de9fb2779e7b96be9a444ee0ca60a7eca9fdaa7935da3c528f85ae3"
+    },
+    {
+      "original_path": "HANDOFF-2.79.126.md",
+      "git_blob_sha": "90ea0a5c6e041c3f5c84a4c35d2265c1e39df8bf",
+      "sha256": "8a54be11507878a3507243a8e4344894af883c5676750573c063f95e929f3595",
+      "anchor": "archive-handoff-2-79-126-md",
+      "archive_body_sha256": "8a54be11507878a3507243a8e4344894af883c5676750573c063f95e929f3595"
+    },
+    {
+      "original_path": "HANDOFF-2.79.127.md",
+      "git_blob_sha": "5658cb30599e235ffaeec15692e4df13cc6c3a3f",
+      "sha256": "470f148e3c05438f29862e550adfbd79ad15ad850a6869c12e68524078834718",
+      "anchor": "archive-handoff-2-79-127-md",
+      "archive_body_sha256": "470f148e3c05438f29862e550adfbd79ad15ad850a6869c12e68524078834718"
+    },
+    {
+      "original_path": "HANDOFF-2.79.128.md",
+      "git_blob_sha": "ae230302fda47a4fbc5f67647ff3118d469e61f2",
+      "sha256": "57e7f650ffadf9fff2ada8fa91a790df5727a4efb930de79df29b4b18721a701",
+      "anchor": "archive-handoff-2-79-128-md",
+      "archive_body_sha256": "57e7f650ffadf9fff2ada8fa91a790df5727a4efb930de79df29b4b18721a701"
+    },
+    {
+      "original_path": "HANDOFF-2.79.129.md",
+      "git_blob_sha": "57cd26091ad6e1a8ebb5781028139e40e8ea40b3",
+      "sha256": "1e1fdbc7aeebe7f5c17cea4ceaf534851502752328fd130bb23e17d966b01641",
+      "anchor": "archive-handoff-2-79-129-md",
+      "archive_body_sha256": "1e1fdbc7aeebe7f5c17cea4ceaf534851502752328fd130bb23e17d966b01641"
+    },
+    {
+      "original_path": "HANDOFF-2.79.130.md",
+      "git_blob_sha": "c4569c5915e97ea3c211ac3b62695d1669f782f1",
+      "sha256": "ce13a1a18be003682a863458fb16eef3f2e1d32b48239d29546f817c361b4dc4",
+      "anchor": "archive-handoff-2-79-130-md",
+      "archive_body_sha256": "ce13a1a18be003682a863458fb16eef3f2e1d32b48239d29546f817c361b4dc4"
+    },
+    {
+      "original_path": "HANDOFF-2.79.131.md",
+      "git_blob_sha": "a39e7e08afd59ed396e1458b29cb7826ede0002b",
+      "sha256": "c8f5d5e4cf9ee3dcef208915c027a5d9563f99fe2d99c640526459472e51c53b",
+      "anchor": "archive-handoff-2-79-131-md",
+      "archive_body_sha256": "c8f5d5e4cf9ee3dcef208915c027a5d9563f99fe2d99c640526459472e51c53b"
+    },
+    {
+      "original_path": "HANDOFF-2.79.132.md",
+      "git_blob_sha": "03ac996df685f9c9159e393b5fd54ebc4e744ecd",
+      "sha256": "ff22a4ec68f2e15d4063ba64d04162fa582c37d1f7616620945cfe616b3ce93c",
+      "anchor": "archive-handoff-2-79-132-md",
+      "archive_body_sha256": "ff22a4ec68f2e15d4063ba64d04162fa582c37d1f7616620945cfe616b3ce93c"
+    },
+    {
+      "original_path": "HANDOFF-2.79.133.md",
+      "git_blob_sha": "dc55aa17f1c3f38572f6db15361afa49f0767a3f",
+      "sha256": "76ff75499470705852d899c774944ff5f32a4f981bc1b3b2f444ed4876835fe5",
+      "anchor": "archive-handoff-2-79-133-md",
+      "archive_body_sha256": "76ff75499470705852d899c774944ff5f32a4f981bc1b3b2f444ed4876835fe5"
+    },
+    {
+      "original_path": "HANDOFF-2.79.134.md",
+      "git_blob_sha": "3dea2f8278df2673583215e3e13c51998220d518",
+      "sha256": "b55977d86afe3b20f4e90e5445bf438b09003ba2156236f11b154a1285c64f56",
+      "anchor": "archive-handoff-2-79-134-md",
+      "archive_body_sha256": "b55977d86afe3b20f4e90e5445bf438b09003ba2156236f11b154a1285c64f56"
+    },
+    {
+      "original_path": "HANDOFF-2.79.135.md",
+      "git_blob_sha": "a7dff5c65f4e1147c020ae9ad21f04a986b46357",
+      "sha256": "d60ffe2a6d0fc0a0ec37293871e4973b53f5973eba777819c7ae7cc616bf2fce",
+      "anchor": "archive-handoff-2-79-135-md",
+      "archive_body_sha256": "d60ffe2a6d0fc0a0ec37293871e4973b53f5973eba777819c7ae7cc616bf2fce"
+    },
+    {
+      "original_path": "HANDOFF-2.79.136.md",
+      "git_blob_sha": "62e7c2da7a0001435a613ab06c71baaddaef0fd5",
+      "sha256": "1788f5a72e6244a2989e5e602608b9cc495ada377887a103f8e15b203acddbe1",
+      "anchor": "archive-handoff-2-79-136-md",
+      "archive_body_sha256": "1788f5a72e6244a2989e5e602608b9cc495ada377887a103f8e15b203acddbe1"
+    },
+    {
+      "original_path": "HANDOFF-2.79.137.md",
+      "git_blob_sha": "9d2e11b3011fd3a9c6a0e342d3b4687c9a4f1667",
+      "sha256": "fd4ac3f0a75ea20e9e3ae7cbe83dd0b38b086ba60d74a4dce52c495bf2a4c996",
+      "anchor": "archive-handoff-2-79-137-md",
+      "archive_body_sha256": "fd4ac3f0a75ea20e9e3ae7cbe83dd0b38b086ba60d74a4dce52c495bf2a4c996"
+    },
+    {
+      "original_path": "HANDOFF-2.79.138.md",
+      "git_blob_sha": "7fd6f67958360c6a618663924cbf386e12ae2f32",
+      "sha256": "a306be5051cc1f7d076eb2ed817456f8ad1b566339105f1e2b92db3147727243",
+      "anchor": "archive-handoff-2-79-138-md",
+      "archive_body_sha256": "a306be5051cc1f7d076eb2ed817456f8ad1b566339105f1e2b92db3147727243"
+    },
+    {
+      "original_path": "HANDOFF-2.79.139.md",
+      "git_blob_sha": "eb35af78cccaa94f881d5ba0f9a7d2b9c9018e53",
+      "sha256": "dba8d5cc1aa7fd71d777e0ec3fc1c004c529ebfb80c518d8deb3e14d234009d1",
+      "anchor": "archive-handoff-2-79-139-md",
+      "archive_body_sha256": "dba8d5cc1aa7fd71d777e0ec3fc1c004c529ebfb80c518d8deb3e14d234009d1"
+    },
+    {
+      "original_path": "HANDOFF-2.79.140.md",
+      "git_blob_sha": "2cc0e7490bc359411cd8b16ded59b8fe87f898d6",
+      "sha256": "cb53465fef63484cecad5e435e30a6056c7ccb9ca5e1326f1f0969f28d802046",
+      "anchor": "archive-handoff-2-79-140-md",
+      "archive_body_sha256": "cb53465fef63484cecad5e435e30a6056c7ccb9ca5e1326f1f0969f28d802046"
+    },
+    {
+      "original_path": "HANDOFF-2.79.141.md",
+      "git_blob_sha": "87a2d7bfbb3bfdfd56e3460bd6a0107b37ef44eb",
+      "sha256": "892fe6ddf29388ad6f532df38ae115d4cc7c8798997ddcfdd6541d00122d6add",
+      "anchor": "archive-handoff-2-79-141-md",
+      "archive_body_sha256": "892fe6ddf29388ad6f532df38ae115d4cc7c8798997ddcfdd6541d00122d6add"
+    },
+    {
+      "original_path": "HANDOFF-2.79.142.md",
+      "git_blob_sha": "77ed9141beb6a7344d248b620849b6cde458d464",
+      "sha256": "8a03538337f75b7b369d3cc8811ccb10a40a6cbceebdb081160452430a629c94",
+      "anchor": "archive-handoff-2-79-142-md",
+      "archive_body_sha256": "8a03538337f75b7b369d3cc8811ccb10a40a6cbceebdb081160452430a629c94"
+    },
+    {
+      "original_path": "HANDOFF-2.79.143.md",
+      "git_blob_sha": "9bcbfd1d041b50712b88303d7c40b47393cc6675",
+      "sha256": "08f53b9f3ec6f62abc6e5ddc195699861bc91f0071221b4fc5c8e5e5c2f870e2",
+      "anchor": "archive-handoff-2-79-143-md",
+      "archive_body_sha256": "08f53b9f3ec6f62abc6e5ddc195699861bc91f0071221b4fc5c8e5e5c2f870e2"
+    },
+    {
+      "original_path": "HANDOFF-2.79.144.md",
+      "git_blob_sha": "eb1132455dfa1af4c42618577ddab52cef530f44",
+      "sha256": "53075a0e9194cbf83c3b6a7bd955b3dbee06fc416c8884bceb300fe620f7d4a4",
+      "anchor": "archive-handoff-2-79-144-md",
+      "archive_body_sha256": "53075a0e9194cbf83c3b6a7bd955b3dbee06fc416c8884bceb300fe620f7d4a4"
+    },
+    {
+      "original_path": "HANDOFF-2.79.145.md",
+      "git_blob_sha": "55c7d885586eb536aed18341a802a1f1712181b9",
+      "sha256": "de0f2f9f9de7f5f4b05873e5da56b707aa959aa4d98acf0f8a35ef942454209f",
+      "anchor": "archive-handoff-2-79-145-md",
+      "archive_body_sha256": "de0f2f9f9de7f5f4b05873e5da56b707aa959aa4d98acf0f8a35ef942454209f"
+    },
+    {
+      "original_path": "HANDOFF-2.79.146.md",
+      "git_blob_sha": "56e467103b5184c27deee02d3752505060b9cda6",
+      "sha256": "dc615f660f7986895df291df1050b32de361bd13f903cb2adff7c250570e6a91",
+      "anchor": "archive-handoff-2-79-146-md",
+      "archive_body_sha256": "dc615f660f7986895df291df1050b32de361bd13f903cb2adff7c250570e6a91"
+    },
+    {
+      "original_path": "HANDOFF-2.79.147.md",
+      "git_blob_sha": "78472c37099ed72648112cc17d7c2f1c694f55e6",
+      "sha256": "563b57be970bbdbdf3729123af78871b76873d1df55b0f700a828e5e8217582a",
+      "anchor": "archive-handoff-2-79-147-md",
+      "archive_body_sha256": "563b57be970bbdbdf3729123af78871b76873d1df55b0f700a828e5e8217582a"
+    },
+    {
+      "original_path": "HANDOFF-2.79.148.md",
+      "git_blob_sha": "8bf8b06480bc4aff4eda381b57cf0386b918a123",
+      "sha256": "33a6fe8e8662b073dd55c00ee0826d68879416cdf7f55d442333707de668f183",
+      "anchor": "archive-handoff-2-79-148-md",
+      "archive_body_sha256": "33a6fe8e8662b073dd55c00ee0826d68879416cdf7f55d442333707de668f183"
+    },
+    {
+      "original_path": "HANDOFF-2.79.149.md",
+      "git_blob_sha": "42151229d95d5bbf4cb3a24ccc88dcd1df792ca3",
+      "sha256": "4d49fe0910d8dfc4403567df2b16180593991cdaf76d9a5fe714f933669359f7",
+      "anchor": "archive-handoff-2-79-149-md",
+      "archive_body_sha256": "4d49fe0910d8dfc4403567df2b16180593991cdaf76d9a5fe714f933669359f7"
+    },
+    {
+      "original_path": "HANDOFF-2.79.150.md",
+      "git_blob_sha": "976140f152c7b0fa48bc0fa7eb8f2c86796405fa",
+      "sha256": "a15a83d0375379d5b1351ef94c5d70b44407de52ce2d3478486399e1792db7cc",
+      "anchor": "archive-handoff-2-79-150-md",
+      "archive_body_sha256": "a15a83d0375379d5b1351ef94c5d70b44407de52ce2d3478486399e1792db7cc"
+    },
+    {
+      "original_path": "HANDOFF-2.79.151.md",
+      "git_blob_sha": "fa169c21e9c24487a274f33208c361868a87fccb",
+      "sha256": "270fed69b71f1632ec9e54ad33bd4c358234750b92257a8f2063953c01f4ddbe",
+      "anchor": "archive-handoff-2-79-151-md",
+      "archive_body_sha256": "270fed69b71f1632ec9e54ad33bd4c358234750b92257a8f2063953c01f4ddbe"
+    },
+    {
+      "original_path": "HANDOFF-2.79.152.md",
+      "git_blob_sha": "7aaf1aaa4c1e01722657a0b5ae54d74ec37751bb",
+      "sha256": "7d701b8ce46a841aa59e7d58dc032f329522e6018c89910bbb60b15aa27d189b",
+      "anchor": "archive-handoff-2-79-152-md",
+      "archive_body_sha256": "0f99f12c9a0938fe28128a96f481276348a9eb3bbba7f47cbe0656ff9116bb23"
+    },
+    {
+      "original_path": "HANDOFF-2.79.153.md",
+      "git_blob_sha": "f9c13fc573e5c372379e0857a80ef8d6e2adfd67",
+      "sha256": "868ae0523f278a95b49f363fcb9c420f16d45140105fbd1ab562cb83a5f8e500",
+      "anchor": "archive-handoff-2-79-153-md",
+      "archive_body_sha256": "374502d0951c2b3540aedeca4e4ccbb77149d4317ce8b807b658eb6d46791963"
+    },
+    {
+      "original_path": "HANDOFF-2.79.154.md",
+      "git_blob_sha": "239469f65a2ccae4daa7edbbc1730ed43612bc1f",
+      "sha256": "503b4401ac8aa8761718a4a584a1efdf10f425d9e03bb0d93cc7bc6db6596f6b",
+      "anchor": "archive-handoff-2-79-154-md",
+      "archive_body_sha256": "abc66c1ca36eaca31d1bdcc559df0a9ef236962bebaab5dcf90eb47831e3dcba"
+    },
+    {
+      "original_path": "HANDOFF-2.79.155.md",
+      "git_blob_sha": "aef4748eb96721d4975d131a018b07330f01cce6",
+      "sha256": "417f7b76c98082980af8d0cbc516abb1203aa9e6cb7315e082fa0eb67d83eab9",
+      "anchor": "archive-handoff-2-79-155-md",
+      "archive_body_sha256": "417f7b76c98082980af8d0cbc516abb1203aa9e6cb7315e082fa0eb67d83eab9"
+    },
+    {
+      "original_path": "HANDOFF-2.79.156.md",
+      "git_blob_sha": "788c47fc22b9e4a6896b3dc075b604a271244364",
+      "sha256": "1633769e4926eca5e7897c44daed0fe043876b0980f2d366522d79fdf9390dcf",
+      "anchor": "archive-handoff-2-79-156-md",
+      "archive_body_sha256": "1633769e4926eca5e7897c44daed0fe043876b0980f2d366522d79fdf9390dcf"
+    },
+    {
+      "original_path": "HANDOFF-2.79.157.md",
+      "git_blob_sha": "fbebb2cf21f687468f19a168d9fbd11e207b2578",
+      "sha256": "61118e58ff5df8c22dfe399cf3a7cc21db962f8b06a795f9aa21c5908274abfb",
+      "anchor": "archive-handoff-2-79-157-md",
+      "archive_body_sha256": "61118e58ff5df8c22dfe399cf3a7cc21db962f8b06a795f9aa21c5908274abfb"
+    },
+    {
+      "original_path": "HANDOFF-2.79.158.md",
+      "git_blob_sha": "47296a7cd42b746bfe16a06054457e175c5530a3",
+      "sha256": "22076e7c3f35b412d0e6be3d491845176af3018ab9cbdb3588dce9eaf58c951b",
+      "anchor": "archive-handoff-2-79-158-md",
+      "archive_body_sha256": "22076e7c3f35b412d0e6be3d491845176af3018ab9cbdb3588dce9eaf58c951b"
+    },
+    {
+      "original_path": "HANDOFF-2.79.159.md",
+      "git_blob_sha": "ec37da445c5c8ebe088385b3a5a5b4116188448f",
+      "sha256": "902b8f51b1d6ac9b084e72c3023132eeb13307d8985fabefbfb1d217fa6029f4",
+      "anchor": "archive-handoff-2-79-159-md",
+      "archive_body_sha256": "902b8f51b1d6ac9b084e72c3023132eeb13307d8985fabefbfb1d217fa6029f4"
+    },
+    {
+      "original_path": "HANDOFF-2.79.160.md",
+      "git_blob_sha": "ea791703e97b6c7e057c91b5f141dcea0f7bb132",
+      "sha256": "164c802134c71b50912ff0a67c7843a42f2921697c020c6a0a0f8c07f0fe5cd2",
+      "anchor": "archive-handoff-2-79-160-md",
+      "archive_body_sha256": "164c802134c71b50912ff0a67c7843a42f2921697c020c6a0a0f8c07f0fe5cd2"
+    },
+    {
+      "original_path": "HANDOFF-2.79.161.md",
+      "git_blob_sha": "28062704529cc5be25fcf348e7a0ab7628c68cde",
+      "sha256": "544f133bbd271ae80de8eae7d5619e9f6a3035aef96a10ec699b676405241f1b",
+      "anchor": "archive-handoff-2-79-161-md",
+      "archive_body_sha256": "544f133bbd271ae80de8eae7d5619e9f6a3035aef96a10ec699b676405241f1b"
+    },
+    {
+      "original_path": "HANDOFF-2.79.162.md",
+      "git_blob_sha": "5ea1a78b4cfc4f7b2b63b2753adb58ac10ccef28",
+      "sha256": "1124dea7d8ad319fc4a2ea3b100767712e098ea903e82792740e2b9e6275a6be",
+      "anchor": "archive-handoff-2-79-162-md",
+      "archive_body_sha256": "1124dea7d8ad319fc4a2ea3b100767712e098ea903e82792740e2b9e6275a6be"
+    },
+    {
+      "original_path": "HANDOFF-2.79.163.md",
+      "git_blob_sha": "ab5c9cfc0ad50833b4112bc6699d4798e6aff4f3",
+      "sha256": "9fe68d9e712f558ce3ec0a59b311c0f4c1eff3e6ab98fa19b2179950e8c1262c",
+      "anchor": "archive-handoff-2-79-163-md",
+      "archive_body_sha256": "9fe68d9e712f558ce3ec0a59b311c0f4c1eff3e6ab98fa19b2179950e8c1262c"
+    },
+    {
+      "original_path": "HANDOFF-2.79.164.md",
+      "git_blob_sha": "b712eac46d7ebb801549f2c0f5adc00c04187b2d",
+      "sha256": "4f8e33b3ef87d8991de6d840698cff16371d3701ed917db69d3369c9f269b746",
+      "anchor": "archive-handoff-2-79-164-md",
+      "archive_body_sha256": "4f8e33b3ef87d8991de6d840698cff16371d3701ed917db69d3369c9f269b746"
+    },
+    {
+      "original_path": "HANDOFF-2.79.165.md",
+      "git_blob_sha": "61c3c7177424d1c1a0f705e445ea310d09a44e74",
+      "sha256": "d7d9d30d81aab4c802acf66441251acc228cef2410edcf7299731d4ba1396557",
+      "anchor": "archive-handoff-2-79-165-md",
+      "archive_body_sha256": "d7d9d30d81aab4c802acf66441251acc228cef2410edcf7299731d4ba1396557"
+    },
+    {
+      "original_path": "HANDOFF-2.79.166.md",
+      "git_blob_sha": "d0446149b691ad85d763dd1e116e8be48e6b3233",
+      "sha256": "3aa1b89d66d3e18103ff6031b4332531302410b46a73eaedeb5f03b281d7a180",
+      "anchor": "archive-handoff-2-79-166-md",
+      "archive_body_sha256": "3aa1b89d66d3e18103ff6031b4332531302410b46a73eaedeb5f03b281d7a180"
+    },
+    {
+      "original_path": "HANDOFF-2.79.167.md",
+      "git_blob_sha": "09c70fa0e22481d34800dd1b441256398afc6953",
+      "sha256": "8c607c334f2c93f0279d2f7b6aa91ec567e6acf014a5ca1d42d6978000f07190",
+      "anchor": "archive-handoff-2-79-167-md",
+      "archive_body_sha256": "8c607c334f2c93f0279d2f7b6aa91ec567e6acf014a5ca1d42d6978000f07190"
+    },
+    {
+      "original_path": "HANDOFF-2.79.168-DELIVERY.md",
+      "git_blob_sha": "0bed554164aa9273f31c2eae1439fd7de296d243",
+      "sha256": "3a82eb9331cc32456d6fc3419a805740d4ec9475d36e5156f9d59ce965c9715c",
+      "anchor": "archive-handoff-2-79-168-delivery-md",
+      "archive_body_sha256": "3a82eb9331cc32456d6fc3419a805740d4ec9475d36e5156f9d59ce965c9715c"
+    },
+    {
+      "original_path": "HANDOFF-2.79.168.md",
+      "git_blob_sha": "8e1e22149b4285a7de4dd5aa7127ff882000e6af",
+      "sha256": "b309500b037928974af88e2fc158a640328f9c85eac6880b699d115ec94c6101",
+      "anchor": "archive-handoff-2-79-168-md",
+      "archive_body_sha256": "b309500b037928974af88e2fc158a640328f9c85eac6880b699d115ec94c6101"
+    },
+    {
+      "original_path": "HANDOFF-2.79.179.md",
+      "git_blob_sha": "6ec814646fa7d9f876862fb82801d9882b57ba11",
+      "sha256": "3c9d15b9a0ae5add383ecd115c080f78fb41d71591d0ad27cbb4f5b8d05a495c",
+      "anchor": "archive-handoff-2-79-179-md",
+      "archive_body_sha256": "3c9d15b9a0ae5add383ecd115c080f78fb41d71591d0ad27cbb4f5b8d05a495c"
+    },
+    {
+      "original_path": "HANDOFF-APOCALYPSE-AUDIT.md",
+      "git_blob_sha": "ba5fc3762cda11367f5aa18bea239b116564a6a3",
+      "sha256": "87991f303243f5424ba1328225d181c4b5d1da1c57ec4a43904023a61944e1dc",
+      "anchor": "archive-handoff-apocalypse-audit-md",
+      "archive_body_sha256": "afafe499a2a33dffb5b5a0d308257e8bea4e568adfc8120439bc66292ec6f655"
+    },
+    {
+      "original_path": "HANDOFF-APOCALYPSE-SINGLE-DUAL.md",
+      "git_blob_sha": "3d67dab6cc019e3d3da6e44179ba72d4f6c7040b",
+      "sha256": "d8779d55dc30a403a67d1bedc1317c235bea04b3867df7149f7fc884a7ac53a3",
+      "anchor": "archive-handoff-apocalypse-single-dual-md",
+      "archive_body_sha256": "d8779d55dc30a403a67d1bedc1317c235bea04b3867df7149f7fc884a7ac53a3"
+    },
+    {
+      "original_path": "HANDOFF-APOCALYPSE-TEST95-REGRESSION.md",
+      "git_blob_sha": "d2c73a299960d6380efb8e13c95b3c71b6033e4f",
+      "sha256": "0692f53048f0023d31c1d40ff4f36dc0cc1bf1716424c5620ec7a2a93c2623af",
+      "anchor": "archive-handoff-apocalypse-test95-regression-md",
+      "archive_body_sha256": "0692f53048f0023d31c1d40ff4f36dc0cc1bf1716424c5620ec7a2a93c2623af"
+    },
+    {
+      "original_path": "HANDOFF-DETECTOR-SOURCE173.md",
+      "git_blob_sha": "da503da33ab819b7b41992a834cf95169db3aa35",
+      "sha256": "fc3068b7490a36b946d4d5d63d0f68eeed3648f8e620979236c34312c1142e64",
+      "anchor": "archive-handoff-detector-source173-md",
+      "archive_body_sha256": "fc3068b7490a36b946d4d5d63d0f68eeed3648f8e620979236c34312c1142e64"
+    },
+    {
+      "original_path": "HANDOFF-DETECTOR-SOURCE176.md",
+      "git_blob_sha": "f444519a1fe7d99028c62ca03cedfdf1e989c0a8",
+      "sha256": "9c70bf349ae456c96e7f8e88f62a11d17463d9219570023976358e27dfe4f7ce",
+      "anchor": "archive-handoff-detector-source176-md",
+      "archive_body_sha256": "9c70bf349ae456c96e7f8e88f62a11d17463d9219570023976358e27dfe4f7ce"
+    },
+    {
+      "original_path": "HANDOFF-Test32.md",
+      "git_blob_sha": "7bd0fa18655bc34a9cdae4661579554ecc55f70b",
+      "sha256": "4aa5f9cf403da92c5aaa275bc195307b6504a4708708853a96763120a542ce65",
+      "anchor": "archive-handoff-test32-md",
+      "archive_body_sha256": "4aa5f9cf403da92c5aaa275bc195307b6504a4708708853a96763120a542ce65"
+    }
+  ],
+  "merge_decisions": [
+    "Fast-forward Test_Branch through detector and reviewed candidate ancestry.",
+    "Merge Android ancestry; keep current manual-only test workflow instead of older Android push-trigger workflow.",
+    "Preserve Android Test88 acceptance records and historical documentation; do not alter Android ref.",
+    "Rewrite current README and Android module guidance; retain unique historical Android prose in HANDOFF.md."
+  ],
+  "recovery": "All listed branch tips remain ancestors of consolidated Test_Branch (Android also retains its original ref). Recreate a removed branch at its recorded SHA if needed.",
+  "content_policy": "Original handoff bodies preserved with Markdown link destinations redirected and trailing whitespace normalized; original SHA256 and Git blob IDs retained for reproducible verification."
+}

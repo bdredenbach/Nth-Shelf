@@ -1,86 +1,23 @@
-# Nth Shelf Android test shell
+# Nth Shelf Android shell
 
-This module packages the repository's current web assets into a small Android
-WebView shell. The files are copied from the repository root during every build,
-so the APK and PWA cannot silently drift apart.
+This directory packages the checkout's web assets in an Android WebView shell. `Test_Branch` is the consolidated development source; the separate `Android` branch remains unchanged at its historical accepted Test88 checkpoint (`f55efa22e920f39839541ddf8d11e64910398255`). Test88 phone acceptance does not qualify later source.
 
-The `Test_Branch` workflow builds an installable debug APK with Java 17 and
-Gradle 8.9:
+## Build and qualification
 
-```bash
-gradle -p android :app:assembleDebug
+The historical build toolchain uses Java 17, Gradle 8.9 and Android SDK 35, with minimum API 24. The module copies web assets during a build:
+
+```sh
+gradle --no-daemon -p android :app:assembleDebug
 ```
 
-## Test35 identity
+Output: `android/app/build/outputs/apk/debug/app-debug.apk`.
 
-The current broad-spectrum frame candidate is version **2.79.35**
-(`versionCode 27963`). Debug builds use the separate application ID
-`io.github.bdredenbach.nthshelf.frametest35` and label **Nth Shelf Test35**.
-That keeps the stable app and earlier frame-test APKs installed independently.
+**Do not treat the existing manual workflow as a qualified build of the current source.** It is restricted to `Test_Branch` and retains Test168 identity and frozen asset checks. Newer Test179/candidate web files need a deliberately reconciled Android identity, web-asset manifest and full build validation before dispatch. The original Test179 APK was a Test178-shell repack, not a Gradle rebuild. No new APK was built during branch consolidation.
 
-Test35 adds the reusable edge-connected matte/paper cell family used by page44
-and the remaining-empty-page sweep. It does not include comic artwork or private
-signing material. GitHub Actions verifies package identity, version, signature
-and exact packaged web files before publishing the debug artifact.
+The workflow is manual-only; a push does not build or release an app. No signing keys or comic fixtures belong in Git. CI debug signing is not production signing.
 
+## Historical Android acceptance
 
-## Test37 identity
+Test88 (`2.79.88`, code `28016`, package `io.github.bdredenbach.nthshelf.frametest88`) was confirmed working on phone on 5 October 2026. The narrow scope and original validation remain in [TEST88-VALIDATION.json](../TEST88-VALIDATION.json). It is not a new full-corpus success count.
 
-The current candidate is version **2.79.37** (`versionCode 27965`). Debug builds use `io.github.bdredenbach.nthshelf.frametest37` with label **Nth Shelf Test37**, so Test36 and earlier installs can remain side-by-side. Test37 adds the tap-independent structural-grid completion route used for Reader page23; Test36 edge-spill behavior remains packaged.
-
-
-## Test38 identity
-
-The current candidate is version **2.79.38** (`versionCode 27966`). Debug builds use `io.github.bdredenbach.nthshelf.frametest38` with label **Nth Shelf Test38**, so earlier frame-test installs can remain side-by-side. Test38 extends the structural-grid family with a bounded occluded-bottom-tier completion route for Reader page27.
-
-
-## Test39 identity
-
-The current candidate is version **2.79.39** (`versionCode 27967`). Debug builds use `io.github.bdredenbach.nthshelf.frametest39` with label **Nth Shelf Test39**. Test39 adds nested structural leaf completion for Reader page28 while retaining Test36–38 frame behavior.
-
-
-## Test40 identity
-
-The current candidate is version **2.79.40** (`versionCode 27968`). Debug builds use `io.github.bdredenbach.nthshelf.frametest40` with label **Nth Shelf Test40**. Test40 adds the framed-inset triplet completion used by Reader page32 while retaining Test36–39 behavior.
-
-
-## Test41 identity
-
-The current candidate is version **2.79.41** (`versionCode 27969`). Debug builds use `io.github.bdredenbach.nthshelf.frametest41` with label **Nth Shelf Test41**. Test41 adds the five-column-bank structural completion used by Reader page33 while retaining Test36–40 behavior.
-
-
-## Test42 identity
-
-The current candidate is version **2.79.42** (`versionCode 27970`). Debug builds use `io.github.bdredenbach.nthshelf.frametest42` with label **Nth Shelf Test42**. Test42 adds the branched-stack / curved-shared-seam completion used by Reader page35 while retaining Test36–41 behavior.
-
-
-## Test43 identity
-
-The current candidate is version **2.79.43** (`versionCode 27971`). Debug builds use `io.github.bdredenbach.nthshelf.frametest43` with label **Nth Shelf Test43**. Test43 keeps Test36–42 frame behavior and changes Page-mode forward corner geometry plus the matching tutorial cues.
-
-
-## Test44 identity
-
-The current candidate is version **2.79.44** (`versionCode 27972`). Debug builds use `io.github.bdredenbach.nthshelf.frametest44` with label **Nth Shelf Test44**. Test44 moves the forward top/bottom right-corner hot zones inward and makes the tutorial consume the same live-zone metrics.
-
-
-## Test45 identity
-
-The current candidate is version **2.79.45** (`versionCode 27973`). Debug builds use `io.github.bdredenbach.nthshelf.frametest45` with label **Nth Shelf Test45**. Test45 adds the six-owner stepped shared-scene completion used by Reader page36 while retaining Test36–44 frame and corner-furl behavior.
-
-
-## Test46 identity
-
-The current candidate is version **2.79.46** (`versionCode 27974`). Debug builds use `io.github.bdredenbach.nthshelf.frametest46` with label **Nth Shelf Test46**. Test46 retains Test36–45 and Test44 corner behavior, but replaces page36's Test45 polygon reconstruction with the stepped shared-scene v2 proof.
-
-## Test47 identity
-
-Current candidate: **2.79.47** (`versionCode 27975`), package `io.github.bdredenbach.nthshelf.frametest47`, label **Nth Shelf Test47**. Page36 now completes from the actual two-frame baseline. Install separately, import the comic, and check the six marked scenes. Phone acceptance is pending. See the Test47 handoff.
-
-## Test48 identity
-
-Current candidate: **2.79.48** (`versionCode 27976`), package `io.github.bdredenbach.nthshelf.frametest48`, label **Nth Shelf Test48**. Page43 corner and center taps now share the complete middle-scene mask. Install separately and import the comic. Phone acceptance is pending.
-
-## Test49 identity
-
-Current candidate: **2.79.49** (`versionCode 27977`), package `io.github.bdredenbach.nthshelf.frametest49`, label **Nth Shelf Test49**. Page44: eight scenes, nine browser touch checks per scene. Install separately and import the comic. Phone acceptance is pending.
+See [current project status](../README.md), [canonical handoff](../HANDOFF.md), and [chronology](../RELEASE-HISTORY.md). The consolidated handoff retains the original Android documentation as explicitly historical text.
