@@ -2,7 +2,16 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
-## Panorama ownership cleanup — latest verified result
+## Bounded panorama fragment cleanup — benchmark-qualified · 28 October 2026
+
+A source-supported paper barrier now isolates some lower-neighbor finger and bandage remnants without trimming the panorama's owned pink/peach foreground. The focused actual Reader replay passes **5/5 opening taps**, with the other four outputs exact. Independent native review and strict pixel checks confirm **zero RGBA changes outside the preregistered undilated removal footprint, no alpha increases, and exact preservation of all 18 protected witnesses**, including all ten panorama captions. [Method, evidence and limits](docs/panorama-fragment-cleanup-2026-10-28.md).
+
+<!-- FINAL-REGRESSION-STATUS -->
+**Independent full regression passes: 369/369 opening taps across 93 entries / 92 sources.** The approved panorama is the sole changed output; the other **368 remain exact**. Execution is an audited disjoint union of 4 entries / 17 taps, 62 / 268, and 27 / 84, with identical runtime, original harness and caps and source-path-only input normalization. Two interrupted sessions became unavailable; host termination was not independently verified. Partial entries are retained but excluded. This is fixed-benchmark preservation, not perfect-frame or unseen-comic qualification.
+
+This is **partial cleanup**. Thin outlines/slivers, the ambiguous hair contact, inset-caption gold halos, the standalone inset's missing pale interior and older defects remain. The optional cleanup has explicit work limits and falls back to the unchanged inset-only owner if they are exceeded. Source173 acceptance, Android and APK identity remain unchanged; there is no new APK, browser/phone qualification or speed claim.
+
+## Panorama inset separation — prior verified result
 
 An independently audited resumed original-harness native replay preserves **369/369 opening taps across 93 entries / 92 sources**. **368 outputs remain exact**; the sole intentional change separates the upper inset from the panorama. The approved panorama is bound to native hashes and geometry. These are 369 unique entry/tap-ID pairs (366 distinct bare tap labels), not 369 perfect frames or unseen-comic qualification. [Method and limits](docs/panorama-ownership-2026-10-27.md).
 
@@ -64,6 +73,7 @@ node qa27900/source-group-viewport-contract.cjs
 node qa27900/supported-landscape-routing.cjs
 node qa27900/panorama-ownership-contract.cjs
 node qa27900/panorama-ownership-routing.cjs
+node qa27900/panorama-exterior-corridor-contract.cjs
 python3 -m unittest discover -s qa27900/native-regression-gate -p 'test_*.py'
 python3 scripts/verify-consolidated-handoff.py
 ```
@@ -83,7 +93,7 @@ Detector source checkpoints and Android build numbers are different identities:
 
 Test179's original APK was a **verified Test178-shell repack, not a Gradle rebuild**: package `io.github.bdredenbach.nthshelf.frametest179`, version `2.79.179`, code `28107`, label `Nth Shelf Test179`. APK SHA256: `c396ba6955687787d7372af16eb3f925d20a04ab004b538edccd5937d658cf66`. The [handoff](HANDOFF.md#archive-handoff-2-79-179-md) retains original module hashes and packaging checks. Existing app/version labels are provenance, not a deployment-ready identity for these newer source fixes.
 
-Comic artwork, frozen audit coordinates, private receipts and signing material stay outside public Git and CI. This branch consolidation preserves history and does not create a release, APK, phone qualification or detector acceptance. Runtime extends the reviewed `9149b3a` candidate only with the qualified source-context changes above; source acceptance and phone qualification remain separate.
+Comic artwork, frozen audit coordinates, private receipts and signing material stay outside public Git and CI. This branch consolidation preserves history and does not create a release, APK, phone qualification or detector acceptance. Current runtime provenance and qualification are described above; source acceptance and phone qualification remain separate.
 
 ## Documentation and chronological history
 

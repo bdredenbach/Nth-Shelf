@@ -2,13 +2,22 @@
 
 <a id="current-state"></a>
 
-## Start here · 27 October 2026
+## Start here · 28 October 2026
 
 `Test_Branch` is the single ongoing development branch. `Android` remains unchanged as the historical accepted Android branch. Branch consolidation preserves Git history; it is **not** acceptance of every historical candidate or a new APK release.
 
 The current runtime extends reviewed `9149b3a07beb30a81a6678f41ba2eb0a3e2b75cb` (recovered Test179 plus caption preservation, WASM reattachment invalidation and retained-owner contour routing) with native inset recovery, a final-miss landscape route and isolated terminal source-seeded separation. Source173 remains the accepted detector baseline; internal proof versions are not new detector acceptance checkpoints. See [source-context qualification](docs/source-context-recovery-2026-10-27.md).
 
-## Panorama ownership cleanup — latest verified result
+## Bounded panorama fragment cleanup — benchmark-qualified · 28 October 2026
+
+A source-supported paper barrier now isolates some lower-neighbor finger and bandage remnants without trimming the panorama's owned pink/peach foreground. The focused actual Reader replay passes **5/5 opening taps**, with the other four outputs exact. Independent native review and strict pixel checks confirm **zero RGBA changes outside the preregistered undilated removal footprint, no alpha increases, and exact preservation of all 18 protected witnesses**, including all ten panorama captions. [Method, evidence and limits](docs/panorama-fragment-cleanup-2026-10-28.md).
+
+<!-- FINAL-REGRESSION-STATUS -->
+**Independent full regression passes: 369/369 opening taps across 93 entries / 92 sources.** The approved panorama is the sole changed output; the other **368 remain exact**. Execution is an audited disjoint union of 4 entries / 17 taps, 62 / 268, and 27 / 84, with identical runtime, original harness and caps and source-path-only input normalization. Two interrupted sessions became unavailable; host termination was not independently verified. Partial entries are retained but excluded. This is fixed-benchmark preservation, not perfect-frame or unseen-comic qualification.
+
+This is **partial cleanup**. Thin outlines/slivers, the ambiguous hair contact, inset-caption gold halos, the standalone inset's missing pale interior and older defects remain. The optional cleanup has explicit work limits and falls back to the unchanged inset-only owner if they are exceeded. Source173 acceptance, Android and APK identity remain unchanged; there is no new APK, browser/phone qualification or speed claim.
+
+## Panorama inset separation — prior verified result
 
 An independently audited resumed original-harness native replay preserves **369/369 opening taps across 93 entries / 92 sources**. **368 outputs remain exact**; the sole intentional change separates the upper inset from the panorama. The approved panorama is bound to native hashes and geometry. These are 369 unique entry/tap-ID pairs (366 distinct bare tap labels), not 369 perfect frames or unseen-comic qualification. [Method and limits](docs/panorama-ownership-2026-10-27.md).
 
@@ -40,6 +49,9 @@ These are isolated learned scene-ownership experiments, not integrated Reader im
 7. The subsequent supervised click-coverage attempt used 12 training taps per scene and 24 separate source-fixed probes, with an unchanged 600-update budget. It hit the 1,800-second loop limit after **567 logged updates**. No final adapter, resumable checkpoint or evaluation exists. This is an incomplete attempt, not evidence against the approach. No retry has started.
 
 ### Next action and recovery
+
+<!-- FINAL-NEXT-ACTION -->
+The bounded cleanup has passed independent fixed-suite regression and is staged for Test_Branch publication. Verify the exact remote commit and deployment before calling it published. Preserve the fixed removal footprint, residual-quality limits and all incomplete diagnostics; do not combine focused or superseded runs with the qualified union.
 
 The fixed-suite missing targets now open. Preserve the exact native outputs and immutable source artifacts; next address documented quality defects, wider source coverage and real browser/device qualification. Do not revive the rejected eager-hook candidate or weaken source guards. The compact scene uses ordinary zoom; the separate narrow/tall-group viewport helper never changes source geometry. The unstarted learned retry would retain the exact base, loss, parameters, seed, clicks, schedule and 600 updates with a revised wall-clock allowance and periodic model/optimizer/RNG/step checkpoints; the aborted run has no checkpoint. Do not silently resume or conflate model research with these geometric Reader fixes.
 

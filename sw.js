@@ -2,7 +2,7 @@
 // Cumulative comic fixes plus general monochrome frame detection.
 // A failed precache must leave the previous worker in control.
 const CACHE_PREFIX = "nth-shelf-shell-";
-const CACHE_NAME = "nth-shelf-shell-2.79.179-panorama-inset-ownership-175-q2";
+const CACHE_NAME = "nth-shelf-shell-2.79.179-panorama-fragment-cleanup-176";
 const SHELL_FILES = [
   "./js/panels-host-background-islands.js",
   "./js/panels-supported-landscape.js",
