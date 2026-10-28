@@ -1163,6 +1163,7 @@ const Reader = {
  // Terminal source owners never wrap legacy grid/refine/Reader methods.
  // Reserved claims are intercepted even when their version is malformed.
  terminalSourceRoute(panel) {
+   if (typeof PanelPanoramaOwnership !== 'undefined' && PanelPanoramaOwnership.isClaim(panel)) return PanelPanoramaOwnership;
    if (typeof PanelTerminalAppearance !== 'undefined' && PanelTerminalAppearance.isClaim(panel)) return PanelTerminalAppearance;
    if (typeof PanelTerminalContext !== 'undefined' && PanelTerminalContext.isClaim(panel)) return PanelTerminalContext;
    return null;
@@ -3109,10 +3110,18 @@ async setMode(mode) {
    // Source-supported parent contours are a final-miss opportunity only.
    // They never enter the owner/map banks or displace an accepted route above.
    const sourceMissRoutes = [];
+   if (typeof PanelPanoramaOwnership !== 'undefined') sourceMissRoutes.push(PanelPanoramaOwnership);
    if (typeof PanelSupportedLandscape !== 'undefined') sourceMissRoutes.push(PanelSupportedLandscape);
    if (typeof PanelTerminalAppearance !== 'undefined') sourceMissRoutes.push(PanelTerminalAppearance);
    if (typeof PanelTerminalContext !== 'undefined') sourceMissRoutes.push(PanelTerminalContext);
    for (const sourceRoute of sourceMissRoutes) {
+     // An available inset-excluding panorama must not reopen its excluded area
+     // through the older contextual panorama, even when this tap misses it.
+     if (typeof PanelSupportedLandscape !== 'undefined' && sourceRoute === PanelSupportedLandscape &&
+         typeof PanelPanoramaOwnership !== 'undefined' && typeof PanelPanoramaOwnership.hasSourceCandidate === 'function') {
+       try { if (PanelPanoramaOwnership.hasSourceCandidate(img)) continue; }
+       catch (_) { /* Optional quality refinement unavailable: retain validated172 fallback. */ }
+     }
      // A source-level compact refinement supersedes its broader context group,
      // including for taps outside the compact contour. Never enlarge a miss.
      if (typeof PanelTerminalContext !== 'undefined' && sourceRoute === PanelTerminalContext &&
@@ -3218,6 +3227,8 @@ async setMode(mode) {
    const imgRect = ctx?.rect || stageRect;
    const sourceFocusCurrent = () => {
      const p = meta?.panel, img = this.getPanelImageContext()?.img;
+     if (typeof PanelPanoramaOwnership !== 'undefined' && PanelPanoramaOwnership.isClaim(p))
+       return PanelPanoramaOwnership.validateImage(p, img);
      if (typeof PanelHostBackgroundIslands !== 'undefined' && PanelHostBackgroundIslands.claims(p))
        return PanelHostBackgroundIslands.validateImage(p, img);
      if (typeof PanelSupportedLandscape !== 'undefined' && PanelSupportedLandscape.isClaim(p))
@@ -3495,16 +3506,27 @@ async setMode(mode) {
    const img = ctx?.img;
    if (!img || !img.naturalWidth || !img.naturalHeight) return;
    const sourceContourClaim =
+     (typeof PanelPanoramaOwnership !== 'undefined' && PanelPanoramaOwnership.isClaim(panel)) ||
      (typeof PanelHostBackgroundIslands !== 'undefined' && PanelHostBackgroundIslands.claims(panel)) ||
      (typeof PanelSupportedLandscape !== 'undefined' && PanelSupportedLandscape.isClaim(panel)) ||
      (typeof PanelTerminalContext !== 'undefined' && PanelTerminalContext.isClaim(panel)) ||
      (typeof PanelTerminalAppearance !== 'undefined' && PanelTerminalAppearance.isClaim(panel));
    const heldSourceContour = contours && sourceContourClaim && (
+     (typeof PanelPanoramaOwnership !== 'undefined' && PanelPanoramaOwnership.isClaim(panel) && PanelPanoramaOwnership.validateImage(panel, img)) ||
      (typeof PanelHostBackgroundIslands !== 'undefined' && PanelHostBackgroundIslands.claims(panel) && PanelHostBackgroundIslands.validateImage(panel, img)) ||
      (typeof PanelSupportedLandscape !== 'undefined' && PanelSupportedLandscape.isClaim(panel) && PanelSupportedLandscape.validateImage(panel, img)) ||
      (typeof PanelTerminalContext !== 'undefined' && PanelTerminalContext.isClaim(panel) && PanelTerminalContext.validateImage(panel, img)) ||
      (typeof PanelTerminalAppearance !== 'undefined' && PanelTerminalAppearance.isClaim(panel) && PanelTerminalAppearance.validateImage(panel, img)));
    if (sourceContourClaim && !heldSourceContour) return;
+   // Only175 has a private, source-validated subtractive render contract.
+   let panoramaRenderPlan = null;
+   if (typeof PanelPanoramaOwnership !== 'undefined' && PanelPanoramaOwnership.isClaim(panel)) {
+     try { panoramaRenderPlan = PanelPanoramaOwnership.renderPlan(panel, img); }
+     catch (_) { return; }
+     if (!panoramaRenderPlan || !Object.isFrozen(panoramaRenderPlan) ||
+         !Array.isArray(panoramaRenderPlan.parentContours) || !panoramaRenderPlan.parentContours.length ||
+         !Array.isArray(panoramaRenderPlan.exclusionContours) || !panoramaRenderPlan.exclusionContours.length) return;
+   }
    this._bubbleRequestToken++;
 
    // Live strict proofs supplement a partial background map. Non-frame V73,
@@ -3663,7 +3685,12 @@ async setMode(mode) {
    if(contours){if(captionExpanded)Object.assign(this.panelFocusMeta.panel,{x:panel.x,y:panel.y,w:panel.w,h:panel.h});this.panelFocusMeta.cropContours=cropContours;}
    const frameRect=[[frameGeom.x,frameGeom.y],[frameGeom.x+frameGeom.w,frameGeom.y],[frameGeom.x+frameGeom.w,frameGeom.y+frameGeom.h],[frameGeom.x,frameGeom.y+frameGeom.h]].map(([x,y])=>({x,y}));
    const baseContours=cropContours||(edgeSpill?(polygon?[polygon]:[frameRect]):null),drawBase=()=>context.drawImage(img,sx,sy,sw,sh,0,0,canvasW,canvasH);
-   if(baseContours){context.save();context.beginPath();for(const ring of baseContours){ring.forEach((p,i)=>{const x=(p.x-geom.x)/geom.w*canvasW,y=(p.y-geom.y)/geom.h*canvasH;if(i)context.lineTo(x,y);else context.moveTo(x,y);});context.closePath();}context.clip(cropContours?'evenodd':'nonzero');drawBase();context.restore();overlay.style.boxShadow='none';canvas.style.filter='drop-shadow(0 5px 12px rgba(0,0,0,.42))';overlay.dataset.geometry=cropContours?'contours':'frame-plus-spill';}else drawBase();
+   if (panoramaRenderPlan) {
+     const trace = rings => { context.beginPath();for(const ring of rings){ring.forEach((p,i)=>{const x=(p.x-geom.x)/geom.w*canvasW,y=(p.y-geom.y)/geom.h*canvasH;if(i)context.lineTo(x,y);else context.moveTo(x,y);});context.closePath();} };
+     context.save();trace(panoramaRenderPlan.parentContours);context.clip('evenodd');drawBase();context.restore();
+     context.save();trace(panoramaRenderPlan.exclusionContours);context.clip('evenodd');context.globalCompositeOperation='destination-out';context.fillStyle='#fff';context.fillRect(0,0,canvasW,canvasH);context.restore();
+     overlay.style.boxShadow='none';canvas.style.filter='drop-shadow(0 5px 12px rgba(0,0,0,.42))';overlay.dataset.geometry='contours';
+   } else if(baseContours){context.save();context.beginPath();for(const ring of baseContours){ring.forEach((p,i)=>{const x=(p.x-geom.x)/geom.w*canvasW,y=(p.y-geom.y)/geom.h*canvasH;if(i)context.lineTo(x,y);else context.moveTo(x,y);});context.closePath();}context.clip(cropContours?'evenodd':'nonzero');drawBase();context.restore();overlay.style.boxShadow='none';canvas.style.filter='drop-shadow(0 5px 12px rgba(0,0,0,.42))';overlay.dataset.geometry=cropContours?'contours':'frame-plus-spill';}else drawBase();
    if(edgeSpill?.spills?.length){for(const spill of edgeSpill.spills)this.drawPanelEdgeSpill(context,img,geom,canvasW,canvasH,spill);overlay.dataset.geometry='edge-spill';}
    overlay.appendChild(canvas);
 

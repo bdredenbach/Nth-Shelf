@@ -1,5 +1,7 @@
 # Source-context frame recovery — 27 October 2026
 
+> Historical qualification for the source-context recovery baseline. Later panorama ownership work is tracked [separately](panorama-ownership-2026-10-27.md); it must not be conflated with this split-harness run. The pink angular foreground belongs to the panorama, not a foreign hand; genuinely foreign blue finger/hair/bandage slivers remain a distinct defect.
+
 ## Qualified outcome
 Independently audited split-harness native coverage: **93 entries, 92 original sources, 369 taps; 369 opens, zero fixed-suite misses**. Four formerly missed taps represent three intended scenes, not four frames. All 365 previous opens retain authenticated raw/display hashes and non-timing/non-log fields. Approved new outputs are hash/geometry-bound; a broad-group fallback cannot silently replace the compact scene.
 

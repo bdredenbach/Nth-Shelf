@@ -2,7 +2,17 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
-## Current status · 27 October 2026
+## Panorama ownership cleanup — latest verified result
+
+An independently audited resumed original-harness native replay preserves **369/369 opening taps across 93 entries / 92 sources**. **368 outputs remain exact**; the sole intentional change separates the upper inset from the panorama. The approved panorama is bound to native hashes and geometry. These are 369 unique entry/tap-ID pairs (366 distinct bare tap labels), not 369 perfect frames or unseen-comic qualification. [Method and limits](docs/panorama-ownership-2026-10-27.md).
+
+Execution was an audited disjoint union: 11 original-run entries / 43 taps, 51 first-continuation entries / 219 taps, and 31 final-continuation entries / 107 taps, with identical runtime, harness and caps and source-path-only normalization. Three controller sessions became unresponsive; their termination was not verified. Partial entries were retained but not counted. The intermediate second continuation contributed zero qualified entries; each continuation used a separate output root.
+
+Strict targeted comparison found **zero RGBA changes outside the original undilated exclusion footprint and no alpha increases**; all 18 source-region witnesses remain exact. Independent native review confirms all ten panorama captions and owned artwork. The 156-asset freeze adds one module and changes Reader/index/service-worker registration; the other 152 baseline assets, including modules 171–174, are byte-exact.
+
+The scope is **inset separation only**, not complete contamination cleanup. Pink angular foreground structure belongs to the panorama, not a foreign hand; its exact object identity is uncertain. Blue finger, hair and bandage slivers remain. Thin inset-caption halos, the standalone inset's missing pale interior and older clipping defects are unchanged. Excluded inset regions are transparent, not reconstructed.
+
+## Prior published status · 27 October 2026
 
 Continue from the recovered **Test179 source plus the reviewed candidate fixes**, not the old Test158 or source176 work queue. The ongoing source branch is **`Test_Branch`**. Historical development branches have been consolidated into it; **`Android` is retained unchanged**. **Source173 remains the accepted detector baseline.** This branch is not an accepted release, a new APK, or phone-qualified software.
 
@@ -52,6 +62,8 @@ node qa27900/terminal-context-contract.cjs
 node qa27900/terminal-appearance-contract.cjs
 node qa27900/source-group-viewport-contract.cjs
 node qa27900/supported-landscape-routing.cjs
+node qa27900/panorama-ownership-contract.cjs
+node qa27900/panorama-ownership-routing.cjs
 python3 -m unittest discover -s qa27900/native-regression-gate -p 'test_*.py'
 python3 scripts/verify-consolidated-handoff.py
 ```
