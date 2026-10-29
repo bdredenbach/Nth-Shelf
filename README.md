@@ -2,6 +2,17 @@
 
 A local-first comic reader and personal comic library for Android and the web.
 
+## Source-backed inset interior restoration — benchmark-qualified · 29 October 2026
+
+The standalone inset restoration restores **35,935 previously transparent output pixels from the original source sampling**, not generated fill. Independent native/source review confirms zero changes to previously nontransparent pixels, zero changes outside the frozen addition footprint, and exact preservation of the other four targeted crops, including the panorama. Twenty uncertain bridge cells remain excluded. [Method, evidence and limits](docs/inset-pale-interior-2026-10-28.md).
+
+<!-- FINAL-179B-REGRESSION-STATUS -->
+**Independent full regression passes: 369/369 opening taps across 93 entries / 92 sources.** Only the standalone inset changes; the other **368 outputs remain exact**, including the panorama. Execution is an audited disjoint union of 60 entries / 251 taps and 33 / 118, with identical frozen runtime, the disclosed Path2D-adapted harness and unchanged 2 GiB / 300-second caps. One interrupted session became unavailable; host termination was not independently verified. Its incomplete entry is retained but excluded. All 738 current PNGs and 738 alpha artifacts were checked against authenticated baseline bytes or the approved target. This is fixed-benchmark preservation, not perfect-frame, unseen-comic or platform qualification.
+
+The published baseline is bounded panorama cleanup at `a69a8e649217e7c05319929afd1a6e2041cff924` on `Test_Branch`; its Pages deployment succeeded. Original inset owner identity, contours, crop box and hit routing remain unchanged: **restored display pixels do not gain tap support**. Gold caption halos, panorama hair/slivers and older defects remain. Source173 acceptance and Android are unchanged; no APK, unseen-comic, browser/phone or speed qualification is claimed.
+
+The sections below record earlier checkpoints; their missing-interior descriptions apply to those checkpoints, not this qualified 179b restoration.
+
 ## Bounded panorama fragment cleanup — benchmark-qualified · 28 October 2026
 
 A source-supported paper barrier now isolates some lower-neighbor finger and bandage remnants without trimming the panorama's owned pink/peach foreground. The focused actual Reader replay passes **5/5 opening taps**, with the other four outputs exact. Independent native review and strict pixel checks confirm **zero RGBA changes outside the preregistered undilated removal footprint, no alpha increases, and exact preservation of all 18 protected witnesses**, including all ten panorama captions. [Method, evidence and limits](docs/panorama-fragment-cleanup-2026-10-28.md).

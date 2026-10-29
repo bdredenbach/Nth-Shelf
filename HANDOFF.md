@@ -2,11 +2,22 @@
 
 <a id="current-state"></a>
 
-## Start here · 28 October 2026
+## Start here · 29 October 2026
 
 `Test_Branch` is the single ongoing development branch. `Android` remains unchanged as the historical accepted Android branch. Branch consolidation preserves Git history; it is **not** acceptance of every historical candidate or a new APK release.
 
 The current runtime extends reviewed `9149b3a07beb30a81a6678f41ba2eb0a3e2b75cb` (recovered Test179 plus caption preservation, WASM reattachment invalidation and retained-owner contour routing) with native inset recovery, a final-miss landscape route and isolated terminal source-seeded separation. Source173 remains the accepted detector baseline; internal proof versions are not new detector acceptance checkpoints. See [source-context qualification](docs/source-context-recovery-2026-10-27.md).
+
+## Source-backed inset interior restoration — benchmark-qualified · 29 October 2026
+
+The standalone inset restoration restores **35,935 previously transparent output pixels from the original source sampling**, not generated fill. Independent native/source review confirms zero changes to previously nontransparent pixels, zero changes outside the frozen addition footprint, and exact preservation of the other four targeted crops, including the panorama. Twenty uncertain bridge cells remain excluded. [Method, evidence and limits](docs/inset-pale-interior-2026-10-28.md).
+
+<!-- FINAL-179B-REGRESSION-STATUS -->
+**Independent full regression passes: 369/369 opening taps across 93 entries / 92 sources.** Only the standalone inset changes; the other **368 outputs remain exact**, including the panorama. Execution is an audited disjoint union of 60 entries / 251 taps and 33 / 118, with identical frozen runtime, the disclosed Path2D-adapted harness and unchanged 2 GiB / 300-second caps. One interrupted session became unavailable; host termination was not independently verified. Its incomplete entry is retained but excluded. All 738 current PNGs and 738 alpha artifacts were checked against authenticated baseline bytes or the approved target. This is fixed-benchmark preservation, not perfect-frame, unseen-comic or platform qualification.
+
+The published baseline is bounded panorama cleanup at `a69a8e649217e7c05319929afd1a6e2041cff924` on `Test_Branch`; its Pages deployment succeeded. Original inset owner identity, contours, crop box and hit routing remain unchanged: **restored display pixels do not gain tap support**. Gold caption halos, panorama hair/slivers and older defects remain. Source173 acceptance and Android are unchanged; no APK, unseen-comic, browser/phone or speed qualification is claimed.
+
+The sections below record earlier checkpoints; their missing-interior descriptions apply to those checkpoints, not this qualified 179b restoration.
 
 ## Bounded panorama fragment cleanup — benchmark-qualified · 28 October 2026
 
@@ -50,8 +61,8 @@ These are isolated learned scene-ownership experiments, not integrated Reader im
 
 ### Next action and recovery
 
-<!-- FINAL-NEXT-ACTION -->
-The bounded cleanup has passed independent fixed-suite regression and is staged for Test_Branch publication. Verify the exact remote commit and deployment before calling it published. Preserve the fixed removal footprint, residual-quality limits and all incomplete diagnostics; do not combine focused or superseded runs with the qualified union.
+<!-- FINAL-179B-NEXT-ACTION -->
+The final frozen 179b regression and independent audit pass. Preserve the failed initial 179 renderer and incomplete diagnostics without counting them as qualified coverage. Preserve source sampling, the fixed addition footprint, strict comparator gates and unchanged resource caps. Verify the exact release commit and deployment separately; continue quality work on documented residuals before speed and phone testing. No APK is authorized at this checkpoint.
 
 The fixed-suite missing targets now open. Preserve the exact native outputs and immutable source artifacts; next address documented quality defects, wider source coverage and real browser/device qualification. Do not revive the rejected eager-hook candidate or weaken source guards. The compact scene uses ordinary zoom; the separate narrow/tall-group viewport helper never changes source geometry. The unstarted learned retry would retain the exact base, loss, parameters, seed, clicks, schedule and 600 updates with a revised wall-clock allowance and periodic model/optimizer/RNG/step checkpoints; the aborted run has no checkpoint. Do not silently resume or conflate model research with these geometric Reader fixes.
 

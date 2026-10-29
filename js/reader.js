@@ -3527,6 +3527,17 @@ async setMode(mode) {
          !Array.isArray(panoramaRenderPlan.parentContours) || !panoramaRenderPlan.parentContours.length ||
          !Array.isArray(panoramaRenderPlan.exclusionContours) || !panoramaRenderPlan.exclusionContours.length) return;
    }
+   // Optional179 adds independently revalidated source interior only after171 wins.
+   // The issued owner, hit routing, crop box and original base rendering stay intact.
+   let insetPositiveRenderPlan = null;
+   const insetPositiveOwnerBank = this.currentPanels;
+   if (heldSourceContour && typeof PanelInsetPositive179 !== 'undefined' &&
+       typeof PanelHostBackgroundIslands !== 'undefined' && PanelHostBackgroundIslands.claims(panel)) {
+     try {
+       const candidate = PanelInsetPositive179.renderPlan(panel, img, insetPositiveOwnerBank);
+       if (candidate && PanelInsetPositive179.validatePlan(candidate, panel, img, insetPositiveOwnerBank)) insetPositiveRenderPlan = candidate;
+     } catch (_) { /* Optional failure preserves the exact original171 rendering. */ }
+   }
    this._bubbleRequestToken++;
 
    // Live strict proofs supplement a partial background map. Non-frame V73,
@@ -3691,6 +3702,42 @@ async setMode(mode) {
      context.save();trace(panoramaRenderPlan.exclusionContours);context.clip('evenodd');context.globalCompositeOperation='destination-out';context.fillStyle='#fff';context.fillRect(0,0,canvasW,canvasH);context.restore();
      overlay.style.boxShadow='none';canvas.style.filter='drop-shadow(0 5px 12px rgba(0,0,0,.42))';overlay.dataset.geometry='contours';
    } else if(baseContours){context.save();context.beginPath();for(const ring of baseContours){ring.forEach((p,i)=>{const x=(p.x-geom.x)/geom.w*canvasW,y=(p.y-geom.y)/geom.h*canvasH;if(i)context.lineTo(x,y);else context.moveTo(x,y);});context.closePath();}context.clip(cropContours?'evenodd':'nonzero');drawBase();context.restore();overlay.style.boxShadow='none';canvas.style.filter='drop-shadow(0 5px 12px rgba(0,0,0,.42))';overlay.dataset.geometry=cropContours?'contours':'frame-plus-spill';}else drawBase();
+   if (insetPositiveRenderPlan) {
+     let additionCanvas = null;
+     try {
+       additionCanvas = document.createElement("canvas");additionCanvas.width=canvasW;additionCanvas.height=canvasH;
+       const additionContext=additionCanvas.getContext("2d");
+       if (!additionContext) throw new Error("Optional inset addition context unavailable");
+       additionContext.imageSmoothingEnabled=true;additionContext.imageSmoothingQuality="high";
+       additionContext.beginPath();
+       for (const ring of insetPositiveRenderPlan.additionContours) {
+         ring.forEach((p,i)=>{const x=(p.x-geom.x)/geom.w*canvasW,y=(p.y-geom.y)/geom.h*canvasH;if(i)additionContext.lineTo(x,y);else additionContext.moveTo(x,y);});
+         additionContext.closePath();
+       }
+       additionContext.clip('evenodd');additionContext.drawImage(img,sx,sy,sw,sh,0,0,canvasW,canvasH);
+       // Admit only fully opaque addition raster cells whose destination is empty.
+       // Never roundtrip or repaint existing pixels, including fractional alpha edges.
+       if(canvas.width!==canvasW||canvas.height!==canvasH||additionCanvas.width!==canvasW||additionCanvas.height!==canvasH)throw new Error("Optional inset raster dimension mismatch");
+       const runs=PanelInsetPositive179.opaqueEmptyRuns(
+         context.getImageData(0,0,canvasW,canvasH).data,
+         additionContext.getImageData(0,0,canvasW,canvasH).data,canvasW,canvasH);
+       const matrix=context.getTransform();
+       const identityTransform=matrix.a===1&&matrix.b===0&&matrix.c===0&&matrix.d===1&&matrix.e===0&&matrix.f===0;
+       if (runs && runs.pixels && identityTransform && this.currentPanels === insetPositiveOwnerBank &&
+           PanelInsetPositive179.validatePlan(insetPositiveRenderPlan,panel,img,insetPositiveOwnerBank)) {
+         const copyPath=new Path2D();
+         for(const [x,y,length] of runs.runs)copyPath.rect(x,y,length,1);
+         context.save();
+         try {
+           context.clip(copyPath);context.globalCompositeOperation='source-over';context.globalAlpha=1;context.imageSmoothingEnabled=false;
+           context.shadowColor='rgba(0,0,0,0)';context.shadowBlur=0;context.shadowOffsetX=0;context.shadowOffsetY=0;context.filter='none';
+           context.drawImage(additionCanvas,0,0);
+           this.panelFocusMeta.insetPositiveRenderPlan=insetPositiveRenderPlan;
+         } finally { context.restore(); }
+       }
+     } catch (_) { /* Optional preparation failure leaves the original171 canvas untouched. */ }
+     finally { if(additionCanvas)additionCanvas.width=additionCanvas.height=1; }
+   }
    if(edgeSpill?.spills?.length){for(const spill of edgeSpill.spills)this.drawPanelEdgeSpill(context,img,geom,canvasW,canvasH,spill);overlay.dataset.geometry='edge-spill';}
    overlay.appendChild(canvas);
 
